@@ -400,7 +400,6 @@ Back in the `MainWindow`'s `executeCommand()` method, it will determine if the `
 
 If the Help Window is showing, the `focus()` method of the HelpWindow is called. Else when the Help Window is not showing, the `show()` method of the HelpWindow is called. For both alternate paths, when the user clicks on the `Open User Guide` button, this will call the `openUG()` method of the HelpWindow object.
 
-
 ### Clear feature
 
 The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
@@ -474,7 +473,7 @@ The sequence diagram below illustrates the execution of `find alex`.
 
 ### Edit feature
 
-The edit mechanism implements the following sequence for the method call execute("edit").
+In this section, the functionality of the `edit` feature, the expected execution path, the structure of the **EditCommand** class and the interactions between objects with the **EditCommand** object will be discussed.
 
 #### What is the edit feature
 
@@ -482,30 +481,46 @@ The edit feature allows the user to edit field values of exising student with ne
 
 The `edit` command is as follows:
 
-`edit 1 n/Poppy p/62536273 ...` where `...` indicates any other additional fields the user wishes to edit.
+`edit [INDEX] [PREFIX/NEW_VALUE]...` where `[PREFIX/NEW_VALUE]...` indicates one or more new fields in which the user wishes to edit.
 
-The original AB3 implementation of this feature allows the same edited value for the corresponding field of the person. `e.g` If a `Person` with `name` of  John (index 1 in the address book) is already present in the address book, then the command `edit 1 n/John` will still work. 
-In addition, for attribute types that need to be unique for each `Person` `e.g.``Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in the address book. 
-<br>`e.g.` If there are two `Person`:
-* `name`: John `Email`: john123@gmail.com (Index 1 in the address book)
-* `name`: Johnny `Email` johnny123@gmail.com (Index 2 in the address book)
-<br> The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and is supposed to be unique for each person in the address book. 
+The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work. 
+In addition, for attribute types that need to be unique for each `Person` e.g. `Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in Tracey.
+<br>e.g. Given the two following `Person` objects in Tracey:
+* `name`: John `Email`: john123@gmail.com (indexed 1)
+* `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
+
+The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
  
-In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and and `Person#isDifferentPerson()` to address the latter issue.
+In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-**Path Execution of Edit Feature Activity Diagram is shown below:**
+####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
-
-**Class Diagram of Edit Feature is shown below**
-![EditFeatureActivityDiagram](images/EditFeatureClassDiagram.png)
-
-The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
+  
+####**Class Diagram of Edit Feature is shown below**
 
-**Sequence Diagram of Edit Feature is shown below:**
+![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
+
+Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the **EditCommand**:
+1.`MESSAGE_EDIT_PERSON_SUCCESS`:
+  - Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
+  - Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
+2. `MESSAGE_NOT_EDITED`:
+  - Scenario: No attribute is specified for the `Person` to be edited.
+  - Message: "At least one field to edit must be provided."
+3. `MESSAGE_DUPLICATE_PERSON`:
+  - Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
+  - Message: "This person already exists in the address book."
+4. `MESSAGE_SAME_INPUT`:
+  - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
+  - Message: "The edited value is the same as the current one."
+  
+####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -523,11 +538,13 @@ TThe `ObservableList` is a JavaFX class which observes and automatically changes
 
 ### Filter feature
 
-The filter mechanism implements the following sequence for the method call execute("filter").
+In this section, the functionality of the filter feature, the expected execution path, the structure of the FilterCommand class, the structure of the FilterCommand class and the interactions between objects with the FilterCommand object will be discussed.
 
 #### What is the filter feature
 
 The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block.
+
+#### Path execution of filter feature
 
 The `filter` command is as follows:
 
@@ -551,6 +568,17 @@ There are two possible execution paths for this command.
 1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
 2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
 
+#### Structure of Filter feature
+
+The following is a class diagram of the filter feature. 
+
+**Class diagram of Filter feature is shown below:**
+![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
+
+The above class diagram shows the structure of the FilterCommand and its associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in FilterCommand; such as public static fields and getter/setter methods.
+
+#### Interaction between objects when the Filter Command is executed
+
 The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
 
 **Sequence Diagram of Filter Feature is shown below:**
@@ -563,7 +591,6 @@ A `FilterCommandParser` object will then be created to parse this input, with it
 Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students.
 
 The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
-
 The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
 
 ### Email Feature
@@ -600,7 +627,6 @@ The class diagram above depicts the structure of `EmailCommand`. As per any Comm
 
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
-
 When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object.
 
 Following this, the `LogicManager` will call the `execute()` method of the `EmailCommand` object. In this method, a `CommandResult` object will be instantiated.
@@ -608,8 +634,6 @@ Following this, the `LogicManager` will call the `execute()` method of the `Emai
 Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleEmailWindow()` method which will then instantiate an `EmailWindow` object.
 
 Afterwards, the `LogicManager` calls the `show()` method of `EmailWindow` and the `EmailWindow` will be shown to the user.
-
-
 
 ### Exit Feature
 
@@ -640,44 +664,92 @@ The sequence diagram below shows the interactions between objects during the exe
 ![ExitSequenceDiagram](images/ExitFeatureSequenceDiagram.jpg)
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/Redo features
 
-#### Proposed Implementation
+In this section, the functionality of the undo and redo features, the expected execution path, the structure of the UndoCommand and RedoCommand class, and the interactions between objects with the UndoCommand and RedoCommand objects will be discussed.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### What are the undo and redo features
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The undo feature allows users reverse an `add`, `edit`, or `delete` command.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The redo feature allows users to reverse an `undo` command. 
+
+#### Execution of undo feature
+
+The `undo` command is as follows:
+
+`undo`
+
+Calling this command undoes only the last executed add, edit or delete command, and can only be used after executing an add, edit, or delete command.
+
+This command cannot be used in succession to undo previously executed commands besides the last executed one.
+
+#### Execution of redo feature
+
+The `redo` command is as follows:
+
+`redo`
+
+Calling this command reverses only the last executed undo command, and can only be used after executing an undo command.
+
+This command cannot be used in succession.
+
+### Path execution of undo and redo features
+
+The activity diagram shows the possible execution paths for the `undo` and `redo` command.
+
+**Path Execution of Undo and Redo Features Activity Diagram is shown below:**
+![UndoRedoFeatureActivityDiagram](images/UndoRedoFeatureActivityDiagram.png)
+
+#### Implementation
+
+The proposed undo/redo mechanism is facilitated by `AddressBook`. On top of the current state of the `UniquePersonList` of `Person` objects, it stores two additional states, the history and the "original" state. Additionally, it implements the following operations:
+
+* `AddressBook#saveHistory()` — Saves the current persons list state in its history.
+* `AddressBook#restoreHistory()` — Restores the previous state of the persons list from its history and deletes the history.
+* `AddressBook#saveOriginal()` — Saves the current persons list state in an "original" state, used after an `undo` command is called.
+* `AddressBook#restoreOriginal()` — Restores the previous state of the persons list from its "original" state and deletes the history.
+
+
+The restoreHistory() and restoreOriginal() operations are exposed in the `Model` interface as `Model#restoreHistory()` and `Model#restoreOriginal()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`. 
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book, modifying `persons` (now having a state B). The `delete` command calls `Model#saveHistory()`, causing the modified state of the address book before the `delete 5` command executes to be saved in the `personsHistory`.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#restoreHistory()`, which will replace the current state of `persons` with state A in `personsHistory`.
+
+The original list with the person at index 5 deleted, shown as state B, will be stored in `personsOriginal` and `personsHistory` will be set to null.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 4. The user then decides that the initial delete was not a mistake, and decides to redo that action by executing the `redo` command. The `redo` command will call `Model#restoreOriginal()`, which will replace the current state of `persons` with state B in `personsOriginal`.
 
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+`personsOriginal` will then be set to null.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo. Similarly, if `redo` is called as the first command or in succession, `personsOriginal` will be null. The `redo` command uses `Model#checkOriginal()` to check if this is the case and will also throw an error if so.
 
 </div>
+
+#### Structure of Undo and Redo features
+
+The following is a class diagram of the undo and redo features.
+
+**Class diagram of Undo/Redo features is shown below:**
+![FilterFeatureClassDiagram](images/UndoRedoClassDiagram.png)
+
+The above class diagram shows the structure of the UndoCommand and RedoCommand and their associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in UndoCommand and RedoCommand; such as public static fields and getter/setter methods.
+
+#### Interaction between objects when the Undo and Redo Commands are executed
 
 The following sequence diagram shows how the undo operation works:
 
@@ -687,29 +759,19 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The following sequence diagram shows how the redo operation works:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire list of persons in the address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -722,24 +784,25 @@ _{more aspects and alternatives to be added}_
 
 ### Data archiving feature
 
-The archive mechanism implements the following sequence for the method call execute("archive") on a LogicManager object.
+In this section, the functionality of the `archive` feature, the expected execution path, the structure of the **ArchiveCommand** class, the structure of the **ArchiveCommandParser** class and the interactions between objects with the **ArchiveCommand** object will be discussed.
 
 #### what is the archive feature
-This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
-The `archive` command is as follows:
-`archive`
+This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
 This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date. 
 When the user uses this command, a folder named `archive` will be created if it is not yet created at the directory relative to the database file.
 Inside this `archive` folder will contain subdirectories named after the user's computer local date in `DDMMYY` format and inside these subdirectories will contain the archived files which is named after the user's computer
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
 
+The `archive` command is as follows:
+`archive`
+
 #### <ins>How the feature is implemented<ins/>
 The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
 `ArchiveCommand#initArchiveFilePath()` will produce the archived file path using the directory path of the address book file as the base directory.
-e.g. If the address book file is saved in `[ROOT]/data`, then a directory called `archive` will be saved in `[ROOT]/data` and the
-subdirectories will be saved as `[ROOT/data/[LOCAL_PC_DATE]` and the archived file path is `[ROOT]/data/[LOCAL_PC_DATE]/[ARCHIVED_FILE]`.
+e.g. If the address book file is saved in `ROOT/data`, then a directory called `archive` will be saved in `ROOT/data` and the
+subdirectories will be saved as `ROOT/data/DATE` and the archived file path is `ROOT/data/DATE/ARCHIVED_FILE`.
 `FileUtil#createIfMissing()` will create a dummy file at the archive file path.
 The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
@@ -748,20 +811,19 @@ Below are links for implementation of the classes and its methods:
 * [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-
-**Class Diagram of Archive Feature is shown below:**
+####**Class Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-**Path Execution of Archive Feature Activity Diagram is shown below:**
+####**Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
-**Sequence Diagram of Archive Feature is shown below:**
+####**Sequence Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -774,6 +836,8 @@ the working database file is obtained using `Model#getAddressBookFilePath()`. A 
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
 ### Resizing result display window feature
+
+In this section, the functionality of the `resize` feature, the expected execution path, the structure of the **ResizeCommand** class and the interactions between objects with the **ResizeCommand** object will be discussed.
 
 #### what is the resize feature
 This feature allows the user to resize the result display window in the case they have a small application window size, and/or they want to have a better view at the result feedback text after keying in a command, which is especially true for the `SummariseCommand`
@@ -807,6 +871,7 @@ The above figure illustrates the important interactions of `ResizeCommand` when 
 When a user inputs `resize 1`, `MainWindow#executeCommand()` will be invoked which in turn calls `LogicManager#execute()`. This will trigger a parsing process by `AddressBookParser` and `ResizeCommandParser` to check for valid command type and parameters.
 This will then create a `ResizeCommand` object which is then executed by the `LogicManager` via `ResizeCommand#execute()` which will then update the value needed to set the result display window size. This value is used by the `MainWindow#handleResizeResultDisplayWindow()`
 which sets the window in the GUI according to the user's desired option.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
