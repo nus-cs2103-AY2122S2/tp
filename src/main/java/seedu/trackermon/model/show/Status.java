@@ -1,5 +1,8 @@
 package seedu.trackermon.model.show;
 
+/***
+ * Represents a Show's watch status.
+ */
 public enum Status {
 
     COMPLETED("completed"),
@@ -13,7 +16,10 @@ public enum Status {
 
     private final String status;
 
-
+    /**
+     * Constructs a {@code Status} with the provided {@code String}.
+     * @param status provided {@code String}.
+     */
     Status(String status) {
         this.status = status;
     }
@@ -27,6 +33,9 @@ public enum Status {
         return Status.valueOf(status);
     }
 
+    /**
+     * Returns the {@String} representation of {@code Status}.
+     */
     @Override
     public String toString() {
         return status;
@@ -55,7 +64,7 @@ public enum Status {
     }
 
     /**
-     * Compare this status with other
+     * Compare this status with other.
      */
     public int compareStatus(Status other) {
         return this.status.compareTo(other.status);

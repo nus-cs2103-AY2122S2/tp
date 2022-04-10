@@ -42,7 +42,7 @@ public class NameTest {
     @Test
     void testToString() {
         Name testName = new Name("Another");
-        assertEquals("Another", testName.fullName);
+        assertEquals("Another", testName.name);
     }
 
     @Test

@@ -9,6 +9,10 @@ public class SuggestPredicate implements Predicate<Show> {
 
     private final Show testShow;
 
+    /**
+     * Constructs a {@code SuggestPredicate} with the provided {@code Show}.
+     * @param show provided {@code Show}
+     */
     public SuggestPredicate(Show show) {
         testShow = show;
     }
