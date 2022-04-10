@@ -290,7 +290,7 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ### The Schedule and Appointment Models
 
-This section describes the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects.
+This section describes the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. It starts from the lowest level, and slowly works its way upwards.
 
 <div markdown="span" class="alert alert-info">
 
@@ -313,7 +313,7 @@ Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. 
 
 ![Appointment Models](images/ScheduleItemClassDiagram.png)
 
-In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` objects through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
 The time-related methods of note implemented by `ScheduleItem` are:
 
@@ -324,15 +324,17 @@ The time-related methods of note implemented by `ScheduleItem` are:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
+:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`A2.getStartDateTime() < A1.getEndDateTime()`
 
 </div>
 
 #### The `DisjointAppointmentList` Class
 
-All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
+All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
 * All `Appointment` objects in the list *must not* have overlapping periods, enforced through the `ScheduleItem#isOverlapping(ScheduleItem)` method.
-  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.getStartDateTime() >= A2.getEndDateTime()` or `A2.getStartDateTime() >= A1.getEndDateTime()`.
+  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list,
+    * `A1.getStartDateTime() >= A2.getEndDateTime()` or
+    * `A2.getStartDateTime() >= A1.getEndDateTime()`.
 * All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
 
 |<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
@@ -340,18 +342,23 @@ All persistent `Appointment` objects in the system are stored in a `DisjointAppo
 |<img src="images/DisjointAppointmentListStateDisallowed.png" width="550" />|
 
 
-The no-overlap constraint is enforced at such a low level as a defensive measure so that all higher-level classes that use this class is guaranteed a list of appointments that is consistent with the application constraints (that is to have no overlapping appointments in the schedule). This eliminates the need for higher-level classes to check and possibly recover from an inconsistent list.
+The no-overlap constraint is enforced at such a low level as a defensive measure so that all higher-level classes that use `DisjointAppointmentList` is guaranteed a list of appointments that is consistent with the application constraints (that is to have no overlapping appointments in the schedule). This eliminates the need for higher-level classes to check and possibly recover from an inconsistent list.
 
 While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
-In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **QuickSort vs Insertion Sort**<br>The built-in Java *QuickSort* is still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+
+</div>
 
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
 
-The built-in Java *QuickSort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
 
 #### The `Schedule` Wrapper Class
 
