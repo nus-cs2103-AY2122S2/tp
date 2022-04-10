@@ -352,7 +352,7 @@ this entry:
 Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of
 Tinner, you will be able to see a reminder pop-out box like this:
 
-![ReminderDemo](images/ReminderDemo.png)
+<img src="images/ReminderDemo.png" alt="ReminderDemo" height="480">
 
 If you do not see the intended reminder, it is likely that the reminder date is not within
 the [reminder window](#c-setWindow-c).  
