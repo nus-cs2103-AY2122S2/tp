@@ -17,6 +17,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -27,7 +28,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<p align="center">
+    <img src="images/ArchitectureDiagram.png" width="341" />
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +56,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<p align="center">
+    <img src="images/ArchitectureSequenceDiagram.png" width="574" />
+</p>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +67,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<p align="center">
+    <img src="images/ComponentManagers.png" width="300" />
+</p>
 
 The sections below give more details of each component.
 
@@ -89,7 +96,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<p align="center">
+    <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `PetBookParser` class to parse the user command.
@@ -106,7 +115,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<p align="center">
+    <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `PetBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PetBookParser` returns back as a `Command` object.
@@ -115,7 +126,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="1626" />
 
 
 The `Model` component,
@@ -127,7 +138,9 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PetBook`, which `Pet` references. This allows `PetBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<p align="center">
+    <img src="images/BetterModelClassDiagram.png" width="700" />
+</p>
 
 </div>
 
@@ -136,7 +149,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<p align="center">
+    <img src="images/StorageClassDiagram.png" width="550" />
+</p>
 
 The `Storage` component,
 * can save both WoofAreYou data and user preference data in json format, and read them back into corresponding objects.
@@ -240,7 +255,10 @@ for the `execute("app 1 clear")` API call:
 ![AppointmentSequenceDiagram](images/AppointmentSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new Appointmentcommand:
-![AppointmentActivityDiagram](images/AppointmentActivityDiagram.png)
+
+<p align="center">
+    <img src="images/AppointmentActivityDiagram.png" alt=AppointmentActivityDiagram width="600" />
+</p>
 
 #### Design considerations:
 
@@ -314,15 +332,21 @@ Given below is an example usage scenario and how the undo mechanism behaves at e
 
 Step 1. The user launches the application for the first time. The `VersionedPetBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
 
-![UndoRedoState0](images/UndoState0.png)
+<p align="center">
+  <img src="images/UndoState0.png" alt="UndoRedoState0" width="450"/>
+</p>
 
 Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitPetBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `petBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
 
-![UndoRedoState1](images/UndoState1.png)
+<p align="center">
+  <img src="images/UndoState1.png" alt="UndoRedoState1" width="450"/>
+</p>
 
 Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitPetBook()`, causing another modified WoofAreYou state to be saved into the `petBookStateList`.
 
-![UndoRedoState2](images/UndoState2.png)
+<p align="center">
+  <img src="images/UndoState2.png" alt="UndoRedoState2" width="450"/>
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitPetBook()`, so the WoofAreYou state will not be saved into the `petBookStateList`.
 
@@ -330,7 +354,9 @@ Step 3. The user executes `add n/David …​` to add a new pet. The `add` comma
 
 Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPetBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
-![UndoRedoState3](images/UndoState3.png)
+<p align="center">
+  <img src="images/UndoState3.png" alt="UndoRedoState3" width="450"/>
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. The `undo` command uses `Model#canUndoPetBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -339,7 +365,9 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<p align="center">
+  <img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" width="450"/>
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -347,15 +375,22 @@ The following sequence diagram shows how the undo operation works:
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitPetBook()` or `Model#undoPetBook()` Thus, the `petBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoState4.png)
+<p align="center">
+  <img src="images/UndoState4.png" alt="UndoRedoState4" width="450"/>
+</p>
 
 Step 6. The user executes `clear`, which calls `Model#commitPetBook()`. Since the `currentStatePointer` is not pointing at the end of the `petBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged.
 
-![UndoRedoState5](images/UndoState5.png)
+<p align="center">
+  <img src="images/UndoState5.png" alt="UndoRedoState5" width="450"/>
+</p>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<p align="center">
+    <img src="images/CommitActivityDiagram.png" width="250" />
+</p>
+
 
 #### Design considerations:
 
@@ -383,7 +418,9 @@ During command execution, data from the user input is parsed into one of two sub
 The attendance entry is then stored into `AttendanceHashMap`. A class diagram illustrating the structure of `AttendanceHashMap`
 can be seen below.
 
-![AttendanceHashMapClassDiagram](images/AttendanceHashMapClassDiagram.png)
+<p align="center">
+    <img src="images/AttendanceHashMapClassDiagram.png" alt=AttendanceHashMapClassDiagram width="350" />
+</p>
 
 The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet",
 and is the main repository of data within the Model component that facilitates `Attendance` functionalities.
@@ -400,8 +437,9 @@ update the backend and frontend of the application for the `absent` command.
 The sequence model follows a similar structure for the `present` command as well.
 
 In addition, the activity diagram below illustrates the workflow of attendance commands.
-
-![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
+<p align="center">
+    <img src="images/AttendanceActivityDiagram.png" alt=AttendanceActivityDiagram width="500" />
+</p>
 
 #### Design considerations:
 
