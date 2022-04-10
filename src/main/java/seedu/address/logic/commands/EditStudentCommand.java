@@ -77,7 +77,7 @@ public class EditStudentCommand extends Command {
 
         boolean isIndexOutOfBounds = index.getZeroBased() >= lastShownList.size();
         if (isIndexOutOfBounds) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_OOB_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());

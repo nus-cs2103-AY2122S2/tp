@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_OOB_LESSON_DISPLAYED_INDEX;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
@@ -86,7 +86,7 @@ public class EditLessonCommand extends Command {
 
         boolean isIndexOutOfBounds = lastShownList.size() < lessonId.getOneBased();
         if (isIndexOutOfBounds) {
-            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_OOB_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
