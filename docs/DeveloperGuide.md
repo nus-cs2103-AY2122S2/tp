@@ -246,7 +246,7 @@ As such, detailed descriptions for the Address Book subsystem can be easily tran
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. The section is organized by functionality.
 
 ### Tag Management
 
@@ -290,19 +290,30 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ### The Schedule and Appointment Models
 
-This section will describe the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. The overall *design goal* of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+This section describes the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects.
 
-An overview is shown in the partial class diagram below.
+<div markdown="span" class="alert alert-info">
+
+:bulb: The overall **design goal** of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+
+</div>
+
+An overview of the structure is shown in the partial class diagram below. Note that this diagram omits unrelated methods, and shows a high-level view of how classes are organized.
 
 ![Appointment Models](images/AppointmentModelClassDiagram.png)
 
 #### The `ScheduleItem` Class
 
-The data models `Appointment` and `AppointmentSlot` models inherit from the `ScheduleItem` class. The classes are structured such that common logic related to time are mostly handled in the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
+There are 2 classes that represent items in the schedule, namely
+
+- **`Appointment`**: Represents a user-defined appointment in the `Schedule`.
+- **`AppointmentSlot`**: Represents empty slots in the `Schedule`, which are automatically computed based on `Appointment` objects.
+
+Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. The classes are structured such that common scheduling-related logic are abstracted into the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
 
 ![Appointment Models](images/ScheduleItemClassDiagram.png)
 
-In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering used by both `CompositeObservableList` and `DisjointAppointmentList`.
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering. This ordering is used by the lists used to contain these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
 The time-related methods of note implemented by `ScheduleItem` are:
 
@@ -310,7 +321,12 @@ The time-related methods of note implemented by `ScheduleItem` are:
 * Comparator helper method `getComparableDateTime()`
 * Comparable method `compareTo(ScheduleItem)`
 * Helper method `isOverlapping(ScheduleItem)` for checking if the `ScheduleItem` overlaps with another `ScheduleItem`
-  * Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
+
+</div>
 
 #### The `DisjointAppointmentList` Class
 

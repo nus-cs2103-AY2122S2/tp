@@ -10,6 +10,11 @@ title Partial ScheduleItem Class Diagram
 
 package "ScheduleItem" {
     class Appointment {
+        name: Name
+        startDateTime: StartDateTime
+        duration: Duration
+        person: Person
+        priority: Priority
     }
 
     class AppointmentSlot {
