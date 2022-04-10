@@ -22,7 +22,7 @@ title: Documentation guide
 
 **Diagrams:**
 
-* Our diagrams are created using [Diagrams.net](https://www.diagrams.net/)
+* See the [_[se-edu/guides] **Using PlantUML**_](https://se-education.org/guides/tutorials/plantUml.html)
 
 **Converting a document to the PDF format:**
 
