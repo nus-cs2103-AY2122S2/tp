@@ -394,8 +394,6 @@ The activity diagram shows the possible execution paths for the `help` command.
 ![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
 
 
-
-
 ### Clear feature
 
 The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
@@ -463,7 +461,7 @@ The sequence diagram below illustrates the execution of `find alex`.
 
 ### Edit feature
 
-The edit mechanism implements the following sequence for the method call execute("edit").
+In this section, the functionality of the `edit` feature, the expected execution path, the structure of the **EditCommand** class and the interactions between objects with the **EditCommand** object will be discussed.
 
 #### What is the edit feature
 
@@ -471,21 +469,37 @@ The edit feature allows the user to edit field values of exising student with ne
 
 The `edit` command is as follows:
 
-`edit 1 n/Poppy p/62536273 ...` where `...` indicates any other additional fields the user wishes to edit.
+`edit [INDEX] [PREFIX/NEW_VALUE]...` where `[PREFIX/NEW_VALUE]...` indicates one or more new fields in which the user wishes to edit.
 
-The original AB3 implementation of this feature allows the same edited value for the corresponding field of the person. `e.g` If a `Person` with `name` of  John (index 1 in the address book) is already present in the address book, then the command `edit 1 n/John` will still work. 
-In addition, for attribute types that need to be unique for each `Person` `e.g.``Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in the address book. 
-<br>`e.g.` If there are two `Person`:
-* `name`: John `Email`: john123@gmail.com (Index 1 in the address book)
-* `name`: Johnny `Email` johnny123@gmail.com (Index 2 in the address book)
-<br> The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and is supposed to be unique for each person in the address book. 
+The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work. 
+In addition, for attribute types that need to be unique for each `Person` e.g. `Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in Tracey.
+<br>e.g. Given the two following `Person` objects in Tracey:
+* `name`: John `Email`: john123@gmail.com (indexed 1)
+* `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
+
+The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
  
-In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and and `Person#isDifferentPerson()` to address the latter issue.
+In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-**Path Execution of Edit Feature Activity Diagram is shown below:**
+####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
-**Class Diagram of Edit Feature is shown below**
+####**Class Diagram of Edit Feature is shown below**
+
+Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the **EditCommand**:
+1.`MESSAGE_EDIT_PERSON_SUCCESS`:
+  - Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
+  - Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
+2. `MESSAGE_NOT_EDITED`:
+  - Scenario: No attribute is specified for the `Person` to be edited.
+  - Message: "At least one field to edit must be provided."
+3. `MESSAGE_DUPLICATE_PERSON`:
+  - Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
+  - Message: "This person already exists in the address book."
+4. `MESSAGE_SAME_INPUT`:
+  - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
+  - Message: "The edited value is the same as the current one."
+
 ![EditFeatureActivityDiagram](images/EditFeatureClassDiagram.png)
 
 The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
@@ -494,7 +508,7 @@ Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Com
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
 
-**Sequence Diagram of Edit Feature is shown below:**
+####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -601,8 +615,6 @@ Following this, the `LogicManager` will call the `execute()` method of the `Emai
 Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleEmailWindow()` method which will then instantiate an `EmailWindow` object.
 
 Afterwards, the `LogicManager` calls the `show()` method of `EmailWindow` and the `EmailWindow` will be shown to the user.
-
-
 
 ### Exit Feature
 
@@ -753,24 +765,25 @@ _{more aspects and alternatives to be added}_
 
 ### Data archiving feature
 
-The archive mechanism implements the following sequence for the method call execute("archive") on a LogicManager object.
+In this section, the functionality of the `archive` feature, the expected execution path, the structure of the **ArchiveCommand** class, the structure of the **ArchiveCommandParser** class and the interactions between objects with the **ArchiveCommand** object will be discussed.
 
 #### what is the archive feature
-This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
-The `archive` command is as follows:
-`archive`
+This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
 This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date. 
 When the user uses this command, a folder named `archive` will be created if it is not yet created at the directory relative to the database file.
 Inside this `archive` folder will contain subdirectories named after the user's computer local date in `DDMMYY` format and inside these subdirectories will contain the archived files which is named after the user's computer
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
 
+The `archive` command is as follows:
+`archive`
+
 #### <ins>How the feature is implemented<ins/>
 The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
 `ArchiveCommand#initArchiveFilePath()` will produce the archived file path using the directory path of the address book file as the base directory.
-e.g. If the address book file is saved in `[ROOT]/data`, then a directory called `archive` will be saved in `[ROOT]/data` and the
-subdirectories will be saved as `[ROOT/data/[LOCAL_PC_DATE]` and the archived file path is `[ROOT]/data/[LOCAL_PC_DATE]/[ARCHIVED_FILE]`.
+e.g. If the address book file is saved in `ROOT/data`, then a directory called `archive` will be saved in `ROOT/data` and the
+subdirectories will be saved as `ROOT/data/DATE` and the archived file path is `ROOT/data/DATE/ARCHIVED_FILE`.
 `FileUtil#createIfMissing()` will create a dummy file at the archive file path.
 The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
@@ -779,20 +792,19 @@ Below are links for implementation of the classes and its methods:
 * [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-
-**Class Diagram of Archive Feature is shown below:**
+####**Class Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-**Path Execution of Archive Feature Activity Diagram is shown below:**
+####**Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
-**Sequence Diagram of Archive Feature is shown below:**
+####**Sequence Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -805,6 +817,8 @@ the working database file is obtained using `Model#getAddressBookFilePath()`. A 
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
 ### Resizing result display window feature
+
+In this section, the functionality of the `resize` feature, the expected execution path, the structure of the **ResizeCommand** class and the interactions between objects with the **ResizeCommand** object will be discussed.
 
 #### what is the resize feature
 This feature allows the user to resize the result display window in the case they have a small application window size, and/or they want to have a better view at the result feedback text after keying in a command, which is especially true for the `SummariseCommand`
@@ -838,6 +852,7 @@ The above figure illustrates the important interactions of `ResizeCommand` when 
 When a user inputs `resize 1`, `MainWindow#executeCommand()` will be invoked which in turn calls `LogicManager#execute()`. This will trigger a parsing process by `AddressBookParser` and `ResizeCommandParser` to check for valid command type and parameters.
 This will then create a `ResizeCommand` object which is then executed by the `LogicManager` via `ResizeCommand#execute()` which will then update the value needed to set the result display window size. This value is used by the `MainWindow#handleResizeResultDisplayWindow()`
 which sets the window in the GUI according to the user's desired option.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
