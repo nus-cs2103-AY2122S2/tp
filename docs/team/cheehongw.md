@@ -16,13 +16,26 @@ Given below are my contributions to the project.
 
   - Highlights: This enhancement requires understanding of the observer pattern used in the GUI framework and FXML.
 
-* **New Feature:** Add ability to add and remove individual tags from a person
+* **New Feature:** Add ability to `add` and `remove` individual tags from a person
   - What it does: Allows the user to create and delete individual tags in the application
+
   - Justification: As part of the target user profile, this a key feature that allows the user to organise the contacts in the address book.
 
-* **New Feature:** Add `SocialMedia` to `Person`
-
 * **New Feature:** Filter list by clicking a tag label
+  - What it does: Allows the user to filter the Person/Meeting list by clicking on a tag label in the tag panel.
+
+  - Justification: This feature improves the product significantly because a user can conveniently filter for groups of people/meeting with just a click, which is a key feature.
+
+* **Enhancement:** Add `SocialMedia` to `Person`
+  - What it does: Allows `Person` instances to contain information about any number of social media handles. Users can add/delete/edit specific `SocialMedia` entries for each person easily.
+
+  - Justification: Storing multiple and manipulating social media handles for each person is part of our product's feature.
+
+  - Highlights: This enhancement requires understanding of data storage and retrieval from AB3.
+
+  - Credits: 
+    - Chee Hong: Writing `SocialMedia` class, command for editing `SocialMedia` entries, JSON serialization of `SocialMedia`
+    - Weng Qi: Command for adding & deleting individual `SocialMedia` entries
 
 
 
