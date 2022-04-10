@@ -40,6 +40,14 @@ public class ReminderPersons {
     }
 
     /**
+     * A helper method for developers to reset the internal HashMap
+     * when conducting testing.
+     */
+    public void setTestingInstance() {
+        personReminderHashMap = new HashMap<>();
+    }
+
+    /**
      * Adds a person to the list of persons to be reminded of,
      * returns a boolean indicating if this person is in this list or not.
      * @param person The person to be reminded of.
@@ -69,10 +77,6 @@ public class ReminderPersons {
      */
     public Reminder get(Person person) {
         return personReminderHashMap.get(person);
-    }
-
-    public Reminder put(Person person, Reminder reminder) {
-        return personReminderHashMap.put(person, reminder);
     }
 
     /**

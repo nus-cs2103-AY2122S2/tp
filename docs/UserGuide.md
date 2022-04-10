@@ -31,7 +31,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Upload an image: `upload`](#upload-an-image--upload)
   - [View image of client: `viewimage`](#view-image-of-client-viewimage)
   - [Setting a reminder for a client: `remind`](#setting-a-reminder-for-a-client-remind)
-  - [Open Reminder window: `rm`](#open-reminder-window)
+  - [Open Reminder window: `rm`](#open-reminders-window-rm)
   - [Displaying statistics: `stats`](#displaying-statistics-stats)
 - [Future Features](#future-features-coming-soon)
 - [Storage](#storage)
@@ -99,7 +99,7 @@ Some example commands you can try:
   - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
   - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
   - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
-  - PRICE: `$` followed by a positive integer. e.g. `$150000`
+  - PRICE: `$` followed by a positive integer with at most 9 digits. e.g. `$150000` is acceptable but `$1234567890` is not acceptable.
 
 </div>
 
@@ -320,8 +320,8 @@ Uploads an image and description to be associated with a client.
 Format `upload INDEX [i/FilePath:description]`
 - Adds an image to the client at the specified `INDEX`.
 - The index refers to the index number shown in the displayed client list.
-- File path is from the directory the JAR file is launched from. e.g. `upload 1 i/example.png:living room`
-  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png).
+- File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`.
 - multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`.
 
@@ -333,8 +333,19 @@ Format `viewimage INDEX`
 
 
 ### Setting a Reminder for a client: `remind`
+<img src="images/user-guide/successfulRemindCommand.png" height="400px">
 
-Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the Reminder window.
+Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminder-window).
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Reminders:**<br>
+
+- The user will only be able to create 1 Reminder for each client. The user will be able to create a new Reminder, edit a current Reminder or remove a Reminder for a client.
+- Reminders are meant to serve as temporary notes for the user & thus will not persist beyond the lifecycle of a RealEstatePro application. This means any reminders created will be removed once the RealEstatePro application is closed.
+
+</div>
+
 
 Format: `remind INDEX r/ReminderDetails`
 - Sets a Reminder for the client at the specified `INDEX`.
@@ -342,9 +353,26 @@ Format: `remind INDEX r/ReminderDetails`
 - The index **must be a postive integer** 1, 2, 3, ...
 - The `ReminderDetails` must be a non-empty String, e.g. `arrange home viewing`.
 
-### Open Reminder window: `rm`
+Example of usage:
+- Creating a Reminder
+  - `remind 1 r/meet client for home viewing` to create a Reminder titled "meet client for home viewing" for the client at index 1.
+- Editing a Reminder
+  - `remind 1 r/liaise with client for leasing details` to edit the existing Reminder for the client at index 1 to be "liaise with client for leasing details".
+- Deleting a Reminder
+  - `remind 1` to remove the current Reminder for the client at index 1.
 
-Opens a new window that displays compacted list of clients that have Reminders set.
+### Open Reminders window: `rm`
+
+<p float="left">
+  <img src="images/user-guide/reminderWindowFilled.png" height="400px">
+  <img src="images/user-guide/reminderWindowEmpty.png" height="400px">
+</p>
+
+
+
+Opens a new window that displays compacted list of clients that have Reminders set. Upon execution of the `rm` command, the Reminders window will persist & continuously appear every 1 minute, until the RealEstatePro app is closed. The Reminders window is meant to serve as a pinboard showing existing Reminders.
+
+The Reminders window can exist in the above 2 states: a list of clients with their reminders or a label "No Reminders set!". These 2 states exist when there are existing reminders or there are no reminders respectively. If the user has reminders set for their clients, the Reminders window will resemble the first picture, else the second picture.
 
 Format: `rm`
 
@@ -368,7 +396,8 @@ Format: `stats`
 2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
 3. Display statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
 4. Display statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
-5. Allow images to be associated with properties or preferences to allow for better organization
+5. Allow images to be associated with properties or preferences to allow for better organization.
+6. Reminders set for clients can be saved to disk.
 
 ## Storage
 ### Saving the data
