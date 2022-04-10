@@ -155,7 +155,56 @@ This section describes some noteworthy details on how certain features are imple
 
 ### About delete student contact feature
 
-The delete student contact feature allows users to delete an existing student contact from the student contact list.
+The delete student contact feature allows users to delete an existing student contact from the student contact list
+via the command `delete INDEX`.
+
+### How it is implemented
+
+The `delete` command mechanism is facilitated by the `DeleteCommand` and the `DeleteCommandParser`.
+It allows users to delete a student contact from the student contact list.
+It uses the `AddressBook#removePerson(Person key)` which is exposed in the `Model`
+interface as `Model#deletePerson(Person personToDelete)`. Then, the `remove(Person person)` is called on the `UniquePersonList`
+in `AddressBook` to delete the student contact from the list. <br>
+
+A modification from AB3 delete mechanism is that the `delete` command also involves the facilitation of the `AddressBook#deassignPerson(Person persontToDeassign, Group group)`
+which is exposed in the `Model` interface as `Model#deassignPerson(Person person, Group group)`, which result in the call of `Group#deassign(Person person)` to 
+deassign the deleted student contact from all previously assigned groups.
+
+#### Parsing user input
+
+1. The user inputs the `delete` command.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteCommandParser`.
+
+3. The `DeleteCommandParser` then calls the `ParserUtil#parseIndex()` to check for the validity of the `INDEX`. 
+At this stage, if the `INDEX is invalid or is not present`, `ParseException` would be thrown.
+
+4. The `DeleteCommandParser` then creates the `DeleteCommand` based on the processed input.
+
+#### Command execution
+
+5. The `LogicManager` executes the `DeleteCommand`.
+
+6. The `DeleteCommand` calls the `Model#getFilteredPersonList()` to get the unmodifiable view of the filtered person list to get the target 
+person to delete based on the provided `INDEX`. <br><br> At this stage, `CommandException` would be thrown if the input `INDEX` 
+is invalid (i.e. `INDEX` exceeds the size of the student contact list). 
+
+7. The `DeleteCommand` the calls the `Model#deletePerson(Person personToDelete)` to delete the target student contact from the 
+student contact list.
+
+8. After which, the `Model#getFilteredGroupList()` is called to get the unmodifiable view of the filtered group list.
+
+9. The iteration through the groups in the obtained group list is being done to check if the target student contact was assigned 
+to the groups. `Model#deassignPerson(Person person, Group group)` is called to deassign the student contact from all previously assigned groups. 
+
+#### Displaying of result
+
+10. Finally, the `DeleteCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+   The GUI would also be updated on this change in the student contact list and group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `delete` mechanism works:
+
+
 
 ## Add group feature
 
