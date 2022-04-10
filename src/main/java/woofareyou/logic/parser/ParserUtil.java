@@ -350,7 +350,6 @@ public class ParserUtil {
         requireNonNull(charge);
 
         String trimmedCharge = charge.trim();
-        System.out.println(trimmedCharge);
         if (!Charge.isValidCharge(trimmedCharge)) {
             throw new ParseException(Charge.MESSAGE_INVALID_CHARGE_FORMAT);
         }

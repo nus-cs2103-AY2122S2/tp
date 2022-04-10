@@ -32,36 +32,36 @@ class AppointmentCommandTest {
 
     @Test
     public void execute_addAppointmentUnfilteredList_success() {
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson)
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(firstPet)
                 .withAppointment(APPOINTMENT_DATE_TIME_STUB,
                         APPOINTMENT_LOCATION_STUB).build();
 
         AppointmentCommand appointmentCommand =
                 new AppointmentCommand(INDEX_FIRST_PET,
-                        new Appointment(editedPerson.getAppointment().getDateTime(),
-                                editedPerson.getAppointment().getLocation()));
+                        new Appointment(editedPet.getAppointment().getDateTime(),
+                                editedPet.getAppointment().getLocation()));
 
-        String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_clearAppointmentUnfilteredList_success() {
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withAppointment().build();
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(firstPet).withAppointment().build();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                editedPerson.getAppointment());
+                editedPet.getAppointment());
 
-        String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
@@ -70,25 +70,25 @@ class AppointmentCommandTest {
     public void execute_filteredList_success() {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
                 .withAppointment(APPOINTMENT_DATE_TIME_STUB, APPOINTMENT_LOCATION_STUB).build();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PET,
-                new Appointment(editedPerson.getAppointment().getDateTime(),
-                        editedPerson.getAppointment().getLocation()));
+                new Appointment(editedPet.getAppointment().getDateTime(),
+                        editedPet.getAppointment().getLocation()));
 
-        String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPetIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,
                 new Appointment());
@@ -101,7 +101,7 @@ class AppointmentCommandTest {
      * but smaller than size of pet book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidPetIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of pet book list

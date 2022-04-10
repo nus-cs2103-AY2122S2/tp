@@ -5,10 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyPetBook" as ReadOnlyPetBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class PetBook
 Class ModelManager
 Class UserPrefs
 
@@ -29,23 +29,23 @@ Class AttendanceHashMap
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+PetBook .up.|> ReadOnlyPetBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyPetBook
+ModelManager -left-> "1" PetBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePetList
+PetBook *--> "1" UniquePetList
 UniquePetList --> "~* all" Pet
 Pet *--> Name
 Pet *--> OwnerName
 Pet *--> Phone
 Pet *--> Address
-Pet *--> Diet
-Pet *--> Appointment
+Pet *--> "0..1" Diet
+Pet *--> "0..1" Appointment
 Pet *--> "0..1" Tag
 Pet *--> AttendanceHashMap
 

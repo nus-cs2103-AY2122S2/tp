@@ -58,7 +58,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + OWNER_NAME_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPet));
 
-        // multiple emails - last email accepted
+        // multiple ownerNames - last ownerName accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + OWNER_NAME_DESC_AMY + OWNER_NAME_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPet));
 
@@ -87,7 +87,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + OWNER_NAME_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing email prefix
+        // missing ownerName prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_OWNER_NAME_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
@@ -110,7 +110,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + OWNER_NAME_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND, Phone.MESSAGE_CONSTRAINTS);
 
-        // invalid email
+        // invalid ownerName
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_OWNER_NAME_DESC + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND, OwnerName.MESSAGE_CONSTRAINTS);
 

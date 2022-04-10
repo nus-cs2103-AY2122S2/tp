@@ -33,31 +33,31 @@ class DietCommandTest {
 
     @Test
     public void execute_addDietUnfilteredList_success() {
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withDiet(DIET_STUB).build();
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(firstPet).withDiet(DIET_STUB).build();
 
-        DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
+        DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPet.getDiet().value));
 
-        String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteDietUnfilteredList_success() {
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(firstPerson).withDiet("").build();
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(firstPet).withDiet("").build();
 
         DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET,
-                new Diet(editedPerson.getDiet().toString()));
+                new Diet(editedPet.getDiet().toString()));
 
-        String expectedMessage = String.format(DietCommand.MESSAGE_DELETE_DIET_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DietCommand.MESSAGE_DELETE_DIET_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
     }
@@ -66,23 +66,23 @@ class DietCommandTest {
     public void execute_filteredList_success() {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Pet firstPerson = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
-        Pet editedPerson = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet editedPet = new PetBuilder(model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased()))
                 .withDiet(DIET_STUB).build();
 
-        DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
+        DietCommand dietCommand = new DietCommand(INDEX_FIRST_PET, new Diet(editedPet.getDiet().value));
 
-        String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
+        String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPet);
 
         Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
-        expectedModel.setPet(firstPerson, editedPerson);
+        expectedModel.setPet(firstPet, editedPet);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPetIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         DietCommand dietCommand = new DietCommand(outOfBoundIndex, new Diet(VALID_DIET_BOB));
 
@@ -94,7 +94,7 @@ class DietCommandTest {
      * but smaller than size of pet book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidPetIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of pet book list

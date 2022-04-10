@@ -1,5 +1,6 @@
 ---
-layout: page title: Hao Yu's Project Portfolio Page
+layout: page 
+title: Hao Yu's Project Portfolio Page
 ---
 
 ### Project: WoofAreYou
