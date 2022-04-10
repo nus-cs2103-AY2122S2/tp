@@ -423,8 +423,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns a hashmap for count of allergies, preferred services and staffs of customers, which are stored as tags.
-     */
+    * Returns a hashmap for count of allergies, preferred services and staffs of customers, which are stored as tags.
+    */
     HashMap<String, Integer> getTagMap(String methodName) {
         try {
             HashMap<String, Integer> map = new HashMap<String, Integer>();
