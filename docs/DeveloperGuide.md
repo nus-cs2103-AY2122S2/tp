@@ -1443,28 +1443,28 @@ testers are expected to do more *exploratory* testing.
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** This section only lists a few complex commands with arguments. For more information on each of the commands, refer to the [user guide](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html).
+:information_source: **Note:** This section only lists a few standard commands with arguments. For more information on each of the commands, refer to the [user guide](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html).
 
 </div>
 
-| **Command**                                                                                       | **Expected Action**                                            |
-|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| `addperson n/Johnny Ong p/12345678 e/sample@domain.com a/123 Chestnut Drive t/friend t/colleague` | Adds a new contact called Johnny Ong                           |
-| `deleteperson 1`                                                                                  | Deletes the contact at index 1                                 |
-| `editperson 1 n/James Lee`                                                                        | Changes the name of the contact at index 1 to James Lee        |
-| `findperson James Jake`                                                                           | Finds contacts whose name contains James or Jake               |
-| `addtag n/Clients`                                                                                | Adds a new tag called Clients                                  |
-| `edittag 1 t/Blocked`                                                                             | Edits the tag at index 1 to be named Blocked                   |
-| `deletetag 1`                                                                                     | Deletes the tag at index 1                                     |
-| `addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`                                                | Adds an appointment called Call Bob                            |
-| `deleteappt 1`                                                                                    | Deletes the appointment at index 1                             |
-| `editappt 1 n/Call Boss`                                                                          | Changes the name of the appointment at index 1 to Call Boss    |
-| `apptbetween sd/21-10-2022`                                                                       | List all appointments from 21 october 2022                     |
-| `freebetween l/40`                                                                                | Lists empty slots in the schedule that at at least 1 hour long |
-| `findappt Meeting`                                                                                | Find appointments that contain the word Meeting in the name    |
-| `batch editperson p/87654321 by/phone =/12345678`                                                 | Edits all persons whose phone numbers are 12345678             |
-| `range editperson p/87654321 from/1 to/10`                                                        | Edits all persons from index 1 to 10                           |
-| `chain editappt 1 l/360 && listappt`                                                              | Edits the appointment at index 1 and lists all appointments    |
+| **Command**                                                             | **Expected Action**                                            |
+|-------------------------------------------------------------------------|----------------------------------------------------------------|
+| `addperson n/Johnny p/12345678 e/abc@domain.com a/1 Burn Road t/friend` | Adds a new contact called Johnny                               |
+| `deleteperson 1`                                                        | Deletes the contact at index 1                                 |
+| `editperson 1 n/James Lee`                                              | Changes the name of the contact at index 1 to James Lee        |
+| `findperson James Jake`                                                 | Finds contacts whose name contains James or Jake               |
+| `addtag n/Clients`                                                      | Adds a new tag called Clients                                  |
+| `edittag 1 t/Blocked`                                                   | Edits the tag at index 1 to be named Blocked                   |
+| `deletetag 1`                                                           | Deletes the tag at index 1                                     |
+| `addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`                      | Adds an appointment called Call Bob                            |
+| `deleteappt 1`                                                          | Deletes the appointment at index 1                             |
+| `editappt 1 n/Call Boss`                                                | Changes the name of the appointment at index 1 to Call Boss    |
+| `apptbetween sd/21-10-2022`                                             | List all appointments from 21 october 2022                     |
+| `freebetween l/60`                                                      | Lists empty slots in the schedule that at at least 1 hour long |
+| `findappt Meeting`                                                      | Find appointments that contain the word Meeting in the name    |
+| `batch editperson p/87654321 by/phone =/12345678`                       | Edits all persons whose phone numbers are 12345678             |
+| `range editperson p/87654321 from/1 to/10`                              | Edits all persons from index 1 to 10                           |
+| `chain editappt 1 l/360 && listappt`                                    | Edits the appointment at index 1 and lists all appointments    |
 
 
 <div style="page-break-after: always;"></div>
