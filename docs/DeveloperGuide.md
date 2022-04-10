@@ -230,6 +230,8 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 **Class Diagram of Add Feature is shown below:**
 ![AddClassDiagram](images/AddClassDiagram.png)
 
+The class diagram above depicts the structure of `AddCommand`. As per any Command class, AddCommand needs to extend the abstract class Command.
+
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
@@ -255,23 +257,15 @@ Following this, `LogicManager` will call the `execute()` method of the `AddComma
 
 ### Summarise feature
 
-The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
+The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
 
+In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
+students who are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
+This helps the hall masters determine if there is a spread of virus in any particular block.
 
-#### What is the summarise feature
-
-The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
-Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
-Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
-
-This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
-their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
-
-The `summarise` command is as follows:
-
-`summarise`
-
-The user can choose when to execute the summarise command.
+Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
+comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
+their hall safe.
 
 **Path Execution of Summarise Feature Activity Diagram is shown below:**
 ![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
@@ -285,7 +279,7 @@ There are three possible execution paths for this command.
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
 
-The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
+The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces. 
 
 **Sequence Diagram of Summarise Feature is shown below:**
 
@@ -313,6 +307,7 @@ At the same time, `summariseFaculty` will stored the highest number of covid cas
 
 Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
 A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+
 
 ### Pie Chart Window feature
 
@@ -368,10 +363,9 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
 
 The help mechanism implements the following sequence for the method call execute("help").
 
-What is the help feature
+#### What is the help feature
 
 The help feature opens up a separate window that contains a simple user guide for the user to adhere to. The window contains a list of commands that Tracey provides, their formats and examples.
-When the Help Window is open, the user can also choose to view the comprehensive user guide on the user's default browser by clicking on the `Open User Guide` button.
 
 The `help` command is as follows:
 
@@ -385,15 +379,25 @@ The activity diagram shows the possible execution paths for the `help` command.
 
 ![HelpActivityDiagram](images/HelpActivityDiagram.png)
 
+When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
+
 **Class Diagram of Help Feature is shown below:**
 
 ![HelpClassDiagram](images/HelpClassDiagram.png)
+
+The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
 
 **Sequence Diagram of Help Feature is shown below:**
 
 ![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
 
+When a user inputs a `help` command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `HelpCommand` object.
 
+Following this, the `LogicManager` will call the `execute()` method of the `HelpCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will determine if the `CommandResult` is a `HelpCommand` by calling the `isShowHelp()` method. Following this, the `handleHelp()` method is called.
+
+If the Help Window is showing, the `focus()` method of the HelpWindow is called. Else when the Help Window is not showing, the `show()` method of the HelpWindow is called. For both alternate paths, when the user clicks on the `Open User Guide` button, this will call the `openUG()` method of the HelpWindow object.
 
 
 ### Clear feature
@@ -403,23 +407,29 @@ The clear mechanism implements the following sequence and interactions for the m
 The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
 user to replace the list of students with an empty one. Previous data are swiped away.
 
-**Path Execution of Clear Feature Activity Diagram is shown below:**
+**Path Execution of Clear Feature:**
 
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
-**Class Diagram of Clear Feature is shown below:**
+**Structure of Clear Feature:**
+
 ![ClearClassDiagram](images/ClearClassDiagram.png)
+
+The class diagram above depicts the structure of `CLearCommand`. As per any Command class, ClearCommand needs to extend the abstract class Command.
 
 Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
 
 1. `MESSAGE_SUCCESS`
    - Scenario: Tracey database successfully cleared.
    - Message: "Tracey has been cleared!".
-
-
-**Sequence Diagram of Clear Feature is shown below:**
+   
+**Interaction between objects when Clear Command is executed:**
 
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
+
+When a user inputs a clear command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, creating a new ClearCommand object.
+
+Afterwards, the `execute()` method of this ClearCommand object is called, which calls the Model's `setAddressBook(AddressBook)` feature, setting a new AddressBook object to clear the database.
 
 <br>
 
@@ -571,14 +581,22 @@ The user can choose when to execute the email command.
 
 The activity diagram shows the possible execution paths for the `email` command.
 
-**Path Execution of Email Feature Activity Diagram is shown below:**
+**Path Execution of Email Feature:**
+
 ![EmailActivityDiagram](images/EmailActivityDiagram.png)
 
 There are two possible execution paths for this command.
 1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
 2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
 
-The sequence diagram below shows the interactions between objects during the execution of a `email` command.
+**Structure of Email Feature:**
+
+![EmailClassDiagram](images/EmailClassDiagram.png)
+
+The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
+
+**Interactions between objects when EmailCommand is executed:**
+
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
 
