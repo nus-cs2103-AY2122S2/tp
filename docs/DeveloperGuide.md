@@ -334,7 +334,11 @@ This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps
 
 ## Value Proposition
 
-Manage Persons faster that a typical mouse/GUI driven app.
+RealEstatePro is faster that a typical mouse/GUI driven app that helps the real estate agent to
+- Keep track of clients who are looking to buy and sell properties 
+- Organize clients to be able to easily find their information when needed
+- Buy and sell properties with greater efficiency
+
 
 ## User stories
 
