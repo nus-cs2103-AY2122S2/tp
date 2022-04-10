@@ -573,6 +573,35 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect filter interview commands to try: `list -i f/abc a/abc`, `list -i a/2022-05-05`<br>
        Expected: Similar to previous.
 
+### Sorting Data
+1. Sorting applicants
+    1. Prerequisites: List all applicants using the `list -a` command. At least two applicants in the list.
+
+    2. Test case: `list -a s/asc` <br>
+       Expected: The list refreshes showing the list of all applicants sorted by their names in ascending order (if not already).
+
+    3. Test case: `list -a s/abc` <br>
+       Expected: An error message is shown.
+
+2. Sorting positions
+    1. Prerequisites: List all positions using the `list -p` command. At least two positions in the list.
+
+    2. Test case: `list -p s/asc` <br>
+       Expected: The list refreshes showing the list of all positions sorted by their names in ascending order (if not already).
+
+    3. Test case: `list -p s/abc` <br>
+       Expected: An error message is shown.
+
+2. Sorting interviews
+    1. Prerequisites: List all interviews using the `list -i` command. At least two interviews in the list.
+
+    2. Test case: `list -i s/asc` <br>
+       Expected: The list refreshes showing the list of all interviews sorted by their date in ascending order (if not already).
+
+    3. Test case: `list -i s/abc` <br>
+       Expected: An error message is shown.
+
+       
 ### Saving data
 
 1. Saving newly added/edited data
