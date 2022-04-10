@@ -520,12 +520,12 @@ The following activity diagram summarizes what happens when a user executes a `f
 ### Scheduling interviews feature
 
 #### What is this feature about?
-The `AddScheduleCommand`, `EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` features allow 
+The `AddScheduleCommand`, `EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` features allow
 the user to add, edit, delete or clear all interviews respectively.
 
 #### How is this feature implemented?
-This feature is modelled after AB3's `add`, `edit`, `delete` and `clear` commands for consistency. Interview objects 
-created upon the `schedule add` command are contained in a `UniqueInterviewList` object and exposed to outsiders as 
+This feature is modelled after AB3's `add`, `edit`, `delete` and `clear` commands for consistency. Interview objects
+created upon the `schedule add` command are contained in a `UniqueInterviewList` object and exposed to outsiders as
 an unmodifiable `ObservableList<Interview>`.
 
 #### Why is this feature implemented as such?
@@ -537,10 +537,10 @@ an unmodifiable `ObservableList<Interview>`.
 * Alternative 2: Every candidate has an `Interview` attribute, initialised to null. When a candidate is scheduled for an
   interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
     * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
-    * Cons: Interview schedule has to iterate through every candidate to search for existing interviews during initialisation. 
+    * Cons: Interview schedule has to iterate through every candidate to search for existing interviews during initialisation.
   Editing or deleting interviews by index from the interview schedule would require further iterations through the candidate list
   to find the target interview.
-    
+
 #### UML Diagram
 Below is a simplified sequence diagram showing how an `AddScheduleCommand` is parsed under the `Logic` 
 component when a user adds an interview to the schedule. Note that all four schedule commands `AddScheduleCommand`, 
@@ -680,7 +680,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant™ creates a centralized management system for NUS School of Computing professors to manage 
+**Value proposition**: TAlent Assistant™ creates a centralized management system for NUS School of Computing professors to manage
 undergraduate TA applications by providing easy access to candidates' data to review their general availability for
 scheduling interviews during office hours.
 
@@ -1079,7 +1079,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `remark 1 r/new remark`<br>
        Expected: Remark for candidate at index 1 in the currently displayed candidate list is updated to
        `new remark`. Details of the candidate with the updated remark is shown in the feedback panel. Focus panel does not update the remark of the currently displayed candidate.
-    
+
 ### Sorting candidates in the system
 
 1. Sorting candidates while all candidates are being shown
@@ -1097,12 +1097,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Sorting candidates while only some candidates are being shown
 
-    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. 
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
        Use the `find` command to display a new filtered list with fewer candidates. Multiple candidates in the filtered list.
 
      2. Test case: `sort s/name`<br>
        Expected: Currently displayed candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed name. Number of candidates sorted is shown in the feedback panel.
-    
+
 
 ### Finding candidates in the system
 
@@ -1118,10 +1118,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find k/Alex f/`<br>
       Expected: Only candidates containing `Alex` in any of their valid searchable attribute fields (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.
-   
+
    1. Incorrect find commands to try: `find`, `find f/xxx` (where xxx is any invalid attribute field to search by)<br>
       Expected: No change to the list of candidates already displayed. Error message is shown in the feedback panel.
-   
+
 
 ### Saving data
 
