@@ -14,7 +14,7 @@ public class FriendName extends Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Friend names should only contain alphanumeric characters and spaces, and it should not be blank"
-            + "or consisting only of whitespace";
+            + " or consisting only of whitespace";
 
     /*
      * The first character of the name must not be a whitespace,
