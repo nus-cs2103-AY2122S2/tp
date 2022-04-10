@@ -39,7 +39,7 @@ We hope you enjoy Tracey as much as we did when developing it!
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to navigate the User Guide
@@ -68,21 +68,21 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
-   📓`Note:`
-    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
-    2. To check your java version:
-        1. For Mac users, open up Terminal and type in `java --version`.
-        2. For Windows users, open up Command Prompt and type in `java --version`.
-    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
-    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+ 📓`Note:`
+   1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+   2. To check your java version:
+      1. For Mac users, open up Terminal and type in `java --version`.
+      2. For Windows users, open up Command Prompt and type in `java --version`.
+   3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+   4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
    📓`Note:`
-    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-    2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -116,7 +116,7 @@ This is a sample screenshot of what you can expect from the `help` command.
 Format: `help`
 
 ### Importing Excel sheet
-Add a list of students from an Excel file into Tracey.
+Add a list of students from an Excel file into Tracey. 
 
 Format: `import FILE PATH`
 * Adds a list of students with Relevant Details such as Covid status into Tracey.
@@ -129,7 +129,7 @@ Examples of usage:
 * `import C:\Users\Documents\Desktop\tp\students.xlsx`
 
 📓`Note:`
-There is also a `Import` button on the GUI which you can click to open the same window as shown in Figure 4.
+There is also a `Import` button on the GUI which you can click to open the same window as shown in Figure 4. 
 
 Sample Excel file:
 ![Format_Sample](images/Excelformat.png) *Figure 3: Screenshot of Excel file.*
@@ -356,9 +356,9 @@ From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the res
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
 * `[ROOT]`: The folder where the Tracey.jar is in.
 * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
-    * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
+  * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
 * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
-    * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
+  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
@@ -370,7 +370,7 @@ Example:
 
 💡`Tips:`
 * You can rename the archived file in the file path manually for easier reference.
-    * Features for naming of the archived file via the CLI will be available in later releases.
+  * Features for naming of the archived file via the CLI will be available in later releases.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Resizing the result display window
