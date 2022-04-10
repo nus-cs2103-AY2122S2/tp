@@ -140,7 +140,6 @@ The `Lab` Component is a subcomponent of the `Model` component.
 * stores all Lab related data.
 * stores all `Lab` objects related to a `Student` object in `LabList`. (each `Student` object has its own copy of a `LabList`).
 * the `MasterLabList` stores all the labs added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any one time).
-* `LabList` is exposed to outsiders as an `ObservableList<Lab>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 
 ### Storage component
@@ -177,7 +176,7 @@ The add lab command is implemented as follows:
 4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, and if it is empty, the system will output a message to the user to notify the user that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
 5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` by increasing `LAB_NUMBER`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation on a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` by increasing `LAB_NUMBER`.
 </div>
 
 The sequence for parsing the input is similar to the one shown in [this sequence diagram](#delete-sequence-diagram) above.
@@ -191,9 +190,10 @@ The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for 
 
 The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.
 
-The sequence diagram for the implementation of `LabList#add(Lab)` will be shown seperately below. <br>
+The sequence diagram for the implementation of `LabList#add(Lab)` will be shown separately below. <br>
 
-**Note:** Instead of putting a reference frame in the above UML diagram for the sequence diagram of `LabList#add(Lab)`, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead, this short note will suffice.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Instead of putting a reference frame in the above UML diagram for the sequence diagram of `LabList#add(Lab)`, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead, this short note will suffice.
+</div>
 
 The following UML sequence diagram shows how `add(Lab)` is implemented in `LabList`:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. TAB detects that the student list is empty.
-    * 2a1. TAB displays warning message to user (that there are no students yet).
+    * 1a1. TAB displays warning message to user (that there are no students yet).
 
       Use case resumes from 4.
   
