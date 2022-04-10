@@ -165,7 +165,16 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help [COMMAND]`
+
+* Enter optional parameter `COMMAND` to view the usage for that command.
+![meet Help Message](images/meetHelpMessage.png)
+* Leave parameter blank to view message explaining how to access help page and the usage of all commands.
+
+Example:
+
+* `help`
+* `help meet`
 
 ## Managing your clients
 
@@ -272,6 +281,12 @@ Example:
 * Running the command `delete n/John` will show a list of clients with names containing "John"
 * If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue deleting other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
+
 ### Flagging a client : `flag`
 
 Flag a client in the HustleBook to mark them as important. 
@@ -283,6 +298,8 @@ Format: `flag NAME`
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names.
   * Input the position on the list of the client you wish to edit.
+* A flagged client will have **red** tab on the left shown below:
+![flagged_client](images/flaggedClient.png)
 
 Example:
 
@@ -293,9 +310,12 @@ Example:
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `flag John` will show a list of clients with names containing "John".
 * If you wish to flag `John Doe` and he is the first person listed, typing `1` and `Enter` will flag `John Doe`.
-* Subsequently, you can continue to flag other "John" listed here by typing their indexes and pressing `Enter`.
-* Run `list` to show all clients and stop flagging clients with names containing "John".
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue flagging other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
 
 ### Unflagging a client : `unflag`
 
@@ -318,8 +338,12 @@ Example:
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `unflag John` will show a list of clients with names containing "John".
 * If you wish to unflag `John Doe` and he is the first person listed, typing `1` and `Enter` will unflag `John Doe`.
-* Subsequently, you can continue to unflag other "John" listed here by typing their indexes and pressing `Enter`.
-* Run `list` to show all clients and stop flagging clients with names containing "John".
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue unflagging other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
 
 ## Managing your meetings
 
