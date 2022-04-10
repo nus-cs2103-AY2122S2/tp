@@ -53,10 +53,10 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 **:information_source: Notes about the command format:**
 
 * **Words in `<UPPER_CASE>` are the parameters to be supplied by the user.** <br>
-  * e.g. in `addstudent -n <STUDENT_NAME>`, `<STUDENT_NAME>` is a parameter which 
+  * e.g. in `addstudent -n <NAME>`, `<NAME>` is a parameter which 
   can be used as `addstudent -n John Doe`.
 
-* **Words in `[SQUARE BRACKETS]` are parameters that are optional.**
+* **Words in `[SQUARE BRACKETS]` are parameters that are optional and supplied by the user.**
   * e.g. in the command `editstudent INDEX [-n NAME] [-p PHONE]...`, `[-n NAME]` and `[-p PHONE]` are optional 
   parameters.
 
@@ -130,7 +130,7 @@ Adds a student to TeachWhat!
 
 **Command word**: `addstudent` / `as`
 
-**Format**: `addstudent -n <STUDENT_NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>` 
+**Format**: `addstudent <-n STUDENT_NAME> -p <PHONE_NO> [-e EMAIL] [-a ADDRESS] [-t TAG]` 
 
 **Example**: `addstudent -n James -p 999 -e jamesboyo@gmail.com -a 34 Lor 11 Geylang -t hardworking -t small`
 
@@ -162,7 +162,7 @@ Edits an existing student in TeachWhat!.
 
 **Command word**: `editstudent` / `es`
 
-**Format**: `editstudent <STUDENT_ID> -n [NAME] -p [PHONE_NO] -e [EMAIL] -a [ADDRESS] -t [TAG]`
+**Format**: `editstudent <STUDENT_ID> [-n NAME] [-p PHONE_NO] [-e EMAIL] [-a ADDRESS] [-t TAG]`
 
 **Example**: `editstudent 2 -n Sammy -p 123 -t codinggod -t extrageeky -t extrahansum`
 
@@ -199,11 +199,11 @@ Adds a lesson to TeachWhat!
 
 **Command word**: `addlesson` / `al`
 
-**Format**: `addlesson [-r] -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES] -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
+**Format**: `addlesson [-r] -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> [-h DURATION_OF_LESSON_IN_HOURS] [-m DURATION_OF_LESSON_IN_MINUTES] [-s LESSON_SUBJECT] [-a ADDRESS_OF_LESSON]`
 
 <div markdown="span" class="alert alert-warning">:bulb:
 **Adding Recurring Lessons**: To specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! If it is a temporary lesson, simply leave it out.
-
+**Duration**: At least one of the optional prefixes `-m` or `-h` must be used to give the duration of the lesson.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -246,7 +246,7 @@ Edits an existing lesson in TeachWhat!.
 
 **Command word**: `editlesson` / `el`
 
-**Format**: `editlesson <LESSON_ID> -n [LESSON_NAME] -s [SUBJECT] -a [ADDRESS_OF_LESSON] -d [DATE_OF_LESSON] -t [STARTING_TIME] -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES]`
+**Format**: `editlesson <LESSON_ID> [-n LESSON_NAME] [-s SUBJECT] [-a ADDRESS_OF_LESSON] [-d DATE_OF_LESSON] [-t STARTING_TIME] [-h DURATION_OF_LESSON_IN_HOURS] [-m DURATION_OF_LESSON_IN_MINUTES]`
 
 **Example**: `editlesson 2 -n Bio Make Up Session -t 17:00 -h 2`
 
