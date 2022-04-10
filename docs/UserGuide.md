@@ -107,7 +107,7 @@ Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
   an applicant can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
   but not at `2022-01-01 13:50`.
 * A candidate can only have **at most one interview for each unique position** in the position list.
-* An interview cannot be created for a Position that have no openings.
+* An interview cannot be created for a Position that has no openings.
 * The `APPLICANT_INDEX` refers to the index number shown in the last displayed Applicant
   list.
 * The `POSITION_INDEX` refers to the index number shown in the last displayed Position
