@@ -23,7 +23,7 @@ fckpAnd <|-- nckpAnd
 fckpOr <|-- nckpOr
 fckpAnd <|-- pckpAnd
 fckpOr <|-- pckpOr
-class "{abstract}\CcaContainsKeywordPredicateAnd" as cckpAnd
+class "{abstract}\nCcaContainsKeywordPredicateAnd" as cckpAnd
 class "{abstract}\nCcaContainsKeywordPredicateOr" as cckpOr
 class "{abstract}\nModuleContainsKeywordPredicateAnd" as mckpAnd
 class "{abstract}\nModuleContainsKeywordPredicateOr" as mckpOr
