@@ -624,7 +624,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC05 - Exiting Trackermon**
+**Use case: UC05 - Exit Trackermon**
 
 **Preconditions: Trackermon application is started.**
 
@@ -783,7 +783,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC11 - Suggesting a show**
+**Use case: UC11 - Suggest a show**
 
 **Preconditions: Trackermon application is started.**
 
