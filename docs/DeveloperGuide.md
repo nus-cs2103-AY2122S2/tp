@@ -7,7 +7,6 @@ title: Developer Guide
 
 ## **Acknowledgements**
 * [Documentation idea of splitting the Model component into 2, to prevent cramping of images](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components)
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,7 +164,7 @@ A `Task`,
 - can be represented by a `Todo`, `Event`, or `Deadline`
 
 A `Task` contains the following attributes,
-1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
+1. a `Description`, which represent the details of the Task
 2. a `Date`, which represent the day, month and year as specified by a number of the Task
 3. a `Time`, which represent the period during the Task exists or happens
 4. can be assigned/Tagged to multiple different `Person`
@@ -720,7 +719,7 @@ Preconditions: User is currently using ManageEZPZ.
       the edit Task command is incorrect, attached with the correct syntax format.
 
       Use Case ends.
-    * 
+  
 * 4c. User uses edit Task commands with prefix declared but no input value afterwards
 
     * 4c1. ManageEZPZ sends an error message to User, indicating that User must input a value after a prefix.
@@ -903,6 +902,7 @@ Preconditions: User is currently using ManageEZPZ.
 | **Mainstream OS** | Windows, Linux, Unix, OS-X                                                 |
 | **Users**         | Applies to both managers or supervisors                                    |
 | **command**       | A message sent as an input from User, that coincides with our Command List |
+| **Person**        | An employee
 
 --------------------------------------------------------------------------------------------------------------------
 
