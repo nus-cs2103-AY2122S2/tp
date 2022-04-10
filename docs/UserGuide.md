@@ -89,9 +89,9 @@ only packages that existing people in ClientConnect have.
 
 **Notes about the insurance packages:**<br>
 
-
 ### Viewing help : `help`
 ![Help button image](images/helpButtonUG.png)
+
 Shows a message explaining how to access the ClientConnect help page
 
 Format: `help`
