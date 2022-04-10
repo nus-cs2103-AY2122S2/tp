@@ -202,6 +202,11 @@ public class ParserUtil {
         Size size = parseSize(preferenceSplit[1]);
         Price lowPrice = parsePrice(preferenceSplit[2]);
         Price highPrice = parsePrice(preferenceSplit[3]);
+
+        if (highPrice.compareTo(lowPrice) < 0) {
+            throw new ParseException(Preference.MESSAGE_CONSTRAINTS);
+        }
+
         return new Preference(region, size, lowPrice, highPrice);
     }
 
