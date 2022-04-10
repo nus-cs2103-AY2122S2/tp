@@ -217,7 +217,7 @@ A client's meeting can be scheduled through meet command after adding the client
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Low Risj Tolerance f/true`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Low Risk Tolerance f/true`
 
 ### Editing a client : `edit`
 
