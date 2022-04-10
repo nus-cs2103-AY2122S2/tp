@@ -25,7 +25,7 @@ especially for those who are teaching multiple classes/modules at the same time.
 3. Copy the `TAPA.jar` file to the folder you want to use as the _home folder_ for TAPA.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui-Startup.png)
 
 5. Type the desired command in the command box and press the "Enter" key on your keyboard to execute it. For example, typing **`help`** and pressing "Enter" will open the help window.<br>
    <br>

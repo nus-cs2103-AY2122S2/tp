@@ -6,7 +6,7 @@ title: TAPA
 [![CI Status](https://github.com/AY2122S2-CS2103T-W09-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W09-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W09-4/tp/branch/master/graph/badge.svg?token=CDP6XU44SQ)](https://codecov.io/gh/AY2122S2-CS2103T-W09-4/tp)
 
-![Ui](images/Ui-Sample-Data.png)
+![Ui](images/Ui.png)
 
 **TAPA (Teaching Assistant's Personal Assistant) is a desktop application for TAs to better manage their students and keep track of their progress.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
