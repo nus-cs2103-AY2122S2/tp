@@ -7,19 +7,31 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code Name}.
+ */
 public class NameTest {
 
+    /**
+     * Tests constructor of {@code Name} in the event of null input.
+     */
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Name(null));
     }
 
+    /**
+     * Tests constructor of {@code Name} in the event of invalid input.
+     */
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
         assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
     }
 
+    /**
+     * Tests isValidName method of {@code Name}.
+     */
     @Test
     public void test_isValidName() {
         // null name
@@ -52,26 +64,38 @@ public class NameTest {
         assertTrue(Name.isValidName("The Time I Got Bang Down by Truck kun")); // long names
     }
 
+    /**
+     * Tests toString method of {@code Name}.
+     */
     @Test
     void testToString() {
         Name testName = new Name("Another");
         assertEquals("Another", testName.name);
     }
 
+    /**
+     * Tests equals method of {@code Name}.
+     */
     @Test
     void testEquals() {
         Name testName = new Name("Another");
         assertTrue(testName.equals(testName));
     }
 
+    /**
+     * Tests hashcode method of {@code Name}.
+     */
     @Test
     void testHashCode() {
         Name testName = new Name("Another");
         assertEquals("Another".hashCode(), testName.hashCode());
     }
 
+    /**
+     * Tests compareTo method of {@code Name}.
+     */
     @Test
-    void compareTo() {
+    void testCompareTo() {
         Name testName = new Name("Another");
         assertEquals(0, testName.compareTo(new Name("ANOTHER")));
     }
