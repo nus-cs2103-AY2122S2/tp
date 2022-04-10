@@ -33,7 +33,7 @@ public class JsonAdaptedClassGroupTest {
     private static final List<TaModule> modules = new ArrayList<>(Arrays.asList(TypicalModules.CS2101));
     private static final List<String> studentIds =
             new ArrayList<>(Arrays.asList(TypicalStudents.BENSON.getStudentId().toString()));
-    private static final List<Student> students =TypicalClassGroups.CS2101G09.getStudents();
+    private static final List<Student> students = TypicalClassGroups.CS2101G09.getStudents();
     private static final List<JsonAdaptedLesson> lessons = TypicalClassGroups.CS2101G09.getLessons()
             .stream().map(JsonAdaptedLesson::new).collect(Collectors.toList());
 
