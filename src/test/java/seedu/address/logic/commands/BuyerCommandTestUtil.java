@@ -36,9 +36,11 @@ public class BuyerCommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CHAD = "Chad chadson";
+    public static final String VALID_NAME_WEIRD = "123BBBaln123  23asdsd";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHAD = "33333333";
+    public static final String VALID_PHONE_WEIRD = "00000000";
     public static final PropertyToBuy VALID_PROPERTY_BUY_CHAD = new PropertyToBuy(new House(HouseType.HDB_FLAT,
             new Location("jurong")), new PriceRange(1000, 2000));
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -52,14 +54,22 @@ public class BuyerCommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_WEIRD = " " + PREFIX_NAME + VALID_NAME_WEIRD;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String PHONE_DESC_WEIRD = " " + PREFIX_PHONE + VALID_PHONE_WEIRD;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC_2 = " " + PREFIX_NAME + "James pr/1,2";
+    public static final String INVALID_NAME_DESC_3 = " " + PREFIX_NAME + "Jamesn/David";
+    public static final String INVALID_NAME_DESC_4 = " " + PREFIX_NAME + "Jamesp/90872";
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PHONE_DESC_2 = " " + PREFIX_PHONE + "911 09"; // spaces not allowed in phones
+    public static final String INVALID_PHONE_DESC_3 = " " + PREFIX_PHONE + "91"; // too short phone number
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC_2 = " " + PREFIX_TAG + "hubby 123"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

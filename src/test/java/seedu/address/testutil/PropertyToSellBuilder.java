@@ -52,8 +52,8 @@ public class PropertyToSellBuilder {
     /**
      * Sets the {@code Address} of the {@code PropertyToBuy}.
      */
-    public PropertyToSellBuilder withAddress(Address address) {
-        this.address = address;
+    public PropertyToSellBuilder withAddress(String address) {
+        this.address = new Address(address);
         return this;
     }
 

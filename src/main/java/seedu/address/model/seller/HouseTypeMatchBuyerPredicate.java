@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.property.PropertyToSell;
 
@@ -43,7 +44,9 @@ public class HouseTypeMatchBuyerPredicate implements Predicate<Seller> {
         HouseType buyType = houseToBuy.getHouseType();
         HouseType sellType = houseToSell.getHouseType();
 
-        return buyType.equals(sellType) || buyType.equals(HouseType.UNSPECIFIED);
+        boolean isNotNullProperty = !(propertyToSell instanceof NullPropertyToSell);
+
+        return (buyType.equals(sellType) || buyType.equals(HouseType.UNSPECIFIED)) && isNotNullProperty;
     }
 
     public PropertyToBuy getPropertyToBuy() {

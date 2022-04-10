@@ -37,23 +37,23 @@ class HouseTypeMatchBuyerPredicateTest {
     //property to sell
     private PropertyToSell ptsStub1 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub2 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub3 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub4 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.COLONIA).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub5 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.CONDOMINIUM).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private Buyer buyer1 = new BuyerBuilder().withProperty(ptbStub1).build();
     private Buyer buyer2 = new BuyerBuilder().withProperty(ptbStub2).build();

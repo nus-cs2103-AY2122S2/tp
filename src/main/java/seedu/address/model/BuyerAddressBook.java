@@ -110,7 +110,7 @@ public class BuyerAddressBook implements ReadOnlyBuyerAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
+                || (other instanceof BuyerAddressBook // instanceof handles nulls
                 && buyers.equals(((BuyerAddressBook) other).buyers));
     }
 

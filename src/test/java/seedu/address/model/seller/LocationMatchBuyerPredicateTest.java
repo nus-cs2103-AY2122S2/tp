@@ -29,19 +29,19 @@ class LocationMatchBuyerPredicateTest {
     //property to sell
     private PropertyToSell ptsStub1 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub2 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Crunchy").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub3 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub4 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("kRaNji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 100)).withAddress("ANY ADDRESS").build();
 
 
 

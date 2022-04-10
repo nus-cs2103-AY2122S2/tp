@@ -37,6 +37,10 @@ public class JsonAdaptedHouse {
      * @throws IllegalValueException if there were any data constraints violated in the adapted house.
      */
     public House toModelType() throws IllegalValueException {
-        return new House(HouseType.getHouseType(houseType), new Location(location));
+        if (houseType.equals("-")) {
+            return new House(HouseType.NULLHOUSETYPE, new Location(location));
+        } else {
+            return new House(HouseType.getHouseType(houseType), new Location(location));
+        }
     }
 }

@@ -25,6 +25,7 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.SellerBuilder;
 
 public class AddBuyerCommandTest {
 
@@ -34,14 +35,25 @@ public class AddBuyerCommandTest {
     }
 
     @Test
-    public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_buyerAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
         Buyer validBuyer = new BuyerBuilder().build();
 
         CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
         assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, validBuyer), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validBuyer), modelStub.clientsAdded);
+        assertEquals(List.of(validBuyer), modelStub.buyersAdded);
+    }
+
+    @Test
+    public void constructor_nullNotAccepted_addFailure() {
+        assertThrows(NullPointerException.class, () -> new AddBuyerCommand(null));
+    }
+
+    @Test
+    public void execute_nullModel_executeFailure() {
+        Buyer validBuyer = new BuyerBuilder().build();
+        assertThrows(NullPointerException.class, () -> new AddBuyerCommand(validBuyer).execute(null));
     }
 
     @Test
@@ -58,8 +70,10 @@ public class AddBuyerCommandTest {
     public void equals() {
         Buyer janald = new BuyerBuilder().withName("Janald").build();
         Buyer junheng = new BuyerBuilder().withName("Junheng").build();
+        Seller shihong = new SellerBuilder().withName("janald").build();
         AddBuyerCommand addJanaldCommand = new AddBuyerCommand(janald);
         AddBuyerCommand addJunhengCommand = new AddBuyerCommand(junheng);
+        AddSellerCommand addShihongCommand = new AddSellerCommand(shihong);
 
         // same object -> returns true
         assertEquals(addJanaldCommand, addJanaldCommand);
@@ -76,6 +90,9 @@ public class AddBuyerCommandTest {
 
         // different client -> returns false
         assertNotEquals(addJanaldCommand, addJunhengCommand);
+
+        // different command type -> returns false
+        assertNotEquals(addShihongCommand, addJunhengCommand);
     }
 
     /**
@@ -285,18 +302,18 @@ public class AddBuyerCommandTest {
      * A Model stub that always accept the client being added.
      */
     private static class ModelStubAcceptingBuyerAdded extends ModelStub {
-        final ArrayList<Client> clientsAdded = new ArrayList<>();
+        final ArrayList<Buyer> buyersAdded = new ArrayList<>();
 
         @Override
         public boolean hasBuyer(Buyer buyer) {
             requireNonNull(buyer);
-            return clientsAdded.stream().anyMatch(buyer::isSameclient);
+            return buyersAdded.stream().anyMatch(buyer::isSameclient);
         }
 
         @Override
         public void addBuyer(Buyer buyer) {
             requireNonNull(buyer);
-            clientsAdded.add(buyer);
+            buyersAdded.add(buyer);
         }
 
         @Override
