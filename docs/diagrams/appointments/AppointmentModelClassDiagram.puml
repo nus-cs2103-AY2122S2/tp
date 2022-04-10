@@ -8,24 +8,17 @@ skinparam ClassBorderColor #000000
 
 title Partial Schedule Subsystem Class Diagram
 
-package "Schedule\n Subsystem" {
+package "Schedule\nSubsystem\n" {
     class Appointment {
-        name: Name
-        startDateTime: StartDateTime
-        duration: Duration
-        person: Person
     }
 
     class DisjointAppointmentList {
-        add()
-        set()
-        remove()
+        add(Appointment)
+        set(Appointment, Appointment)
+        remove(Appointment)
     }
 
     class Schedule {
-        addAppointment()
-        setAppointment()
-        removeAppointment()
         getAppointmentList()
     }
 
@@ -34,7 +27,7 @@ package "Schedule\n Subsystem" {
     }
 
     class AppointmentSlotList {
-
+        getSlotList()
     }
 
     class AppointmentSlot {
@@ -50,30 +43,30 @@ package "Schedule\n Subsystem" {
     class "<<interface>>\n TemporalComparable " as TemporalComparable {
         getComparableDateTime()
     }
+
 }
 
-class ModelManager
+class ModelManager {
+    getScheduleItemList()
+}
 class " CompositeObservableList " as CompositeObservableList
-class "External Class" as External
+
 
 AppointmentSlot -[hidden]right- Appointment
 DisjointAppointmentList -[hidden]down- TemporalComparable
 
-Schedule "1  "*-down->"1  " DisjointAppointmentList
-Schedule -right-|> ReadOnlySchedule
-DisjointAppointmentList "*"--left->"*" Appointment
-ModelManager -down-> Schedule
-ModelManager -left-> CompositeObservableList
-CompositeObservableList -down-> AppointmentSlotList
-AppointmentSlotList --> AppointmentSlot
+Schedule *-down->"1  " DisjointAppointmentList
+Schedule .right.|> ReadOnlySchedule
+DisjointAppointmentList -down->"*" Appointment
+ModelManager -down->"1 " Schedule
+ModelManager -left->"1" CompositeObservableList
+CompositeObservableList -[hidden]down-> AppointmentSlotList
+ModelManager -down->"1 " AppointmentSlotList
+AppointmentSlotList --->"*" AppointmentSlot
 AppointmentSlotList -right-> Schedule
 AppointmentSlot -down-|> ScheduleItem
 Appointment -down-|> ScheduleItem
-ScheduleItem .right.|> TemporalComparable
-
-CompositeObservableList ...> ScheduleItem
+ScheduleItem .up.|> TemporalComparable
 ModelManager ...> ScheduleItem
-External -left-> ModelManager
-External ..> ReadOnlySchedule
 
 @enduml

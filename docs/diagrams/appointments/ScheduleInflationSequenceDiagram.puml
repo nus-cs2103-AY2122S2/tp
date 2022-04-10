@@ -23,7 +23,7 @@ Storage -> ScheduleStorage : readSchedule(initialAddressBook)
 activate ScheduleStorage
 ScheduleStorage -> JsonSerializableStorage : toModelType(initialAddressBook.getPersonList())
 activate JsonSerializableStorage
-JsonSerializableStorage -> JsonSerializableAppointment : toModelType(initialAddressBook)
+JsonSerializableStorage -> JsonSerializableAppointment : toModelType(personList)
 activate JsonSerializableAppointment
 JsonSerializableStorage <-- JsonSerializableAppointment
 deactivate JsonSerializableAppointment
