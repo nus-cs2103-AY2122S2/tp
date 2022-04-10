@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/melvinczj.png" width="200px">
 
-[[github](https://https://github.com/MelvinCZJ)][[portfolio](team/melvinczj.md)]
+[[github](https://github.com/MelvinCZJ)][[portfolio](team/melvinczj.md)]
 
 * Role: Developer
 * Responsibilities: Functionality
