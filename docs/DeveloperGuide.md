@@ -809,13 +809,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a candidate into the system
 
-   1. Test case: `add id\A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
+   1. Test case: `add id\A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`<br>
       Expected: 1st parameter is incorrect. It should be `id/A0123456B` with a forward slash `/`. All prefixes and its value are tied with a forward slash `/`.
    
-   2. Test case: `add id/A0123456B`
+   2. Test case: `add id/A0123456B`<br>
       Expected: All attributes of a `Candidate` should be present in the `add` command. An error message will be shown with the full `add` command statement.
 
-   3. Test case: `add id/A0123456B n/John Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`
+   3. Test case: `add id/A0123456B n/John Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`<br>
       Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `add` command will be validated by the system. 
 
 ### Deleting a candidate (WIP)
