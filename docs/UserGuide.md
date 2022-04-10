@@ -10,27 +10,34 @@ This guide will help provide you with all the necessary information to set up, r
 
 To get started, click on any of the headers in the table of content to jump to that section to get more information.
 
-* Table of Contents
-  * [Quick Start](#quick-start)
-  * [Features](#features)
+### Table of Contents
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [All Features](#all-features)
+  * [**Basic Features**](#basic-features)
     * [Viewing Help: `help`](#viewing-help--help)
-    * [Adding a client : `add`](#adding-a-client--add)
-    * [Listing all clients : `list`](#listing-all-clients--list)
-    * [Flagging a client : `flag`](#flagging-a-client--flag)
-    * [Unflagging a client : `unflag`](#unflagging-a-client--unflag)
-    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
-    * [Scheduling / Rescheduling a meeting: `meet`](#scheduling--rescheduling-a-meeting-meet)
-    * [Canceling a meeting: `meet`](#canceling-a-meeting-meet)
-    * [Editing a client : `edit`](#editing-a-client--edit)
-    * [Locating clients by name : `find`](#locating-clients-by-name--find)
-    * [Deleting a client : `delete`](#deleting-a-client--delete)
+    * [Managing you clients](#managing-your-clients)
+      * [Listing all clients : `list`](#listing-all-clients--list) 
+      * [Adding a client : `add`](#adding-a-client--add)
+      * [Editing a client : `edit`](#editing-a-client--edit)
+      * [Deleting a client : `delete`](#deleting-a-client--delete)
+      * [Flagging a client : `flag`](#flagging-a-client--flag)
+      * [Unflagging a client : `unflag`](#unflagging-a-client--unflag)
+    * [Managing your meetings](#managing-your-meetings)
+      * [Scheduling / Rescheduling a meeting: `meet`](#scheduling--rescheduling-a-meeting-meet)
+      * [Canceling a meeting: `meet`](#canceling-a-meeting-meet)
+    * [Viewing your clients and meetings](#viewing-your-clients-and-meetings)
+      * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+      * [Locating clients by name : `find`](#locating-clients-by-name--find)
+  * [**Useful Features**](#useful-features)
     * [Undoing the previous commands : `undo`](#undoing-the-previous-commands--undo)
     * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [**Miscellaneous Features**](#miscellaneous-features)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
-  * [Command Summary](#command-summary)
+* [Command Summary](#command-summary)
   
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For new users, it is highly recommended starting off from the `Quick Start` section to get HustleBook up and running.
@@ -38,37 +45,91 @@ For new users, it is highly recommended starting off from the `Quick Start` sect
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Introduction
+Tired of how messy Excel sheets can get? HustleBook...
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have `Java 11` or above installed in your Computer. [What's Java 11?](https://www.oracle.com/java/)
 
-2. Download the latest `hustlebook.jar` from [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
+2. Download the latest `HustleBook` [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
+   ![Where to click](images/downloadHustleBookHere.png)
 
-3. Copy the file to the folder you want to use as the _home folder_ for your HustleBook.
+3. Place the file into a folder where you would like to keep it. We recommend keeping it in your `Desktop` folder for easier access.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. That's it. Your HustleBook is ready to go! 🎉 Keep following the steps to get to know how HustleBook can help you.
+
+6. Let's try out some features! Type the command in the command box and press Enter to run it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the HustleBook.
+   * **`add`**` n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the HustleBook.
 
-   * **`delete`**`John Doe` : Deletes `John Doe` from the list.
+   * **`delete`**` John Doe` : Deletes `John Doe` from the list.
 
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Basic Features](#basic-features) below to learn all the essential commands. 
 
-Now that you have set up the HustleBook, lets take a look at what Hustlebook offers to allow you to do the hustle without moving a muscle.
+Now that you have set up the HustleBook, lets take a look at what HustleBook offers to allow you to keep the hustle without lifting a muscle.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# All Features
+
+You can find basic, useful and advanced features below. If you are new to HustleBook,
+we recommend to look through the [basic features](#basic-features) to start managing your clients
+and meetings.
+
+* [Basic Features](#basic-features)
+  * [Viewing Help: `help`](#viewing-help--help)
+  * [Managing you clients](#managing-your-clients)
+  * [Viewing your clients and meetings](#viewing-your-clients-and-meetings)
+* [Useful Features](#useful-features)
+  * [Undoing the previous commands : `undo`](#undoing-the-previous-commands--undo)
+  * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
+  * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  * [Exiting the program : `exit`](#exiting-the-program--exit)
+* [Miscellaneous Features](#miscellaneous-features)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+
+#### Legends
+
+:information_source: - Important information that you should keep in mind.
+
+:bulb: - Tips to make your workflow with HustleBook more efficient.
+
+:exclamation: - Important information to keep your HustleBook working at all times. 
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Basic Features
+Here you can find all the necessary features to manage your clients and meetings.
+
+* [Viewing Help: `help`](#viewing-help--help)
+* [Managing you clients](#managing-your-clients)
+  * [Listing all clients : `list`](#listing-all-clients--list)
+  * [Adding a client : `add`](#adding-a-client--add)
+  * [Editing a client : `edit`](#editing-a-client--edit)
+  * [Deleting a client : `delete`](#deleting-a-client--delete)
+  * [Flagging a client : `flag`](#flagging-a-client--flag)
+  * [Unflagging a client : `unflag`](#unflagging-a-client--unflag)
+* [Managing your meetings](#managing-your-meetings)
+  * [Scheduling / Rescheduling a meeting: `meet`](#scheduling--rescheduling-a-meeting-meet)
+  * [Canceling a meeting: `meet`](#canceling-a-meeting-meet)
+* [Viewing your clients and meetings](#viewing-your-clients-and-meetings)
+  * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+  * [Locating clients by name : `find`](#locating-clients-by-name--find)
 
 <div markdown="block" class="alert alert-info">
 
@@ -106,6 +167,16 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Managing your clients
+
+### Listing all clients : `list`
+
+Shows a list of clients in the HustleBook.
+
+Format: `list [flag|unflag]`
+
+* Optional Parameter allows you to view only flagged or only unflagged clients.
+* If the optional parameter is not provided, both flagged and unflagged clients will be displayed.
 
 ### Adding a client : `add`
 
@@ -134,14 +205,72 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Salary of $3400 f/true`
 
-### Listing all clients : `list`
+### Editing a client : `edit`
 
-Shows a list of clients in the HustleBook.
+Edits an existing client in the HustleBook.
 
-Format: `list [flag|unflag]`
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
 
-* Optional Parameter allows you to view only flagged or only unflagged clients.
-* If the optional parameter is not provided, both flagged and unflagged clients will be displayed.
+* Edits the client with the specified `NAME`.
+  * `Name` is case-insensitive. E.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
+    * Example: `edit John Doe p/88888888` will find clients with names containing `John` and `Doe`, unless
+      there exists a client with the name `John Doe`
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names
+  * Input the position on the list of the client you wish to edit.
+
+Example:
+
+**Scenario 1**: You have a client named `John Doe`
+* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
+  `2020-12-04` which is 4th Dec 2020.
+
+**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
+* Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
+
+![edit_multiple_clients](images/editMultipleClients.png)
+* Typing `1` will edit "John Doe", typing `2` will edit "John Smith" and typing `3` will edit "John Williams"
+* After typing `1`, the previous meeting date of the client with the name `John Doe` to `2020-12-04`
+
+![edit_client_result](images/editClientResult.png)
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `edit`:**<br>
+
+* `DATE` has to be in the format **YYYY-MM-DD**.
+* **At least one** of the optional fields must be provided.
+* Existing values will be updated with the input values.
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
+* You can remove the client's info by typing `i/` without specifying any info after it.
+
+</div>
+
+### Deleting a client : `delete`
+
+Deletes the specified client from the HustleBook.
+
+Format: `delete NAME`
+
+* Deletes the client with the specified `NAME`.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names
+  * Input the position on the list of the client you wish to edit.
+
+Example:
+
+**Scenario 1**: You have a client named `John Doe`
+
+`delete John Doe` removes client `John Doe` from HustleBook
+
+**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
+* Running the command `delete n/John` will show a list of clients with names containing "John"
+* If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
 ### Flagging a client : `flag`
 
@@ -149,10 +278,24 @@ Flag a client in the HustleBook to mark them as important.
 
 Format: `flag NAME`
 
-* `NAME` input should be a name found in the HustleBook.
-* `NAME` is not case-sensitive.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` 
-of the list shown.
+* Flags the client with the specified `NAME`.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names.
+  * Input the position on the list of the client you wish to edit.
+
+Example:
+
+**Scenario 1**: You have a client named `John Doe`
+
+`flag John Doe` flags client `John Doe` on HustleBook.
+
+**Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
+* Running the command `flag John` will show a list of clients with names containing "John".
+* If you wish to flag `John Doe` and he is the first person listed, typing `1` and `Enter` will flag `John Doe`.
+* Subsequently, you can continue to flag other "John" listed here by typing their indexes and pressing `Enter`.
+* Run `list` to show all clients and stop flagging clients with names containing "John".
+
 
 ### Unflagging a client : `unflag`
 
@@ -160,23 +303,25 @@ Unflag a client in the HustleBook to unmark flagged clients.
 
 Format: `unflag NAME`
 
-* `NAME` input should be a name found in the HustleBook.
-* `NAME` is not case-sensitive.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
-  of the list shown.
+* Unflags the client with the specified `NAME`.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names.
+  * Input the position on the list of the client you wish to edit.
 
-### Sorting all clients : `sort`
+Example:
 
-Sorts clients such that flagged clients are displayed before unflagged clients.
-It then sorts all clients in HustleBook based on the parameter provided.
+**Scenario 1**: You have a client named `John Doe`
 
-Format: `sort [meeting|name|prev|salary]`
+`unflag John Doe` unflags client `John Doe` on HustleBook.
 
-* `sort meeting` sorts clients by the date and time of the meeting. The earliest upcoming meeting will be displayed first.
-* `sort name` sorts clients by name in alphabetical order.
-* `sort prev` sorts clients by previous date met. The client you have not met for the longest will be displayed at the top.
-* `sort salary` sorts clients by their salary in descending order.
-* `meeting`, `name`, `prev` and `salary` are all not case-sensitive.
+**Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
+* Running the command `unflag John` will show a list of clients with names containing "John".
+* If you wish to unflag `John Doe` and he is the first person listed, typing `1` and `Enter` will unflag `John Doe`.
+* Subsequently, you can continue to unflag other "John" listed here by typing their indexes and pressing `Enter`.
+* Run `list` to show all clients and stop flagging clients with names containing "John".
+
+## Managing your meetings
 
 ### Scheduling / Rescheduling a meeting: `meet`
 
@@ -208,50 +353,20 @@ Format: `meet NAME c/`
 Example:
 * `meet John Doe c/` Cancels the meeting with client name `John Doe`.
 
-### Editing a client : `edit`
+## Viewing your clients and meetings
 
-Edits an existing client in the HustleBook.
+### Sorting all clients : `sort`
 
-Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
+Sorts clients such that flagged clients are displayed before unflagged clients.
+It then sorts all clients in HustleBook based on the parameter provided.
 
-* Edits the client named `NAME`.
-  * `Name` is case-insensitive. E.g. `John` will match `john`.
-  * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
-    * Example: `edit John Doe p/88888888` will find clients with names containing `John` and `Doe`, unless
-                there exists a client with the name `John Doe`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* If `NAME` matches multiple clients, you will see a list of clients with matching names
-  * Input the position on the list of the client you wish to edit.
+Format: `sort [meeting|name|prev|salary]`
 
-Example:
-
-**Scenario 1**: You have a client named `John Doe`
-* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
-  `2020-12-04` which is 4th Dec 2020.
-  
-**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
-
-![edit_multiple_clients](images/editMultipleClients.png)
-* Typing `1` will edit "John Doe", typing `2` will edit "John Smith" and typing `3` will edit "John Williams"
-* After typing `1`, the previous meeting date of the client with the name `John Doe` to `2020-12-04`
-
-![edit_client_result](images/editClientResult.png)
-
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes on `edit`:**<br>
-
-* `DATE` has to be in the format **YYYY-MM-DD**.
-* **At least one** of the optional fields must be provided.
-* Existing values will be updated with the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
-* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
-* You can remove the client's info by typing `i/` without specifying any info after it.
-
-</div>
+* `sort meeting` sorts clients by the date and time of the meeting. The earliest upcoming meeting will be displayed first.
+* `sort name` sorts clients by name in alphabetical order.
+* `sort prev` sorts clients by previous date met. The client you have not met for the longest will be displayed at the top.
+* `sort salary` sorts clients by their salary in descending order.
+* `meeting`, `name`, `prev` and `salary` are all not case-sensitive.
 
 ### Locating clients by name : `find`
 
@@ -274,31 +389,14 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a client : `delete`
+--------------------------------------------------------------------------------------------------------------------
 
-Deletes the specified client from the HustleBook.
-
-Format: `delete NAME`
-
-* Deletes the client with the specified `NAME`.
-  * `Name` is case-insensitive. e.g. `John` will match `john`.
-  * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
-    * Example: `delete John Doe ` will find clients with names containing `John` and `Doe`, unless
-                there exists a client with the name `John Doe`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* If `NAME` matches multiple clients, you will see a list of clients with matching names
-  * Input the position on the list of the client you wish to edit.
-  
-Example:
-
-**Scenario 1**: You have a client named `John Doe`
-
-`delete John Doe` removes client `John Doe` from HustleBook
-
-**Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `delete n/John` will show a list of clients with names containing "John"
-* If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
+## Useful Features
+Here you can find useful features that can help improve your efficiency using HustleBook.
+* [Undoing the previous commands : `undo`](#undoing-the-previous-commands--undo)
+* [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
+* [Clearing all entries : `clear`](#clearing-all-entries--clear)
+* [Exiting the program : `exit`](#exiting-the-program--exit)
 
 ### Undoing the previous commands : `undo`
 
@@ -308,6 +406,17 @@ Undoes the previous commands executed.
 
 Format: `undo`
 
+When a command is undone successfully, a message `Undo Successful!` will be displayed as shown below.
+![undo_success_message](images/undoSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about the `undo` command:**<br>
+
+* For `list`, `find` and `help` commands, `undo` will be executed successfully. The `Undo Successful!` message will be displayed, however, undoing these commands will not cause visible changes in the client list displayed and their information.
+
+</div>
+
 ### Redoing the previous commands : `redo`
 
 Redoes the previous commands executed.
@@ -315,6 +424,17 @@ Redoes the previous commands executed.
   * Maximum possible `redo` is till the last executed command.
 
 Format: `redo`
+
+When a command is redo successfully, a message `Redo Successful!` will be displayed as shown below.
+![redo_success_message](images/redoSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about the `redo` command:**<br>
+
+* For `list`, `find` and `help` commands, `redo` will be executed successfully. The `Redo Successful!` message will be displayed, however, redoing these commands will not cause visible changes in the client list displayed and their information.
+
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -328,9 +448,17 @@ Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Miscellaneous Features 
+
+Here you can find miscellaneous features. These are only for advanced users as they have the potential to cause
+HustleBook to wipe your data.
+
 ### Saving the data
 
 HustleBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data is saved in a `json` file found in a folder named `data` at the location HustleBook is saved in.
 
 ### Editing the data file
 
@@ -338,6 +466,10 @@ HustleBook data are saved as a JSON file `[JAR file location]/data/hustlebook.js
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HustleBook will discard all data and start with an empty data file at the next run.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you decide to make changes to the data file, HustleBook will not check the validity of the data. Such as meeting clashes and clients with the same name.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------

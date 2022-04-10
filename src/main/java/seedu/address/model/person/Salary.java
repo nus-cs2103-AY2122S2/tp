@@ -8,9 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers and at most 15 digits";
     public static final String DEFAULT_VALUE = "0";
-    private static final String VALIDATION_REGEX = "\\d+";
+    private static final String VALIDATION_REGEX = "\\d{1,15}";
     public final String value;
 
     /**
@@ -38,7 +38,7 @@ public class Salary {
      * @return A boolean stating if the string is valid or not.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (test.matches(VALIDATION_REGEX));
     }
 
     /**

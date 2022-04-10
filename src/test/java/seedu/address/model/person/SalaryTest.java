@@ -43,6 +43,21 @@ public class SalaryTest {
         assertTrue(Salary.isValidSalary("1"));
         assertTrue(Salary.isValidSalary("100"));
         assertTrue(Salary.isValidSalary("5000"));
+
+        // null salary
+        assertThrows(NullPointerException.class, () -> Salary.isValidSalary(null));
+
+        // salary with more than 15 digits
+        assertFalse(Salary.isValidSalary("1234567890123456"));
+
+        // salary with 15 digits
+        assertTrue(Salary.isValidSalary("123456789012345"));
+
+        // salary with digits and non digits
+        assertFalse(Salary.isValidSalary("12345ABCD"));
+
+        // salary with digits and special characters
+        assertFalse(Salary.isValidSalary("1234*!"));
     }
 
     @Test
