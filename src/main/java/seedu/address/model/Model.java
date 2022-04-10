@@ -114,17 +114,29 @@ public interface Model {
      * Checks if {@code editedCandidate} already has an interview when editing {@code availability}
      */
     boolean hasInterview(Candidate editedCandidate);
-
+    /**
+     * Returns true if the candidate to be interviewed already has an interview scheduled.
+     */
     boolean hasInterviewCandidate(Interview interview);
-
+    /**
+     * Returns true if the interview has a conflicting time slot with the interviews in the list.
+     */
     boolean hasConflictingInterview(Interview interview);
-
+    /**
+     * Deletes the interview for the specified candidate.
+     */
     void deleteInterviewForCandidate(Candidate target);
-
+    /**
+     * Deletes the interview.
+     */
     void deleteInterview(Interview interviewToDelete);
-
+    /**
+     * Adds the interview.
+     */
     void addInterview(Interview interview);
-
+    /**
+     * Sets the target interview to the editedInterview.
+     */
     void setInterview(Interview target, Interview editedInterview) throws CommandException;
 
     /**
