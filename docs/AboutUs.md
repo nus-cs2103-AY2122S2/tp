@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Kuo Chun Yuan
@@ -18,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kevinkuo0320.md)]
 
 * Role: Developer
-* Responsibilities: Storage
+* Responsibilities: Code integration and UI design
 
 ### Chua Wen Quan
 
@@ -27,8 +25,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/cwq2326)]
 [[portfolio](team/cwq2326.md)]
 
-* Role: Developer
-* Responsibilities: Features
+* Role: Developer & Co-Integration
+* Responsibilities: Code integration and Tracking
 
 ### Malcom Tan
 
@@ -36,8 +34,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/DannyDakota)] [[portfolio](team/dannydakota.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer & Code-Quality
+* Responsibilities: Code integration and Testing
 
 ### Tan Chin Kiat
 
@@ -46,8 +44,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/tanchinkiat99)]
 [[portfolio](team/tanchinkiat99.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer & Documentation
+* Responsibilities: Testing and Code Quality
 
 ### Chee Jia Le
 
@@ -56,5 +54,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jiale-c)]
 [[portfolio](team/jiale-c.md)]
 
-* Role: Developer
-* Responsibilities: Features and testings
+* Role: Team Lead & Integration
+* Responsibilities: Scheduling and Code integration
