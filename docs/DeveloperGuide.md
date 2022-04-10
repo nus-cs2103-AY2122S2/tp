@@ -28,9 +28,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note about `AddressBook` named classes:**<br>
+**:information_source: Note about `AddressBook` named classes/packages:**<br>
 
-TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes or the application's package, unless otherwise stated.
 
 </div>
 
