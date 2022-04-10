@@ -64,6 +64,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 * All indexes are int based, as such the maximum value is 2147483647 (2<sup>31</sup> - 1).
 
+* Employee `Names` and Task `Description` are case-sensitive. 
+
 </div>
 
 <div style="page-break-after: always;"></div>
