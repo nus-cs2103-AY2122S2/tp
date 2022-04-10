@@ -6,7 +6,6 @@ skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
@@ -15,6 +14,9 @@ Class CandidateListPanel
 Class CandidateCard
 Class StatusBarFooter
 Class CommandBox
+Class InterviewListPanel
+Class InterviewCard
+Class FocusCard
 }
 
 package Model <<Rectangle>> {
@@ -32,29 +34,26 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" FocusCard
 MainWindow *-down-> "1" CandidateListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" InterviewListPanel
 MainWindow --> "0..1" HelpWindow
 
 CandidateListPanel -down-> "*" CandidateCard
+InterviewListPanel -down-> "*" InterviewCard
 
-MainWindow -left-|> UiPart
-
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-CandidateListPanel --|> UiPart
-CandidateCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
-
+FocusCard ..> Model
 CandidateCard ..> Model
+InterviewCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
+FocusCard -[hidden]left- InterviewListPanel
+InterviewListPanel -[hidden]left- CandidateListPanel
 CandidateListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
 @enduml

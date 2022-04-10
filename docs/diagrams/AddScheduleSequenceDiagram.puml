@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+
+participant ":AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+participant ":ModelManager" as ModelManager MODEL_COLOR
+
+participant ":List<Candidate>" as List MODEL_COLOR
+
+participant ":Candidate" as Candidate MODEL_COLOR
+
+participant ":Interview" as Interview MODEL_COLOR
+
+[-> LogicManager : execute\n("schedule add ...")
+activate LogicManager
+
+LogicManager -> AddScheduleCommand : execute(model)
+activate AddScheduleCommand
+
+AddScheduleCommand -> ModelManager : getFilteredCandidateList()
+activate ModelManager
+
+ModelManager -> List
+activate List
+List--> ModelManager : l
+deactivate List
+
+ModelManager --> AddScheduleCommand : l
+deactivate ModelManager
+
+AddScheduleCommand -> List : get(index)
+activate List
+
+List -> Candidate
+activate Candidate
+
+Candidate --> List : c
+deactivate Candidate
+
+List --> AddScheduleCommand : c
+deactivate List
+
+create Interview
+AddScheduleCommand -> Interview : Interview(c, interviewDateTime);
+activate Interview
+Interview --> AddScheduleCommand : toAdd
+deactivate Interview
+
+AddScheduleCommand -> ModelManager : addInterview(toAdd)
+activate ModelManager
+ModelManager --> AddScheduleCommand
+deactivate ModelManager
+
+AddScheduleCommand -> Candidate : triggerInterviewStatusScheduled()
+activate Candidate
+
+Candidate --> AddScheduleCommand : ec
+deactivate Candidate
+
+AddScheduleCommand -> ModelManager : setCandidate(c, ec)
+activate ModelManager
+
+ModelManager --> AddScheduleCommand
+deactivate ModelManager
+
+create CommandResult
+AddScheduleCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddScheduleCommand
+deactivate CommandResult
+
+AddScheduleCommand --> LogicManager
+deactivate AddScheduleCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddScheduleCommand -[hidden]-> LogicManager
+destroy AddScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

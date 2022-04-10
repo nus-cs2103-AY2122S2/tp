@@ -71,18 +71,26 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about UI Class Diagram:**<br>
+
+To make things more concise and for neatness, we have taken out the `UIPart` abstract class.
+All classes associated with `MainWindow` and itself are connected to this abstract class (Again, not shown in the image below).
+
+</div>
+
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateListPanel`, `InterviewListPanel`, `FocusCard`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
-
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Candidate` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Candidate` or `Interview` object residing in the `Model`.
 
 ### Logic component
 
@@ -118,7 +126,6 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
@@ -131,7 +138,6 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -153,6 +159,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about `AddressBook` named classes:**<br>
+
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
+
+</div>
 
 ### Candidate model
 
@@ -177,9 +191,9 @@ List of new entities:
 ### Add feature
 
 #### What is the feature about?
-The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes (Refer to the [Current Implementation](#current-implementation)).
 
-The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+The enhancement works by adding additional prefixes i.e. `id/[StudentId]`, `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the attributes `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned.
 
 #### How is the feature implemented?
 
@@ -197,15 +211,9 @@ Step 2. The user proceeds to add a candidate by running the `add` command with i
 
 ![AddStep2](images/AddStep2.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Tip:** Todo: Update image
-
-</div>
-
 #### Why is the feature implemented as such?
 
-The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input.
+The `add` command is done up with the goals of being as convenient and efficient as possible for the users. It is kept simple with easy to interpret and understandable prefixes that convey to the user on what is expected from their input.
 
 #### UML Diagrams
 **Activity Diagram**
@@ -213,7 +221,6 @@ The `add` command is done up with the goals of being as convenient and efficient
 The following activity diagram summarizes what happens when a user executes an `add` command:
 
 <img src="images/AddActivityDiagram.png" />
-
 
 ### ApplicationStatus Feature
 
@@ -397,7 +404,61 @@ that this will be a heavy headway for our application.
 
 #### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
+
 <img src="images/FocusCommandDiagram.png" />
+
+### Scheduling interviews feature
+
+#### What is this feature about?
+The `AddScheduleCommand`, `EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` features allow
+the user to add, edit, delete or clear all interviews respectively.
+
+#### How is this feature implemented?
+This feature is modelled after AB3's `add`, `edit`, `delete` and `clear` commands for consistency. Interview objects
+created upon the `schedule add` command are contained in a `UniqueInterviewList` object and exposed to outsiders as
+an unmodifiable `ObservableList<Interview>`.
+
+#### Why is this feature implemented as such?
+* **Alternative 1 (Current Choice)**: Newly created interviews are added to a list of interviews, and
+  each interview object contains its corresponding `Candidate`.
+    * Pros: No need to iterate through every candidate to initialise the interview schedule. Better performanece when
+      editing or deleting interviews by index in the interview schedule.
+    * Cons: Editing a `Candidate` attribute requires an update to their corresponding `Interview`'s `Candidate` object.
+* Alternative 2: Every candidate has an `Interview` attribute, initialised to null. When a candidate is scheduled for an
+  interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
+    * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
+    * Cons: Interview schedule has to iterate through every candidate to search for existing interviews during initialisation.
+  Editing or deleting interviews by index from the interview schedule would require further iterations through the candidate list
+  to find the target interview.
+
+#### UML Diagram
+Below is a simplified sequence diagram showing how an `AddScheduleCommand` is parsed under the `Logic` 
+component when a user adds an interview to the schedule. Note that all four schedule commands `AddScheduleCommand`, 
+`EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` follow a similar structure.
+
+<img src="images/ScheduleLogicDiagram.png"/>
+
+Below is another sequence diagram with a more in depth view of how the `AddScheduleCommand` is executed after parsing.
+
+<img src="images/AddScheduleSequenceDiagram.png"/>
+
+Explanation of sequence when a `AddScheduleCommand` is called.
+
+**Step 1.** The user executes the command `schedule add candidate/1 at/24-05-2022`.
+
+**Step 2.** User input is passed to the `AddressBookParser`, which calls `ScheduleCommandParser#parse`, 
+which then calls `AddScheduleCommandParser#parse` to create a new `AddScheduleCommand`.
+
+**Step 3.** The `AddScheduleCommand` will then be executed by calling its `execute` method.
+
+**Step 4.** Since the Model is passed to `AddScheduleCommand#execute`, it is able to call a method `Model#getFilteredCandidateList` to get the last candidate list shown.
+
+**Step 5.** From the candidate list, we can find the desired candidate to schedule for interview by calling the `get` function with the specified Index.
+
+**Step 6.** A new `Interview` is created for the candidate and the Model#addInterview method is called to add the `Interview` to the Model.
+
+**Step 7.** After the interview is successfully added, we call the `Candidate#triggerInterviewStatusScheduled` method which returns
+the `Candidate` with his interview status set to `Scheduled`. The Model will then call Model#setCandidate to update the candidate in the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -424,7 +485,7 @@ The following activity diagram summarizes what happens when a user executes a `f
 * Prefers typing to mouse interactions
 * Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant™ creates a centralized management system for NUS School of Computing professors to manage 
+**Value proposition**: TAlent Assistant™ creates a centralized management system for NUS School of Computing professors to manage
 undergraduate TA applications by providing easy access to candidates' data to review their general availability for
 scheduling interviews during office hours.
 
@@ -742,7 +803,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown (WIP)
+### Launch and shutdown
 
 1. Initial launch
 
@@ -750,14 +811,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample candidates. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+   
+3. Resizing panels
 
-1. _{ more test cases …​ }_
+   1. Resize the bottom panels accordingly. Close the window.
+
+   2. Re-launch the app by double-clicking the jar file<br>
+      Expected: The panels will be resized to its default size. All three panels will have equal width.
 
 ### Deleting a candidate (WIP)
 
@@ -825,7 +891,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `remark 1 r/new remark`<br>
        Expected: Remark for candidate at index 1 in the currently displayed candidate list is updated to
        `new remark`. Details of the candidate with the updated remark is shown in the feedback panel. Focus panel does not update the remark of the currently displayed candidate.
-    
+
 ### Sorting candidates in the system
 
 1. Sorting candidates while all candidates are being shown
@@ -843,12 +909,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Sorting candidates while only some candidates are being shown
 
-    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. 
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
        Use the `find` command to display a new filtered list with fewer candidates. Multiple candidates in the filtered list.
 
      2. Test case: `sort s/name`<br>
        Expected: Currently displayed candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed name. Number of candidates sorted is shown in the feedback panel.
-    
+
 
 ### Finding candidates in the system
 
@@ -864,10 +930,38 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find k/Alex f/`<br>
       Expected: Only candidates containing `Alex` in any of their valid searchable attribute fields (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.
-   
+
    1. Incorrect find commands to try: `find`, `find f/xxx` (where xxx is any invalid attribute field to search by)<br>
       Expected: No change to the list of candidates already displayed. Error message is shown in the feedback panel.
+
+
+### Bringing candidate data to center panel
+
+1. Loading up `Candidate's` details into the center panel in the application. 
+
+   1. Test case: `focus` on a `Candidate` in the system. <br>
+      Expected: The `Candidate's` information will be shown on the center panel.
    
+   2. Test case: `focus` on an `INDEX` that is out of bounds.
+      Expected: No `Candidate` will be shown in the center panel, and an error message will be displayed. 
+
+   3. Test case: `schedule clear` when `Candidate's` information is currently displayed on the center panel. 
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   4. Test case: `schedule add` when `Candidate's` information is currently displayed on the center panel.
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   5. Test case: `schedule edit` when `Candidate's` information is currently displayed on the center panel.
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   6. Test case: `edit as/` when `Candidate's` information is currently displayed on the center panel. 
+      Expected: `Candidate's` `ApplicationStatus` will be automatically refreshed on the center panel.
+
+   7. Test case: `edit` other attributes of `Candidate` when `Candidate's` information is currently displayed on the center panel.
+      Expected: The center panel will be cleared. 
+
+   7. Test case: `clear` when `Candidate's` information is currently displayed on the center panel.
+      Expected: The center panel will be cleared.
 
 ### Saving data
 

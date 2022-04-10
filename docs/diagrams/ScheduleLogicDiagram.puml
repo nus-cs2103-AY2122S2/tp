@@ -1,0 +1,99 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ScheduleCommandParser" as ScheduleCommandParser LOGIC_COLOR
+participant ":AddScheduleCommandParser" as AddScheduleCommandParser LOGIC_COLOR
+participant "a:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("schedule add ...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand\n(userInput)
+activate AddressBookParser
+
+create ScheduleCommandParser
+AddressBookParser -> ScheduleCommandParser
+activate ScheduleCommandParser
+
+ScheduleCommandParser --> AddressBookParser
+deactivate ScheduleCommandParser
+
+AddressBookParser -> ScheduleCommandParser : parse\n(arguments)
+activate ScheduleCommandParser
+
+create AddScheduleCommandParser
+ScheduleCommandParser -> AddScheduleCommandParser
+activate AddScheduleCommandParser
+
+AddScheduleCommandParser --> ScheduleCommandParser
+deactivate AddScheduleCommandParser
+
+ScheduleCommandParser -> AddScheduleCommandParser : parse(args)
+activate AddScheduleCommandParser
+
+create AddScheduleCommand
+AddScheduleCommandParser -> AddScheduleCommand
+activate AddScheduleCommand
+
+AddScheduleCommand --> AddScheduleCommandParser : a
+deactivate AddScheduleCommand
+
+AddScheduleCommandParser --> ScheduleCommandParser : a
+deactivate AddScheduleCommandParser
+
+AddScheduleCommandParser -[hidden]-> AddressBookParser
+destroy AddScheduleCommandParser
+
+ScheduleCommandParser --> AddressBookParser : a
+deactivate ScheduleCommandParser
+
+ScheduleCommandParser -[hidden]-> AddressBookParser
+destroy ScheduleCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddScheduleCommand : execute()
+activate AddScheduleCommand
+
+AddScheduleCommand -> Model : addInteview()
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+create CommandResult
+AddScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddScheduleCommand
+deactivate CommandResult
+
+AddScheduleCommand --> LogicManager : commandResult
+deactivate AddScheduleCommand
+
+AddScheduleCommand -[hidden]-> LogicManager
+destroy AddScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

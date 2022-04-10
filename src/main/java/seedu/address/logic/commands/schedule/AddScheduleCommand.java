@@ -58,7 +58,6 @@ public class AddScheduleCommand extends ScheduleCommand {
         }
 
         Candidate candidateToInterview = lastShownList.get(targetIndex.getZeroBased());
-        Candidate editedCandidate = candidateToInterview.triggerInterviewStatusScheduled();
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 
         if (candidateToInterview.isCompleted()) {
@@ -76,8 +75,9 @@ public class AddScheduleCommand extends ScheduleCommand {
         if (model.hasConflictingInterview(toAdd)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
-        model.setCandidate(candidateToInterview, editedCandidate);
         model.addInterview(toAdd);
+        Candidate editedCandidate = candidateToInterview.triggerInterviewStatusScheduled();
+        model.setCandidate(candidateToInterview, editedCandidate);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
                 toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate()
                         .format(DATE_TIME_FORMATTER), toAdd.getInterviewStartTime()),
