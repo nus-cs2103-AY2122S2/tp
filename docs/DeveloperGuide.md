@@ -133,6 +133,7 @@ The `Model` component,
 <img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
