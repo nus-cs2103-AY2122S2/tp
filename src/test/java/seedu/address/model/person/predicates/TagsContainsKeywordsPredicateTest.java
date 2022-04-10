@@ -2,6 +2,10 @@ package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_MULTI_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_ONE_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_TAGS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class TagsContainsKeywordsPredicateTest {
 
@@ -38,47 +42,52 @@ public class TagsContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
-    /*
     @Test
     public void test_tagsContainsKeywords_returnsTrue() {
-        // One keyword
+        // One keyword match
         TagsContainsKeywordsPredicate predicate =
-                new TagsContainsKeywordsPredicate(Collections.singletonList("Friends"));
-        assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
-                new Pair<>("School", null)).build()));
+                new TagsContainsKeywordsPredicate(Collections.singletonList("Friend"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_MULTIPLE_TAGS).build()));
 
-        // Multiple keywords
-        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Friends", "School"));
-        assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
-                new Pair<>("School", null)).build()));
+        // One keyword match with different priorities
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Friend"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_DIFFERENT_PRIO_ONE_TAG).build()));
+
+        // Multiple keywords match multiple tags
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Husband", "Friend"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_MULTIPLE_TAGS).build()));
+
+        // Multiple keywords match multiple tags with different priorities
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Husband", "Friend"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_DIFFERENT_PRIO_MULTI_TAG).build()));
 
         // Only one matching keyword
-        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Friends", "Church"));
-        assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Church", null),
-                new Pair<>("School", null)).build()));
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Friend", "Church"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_MULTIPLE_TAGS).build()));
 
         // Mixed-case keywords
-        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("fRiEnDs", "sChOoL"));
-        assertTrue(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
-                new Pair<>("School", null)).build()));
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("hUsBaNd", "fRiEnD"));
+        assertTrue(predicate.test(new PersonBuilder().withTags(VALID_MULTIPLE_TAGS).build()));
     }
 
     @Test
     public void test_tagsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null)).build()));
+        assertFalse(predicate.test(new PersonBuilder().withTags(VALID_TAG_FRIEND).build()));
 
         // Non-matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Church"));
-        assertFalse(predicate.test(new PersonBuilder().withTags(new Pair<>("Friends", null),
-                new Pair<>("School", null)).build()));
+        assertFalse(predicate.test(new PersonBuilder().withTags(VALID_TAG_FRIEND).build()));
+
+        // Multiple non-matching keywords
+        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Church", "Dance"));
+        assertFalse(predicate.test(new PersonBuilder().withTags(VALID_TAG_FRIEND).build()));
 
         // Keywords match phone, email and address, but does not match tags
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
-                "Main", "Street", "Friends"));
+                "Main", "Street", "Church"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withTags(new Pair<>("Church", null)).build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withTags(VALID_TAG_FRIEND).build()));
     }
-    */
 }
