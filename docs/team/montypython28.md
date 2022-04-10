@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Updated information about tags and priorities
-    * Udated information about `addTag`, `editTag` and `deleteTag` commands
+    * Updated information about `addTag`, `editTag` and `deleteTag` commands
   * Developer Guide:
     * Updated information about current team members and their responsibilities.
     * Updated ModelClassDiagram and the relevant section to include changes we made to the Model.
