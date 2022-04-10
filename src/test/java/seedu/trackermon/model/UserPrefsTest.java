@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class UserPrefsTest {
 
     /**
-     * Test method to test exception thrown when setting a null {@code GuiSettings}.
+     * Tests exception thrown when setting a null {@code GuiSettings}.
      */
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
@@ -19,7 +19,7 @@ public class UserPrefsTest {
     }
 
     /**
-     * Test method to test exception thrown when setting a null showListFilePath.
+     * Tests exception thrown when setting a null showListFilePath.
      */
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {

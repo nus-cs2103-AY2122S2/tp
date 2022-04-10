@@ -26,7 +26,7 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     /**
-     * Test method to test the constructor of {@code ModelManager}.
+     * Tests the constructor of {@code ModelManager}.
      */
     @Test
     public void constructor() {
@@ -36,7 +36,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test exception thrown when setting a null {@code UserPrefs}.
+     * Tests exception thrown when setting a null {@code UserPrefs}.
      */
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
@@ -44,7 +44,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test setting of a valid {@code UserPrefs}.
+     * Tests setting of a valid {@code UserPrefs}.
      */
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
@@ -61,7 +61,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test exception thrown when setting a null {@code UserPrefs}.
+     * Tests exception thrown when setting a null {@code UserPrefs}.
      */
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
@@ -69,7 +69,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test setting of a valid {@code GuiSettings}.
+     * Tests setting of a valid {@code GuiSettings}.
      */
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
@@ -79,7 +79,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test exception thrown when setting a null showListFilePath.
+     * Tests exception thrown when setting a null showListFilePath.
      */
     @Test
     public void setShowListFilePath_nullPath_throwsNullPointerException() {
@@ -87,7 +87,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test setting of a valid showListFilePath.
+     * Tests setting of a valid showListFilePath.
      */
     @Test
     public void setShowListFilePath_validPath_setsShowListFilePath() {
@@ -97,7 +97,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test exception thrown when checking for a null {@code Show}.
+     * Tests exception thrown when checking for a null {@code Show}.
      */
     @Test
     public void hasShow_nullShow_throwsNullPointerException() {
@@ -105,7 +105,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test the {@code Show} is not in the show list.
+     * Tests the {@code Show} is not in the show list.
      */
     @Test
     public void hasShow_showNotInShowList_returnsFalse() {
@@ -113,7 +113,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test the {@code Show} is in the show list.
+     * Tests the {@code Show} is in the show list.
      */
     @Test
     public void hasShow_showInShowList_returnsTrue() {
@@ -122,7 +122,7 @@ public class ModelManagerTest {
     }
 
     /**
-     * Test method to test exception thrown when removing in the FilterShowList.
+     * Tests exception thrown when removing in the FilterShowList.
      */
     @Test
     public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
@@ -157,7 +157,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentShowList, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE_IN_WONDERLAND.getName().fullName.split("\\s+");
+        String[] keywords = ALICE_IN_WONDERLAND.getName().name.split("\\s+");
         modelManager.updateFilteredShowList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(showList, userPrefs)));
 

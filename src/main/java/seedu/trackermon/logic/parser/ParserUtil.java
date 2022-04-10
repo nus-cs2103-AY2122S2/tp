@@ -22,11 +22,11 @@ import seedu.trackermon.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     * @param oneBasedIndex the {@code oneBasedIndex}.
+     * @return the parsed {@code oneBasedIndex}.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -41,7 +41,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
-     *
+     * @param name a {@code String name}.
+     * @return a {@code Name}.
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -56,7 +57,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
-     *
+     * @param status a {@code String status}.
+     * @return a {@code Status}.
      * @throws ParseException if the given {@code status} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
@@ -71,12 +73,13 @@ public class ParserUtil {
     /**
      * Parses a {@code String rating} into a {@code Rating}.
      * Leading and trailing whitespaces will be trimmed.
-     *
+     * @param rating a {@code String rating}.
+     * @return a {@code Rating}.
      * @throws ParseException if the given {@code rating} is invalid.
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
-        if (!Rating.isValidScore(rating)) {
+        if (!Rating.isValidRating(rating)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
         }
         return new Rating(rating);
@@ -86,7 +89,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
-     *
+     * @param tag a {@code String tag}.
+     * @return a {@code Tag}.
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
@@ -100,6 +104,9 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * @param tags a {@code Collection<String> tags}.
+     * @return a {@code Set<Tag>}.
+     * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
@@ -111,10 +118,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String comment} into a {@code Comment}
+     * Parses {@code String comment} into a {@code Comment}.
+     * @param comment a {@code String comment}.
+     * @return a {@code Comment}.
      */
-    public static Comment parseComment(String comment) {
+    public static Comment parseComment(String comment) throws ParseException {
         requireNonNull(comment);
+        if (!Comment.isValidComment(comment)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Comment.MESSAGE_CONSTRAINTS));
+        }
         Comment validComment = new Comment(comment);
         return validComment;
     }

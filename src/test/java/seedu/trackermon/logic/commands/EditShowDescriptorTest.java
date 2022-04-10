@@ -18,6 +18,10 @@ import seedu.trackermon.testutil.EditShowDescriptorBuilder;
  */
 public class EditShowDescriptorTest {
 
+    /**
+     *  Tests if different types of EditShowDescriptorTest
+     *  are the same from the execution of {@code EditShowDescriptorTest}.
+     */
     @Test
     public void equals() {
         // same values -> returns true

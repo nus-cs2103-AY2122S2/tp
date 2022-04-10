@@ -1,7 +1,7 @@
 ﻿Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
 
 Copyright by icons8.com - https://icons8.com/
-- icon_star_30.png
-- icon_star_filled_30.png
+- icon_star_30.png (https://icons8.com/icon/tAfqdu2AVpjT/star)
+- icon_star_filled_30.png (https://icons8.com/icon/tf9WJOzzs4Wo/star)
 
 

@@ -50,6 +50,9 @@ public class LogicManagerTest {
     private Model model = new ModelManager();
     private Logic logic;
 
+    /**
+     * Sets up JsonShowListStorage, JsonUserPrefsStorage and logic before each test.
+     */
     @BeforeEach
     public void setUp() {
         JsonShowListStorage showListStorage =
@@ -59,24 +62,36 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
     }
 
+    /**
+     * Tests the parsing of invalid command format from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, UNKNOWN_COMMAND_HELP);
     }
 
+    /**
+     * Tests the parsing of command error from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_INDEX);
     }
 
+    /**
+     * Tests the parsing of valid command from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
+    /**
+     * Tests if storage throws IO exception from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonShowListIoExceptionThrowingStub
@@ -98,11 +113,17 @@ public class LogicManagerTest {
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests unsupported operation exception from the execution of {@code LogicManager}.
+     */
     @Test
     public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredShowList().remove(0));
     }
 
+    /**
+     * Tests the getters from the execution of {@code LogicManager}.
+     */
     @Test
     public void testGetters() {
         // Checking showListFilePath

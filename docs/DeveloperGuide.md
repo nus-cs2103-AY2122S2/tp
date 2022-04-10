@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-### Table of Contents
+## Table of Contents
 
 * [**Introduction**](#introduction)
 * [**Setting up, getting started**](#setting-up-getting-started)

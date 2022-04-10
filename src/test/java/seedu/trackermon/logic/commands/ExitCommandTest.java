@@ -15,6 +15,9 @@ public class ExitCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
+    /**
+     * Tests the exiting of the program from the execution of {@code ExitCommand}.
+     */
     @Test
     public void execute_exit_success() {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);

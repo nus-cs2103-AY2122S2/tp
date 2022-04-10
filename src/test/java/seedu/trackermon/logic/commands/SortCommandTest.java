@@ -27,6 +27,9 @@ public class SortCommandTest {
     private final Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalShowList(), new UserPrefs());
 
+    /**
+     * Tests the sorting of name by ascending order from the execution of {@code SortCommand}.
+     */
     @Test
     public void execute_oneKeyword_nameAcs() {
         Comparator<Show> comparator = new NameComparator();
@@ -38,6 +41,9 @@ public class SortCommandTest {
         assertEquals(expectedList, model.getSortedShowList());
     }
 
+    /**
+     * Tests the sorting of status by descending order from the execution of {@code SortCommand}.
+     */
     @Test
     public void execute_oneKeyword_statusDcs() {
         Comparator<Show> comparator = new StatusComparator().reversed();
@@ -49,6 +55,9 @@ public class SortCommandTest {
         assertEquals(expectedList, model.getSortedShowList());
     }
 
+    /**
+     * Tests the sorting of tag and rating by descending order from the execution of {@code SortCommand}.
+     */
     @Test
     public void execute_twoKeywords_tagRatingDsc() {
         Comparator<Show> comparator = new TagComparator().reversed()
@@ -61,6 +70,9 @@ public class SortCommandTest {
         assertEquals(expectedList, model.getSortedShowList());
     }
 
+    /**
+     * Tests the sorting of tag and rating by descending order from the execution of {@code SortCommand}.
+     */
     @Test
     public void execute_threeKeywords_nameTagRatingDsc() {
         Comparator<Show> comparator = new NameComparator().reversed().thenComparing
@@ -73,6 +85,9 @@ public class SortCommandTest {
         assertEquals(expectedList, model.getSortedShowList());
     }
 
+    /**
+     * Tests the sorting of name, status, tag and rating by ascending order from the execution of {@code SortCommand}.
+     */
     @Test
     public void execute_fourKeywords_nameStatusTagRatingAcs() {
         Comparator<Show> comparator = new NameComparator().thenComparing
