@@ -127,7 +127,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | RATING     | r/     | The rating to give a show                                                           |
 | COMMENT    | c/     | The comment to describe a show                                                      |
 | TAG        | t/     | The tag to label a show                                                             |
-| ORDER      | \{n/s/r/t\}/ | The order in which a prefix will sort the show list                           |
+| ORDER      | \{n/ s/ r/ t/\} | The order in which a prefix will sort the show list                        |
 | SEQUENCE   | so/    | The order of prefixes to sort the show list                                         |
 
 <div markdown="block" class="alert alert-info">
@@ -176,8 +176,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
 | COMMENT   | c/     | A comment can only contain up to 300000 [**ASCII**](#glossary) values. |
 | TAG       | t/     | A tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters. |
-| ORDER      | \{n/s/r/t\}/ | An order can only be either `asc` or `dsc`.                     |
-| SEQUENCE  | so/    | A sequence lists out the order of the prefixes used to sort the show list. |
+| ORDER      | \{n/ s/ r/ t/\} | An order can only be either `asc` or `dsc`.                |
+| SEQUENCE  | so/    | A sequence lists out the order of **all** the prefixes used to sort the show list. It can only contain the case-insensitive full names of the prefixes used. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -398,24 +398,24 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 :exclamation: **Caution:** 
 * You cannot undo the sort once you have applied it! 
 * Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
-* A successful sort command followed by an add command will still result in the new show being added to the last index!  
+* A successful sort command followed by an add command will still result in the new show being added to the last index!
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
-**Explanation** 
+**Explanation:** 
 
 To sort your show list by rating ascendingly, you can key in `sort r/asc`! For more examples, refer to this table below!
 
-| To sort by | ascendingly | descendingly | Notes |
-| ---------- | ----------- | ------------ | ----- |
-| name       | n/asc       | n/dsc        | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
-| status     | s/asc       | s/dsc        | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch` |
-| rating     | r/asc       | r/dsc        |       |
-| tag        | t/asc       | t/dsc        | Tag is sorted by number of tags |
+| Sort by    | Ascending Order | Descending Order | Notes |
+| ---------- | --------------- | ---------------- | ----- |
+| name       | n/asc           | n/dsc            | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
+| status     | s/asc           | s/dsc            | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch`   |
+| rating     | r/asc           | r/dsc            |       |
+| tag        | t/asc           | t/dsc            | Tag is sorted by number of tags |
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order. By default, Trackermon prioritises sorting in the following order if the criteria are used: 
+:exclamation: **Take note:** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order. By default, Trackermon prioritises sorting in the following order if the criteria are used: 
 
 * `name` > `status` > `rating` > `tag`
 </div>
@@ -424,16 +424,15 @@ Therefore, let's say you want to sort by status in ascending order, then by name
 Use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
+:exclamation: **Take note:** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
 * `sort` can also be used as is! It will sort by name in ascending order.
-* The `ORDER` must be asc or dsc!
-* The `SEQUENCE` must contain the full name of all the criteria used!
-* For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
+* Refer to [parameter conditions](#parameter-conditions) section about `ORDER` `SEQUENCE`.
+* For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "ratingtagrating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
