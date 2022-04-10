@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -73,6 +74,36 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setAddressBook_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBook(null));
+    }
+
+    @Test
+    public void setAddressBook_setAsNewAddressBook_returnsSameAddressBookAsNewAddressBook() {
+        AddressBook addressBook = new AddressBook();
+        modelManager.setAddressBook(addressBook);
+        assertEquals(addressBook, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void getPreviousAddressBook_newAddressBookHistory_returnsNewAddressBook() {
+        AddressBook expectedAddressBook = new AddressBook();
+        assertEquals(expectedAddressBook, modelManager.getPreviousAddressBook());
+    }
+
+    @Test
+    public void getAddressBookHistory_emptyAddressBookHistory_returnsEmptyAddressBookHistory() {
+        AddressBook expectedAddressBook = new AddressBook();
+        AddressBookHistory expectedAddressBookHistory = new AddressBookHistory(expectedAddressBook);
+        assertEquals(expectedAddressBookHistory, modelManager.getAddressBookHistory());
+    }
+
+    @Test
+    public void isAddressBookHistoryEmpty_usingAddressBookHistoryOnInitialisation_returnsFalse() {
+        assertFalse(modelManager.isAddressBookHistoryEmpty());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -86,6 +117,32 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void getCommandHistory_emptyCommandHistory_returnsNewCommandHistory() {
+        CommandHistory expectedCommandHistory = new CommandHistory();
+        assertEquals(expectedCommandHistory, modelManager.getCommandHistory());
+    }
+
+    @Test
+    public void getPreviousCommandText_emptyCommandHistory_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.getPreviousCommandText());
+    }
+
+    @Test
+    public void isCommandHistoryEmpty_usingCommandHistoryOnInitialisation_returnTrue() {
+        assertTrue(modelManager.isCommandHistoryEmpty());
+    }
+
+    @Test
+    public void clearCommandHistory_addThenClearCommandHistory_commandHistorySameAsNewCommandHistory() {
+        String testCommandText = ListCommand.COMMAND_WORD;
+        modelManager.addToCommandHistory(testCommandText);
+        modelManager.clearCommandHistory();
+
+        ModelManager expectedModelManager = new ModelManager();
+        assertEquals(expectedModelManager, modelManager);
     }
 
     @Test
