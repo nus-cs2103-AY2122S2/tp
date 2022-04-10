@@ -43,6 +43,8 @@ title: Developer Guide
   * [Adding a lesson / Viewing a lesson's details](#adding-a-lesson--viewing-a-lessons-details)
   * [Adding a student / Viewing a student's details](#adding-a-student--viewing-a-students-details)
   * [Deleting a student](#deleting-a-student)
+  * [Assigning a student](#assigning-a-student)
+  * [Unassigning a student](#unassigning-a-student)
   * [Saving data](#saving-data)
 
 ## **Introduction**
@@ -714,6 +716,7 @@ window preferences when you close the program.
    3. Test Case: First launch\
    Expected: Sample data should populate the lists. A data folder along with config.json and preferences.json should be
    created in the current directory.
+<br>
 2. Saving window preferences
    1. Launch TeachWhat!.
    2. Resize the window to your preference.
@@ -721,6 +724,8 @@ window preferences when you close the program.
    4. Test Case: Restoring window preferences\
    Expected: When relaunching the program, the window position and size should be restored from where you previously
    left off.
+
+[return to top ↑](#table-of-contents)
 
 ### Adding a lesson / Viewing a lesson's details
 TeachWhat! allows you to store details of a lesson and view it back later on.
@@ -745,12 +750,13 @@ TeachWhat! allows you to store details of a lesson and view it back later on.
    3. Expected: In this example, the entered lesson conflicts with the command entered in Test Case 1. TeachWhat! should
    give you a warning that an existing lesson has a conflicting timeslot. The new lesson will not be added to the list.
    The list should also be filtered to show you the conflicting lessons.
-4. Test case: Viewing a temporary lesson's details
+4. Test case 4: Viewing a temporary lesson's details
    1. Condition: An existing temporary lesson should be in the list.
    2. Enter the command `listlessons`.
    3. Assuming an existing temporary lesson has an index of 1, enter the command `lesson 1`.
    4. Expected: The details of that temporary lesson should be shown on the right.
-5. Test case: Viewing a recurring lesson's details
+<br>
+5. Test case 5: Viewing a recurring lesson's details
    1. Condition: An existing recurring lesson should be in the list.
    2. Enter the command `listlessons`.
    3. Assuming an existing recurring lesson has an index of 2, enter the command `lesson 2`.
@@ -761,6 +767,8 @@ TeachWhat! allows you to store details of a lesson and view it back later on.
 **:information_source: Note that:**<br>
 The list of lessons displayed is sorted by the next upcoming lesson date.
 </div>
+
+[return to top ↑](#table-of-contents)
 
 ### Adding a student / Viewing a student's details
 TeachWhat! allows you to store details of a student and view it back later on.
@@ -773,28 +781,32 @@ TeachWhat! allows you to store details of a student and view it back later on.
    2. Assuming an existing student has an index of 1, enter the command `student 1`.
    3. Expected: The details of that student should be shown on the right.
 
+[return to top ↑](#table-of-contents)
+
 ### Deleting a student
 
 This command requires you to have at least one existing student.
 * If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
   user guide section to add a student.
 
-1. Testcase 1: Delete `student` of index 1 on the viewable student list.
+1. Test case 1: Delete `student` of index 1 on the viewable student list.
    1. Execute `liststudents` to ensure that your lists includes all students.
    2. Execute `rmstudent 1` or the shortcut `rms 1`.
    3. Expected: The student of index 1 on the viewable student list is deleted.
 
-2. Testcase 2: Delete `student` with invalid index
+2. Test case 2: Delete `student` with invalid index
     1. Execute `liststudents` to ensure that your lists includes all students.
     2. Execute `rmstudent 0` or the shortcut `rms 0`.
     3. Expected: An invalid index error message is shown.
 * Note: An invalid index is any value that is not a positive integer of type `java.lang.Integer`. (e.g. if index is greater than`Integer.MAX_VALUE` or less than 0 or is not of type `java.util.Integer`)
 
-3. Testcase 3: Delete `student` with out-of-bounds index
+3. Test case 3: Delete `student` with out-of-bounds index
     1. Execute `liststudents` to ensure that your lists includes all students. (Ensure there are only two students)
     2. Execute `rmstudent 3` or the shortcut `rms 3`.
     3. Expected: An out-of-bounds error message is shown.
 * Note: An out-of-bounds index is a positive integer of type `java.lang.Integer` but is a greater than the viewable student list.
+
+[return to top ↑](#table-of-contents)
 
 ### Assigning a student
 
@@ -804,7 +816,7 @@ user guide section to add a student.
 * If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
   user guide section to add a lesson.
 
-1. Testcase 1: Assigning `student` to `lesson` successfully
+1. Test case 1: Assigning `student` to `lesson` successfully
    1. Ensure that `student` with `<STUDENT_ID>` **1** is not already assigned to the `lesson` of `<LESSON_ID>` **1**. 
    2. Execute `liststudents` and `listlessons` to ensure that your lists includes all students and lessons.
    3. Execute the command `assign -s 1 -l 1`. This will assign the first `student` in the list to the first
@@ -812,11 +824,13 @@ user guide section to add a student.
    4. Expected: The details of the `lesson` will be displayed on the right info panel, and you should
    see the `student` that you just assigned in the **Students** list of the `lesson`.
     
-2. Testcase 2: Assigning `student` to `lesson` unsuccessfully
+2. Test case 2: Assigning `student` to `lesson` unsuccessfully
    1. Following **Testcase 1**, execute `listlessons` and `liststudents` to ensure that your lists includes
    all existing students and lessons.
    2. Execute the command `assign -l 1 -s 1`.
    3. Expected: An error message will be displayed saying that the student is already enrolled in the lesson.
+
+[return to top ↑](#table-of-contents)
 
 ### Unassigning a student
 
@@ -826,7 +840,7 @@ This command requires you to have at least one existing student and lesson.
 * If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
   user guide section to add a lesson.
 
-1. Testcase 1: Unassigning `student` from `lesson` successfully
+1. Test case 1: Unassigning `student` from `lesson` successfully
     1. Ensure that `student` with `<STUDENT_ID>` **1** is already assigned to the `lesson` of `<LESSON_ID>` **1**.
        1. If not, follow the [**Assigning a student: Testcase 1**](#Assigning-a-student) 
     2. Execute `liststudents` and `listlessons` to ensure that your lists includes all students and lessons.
@@ -835,12 +849,14 @@ This command requires you to have at least one existing student and lesson.
     4. Expected: The details of the `student` will be displayed on the right info panel, and you should
        **not** see the `lesson` that you just unassigned in the **Lessons** list of the `student`.
 
-2. Testcase 2: Unassigning `student` from `lesson` unsuccessfully
+2. Test case 2: Unassigning `student` from `lesson` unsuccessfully
     1. Following **Testcase 1**, execute `listlessons` and `liststudents` to ensure that your lists includes
        all existing students and lessons.
     2. Execute the command `unassign -l 1 -s 1`.
     3. Expected: An error message will be displayed saying that the student is **not** enrolled in the lesson.
-    
+
+[return to top ↑](#table-of-contents)
+
 ### Saving data
 
 #### Missing data files
