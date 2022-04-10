@@ -248,17 +248,32 @@ As such, detailed descriptions for the Address Book subsystem can be easily tran
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Tag Management
-
-This section will describe tag management in the address book as well as the features implemented.
-
-#### Centralising Tags in the Address Book
+### Centralising Tags in the Address Book
 
 In the previous implementation, all `Tag` objects are independent of one another despite having the same tag names. To improve the usability of the address book, the tags are centralised so that the user can easily manage them as well as searching for `Person` objects that contain the tag.
 This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will also propagate these changes to the relevant `Person`s who contain the specified tag.
 All operations relating to the `Tag` objects are done at the `AddressBook` level to ensure that the `Tag` objects and `Person` objects are properly synchronised.
 
 Another benefit that comes with the centralised tag list is that the user can maintain tags even if it is not associated with any `Person` objects. The rationale to maintain `Tag` separately is to allow the user to reuse the tag depending on their workflow (i.e. A user may want to maintain the `prospective clients` tag even if he/she currently does not have any prospective clients.)
+
+Below is a partial class diagram of the Tag subsystem.
+
+![Tag Subsystem](images/TagModelClassDiagram.png)
+
+### Defensive `AddressBook`
+
+As the `Tag` objects are moved to its own subsystem, there is a need to synchronise the `Tag` and `Person` subsystems which is done through cascading any changes made from `Tag` to `Person`. For example, if a `Tag` object is deleted, this tag should also be removed for all `Person` objects containing that tag. 
+For operations involving `Person`, if there are missing tags that do not exist in the `UniqueTagList`, those tags will be added into the system before performing the operation on `Person`. 
+For operations involving `Tag`, the changes will propagate to `Person` objects that contain the specified `Tag`. See the edit tag feature below for an example of `Tag` propagation.
+
+A special case of defensive `AddressBook` is `AddressBook#resetData()` where it replaces the `AddressBook` with new data. To ensure that there are no outlier `Tag` objects attached to the `Person` objects or `Tag` objects existing in `Person` but not in the subsystems, the `AddressBook#setTags()` and `AddressBook#setPersons()` are modified to strip `Tag` objects from `Person` or add missing `Tag` objects.
+
+Below are the modified sequence diagrams of `AddressBook#setPersons()` and `AddressBook#setTags()`
+
+
+![AddressBook SetPersons](images/AddressBookSetPersonsSequenceDiagram.png)
+
+![AddressBook SetTags](images/AddressBookSetPersonsSequenceDiagram.png)
 
 ### Edit Tag Feature - `edittag`
 
@@ -576,7 +591,7 @@ The multiple commands executed will return a `CommandResult` which contains a li
 
 ### \[Proposed\] Tag Finding Feature
 
-The proposed find tag feature is similar to `findperson` where the user can search for tags from the specified keywords. This feature was not implemented as our target user need not maintain a large number of tabs (compared to persons and appointments). However, if this feature is required in the future, the developer simply needs to implement the `Logic` components as the required components in `Model` already exists.
+The proposed find tag feature is similar to `findperson` where the user can search for tags from the specified keywords. This feature was not implemented as our target user need not maintain a large number of tags (compared to persons and appointments). However, if this feature is required in the future, the developer simply needs to implement the `Logic` components as the required components in `Model` already exists.
 Similar to the system used for person, `Tag` filtering is facilitated by `FilteredList` from the JavaFX library which is implemented at the `ModelManager` level, and the related functions are:
 
 * `Model#updateFilteredTagList()`
