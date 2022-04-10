@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User opens Tracey;
+
+If () then ([User needs help])
+    :User executes a Help command;
+
+    If () then ([User inputs extra parameters)
+    :throw ParseException;
+    else ([else])
+    :Help window opens;
+
+    If () then ([User wants to access User Guide])
+    :User clicks on Open User Guide button;
+    :User Guide opens in User's default browser;
+
+    else ([else])
+
+    endif
+    endif
+    else ([else])
+    endif
+stop
+
+@enduml
