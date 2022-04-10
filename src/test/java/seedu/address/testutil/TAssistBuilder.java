@@ -4,9 +4,7 @@ import seedu.address.model.TAssist;
 import seedu.address.model.student.Student;
 
 /**
- * A utility class to help with building Addressbook objects.
- * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ * A utility class to help with building TAssist objects.
  */
 public class TAssistBuilder {
 
@@ -21,7 +19,7 @@ public class TAssistBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Student} to the {@code TAssist} that we are building.
      */
     public TAssistBuilder withStudent(Student student) {
         tassist.addStudent(student);
