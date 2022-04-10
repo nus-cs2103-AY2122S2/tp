@@ -72,6 +72,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **About**
 
@@ -94,6 +95,7 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -147,6 +149,8 @@ The sections below give more details of each component.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -202,6 +206,8 @@ How the parsing works:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/src/main/java/seedu/trackermon/model/Model.java)
@@ -226,6 +232,8 @@ The `Model` component,
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/trackermon/storage/Storage.java)
@@ -240,6 +248,8 @@ The `Storage` component,
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Common classes
 
