@@ -47,11 +47,11 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
-| Symbol  |                                                 Purpose                                                 |
-|:-------:|:-------------------------------------------------------------------------------------------------------:|
-|   📓    |     Additional notes are parked here. They contain beneficial information in case you are confused.     |
-|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.          |
-|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.  |
+| Symbol  |                                                                            Purpose                                                                             |
+|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|   :information_source:    |      <div markdown="span" class="alert alert-info"> Additional notes are parked here. They contain beneficial information in case you are confused.</div>      |
+|   ⚠️    |         <div markdown="span" class="alert alert-warning"> Warnings are parked here. They contain information that you **NEED** to take note of.</div>          |
+|   💡    | <div markdown="span" class="alert alert-primary"> Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.</div> |
 
 *Table 1: Symbols and their purposes.*
 
@@ -69,21 +69,23 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
- 📓`Note:`
+ <div markdown="span" class="alert alert-info">:information_source: **Note:**
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
    2. To check your java version:
       1. For Mac users, open up Terminal and type in `java --version`.
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+</div>
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
-   📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
    2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+</div>
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -114,6 +116,10 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+* You can also use the `F1` key to open the pop-up window.
+</div>
+
 Format: `help`
 
 ### Importing Excel sheet
@@ -121,8 +127,9 @@ Add a list of students from an Excel file into Tracey. Import feature can be use
 
 Format: `import FILE PATH`
 
-💡`Tips`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * The file path is relative to the root directory.
+</div>
 
 Examples of usage:
 * `import C:\Users\Documents\tp.xlsx`
@@ -140,10 +147,11 @@ Sample Excel file:
 How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
 
-⚠️`Warning:`
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
 * The excel file must contain only one sheet named "Sheet1".
 * The column of the table must be capital and starts with Column A.
 * The data in the table needs to be ensured no space behind
+</div>
 
 ### Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
@@ -191,9 +199,10 @@ Examples of usage:
 As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
-💡`Tips`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * You are able to add optional tags with no restrictions using the `t/` prefix.
 * Additions can be reversed with the `undo` feature.
+</div>
 
 ### Editing an existing contact
 Edit a contact at a specific index.
@@ -225,12 +234,14 @@ Original list:
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * Tracey shows the entire edited database after the edit command is applied.
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
+</div>
 
-💡`Tip`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * Edits can be reversed with the `undo` feature.
+</div>
 
 ### Deleting a contact
 Delete a contact at a specific index.
@@ -249,49 +260,84 @@ Examples of usage:
 * `delete 2` removes the 2nd student on the list.
 * `delete 10` removes the 10th student on the list.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
 * You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 * Deletions can be reversed with the `undo` feature.
+</div>
 
 ### Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
 * Undoes only the last executed add, edit or delete command.
-* You can only use the undo command after executing an add, edit, or delete command.
+* You can only use the `undo` command after executing an add, edit, or delete command.
 * Cannot be used in succession to undo previously executed commands besides the last executed one.
 
+Examples of usage:
+* Using `undo` after an `add` command will remove the recently added student.
+* Using `undo` after an `edit` command will restore the details of the student back to his/her previous state.
+* Using `undo` after a `delete` command will add the recently deleted student.
+
+Scenario for undoing an edit command:
+![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 8: Scenario of using an undo command following an edit command.*
+
+Figure *8* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  * Using an `undo` command will not restore the student's index back to 1
+</div>
+
 ### Redoing an action
-Reverses an executed undo command.
+Reverse an executed undo command.
 
 Format: `redo`
 * Reverses only the last executed `undo` command.
 * You can only use the `redo` command after executing an `undo` command.
 * Cannot be used in succession to reverse previously executed `undo` commands besides the last executed one.
 
+Examples of usage:
+* Using `redo` after using `undo` on an `add` command will counteract the effect of undoing an `add` command and the overall result adds a student into Tracey.
+* Using `redo` after using `undo` on a `delete` command will counteract the effect of undoing a `delete` command and the overall result deletes the student from Tracey.
+* Using `redo` after using `undo` on an `edit` command will counteract the effect of undoing an `edit` command and the overall result edits the details of the student in Tracey.
+
+Scenario for redoing after undoing an edit command:
+![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
+
+Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
+to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+</div>
+
 ### Finding a contact
-Find a particular contact in Tracey and retrieve their specific details.
+Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
-* A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
 * The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
 * Following the previous point, the input should contain the initial letters of the name. e.g. `jo` or`joh` for John. Conversely, if a user inputs `ohn` for John, this will not warrant the correct result. 
 
 Examples of usages:
-
 * `find John` returns `john` and `John Doe`.
 * `find alex david` returns `Alex Yeoh` and`David Li`.
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 8: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 10: Screenshot of result of the find command.*
 
-As seen in the *Figure 8*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
@@ -312,12 +358,13 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 9: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 11: Example result of `filter` command.*
 
-As seen in *Figure 9*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 11*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+</div>
 
 ### Listing the records
 List all students, displaying all their data stored in Tracey.
@@ -326,80 +373,97 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
 
 ### Copying emails
 Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
 
-![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
-
-From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section.
-
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
 * There is also a `Show Email` button on the GUI which you can click to open the same window.
 * On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+</div>
+
+![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
+
+From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
-Summarises the statistics of the student records inside Tracey.
+Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
-* You can get an overview of the students in Tracey if you want to get an idea of the location where Covid is more prevalent.
-* You can see which faculty has the highest number of Covid cases.
+* You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
+* You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
+<div style="display:flex">
 ![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
+</div>
 
-From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
-Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-* `[ROOT]`: The folder where the Tracey.jar is in.
-* `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
+Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
+* `ROOT`: The folder where the Tracey.jar is in.
+* `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
   * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
-* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
-  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
+* `ARCHIVED_FILE`: Archived file name named using your local PC's date and time in the format of DDMMYY_HHmmssSSS which is stored as a `json` file.
+  * The hour is abbreviated as HH, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
-Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (hh:mm:ss:SSS in 24-hour notation).
-* The archived file will be saved **in** `[ROOT]/data/archive/270322123`.
-* The archived file will be saved **as** `270322_152833`.
-* The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
+Examples of usage:
+* Given the current date and time on your local PC in which the `archive` command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (HH:mm:ss:SSS in 24-hour notation).
+  * The archived file will be saved **in** `ROOT/data/archive/270322`.
+  * The archived file will be saved **as** `270322_152833123.json`. (`json` is the suffix (after the period) to indicate the file type)
+  * The file path will be `ROOT/data/archive/270322/270322_152833123.json`.
+* To retrieve your archived file:
+  1. Open the folder in which your Tracey.jar is stored in.
+  2. Open the folder named `data`.
+  3. Open the folder named `archive`.
+  4. Open the folder named `270322`.
+  5. Your archived file is named `270322_152833123.json`.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-alert">:warning: **Warning:**
+* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * You can rename the archived file in the file path manually for easier reference.
-  * Features for naming of the archived file via the CLI will be available in later releases.
-* To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+  * Features for naming the archived file using the CLI will be available in later releases.
+* To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+</div>
 
 ### Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
-* There are 3 options for `SIZE` which are 1, 2 and 3.
+* There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 13 for the comparison for the different result display window sizes.
+* Refer to figure 15 for the comparison for the different result display window sizes.
 
-💡`Tips:`
+![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+</div>
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
-
-![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
+</div>
 
 ### Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
 
-⚠️`Warning:`
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
 * Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 * This feature cannot be reversed using `undo`.
+</div>
 
 ### Exiting Tracey
 Close the application.
