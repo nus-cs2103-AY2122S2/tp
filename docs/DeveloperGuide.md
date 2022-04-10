@@ -100,7 +100,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("addTask")` API call.
 
-![Interactions Inside the Logic Component for the `addTask` Command](images/AddSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `addTask` Command](images/AddSeqDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
