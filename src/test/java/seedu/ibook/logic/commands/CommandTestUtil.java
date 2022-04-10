@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
 import static seedu.ibook.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ import java.util.List;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
-import seedu.ibook.logic.commands.product.UpdateCommand;
+import seedu.ibook.logic.commands.item.UpdateItemCommand.UpdateItemDescriptor;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.ProductFilter;
+import seedu.ibook.testutil.UpdateItemDescriptorBuilder;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 /**
@@ -41,10 +45,12 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_B = "Description B";
     public static final String VALID_PRICE_A = "$1.99";
     public static final String VALID_PRICE_B = "$2.99";
-    public static final String VALID_DISCOUNTRATE_A = "25";
-    public static final String VALID_DISCOUNTRATE_B = "30";
-    public static final String VALID_DISCOUNTSTART_A = "1";
-    public static final String VALID_DISCOUNTSTART_B = "4";
+    public static final String VALID_PRICE_0 = "$0";
+    public static final String VALID_PRICE_100 = "$100";
+    public static final String VALID_DISCOUNT_RATE_A = "25";
+    public static final String VALID_DISCOUNT_RATE_B = "30";
+    public static final String VALID_DISCOUNT_START_A = "1";
+    public static final String VALID_DISCOUNT_START_B = "4";
     public static final String VALID_EXPIRY_DATE_A = "2022-03-08";
     public static final String VALID_EXPIRY_DATE_B = "2022-03-18";
     public static final String VALID_QUANTITY_A = "10";
@@ -58,10 +64,14 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_FULL_B = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_B;
     public static final String PRICE_FULL_A = " " + PREFIX_PRICE + VALID_PRICE_A;
     public static final String PRICE_FULL_B = " " + PREFIX_PRICE + VALID_PRICE_B;
-    public static final String DISCOUNTRATE_FULL_A = " " + PREFIX_DISCOUNTRATE + VALID_DISCOUNTRATE_A;
-    public static final String DISCOUNTRATE_FULL_B = " " + PREFIX_DISCOUNTRATE + VALID_DISCOUNTRATE_B;
-    public static final String DISCOUNTSTART_FULL_A = " " + PREFIX_DISCOUNTSTART + VALID_DISCOUNTSTART_A;
-    public static final String DISCOUNTSTART_FULL_B = " " + PREFIX_DISCOUNTSTART + VALID_DISCOUNTSTART_B;
+    public static final String START_PRICE_FULL_0 = " " + PREFIX_START_PRICE + VALID_PRICE_0;
+    public static final String START_PRICE_FULL_100 = " " + PREFIX_START_PRICE + VALID_PRICE_100;
+    public static final String END_PRICE_FULL_100 = " " + PREFIX_END_PRICE + VALID_PRICE_100;
+    public static final String END_PRICE_FULL_0 = " " + PREFIX_END_PRICE + VALID_PRICE_0;
+    public static final String DISCOUNT_RATE_FULL_A = " " + PREFIX_DISCOUNT_RATE + VALID_DISCOUNT_RATE_A;
+    public static final String DISCOUNT_RATE_FULL_B = " " + PREFIX_DISCOUNT_RATE + VALID_DISCOUNT_RATE_B;
+    public static final String DISCOUNT_START_FULL_A = " " + PREFIX_DISCOUNT_START + VALID_DISCOUNT_START_A;
+    public static final String DISCOUNT_START_FULL_B = " " + PREFIX_DISCOUNT_START + VALID_DISCOUNT_START_B;
     public static final String EXPIRY_DATE_FULL_A = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_A;
     public static final String EXPIRY_DATE_FULL_B = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_B;
     public static final String QUANTITY_FULL_A = " " + PREFIX_QUANTITY + VALID_QUANTITY_A;
@@ -69,9 +79,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
     // discount rate must be less than 100;
-    public static final String INVALID_DISCOUNTRATE_DESC = " " + PREFIX_DISCOUNTRATE + "101";
+    public static final String INVALID_DISCOUNT_RATE_DESC = " " + PREFIX_DISCOUNT_RATE + "101";
     // discount start must be a positive number;
-    public static final String INVALID_DISCOUNTSTART_DESC = " " + PREFIX_DISCOUNTSTART + "-1";
+    public static final String INVALID_DISCOUNT_START_DESC = " " + PREFIX_DISCOUNT_START + "-1";
     public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2022 03 08"; // incorrect format
     public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-2"; // quantity must be non-negative
 
@@ -79,23 +89,31 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final UpdateCommand.UpdateProductDescriptor DESC_A;
-    public static final UpdateCommand.UpdateProductDescriptor DESC_B;
+    public static final UpdateProductDescriptor PRODUCT_DESCRIPTOR_A;
+    public static final UpdateProductDescriptor PRODUCT_DESCRIPTOR_B;
+    public static final UpdateItemDescriptor ITEM_DESCRIPTOR_A;
+    public static final UpdateItemDescriptor ITEM_DESCRIPTOR_B;
 
     static {
-        DESC_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
+        PRODUCT_DESCRIPTOR_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
                 .withCategory(VALID_CATEGORY_A)
                 .withDescription(VALID_DESCRIPTION_A)
                 .withPrice(VALID_PRICE_A)
-                .withDiscountRate(VALID_DISCOUNTRATE_A)
-                .withDiscountStart(VALID_DISCOUNTSTART_A)
+                .withDiscountRate(VALID_DISCOUNT_RATE_A)
+                .withDiscountStart(VALID_DISCOUNT_START_A)
                 .build();
-        DESC_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
+        PRODUCT_DESCRIPTOR_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
                 .withCategory(VALID_CATEGORY_B)
                 .withDescription(VALID_DESCRIPTION_B)
                 .withPrice(VALID_PRICE_B)
-                .withDiscountRate(VALID_DISCOUNTRATE_B)
-                .withDiscountStart(VALID_DISCOUNTSTART_B)
+                .withDiscountRate(VALID_DISCOUNT_RATE_B)
+                .withDiscountStart(VALID_DISCOUNT_START_B)
+                .build();
+        ITEM_DESCRIPTOR_A = new UpdateItemDescriptorBuilder().withExpiryDate(VALID_EXPIRY_DATE_A)
+                .withQuantity(VALID_QUANTITY_A)
+                .build();
+        ITEM_DESCRIPTOR_B = new UpdateItemDescriptorBuilder().withExpiryDate(VALID_EXPIRY_DATE_B)
+                .withQuantity(VALID_QUANTITY_B)
                 .build();
     }
 

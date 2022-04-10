@@ -39,6 +39,13 @@ public class Item extends ItemDescriptor implements Comparable<Item>, Distinguis
     }
 
     /**
+     * Checks if adding two items together satisfies the quantity constraint.
+     */
+    public boolean allowedToAdd(Item newItem) {
+        return getQuantity().add(newItem.getQuantity()).inRange();
+    }
+
+    /**
      * Adds two items together.
      * @param newItem Item to add.
      */

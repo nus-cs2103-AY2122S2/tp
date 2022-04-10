@@ -213,6 +213,7 @@ public class ModelManager implements Model {
     private void refreshFilteredProductList() {
         filteredProducts.setPredicate(unused -> true);
         filteredProducts.setPredicate(productFilter);
+        updateFilteredItemListForProducts(unused -> true);
     }
 
     /**
@@ -231,7 +232,6 @@ public class ModelManager implements Model {
     public void removeProductFilter(AttributeFilter filter) {
         productFilter.removeFilter(filter);
         refreshFilteredProductList();
-        updateFilteredItemListForProducts(unused -> true);
     }
 
     /**
@@ -241,10 +241,8 @@ public class ModelManager implements Model {
     public void clearProductFilters() {
         productFilter.clearFilters();
         refreshFilteredProductList();
-        updateFilteredItemListForProducts(unused -> true);
     }
 
-    // TODO: remove this in the future so that product filter would not be changed
     @Override
     public void updateProductFilters(Predicate<Product> predicate) {
         requireNonNull(predicate);

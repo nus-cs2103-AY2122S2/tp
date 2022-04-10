@@ -1,17 +1,19 @@
 @startuml
-!include style.puml
+!include Style.puml
+!include SequenceStyle.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":IBookParser" as IBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant "u:UndoCommand" as UndoCommand<<Logic>>
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":ReversibleIBook" as ReversibleIBook MODEL_COLOR
-participant ":StateChangeRecorder" as StateChangeRecorder MODEL_COLOR
+box Model MODEL_COLOR_LIGHT
+participant ":Model" as Model<<Model>>
+participant ":ReversibleIBook" as ReversibleIBook<<Model>>
+participant ":StateChangeRecorder" as StateChangeRecorder<<Model>>
 end box
+
 [-> LogicManager : execute(undo)
 activate LogicManager
 

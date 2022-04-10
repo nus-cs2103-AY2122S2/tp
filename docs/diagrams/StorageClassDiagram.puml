@@ -1,23 +1,24 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(STORAGE_COLOR)
 
-package Storage {
+package Storage as StoragePackage<<Store>> {
 
-    class "<<interface>>\nStorage" as Storage
-    class StorageManager
+    class "<<interface>>\nStorage" as Storage<<Storage>>
+    class StorageManager<<Storage>>
 
-    package "UserPrefsStorage" #F4F6F6{
-        class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-        class JsonUserPrefsStorage
+    package "UserPrefsStorage" as UserPrefsStorage<<Store>> #F4F6F6{
+        class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage<<Storage>>
+        class JsonUserPrefsStorage<<Storage>>
     }
 
-    package "IBookStorage" #F4F6F6{
-        class "<<interface>>\nIBookStorage" as IBookStorage
-        class JsonIBookStorage
-        class JsonSerializableIBook
-        class JsonAdaptedProduct
+    package "IBookStorage" as IBookStorage<<Store>> #F4F6F6{
+        class "<<interface>>\nIBookStorage" as IBookStorage<<Storage>>
+        class JsonIBookStorage<<Storage>>
+        class JsonSerializableIBook<<Storage>>
+        class JsonAdaptedProduct<<Storage>>
+        class JsonAdaptedItem<<Storage>>
     }
 
 }
@@ -36,5 +37,6 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonIBookStorage .up.|> IBookStorage
 JsonIBookStorage ..> JsonSerializableIBook
 JsonSerializableIBook --> "*" JsonAdaptedProduct
+JsonAdaptedProduct --> "*" JsonAdaptedItem
 
 @enduml

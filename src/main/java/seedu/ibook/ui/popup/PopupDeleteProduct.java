@@ -39,6 +39,12 @@ public class PopupDeleteProduct extends Popup {
         message.setText("Are you sure you want to delete " + product.getName() + "?");
     }
 
+    @Override
+    public void hide() {
+        message.setText("");
+        super.hide();
+    }
+
     @FXML
     private void handleDeleteProduct() {
         String commandText = DeleteCommand.COMMAND_WORD + " " + index;

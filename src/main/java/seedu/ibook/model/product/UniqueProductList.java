@@ -7,7 +7,6 @@ import java.util.List;
 
 import seedu.ibook.commons.core.UniqueList;
 import seedu.ibook.commons.core.exceptions.DuplicateElementException;
-import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
  * A list of products that enforces uniqueness between its elements and does not allow nulls.
@@ -27,24 +26,18 @@ public class UniqueProductList extends UniqueList<Product> {
      * {@code target} must exist in the list.
      * The product identity of {@code editedProduct} must not be the same as another existing product in the list.
      */
-    public void setProduct(Product target, Product editedProduct) {
-        requireAllNonNull(target, editedProduct);
+    public void setProduct(Product target, Product updatedProduct) {
+        requireAllNonNull(target, updatedProduct);
+        canUpdateItem(target, updatedProduct);
 
-        int index = asObservableList().indexOf(target);
-        if (index == -1) {
-            throw new ElementNotFoundException();
-        }
+        int index = getIndexOf(target);
 
-        if (!target.isSame(editedProduct) && contains(editedProduct)) {
-            throw new DuplicateElementException();
-        }
-
-        set(index, editedProduct);
+        set(index, updatedProduct);
     }
 
     public void setProducts(UniqueProductList replacement) {
         requireNonNull(replacement);
-        setAll(replacement.asObservableList());
+        setAll(replacement);
     }
 
     /**

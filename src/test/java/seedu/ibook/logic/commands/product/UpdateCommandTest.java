@@ -3,8 +3,8 @@ package seedu.ibook.logic.commands.product;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.logic.commands.CommandTestUtil.DESC_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.DESC_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
@@ -129,7 +129,7 @@ public class UpdateCommandTest {
 
     /**
      * Update filtered list where index is larger than size of filtered list,
-     * but smaller than size of ibook
+     * but smaller than size of iBook.
      */
     @Test
     public void execute_invalidProductIndexFilteredList_failure() {
@@ -146,10 +146,10 @@ public class UpdateCommandTest {
 
     @Test
     public void equals() {
-        final UpdateCommand standardCommand = new UpdateCommand(INDEX_FIRST_PRODUCT, DESC_A);
+        final UpdateCommand standardCommand = new UpdateCommand(INDEX_FIRST_PRODUCT, PRODUCT_DESCRIPTOR_A);
 
         // same values -> returns true
-        UpdateProductDescriptor copyDescriptor = new UpdateProductDescriptor(DESC_A);
+        UpdateProductDescriptor copyDescriptor = new UpdateProductDescriptor(PRODUCT_DESCRIPTOR_A);
         UpdateCommand commandWithSameValues = new UpdateCommand(INDEX_FIRST_PRODUCT, copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -163,10 +163,10 @@ public class UpdateCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new UpdateCommand(INDEX_SECOND_PRODUCT, DESC_A));
+        assertNotEquals(standardCommand, new UpdateCommand(INDEX_SECOND_PRODUCT, PRODUCT_DESCRIPTOR_A));
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new UpdateCommand(INDEX_FIRST_PRODUCT, DESC_B));
+        assertNotEquals(standardCommand, new UpdateCommand(INDEX_FIRST_PRODUCT, PRODUCT_DESCRIPTOR_B));
     }
 
 }

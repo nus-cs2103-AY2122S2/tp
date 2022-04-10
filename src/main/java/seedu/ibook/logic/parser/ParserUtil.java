@@ -1,6 +1,7 @@
 package seedu.ibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.commons.core.index.Index;
@@ -14,6 +15,7 @@ import seedu.ibook.model.product.DiscountRate;
 import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.PriceRange;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -158,6 +160,27 @@ public class ParserUtil {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String startPrice} and {@code String endPrice} into a {@code PriceRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code startPrice} or {@code endPrice} is invalid.
+     */
+    public static PriceRange parsePriceRange(String startPrice, String endPrice) throws ParseException {
+        requireAllNonNull(startPrice, endPrice);
+        String trimmedStartPrice = strip(startPrice);
+        String trimmedEndPrice = strip(endPrice);
+
+        if (!Price.isValidPrice(trimmedStartPrice) || !Price.isValidPrice(trimmedEndPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        if (!PriceRange.isValidPriceRange(trimmedStartPrice, trimmedEndPrice)) {
+            throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
+        }
+
+        return new PriceRange(trimmedStartPrice, trimmedEndPrice);
     }
 
     /**

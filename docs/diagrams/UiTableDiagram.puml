@@ -1,44 +1,29 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(UI_COLOR)
 
-package UI {
-    class "{abstract}\nUiComponent" as UiComponent
-    class MainWindow
+package UI <<Ui>> {
+    class MainWindow <<Ui>>
 
-    package Table {
-        class ProductCard
-        class Table
-        class TableContent
-        class TableHeader
+    package Table <<Ui>> {
+        class ProductCard <<Ui>>
+        class ProductTable <<Ui>>
+
+        package Item <<Ui>> {
+            class ItemCard <<Ui>>
+            class ItemTable <<Ui>>
+        }
     }
 }
 
-package Model <<Rectangle>> {
-}
+MainWindow *--> "1" ProductTable
 
-package Logic <<Rectangle>> {
-}
+ProductTable *-right-> "*" ProductCard
 
-MainWindow *-right-> "1" Table
+ProductCard *--> "0..1" ItemTable
 
-Table *--> "1" TableContent
-Table *--> "1" TableHeader
+ItemTable *-left-> "*" ItemCard
 
-TableContent *--> "*" ProductCard
-
-ProductCard --|> UiComponent
-Table --|> UiComponent
-TableContent --|> UiComponent
-TableHeader --|> UiComponent
-
-TableContent ..> Model
-MainWindow ..> Model
-ProductCard ..> Model
-
-UiComponent -left-> MainWindow
-
-MainWindow -right-> Logic
 
 @enduml

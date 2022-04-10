@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands.product;
+package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,7 +16,7 @@ public class ExpiredCommand extends Command {
 
     public static final String COMMAND_WORD = "expired";
 
-    public static final String MESSAGE_SUCCESS = "Listed expired products";
+    public static final String MESSAGE_SUCCESS = "Listed expired items";
 
     private final AttributeFilter expiredFilter = new ExpiredFilter();
 

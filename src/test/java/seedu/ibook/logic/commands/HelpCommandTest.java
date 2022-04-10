@@ -1,9 +1,6 @@
 package seedu.ibook.logic.commands;
 
-/*
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-
-
 import static seedu.ibook.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
@@ -11,10 +8,9 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 
- */
 
 public class HelpCommandTest {
-    /*
+
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
@@ -24,5 +20,4 @@ public class HelpCommandTest {
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 
-     */
 }

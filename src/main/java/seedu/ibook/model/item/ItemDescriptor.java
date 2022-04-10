@@ -28,6 +28,8 @@ public class ItemDescriptor {
      */
     public ItemDescriptor(ExpiryDate expiryDate, Quantity quantity) {
         requireAllNonNull(expiryDate, quantity);
+        assert quantity.getQuantity() <= Quantity.MAX_QUANTITY;
+
         this.expiryDate = expiryDate;
         this.quantity = quantity;
     }

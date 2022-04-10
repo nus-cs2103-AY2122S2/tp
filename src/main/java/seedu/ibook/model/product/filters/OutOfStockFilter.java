@@ -3,16 +3,12 @@ package seedu.ibook.model.product.filters;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Filter that checks if the product has quantity of zero in all its items.
+ */
 public class OutOfStockFilter extends AttributeFilter {
     private static final String TYPE = "out-of-stock";
-
     private final String value = "";
-
-    /**
-     * Creates a predicate that checks if the product has quantity of zero in all its items.
-     */
-    public OutOfStockFilter() {
-    }
 
     @Override
     public String getType() {

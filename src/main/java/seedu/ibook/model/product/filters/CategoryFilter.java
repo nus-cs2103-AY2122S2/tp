@@ -5,13 +5,12 @@ import seedu.ibook.model.product.Product;
 
 public class CategoryFilter extends AttributeFilter {
     private static final String TYPE = "category";
-
-    private final Category category;
     private final String value;
 
+    private final Category category;
+
     /**
-     * Creates a predicate that checks if the product has the same parameters.
-     * @param category
+     * Creates a filter that checks if the product has a similar category.
      */
     public CategoryFilter(Category category) {
         this.category = category;

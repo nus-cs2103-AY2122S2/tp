@@ -14,6 +14,7 @@ public class ReversibleAddItemAction extends ReversibleIBookAction {
 
     private final Product product;
     private final Item item;
+    private final Item originalExistingItem;
 
     /**
      * Class constructor.
@@ -25,6 +26,7 @@ public class ReversibleAddItemAction extends ReversibleIBookAction {
 
         this.product = product;
         this.item = item;
+        this.originalExistingItem = product.getExistingItem(item);
     }
 
     @Override
@@ -38,7 +40,13 @@ public class ReversibleAddItemAction extends ReversibleIBookAction {
     public void performBackwardAction(IBook iBook) {
         requireNonNull(iBook);
 
-        iBook.removeItem(product, item);
+        if (originalExistingItem == null) {
+            iBook.removeItem(product, item);
+        } else {
+            Item newItem = originalExistingItem.add(item);
+            iBook.removeItem(product, newItem);
+            iBook.addItem(product, originalExistingItem);
+        }
     }
 
     @Override

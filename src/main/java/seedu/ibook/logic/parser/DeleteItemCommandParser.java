@@ -1,6 +1,7 @@
 package seedu.ibook.logic.parser;
 
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ibook.logic.parser.ParserUtil.parseCompoundIndex;
 
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.logic.commands.item.DeleteItemCommand;
@@ -15,7 +16,7 @@ public class DeleteItemCommandParser implements Parser<DeleteItemCommand> {
      */
     public DeleteItemCommand parse(String args) throws ParseException {
         try {
-            CompoundIndex index = ParserUtil.parseCompoundIndex(args);
+            CompoundIndex index = parseCompoundIndex(args);
             return new DeleteItemCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

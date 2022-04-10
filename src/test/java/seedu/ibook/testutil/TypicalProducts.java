@@ -4,10 +4,10 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTRATE_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTRATE_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTSTART_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTSTART_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_RATE_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_RATE_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_START_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_START_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_A;
@@ -41,7 +41,7 @@ public class TypicalProducts {
             .withCategory("Bread")
             .withDescription("Chocolate on bread")
             .withPrice("8.99")
-            .withDiscountRate("30.75")
+            .withDiscountRate("30")
             .withDiscountStart("1").build();
     public static final Product VANILLA_CAKE = new ProductBuilder().withName("Vanilla Cake")
             .withCategory("Cake")
@@ -72,7 +72,7 @@ public class TypicalProducts {
             .withCategory("Bread")
             .withDescription("Chocolate on bread")
             .withPrice("8.99")
-            .withDiscountRate("30.75")
+            .withDiscountRate("30")
             .withDiscountStart("1").buildWithItems(getTypicalItems());
     public static final Product VANILLA_CAKE_WITH_ITEMS = new ProductBuilder().withName("Vanilla Cake")
             .withCategory("Cake")
@@ -90,10 +90,10 @@ public class TypicalProducts {
     // Manually added - Product's details found in {@code CommandTestUtil}
     public static final Product PRODUCT_A = new ProductBuilder().withName(VALID_NAME_A).withCategory(VALID_CATEGORY_A)
             .withDescription(VALID_DESCRIPTION_A).withPrice(VALID_PRICE_A)
-            .withDiscountRate(VALID_DISCOUNTRATE_A).withDiscountStart(VALID_DISCOUNTSTART_A).build();
+            .withDiscountRate(VALID_DISCOUNT_RATE_A).withDiscountStart(VALID_DISCOUNT_START_A).build();
     public static final Product PRODUCT_B = new ProductBuilder().withName(VALID_NAME_B).withCategory(VALID_CATEGORY_B)
             .withDescription(VALID_DESCRIPTION_B).withPrice(VALID_PRICE_B)
-            .withDiscountRate(VALID_DISCOUNTRATE_B).withDiscountStart(VALID_DISCOUNTSTART_B).build();
+            .withDiscountRate(VALID_DISCOUNT_RATE_B).withDiscountStart(VALID_DISCOUNT_START_B).build();
 
     private TypicalProducts() {} // prevents instantiation
 

@@ -126,6 +126,25 @@ public class Product implements Distinguishable<Product> {
     }
 
     /**
+     * Checks if it is allowed to add a new item to current product.
+     */
+    public boolean canAddItem(Item i) {
+        if (!hasItem(i)) {
+            return true;
+        }
+
+        Item existingItem = items.getExisting(i);
+        return existingItem.allowedToAdd(i);
+    }
+
+    /**
+     * Returns the item in current item list that is similar to the specified item.
+     */
+    public Item getExistingItem(Item i) {
+        return items.getExisting(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code items}.
      * {@code key} must exist in items.
      */

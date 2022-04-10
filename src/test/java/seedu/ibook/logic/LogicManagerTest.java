@@ -5,8 +5,8 @@ import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_PRODUCT_DISPLAYE
 import static seedu.ibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTRATE_FULL_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTSTART_FULL_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNT_RATE_FULL_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNT_START_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.PRICE_FULL_A;
 import static seedu.ibook.testutil.Assert.assertThrows;
@@ -84,7 +84,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand =
             AddCommand.COMMAND_WORD + NAME_FULL_A + CATEGORY_FULL_A + DESCRIPTION_FULL_A + PRICE_FULL_A
-                + DISCOUNTRATE_FULL_A + DISCOUNTSTART_FULL_A;
+                + DISCOUNT_RATE_FULL_A + DISCOUNT_START_FULL_A;
         Product expectedProduct = new ProductBuilder(PRODUCT_A).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addProduct(expectedProduct);

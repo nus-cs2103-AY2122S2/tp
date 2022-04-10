@@ -7,6 +7,11 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
+import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
+import static seedu.ibook.logic.parser.ParserUtil.parseDescription;
+import static seedu.ibook.logic.parser.ParserUtil.parseName;
+import static seedu.ibook.logic.parser.ParserUtil.parsePrice;
+import static seedu.ibook.logic.parser.ParserUtil.parsePriceRange;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +22,13 @@ import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.PriceRange;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.CategoryFilter;
 import seedu.ibook.model.product.filters.DescriptionFilter;
 import seedu.ibook.model.product.filters.NameFilter;
 import seedu.ibook.model.product.filters.PriceFilter;
+import seedu.ibook.model.product.filters.PriceRangeFilter;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -35,29 +42,29 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE,
+                PREFIX_START_PRICE, PREFIX_END_PRICE);
 
         Name name;
         Category category;
         Description description;
         Price price;
-        Price startPrice;
-        Price endPrice;
+        PriceRange priceRange;
 
         List<AttributeFilter> filterList = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            name = parseName(argMultimap.getValue(PREFIX_NAME).get());
             filterList.add(new NameFilter(name));
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            category = parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             filterList.add(new CategoryFilter(category));
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            description = parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             filterList.add(new DescriptionFilter(description));
         }
 

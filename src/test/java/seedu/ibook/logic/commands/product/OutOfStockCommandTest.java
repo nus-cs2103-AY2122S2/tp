@@ -1,10 +1,13 @@
 package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02;
-import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01;
+import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02_KAYA;
+import static seedu.ibook.testutil.TypicalItems.getAllItemsOut;
+import static seedu.ibook.testutil.TypicalItems.getNonZeroItems;
+import static seedu.ibook.testutil.TypicalItems.getZeroItems;
 import static seedu.ibook.testutil.TypicalProducts.CHOCOLATE_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
@@ -18,20 +21,17 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
-import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class OutOfStockCommandTest {
-    private final List<Item> allItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01);
-    private final List<Item> onlyZeroItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02);
-    private final List<Item> onlyNonZeroItems = Arrays.asList(Q5_2020_01_01);
-    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(allItems);
+
+    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsOut());
     private final Product peanutButterBreadWithAllExpired =
-            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(onlyZeroItems);
+            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getZeroItems());
     private final Product chocolateBreadWithAllNotExpired =
-            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(onlyNonZeroItems);
+            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getNonZeroItems());
     private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 
@@ -42,7 +42,7 @@ public class OutOfStockCommandTest {
 
     @Test
     public void execute_someOutOfStock_someFound() {
-        String expectedMessage = "Listed products that are out of stock.\n1 product listed!";
+        String expectedMessage = OutOfStockCommand.MESSAGE_SUCCESS + String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 1);
         expectedModel.addProductFilter(new OutOfStockFilter());
         expectedModel.updateFilteredItemListForProducts(Product.PREDICATE_SHOW_ALL_ITEMS);
         assertCommandSuccess(outOfStockCommand, model, expectedMessage, expectedModel);
@@ -50,9 +50,8 @@ public class OutOfStockCommandTest {
         for (Product p: model.getFilteredProductList()) {
             assertEquals(p, PEANUT_BUTTER_BREAD);
             assertEquals(p.getFilteredItems().getInternalList(),
-                    Arrays.asList(Q0_2022_03_01.toItem(PEANUT_BUTTER_BREAD),
-                            Q0_2022_03_02.toItem(PEANUT_BUTTER_BREAD)));
+                    Arrays.asList(Q0_2022_03_01_KAYA.toItem(PEANUT_BUTTER_BREAD),
+                            Q0_2022_03_02_KAYA.toItem(PEANUT_BUTTER_BREAD)));
         }
-
     }
 }

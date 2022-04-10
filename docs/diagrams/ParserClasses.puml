@@ -1,20 +1,20 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(LOGIC_COLOR)
 
-class "{abstract}\nCommand" as Command
-class XYZCommand
+class "{abstract}\nCommand" as Command<<Logic>>
+class XYZCommand<<Logic>>
 
-package "Parser classes" {
-    class "<<interface>>\nParser" as Parser
-    class IBookParser
-    class XYZCommandParser
-    class CliSyntax
-    class ParserUtil
-    class ArgumentMultimap
-    class ArgumentTokenizer
-    class Prefix
+package "Parser classes"<<Logic>> {
+    class "<<interface>>\nParser" as Parser<<Logic>>
+    class IBookParser<<Logic>>
+    class XYZCommandParser<<Logic>>
+    class CliSyntax<<Logic>>
+    class ParserUtil<<Logic>>
+    class ArgumentMultimap<<Logic>>
+    class ArgumentTokenizer<<Logic>>
+    class Prefix<<Logic>>
 }
 
 class HiddenOutside<<Hidden>>

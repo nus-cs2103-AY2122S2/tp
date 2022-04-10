@@ -7,8 +7,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import seedu.ibook.commons.core.UniqueList;
-import seedu.ibook.commons.core.exceptions.DuplicateElementException;
-import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
  * A list of items that enforces uniqueness between its elements and does not allow nulls.
@@ -58,15 +56,9 @@ public class UniqueItemList extends UniqueList<Item> {
      */
     public void setItem(Item target, Item updatedItem) {
         requireAllNonNull(target, updatedItem);
+        canUpdateItem(target, updatedItem);
 
-        int index = asObservableList().indexOf(target);
-        if (index == -1) {
-            throw new ElementNotFoundException();
-        }
-
-        if (!target.isSame(updatedItem) && contains(updatedItem)) {
-            throw new DuplicateElementException();
-        }
+        int index = getIndexOf(target);
 
         if (updatedItem.isEmpty()) {
             internalList().remove(index);
@@ -82,7 +74,7 @@ public class UniqueItemList extends UniqueList<Item> {
 
     public void setItems(UniqueItemList replacement) {
         requireNonNull(replacement);
-        internalList().setAll(replacement.internalList());
+        setAll(replacement);
     }
 
     /**

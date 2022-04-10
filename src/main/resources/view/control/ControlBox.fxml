@@ -34,6 +34,6 @@
             </padding>
         </Button>
     </HBox>
-    <FlowPane fx:id="filters" alignment="CENTER_RIGHT" columnHalignment="RIGHT"
+    <FlowPane fx:id="filterBox" alignment="CENTER_RIGHT" columnHalignment="RIGHT"
               prefWrapLength="800" hgap="12" vgap="12"/>
 </HBox>

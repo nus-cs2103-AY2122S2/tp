@@ -3,8 +3,8 @@ package seedu.ibook.logic.commands.product;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
+import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01_KAYA;
 import static seedu.ibook.testutil.TypicalItems.getOnlyExpiredItems;
 import static seedu.ibook.testutil.TypicalItems.getOnlyNonExpiredItems;
 import static seedu.ibook.testutil.TypicalItems.getTypicalItems;
@@ -19,6 +19,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.logic.commands.item.ExpiredCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
@@ -51,12 +52,12 @@ public class ExpiredCommandTest {
         for (Product p: model.getFilteredProductList()) {
             if (p.equals(KAYA_BREAD)) {
                 assertEquals(p.getFilteredItems().getInternalList(),
-                        Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
+                        Arrays.asList(Q5_2020_01_01_KAYA.toItem(p), Q5_2022_03_01_KAYA.toItem(p)));
             }
 
             if (p.equals(PEANUT_BUTTER_BREAD)) {
                 assertEquals(p.getFilteredItems().getInternalList(),
-                        Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
+                        Arrays.asList(Q5_2020_01_01_KAYA.toItem(p), Q5_2022_03_01_KAYA.toItem(p)));
             }
 
             assertNotEquals(p, CHOCOLATE_BREAD);

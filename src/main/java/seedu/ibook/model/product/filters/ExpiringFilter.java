@@ -6,17 +6,18 @@ import seedu.ibook.model.product.Product;
 public class ExpiringFilter extends AttributeFilter {
 
     private static final String TYPE = "expiring";
+    private final String value;
 
     private final ExpiryDate expiryDateToCheck;
-    private final String value;
 
     /**
      * Creates a predicate that checks if the product has expired.
      */
     public ExpiringFilter(ExpiryDate expiryDateToCheck) {
         this.expiryDateToCheck = expiryDateToCheck;
-        value = " " + expiryDateToCheck.toString();
+        value = expiryDateToCheck.toString();
     }
+
     @Override
     public String getType() {
         return TYPE;

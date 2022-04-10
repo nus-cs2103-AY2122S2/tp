@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+
+$OverrideTheme(MODEL_COLOR)
+
+class "<<interface>>\nPredicate" as Predicate<<Model>>
+class "{abstract}\nAttributeFilter" as AttributeFilter<<Model>>
+class ProductFilter<<Model>>
+
+class CategoryFilter<<Model>>
+class DescriptionFilter<<Model>>
+class ExpiredFilter<<Model>>
+class ExpiringFilter<<Model>>
+class NameFilter<<Model>>
+class OutOfStockFilter<<Model>>
+class PriceFilter<<Model>>
+class PriceRangeFilter<<Model>>
+
+ProductFilter .up.|> Predicate
+AttributeFilter .up.|> Predicate
+
+ProductFilter *-down-> "*" AttributeFilter
+
+CategoryFilter -up-|> AttributeFilter
+NameFilter -up-|> AttributeFilter
+PriceFilter -up-|> AttributeFilter
+PriceRangeFilter -up-|> AttributeFilter
+DescriptionFilter -up-|> AttributeFilter
+
+ExpiredFilter -|> AttributeFilter
+ExpiringFilter --|> AttributeFilter
+OutOfStockFilter -left-|> AttributeFilter
+
+@enduml

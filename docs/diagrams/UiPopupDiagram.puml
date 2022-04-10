@@ -1,46 +1,26 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(UI_COLOR)
 
-package UI {
-    class "{abstract}\nUiComponent" as UiComponent
-    class MainWindow
+package UI <<Ui>> {
+    class "{abstract}\nUiComponent" as UiComponent<<Ui>>
+    class MainWindow<<Ui>>
 
-    package Popup as PopupContainer {
-       class "{abstract}\nPopup" as Popup
-       class PopupHandler
-       class PopupAdd
-       class PopupDelete
-       class PopupUpdate
+    package Popup <<Ui>> {
+        class "{abstract}\nPopup" as Popup<<Ui>>
+        class PopupHandler<<Ui>>
+        class PopupXXX<<Ui>>
     }
 }
 
-package Model <<Rectangle>> {
-}
-
-package Logic <<Rectangle>> {
-}
-
-
 MainWindow *--> "1" PopupHandler
 
-PopupHandler *-->  "1" PopupAdd
-PopupHandler *-->  "1" PopupDelete
-PopupHandler *-->  "1" PopupUpdate
+PopupHandler *-->  "1" PopupXXX
 
-PopupAdd -up-|> Popup
-PopupDelete -up-|> Popup
-PopupUpdate -up-|> Popup
+PopupXXX -up-|> Popup
 
 Popup -up-|> UiComponent
-
-
-PopupAdd ..> Logic
-PopupUpdate ..> Model
-PopupUpdate ..> Logic
-PopupDelete ..> Model
-PopupDelete ..> Logic
 
 UiComponent -left-> MainWindow
 

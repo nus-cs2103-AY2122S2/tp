@@ -1,6 +1,7 @@
 package seedu.ibook.commons.core;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,6 +31,20 @@ public class UniqueList<T extends Distinguishable<T>> implements Iterable<T> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
+     * Returns the index of {@code item} in the list.
+     * @throws ElementNotFoundException if {@code item} is not in the list.
+     */
+    public int getIndexOf(T item) throws ElementNotFoundException {
+        int index = internalList.indexOf(item);
+
+        if (index < 0) {
+            throw new ElementNotFoundException();
+        }
+
+        return index;
+    }
+
+    /**
      * Returns true if the list contains an equivalent item as the given argument.
      */
     public boolean contains(T toCheck) {
@@ -57,6 +72,17 @@ public class UniqueList<T extends Distinguishable<T>> implements Iterable<T> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ElementNotFoundException();
+        }
+    }
+
+    /**
+     * Throws {@code DuplicateElementException} if the update will not break the property of {@code UniqueList}
+     * of containing unique items only.
+     */
+    public void canUpdateItem(T original, T updated) throws DuplicateElementException {
+        requireAllNonNull(original, updated);
+        if (!original.isSame(updated) && contains(updated)) {
+            throw new DuplicateElementException();
         }
     }
 
@@ -100,7 +126,13 @@ public class UniqueList<T extends Distinguishable<T>> implements Iterable<T> {
     }
 
     public boolean setAll(Collection<? extends T> elements) {
+        requireNonNull(elements);
         return internalList.setAll(elements);
+    }
+
+    public boolean setAll(UniqueList<? extends T> other) {
+        requireNonNull(other);
+        return internalList.setAll(other.internalList);
     }
 
     @Override

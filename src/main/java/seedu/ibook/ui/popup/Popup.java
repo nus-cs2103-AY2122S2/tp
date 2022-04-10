@@ -31,6 +31,7 @@ public abstract class Popup extends UiComponent<Stage> {
      * Shows the popup window.
      */
     public void show() {
+        getRoot().setAlwaysOnTop(true);
         getRoot().show();
         error.setText("");
     }
@@ -49,22 +50,6 @@ public abstract class Popup extends UiComponent<Stage> {
      */
     public boolean isShowing() {
         return getRoot().isShowing();
-    }
-
-    /**
-     * Hides the popup if it is showing.
-     */
-    public void hideIfShowing() {
-        if (isShowing()) {
-            hide();
-        }
-    }
-
-    /**
-     * Focuses the popup window.
-     */
-    public void focus() {
-        getRoot().requestFocus();
     }
 
     /**

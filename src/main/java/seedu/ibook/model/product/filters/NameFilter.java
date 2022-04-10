@@ -4,10 +4,11 @@ import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Product;
 
 public class NameFilter extends AttributeFilter {
+
     private static final String TYPE = "name";
+    private final String value;
 
     private final Name name;
-    private final String value;
 
     /**
      * Creates a predicate that checks if the product has the same parameters.
@@ -17,7 +18,6 @@ public class NameFilter extends AttributeFilter {
         this.name = name;
         this.value = name.toString();
     }
-
 
     @Override
     public String getType() {

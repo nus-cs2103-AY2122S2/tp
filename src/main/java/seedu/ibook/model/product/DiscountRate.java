@@ -9,14 +9,14 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class DiscountRate {
 
-    public static final String DEFAULT_DISCOUNT_RATE = "0.00";
+    public static final String DEFAULT_DISCOUNT_RATE = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Discount Rate should only be a positive double, and at most 100";
+            "Discount Rate should only be a non-negative integer, and at most 100";
 
-    public static final String VALIDATION_REGEX = "|\\d+(?:\\.\\d{1,2})?%?";
+    public static final String VALIDATION_REGEX = "|0*(?:\\d{1,2}|100)%?";
 
-    public final Double discountRate;
+    public final Integer discountRate;
 
     /**
      * Constructs a {@code DiscountRate}.
@@ -30,7 +30,7 @@ public class DiscountRate {
             discountRate = DEFAULT_DISCOUNT_RATE;
         }
         discountRate = removePercentage(discountRate);
-        this.discountRate = Double.parseDouble(discountRate);
+        this.discountRate = Integer.parseInt(discountRate);
         assert this.discountRate >= 0; // ensure that the discount rate is not negative
     }
 
@@ -41,15 +41,7 @@ public class DiscountRate {
      * @return Result of test.
      */
     public static boolean isValidDiscountRate(String test) {
-        if (test.equals("")) {
-            return true;
-        }
-        if (!test.matches(VALIDATION_REGEX)) {
-            return false;
-        }
-        test = removePercentage(test);
-        double testDouble = Double.parseDouble(test);
-        return testDouble <= 100;
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -68,7 +60,7 @@ public class DiscountRate {
 
     @Override
     public String toString() {
-        return String.format("%.2f", discountRate) + "%";
+        return String.format("%d", discountRate) + "%";
     }
 
     @Override

@@ -3,64 +3,88 @@ layout: page
 title: User Guide
 ---
 
-IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
-It is designed for fast use through **command line interface**(CLI), complemented by a **graphical user interface**(GUI)
-for convenience use.
+<!-- <style>
+  hr {
+    display: none
+  }
+  h1, h2, h3, h4, h5 {
+    margin-top: 10px !important;
+  }
+</style> -->
 
-## Target User
+IBook is an inventory organizing system specially designed to manage products in a store.
 
-IBook is specially designed for small scale groceries store keeper, who are having issues with product organization and keeping track on expiring items.
+<h2>Target User</h2>
 
-We aim to help store keeper to simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
+IBook's target user are small scale groceries storekeepers who are having issues with product organization and keeping track of expiring items.
 
---------------------------------------------------------------------------------------------------------------------
+We aim to help these storekeepers by 
+
+1. Simplifying the process of inventory organization.
+2. Minimizing groceries wastage due to unnoticed expiring of items. 
+
+<h2>Structure of This Document</h2>
+
+This document is structured in a chronological manner so that you are able to follow through this guide while using the product. 
+
+If you feel lost at any point in time, you can always refer to the Table of Contents.
+
+<hr>
+
+<div style="page-break-after: always;"></div>
+
+<h2>Table of Contents</h2>
 
 * Table of Contents
-  {:toc}
+{:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/) or above installed in your computer.
 
-1. Download the latest `ibook.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-4/tp/releases).
+2. Download the latest `ibook.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your iBook.
+3. Copy the file to the folder you want to use as the home folder for iBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. If you are having issues, type in `java -jar ibook.jar` in a terminal in the same directory as the file. 
+   
+   The GUI similar to the image below should appear in a few seconds.
+   
+    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press Enter to execute it.
+  
+    Some example commands you can try:
 
    * **`list`** : Lists all products.
 
    * **`add n:Maggie Mee c:noodles p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
-   * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
+   * **`delete 3`** : Deletes the 3rd product shown in the displayed product list.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
-## 2. About
-### 2.1 Structure of the document
+<div style="page-break-after: always;"></div>
 
-This document is structured in a chronological manner so that you are able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
+## 2. Reading the document
 
-### 2.2 Reading the document
+This section will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 
-This subsection will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
-It is important to read this section before proceeding further to avoid getting confused!
+It is important to read this section before proceeding further to avoid getting confused.
 
-#### 2.2.1 Special symbols
+#### 2.1 Special Boxes
 
 **Additional Information**
 
-Text that appears in an information box indicates additional information that may be useful to know.
+Text that appears in an information box indicates additional information that are useful to know.
 
 <div markdown="block" class="alert alert-info">
 
@@ -71,7 +95,7 @@ Example additional information.
 
 **Caution**
 
-Text that appears in a caution box should be followed carefully, else unintended consequences might arise.
+Text that appears in a caution box should be followed carefully to avoid unintended consequences.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -82,7 +106,7 @@ Example warnings.
 
 **Tip**
 
-Text that appears in a tip box are useful for improving your experience with iBook.
+Text that appears in a tip box are useful to improve your experience with iBook.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -93,62 +117,76 @@ Example tip.
 
 <div style="page-break-after: always;"></div>
 
-#### 2.2.2 Sections of the Application Window
+#### 2.2 Sections of the Application Window
 
-The application window is divided into a command box, results window as well as a table that includes all the products.
-![Ui](images/Ui.png)
+The application window is divided into a Command Box, Result Window as well as a Display Table that includes all the products.
+![Ui-2](images/Ui-2.png)
 
-#### 2.2.3 Navigating around
+#### 2.3 Navigating around
 
-The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
+The main mode of navigation in iBook is through the Command Line Interface (CLI). 
 
-Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
+You can enter commands into the command box and press enter to execute them.
 
-#### 2.2.4 Command Format
+*Alternatively*,  
 
-<div markdown="block" class="alert alert-info">
+You can interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button.
 
-**:information_source: Notes about the command format:**<br>
+Either way, the result window will then display the results of executing the command. The display table will also update accordingly based on the command run.
+
+<div style="page-break-after: always;"></div>
+
+#### 2.4 Command Format
+
 
 * Words in `UPPER_CASE` are additional user inputs supplied to a command.<br>
   e.g. in `add n:NAME`, `NAME` is an input which can be supplied as `add n:Maggie Mee`.
 
 * Inputs in square brackets are optional.<br>
-  e.g. if the command specifies `n:NAME [t:TAG]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
+  e.g. if the command specifies `n:NAME [c:CATEGORY]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
 
+* Inputs separated by a vertical bar (`|`) inside brackets denote that either one of them can be provided, *but not both*.<br>
+  e.g. if the command specifies `[p:PRICE | sp:START_PRICE ep:END_PRICE]`, then an empty input, `p:2.00`, and `sp:1.00 ep:5.00` are all acceptable. However, `p:2.00 sp:1.00 ep:5.00` is not accepted.
+  
 * Inputs of a command can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
 * Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
   e.g. the command `exit 123` will be interpreted as `exit`.
+  
+* If two inputs of the same tag are given, the latter will be taken. <br> 
+  e.g. the command `add n:Maggie Curry n:Maggie Chicken p:3.00 p:3.50` will add a product with the name `Maggie Chicken` and with a price of `3.50`.
 
-</div>
 
 <div markdown="block" class="alert alert-warning">
 
-**:exclamation: Important notes about inputs**<br>
+**:exclamation: Important notes about inputs:**<br>
 
-Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add `\` before a colon character in your input.<br>
+Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add a backslash (`\`) before a colon character in your input.<br>
 e.g. To provide a product name of `Nescafe: special edition`, you should type `n:Nescafe\: special edition`.
 
 </div>
 
-#### 2.2.5 Command inputs
+<div style="page-break-after: always;"></div>
 
-| Input            | Description                                                            |
-|:-----------------|:-----------------------------------------------------------------------|
-| `NAME`           | Name of the product.                                                   |
-| `CATEGORY`       | Category of the product.                                               |
-| `PRICE`          | Price of the product. A valid price is a positive number.              |
-| `START_PRICE`    | Start price of the product. Used for find command.                     |
-| `END_PRICE`      | End price of the product. Used for find command.                       |
-| `DESCRIPTION`    | Description of the product.                                            |
-| `EXPRIRY_DATE`   | Expiry date of the item.                                               |
-| `QUANTITY`       | Quantity of the item.                                                  |
-| `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date. |
-| `DISCOUNT_START` | Number of days before the expiry date to start the discount.                     |
+#### 2.5 Command inputs
 
---------------------------------------------------------------------------------------------------------------------
+| Input            | Description                                                                                  |
+|:-----------------|:---------------------------------------------------------------------------------------------|
+| `NAME`           | Name of the product.                                                                         |
+| `CATEGORY`       | Category of the product.                                                                     |
+| `PRICE`          | Price of the product. A valid price is a positive number, possibly prepended by a `$` sign.  |
+| `START_PRICE`    | Start price of the product. Used for `find` command.                                         |
+| `END_PRICE`      | End price of the product. Used for `find` command.                                           |
+| `DESCRIPTION`    | Description of the product.                                                                  |
+| `EXPRIRY_DATE`   | Expiry date of the item.                                                                     |
+| `QUANTITY`       | Quantity of the item.                                                                        |
+| `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date.                       |
+| `DISCOUNT_START` | Number of days before the expiry date to start the discount.                                 |
+
+<hr/>
+
+<div style="page-break-after: always;"></div>
 
 ## 3. Features
 
@@ -160,33 +198,44 @@ Shows the full list of all products in iBook.
 
 Format: `list`
 
-#### 3.1.2 Adding a product : `add` 
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
-* Only a single product would be added at a time
+| Compulsory Fields | `NAME`, `PRICE`                                              | 
+| Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
+
+* Only a single product would be added at a time.
+* The new product added must not be of the same `NAME` and `CATEGORY` as any existing products in iBook.
+* The `NAME` and the `PRICE` fields cannot be empty.
+* If the `CATEGORY` field is not specified or is empty, the default category, **Miscellaneous**, would be used.
+* The default `DISCOUNT_RATE` is 0.
+* The default `DISCOUNT_START` is 0.
 
 Examples:
+
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
 
 *Alternatively*, 
 
 Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button above the table to add a new product.
 
-A pop-up window will appear, allowing you to fill in the details for name, price, description. 
-Optionally, you can also fill in the category, discount rate and discount start. 
+A pop-up window similar to the image below will appear.
 
-<div markdown="block" class="alert alert-primary">
+![Ui](images/popup-add-product.png)
 
-:bulb: **Tip:**
-Required field has a red asterisk `*` beside the label
+You can now fill in the details for name, price and description. Optionally, you can also fill in the category, discount rate and discount start. 
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Required fields have a red asterisk `*` beside its label.
 
 </div>
 
 After filling in the required fields, click 
-<img align="center" src = "images/ui-icons/add-icon.png" alt="Add" height = "25"/> 
+<img align="center" src = "images/ui-icons/add-icon.png" alt="Add" height = "25"/>. 
 
 #### 3.1.3 Updating products : `update`
 
@@ -194,7 +243,10 @@ Updates the product at the specified INDEX.
 
 Format: `update INDEX [TAG:NEW_VALUE ...]`
 
-* Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index must be **a positive integer** (1, 2, 3, …)
+Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE] [d:DESCRIPTION] [dr:DISCOUNT_RATE] [ds:DISCOUNT_START]`
+
+* The index refers to the index of product as shown in the displayed product list. 
+* The index must be **a positive integer** (1, 2, 3, …).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the new values.
 
@@ -206,21 +258,24 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/edit-color.png" alt="Edit" height = "25"/> on the right side of each product to update the product.
 
-A pop-up window will appear, allowing you to change the details for name, price, description. 
+A pop-up window similar to the image below will appear
+
+![Ui](images/popup-update-product.png)
+
+You can now change the details for the product.
 
 After filling in the required fields, click 
-<img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> 
+<img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the product.
 
 
 #### 3.1.4 Deleting products : `delete`
 
-Deletes the product at a specified INDEX.
+Deletes the product at a specified `INDEX`.
 
 Format: `delete INDEX`
 
-* Deletes the product at the specified `INDEX`.
-* The index refers to the index number shown in the displayed product list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index refers to the index of product as shown in the displayed product list.
+* The index **must be a positive integer** (1, 2, 3, …).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd product in the iBook.
@@ -229,51 +284,43 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete" height = "25"/> on the right side of each product to delete the product.
 
-A pop-up window will appear, requiring you to confirm the deletion. 
+A pop-up window similar to the image below will appear. 
 
-<div markdown="block" class="alert alert-primary">
+![Ui](images/popup-delete-product.png)
 
-:bulb: You can delete all products that match one or more (tag, value) pairs.
-
-Format: `delete-all [TAG:VALUE ...]`
-
-* Deletes all products that match the (tag, value) pair.
-* Must include at least one (tag, value) pair.
-
-Example: `delete-all n:Bread`
-
-</div>
+You can now delete the product by clicking the <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> button.
 
 #### 3.1.5 Finding certain products : `find`
 
-Finds products that fit certain filters given by the user.
+Finds products that fit certain filters.
 
 Format: `find [TAG:VALUE ...]`
 
-Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` | `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
+Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE | sp:START_PRICE ep:END_PRICE] [d:DESCRIPTION]`
 
-* For the name, category and description fields, the value provided can be a substring of the exact product
-* For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead
-* If the `START_PRICE` is provided, the `END_PRICE` must also be provided, vice versa
+* For the name, category and description fields, the value provided can be a substring of the exact product.
+* For searching a specific price, `PRICE` should be used.
+* For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead.
+* If the `START_PRICE` is provided, the `END_PRICE` must also be provided, vice versa.
+* At least one tag must be specified.
 
 Examples:
 
-* `find n:Water` lists all products that contains "Water" in its name.
-* `find n:Bread c:Food` lists all products that contains "Bread" in its name and Food as category.
-* `find c:Food` lists all products that contains Food as category.
-* `find sp:0 ep:10` list all products that are within $0 and $10
+* `find n:Water` finds all products that contain `Water` in the name.
+* `find n:Bread c:Food` finds all products that contain `Bread` in the name and have `Food` as category.
+* `find c:Food` finds all products that have `Food` as category.
+* `find sp:0 ep:10` finds all products that have price within $0 and $10.
 
-After a valid find command is entered, a filter tag will appear on top of the table.
+After a valid find command is entered, a filter tag will appear on the top right corner of the display table.
 
-Example:
+Example filter tag:
 <img align="center" src = "images/ui-icons/filter-tag.png" alt="Filter" height = "25"/>
 
-Click `X` on the filter tag to remove the filtering.
+You can click <img align="center" src = "images/ui-icons/x.png" alt="X" height = "25"/> on the filter tag to remove the filtering.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: **Tip:**
-A filter tag will always appear whenever a command that involves filtering is entered.
+:information_source: A filter tag will always appear whenever a command that involves filtering is executed.
 
 </div>
 
@@ -285,7 +332,13 @@ Format: `expired`
 
 *Alternatively*, 
 
-Click on the menu bar `Actions` > `Find expired`
+On the menu bar, select `Actions` > `Find expired`.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Items that are expiring on the same day are not considered expired.
+
+</div>
 
 #### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
@@ -295,32 +348,36 @@ Format: `out-of-stock`
 
 *Alternatively*, 
 
-Click on the menu bar `Actions` > `Find out of stock items`
+On the menu bar, select `Actions` > `Find Out of Stock products`.
 
-:information_source: Filters cannot be stacked with subsequent commands. 
-Thus, expired and out of stock filters cannot be stacked with other filters.
+<div markdown="block" class="alert alert-info">
 
-#### 3.1.8 Updating all products : `update-all`
+:information_source: Only one filter can be applied at a time. Thus, expired and out of stock filters cannot be used with other filters.
 
-Updates all products in the displayed list.
+</div>
+
+#### 3.1.7 Updating all products : `update-all`
+
+Updates all products in the displayed product list.
 
 Format: `update-all [TAG:VALUE ...]`
 
+Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE] [d:DESCRIPTION] [dr:DISCOUNT_RATE] [ds:DISCOUNT_START]`
+
 Examples:
 
-* `update-all c:fruits` updates all products in current displayed list to have category `fruits`.
-* `update-all p:5.00` updates all products in current displayed list to have price `5.00`.
+* `update-all c:fruits` updates all products in the displayed product list to have category `fruits`.
+* `update-all p:5.00` updates all products in the displayed product list to have price `5.00`.
 
-#### 3.1.9 Deleting all products : `delete-all`
+#### 3.1.8 Deleting all products : `delete-all`
 
-Deletes all products in the displayed list.
+Deletes all products in the displayed product list.
 
 Format: `delete-all`
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**
-If you accidentally used this command, you can use `undo` command to undo `delete-all`.
+:bulb: If you accidentally used this command, you can use `undo` command to recover back to the previous state.
 
 </div>
 
@@ -332,22 +389,31 @@ Adds a new item to iBook.
 
 Format: `add-item INDEX e:EXPIRY_DATE q:QUANTITY`
 
-* Index refers to the index of the product
-* The index **must be a positive integer** 1, 2, 3, …
-
-* Only a single item would be added at a time
+* The index refers to the index of product as shown in the displayed product list.
+* The index **must be a positive integer** (1, 2, 3, …).
+* Only a single item would be added at a time.
 
 Examples:
-* `add-item 1 e:2022-01-01 q:10`
+* `add-item 1 e:2022-01-01 q:10` adds an item with expiry date `01 January 2022` and quantity `10` to the first product in iBook.
 
 *Alternatively*,
 
-Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button on the left of the product to add a new item.
+Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button besides the product to add a new item.
 
-A pop-up window will appear, allowing you to fill in the details for expiry date and quantity.
+A pop-up window similar to the image below will appear. 
+
+![Ui](images/popup-add-item.png)
+
+You can now fill in the details for expiry date and quantity.
 
 After filling in the required fields, click
-<img align="center" src = "images/ui-icons/add-icon.png" alt="Add Item" height = "25"/>
+<img align="center" src = "images/ui-icons/add-icon.png" alt="Add Item" height = "25"/>.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can add items that have expired by inputting their expiry dates in the past!
+
+</div>
 
 #### 3.2.2 Updating an item of a product : `update-item`
 
@@ -355,22 +421,36 @@ Updates an item of a specified product in iBook.
 
 Format: `update-item INDEX-INDEX [TAG:VALUE ... ]`
 
-* The first index refers to the index of product.
-* The second index refers to the index of item.
+Valid tags and their values: `[e:EXPIRY_DATE] [q:QUANTITY]`
+
+* The first index refers to the index of product as shown in the displayed product list.
+* The second index refers to the index of item as shown in the item list of the product.
+* Both the product index and the item index must be specified.
+* The resulting input **must be a positive integer pair** (1-2, 2-3, 1-3, …).
 * At least one (tag, value) pair must be provided.
 
 Examples:
 
-* `update-item 1-2 q:10` updates the 2nd item of the 1st product in the displayed list to have quantity `10`.
-* `update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed list to have expiry date `01 Aug 2022`.
+* `update-item 1-2 q:10` updates the 2nd item of the 1st product in the displayed product list to have quantity `10`.
+* `update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed product list to have expiry date `01 Aug 2022`.
 
 *Alternatively*,
 
 Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
 
-A pop-up window will appear, allowing you to update the details for expiry date and quantity.
+A pop-up window similar to the image below will appear. 
 
-Then, click on the <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the item.
+![Ui](images/popup-modify-item.png)
+
+You can now modify the details for item.
+
+After editing the relevant fields, click on the <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the item.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: If the quantity of an item is updated to 0, the item is deleted.
+
+</div>
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
 
@@ -378,29 +458,49 @@ Deletes the item at a specified INDEX.
 
 Format: `delete-item INDEX-INDEX`
 
-* The first index refers to the index of product shown in the displayed product list.
-* The second index refers to the index of item shown in the item list of the product.
+* The first index refers to the index of product as shown in the displayed product list.
+* The second index refers to the index of item as shown in the item list of the product.
 * Both the product index and the item index must be specified.
-* The resulting input **must be a positive integer pair** 1-2, 2-3, 1-3, …
+* The resulting input **must be a positive integer pair** (1-2, 2-3, 1-3, …).
 
 Examples:
-* `list` followed by `delete-item 1-2` deletes the 2nd item of the 1st product currently shown.
+* `list` followed by `delete-item 1-2` deletes the 2nd item of the 1st product in iBook.
 
-*Alternatively*
+*Alternatively*,
 
-Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
+Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item.
 
-A pop-up window will appear.
+A pop-up window similar to the image below will appear. 
+
+![Ui](images/popup-modify-item.png)
 
 Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 
-#### 3.2.4 Finding items that are expiring soon: `remind`
+#### 3.2.4 Looking expired items : `expired`
 
-Lists items that are expiring within a certain number of days
+Finds items that are expired.
+
+Format: `expired`
+
+*Alternatively*,
+
+On the menu bar, select `Actions` > `Find Expired items`
+
+#### 3.2.5 Finding items that are expiring soon: `remind`
+
+Lists items that are expiring within a certain number of days.
 
 Format: `remind NUMBER_OF_DAYS`
 
-Examples: `remind 10` lists items that are expiring 10 days from now.
+* `NUMBER_OF_DAYS` **must be a non-negative integer** (0, 1, 2, 3, …).
+
+Examples: `remind 10` lists items that are expiring in 10 days from now.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: To find items that are expiring today, use `remind 0`!
+
+</div>
 
 ### 3.3 Miscellaneous Commands
 
@@ -422,6 +522,12 @@ Format: `undo`
 
 </div>
 
+<div markdown="block" class="alert alert-warning">
+
+:exclamation: Undo does not preserve the order of the list, thus a product/item deleted and later added back by undo may have a different index.
+
+</div>
+
 #### 3.3.3 Redoing most recent undone changes : `redo`
 
 Redoes the most recent undone changes made to iBook.
@@ -440,6 +546,8 @@ Exits iBook.
 
 Format: `exit`
 
+<hr/>
+
 ## 4. Storage
 
 ### 4.1 Saving the data
@@ -450,44 +558,50 @@ iBook's data are saved in the hard disk automatically after any command that cha
 
 iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation:
+
 If your changes to the data file makes its format invalid, iBook will discard all data and start with an empty data file at the next run.
+
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 6. Glossary
 
-| Term                              | Meanings                                                                             |
-|-----------------------------------|--------------------------------------------------------------------------------------|
-| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
-| **Products**                      | `Goods that are unique in name, price, category and description`                     |
-| **Items**                         | `Copies of products that have different expiry dates`                                |
-| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| Term                              | Meanings                                                                              |
+|-----------------------------------|---------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                         |
+| **Products**                      | `Goods that can be uniquely identified using name and category`                       |
+| **Items**                         | `Copies of products that have different expiry dates`                                 |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`        |
 | **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
+| **String**                        | `A sequence of characters that can have whitespace in between`                        |
+| **Substring**                     | `A contiguous sequence of characters inside a string`                                 |
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 7. Command summary
 
 ### 7.1 Product Commands
 
-| Action           | Format, Examples                                                                                                                                                                        |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:50 ds:10` |
-| **List**         | `list`                                                                                                                                                                                  |
-| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                                                         |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
-| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                                                      |
-| **Expired**      | `expired`                                                                                                                                                                               |
-| **Out of Stock** | `out-of-stock`                                                                                                                                                                          |
+| Action           | Format, Examples                                                                                                                                            |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:50 ds:10` |
+| **List**         | `list`                                                                                                                                                      |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                             |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                         |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                          |
+| **Expired**      | `expired`                                                                                                                                                   |
+| **Out of Stock** | `out-of-stock`                                                                                                                                              |
+| **Update All**   | `update-all [TAG:NEW_VALUE ...]` <br> e.g. `update-all p:3.00 d:Very tasty`                                                                                 |
+| **Delete All**   | `delete-all`                                                                                                                                                |
 
 ### 7.2 Item Commands
 

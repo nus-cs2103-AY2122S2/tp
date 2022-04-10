@@ -3,6 +3,9 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.ibook.logic.parser.ParserUtil.parseCompoundIndex;
+import static seedu.ibook.logic.parser.ParserUtil.parseExpiryDate;
+import static seedu.ibook.logic.parser.ParserUtil.parseQuantity;
 
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.logic.commands.item.UpdateItemCommand;
@@ -24,7 +27,7 @@ public class UpdateItemCommandParser implements Parser<UpdateItemCommand> {
         CompoundIndex compoundIndex;
 
         try {
-            compoundIndex = ParserUtil.parseCompoundIndex(argMultimap.getPreamble());
+            compoundIndex = parseCompoundIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateItemCommand.MESSAGE_USAGE),
@@ -34,11 +37,11 @@ public class UpdateItemCommandParser implements Parser<UpdateItemCommand> {
         UpdateItemDescriptor updateItemDescriptor = new UpdateItemDescriptor();
         if (argMultimap.getValue(PREFIX_EXPIRY_DATE).isPresent()) {
             updateItemDescriptor.setExpiryDate(
-                    ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get()));
+                    parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             updateItemDescriptor.setQuantity(
-                    ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
+                    parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
 
         if (!updateItemDescriptor.isAnyFieldUpdated()) {

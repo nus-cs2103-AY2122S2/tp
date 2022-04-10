@@ -2,8 +2,8 @@ package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.logic.commands.CommandTestUtil.DESC_A;
-import static seedu.ibook.logic.commands.CommandTestUtil.DESC_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_A;
+import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -122,10 +122,10 @@ public class UpdateAllCommandTest {
 
     @Test
     public void equals() {
-        final UpdateAllCommand standardCommand = new UpdateAllCommand(DESC_A);
+        final UpdateAllCommand standardCommand = new UpdateAllCommand(PRODUCT_DESCRIPTOR_A);
 
         // same values -> returns true
-        UpdateProductDescriptor copyDescriptor = new UpdateProductDescriptor(DESC_A);
+        UpdateProductDescriptor copyDescriptor = new UpdateProductDescriptor(PRODUCT_DESCRIPTOR_A);
         UpdateAllCommand commandWithSameValues = new UpdateAllCommand(copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -139,6 +139,6 @@ public class UpdateAllCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new UpdateCommand(INDEX_FIRST_PRODUCT, DESC_B)));
+        assertFalse(standardCommand.equals(new UpdateCommand(INDEX_FIRST_PRODUCT, PRODUCT_DESCRIPTOR_B)));
     }
 }

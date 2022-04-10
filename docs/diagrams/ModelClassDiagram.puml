@@ -1,22 +1,24 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(MODEL_COLOR)
 
-package Model {
-    class "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
-    class "<<interface>>\nModel" as Model
-    class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+package Model as ModelPackage<<Model>> {
+    class "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook<<Model>>
+    class "<<interface>>\nModel" as Model<<Model>>
+    class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs<<Model>>
+    class "{abstract}\nAttributeFilter" as AttributeFilter<<Model>>
 
-    class IBook
-    class ModelManager
-    class UserPrefs
+    class IBook<<Model>>
+    class ModelManager<<Model>>
+    class UserPrefs<<Model>>
 
-    class UniqueProductList
-    class Product
+    class UniqueProductList<<Model>>
+    class ProductFilter<<Model>>
+    class Product<<Model>>
 }
 
-class HiddenOutside <<Hidden>>
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Model
 
 IBook .up.|> ReadOnlyIBook
@@ -29,7 +31,10 @@ ModelManager -left-> "1" IBook
 ModelManager -right-> "1" UserPrefs
 
 IBook *--> "1" UniqueProductList
-UniqueProductList ---> "~* all" Product
+UniqueProductList -right-> "~* all" Product
 
-ModelManager -->"~* filtered" Product
+ModelManager --> "1" ProductFilter
+ProductFilter *-> "*" AttributeFilter
+
+ModelManager --->"~* filtered" Product
 @enduml

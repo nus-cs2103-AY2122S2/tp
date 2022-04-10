@@ -2,8 +2,8 @@ package seedu.ibook.testutil;
 
 import static seedu.ibook.testutil.TypicalItems.ITEM_A;
 import static seedu.ibook.testutil.TypicalItems.ITEM_B;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2200_01_01;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2200_01_01_KAYA;
 import static seedu.ibook.testutil.TypicalProducts.CHOCOLATE_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
@@ -34,9 +34,9 @@ public class TypicalReversibleIBookActions {
     public static final ReversibleAddItemAction REVERSIBLE_ADD_ITEM_ACTION =
             new ReversibleAddItemAction(WAFFLES, ITEM_A);
     public static final ReversibleSetItemAction REVERSIBLE_SET_ITEM_ACTION =
-            new ReversibleSetItemAction(CHOCOLATE_BREAD, Q5_2200_01_01, ITEM_B);
+            new ReversibleSetItemAction(CHOCOLATE_BREAD, Q5_2200_01_01_KAYA, ITEM_B);
     public static final ReversibleRemoveItemAction REVERSIBLE_REMOVE_ITEM_ACTION =
-            new ReversibleRemoveItemAction(PEANUT_BUTTER_BREAD, Q5_2022_03_01);
+            new ReversibleRemoveItemAction(PEANUT_BUTTER_BREAD, Q5_2022_03_01_KAYA);
 
     private TypicalReversibleIBookActions() {} // prevent instantiation
 

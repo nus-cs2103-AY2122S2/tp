@@ -62,6 +62,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Register event handler for stage close
         primaryStage.setOnCloseRequest(event -> handleExit());
+
     }
 
 
@@ -238,7 +239,10 @@ public class MainWindow extends UiPart<Stage> {
         populateFilters();
     }
 
-    private void hidePopup() {
+    /**
+     * Hide the popup window
+     */
+    public void hidePopup() {
         popupHandler.hidePopup();
     }
 

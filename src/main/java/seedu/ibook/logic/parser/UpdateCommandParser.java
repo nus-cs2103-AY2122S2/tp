@@ -4,10 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
+import static seedu.ibook.logic.parser.ParserUtil.parseDescription;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountRate;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountStart;
+import static seedu.ibook.logic.parser.ParserUtil.parseIndex;
+import static seedu.ibook.logic.parser.ParserUtil.parseName;
+import static seedu.ibook.logic.parser.ParserUtil.parsePrice;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.product.UpdateCommand;
@@ -28,12 +35,12 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_CATEGORY, PREFIX_PRICE,
-                PREFIX_DESCRIPTION, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
+                PREFIX_DESCRIPTION, PREFIX_DISCOUNT_RATE, PREFIX_DISCOUNT_START);
 
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE),
@@ -42,26 +49,26 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
 
         UpdateProductDescriptor updateProductDescriptor = new UpdateProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            updateProductDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            updateProductDescriptor.setName(parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             updateProductDescriptor.setCategory(
-                    ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
+                    parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             updateProductDescriptor.setDescription(
-                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+                    parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            updateProductDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
+            updateProductDescriptor.setPrice(parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
         }
-        if (argMultimap.getValue(PREFIX_DISCOUNTRATE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DISCOUNT_RATE).isPresent()) {
             updateProductDescriptor.setDiscountRate(
-                    ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE).get()));
+                    parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNT_RATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_DISCOUNTSTART).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DISCOUNT_START).isPresent()) {
             updateProductDescriptor.setDiscountStart(
-                    ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART).get()));
+                    parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNT_START).get()));
         }
 
         if (!updateProductDescriptor.isAnyFieldUpdated()) {

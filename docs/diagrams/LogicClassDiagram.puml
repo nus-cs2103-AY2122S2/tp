@@ -1,24 +1,19 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(LOGIC_COLOR)
 
-package Logic {
-    class IBookParser
-    class XYZCommand
-    class CommandResult
-    class "{abstract}\nCommand" as Command
-
-
-    class "<<interface>>\nLogic" as Logic
-    class LogicManager
+package Logic as LogicPackage<<Logic>> {
+    class "<<interface>>\nLogic" as Logic<<Logic>>
+    class LogicManager<<Logic>>
+    class IBookParser<<Logic>>
+    class "{abstract}\nCommand" as Command<<Logic>>
+    class XYZCommand<<Logic>>
+    class CommandResult<<Logic>>
 }
 
-package Model <<Rectangle>> {
-}
-
-package Storage <<Rectangle>> {
-}
+class Model<<Model>>
+class Storage<<Storage>>
 
 class HiddenOutside<<Hidden>>
 HiddenOutside ..> Logic

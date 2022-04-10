@@ -1,0 +1,42 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+Box Logic LOGIC_COLOR_LIGHT
+Participant ":LogicManager" as LogicManager<<Logic>>
+Participant ":IBookParser" as IBookParser<<Logic>>
+Participant "f:FindCommand" as FindCommand<<Logic>>
+end Box
+
+Box Model MODEL_COLOR_LIGHT
+Participant ":AttributeFilter" as AttributeFilter<<Model>>
+end Box
+
+[-> LogicManager : execute(find)
+activate LogicManager
+
+LogicManager -> IBookParser : parseCommand(find)
+activate IBookParser
+
+loop each attribute
+    create AttributeFilter
+    IBookParser -> AttributeFilter
+    activate AttributeFilter
+
+    AttributeFilter --> IBookParser
+    deactivate AttributeFilter
+end
+
+create FindCommand
+IBookParser -> FindCommand
+activate FindCommand
+
+FindCommand --> IBookParser
+deactivate FindCommand
+
+IBookParser --> LogicManager : f
+deactivate IBookParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -19,7 +19,7 @@
     "category" : "Bread",
     "description" : "Chocolate on bread",
     "price" : "8.99",
-    "discountRate": "30.75",
+    "discountRate": "30",
     "discountStart": "1"
   }, {
     "name" : "Vanilla Cake",

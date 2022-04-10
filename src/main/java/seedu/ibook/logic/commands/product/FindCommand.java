@@ -60,7 +60,7 @@ public class FindCommand extends Command {
             filterList.forEach(model::addProductFilter);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                String.format(Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override
