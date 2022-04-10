@@ -65,4 +65,8 @@ class JsonAdaptedStudentAttendance {
 
         return new StudentAttendance(modelStudent, modelAttendance);
     }
+
+    public String getStudentId() {
+        return studentId;
+    }
 }
