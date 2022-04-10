@@ -1,15 +1,38 @@
+skinparam Actor {
+    BorderColor USER_COLOR
+    Color USER_COLOR
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    BoxBorderColor #FFFFFF
+
+    GroupFontColor #FF9800
+    GroupBackgroundColor #FF980032
+    GroupBorderColor #FF9800    FontColor #000000
+    GroupBorderThickness 1.8    FontName Arial
+    GroupHeaderFontColor #FF9800
+    GroupHeaderFontStyle bold    LifelineBorderColor #000000
+
+    LifelineBackgroundColor #FFFFFF
+}
+
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
 skinparam Participant {
     FontColor #FFFFFFF
     Padding 10
     BorderColor #000000
 }
-
-skinparam SequenceGroupFontColor #FF9800
-skinparam SequenceGroupBackgroundColor #FF980032
-skinparam SequenceGroupBorderColor #FF9800
-skinparam SequenceGroupBorderThickness 1.8
-skinparam SequenceGroupHeaderFontColor #FF9800
-skinparam SequenceGroupHeaderFontStyle bold
 
 !procedure styleParticipant($stereotype, $color, $bg_color)
     skinparam Participant {

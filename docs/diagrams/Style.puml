@@ -36,6 +36,8 @@
 
 !define USER_COLOR #000000
 
+skinparam BackgroundColor #FFFFFFF
+
 !procedure classTitleOnly($stereotype, $color)
     skinparam Class {
         FontColor<<$stereotype>> $color
@@ -54,8 +56,6 @@
     hide <<$stereotype>> stereotype
 !endprocedure
 
-skinparam BackgroundColor #FFFFFFF
-
 classTitleOnly(Hidden, "#FFFFFF")
 classTitleOnly(Logic, LOGIC_COLOR)
 classTitleOnly(Ui, UI_COLOR)
@@ -66,33 +66,6 @@ skinparam Class {
     FontSize 15
     StereotypeFontSize 13
     BorderThickness 1.1
-}
-
-skinparam Actor {
-    BorderColor USER_COLOR
-    Color USER_COLOR
-    FontName Arial
-}
-
-skinparam Arrow {
-    Color #000000
-    FontSize 13
-    Thickness 1.1
-}
-
-skinparam Sequence {
-    MessageAlign center
-
-    BoxFontSize 15
-    BoxPadding 0
-    BoxFontColor #FFFFFF
-    BoxBorderColor #FFFFFF
-
-    FontColor #000000
-    FontName Arial
-
-    LifelineBorderColor #000000
-    LifelineBackgroundColor #FFFFFF
 }
 
 packageTitleOnly(Logic, LOGIC_COLOR)
@@ -112,12 +85,6 @@ SKINPARAM TITLEFONTCOLOR<<LOGIC>> LOGIC_COLOR
 SKINPARAM TITLEFONTCOLOR<<UI>>    UI_COLOR
 SKINPARAM TITLEFONTCOLOR<<MODEL>> MODEL_COLOR
 SKINPARAM TITLEFONTCOLOR<<STORE>> STORAGE_COLOR
-
-HIDE <<LOGIC>> STEREOTYPE
-hide <<Ui>>    stereotype
-hide <<Model>> stereotype
-hide <<Store>> stereotype
-hide <<Storage>> stereotype
 
 'Procedure to override colors and styles for class diagrams
 !procedure $OverrideTheme($theme_color)
