@@ -154,27 +154,21 @@ Displaying statistics of lower price and higher price of preferences of clients 
 
 ## Sorting
 
-The sorting feature allows the user to sort the list of `Person` displayed.
+The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`. Whenever the data in the list containing all `Person` objects is changed, the `FilteredList<Person>` is notified first and will filter the data. Whenever the data in the `FilteredList<Person>` changes, the `SortedList<Person>` is notified and will sort the filtered data. This allows the *sort* feature to be used in conjunction with the *find* feature, i.e., it is possible to *sort* the results found by the *find* feature.
 
-The following table shows the attributes that the list can be sorted by and their corresponding keywords.
+The `SortedList<Person>` is exposed in the `Model` interface as `Model#getFilteredAndSortedPersonList()` while the `FilteredList<Person>` is not exposed.
 
-| Attribute            | Keyword        |
-|----------------------|----------------|
-| `Name`               | `name`         |
-| `Phone`              | `phone`        |
-| `Email`              | `email`        |
-| `Favourite`          | `favourite`    |
-| `Address`            | `address`      |
-| `UserType`           | `usertype`     |
-| Number of `Property` | `num_property` |
+Comparisons between `Person` objects are facilitated by `PersonComparator` which holds a list of `Comparator<Person>`. It implements `Comparator<Person>` and compares `Person` objects using the first `Comparator<Person>` in the list, followed by the subsequent elements in the event of a tie.
 
-Sorting the list is done by using the `sort` command, which has the following syntax: `sort [KEYWORD]...`.
+Given below is an example usage scenario.
 
-If multiple attributes are specified, the first attribute is given the highest priority, while the last attribute is given the lowest priority. For example, `sort address name` will sort the list by `Address` first, followed by `Name` if `Address` is equal.
+Step 1. The user launches the application. Both the `FilteredList<Person>` and `SortedList<Person>` will contain the same data as the list containing all `Person` objects.
 
-The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
+Step 2. The user executes `find name john`, causing the `FilteredList<Person>` to only contain clients with `john` in their name.
 
-Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+Step 3. The user executes `sort phone` to sort the clients according to their phone number. The `sort` command calls `Model#updateSortedPersonList()`. This in turn calls `FilteredList#setComparator()` which causes the `FilteredList<Person>` to sort the data it contains.
+
+Step 4. The user executes `list` to list all clients, which causes the `FilteredList<Person>` to now contain all clients. The `SortedList<Person>` is automatically notified and sorts the new data in the `FilteredList<Person>`. Similarly, other commands that cause the data in the `FilteredList<Person>` to change, such as `add`, `delete`,`edit`,`favourite`, will cause the `SortedList<Person>` to automatically update itself.
 
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
