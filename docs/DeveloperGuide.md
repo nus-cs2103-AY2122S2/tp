@@ -677,6 +677,51 @@ TODO
 
 TODO
 
+### Assigning a student
+
+This command requires you to have at least one existing student and lesson.
+* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+user guide section to add a student.
+* If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
+  user guide section to add a lesson.
+
+1. Testcase 1: Assigning `student` to `lesson` successfully
+   1. Ensure that `student` with `<STUDENT_ID>` **1** is not already assigned to the `lesson` of `<LESSON_ID>` **1**. 
+   2. Execute `liststudents` and `listlessons` to ensure that your lists includes all students and lessons.
+   3. Execute the command `assign -s 1 -l 1`. This will assign the first `student` in the list to the first
+   `lesson` in the list.
+   4. Expected: The details of the `lesson` will be displayed on the right info panel, and you should
+   see the `student` that you just assigned in the **Students** list of the `lesson`.
+    
+2. Testcase 2: Assigning `student` to `lesson` unsuccessfully
+   1. Following **Testcase 1**, execute `listlessons` and `liststudents` to ensure that your lists includes
+   all existing students and lessons.
+   2. Execute the command `assign -l 1 -s 1`.
+   3. Expected: An error message will be displayed saying that the student is already enrolled in the lesson.
+
+### Unassigning a student
+
+This command requires you to have at least one existing student and lesson.
+* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+  user guide section to add a student.
+* If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
+  user guide section to add a lesson.
+
+1. Testcase 1: Unassigning `student` from `lesson` successfully
+    1. Ensure that `student` with `<STUDENT_ID>` **1** is already assigned to the `lesson` of `<LESSON_ID>` **1**.
+       1. If not, follow the [**Assigning a student: Testcase 1**](#Assigning-a-student) 
+    2. Execute `liststudents` and `listlessons` to ensure that your lists includes all students and lessons.
+    3. Execute the command `unassign -s 1 -l 1`. This will unassign the first `student` in the list from the first
+       `lesson` in the list.
+    4. Expected: The details of the `student` will be displayed on the right info panel, and you should
+       **not** see the `lesson` that you just unassigned in the **Lessons** list of the `student`.
+
+2. Testcase 2: Unassigning `student` from `lesson` unsuccessfully
+    1. Following **Testcase 1**, execute `listlessons` and `liststudents` to ensure that your lists includes
+       all existing students and lessons.
+    2. Execute the command `unassign -l 1 -s 1`.
+    3. Expected: An error message will be displayed saying that the student is **not** enrolled in the lesson.
+    
 ### Saving data
 
 #### Missing data files
