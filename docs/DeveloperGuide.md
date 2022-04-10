@@ -574,6 +574,77 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Switching views
+1. Switching to `People`/`Modules`/`Groups` view
+
+    1. Prerequisites: `People`/`Modules`/`Groups` view not currently showing respectively. If an attempt to switch to currently active view is made, nothing happens.
+    
+    2. Test case: `list o/view v/people`<br>
+       Expected: The UniBook switches to the `People` view and lists all entries there.
+       
+    3. Test case: `list o/view v/modules`<br>
+      Expected: The UniBook switches to the `Modules` view and lists all entries there.       
+       
+    4. Test case: `list o/view v/groups`<br>
+      Expected: The UniBook switches to the `Groups` view and lists all entries there.
+
+### Listing all entries
+1. List all entries in currently active view.
+    1. Test Case: `list`<br>
+       Expected: The UniBook lists all `People`/`Modules`/`Groups` depending on the currently active view.
+
+### Listing specific entries
+1. List people of a specific type.
+    1. Prerequisites: Currently on `People` view.
+    2. Test case: `list type/professors`<br>
+        Expected: All professors are listed.
+    3. Test case: `list type/students`<br>
+        Expected: All students are listed.
+       
+2. List people from a specific module
+    1. Prerequisites: Currently on `People` view.
+    2. Test case: `list o/module m/CS2103`<br>
+        Expected: Everybody associated with module code `CS2103`, if it exists, will be listed.
+    3. Test case: `list o/module m/cs2103 type/professors` <br>
+        Expected: Every professor associated with module code`CS2103`, if it exists, will be listed.
+
+3. List people from a specific group in a module
+    1. Prerequisites: Currently on `People` view.
+    2. Test case: `list o/group m/CS2103 g/W100-1`<br>
+        Expected: All students in group `W100-1`, of `CS2103`, if it exists, will be listed.
+    
+4. List a module with a specific module code
+    1. Prerequisites: Currently on `Modules` view.
+    2. Test case: `list m/CS2103`<br>
+        Expected: The module with code `CS2103` is listed, if it exists.
+
+5. List module(s) with name matching a specific keyword       
+   1. Prerequisites: Currently on `Modules` view.
+   2. Test case: `list n/Software`<br>
+       Expected: Modules with names that contain `Software` are listed, if it exists.
+       
+6. List module(s) with key event(s) on a specific date
+    1. Prerequisites: Currently on `Modules` view.
+    2. Test case: `list dt/2022-05-04`<br>
+        Expected: Modules with any key event(s) falling on `2022-05-04` are listed.
+
+7. List module(s) with key event(s) of a specific type
+    1. Prerequisites: Currently on `Modules` view.
+    2. Test case: `list ke/EXAM`<br>
+        Expected: Modules with `EXAM` key event(s) will be listed.
+
+8. List group(s) with a specific name
+    1. Prerequisites: Currently on `Groups` view.
+    2. Test case: `list g/W100-1`<br>
+        Expected: Groups with name `W100-1` will be listed.
+    3. Test case: `list g/W100-1 m/CS2103`<br>
+        Expected: The specific group `W100-1` in `CS2103` will be listed.
+       
+9. List group(s) with a specific meeting date
+   1. Prerequisites: Currently on `Groups` view.
+   2. Test case: `list mt/2022-05-04`<br>
+       Expected: Groups with meetings on `2022/05/04` are listed.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
