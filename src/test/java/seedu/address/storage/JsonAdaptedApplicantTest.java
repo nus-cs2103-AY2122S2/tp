@@ -5,7 +5,6 @@ import static seedu.address.storage.JsonAdaptedApplicant.MISSING_FIELD_MESSAGE_F
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplicants.BENSON;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,7 @@ public class JsonAdaptedApplicantTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validApplicantDetails_returnsApplicant() throws Exception {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(BENSON);
         assertEquals(BENSON, person.toModelType());
     }
