@@ -563,6 +563,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Command summary**
 
@@ -584,6 +585,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Glossary**
 
