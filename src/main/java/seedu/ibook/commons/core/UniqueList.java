@@ -130,7 +130,7 @@ public class UniqueList<T extends Distinguishable<T>> implements Iterable<T> {
         return internalList.setAll(elements);
     }
 
-    public boolean setAll(UniqueList other) {
+    public boolean setAll(UniqueList<? extends T> other) {
         requireNonNull(other);
         return internalList.setAll(other.internalList);
     }
