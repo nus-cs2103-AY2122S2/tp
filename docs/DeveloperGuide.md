@@ -193,6 +193,17 @@ The command is first parsed with `execute("add o/module n/Software Engineering m
 The add command can also add a group/student/professor/event/meeting. In these cases, the flow of the program is still largely similar, except that `model` object will be accessed to update the respective fields of students/professors/groups.
 ![Implementation of adding a module](images/AddSequenceDiagram.png)
 
+### Edit feature
+The add feature enables the user to edit a module/person/group/event/meeting to the UniBook depending on the option specified by the user. 
+
+Given below is an example of a sequence diagram that shows the flow using the input `edit 1 o/person n/Alex`.
+
+The command is first parsed with `execute("edit 1 o/person n/Alex", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `EditCommandParser`. This instantiates a new `EditCommandDescriptor` object which is used to create a new `EditCommand` object, and returned to `UniBookParser`. After which, the `EditCommand`and returned to `EditCommand`. The`execute` method will run. Finally, the `CommandResult` will be returned and the `setPerson` method will be called to update the people list in the `model` object.
+
+The edit command can also add a group/student/professor/event/meeting. In these cases, the flow of the program is still largely similar, except that `model` object will be accessed to update the respective fields of students/professors/groups.
+
+![Implementation of adding a module](images/EditSequenceDiagram.png)
+
 
 ### Delete feature
 The delete feature enables the user to delete a module/student/professor/group/event/meeting/key event from the UniBook depending on the option specified by the user.
@@ -449,7 +460,7 @@ Actor: User
 
 Use case ends.
 
-**Use Case: UC09 - Edit Person/Module**
+**Use Case: UC09 - Edit Person/Module/Group/Key Event**
 
 Actor: User
 
@@ -459,13 +470,13 @@ Actor: User
 
 **MSS**
 
-1. User requests to edit person/module
+1. User requests to edit person/module/group/key event using `o/OPTION`
 2. UniBook updates the relevant data according to the user command.
 
 Use case ends.
 
 **Extensions**
-* 1a. The person/module does not exist in UniBook.
+* 1a. The person/module/group/key event does not exist in UniBook.
     - The user is notified that the person/module does not exist.
     - Use case ends.
 
@@ -575,6 +586,23 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Editing a person
+
+1. Editing a person while on people view (similarly for module/group/key event)
+
+   1. Prerequisites: List all persons using the `list o/view v/people` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 o/person n/Greg`<br>
+      Expected: First contact's name from the list changed to Greg from the list. Details of the edited contact shown in the status message.
+
+   1. Test case: `edit 1`<br>
+      Expected: No object is edited. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
