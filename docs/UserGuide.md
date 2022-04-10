@@ -153,8 +153,8 @@ Here you can find all the necessary features to manage your clients and meetings
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `cleardemo`, `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `clear 123`, it will be interpreted as `clear`.
 
 </div>
 
@@ -201,18 +201,21 @@ A client's meeting can be scheduled through meet command after adding the client
   * Duplicate is found when two clients have the exact `NAME`.
   * Duplicate `NAME` are case-insensitive. `John` is a duplicate of `JoHn`. 
 * `n/NAME` can only contain letters and numbers with single space in between each name.
-  * `William B J` and `John The 2nd` is acceptable. `Clara   Tan` is not acceptable.
+  * `William B J` and `John The 2nd` is acceptable. `Clara   Tan` is not acceptable.
 * `d/DATE` will be set to today's date by default if not specified.
   * `DATE` has to be in the format **YYYY-MM-DD**.
   * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
+* `p/PHONE_NUMBER` needs to be minimum **7** digits and maximum **15** digits.
 * `i/INFO` will be set to `No further info` by default if not specified.
 * `t/TAG` will be empty by default if not specified.
+  * Each tag is limited to **25** characters maximum currently.
 * `f/FLAG` will be set to `false` by default if not specified.
 * `s/SALARY` will be set to 0 by default if not specified.
+  * Salary is limited to **15** digits maximum currently. 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Salary of $3400 f/true`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Low Risj Tolerance f/true`
 
 ### Editing a client : `edit`
 
@@ -233,11 +236,11 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 Example:
 
 **Scenario 1**: You have a client named `John Doe`
-* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
+* `edit John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
   `2020-12-04` which is 4th Dec 2020.
 
 **Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
+* Running the command `edit John d/2020-12-04` will show a list of clients with names containing "John"
 
 ![edit_multiple_clients](images/editMultipleClients.png)
 * Typing `1` will edit "John Doe", typing `2` will edit "John Smith" and typing `3` will edit "John Williams"
@@ -278,7 +281,7 @@ Example:
 `delete John Doe` removes client `John Doe` from HustleBook
 
 **Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `delete n/John` will show a list of clients with names containing "John"
+* Running the command `delete John` will show a list of clients with names containing "John"
 * If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -365,7 +368,7 @@ Example:
 
 ### Canceling a meeting: `meet`
 
-Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+Cancels current meeting with the `NAME` given of the client.
 
 Format: `meet NAME c/`
 
@@ -502,16 +505,16 @@ If you decide to make changes to the data file, HustleBook will not check the va
 
 | Action     | Format, Examples                                                                                                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/3400`     |
 | **List**   | `list`                                                                                                                                                                                      |
 | **Clear**  | `clear`                                                                                                                                                                                     |
-| **Sort**   | `sort`                                                                                                                                                                                      |
-| **Undo**  | `undo`                                                                                                                                                                                       |
+| **Sort**   | `sort [meeting|name|prev|salary]` <br> e.g., `sort name`                                                                                                                                                                                      |
+| **Undo**   | `undo`                                                                                                                                                                                       |
 | **Redo**   | `redo`                                                                                                                                                                                      |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                                       |
 | **Flag**   | `flag NAME`<br> e.g., `flag John`                                                                                                                                                           |
 | **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |
 | **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
 | **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James, Jake`                                                                                                                                 |
+| **Find**   | `find KEYWORD, [MORE_KEYWORDS]`<br> e.g., `find James, Jake`                                                                                                                                 |
 | **Help**   | `help [COMMAND]` <br> e.g., `help meet`                                                                                                                                                     |
