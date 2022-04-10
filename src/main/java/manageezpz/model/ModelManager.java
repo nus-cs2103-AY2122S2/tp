@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.commons.core.LogsCenter;
-import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
@@ -235,11 +234,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void findTask(Task task) {
-
-    }
-
-    @Override
     public Task tagEmployeeToTask(Task task, Person person) {
         requireAllNonNull(task, person);
         return addressBook.tagEmployeeToTask(task, person);
@@ -255,16 +249,6 @@ public class ModelManager implements Model {
     public boolean isEmployeeTaggedToTask(Task task, Person person) {
         requireAllNonNull(task, person);
         return addressBook.isEmployeeTaggedToTask(task, person);
-    }
-
-    @Override
-    public String listTasks() {
-        return addressBook.listTask();
-    }
-
-    @Override
-    public String listTasks(Prefix option) {
-        return addressBook.listTask(option);
     }
 
     //=========== Filtered Task List Accessors =============================================================

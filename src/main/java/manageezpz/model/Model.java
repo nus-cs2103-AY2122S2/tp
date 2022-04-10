@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
-import manageezpz.logic.parser.Prefix;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.Deadline;
 import manageezpz.model.task.Event;
@@ -168,12 +167,6 @@ public interface Model {
      */
     Task tagPriorityToTask(Task task, Priority priority);
 
-    /**
-     * Finds the given task.
-     * The task must exist in the task list.
-     * @param task the task be found.
-     */
-    void findTask(Task task);
 
     /**
      * Tags the given task to the specified person.
@@ -273,15 +266,6 @@ public interface Model {
      */
     boolean isEmployeeTaggedToTask(Task task, Person person);
 
-    /**
-     * Returns a list of all tasks.
-     */
-    String listTasks();
-
-    /**
-     * Returns a list of tasks that satisfy the option given.
-     */
-    String listTasks(Prefix option);
 
     /**
      * Returns true if a {@code Task} is allocated with a priority.

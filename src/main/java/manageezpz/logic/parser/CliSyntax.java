@@ -17,7 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_BY_DATETIME = new Prefix("by/");
     public static final Prefix PREFIX_AT_DATETIME = new Prefix("at/");
     public static final Prefix PREFIX_DATE = new Prefix("date/");
-    public static final Prefix PREFIX_TIME = new Prefix("time/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("priority/");
     public static final Prefix PREFIX_ASSIGNEES = new Prefix("assignees/");
     public static final Prefix PREFIX_IS_MARKED = new Prefix("isMarked/");

@@ -11,8 +11,6 @@ import manageezpz.model.person.Phone;
 import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Time;
-import manageezpz.model.tasktag.Tag;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -121,20 +119,5 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
     }
 }
