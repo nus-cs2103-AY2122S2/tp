@@ -9,14 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HireLah;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable HireLah that is serializable to JSON format.
  */
 @JsonRootName(value = "HireLah")
 class JsonSerializableHireLah {
@@ -42,11 +42,11 @@ class JsonSerializableHireLah {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyHireLah} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableHireLah}.
      */
-    public JsonSerializableHireLah(ReadOnlyAddressBook source) {
+    public JsonSerializableHireLah(ReadOnlyHireLah source) {
         applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new)
                 .collect(Collectors.toList()));
         interviews.addAll(source.getInterviewList().stream().map(JsonAdaptedInterview::new)
@@ -56,26 +56,26 @@ class JsonSerializableHireLah {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code HireLah} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public HireLah toModelType() throws IllegalValueException {
+        HireLah hireLah = new HireLah();
         for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType();
-            if (addressBook.hasApplicant(applicant)) {
+            if (hireLah.hasApplicant(applicant)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICANT);
             }
-            addressBook.addApplicant(applicant);
+            hireLah.addApplicant(applicant);
         }
 
         for (JsonAdaptedPosition jsonAdaptedPosition : positions) {
             Position position = jsonAdaptedPosition.toModelType();
-            if (addressBook.hasPosition(position)) {
+            if (hireLah.hasPosition(position)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POSITION);
             }
-            addressBook.addPosition(position);
+            hireLah.addPosition(position);
         }
 
         for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
@@ -83,21 +83,21 @@ class JsonSerializableHireLah {
             Applicant interviewApplicant = interview.getApplicant();
             Position interviewPosition = interview.getPosition();
 
-            if (addressBook.hasApplicant(interviewApplicant)) {
-                interview.setApplicant(addressBook.getApplicantUsingStorage(interviewApplicant));
+            if (hireLah.hasApplicant(interviewApplicant)) {
+                interview.setApplicant(hireLah.getApplicantUsingStorage(interviewApplicant));
             }
 
-            if (addressBook.hasPosition(interviewPosition)) {
-                interview.setPosition(addressBook.getPositionUsingStorage(interviewPosition));
+            if (hireLah.hasPosition(interviewPosition)) {
+                interview.setPosition(hireLah.getPositionUsingStorage(interviewPosition));
             }
 
-            if (addressBook.hasInterview(interview)) {
+            if (hireLah.hasInterview(interview)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
             }
-            addressBook.addInterview(interview);
+            hireLah.addInterview(interview);
         }
 
-        return addressBook;
+        return hireLah;
     }
 
 }

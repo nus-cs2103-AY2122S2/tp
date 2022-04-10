@@ -29,7 +29,7 @@ import seedu.address.logic.parser.interview.RejectInterviewCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class HireLahParser {
 
     /**
      * Used for initial separation of command word and args.

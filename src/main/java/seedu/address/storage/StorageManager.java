@@ -7,12 +7,12 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of HireLah data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ HireLah methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return hireLahStorage.getAddressBookFilePath();
+    public Path getHireLahFilePath() {
+        return hireLahStorage.getHireLahFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(hireLahStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyHireLah> readHireLah() throws DataConversionException, IOException {
+        return readHireLah(hireLahStorage.getHireLahFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyHireLah> readHireLah(Path filePath) throws DataConversionException, IOException {
         logger.info("Attempting to read data from file: " + filePath);
-        return hireLahStorage.readAddressBook(filePath);
+        return hireLahStorage.readHireLah(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, hireLahStorage.getAddressBookFilePath());
+    public void saveHireLah(ReadOnlyHireLah hireLah) throws IOException {
+        saveHireLah(hireLah, hireLahStorage.getHireLahFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveHireLah(ReadOnlyHireLah hireLah, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        hireLahStorage.saveAddressBook(addressBook, filePath);
+        hireLahStorage.saveHireLah(hireLah, filePath);
     }
 
 }

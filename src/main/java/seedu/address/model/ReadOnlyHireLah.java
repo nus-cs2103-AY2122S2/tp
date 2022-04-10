@@ -6,9 +6,9 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an HireLah
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyHireLah {
 
     /**
      * Returns an unmodifiable view of the persons list.

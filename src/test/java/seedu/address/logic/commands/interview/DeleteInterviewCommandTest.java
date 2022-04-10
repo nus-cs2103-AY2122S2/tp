@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -23,7 +23,7 @@ import seedu.address.model.interview.Interview;
  */
 public class DeleteInterviewCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHireLah(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteInterviewCommandTest {
         String expectedMessage =
                 String.format(DeleteInterviewCommand.MESSAGE_DELETE_INTERVIEW_SUCCESS, interviewToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getHireLah(), new UserPrefs());
         expectedModel.deleteInterview(interviewToDelete);
 
         assertCommandSuccess(deleteInterviewCommand, model, expectedMessage, expectedModel);

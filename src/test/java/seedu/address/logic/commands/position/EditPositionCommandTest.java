@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_NAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REQUIREMENT_EXPERIENCE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.position.EditPositionCommand.EditPositionDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HireLah;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,7 +30,7 @@ import seedu.address.testutil.PositionBuilder;
  */
 public class EditPositionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHireLah(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -39,7 +39,7 @@ public class EditPositionCommandTest {
                 new EditPositionDescriptorBuilder(editedPosition).build();
         EditPositionCommand editCommand = new EditPositionCommand(INDEX_FIRST, descriptor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
         expectedModel.updatePosition(model.getFilteredPositionList().get(0), editedPosition);
 
         String expectedMessage = String.format(EditPositionCommand.MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
@@ -59,7 +59,7 @@ public class EditPositionCommandTest {
                 new EditPositionDescriptorBuilder(editedPosition).build();
         EditPositionCommand editCommand = new EditPositionCommand(indexLastPosition, descriptor);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
         expectedModel.updatePosition(model.getFilteredPositionList().get(indexLastPosition.getZeroBased()),
                 editedPosition);
 
