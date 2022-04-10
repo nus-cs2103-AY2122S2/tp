@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-primary">:bulb: **Note**<br>
 
 The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -32,7 +32,7 @@ The `.puml` files used to create diagrams in this document can be found in the [
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
-*Figure: High-level architecture diagram of the CinnamonBun.*
+*Figure: High-level architecture diagram of CinnamonBun.*
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -111,7 +111,7 @@ How the `Logic` component works:
 
 *Figure: Interactions inside the logic component for the `delete 1` command.*
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
 The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -152,7 +152,7 @@ The `Model` component,
 The `Storage` component,
 * stores user preference data in json format, and reads it back into corresponding objects.
 * stores client and transaction data in binary format, and reads it back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `AddressBookStorage`, `TempAddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -186,13 +186,13 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 
 *Figure: Simplified sequence diagram of `AppendCommand`.*
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
 The lifeline for `AppendCommandParser` and `AppendCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-info">:bulb: **Note**<br>
 
 * The above sequence diagram has been simplified to provide a more comprehensible overview. It is not completely accurate as some unnecessary details have been omitted.
 * While not shown here, `AddCommand`, `EditCommand`, `RemarkCommand`, `RemoveCommand` work very similarly to `AppendCommand`, and their sequence diagram will be almost identical to `AppendCommand`'s.
@@ -205,7 +205,7 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 * **Alternative 1 (original AB-3 method)**:
   Hard-code every field directly into `Person`.
     * Pros: None.
-    * Cons: Extremely highly coupled code that requires many changes to be done everytime a new field is added. Pront to bugs.
+    * Cons: Extremely highly coupled code that requires many changes to be done everytime a new field is added. Prone to bugs.
 * **Alternative 2 (current choice)**
   Make `Person` modular by storing a `HashMap<Prefix, Field>` of fields instead.
     * Pros: Code is much less coupled. Much easier to maintain.
@@ -215,15 +215,15 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 
 #### Implementation
 
-The undo mechanism is facilitated by `SerializableTempAddressBookStorage`. It extends `TempAddressBookStorage` 
-an interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
+The undo mechanism is facilitated by `SerializableTempAddressBookStorage`.
+It extends the `TempAddressBookStorage` interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
 
-This mechanism will store previous states of CinnamonBun when a modification or change is made to the data in temporary files.
-When users type the `undo` command, the latest state stored will be restored.
+This mechanism will store the previous states of CinnamonBun in temporary files when a modification or change is made to the data.
+When users type the `undo` command, the latest stored state will be restored.
 
 Additionally, it implements the follow operations which are exposed in the `Storage` interface:
 - `SerializableTempAddressBookStorage#getTempAddressBookFilepath()` --- Gets the file path of where the temporary files are stored.
-- `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the state of CinnamonBun and keep track of the version.
+- `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the current state of CinnamonBun and keep track of the version.
 - `SerializableTempAddressBookStorage#popTempAddressFileData()` --- Gets the latest state of CinnamonBun stored in `SerializableTempAddressBookStorage`.
 
 ![Undo activity diagram](images/TemporaryAddressBookStorage.png)
@@ -231,23 +231,23 @@ Additionally, it implements the follow operations which are exposed in the `Stor
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `SerializableTempAddressBookStorage` will be initialized
-with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
+with the file path of where the temporary files will be saved, and an empty `ArrayList<Path>` named `tempFiles` is created to store the file paths of the
 temporary files that will be created.
 
 ![State 1 undo image](images/UndoState.png)
 
-Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th client in the client list.
-In `LogicManager`, before executing the command, it will locally store the current clients' list state.
+Step 2. The user makes a modification to the client list such as executing the command `delete 5` to delete the 5th client.
+In `LogicManager`, before executing the command, it will locally store the current client list's state.
 
-After executing the command, it will compare the previous state with the current state of the clients' list. If it senses they are different, such as in this
+After executing the command, it will compare the previous state with the current state of the client list. If it senses they are different, such as in this
 case since user has deleted the 5th client, it will call `LogicManager#savePrevAddressBookDataInTemp()`. 
 
-From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the clients' list, before the `delete 5` was executed, will be saved as a temporary file.
+From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the client list, before the `delete 5` was executed, will be saved as a temporary file.
 The new temporary file will then be added into `tempFiles` list in `SerializableTempAddressBookStorage`.
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
-Only modifications made to the clients' list will be saved. See the user guide for more info.
+Only modifications made to the client list or transaction list will be saved. See the user guide for more info.
 
 `SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will remove
 the earliest modification saved and delete the temporary file for it.
@@ -309,33 +309,33 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
 _{more aspects and alternatives to be added}_
 
 ### Clear Filtered functionality
-The `ClearFiltered` commands works in tandem with the `Find` or `ListMembers` command. After the `Find`/`ListMembers` function populates
-`FilteredPersonList`, the `ClearFiltered` commands retrieves the `FilteredPersonList` from the `Model` and
-deletes all people in the `FilteredPersonList` using the `deletePerson` function from `Model`.
+The `clearFiltered` commands works in tandem with the `find` or `listMembers` command. After the `find`/`listMembers` function populates
+`ModelManager`'s `filteredPersons`, the `clearFiltered` commands retrieves the `filteredPersons` from the `Model` and
+deletes all people in `filteredPersons` using the `deletePerson` function from `Model`.
 
-If the `Find` or `ListMembers` function had not been executed beforehand, the `ClearFiltered` command will still function
-as if clearing the entire address book, as by default, the `FilteredPersonList` will be the whole address book.
+If the `find` or `listMembers` command had not been executed beforehand, the `clearFiltered` command will still function
+as if clearing the entire address book, as by default, the `filteredPersons` will be the whole address book.
 
-If there are no people in the `FilteredPersonList`, the `CommandResult` returned has a message "No clients to delete.".
+If there are no people in the `filteredPersons`, the `CommandResult` returned has a message "No clients to delete.".
 
 Below is a sequence diagram to show how the `ClearFilteredCommand` executes.
 
 ![Clear Filtered Sequence Diagram](images/ClearFilteredSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
-The lifeline for `ClearFilteredCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for `ClearFilteredCommand` should end at its destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
   
 </div>
 
 ### Membership functionality
 
 #### Implementation
-The membership functionality allows users to be assigned a membership tier, either 'Bronze','Silver' or 'Gold'. It inherits
-from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
+The membership functionality allows users to be assigned a membership tier, either 'Bronze', 'Silver' or 'Gold'.
+It inherits from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
 
 When the user calls the `addMembership` functionality along with a specified client and membership tier, a Membership 
-object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions as if any other `Field`.
+object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions like any other `Field`.
 The `removeMembership` functions in a similar manner to other fields in that the `Field` with the `Membership` prefix is removed
 from the fields HashMap.
 
@@ -345,18 +345,18 @@ in its fields HashMap.
 
 When a client's membership is displayed on the screen, the colour of the membership `Label` changes according to the membership
 tier. This is done by having a `FlowPane` stored in the `PersonCard` class. When a membership is displayed, a `Label` with
-a different tier is created with a different id. The CSS files (Cinnamon.css or Caramel.css) then decides what colour to render the label background accordingly.
+a different tier is created with a different id. The CSS files (`Cinnamon.css` or `Caramel.css`) then decides what colour to render the label background accordingly.
 
 #### Design considerations
 
 **Aspect: How it executes**
 
-* **Alternative 1 (current choice):** Store each Membership in each user.
-  * Pros: Easy to implement
-  * Cons: Membership functionality is limited (only able to have predefined membership tiers)
+* **Alternative 1 (current choice):** Store a `Membership` object in each user.
+  * Pros: Easy to implement.
+  * Cons: Membership functionality is limited (only able to have predefined membership tiers).
 
 * **Alternative 2:** Create a list of memberships and assign users a membership index.
-  * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions
+  * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions.
   * Cons: Harder to implement.
 
 ### Transaction functionality
@@ -394,6 +394,7 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
     in comparison to the `Person` class.
 
 ### Sort functionality
+
 **Implementation**
 
 The sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
@@ -503,39 +504,39 @@ When the user edits a previous command and executes, the content of that command
 
 Example usage (red arrow is what the command box is displaying):
 
-1. ![Command History Flow 1](images/CommandHistoryFlow1.png)
+Step 1. ![Command History Flow 1](images/CommandHistoryFlow1.png)
 
 *Figure: User starts with a blank command box.*
 
-2. ![Command History Flow 2](images/CommandHistoryFlow2.png)
+Step 2. ![Command History Flow 2](images/CommandHistoryFlow2.png)
 
 *Figure: User types `append 1 t/vendor`.*
 
-3. ![Command History Flow 3](images/CommandHistoryFlow3.png)
+Step 3. ![Command History Flow 3](images/CommandHistoryFlow3.png)
 
 *Figure: User executes `append 1 t/vendor`. `append 1 t/vendor` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again.*
 
-4. ![Command History Flow 4](images/CommandHistoryFlow4.png)
+Step 4. ![Command History Flow 4](images/CommandHistoryFlow4.png)
 
 *Figure: User types `edit 2 e/` but does not execute. User then presses the up arrow key to cycle to `addMembership 1 m/silver`.*
 
-5. ![Command History Flow 5](images/CommandHistoryFlow5.png)
+Step 5. ![Command History Flow 5](images/CommandHistoryFlow5.png)
 
 *Figure: User changes `addMembership 1 m/silver` to `addMembership 3 m/bronze`.*
 
-6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
+Step 6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
 
 *Figure: User executes `addMembership 3 m/bronze`. `addMembership 3 m/bronze` is appended to `historyBuffer` and `activeBuffer`. Un-executed command `edit 2 e/` is erased. Command box is blank again. `addMembership 1 m/silver` in `activeBuffer` is restored.*
 
-7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
+Step 7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
 
 *Figure: User cycles to `listTransaction` and changes it to `random invalid string`.*
 
-8. ![Command History Flow 8](images/CommandHistoryFlow8.png)
+Step 8. ![Command History Flow 8](images/CommandHistoryFlow8.png)
 
 *Figure: User cycles to `delete 5` and changes it to `delete 7`.*
 
-9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
+Step 9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
 
 *Figure: User executes `delete 7`. `delete 7` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again. `delete 5` in `activeBuffer` is restored. `listTransaction` is not restored.*
 
@@ -857,7 +858,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-info">:bulb: **Note**<br>
 
 These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
