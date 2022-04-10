@@ -39,6 +39,7 @@ public class AppointmentBuyerCommandParser implements Parser<AppointmentBuyerCom
         if (!appointment.isLaterThanCurrentTime()) {
             throw new ParseException(AppointmentBuyerCommand.MESSAGE_TIME_IN_PAST);
         }
+
         return new AppointmentBuyerCommand(index, appointment);
     }
 }
