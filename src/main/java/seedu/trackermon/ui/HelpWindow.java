@@ -148,7 +148,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static ObservableList<CommandBuilder> getCommandSummary() {
         return FXCollections.observableArrayList(
                 new CommandBuilder("Add", "add n/NAME s/STATUS [r/RATING] [c/COMMENT] "
-                        + " [t/TAG]…"),
+                        + "[t/TAG]…"),
                 new CommandBuilder("Delete", "delete INDEX"),
                 new CommandBuilder("Clear", "clear"),
                 new CommandBuilder("Edit", "edit INDEX {[n/NAME] [s/STATUS] [r/RATING] "
