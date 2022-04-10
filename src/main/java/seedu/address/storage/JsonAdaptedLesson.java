@@ -19,7 +19,9 @@ import seedu.address.model.studentattendance.StudentAttendance;
 class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
-
+    public static final String STUDENT_LIST_DOES_NOT_MATCH = "Lesson's student attendance does not match with"
+            + " class group student list!";
+    public static final String MESSAGE_DUPLICATE_STUDENTS = "Lesson's student list contains duplicate student(s).";
     private final String weekId;
     private final List<JsonAdaptedStudentAttendance> studentAttendanceList = new ArrayList<>();
 
@@ -52,7 +54,13 @@ class JsonAdaptedLesson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
-    public Lesson toModelType(List<Student> studentList) throws IllegalValueException {
+    public Lesson toModelType(List<Student> studentList, List<Student> classGroupStudentList)
+            throws IllegalValueException {
+
+        if (classGroupStudentList.size() != studentAttendanceList.size()) {
+            throw new IllegalValueException(STUDENT_LIST_DOES_NOT_MATCH);
+        }
+
         if (weekId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, WeekId.class.getSimpleName()));
         }
@@ -63,7 +71,11 @@ class JsonAdaptedLesson {
 
         final List<StudentAttendance> modelStudentAttendances = new ArrayList<>();
         for (JsonAdaptedStudentAttendance sa : studentAttendanceList) {
-            modelStudentAttendances.add(sa.toModelType(studentList));
+            StudentAttendance modelSA = sa.toModelType(studentList, classGroupStudentList);
+            if (modelStudentAttendances.stream().anyMatch(modelSA::isSameStudentAttendance)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENTS);
+            }
+            modelStudentAttendances.add(modelSA);
         }
 
         return new Lesson(modelWeekId, modelStudentAttendances);

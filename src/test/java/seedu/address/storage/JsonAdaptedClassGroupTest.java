@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,6 @@ import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 import seedu.address.testutil.TypicalClassGroups;
-import seedu.address.testutil.TypicalLessons;
 import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalStudents;
 
@@ -34,8 +34,8 @@ public class JsonAdaptedClassGroupTest {
     private static final List<String> studentIds =
             new ArrayList<>(Arrays.asList(TypicalStudents.BENSON.getStudentId().toString()));
     private static final List<Student> students = new ArrayList<>(Arrays.asList(TypicalStudents.BENSON));
-    private static final List<JsonAdaptedLesson> lessons =
-            new ArrayList<>(Arrays.asList(new JsonAdaptedLesson(TypicalLessons.LESSON2)));
+    private static final List<JsonAdaptedLesson> lessons = TypicalClassGroups.CS2101G09.getLessons()
+            .stream().map(JsonAdaptedLesson::new).collect(Collectors.toList());
 
     @Test
     public void toModelType_validClassGroupDetails_returnsClassGroup() throws Exception {
