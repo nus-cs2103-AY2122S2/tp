@@ -184,7 +184,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rms 1")` API call.
 
-![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -368,6 +368,40 @@ The following sequence diagram shows how the add student command works.
 ![](images/AddStudentSequenceDiagram.png)
 
 [return to top ↑](#table-of-contents)
+
+### Delete student or lesson
+Deleting a `Student` or `Lesson` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the
+`TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
+
+Given below is an example scenario:
+
+Step 1. The user requests to delete student that is of index 1 on the viewable student list,
+
+Step 2. The user enters the command `rml 1`
+
+Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+
+Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+
+Step 5. The `TeachWhatParser` detects the command word `rml` and passes the student details to `DeleteLessonCommandParser#parse(args)`.
+
+Step 6. The `DeleteLessonCommandParser` uses `ParserUtil#parseIndex(oneBasedIndex)` to parse the one-based index of the lesson to be deleted into a zero-based `Index`. This is used to construct a new
+`DeleteLessonCommand` which it then returns.
+
+* Constraints
+   * `ParserUtil#parseIndex(oneBasedIndex)` rejects non-positive integers (i <= 0)
+   * `ParserUtil#parseIndex(oneBasedIndex)` rejects values that are not of type `java.lang.Integer`
+     `ParseException` will be thrown if the constraints are violated
+
+Step 7. The `LogicManager` then executes the `DeleteLessonCommand` and the `Lesson` is removed from the `Lesson Book`.
+
+* Constraint
+  * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
+    `ParseException` will be thrown if the constraints are violated
+
+![](images/DeleteLessonSequenceDiagram.png)
+
+
 
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
