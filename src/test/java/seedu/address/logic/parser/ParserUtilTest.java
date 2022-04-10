@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.HelpArgument;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Email;
@@ -26,6 +27,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "###";
+    private static final String INVALID_HELP_1 = "invalid help";
+    private static final String INVALID_HELP_2 = "312@!#$%^&*()_-=+';]}/.,\\";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_HELP_1 = "list";
+    private static final String VALID_HELP_2 = "add";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -50,10 +55,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -192,5 +197,45 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseHelpArgument_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHelpArgument(null));
+    }
+
+    @Test
+    public void parseHelpArgument_invalidArgument_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHelpArgument(INVALID_HELP_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseHelpArgument(INVALID_HELP_2));
+    }
+
+    @Test
+    public void parseHelpArgument_emptyArgument_returnsHelpArgumentWithEmptyArgument() throws Exception {
+        HelpArgument expectedHelpArgument = new HelpArgument("");
+        assertEquals(expectedHelpArgument, ParserUtil.parseHelpArgument(""));
+    }
+
+    @Test
+    public void parseHelpArgument_emptyArgumentWithTrailingWhitespace_returnsHelpArgumentWithNotTrailing()
+            throws Exception {
+        HelpArgument expectedHelpArgument = new HelpArgument("");
+        assertEquals(expectedHelpArgument, ParserUtil.parseHelpArgument("       "));
+    }
+
+    @Test
+    public void parseHelpArgument_validArgument_returnsHelpArgument() throws Exception {
+        HelpArgument expectedHelpArgument1 = new HelpArgument(VALID_HELP_1);
+        HelpArgument expectedHelpArgument2 = new HelpArgument(VALID_HELP_2);
+        assertEquals(expectedHelpArgument1, ParserUtil.parseHelpArgument(VALID_HELP_1));
+        assertEquals(expectedHelpArgument2, ParserUtil.parseHelpArgument(VALID_HELP_2));
+    }
+
+    @Test
+    public void parseHelpArgument_validArgumentWithTrailing_returnsHelpArgumentWithoutTrailing() throws Exception {
+        HelpArgument expectedHelpArgument1 = new HelpArgument(VALID_HELP_1);
+        HelpArgument expectedHelpArgument2 = new HelpArgument(VALID_HELP_2);
+        assertEquals(expectedHelpArgument1, ParserUtil.parseHelpArgument(WHITESPACE + VALID_HELP_1 + WHITESPACE));
+        assertEquals(expectedHelpArgument2, ParserUtil.parseHelpArgument(WHITESPACE + VALID_HELP_2 + WHITESPACE));
     }
 }

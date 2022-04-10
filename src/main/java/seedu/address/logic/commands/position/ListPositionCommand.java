@@ -37,7 +37,7 @@ public class ListPositionCommand extends ListCommand {
             + PREFIX_FILTER_ARGUMENT + "Java "
             + PREFIX_SORT_ARGUMENT + "asc ";
 
-    public static final String MESSAGE_SUCCESS = "Listed %1$d position(s)";
+    public static final String MESSAGE_SUCCESS = "Listed %1$d positions";
 
     private FilterType filterType;
     private FilterArgument filterArgument;

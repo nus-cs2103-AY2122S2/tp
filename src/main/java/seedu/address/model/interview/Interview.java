@@ -72,7 +72,7 @@ public class Interview {
      * Checks if the interview is for the specified applicant.
      */
     public boolean isInterviewForApplicant(Applicant a) {
-        return applicant.isSamePerson(a);
+        return applicant.isSameApplicant(a);
     }
 
     /**
@@ -151,8 +151,13 @@ public class Interview {
      */
     public void markAsRejected() {
         this.status.markAsRejected();
+    }
 
-        // decrement position count and offering
+    /**
+     * Checks whether an interview is passed.
+     */
+    public boolean isPassedStatus() {
+        return this.status.isPassedStatus();
     }
 
     /**

@@ -17,10 +17,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
+import seedu.address.logic.HelpArgument;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.help.HelpDescription;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,7 +51,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane applicantListPanelPlaceholder;
 
     @FXML
     private StackPane positionListPanelPlaceholder;
@@ -82,7 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        helpWindow = new HelpWindow(HelpArgument.OVERALL_HELPING_DESCRIPTION);
     }
 
     public Stage getPrimaryStage() {
@@ -128,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
-        personListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
+        applicantListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
 
         positionListPanel = new PositionListPanel(logic.getFilteredPositionList());
         positionListPanelPlaceholder.getChildren().add(positionListPanel.getRoot());
@@ -139,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getHireLahFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -174,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelpTab() {
-        helpWindow.setHelpDescription(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        helpWindow.setHelpDescription(HelpArgument.OVERALL_HELPING_DESCRIPTION);
         handleHelp();
     }
 
@@ -194,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ApplicantListPanel getPersonListPanel() {
+    public ApplicantListPanel getApplicantListPanel() {
         return applicantListPanel;
     }
 
@@ -204,7 +205,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException,
-            FileNotFoundException {
+            FileNotFoundException, ExportCsvOpenException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -230,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ExportCsvOpenException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

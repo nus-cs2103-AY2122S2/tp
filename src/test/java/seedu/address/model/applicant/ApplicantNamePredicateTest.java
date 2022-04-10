@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicantBuilder;
 
 public class ApplicantNamePredicateTest {
 
@@ -42,34 +42,34 @@ public class ApplicantNamePredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         ApplicantNamePredicate predicate = new ApplicantNamePredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
         predicate = new ApplicantNamePredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
         predicate = new ApplicantNamePredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate = new ApplicantNamePredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         ApplicantNamePredicate predicate = new ApplicantNamePredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new ApplicantBuilder().withName("Alice").build()));
 
         // Non-matching keyword
         predicate = new ApplicantNamePredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
         predicate = new ApplicantNamePredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new ApplicantBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }

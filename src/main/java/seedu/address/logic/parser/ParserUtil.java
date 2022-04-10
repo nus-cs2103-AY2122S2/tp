@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
+import seedu.address.logic.HelpArgument;
 import seedu.address.logic.SortArgument;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
@@ -177,9 +179,9 @@ public class ParserUtil {
         String trimmedDate = date.trim();
 
         // See whether date is valid
-        // consider abstracting into a separate class in Interview
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
+                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDateTime dateParsed = LocalDateTime.parse(date, formatter);
             return dateParsed;
         } catch (DateTimeException e) {
@@ -279,8 +281,11 @@ public class ParserUtil {
      * Parses a {@code String filterArgument} into a {@code FilterArgument}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static FilterArgument parseFilterArgument(String filterArgument) {
+    public static FilterArgument parseFilterArgument(String filterArgument) throws ParseException {
         requireNonNull(filterArgument);
+        if (filterArgument.trim().isEmpty()) {
+            throw new ParseException(FilterArgument.MESSAGE_CONSTRAINTS);
+        }
         return new FilterArgument(filterArgument.trim());
     }
 
@@ -295,5 +300,18 @@ public class ParserUtil {
             throw new ParseException(SortArgument.MESSAGE_CONSTRAINTS);
         }
         return new SortArgument(trimmedSortArgument);
+    }
+
+    /**
+     * Parses a {@code String helpArgument} into a {@code HelpArgument}.
+     * All whitespaces will be trimmed, and argument will be converted to lower case.
+     */
+    public static HelpArgument parseHelpArgument(String helpArgument) throws ParseException {
+        requireNonNull(helpArgument);
+        String trimmedHelpArgument = helpArgument.replaceAll("\\s+", "").toLowerCase();
+        if (!HelpArgument.isValidHelpArgument(trimmedHelpArgument)) {
+            throw new ParseException(HelpArgument.COMMAND_NOT_FOUND_DESCRIPTION);
+        }
+        return new HelpArgument(trimmedHelpArgument);
     }
 }

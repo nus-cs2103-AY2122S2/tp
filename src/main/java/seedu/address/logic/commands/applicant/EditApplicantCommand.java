@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -56,9 +56,9 @@ public class EditApplicantCommand extends EditCommand {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
+    public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
     private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
     private static final String MESSAGE_DUPLICATE_PHONE = "The phone number is already used by %1$s";
 
@@ -83,14 +83,14 @@ public class EditApplicantCommand extends EditCommand {
         List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
-        Applicant editedApplicant = createEditedPerson(applicantToEdit, editApplicantDescriptor);
+        Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
-        if (!applicantToEdit.isSamePerson(editedApplicant) && model.hasPerson(editedApplicant)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
         boolean emailNotEdited = applicantToEdit.getEmail().equals(editedApplicant.getEmail());
@@ -112,8 +112,8 @@ public class EditApplicantCommand extends EditCommand {
         }
 
         model.updateApplicant(applicantToEdit, editedApplicant);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), getCommandDataType());
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant), getCommandDataType());
     }
 
     @Override
@@ -125,8 +125,8 @@ public class EditApplicantCommand extends EditCommand {
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      */
-    private static Applicant createEditedPerson(Applicant applicantToEdit,
-                                                EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());

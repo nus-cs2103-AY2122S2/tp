@@ -39,7 +39,7 @@
           <right>
               <VBox alignment="TOP_RIGHT" >
                   <padding>
-                      <Insets bottom="10" left="15" right="15" top="15" />
+                      <Insets bottom="10" left="5" right="15" top="15" />
                   </padding>
                     <Label fx:id="interviewstatus" styleClass="cell_small_label" text="\$status"/>
               </VBox>
