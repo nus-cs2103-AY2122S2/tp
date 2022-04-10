@@ -1194,20 +1194,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Product is not required to handle printing of reports
 12. Product should respond within 10 seconds.
 
-
-*{More to be added}*
-
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Covid Status**: A student detail that indicates whether the student has Covid-19
-* **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
-* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
-* **NUS Hall**: Hall of residence in the National University of Singapore
-* **Resident Fellow**: Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
-* **Hall leaders**: Student leaders in NUS halls
+*Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
+| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
+|:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
+| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
+| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
+| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
+| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
+
+*Table 6: Specific terminology used.*
+
+| Term                           | Meaning                                                                                                                                                                                                                                                                                              |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                          | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                     |
+| Command Line Interface (CLI)   | A text-based user interface used to run applications.                                                                                                                                                                                                                                                |
+| Covid Status                   | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                     |
+| Faculty                        | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                       |
+| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                    |
+| Health Risk Notice (HRN)       | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                     |
+| JAR File                       | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                        |
+| Matriculation Number           | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                  |
+| Prefix                         | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
+| Pre-defined constant           | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                  |
+| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                               |
+| Mainstream OS                  | A Windows, Linux, Unix, OS-X operating system that computers run on.                                                                                                                                                                                                                                 |
+| Covid-19                       | An infectious disease caused by the SARS-CoV-2 virus.                                                                                                                                                                                                                                                |
+| NUS Hall                       | Hall of residence in the National University of Singapore.                                                                                                                                                                                                                                           |
+| Hall leaders                   | Student leaders in NUS halls.                                                                                                                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
