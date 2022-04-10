@@ -1,5 +1,7 @@
 package seedu.ibook.ui.table;
 
+import java.util.ArrayList;
+
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +10,6 @@ import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
-import java.util.ArrayList;
 
 /**
  * The {@code ProductTable} that is containing {@code ProductCard}.

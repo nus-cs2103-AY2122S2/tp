@@ -1,5 +1,7 @@
 package seedu.ibook.ui.control;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.FlowPane;
@@ -7,8 +9,6 @@ import javafx.scene.layout.HBox;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
-
-import java.util.ArrayList;
 
 public class ControlBox extends UiComponent<HBox> {
 

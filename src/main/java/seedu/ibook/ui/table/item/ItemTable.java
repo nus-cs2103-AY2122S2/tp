@@ -1,5 +1,7 @@
 package seedu.ibook.ui.table.item;
 
+import java.util.ArrayList;
+
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -8,8 +10,6 @@ import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
-
-import java.util.ArrayList;
 
 /**
  * The {@code ItemTable} that is containing {@code ItemCard}
@@ -22,7 +22,7 @@ public class ItemTable extends UiComponent<VBox> {
     private final int productIndex;
 
     private final FilteredItemList filteredItem;
-    private final ArrayList<ItemCard> itemCards = new ArrayList<>();;
+    private final ArrayList<ItemCard> itemCards = new ArrayList<>();
 
     private final Listener listener = new Listener();
 
