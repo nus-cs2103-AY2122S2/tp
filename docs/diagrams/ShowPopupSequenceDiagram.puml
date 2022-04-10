@@ -1,0 +1,41 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+Actor User as User USER_COLOR
+
+Participant ":XXX_Ui" as XXX_Ui <<UI>>
+Participant ":MainWindow" as MainWindow <<UI>>
+Participant ":PopupHandler" as PopupHandler <<UI>>
+Participant ":PopupYYY" as PopupYYY <<UI>>
+
+User -> XXX_Ui : "Button Clicked"
+activate XXX_Ui
+
+XXX_Ui -> MainWindow : showPopupXXX(...)
+activate MainWindow
+
+MainWindow -> PopupHandler : showPopupXXX(...)
+activate PopupHandler
+
+PopupHandler -> PopupHandler : hidePopup()
+activate PopupHandler
+
+deactivate PopupHandler
+
+PopupHandler -> PopupYYY : show()
+activate PopupYYY
+
+PopupYYY --> PopupHandler
+deactivate PopupYYY
+
+PopupHandler --> MainWindow
+deactivate PopupHandler
+
+MainWindow --> XXX_Ui
+deactivate MainWindow
+
+XXX_Ui --> User
+deactivate XXX_Ui
+
+@enduml

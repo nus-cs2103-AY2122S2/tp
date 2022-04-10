@@ -3,40 +3,24 @@
 
 $OverrideTheme(UI_COLOR)
 
-package UI as UiPackage<<Ui>> {
+package UI <<Ui>> {
     class "{abstract}\nUiComponent" as UiComponent<<Ui>>
     class MainWindow<<Ui>>
 
-    package Popup as PopupContainer<<Ui>> {
-       class "{abstract}\nPopup" as Popup<<Ui>>
-       class PopupHandler<<Ui>>
-       class PopupAdd<<Ui>>
-       class PopupDelete<<Ui>>
-       class PopupUpdate<<Ui>>
+    package Popup <<Ui>> {
+        class "{abstract}\nPopup" as Popup<<Ui>>
+        class PopupHandler<<Ui>>
+        class PopupXXX<<Ui>>
     }
 }
 
-class Model<<Model>>
-class Logic<<Logic>>
-
 MainWindow *--> "1" PopupHandler
 
-PopupHandler *-->  "1" PopupAdd
-PopupHandler *-->  "1" PopupDelete
-PopupHandler *-->  "1" PopupUpdate
+PopupHandler *-->  "1" PopupXXX
 
-PopupAdd -up-|> Popup
-PopupDelete -up-|> Popup
-PopupUpdate -up-|> Popup
+PopupXXX -up-|> Popup
 
 Popup -up-|> UiComponent
-
-
-PopupAdd ..> Logic
-PopupUpdate ..> Model
-PopupUpdate ..> Logic
-PopupDelete ..> Model
-PopupDelete ..> Logic
 
 UiComponent -left-> MainWindow
 

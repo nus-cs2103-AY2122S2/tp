@@ -5,19 +5,30 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
+
+<style>
+   p img {
+      display: block;
+      margin: 0 auto 30px;
+   }
+</style>
 
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
---------------------------------------------------------------------------------------------------------------------
+* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
+
+* The Ui design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+
+<hr/>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Design**
 
@@ -30,9 +41,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the app.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -67,52 +78,85 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### Ui component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java)
 
+The diagram below shows a simplified view of the Ui component.
+
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultWindow`, `Table`, `Popup` etc. The `MainWindow` and `UiComponent` inherits from `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+`XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc
 
-`UiComponent` is an abstract class that contains a reference to the MainWindow. Notice how all the other Ui components inherit from `UiComponent`. This is to enable the individual Ui components to navigate back to MainWindow. The navigation is helpful for certain Ui components that requires to call the methods resides in MainWindow. For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
+The Ui consists of a `UiManager` that implements the Façade interface `Ui`.
+
+`UiManager` consists of a `MainWindow` that holds all Ui components of the application. 
+
+`UiComponent` is an abstract class that contains a reference to the MainWindow. 
+
+By having `XXX_Ui` inherit from `UiComponent`, we enabled nagivation from `XXX_Ui` to MainWindow. 
+
+The navigation is helpful for some Ui components that are required to call methods in `UiManager`.
+
+For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
 
 #### The Structure of The Table Component
 
+Ui components that are related to the main display table are grouped in the `Table` package
+
+The diagram below shows a simplified internal structure of `Table`.
+
 ![Structure of the Table Component](images/UiTableDiagram.png)
 
-The diagram above shows the internal structure of the `Table` component.
 
-The `MainWindow` contains a `Table`, which holds a `TableHeader` and a `TableContent`.
+The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` that represent `Product`.
 
-`TableContent` has multiple `ProductCard` that represents each `Product` in the table.
-
-Here, `ProductCard` and `TableContent` has a dependency on `Model` to get the attributes of a `Product`
-
-As usual, all Ui components are inherited from `UiComponent` for navigability back to `MainWindow`
+Subsequently, each `ProductCard` may contains `ItemTable` which has multiple `ItemCard` to represent `Item`.
 
 #### The Structure of The Popup Component
 
+Ui components that are related to a popup are grouped in the `Popup` package
+
+The diagram below shows a simplified internal structure of `Popup`.
+
 ![Structure of the Popup UI](images/UiPopupDiagram.png)
 
-The diagram above shows the internal structure of the `Popup` component.
+`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
-Firstly, `MainWindow` contains a `PopupHandler` that provides several APIs for operations related to popup.
+The `MainWindow` contains a `PopupHandler` that provides APIs for operations related to popup.
 
-Every popup is inherited from the `Popup` abstract class which contains the implementation of the common attribute across all popups. The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
+Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups
 
-Popups depends on several classes in `Logic` and `Model`.
+e.g `show()`, `hide()`, `setFeedbackToUser()`, etc
 
-`Model` is needed to show the relevant product information to the user. `Logic` on the other hand, is required to forge commands to add product and update product.
+The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
+
+#### The Structure of The Control Component
+
+Ui components that are related to the `ControlBox` are grouped in the `Control` package.
+
+The `ControlBox` is the box located just above the main display table. Its main usage is to hold `Add Product` button and `Filter` tags.
+
+The diagram below shows a simplified internal structure of `Control`.
+
+![Structure of the Popup UI](images/UiControlDiagram.png)
+
+
+
+The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represent each `AttributeFilter`.
+
+#### More about Ui
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The css files can be found in [`src/main/resources/view/css`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/css), the images used are located in [`src/main/resources/images`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/images)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Product` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Product`, `Item` object residing in the `Model`.
 
 ### Logic component
 
@@ -181,15 +225,103 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Popups
+
+#### Implementation
+
+The diagram below shows a simplified internal structure of `Popup`.
+
+![Structure of the Popup UI](images/UiPopupDiagram.png)
+
+`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
+
+The API provided by `PopupHandler` are:
+* `isShowing()` Checks if any of the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in the showing popup
+* `showPopupXXX()` Shows `PopupXXX`
+* `HidePopup()` Hides the showing popup
+
+The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to make sure that the number of popups will not flood the user's screen.
+
+Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups. 
+
+The methods in `Popup` are:
+* `show()` Shows the popup window
+* `hide()` Hides the popup window
+* `isShowing()` Checks if the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in popup
+* `execute(String commandText)` Executes the `commandText`
+
+#### Showing a Popup
+
+The following sequence diagram shows how a `Popup` is shown once a button is clicked.
+
+![Show Popup](images/ShowPopupSequenceDiagram.png)
+
+`XXX_Ui` represents Ui components that has a button which will open a popup once it is clicked
+
+e.g `ControlBox`, `ProductCard`, `ItemCard`, etc
+
+`PopupYYY` represents different types of `Popup`
+
+e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+As you can see from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
+
+This is to reduce coupling for each of the Ui components as they will not have a dependency on `PopupHandler` to call any of the popup. Also, it avoids the issue of deeply nested passing of `PopupHandler`.
+
+#### Executing command in Popup
+
+The sequence diagram below shows successful execution of a command in popup
+
+![Execute Popup](images/ExecutePopupSequenceDiagram.png)
+
+`PopupYYY` represents different types of `Popup`
+
+e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+When a user clicked a button in `PopupYYY`, it will generate the associated command from the inputs. The command is then passed to `MainWindow` for execution.
+
+This process is similar to how command is executed from `CommandBox`.
+
+The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` will be hidden.
+
+#### Design Considerations
+
+**Aspect: How to handle popup**
+* **Alternative 1:** Pass in popups created at `MainWindow` to Ui components that require it
+  * Pros: Less function calls and better performance
+  * Cons: 
+   1. Increase coupling as these popups might required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This cause `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`
+
+   &nbsp;
+
+* **Alternative 2:** Create popup in Ui components that require it
+  * Pros: Easy solution to reduce coupling
+  * Cons: 
+    1. Difficult to manage popups and check whether the popups are current showing
+    2. Two same popups might be opened at the same period of time
+
+   &nbsp;
+
+* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provides method for Ui component for all the `Popup`
+  * Pros: Centralized control for popup and reduce coupling
+  * Cons: 
+    1. Increase complexity for `MainWindow`
+    2. Less efficient as more function calls are required
+
+
 ### Product
 
-###Implementation
+#### Implementation
 
 The implementation of product is entirely governed by the `Product` class. The `Product` class is immutable and guarantees that all fields are valid and immutable as well.
 
@@ -199,7 +331,7 @@ The following sequence diagram shows how the `Update` command works:
 
 <img src="images/UpdateExecutionSequenceDiagram.png" width="1000" />
 
-###Design Considerations
+#### Design Considerations
 **Aspect: How to design the product structure**
 * **Alternative 1:** Make product mutable
   * Pros: Easy to Implement
@@ -383,13 +515,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
   * Cons: We must ensure that the implementation of each individual method are correct.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -399,7 +525,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Appendix: Requirements**
 
@@ -809,7 +935,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Appendix: Instructions for manual testing**
 

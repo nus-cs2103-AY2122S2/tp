@@ -1,0 +1,19 @@
+@startuml
+!include Style.puml
+
+$OverrideTheme(UI_COLOR)
+
+package UI <<Ui>> {
+    class MainWindow<<Ui>>
+
+    package Control <<Ui>> {
+        class ControlBox<<Ui>>
+        class Filter<<Ui>>
+    }
+}
+
+MainWindow *--> "1" ControlBox
+
+ControlBox *-right-> "*" Filter
+
+@enduml
