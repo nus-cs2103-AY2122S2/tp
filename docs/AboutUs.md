@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/fantablack.md)]
 
 * Role: Developer
-* Responsibilities: TBA
+* Responsibilities: Developer
 
 ### Benjamin Tay Keck Bin
 
