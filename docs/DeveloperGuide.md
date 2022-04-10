@@ -455,8 +455,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-*{More to be added}*
-
 **Use Case 5: user wishes to exit the application**
 
 1.  User requests to exit the application
