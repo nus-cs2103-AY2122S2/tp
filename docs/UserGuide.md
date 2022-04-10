@@ -514,4 +514,4 @@ If you decide to make changes to the data file, HustleBook will not check the va
 | **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
 | **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                          |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
-| **Help**   | `help`                                                                                                                                                                                      |
+| **Help**   | `help [COMMAND]` <br> e.g., `help meet`                                                                                                                                                     |
