@@ -30,7 +30,8 @@ public class AddInterviewCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
     public static final String POSITION_NO_OPENING = "The position the applicant is interviewing for has no openings, "
             + "so an interview cannot be scheduled.";
-    public static final String APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot be scheduled.";
+    public static final String APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
+            + "be scheduled.";
 
     private final Index applicantIndex;
     private final LocalDateTime date;
