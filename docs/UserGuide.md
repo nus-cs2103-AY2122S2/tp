@@ -295,6 +295,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `edit 2 n/Sailor Moo t/Horror`
 
 <img src="images/EditImage.png">
