@@ -35,7 +35,7 @@ title: Developer Guide
       * [What it does](#what-it-does-3)
       * [Implementation](#implementation-4)
       * [Design considerations](#design-considerations-3)
-    * [Suggest show](#suggest-show)
+    * [Suggest show feature](#suggest-show-feature)
         * [What it does](#what-it-does-4)
         * [Implementation](#implementation-5)
         * [Design considerations](#design-considerations-4)
@@ -412,7 +412,7 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Suggest Show
+### Suggest Show feature
 
 #### What it does
 
