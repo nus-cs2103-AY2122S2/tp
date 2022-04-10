@@ -39,6 +39,11 @@ public class EditInterviewCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field in Interview to edit must be provided.";
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited interview: %1$s";
     public static final String MESSAGE_NOT_PENDING = "Only interviews that are pending can be edited.";
+    public static final String MESSAGE_POSITION_NO_OPENING = "The position has no openings, so an interview cannot be"
+            + " scheduled.";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
+            + "be scheduled.";
+
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -119,6 +124,10 @@ public class EditInterviewCommand extends EditCommand {
             throw new CommandException(String.format(Messages.MESSAGE_APPLICANT_SAME_POSITION,
                     editedInterview.getApplicant().getName().fullName,
                     editedInterview.getPosition().getPositionName().positionName));
+        } else if (applicantEdited && editedInterview.getApplicant().isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
+        } else if (positionEdited && !editedInterview.getPosition().canScheduleInterview()) {
+            throw new CommandException(MESSAGE_POSITION_NO_OPENING);
         }
 
         boolean dateEdited = !(interviewToEdit.getDate().equals(editedInterview.getDate()));
