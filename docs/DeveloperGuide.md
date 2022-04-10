@@ -388,6 +388,8 @@ two properties, phone number and email.
 `findTask` similarly searches tasks based on any of their attributes (as stated in the task implementation) 
 stated by the user.
 
+<div style="page-break-after: always;"></div>
+
 #### Design of the find feature
 
 The find feature utilizes mainly the following classes:
