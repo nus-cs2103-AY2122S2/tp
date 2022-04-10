@@ -123,6 +123,27 @@ public class ClassGroupBuilder {
      * Sets the {@code UniqueStudentList} of the {@code ClassGroup} that we are building.
      * Initializes his/her attendance for all lessons.
      */
+    public ClassGroupBuilder withUniqueStudentList(List<Student> uniqueStudentList) {
+        this.uniqueStudentList = new UniqueStudentList();
+        this.uniqueStudentList.setStudents(uniqueStudentList);
+        for (Student s : this.uniqueStudentList) {
+            for (Lesson lesson : this.lessons) {
+                if (!lesson.getStudents().contains(s)) {
+                    lesson.addStudent(s);
+                }
+                lesson.getStudents().stream()
+                        .filter(s1 -> !uniqueStudentList.contains(s1))
+                        .forEach(s1 -> lesson.removeStudent(s1));
+            }
+        }
+        return this;
+    }
+
+    //@@author jxt00
+    /**
+     * Sets the {@code UniqueStudentList} of the {@code ClassGroup} that we are building.
+     * Initializes his/her attendance for all lessons.
+     */
     public ClassGroupBuilder withUniqueStudentList(Student... students) {
         this.uniqueStudentList = new UniqueStudentList();
         for (Student s : students) {

@@ -67,10 +67,22 @@ public class ModuleBuilder {
     }
 
     /**
-     * Sets the {@code studentList} of the {@code Module} that we are building.
+     * Sets the {@code studentList} of the {@code Module} that we are building with a list of students.
      */
     public ModuleBuilder withStudentList(List<Student> studentList) {
         this.studentList.setStudents(studentList);
+        return this;
+    }
+
+    /**
+     * Sets the {@code studentList} of the {@code Module} that we are building with variable number of students.
+     */
+    public ModuleBuilder withUniqueStudentList(Student... students) {
+        UniqueStudentList newStudentList = new UniqueStudentList();
+        for (Student s : students) {
+            newStudentList.add(s);
+        }
+        studentList.setStudents(newStudentList);
         return this;
     }
 
