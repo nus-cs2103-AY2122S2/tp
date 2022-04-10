@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes delete command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+
+else ([else])
+    if () then ([index is invalid])
+    : Show invalid index error message;
+    else([else])
+        if () then ([Task name already exist in the group])
+        : Show duplicate task error message;
+        else ([else])
+        : Delete the student contact from the contact list;
+        : Delete the student contact from all previously assigned groups;
+        : Update the student contact list and group list in the GUI;
+        endif
+    endif
+endif
+stop
+
+
+@enduml
