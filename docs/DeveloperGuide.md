@@ -422,13 +422,20 @@ The `Appointment` filtering feature mirrors the system used for `Person`, and is
 The filtering is implemented at the `ModelManager` level because it is the highest common level that can be accessed by both the `Logic` and `UI` components.
 This allows code for filtering to be centralized, while allowing the lower level classes in the `Model` component access to the full unfiltered list of `Appointment` objects.
 
-The sequence diagram below illustrates an example of both `Parser` and `UI` accessing the appointment filtering functionality.
+The sequence diagram below illustrates an example of both `Logic` and `UI` accessing the appointment filtering functionality.
 
 ![Appointment Filter](images/AppointmentFilterSequenceDiagram.png)
 
 ### Schedule Serialization and Inflation
 
-`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`.
+
+<div markdown="span" class="alert alert-warning">
+
+:rotating_light: **Important Note:**<br>
+Because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+
+</div>
 
 The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
 
@@ -448,7 +455,7 @@ It is important to note the design consideration that the coupling of `AddressBo
 
 #### Schedule Data as a Separate JSON File
 
-The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file should be user-editable. Clustering both AddressBook and Schedule data into a single file would have made the JSON file extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook allows the user to quickly narrow down the area to edit, making the task slightly easier.
+The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file(s) should be user-editable. Clustering both the AddressBook and Schedule data into a single JSON file would have made it extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook data files allows the user to quickly narrow down the area to edit, making the task slightly easier.
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
 
