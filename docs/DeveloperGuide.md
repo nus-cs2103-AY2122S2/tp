@@ -372,27 +372,34 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Attendance feature
 
-#### Implementation
-The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
-`PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
-on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off
-time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into
-the command classes above. The command classes are then passed on to the Model component for execution.
+#### Proposed Implementation
+The proposed attendance feature is facilitated by the two classes `PresentAttendanceCommand` and `AbsentAttendanceCommand`,
+which extend the `Command` class. The commands allow users to either mark a pet as present or absent on a particular day.
+Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off time (if applicable),
+is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into the command classes above.
+The command classes are then passed on to the `Model` component for execution.
 
-The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to
-`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the
-Model component that facilitates `Attendance` functionalities.
+During command execution, data from the user input is parsed into one of two subclasses of `AttendanceEntry` objects.
+The attendance entry is then stored into `AttendanceHashMap`. A class diagram illustrating the structure of `AttendanceHashMap`
+can be seen below.
+
+![AttendanceHashMapClassDiagram](images/AttendanceHashMapClassDiagram.png)
+
+The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet",
+and is the main repository of data within the Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods
 in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
-supported by the methods in `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes.
+supported by the `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes as well as methods.
 
 The following sequence diagram below models the interactions between the Logic as well as the Model components to
-update the backend and frontend of the application.
+update the backend and frontend of the application for the `absent` command.
 
 ![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
-The activity diagram below illustrates the workflow of attendance commands.
+The sequence model follows a similar structure for the `present` command as well.
+
+In addition, the activity diagram below illustrates the workflow of attendance commands.
 
 ![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
 
@@ -400,12 +407,12 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 **Aspect: Attendance data within `Model` component**
 
-* **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
+* **Alternative 1 (current choice):** Attendance entries in every pet's `AttendanceHashMap`.
     * Pros: Better OOP and performance.
     * Cons: Higher memory usage.
 * **Alternative 2:** All attendance entries in a single HashMap.
     * Pros: Lesser memory usage, easier to implement.
-    * Cons: May have performance issues due to nested data structure.
+    * Cons: Nested data structure, lack of OOP and separation of concerns.
     
 --------------------------------------------------------------------------------------------------------------------
 
@@ -438,29 +445,29 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                      | So that I can…​                                                        |
-|----------|-------------------|-------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | pet daycare owner | retrieve pet owner's contact                                      | contact pet owners                                                     |
-| `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                         |
-| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                                   |
-| `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                          |
-| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                 | charge pet owners the correct amount depending on pets attendanceEntry |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                                |
-| `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                                 |
-| `* * *`  | pet daycare owner | find pets by their INDEX                                          | retrieve the pet information accordingly                               |
-| `* * *`  | pet daycare owner | delete pet's information from the system                          | information of pets that are in the system will be up to date          |
-| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                          | bill owners accordingly                                                |
-| `* *`    | pet daycare owner | track pets' grooming appointments                                 | remember to bring them for grooming                                    |
-| `* *`    | pet daycare owner | track the allergies that each pet has                             | avoid giving them food they may be allergic to                         |
-| `* *`    | pet daycare owner | order pets chronologically by there name                          | easily search for their name in the system                             |
-| `* *`    | pet daycare owner | order pets' appointments chronologically                          | know what is the next appointment I should take note of                |
-| `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments                  |
-| `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                                 |
-| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                 | I can allow for last minute scheduling                                 |
-| `*`      | pet daycare owner | update pet's information                                          |                                                                        |
-| `*`      | pet daycare owner | update pet owner's information                                    |                                                                        |
-| `*`      | pet daycare owner | access the previous attendanceEntry of pets                       | update owners if they were to enquire                                  |
-| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                         |
+| Priority | As a …​           | I want to …​                                                    | So that I can…​                                                    |
+|----------|-------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | pet daycare owner | retrieve pet owner's contact                                    | contact pet owners                                                 |
+| `* * *`  | pet daycare owner | tag different types of pets                                     | easily differentiate between the types of pets                     |
+| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                      | schedule the school bus for each day                               |
+| `* * *`  | pet daycare owner | track the different food preferences required by different pets | make sure the pets are served the right foods                      |
+| `* * *`  | pet daycare owner | track the attendance of pets                                    | charge pet owners the correct amount depending on pet's attendance |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                               | I have a consolidated information sheet                            |
+| `* * *`  | pet daycare owner | retrieve the pets addresses                                     | inform the school bus driver correctly                             |
+| `* * *`  | pet daycare owner | find pets by their INDEX                                        | retrieve the pet information accordingly                           |
+| `* * *`  | pet daycare owner | delete pet's information from the system                        | information of pets that are in the system will be up to date      |
+| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                        | bill owners accordingly                                            |
+| `* *`    | pet daycare owner | track pets' grooming appointments                               | remember to bring them for grooming                                |
+| `* *`    | pet daycare owner | track the allergies that each pet has                           | avoid giving them food they may be allergic to                     |
+| `* *`    | pet daycare owner | order pets chronologically by there name                        | easily search for their name in the system                         |
+| `* *`    | pet daycare owner | order pets' appointments chronologically                        | know what is the next appointment I should take note of            |
+| `*`      | pet daycare owner | track the vet appointments of pets                              | make sure pets do not miss their medical appointments              |
+| `*`      | pet daycare owner | track the medicine that pets need to take                       | i can feed them medicine appropriately                             |
+| `*`      | pet daycare owner | change the attendance of pets anytime I want                    | I can allow for last minute scheduling                             |
+| `*`      | pet daycare owner | update pet's information                                        |                                                                    |
+| `*`      | pet daycare owner | update pet owner's information                                  |                                                                    |
+| `*`      | pet daycare owner | access the previous attendance of pets                          | update owners if they were to enquire                              |
+| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day      | arrange the necessary manpower                                     |
 
 ### Use cases
 
@@ -752,7 +759,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -871,23 +879,23 @@ WoofAreYou's `Model` draws inspiration from original [AB3](https://se-education.
 However, WoofAreYou's model is more complicated because it is specifically adapted to handle `Pet` attributes instead of
 just `Person` objects.
 
-In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
-essential for many of the functionalities. Not only does `AttendanceEntry` need to modify the database directly to store
+In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceHashMap` class in WoofAreYou is
+essential for many of the functionalities. Not only does `AttendanceHashMap` need to modify the database directly to store
 potentially large amount of attendance entries for each pet, it has to ensure that these data are easily retrievable.
 Similarly, the `Appointment` class has to be flexible to cater to the ever-changing nature of pets' appointments.
 These 2 classes utilised Java's `LocalDate`, `LocalTime` and `LocalDateTime` libraries to facilitate parsing of arguments
 which saved significant amount of time in handling invalid inputs.
 
-Complex attributes such as `Charge` is also implemented to calculate the specific cost every month for each pet. The
+Complex attributes such as `Charge` were also implemented to calculate the specific cost every month for each pet. The
 `Model` of WoofAreYou supports higher level features and commands like sorting, filtering and undoing to increase efficiency
 that are not present in AB3.
 
 All the different classes in WoofAreYou `Model` have to interact with one another to ensure cohesiveness and efficient
-navigability for the user. For instance, filtering and sort have to access the `AttendaceEntry` or `Appointment` class
+navigability for the user. For instance, filtering and sort have to access the `AttendanceHashMap` or `Appointment` class
 to retrieve the relevant dates. There are many ways of implementing these commands and a lot of effort is put into
 the design consideration as discussed in the previous sections.
 
-After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable model
+After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable models
 catered for its purpose.
 
 ## Logic
@@ -897,7 +905,7 @@ WoofAreYou's `Logic` is more advanced than that of AB3. WoofAreYou supports many
 `edit` and `find` are also enhanced to handle the complex `Model` of WoofAreYou.
 
 Significant effort was placed in implementing the `Logic` for WoofAreYou. It encompasses the logic for pets'
-`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
+`AttendanceHashMap`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
 for WoofAreYou.
 
 A huge amount of time was dedicated in validating user input for different commands. This is to ensure that WoofAreYou
@@ -907,7 +915,7 @@ effort was put into crafting error messages to ensure smooth handling of invalid
 ## Storage
 
 WoofAreYou's `Storage` extends that of AB3 to increase functionality and store a variety of attributes that pets may
-have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
+have. `AttendanceHashMap`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
 JSON file. Doing so ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
 
 More time and effort were spent in crafting the JSON entries of `AttendanceEntry` as it needs to store dates that
