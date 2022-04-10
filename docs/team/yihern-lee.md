@@ -47,4 +47,3 @@ to the project.
     * Forum contributions:
       * Question to enhance the closing process for iP chatbot project [#127](https://github.com/nus-cs2103-AY2122S2/forum/issues/127).
       * Contributed to discussion on the immutable design for data classes in tP [#193](https://github.com/nus-cs2103-AY2122S2/forum/issues/193).
-  
