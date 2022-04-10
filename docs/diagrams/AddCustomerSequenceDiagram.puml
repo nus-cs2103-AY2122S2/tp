@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant ":AddCustomerCommandParser" as AddCustomerCommandParser LOGIC_COLOR
+participant "c:Customer" as Customer LOGIC_COLOR
+participant "a:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box CommandException STORAGE_COLOR_T1
+participant "e:CommandException" as CommandException STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate LogicManager
+
+LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate TrackBeauParser
+
+create AddCustomerCommandParser
+TrackBeauParser -> AddCustomerCommandParser
+activate AddCustomerCommandParser
+
+AddCustomerCommandParser --> TrackBeauParser
+deactivate AddCustomerCommandParser
+
+TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate AddCustomerCommandParser
+
+create Customer
+AddCustomerCommandParser -> Customer
+activate Customer
+
+create AddCustomerCommand
+Customer -> AddCustomerCommand
+activate AddCustomerCommand
+
+AddCustomerCommand --> AddCustomerCommandParser :
+deactivate Customer
+deactivate AddCustomerCommand
+
+AddCustomerCommandParser --> TrackBeauParser : a
+deactivate AddCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCustomerCommandParser -[hidden]-> TrackBeauParser
+destroy AddCustomerCommandParser
+
+TrackBeauParser --> LogicManager : a
+destroy TrackBeauParser
+
+
+@enduml
