@@ -100,7 +100,6 @@ public class ClassGroupTest {
         assertTrue(danielAttendance.getAttendance().equals(new Attendance(VALID_ATTENDANCE_FALSE)));
     }
 
-    // to fix
     @Test
     public void equals() {
         // same values -> returns true
