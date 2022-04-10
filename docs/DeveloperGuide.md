@@ -305,8 +305,8 @@ Below is a sequence diagram to show how the `ClearFilteredCommand` executes.
 
 <div markdown="span" class="alert alert-info">:information_source: **Info**<br>
 
-The lifeline for `ClearFilteredCommand` ends after the X mark.
-
+The lifeline for `ClearFilteredCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+  
 </div>
 
 ### Membership functionality
