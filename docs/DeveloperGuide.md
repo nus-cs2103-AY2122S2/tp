@@ -710,13 +710,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Number of days is invalid.
 		
-    * 2a1. IBook show an error message.
+    * 1a1. IBook show an error message.
 
       Use case ends.
 
 * 1b. No items found.
 
-    * 2b1. IBook shows a cute image stating nothing found.
+    * 1b1. IBook shows a cute image stating nothing found.
 
       Use case ends.
 
@@ -737,9 +737,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1a. The current display list is empty.
+* 1b. The current display list is empty.
 
-    * 1a1. IBook shows an error message.
+    * 1b1. IBook shows an error message.
 
       Use case ends.
 
