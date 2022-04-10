@@ -341,11 +341,12 @@ Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The use
 Given below is an example scenario:
 
 The user wants to add a student that has the following details,
-- `Name`: Samuel
-- `Phone number`: 64874982
-- `Email`: simp4raiden@gmail.com
-- `Address`: 6 Raffles Quay Singapore, 048580 Singapore
-- `Tag`: struggling in math, good in cs
+- `name`: Samuel
+- `phone`: 64874982
+- `email`: simp4raiden@gmail.com
+- `address`: 6 Raffles Quay Singapore, 048580 Singapore
+- `tag`: struggling in math
+- `tag`: good in cs
 
 Step 1. The user enters the command
 
@@ -357,11 +358,11 @@ Step 3. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to par
 
 Step 4. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
 
-Step 5. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `Name`, `Phone`, `Email`, `Address` and `Tag`, and constructs a new `Student` and passes the `Student` to
-`AddStudentCommand` which it then returns.
+Step 5. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student`
+which is then used to construct and return `AddStudentCommand`.
 
 * Constraints
-    * Multiple `Tag` prefixes can be given but only one `Name`, `Phone`, `Email` and `Address` can be given.
+    * Multiple `tag` prefixes can be given but only one `name`, `phone`, `email` and `address` can be given.
     * All the prefixes are optional except for `name` and `phone`
 
       `ParseException` will be thrown if the constraints are violated
@@ -429,7 +430,7 @@ Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
 - the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
-- the `AddLessonCommandParser` then maps the arguments into the prefixes `name`, `subject`, `address`, `date`, `startTime`, `recurring`, `hours` and `minutes`
+- the `AddLessonCommandParser` then maps the arguments into the prefixes `lessonName`, `subject`, `lessonAddress`, `date`, `time`, `recurring`, `hours` and `minutes`
 - after which it constructs a new `Lesson` and passes it to the `AddLessonComand` 
 
 The following sequence diagram shows how the add lesson operation works when a user enters the following command:
