@@ -1843,7 +1843,7 @@ testers are expected to do more *exploratory* testing.
           3. No students have "Dueet" in their name.
 
    1. Test case: `find n/John`<br>
-      Expected: All students with "John" in their names are listed. Status message states how many students were listed.
+      Expected: All students with "John" in their names (but not Johnathan, Johnny etc) are listed. Status message states how many students were listed.
       
    1. Test case: `find n/Dueet`<br>
       Expected: Student list displays no results. Status message states that 0 students were listed.
