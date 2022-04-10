@@ -910,6 +910,7 @@ Preconditions: User is currently using ManageEZPZ.
 | **Person**        | An employee                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
