@@ -14,10 +14,10 @@ Given below are my contributions to the project.
   * Justification: This feature allows the user to make rational and prompt decisions to contain the Covid outbreak if a certain region of its premises is having widespread infection.
   * Highlights: The feature will calculate the percentage of students that are Covid positive in each block so that users do not need to do extra calculations.
 
-* **New Feature**: Added the overall revamp and upgrades of the pie chart window to fit to the needs of a typical hall master user. Colour coded charts to be consistent between Covid statuses and between charts. 
+* **New Feature**: Added the overall revamp and upgrades of the pie chart window to fit to the needs of a typical hall master user. Colour coded charts to be consistent between Covid statuses and between charts.
   * What it does: This allows the user to visualise the response executed by the `summarise` command to aid better understanding of Covid statistics.
   * Justification: This feature allows the user to make the user experience on the GUI more pleasurable with diagrams and figures. Plain words and numbers can be hard for some users to get a quick understanding of the issues Covid may have caused the Hall.The charts provide users a better viewing experience. Additional use of javafx bar charts and pie charts helps for seamless implementation to our application.
-  
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jiale-c&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jiale-c&tabRepo=AY2122S2-CS2103T-T12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Added new categories for representing data (Pull request [\#86]()).
-  * Added defensive programming elements into the code (Pull request [\#86]()). 
+  * Added defensive programming elements into the code (Pull request [\#86]()).
   * Added colour and chart formatting so that it suits the data types of student types and categories (i.e. axes representing number of students are type casted to be integers instead of double) (Pull request [\#232]()).
   * Further updated the UI of the PieChartWindow by constraining its size and forcing it to close when the main application exits (Pull requests [\#234](), [\#232]()).
   * Wrote test cases for the summarise command. Inclusive of test for Block type, Covid Status type and Faculty type. These test cases allowed the increase in coverage from 71% to 73% (Pull requests [\#58]()).

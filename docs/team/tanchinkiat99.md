@@ -9,10 +9,10 @@ Tracey is a desktop app for managing health statuses of NUS Hall Residents. The 
 
 Given below are my contributions to the project.
 
-**New Features**: 
+**New Features**:
   * Added a filter command that allows the user to retrieve certain entries using a filter.
     * What it does: Allows the user to use the `filter` command to display a list of a certain group of students. By inputting a certain covid status, faculty, and/or block, the user can retrieve a list of students which fit the desired criteria.
-    * Justification: This feature largely improves the functionality of the app as it helps the user to retrieve the details of students who fit a desired set of criteria. 
+    * Justification: This feature largely improves the functionality of the app as it helps the user to retrieve the details of students who fit a desired set of criteria.
     * Highlights: It greatly increases the speed and convenience at which the user can isolate a group of students with a certain covid status, instead of viewing the entire list of students in the address book.
 
   * Added an undo and redo command that allows the user to reverse actions.
@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * Set up issues tracker on GitHub to manage project tasks.
     * Managed releases `v1.3` - `v1.3b` (2 releases) on GitHub.
     * Reviewed and approved pull requests from teammates.
-    * Helped to coordinate submissions and admin tasks. 
+    * Helped to coordinate submissions and admin tasks.
 
 * **Enhancements to existing features**:
     * Added function in Person class to check if Person object matches a given covid status (Pull request [\#50]())
@@ -49,7 +49,7 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#57](), [\#60](), [\#86](), [\#100](), [\#134](), [\#137](), [\#138](), [\#140](), [\#143](), [\#259]()
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3](), [4](), [5](), [6](), [7](), [8](), [9](), [10]())
-    
+
 * **Tools**:
     * Integrated a third party library (Natty) to the project ([\#42]())
     * Integrated a new Github plugin (CircleCI) to the team repo
