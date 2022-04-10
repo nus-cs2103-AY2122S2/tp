@@ -1947,8 +1947,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted entries
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. The `data` files can be found in the data folder of the repository, and will be named `addressbook`. 
+   2. Modify the first entry in the data file, by deleting the word "Name" from it.
+   3. Restart the application.
+      Expected: TAPA will display an empty list.
 
-1. _{ more test cases …​ }_
+2. Dealing with missing entries
+   
+   1. The `data` files can be found in the data folder of the repository, and will be named `addressbook`. 
+   2. Remove all entries from the data file.
+   3. Restart the application.
+   Expected: TAPA will display an empty list.
+
+3. Dealing with missing data file
+
+    1. The `data` files can be found in the data folder of the repository, and will be named `addressbook`.
+    2. Delete `addressbook.json`.
+    3. Restart the application.
+    Expected: A new data file will be created, and TAPA will populate it with sample data entries. This list of sample entries will be displayed to the user as well.
+
+*{More to be added}*
