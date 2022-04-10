@@ -153,7 +153,7 @@ application process for each role is at a glance.
 |:-------------:|----------------------------------------------------------------------------------------------------------------------|
 | Reminder List | List of all reminders within the reminder window (defaults to 7 days) in ascending order                             |
 |   Date Card   | With the date denoted at the top, all the reminders within this date card have their date of reminder on the same day |
-| Reminder Card | Describes the Company name and Role name to be reminded of as well as its status and full reminder date and time     |
+| Reminder Card | Describes the company name and role name to be reminded of as well as its status and full reminder date and time; reminders are sorted in chronological order, from which reminders with the same date and time are sorted in alphabetical order     |
 
 <div markdown="block" class="alert alert-info">
 
