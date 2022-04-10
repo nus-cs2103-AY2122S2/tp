@@ -54,7 +54,8 @@ public class TagContainsKeywordsPredicateTest {
 
         // Multiple keywords, tag contains multiple keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues"));
-        assertTrue(predicate.test(new PersonBuilder().withTags(new String[]{"friends", "colleagues", "lover"}).build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags(
+                new String[]{"friends", "colleagues", "lover"}).build()));
 
         // Mixed-case keywords
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("fRIEndS"));
@@ -72,7 +73,8 @@ public class TagContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withTags(new String[]{"friends", "lover"}).build()));
 
         // Keywords match name, phone, email and address, but does not match tags
-        predicate = new TagContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street", "Alice"));
+        predicate = new TagContainsKeywordsPredicate(Arrays.asList(
+                "12345", "alice@email.com", "Main", "Street", "Alice"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAcademicMajor("Main Street").withTags("friends").build()));
     }
