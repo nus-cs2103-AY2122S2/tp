@@ -172,26 +172,6 @@ TAlent Assistant™'s development team has decided to stick with AB3's naming co
 
 </div>
 
-### Candidate model
-
-#### Previous Implementation
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-#### Current Implementation
-
-To suit the direction of where TAlent Assistant™ is headed to, the previous `Candidate` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
-
-List of new entities:
-1. `StudentId`
-2. `Course`
-3. `Seniority`
-4. `ApplicationStatus`
-5. `InterviewStatus`
-6. `Availability`
-
-<img src="images/CandidateModelClassDiagram.png" />
-
 ### Add feature
 
 #### What is the feature about?
