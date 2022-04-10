@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete -a 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -207,7 +207,21 @@ It is implemented in this way, so that it accurately reflects the number of `App
 the position. It would defeat the purpose if `PositionOffers` can be set to any number, as it would no longer be able to accurately
 keep track of offers handed out.
 
-### To Add: Interview feature?
+### Tracking Interview Status
+
+#### Implementation
+
+Currently, there are 5 possible status for interviews which represents where a candidate is in the hiring pipeline.
+* `Pending` - Interview has been created / scheduled, applicant yet to go for interview.
+* `Passed` - Applicant has passed the interview. A job **offer is automatically extended** to the applicant at this stage.
+* `Failed` - Applicant has failed the interview.
+* `Accepted` - Applicant has accepted the job offer. Applicant job role will be updated in Applicants tab.
+* `Rejected` - Applicant has rejected the job offer.
+
+The **activity diagram** below shows the workflows between different interview status and corresponding updates to `Position`
+and `Applicant` classes.
+
+![Activity diagram between different interview status](images/InterviewStatus.png)
 
 ### Adding of Data 
 
