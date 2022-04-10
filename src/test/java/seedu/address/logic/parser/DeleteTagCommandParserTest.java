@@ -16,7 +16,9 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_validCommand_success() throws ParseException {
         // single tag - accepted
-        assertParseSuccess(parser, "1 " + "2 ", new DeleteTagCommand(Index.fromOneBased(1), 2));
+        assertParseSuccess(parser, "1 " + "2", new DeleteTagCommand(Index.fromOneBased(1), 2));
+        assertParseSuccess(parser, "1 " + "2         ",
+                new DeleteTagCommand(Index.fromOneBased(1), 2)); // lot of spaces at end
     }
 
     @Test
@@ -37,5 +39,7 @@ public class DeleteTagCommandParserTest {
     public void parse_invalidTagNumber_failure() {
         assertParseFailure(parser, "1 two ",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 2 stringhere ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
     }
 }

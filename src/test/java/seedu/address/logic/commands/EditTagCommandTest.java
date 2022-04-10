@@ -21,13 +21,13 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class EditTagCommandTest {
-    private final Tag tag1 = VALID_TAG_FRIEND.get(0);
-    private final Tag tag2 = VALID_TAG_HUSBAND.get(0);
+    static final Tag TAG_1 = VALID_TAG_FRIEND.get(0);
+    static final Tag TAG_2 = VALID_TAG_HUSBAND.get(0);
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditTagCommand(null,
-                1, tag1));
+                1, TAG_1));
     }
 
     @Test
@@ -38,10 +38,10 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagEditedByPerson_editSuccessful() throws Exception {
         Person person = new PersonBuilder().withTags(new ArrayList<>(
-                List.of(tag1))).build();
+                List.of(TAG_1))).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
-        Tag editedTag = tag2;
+        Tag editedTag = TAG_2;
 
         Person tagAddedPerson = new PersonBuilder().withTags(new ArrayList<>(
                 List.of(editedTag))).build();
@@ -57,7 +57,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_indexOutOfBounds_throwsException() throws Exception {
         Index index = Index.fromOneBased(100);
-        Tag editedTag = tag2;
+        Tag editedTag = TAG_2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 1, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -72,7 +72,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagNumberNotPositive_throwsException() throws Exception {
         Index index = Index.fromOneBased(1);
-        Tag editedTag = tag2;
+        Tag editedTag = TAG_2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 0, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -87,7 +87,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagNumberOutOfBounds_throwsException() throws Exception {
         Index index = Index.fromOneBased(1);
-        Tag editedTag = tag1;
+        Tag editedTag = TAG_1;
         EditTagCommand editTagCommand = new EditTagCommand(index, 100, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -101,7 +101,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_duplicateTagAlreadyExists_throwsException() throws Exception {
-        ArrayList<Tag> personTagList = new ArrayList<>(List.of(tag1, tag2));
+        ArrayList<Tag> personTagList = new ArrayList<>(List.of(TAG_1, TAG_2));
         Person person = new PersonBuilder().withTags(personTagList).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
@@ -109,7 +109,7 @@ public class EditTagCommandTest {
         ModelManager modelManager = new ModelManager();
         modelManager.setAddressBook(addressBookBuilder.build());
 
-        Tag alreadyPresentTag = tag2;
+        Tag alreadyPresentTag = TAG_2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 1, alreadyPresentTag);
 
         assertThrows(CommandException.class, EditTagCommand.MESSAGE_DUPLICATE_TAG, () ->
@@ -123,8 +123,8 @@ public class EditTagCommandTest {
         int tagNumber1 = 3;
         int tagNumber2 = 5;
 
-        Tag tag1 = this.tag1;
-        Tag tag2 = this.tag2;
+        Tag tag1 = this.TAG_1;
+        Tag tag2 = this.TAG_2;
 
         assertEquals(new EditTagCommand(index1, tagNumber1, tag1),
                 new EditTagCommand(index1, tagNumber1, tag1)); // same values

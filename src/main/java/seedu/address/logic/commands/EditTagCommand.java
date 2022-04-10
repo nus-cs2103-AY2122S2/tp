@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a person to the address book.
+ * Edits the tag of a person in the address book.
  */
 public class EditTagCommand extends Command {
 
@@ -70,6 +70,14 @@ public class EditTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson));
     }
 
+    /**
+     * Edits {@code Tag} of {@code Person}
+     * @param personToEdit person whose tag should be edited
+     * @param tagNumber serial number of tag to be edited
+     * @param tag tag to replace original tag
+     * @return Person who is identical to personToEdit except for edited tag
+     * @throws CommandException if the new tag already exists in personToEdit's tag list
+     */
     private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
@@ -80,13 +88,9 @@ public class EditTagCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
-        tagList.set(tagNumber - 1, tag); // add exception later
+        tagList.set(tagNumber - 1, tag);
         newPerson.setTags(tagList);
         return newPerson;
-    }
-
-    public Tag getToAdd() {
-        return toAdd;
     }
 
     @Override
