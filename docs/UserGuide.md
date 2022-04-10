@@ -422,8 +422,8 @@ A: An error message colored in red will appear stating that you have typed an un
 ----------------
 ## Command Summary
 
-| Action                                                             | Format                                                                                                                    | Example                                                                                                         |
-|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Action       | Format           | Example        |
+|:------------:|:----------------:|:--------------:|
 | [Add a student](#add-a-student-add)                                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES] [act/MORE ACTIVITIES]`                    | `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01 cc/5A s/Negative act/badminton` |
 | [List all students](#list-all-students-list)                       | `list`                                                                                                                    | `list`                                                                                                          |
 | [Find student by name](#find-student-by-name-find)                 | `find NAME [MORE_NAME]`                                                                                                   | `find James Jake`                                                                                               |
@@ -439,7 +439,7 @@ A: An error message colored in red will appear stating that you have typed an un
 
 ## Glossary
 | Term      | Meaning                                 |
-|-----------|:----------------------------------------|
+|:---------:|:---------------------------------------:|
 | Parameter | Input supplied after the command        |
 | JSON      | A file type that UDT uses to store data |
 | csv       | A common file type used to store data   |
