@@ -525,6 +525,7 @@ Format: `exportcsv`
 
 Examples:
 * `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
+
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
