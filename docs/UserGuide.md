@@ -21,7 +21,7 @@ title: User Guide
     * [General find](#general-find)
     * [Precise find](#precise-find)
   * [Sorting the shows `sort`](#sorting-the-shows-sort)
-  * [Suggesting a show `suggest`](#suggest-a-show-suggest)
+  * [Suggesting a show `suggest`](#suggesting-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
