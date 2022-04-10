@@ -38,8 +38,23 @@ Given below are my contributions to the project.
         * Maintain a view state to keep track of user's latest viewing state.
     
 
-* **Contributions to the UG**: to be added soon
+* **Contributions to the UG**:
+
+    * Add patients' medical prescription section.
+    * Created Command Summary Section
+
 
 * **Contributions to the DG**: to be added soon
 
-* **Contributions to team-based tasks**: to be added soon
+
+* **Contributions to team-based tasks**:
+    * Keep track of project deadline
+    * Plan and schedule meeting time
+    * Distribute task to team members
+
+
+* **Community**:
+    * Reviews and Comments
+        * Provide reviews and comments to PR made by teammates. Pull requests: [#58](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/58), [#219](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/219)
+    * Beyond Team
+        * Reported bugs and suggestions for other team: [1](https://github.com/cheekean5848/ped/issues/3), [2](https://github.com/cheekean5848/ped/issues/2)
