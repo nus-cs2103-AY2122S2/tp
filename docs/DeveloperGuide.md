@@ -680,10 +680,43 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Generating a save file when there is no saved data found.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1.  Prerequisites: There is no `addressoc.json` file in a folder called `data`  located in the same directory as the jar file.
+    1.  Launch the app and enter the exit command (Note: a command must be entered for the data to be saved, so closing the app via the GUI will not work unless another command has already been entered).
 
-1. _{ more test cases …​ }_
+        Expected: An `addressoc.json` file containing the sample contact list and meeting list data is generated in the `data` folder located in the same directory as the jar file
+
+1. Handling an invalid save file.
+
+    1.  Prerequisites: There is already an `addressoc.json` file in the correct folder.
+    1.  Open the json file in a text editor and delete one line (eg. the first line)
+    1.  Launch the app
+
+        Expected: The contact list and meeting list are both empty.
+
+
+### Finding a meeting
+
+1. Finding a meeting by search terms of one type only.
+    1.  Test case: `findm d/12 03 2022`
+
+        Expected: The full list of meetings is still shown as the find operation is not carried out. Error details shown in the status message.
+    1.  Test case: `findm n/project`
+
+        Expected: All meetings with the word `project` (not case-sensitive) in their name are listed. For example, if the sample
+        meeting data is being used, the meetings `CS2103T project` and `CS2101 project` are listed.
+    1.  Test case: `findm d/12-03-2022 d/15-03-2022`
+
+        Expected: All meetings occurring on either `12-03-2022` **or** `15-03-2022` are listed. For example, if the sample meeting data is being used, the same 2 meetings are listed.
+
+1. Finding a meeting by search terms of different types.
+    1.  Test case: `findm n/project d/12-03-2022`
+
+        Expected: All meetings that both have the word `project` (not case-sensitive) in their name **and** occur on `12-03-2022` are listed. For example, if the sample
+        meeting data is being used, only the meeting `CS2103T project` is listed.
+    
+
