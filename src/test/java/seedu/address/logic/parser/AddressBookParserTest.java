@@ -54,9 +54,9 @@ import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.EditCompanyDescriptorBuilder;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EntryUtil;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.EntryUtil;
 
 public class AddressBookParserTest {
 
