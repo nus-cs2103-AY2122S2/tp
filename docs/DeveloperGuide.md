@@ -94,7 +94,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `UniteParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `UniteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniteParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the UNite data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Unite`, which `Person` references. This allows `Unite` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -141,13 +141,13 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both UNite data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `UniteStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.unite.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,13 +157,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Enhanced Person Object
 
-In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
+In the original add profile feature in the AB3 Address Book, all the `Person` objects are being stored in the `Unite`.
 
-Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and
-ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
+Now in UNite, we are storying them in `Unite`.
 
-In the original AB3 address book, each profile is modelled by one `Person` object, which
-consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
+Within it, it contains two class, i) `UniquePersonList` that keep tracks of the `Person` in UNite, and
+ii) `UniqueTagList` that keep tracks of the `Tag` in UNite.
+
+In the original AB3 address book, eachj `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
 diagram of a class diagram of the profiles in the AB3 Address Book.
 
 ![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
@@ -200,7 +201,7 @@ Given below is an example usage scenario of filter command.
 
 Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `filter family`.
 
-Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `FilterCommandParser` object.
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `FilterCommandParser` object.
 
 Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object
 if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new
@@ -236,7 +237,7 @@ Given below is an example usage scenario of grab command.
 
 Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `grab tele/1`.
 
-Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `GrabCommandParser` object.
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `GrabCommandParser` object.
 
 Step 3. The `GrabCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `GrabCommand` object
 if there is no parse exception.
@@ -245,41 +246,44 @@ Step 4. During the execution of grab command, a `CommandException` is thrown if 
 
 ![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GrabCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedUnite`. It extends `Unite` with an undo/redo history, stored internally as an `uniteStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedUnite#commit()` — Saves the current UNite state in its history.
+* `VersionedUnite#undo()` — Restores the previous UNite state from its history.
+* `VersionedUnite#redo()` — Restores a previously undone UNite state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitUnite()`, `Model#undoUnite()` and `Model#redoUnite()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedUnite` will be initialized with the initial UNite state, and the `currentStatePointer` pointing to that single UNite state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the UNite. The `delete` command calls `Model#commitUnite()`, causing the modified state of the UNite after the `delete 5` command executes to be saved in the `uniteStateList`, and the `currentStatePointer` is shifted to the newly inserted UNite state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitUnite()`, causing another modified UNite state to be saved into the `uniteStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitUnite()`, so the UNite state will not be saved into the `uniteStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoUnite()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous UNite state, and restores the UNite to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Unite state, then there are no previous Unite states to restore. The `undo` command uses `Model#canUndoUnite()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -292,17 +296,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoUnite()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the UNite to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `uniteStateList.size() - 1`, pointing to the latest UNite state, then there are no undone Unite states to restore. The `redo` command uses `Model#canRedoUnite()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the UNite, such as `list`, will usually not call `Model#commitUnite()`, `Model#undoUnite()` or `Model#redoUnite()`. Thus, the `uniteStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitUnite()`. Since the `currentStatePointer` is not pointing at the end of the `uniteStateList`, all UNite states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -372,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                   | add someone’s contact information        | update the address book or contact him/her if I need to|
+| `* * *`  | user                   | add someone’s contact information        | update UNite or contact him/her if I need to|
 | `* * *`  | user                   | delete someone’s contact information     |   clear and organize my contact list  if I need to |
 | `* * *`  | user                   | view a particular existing profile       | know his/her information such as name, year of study and faculty  |
 | `* * *`  | user                   | edit a profile                           | update the information if it is wrong or inaccurate|
