@@ -66,7 +66,9 @@ Each contact in TAPA represents a student, who can have the following fields:
 
 **:information_source: Note:** <br>
 
-* Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
+* Multiplicity refers to the number of instances of each field, that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
+
+* In TAPA, two students are considered as equal only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not student ID).
 
 * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
