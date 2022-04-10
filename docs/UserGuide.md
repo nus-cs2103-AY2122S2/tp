@@ -59,6 +59,8 @@ Some example commands you can try:
     - `exit` : Exits the app.
 6. Refer to the Features below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -133,6 +135,8 @@ Format: `help`
 2. Buttons to access the different help sections.
 3. Help contents.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all clients : `list`
 
 Shows a list of all clients in the address book.
@@ -154,6 +158,8 @@ All clients will be deleted! Use with caution.
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ## Client Management
 
@@ -437,6 +443,8 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 <div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
 If your changes to the data file makes its format invalid, RealEstatePro will discard all data and start with an empty data file at the next run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 # FAQ
 
