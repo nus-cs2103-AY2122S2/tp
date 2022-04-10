@@ -1,11 +1,14 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, 
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
 Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
 
-School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, 
+the education of the students.
 
 Through this user guide, you will learn how to use UDT effectively and efficiently, to manage COVID-19 cases in your schools.
 Features below are accompanied by instructions, figures and examples to help you understand how to use them.
@@ -26,6 +29,13 @@ A glossary is included at the end to clarify any technical or vague terms used.
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
+  - [Right-Click Help Menu](#right-click-help-menu)
+    - [Undo/Redo](#undoredo)
+    - [Cut/Copy/Paste](#cutcopypaste)
+    - [Delete](#delete)
+    - [Select All](#select-all)
+  - [Viewing help window](#viewing-the-help-window-help): `help`
+  - [Clearing the data](#clearing-the-data-clear): `clear`
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -81,22 +91,12 @@ Lastly, each information card contains the following details of the student and 
 6. Class
 7. COVID-19 Status
 
+|![Information Card](images/user-guide/infocardwithlabel.png)|
+|:--:|
+|*Figure 2 - Information Card*|
+
 With UDT, you can update and track COVID-19 Cases in your school, keep track of Close-Contacts, to perform timely updates to parents and Next-of-Kin.
 Filter through the endless list of students with a simple command to extract details on the cases by class, or by activities (CCAs etc.).
-
-### Automation of `Status`
-`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
-- UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
-- UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
-
-<div markdown="block" class="alert alert-info">
-
-> :information_source: **Note:**  UDT tracks COVID statuses of those listed in the tracker only, and does not account for external cases.
-
-</div>
-
-#### Limitations of automation
-UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
 
 ### Graphical User Interface
 Graphical User Interface (GUI) has a **locked aspect ratio** to prevent the GUI elements from producing any unintended cosmetic problems
@@ -117,14 +117,16 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
-  - `NAME`, `ADDRESS`, `ACTIVITY` takes in alphanumeric text
+  - `NAME` takes in alphabetical characters and have a character limit of 50  
+  - `ADDRESS` takes in any characters and have a character limit of 70 
+  - `ACTIVITY` takes in alphanumeric text and have a character limit of 50 
   - `CLASS` takes in a number and alphabet pair
     - Eg. `4A`
   - `EMAIL` follows the standard email formatting
-    - Accepts inputs such as alphanumeric inputs, "-", "_", and "+"
+    - Accepts input such as alphanumeric inputs, "-", "_", and "+"
     - Eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
-    - Requires at least 3 numbers
+    - Requires at least 3 numbers up to a maximum of 15 numbers
   - `STATUS` takes either of these texts `Positive`, `Negative`, `Close-Contact`
     - `STATUS` is case-sensitive and should strictly follow the texts stated above
 - Examples:
@@ -135,7 +137,7 @@ Adds a student to the tracking list
 
 > :bulb: **Tips:**  
 > - Multiple activity tags can be added to a single student by using multiple `act/` prefixes  
->   - Eg. `act/choir act/dance`  
+>   - Eg. `act/choir act/dance`
 > - A student can also have no activity tags  
 > - User inputs can be in any order
 
@@ -161,7 +163,7 @@ Shows a list of all students in the application.
 
 |![list command](images/user-guide/list.png)|
 |:--:|
-|*Figure 2 - `list` Command*|
+|*Figure 3 - `list` Command*|
 
 ## Find student by name: `find`
 Find an existing student in the application by their name
@@ -176,12 +178,12 @@ Find an existing student in the application by their name
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
 
-> :bulb: **Tip:** find multiple students at the same time by inputting their names in the same command
+> :bulb: **Tip:** find multiple students at the same time by typing their names in the same command
 > - Eg. `find alex bernice` will find students _"Alex Yeoh"_ and _"Bernice Yu"_
 
 |![find command](images/user-guide/find.png)|
 |:--:|
-|*Figure 3 - `find` Command*|
+|*Figure 4 - `find` Command*|
 
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
@@ -195,7 +197,7 @@ Find an existing student in the application by their Covid-19 Status
   
 |![find status command](images/user-guide/findstatus.png)|
 |:--:|
-|*Figure 4 - `findstatus` Command*|
+|*Figure 5 - `findstatus` Command*|
 
 ## Find student by class: `findclasscode`
 Finds an existing student in the application by their class
@@ -207,7 +209,7 @@ Finds an existing student in the application by their class
 
 |![find classcode command](images/user-guide/findclasscode.png)|
 |:--:|
-|*Figure 5 - `findclasscode` Command*|
+|*Figure 6 - `findclasscode` Command*|
 
 ## Find student by activity: `findactivity`
 Finds an existing student in the application by the activities they are participating in
@@ -222,7 +224,7 @@ Finds an existing student in the application by the activities they are particip
 
 |![find activity command](images/user-guide/findactivity.png)|
 |:--:|
-|*Figure 6 - `findactivity` Command*|
+|*Figure 7 - `findactivity` Command*|
 
 ## Edit student details: `edit`
 Edits an existing student's details in the list Index provided and the parts that you want to edit
@@ -251,7 +253,7 @@ Edits an existing student's details in the list Index provided and the parts tha
 
 |![edit command](images/user-guide/edit.png)|
 |:--:|
-|*Figure 7 - `edit` Command*|
+|*Figure 8 - `edit` Command*|
 
 ## Delete a student: `delete`
 Deletes the specified person from the application.
@@ -271,7 +273,96 @@ Deletes the specified person from the application.
 
 |![delete command](images/user-guide/delete.png)|
 |:--:|
-|*Figure 8 - `delete` Command*|
+|*Figure 9 - `delete` Command*|
+
+### Automation of `Status`
+`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
+- UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
+- UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
+
+<div markdown="block" class="alert alert-info">
+
+> :information_source: **Note:**  UDT tracks COVID statuses of those listed in the tracker only, and does not account for external cases.
+
+</div>
+
+#### Limitations of automation
+- UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
+`Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
+changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
+in the *next iteration (v1.5)*.
+- If student A recovers from COVID-19 (`Status` is changed from `Positive` to `Negative`), A's status will be `Negative` even though there are still `Positive` cases
+related to A. However, if a student related to A by `ClassCode` or `Activity` becomes COVID-19 positive after A recovers, A's status will be listed as `Close-Contact`
+
+## Right-Click Help Menu
+
+|![RightClick](images/user-guide/rightclick.png)|
+|:--:|
+|*Figure 10 - Right-Click Help Menu*|
+
+The following few features can be achieved through right-clicking the Command Line.
+Some features have keyboard shortcuts as well, so do read on to find out more.
+
+### Undo/Redo: 
+Undo or redo what you have been typing in the Command Line **BEFORE** it has been executed/entered, 
+allowing you to make any edits as required.
+Refer to **_Figure 10_** above to see the menu.
+
+Using a Mouse:
+- Right-click on the Command Line to open the menu containing the `undo` and `redo` buttons
+- Click on the respective buttons to undo/redo what you have typed
+
+**OR**
+
+Using a Keyboard:
+- `ctrl+z` to undo
+- `ctrl+y` to red
+
+> :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
+
+### Cut/Copy/Paste:
+`Cut` any text that has been highlighted.
+
+`Copy` any text that has been highlighted.
+
+`Paste` any text that is currently stored in your clipboard.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Keyboard Shortcuts
+> - `ctrl+x` to cut
+> - `ctrl+c` to copy
+> - `ctrl+v` to paste
+
+</div>
+
+### Delete:
+Removes any text that has been highlighted.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use the `Backspace` key or `del` key on your keyboard to perform the same command
+
+</div>
+
+### Select All:
+Highlights all the text that is currently in the Command Box
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use this to highlight everything so that you can follow up with a `cut`, `copy` or `delete` command.
+
+</div>
+
+## Viewing the help window: `help`
+Displays a list of commands to use and a link to our user guide. A `Copy URL` button is provided to copy the link.
+- Format: `help`
+  - Any user input after `help` is ignored
+    - `help 12345 john` is the same as `help`
+
+|![help command](images/user-guide/help.png)|
+|:--:|
+|*Figure 11 - `help` Command*|
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
@@ -347,9 +438,8 @@ A: An error message colored in red will appear stating that you have typed an un
 ----------------
 
 ## Glossary
-
-| Term      | Meaning          |
-|:---------:|:----------------:|
-| Parameter | Input supplied after the command          |
-| JSON      | A file type that UDT uses to store data   |  
-
+| Term      | Meaning                                 |
+|:---------:|:---------------------------------------:|
+| Parameter | Input supplied after the command        |
+| JSON      | A file type that UDT uses to store data |
+| csv       | A common file type used to store data   |

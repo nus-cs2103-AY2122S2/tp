@@ -32,7 +32,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Status;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -97,10 +96,10 @@ public class EditCommandTest {
         ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
         List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                .filter(student -> (student.hasSameClassCode(editedPerson)
                         || student.hasSameActivity(editedPerson))
                         && !student.isSamePerson(editedPerson)
-                        && !student.getStatus().toString().equals(Status.POSITIVE))
+                        && !student.isPositive())
                 .collect(Collectors.toList());
 
         for (Person classmate : filteredByClassCodeAndActivityList) {
@@ -131,18 +130,17 @@ public class EditCommandTest {
         ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
         List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                .filter(student -> (student.getClassCode().toString()
-                        .equals(editedPerson.getClassCode().toString())
+                .filter(student -> (student.hasSameClassCode(editedPerson)
                         || student.hasSameActivity(editedPerson))
                         && !student.isSamePerson(editedPerson))
                 .collect(Collectors.toList());
 
         for (Person classmate : filteredByClassCodeAndActivityList) {
             List<Person> positiveRelatedToPerson = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                        .equals(classmate.getClassCode().toString()) || student.hasSameActivity(classmate))
-                        && !student.isSamePerson(editedPerson)
-                        && student.getStatus().toString().equals(Status.POSITIVE))
+                    .filter(student -> (student.hasSameClassCode(classmate)
+                            || student.hasSameActivity(classmate))
+                            && !student.isSamePerson(editedPerson)
+                            && student.isPositive())
                     .collect(Collectors.toList());
 
             if (positiveRelatedToPerson.size() == 0) {

@@ -27,6 +27,8 @@ public class FindClassCodeCommandParser implements Parser<FindClassCodeCommand> 
 
         String[] classCodeKeywords = trimmedArgs.split("\\s+");
 
+        assert classCodeKeywords.length > 0 : "Keywords for findclasscode command cannot be empty";
+
         return new FindClassCodeCommand(new ClassCodeContainsKeywordsPredicate(Arrays.asList(classCodeKeywords)));
     }
 

@@ -26,6 +26,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
@@ -90,6 +91,9 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "An edited person should not be null";
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -119,22 +123,24 @@ public class EditCommand extends Command {
      */
     private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.NEGATIVE)
-                && editedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
+
+        if ((personToEdit.isNegative() || personToEdit.isCloseContact()) && editedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson)
-                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                            && !student.isPositive())
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
-                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                model.setPerson(currentPerson, editedPersonStatus);
+                assert currentPerson != null : "A person should not be null";
+                ModelManager.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         }
     }
@@ -145,32 +151,31 @@ public class EditCommand extends Command {
      */
     private static void batchUpdatePositiveToNegative(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
-                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
+
+        if (personToEdit.isPositive() && editedPerson.isNegative()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson))
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
+                assert currentPerson != null : "A person should not be null";
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(editedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                    model.setPerson(currentPerson, editedPersonStatus);
+                    ModelManager.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 }
             }
         }
@@ -180,7 +185,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());

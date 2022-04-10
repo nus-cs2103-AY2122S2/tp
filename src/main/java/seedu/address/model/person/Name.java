@@ -9,9 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int NAME_SIZE_MIN_LIMIT = 2;
+    public static final int NAME_SIZE_MAX_LIMIT = 50;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-
+            "Names should only contain alphabet characters and spaces, it should not be blank, and must be between"
+                    + "1 and 50 characters";
+    public static final String MESSAGE_NAME_LIMIT = "Student's name cannot be shorter than " + NAME_SIZE_MIN_LIMIT
+            + " characters and cannot be longer than " + NAME_SIZE_MAX_LIMIT + ". ";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

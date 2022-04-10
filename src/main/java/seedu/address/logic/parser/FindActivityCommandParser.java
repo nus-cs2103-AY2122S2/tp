@@ -27,6 +27,8 @@ public class FindActivityCommandParser implements Parser<FindActivityCommand> {
 
         String[] activityKeywords = trimmedArgs.split("\\s+");
 
+        assert activityKeywords.length > 0 : "Keywords for findactivity command cannot be empty";
+
         return new FindActivityCommand(new ActivityContainsKeywordsPredicate(Arrays.asList(activityKeywords)));
     }
 }

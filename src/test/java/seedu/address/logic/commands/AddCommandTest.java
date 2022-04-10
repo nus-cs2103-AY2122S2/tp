@@ -33,7 +33,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -72,10 +71,10 @@ public class AddCommandTest {
 
         ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
         List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                .filter(student -> (student.getClassCode().toString().equals(validPerson.getClassCode().toString())
+                .filter(student -> (student.hasSameClassCode(validPerson)
                         || student.hasSameActivity(validPerson))
                         && !student.isSamePerson(validPerson)
-                        && !student.getStatus().toString().equals(VALID_STATUS_POSITIVE))
+                        && !student.isPositive())
                 .collect(Collectors.toList());
 
         for (Person classmate : filteredByClassCodeAndActivityList) {
