@@ -320,7 +320,7 @@ Using a Mouse:
 
 Using a Keyboard:
 - `ctrl+z` to undo
-- `ctrl+y` to red
+- `ctrl+y` to redo
 
 > :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
 
