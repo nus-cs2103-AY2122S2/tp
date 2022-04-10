@@ -346,16 +346,16 @@ The Sequence Diagrams below summarizes the various steps involved:
 ---
 
 ### Add property for buyer feature
-The `add-ptb` command uses a similar mechanism as the `addbuyer` command mentioned [above](#add-buyer-feature), with the following differences:
+The `add-ptb` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
 
 1. An index needs to be specified along with the necessary fields
     E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
-2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 0 and Smaller than or equal to the size of the Buyer list).
-3. The updated buyer remains in the same position as before, while a new buyer is added to the end of the list
+2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and Smaller than or equal to the size of the displayed buyer list).
+3. The updated buyer remains in the same position as before.
 
 **\[Proposed\]** Alternatives considered:
 
-- Given the time, the add property to buy feature can be integrated with the `addbuyer` command to allow users to add properties with the buyer,
+- Given the time, the add property to buy feature can be integrated with the `add-b` command to allow users to add properties with the buyer,
 instead of doing it in 2 commands. 
   - Pros:
     - More flexibility for experienced users
@@ -367,11 +367,6 @@ instead of doing it in 2 commands.
   - Cons:
     - Hard to implement
     - Error prone
-
-### \[Proposed\] Add Property to sell feature
-The `add-pts` command is very similar to the above command with only slight differences:
-1. An additional field is required: `address` of the seller's house
-
 
 ### `sort` feature
 The `sort` command mechanism can be broken down into the following steps:
@@ -679,8 +674,8 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Run `java -jar addressbook.jar` in the directory containing the jar file.
+   3. Alternatively, double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -688,23 +683,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a client
-
-1. Deleting a client while all clients are being shown
-
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
