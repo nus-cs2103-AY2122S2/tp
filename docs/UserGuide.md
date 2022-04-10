@@ -390,7 +390,6 @@ Adds a new item to iBook.
 Format: `add-item INDEX e:EXPIRY_DATE q:QUANTITY`
 
 * The index refers to the index of product as shown in the displayed product list.
-* Index refers to the index of the product.
 * The index **must be a positive integer** (1, 2, 3, …).
 * Only a single item would be added at a time.
 
