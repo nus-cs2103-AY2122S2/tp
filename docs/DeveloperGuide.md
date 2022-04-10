@@ -1275,7 +1275,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Must have an existing CSV File with contact information.
    
-   2. Test case: CSV File was exported previously from another instance of ContaX, or is in proper ContaX format (ContaX format details can be found [here](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html#exporting-the-data-exportcsv) <br>
+   2. Test case: CSV File was exported previously from another instance of ContaX, or is in proper ContaX format (ContaX format details can be found [here](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html#exporting-the-data-exportcsv)) <br>
       **Expected:** Entries in the CSV file are successfully appended into ContaX.
    
    3. Test case: CSV File was in another format but has the necessary entries of each contact (Name, Phone, Email, Address, Tags). `importcsv` command executed specifying each of the column numbers to read from. <br>
