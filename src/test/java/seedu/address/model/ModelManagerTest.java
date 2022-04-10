@@ -136,7 +136,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void clearCommandHistory_addThenClearCommandHistory_() {
+    public void clearCommandHistory_addThenClearCommandHistory_commandHistorySameAsNewCommandHistory() {
         String testCommandText = ListCommand.COMMAND_WORD;
         modelManager.addToCommandHistory(testCommandText);
         modelManager.clearCommandHistory();
