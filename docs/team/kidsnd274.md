@@ -65,7 +65,8 @@ to see the code I've contributed.
    - Added sequence diagrams to show how the input is parsed and how the command is executed.
    - Added a step-by-step example of how the entire command execution process is done.
 3. Added table of contents and cleaned up formatting
-4. Added manual testing instructions for:
+4. Added manual testing instructions for: (Pull request 
+[#266](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/266))
    - First launch and saving window preferences
    - Adding lesson and student details
 

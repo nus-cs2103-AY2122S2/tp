@@ -39,6 +39,9 @@ title: Developer Guide
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [First launch and saving window preferences](#first-launch-and-saving-window-preferences)
+  * [Adding a lesson / Viewing a lesson's details](#adding-a-lesson--viewing-a-lessons-details)
+  * [Adding a student / Viewing a student's details](#adding-a-student--viewing-a-students-details)
 
 ## **Introduction**
 
@@ -683,6 +686,57 @@ window preferences when you close the program.
    4. Test Case: Restoring window preferences\
    Expected: When relaunching the program, the window position and size should be restored from where you previously
    left off.
+
+### Adding a lesson / Viewing a lesson's details
+TeachWhat! allows you to store details of a lesson and view it back later on.
+
+1. Test case 1: Adding a temporary lesson
+   1. Condition: No other lesson should have a conflicting timeslot.
+   2. Enter the command `addlesson -n Sec 2 Biology Group Tuition -s Biology
+      -a Blk 11 Ang Mo Kio Street 74, #11-04
+      -d 19-12-2022 -t 18:00 -h 2 -m 15`.
+   3. Expected: The lesson should be added to the list, with its details shown on the card.
+2. Test case 2: Adding a recurring lesson
+   1. Condition: No other lesson should have a conflicting timeslot.
+   2. Enter the command `addlesson -r -n Sec 2 Chemistry Group Tuition -s Biology
+      -a Blk 11 Ang Mo Kio Street 74, #11-04
+      -d 20-12-2022 -t 18:00 -h 2 -m 15`
+   3. Expected: The lesson should be added to the list, with its details shown on the card.
+3. Test case 3: Adding a conflicting lesson
+   1. Condition: Should have another class with a conflicting timeslot.
+   2. Enter the command `addlesson -n Sec 2 Mathemathics Group Tuition -s Biology
+      -a Blk 11 Ang Mo Kio Street 74, #11-04
+      -d 19-12-2022 -t 19:00 -h 2 -m 15`
+   3. Expected: In this example, the entered lesson conflicts with the command entered in Test Case 1. TeachWhat! should
+   give you a warning that an existing lesson has a conflicting timeslot. The new lesson will not be added to the list.
+   The list should also be filtered to show you the conflicting lessons.
+4. Test case: Viewing a temporary lesson's details
+   1. Condition: An existing temporary lesson should be in the list.
+   2. Enter the command `listlessons`.
+   3. Assuming an existing temporary lesson has an index of 1, enter the command `lesson 1`.
+   4. Expected: The details of that temporary lesson should be shown on the right.
+5. Test case: Viewing a recurring lesson's details
+   1. Condition: An existing recurring lesson should be in the list.
+   2. Enter the command `listlessons`.
+   3. Assuming an existing recurring lesson has an index of 2, enter the command `lesson 2`.
+   4. Expected: The details of that recurring lesson should be shown on the right. A recurring lesson is denoted by the
+   green tag which is labelled `recurring`.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note that:**<br>
+The list of lessons displayed is sorted by the next upcoming lesson date.
+</div>
+
+### Adding a student / Viewing a student's details
+TeachWhat! allows you to store details of a student and view it back later on.
+
+1. Test case 1: Adding a student
+   1. Enter the command `addstudent -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t friends -t owesMoney`.
+   2. Expected: The student should be added to the list, with its details shown on the card.
+2. Test case 2: Viewing a student's details
+   1. Condition: An existing student should be in the list.
+   2. Assuming an existing student has an index of 1, enter the command `student 1`.
+   3. Expected: The details of that student should be shown on the right.
 
 ### Deleting a student
 
