@@ -23,6 +23,7 @@ Given below are my contributions to the project.
   * Highlights: This enhancement is used in the batch update status feature. 
   * Credits: *{Jun Hong, Joshua}*
 
+
 * **New Feature**: Batch update status when a person recovers [\#76](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/76)
   * What it does: 
     * When a person recovers (`Status` changes from `Positive` to `Negative`) and there is no person in the same
@@ -33,6 +34,7 @@ Given below are my contributions to the project.
   persons with `Close-Contact` status having the same `ClassCode` as the recovered person should change to `Negative`.
   * Highlights: This feature is called every time a person's `Status` is changed from `Positive` to `Negative`. 
   It requires a check whether there are still positive cases in the `ClassCode` of the recovered person.
+
 
 * **New Feature**: Batch update status based on the same activities [\#112](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/112)
   * What it does: Considers those with the same `Activity` close contacts instead of only those with the same 
@@ -48,6 +50,7 @@ Given below are my contributions to the project.
   * Highlights: One person can have multiple `Activity` so the implementation is not the same as the `ClassCode` 
   only implementation since one person can only have one `ClassCode`.
 
+
 * **JUnit Test**:
   * Added test methods for:
     * Batch update status feature [\#71](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/71)
@@ -56,13 +59,16 @@ Given below are my contributions to the project.
     * `FindClassCode` command [\#175](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/175)
     * `FindStatus` command [\#175](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/175)
 
+
 * **Enhancements to existing features**:
   * Displayed `Activity` on persons' cards [\#78](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/78)
   * Updated UI by adding different text colors according to `Status` [\#103](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/103)
   * Applied abstraction to different parts of the code [\#113](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/113) and [\#174](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/174)
   * Added assertions to the code [\#176](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/176)
 
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=louisdavinlie&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+
 
 * **Documentation**:
   * User Guide:
@@ -79,6 +85,7 @@ Given below are my contributions to the project.
     * Added a sequence diagram for findactivity command execution [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
     * Updated the documentation for the implementation of batch update with respect to the incorporation of the `activity` attribute [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
     * Added and edited explanations for the role of batch update in AddCommand, DeleteCommand and EditCommand [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
+
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
