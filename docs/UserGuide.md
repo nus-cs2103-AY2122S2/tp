@@ -171,7 +171,7 @@ Format: `help [COMMAND]`
 
 * Enter optional parameter `COMMAND` to view the usage for that command.
 ![meet Help Message](images/meetHelpMessage.png)
-* Leave parameter blank to view message explaining how to access help page and the usage of all commands.
+* Entering only the `help` will allow you to view message explaining how to access help page and the usage of all commands.
 
 Example:
 
@@ -303,7 +303,7 @@ Format: `flag NAME`
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names.
   * Input the position on the list of the client you wish to edit.
-* A flagged client will have **red** tab on the left shown below:
+* A flagged client will have **red** tab on the left as shown below:
 ![flagged_client](images/flaggedClient.png)
 
 Example:
@@ -354,7 +354,7 @@ To exit out of this mode and search result, simply run `list` to show all client
 
 ### Scheduling / Rescheduling a meeting: `meet`
 
-Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+Schedules a meeting for the client with the specified `NAME` with the `DATE` and `TIME` of the meeting specified.
 The same command can be used to reschedule a meeting with the client.
 
 Format: `meet NAME d/DATE t/TIME`
@@ -370,7 +370,7 @@ Example:
 
 ### Canceling a meeting: `meet`
 
-Cancels current meeting with the `NAME` given of the client.
+Cancels current meeting for the client with the specified `NAME`.
 
 Format: `meet NAME c/`
 
