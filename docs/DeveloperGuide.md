@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project would not have been possible without the help of [Ivan](https://github.com/wpinrui), and [prof Damith](https://github.com/damithc)
+This project would not have been possible without the help of [Ivan](https://github.com/wpinrui), and [prof Damith](https://github.com/damithc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -471,13 +471,12 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 persons and respond under 3s for all user inputs.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The program should not have functionalities sharing data with others.
-5. Raw data stored must be human-readable and easy to edit for power users to edit. (at their own risk)
+5. Raw data stored must be human-readable and easy to edit for power users. (at their own risk)
 6. Product should be able to work without internet connection.
 7. User commands must be easy to understand and use.
-8. HackNet must respond to all user inputs under 3s.
 9. HackNet must be free of charge and open sourced.
 10. HackNet must be able to run after downloading and not require installation.
 

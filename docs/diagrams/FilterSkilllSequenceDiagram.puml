@@ -30,17 +30,17 @@ deactivate SkillSet
 create PersonContainsSkillPredicate
 FilterSkillCommandParser -> PersonContainsSkillPredicate : new PersonContainsSkillPredicate(skillSet)
 activate PersonContainsSkillPredicate
-PersonContainsSkillPredicate --> FilterSkillCommandParser : personContainsSkillPredicate
+PersonContainsSkillPredicate --> FilterSkillCommandParser : predicate
 deactivate PersonContainsSkillPredicate
 
 create FilterSkillCommand
-FilterSkillCommandParser -> FilterSkillCommand : new FilterSkillCommand(p)
+FilterSkillCommandParser -> FilterSkillCommand : new FilterSkillCommand(predicate)
 activate FilterSkillCommand
 
-FilterSkillCommand --> FilterSkillCommandParser : f
+FilterSkillCommand --> FilterSkillCommandParser : command
 deactivate FilterSkillCommand
 
-[<--FilterSkillCommandParser : f
+[<--FilterSkillCommandParser : command
 deactivate FilterSkillCommandParser
 destroy FilterSkillCommandParser
 
