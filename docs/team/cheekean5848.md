@@ -58,4 +58,3 @@ history by pressing the `↑` and `↓` arrow keys.
         * Provide reviews and comments to PR made by teammates. Pull requests: [#58](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/58), [#219](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/219)
     * Beyond Team
         * Reported bugs and suggestions for other team: [1](https://github.com/cheekean5848/ped/issues/3), [2](https://github.com/cheekean5848/ped/issues/2)
-    
