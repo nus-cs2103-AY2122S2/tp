@@ -71,6 +71,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Added implementation details for the duplicate detection feature (PR [\#267](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/267))
     * Updated UML diagrams ModelClassDiagram and BetterModelClassDiagram (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93), [\#109](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/109))
     * Added instructions for manual testing (PR [\#278](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/278))
+    * Updated non-functional requirement and glossary (PR [\#291](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/291))
     * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165))
     <br><br>
     
