@@ -128,6 +128,7 @@ Format: `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL`
 * The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * All tasks that are assigned to the edited employee will be updated to reflect the new changes of the employee.
+* No 2 Employees should have the same name, phone number or email.
 
 Examples:
 * `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. All tasks that are assigned to the 1st employee will be updated to reflect the new changes of the employee.
