@@ -21,10 +21,16 @@ public class AddressBookHistory {
         return addressBooks;
     }
 
+    /**
+     * Adds an AddressBook to the list of AddressBooks in AddressBookHistory.
+     */
     public void addAddressBook(AddressBook addressBook) {
         addressBooks.add(new AddressBook(addressBook));
     }
 
+    /**
+     * Returns true if AddressBookHistory is empty.
+     */
     public boolean isEmpty() {
         return addressBooks.isEmpty();
     }

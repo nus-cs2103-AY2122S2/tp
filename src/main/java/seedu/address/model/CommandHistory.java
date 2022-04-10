@@ -11,6 +11,13 @@ public class CommandHistory {
     public CommandHistory() {}
 
     /**
+     * Returns the list of previously executed commands.
+     */
+    public ArrayList<String> getPreviousCommands() {
+        return commands;
+    }
+
+    /**
      * Returns true if command history does not contain any commands.
      * @return true if command history does not contain any commands
      */
