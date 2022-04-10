@@ -12,6 +12,9 @@ public class UserImageTest {
         assertTrue(success.equals(
                 new UserImage(new FilePath("./src/test/resources/images/success.png"), "success")));
 
+        //tests same object
+        assertTrue(success.equals(success));
+
         //tests different description
         assertFalse(success.equals(
               new UserImage(new FilePath("./src/test/resources/images/success.png"), "fail")));
@@ -40,6 +43,13 @@ public class UserImageTest {
         //tests file that is not an image
         FilePath text = new FilePath("./src/test/resources/images/text.txt");
         assertFalse(UserImage.isImage(text));
+    }
+
+    @Test
+    public void equals() {
+        UserImage success = new UserImage(new FilePath("./src/test/resources/images/success.png"), "success");
+        //Tests other types of objects
+        assertFalse(success.equals(new Object()));
     }
 }
 

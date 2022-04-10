@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of HDB properties.
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of HDB/Condominium properties.
 The app also includes various tools which aims to help agents in their work.
 
 # Reference
@@ -24,7 +24,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Deleting a client: `delete`](#deleting-a-client-delete)
   - [Favourite a client: `favourite`](#favourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
-  - [Finding clients by keyword: `find`](#locating-clients-by-name-find)
+  - [Finding clients by keyword: `find`](#finding-clients-by-keyword-find)
   - [Sorting clients: `sort`](#sorting-clients-sort)
 - [Tools](#tools)
   - [Matching properties and preferences: `match`](#matching-properties-and-preferences-match)
@@ -51,7 +51,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - `list` : Lists all client information.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pr/north,123 Street,1-room,$300000` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` owns the property `north,123 Street,1-room,$300000`and is a seller in the RealEstatePro app.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pr/north,123 Street,1-room,$300000` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01`, who owns the property `north,123 Street,1-room,$300000`and is a seller in the RealEstatePro app.
     - `delete 3` : Deletes the 3rd client shown in the current list.
     - `clear` : Deletes all client information.
     - `exit` : Exits the app.
@@ -72,8 +72,8 @@ Some example commands you can try:
 - Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
-- Inputting information after `pr/` & `p/` indicates the type of property a client is selling or buying.<br>
-  e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+- Inputting information after `pr/` & `pf/` indicates the type of property a client is selling or the property preference that a client is looking to buy.<br>
+  e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` which means that this client is a seller looking to sell a 2-room property at Block 123 located in the East, with a price of $550000.<br>More information about the required format of properties/preferences can be found in the next section.
 
 - client parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
@@ -107,7 +107,7 @@ Some example commands you can try:
 
 **:information_source: Notes about the image format:**<br>
 
-- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted.
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted. [exp. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pf/north,123 Street,1-room,$300000 i/Livingroom(blk123).jpg:Living room of Block 123 #01-01`]
 
 </div>
 
@@ -169,10 +169,10 @@ A client is either a `buyer`, or `seller` based on whether he has a property or 
 
 Examples:
 
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/living.png:living room`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/Betsy Crowe.png:Profile Picture of Betsy Crowe`
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 
-    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addJohnDoeResult.png)
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
 ### Editing a client: `edit`
 
@@ -189,9 +189,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd client to be `Betsy Crower` and updates the 2nd client to have a `preference` turning the
-2nd client into a `buyer`.
-- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing properties.
+- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd client to be `Betsy Crower` and with a `preference`, turning this
+client into a `buyer`.
+- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing properties/preferences.
 - `edit 2 i/Living.png:living room` Edits 2nd client to only have `Living.png` and removes all other images.
 
 
@@ -215,9 +215,11 @@ Examples:
 
 ### Favourite a client: `favourite`
 
-Favourites the specified client in the RealEstatePro represented by a star as show below. The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
+Favourites the specified client in the RealEstatePro represented by a star as shown below. 
 
-![images/Favouritestar.png](images/Favouritestar.png)
+The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
+
+![images/user-guide/favouritingBerniceYu.png](images/user-guide/favouritingBerniceYu.png)
 
 Format: `favourite INDEX`
 
@@ -239,6 +241,8 @@ Format:  `fw`
 
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
+![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
+
 ### Finding clients by keyword: `find`
 
 Finds clients whose specified attribute contain any of the given keywords.
@@ -254,8 +258,7 @@ Format: `find ATTRIBUTE KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find name John` returns `john` and `John Doe`
-- `find name sam elon` returns `Sam Yeo`, `Elon Musk`
+- `find name robin johan` returns `Robin Hood`, `Johan Ng`
 - `find phone 99272758` returns `Bernice Yu`
 - `find email charlotte@example.com` return `Charlotte Oliveiro`
 - `find address 436` return `David Li`
@@ -273,7 +276,7 @@ Examples:
 - `find usertype seller` return `Bernice Yu`, `David Li`, `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
 - `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
-    ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
+    ![images/user-guide/findRobinJohan.png](images/user-guide/findRobinJohan.png)
 
 ### Sorting clients: `sort`
 
@@ -312,10 +315,11 @@ Examples:
 
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: <b>Tip:</b>
 To sort by number of properties in the default order, but with buyers shifted to the bottom of the list, sort by user type in reverse order, followed by number of properties in default order, i.e., `sort !usertype num_property`.
-![images/user-guide/sortReverseUserTypeNumPropertiesResult.png](images/user-guide/sortReverseUserTypeNumPropertiesResult.png)
 </div>
+
+![images/user-guide/sortReverseUserTypeNumPropertiesResult.png](images/user-guide/sortReverseUserTypeNumPropertiesResult.png)
 
 ## Tools
 ### Matching properties and preferences: `match`
@@ -343,7 +347,7 @@ Format `upload INDEX [i/FilePath:description]`
 
 ### View image of client: `viewimage`
 
-View images that are associated with a client in another window.
+Opens a new window that displays the images associated to a client.
 
 Format `viewimage INDEX`
 
@@ -400,11 +404,12 @@ Format: `rm`
 
 
 ### Displaying statistics: `stats`
-<img src="images/user-guide/Stats.png" height="400px">
 
-Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region namely { North, South, East, West, Central }.
 
 Format: `stats`
+
+<img src="images/user-guide/Stats.png" height="400px">
 
 ## Future Features **[Coming soon]**
 1. More types of sizes and increased details such as floor size, landed properties.
@@ -423,7 +428,7 @@ RealEstatePro data are saved in the hard disk automatically after any command th
 
 RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestatepro.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
 If your changes to the data file makes its format invalid, RealEstatePro will discard all data and start with an empty data file at the next run.
 </div>
 
