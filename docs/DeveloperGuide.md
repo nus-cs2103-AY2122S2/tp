@@ -362,11 +362,11 @@ There are 2 classes that represent items in the schedule, namely
 
 Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. The classes are structured such that common scheduling-related logic are abstracted into the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
 
-<img src="images/ScheduleItemClassDiagram.png" width="350px" />
+![Parital Schedule Item Diagram](images/ScheduleItemClassDiagram.png)
 
 In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` objects through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
-The time-related methods of note implemented by `ScheduleItem` are:
+The scheduling-related methods of note implemented by `ScheduleItem` are:
 
 * Getters `getStartDateTime()` and `getEndDateTime()`
 * Comparator helper method `getComparableDateTime()`

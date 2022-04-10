@@ -37,9 +37,9 @@ class "<<interface>>\n Comparable<T> " as Comparable {
     compareTo(T)
 }
 
-AppointmentSlot -[hidden]right- Appointment
+
 AppointmentSlot -up-|> ScheduleItem
-Appointment -up-|> ScheduleItem
+Appointment -left-|> ScheduleItem
 ScheduleItem .up.|> TemporalComparable
 TemporalComparable -right-|> Comparable
 
