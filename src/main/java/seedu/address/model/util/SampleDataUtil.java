@@ -56,19 +56,19 @@ public class SampleDataUtil {
         samplePos.increment();
         return new Position[]{
             new Position(new PositionName("Senior Software Developer"),
-                    new Description("The highest paying job in the company\nMore than 5 years experience"),
+                    new Description("The highest paying job in the company. More than 5 years experience."),
                     new PositionOpenings("3"), getRequirementSet("Java", "C++")),
-            new Position(new PositionName("Useless IT Intern"),
-                    new Description("Need to hire to fill the quota"),
+            new Position(new PositionName("IT Intern"),
+                    new Description("Work on internal tools. Must be willing to learn."),
                     new PositionOpenings("1"),
                     getRequirementSet("Source Academy", "C")),
             new Position(new PositionName("Janitor"),
                     new Description("Arguably the most important job"),
-                    new PositionOpenings("0"),
+                    new PositionOpenings("2"),
                     getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
             new Position(new PositionName("Admin Officer"),
                     new Description("Degree or Postgraduate holder with Major in Information Technology, "
-                            + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
+                            + "Computer Science, or other similar areas, and a cumulative GPA of 3.5 and above."),
                     new PositionOpenings("2"), samplePos, getRequirementSet("Hardworking", "Good with people"))
         };
     }
