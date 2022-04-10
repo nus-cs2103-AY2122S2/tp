@@ -56,6 +56,7 @@ public class DeassignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> persons = model.getFilteredPersonList();
+        assert persons != null : "person list should not be null";
 
         if (index.getZeroBased() >= persons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -66,6 +67,7 @@ public class DeassignCommand extends Command {
         }
 
         ObservableList<Group> groups = model.getFilteredGroupList();
+        assert groups != null : "group list should not be null";
 
         Group deassignedGroup = group;
         for (Group gp : groups) {
@@ -75,7 +77,10 @@ public class DeassignCommand extends Command {
             }
         }
 
+        assert deassignedGroup != null : "deassignedGroup should not be null";
+
         Person personToDeassign = persons.get(index.getZeroBased());
+        assert personToDeassign != null : "personToDeassign should not be null";
 
         if (!deassignedGroup.personExists(personToDeassign)) {
             throw new CommandException(String.format(

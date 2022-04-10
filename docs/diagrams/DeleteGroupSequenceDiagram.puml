@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
 participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
-participant "g:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,17 +33,17 @@ create DeleteGroupCommand
 DeleteGroupCommandParser -> DeleteGroupCommand
 activate DeleteGroupCommand
 
-DeleteGroupCommand --> DeleteGroupCommandParser : g
+DeleteGroupCommand --> DeleteGroupCommandParser : d
 deactivate DeleteGroupCommand
 
-DeleteGroupCommandParser --> ArchDukeParser : g
+DeleteGroupCommandParser --> ArchDukeParser : d
 deactivate DeleteGroupCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteGroupCommandParser -[hidden]-> ArchDukeParser
 destroy DeleteGroupCommandParser
 
-ArchDukeParser --> LogicManager : g
+ArchDukeParser --> LogicManager : d
 deactivate ArchDukeParser
 
 LogicManager -> DeleteGroupCommand : execute()
