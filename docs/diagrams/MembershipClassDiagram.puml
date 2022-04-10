@@ -1,12 +1,18 @@
 @startuml
+hide empty members
 
 class Membership {
     + {static}PREFIX : final Prefix
     + {static}DATE_PREFIX: final Prefix
+    + {static}MESSAGE_CONSTRAINTS: final String
+    + {static}MESSAGE_DATE_CONSTRAINTS: final String
     - tier : Tier
     - date : LocalDate
 
-    + hasField(Prefix) : boolean
+    + {static}getTierFromString(String) : Tier
+    + {static}isValidName(String) : boolean
+    + {static}isValidDate(String) : boolean
+    + getValue() : String
 }
 
 class Field {
@@ -15,6 +21,14 @@ class Field {
     + getValue() : String
 }
 
+enum Tier <<enumeration>> {
+    GOLD
+    SILVER
+    BRONZE
+    ALL
+}
+
 Membership --|> Field
+Tier +-- Membership
 
 @enduml
