@@ -500,46 +500,28 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a new customer 
 
-   1. Test case: `addc n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 rd/31-03-2022 al/Aloe Vera sep/facial sep/massage`<br>
-      Expected: A customer with the above details will be added
-
-   2.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
+   1.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
       Expected: Error details shown in the status message about invalid command format. Status bar remains the same.<br>
-   
-   3.  Test case: Any command with invalid format for one of the keywords : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/<DATE THAT IS IN THE FUTURE>` <br>
+  
+   2.  Test case: Any command with invalid format for one of the keywords : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/<DATE THAT IS IN THE FUTURE>` <br>
      Expected: Error details shown in the status message about invalid date format. Status bar remains the same.
      
-   4.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
+   3.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
      Expected: Error message saying customer already exist
 
 ### Editing a customer 
-
-  1.  Test case: `editc 1 p/91234567 e/johndoe@example.com`<br>
-      Expected: Edits the phone number and email address of the 1st customer to be 91234567 and johndoe@example.com respectively.
       
-  2.  Test case: `editc 2 n/Betsy Crower  p/91234567 e/johndoe@example.com`<br>
+  1.  Test case: `editc 2 n/Betsy Crower  p/91234567 e/johndoe@example.com`<br>
       Expected: Customer already exist error as this customer has the same phone and email as first customer after executing test case 1.
       
-  3.  Test case: `editc 1`<br>
+  1.  Test case: `editc 1`<br>
       Expected: Return an error that at least one field must be provided.
-  
-  4.  Test case: `editc n/Alex` <br>
-      Expected: Return an error of invalid command format
-     
-  6.  Test case: `editc 1 al/ stp/ sep/`<br>
-      Expected: Clears the preferred staff, services and the allergies of the 1st customer. 
- 
+
 
 ### Finding customers
 
 NOTE: Make sure to use `listc` between test cases.
 
-  1. Test case: `findc n/Alex Yeoh`<br>
-     Expected: list of customers with Alex Yeoh in their name will be shown.
-   
-  1. Test case: `findc n/aleX Yeoh`<br>
-     Expected: list of customers with Alex Yeoh in their name will be shown.
-      
   1. Test case: `findc h/Oily h/Dry`<br>
      Expected: list of customers with hair type as dry only.
 
@@ -569,9 +551,6 @@ NOTE: Make sure to use `listc` between test cases.
 
 ### Adding service
 
-  1. Test case: `adds n/Acne Facial Treatment pr/138 d/120`<br>
-     Expected: Adds a service with the given information.
-   
   1. Test case: Any command with either n/ or pr/ or d/ missing, example  `adds n/Acne Facial Treatment pr/138`<br>
      Expected: Invalid command format error message.
       
@@ -599,12 +578,6 @@ NOTE: Make sure to use `listc` between test cases.
  
  NOTE: Make sure to use `lists` between the tests
  
-  1. Test case: `finds n/Facial`<br>
-     Expected:  Returns services that contain the word 'Facial', for example Organic Radiance Facial and Bio Ageless Facial
-  
-  1. Test case: `finds n/facial`<br>
-     Expected:Returns services that cfntain the word 'Facial', for example Organic Radiance Facial and Bio Ageless Facial
-     
   1. Test case: `finds n/Facial dr/120`<br>
      Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
      
@@ -615,22 +588,11 @@ NOTE: Make sure to use `listc` between test cases.
   
   1. Test case: `deletes 100,1`<br>
      Expected: Invalid index message.
-     
-  1. Test case: `deletes 1,2,3`<br>
-     Expected:  Removes the 1st, 2nd and 3rd service from the application.
-     
- ### List services
- 
-   1. Test case: `lists`<br>
-     Expected:  List all services.
- 
+
 ## Booking Commands
 
  ### Adding a booking 
- 
-   1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30`<br>
-     Expected:  Adds a booking for the customer with index 1 with service (index 1) on 10-10-2022 10:30
-  
+
   1. Test case: Any of the fields are missing, example: `addb c/1 sev/1`<br>
      Expected: Invalid command format message.
      
@@ -652,12 +614,9 @@ NOTE: Make sure to use `listc` between test cases.
 
 NOTE: Make sure to use `listb` between the test cases.
 
-  1. Test case: `findb f/bad` <br>
-     Expected:Returns feedback saying "Bad service" and "Service was bad".
+  1. Test case: `findb f/bad st/10-04-2022` <br>
+     Expected:Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
  
-  1. Test case: `findb st/10-10-202`<br>
-     Expected: Will not return any customers as only full words will be matched.
-     
 ### Deleting a booking
 
    1. Test case: `deleteb 1,2,3`<br>
@@ -666,24 +625,11 @@ NOTE: Make sure to use `listb` between the test cases.
    1. Test case: `deleteb -1` or `deleteb 100`<br>
      Expected: Invalid format or invalid index error message.
      
-### Listing a booking
-
-   1. Test case: `listb`<br>
-     Expected:Lists all bookings.
      
 ## Statistics Commands
-
 
    1. Test case: `plotAll`<br>
      Expected:Plots 6 charts.
     
    1. Test case: `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/10-04-2022 al/Test sep/Test sep/Test stp/Test h/Test s/Test` then `plotAll` <br>
      Expected:Plots 6 charts with updated information. Accuracy can be checked by comparing charts before and after the new customer is added.
-
-## Miscellaneous 
-
-   1. Test case: `help` <br>
-     Expected:Shows a help window with URL to User guide.
-     
-   1. Test case: `exit` <br>
-     Expected:Closes all windows and exits the application.
