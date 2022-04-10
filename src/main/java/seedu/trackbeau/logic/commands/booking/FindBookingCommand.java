@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands.booking;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 
@@ -22,10 +23,12 @@ public class FindBookingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all booking whose details match "
             + "Parameters: "
             + "[" + PREFIX_NAME + "CUSTOMERNAME/SERVICENAME] "
-            + "[" + PREFIX_STARTTIME + "APPOINTMENTTIME] \n"
+            + "[" + PREFIX_STARTTIME + "APPOINTMENTTIME] "
+            + "[" + PREFIX_FEEDBACK + "FEEDBACK] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "ALICE "
-            + PREFIX_STARTTIME + "10-10-2022 10:30";
+            + PREFIX_STARTTIME + "10-10-2022"
+            + PREFIX_STARTTIME + "Great Service";
 
     private final BookingSearchContainsKeywordsPredicate predicate;
 

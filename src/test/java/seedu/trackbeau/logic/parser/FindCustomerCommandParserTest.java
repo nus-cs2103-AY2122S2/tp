@@ -37,16 +37,16 @@ public class FindCustomerCommandParserTest {
         prefixArr.set(3, Arrays.asList(new String[]{"geylang"}));
         prefixArr.set(4, Arrays.asList(new String[]{"oily"}));
         prefixArr.set(5, Arrays.asList(new String[]{"dry"}));
-        prefixArr.set(6, Arrays.asList(new String[]{"jason"}));
-        prefixArr.set(7, Arrays.asList(new String[]{"acne"}));
-        prefixArr.set(8, Arrays.asList(new String[]{"nickel"}));
+        prefixArr.set(8, Arrays.asList(new String[]{"jason"}));
+        prefixArr.set(9, Arrays.asList(new String[]{"acne"}));
+        prefixArr.set(10, Arrays.asList(new String[]{"nickel"}));
         FindCustomerCommand expectedFindNameCommand =
                 new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr));
-        assertParseSuccess(parser, "name n/alex yeoh p/87438807 e/alex@example.com"
+        assertParseSuccess(parser, " n/alex yeoh p/87438807 e/alex@example.com"
                 + " a/geylang s/oily h/dry stp/jason sep/acne al/nickel", expectedFindNameCommand);
 
         // Find name with multiple whitespaces between keywords
-        assertParseSuccess(parser, "name \n n/alex \n \t yeoh p/87438807 e/alex@example.com\" +"
+        assertParseSuccess(parser, " n/alex yeoh \n \t p/87438807 e/alex@example.com"
                 + " a/geylang s/oily h/dry stp/jason sep/acne al/nickel\t", expectedFindNameCommand);
 
     }
