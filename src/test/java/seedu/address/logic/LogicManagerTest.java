@@ -85,9 +85,19 @@ public class LogicManagerTest {
     //    assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     //}
 
+    // @Test
+    // public void getFilteredclientList_modifyList_throwsUnsupportedOperationException() {
+    //     assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredclientList().remove(0));
+    // }
+
     @Test
-    public void getFilteredclientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredclientList().remove(0));
+    public void getFilteredBuyerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredBuyerList().remove(0));
+    }
+
+    @Test
+    public void getFilteredSellerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSellerList().remove(0));
     }
 
     /**
@@ -126,7 +136,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }

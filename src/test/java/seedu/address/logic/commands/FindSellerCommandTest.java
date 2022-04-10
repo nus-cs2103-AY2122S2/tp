@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.SellerCommandTestUtil.assertCommandSu
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.ELLE;
 import static seedu.address.testutil.TypicalClients.FIONA;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSellers.getTypicalSellerAddressBook;
 
 import java.util.Arrays;
@@ -19,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.SellerAddressBook;
+//import seedu.address.model.SellerAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.seller.SellerNameContainsKeywordsPredicate;
 
@@ -27,10 +26,10 @@ import seedu.address.model.seller.SellerNameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindSellerCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSellerAddressBook(),
+    private Model model = new ModelManager(new UserPrefs(), getTypicalSellerAddressBook(),
             new BuyerAddressBook());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            new SellerAddressBook(), new BuyerAddressBook());
+    private Model expectedModel = new ModelManager(new UserPrefs(),
+        getTypicalSellerAddressBook(), new BuyerAddressBook());
 
     @Test
     public void equals() {

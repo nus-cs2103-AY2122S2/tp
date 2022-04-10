@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.SellerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+//import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,9 +22,9 @@ public class ListSellerCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
     }
 
