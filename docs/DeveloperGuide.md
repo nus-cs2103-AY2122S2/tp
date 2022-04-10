@@ -430,6 +430,9 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
+
 ### Suggest command feature
 
 #### What it does
@@ -480,8 +483,6 @@ selected show.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
