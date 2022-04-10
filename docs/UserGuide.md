@@ -325,7 +325,7 @@ Opens a new window and shows all sellers and buyers with matching property and p
 A preference matches with a property if 
 - they have the same `region`, and
 - they have the same `size`, and
-- the `price` of the property is between `lowPrice` and `highPrice` of the preference. 
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference. 
 
 Format: `match`
 
