@@ -60,7 +60,7 @@ title: Developer Guide
 
 ## **Introduction**
 
-Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
+Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -80,7 +80,7 @@ This document specifies architecture and software design decisions for the appli
 
 ### Scope
 
-The developer guide allows developers who want to work on Trackermon to gain a better understanding on the application's implementation.
+The developer guide allows developers who want to work on Trackermon to gain a better understanding of the application's implementation.
 
 ### Developer guide navigation
 
