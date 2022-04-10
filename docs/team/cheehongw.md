@@ -8,7 +8,10 @@ uMessage is a desktop app that helps university students manage contacts, academ
 
 Given below are my contributions to the project.
 
-* **New Feature:** Make the list of persons selectable
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=cheehong&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+
+
+* **New Feature:** Make the list of persons selectable ([Pull Request #112](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/112))
 
   - What it does: Allows the user to directly view the detailed contact information of any person in the contact list simply by clicking with the mouse or navigating with the arrow keys.
 
@@ -16,17 +19,17 @@ Given below are my contributions to the project.
 
   - Highlights: This enhancement requires understanding of the observer pattern used in the GUI framework and FXML.
 
-* **New Feature:** Add ability to `add` and `remove` individual tags from a person
+* **New Feature:** Add ability to `add` and `remove` individual tags from a person ([Pull Request #88](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88))
   - What it does: Allows the user to create and delete individual tags in the application
 
   - Justification: As part of the target user profile, this a key feature that allows the user to organise the contacts in the address book.
 
-* **New Feature:** Filter list by clicking a tag label
+* **New Feature:** Filter list by clicking a tag label ([9f227def](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/113/commits/9f227def61b39204dedc367f5bb1327d1fbab419))
   - What it does: Allows the user to filter the Person/Meeting list by clicking on a tag label in the tag panel.
 
   - Justification: This feature improves the product significantly because a user can conveniently filter for groups of people/meeting with just a click, which is a key feature of our product.
 
-* **New Feature:** Add `SocialMedia` to `Person`
+* **New Feature:** Add `SocialMedia` to `Person` ([Pull Request #77](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/77), [Pull Request #131](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/131))
   - What it does: Allows `Person` instances to contain information about any number of social media handles. Users can add/delete/edit specific `SocialMedia` entries for each person easily.
 
   - Justification: Storing multiple and manipulating social media handles for each person is part of our product's feature.
@@ -34,22 +37,38 @@ Given below are my contributions to the project.
   - Highlights: This enhancement requires understanding of data storage and retrieval from AB3.
 
   - Credits: 
-    - Chee Hong: Writing `SocialMedia` class, command for editing `SocialMedia` entries, JSON serialization of `SocialMedia`
-    - Weng Qi: Command for adding & deleting individual `SocialMedia` entries
+    - *Chee Hong*: Writing `SocialMedia` class, command for editing `SocialMedia` entries, JSON serialization of `SocialMedia`.
+    - Weng Qi: Command for adding & deleting individual `SocialMedia` entries.
+
+
+* **Enhancements to existing features**: `Email` regex ([Pull Request #227](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/227))
+
+  - Fix regex to allow for more than 2 consecutive special characters in local-part of an email.
+  - Set character limits of `Email` to follow RFC guidelines.
+
+* **Enhancements to existing features**: * Allow index-based commands to work with names ([106db91](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/106db91bc80597b9da03dba3c73858fd9b464f38), [Pull Request #232](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/232))
+
+
+* **Enhancements to existing features**: * Make UI components scale dynamically to the window size ([Pull Request #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
 
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=cheehong&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 * **Project management**:
-  * Managed releases `1.2`, `1.3.trial`, `1.3.1`
-
-* **Enhancements to existing features**:
-  * UI 
-  * `To be added soon`
+  * Managed releases `1.2`, `1.3.trial`, `1.3.1`.
+  * Created milestones for the team repo.
 
 * **Documentation**:
   * Developer Guide:
     * Add Product Scope: [#53](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/53)
+    * Add Acknowledgements: [c724c4](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c724c4a82e6e68bea84e3ad1c087bc284d15a4bf)
+    * Wrote implementation for `Target` class: [c8c5f74](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c8c5f7422268279d07b35ecc46ae9a733232f495)
+    * Wrote implementation for split-view panel: [d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6)
+
+    * Update diagrams for `Model` component: [5e3f128](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/5e3f12877e18aaa6cc8b94ac73154da096528aba)
+  * User Guide:
+    * Add instructions on editing social media. [6833d5](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/6833d554602c4ea0725839985c5e5021449e46ad)
+    * Add instructions on add and delete commands. [130fcfb](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/130fcfb411d526c43b41909772bc801b1e3043bf)
+    * Fixed minor grammatical issues [bc8c99](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/bc8c99b7b2f63f1ebd23b621b89312b4b38997b1)
 
 * **Contributions to team-based tasks**
   * Update site-wide settings: [#26](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/26)
