@@ -359,13 +359,12 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 | B        | Users with need to manage large number of contacts  | Manage large number of contacts effortlessly                          | Search for contacts through the use of different search options easily / add contacts |
 | B        | User who value my privacy                           | Make my contact private so others cannot share it                     | Only users that directly share contacts with me will have my contact                  |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is `HackNet` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add contact**
+<ins>**Use case: UC01 - Add contact**</ins>
 
 **MSS**
 1. User adds a contact specifying personal details and technical skills.
@@ -394,7 +393,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
     Use case ends.
 
-**Use case: UC03 - Form potential team**
+<ins>**Use case: UC03 - Form potential team**</ins>
 
 **MSS**
 1. User requests to see list of persons with a specific technical skill.
@@ -415,15 +414,15 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
     Use case resumes from step 2.
 
-**Use case: UC04 - See past teammates**
+<ins>**Use case: UC04 - View past teammates**</ins>
 
 **MSS**
 1. User tags specified person to a past project team.
 2. HackNet links person to the specified project team.
 3. User requests to show a list of persons tagged to his past project team.
 4. HackNet shows the list of all persons linked with a past project team.
-    
-**Use case: UC05 - Edit a person**
+
+<ins>**Use case: UC05 - Edit a person**</ins>
 
 **MSS**
 
@@ -446,7 +445,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
       Use case resumes at step 3.
 
-**Use case: UC06 - Find a person by skill**
+<ins>**Use case: UC06 - Find a person by skill**</ins>
 
 **MSS**
 

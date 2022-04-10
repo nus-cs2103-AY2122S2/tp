@@ -22,7 +22,7 @@ Skill --> FilterSkillCommandParser : skill
 deactivate Skill
 
 create SkillSet
-FilterSkillCommandParser -> SkillSet : new SkillSet(s)
+FilterSkillCommandParser -> SkillSet : new SkillSet(skill)
 activate SkillSet
 SkillSet --> FilterSkillCommandParser : skillSet
 deactivate SkillSet
