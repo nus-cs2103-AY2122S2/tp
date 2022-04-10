@@ -7,7 +7,7 @@ Participant ":LogicManager" as LogicManager<<Logic>>
 Participant ":IBookParser" as IBookParser<<Logic>>
 Participant "f:FindCommand" as FindCommand<<Logic>>
 end Box
-z
+
 Box Model MODEL_COLOR_LIGHT
 Participant ":AttributeFilter" as AttributeFilter<<Model>>
 end Box
