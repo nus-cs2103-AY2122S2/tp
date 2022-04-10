@@ -82,7 +82,7 @@ public class ModuleBuilder {
         for (Student s : students) {
             newStudentList.add(s);
         }
-        newStudentList.setStudents(newStudentList);
+        studentList.setStudents(newStudentList);
         return this;
     }
 
