@@ -35,7 +35,7 @@ title: Developer Guide
       * [What it does](#what-it-does-3)
       * [Implementation](#implementation-4)
       * [Design considerations](#design-considerations-3)
-    * [Suggest show feature](#suggest-show-feature)
+    * [Suggest command feature](#suggest-command-feature)
         * [What it does](#what-it-does-4)
         * [Implementation](#implementation-5)
         * [Design considerations](#design-considerations-4)
@@ -247,8 +247,6 @@ Classes used by multiple components are in the `seedu.trackermon.commons` packag
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
-
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -256,7 +254,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Find command feature
 
 #### What it does
-Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input contains no prefixes, `find` will do a general search through all fields in the `Show` class.
+Looks for a show in a list of shows and displays all the shows that match the user's input. If the user's input does not contain any prefixes, `find` will do a general search through all fields in the `Show` class.
 
 #### Implementation
 <img src="images/FindSequenceDiagram.png">
@@ -274,7 +272,7 @@ Then, `LogicManager` will execute the given `findCommand` object and scan throug
 
 Given below is an example usage scenario and the step-by-step flow of the find command.
 
-Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from local storage `Trackermon.json`.
+Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from local storage `trackermon.json`.
 
 Step 2: The user executes `find t/Anime` to find a show.
 
@@ -312,34 +310,36 @@ The following activity diagram summarizes what happens when a user executes a va
 ### Sort command feature
 
 #### What it does
-Sorts the list of shows according to the user's input prefix. If the input contains no prefixes, sort will default to organizing the shows in ascending order by name. The format for sort is `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`. `ORDER` must be either "asc" or "dsc". If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags. Use `so/` to change the priority. `SEQUENCE` must contain the full name of the prefix used and the user have to list it in the sequence in the order which sort prioritise. 
+Sorts the list of shows according to the user's input prefix. If the input does not contain any prefixes, sort will default to organizing the shows in ascending order by name. The format for sort is `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`. If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags. Use `so/` to change the priority. `SEQUENCE` is the order of all the prefixes used to sort the show list, and it must contain the full names of the prefixes used.
+
 #### Implementation
-After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
+After entering the sort command, the `ArgumentTokenizer` in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created, which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sorts `Model`'s list of shows according to the `Comparator`. `Model` is then updated with the sorted show list.
 
 Given below is an example usage scenario and the step-by-step flow of the sort command.
 
 Step 1: The user launches Trackermon and enters `sort n/asc s/dsc` to sort the list of shows.
 
-Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the SortCommand. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
+Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the `SortCommand`. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
 
-Step 3: When the sort command executes, it will call`Model#updateSortedShowList` method.
+Step 3: When the sort command executes, it will call the `Model#updateSortedShowList` method.
 
-Step 4: The sorted list in model will apply the Comparator and model will be updated in order by ascending name then descending status.
+Step 4: The sorted list in `Model` will apply the `Comparator` and `Model` will be updated in order by ascending name then descending status.
 
-The following activity diagram summarizes what happens when a user executes a sort command:
+The following activity diagram summarizes what happens when a user executes a `SortCommand`:
 
-After the user input the sort commands, `SortCommandParser` will parse commands arguments. Then a map is used to keep track of what order prefixes (`n/`, `s/`, `t/`, `r/`) are being used and also how they are being ordered. If the user use `so/` it will reorder the Map based on the input `SEQUENCE`. Afterwards a comparator is being built according the Map and passed into SortCommand. SortCommand executes and model will update the list accordingly. 
+After the user input the sort command, `SortCommandParser` will parse the command arguments. A map is then used to keep track of which order prefixes (`n/`, `s/`, `t/`, `r/`) are being used and also how they are being ordered. If the user uses `so/` it will reorder the Map based on the input `SEQUENCE`. Afterwards a `Comparator` is being built according the Map and passed into `SortCommand`. `SortCommand` executes and `Model` will update the list accordingly. 
 
 <img src="images/SortShowDiagram.png">
 
-The following sequence diagram summarizes what happens when a user executes a sort command, in this case sort with no prefix:
+The following sequence diagram summarizes what happens when a user executes a `SortCommand`, in this case, sort without any prefixes:
 <img src="images/SortSequenceDiagram.png">
 
 #### Design considerations:
-- **Alternative 1:** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
+- **Alternative 1:** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default, it will sort by name.
 
-  - Pros: No invalid commands input by the user
-  - Cons: Users need to get use to the prefixes used.
+  - Pros: No invalid commands input by the users
+  - Cons: Users need to get used to the prefixes used.
+
 
 - **Alternative 2 (current choice):** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
     - Pros: Users have fewer prefixes to remember
@@ -401,9 +401,10 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 #### Design considerations:
 
 - **Alternative 1 (current choice):** 
-  `Status` is implemented as a `enum` class. Enumerations offer compile time type safety, reducing the risk of runtime errors. Enumerations implementation would have better space complexity. With the `enum` implementation, all the shows would reference the same `enum` static class. However, for the class implementation, a new `Status` instance is  instantiated each time a `Show` object is created.
+  `Status` is implemented as a `enum` class. Enumerations offer compile time type safety, reducing the risk of runtime errors. Enumeration implementation has better space complexity. With the `enum` implementation, all the shows would reference the same `enum` static class. However, for the class implementation, a new `Status` instance is  instantiated each time a `Show` object is created.
   - Pros: Offers compile time type safety.
   - Cons: Harder to implement for people who are not familiar with `enum` class.
+
 - **Alternative 2 :** `Status` is implemented as a regular class that encapsulates a String or Integer which would represent the status of the show (`watching`, `completed` and `plan-to-watch`). 
   - Pros: Easier to implement as it is what most people are more familiar with.
   - Cons: Lack of compile time safety.
@@ -411,7 +412,7 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-### Suggest Show feature
+### Suggest command feature
 
 #### What it does
 
@@ -419,13 +420,13 @@ Returns a single show from the current displayed list of shows
 
 #### Implementation
 
-After executing the suggest command, it would create a SuggestCommand object.
-Then, LogicManager will execute the given SuggestCommand. Upon execution of the SuggestCommand's execute method,
-it will obtain the currently displayed list of shows via the model's `getFilteredShowList()`method.
+After executing the suggest command, Trackermon creates a `SuggestCommand` object.
+Then, `LogicManager` will execute the given `SuggestCommand`. Upon execution of the `SuggestCommand`'s execute method,
+it will obtain the currently displayed list of shows via the `Model#getFilteredShowList` method.
 
-In the event that the list is empty, this would cause an error message which informs users that
+In the event that the list is empty, an error message will inform users that
 there are no shows currently in the displayed show list. Similarly, if there is only one show 
-present in the list, it would inform the user that there is only one show in the current displayed 
+present in the list, it will inform the user that there is only one show in the currently displayed 
 show list.
 
 A random show is then selected from the list of displayed shows and displayed in the show list.
@@ -433,29 +434,30 @@ A random show is then selected from the list of displayed shows and displayed in
 Below is the example usage scenario and the step-by-step flow of the suggest command.
 
 Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from
-local storage trackermon.json.
+local storage `trackermon.json`.
 
-Step 2: The user executes suggest command to get a random show from the currently displayed 
+Step 2: The user executes the suggest command to get a random show from the currently displayed 
 list of shows.
 
-Step 3: The suggest command will then check to ensure that the current displayed list of shows
+Step 3: The suggest command will then check to ensure that the currently displayed list of shows
 contains two or more shows.
 
-Step 4: In the event that there is no show or one show currently being displayed, Trackermon would return 
-an error message. Else, a random show would then be selected from the currently displayed list 
+Step 4: In the event that there are no shows or only one show currently being displayed, Trackermon will return 
+an error message. Else, a random show will then be selected from the currently displayed list 
 of shows.
 
-Step 5: Model#updateFilteredShowList will then be called and model will be updated with the 
-random show.
+Step 5: `Model#updateFilteredShowList` will then be called and `Model` will be updated with the 
+selected show.
 
 #### Design considerations:
 
 - **Alternative 1 (current choice):** Returns a random show from the currently displayed list.
   - Pros: - Simple and easy to use.
   - Cons: - If the user wants to get another suggestion, they have to call the list command to get a full list of shows again.
+
 - **Alternative 2 :** Returns a random show from the list of all shows currently in Trackermon.
   - Pros: - If the user wants to get another suggestion, they can just call suggest another time.
-  - Cons: - Users are unable to get a suggestion from a filtered list of show.
+  - Cons: - Users are unable to get a suggestion from a filtered list of shows.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -485,7 +487,7 @@ random show.
 
 **Value proposition**:
 
-* Helps users to keep track of all their shows in a single application.
+* Helps users keep track of all their shows in a single application.
 * No need to create an account unlike traditional web based services.
 * Able to keep a local copy of their list of shows.
 * Clean and minimal user interface.
@@ -508,10 +510,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user                     | see usage instructions                                | refer to instructions when I forget how to use the application         |
 | `* * `   | long time user               | find shows of specific genres                         | recommend those shows to my friends                                    |
 | `* * `   | long time user               | find a show I may or may not have watched             | decide whether to watch that show or not                               |
-| `* * `   | long time user               | find whether a show I am watching is completed or not | continue watching if it is not completed                               |
+| `* * `   | long time user               | find whether a show I am watching is completed or not | continue watching it if it is not completed                               |
 | `* * `   | long time user               | sort the list of shows                                | view the list in an organised manner                                   |
 | `* * `   | user with multiple computers | import or export the show data easily                 | keep updated copies of the show data                                   |
-| `* * `   | indecisive user              | get a suggestion                                      | easily decide on what show to watch                                    |
+| `* * `   | indecisive user              | get a suggestion                                      | easily decide what show to watch                                    |
 | `* * `   | user                         | comment on shows                                      | record my opinions about a show                                        |
 | `* * `   | user                         | rate shows                                            | keep track of whether a show is good or bad                            |
 | `* * `   | user                         | tag shows                                             | keep track of what genre the show belongs to                           |
@@ -532,10 +534,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list shows.
-2.  Trackermon shows a list of shows.
-3.  User adds a show in Trackermon.
-4.  Trackermon stores the show in its storage.
+1.  User requests to <ins>list shows (UC03) </ins>.
+2.  User adds a show in Trackermon.
+3.  Trackermon stores the show in its storage.
 
     Use case ends.
 
@@ -569,8 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list shows.
-2.  Trackermon shows a list of shows.
+1.  User requests to <ins>list shows (UC03) </ins>.
 3.  User requests to delete a specific show in the list.
 4.  Trackermon deletes the show.
 
@@ -658,8 +658,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list shows.
-2.  Trackermon shows a list of shows.
+1.  User requests to <ins>list shows (UC03) </ins>.
 3.  User requests to edit a specific show in the list.
 4.  Trackermon edits the show.
 
@@ -800,12 +799,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: -. **
+**Guarantees: A random show from the currently displayed list of shows will be displayed. **
 
 **MSS**
 
-1. User requests to list shows.
-2. Trackermon shows a list of shows.
+1. User requests to <ins>list shows (UC03) </ins>.
 3. User requests a suggestion from Trackermon.
 4. Trackermon returns a random show.
 
@@ -847,7 +845,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **Mainstream OS** | Windows, Linux, Unix, OS-X                                                                    |
 | **Parameter**     | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`) |
 | **JavaFx**        | 	JavaFX is a set of Java graphics libraries for creating Java GUI applications                |
-| **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).        | 
+| **Command Line Interface (CLI)**   | A Command Line Interface connects you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).        | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation.        |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
