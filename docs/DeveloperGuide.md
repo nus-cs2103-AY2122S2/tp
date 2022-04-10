@@ -693,16 +693,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | update the remark for a candidate in the system         | keep a note of important details relating to the candidate.                        |
 | `* * *`  | new user | view all available commands                             | get familiarised with the system.                                                  |
 
-
 ### Use cases
 
 (For all use cases below, the **System** is `TAlent Assistant™` and the **Actor** is the `professor`, unless specified otherwise)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes on the abbreviations:**<br>
-
-TA - Teaching Assistant
+**:information_source: Notes on the abbreviations:** TA - Teaching Assistant
 
 </div>
 
