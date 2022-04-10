@@ -56,7 +56,7 @@ AppointmentSlot -[hidden]right- Appointment
 DisjointAppointmentList -[hidden]down- TemporalComparable
 
 Schedule *-down->"1  " DisjointAppointmentList
-Schedule -right-|> ReadOnlySchedule
+Schedule .right.|> ReadOnlySchedule
 DisjointAppointmentList -down->"*" Appointment
 ModelManager -down->"1 " Schedule
 ModelManager -left->"1" CompositeObservableList
