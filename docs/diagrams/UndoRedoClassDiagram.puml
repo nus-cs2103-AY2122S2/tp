@@ -1,0 +1,27 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
++ execute(model: Model) {abstract}
+}
+interface Model <<interface>> {
++ checkHistory(): boolean
++ restoreHistory()
++ checkOriginal(): boolean
++ restoreOriginal()
+}
+class UndoCommand {
+execute(model: Model): CommandResult
+}
+class RedoCommand {
+execute(model: Model): CommandResult
+}
+
+"{abstract}\nCommand" <|-- UndoCommand
+"{abstract}\nCommand" <|-- RedoCommand
+Model <.- UndoCommand
+Model <.- RedoCommand
+
+@enduml
