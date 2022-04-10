@@ -323,6 +323,8 @@ Format: `edittag INDEX t/NEW_TAGNAME`
 Examples:
 * `edittag 1 t/Prospective Clients` Changes the name of first tag in the list to *Prospective Clients*.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing All Tags : `listtags`
 
 Shows a list of all tags in ContaX.
@@ -411,6 +413,8 @@ Format: `deleteappt INDEX`
 
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an Appointment : `editappt`
 
@@ -538,6 +542,8 @@ Examples:
 **Example Output:**
 
 ![Prioritize Appointments](images/Prioritizeappt.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding Appointment by Name or Person Name : `findappt`
 
