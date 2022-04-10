@@ -18,9 +18,9 @@ title: Developer Guide
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
+* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - a collection of simply beautiful open source icons.
 
-* The Ui design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+* The Ui design is inspired by [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
 
 <hr/>
 
@@ -76,7 +76,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 <img src="images/ComponentManagers.png" width="300" />
 
-The sections below give more details of each component.
+The sections below give more details about each component.
 
 ### Ui component
 
@@ -88,17 +88,17 @@ The diagram below shows a simplified view of the Ui component.
 
 `XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc
 
-The Ui consists of a `UiManager` that implements the Façade interface `Ui`.
+The Ui consists of a `UiManager` that implements the Facade interface `Ui`.
 
 `UiManager` consists of a `MainWindow` that holds all Ui components of the application. 
 
 `UiComponent` is an abstract class that contains a reference to the MainWindow. 
 
-By having `XXX_Ui` inherit from `UiComponent`, we enabled nagivation from `XXX_Ui` to MainWindow. 
+By having `XXX_Ui` inherit from `UiComponent`, we enabled navigation from `XXX_Ui` to MainWindow. 
 
 The navigation is helpful for some Ui components that are required to call methods in `UiManager`.
 
-For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
+For example, `CommandBox` calls the method `executeCommand` in `MainWindow` when the user enters a command.
 
 #### The Structure of The Table Component
 
@@ -111,7 +111,7 @@ The diagram below shows a simplified internal structure of `Table`.
 
 The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` that represent `Product`.
 
-Subsequently, each `ProductCard` may contains `ItemTable` which has multiple `ItemCard` to represent `Item`.
+Subsequently, each `ProductCard` may contain `ItemTable` which has multiple `ItemCard` to represent `Item`.
 
 #### The Structure of The Popup Component
 
@@ -143,11 +143,11 @@ The diagram below shows a simplified internal structure of `Control`.
 
 
 
-The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represent each `AttributeFilter`.
+The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represents each `AttributeFilter`.
 
 #### More about Ui
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The css files can be found in [`src/main/resources/view/css`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/css), the images used are located in [`src/main/resources/images`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/images)
 
@@ -160,7 +160,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/logic/Logic.java)
+**API**: [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -170,16 +170,16 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `IBookParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a product).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-Commands are separated into different packages depending on its functionalities. Thus,the commands package includes the item package for item commands, product package for product commands.
+Commands are separated into different packages depending on their functionalities. Thus, the commands package includes the item package for item commands, the product package for product commands.
 The rest of the commands that do not fit into those two are directly under the command package.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -191,7 +191,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API**: [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -200,19 +200,19 @@ The `Model` component,
 * stores the IBook data i.e., all `Product` objects (which are contained in a `UniqueProductList` object).
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the current `ProductFilter` which is applied to the _filtered_ list.
-* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
+* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 A more detailed representation of the `Product` class is shown below which includes more details regarding the `Item` class.
 
 * The `Item` object enforces a two-way relationship with `Product`.
-* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item`.
+* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item`s.
 
 <img src="images/DetailedModelClassDiagram.png" width="450" />
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/storage/Storage.java)
+**API**: [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -241,11 +241,11 @@ The diagram below shows a simplified internal structure of `Popup`.
 
 `PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
-The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
+The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each popup is contained by `PopupHandler` which provides APIs for operations related to the popup.
 
 The API provided by `PopupHandler` are:
-* `isShowing()` Checks if any of the popup is showing
-* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in the showing popup
+* `isShowing()` Checks if any of the popups is showing
+* `setFeedbackToUser(String feedbackToUser)` Shows feedback to the user in the showing popup
 * `showPopupXXX()` Shows `PopupXXX`
 * `HidePopup()` Hides the showing popup
 
@@ -266,7 +266,7 @@ The following sequence diagram shows how a `Popup` is shown once a button is cli
 
 ![Show Popup](images/ShowPopupSequenceDiagram.png)
 
-`XXX_Ui` represents Ui components that has a button which will open a popup once it is clicked
+`XXX_Ui` represents Ui components that have a button which will open a popup once it is clicked
 
 e.g `ControlBox`, `ProductCard`, `ItemCard`, etc
 
@@ -276,11 +276,11 @@ e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
 As you can see from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
 
-This is to reduce coupling for each of the Ui components as they will not have a dependency on `PopupHandler` to call any of the popup. Also, it avoids the issue of deeply nested passing of `PopupHandler`.
+This is to reduce coupling for each of the Ui components as they will not have a dependency on `PopupHandler` to call any of the popups. Also, it avoids the issue of having deeply nested passing of `PopupHandler`.
 
 #### Executing command in Popup
 
-The sequence diagram below shows successful execution of a command in popup
+The sequence diagram below shows the successful execution of a command in popup
 
 ![Execute Popup](images/ExecutePopupSequenceDiagram.png)
 
@@ -290,7 +290,7 @@ e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
 When a user clicked a button in `PopupYYY`, it will generate the associated command from the inputs. The command is then passed to `MainWindow` for execution.
 
-This process is similar to how command is executed from `CommandBox`.
+This process is similar to how the command is executed from `CommandBox`.
 
 The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` will be hidden.
 
@@ -298,9 +298,9 @@ The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` wi
 
 **Aspect: How to handle popup**
 * **Alternative 1:** Pass in popups created at `MainWindow` to Ui components that require it
-  * Pros: Less function calls and better performance
+  * Pros: Fewer function calls and better performance
   * Cons: 
-   1. Increase coupling as these popups might required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This cause `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`
+   1. Increase coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have an unnecessary dependency on `PopupModifyItem`
 
    &nbsp;
 
@@ -308,12 +308,12 @@ The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` wi
   * Pros: Easy solution to reduce coupling
   * Cons: 
     1. Difficult to manage popups and check whether the popups are current showing
-    2. Two same popups might be opened at the same period of time
+    2. Two same popups might be opened at the same time
 
    &nbsp;
 
-* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provides method for Ui component for all the `Popup`
-  * Pros: Centralized control for popup and reduce coupling
+* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provides a method for Ui component for all the `Popup`
+  * Pros: Centralized control for popup and reduced coupling
   * Cons: 
     1. Increase complexity for `MainWindow`
     2. Less efficient as more function calls are required
@@ -336,37 +336,38 @@ The following sequence diagram shows how the `Update` command works:
 * **Alternative 1:** Make product mutable
   * Pros: Easy to Implement
   * Cons: Hard to track state in undo/redo feature
+
 * **Alternative 2 (current choice):** Make product immutable
   * Pros: Removes the need for listeners for UI to track product states
-  * Cons: Cost for updating a product maybe huge
+  * Cons: The cost for updating a product maybe huge
 
 ### Product filters
 
 #### Implementation
 
-The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command. Both the `ProductFilter` as well as the `AttributeFilter` has a `test` method to test whether a given `Product` fulfils the query specified by the user.
+The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command. Both the `ProductFilter` as well as the `AttributeFilter` has a `test` method to test whether a given `Product` fulfills the query specified by the user.
 
 Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
 
 <img src="images/ProductFilterClassDiagram.png" width="550" />
 
-The following sequence diagrams shows how the `Find` command works:
+The following sequence diagrams show how the `Find` command works:
 
 The sequence diagram below shows how the `FindCommand` object is created:
 
-<img src="images/FindCreationSequenceDiagram.png" width="550" />
+<img src="images/FindCreationSequenceDiagram.png" width="1000" />
 
 The sequence diagram below shows how the `FindCommand` object is executed:
 
-<img src="images/FindExecutionSequenceDiagram.png" width="550" />
+<img src="images/FindExecutionSequenceDiagram.png" width="1000" />
 
-As different attributes have different constraints, the `parse` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
+As different attributes have different constraints, the `parse` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any invalid attribute, an exception would be thrown.
 
-When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test` method is called with `Product` as the argument). The updated filtered product list would then be displayed in the GUI.
+When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfills every condition in the `AttributeFilter` (i.e. returning true for when the `test` method is called with `Product` as the argument). The updated filtered product list would then be displayed in the GUI.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` has the capability to do partial matching so the query given does not have to exactly match the actual product.  
+:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter`, and `DescriptionFilter` can do partial matching so the query given does not have to exactly match the actual product.  
 
 </div>
 
@@ -376,7 +377,7 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
 
 * **Alternative 1:** Create a single predicate as the product filter.
     * Pros: Easy to implement.
-    * Cons: User does not have fine-grained control over the current filter.
+    * Cons: The user does not have fine-grained control over the current filter.
 
 * **Alternative 2 (current choice):** Create a `ProductFilter` that contains a list of `AttributeFilter`
     * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
@@ -390,14 +391,14 @@ The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and
 
 Listed below are the few behavioral requirements for `Item`, along with the classes/interfaces related to it.
 
-* A `Product` must not have two `Item` objects that are considered the same: `UniqueItemList`
-* An `Item` cannot exist without a `Parent` it's under: `ItemDescriptor`
+* A `Product` must not have two `Item` objects that are considered the same, this is enforced by `UniqueItemList`
+* An `Item` without a `Parent` is characterised using the `ItemDescriptor`
 
 `ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
 
-The motivation for such implementation is due to the parsing of the `add-item` command, when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
+The motivation for such implementation is due to the parsing of the `add-item` command when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
 
-*The reason of choosing this design solution will be justified in the next section.*
+*The reason for choosing this design solution will be justified in the next section.*
 
 ##### Adding an Item
 
@@ -418,7 +419,7 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 #### Design considerations
 
-**Aspect: How to create `Item` and ensure it  when user executes `add-item` command:**
+**Aspect: How to create `Item` and ensure it when the user executes `add-item` command:**
 
 * **Alternative 1:** Retrieve the respective `Product` within the parser.
     * Pros: Easy solution.
@@ -441,18 +442,18 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally store changes as a `StateChange`. `ReversibleIBook` implements the following operations:
+The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally stores changes as a `StateChange`. `ReversibleIBook` implements the following operations:
 
 * `ReversibleIBook#prepareForChanges()` — Prepares a clean workspace to record next possible changes.
 * `ReversibleIBook#saveChanges()` — Saves all changes made to `IBook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
-* `ReversibleIBook#undo()` — Reverts the most currently changes.
+* `ReversibleIBook#undo()` — Reverts the most current changes.
 * `ReversibleIBook#redo()` — Restores the most currently undone changes.
 
 These operations are exposed in the `Model` interface as `Model#prepareIBookForChanges()`, `Model#saveIBookChanges()`, `Model#undoIBook()` and `Model#redoIBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` record.
+Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` records.
 
 <img src="images/UndoRedoState0.png" width="550" />
 
@@ -478,13 +479,13 @@ Step 4. The user now decides that adding the product was a mistake, and decides 
 <br>
 The following sequence diagram shows how the undo operation works:
 
-<img src="images/UndoSequenceDiagram.png" width="950" />
+<img src="images/UndoSequenceDiagram.png" width="1000" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 <br>
-The `redo` command does exactly the opposite — it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
+The `redo` command does exactly the opposite — it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then performs the actions needed to restore them.
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is pointing at the latest record of the `stateChanges` list, then there are no reverted changes to restore. The `redo` command uses `Model#canRedoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
@@ -513,7 +514,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2 (current choice):** Individual method that makes changes to `IBook` knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
-  * Cons: We must ensure that the implementation of each individual method are correct.
+  * Cons: We must ensure that the implementation of each method is correct.
 
 <hr/>
 
@@ -549,7 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                    | I want to …​                                                            | So that I can…​                                        |
 |----------|----------------------------|-------------------------------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | user                       | add a product                                                           | input product data that I want to store                |
-| `* * *`  | user                       | list all products added                                                 | check on all important details of all itemms at once   |
+| `* * *`  | user                       | list all products added                                                 | check on all important details of all items at once    |
 | `* * *`  | user                       | search for specific products by category                                | find the relevant products and its details quickly     |
 | `* * *`  | user                       | delete a product                                                        | remove entries that I no longer need                   |
 | `* * *`  | user                       | update a product's information                                          | keep the details relevant                              |
@@ -717,23 +718,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
 **Extensions**
 
-* 1a. Required fields are all present but are invalid.
+* 2a. Required fields are all present but are invalid.
 
-    * 1a1. IBook shows an error message.
-
-      Use case ends.
-
-* 1b. Not all required fields are present (e.g. Expiry Date).
-
-    * 1b1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
-* 1c. Optional fields like Quantity is missing.
+* 2b. Not all required fields are present (e.g. Expiry Date).
 
-    * 1c1. IBook automatically sets the quantity to 0.
+    * 2b1. IBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
+
+* 2c. Optional fields like Quantity is missing.
+
+    * 2c1. IBook automatically sets the quantity to 0.
+
+      Use case resumes at step 3.
 
 #### UC8: Delete an item
 
@@ -850,22 +851,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to update all products displayed in the list.
-2. IBook updates the list to show all products updated.
+1. User finds products they want to update using the find command ([UC5](#uc5-find-products)).
+2. User requests to update all products displayed in the list.
+3. IBook updates the list to show all products updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Some provided fields are invalid.
+* 2a. Some provided fields are invalid.
 
-    * 1a1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
-* 1b. The current display list is empty.
+* 2b. The current display list is empty.
 
-    * 1b1. IBook shows an error message.
+    * 2b1. IBook shows an error message.
 
       Use case ends.
 
@@ -873,16 +875,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete all products displayed in the list.
-2. IBook updates the list to show all products updated.
+1. User finds products they want to delete using the find command ([UC5](#uc5-find-products)).
+2. User requests to delete all products displayed in the list.
+3. IBook updates the list to show all products updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The current display list is empty.
+* 2a. The current display list is empty.
 
-    * 1a1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
