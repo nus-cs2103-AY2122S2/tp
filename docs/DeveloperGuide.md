@@ -364,11 +364,13 @@ Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student
 
       `ParseException` will be thrown if the constraints are violated
 
+<img src="images/AddStudentSequenceDiagram-0.png" width="550"/>
+
 Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
-![](images/AddStudentSequenceDiagram-0.png)
-![](images/AddStudentSequenceDiagram-1.png)
+
+<img src="images/AddStudentSequenceDiagram-1.png" width="550"/>
 
 [return to top ↑](#table-of-contents)
 
