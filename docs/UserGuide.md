@@ -337,7 +337,7 @@ this entry:
 
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
-Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of
+Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next opening of
 Tinner, you will be able to see a reminder pop-out box like this:   
 ![ReminderDemo](images/ReminderDemo.png)
 
@@ -715,29 +715,6 @@ readily identify and track down items!
 
 Below are miscellaneous features that enhance the general user experience.
 
-### Clearing the company list: `clear` <a id="c-clear"></a>
-
-Start off the internship application period fresh with `clear`. Reset the list of companies and internship roles with a
-single command.
-
-**Function:** Clears the entire company list, including roles within each company.
-
-**Format:** `clear`
-
-[Back to Table of Contents](#toc)
-
-### Viewing help : `help` <a id="c-help"></a>
-
-If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
-
-**Function:** Shows a message explaining how to access the user guide and a table of commands.
-
-![help message](images/helpMessage.png)
-
-**Format:** `help`
-
-[Back to Table of Contents](#toc)
-
 ### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
 
 Is the default reminder window of 7 days not to your liking? Update the window size with `setWindow` so that you can
@@ -760,9 +737,33 @@ keep better track of upcoming tasks.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Changes to the reminder window can only be observed after restarting Tinner. 
+:information_source: Changes to the reminder window can only be observed after restarting Tinner.
 
 </div>
+
+[Back to Table of Contents](#toc)
+
+
+### Clearing the company list: `clear` <a id="c-clear"></a>
+
+Start off the internship application period fresh with `clear`. Reset the list of companies and internship roles with a
+single command.
+
+**Function:** Clears the entire company list, including roles within each company.
+
+**Format:** `clear`
+
+[Back to Table of Contents](#toc)
+
+### Viewing help : `help` <a id="c-help"></a>
+
+If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
+
+**Function:** Shows a message explaining how to access the user guide and a table of commands.
+
+![help message](images/helpMessage.png)
+
+**Format:** `help`
 
 [Back to Table of Contents](#toc)
 
