@@ -26,7 +26,7 @@ process of using WoofAreYou step-by-step. By the end of this user guide, it is o
 Let's get started!
 
 <p align="center">
-  <img src="images/forUserGuide/FinalSampleSS.png" alt="WoofForYou sample screenshot"/>
+  <img src="images/forUserGuide/Ui.png" alt="WoofForYou sample screenshot"/>
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -75,16 +75,16 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Woofie`.
 
 * Items in square brackets are optional.<br>
-  e.g `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Sheppard` or as `n/Woofie`.
+  e.g. `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Sheppard` or as `n/Woofie`.
 
 * Items with `…`​ after them can be used multiple times.<br>
-  e.g. `NAME_OF_PET…​` can be used as `Woofie`, `Woofie Poofie` etc.
+  e.g. `NAME_OF_PET [KEYWORD]…​` can be used as `Woofie`, `Woofie Poofie`, `Woofie Poofie Zoofie` etc.
 
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * However, for the breed parameter, users will only be able to key in one breed.
@@ -120,7 +120,7 @@ Examples:
 * `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog` will show a screenshot as below.
 
 <p align="center">
-  <img src="images/forUserGuide/FinalAddCommandSS.png" alt="After adding Woofie sample screenshot"/>
+  <img src="images/forUserGuide/AddCommandSS.png" alt="After adding Woofie sample screenshot"/>
 </p>
 
 ### Edit a pet : `edit`
@@ -131,12 +131,13 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 * Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integer** 1, 2, 3, …​.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about editing `[t/BREED]`:**<br>
 
 * When editing `[t/BREED]`, the existing breed of the pet will be removed.
-* You can only edit *one* breed.
+* As there is only one breed for each pet, you may only edit *that* breed.
 * Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
   by "German Sheppard" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
@@ -144,7 +145,7 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 
 Examples:
 * Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and
-  the tag of Woofie from 'Bulldog' to 'German Sheppard'.
+  the breed of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
 
@@ -177,7 +178,7 @@ Examples:
 * On the other hand, `present 1 date/05-04-2022` indicates that Woofie is present for daycare on 5th April 2022, with no transport arrangements planned.
 
 <p align="center">
-  <img src="images/forUserGuide/FinalAttendanceSS.png" alt="After adding attendance sample screenshot"/>
+  <img src="images/forUserGuide/AttendanceCommandSS.png" alt="After adding attendance sample screenshot"/>
 </p>
 
 <div markdown="block" class="alert alert-info">
@@ -204,7 +205,7 @@ Format: `absent INDEX date/dd-MM-yyyy`
 * Date **must follow the specified format**.
 
 Examples:
-* `absent 1 date/05-04-2022` indicates that the first pet in the current list is absent for daycare on 5th April 2022.
+* `absent 1 date/09-04-2022` indicates that the first pet in the current list is absent for daycare on 9th April 2022.
 
 ### Compute total chargeable of a pet: `charge`
 
@@ -274,7 +275,7 @@ Examples:
 * `diet 1 d/Only feed dry kibble` will store a dietary remark for Woofie indicating to "Only feed dry kibble" as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/FinalDietSS.png" alt="After adding diet sample screenshot"/>
+  <img src="images/forUserGuide/DietCommandSS.png" alt="After adding diet sample screenshot"/>
 </p>
 
 ### Add / Clear pets' appointment details: `app` ###
@@ -306,7 +307,7 @@ Format: `app INDEX dt/dd-MM-yyyy HH:mm at/location`
 * Both `dt/` and `at/` are **mandatory** fields.
 
 Examples:
-* `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will note down that Woofie has an appointment on 27 March 2022, 9:30 am at the NUS Vet Clinic.
+* `app 1 dt/11-04-2022 09:30 at/ NUS Vet Clinic` will note down that Woofie has an appointment on 11 April 2022, 9:30 am at the NUS Vet Clinic.
 
 **Clear Appointment**
 
@@ -369,7 +370,7 @@ you want a more refined search, you may consider keying in a longer and more spe
 </div>
 
 <p align="center">
-  <img src="images/forUserGuide/FinalFindSS.png" alt="After finding sample screenshot"/>
+  <img src="images/forUserGuide/FindCommandSS.png" alt="After finding sample screenshot"/>
 </p>
 
 ### Sort pets: `sort`
@@ -392,6 +393,18 @@ Format: `sort SORT_BY`
 * The valid `SORT_BY` parameters are `name` , `owner`, `app`, `pick up` and `drop off`.
 * The parameters are case-sensitive.
 
+<div markdown="block" class="fa fa-question-circle">
+
+**:information_source: Unusual Behaviour?:**<br>
+
+You may have noticed that your pet list only shows 2 pets (i.e. Woofie and Poofie) or less after executing the sort command, and
+Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *_exisitng pet list_* which in this case,
+may be the pet list after executing a `find woofie poofie` command. If you want to `sort` the whole pet list, you can
+execute the [`list`](#list-all-pets--list) command first before executing the `sort` command. This behaviour applies to
+pet list after `filter` command too!
+
+</div>
+
 Examples:
 * `sort name` will sort the pets alphabetically as shown below.
 
@@ -402,6 +415,7 @@ Examples:
 * `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
 * `sort pick up` and `sort drop off` will sort the pets by their pick-up and drop-off times for transport arrangements **for today only**, listing the pets starting from the pet with the earliest time to the latest time.<br>
   i.e. if there are no pets to pick up and drop off today, WoofAreYou will not display any change.
+
 
 ### Filter pet list: `filter`
 
@@ -422,11 +436,11 @@ Format: `filter f/KEYWORD`
 
 Examples:
 * `filter byOwner/Lily` shows pets owned by all Lily(s).
-* `filter byTag/Retriever` shows pets with `Retriever` in their tag.
-* `filter byDate/06-04-2022` show pets present on 6 April 2022 as shown below.
+* `filter byTag/Retriever` shows pets with `Retriever` in their breed.
+* `filter byDate/08-04-2022` show pets present on 8 April 2022 as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/FinalFilterSS.png" alt="After filtering by date sample screenshot"/>
+  <img src="images/forUserGuide/FilterCommandSS.png" alt="After filtering by date sample screenshot"/>
 </p>
 
 ### List all pets : `list`
