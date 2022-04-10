@@ -1103,8 +1103,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Teaching Assistant                                        | view grades scored by students in each assignment                                      | understand which topics they are finding difficult                                                        |
 | `*`      | Teaching Assistant                                        | be able to highlight or feature certain students                                       | know which students are performing the best or need more help                                             |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
@@ -1546,8 +1544,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should be usable by a novice who has never used a contact management application before.
 5.  The system should respond within 3 seconds.
 6.  The student's data should only be stored locally.
-
-*{More to be added}*
 
 ### Glossary
 
