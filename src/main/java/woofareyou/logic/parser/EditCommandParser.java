@@ -34,11 +34,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_OWNER_NAME, PREFIX_PHONE,
                         PREFIX_ADDRESS, PREFIX_TAG);
-        System.out.println("sff");
-        System.out.println(args);
 
         if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
-            System.out.println("s");
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     EditCommand.MESSAGE_USAGE));
         }
