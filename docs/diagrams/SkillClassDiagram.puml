@@ -8,7 +8,6 @@ class Person {
 <color:white>email
 <color:white>githubUsername
 <color:white>phone
-<color:white>skillSet
 <color:white>team
 }
 
@@ -19,9 +18,8 @@ class Skill {
 }
 
 class SkillSet {
-<color:white>skillset : Set<Skill>
 <color:white>hasSkill(skill : Skill) : boolean
-<color:white>addAll(SkillSeq : SkillSet)
+<color:white>addAll(SkillSet : SkillSet)
 <color:white>add(skill : Skill)
 <color:white>getSkillProficiency(skill : Skill) : int
 }
