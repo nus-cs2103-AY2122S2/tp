@@ -294,21 +294,21 @@ The diagram below shows a simplified internal structure of `Popup`.
 The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
 
 The API provided by `PopupHandler` are:
-* `isShowing()` checks if any of the popup is showing
-* `setFeedbackToUser(String feedbackToUser)` shows feedback to user in the showing popup
-* `showPopupXXX()` shows `PopupXXX`
-* `hidePopup()` hides the showing popup
+* `isShowing()` – Checks if any of the popup is showing.
+* `setFeedbackToUser(String)` – Shows feedback to user in the showing popup.
+* `showPopupXXX()` – Shows `PopupXXX`.
+* `hidePopup()` – Hides the showing popup.
 
 The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to prevent overcrowding the user's screen.
 
 Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups. 
 
 The methods in `Popup` are:
-* `show()` shows the popup window
-* `hide()` hides the popup window
-* `isShowing()` checks if the popup is showing
-* `setFeedbackToUser(String feedbackToUser)` shows feedback to user in popup
-* `execute(String commandText)` executes the `commandText`
+* `show()` — Shows the popup window.
+* `hide()` — Hides the popup window.
+* `isShowing()` — Checks if the popup is showing.
+* `setFeedbackToUser(String)` — Shows feedback to user in popup.
+* `execute(String)` — Executes the given command.
 
 #### Showing a Popup
 
@@ -336,17 +336,18 @@ When a user clicks a button in `PopupYYY`, the associated command is generated f
 
 The `commandResult` will then be sent to `ResultWindow` for display and `PopupYYY` will be hidden.
 
+<div style="page-break-after: always;"></div>
+
 #### Design Considerations
 
 **Aspect: How to handle popup**
 * **Alternative 1:** Pass in popups created at `MainWindow` to UI components that require it.
   * Pros: Less function calls and better performance.
-  * Cons: 
-   1. Increases coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`.
+  * Cons: Increases coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`.
 
    &nbsp;
 
-* **Alternative 2:** Create popup in UI components that require it
+* **Alternative 2:** Create popup in UI components that require it.
   * Pros: Easy solution to reduce coupling.
   * Cons: 
     1. Difficult to manage popups and to check whether the popups are currently showing.
@@ -374,25 +375,29 @@ The following sequence diagram shows how the `Update` command works:
 <img src="images/UpdateExecutionSequenceDiagram.png" width="1000" />
 
 #### Design Considerations
-**Aspect: How to design the product structure**
-* **Alternative 1:** Make product mutable
-  * Pros: Easy to Implement
-  * Cons: Hard to track state in undo/redo feature
-* **Alternative 2 (current choice):** Make product immutable
-  * Pros: Removes the need for listeners for UI to track product states
-  * Cons: Cost for updating a product maybe huge
+**Aspect: How to design the `Product` structure**
+
+* **Alternative 1:** Make `Product` mutable.
+  * Pros: Easy to implement.
+  * Cons: Hard to track state in undo/redo feature.
+
+   &nbsp;
+
+* **Alternative 2 (current choice):** Make `Product` immutable.
+  * Pros: Removes the need for listeners for UI to track product states.
+  * Cons: Cost for updating a product maybe huge.
 
 ### Product filters
 
 #### Implementation
 
-The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command. Both the `ProductFilter` as well as the `AttributeFilter` has a `test` method to test whether a given `Product` fulfils the query specified by the user.
+The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command.
+
+Both the `ProductFilter` as well as the `AttributeFilter` has a `test()` method to test whether a given `Product` fulfils the query specified by the user.
 
 Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
 
 <img src="images/ProductFilterClassDiagram.png" width="550" />
-
-The following sequence diagrams shows how the `Find` command works:
 
 The sequence diagram below shows how the `FindCommand` object is created:
 
@@ -402,13 +407,15 @@ The sequence diagram below shows how the `FindCommand` object is executed:
 
 <img src="images/FindExecutionSequenceDiagram.png" width="550" />
 
-As different attributes have different constraints, the `parse` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
+As different attributes have different constraints, the `parse()` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
 
-When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test` method is called with `Product` as the argument). The updated filtered product list would then be displayed in the GUI.
+When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test()` method is called with `Product` as the argument).
+
+The updated filtered product list would then be displayed in the GUI.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` has the capability to do partial matching so the query given does not have to exactly match the actual product.  
+:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` have the capability to do partial matching so the query given does not have to exactly match the actual product.  
 
 </div>
 
@@ -419,6 +426,8 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
 * **Alternative 1:** Create a single predicate as the product filter.
     * Pros: Easy to implement.
     * Cons: User does not have fine-grained control over the current filter.
+
+    &nbsp;
 
 * **Alternative 2 (current choice):** Create a `ProductFilter` that contains a list of `AttributeFilter`
     * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
@@ -438,8 +447,6 @@ Listed below are the few behavioral requirements for `Item`, along with the clas
 `ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
 
 The motivation for such implementation is due to the parsing of the `add-item` command, when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
-
-*The reason of choosing this design solution will be justified in the next section.*
 
 ##### Adding an Item
 
@@ -467,6 +474,7 @@ These two operations are similar to adding an `Item` as shown in the section abo
     * Cons: Allows the parser to interact with model and logic, which also increases coupling.
 
       &nbsp;
+
 * **Alternative 2:** Create command object with each field as a parameter.
     * Pros: Easy solution.
     * Cons:
@@ -474,6 +482,7 @@ These two operations are similar to adding an `Item` as shown in the section abo
         * If more commands that have the same issue are implemented, the amount of modification will increase.
 
       &nbsp;
+
 * **Alternative 3 (current choice):** `ItemDescriptor` to temporarily hold the fields' value, then converted to `Item` later when `Product` is specified.
     * Pros: Good abstraction.
     * Cons: Requires an extra class to be created.
@@ -483,12 +492,12 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally store changes as a `StateChange`. `ReversibleIBook` implements the following operations:
+The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally stores changes as `StateChange`. `ReversibleIBook` implements the following operations:
 
-* `ReversibleIBook#prepareForChanges()` — Prepares a clean workspace to record next possible changes.
-* `ReversibleIBook#saveChanges()` — Saves all changes made to `IBook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
-* `ReversibleIBook#undo()` — Reverts the most currently changes.
-* `ReversibleIBook#redo()` — Restores the most currently undone changes.
+* `prepareForChanges()`  —  Prepares a clean workspace to record next possible changes.
+* `saveChanges()`  —  Saves all changes made to `IBook` as a `StateChange` into `StateChangeRecorder`.
+* `undo()`  —  Reverts the most recent changes.
+* `redo()`  —  Restores the most recently undone changes.
 
 These operations are exposed in the `Model` interface as `Model#prepareIBookForChanges()`, `Model#saveIBookChanges()`, `Model#undoIBook()` and `Model#redoIBook()` respectively.
 
@@ -496,50 +505,62 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` record.
 
-<img src="images/UndoRedoState0.png" width="550" />
+<img src="images/UndoRedoState0.png" width="500" />
 
 Step 2. The user executes `delete 3` command to delete the 3rd product in the iBook. The `delete` command calls `Model#saveIBookChanges()` after its execution, causing changes made to iBook to be recorded as a `StateChange` and stored in the `stateChanges` list. The `currentStateChange` is now pointing to this most recent `StateChange`.
 
-<img src="images/UndoRedoState1.png" width="550" />
+<img src="images/UndoRedoState1.png" width="500" />
 
-Step 3. The user executes `update 1 n:Maggie​` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
+Step 3. The user executes `add n:Maggie​ p:2.00` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
 
-<img src="images/UndoRedoState2.png" width="550" />
+<img src="images/UndoRedoState2.png" width="500" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveIBookChanges()`, so no `StateChange` will be saved into the `stateChanges` list.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If a command fails its execution, it will not call `Model#saveIBookChanges()`, so no `StateChange` will be saved into the `stateChanges` list.
 
 </div>
+
 <br>
+
 Step 4. The user now decides that adding the product was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoIBook()`, which will get and execute the actions needed to revert this change. `currentStateChange` will then move once to the left, pointing to the most recent `stateChange` (with respect to the state of `IBook` after the `undo` command).
 
-<img src="images/UndoRedoState3.png" width="550" />
+<img src="images/UndoRedoState3.png" width="500" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is not pointing to a valid `StateChange` (for example when there is no record in the `stateChanges` list), then there are no changes to revert. The `undo` command uses `Model#canUndoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If the `currentStateChange` is not pointing to a valid `StateChange` (for example when there is no record in the `stateChanges` list), then there are no changes to revert. The `undo` command uses `Model#canUndoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 </div>
+
 <br>
+
 The following sequence diagram shows how the undo operation works:
 
 <img src="images/UndoSequenceDiagram.png" width="950" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<br>
+
+The `redo` command does exactly the opposite  —  it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
+
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If the `currentStateChange` is pointing at the latest record of the `stateChanges` list, then there are no reverted changes to restore. The `redo` command uses `Model#canRedoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
+
 <br>
-The `redo` command does exactly the opposite — it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
 
+Step 5. The user then decides to execute the command `list`. Commands that do not make any changes to `IBook`, such as `list`, will not call `Model#saveIBookChanges()`. Thus, state change records in `StateChangeRecorder` remain unchanged.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStateChange` is pointing at the latest record of the `stateChanges` list, then there are no reverted changes to restore. The `redo` command uses `Model#canRedoIBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<img src="images/UndoRedoState4.png" width="500" />
 
-</div>
-<br>
-Step 5. The user then decides to execute the command `list`. Commands that do not make any changes to `Ibook`, such as `list`, will usually not call `Model#saveIBookChanges()`, `Model#undoIBook()` or `Model#redoIBook()`. Thus, state change records in `StateChangeRecorder` remain unchanged.
+Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared.
 
-<img src="images/UndoRedoState4.png" width="550" />
+Reason: It does not make sense to redo the `add n:Maggie​ p:200` command. This is the convention that most modern desktop applications follow.
 
-Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared. Reason: It does not make sense to redo the `update 1 n:Maggie​` command. This is the convention that most modern desktop applications follow.
-
-<img src="images/UndoRedoState5.png" width="550" />
+<img src="images/UndoRedoState5.png" width="500" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -549,17 +570,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1:** Saves the entire `Ibook`.
+* **Alternative 1:** Save the entire `IBook`.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2 (current choice):** Individual method that makes changes to `IBook` knows how to undo/redo by itself.
+  &nbsp;
+
+* **Alternative 2 (current choice):** Methods that make changes to `IBook` has corresponding reverse actions.
   * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
-  * Cons: We must ensure that the implementation of each individual method are correct.
+  * Cons: Must ensure that the implementation of each method is correct.
 
 <hr/>
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Link to guides**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -575,20 +598,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: A storekeeper who
 
-* has a need to manage different products in the store
-* is comfortable with CLI but prefers GUI for certain occasions
-* is forgetful and easily loses track of expiry dates in  a store
-* is forgetful and sometimes forgets command syntax
-* prefer desktop apps over other types
+* has a need to manage different products in the store.
+* is comfortable with CLI but prefers GUI for certain occasions.
+* is forgetful and easily loses track of expiry dates in a store.
+* is forgetful and sometimes forgets command syntax.
+* prefers desktop apps over other types.
 
-**Value proposition**: manage products and their expiry dates with ease using CLI
-
+**Value proposition**: Manage products and their expiry dates with ease using CLI.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                    | I want to …​                                                            | So that I can…​                                        |
+| Priority level | As a …​                    | I want to …​                                                            | So that I can…​                                        |
 |----------|----------------------------|-------------------------------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | user                       | add a product                                                           | input product data that I want to store                |
 | `* * *`  | user                       | list all products added                                                 | check on all important details of all itemms at once   |
@@ -607,11 +629,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | user familiar with the app | add custom permissions for the staff accounts                           | modify their access rights related to their job scope  |
 | `* `     | professional user          | create and use my own shortcut commands                                 | accomplish my task faster                              |
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `IBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is the `IBook` and the **Actor** is the user, unless specified otherwise.
 
 #### UC1: Listing products
 
@@ -983,7 +1003,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
