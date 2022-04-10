@@ -589,20 +589,66 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ## Find student contact feature
 
-The current FindCommand allows the search of a contact through keywords.
-The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
-The enhanced FindCommand allows the users to search a contact through keywords
-which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
+### About find contact feature
 
-The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
+The `find` command allows the search of a contact by attributes via the command `find KEYWORDS` where `KEYWORDS` can be either `NAME` , `PHONE`, `EMAIL`, `ACADEMIC MAJOR` or `TAGS`
+
+### How it is implemented
+The feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
 implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
 `NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
 
-Given below is the example usage scenario and how the FindCommand behaves at each step
+Given below is the example usage scenario and how the `find` mechanism behaves at each step.
 
-Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
+#### Parsing user input
 
-Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
+1. The user inputs the `find` command and provide the input with the attribute of the student contact and its respective prefix (eg. `n/NAME` or `p/PHONE`) in which the user wants to find the contact.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `FindCommandParser`.
+
+3. The `FindCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+   It also checks whether the command is in the correct format and ensures that there are no multiples of prefixes. In this case, the required prefix and attribute can be any of the `Person`'s attribute, such as  `n/NAME` or `a/ACADEMIC MAJOR`. <br> <br> At this stage, if none of the prefixes are present or the input contains multiple prefixes,
+   `ParseException` would be thrown.
+
+4. If the required prefix and attribute is present (i.e. `n/NAME`), `FindCommandParser` will then call the `ParserUtil#parseName()`
+   to check for the validity of the input `NAME`. <br><div markdown="span" class="alert alert-info">:information_source: **Note:** The `ParserUtil#parse` will follow the input of the prefix (e.g. If the prefix used is `p/` the `ParserUtil` will be `ParserUtil#parsePhone()` or `e/` then the `ParserUtil` will be `ParserUtil#parseEmail()` <br><br> At this stage, `ParseException` would be thrown if the
+   `NAME` specified is invalid.
+
+5. The `FindCommandParser` then creates the `FindCommand` based on the processed inputs.
+
+#### Command execution
+
+6. The `LogicManager` executes the `FindCommand`.
+7. The `FindCommand` calls the `Model#updateFilteredPersonList()` to update the filtered person list based on the user input attributes.
+8. The `FindCommand` then calls the `Model#getFilteredPersonList()#size()` to get the size of the person list. The size will correspond to the number of persons listed.
+
+#### Displaying of result
+9. Finally, the `FindCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+    The GUI would also be updated on this change in the person list and update the display of person list accordingly.
+
+The following sequence diagram shows how the `find` mechanism works:
+
+![](images/FindCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `find` command:
+
+![](images/FindCommandActivityDiagram.png)
+
+### Design considerations
+
+#### Aspect: How the find command finds the student contact 
+
+* **Alternative 1**: finds student contact without any prefixes.
+    * Pros: Allows the users to find student contact with ease without remembering any prefixes.
+    * Cons: It is hard to determine which attributes the users are referring to. If there are multiple contacts which have similar attribute names, the `find` will not be able to pinpoint on the correct contact. For instance, Contact 1: `Name = Ben Science`, `Academic Major = Mathematics` and Contact 2: `Name = Alice Teo`, `Academic Major = Science`. If the user input `find Science`, the two contacts will be listed and hence the search efficiency is compromised.
+
+* **Alternative 2**: finds through partial search (eg. `Dav` to find `David`)
+    * Pros: Allows the users to save time as they are not required to input the full details.
+    * Cons: In a situation when there are multiple contacts with similar names (i.e. `Ben`, `Benedict`, `Benny`), a partial search may not be really beneficial as the users would still require to input the almost to full name in order to get the desired person.
 
 ## \[Proposed\] Undo/redo feature
 
