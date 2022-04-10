@@ -273,25 +273,25 @@ _{more aspects and alternatives to be added}_
 #### Design
 
 The main idea of the archive feature for InternBuddy is that archived entries will not show up when searching for entries
-with the `find` or `list` commands unless you add an option to search for archived entries.
+with the `find` or `list` commands unless the user specifies that they specifically want to search for archived entries.
+In this way, they function similarly to hidden files in many file managers.
 
-To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. To allow for the greatest
-flexibility, there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
+To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. For flexibility,
+there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
 not to explicitly pass a search type; in this case, the default behavior would be `UNARCHIVED_ONLY`.
 
-This extra parameter necessitate
-a `ListCommandParser` to parse it (the list commands previously had no parameters and so did not need a parser class).
-Because the parser would function almost the same for each of the list commands, only one `ListCommandParser` objects was
-added to handle the 3 kinds of list commands. This itself necessitated creating a `ListCommand` object class that each of the
-3 list command classes would inherit from, so that the `ListCommandParser` could return any of the 3 list command classes
-for the `parse()` method.
+This extra parameter required the list commands, which previously had no parser, to use a `ListCommandParser` in order
+to parse the needed search type. Because the parser would function almost the same for each of the list commands, only one
+`ListCommandParser` object was created to handle the 3 kinds of list commands. This itself necessitated creating a
+`ListCommand` object class that each of the 3 list command classes would inherit from, so that the `ListCommandParser`
+could return any of the 3 list command classes for the `parse()` method.
 
-To deal with the actual archiving, each `Entry` class would simply have an `isArchived` attribute indicating if the entry
-was archived or not. Predicates to check the value of the `isArchived` attribute of each entry can then be applied to the
+To deal with the actual archiving, each `Entry` object was given an `isArchived` attribute indicating if the entry
+was archived or not. Predicates to check the value of the `isArchived` attribute of each entry could then be applied to the
 filtered lists to filter out archived entries (or filter only archived entries).
 
-Finally, the `archive` command would simply only take the index as the parameter and it would archive whichever entry in
-the currently displayed list was specified by the index. The `unarchive` command has a similar design.
+Finally, the `archive` command aws designed to take only the index as the parameter. It would archive the entry specified
+by the index that was in the currently displayed list. The `unarchive` command has a similar design.
 
 #### Implementation
 
@@ -312,12 +312,12 @@ displayed list to show all its unarchived entries. Note that in order to get the
 
 A similar process is performed with the `unarchive` command, but `Entry#setArchived()` is ultimately passed `false` instead of `true`.
 
-For the `list` command, here is a sample process:
+For one of the list commands, here is a sample process:
 1. The user executes `listc`
 2. The `ListCommandParser` object is creates with the appropriate `ListType` passed as a parameter to the constructor.
 3. The `ListCommandParser` parses the command to see if the search type parameter is valid. If there is none, or if the
-passed search type parameter is `unarchived`, `archived`, or `all`, the execution proceeds to 3). Otherwise, a `ParseException`
-is thrown.
+passed search type parameter is `unarchived`, `archived`, or `all`, the execution proceeds to 3). Otherwise, a
+`ParseException` is thrown.
 4. The `ListCommandParser` then creates the appropriate `ListCommand` object based on the `ListType` attribute. The
 `ListCommand` object is created with a `SearchType` passed as the parameter.
 5. When the `ListCommand` object is executed, it switches the displayed list to the proper one and applies the appropriate
@@ -350,7 +350,6 @@ predicate on it depending on the search type.
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: manage companies, their events, and their contact people faster than a typical mouse/GUI driven app
-
 
 ### User stories
 
@@ -507,9 +506,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Entry**: A single entry stored in a list of entries (Contact person/Event/Company)
-* **Contact person**: An entry representing a contact person that consists of a name, phone number, email address, and a list of tags
-* **Event**: An entry representing an event that consists of a name, date, time, location, and a list of tags
-* **Company**: An entry representing a company that consists of a name and a list of tags
+* **Person**: An entry representing a contact person that consists of a name, company name, phone number, email address,
+and a list of tags
+* **Event**: An entry representing an event that consists of a name, company name, date, time, location, and a list of tags
+* **Company**: An entry representing a company that consists of a name, phone number, email address, and a list of tags
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -530,36 +530,97 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Listing entries
 
-### Deleting a person
+1. Listing persons
+   1. Test case: `listp`<br>
+      Expected: All unarchived persons are listed. Status message displays "Listed all unarchived persons".
+   2. Test case: `listp s/unarchived`<br>
+      Expected: Same as previous.
+   3. Test case: `listp s/all` or `listp s/archived`<br>
+      Expected: All or only all archived persons are listed, respectively. Status message displays accordingly.
+   4. Test case: `listp s/X` (where x is anything besides `unarchived`, `archived`, or `all`)<br>
+      Expected: No change in the display. Error details shown in the status message.
+2. Listing companies or events
+   1. Same as previous, but use `listc` or `liste` instead of `listp`, respectively.
+
+### Deleting an entry
 
 1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
+   1. Prerequisites: List all persons using the `listp` command. Multiple persons in the list.
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
+      Expected: No person is deleted. Error details shown in the status message.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a company or event while all companies/events are being shown, respectively
+
+   1. Similar procedure for testing deleting a person, but use `listc` or `liste` beforehand instead of `listp`.
+   2. Note: when deleting companies, it is expected that all persons/events with a company name that refers to the deleted
+      company will also be deleted
+
+### Adding an entry
+1. Adding a person
+   1. Test case: `addp n/N c/C e/example@example.com p/12345678 t/hr` (where `N` is a name not already used by another
+   person and `C` is a name of an existing company in the address book) <br>
+      Expected: Person is added to the persons list with the details given. Details of the person are also shown in the
+      status message.
+   2. Test case: `addp`<br>
+      Expected: No person is added. Error details shown in the status message.
+   3. Any `addp` command which is missing a parameter besides `t/`
+      Expected: Similar to previous.
+   4. Any `addp` command where the name parameter is a name of an existing person in the address book
+      Expected: No person is added. Status message should say something to the effect of "Person already exists".
+   5. Any `addp` command where the company parameter is a name of a company that doesn't exist
+      Expected: No person is added. Status message should say something to the effect of "Company name does not refer
+      to an existing company".
+2. Adding a company/event
+   1. Similar to adding a person, but use the `addc` and `adde` commands instead. See User Guide for more details.
+
+### Archive
+
+1. Archiving an unarchived person
+    1. Prerequisites: List all unarchived persons using the `listp` command. Multiple persons in the list.
+    2. Test case: `archive 1`<br>
+       Expected: First contact is archived and no longer appears in the list. Details of the archived contact shown in the status message.
+    3. Test case: `archive 0`<br>
+       Expected: No person is archived. Error details shown in the status message.
+    4. Other incorrect archive commands to try: `archive`, `archive x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Archiving an archived person
+    1. Prerequisites: List all archived persons using the `listp s/archived` command. Multiple persons in the list.
+    2. Test case: `archive 1`<br>
+       Expected: No change. Status message says that the entry is already archived.
+
+3. Unarchiving an archived person
+   1. Prerequisites: List all archived persons using the `listp s/archived` command. Multiple persons in the list.
+   2. Test case: `unarchive 1`<br>
+      Expected: First contact is archived and no longer appears in the list. Details of the unarchived contact shown in the status message.
+   3. Test case: `unarchive 0`<br>
+      Expected: No person is archived. Error details shown in the status message.
+   4. Other incorrect archive commands to try: `unarchive`, `unarchive x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+4. Unarchiving an unarchived person
+    1. Prerequisites: List all unarchived persons using the `listp` command. Multiple persons in the list.
+    2. Test case: `archive 1`<br>
+       Expected: No change. Status message says that the entry is already unarchived.
+
+5. Unarchiving/archiving persons or companies
+   1. Follow similar procedure to the above, but use `listc` or `liste` beforehand instead of `listp`.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}
