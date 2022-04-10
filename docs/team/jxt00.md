@@ -47,6 +47,6 @@ Given below are my contributions to the project.
   * Maintaining the issue tracker
     * Added and assigned issues. [\#10](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/10), [\#28](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/28), [\#43](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/43), [\#46](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/46), [\#153](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/153), [\#219](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/219)
   * Updating user/developer docs that are not specific to a feature
-    * Adapted model component and diagrams to TAssist in the developer guide. [\#110](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/110), [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
+    * Adapted Model component and diagrams to TAssist in the developer guide. [\#110](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/110), [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
     * Updated command summary table in the user guide. [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
     * Added command parameter table to the user guide. [\#141](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/141)
