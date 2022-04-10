@@ -26,7 +26,7 @@ deactivate Command
 
 
 
-MainWindow -> ResultDisplay : resultDisplay(commandResult.text)
+MainWindow -> ResultDisplay : setFeedbackToUser(commandResult.text)
 activate ResultDisplay
 
 ResultDisplay -> TextStyleHelper : formattedTextParser(text)
