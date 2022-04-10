@@ -55,7 +55,7 @@ A glossary is included at the end to clarify any technical or vague terms used.
 2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
-  - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
+    - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
     1. Navigate to the folder containing the **udt.jar** file.
     2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
     3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
