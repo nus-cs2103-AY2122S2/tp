@@ -59,7 +59,7 @@ from what the user sees, how Tinner can help the user, and even its limitations.
 # Quick Start <a id="quick-start"></a>
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest tinner.jar.
+2. Download the [latest tinner.jar](https://github.com/AY2122S2-CS2103T-T17-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tinner.
 
 **For Windows**
@@ -171,10 +171,12 @@ application process for each role is at a glance.
 
 ## Technical Terminologies <a id="technical-terminologies"></a>
 
-| Term |  What it means |
-|:----------:|-------------|
-| Command word| Commands are invoked based on the command word, which is the first word in every user command. The command word is indicated by `COMMAND_WORD` in the guide.|
-|Parameter|User input supplied to a command|
+|     Term     | What it means                                                                                                                                                |
+|:------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command word | Commands are invoked based on the command word, which is the first word in every user command. The command word is indicated by `COMMAND_WORD` in the guide. |
+|  Parameter   | User input supplied to a command                                                                                                                             |
+|  Whitespace  | Any string of text composed only of spaces, tabs or line breaks                                                                                                 |
+|   Integer    | An integer is a number which is not a fraction; a whole number.                                                                                                                                                         |
 
 [Back to Table of Contents](#toc)
 
@@ -206,9 +208,8 @@ The following points explain the format of a command.
   the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Additional parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be
-  ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Additional non-whitespace parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will result in an error.<br>
+  e.g. if the command specifies `help 123`, Tinner will throw an error and the command will not be executed.
 
 * Duplicate company names are not allowed.<br>
   e.g. if there exists a company named `meta`, adding another company with the name `meta` is not allowed.
@@ -268,11 +269,6 @@ in the following format: dd-MM-yyyy HH:mm.
 * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
 * The `STIPEND` must be a positive integer with input going up to 10 digits long.
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: An integer is a number which is not a fraction; a whole number.
-
-</div>
 
 [Back to Table of Contents](#toc)
 
@@ -353,7 +349,7 @@ this entry:
 
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
-Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of
+Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next opening of
 Tinner, you will be able to see a reminder pop-out box like this:
 
 <img src="images/ReminderDemo.png" alt="ReminderDemo" height="480">
