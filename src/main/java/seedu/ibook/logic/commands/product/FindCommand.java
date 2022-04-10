@@ -30,6 +30,9 @@ public class FindCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " " + PREFIX_NAME + " bottle " + PREFIX_PRICE + " 3.00\n"
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_START_PRICE + " 3.00 " + PREFIX_END_PRICE + " 4.00";
 
+    public static final String MESSAGE_REQUIRE_START_END_PRICE = "Please specify both the start and end price and "
+            + "omit price ";
+
     private final List<AttributeFilter> filterList;
 
     /**

@@ -61,14 +61,20 @@ public class FindCommandParser implements Parser<FindCommand> {
             filterList.add(new DescriptionFilter(description));
         }
 
-        if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+        boolean isPricePresent = argMultimap.getValue(PREFIX_PRICE).isPresent();
+        boolean isStartPricePresent = argMultimap.getValue(PREFIX_START_PRICE).isPresent();
+        boolean isEndPricePresent = argMultimap.getValue(PREFIX_END_PRICE).isPresent();
+
+        if (isPricePresent && !isStartPricePresent && !isEndPricePresent) {
+            price = parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
             filterList.add(new PriceFilter(price));
-        } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
-            && argMultimap.getValue(PREFIX_END_PRICE).isPresent()) {
-            startPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_START_PRICE).get());
-            endPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_END_PRICE).get());
-            filterList.add(new PriceFilter(startPrice, endPrice));
+        } else if (!isPricePresent && isStartPricePresent && isEndPricePresent) {
+            priceRange = parsePriceRange(argMultimap.getValue(PREFIX_START_PRICE).get(),
+                argMultimap.getValue(PREFIX_END_PRICE).get());
+            filterList.add(new PriceRangeFilter(priceRange));
+        } else if (isPricePresent || isStartPricePresent || isEndPricePresent) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_REQUIRE_START_END_PRICE));
         }
 
         if (filterList.size() == 0) {
