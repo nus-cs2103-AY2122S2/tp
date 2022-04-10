@@ -7,10 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in Mr. Agent.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -23,6 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Record> records = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -34,6 +36,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Record> records) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.records.addAll(records);
     }
 
     public Name getName() {
@@ -58,6 +73,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Record> getRecords() {
+        return Collections.unmodifiableSet(records);
     }
 
     /**
@@ -92,7 +111,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getRecords().equals(getRecords());
     }
 
     @Override
@@ -117,6 +137,13 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        Set<Record> records = getRecords();
+        if (!records.isEmpty()) {
+            builder.append("; Records: ");
+            records.forEach(builder::append);
+        }
+
         return builder.toString();
     }
 

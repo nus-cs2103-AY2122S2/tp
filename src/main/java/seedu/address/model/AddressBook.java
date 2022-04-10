@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -27,7 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -97,8 +99,15 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        // return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
+        final StringBuilder builder = new StringBuilder();
+        for (Iterator<Person> it = persons.iterator(); it.hasNext(); ) {
+            Person person = it.next();
+            builder.append(person.toString());
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
     @Override

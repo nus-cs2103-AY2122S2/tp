@@ -16,15 +16,27 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
+import seedu.address.model.InsuranceBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.ReadOnlyInsuranceBook;
+import seedu.address.model.ReadOnlyRecordBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RecordBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.AppointmentBookStorage;
+import seedu.address.storage.InsuranceBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonAppointmentBookStorage;
+import seedu.address.storage.JsonInsuranceBookStorage;
+import seedu.address.storage.JsonRecordBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RecordBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -51,21 +63,33 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
 
-        AppParameters appParameters = AppParameters.parse(getParameters());
-        config = initConfig(appParameters.getConfigPath());
+        AppParameters appParameters = AppParameters.parse(this.getParameters());
+        this.config = this.initConfig(appParameters.getConfigPath());
 
-        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(this.config.getUserPrefsFilePath());
+        UserPrefs userPrefs = this.initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        initLogging(config);
+        AppointmentBookStorage appointmentBookStorage =
+                new JsonAppointmentBookStorage(userPrefs.getAppointmentBookFilePath());
 
-        model = initModelManager(storage, userPrefs);
+        InsuranceBookStorage insuranceBookStorage = new JsonInsuranceBookStorage(userPrefs.getInsuranceBookFilePath());
 
-        logic = new LogicManager(model, storage);
+        RecordBookStorage recordBookStorage =
+                new JsonRecordBookStorage(userPrefs.getRecordBookFilePath());
 
-        ui = new UiManager(logic);
+        this.storage = new StorageManager(addressBookStorage, insuranceBookStorage,
+                appointmentBookStorage, recordBookStorage, userPrefsStorage);
+
+        this.initLogging(this.config);
+
+        this.model = this.initModelManager(this.storage, userPrefs);
+
+        this.logic = new LogicManager(this.model, this.storage);
+
+        this.ui = new UiManager(this.logic);
+
+        logic.setUi((UiManager) this.ui);
     }
 
     /**
@@ -75,22 +99,77 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressBookData;
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBookData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBookData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<ReadOnlyInsuranceBook> insuranceBookOptional;
+        ReadOnlyInsuranceBook initialInsuranceBookData;
+        try {
+            insuranceBookOptional = storage.readInsuranceBook();
+            if (!insuranceBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample InsuranceBook");
+            }
+            initialInsuranceBookData = insuranceBookOptional.orElseGet(SampleDataUtil::getSampleInsuranceBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty InsuranceBook");
+            initialInsuranceBookData = new InsuranceBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty InsuranceBook");
+            initialInsuranceBookData = new InsuranceBook();
+        }
+
+        Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
+        ReadOnlyAppointmentBook initialAppointmentData;
+        try {
+            appointmentBookOptional = storage.readAppointmentBook();
+            if (!appointmentBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AppointmentBook");
+            }
+            initialAppointmentData = appointmentBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AppointmentBook");
+            initialAppointmentData = new AppointmentBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentBook");
+            initialAppointmentData = new AppointmentBook();
+        }
+
+        Optional<ReadOnlyRecordBook> recordBookOptional;
+        ReadOnlyRecordBook initialRecordData;
+        try {
+            recordBookOptional = storage.readRecordBook();
+            if (!recordBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample RecordBook");
+            }
+            initialRecordData = recordBookOptional.orElseGet(SampleDataUtil::getSampleRecordBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty RecordBook");
+            initialRecordData = new RecordBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty RecordBook");
+            initialRecordData = new RecordBook();
+        }
+
+        System.out.println(initialAppointmentData.toString());
+        System.out.println(initialAddressBookData.toString());
+        System.out.println(initialInsuranceBookData.toString());
+        System.out.println(initialRecordData.toString());
+
+        return new ModelManager(initialAddressBookData, initialInsuranceBookData,
+                initialAppointmentData, initialRecordData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -168,14 +247,14 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        this.ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            this.storage.saveUserPrefs(this.model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.insurance.Insurance;
+import seedu.address.model.person.Person;
+import seedu.address.model.record.Record;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +36,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private InsuranceListPanel insuranceListPanel;
+    private AppointmentListPanel appointmentListPanel;
+
+    private RecordListPanel recordListPanel;
+    private AppointmentListPanel appointmentHistoryPanel;
+    private ExpiredRecordPanel expiredRecordPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +52,29 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane objectListPanelPlaceholder;
+
+    @FXML
+    private StackPane detailPanel;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
+
+
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane appointmentListPanelPlaceholder;
+
+
+    //@FXML
+    //private StackPane recordListPanelPlaceholder;
+
+    @FXML
+    private StackPane expiredRecordPanelPlaceholder;
+
+    @FXML
+    private StackPane appointmentHistoryPanelPlaceholder;
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,6 +104,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,14 +137,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        // default will display Person List
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this);
+        objectListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        insuranceListPanel = new InsuranceListPanel(logic.getFilteredInsuranceList(), this);
+
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList(), this);
+
+        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+
+
+        appointmentHistoryPanel = new AppointmentListPanel(logic.getFilteredAppointmentHistoryList());
+        expiredRecordPanel = new ExpiredRecordPanel(logic.getFilteredExpiredRecordList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -135,6 +171,32 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+
+    /**
+     * Updates DetailPanel for clicked insurance card.
+     */
+    public void updateInsuranceDetailPanel(Insurance insurance, int displayedIndex) {
+        detailPanel.getChildren().clear();
+        detailPanel.getChildren().add(new InsuranceDetailCard(insurance, displayedIndex).getRoot());
+    }
+
+    /**
+     * Updates DetailPanel for clicked insurance card.
+     */
+    public void updatePersonDetailPanel(Person person, int displayedIndex) {
+        ObservableList<Record> records = logic.getFilteredRecordList();
+        detailPanel.getChildren().clear();
+        detailPanel.getChildren().add(new PersonDetailCard(person, records, displayedIndex, this).getRoot());
+    }
+
+    /**
+     * Updates DetailPanel for clicked record card.
+     */
+    public void updateRecordDetailPanel(Record record, int displayedIndex) {
+        detailPanel.getChildren().clear();
+        detailPanel.getChildren().add(new RecordDetailCard(record, displayedIndex).getRoot());
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -146,6 +208,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+
 
     void show() {
         primaryStage.show();
@@ -177,6 +240,30 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isListPerson()) {
+                objectListPanelPlaceholder.getChildren().clear();
+                objectListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            }
+
+            if (commandResult.isListInsurance()) {
+                objectListPanelPlaceholder.getChildren().clear();
+                objectListPanelPlaceholder.getChildren().add(insuranceListPanel.getRoot());
+            }
+
+            if (commandResult.isListRecord()) {
+                objectListPanelPlaceholder.getChildren().clear();
+                objectListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
+            }
+
+            if (commandResult.isListAppointmentHistory()) {
+                objectListPanelPlaceholder.getChildren().clear();
+                objectListPanelPlaceholder.getChildren().add(appointmentHistoryPanel.getRoot());
+            }
+            if (commandResult.isListExpiredRecord()) {
+                objectListPanelPlaceholder.getChildren().clear();
+                objectListPanelPlaceholder.getChildren().add(expiredRecordPanel.getRoot());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

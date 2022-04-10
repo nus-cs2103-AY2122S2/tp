@@ -57,4 +57,12 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns the preamble for add appointment command (text before the first valid prefix and after '-a').
+     * Trims any leading/trailing spaces.
+     */
+    public String getAddAppointmentPreamble() {
+        return getValue(new Prefix("-a ")).orElse("");
+    }
 }

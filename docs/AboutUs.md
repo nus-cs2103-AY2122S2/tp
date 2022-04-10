@@ -9,51 +9,43 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Mo Yunbin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yunbinmo.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yunbinmo)]
+[[portfolio](team/yunbinmo.md)]
 
-* Role: Project Advisor
+* Role: Integration
+* Responsibilities: Appointment
 
-### Jane Doe
+### Koh Su En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seksek13.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/seksek13)]
+[[portfolio](team/seksek13.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
-### Johnny Doe
+### Jessica Jacelyn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jessicajacelyn.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jessicajacelyn)] [[portfolio](team/jessicajacelyn.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and deadlines + Scheduling and Tracking
 
-### James Doe
+### Zheng ZiKang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zzkzzzz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zzkzzzz)]
+[[portfolio](team/zzkzzzz.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing + Code quality
+
+

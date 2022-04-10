@@ -11,6 +11,9 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.insurance.Insurance;
+import seedu.address.model.person.Person;
+import seedu.address.model.record.Record;
 
 /**
  * The manager of the UI component.
@@ -83,6 +86,19 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    /**
+     * Updates DetailPanel for edit command.
+     */
+    public void updateDetailPanel(Object obj, int index) {
+        if (obj instanceof Person) {
+            mainWindow.updatePersonDetailPanel((Person) obj, index);
+        } else if (obj instanceof Record) {
+            mainWindow.updateRecordDetailPanel((Record) obj, index);
+        } else if (obj instanceof Insurance) {
+            mainWindow.updateInsuranceDetailPanel((Insurance) obj, index);
+        }
     }
 
 }

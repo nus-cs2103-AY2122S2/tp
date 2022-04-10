@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" style="-fx-background-color: #dcbea9; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox style="-fx-background-color: #dcbea9; -fx-border-color: transparent;">
+        <SplitPane id="splitPane" fx:id="splitPane" style="-fx-border-color: transparent; -fx-background-color: #dcbea9#dcbea9;" VBox.vgrow="ALWAYS">
+            <GridPane style="-fx-background-color: #dcbea9; -fx-border-color: transparent;" HBox.hgrow="ALWAYS">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="3000" />
+                </columnConstraints>
+                <VBox alignment="CENTER_LEFT" style="-fx-background-color: #dcbea9; -fx-border-color: transparent;" GridPane.columnIndex="0">
+                    <padding>
+                        <Insets bottom="5" left="15" right="5" top="5" />
+                    </padding>
+                    <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-background-color: #dcbea9; -fx-border-color: transparent;">
+                        <Label fx:id="id" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9;" styleClass="cell_big_label">
+                            <minWidth>
+                                <!-- Ensures that the label text is never truncated -->
+                                <Region fx:constant="USE_PREF_SIZE" />
+                            </minWidth>
+                        </Label>
+                        <Label fx:id="name" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9; -fx-font: 30 arial;" styleClass="cell_big_label" text="\$first" />
+                    </HBox>
+                    <FlowPane fx:id="tags" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9;" />
+                    <Label fx:id="phone" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9; -fx-font: 15 arial;" styleClass="cell_small_label" text="\$phone" />
+                    <Label fx:id="address" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9; -fx-font: 15 arial;" styleClass="cell_small_label" text="\$address" />
+                    <Label fx:id="email" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9; -fx-font: 15 arial;" styleClass="cell_small_label" text="\$email" />
+                    <padding>
+                        <Insets bottom="5" left="0" right="5" top="5" />
+                    </padding>
+                    <padding>
+                        <Insets bottom="5" left="0" right="5" top="5" />
+                    </padding>
+
+                </VBox>
+            <rowConstraints>
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+        </SplitPane>
+        <VBox alignment="CENTER_LEFT" style="-fx-background-color: #dcbea9;" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <Label fx:id="record" wrapText="true" style="-fx-text-fill: #3a2c1d; -fx-background-color: #dcbea9; -fx-font: 18 arial;" styleClass="cell_small_label" text="\$record" />
+            <StackPane fx:id="recordListPanelPlaceholder" style="-fx-background-color: #dcbea9;" VBox.vgrow="ALWAYS" />
+        </VBox>
+
+    </VBox>
+</HBox>
