@@ -14,11 +14,18 @@ Class UserPrefs
 
 Class UniqueCandidateList
 Class Candidate
-Class Address
-Class Email
+Class StudentId
 Class Name
 Class Phone
-Class Tag
+Class Email
+Class Course
+Class Seniority
+Class ApplicationStatus
+Class InterviewStatus
+Class Availability
+
+Class UniqueInterviewList
+Class Interview
 
 }
 
@@ -34,17 +41,31 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+AddressBook *--> "1" UniqueInterviewList
+UniqueInterviewList --> "~* all" Interview
+
 AddressBook *--> "1" UniqueCandidateList
-UniqueCandidateList --> "~* all" Candidate
+UniqueCandidateList -left-> "~* all" Candidate
+Candidate *--> StudentId
 Candidate *--> Name
 Candidate *--> Phone
 Candidate *--> Email
-Candidate *--> Address
-Candidate *--> "*" Tag
+Candidate *--> Course
+Candidate *--> Seniority
+Candidate *--> ApplicationStatus
+Candidate *--> InterviewStatus
+Candidate *--> "*" Availability
 
+StudentId -[hidden]right-> Name
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Course
+Course -[hidden]right-> Seniority
+Seniority -[hidden]right-> ApplicationStatus
+ApplicationStatus -[hidden]right-> InterviewStatus
+InterviewStatus -[hidden]right-> Availability
 
 ModelManager -->"~* filtered" Candidate
+ModelManager -left->"~* filtered" Interview
+
 @enduml

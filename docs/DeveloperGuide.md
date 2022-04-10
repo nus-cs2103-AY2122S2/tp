@@ -133,20 +133,15 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
-* stores the currently 'selected' `Candidate` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TAlent Assistant™'s data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
+* stores the currently 'selected' `Candidate` objects (e.g., results of a `find` or `sort` query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bounded to this list so that the UI automatically updates when the data in the list change.
+* stores Candidates' `Interview` objects (which are contained in a `UniqueInterviewList` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Candidate` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Candidate` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" />
-
-</div>
 
 ### Storage component
 
