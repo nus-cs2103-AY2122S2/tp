@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -23,7 +23,8 @@
               <Insets bottom="10" left="10" right="10" top="5" />
           </padding>
         <children>
-          <Label fx:id="helpMessage" prefWidth="520" style="-fx-wrap-text: true" text="Label" />
+
+          <Label fx:id="helpMessage" prefWidth="520" style="-fx-wrap-text: true" text="Label" wrapText="true" />
             <BorderPane>
                 <left>
                     <Label fx:id="ugMessage" BorderPane.alignment="CENTER" />

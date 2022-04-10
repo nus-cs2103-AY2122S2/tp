@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete -a 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -97,13 +97,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. In the case of commands that is common to all data types (e.g. `add`, `edit`, `delete`, `list`), an intermediate parser may be used to select the specific parser for the data type.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddApplicantCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a applicant).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -a 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete -a 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -154,8 +155,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both HireLah data, which consists of `Applicants`, `Interviews` and `Positions`; and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `HireLahStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -195,9 +196,61 @@ A new `Applicant` class had to be created to support the functionality. It is al
 Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
 support the needs of HireLah.
 
-### To Add: Position feature?
+### Position feature
 
-### To Add: Interview feature?
+#### Proposed Implementation
+
+A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
+* `PositionName` —  refers to the name of the job opening. 
+  Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 100 characters.
+* `Description` —  refers to the description of the position. 
+  Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 200 characters.
+* `PositionOpenings` —  refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
+* `PositionOffers` —  refers to the number of outstanding offers handed out for the position. 
+  Number of offers is initialized as 0 when a position is created. Number of offers cannot be directly mutated, and is only altered through commands of `pass`, `accept`, `reject`.
+* `Set<Requirement>` —  refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
+  There can be any number of requirements for the `Position`.
+  
+These classes are contained in the `position` package which belongs to the `model` package.
+
+Position is implemented this way as for HireLah, as we need to keep track of these informations, in order to aid recruiters
+in keeping track of crucial information in the hiring process.
+
+`PositionOffers` is implemented in a way that disallow users from directly mutating the underlying value.
+It is implemented in this way, so that it accurately reflects the number of `Applicants` that have been offered a job at
+the position. It would defeat the purpose if `PositionOffers` can be set to any number, as it would no longer be able to accurately
+keep track of offers handed out.
+
+### Tracking Interview Status
+
+#### Implementation
+
+Currently, there are 5 possible status for interviews which represents where an applicant is in the hiring pipeline.
+* `Pending` - Interview has been created / scheduled, applicant yet to go for interview.
+* `Passed - waiting for applicant` - Applicant has passed the interview. A job **offer is automatically extended** to the applicant at this stage.
+* `Failed` - Applicant has failed the interview.
+* `Accepted` - Applicant has accepted the job offer. Applicant job role will be updated in Applicants tab.
+* `Rejected` - Applicant has rejected the job offer.
+
+The **activity diagram** below shows the workflows between different interview status and corresponding updates to `Position`
+and `Applicant` classes.
+
+![Activity diagram between different interview status](images/InterviewStatus.png)
+
+#### Design considerations:
+
+Aspect: Number of interviews per applicant allowed for each unique role
+
+* **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
+    * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
+    * Cons: May not model the real-world hiring process accurately where some roles require multiple interviews.
+    
+
+* **Alternative 2:** An applicant can schedule multiple interviews for a unique position they apply for.
+    * Pros: A more accurate modelling of real-world hiring processes.
+    * Cons: Increased complexity of hiring process. 
+      Need to keep track of different number of interviews required for every unique position and where each applicant is 
+      at which stage e.g "Finished HR interview" / "Finished Online Assessment", which may result in more bugs.
 
 ### Adding of Data 
 
@@ -265,30 +318,43 @@ To support different filters for different data types, each filter is a predicat
     * Pros: No two commands doing the similar things, which may lead to chunks of repeated code under the two commands.
     * Cons: May be confusing for new users, need to explain it well in user guide and help window. Also, will have to parse filter-related arguments together with other arguments in `list -X` command (such as for sorting), which may cause the parsing to be more complicated.
 
-### Sorting of Data !NEED TO UPDATE!
+### Sorting of Data 
 
 #### Implementation
-The implementation of sorting data is similar to list data, where sorting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
+The implementation of sorting data is done as an extension of the `list -X` command, which takes in optional 
+parameters that will trigger the sorting of data to display if given. The sorting is done by directly sorting
+the data in `UniqueXYZList`, which uses `ObservableList<XYZ>` to contain the data. It applies a comparator to
+`UniqueXYZList` in `AddressBook`, then applies the given predicate (if none, then use show all predicate) to `filteredXYZ` 
+filtered lists in `ModelManager`, which the `UI` will pick up and display the data to the user.
 
-The parsing of a sorting command from user input is also done through the 3 levels system, with `AddressBookParser`, `SortCommandParser`, and `SortXYZCommandParser` which eventually creates the `SortXYZCommand`.
+
+To support different sorting for different data types, each type of data sort is a comparator class in the Model component. 
+For example, for applicants, we will sort by their name, hence, there is a ApplicantNameComparator in the Model component 
+under applicant. The comparator implements Java's Comparator<Applicant> interface.
+
 
 #### Design considerations:
 
 #### Aspect: How to sort data without affect the original dataset
 
-* **Alternative 1 (current choice):** Store an additional full dataset in `ModelManager`
-    * Pros: Easier to implement, less chance of error occurs when modify the displayed data.
-    * Cons: Less optimal in space as we need to store a copy of the database
+* **Alternative 1 (current choice):** Sort the `UniqueXYZList` and display the data using filtered lists predicate
+    * Pros: 
+      * Less chance of error occurs when modify the displayed data.
+      * `UI` can displayed the sorted data immediately.
+      * `export -X` can export the data according to their sorting order. 
+    * Cons: Decrease cohesion, as we need to depend on `AddressBook`. 
 
 
-* **Alternative 2:** Mark an integer represent the position of the original data
-    * Pros: More efficient in memory space
-    * Cons: Increased the complexity of the relevant code, which make it more bug-prone.
+* **Alternative 2:** Directly sort the `filteredXYZ` filtered lists in `ModelManager` by passing it to sorted lists.
+    * Pros: Increase cohesion, as method only used attributes in `ModelManager`. 
+    * Cons: 
+      * Increased the complexity of the relevant code, as we need to double passing, which make it more bug-prone.
+      * `UI` won't able to display the new filtered lists, and need to connect again to `UI` components.
     
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
-
+    
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
@@ -336,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HireLah Application` and the **Actor** is the `user`, unless specified otherwise)
 
-####**Use case 01: Delete a applicant**
+#### **Use case 01: Delete a applicant**
 
 **MSS**
 
@@ -359,28 +425,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-####**Use case 02: Add an interview**
+#### **Use case 02: Add an interview**
 
 **MSS**
 
-1.  User requests to list applicants
-2.  HireLah shows a list of applicants
-3.  User requests to add a specific interview to a applicant in the list
-4.  HireLah adds the interview to the applicant.
-
+1. User requests to list applicants
+2. HireLah shows a list of applicants
+3. User request to list positions
+4. HireLah shows a list of positions
+5. User requests to add an interview, for a specific position to an applicant in the list
+6. HireLah adds the interview to the applicant
+   <br/><br/>
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
+  <br/><br/>
   Use case ends.
+  <br/><br/>
+* 4a. The list is empty.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 5a. The given index is invalid.
 
-* 3a. The given index is invalid.
+    * 5a1. HireLah shows an error message.
 
-    * 3a1. HireLah shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 4.
 
 #### **Use case 03: Editing position**
 
@@ -404,7 +476,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br/><br/>
   Use case ends.
 
-#### **Use case 04: Filtering data**
+**Use case 04: Viewing help**
+
+**MSS**
+1. User requests to view help
+2. HireLah shows a list of commands and its briefly description
+3. User chooses to close the help box
+4. HireLah closes the help box
+
+Use case ends.
+
+**Use case 05: Viewing detail help for a specific command**
+
+**MSS**
+1. User <u>open the list of commands and general description (UC4).<u>
+2. User chooses a specific command and view its detail description.
+3. HireLah displays the detail description of that command
+4. User chooses to close the box.
+5. HireLah closes the box.
+
+Use case ends.
+#### **Use case 06: Filtering data**
+
 
 **MSS**
 1. User requests to list data with filter applied.

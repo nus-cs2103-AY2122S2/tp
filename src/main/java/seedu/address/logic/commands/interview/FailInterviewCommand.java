@@ -50,7 +50,7 @@ public class FailInterviewCommand extends Command {
         failedInterview.markAsFailed();
         model.setInterview(interviewToFail, failedInterview);
 
-        return new CommandResult(String.format(MESSAGE_FAIL_INTERVIEW_SUCCESS, interviewToFail),
+        return new CommandResult(String.format(MESSAGE_FAIL_INTERVIEW_SUCCESS, failedInterview),
                 getCommandDataType());
     }
 

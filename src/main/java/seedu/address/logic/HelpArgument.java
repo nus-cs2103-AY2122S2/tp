@@ -18,13 +18,14 @@ public class HelpArgument {
             + "7. accept: Accept a passed interview. \n"
             + "8. reject: Reject a passed interview. \n"
             + "9. export: Export data to a CSV file. \n"
-            + "10. exit: Exits the program";
+            + "10. clear: Clears all data in HireLah. \n"
+            + "11. exit: Exits the program";
 
     public static final String ADD_COMMAND_DESCRIPTION =
             "1. Adding an applicant: \n"
             + "Format: 'add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…' \n"
             + "Some notice: \n"
-            + "- Age provided must be at least two digits eg: “23”. \n"
+            + "- Age provided must be two digits, and cannot start with a 0. eg: “23”. \n"
             + "- Name, Phone number and email must be unique  \n"
             + "- Gender must be M/F. \n"
             + "Examples: \n"
@@ -44,7 +45,7 @@ public class HelpArgument {
             + "Some notice: \n"
             + "- Positions must have a unique name. \n"
             + "- Name provided is case-insensitive. \n"
-            + "- Number of openings in the position must be 0 or more 0, 1, 2,… \n"
+            + "- Number of openings in the position must be between 1 to 5 digits, and cannot start with 0. \n"
             + "Examples: \n"
             + "add -p p/Senior Software Engineer o/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS";
 
@@ -199,6 +200,10 @@ public class HelpArgument {
             + "'list -a f/name a/Betsy' then 'export -a' will export csv all applicants"
             + " name Betsy to the corresponding csv file.";
 
+    public static final String CLEAR_COMMAND_DESCRIPTION =
+            "Clears all data in HireLah, including all applicants, positions, and interviews`. \n"
+            + "Warning: This command cannot be undone!";
+
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
             + "Format: 'exit'";
@@ -236,6 +241,7 @@ public class HelpArgument {
         argumentWithDescription.put("export", EXPORT_COMMAND_DESCRIPTION);
         argumentWithDescription.put("exit", EXIT_COMMAND_DESCRIPTION);
         argumentWithDescription.put("help", HELP_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("clear", CLEAR_COMMAND_DESCRIPTION);
         argumentWithDescription.put("", OVERALL_HELPING_DESCRIPTION);
         return argumentWithDescription;
     }

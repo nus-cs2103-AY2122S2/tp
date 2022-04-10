@@ -26,7 +26,7 @@ import seedu.address.logic.commands.applicant.EditApplicantCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.position.EditPositionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HireLah;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantNamePredicate;
@@ -165,11 +165,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        HireLah expectedHireLah = new HireLah(actualModel.getHireLah());
         List<Applicant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedHireLah, actualModel.getHireLah());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicantList());
     }
     /**

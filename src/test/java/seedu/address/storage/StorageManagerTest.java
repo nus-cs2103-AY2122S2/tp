@@ -3,7 +3,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalApplicants.getTypicalHireLah;
 
 import java.nio.file.Path;
 
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HireLah;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -57,16 +57,16 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
     /*
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        HireLah original = getTypicalHireLah();
+        storageManager.saveHireLah(original);
+        ReadOnlyHireLah retrieved = storageManager.readHireLah().get();
+        assertEquals(original, new HireLah(retrieved));
 
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getHireLahFilePath() {
+        assertNotNull(storageManager.getHireLahFilePath());
     }
 
 }

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicantAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -22,7 +22,7 @@ import seedu.address.model.UserPrefs;
  */
 public class DeleteApplicantCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHireLah(), new UserPrefs());
 
     //    @Test
     //    public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class DeleteApplicantCommandTest {
     //                String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
     //                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
     //
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        ModelManager expectedModel = new ModelManager(model.getHireLah(), new UserPrefs());
     //        expectedModel.deleteApplicant(applicantToDelete);
     //
     //        assertCommandSuccess(deleteApplicantCommand, model, expectedMessage, expectedModel);
@@ -58,7 +58,7 @@ public class DeleteApplicantCommandTest {
     //                String.format(DeleteApplicantCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
     //                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
     //
-    //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        Model expectedModel = new ModelManager(model.getHireLah(), new UserPrefs());
     //        expectedModel.deleteApplicant(applicantToDelete);
     //        showNoApplicant(expectedModel);
     //
@@ -72,7 +72,7 @@ public class DeleteApplicantCommandTest {
         Index outOfBoundIndex = INDEX_SECOND;
 
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicantList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getHireLah().getApplicantList().size());
 
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(outOfBoundIndex);
 

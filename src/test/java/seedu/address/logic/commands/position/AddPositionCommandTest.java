@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HireLah;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.PositionBuilder;
 
@@ -111,8 +111,8 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyHireLah getHireLah() {
+            return new HireLah();
         }
     }
 }
