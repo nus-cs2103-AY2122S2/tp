@@ -92,7 +92,8 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Company`, and `Event` objects
+residing in the `Model`.
 
 ### Logic component
 
@@ -112,7 +113,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -120,8 +122,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a 
+placeholder for the specific command name e.g., `DeleteCommandParser`) which uses the other classes shown above to parse
+ the user command and create a `XYZCommand` object (e.g., `DeleteCommand`) which the `AddressBookParser` returns back as 
+a `Command` object.
+* All `XYZCommandParser` classes (e.g., `DeleteCommandParser`, `ListCommandParser`, ...) inherit from the `Parser` interface
+so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -131,15 +137,30 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person`, `Company`, and `Event` objects (which are each contained in their own `UniqueEntryList` objects).
+* stores the address book data i.e., all `Entry` objects 
+  * Each type of entry (`Company`, `Person`, and `Event`) is contained in their own `UniqueEntryList` objects.
 * stores the currently 'selected' objects (e.g., results of a search query) as a separate _filtered_ list.
-  * Each type of entry (`Person`, `Company`, and `Event`) has their own filtered list
-  * These filtered lists are exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' 
+  * Each type of entry (`Company`, `Person`, and `Event`) has their own filtered list
+  * These filtered lists are exposed to outsiders as an unmodifiable `ObservableList<Entry>` that can be 'observed' 
 e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
+`ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain,
+they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+Here are the various classes that inherits from and is used by the `Entry` object:
+
+<img src="images/EntryClasses.png" width="650" />
+
+Note that the `CompanyName` object is actually just a `Name` object, so in effect `Person` and `Event` have two
+`Name` objects: one for their name, and one for the name of the company they are attached to.
+
+Furthermore, the `CompanyName`
+object must match an existing `Company` object in the `AddressBook`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model
+is given below. It has a `Tag` list in the `AddressBook`, which `Entry` references. This allows `AddressBook` to only 
+require one `Tag` object per unique tag, instead of each `Entry` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 

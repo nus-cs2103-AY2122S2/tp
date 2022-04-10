@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "Entry classes" <<Rectangle>>{
+Class "{abstract}\nEntry" as Entry
+Class Company
+Class Person
+Class Event
+
+Class Address
+Class Phone
+Class Email
+Class Tag
+Class Name
+Class CompanyName
+Class Date
+Class Time
+Class Location
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Entry
+
+Company -up-|> Entry
+Person -up-|> Entry
+Event -up-|> Entry
+
+Company *-down-> Address
+Company *-down-> Phone
+Company *-down-> Email
+
+Person *-down-> Phone
+Person *-down-> Email
+Person *-down-> CompanyName
+
+Event *-down-> CompanyName
+Event *-down-> Date
+Event *-down-> Time
+Event *-down-> Location
+
+CompanyName -up-|> Name
+Entry *--> Name
+Entry *--> "*" Tag
+
+@enduml
