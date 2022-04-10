@@ -624,7 +624,7 @@ The sequence diagrams below illustrates the proposed implementations to access t
 * Needs to manage a large number of contacts
 * Has a busy schedule with many appointments and meetings
 * Needs to know when he is free very quickly
-* May need documents or information related to contacts or meetings
+* Needs to manage information related to contacts and meetings efficiently
 * Prefers keyboard over mouse interactions for on-the-go usage
 * Is reasonably comfortable using apps with text-based inputs
 * Currently uses excel for managing contacts
@@ -671,7 +671,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 The following user stories were considered but ultimately not implemented. Some reasons for not implementing are listed below.
 
 * The UI was made intuitive with only 1 text field for input so that there is no ambiguity for the user
-* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fiels
+* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fields
 * A To-Do list does not add value to the problem that is being tackled
 * Custom commands add significant complexity without much value. It was decided that keeping the commands simple and short would eliminate the need for this entirely.
 * Finding tags by name does not add value to the problem that is being tackled
@@ -1145,9 +1145,9 @@ Note that since underline is not allowed in markdown, included use cases are **b
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 persons and appointments without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be intutitive for a first-time user to perform basic actions.
+4.  Should be intuitive for a first-time user to perform basic actions.
 5.  The data file should be understandable to tech-savvy human readers.
 6.  The system's design should follow the *Object-Oriented Paradigm (OOP)*.
 7.  Should be packageable into a single JAR file.
