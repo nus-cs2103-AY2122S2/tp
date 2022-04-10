@@ -31,7 +31,7 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Task taskToDelete = model.getAddressBook().getTaskList().get(INDEX_FIRST.getZeroBased());
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
 
         // Add Benson to model's UniquePersonList
         model.addPerson(BENSON);
