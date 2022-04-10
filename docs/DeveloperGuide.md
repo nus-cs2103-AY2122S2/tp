@@ -593,6 +593,46 @@ Subsequently, the `parseCommand` method in `LogicManager` will continue to creat
 The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
 The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
 
+### List Feature
+
+The list mechanism implements the following sequence for the method call execute("list").
+
+#### What is the list feature
+
+The list feature will display all students and their details on the main window. 
+Each student's name, phone number, email, address, block letter, faculty, matriculation number, covid status and tags will be shown in the form of cards.
+
+The `list` command is as follows:
+
+`list`
+
+The user can choose when to execute the list command.
+
+The activity diagram shows the possible execution paths for the `list` command.
+
+**Path Execution of List Feature:**
+
+![ListFeatureActivityDiagram](images/ListFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
+2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
+
+**Structure of List Feature:**
+
+![ListFeatureClassDiagram](images/ListFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `ListCommand`. As per any Command class, ListCommand needs to extend the abstract class Command.
+
+**Interactions between objects when List Command is executed:**
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+When a user inputs a list command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ListCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method, a `CommandResult` object will be instantiated. In this method,
+the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window.
+
 ### Email Feature
 
 The email mechanism implements the following sequence for the method call execute("email").
