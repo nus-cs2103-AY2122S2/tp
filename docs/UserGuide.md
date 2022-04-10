@@ -289,7 +289,7 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
 </div>
 
 ### Redoing an action
-Reverses an executed undo command.
+Reverse an executed undo command.
 
 Format: `redo`
 * Reverses only the last executed `undo` command.
@@ -315,17 +315,16 @@ to counteract the effects of the `undo` command on the `edit` command, and the o
 </div>
 
 ### Finding a contact
-Find a particular contact in Tracey and retrieve their specific details.
+Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
-* A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
-* The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
+* The input keyword can be a partial name e.g. `jo` will match `Joe` and `John`.
+  * The partial name used must match the corresponding characters of the student's name starting from the first character e.g. using partial names such as `p`, `po`, `pop`, will match a student named `Poppy`, but using partial names such as `op`, `ppy` and `oppy` will not match.
 
 Examples of usages:
-
 * `find John` returns `john` and `John Doe`.
 * `find alex david` returns `Alex Yeoh` and`David Li`.
 * `find J` returns `john` and`jay`.
