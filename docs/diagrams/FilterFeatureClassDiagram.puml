@@ -1,0 +1,36 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
++ execute(model: Model) {abstract}
+}
+interface Model <<interface>> {
++ updateFilteredPersonsList(predicate: Predicate<Person>)
+}
+class FilterCommand {
+- filterDescriptor: FilterDescriptor
+execute(model: Model): CommandResult
+}
+class FilterDescriptor {
+- faculty: Faculty
+- status: CovidStatus
+- block: Block
+- filter: ArrayList<Predicate<Person>>
++ getFilters(): Predicate<Person>
++ setFaculty(faculty: Faculty)
++ setCovidStatus(status: CovidStatus)
++ setBlock(block: Block)
++ isEmpty(): boolean
+}
+class FilterCommandParser {
+parse(args: String): FilterCommand
+}
+
+"{abstract}\nCommand" <|-- FilterCommand
+FilterDescriptor <|-- FilterCommandParser
+FilterCommand *-- FilterDescriptor
+Model <.- FilterCommand
+
+@enduml
