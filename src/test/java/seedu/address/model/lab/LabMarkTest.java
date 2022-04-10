@@ -34,14 +34,17 @@ public class LabMarkTest {
         assertFalse(LabMark.isValidLabMark(" ")); // spaces only
 
         // invalid lab
-        assertFalse(LabMark.isValidLabMark("1a")); // invalid lab number
-        assertFalse(LabMark.isValidLabMark("01")); // starts with 0
+        assertFalse(LabMark.isValidLabMark("1a")); // invalid lab mark
         assertFalse(LabMark.isValidLabMark("-1")); // negative integer
+        assertFalse(LabMark.isValidLabMark("101")); // integer greater than 100
+        assertFalse(LabMark.isValidLabMark("0101")); // leading 0s ignored
+        assertFalse(LabMark.isValidLabMark("123456789")); // integer greater than 100
 
         // valid lab
-        assertTrue(LabMark.isValidLabMark("0")); // valid non-negative integer
+        assertTrue(LabMark.isValidLabMark("0")); // smallest possible lab mark
         assertTrue(LabMark.isValidLabMark("2")); // valid integer
-        assertTrue(LabMark.isValidLabMark("123456789")); // valid integer
+        assertTrue(LabMark.isValidLabMark("01")); // leading 0s ignored
+        assertTrue(LabMark.isValidLabMark("100")); // largest possible lab mark
     }
 
     @Test
