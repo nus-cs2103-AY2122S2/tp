@@ -31,7 +31,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Upload an image: `upload`](#upload-an-image--upload)
   - [View image of client: `viewimage`](#view-image-of-client-viewimage)
   - [Setting a reminder for a client: `remind`](#setting-a-reminder-for-a-client-remind)
-  - [Open Reminder window: `rm`](#open-reminder-window)
+  - [Open Reminder window: `rm`](#open-reminders-window-rm)
   - [Displaying statistics: `stats`](#displaying-statistics-stats)
 - [Future Features](#future-features-coming-soon)
 - [Storage](#storage)
@@ -99,7 +99,7 @@ Some example commands you can try:
   - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
   - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
   - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
-  - PRICE: `$` followed by a positive integer. e.g. `$150000`
+  - PRICE: `$` followed by a positive integer with at most 9 digits. e.g. `$150000` is acceptable but `$1234567890` is not acceptable.
 
 </div>
 
@@ -239,7 +239,7 @@ Format:  `fw`
 
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
-### Locating clients by name: `find`
+### Finding clients by keyword: `find`
 
 Finds clients whose specified attribute contain any of the given keywords.
 
@@ -256,6 +256,22 @@ Examples:
 
 - `find name John` returns `john` and `John Doe`
 - `find name sam elon` returns `Sam Yeo`, `Elon Musk`
+- `find phone 99272758` returns `Bernice Yu`
+- `find email charlotte@example.com` return `Charlotte Oliveiro`
+- `find address 436` return `David Li`
+- `find properties jurong` return `Albus Dumbledore`
+- `find properties north` return `Bellatrix Lestrange`
+- `find properties 2-room` return `Cornelius Fudge`
+- `find properties $300` return `Draco Malfoy`
+- `find properties jurong north 2-room $300` return `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find preference east` return `Ernie Mcmillan`
+- `find preference 4-room` return `Fred Weasley`
+- `find preference $100` return `George Weasley`
+- `find preference $200` return `Harry Potter`
+- `find preference east 4-room $100 $200` return `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
+- `find all alex 99272758 charlotte@example.com 436 jurong $200` return `Alex Yeoh`, `Bernice Yu`, `Charlotte Oliveiro`, `David Li`, `Albus Dumbledore`, `Harry Potter`
+- `find usertype seller` return `Bernice Yu`, `David Li`, `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
@@ -306,6 +322,11 @@ To sort by number of properties in the default order, but with buyers shifted to
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
 
+A preference matches with a property if 
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference. 
+
 Format: `match`
 
 ### Upload an Image : `upload`
@@ -316,7 +337,7 @@ Format `upload INDEX [i/FilePath:description]`
 - Adds an image to the client at the specified `INDEX`.
 - The index refers to the index number shown in the displayed client list.
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
-  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png).
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`.
 - multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`.
 
@@ -328,8 +349,19 @@ Format `viewimage INDEX`
 
 
 ### Setting a Reminder for a client: `remind`
+<img src="images/user-guide/successfulRemindCommand.png" height="400px">
 
-Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the Reminder window.
+Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminder-window).
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Reminders:**<br>
+
+- The user will only be able to create 1 Reminder for each client. The user will be able to create a new Reminder, edit a current Reminder or remove a Reminder for a client.
+- Reminders are meant to serve as temporary notes for the user & thus will not persist beyond the lifecycle of a RealEstatePro application. This means any reminders created will be removed once the RealEstatePro application is closed.
+
+</div>
+
 
 Format: `remind INDEX r/ReminderDetails`
 - Sets a Reminder for the client at the specified `INDEX`.
@@ -337,9 +369,26 @@ Format: `remind INDEX r/ReminderDetails`
 - The index **must be a postive integer** 1, 2, 3, ...
 - The `ReminderDetails` must be a non-empty String, e.g. `arrange home viewing`.
 
-### Open Reminder window: `rm`
+Example of usage:
+- Creating a Reminder
+  - `remind 1 r/meet client for home viewing` to create a Reminder titled "meet client for home viewing" for the client at index 1.
+- Editing a Reminder
+  - `remind 1 r/liaise with client for leasing details` to edit the existing Reminder for the client at index 1 to be "liaise with client for leasing details".
+- Deleting a Reminder
+  - `remind 1` to remove the current Reminder for the client at index 1.
 
-Opens a new window that displays compacted list of clients that have Reminders set.
+### Open Reminders window: `rm`
+
+<p float="left">
+  <img src="images/user-guide/reminderWindowFilled.png" height="400px">
+  <img src="images/user-guide/reminderWindowEmpty.png" height="400px">
+</p>
+
+
+
+Opens a new window that displays compacted list of clients that have Reminders set. Upon execution of the `rm` command, the Reminders window will persist & continuously appear every 1 minute, until the RealEstatePro app is closed. The Reminders window is meant to serve as a pinboard showing existing Reminders.
+
+The Reminders window can exist in the above 2 states: a list of clients with their reminders or a label "No Reminders set!". These 2 states exist when there are existing reminders or there are no reminders respectively. If the user has reminders set for their clients, the Reminders window will resemble the first picture, else the second picture.
 
 Format: `rm`
 
@@ -362,7 +411,8 @@ Format: `stats`
 2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
 3. Display statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
 4. Display statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
-5. Allow images to be associated with properties or preferences to allow for better organization
+5. Allow images to be associated with properties or preferences to allow for better organization.
+6. Reminders set for clients can be saved to disk.
 
 ## Storage
 ### Saving the data

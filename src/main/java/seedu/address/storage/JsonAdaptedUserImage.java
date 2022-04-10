@@ -7,13 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.property.Region;
 import seedu.address.model.userimage.FilePath;
 import seedu.address.model.userimage.UserImage;
 
 public class JsonAdaptedUserImage {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "UserImage's %s field is missing!";
 
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedUserImage.class);
 
@@ -47,7 +44,7 @@ public class JsonAdaptedUserImage {
         final FilePath modelFilePath;
 
         if (filePath == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Region.class.getSimpleName()));
+            throw new IllegalValueException(String.format(FilePath.MESSAGE_CONSTRAINTS));
         }
         if (!FilePath.isValidFilePath(filePath)) {
             logger.warning("File at " + filePath + " is missing, entry deleted.");

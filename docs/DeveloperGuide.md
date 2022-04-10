@@ -9,27 +9,134 @@ This is a brownfield project that bases from the Project template [AddressBook L
 
 # Setting up, getting started
 
-Get started by following these instructions from our [guide](https://www.notion.so/Setting-up-and-getting-started-28e77333ad24494093cc39f79194a1e2).
+Get started by following these instructions from our [guide](https://ay2122s2-cs2103-w16-4.github.io/tp/SettingUp.html).
 
 # Design
 
 Take a look at our design which is mostly based off [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/DeveloperGuide.html#design).
 
+## Architecture
 
-##Architecture
+<img src="images/ArchitectureDiagram.png" width="280" />
 
-##UI Component
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
+Each of the four main components (also shown in the diagram above),
+
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+
+The sections below give more details of each component.
+
+### UI Component
+
+The **API** of this component is specified in `Ui.java`
+
 <img src="images/developer-guide/UiArchitecture.png" width="800px">
 
-# Model Component
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the src/main/resources/view folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
+The `UI` component,
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+Several user commands also involve the display and creation of `XYZWindows` (`matchwindow`, `statswindow`, `viewimagewindow`, `reminderwindow`, `favouritewindow`) which relies on the logic component in order to execute and display the information returned from the commands.
+
+### Logic component
+
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+
+Here's a (partial) class diagram of the `Logic` component:
+
+<img src="images/LogicClassDiagram.png" width="550"/>
+
+How the `Logic` component works:
+1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+How the parsing works:
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+### Model component
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+<img src="images/ModelClassDiagram.png" width="450" />
+
+
 The `Model` component,
 
-- stores the address book data, i.e., all Person objects (which are contained in a UniquePersonList object). 
-- stores the currently ‘selected’ `Person` objects (i.e., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
-- stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes. 
-- The *sorted* list is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
-- stores a UserPref object that represents the user’s preferences. This is exposed to the outside as a ReadOnlyUserPref objects. 
-- does not depend on any of the other three components (as the Model represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
+* stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes.
+* The *sorted* list is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
+
+
+### Storage component
+
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+
+<img src="images/StorageClassDiagram.png" width="550" />
+
+The `Storage` component,
+* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Common classes
+
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 # Implementation
 
@@ -141,7 +248,7 @@ The `viewImageWindow` is then launched after it retrieves the set from `model`
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
 ## Statistics feature/Window
-<img src="images/user-guide/stats.png" height="400px">
+<img src="images/user-guide/Stats.png" height="400px">
 
 The `stats` opens a new `StatisticsWindow` that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
@@ -186,9 +293,9 @@ This is how we do our [configurations](https://se-education.org/addressbook-leve
 
 This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOps.html).
 
-<aside>
-💡 **Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
-</aside>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+</div>
 
 # Appendix: Requirements
 
@@ -218,8 +325,118 @@ Manage Persons faster that a typical mouse/GUI driven app.
 | High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
 | High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
 | High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
 
 ## Use cases
+System: RealEstatePro (REP)
+
+**Use case: Add a client**
+
+Actor: User
+
+**MSS**
+1. User requests to add a client.
+2. REP adds the client to the system.
+
+**Extensions:**
+
+* 1a. REP detects error in details
+   * 1a1. REP displays an error message.
+
+     Use case resumes at step 1
+
+**Use Case: Edit a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to edit a specific client
+4. REP edits the client in the system
+
+**Extensions:**
+
+* 1a. The list is empty
+
+  Use case ends
+
+* 3a. The given index is invalid
+  * 3b1. REP displays an error message
+
+    Use case resumes at step 2
+
+* 3b. REP detects error in details
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 3
+
+**Use Case: Delete a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to delete a specific client
+4. REP deletes the client from the system
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
+**Use Case: Upload Image**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to upload image for a specific client
+4. REP associates image to the client
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
+* 3b. Image given is invalid
+   * 3b1. REP displays an error message
+
+     Use case resumes at step 3
+
+**Use Case: View Image**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to view images of a specific client
+4. REP displays images associated to the client
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
+* 3b. Client has no images
+   * 3b1. REP displays an error message
+
+     Use case resumes at step 2
 
 ## Non-functional Requirements
 
@@ -230,18 +447,18 @@ Manage Persons faster that a typical mouse/GUI driven app.
 5. The application will not be able to prevent any data privacy violated by other programs.
 
 ## Glossary
-
-**Buyer** - client that is looking to buy a property based on some preference
-
-**Seller -** client that is looking to sell a property for a particular price
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
-<aside>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
-</aside>
+</div>
 
 ## Launch and shutdown
 
@@ -256,11 +473,86 @@ Given below are instructions to test the app manually.
     2. Another way is to click on ‘File’ menu item and click on ‘Exit’.
     3. Lastly, you can enter the `exit` command.
 
-## Deleting a Person
+## Adding a Client
+1. Adding a new client
+   1. Prerequisites: None
+   2. Test Case: `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`<br>
+   Expected: A new client is created at the end of the list with a buyer tag. Details of the new client is shown in the result display.
+   3. Test Case: `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`<br>
+   Expected: A new client is created at the end of the list with a seller tag. Details of the new client is shown in the result display.
+   4. Test Case: `add n/Mary Sue`<br>
+   Expected: No client is created. Error details are shown in the result display and list remains the same.
+   5. Other incorrect add commands to try: `add`, `add p/999`, `...`<br>
+   Expected: Similar to previous.
 
-1. Deleting a Person while all Persons are being shown
-    1. Prerequisites: List all Persons using the `list` command. Multiple Persons in the list.
-    2. Test case: `delete 1`Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-    3. Test case: `delete 0`Expected: No Person is deleted. Error details shown in the status message. Status bar remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+## Editing a Client
 
+1. Editing a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   2. Test case: `edit 1 n/John Deen`<br>
+   Expected: Name of first client is changed to John Deen. Details of the edited client is shown in the result display.
+   3. Test case: `edit 1 n/Mary Susna p/999`<br>
+   Expected: Name and Phone number of first client is changed to Mary Susan and 999 respectively. Details of the edited client is shown in the result display.
+   4. Test case: `edit 0`<br>
+   Expected: No client is edited. Error details are shown in the result display. List remains the same.
+   5. Other incorrect edit commands to try: `edit`, `edit 1 John Done`, `...`
+   Expected: Similar to previous
+
+## Deleting a Client
+
+1. Deleting a client while all clients are being shown
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    2. Test case: `delete 1`<br>Expected: First client is deleted from the list. Details of the deleted contact shown in the result display. Timestamp in the status bar is updated.
+    3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+
+## Favoriting a client
+
+## Finding a client
+
+## Sorting clients
+
+## Matching clients
+
+## Uploading an Image
+
+1. Uploading an Image to an existing client
+   1. Prerequisites:
+      1. There must be at least a client in the list.
+      2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+   2. Test case: `upload 1 i/success.png:successful upload`<br>
+   Expected: an image is successfully associated to the first client with successful upload message.
+   3. Test case: `upload 1 i/test.txt:Fail upload`<br>
+   Expected: upload fails and error message is shown.
+   4. Other incorrect upload commands to try: `upload` `upload i/fail.png`, `...` Expected: Incorrect command format or invalid file error messages.
+
+## Viewing an Image
+
+1.Uploading an Image to an existing client
+1. Prerequisites:
+   1. There must be at least a client in the list.
+   2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+   3. client must have at least one image associated with
+2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
+3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+
+## Setting reminders
+
+# Effort
+
+## Difficulty level
+The development was of moderate difficulty due to having to understand the existing codebase and adapting it for our project. We also had trouble integrating the various features together especially the buyer and seller feature.
+
+## Challenges
+Challenges faced were the following:
+- Understanding and refactoring the existing AB3 code base.
+- Balancing the relationship between buyers, sellers, properties and preferences.
+- Understanding how to use JavaFX and adapting the existing JavaFX to suit our needs.
+
+## Effort Required
+We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work.
+
+## Achievements
+RealEstatePro has been developed to become a fully functioning app that is fully capable fo fufilling the needs of a real estate agent in organising clients and is capable of
+managing the different types of information that a real estate agent will need about a client.
+RealEstatePro also boasts a range of tools that would improve the efficiency of the real estate agent by providing tools such as reminders and matching of clients which makes it easier identify trends and fulfill the needs of clients.
