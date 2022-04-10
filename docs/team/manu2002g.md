@@ -22,7 +22,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user search for a contact entry in the list according to basic particulars. Functionality for tags was added by another teammate.
   * Justification:  Users may have very large lists of contacts and may want to filter them by a certain tag or detail. We should allow them to do this using a find command.
   * Highlights: This enhancement offers both 'AND' and 'OR' search for the fields searched for. The implementation was challenging as it required good knowledge of java predicates and functional programming.
-* 
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=manu2002g&tabRepo=AY2122S2-CS2103T-W11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
 
 * **Documentation**:

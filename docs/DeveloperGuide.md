@@ -331,7 +331,7 @@ are copied over from the existing person and the fields to be overwritten are ch
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
 #### Current Implementation
-We initially built the `edit` command to allow overwriting of the tag lists. However later we removed that functionality so the command 
+We initially built the `edit` command to allow overwriting of the tag lists. However later we removed that functionality so the command
 can only be used to edit the main fields. This is because we realised that it is easier to use the `tag` and `removetag` commands to
 edit the tag lists instead.
 
@@ -343,9 +343,9 @@ Below is an example usage scenario and how the edit mechanism behaves at each st
 It will then pass the arguments to the `EditCommandParser` to handle the parsing for the identified `EditCommand`.
 
 **Step 3.** `EditCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to edit.
-Afterwards, it would separately parse the arguments according to prefixes using `ArgumentTokenizer#Tokerize()`. 
+Afterwards, it would separately parse the arguments according to prefixes using `ArgumentTokenizer#Tokerize()`.
 In this case it would use the parsing functions `ParserUtil#parseName()` and `ParserUtil#parsePhone()` to parse the name and phone number into
-`Name` and `Phone` objects. 
+`Name` and `Phone` objects.
 
 **Step 4.** These parsed fields are then stored in a `EditPersonDescriptor` object, which is then passed into `FindCommand`.
 Control is handed over to `FindCommand` which will eventually return to `LogicManager`, which will call `FindCommand#Execute()` to
@@ -810,9 +810,9 @@ The user wants to delete event(s) instead.
 4. The system should work on both 32-bit and 64-bit environments.
 5. The system should respond within 3 seconds.
 6. The product is strictly an offline application and data is stored locally.
-7. The product is not required to handle the feature of finding past events based on the date and time. 
+7. The product is not required to handle the feature of finding past events based on the date and time.
 (i.e using a past date & time for the "find -e" command would be invalid)
-8. The product is not required to handle multiple whitespaces in between words for all data field inputs. 
+8. The product is not required to handle multiple whitespaces in between words for all data field inputs.
 (i.e "Alison Baker" will not be identified the same as "Alison   Baker")
 9. The product is not required to handle the multiple events occurring at the same time.
 (i.e Multiple events sharing the same date and time would be recognized as separate unique events respectively)
@@ -894,7 +894,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `event name/ info/at HDL d/2023-11-10 t/12:12` <br>
       Expected: No new event is added into the event list. Error details shown in the status message. Status bar remains the same
-   
+
    3. Other incorrect event commands to try: `event name/lunch info/ d/2023-11-10 t/12:12`, `event name/lunch info/at HDL d/2019-11-10 t/12:12`, `event name/lunch info/at HDL d/2023-11-10 t/28:12`<br>
       Expected: Similar to previous.
 
@@ -902,8 +902,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Cancelling an event while all events are being shown
 
-    1. Prerequisites: List all events using the `showevents` command. Multiple events in the list. 
-       If event list is empty, add new events to the list first. (At least 1 event is added) 
+    1. Prerequisites: List all events using the `showevents` command. Multiple events in the list.
+       If event list is empty, add new events to the list first. (At least 1 event is added)
 
     2. Test case: `cancelevent 1`<br>
        Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
@@ -934,14 +934,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
       If person list is empty, add new persons to the list first. (At least 1 person is added)
-   
+
    2. Test case: `tag 1 c/bouldering`
       Expected: First person is tagged with the cca information and the information is displayed on the first person's contact card.
       Details of the updated tag information of the person is shown in the status message.
-   
+
    3. Test case: `tag 1 c/$$`
       Expected: First person is not tagged with the cca information. Error details shown in the status message. Status bar remains the same.
-   
+
    4. Other incorrect tag commands to try: `tag 1 c/`, `tag 1 c/ `
       Expected: Similar to previous.
 

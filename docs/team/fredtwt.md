@@ -41,7 +41,7 @@ Given below are my contributions to the project.
   * CancelEventCommandParser
   * All the event field types
   * JsonAdaptedEvent
-  
+
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `event`, `tag`, `cancelevent`.
