@@ -27,14 +27,20 @@ public class FindPersonCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
-                List.<String>of("Alice", "Bob"), List.<String>of(""),
-                List.<String>of(""), SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
-        FindPersonCommand expectedFindPersonCommand =
-                new FindPersonCommand(predicate);
+                List.of("Alice", "Bob"), List.of(""),
+                List.of(""), SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
+        FindPersonCommand expectedFindPersonCommand = new FindPersonCommand(predicate);
+
         assertParseSuccess(parser, " n/ Alice Bob", expectedFindPersonCommand);
 
         //multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/  Alice \n \t Bob  \t", expectedFindPersonCommand);
+
+        predicate = new PersonContainsKeywordsPredicate(List.of("Carl"), List.of("DBSSS"),
+                List.of("hr"), SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.ARCHIVED_ONLY));
+        expectedFindPersonCommand = new FindPersonCommand(predicate);
+
+        assertParseSuccess(parser, " n/Carl s/archived c/DBSSS t/hr", expectedFindPersonCommand);
     }
 
 }

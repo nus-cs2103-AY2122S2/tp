@@ -4,7 +4,7 @@ import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.commons.core.SearchTypeUtil.SearchType;
 
 public abstract class SortCommand extends ListCommand {
-    private final Ordering ordering;
+    protected final Ordering ordering;
 
     /**
      * Constructs a command with the given {@code ordering}.

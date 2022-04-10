@@ -49,6 +49,13 @@
     "email" : "anna@example.com",
     "tagged" : [ ],
     "isArchived": false
+  }, {
+    "name" : "Jane Lee",
+    "companyName": "Big Bank",
+    "phone" : "6444121",
+    "email" : "jane@example.com",
+    "tagged" : [ ],
+    "isArchived": true
   } ],
   "companies": [ {
     "name" : "DBSSS",
@@ -72,5 +79,31 @@
     "tagged" : [ ],
     "isArchived": false
   } ],
-  "events": []
+  "events": [
+    {
+      "name" : "DBSSS Interview",
+      "company" : "DBSSS",
+      "date" : "2022-05-01",
+      "time" : "10:00",
+      "location" : "Zoom",
+      "tagged" : [ "Technical" ],
+      "isArchived" : false
+    }, {
+      "name" : "BB Interview",
+      "company" : "Big Bank",
+      "date" : "2022-06-05",
+      "time" : "12:30",
+      "location" : "16 Race Course Road",
+      "tagged" : [],
+      "isArchived" : false
+    }, {
+      "name" : "Online Assessment",
+      "company" : "Janice Street",
+      "date" : "2022-04-30",
+      "time" : "18:00",
+      "location" : "Hackerrank",
+      "tagged" : [ "Difficult" ],
+      "isArchived" : false
+    }
+  ]
 }

@@ -1,13 +1,14 @@
-package seedu.address.model.person;
+package seedu.address.model.entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalEntries.ALICE;
+import static seedu.address.testutil.TypicalEntries.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,8 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.entry.Person;
-import seedu.address.model.entry.UniqueEntryList;
 import seedu.address.model.entry.exceptions.DuplicateEntryException;
 import seedu.address.model.entry.exceptions.EntryNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -44,7 +43,8 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -87,7 +87,8 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setEntry(ALICE, editedAlice);
         UniqueEntryList<Person> expectedUniquePersonList = new UniqueEntryList<>();
@@ -168,5 +169,23 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void findPerson_emptyList_returnsNull() {
+        assertNull(uniquePersonList.find(ALICE));
+    }
+
+    @Test
+    public void archivePerson_emptyList_throwsEntryNotFoundException() {
+        assertThrows(EntryNotFoundException.class, () -> uniquePersonList.setArchived(ALICE, true));
+    }
+
+    @Test
+    public void removeMatchingCompanyName_personInList_throwsEntryNotFoundException() {
+        uniquePersonList.add(ALICE);
+        UniqueEntryList<Person> expectedUniquePersonList = new UniqueEntryList<>();
+        uniquePersonList.removeMatchingCompanyName("DBSSS");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }

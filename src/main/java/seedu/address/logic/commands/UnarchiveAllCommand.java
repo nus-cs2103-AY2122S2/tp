@@ -14,7 +14,7 @@ public class UnarchiveAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unarchives all entries in the displayed entry list.";
 
-    public static final String MESSAGE_UNARCHIVE_ALL_SUCCESS = "Unarchived all entries\n"
+    public static final String MESSAGE_SUCCESS = "Unarchived all entries\n"
         + "Listing all unarchived entries.";
 
     @Override
@@ -32,7 +32,7 @@ public class UnarchiveAllCommand extends Command {
         model.updateCurrentlyDisplayedList(PREDICATE_SHOW_ALL);
         model.updateCurrentlyDisplayedList(PREDICATE_SHOW_UNARCHIVED_ONLY);
 
-        return new CommandResult(MESSAGE_UNARCHIVE_ALL_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

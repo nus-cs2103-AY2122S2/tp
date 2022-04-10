@@ -35,4 +35,11 @@ public class ListPersonCommand extends ListCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
                 false, false, true, false, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListPersonCommand // instanceof handles nulls
+                && searchType.equals(((ListPersonCommand) other).searchType)); // state check
+    }
 }
