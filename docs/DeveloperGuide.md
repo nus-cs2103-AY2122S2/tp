@@ -408,7 +408,7 @@ In addition, the activity diagram below illustrates the workflow of attendance c
 
 **Aspect: Attendance data within `Model` component**
 
-* **Alternative 1 (current choice):** Attendance entries in every pets' `AttendanceHashMap`.
+* **Alternative 1 (current choice):** Attendance entries in every pet's `AttendanceHashMap`.
     * Pros: Better OOP and performance.
     * Cons: Higher memory usage.
 * **Alternative 2:** All attendance entries in a single HashMap.
