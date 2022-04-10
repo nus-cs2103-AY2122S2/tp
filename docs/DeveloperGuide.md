@@ -1075,7 +1075,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a friend
 
-1. Deleting a friend while all friend are being shown
+1. Deleting a friend while all friends are being shown
 
    1. Prerequisites: List all persons using the `listfriend` command. Multiple friends in the list.
 
@@ -1091,7 +1091,7 @@ testers are expected to do more *exploratory* testing.
 #### Editing a friend
 
 1. Editing a friend while all friends are being shown
-   1. Prerequisites: Atleast 3 friends present, with one their names being `Alex Yeoh`
+   1. Prerequisites: At least 3 friends present, with one their names being `Alex Yeoh`
 
    2. Test case: `editfriend cn/Alex Yeoh nn/Alex Row d/Best friend` <br>
       Expected: Friend with the name `Alex Yeoh` edited to have a new name `Alex Row` and a new description `Best friend`
@@ -1105,7 +1105,7 @@ testers are expected to do more *exploratory* testing.
 #### Finding a friend
 
 1. finding a friend while all friends are being shown
-    1. Prerequisites: Atleast 3 friends present, with one their names being `Alex Row`, one of them having a tag `colleagues` and one of them having a log titled `Dinner`
+    1. Prerequisites: At least 3 friends present, with one their names being `Alex Row`, one of them having a tag `colleagues` and one of them having a log titled `Dinner`
 
     2. Test case: `findfriend n/Alex Row` <br>
        Expected: Contacts whose names contain the substring `Alex Row` are displayed
