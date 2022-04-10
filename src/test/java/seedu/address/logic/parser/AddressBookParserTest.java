@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_OPTION_R;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -58,7 +59,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -67,7 +68,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " -r " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+            + INDEX_FIRST_PERSON.getOneBased() + EDIT_OPTION_R + " "
+            + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, true), command);
     }
 
@@ -90,14 +92,14 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + "") instanceof HelpCommand);
-        assertThrows(ParseException.class, ()-> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -115,14 +117,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_makeTeamCommandAdd() throws Exception {
         MakeTeamCommand command = (MakeTeamCommand) parser.parseCommand(
-                MakeTeamCommand.COMMAND_WORD_ADD + " " + INDEX_FIRST_PERSON.getOneBased());
+            MakeTeamCommand.COMMAND_WORD_ADD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MakeTeamCommand(INDEX_FIRST_PERSON, MakeTeamCommand.TeamAction.ADD), command);
     }
 
     @Test
     public void parseCommand_makeTeamCommandRemove() throws Exception {
         MakeTeamCommand command = (MakeTeamCommand) parser.parseCommand(
-                MakeTeamCommand.COMMAND_WORD_REMOVE + " " + INDEX_FIRST_PERSON.getOneBased());
+            MakeTeamCommand.COMMAND_WORD_REMOVE + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MakeTeamCommand(INDEX_FIRST_PERSON, MakeTeamCommand.TeamAction.REMOVE), command);
     }
 
