@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path hireLahFilePath = Paths.get("data" , "HireLah.json");
+    private Path hireLahFilePath = Paths.get("data\\HireLah.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
