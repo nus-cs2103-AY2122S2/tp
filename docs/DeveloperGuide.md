@@ -883,23 +883,23 @@ WoofAreYou's `Model` draws inspiration from original [AB3](https://se-education.
 However, WoofAreYou's model is more complicated because it is specifically adapted to handle pets' attributes instead of
 just Person objects.
 
-In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
-essential for many of the functionalities. Not only does `AttendanceEntry` need to modify the database directly to store
+In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceHashMap` class in WoofAreYou is
+essential for many of the functionalities. Not only does `AttendanceHashMap` need to modify the database directly to store
 potentially large amount of attendance entries for each pet, it has to ensure that these data are easily retrievable.
 Similarly, the `Appointment` class has to be flexible to cater to the ever-changing nature of pets' appointments.
 These 2 classes utilised Java's `LocalDate`, `LocalTime` and `LocalDateTime` libraries to facilitate parsing of arguments
 which saved significant amount of time in handling invalid inputs.
 
-Complex attributes such as `Charge` is also implemented to calculate the specific cost every month for each pet. The
+Complex attributes such as `Charge` were also implemented to calculate the specific cost every month for each pet. The
 `Model` of WoofAreYou supports higher level features and commands like sorting, filtering and undoing to increase efficiency
 that are not present in AB3.
 
 All the different classes in WoofAreYou `Model` have to interact with one another to ensure cohesiveness and efficient
-navigability for the user. For instance, filtering and sort have to access the `AttendaceEntry` or `Appointment` class
+navigability for the user. For instance, filtering and sort have to access the `AttendanceHashMap` or `Appointment` class
 to retrieve the relevant dates. There are many ways of implementing these commands and a lot of effort is put into
 the design consideration as discussed in the previous sections.
 
-After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable model
+After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable models
 catered for its purpose.
 
 ## Logic
@@ -909,7 +909,7 @@ WoofAreYou's `Logic` is more advanced than that of AB3. WoofAreYou supports many
 `edit` and `find` are also enhanced to handle the complex `Model` of WoofAreYou.
 
 Significant effort was placed in implementing the `Logic` for WoofAreYou. It encompasses the logic for pets'
-`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
+`AttendanceHashMap`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
 for WoofAreYou.
 
 A huge amount of time was dedicated in validating user input for different commands. This is to ensure that WoofAreYou
@@ -919,7 +919,7 @@ effort was put into crafting error messages to ensure smooth handling of invalid
 ## Storage
 
 WoofAreYou's `Storage` extends that of AB3 to increase functionality and store a variety of attributes that pets may
-have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
+have. `AttendanceHashMap`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
 JSON file. Doing so ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
 
 More time and effort were spent in crafting the JSON entries of `AttendanceEntry` as it needs to store dates that
