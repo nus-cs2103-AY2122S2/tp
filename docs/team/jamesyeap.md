@@ -37,9 +37,9 @@ Given below are my contributions to the project.
 1. Added use-cases for the main user-stories, specifying the actions a user would perform to achieve the intended outcome.
 2. Added [class-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#model-component) for the `Model` component, along with a brief description of the key classes and associations between them 
 3. Added [sequence-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#add-temporaryrecurring-lesson) that explain how the `addlesson` command is implemented.
-4. Added instructions on how to test the saving of data in TeachWhat! 
-   - steps to simulate missing data-files, and the expected behaviour
-   - steps to simulate corrupted data-files, and the expected behaviour
+4. Added instructions on how to test the saving of data in TeachWhat! (pull-request [#265](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/265))
+   - steps to simulate missing data-files, and what the expected behaviour is
+   - steps to simulate corrupted data-files, and what the expected behaviour is
 
 ## Contributions to team-based tasks
 1. Set up the team's [GitHub repository](https://github.com/orgs/AY2122S2-CS2103T-W11-3/teams/developers)
