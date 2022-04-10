@@ -19,7 +19,7 @@ import seedu.address.model.position.Position;
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "HireLah")
-class JsonSerializableAddressBook {
+class JsonSerializableHireLah {
 
     public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate applicant(s).";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
@@ -30,10 +30,10 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPosition> positions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableHireLah} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants,
+    public JsonSerializableHireLah(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants,
             @JsonProperty("interviews") List<JsonAdaptedInterview> interviews,
             @JsonProperty("positions") List<JsonAdaptedPosition> positions) {
         this.applicants.addAll(applicants);
@@ -44,9 +44,9 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableHireLah}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableHireLah(ReadOnlyAddressBook source) {
         applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new)
                 .collect(Collectors.toList()));
         interviews.addAll(source.getInterviewList().stream().map(JsonAdaptedInterview::new)

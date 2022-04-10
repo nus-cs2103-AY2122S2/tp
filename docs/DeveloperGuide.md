@@ -144,8 +144,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both HireLah data, which consists of `Applicants`, `Interviews` and `Positions`; and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `HireLahStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -414,7 +414,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br/><br/>
   Use case ends.
 
-#### **Use case 04: Filtering data**
+**Use case 04: Viewing help**
+
+**MSS**
+1. User requests to view help
+2. HireLah shows a list of commands and its briefly description
+3. User chooses to close the help box
+4. HireLah closes the help box
+
+Use case ends.
+
+**Use case 05: Viewing detail help for a specific command**
+
+**MSS**
+1. User <u>open the list of commands and general description (UC4).<u>
+2. User chooses a specific command and view its detail description.
+3. HireLah displays the detail description of that command
+4. User chooses to close the box.
+5. HireLah closes the box.
+
+Use case ends.
+#### **Use case 06: Filtering data**
+
 
 **MSS**
 1. User requests to list data with filter applied.
