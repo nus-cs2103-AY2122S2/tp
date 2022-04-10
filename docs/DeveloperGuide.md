@@ -398,7 +398,9 @@ update the backend and frontend of the application for the `absent` command.
 
 ![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
-The activity diagram below illustrates the workflow of attendance commands.
+The sequence model follows a similar structure for the `present` command as well.
+
+In addition, the activity diagram below illustrates the workflow of attendance commands.
 
 ![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
 
@@ -406,12 +408,12 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 **Aspect: Attendance data within `Model` component**
 
-* **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
+* **Alternative 1 (current choice):** Attendance entries in every pets' `AttendanceHashMap`.
     * Pros: Better OOP and performance.
     * Cons: Higher memory usage.
 * **Alternative 2:** All attendance entries in a single HashMap.
     * Pros: Lesser memory usage, easier to implement.
-    * Cons: May have performance issues due to nested data structure.
+    * Cons: Nested data structure, lack of OOP and separation of concerns.
 
 
 ### \[Proposed\] Data archiving
