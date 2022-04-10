@@ -39,6 +39,9 @@ title: Developer Guide
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Deleting a student](#deleting-a-student)
+  * [Saving data](#saving-data)
 
 ## **Introduction**
 
@@ -676,6 +679,80 @@ TODO
 
 ### Saving data
 
-TODO
+#### Missing data files
+When using TeachWhat! (or any program), there is always a possibility that data-files would go missing. This could either be due to errors caused by the operating-system, or by the user deleting the data-files.
+
+To simulate this scenario, follow the steps below:
+
+1. Create an **empty folder**, and place the `TeachWhat!.jar` inside it.
+2. Start the program by following the quick-start instructions in the [User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start).
+3. Exit the program by entering the `exit` command in the command-box.
+   - At this point, you should see that some new files and folders have been created in the folder.
+4. Open the folder named **"data"**, and delete both **"lessonbook.json"** and **"studentbook.json"**
+    - At this point, the "data" folder would be empty.
+5. Start the program again.
+   - You should see that the program would start with the default sample list of lessons and students.
+
+As seen in the steps above, the expected-behaviour for missing data-files is that TeachWhat! would simply create another new data-file pre-populated with sample data (as if the user is using the program for the first time.)
+
+#### Corrupted data-files
+When using TeachWhat! (or any program), there is always a possibility that data-files would become corrupted. This could either be due to errors caused by the operating-system, or by the user manually-editing the data-files.
+
+To simulate this scenario, follow the steps below:
+
+1. Create an **empty folder**, and place the `TeachWhat!.jar` inside it.
+2. Start the program by following the quick-start instructions in the [User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start).
+3. Exit the program by entering the `exit` command in the command-box.
+    - At this point, you should see that some new files and folders have been created in the folder.
+4. Open the folder named **"data"**, and open the data-file named **"lessonbook.json"** using a text-editor of your choice.
+5. To simulate the file becoming corrupted, you may remove or add some items into the JSON file.
+   - In this case, we can simply remove the opening square-bracket from the JSON file, rendering it unreadable, like so:
+
+##### BEFORE
+```
+{
+  "lessons" : [ {                                   // <---------- to remove [
+    "lessonName" : "Make up lesson for George",
+    "subject" : "Geography",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "5-1-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "0",
+      "startTime" : "17:50"
+    },
+    "isRecurring" : false,
+    "assignedStudents" : [ ],
+    "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
+  }
+  
+  // ......
+}
+```
+
+##### AFTER
+```
+{
+  "lessons" : {                                   // <---------- removed [
+    "lessonName" : "Make up lesson for George",
+    "subject" : "Geography",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "5-1-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "0",
+      "startTime" : "17:50"
+    },
+    "isRecurring" : false,
+    "assignedStudents" : [ ],
+    "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
+  }
+  
+  // ......
+}
+```
+
+6. Start the program again.
+    - You should see that the program would start with an **EMPTY** list of lessons and students.
+
+As seen in the steps above, the expected-behaviour for corrupted data-files is that TeachWhat! would simply **overwrite both** "lessonbook.json" and "studentbook.json" with an *empty* list.
 
 [return to top ↑](#table-of-contents)
