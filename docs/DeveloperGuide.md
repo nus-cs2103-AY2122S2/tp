@@ -318,30 +318,43 @@ To support different filters for different data types, each filter is a predicat
     * Pros: No two commands doing the similar things, which may lead to chunks of repeated code under the two commands.
     * Cons: May be confusing for new users, need to explain it well in user guide and help window. Also, will have to parse filter-related arguments together with other arguments in `list -X` command (such as for sorting), which may cause the parsing to be more complicated.
 
-### Sorting of Data !NEED TO UPDATE!
+### Sorting of Data 
 
 #### Implementation
-The implementation of sorting data is similar to list data, where sorting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
+The implementation of sorting data is done as an extension of the `list -X` command, which takes in optional 
+parameters that will trigger the sorting of data to display if given. The sorting is done by directly sorting
+the data in `UniqueXYZList`, which uses `ObservableList<XYZ>` to contain the data. It applies a comparator to
+`UniqueXYZList` in `AddressBook`, then applies the given predicate (if none, then use show all predicate) to `filteredXYZ` 
+filtered lists in `ModelManager`, which the `UI` will pick up and display the data to the user.
 
-The parsing of a sorting command from user input is also done through the 3 levels system, with `AddressBookParser`, `SortCommandParser`, and `SortXYZCommandParser` which eventually creates the `SortXYZCommand`.
+
+To support different sorting for different data types, each type of data sort is a comparator class in the Model component. 
+For example, for applicants, we will sort by their name, hence, there is a ApplicantNameComparator in the Model component 
+under applicant. The comparator implements Java's Comparator<Applicant> interface.
+
 
 #### Design considerations:
 
 #### Aspect: How to sort data without affect the original dataset
 
-* **Alternative 1 (current choice):** Store an additional full dataset in `ModelManager`
-    * Pros: Easier to implement, less chance of error occurs when modify the displayed data.
-    * Cons: Less optimal in space as we need to store a copy of the database
+* **Alternative 1 (current choice):** Sort the `UniqueXYZList` and display the data using filtered lists predicate
+    * Pros: 
+      * Less chance of error occurs when modify the displayed data.
+      * `UI` can displayed the sorted data immediately.
+      * `export -X` can export the data according to their sorting order. 
+    * Cons: Decrease cohesion, as we need to depend on `AddressBook`. 
 
 
-* **Alternative 2:** Mark an integer represent the position of the original data
-    * Pros: More efficient in memory space
-    * Cons: Increased the complexity of the relevant code, which make it more bug-prone.
+* **Alternative 2:** Directly sort the `filteredXYZ` filtered lists in `ModelManager` by passing it to sorted lists.
+    * Pros: Increase cohesion, as method only used attributes in `ModelManager`. 
+    * Cons: 
+      * Increased the complexity of the relevant code, as we need to double passing, which make it more bug-prone.
+      * `UI` won't able to display the new filtered lists, and need to connect again to `UI` components.
     
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
-
+    
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
