@@ -266,7 +266,7 @@ in the following format: dd-MM-yyyy HH:mm.
     * rejected
     * complete
 * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
-* The `STIPEND` must be a positive integer going up to 10 digits long.
+* The `STIPEND` must be a positive integer with input going up to 10 digits long.
 
 <div markdown="block" class="alert alert-info">
 
@@ -282,7 +282,7 @@ in the following format: dd-MM-yyyy HH:mm.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Note that all these demos are done in the past, as such do remember to
+:information_source: Note that some of these demos may be outdated, as such do remember to
 update the reminder date if you wish to follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
 
 </div>
@@ -293,9 +293,13 @@ Say you found a company with an opening that you are interested in. You did your
 pertaining to the company and the role. Here's how you can input this data in the application:
 
 1. [Add the company](#c-add-c) to the company list.
+
+
    ![AddCompanyDemo](images/AddCompanyDemo.png)
 
 2. [Add the role](#c-add-c-r) under the added company.
+
+
    ![AddRoleDemo](images/AddRoleDemo.png)
 
 <div markdown="block" class="alert alert-info">
@@ -314,9 +318,13 @@ vision were not in line with your values or maybe you realised the role isn't fo
 entries from the application:
 
 1. [Delete the role](#c-delete-c-r) from a given company.
+
+
    ![DeleteRoleDemo](images/DeleteRoleDemo.png)
 
 2. [Delete the company](#c-delete-c) from the company list.
+
+
    ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
 
 ## Use Case #3: Editing a company or a role <a id="usecase3"></a>
@@ -324,13 +332,17 @@ entries from the application:
 Say you received an email for an interview and the point of contact's email is different. Here's how you can make
 changes to the application:
 
-1. [Edit the company](#c-edit-c) from the company list.  
+1. [Edit the company](#c-edit-c) from the company list.
+
+
    ![EditCompanyDemo](images/EditCompanyDemo.png)
 
 Also, you can change the status of your internship application and set the reminder for the interview date by making
 this entry:
 
-2. [Edit the role](#c-edit-r) from a given company.  
+2. [Edit the role](#c-edit-r) from a given company.
+
+
    ![EditRoleDemo](images/EditRoleDemo.png)
 
 <div markdown="block" class="alert alert-info">
@@ -341,16 +353,19 @@ this entry:
 
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
-Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next opening of
-Tinner, you will be able to see a reminder pop-out box like this:   
-![ReminderDemo](images/ReminderDemo.png)
+Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of
+Tinner, you will be able to see a reminder pop-out box like this:
+
+<img src="images/ReminderDemo.png" alt="ReminderDemo" height="480">
 
 If you do not see the intended reminder, it is likely that the reminder date is not within
 the [reminder window](#c-setWindow-c).  
 Thus, you can increase the reminder window by making this entry:
 
-1. [Set the reminder window](#c-setWindow-c) for the reminder list.  
-   ![WindowrDemo](images/WindowDemo.png)
+1. [Set the reminder window](#c-setWindow-c) for the reminder list.
+
+
+   ![WindowDemo](images/WindowDemo.png)
 
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
 
@@ -358,7 +373,9 @@ A scenario where multiple companies have sent you offers and you may want to sto
 a [list of favourites](#c-listfavourite) for ease of reference.  
 You can favourite a company by making this entry:
 
-1. [Favourite a company](#c-favourite-c) from the company list.  
+1. [Favourite a company](#c-favourite-c) from the company list.
+
+
    ![FavouriteDemo](images/FavouriteDemo.png)
    
 
@@ -377,7 +394,9 @@ companies which have sent you offers.
 
 You can choose to unfavourite by making this entry:
 
-2. [Unfavourite a company](#c-favourite-c) from the company list.  
+2. [Unfavourite a company](#c-favourite-c) from the company list.
+
+
    ![UnfavouriteDemo](images/UnfavouriteDemo.png)
 
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
@@ -390,11 +409,15 @@ In the future when you have many applications, finding specific applications can
 Say you are interested in finding out what are the roles you had applied to at Google,
 you can make this entry:
 1. [Finding a company](#c-find-c-r) from the company list.
+
+
    ![FindCompanyDemo](images/FindCompanyDemo.png)
 
 Then after realising that you have an interview for a backend role at Google, you want to check out the progress of similar roles.
 You can search for other backend roles by making this entry:
 2. [Finding all roles](#c-find-c-r) from the company list.
+
+
    ![FindRoleDemo](images/FindRoleDemo.png)
 
 <div markdown="span" class="alert alert-primary">
@@ -578,20 +601,20 @@ company.
 </div>
 
 <div markdown="block" class="alert alert-info">
-
-:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
-
-</div>
-
-<div markdown="block" class="alert alert-info">
    
 :information_source: Roles in a Company are listed based on the order in which they are added to the Company.
    
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
+
+</div>
+
 <div markdown="block" class="alert alert-danger">
 
-:warning: When round brackets are used, they must be in pairs.
+:warning: When round brackets are used, they must be in pairs and at the end of the role name.
 
 </div>
 
@@ -718,6 +741,29 @@ readily identify and track down items!
 ## General <a id="c-general"></a>
 
 Below are miscellaneous features that enhance the general user experience.
+
+### Clearing the company list: `clear` <a id="c-clear"></a>
+
+Start off the internship application period fresh with `clear`. Reset the list of companies and internship roles with a
+single command.
+
+**Function:** Clears the entire company list, including roles within each company.
+
+**Format:** `clear`
+
+[Back to Table of Contents](#toc)
+
+### Viewing help : `help` <a id="c-help"></a>
+
+If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
+
+**Function:** Shows a message explaining how to access the user guide and a table of commands.
+
+![help message](images/helpMessage.png)
+
+**Format:** `help`
+
+[Back to Table of Contents](#toc)
 
 ### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
 

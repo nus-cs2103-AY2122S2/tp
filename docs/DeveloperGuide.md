@@ -181,7 +181,7 @@ The `Model` component,
 * the `Reminder` objects store data of a role in a company that has a reminder date which is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage Component <a id="storage"></a>
+### Storage Component <a id="storage-component"></a>
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
@@ -936,7 +936,7 @@ Guarantees: a company is successfully unfavourited within Tinner
       The response box shows error message that the role name character limit is 30 characters/the stipend character limit is 14 characters.
 
 ### Editing a role <a id="editing-a-role"></a>
-1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
+1. Prerequisites: At least 1 company with 2 roles must exist and is listed using the `list` command
 2. Test case: `editRole 1 1 n/Frontend Engineer`
    1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is changed to "Frontend Engineer".
    The response box shows the updated details of all the fields of the edited role. The company list is updated with the changes. 
