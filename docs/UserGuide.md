@@ -396,6 +396,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `find n/Shutter Island`
 
 <img src="images/Precise_Find_UI.png">
