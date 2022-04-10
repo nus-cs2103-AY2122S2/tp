@@ -1,0 +1,48 @@
+@startuml
+ skinparam backgroundColor #ffffff
+ skinparam classAttributeIconSize 0
+ hide circle
+
+ abstract class "{abstract}\nCommand" {
+     + {abstract} execute(Model) : CommandResult
+ }
+
+ interface Model <<interface>> {
+ }
+
+ class ModelManager implements Model{
+     -addressBook : AddressBook
+     +setAddressBook(new AddressBook())
+ }
+
+ class HelpCommand {
+     /' Fields '/
+
+     /' Methods '/
+     + execute(Model) : CommandResult
+ }
+
+ class MainWindow {
+
+    + handleHelp()
+ }
+
+ class HelpWindow {
+    /' Fields '/
+    - helpMessage: TextArea
+    - openUserGuideButton: Button
+
+     /' Methods '/
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + focus()
+     + openUG()
+ }
+
+MainWindow *-- HelpWindow
+HelpCommand <-- MainWindow
+ModelManager <-- HelpCommand
+"{abstract}\nCommand" <|-- HelpCommand
+
+ @enduml
