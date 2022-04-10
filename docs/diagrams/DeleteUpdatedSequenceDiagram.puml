@@ -54,11 +54,31 @@ activate Model
 Model --> DeleteCommand
 deactivate Model
 
+DeleteCommand -> Model : getFilteredGroupList()
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+loop all groups are iterated through
+
+opt student contact exists in the group
+
+DeleteCommand -> Model : deassignPerson(1)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+end
+
+end
+
 create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteCommand : result
 deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
