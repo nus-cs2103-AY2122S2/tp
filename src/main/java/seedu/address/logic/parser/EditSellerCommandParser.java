@@ -36,7 +36,7 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG,
-                        PREFIX_APPOINTMENT, PREFIX_HOUSE_TYPE, PREFIX_LOCATION, PREFIX_ADDRESS, PREFIX_PRICE_RANGE);
+                    PREFIX_HOUSE_TYPE, PREFIX_LOCATION, PREFIX_ADDRESS, PREFIX_PRICE_RANGE);
 
         Index index;
 

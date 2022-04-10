@@ -181,7 +181,7 @@ Format: `appt-b INDEX time/TIME`
 * Create an appointment with the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
-* To delete an appointment with a buyer, use the keyword `reset` after the `time/` prefix
+* To **delete an appointment** with a buyer, use the keyword `reset` after the `time/` prefix
 
 Examples:
 * `appt-b 1 time/2023-01-01-12-12` sets a new appointment for the 1st buyer on the displayed buyer list on 1st January 2023 and 12:12pm.
@@ -257,7 +257,7 @@ Function: Edit an existing buyer's information in the displayed buyer list.
 :bulb: **Caution:** This action **cannot be undone**! Be careful when changing a buyer's information.
 </div>
 
-Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]` 
+Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]` 
 
 * Edit the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * At least one of the optional inputs must be provided.
@@ -265,6 +265,7 @@ Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOU
 * Existing values will be updated to the input values.
 * When editing tags, all the existing tags of the buyer will be **removed**, and replaced with the specified tags in the input. Hence, you can remove all the buyer’s tags by typing `t/` without specifying any tags after it.
 * The house-related inputs (`pr/`, `l/`, `h/`) cannot be edited until a Property is added (See how to add one here).
+* Appointment cannot be edited! You can reset and add another appointment with the `appt-b` commands.
 
 Examples:
 * `edit-b 1 n/Chua` Edits only the name of the 1st buyer in displayed buyer list to be `Chua`.
@@ -430,7 +431,7 @@ Function: Edit an existing seller's information in the displayed seller list.
 :bulb: **Caution:** This action **cannot be undone**! Be careful when changing your seller's information.
 </div>
 
-Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
+Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​[h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
 * Edit the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * At least one of the optional inputs must be provided.
@@ -438,6 +439,8 @@ Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOU
 * Existing values will be updated to the input values.
 * When editing tags, all the existing tags of the buyer will be **removed**, and replaced with the specified tags in the input. Hence, you can remove all the buyer’s tags by typing `t/` without specifying any tags after it.
 * The house-related inputs (`pr/`, `l/`, `h/`, `a/`) cannot be edited until a Property is added (See how to add one here).
+* Appointment cannot be edited! You can reset and add another appointment with the `appt-s` commands.
+
 
 Examples:
 * `edit-s 1 n/Chua` Edits only the name of the 1st seller on displayed seller list to be `Chua`.
