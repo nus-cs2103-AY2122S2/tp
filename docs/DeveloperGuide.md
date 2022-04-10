@@ -663,12 +663,26 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
-### Launch and shutdown
+### First launch and saving window preferences
+When launching TeachWhat! for the first time, it should populate the list with sample data. Furthermore, it should save
+window preferences when you close the program.
 
-TODO
+1. Launching the app
+   1. Refer to the [Quick Start](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start) section of the
+   User Guide on setting up TeachWhat!.
+   2. Launch the program using the Terminal with this command `java -jar TeachWhat.jar`
+   3. Test Case: First launch\
+   Expected: Sample data should populate the lists. A data folder along with config.json and preferences.json should be
+   created in the current directory.
+2. Saving window preferences
+   1. Launch TeachWhat!.
+   2. Resize the window to your preference.
+   3. Close the program, either by using the `exit` command or closing the window.
+   4. Test Case: Restoring window preferences\
+   Expected: When relaunching the program, the window position and size should be restored from where you previously
+   left off.
 
 ### Deleting a student
 
