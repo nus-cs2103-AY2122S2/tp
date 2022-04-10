@@ -30,9 +30,9 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to Existing Features:**
-  * Refactored `edit` feature of AddressBook-Level3 to `editEmployee` feature and then enhanced the feature.
+  * Enhanced the `editEmployee` feature, which is refactored from the `edit` feature of AddressBook-Level3.
     * Justification: The `editEmployee` feature edits the details of the employee identified by the index number used in the displayed employee list. All tasks that are assigned to the edited employee is then updated to reflect the new changes of the employee. ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#179](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/179))
-  * Refactored `delete` feature of AddressBook-Level3 to `deleteEmployee` feature and then enhanced the feature.
+  * Enhanced the `deleteEmployee` feature, which is refactored from the `delete` feature of AddressBook-Level3..
     * Justification: The `deleteEmployee` feature deletes the employee identified by the index number used in the displayed employee list. All tasks that are assigned to the deleted employee is then updated to remove the employee from the respective tasks. ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#182](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/182))
   * Updated the GUI of the Help Window to replace the user guide URL and showcase the feature of copying employee details to Computer Clipboard. ([#247](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/247))
 
