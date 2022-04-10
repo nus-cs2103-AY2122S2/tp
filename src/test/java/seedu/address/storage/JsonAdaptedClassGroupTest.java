@@ -32,8 +32,8 @@ public class JsonAdaptedClassGroupTest {
 
     private static final List<TaModule> modules = new ArrayList<>(Arrays.asList(TypicalModules.getModule(0)));
     private static final List<String> studentIds =
-            new ArrayList<>(Arrays.asList(TypicalStudents.getStudent(0).getStudentId().toString()));
-    private static final List<Student> students = new ArrayList<>(Arrays.asList(TypicalStudents.getStudent(0)));
+            new ArrayList<>(Arrays.asList(TypicalStudents.getStudent(1).getStudentId().toString()));
+    private static final List<Student> students = new ArrayList<>(Arrays.asList(TypicalStudents.getStudent(1)));
     private static final List<JsonAdaptedLesson> lessons = TypicalClassGroups.getClassGroup(0).getLessons()
             .stream().map(JsonAdaptedLesson::new).collect(Collectors.toList());
 
