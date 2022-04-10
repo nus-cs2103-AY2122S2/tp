@@ -1,10 +1,11 @@
 @startuml
-!include ../style.puml
+!include ../Style.puml
+!include ../SequenceStyle.puml
 
-Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
-Participant ":EditCommandParser" as ecp LOGIC_COLOR
-Participant "command:EditCommand" as ec LOGIC_COLOR
+Participant ":LogicManager" as logic<<Logic>>
+Participant ":AddressBookParser" as abp<<Logic>>
+Participant ":EditCommandParser" as ecp<<Logic>>
+Participant "command:EditCommand" as ec<<Logic>>
 
 [-> logic : execute
 activate logic

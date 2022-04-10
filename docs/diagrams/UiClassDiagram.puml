@@ -1,31 +1,24 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(UI_COLOR)
 
-package UI {
-    class "<<interface>>\nUi" as Ui
-    class "{abstract}\nUiPart" as UiPart
-    class "{abstract}\nUiComponent" as UiComponent
-    class UiManager
-    class MainWindow
-    class MenuToolbar
-    class CommandBox
-    class ResultWindow
+package UI as UiPackage<<Ui>> {
+    class "<<interface>>\nUi" as Ui<<Ui>>
+    class "{abstract}\nUiPart" as UiPart<<Ui>>
+    class "{abstract}\nUiComponent" as UiComponent<<Ui>>
+    class UiManager<<Ui>>
+    class MainWindow<<Ui>>
+    class MenuToolbar<<Ui>>
+    class CommandBox<<Ui>>
+    class ResultWindow<<Ui>>
 
-    package Table <<Rectangle>> {
-    }
-
-    package Popup <<Rectangle>> {
-    }
+    class Table<<Ui>>
+    class Popup<<Ui>>
 }
 
-package Model <<Rectangle>> {
-}
-
-package Logic <<Rectangle>> {
-}
-
+class Model<<Model>>
+class Logic<<Logic>>
 
 class HiddenOutside<<Hidden>>
 HiddenOutside ..> Ui

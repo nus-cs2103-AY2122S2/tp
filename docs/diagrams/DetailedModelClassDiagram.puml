@@ -1,20 +1,20 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(MODEL_COLOR)
 
-package Model {
-    class Product
-    class Name
-    class Category
-    class Description
-    class Price
+package Model as Model<<Model>> {
+    class Product<<Model>>
+    class Name<<Model>>
+    class Category<<Model>>
+    class Description<<Model>>
+    class Price<<Model>>
 
-    class UniqueItemList
-    class Item
-    class ItemDescriptor
-    class ExpiryDate
-    class Quantity
+    class UniqueItemList<<Model>>
+    class Item<<Model>>
+    class ItemDescriptor<<Model>>
+    class ExpiryDate<<Model>>
+    class Quantity<<Model>>
 }
 
 Product *---> Name

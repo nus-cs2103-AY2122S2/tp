@@ -1,0 +1,25 @@
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 10
+    BorderColor #000000
+}
+
+skinparam SequenceGroupFontColor #FF9800
+skinparam SequenceGroupBackgroundColor #FF980032
+skinparam SequenceGroupBorderColor #FF9800
+skinparam SequenceGroupBorderThickness 1.8
+skinparam SequenceGroupHeaderFontColor #FF9800
+skinparam SequenceGroupHeaderFontStyle bold
+
+!procedure styleParticipant($stereotype, $color, $bg_color)
+    skinparam Participant {
+        FontColor<<$stereotype>> $color
+        BorderColor<<$stereotype>> $color
+        BackgroundColor<<$stereotype>> $bg_color
+    }
+!endprocedure
+
+styleParticipant(Logic, LOGIC_COLOR, LOGIC_COLOR_T1)
+styleParticipant(Ui, UI_COLOR, UI_COLOR_T1)
+styleParticipant(Model, MODEL_COLOR, MODEL_COLOR_T1)
+styleParticipant(Storage, STORAGE_COLOR, STORAGE_COLOR_T1)

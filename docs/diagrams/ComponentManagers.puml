@@ -1,28 +1,28 @@
 @startuml
-!include style.puml
+!include Style.puml
 
-package Logic {
-    class "<<interface>>\nLogic" as Logic
-    class LogicManager
+Package Logic as LogicPackage<<Logic>> {
+    class "<<interface>>\nLogic" as Logic<<Logic>>
+    class LogicManager<<Logic>>
 }
 
-package Model {
-    class "<<interface>>\nModel" as Model
-    class ModelManager
+Package Model as ModelPackage<<Model>> {
+    class "<<interface>>\nModel" as Model<<Model>>
+    class ModelManager<<Model>>
 }
 
-package Storage {
-    class "<<interface>>\nStorage" as Storage
-    class StorageManager
+Package Storage as StoragePack<<Store>> {
+    class "<<interface>>\nStorage" as Storage<<Storage>>
+    class StorageManager<<Storage>>
 }
 
 class HiddenOutside<<Hidden>>
 HiddenOutside ..> Logic
 
-LogicManager .up.|> Logic
-ModelManager .up.|> Model
-StorageManager .up.|> Storage
+LogicManager .up[LOGIC_COLOR].|> Logic
+ModelManager .up[MODEL_COLOR].|> Model
+StorageManager .up[STORAGE_COLOR].|> Storage
 
-LogicManager --> Model
-LogicManager --> Storage
+LogicManager -[LOGIC_COLOR]-> Model
+LogicManager -[LOGIC_COLOR]-> Storage
 @enduml
