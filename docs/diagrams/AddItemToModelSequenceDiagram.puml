@@ -1,0 +1,43 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+box Logic LOGIC_COLOR_LIGHT
+participant "a:AddItemCommand" as AddItemCommand<<Logic>>
+end box
+
+box Model MODEL_COLOR_LIGHT
+participant ":ItemDescriptor" as ItemDescriptor<<Model>>
+participant ":Model" as Model<<Model>>
+end box
+
+group sd Item Addition
+[-> AddItemCommand : execute()
+activate AddItemCommand
+
+AddItemCommand -> Model : getProduct("1")
+activate Model
+Model --> AddItemCommand : product
+deactivate Model
+
+AddItemCommand -> ItemDescriptor : toItem(product)
+activate ItemDescriptor
+ItemDescriptor --> AddItemCommand : item
+deactivate ItemDescriptor
+
+AddItemCommand -> Model : addItem(product, item)
+activate Model
+
+' Padding to make activation bar longer
+AddItemCommand -[hidden]> Model
+AddItemCommand -[hidden]> Model
+
+Model --> AddItemCommand
+deactivate Model
+
+[<-- AddItemCommand
+deactivate AddItemCommand
+
+end
+
+@enduml

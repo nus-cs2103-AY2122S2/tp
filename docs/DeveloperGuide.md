@@ -250,6 +250,61 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
     * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
     * Cons: More complicated to implement.
 
+### Item
+
+#### Implementation
+
+The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and `Quantity`, under `Product` with a one-to-many relationship, i.e. one `Product` can have multiple `Item` objects under it.
+
+Listed below are the few behavioral requirements for `Item`, along with the classes/interfaces related to it.
+
+* A `Product` must not have two `Item` objects that are considered the same: `UniqueItemList`
+* An `Item` cannot exist without a `Parent` it's under: `ItemDescriptor`
+
+`ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
+
+The motivation for such implementation is due to the parsing of the `add-item` command, when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
+
+*The reason of choosing this design solution will be justified in the next section.*
+
+##### Adding an Item
+
+Given below is a sequence diagram to show how `add-item 1 e:2022-12-13 q:10` is handled:
+
+![Sequence diagram for `add-item` command](images/AddItemSequenceDiagram.png)
+
+The details of `AddItemCommand#execute()` are omitted from the sequence diagram above, and are illustrated below:
+
+![Detailed sequence diagram for the command execution](images/AddItemToModelSequenceDiagram.png)
+
+The sequence diagram below shows how an `Item` is added to a `Product`'s `UniqueItemList`. This happens within `ModelManager` which implements the interface `Model` containing the method `Model#addItem(Product, Item)`.
+
+![Sequence diagram for `ModelManager#addItem` internal details](images/AddItemToUniqueItemList.png)
+
+##### Updating and deleting an Item
+These two operations are similar to adding an `Item` as shown in the section above.
+
+#### Design considerations
+
+**Aspect: How to create `Item` and ensure it  when user executes `add-item` command:**
+
+* **Alternative 1:** Retrieve the respective `Product` within the parser.
+    * Pros: Easy solution.
+    * Cons: Allows the parser to interact with model and logic, which also increases coupling.
+
+      &nbsp;
+* **Alternative 2:** Create command object with each field as a parameter.
+    * Pros: Easy solution.
+    * Cons:
+        * Complicates the `AddItemCommand` constructor and requires modification of constructor signature whenever there are updates to `Item` fields.
+        * If more commands that have the same issue are implemented, the amount of modification will increase.
+
+      &nbsp;
+* **Alternative 3 (current choice):** `ItemDescriptor` to temporarily hold the fields' value, then converted to `Item` later when `Product` is specified.
+    * Pros: Good abstraction.
+    * Cons: Requires an extra class to be created.
+
+
 ### Undo/redo feature
 
 #### Implementation
@@ -257,7 +312,7 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
 The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally store changes as a `StateChange`. `ReversibleIBook` implements the following operations:
 
 * `ReversibleIBook#prepareForChanges()` — Prepares a clean workspace to record next possible changes.
-* `ReversibleIBook#saveChanges()` — Saves all changes made to `Ibook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
+* `ReversibleIBook#saveChanges()` — Saves all changes made to `IBook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
 * `ReversibleIBook#undo()` — Reverts the most currently changes.
 * `ReversibleIBook#redo()` — Restores the most currently undone changes.
 
@@ -394,16 +449,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list products according to a filter.
-2. IBook shows a list of products.
+1. User requests to list all products.
+2. IBook removes all active filters and shows the list of products.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
-  Use case ends.
+    * 1a1. IBook shows an empty table.
+
+    Use case ends.
 
 #### UC2: Adding a product
 
@@ -420,36 +477,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1b. Not all required fields are present (e.g. Name).
 
     * 1b1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1c. Optional fields like Category is missing.
 
     * 1c1. IBook automatically sets the category to miscellaneous.
-      Use case resumes at step 1.
+
+      Use case resumes at step 2.
 
 #### UC3: Delete a product
 
 **MSS**
 
 1. User requests to list products ([UC1](#uc1-listing-products)).
-2. User requests to delete a product in the list specified by the index
-3. IBook deletes the product
+2. User requests to delete a product in the list specified by the index.
+3. IBook deletes the product.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. Index is not provided.
 
     * 2a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
 
 #### UC4: Update a product
 
@@ -463,28 +527,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. Index is not provided.
 
     * 2a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC5: Find a product
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC5: Find products
 
 **MSS**
 
-1. User requests to find products.
+1. User requests to find products by providing filters.
 2. IBook updates the list to show the requested products.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Requested fields are invalid.
+* 1a. Requested fields are invalid.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+* 1b. No product matches the given filter.
+
+    * 1b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
 
 #### UC6: Find out of stock products
 
@@ -497,13 +573,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No products found.
+* 1a. No products found.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+    * 1a1. IBook shows a cute image stating nothing found.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC7: Find expired items
+#### UC7: Add an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products))
+2. User request to add an item to a product in IBook.
+3. IBook adds the item to the product.
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. Required fields are all present but are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case ends.
+
+* 1b. Not all required fields are present (e.g. Expiry Date).
+
+    * 1b1. IBook shows an error message.
+
+      Use case ends.
+
+* 1c. Optional fields like Quantity is missing.
+
+    * 1c1. IBook automatically sets the quantity to 0.
+
+      Use case resumes at step 2.
+
+#### UC8: Delete an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products)).
+2. User requests to delete an item in the list specified by the index.
+3. IBook deletes the item.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Index is not provided.
+
+    * 2a1. IBook shows an error message.
+
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC9: Update an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products)).
+2. User requests to update an item in the list specified by the index.
+3. IBook updates the product.
+   
+   Use case ends.
+
+**Extensions**
+
+* 2a. Index is not provided.
+
+    * 2a1. IBook shows an error message.
+
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC10: Find items
+
+**MSS**
+
+1. User requests to find items by providing filters.
+2. IBook updates the list to show the requested items.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Requested fields are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case ends.
+
+* 1b. No product matches the given filter.
+
+    * 1b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
+
+#### UC11: Find expired items
 
 **MSS**
 
@@ -514,13 +691,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No items found.
+* 1a. No items found.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+    * 1a1. IBook shows a cute image stating nothing found.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC8: Find expiring items
+#### UC12: Find expiring items
 
 **MSS**
 
@@ -531,11 +708,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No items found.
+* 1a. Number of days is invalid.
+		
+    * 2a1. IBook show an error message.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+      Use case ends.
 
-#### UC9: Update all products
+* 1b. No items found.
+
+    * 2b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
+
+#### UC13: Update all products
 
 **MSS**
 
@@ -550,15 +735,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 2a. The current display list is empty.
+* 1a. The current display list is empty.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC10: Delete all products
+#### UC14: Delete all products
 
 **MSS**
 
@@ -569,13 +754,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The current display list is empty.
+* 1a. The current display list is empty.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC11: Undo changes
+#### UC15: Undo changes
 
 **MSS**
 
@@ -586,13 +771,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. There are no changes that can be reverted.
+* 1a. There are no changes that can be reverted.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC12: Redo changes
+#### UC16: Redo changes
 
 **MSS**
 
@@ -603,11 +788,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. There are no changes that can be restored.
+* 1a. There are no changes that can be restored.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 *{More to be added}*
 
