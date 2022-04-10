@@ -13,7 +13,7 @@ public class StackUndoRedo {
     private Stack<RedoableCommand> redoStack;
 
     /**
-     * StackUndoRedo Class to enable storing of commands FIFO
+     * StackUndoRedo Class to enable storing of commands LIFO
      */
     public StackUndoRedo() {
         undoStack = new Stack<>();
@@ -25,7 +25,7 @@ public class StackUndoRedo {
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
     public void push(Command command) {
-        
+
         if (isNotRedoableCommand(command)) {
             return;
         }
