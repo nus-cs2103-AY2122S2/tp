@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":MainWindow" as MainWindow LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant "c:PlotXYZCommand" as PlotXYZCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand("plotXYZ")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("plotXYZ")
+activate LogicManager
+
+LogicManager -> TrackBeauParser : parseCommand("plotXYZ")
+activate TrackBeauParser
+
+create PlotXYZCommand
+TrackBeauParser -> PlotXYZCommand
+activate PlotXYZCommand
+
+PlotXYZCommand --> TrackBeauParser : c
+deactivate PlotXYZCommand
+
+TrackBeauParser --> LogicManager : c
+
+LogicManager -> PlotXYZCommand : execute()
+activate PlotXYZCommand
+
+create CommandResult
+PlotXYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LogicManager : result
+LogicManager --> MainWindow : result
+
+MainWindow -> CommandResult : isPlotXYZChart()
+CommandResult --> MainWindow
+
+alt isPlotXYZChart
+    MainWindow -[LOGIC_COLOR]> MainWindow : PlotXYZChart()
+    activate MainWindow LOGIC_COLOR
+    MainWindow --[LOGIC_COLOR]> MainWindow
+    deactivate MainWindow LOGIC_COLOR
+end
+
+[<--MainWindow : result
+
+@enduml
