@@ -48,7 +48,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deletePerson(p)
 activate Model
 
 Model --> DeleteCommand
@@ -64,7 +64,7 @@ loop all groups are iterated through
 
 opt student contact exists in the group
 
-DeleteCommand -> Model : deassignPerson(1)
+DeleteCommand -> Model : deassignPerson(p)
 activate Model
 
 Model --> DeleteCommand

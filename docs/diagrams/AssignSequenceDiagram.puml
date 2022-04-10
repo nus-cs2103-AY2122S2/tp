@@ -49,7 +49,7 @@ deactivate ArchDukeParser
 LogicManager -> AssignCommand : execute()
 activate AssignCommand
 
-AssignCommand -> Model : assignPerson(1, example)
+AssignCommand -> Model : assignPerson(p, example)
 activate Model
 
 Model --> AssignCommand

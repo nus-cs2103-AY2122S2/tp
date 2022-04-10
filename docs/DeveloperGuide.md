@@ -210,6 +210,10 @@ The following sequence diagram shows how the `delete` mechanism works:
 
 </div>
 
+The following activity diagram summarizes what happens when a user executes the `delete` command:
+
+![](images/DeleteCommandActivityDiagram.png)
+
 ## Add group feature
 
 ### About add group feature
