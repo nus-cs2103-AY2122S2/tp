@@ -39,8 +39,8 @@ public class EditInterviewCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field in Interview to edit must be provided.";
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited interview: %1$s";
     public static final String MESSAGE_NOT_PENDING = "Only interviews that are pending can be edited.";
-    public static final String MESSAGE_POSITION_NO_OPENING = "The position has no openings, so an interview cannot be" +
-            " scheduled.";
+    public static final String MESSAGE_POSITION_NO_OPENING = "The position has no openings, so an interview cannot be"
+            + " scheduled.";
     public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
             + "be scheduled.";
 
