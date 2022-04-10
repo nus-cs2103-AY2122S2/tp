@@ -23,10 +23,11 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `upload`, `viewimage` and `help` ) [\#71](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/71) [\#95](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/95)
+    * Added documentation for the features `upload`, `viewimage` and `help`) [\#71](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/71) [\#95](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/95)
     * Added Table of contents as well as minor edits and reordering of content in the user guide to improve readability.[\#186](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/186)
   * Developer Guide:
-    * Added implementation details of the `upload` feature.[\#98](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/98)
+    * Added implementation details of the `upload` and `viewimage` feature.[\#98](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/98) [\#189](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/189)
+    * Added portions of use cases and manual testing [\#189](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/189)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94), [\#96](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/96), [\#102](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/102) [\#108](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/108)
