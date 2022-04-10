@@ -287,15 +287,15 @@ They can be fed to the `FindCommand` to filter out `Person` with the specified k
 
 # Documentation, logging, testing, configuration, dev-ops
 
-This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
+This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
 
-This is how we do our [testing](https://se-education.org/addressbook-level3/Testing.html).
+This is how we do our [testing](https://ay2122s2-cs2103-w16-4.github.io/tp/Testing.html).
 
-This is how we do our [logging](https://se-education.org/addressbook-level3/Logging.html).
+This is how we do our [logging](https://ay2122s2-cs2103-w16-4.github.io/tp/Logging.html).
 
-This is how we do our [configurations](https://se-education.org/addressbook-level3/Configuration.html).
+This is how we do our [configurations](https://ay2122s2-cs2103-w16-4.github.io/tp/Configuration.html).
 
-This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOps.html).
+This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps.html).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 **Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
