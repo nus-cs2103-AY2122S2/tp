@@ -366,7 +366,7 @@ than attempting to perform the undo.
 The following sequence diagram shows how the undo operation works:
 
 <p align="center">
-  <img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" width="450"/>
+  <img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" width="650"/>
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
