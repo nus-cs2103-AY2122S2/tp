@@ -251,54 +251,52 @@ The delete services feature allows users to remove existing services in TrackBea
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
-With many customers, it is hard for beauty salons to provide personalized customer service.
+With many customers, it is hard for beauty salons to provide personalized customer services.
 Our product allows the user to keep track of customer information and group their customers to provide targeted services every time they return.
 It can also keep track of performance metrics, like total new memberships.
-
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                                          | So that I can…​                                                               |
-|----------|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user          | view the user guide easily                                                               | know what kind of commands that I can use                                        |
-| `* * *`  | new user          | see where to key in information easily                                                   | be clear of how to use the interface                                             |
-| `* * *`  | new user          | see the format to follow for commands when I type incorrect command                      | rectify the command                                                              |
-| `* * *`  | new user          | add name of customer                                                                     | identify the customer correctly                                                  |
-| `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                              |
-| `* *`    | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                           |
-| `* * *`  | new user          | add allergy information of customer                                                      | avoid using or promoting products that the customer is allergic to               |
-| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hair                             |
-| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skin                         |
-| `* *`    | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon          |
-| `* `     | new user          | add name of staff                                                                        | keep track of the personal details of my staffs                                  |
-| `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                            |
-| `* * *`  | new user          | view a customer profile                                                                  | know the details of a customer                                                   |
-| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | view the profiles of customers that i am interest in                             |
-| `* * *`  | new user          | delete a customer                                                                        | remove a customer that does not visit our salon anymore                          |
-| `* * *`  | new user          | edit a customer                                                                          | update details when needed                                                       |
-| `* * *`  | new user          | find a customer                                                                          | locate a customer's profile faster                                               |
-| `* *`    | intermediate user | check if facilities are available based on bookings of the day                           | know if the facility is available for booking                                    |
-| `* *`    | intermediate user | add the birth date of a customer                                                         | know when is the birthday of the customer                                        |
-| `* *`    | intermediate user | add the signup date of a customer                                                        | track the customers gained per month                                             |
-| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                         |
-| `* * *`  | intermediate user | add a new service                                                                        | keep track of the services that our salon provides                               |
-| `* * *`  | intermediate user | edit a service                                                                           | update the details of the service                                                |
-| `* * *`  | intermediate user | delete a service                                                                         | remove service that is not offered anymore                                       |
-| `* * *`  | intermediate user | view all services                                                                        | see all the services and their details that our salon provides                   |
-| `* *`    | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any      |
-| `* * *`  | expert user       | add a customer booking                                                                   | keep track of the customer's upcoming appointments and make preparations         |
-| `* * *`  | expert user       | view all the bookings                                                                    | better allocate my manpower as I can know when the salon is the busiest          |
-| `* * *`  | expert user       | delete a customer booking                                                                | remove the booking if there is any cancellation                                  |
-| `* * *`  | expert user       | edit a customer booking                                                                  | update the details of the booking                                                |
-| `* * *`  | expert user       | see statistics of how many new customers gained by month                                 | review and improve my company's performance                                      |
-| `* * *`  | expert user       | keep track of expected earnings of the salon by month                                    | review and improve my company's performance                                      |
-| `* *`    | expert user       | get summary statistics on customer profiles (preferred services)                         | review and improve my choice of services and products                            |
-| `* *`    | expert user       | get summary statistics on customer profile (preferred staffs)                            | identify the best staff and let the team learn from them                         |
-| `* *`    | expert user       | sort customers based on membership tier                                                  | promote certain facilities or products to the customer to help raise the membership tier of that customer                         |
-
-*{More to be added}*
+| Priority | As a …​           | I want to …​                                                                             | So that I can…​                                                                                           |
+|----------|-------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the user guide easily                                                               | know what kind of commands that I can use and their format for usage                                      |
+| `* * *`  | new user          | see where to key in information easily                                                   | be clear of how to use the application                                                                    |
+| `* * *`  | new user          | see the format to follow for commands when I type incorrect command                      | rectify the incorrect command                                                                             |
+| `* * *`  | new user          | add name of customer                                                                     | identify the customer correctly                                                                           |
+| `* * *`  | new user          | add contact details of customer                                                          | contact them for their appointment or for follow up                                                       |
+| `* * *`  | new user          | view a customer profile                                                                  | access their information when needed                                                                      |
+| `* * *`  | new user          | edit a customer                                                                          | update their details when needed                                                                          |
+| `* * *`  | new user          | find a customer                                                                          | locate a customer's profile faster                                                                        |
+| `* * *`  | new user          | delete a customer                                                                        | remove a customer that does not visit our salon anymore                                                   |
+| `* * *`  | new user          | add allergy information of customer                                                      | avoid using or promoting products that the customer is allergic to                                        |
+| `* * *`  | new user          | add hair type of customer                                                                | choose the correct products when treating their hair                                                      |
+| `* * *`  | new user          | add skin type of customer                                                                | choose the appropriate products when treating their skin                                                  |
+| `* * *`  | new user          | view a list of customer profile associated with a keyword                                | filter the list of customers to only those I am interested in                                             |
+| `* * *`  | intermediate user | add a new service                                                                        | keep track of the services that our salon provides                                                        |
+| `* * *`  | intermediate user | edit a service                                                                           | update the details of the service                                                                         |
+| `* * *`  | intermediate user | delete a service                                                                         | remove service that is not offered anymore                                                                |
+| `* * *`  | intermediate user | view all services                                                                        | see all the services and their details that our salon provides                                            |
+| `* * *`  | expert user       | add a customer booking                                                                   | keep track of the customer's upcoming appointments and make preparations                                  |
+| `* * *`  | expert user       | view all the bookings                                                                    | better allocate my manpower as I can know when the salon is the busiest                                   |
+| `* * *`  | expert user       | delete a customer booking                                                                | remove the booking if there is any cancellation                                                           |
+| `* * *`  | expert user       | edit a customer booking                                                                  | update the details of the booking                                                                         |
+| `* * *`  | expert user       | have an organised view of a week's schedule                                              | better manage new bookings and prepare manpower ahead                                                     |
+| `* *`    | new user          | add customer preference for staff                                                        | appoint the staff they prefer during their appointment                                                    |
+| `* *`    | new user          | add services that customer prefers                                                       | better pitch new products and personalise their experience at the salon                                   |
+| `* *`    | intermediate user | add the birth date of a customer                                                         | know when is the birthday of the customer                                                                 |
+| `* *`    | intermediate user | add the signup date of a customer                                                        | track the customers gained per month                                                                      |
+| `* *`    | intermediate user | view the customers that are having their birthday today                                  | be reminded to sent them birthday wishes                                                                  |
+| `* *`    | expert user       | add the feedback of the customer after been serviced for a booking                       | know how satisfied the customer is and know the areas of improvement if any                               |
+| `* *`    | expert user       | see statistics of how many new customers gained by month                                 | review and improve my company's performance                                                               |
+| `* *`    | expert user       | get summary statistics on customer profiles (preferred services)                         | review and improve my choice of services and products                                                     |
+| `* *`    | expert user       | get summary statistics on customer profile (preferred staffs)                            | identify the best staff and let the team learn from them                                                  |
+| `*`      | new user          | add personal details of staff like birth date, contact number, part time/full timer, etc | know my staffs better                                                                                     |
+| `* `     | new user          | add name of staff                                                                        | keep track of the personal details of my staffs                                                           |
+| `*`      | intermediate user | check if facilities are available based on bookings of the day                           | know if the facility is available for booking                                                             |
+| `*`      | expert user       | keep track of expected earnings of the salon by month                                    | review and improve my company's performance                                                               |
+| `*`      | expert user       | sort customers based on membership tier                                                  | promote certain facilities or products to the customer to help raise the membership tier of that customer |
 
 ### Use cases
 
@@ -333,6 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 **Use case: Add a customer**
+
 
 **MSS**
 
@@ -466,7 +465,7 @@ testers are expected to do more *exploratory* testing.
       Expected: list of customers with john in their name will be shown
 
    1. Test case: `find name j0hn`<br>
-      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
+      Expected: Invalid keyword has been entered. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect show commands to try: `find name`, `find x` (where x only contains english characters)<br>
       Expected: Similar to previous.

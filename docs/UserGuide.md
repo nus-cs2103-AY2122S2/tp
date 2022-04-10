@@ -555,7 +555,7 @@ Examples:
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
-* The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
+* The indexes of bookings in schedule view is not meant for deleting or editing bookings. Using them will lead to unexpected behaviour.
 </div>
 
 
@@ -563,12 +563,12 @@ Examples:
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
 
-| Parameter | Description                                                            |
-|-----------|------------------------------------------------------------------------|
-| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be valid date. |
+| Parameter | Description                                                              |
+|-----------|--------------------------------------------------------------------------|
+| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be a valid date. |
 
 #### 4.5.2 Viewing schedule: `schedule`
-Display the schedule of the week containing selected date.
+Display the schedule of the week containing the selected date.
 
 Format: `schedule date/DATE`
 
@@ -579,12 +579,12 @@ Example Usage: `schedule date/10-10-2022`
 ![display schedule](images/user-guide/display_schedule.png)
 
 #### 4.5.3 Viewing next week schedule: `scheduleNext`
-Display the schedule for next week from the last selected date.
+Display the next week's schedule from the last selected date.
 
 Format: `scheduleNext`
 
 #### 4.5.4 Viewing previous week schedule: `schedulePreivous`
-Display the schedule for previous week from the last selected date.
+Display the previous week's schedule from the last selected date.
 
 Format: `schedulePrevious`
 
@@ -665,23 +665,23 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 The charts plot up to 10 variables at most. For example, in plotStaff, the top 10 most popular staff will be plotted if there are for instance, 15 staff indicated by customers.
    
-| Action                                                                                        | Format                | Examples              |
-|-----------------------------------------------------------------------------------------------|-----------------------|-----------------------|
-| Plot all charts                                                                               | `plotAll`             | `plotAll`             |
-| Plot chart of popular staff (popular being customers indicated them as their preferred staff) | `plotStaff`           | `plotStaff`           |
-| Plot chart on popular services by customers (as indicated in their preferred services)        | `plotService`         | `plotService`         |
-| Plot chart on common allergies amongst customers                                              | `plotAllergy`         | `plotAllergy`         |
-| Plot chart on common skin type of customers                                                   | `plotSkin`            | `plotSkin`            |
-| Plot chart on common hair type of customers                                                   | `plotHair`            | `plotHair`            |
+| Action                                                                                        | Format                 | Examples               |
+|-----------------------------------------------------------------------------------------------|------------------------|------------------------|
+| Plot all charts                                                                               | `plotAll`              | `plotAll`              |
+| Plot chart of popular staff (popular being customers indicated them as their preferred staff) | `plotStaff`            | `plotStaff`            |
+| Plot chart on popular services by customers (as indicated in their preferred services)        | `plotService`          | `plotService`          |
+| Plot chart on common allergies amongst customers                                              | `plotAllergy`          | `plotAllergy`          |
+| Plot chart on common skin type of customers                                                   | `plotSkin`             | `plotSkin`             |
+| Plot chart on common hair type of customers                                                   | `plotHair`             | `plotHair`             |
 | Plot chart on customers gained per month in the current year                                  | `plotMonthlyCustomers` | `plotMonthlyCustomers` |   
 
 ### 5.5 Schedule
 
-| Action                                                              | Format               | Examples                   |
-|---------------------------------------------------------------------|----------------------|----------------------------|
-| Display the schedule of the week containing selected date.          | `schedule date/DATE` | `schedule date/10-10-2022` |
-| Display the schedule for next week from the last selected date.     | `scheduleNext`       | `scheduleNext`             |
-| Display the schedule for previous week from the last selected date. | `schedulePrevious`   | `schedulePrevious`         |
+| Action                                                            | Format               | Examples                   |
+|-------------------------------------------------------------------|----------------------|----------------------------|
+| Display the schedule of the week containing the selected date.    | `schedule date/DATE` | `schedule date/10-10-2022` |
+| Display the next week's schedule from the last selected date.     | `scheduleNext`       |                            |
+| Display the previous week's schedule from the last selected date. | `schedulePrevious`   |                            |
 
 ### 5.6 Miscellaneous
 
