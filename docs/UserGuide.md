@@ -52,22 +52,23 @@ Here are some example commands you can try:
 
 Each contact in TAPA represents a student, who can have the following fields:
 
-Field            | Prefix | Description                                                        | Restrictions                                                                                                                                                                            | Multiplicity
------------------|--------|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------
-STUDENT_ID       |   i/   | Denotes the unique identification number of a student              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                           | 1
-MODULE_CODE      |   m/   | Denotes the module that a student is currently taking              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                            | 1
-NAME             |   n/   | Denotes the name of the student                                    | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                 | 1
-PHONE            |   p/   | Denotes the phone number of the student                            | •Optional field<br>•Should not be blank<br>•Should only contain numeric characters<br>•Letters, whitespaces and symbols are not allowed<br>•Must be at least 3 digits long       | 0 or 1
-TELEGRAM_HANDLE  |   t/   | Denotes the telegram handle of the student                         | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed<br>•Must be between 5 to 32 characters long  | 0 or 1
-EMAIL            |   e/   | Denotes the email address of the student                           | •Optional field<br>•Should not be blank<br>•Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ ) | 0 or 1
-TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                   | Any non-negative number
-
+| Field           | Prefix | Description                                                        | Restrictions                                                                                                                                                                     | Multiplicity            |
+|-----------------|--------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| STUDENT_ID      | i/     | Denotes the unique identification number of a student              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                            | 1                       |
+| MODULE_CODE     | m/     | Denotes the module that a student is currently taking              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                            | 1                       |
+| NAME            | n/     | Denotes the name of the student                                    | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                 | 1                       |
+| PHONE           | p/     | Denotes the phone number of the student                            | •Optional field<br>•Should not be blank<br>•Should only contain numeric characters<br>•Letters, whitespaces and symbols are not allowed<br>•Must be at least 3 digits long       | 0 or 1                  |
+| TELEGRAM_HANDLE | t/     | Denotes the telegram handle of the student                         | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed<br>•Must be between 5 to 32 characters long  | 0 or 1                  |
+| EMAIL           | e/     | Denotes the email address of the student                           | •Optional field<br>•Should not be blank<br>•Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ ) | 0 or 1                  |
+| TASK            | tn/    | Denotes the name of the task that is being assigned to the student | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                   | Any non-negative number |
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** <br>
 
-* Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
+* Multiplicity refers to the number of instances of each field, that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
+
+* In TAPA, two students are considered as equal only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not student ID).
 
 * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
@@ -343,7 +344,7 @@ Assigns a task to a particular student.
 <div markdown="block" class="alert alert-info">:information_source:
 <b>Note:</b>
 
-The name of the assigned task will be converted to Title Case.
+* The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -512,30 +513,30 @@ As seen in the Command Summary below, you can input `manual add` to view a short
 
 If you would like to learn more about a specific command, you can read more about it in the [Features](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#features) section above!
 
-Action              | Command Format with Examples
---------------------|------------------
-**Add**             | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
-**Delete**          | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`
-**Delete Module**   | `deleteModule m/MODULE_CODE` <br> Example: `deleteModule m/CS2100`
-**Find**            | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`
-**Task**            | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
-**Mark**            | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
-**Unmark**          | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`
-**Edit**            | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
-**Clear**           | `clear`
-**Archive**         | `archive`
-**List**            | `list`
-**Assign**          | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`
-**Progress**        | `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`
-**Delete Task**     | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`
-**History**         | `history`
-**Undo**            | `undo`
-**Sort**            | `sort`
-**Manual**          | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`
-**Help**            | `help`
-**Exit**            | `exit`
+| Action            | Command Format with Examples                                                                                                                                                                                   |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`        |
+| **Delete**        | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`                                                                                   |
+| **Delete Module** | `deleteModule m/MODULE_CODE` <br> Example: `deleteModule m/CS2100`                                                                                                                                             |
+| **Find**          | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`                                                             |
+| **Task**          | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`                                                                                                                                                           |
+| **Mark**          | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`                                                                                                                               |
+| **Unmark**        | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`                                                                                                                             |
+| **Edit**          | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg` |
+| **Clear**         | `clear`                                                                                                                                                                                                        |
+| **Archive**       | `archive`                                                                                                                                                                                                      |
+| **List**          | `list`                                                                                                                                                                                                         |
+| **Assign**        | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`                                           |
+| **Progress**      | `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`                                                                                                                       |
+| **Delete Task**   | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`                                       |
+| **History**       | `history`                                                                                                                                                                                                      |
+| **Undo**          | `undo`                                                                                                                                                                                                         |
+| **Sort**          | `sort`                                                                                                                                                                                                         |
+| **Manual**        | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`                                                                                                                                               |
+| **Help**          | `help`                                                                                                                                                                                                         |
+| **Exit**          | `exit`                                                                                                                                                                                                         |
 
-### Glossary
+## Glossary
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Module**: A specific class that a student is taking
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
