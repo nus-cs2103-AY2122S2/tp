@@ -13,6 +13,8 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+   1. You can download the [Oracle version](https://www.oracle.com/java/technologies/downloads/#java11) or another alternative such as the OpenJDK version.
+   1. To check if Java is installed successfully, you can open Command Prompt (for Windows users) or Terminal (for Mac users) and type `java --version`.
 
 1. Download the latest `TAssist.jar` from [here](https://github.com/AY2122S2-CS2103T-T13-2/tp/releases).
 
