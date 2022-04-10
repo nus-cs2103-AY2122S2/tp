@@ -155,6 +155,33 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Enhanced Person Object
+
+In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
+
+Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and
+ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
+
+In the original AB3 address book, each profile is modelled by one `Person` object, which
+consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
+diagram of a class diagram of the profiles in the AB3 Address Book.
+
+![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
+
+In UNite, each `Person` object is being enhanced and modified in order to fits the needs of our target users
+(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class,
+this includes `Course` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
+
+![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
+
+Consider the following commands.
+
+`add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B tele/thisisteoh c/Computer Science`
+
+This is a sample of the `Person` object diagram.
+
+![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
+
 ### Filter feature
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
@@ -186,12 +213,37 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-
-
 ####Design considerations
 
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
 
+### Grab Command
+The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can copy the displayed data.
+
+There are two class related to grab features, they are `GrabCommand` and `GrabCommandParser`. Note the following relationship:
+* `GrabCommand` is a class extending `Command` class. The Command object will then be executed. Read [here](#logic-component) to understand how `Command` works.
+* `GrabCommandParser` is a class extending the `Parser` class, it is used to parse the command entered by user.
+
+The activity diagram below summarizes what happens when a grab command is executed.
+In short, there are three possible "Valid input" for user can grab something.
+1. Provide one valid attribute (except `Tag`) with one index, grab this attribute from the `Person` with this index.
+2. Provide one attribute (except `Tag`) and one Tag, grab this attribute from every `Person` with this Tag.
+3. Provide one attribute (except `Tag`) with no index, grab this attribute from every `Person` in UNite.
+
+![GrabActivityDiagram](images/GrabActivityDiagram.png)
+
+Given below is an example usage scenario of grab command.
+
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `grab tele/1`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `GrabCommandParser` object.
+
+Step 3. The `GrabCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `GrabCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, the attribute is being grabbed from the correct `Person` and returned to user.
+
+![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -281,35 +333,6 @@ height of a `PersonCard`, less person will be displayed of the same window size.
 Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
 conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
 information about a person.
-
-
-### Enhanced Add Profile Feature
-
-In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
-
-Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and
-ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
-
-In the original AB3 address book, each profile is modelled by one `Person` object, which
-consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
-diagram of a class diagram of the profiles in the AB3 Address Book.
-
-![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
-
-In UNite, the profiling of each `Person` object is being enhanced and modified in order to fits the needs of our target users
-(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class,
-this includes `Major` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
-
-![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
-
-Consider the following commands.
-
-`add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B`
-
-This is a sample of the `Person` object diagram.
-
-![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
-
 
 ### Theme choosing
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
@@ -537,6 +560,19 @@ testers are expected to do more *exploratory* testing.
        the displayed list will be empty.
     1. Test case: `filter INVALID_TAGNAME`<br>
         Expected: List is not filtered. Error details shown in result display area.
+
+### Grab attributes from Person 
+1. Filter the full contact list using a tag
+    1. Prerequisites: Have at least one Person in UNite. 
+    2. Test case: `grab n/`<br>
+       Expected: Names of everyone in UNite displayed.
+    3. Test case: `grab n/1`<br>
+       Expected: Names of the first Person in UNite displayed. 
+    4. Test case: `grab n/ t/VALID_TAGNAME`<br>
+       Expected: Names of everyone in UNite which are tagged as "friends". If no such tags exist in Unite, an error message is shown in display area.
+    5. Test case: `grab n/INDEX t/VALID_TAGNAME`<br>
+       Expected: Error message shown saying that you can have both INDEX and VALID_TAGNAME present.
+    6. You can conduct the test cases above with other valid attributes.
 
 ### Saving data
 
