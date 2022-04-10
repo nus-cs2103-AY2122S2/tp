@@ -17,6 +17,10 @@ public class AddressBookHistory {
         addressBooks.add(new AddressBook(addressBook));
     }
 
+    public ArrayList<AddressBook> getAddressBooks() {
+        return addressBooks;
+    }
+
     public void addAddressBook(AddressBook addressBook) {
         addressBooks.add(new AddressBook(addressBook));
     }
