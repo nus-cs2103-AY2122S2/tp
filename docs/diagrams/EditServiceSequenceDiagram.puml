@@ -1,0 +1,107 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant ":EditServiceCommandParser" as EditServiceCommandParser LOGIC_COLOR
+participant "d:EditServiceCommand" as EditServiceCommand LOGIC_COLOR
+participant "esd:EditServiceDescriptor" as EditServiceDescriptor LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edits 1 pr/100")
+activate LogicManager
+
+LogicManager -> TrackBeauParser : parseCommand("edits 1 pr/100")
+activate TrackBeauParser
+
+create EditServiceCommandParser
+TrackBeauParser -> EditServiceCommandParser
+activate EditServiceCommandParser
+
+EditServiceCommandParser --> TrackBeauParser
+deactivate EditServiceCommandParser
+
+TrackBeauParser -> EditServiceCommandParser : parse("1 pr/100")
+activate EditServiceCommandParser
+
+create EditServiceCommand
+EditServiceCommandParser -> EditServiceCommand
+activate EditServiceCommand
+
+create EditServiceDescriptor
+EditServiceCommand -> EditServiceDescriptor
+activate EditServiceDescriptor
+EditServiceDescriptor --> EditServiceCommand : esd
+deactivate
+
+EditServiceCommand --> EditServiceCommandParser : d
+deactivate EditServiceCommand
+
+EditServiceCommandParser --> TrackBeauParser : d
+deactivate EditServiceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditServiceCommandParser -[hidden]-> TrackBeauParser
+destroy EditServiceCommandParser
+
+TrackBeauParser --> LogicManager : d
+deactivate TrackBeauParser
+
+LogicManager -> EditServiceCommand : execute()
+activate EditServiceCommand
+
+EditServiceCommand -> Model : getFilteredServiceList()
+activate Model
+Model --> EditServiceCommand
+deactivate
+
+EditServiceCommand -> EditServiceCommand : createEditedService(serviceToEdit, esd)
+activate EditServiceCommand
+return editedService
+
+EditServiceCommand -> Model : getFilteredBookingList()
+
+activate Model
+Model --> EditServiceCommand
+deactivate
+
+loop for all bookings for the original service
+    EditServiceCommand -> Model : setBooking(b)
+    activate Model
+    Model --> EditServiceCommand
+    deactivate
+end
+
+EditServiceCommand -> Model : setService(serviceToEdit, editedService)
+activate Model
+Model --> EditServiceCommand
+deactivate
+
+EditServiceCommand -> Model :updateServiceList(\nPREDICATE_SHOW_ALL_SERVICES)
+activate Model
+Model --> EditServiceCommand
+deactivate
+
+EditServiceCommand -> Model :updateFilteredBookingList(\nPREDICATE_SHOW_ALL_BOOKINGS)
+activate Model
+Model --> EditServiceCommand
+deactivate Model
+
+create CommandResult
+EditServiceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditServiceCommand
+deactivate CommandResult
+
+EditServiceCommand --> LogicManager : result
+deactivate EditServiceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

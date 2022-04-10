@@ -18,9 +18,9 @@ public class PieChartWindow extends UiPart<Stage> {
     private PieChart pieChart;
 
     /**
-     * Creates a new Allergy Chart Window.
+     * Creates a new Pie Chart Window.
      *
-     * @param root Stage to use as the root of the AllergyChartWindow.
+     * @param root Stage to use as the root of the PieChartWindow.
      */
     public PieChartWindow(Stage root, String rootTitle, String chartTitle, String loggingValue) {
         super(FXML, root);
@@ -28,25 +28,22 @@ public class PieChartWindow extends UiPart<Stage> {
         //referenced from https://docs.oracle.com/javafx/2/charts/pie-chart.htm
         Scene scene = new Scene(new Group());
         root.setTitle(rootTitle);
-        root.setWidth(500);
-        root.setHeight(500);
         pieChart.setLabelLineLength(10);
         pieChart.setTitle(chartTitle); (
                 (Group) scene.getRoot()).getChildren().add(pieChart);
-        pieChart.setLegendVisible(false);
-        pieChart.setMinSize(500, 500);
         root.setScene(scene);
+        //End of reference
     }
 
     /**
-     * Creates a new AllergyChartWindow.
+     * Creates a new PieChartWindow.
      */
     public PieChartWindow(String rootTitle, String chartTitle, String loggingValue) {
         this(new Stage(), rootTitle, chartTitle, loggingValue);
     }
 
     /**
-     * Shows the AllergyChart window.
+     * Shows the PieChart window.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -69,26 +66,27 @@ public class PieChartWindow extends UiPart<Stage> {
         getRoot().centerOnScreen();
     }
 
+
     public PieChart getPieChart() {
         return this.pieChart;
     }
 
     /**
-     * Returns true if the AllergyChart window is currently being shown.
+     * Returns true if the PieChart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the AllergyChart window.
+     * Hides the PieChart window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the AllergyChart window.
+     * Focuses on the PieChart window.
      */
     public void focus() {
         getRoot().requestFocus();
