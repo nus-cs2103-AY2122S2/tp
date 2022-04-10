@@ -49,6 +49,8 @@ deactivate AddStudentCommandParser
 TeachWhatParser --> LogicManager : Command
 deactivate TeachWhatParser
 
+newpage
+
 LogicManager -> AddStudentCommand : execute()
 activate AddStudentCommand
 
