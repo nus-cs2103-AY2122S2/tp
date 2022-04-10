@@ -938,12 +938,12 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with missing files
    1. Prerequisites: JSON file is missing.
       1. Delete the `data/trackermon.json` file to simulate a missing file.
-   2. Relaunch Trackermon. <br> Expected: Trackermon starts with the default list of show list.
+   2. Launch Trackermon. <br> Expected: Trackermon starts with the default list of show list.
 
 3. Dealing with corrupted files
    1. Prerequisites: JSON file is corrupted.
       1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file.
-   2. Relaunch Trackermon. <br> Expected: Trackermon starts with an empty show list.
+   2. Launch Trackermon. <br> Expected: Trackermon starts with an empty show list.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -979,6 +979,7 @@ testers are expected to do more *exploratory* testing.
       
 2. Find a show (Precise Find)
    1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
+      1. [Add shows](#adding-a-show) into the show list.
    
    2. Test case: Finding with a single prefix
       1. Command: `find n/shingeki` <br>
@@ -1019,6 +1020,7 @@ testers are expected to do more *exploratory* testing.
 ### Sorting the list of shows
 
 1. Prerequisites: None, but if the list is empty, all sorts will lead to no results.
+   1. [Add shows](#adding-a-show) into the show list.
 2. Test case: Sort with no prefix
    1. Command: `sort` <br>
       Expected: The list of shows will default to being sorted by name in ascending order.
