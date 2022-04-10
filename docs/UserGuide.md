@@ -435,9 +435,11 @@ Examples of usage:
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
-* There are 3 options for `SIZE` which are 1, 2 and 3.
+* There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 13 for the comparison for the different result display window sizes.
+* Refer to figure 15 for the comparison for the different result display window sizes.
+
+![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
@@ -446,8 +448,6 @@ Format: `resize SIZE`
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 </div>
-
-![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records
 Clear all the data inside Tracey.
