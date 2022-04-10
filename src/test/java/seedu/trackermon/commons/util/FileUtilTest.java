@@ -6,8 +6,14 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code FileUtil}.
+ */
 public class FileUtilTest {
 
+    /**
+     * Tests the isValidPath method.
+     */
     @Test
     public void isValidPath() {
         // valid path

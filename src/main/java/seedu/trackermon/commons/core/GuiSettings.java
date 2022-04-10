@@ -28,6 +28,10 @@ public class GuiSettings implements Serializable {
 
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
+     * @param windowWidth the specified width of the window to be created.
+     * @param windowHeight the specified height of the window to be created.
+     * @param xPosition the x position of the window to be created.
+     * @param yPosition the y position of the window to be created.
      */
     public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
         this.windowWidth = windowWidth;
@@ -47,6 +51,11 @@ public class GuiSettings implements Serializable {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -63,11 +72,19 @@ public class GuiSettings implements Serializable {
                 && Objects.equals(windowCoordinates, o.windowCoordinates);
     }
 
+    /**
+     * Returns the hash code of the {@code GuiSettings} object.
+     * @return a hash code of the object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(windowWidth, windowHeight, windowCoordinates);
     }
 
+    /**
+     * Returns a string representation of the {@code GuiSettings} object.
+     * @return the string of the object.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

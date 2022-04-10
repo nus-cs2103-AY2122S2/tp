@@ -8,7 +8,9 @@ import javafx.collections.ObservableList;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.UniqueShowList;
 
-
+/**
+ * Represents a list of shows
+ */
 public class ShowList implements ReadOnlyShowList {
 
     private final UniqueShowList shows;

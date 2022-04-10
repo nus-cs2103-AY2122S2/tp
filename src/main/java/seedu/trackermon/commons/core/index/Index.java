@@ -33,6 +33,8 @@ public class Index {
 
     /**
      * Creates a new {@code Index} using a zero-based index.
+     * @param zeroBasedIndex the index specified that starts with 0.
+     * @return An {@code Index} object using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
         return new Index(zeroBasedIndex);
@@ -40,11 +42,18 @@ public class Index {
 
     /**
      * Creates a new {@code Index} using a one-based index.
+     * @param oneBasedIndex the index specified that starts with 1.
+     * @return An {@code Index} object using a zero-based index.
      */
     public static Index fromOneBased(int oneBasedIndex) {
         return new Index(oneBasedIndex - 1);
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

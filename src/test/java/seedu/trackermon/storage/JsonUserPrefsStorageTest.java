@@ -16,6 +16,9 @@ import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code JsonUserPrefsStorage}.
+ */
 public class JsonUserPrefsStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
@@ -23,6 +26,10 @@ public class JsonUserPrefsStorageTest {
     @TempDir
     public Path testFolder;
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code readUserPrefs}
+     * attempts to read a null file path.
+     */
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
@@ -33,11 +40,19 @@ public class JsonUserPrefsStorageTest {
         return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
     }
 
+    /**
+     * Tests that a {@code Optional<UserPrefs>} is not obtained after {@code readShowList} attempts to
+     * read a non-existent file.
+     */
     @Test
     public void readUserPrefs_missingFile_emptyResult() throws DataConversionException {
         assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readUserPrefs}
+     * attempts to read a non-Json format data file.
+     */
     @Test
     public void readUserPrefs_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
@@ -49,6 +64,10 @@ public class JsonUserPrefsStorageTest {
                 : null;
     }
 
+
+    /**
+     * Tests that {@code readUserPrefs} can successfully read a typical UserPref file.
+     */
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -56,12 +75,18 @@ public class JsonUserPrefsStorageTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests that {@code readUserPrefs} can successfully read an empty UserPref file.
+     */
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
         assertEquals(new UserPrefs(), actual);
     }
 
+    /**
+     * Tests that {@code readUserPrefs} can successfully read a UserPref file with extrra values.
+     */
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -77,11 +102,19 @@ public class JsonUserPrefsStorageTest {
         return userPrefs;
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveUserPrefs}
+     * attempts to save a null {@code UserPref}.
+     */
     @Test
     public void savePrefs_nullPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveUserPrefs}
+     * attempts to save into a null file path.
+     */
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
@@ -99,6 +132,9 @@ public class JsonUserPrefsStorageTest {
         }
     }
 
+    /**
+     * Tests that no errors are thrown when providing {@code saveUserPrefs} valid inputs.
+     */
     @Test
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 

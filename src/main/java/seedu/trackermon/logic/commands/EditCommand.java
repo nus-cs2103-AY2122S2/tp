@@ -56,8 +56,9 @@ public class EditCommand extends Command {
     private final EditShowDescriptor editShowDescriptor;
 
     /**
-     * @param index of the show in the filtered show list to edit
-     * @param editShowDescriptor details to edit the show with
+     * Creates an edit constructor to edit the specified {@code Show} at a specific {@code Index}.
+     * @param index of the show in the filtered show list to edit.
+     * @param editShowDescriptor details to edit the show with.
      */
     public EditCommand(Index index, EditShowDescriptor editShowDescriptor) {
         requireNonNull(index);
@@ -67,6 +68,12 @@ public class EditCommand extends Command {
         this.editShowDescriptor = new EditShowDescriptor(editShowDescriptor);
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -91,6 +98,9 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Show} with the details of {@code showToEdit}
      * edited with {@code editShowDescriptor}.
+     * @param showToEdit the show to be edited.
+     * @param editShowDescriptor details to edit the show with.
+     * @return a {@code Show} with the details of {@code showToEdit}.
      */
     private static Show createEditedShow(Show showToEdit, EditShowDescriptor editShowDescriptor) {
         assert showToEdit != null;
@@ -103,6 +113,11 @@ public class EditCommand extends Command {
         return new Show(updatedName, updatedStatus, updatedTags, updateComment, updateRating);
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -132,11 +147,14 @@ public class EditCommand extends Command {
         private Comment comment;
         private Rating rating;
 
+        /**
+         * Creates a default constructor.
+         */
         public EditShowDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Creates a defensive copy of {@code tags} and it is used internally. It is a copy constructor.
+         * @param toCopy the constructor to be copied.
          */
         public EditShowDescriptor(EditShowDescriptor toCopy) {
             setName(toCopy.name);
@@ -148,6 +166,7 @@ public class EditCommand extends Command {
 
         /**
          * Returns true if at least one field is edited.
+         * @return true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, status, tags, comment, rating);
@@ -202,6 +221,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Returns whether two objects are equal.
+         * @param other the second object to be compared with.
+         * @return true if both objects are equal, else return false.
+         */
         @Override
         public boolean equals(Object other) {
             // short circuit if same object

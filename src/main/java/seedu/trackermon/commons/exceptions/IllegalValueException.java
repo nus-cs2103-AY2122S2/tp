@@ -5,6 +5,7 @@ package seedu.trackermon.commons.exceptions;
  */
 public class IllegalValueException extends Exception {
     /**
+     * Creates a IllegalValueException with the given message.
      * @param message should contain relevant information on the failed constraint(s)
      */
     public IllegalValueException(String message) {
@@ -12,6 +13,7 @@ public class IllegalValueException extends Exception {
     }
 
     /**
+     * Creates a IllegalValueException with the given message and cause.
      * @param message should contain relevant information on the failed constraint(s)
      * @param cause of the main exception
      */

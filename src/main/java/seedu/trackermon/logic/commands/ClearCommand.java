@@ -12,8 +12,11 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Show list has been cleared!";
-
-
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
