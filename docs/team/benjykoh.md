@@ -51,7 +51,7 @@ Given below are my contributions to the project.
   * Shared effort in morphing product into "TAPA" by removing unused fields, updating the diagrams in the Developer Guide [#232](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/232), and adding an introduction. [#261](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/261) 
   * Maintained the issue tracker by assigning/labelling some issues.
   * Updated Developer Guide by adding and editing user stories in the `Appendix` section. [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93)
-  * Maintained the User Guide and Developer Guide by formatting them. ([#213](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/213), [#234](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/234), [#258](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/258), [#259](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/259), [#263](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/263))
+  * Maintained the User Guide and Developer Guide by formatting them and fixing documentation bugs. ([#213](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/213), [#234](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/234), [#258](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/258), [#259](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/259), [#263](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/263))
 
 
 * **Documentation**:
@@ -67,6 +67,6 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [#40](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/40), [#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#205](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/205)
+  * PRs reviewed (with non-trivial review comments): ([#40](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/40), [#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#205](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/205), [#254](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254))
   * Reported a total of 18 bugs and suggestions for other teams in the class (as seen [here](https://github.com/Benjykoh/ped/issues))
 
