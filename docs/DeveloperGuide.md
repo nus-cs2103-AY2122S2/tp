@@ -169,16 +169,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### To Add: Position feature?
+### Applicant feature
+
+#### Proposed Implementation
+
+An applicant in HireLah is represented by `Applicant`. `Applicant` is implemented by refactoring `Persons`.
+Additionally, `Applicant` implements two new attributes which are represented by the following two new classes:
+
+* `Gender` — M refers to male, and F refers to female. Only the value M or F is allowed.
+* `Age` —  Numerical representation of the age of the applicant. Only values with two digits or more are allowed.
+
+`Gender` and `Age` class highly resemble other existing attribute classes such as `Address`, `Email`, `Name`, and
+`Phone`.
+
+These classes are contained in the `applicant` package which belongs to the `model` package.
+
+Applicant is implemented this way as for HireLah, we require new attributes such as `Gender` and `Age` to aid in the
+recruitment process. the `Person` class did not contain such attributes.
+
+Adding Gender and Age as tags using the existing functionality is not ideal as we do not want these attributes to be
+optional.
+
+A new `Applicant` class had to be created to support the functionality. It is also not ideal to keep the existing
+`Person` class as it should not be instantiated by users in HireLah.
+
+Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
+support the needs of HireLah.
+
+### Position feature
+
+#### Proposed Implementation
+
 A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
-* `PositionName` — M refers to the name of the job opening. 
+* `PositionName` —  refers to the name of the job opening. 
   Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 100 characters.
-* `Description` — M refers to the description of the position. 
+* `Description` —  refers to the description of the position. 
   Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 200 characters.
-* `PositionOpenings` — M refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
-* `PositionOffers` — M refers to the number of outstanding offers handed out for the position. 
+* `PositionOpenings` —  refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
+* `PositionOffers` —  refers to the number of outstanding offers handed out for the position. 
   Number of offers is initialized as 0 when a position is created. Number of offers cannot be directly mutated, and is only altered through commands of `pass`, `accept`, `reject`.
-* `Set<Requirement>` — M refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
+* `Set<Requirement>` —  refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
   There can be any number of requirements for the `Position`.
   
 These classes are contained in the `position` package which belongs to the `model` package.

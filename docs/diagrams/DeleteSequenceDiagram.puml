@@ -66,11 +66,32 @@ deactivate AddressBookParser
 LogicManager -> DeleteApplicantCommand : execute()
 activate DeleteApplicantCommand
 
-DeleteApplicantCommand -> Model : deletePerson(1)
+DeleteApplicantCommand -> Model : getFilteredApplicantList()
 activate Model
-
 Model --> DeleteApplicantCommand
 deactivate Model
+
+DeleteApplicantCommand -> Model : getApplicantInterviews(applicantToDelete)
+activate Model
+Model --> DeleteApplicantCommand
+deactivate Model
+
+DeleteApplicantCommand -> Model : deleteApplicant(applicantToDelete)
+activate Model
+Model --> DeleteApplicantCommand
+deactivate
+
+loop interviewsToDelete.size()
+    DeleteApplicantCommand -> Model : deleteInterview(i)
+    activate Model
+    Model --> DeleteApplicantCommand
+    deactivate
+end
+
+
+
+
+
 
 create CommandResult
 DeleteApplicantCommand -> CommandResult
