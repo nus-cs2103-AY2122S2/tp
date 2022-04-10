@@ -450,7 +450,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 ---
 
-### Suggesting a Show: `suggest`
+### Suggesting a show: `suggest`
 
 **Description:** Wanting to find a random show? This suggests a random show from the displayed list!
 
