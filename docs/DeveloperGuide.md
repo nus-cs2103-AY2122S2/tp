@@ -871,7 +871,7 @@ testers are expected to do more *exploratory* testing.
 2. Test case: Adding a valid show
    1. Condition: Show named `Inception` must not exist in the show list.
    2. Command: `add n/Inception s/watching` <br> 
-      Expected: Show is added into the show list. Added show details shown in the result display.
+      Expected: Show is added into the show list. Added show details shown in the result display.<br><br>
 3. Test case: Adding an invalid show
    1. Condition: Show named `"Inception"` exists in the show list.
    2. Command: `add n/Inception s/watching` <br> 
