@@ -533,8 +533,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-   2. Delete the first line containing `{` in the data file `data/addressbook.json`.
-   3. Start the application and exit right after.
+   1. Delete the first line containing `{` in the data file `data/addressbook.json`.
+   2. Start the application and exit right after.
 
     Expected: Data from data file is cleared and contains no entry.
