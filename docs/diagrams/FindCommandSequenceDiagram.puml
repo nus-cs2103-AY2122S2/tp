@@ -36,13 +36,13 @@ create fFindCommand
 FindCommandParser -> fFindCommand
 activate fFindCommand
 
-fFindCommand --> FindCommandParser : n
+fFindCommand --> FindCommandParser : f
 deactivate fFindCommand
-FindCommandParser --> ArchDukeParser : n
+FindCommandParser --> ArchDukeParser : f
 
 destroy FindCommandParser
 
-ArchDukeParser --> LogicManager : n
+ArchDukeParser --> LogicManager : f
 deactivate ArchDukeParser
 
 LogicManager -> fFindCommand : execute()
