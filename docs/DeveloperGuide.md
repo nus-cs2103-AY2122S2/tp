@@ -180,7 +180,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Edit feature
 #### Implementation
 
-`EditCommand` is responsible for the `edit` command. `EditCommandParser` provides necessary information to `EditCommand` when creating it through parse method. The information includes `isResetMode`, `EditPersonDescriptor`, and `indices`. `indices` is the reference to the list of `index` in the displayed list in GUI, of the person(s) to be edited. `EditPersonDescriptor` encapsulates how the person(s) should be edited, such as which field(e.g. name) should be changed to what(a new name). `isResetMode` is true if the user declared `-r` to activate reset mode in command, and false otherwise.
+`EditCommand` is responsible for the `edit` command. `EditCommandParser` provides necessary information to `EditCommand` when creating it through parse method. The information includes `isResetMode`, `EditPersonDescriptor`, and `indices`. `indices` is the reference to the list of `index` in the displayed list in GUI, of the person(s) to be edited. `EditPersonDescriptor` encapsulates how the person(s) should be edited, such as which field(e.g. name) should be changed to what(a new name). `isResetMode` is true if the user declared `o/r` to activate reset mode in command, and false otherwise.
 
 ![EditCommandClassDiagram](images/EditCommandClassDiagram.png)
 
