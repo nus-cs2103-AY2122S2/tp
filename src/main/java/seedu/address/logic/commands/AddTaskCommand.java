@@ -43,8 +43,7 @@ public class AddTaskCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
-        if (model.hasGroup(specificGroup)) { //check whether the specified group exists
+        if (model.hasGroup(specificGroup)) {
             if (model.hasTask(taskToAdd, specificGroup)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
