@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+skinparam genericDisplay old
+skinparam classAttributeFontColor white
+
+class CommandCard {
+ description
+ commandWord
+ commandShortcut
+
+}
+
+class ObservableList<CommandCard> {
+}
+ObservableList  o-- "17 " CommandCard
+
+class TableColumn<CommandCard, String>
+class TableView<CommandCard>
+
+TableView o-- "3 " TableColumn
+TableColumn o-- "1 " ObservableList
+
+hide class methods
+
+@end

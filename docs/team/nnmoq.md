@@ -50,12 +50,18 @@ Given below are my contributions to the project.
 ### Contributions to the UG
       
 1. Created the initial format and draft of the user guide on our Team's shared google docs.
-2. Updated the user guide to use consistent wording.
+2. Added the command shortcuts to user guide.
+3. Updated the user guide to use consistent wording.
 
 ### Contributions to the DG
 
 1. Added functionality and use-cases for `AddStudent` command.
 2. Added Sequence Diagram for `AddStudent` command.
+3. Updated Logic Component section
+4. Updated Architecture Sequence Diagram
+5. Added testcase examples for deleting a student
+6. Added Help feature and class diagram
+7. Added Command Shortcuts
 
 ### Contributions to team-based tasks
 1. Created and assigned tasks to milestones 1.3 and 1.4
@@ -63,5 +69,5 @@ Given below are my contributions to the project.
 
 ### Review/mentoring contributions
 1. Made multiple good suggestions when reviewing PRs [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978), 
-2. Debated with [james]() about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a `list` to hold all the command words for every command because we decided to not implement user specified keybinds.
+2. Debated with [james](https://github.com/jamesyeap) about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a `list` to hold all the command words for every command because we decided to not implement user specified keybinds.
 3. Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
