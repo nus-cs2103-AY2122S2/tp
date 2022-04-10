@@ -99,7 +99,7 @@ Some example commands you can try:
   - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
   - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
   - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
-  - PRICE: `$` followed by a positive integer. e.g. `$150000`
+  - PRICE: `$` followed by a positive integer with at most 9 digits. e.g. `$150000` is acceptable but `$1234567890` is not acceptable.
 
 </div>
 
