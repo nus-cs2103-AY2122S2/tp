@@ -14,7 +14,7 @@ Class OnboardingCommandBox
 Class OnboardingInstruction
 }
 
-OnboardingWindow *-down-> "1" ListPanel
+OnboardingWindow *-down-> "3" ListPanel
 OnboardingWindow *-down-> "1" ResultDisplay
 OnboardingWindow *-down-> "1" OnboardingCommandBox
 OnboardingWindow *-down-> "1" OnboardingInstruction
