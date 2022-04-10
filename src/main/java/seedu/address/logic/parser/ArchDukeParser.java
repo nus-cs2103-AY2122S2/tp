@@ -16,7 +16,6 @@ import seedu.address.logic.commands.DeassignCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -54,9 +53,6 @@ public class ArchDukeParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

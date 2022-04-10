@@ -54,7 +54,7 @@ public class UniqueTaskList implements Iterable<Task> {
         requireNonNull(taskToCheck);
         if (!internalList.stream().anyMatch(taskToCheck::isSameTask)) {
             throw new TaskNotFoundException();
-        };
+        }
         return taskToCheck;
     }
 
