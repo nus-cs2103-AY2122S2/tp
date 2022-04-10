@@ -315,6 +315,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all shows: `clear`
 
 **Description:** Wanting to reset your current show list? Clear all shows in Trackermon's show list!
@@ -369,6 +371,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Precise Find:**<br>
@@ -388,9 +392,13 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `find n/Shutter Island`
 
 <img src="images/Precise_Find_UI.png">
+
+<div style="page-break-after: always;"></div>
 
 **Example & Output:** `find r/5`
 
@@ -437,6 +445,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 :exclamation: **Take note:** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
@@ -450,9 +460,13 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 <img src="images/Sort_UI.png">
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `sort t/dsc r/asc`
 
 <img src="images/Sort_UI2.png">
+
+<div style="page-break-after: always;"></div>
 
 **Example & Output:** `sort t/dsc r/asc so/tagrating`
 
@@ -461,6 +475,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Suggesting a show: `suggest`
 
