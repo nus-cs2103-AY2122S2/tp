@@ -29,8 +29,9 @@ title: User Guide
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
+<div style="page-break-after: always;"></div>
 
-## Introduction
+## **Introduction**
 
 Always accessing MyAnimeList or IMDB to record down the shows you have watched? Finding it difficult to search the different websites that store your shows' information? Fret not, because **Trackermon** is the application just for you! But hold on, you may be wondering, what is Trackermon?
 
@@ -38,7 +39,7 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## User guide navigation
+## **User guide navigation**
 
 Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
 
@@ -55,7 +56,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## Quick start
+## **Quick start**
 
 1. Ensure you have `Java 11` or above installed in your Computer.
    * For Windows, open Command Prompt and input `java -version`
@@ -75,8 +76,9 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
-## User interface
+## **User interface**
 
 <img src="images/Trackermon_UI_Info.png">
 
@@ -88,6 +90,8 @@ The table below briefly describes each of the **4 main components**.
 | Show Details   | A panel to display a specific show's details |
 | Result Display | A panel to display command results           |
 | Command Box    | A panel to enter commands                    |
+
+<div style="page-break-after: always;"></div>
 
 You can start communicating with Trackermon using the command box. Some example commands you can try are:
 
@@ -102,7 +106,7 @@ You can start communicating with Trackermon using the command box. Some example 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## Command structure
+## **Command structure**
 
 Let us look at what makes up a command:
 
@@ -160,6 +164,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Parameter conditions
 
 <div markdown="block" class="alert alert-info">
@@ -181,7 +187,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## Features
+<div style="page-break-after: always;"></div>
+
+## **Features**
 
 ### Viewing help: `help`
 
@@ -196,6 +204,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a show: `add`
 
@@ -238,6 +248,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a show: `edit`
 
@@ -283,6 +295,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `edit 2 n/Sailor Moo t/Horror`
 
 <img src="images/EditImage.png">
@@ -302,6 +316,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all shows: `clear`
 
@@ -341,11 +357,15 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `find attack on titan`
 
 <img src="images/General_Find_UI.png">
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Precise find
 
@@ -376,9 +396,13 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `find n/Shutter Island`
 
 <img src="images/Precise_Find_UI.png">
+
+<div style="page-break-after: always;"></div>
 
 **Example & Output:** `find r/5`
 
@@ -402,6 +426,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
+<div style="page-break-after: always;"></div>
+
 **Explanation:** 
 
 To sort your show list by rating ascendingly, you can key in `sort r/asc`! For more examples, refer to this table below!
@@ -410,7 +436,7 @@ To sort your show list by rating ascendingly, you can key in `sort r/asc`! For m
 | ---------- | --------------- | ---------------- | ----- |
 | name       | n/asc           | n/dsc            | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
 | status     | s/asc           | s/dsc            | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch`   |
-| rating     | r/asc           | r/dsc            |       |
+| rating     | r/asc           | r/dsc            | Rating is sorted by numerical value     |
 | tag        | t/asc           | t/dsc            | Tag is sorted by number of tags |
 
 <div markdown="block" class="alert alert-warning">
@@ -425,6 +451,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 :exclamation: **Take note:** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
@@ -438,9 +466,13 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 <img src="images/Sort_UI.png">
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `sort t/dsc r/asc`
 
 <img src="images/Sort_UI2.png">
+
+<div style="page-break-after: always;"></div>
 
 **Example & Output:** `sort t/dsc r/asc so/tagrating`
 
@@ -449,6 +481,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Suggesting a show: `suggest`
 
@@ -463,6 +497,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Importing a show: `import`
 
@@ -517,9 +553,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
-
-## FAQ
+## **FAQ**
 
 | Question | Answer |
 | -------- | ------ |
@@ -529,8 +563,9 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
-## Command summary
+## **Command summary**
 
 | Action           | Format, Examples                                                                                                                    |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -550,14 +585,15 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
-## Glossary
+## **Glossary**
 
 | Term                               | Description                                                                                                                                                                          |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                |
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
-| **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
+| **Command Line Interface (CLI)**   | A Command Line Interface connects you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Alphanumeric**                   | A character that is either a letter or a number.                  |
 | **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
