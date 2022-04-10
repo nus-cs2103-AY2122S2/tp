@@ -233,11 +233,11 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-   - Scenario: Adding of the specified `Person` to the database is successful.
-   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
+    - Scenario: Adding of the specified `Person` to the database is successful.
+    - Message: "New person added: %1$s" where "%1$s" is the added person's details.
 2. `MESSAGE_DUPLICATE_PERSON`:
-   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
-   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
+    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 **Sequence Diagram of Add Feature is shown below:**
 
@@ -376,8 +376,8 @@ user to replace the list of students with an empty one. Previous data are swiped
 Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
 
 1. `MESSAGE_SUCCESS`
-   - Scenario: Tracey database successfully cleared.
-   - Message: "Tracey has been cleared!".
+    - Scenario: Tracey database successfully cleared.
+    - Message: "Tracey has been cleared!".
 
 
 **Sequence Diagram of Clear Feature is shown below:**
@@ -388,39 +388,49 @@ Additionally, there is a static final static message to be displayed to the user
 
 ### Find feature
 
-#### Current Implementation
+The find mechanism implements the following sequence for the method call execute("find").
 
-The activity diagram below illustrates the flow of a `find` command.
+#### What is the find feature
 
+The find feature allows users to find a particular contact in Tracey and retrieve their specific details.
+
+The `find` command is as follows:
+
+`find NAME`
+
+The user do not require to search the full name of the contact. However, the name must be its substring.
+
+e.g. `find J`
+This will return any contact details starts with J in the Tracey.
+
+
+The activity diagram shows the possible execution paths for the `find` command.
+
+**Path Execution of Find Feature Activity Diagram is shown below:**
 ![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
 
-#### Usage Scenario
+There are two possible execution paths for this command.
 
-Given below is an example usage scenario and how `find` react and act at each step.
+1. User input the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
+   display an error message that informs the contact details the user try to search is not found.
 
-**1**) The user launches the application for the first time.
+2. User input the `find` command with valid arguments. Tracey returns a list of contact details that matches the
+   input name from the existing database, and display the contact list to the user.
 
-**2**) The user inputs `find alex` in the CLI to sort all contacts by name. This calls `LogicManager::execute`
-to parse the given input.
+The sequence diagram below illustrates the execution of `find` command.
 
-**3**) `LogicManager` will notice that a find command is called and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will create the corresponding `NameContainsKeywordsPredicate` Predicate and return a `FindCommand`.
-
-**4**) After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that lists
-out the persons with the `NameContainsKeywordsPredicate`.
-
-**5**) Through a series of method invocations, a lists of persons that matches the input is generated with their personal details.
-
-The sequence diagram below illustrates the execution of `find alex`.
-
+**Sequence Diagram of Find Feature is shown below:**
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+The argument typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will
+then be parsed by the `parseCommand` function in the `AddressBookParser` object.
 
-#### Design Considerations
+A `FindCommandParser` object will then be created to parse this input, with its `parse` function. A
+NameContainsKeywordsPredicate object is then created, containing the name that the user has entered.
+This NameContainsKeywordsPredicate object is then used to create a FindCommand object.
 
-**Aspect: How `find` executes**
-
-{to be decided}
+Subsequently, the `parseCommand` method in `LogicManager` will continute to create a `CommandResult`, displaying
+a success message and a list of the students that match up the name.
 
 <br>
 
@@ -436,13 +446,13 @@ The `edit` command is as follows:
 
 `edit 1 n/Poppy p/62536273 ...` where `...` indicates any other additional fields the user wishes to edit.
 
-The original AB3 implementation of this feature allows the same edited value for the corresponding field of the person. `e.g` If a `Person` with `name` of  John (index 1 in the address book) is already present in the address book, then the command `edit 1 n/John` will still work. 
-In addition, for attribute types that need to be unique for each `Person` `e.g.``Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in the address book. 
+The original AB3 implementation of this feature allows the same edited value for the corresponding field of the person. `e.g` If a `Person` with `name` of  John (index 1 in the address book) is already present in the address book, then the command `edit 1 n/John` will still work.
+In addition, for attribute types that need to be unique for each `Person` `e.g.``Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in the address book.
 <br>`e.g.` If there are two `Person`:
 * `name`: John `Email`: john123@gmail.com (Index 1 in the address book)
 * `name`: Johnny `Email` johnny123@gmail.com (Index 2 in the address book)
-<br> The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and is supposed to be unique for each person in the address book. 
- 
+  <br> The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and is supposed to be unique for each person in the address book.
+
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and and `Person#isDifferentPerson()` to address the latter issue.
 
 **Path Execution of Edit Feature Activity Diagram is shown below:**
@@ -453,7 +463,7 @@ In order to address these issues, we have enhanced the `EditCommand` to include 
 
 The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
 
-Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
+Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
 
@@ -472,6 +482,32 @@ The main functions of these two methods are to check if the new values are dupli
 The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
 
 TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
+
+###Import feature
+
+The import mechanism implements the following sequence for the method call execute("import").
+
+#### What is the import feature
+
+The import feature allows users to import an Excel file that contains a list of student records into Tracey.
+
+The `import` command is as follows:
+
+`import FILE PATH`
+
+The activity diagram shows the possible execution paths for the `import` command.
+
+**Path Execution of Import Feature Activity Diagram is shown below:**
+
+There are two possible execution paths for this command.
+
+1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+
+The sequence diagram below shows the interactions between objects during the execution of a `import` command.
+
+**Sequence Diagram of Import Feature is shown below:**
+
 
 ### Filter feature
 
@@ -674,7 +710,7 @@ This feature allows the user to save a copy of the working database, which can b
 The `archive` command is as follows:
 `archive`
 
-This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date. 
+This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date.
 When the user uses this command, a folder named `archive` will be created if it is not yet created at the directory relative to the database file.
 Inside this `archive` folder will contain subdirectories named after the user's computer local date in `DDMMYY` format and inside these subdirectories will contain the archived files which is named after the user's computer
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
@@ -701,8 +737,8 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 **Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
-working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
+Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
+working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
 **Sequence Diagram of Archive Feature is shown below:**
@@ -714,7 +750,7 @@ the archived file will be saved in its respective file path and a success messag
 The above figure illustrates the important interactions of `ArchiveCommand` when the user successfully archived the current working database file.
 
 When a user inputs `archive`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser` to check if there are any extra parameters. If the input is valid, the file path of
-the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the 
+the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
 ### Resizing result display window feature
@@ -882,25 +918,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a2. User provide the correct details in the correct format.
 
-        Use case ends.
+      Use case ends.
 
 * 1b. The student to be added already exists in the list by Tracey.
 
     * 1b1. Tracey inform user that the contact exists in her database.
 
-        Use case ends.
+      Use case ends.
 
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
 
-        Use case ends.
+      Use case ends.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
 
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
 
-        Use case ends.
+      Use case ends.
 
 ### Use case: UC04 - Edit information of a student
 
@@ -919,7 +955,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Tracey shows an empty list.
 
-        Use case ends.
+      Use case ends.
 
 * 2a. The given student name exists multiple places on the list.
 
@@ -927,7 +963,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a2. User will key in the correct format to edit the student's details.
 
-        Use case ends.
+      Use case ends.
 
 ### Use case: UC05 - Clear the system database
 
@@ -989,19 +1025,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User keys in the details of students to filter out.
 3. Tracey returns a list of students of the specified covid status, faculty and block.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. Tracey detects invalid or empty arguments in user input.
     * 2a1. Tracey displays a error message and shows the correct input format.
 
-        Use case ends.
+      Use case ends.
 
 * 2b. User only inputs details for one or two of the fields (covid status, faculty or block).
     * 2b1. Tracey returns a list of students of the specified details.
 
-        Use case ends.
+      Use case ends.
 
 ### Use case: UC10 - Summarise all students for some overview of covid situation
 
