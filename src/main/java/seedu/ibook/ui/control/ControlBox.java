@@ -8,12 +8,16 @@ import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
+import java.util.ArrayList;
+
 public class ControlBox extends UiComponent<HBox> {
 
     private static final String FXML = "control/ControlBox.fxml";
 
     @FXML
-    private FlowPane filters;
+    private FlowPane filterBox;
+
+    private final ArrayList<Filter> filters = new ArrayList<>();
 
     /**
      * Creates a {@code ControlBox}.
@@ -29,10 +33,12 @@ public class ControlBox extends UiComponent<HBox> {
      */
     public void populateFilters() {
         ObservableList<AttributeFilter> filterList = getMainWindow().getProductFilters();
-        filters.getChildren().clear();
+        filterBox.getChildren().clear();
+        filters.clear();
         for (AttributeFilter filter: filterList) {
             Filter filterButton = new Filter(filter, getMainWindow());
-            filters.getChildren().add(filterButton.getRoot());
+            filterBox.getChildren().add(filterButton.getRoot());
+            filters.add(filterButton);
         }
     }
 
