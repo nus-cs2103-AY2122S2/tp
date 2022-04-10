@@ -36,8 +36,10 @@ Given below are my contributions to the project.
   * Modified the `delete` feature to allow deletion with multiple indices. [#126](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/126)
     * Justification: The `delete` command ships with the default AB3, but only takes in a single index as a possible parameter. I extended it to also allow users to input multiple indices, such that users can conveniently delete multiple students at once without having to retype the command again and again.
 
-  * Wrote additional tests for new and existing features to increase code coverage. ([#113](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/113)) (TODO: More to be added)
-
+  * Wrote additional tests for new and existing features to increase code coverage. 
+    ([#113](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/113),
+    [#229](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/229),
+    [#244](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/244))
 
 * **Contribution to team-based tasks**:
   * Joint effort in renaming the product to "TAPA".
@@ -45,16 +47,33 @@ Given below are my contributions to the project.
   * Joint effort in morphing product into "TAPA" by extending relevant features.
   * Maintained the issue tracker by assigning/labelling issues.
   * Tested product for cross-platform compatibility for MacOS.
-
+  * Created product banner image.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `find` and `delete` [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32)
+    * Added/updated documentation for the features `find`, `delete` [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32),
+      [#105](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/105), 
+      [#126](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/126) 
+      and `deleteModule` [#135](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/135)
   * Developer Guide:
-    * Updated use cases [#56](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/56)
-    * Added implementation details for commands: `find` [#111](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/111), `delete` and `deleteModule` [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189)
-
-
+    * Added implementation details for commands: `find` [#111](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/111), 
+      `delete` and `deleteModule` [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189)
+    * Updated existing sequence diagrams to match new implementation [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189)
+    * Added/updated use cases: UC02, UC03, UC04 [#56](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/56), 
+      [#249](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/249)
+    * Added/updated details for manual testing: [#270](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/270)
+      
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [#53](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/53), [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69), [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102), [#114](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/114), [#120](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/120), [#140](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/140), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#215](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/215)
+  * PRs reviewed (with non-trivial review comments): [#53](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/53), 
+    [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69),
+    [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102),
+    [#114](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/114),
+    [#120](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/120),
+    [#140](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/140),
+    [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144),
+    [#215](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/215),
+    [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231),
+    [#253](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/253),
+    [#264](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/264)
+    
   * Reported a total of 18 bugs and suggestions for other teams in the class (as seen [here](https://github.com/medajet/ped/issues))
