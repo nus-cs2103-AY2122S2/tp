@@ -357,8 +357,13 @@ Example of usage:
   - `remind 1` to remove the current Reminder for the client at index 1.
 
 ### Open Reminders window: `rm`
-<img src="images/user-guide/reminderWindowFilled.png" height="400px">
-<img src="images/user-guide/reminderWindowEmpty.png" height="400px">
+
+<p float="left">
+  <img src="images/user-guide/reminderWindowFilled.png" height="400px">
+  <img src="images/user-guide/reminderWindowEmpty.png" height="400px">
+</p>
+
+
 
 Opens a new window that displays compacted list of clients that have Reminders set. Upon execution of the `rm` command, the Reminders window will persist & continuously appear every 1 minute, until the RealEstatePro app is closed. The Reminders window is meant to serve as a pinboard showing existing Reminders.
 
