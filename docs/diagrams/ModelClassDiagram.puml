@@ -53,10 +53,10 @@ AddressBook *--> "1" TransactionList
 
 UniquePersonList --> "~* all" Person
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "0..1" Remark
 Person *--> "0..1" Birthday
 Person *--> "0..1" Membership
@@ -75,9 +75,9 @@ Tag -[hidden]up-> Birthday
 
 TransactionList --> "~* all" Transaction
 
-Transaction *--> Amount
-Transaction *--> Status
-Transaction *--> TransactionDate
+Transaction *--> "1" Amount
+Transaction *--> "1" Status
+Transaction *--> "1" TransactionDate
 Transaction *--> "0..1" DueDate
 Transaction *--> "0..1" Note
 

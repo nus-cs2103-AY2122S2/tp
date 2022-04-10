@@ -302,7 +302,12 @@ If there are no people in the `FilteredPersonList`, the `CommandResult` returned
 Below is a sequence diagram to show how the `ClearFilteredCommand` executes.
 
 ![Clear Filtered Sequence Diagram](images/ClearFilteredSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+
 The lifeline for `ClearFilteredCommand` ends after the X mark.
+
+</div>
 
 ### Membership functionality
 
