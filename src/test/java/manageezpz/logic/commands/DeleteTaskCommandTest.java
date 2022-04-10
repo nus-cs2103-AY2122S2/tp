@@ -6,12 +6,12 @@ import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS;
 import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_USAGE;
-import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
-import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
+import static manageezpz.testutil.TypicalIndexes.*;
+import static manageezpz.testutil.TypicalPersons.BENSON;
 import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+import manageezpz.model.person.Person;
 import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.index.Index;
@@ -19,6 +19,8 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 import manageezpz.model.task.Task;
+
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,8 +31,16 @@ public class DeleteTaskCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() { // FAILED
-        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+    public void execute_validIndexUnfilteredList_success() {
+        Task taskToDelete = model.getAddressBook().getTaskList().get(INDEX_FIRST.getZeroBased());
+
+        // Add Benson to model's UniquePersonList
+        model.addPerson(BENSON);
+        // Tag task with index 1 in model's UniqueTaskList to Benson
+        model.tagEmployeeToTask(taskToDelete, model.getAddressBook().getPersonList().get(0));
+        // Increase Benson's numOfTasks by 1
+        model.increaseNumOfTasks(model.getAddressBook().getPersonList().get(0));
+
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
