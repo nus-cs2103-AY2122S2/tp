@@ -21,17 +21,30 @@ public class NameTest {
     }
 
     @Test
-    public void isValidName() {
+    public void test_isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
-        // invalid name
+        // valid name
+        String validString500Characters = "qwrnjbqwrkbqwkrjbqkjwrbjqkwbrkjqbkmasdbkmbdajkbdjkabsdjkbaskjdbakj"
+                + "sbdjkasbsdjkbqasjkdbjkwabdjkbwqjkdbqwjkbdqwjkbdjkqwbdjkasdmadnmaasndnjkldnwqlkndqk"
+                + "mdlqwknqwdjlbnklqdwnklqwjdklqwndklnqwkldnqwklndklqwndklqwwqenoqwieoqweionnnnnnnnnnnn"
+                + "nnnnnnnnnnndadadadqwrnjbqwrkbqwkrjbqkjwrbjqkwbrkjqbkmasdbkmbdajkbdjkabsdjkbaskjdbakj"
+                + "sbdjkasbsdjkbqasjkdbjkwabdjkbwqjkdbqwjkbdqwjkbdjkqwbdjkasdmdnmasndnjkldnwqlkndqkmdlq"
+                + "wknqwdjlbnklqdwnklqwjdklqwndklnqwkldnqwklndklqwndklqwwqenosadasdadasdasdsafqwrwrafaw"
+                + "rfwfraweadasdfas";
+        System.out.println(validString500Characters.length());
+        String invalidString501 = validString500Characters + "a";
+
+        //invalid name
+        assertFalse(Name.isValidName(invalidString501)); // string too long
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("you*")); // contains non-alphanumeric characters
 
         // valid name
+        assertTrue(Name.isValidName(validString500Characters));
         assertTrue(Name.isValidName("You")); // alphabets only
         assertTrue(Name.isValidName("007")); // numbers only
         assertTrue(Name.isValidName("Peter the 2nd")); // alphanumeric characters

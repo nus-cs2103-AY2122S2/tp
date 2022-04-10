@@ -5,7 +5,7 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
 /***
  * Represents a Show's rating.
- * Guarantees: immutable; rating is valid as declared in {@link #isValidScore(int) and @link #isValidScore(String)}
+ * Guarantees: immutable; rating is valid as declared in {@link #isValidRating(int) and @link #isValidScore(String)}
  */
 public class Rating implements Comparable<Rating> {
 
@@ -23,7 +23,7 @@ public class Rating implements Comparable<Rating> {
      */
     public Rating(int rating) {
         requireNonNull(rating);
-        checkArgument(isValidScore(rating), INVALID_RATING);
+        checkArgument(isValidRating(rating), INVALID_RATING);
         this.rating = rating;
     }
 
@@ -33,14 +33,14 @@ public class Rating implements Comparable<Rating> {
      */
     public Rating(String rating) {
         requireNonNull(rating);
-        checkArgument(isValidScore(rating), INVALID_RATING);
+        checkArgument(isValidRating(rating), INVALID_RATING);
         this.rating = Integer.parseInt(rating);
     }
 
     /**
      * Return true if a given {@code int} is a valid rating.
      */
-    public static boolean isValidScore(int rating) {
+    public static boolean isValidRating(int rating) {
         if (rating <= MAX_RATING && rating >= 0) {
             return true;
         }
@@ -50,7 +50,7 @@ public class Rating implements Comparable<Rating> {
     /**
      * Return true if a given {@code String} is a valid rating.
      */
-    public static boolean isValidScore(String rating) {
+    public static boolean isValidRating(String rating) {
         return rating.matches(VALIDATION_REGEX_RATING);
     }
 

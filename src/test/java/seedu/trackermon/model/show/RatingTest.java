@@ -23,18 +23,18 @@ public class RatingTest {
     @Test
     public void isValidRating() {
         //invalid rating
-        assertFalse(Rating.isValidScore("-1"));
-        assertFalse(Rating.isValidScore("6"));
+        assertFalse(Rating.isValidRating("-1"));
+        assertFalse(Rating.isValidRating("6"));
 
-        assertFalse(Rating.isValidScore(-1));
-        assertFalse(Rating.isValidScore(6));
+        assertFalse(Rating.isValidRating(-1));
+        assertFalse(Rating.isValidRating(6));
 
         //valid rating
-        assertTrue(Rating.isValidScore("5"));
-        assertTrue(Rating.isValidScore("0"));
+        assertTrue(Rating.isValidRating("5"));
+        assertTrue(Rating.isValidRating("0"));
 
-        assertTrue(Rating.isValidScore(5));
-        assertTrue(Rating.isValidScore(0));
+        assertTrue(Rating.isValidRating(5));
+        assertTrue(Rating.isValidRating(0));
 
     }
 
