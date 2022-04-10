@@ -166,7 +166,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editBuyerToSeller_success() {
+    public void execute_editBuyerToSeller_success() {
         // editing a buyer to be a seller (editing the buyer to have a property)
         Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
 
@@ -194,7 +194,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editSellerToBuyer_success() {
+    public void execute_editSellerToBuyer_success() {
         // editing a seller to be a buyer (editing the seller to have a preference)
         Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
 
@@ -222,7 +222,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editSellerProperty_success() {
+    public void execute_editSellerProperty_success() {
         // editing other details of the seller (editing the seller's phone number)
         Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
         Index indexOfSeller = Index.fromOneBased(8);
@@ -248,7 +248,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void editSellerOtherDetails_success() {
+    public void execute_editSellerOtherDetails_success() {
         // editing other details of the seller (editing the seller's phone number)
         Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
         Index indexOfSeller = Index.fromOneBased(8);
