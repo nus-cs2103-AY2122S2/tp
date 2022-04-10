@@ -73,7 +73,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts, namely `MeetingListPanel`, `PersonListPanel` and other UI parts that have been left out of the diagram. The other parts include `StatusBarFooter`, `ResultDisplay`, `CommandBox`, `HelpWindow` and `MeetingClashWindow`.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -116,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="740" />
 
 
 The `Model` component,
@@ -138,7 +139,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="740" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -191,7 +192,7 @@ The activity diagram below shows the execution of the above example:
 Activity Diagram in the Managing meeting participants section below.
 </div>
 
-#### Design Considerations
+#### Design Considerations:
 
 **Aspect: How `Participant` is constructed**
 
@@ -321,8 +322,6 @@ general process of creating and adding `Participants` to a `Meeting`'s participa
 
 This process is summarised in the activity diagram below.
 
-Activity: Create Participant
-
 ![CreateParticipantActivityDiagram](images/CreateParticipantActivityDiagram.png)
 
 Another scenario when a `Meeting` may have its set of `Participants` modified is when a `Contact` object
@@ -360,6 +359,51 @@ Reasons for choosing Alternative 1:
 * The number of meetings that the target user (a busy NUS School of Computing student) would realistically schedule is
   not expected to be so large that the slower performance of alternative 1 is noticeable.
 * Hence, testability was prioritised over performance.
+
+
+### Find meeting feature
+
+This section describes how the find meeting feature was implemented. This feature allows the user to find meetings by specifying
+search terms for the name, date and/or tags of meetings.
+
+### Implementation
+
+Similar to other commands, the user input (eg. `findm n/Alex d/22-02-2022`) is first parsed by the `FindMeetingCommandParser` to create a `FindMeetingCommand`,
+which when executed will update the Model's `FilteredList` using `FilteredList#setPredicate`.
+
+During the parsing, the user input is used to create an instance each of `MeetingNameHasKeywordsPredicate`, `MeetingTagHasKeywordsPredicate`
+and `MeetingOccursOnDatesPredicate`. (Note that all 3 are created regardless of whether the user specified a search term of that type).
+The 3 classes implement the Java generic interface `Predicate<Meeting>` (see [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html) for documentation), with the `test` method implemented as follows:
+* If no search terms of a type are specified by the user, the predicate corresponding to that type will always return true. (eg. if the user does not specify any name or tag to search for, `MeetingNameHasKeywordsPredicate#test` and `MeetingTagHasKeywordsPredicate#test` return true for any meeting) 
+* If search terms of that type are specified, the predicate returns true if and only if the meeting being tested matches **at least one** of the search terms. (eg. if the user specifies the dates `22-02-2022` and `11-04-2022`, `MeetingOccursOnDatesPredicate#test` will return true for meetings that occur on either date)
+
+These 3 predicates are combined using the default method `Predicate#and`, thus allowing the user to combine searches of different types (eg. searching for meetings occurring on specific days with the same tag). The predicate produced from `and` is then used as the argument for `FilteredList#setPredicate`.
+
+The following sequence diagram summarises these interactions between the logic and model components when this feature is used:
+
+![FindMeetingSequenceDiagram](images/FindMeetingSequenceDiagram.png)
+
+**Note:** The lifeline for `FindMeetingCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+
+#### Design considerations:
+
+**Aspect: Whether to allow multiple search terms of each type** (eg. allow users to specify multiple dates to search for)
+
+* **Alternative 1 (current choice):** Allow multiple search terms of each type.
+    * Pros: More flexible for the user. Addresses legitimate user stories, eg. users might want to view their schedule on multiple days at once to aid with their planning.
+    * Cons: Manual testing is much more difficult due to the large increase in number of possible user inputs.
+    
+* **Alternative 2:** Allow only one search term per type
+    * Pros: Much easier to test manually due to the smaller number of possible inputs.
+    * Cons: Less flexible for the user. Might not adequately address the problems they face in managing their academic/social life. eg. separate searches are required to view schedule on different days; unable to view schedule across multiple days at once.
+
+Reasons for choosing Alternative 1:
+* It helps to solve problems faced by the user in a faster and more convenient way than alternative 2.
+* The use of OOP through Java `Predicates` makes automated testing easier as we can test the `OR` behaviour 
+  within each predicate separately before testing the `AND` behaviour in `FindMeetingCommand`. This helps to partially make
+  up for the relatively low manual testability compared to alternative 2.
+
 
 ### \[Proposed\] Data archiving
 
@@ -451,15 +495,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user who wants to schedule a meeting on a specific day | search for meetings occurring that day                       | I can see what time I am free that day.                         |
 | `* *`    | busy user with many meetings                           | search for meetings by name or tags                          | I can find specific meetings or groups of meetings easily.      |
 | `* *`    | busy user with many meetings                           | be reminded of meetings happening in the next few days       | I do not forget these meetings.                                 |
+| `* *`    | busy user with many meetings                           | be alerted when I try to add a new meeting that clashes with existing ones | I do not overlook the clash.                      |
 | `* *`    | user who needs to manage a variety of contacts         | categorize my contacts into subgroups                        | I can keep track of what group each contact is from.            |
 | `* *`    | user who needs to manage a variety of contacts         | search for contacts by their tags / grouping                 | I can find all contacts from a specific group / with a specific tag.            |
 | `* *`    | user with many contacts in my contact list             | sort contacts by name                                        | I can locate a person easily.                                   |
-| `* *`    | user with many meetings in my contact list             | sort meetings by date and time                               | I can see my earliest upcoming meetings.                        |
+| `* *`    | user with many meetings in my meeting list             | sort meetings by date and time                               | I can see my earliest upcoming meetings.                        |
+| `*`      | user with many meetings in my meeting list             | archive meetings that are irrelevant/completed               | these meetings do not clutter my meeting list, but I can still refer to them if I need to. |
 | `*`      | long-term user of the app                              | archive contacts that may no longer be relevant              | my contact list is less cluttered.                              |
 | `*`      | user who wants to add many new contacts quickly        | add many contacts at once                                    | I do not have to spend time adding them individually.           |
 | `*`      | new user who already has a contact list on another app | import all my contacts into AddresSoC                        | I do not have to spend time adding them individually.           |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -512,6 +557,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a meeting**
+
+**MSS**
+
+1.  User requests to list meetings
+2.  AddresSoc shows a list of meetings
+3.  User requests to add a meeting in the list
+4.  AddresSoc adds the meeting
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The arguments passed are invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at 2.
+
+* 3b. The mandatory arguments are not passed.
+
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Delete a meeting**
 
 **MSS**
@@ -535,31 +605,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
-**Use case: Add a meeting**
+**Use case: Find meetings**
 
 **MSS**
 
-1.  User requests to list meetings
-2.  AddresSoc shows a list of meetings
-3.  User requests to add a meeting in the list
-4.  AddresSoc deletes the person
-
-    Use case ends.
+1. User requests to find meetings satisfying their desired search terms.
+2. AddresSoc shows the list of meetings satisfying the search terms.
 
 **Extensions**
 
-* 3a. The arguments passed are invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at 2.
-
-* 3b. The mandatory arguments are not passed.
-
-    * 3b1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+* 1a. User does not provide any search terms.
+  * 1a1. AddresSoc shows an error message.
+    
+    Use case ends.
+    
 
 
 *{More to be added}*
@@ -573,8 +632,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  Should have high testability by reducing use of Coupling.
 6.  Should be well documented for users to understand how to use the product.
 7.  Should be well documented for developers to understand how to further improve the product.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -605,8 +662,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 

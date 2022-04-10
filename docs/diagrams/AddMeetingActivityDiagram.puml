@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
-
+title Activity: Add a meeting\n
 start
 :User enters addm command in the command box;
 :AddressBookParser parses the command;
