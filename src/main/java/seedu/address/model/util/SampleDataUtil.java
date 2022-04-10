@@ -23,7 +23,7 @@ import seedu.address.model.testresult.TestResult;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Patient[] getSamplePersons() {
+    public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Nric("S1234567L"), new Name("Alex Yeoh"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -170,9 +170,9 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyMedBook getSampleAddressBook() {
+    public static ReadOnlyMedBook getSampleMedBook() {
         MedBook sampleAb = new MedBook();
-        for (Patient samplePatient : getSamplePersons()) {
+        for (Patient samplePatient : getSamplePatients()) {
             sampleAb.addPatient(samplePatient);
         }
         for (Contact sampleContact : getSampleContacts()) {
