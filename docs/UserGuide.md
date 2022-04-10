@@ -13,8 +13,9 @@ Tracey can get your student health status management tasks done faster than trad
   <summary>What are CLIs? What are GUIs?</summary>
 
 ##  Brief Introduction
-1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
-2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
+CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
+
+GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
 
 Note that the main difference between GUI and CLI is the method of interaction.
 
@@ -78,7 +79,7 @@ Additional formatting guidelines:
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
-   Note how the app contains some sample data. <br>
+   Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
    📓`Note:`
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
@@ -90,7 +91,7 @@ Additional formatting guidelines:
 
 * **`summarise`** : Summarises all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
 
-* **`add`**`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` : Adds a contact named `John Doe` to the Tracey.
+* **`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader`** : Adds a student named `John Doe` to Tracey.
 
 * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -279,6 +280,7 @@ Format: `find NAME`
 * A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
 * The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
+* Following the previous point, the input should contain the initial letters of the name. e.g. `jo` or`joh` for John. Conversely, if a user inputs `ohn` for John, this will not warrant the correct result. 
 
 Examples of usages:
 
@@ -327,16 +329,17 @@ This is a sample screenshot of what you can expect from the `list` command.
 ![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
 
 ### Copying emails
-Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
 
-📓`Note:`
-There is also a `Show Email` button on the GUI which you can click to open the same window.
-
 ![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
 
-From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section.
+
+📓`Note:`
+* There is also a `Show Email` button on the GUI which you can click to open the same window.
+* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarises the statistics of the student records inside Tracey.
