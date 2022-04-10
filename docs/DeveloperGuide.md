@@ -234,6 +234,8 @@ The `Model` component,
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/trackermon/storage/Storage.java)
@@ -274,6 +276,8 @@ After executing the `find` command, `FindCommandParser` will map any prefixes in
 - Else, a general show predicate will be created by scanning through the name, status, rating and tag fields of the `Show` class. 
 
 Then, `LogicManager` will execute the given `findCommand` object and scan through the shows in the model's list of shows while checking if any shows matches the user's input. The model is then updated with the filtered show list.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the parsing implementation of `FindCommandParser`.
 
