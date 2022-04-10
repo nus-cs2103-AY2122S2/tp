@@ -62,4 +62,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments:) (Pull requests: [\#64](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/64), [\#93](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/93), [\#182](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/182))
-  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/petermonky/ped/issues/8), [2](https://github.com/petermonky/ped/issues/11), [3](https://github.com/petermonky/ped/issues/12))
+  * Reported bugs and suggestions for other teams in class during PE-D ([Issues](https://github.com/petermonky/ped/issues))
+  * Participated in internal PE-D with other teams in tutorial group G11 ([Issues](https://github.com/AY2122S2-CS2103T-T17-2/tp/issues/240))
