@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
     public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy");
     public static final String MESSAGE_INVALID_DATE = "Dates should be given in the format DD-MM-YYYY.";
 
