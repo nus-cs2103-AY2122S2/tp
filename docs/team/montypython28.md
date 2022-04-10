@@ -28,12 +28,13 @@ Given below are my contributions to the project.
   * Coordinated generation and management of the various releases (`v1.2` to `v1.4`)
 
 * **Enhancements to existing features**:
-  * Added InsurancePackage field to Person class, and updated add, edit commands accordingly (Pull Request [#20](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/20))
+  * Added InsurancePackage field to Person class, and updated commands accordingly (Pull Request [#20](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/20))
   * Made UI change to the colours of tags, depending on their priority levels. (Pull Request [#45](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/45))
 
 * **Documentation**:
   * User Guide:
-    * To be added soon
+    * Updated information about tags and priorities
+    * Udated information about `addTag`, `editTag` and `deleteTag` commands
   * Developer Guide:
     * Updated information about current team members and their responsibilities.
     * Updated ModelClassDiagram and the relevant section to include changes we made to the Model.
