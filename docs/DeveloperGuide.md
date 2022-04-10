@@ -195,7 +195,7 @@ Result:
     - Their House are equal (i.e, the Location and HouseType of the house matches)
 
 * An example:
-    - buyer's `PropertyToBuy`(after `edit` or `add`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
+    - buyer's `PropertyToBuy`(after `edit-b` or `add-b`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
         - `Name`: *Janald*
     
         - PropertyToBuy: 
