@@ -60,6 +60,13 @@ Given below are my contributions to the project.
       * Added information in add student section about the restrictions of each input [\#166](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/166)
       * Added information for clear command [\#166](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/166)
       * Added warning for clear command [\#166](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/166)
+    * Updated user guide to resolve issues from Practical Exam Dry Run [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
+      * Solves: #159, #157, #143, #137, #128, #127
+      * Added information about GUI aspect ratio [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
+      * Added alternate ways to start the app from command line [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
+      * Added notes on UDT only tracking COVID within the app, not externally [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
+      * Added information on find command finding a person not listed inside the app [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
+      * Added information on limitations of automation of status changes by the app [\#171](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/171)
   * Developer Guide:
     * Added use cases for developer guide [\#27](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/27)
     * Added skeleton for DG additions [\#90](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/90)
@@ -69,7 +76,7 @@ Given below are my contributions to the project.
     * Added followed steps for Find By Class Code, Find By Activity, and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
     
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63) [\#105](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/105) [\#106](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/106) [\#164](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/164)
+  * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63) [\#105](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/105) [\#106](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/106) [\#164](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/164) [\#181](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/181)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the -- feature I added was adopted by several other class mates ([1](), [2]())
