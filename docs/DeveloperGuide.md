@@ -889,7 +889,7 @@ testers are expected to do more *exploratory* testing.
 3. Test case: Deleting a show based on list index
    1. Condition: Range of shows must be within size of show list.
    2. Command: `delete 1` <br> 
-      Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.
+      Expected: Show at specified index is deleted from the list. Deleted show details shown in the result display.<br><br>
 4. Test case: Invalid delete index
    1. Condition: Range of shows must be outside of list size.
    2. Command: `delete 0` `delete` `delete <out_of_bound_integer>` <br> 
@@ -907,17 +907,15 @@ testers are expected to do more *exploratory* testing.
 3. Test case: Edit show name
    1. Condition: Show named `One Piece` must not exist in the show list.
    2. Command: `edit 1 n/One Piece` <br>
-      Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.
+      Expected: Name of show at specified index is changed to `One Piece`. Edited show details shown in the result display.<br><br>
 4. Test case: Edit show status
    1. Condition: None, if show status is already `completed`, expected output will be the same.
    2. Command: `edit 1 s/completed` <br>
-      Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.
-
+      Expected: Status of show at specified index is changed to `completed`. Edited show details shown in the result display.<br><br>
 5. Test case: Invalid edit index
    1. Condition: Range of shows must be outside of list size.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
-      Expected: No show is edited. Error details shown in the result display.
-
+      Expected: No show is edited. Error details shown in the result display.<br><br>
 6. Test case: Invalid edit name
    1. Condition: Show named `Inception` exists in the show list that is not currently being edited.
    2. Command: `edit <index of show to be edited> n/Inception` <br>
@@ -933,13 +931,11 @@ testers are expected to do more *exploratory* testing.
    1. Launch Trackermon.
    2. Modify the show list using any commands that affect the details of a show.
    3. Relaunch Trackermon. <br> 
-      Expected: The most recent changes made to the shows is retained.
-    
+      Expected: The most recent changes made to the shows is retained.<br><br>
 2. Dealing with missing files
    1. Prerequisites: JSON file is missing.
       1. Delete the `data/trackermon.json` file to simulate a missing file.
-   2. Launch Trackermon. <br> Expected: Trackermon starts with the default list of show list.
-
+   2. Launch Trackermon. <br> Expected: Trackermon starts with the default list of show list.<br><br>
 3. Dealing with corrupted files
    1. Prerequisites: JSON file is corrupted.
       1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file.
@@ -1073,9 +1069,9 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: None.
 2. Command: `suggest`
 3. Test case: Displayed list of shows is empty.
-    1. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
+    1. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.<br><br>
 4. Test case: Displayed list of shows only contains one show.
-    1. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.
+    1. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.<br><br>
 5. Test case: Displayed list of shows with two or more show.
     1. Expected: Trackermon returns a random show from the displayed list of shows.
 
@@ -1092,10 +1088,10 @@ testers are expected to do more *exploratory* testing.
 5. Test case: Importing valid data
    1. Condition: Valid Trackermon data file exists in storage.
    2. Action: Select valid Trackermon data file to import.<br>
-      Expected: Import succeeds, current show list is replaced with imported Trackermon data's show list.
+      Expected: Import succeeds, current show list is replaced with imported Trackermon data's show list.<br><br>
 6. Test case: Cancelling import
    1. Action: Click "Cancel" button in File Explorer GUI.<br>
-      Expected: Trackermon displays message saying `Import data aborted.`
+      Expected: Trackermon displays message saying `Import data aborted.`<br><br>
 7. Test case: Importing corrupted Trackermon data file
    1. Condition: Corrupted Trackermon data file exists in storage. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
    2. Action: Select corrupted Trackermon data file to import.<br>
@@ -1112,11 +1108,11 @@ testers are expected to do more *exploratory* testing.
 4. Test case: Exporting data to directory without existing `trackermon.json`
     1. Condition: Directory without existing `trackermon.json` exists.
     2. Action: Select directory fulfilling condition to export Trackermon data to.<br>
-       Expected: Export succeeds, selected directory now has `trackermon.json` file containing exported show data.
+       Expected: Export succeeds, selected directory now has `trackermon.json` file containing exported show data.<br><br>
 5. Test case: Exporting data to directory with existing `trackermon.json`
     1. Condition: Directory with existing `trackermon.json` exists.
     2. Action: Select directory fulfilling condition to export Trackermon data to.<br>
-       Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.
+       Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.<br><br>
 6. Test case: Renaming exported data in File Explorer GUI.
     1. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.<br>
        Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
