@@ -8,7 +8,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditEmployeeCommand;
-import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,30 +34,30 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
 
         Index index;
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeCommand.EditEmployeeDescriptor();
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+                editEmployeeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
+
             if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-                editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+                editEmployeeDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
             }
+
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+                editEmployeeDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
             }
-
-
         } catch (ParseException pe) {
             throw new ParseException(pe.getMessage() + "\n\n" + EditEmployeeCommand.MESSAGE_USAGE, pe);
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(MESSAGE_FIELD_NOT_EDITED + EditEmployeeCommand.MESSAGE_USAGE);
         }
 
-        return new EditEmployeeCommand(index, editPersonDescriptor);
+        return new EditEmployeeCommand(index, editEmployeeDescriptor);
     }
 }

@@ -78,6 +78,16 @@ public class TaskCard extends UiPart<Region> {
             dateTime.setText(task.getDateTime());
         }
 
+        setEmployeeTag();
+        setPriorityTagIconAndPriorityTag();
+        setStatusIsDone();
+        removeEmptyRows();
+    }
+
+    /**
+     * Sets the text of employeesTag {@code Label}.
+     */
+    private void setEmployeeTag() {
         if (!task.getAssignees().isEmpty()) {
             String assigneesNames = task.getAssignees()
                     .stream()
@@ -86,7 +96,12 @@ public class TaskCard extends UiPart<Region> {
 
             employeesTag.setText(assigneesNames);
         }
+    }
 
+    /**
+     * Sets the image of priorityTagIcon {@code ImageView} and the text of priorityTag {@code Label}.
+     */
+    private void setPriorityTagIconAndPriorityTag() {
         Image priorityIcon;
 
         switch (task.getPriority().name()) {
@@ -113,7 +128,12 @@ public class TaskCard extends UiPart<Region> {
         default:
             throw new RuntimeException("Invalid Task Priority");
         }
+    }
 
+    /**
+     * Sets the text of statusIsDone {@code Label}.
+     */
+    private void setStatusIsDone() {
         if (task.isDone()) {
             statusIsDone.setText("Done");
             statusIsDone.getStyleClass().add("cell_completion_done_label");
@@ -121,7 +141,12 @@ public class TaskCard extends UiPart<Region> {
             statusIsDone.setText("Not Done");
             statusIsDone.getStyleClass().add("cell_completion_not_done_label");
         }
+    }
 
+    /**
+     * Removes empty rows from the detailsPane {@code GridPane}.
+     */
+    private void removeEmptyRows() {
         // Remove date/time row if it is a Todo task
         if (task instanceof Todo) {
             removeRow(detailsPane, GridPane.getRowIndex(dateTimeLabel));
@@ -134,28 +159,30 @@ public class TaskCard extends UiPart<Region> {
 
         // Remove priority row if there are no priority tagged to the task
         if (task.getPriority().name().equals("NONE")) {
-            // Remove 'priority' row if there are no priority tagged to the task
             removeRow(detailsPane, GridPane.getRowIndex(priorityTagLabel));
         }
     }
 
     /**
      * Gets row index constrain for given node, forcefully as integer: 0 as null.
+     *
      * @param node Node to look up the constraint for
      * @return The row index as primitive integer
      */
-    public int getRowIndexAsInteger(Node node) {
+    private int getRowIndexAsInteger(Node node) {
         return GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
     }
 
     /**
      * Removes row from grid pane by index.
+     * Adapted from https://stackoverflow.com/a/70961583.
+     *
      * @param grid Grid pane to be affected
      * @param targetRowIndexIntegerObject Target row index to be removed. Integer object type,
      *                                    because for some reason `getRowIndex` returns null
      *                                    for children at 0th row.
      */
-    public void removeRow(GridPane grid, Integer targetRowIndexIntegerObject) {
+    private void removeRow(GridPane grid, Integer targetRowIndexIntegerObject) {
         int targetRowIndex = targetRowIndexIntegerObject == null ? 0 : targetRowIndexIntegerObject;
 
         // Remove children from row

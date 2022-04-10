@@ -36,7 +36,7 @@ import manageezpz.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -79,16 +79,16 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with sample data in manageEZPZ");
+                logger.info("Data file not found. Will be starting with sample data in ManageEZPZ");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             storage.saveAddressBook(initialData);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty manageEZPZ");
+            logger.warning("Data file not in the correct format. Will be starting with an empty ManageEZPZ");
             initialData = new AddressBook();
             storage.saveAddressBook(initialData);
         } catch (IOException | IllegalArgumentException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty manageEZPZ");
+            logger.warning("Problem while reading from the file. Will be starting with an empty ManageEZPZ");
             initialData = new AddressBook();
             storage.saveAddressBook(initialData);
         }
@@ -153,7 +153,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty manageEZPZ");
+            logger.warning("Problem while reading from the file. Will be starting with an empty ManageEZPZ");
             initializedPrefs = new UserPrefs();
         }
 
@@ -169,7 +169,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting manageEZPZ " + MainApp.VERSION);
+        logger.info("Starting ManageEZPZ " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

@@ -2,14 +2,11 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 * [Documentation idea of splitting the Model component into 2, to prevent cramping of images](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components)
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +20,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-F11-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -94,15 +91,15 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddTaskCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddTodoTaskCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("addTask")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteTask 1")` API call.
 
 ![Interactions Inside the Logic Component for the `addTask` Command](images/AddSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,8 +107,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTaskCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTaskCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddTaskCommandParser`, `DeleteTaskCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTodoTaskCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTodoTaskCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddTodoTaskCommandParser`, `DeleteTaskCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -167,7 +164,7 @@ A `Task`,
 - can be represented by a `Todo`, `Event`, or `Deadline`
 
 A `Task` contains the following attributes,
-1. a `Description`, which represent the details of the Task to be stored in the `uniqueTaskList`
+1. a `Description`, which represent the details of the Task
 2. a `Date`, which represent the day, month and year as specified by a number of the Task
 3. a `Time`, which represent the period during the Task exists or happens
 4. can be assigned/Tagged to multiple different `Person`
@@ -362,6 +359,9 @@ If the task is of type Event, then the handler method will create a new `Event` 
 value as "eat", and the date and time values set to be the same
 value from the copy obtained using `model.getFilteredTaskList().get(index)`. Then, `model.setTask()` is called and
 return a CommandResult showing that the update has been successful.
+
+![EditTaskDesc](images/EditTaskDesc.PNG)
+
 
 <b>Note:</b> For the Event type, a String value with two time values corresponding to be the start and end time
 separated with an **empty space** must be provided. Other than the time values being valid,
@@ -719,7 +719,7 @@ Preconditions: User is currently using ManageEZPZ.
       the edit Task command is incorrect, attached with the correct syntax format.
 
       Use Case ends.
-    * 
+  
 * 4c. User uses edit Task commands with prefix declared but no input value afterwards
 
     * 4c1. ManageEZPZ sends an error message to User, indicating that User must input a value after a prefix.
@@ -902,6 +902,7 @@ Preconditions: User is currently using ManageEZPZ.
 | **Mainstream OS** | Windows, Linux, Unix, OS-X                                                 |
 | **Users**         | Applies to both managers or supervisors                                    |
 | **command**       | A message sent as an input from User, that coincides with our Command List |
+| **Person**        | An employee
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -934,7 +935,6 @@ testers are expected to do more *exploratory* testing.
     2. Type `exit` command in the command box in GUI.
        Expected: The programs stops executing and closes.
 
-
 ### Adding an employee
 
 1. Adding an employee while all employees are being shown
@@ -950,7 +950,30 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `addEmployee p/98451254`, `addEmployee e/PeterTan@gmail.com`, `addEmployee n/Peter p/85245127`<br>
        Expected: Similar to previous.
 
-       
+### Listing all employees
+
+1. List down all employees
+    1. Prerequisites: Filter employees using `findEmployee` command.
+    2. Test Case: `listEmployee`<br>
+       Expected: Shows all the employees in ManageEZPZ
+
+### Finding employees
+
+1. Find employees with the given predicate
+
+    1. Prerequisites: List all employees using the `listEmployee` command.
+
+    2. Test case: `findEmployee`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Valid test cases to try: `findEmployee n/Alice`, `findEmployee p/999`, `...` (So long as the task attribute are
+       valid)<br>
+       Expected: All employees with the specified attributes will be listed.
+
+    4. Other invalid test cases to try: `findEmployee someOtherPrefix/`, `findEmployee n/Jame$`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
 ### Deleting an employee
 
 1. Deleting an employee while all employee are being shown
@@ -966,72 +989,87 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deleteEmployee`, `deleteEmployee x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-
-### Deleting a Task
-1. Prerequisites: List all tasks using the `listTask` command. Multiple tasks in the list.
-
-2. Test case: `deleteTask 1`<br>
-   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. GUI immediately updates to show that the task is deleted.
-
-
-3. Test case: `deleteTask 0`<br>
-   Expected: No task is deleted. Error details shown in the status message. GUI remains the same.
-
-
-4. Other incorrect delete commands to try: `deleteTask `, `deleteTask x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
-
 ### Adding a Task (Deadline)
 1. Adding a `Deadline`
 2. Prerequisites: None.
-   
-3. Test case : Adding a valid deadline 
-   1. Command: `addDeadline desc/Testing by/2020-08-08 1800` <br>
-      Expected: A new `Deadline` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Deadline`.
-  
- 
-4. Test case : invalid date 
-   1. Command: `addDeadline desc/Testing by/0000-14-08 1800`<br>
-      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
-   
 
-5. Test case : invalid time 
-   1. Command: `addDeadline desc/Testing by/2020-12-08 6000`<br>
-      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
-   
+3. Test case : Adding a valid deadline
+    1. Command: `addDeadline desc/Testing by/2020-08-08 1800` <br>
+       Expected: A new `Deadline` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Deadline`.
+
+
+4. Test case : invalid date
+    1. Command: `addDeadline desc/Testing by/0000-14-08 1800`<br>
+       Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+
+
+5. Test case : invalid time
+    1. Command: `addDeadline desc/Testing by/2020-12-08 6000`<br>
+       Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+
 
 6. Other incorrect addDeadline commands to try: `addDeadline desc/`, `addDeadline desc/Testing by/`<br>
    Expected: Similar to previous.
 
+### Listing all tasks
+
+1. List down all tasks
+    1. Prerequisites: Filter tasks using `findTask` command.
+    2. Test Case: `listTask`<br>
+       Expected: Shows all the tasks in ManageEZPZ
+
+### Finding tasks
+1. Prerequisites: None, but if the task list is empty, all searches will lead to no results.
+2. List all task using the `listTask` command.
+3. Test case : Find by a single keyword.
+    1. Command `findTask todo/` <br>
+       Expected: Task list will show all tasks that are of type `todo`. Find task details shown in status message. GUI immediately updates to show only `todo` type tasks.
+    2. Command `findTask desc/report` <br>
+       Expected: Task list will show all tasks that have the description of `report`. Find task details shown in status message. GUI immediately updates to show all task with description `report`.
+
+
+4. Test case : Find by multiple keywords.
+    1. Command: `findTask deadline/ desc/report` <br>
+       Expected: Task list will show all task with type `deadline` & description of `report`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with description `report`.
+    2. Command : `findTask deadline/ date/2022-05-05` <br>
+       Expected: Task list will show all task with type `deadline` & date of `2022-05-05`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with date `2020-05-05`.
+
+
+5. test case : Invalid command formats.
+    1. Command: `findTask` <br>
+       Expected: No task would be found. Error details shown in status message. GUI stays the same.
+    2. Other incorrect findTask commands to try: `findTask todo/ deadline/`, `findTask isMarked/maybe` <br>
+       Expected: Similar to previous.
+
 ### Editing a task
 1. Prerequisites: None.
 2. List all task using the `listTask` command.
-3. Test case : Edit task description 
+3. Test case : Edit task description
     1. Condition: the edited task description must not already exist in the task list.
     2. Command: `editTask 1 desc/Complete Sales Report`<br>
        Expected: Description of Task at index 1 is changed to `Complete Sales Report`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
-   
+
 
 4. Test case : Edit task time
-   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
-   2. Command: `editTask 1 at/1700`<br>
-      Expected: Time of Task at index 1 is changed to `1700`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+    1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+    2. Command: `editTask 1 at/1700`<br>
+       Expected: Time of Task at index 1 is changed to `1700`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
 
 
 5. Test case : Edit task date
-   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
-   2. Command: `editTask 1 date/2022-02-05`<br>
-      Expected: Date of Task at index 1 is changed to `2022-02-05`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+    1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+    2. Command: `editTask 1 date/2022-02-05`<br>
+       Expected: Date of Task at index 1 is changed to `2022-02-05`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
 
 
 6. Test case : Invalid edit index
-   1. Condition : index provided exceeds the task list size or index are not positive.
-   2. Command: `editTask 0 at/1700`, `editTask -4 date/2022-02-05`, `editTask <int_greater_than_size_of_list> desc/Complete Sales Report` <br>
-      Expected: No task is edited. Error details shown in the status message. GUI stays the same.
+    1. Condition : index provided exceeds the task list size or index are not positive.
+    2. Command: `editTask 0 at/1700`, `editTask -4 date/2022-02-05`, `editTask <int_greater_than_size_of_list> desc/Complete Sales Report` <br>
+       Expected: No task is edited. Error details shown in the status message. GUI stays the same.
 
 
 7. Other incorrect editTask commands to try: `editTask 1 desc/`, `editTask 1 date/0000-01-01`, `editTask 1 time/2549` <br>
-    Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Marking a Task
 1. Prerequisites: None.
@@ -1047,31 +1085,20 @@ testers are expected to do more *exploratory* testing.
    2. Command: `markTask 0`, `markTask -4`, `markTask <int_greater_than_size_of_list>` <br>
       Expected: No task marked. Error details shown in the status message. GUI stays the same.
 
+### Deleting a Task
+1. Prerequisites: List all tasks using the `listTask` command. Multiple tasks in the list.
 
-### Finding a Task
-1. Prerequisites: None, but if the task list is empty, all searches will lead to no results.
-2. List all task using the `listTask` command.
-3. Test case : Find by a single keyword.
-   1. Command `findTask todo/` <br>
-      Expected: Task list will show all tasks that are of type `todo`. Find task details shown in status message. GUI immediately updates to show only `todo` type tasks.
-   2. Command `findTask desc/report` <br>
-      Expected: Task list will show all tasks that have the description of `report`. Find task details shown in status message. GUI immediately updates to show all task with description `report`.
+2. Test case: `deleteTask 1`<br>
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. GUI immediately updates to show that the task is deleted.
 
 
-4. Test case : Find by multiple keywords.
-   1. Command: `findTask deadline/ desc/report` <br>
-      Expected: Task list will show all task with type `deadline` & description of `report`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with description `report`.
-   2. Command : `findTask deadline/ date/2022-05-05` <br>
-      Expected: Task list will show all task with type `deadline` & date of `2022-05-05`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with date `2020-05-05`.
+3. Test case: `deleteTask 0`<br>
+   Expected: No task is deleted. Error details shown in the status message. GUI remains the same.
 
 
-5. test case : Invalid command formats.
-    1. Command: `findTask` <br>
-       Expected: No task would be found. Error details shown in status message. GUI stays the same.
-    2. Other incorrect findTask commands to try: `findTask todo/ deadline/`, `findTask isMarked/maybe` <br>
-       Expected: Similar to previous.
+4. Other incorrect delete commands to try: `deleteTask `, `deleteTask x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-   
 ### Tagging a task to an Employee
 1. Prerequisites: None, but if the task list or employee list is empty, all tagging will lead to an error.
 2. List all task using the `listTask` command.
@@ -1114,58 +1141,6 @@ testers are expected to do more *exploratory* testing.
 5. Test case : Invalid Priority
     2. Command: `tagPriority 1 priority/Important` <br>
        Expected: Similar to previous.
-
-
-### Finding employees
-
-1. Find employees with the given predicate
-
-    1. Prerequisites: List all employees using the `listEmployee` command.
-
-    2. Test case: `findEmployee`<br>
-       Expected: Error showing that at least an option is needed.
-
-    3. Valid test cases to try: `findEmployee n/Alice`, `findEmployee p/999`, `...` (So long as the task attribute are
-        valid)<br>
-        Expected: All employees with the specified attributes will be listed.
-
-    4. Other invalid test cases to try: `findEmployee someOtherPrefix/`, `findEmployee n/Jame$`, `...` (So long as the
-       attribute are invalid)<br>
-       Expected: Error showing which attributes are entered wrongly.
-
-### Listing all employees
-
-1. List down all employees
-    1. Prerequisites: Filter employees using `findEmployee` command.
-    2. Test Case: `listEmployee`<br>
-       Expected: Shows all the employees in ManageEZPZ
-
-### Finding tasks
-
-1. Find tasks with the given predicate
-
-    1. Prerequisites: List all tasks using the `listTask` command.
-
-    2. Test case: `findTask`<br>
-       Expected: Error showing that at least an option is needed.
-
-    3. Test case: `findTask todo/ date/2022-01-01`<br>
-       Expected: Error showing that todo and date option cannot be together.
-   
-    4. Valid test cases to try: `findTask todo/`, `findTask desc/Meeting`, `...` (So long as the task attribute are
-       valid)<br>
-       Expected: All tasks with the specified attributes will be listed.
-   
-    5. Other invalid test cases to try: `findTask someOtherPrefix/`, `findTask date/1-1-2022`, `...` (So long as the
-       attribute are invalid)<br>
-       Expected: Error showing which attributes are entered wrongly.
-
-### Listing all tasks
-
-1. List down all tasks
-   1. Prerequisites: Filter tasks using `findTask` command.
-   2. Test Case: `listTask`<br>
-      Expected: Shows all the tasks in ManageEZPZ
 
 ### Saving data
 

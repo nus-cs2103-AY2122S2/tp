@@ -29,7 +29,7 @@ import manageezpz.model.task.Task;
 import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.model.task.Time;
 import manageezpz.model.task.Todo;
-import manageezpz.testutil.EditPersonDescriptorBuilder;
+import manageezpz.testutil.EditEmployeeDescriptorBuilder;
 import manageezpz.testutil.TodoBuilder;
 
 /**
@@ -58,8 +58,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditEmployeeCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditEmployeeCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditEmployeeCommand.EditEmployeeDescriptor DESC_AMY;
+    public static final EditEmployeeCommand.EditEmployeeDescriptor DESC_BOB;
 
     // Attributes pertaining tasks
     public static final String VALID_TASK_DESCRIPTION = "get a drink";
@@ -104,10 +104,10 @@ public class CommandTestUtil {
     public static final String INVALID_LIST_MULTIPLE_ARGUMENTS = " " + PREFIX_TODO + " " + PREFIX_EVENT;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
 

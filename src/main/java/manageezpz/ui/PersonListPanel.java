@@ -20,6 +20,7 @@ import manageezpz.model.person.Person;
  * Panel containing the list of persons.
  */
 public class PersonListPanel extends UiPart<Region> {
+
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
@@ -36,7 +37,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Handles mouse click event when user clicks an employee from the list.
+     * Handles the mouse click event when user right-clicks on an employee in the list.
      */
     @FXML
     public void handleMouseClick(MouseEvent arg) {
@@ -46,7 +47,7 @@ public class PersonListPanel extends UiPart<Region> {
         // Creating a context menu
         ContextMenu contextMenu = new ContextMenu();
 
-        // Creating the menu Items for the context menu
+        // Creating the menu items for the context menu
         MenuItem copyNameItem = new MenuItem("Copy Name");
         MenuItem copyPhoneItem = new MenuItem("Copy Phone Number");
         MenuItem copyEmailItem = new MenuItem("Copy Email");

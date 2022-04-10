@@ -18,7 +18,7 @@ import manageezpz.logic.commands.AddEmployeeCommand;
 import manageezpz.logic.commands.ClearCommand;
 import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.commands.EditEmployeeCommand;
-import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
+import manageezpz.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import manageezpz.logic.commands.ExitCommand;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.commands.HelpCommand;
@@ -26,7 +26,7 @@ import manageezpz.logic.commands.ListTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Person;
 import manageezpz.model.task.TaskMultiplePredicate;
-import manageezpz.testutil.EditPersonDescriptorBuilder;
+import manageezpz.testutil.EditEmployeeDescriptorBuilder;
 import manageezpz.testutil.PersonBuilder;
 import manageezpz.testutil.PersonUtil;
 
@@ -57,7 +57,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(person).build();
         EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(
                 EditEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
