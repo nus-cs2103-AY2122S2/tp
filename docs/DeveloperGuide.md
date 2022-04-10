@@ -159,30 +159,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Manual Command
-
-#### Description
-
-The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
-    
-    <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `ParseException` will be thrown if the argument is invalid.
-    </div>
-
-4. The supplied argument will be trimmed using `String#trim()`.
-5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
-6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
-7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the manual command works:
-
-<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
-
 ### Add Command
 
 #### Description
@@ -376,232 +352,71 @@ The following sequence diagram shows how the deleteModule operation works:
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
-
-
-### DeleteTask Command
+### Find Command
 
 #### Description
 
-The `deleteTask` command allows users to delete to task that was previously assigned to students.
-During the execution of the `deleteTask` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `deleteTaskCommand` object will be created, and is subsequently executed by the LogicManager.
+The `find` command allows users to find a particular student into TAPA.
+Since not all fields are compulsory during the execution of the `find` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
+object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
-4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
+4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-   <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, `Index`, `ModuleCode`, and `TaskName` is missing.
-    Either the pair (consisting of `StudentId` and `Index`) or the pair (consisting of `ModuleCode` and `TaskName`) must be provided.   
-   </div>
-
-
-5. If either `Index` or `StudentId` is given, the `indexOrStudentIdGiven(ArgumentMultimap argMultimap)` method is invoked.
-
-    <div markdown="span" class="alert alert-info">:information_source:
-     <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, or `Index` is missing.
-     Both `StudentId` and `Index` must be provided.   
-    </div>
-   
-    i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
-   
-   <div markdown="span" class="alert alert-info">:information_source: 
-     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div>
-
-    ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-
-    iii. `StudentId#isValidId(String studentId)` method will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
-       `ParserUtil#parseIndex(String oneBasedIndex)`.
-       
     <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-   
-    v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
+    </div> 
 
-    vi. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    vii. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
-   
-
-6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
-   
-    <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
-    Both `ModuleCode` and `TaskName` must be provided.   
-    </div>
-
-    i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
-   
-    <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-   
-    ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
-
-    iii. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
-       `ParserUtil#parseTask(String task)`.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-
-    v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
-
-    vi. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
-      If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
-      If the argument is not valid, a `ParseException` will be thrown.
-
-    vii. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
-
-7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
-8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
-
-   i. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
-
-   ii. This method will iterate through each `Person` object in and check for matching `studentId`.
-      If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
-      If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method. 
-      If no student with matching studentId is found, `PersonNotFoundException()` will be thrown.
-
-   iii. The updated `Person` will be replaced the current `Person` object.
-
-   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
-      updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
-   
-9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
-
-    i. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
-   
-    ii. This method will iterate through each `Person` object in and check for matching `moduleCode`.
-        If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
-        If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
-        If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
-   
-    iii. The updated `Person` will be replaced the current `Person` object.
-     
-    iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
-          updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
-   
-10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
-
-<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
-
-<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
-
-### Assign Command
-
-#### Description
-
-The `assign` command allows users to assign tasks to student.
-During the execution of the `assign` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `AssignCommand` object will be created, and is subsequently executed by the LogicManager.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
-4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
-
-   <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of `Task` is missing, or if either the prefix of `StudentId` or `ModuleCode` is missing, as they are compulsory fields.
-   </div> 
-
-5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`.
 
-   <div markdown="span" class="alert alert-info">:information_source:
+   <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div> 
+    </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked,
    which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
+   If the argument is valid, a new `StudentId` object will be created and returned to the `FindCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
-   In the case of `moduleCode`, the `Module` prefix will be used to tokenize the input.
-   Depending on the type of input field used (`studentId` or `moduleCode`), Steps 5 to 7 will be executed using the parse 
-   methods in `ParserUtil` that are specific to the field. The argument's validity would be checked in their respective classes as well.
-    </div>
+   Depending on the type of input field used (`studentId`, `name`, `moduleCode`), Steps 5 to 7 will 
+   be executed using the parse methods in `ParserUtil` that are specific to the field.
+    </div> 
 
-8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseTask(String task)`.
+   | Field          | Parse Methods                              |
+      |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
-   <div markdown="span" class="alert alert-info">:information_source:
-   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div>
+8. The `FindCommandParser` will create a new `Predicate`.
+9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
+10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
+11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
+    updates the filter of the `PersonList` to filter by the given `Predicate`.
+12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
-10. `Task#isValidTaskName(String task)` will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-    
-11. A new `AssignCommand` will be created (using the `StudentId` or `ModuleCode` object and `Task` object created) and returned to the `LogicManager`.
-    
-12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
-    
-13. If `StudentId` is used, `AssignCommand#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, 
-    which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method and 
-    `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. If `ModuleCode` is used, 
-    `AssignCommand#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method will be invoked, which will in 
-    turn invoke `model#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method and 
-    `AddressBook#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method.
-    
-14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
-    If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
-    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`. 
+The following sequence diagram shows how the find operation works:
 
-      <div markdown="span" class="alert alert-info">:information_source:
-      <b>Note:</b> 
-      If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
-      </div>
+<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
 
-15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)` 
-    method to check if the `task` is assigned.
-    If no similar `task` is found, the following step will take place.
-
-      <div markdown="span" class="alert alert-info">:information_source:
-      <b>Note:</b>
-      If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
-      If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
-      </div>
-
-16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
-17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
-18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
-19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
-
-![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
-
+![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 ### Task Command
 
@@ -662,72 +477,6 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 <img src="images/TaskCommandSequenceDiagram-2.png" width="881" />
 
 <img src="images/TaskCommandSequenceDiagram-3.png" width="570" />
-
-### Find Command
-
-#### Description
-
-The `find` command allows users to find a particular student into TAPA.
-Since not all fields are compulsory during the execution of the `find` command,
-the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
-object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
-4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
-    </div> 
-
-5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div> 
-
-6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-7. `StudentId#isValidId(String studentId)` will then be invoked,
-   which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new `StudentId` object will be created and returned to the `FindCommandParser`.
-   If the argument is not valid, a `ParseException` will be thrown.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
-   Depending on the type of input field used (`studentId`, `name`, `moduleCode`), Steps 5 to 7 will 
-   be executed using the parse methods in `ParserUtil` that are specific to the field.
-    </div> 
-
-   | Field          | Parse Methods                              |
-   |----------------|--------------------------------------------|
-   | Index          | parseIndex(String oneBasedIndex)           |
-   | StudentId      | parseStudentId(String studentId)           |
-   | Name           | parseName(String name)                     |
-   | ModuleCode     | parseModuleCode(String moduleCode)         |
-   | Phone          | parsePhone(String phone)                   |
-   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
-   | Email          | parseEmail(String email)                   |
-   | Task           | parseTask(String task)                     |
-
-8. The `FindCommandParser` will create a new `Predicate`.
-9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
-10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
-11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
-    updates the filter of the `PersonList` to filter by the given `Predicate`.
-12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the find operation works:
-
-<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
-
-![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 ### Mark Command
 
@@ -901,6 +650,100 @@ in most cases.
 
 <img src="images/ArchiveCommandSequenceDiagram.png" width="1188" />
 
+### Assign Command
+
+#### Description
+
+The `assign` command allows users to assign tasks to student.
+During the execution of the `assign` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `AssignCommand` object will be created, and is subsequently executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
+4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of `Task` is missing, or if either the prefix of `StudentId` or `ModuleCode` is missing, as they are compulsory fields.
+   </div> 
+
+5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div> 
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
+   In the case of `moduleCode`, the `Module` prefix will be used to tokenize the input.
+   Depending on the type of input field used (`studentId` or `moduleCode`), Steps 5 to 7 will be executed using the parse 
+   methods in `ParserUtil` that are specific to the field. The argument's validity would be checked in their respective classes as well.
+    </div>
+
+8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseTask(String task)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div>
+
+9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Task#isValidTaskName(String task)` will then be invoked,
+    which checks if the trimmed argument is valid (according to the Regex supplied).
+    If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+
+11. A new `AssignCommand` will be created (using the `StudentId` or `ModuleCode` object and `Task` object created) and returned to the `LogicManager`.
+
+12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
+
+13. If `StudentId` is used, `AssignCommand#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked,
+    which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method and
+    `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. If `ModuleCode` is used,
+    `AssignCommand#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method will be invoked, which will in
+    turn invoke `model#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method and
+    `AddressBook#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method.
+
+14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
+    If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
+    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`.
+
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b> 
+      If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
+      </div>
+
+15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)`
+    method to check if the `task` is assigned.
+    If no similar `task` is found, the following step will take place.
+
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b>
+      If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
+      If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
+      </div>
+
+16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
+17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
+18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
+19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
+
+![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
+
 ### Progress Command
 
 #### Description
@@ -954,29 +797,135 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 
 ![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
 
-### Sort Command
+### DeleteTask Command
 
 #### Description
 
-The `sort` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
-During the execution of the `sort` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+The `deleteTask` command allows users to delete to task that was previously assigned to students.
+During the execution of the `deleteTask` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `deleteTaskCommand` object will be created, and is subsequently executed by the LogicManager.
 
 #### Implementation
 
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "sort", `SortCommand()` will be called.
-4. As `SortCommand` utilizes the default constructor, it simply returns a new `SortCommand` object to
-   the `AddressBookParser`.
-5. This `SortCommand` object will then be subsequently returned to the `LogicManager`.
-6. The `LogicManager` calls `SortCommand#execute(Model model)`.
-7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order by calling `model#sortFilteredPersonListByTaskLeft()`.
-8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
-9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
+4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
+   <div markdown="span" class="alert alert-info">:information_source: 
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, `Index`, `ModuleCode`, and `TaskName` is missing.
+    Either the pair (consisting of `StudentId` and `Index`) or the pair (consisting of `ModuleCode` and `TaskName`) must be provided.   
+   </div>
+
+
+5. If either `Index` or `StudentId` is given, the `indexOrStudentIdGiven(ArgumentMultimap argMultimap)` method is invoked.
+
+    <div markdown="span" class="alert alert-info">:information_source:
+     <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, or `Index` is missing.
+     Both `StudentId` and `Index` must be provided.   
+    </div>
+
+   i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div>
+
+   ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+
+   iii. `StudentId#isValidId(String studentId)` method will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
+   `ParserUtil#parseIndex(String oneBasedIndex)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+
+   vi. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   vii. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+
+6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
+    Both `ModuleCode` and `TaskName` must be provided.   
+    </div>
+
+   i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+
+   iii. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into
+   `ParserUtil#parseTask(String task)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+
+   vi. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   vii. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
+8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
+
+   i. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
+
+   ii. This method will iterate through each `Person` object in and check for matching `studentId`.
+   If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`.
+   If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method.
+   If no student with matching studentId is found, `PersonNotFoundException()` will be thrown.
+
+   iii. The updated `Person` will be replaced the current `Person` object.
+
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
+   updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+
+9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
+
+   i. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
+
+   ii. This method will iterate through each `Person` object in and check for matching `moduleCode`.
+   If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
+   If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
+   If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
+
+   iii. The updated `Person` will be replaced the current `Person` object.
+
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
+   updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+
+10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
+
+<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
+
+<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
 
 ### History Command
 
@@ -1039,7 +988,54 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
 * **Alternative 2:** Extend each command to be able to revert the changes it has made to TAPA.
    * Pros: Will not incur major performance issues as it uses less memory.
    * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
-   
+
+### Sort Command
+
+#### Description
+
+The `sort` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
+During the execution of the `sort` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "sort", `SortCommand()` will be called.
+4. As `SortCommand` utilizes the default constructor, it simply returns a new `SortCommand` object to
+   the `AddressBookParser`.
+5. This `SortCommand` object will then be subsequently returned to the `LogicManager`.
+6. The `LogicManager` calls `SortCommand#execute(Model model)`.
+7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order by calling `model#sortFilteredPersonListByTaskLeft()`.
+8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
+9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+
+![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
+
+### Manual Command
+
+#### Description
+
+The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
+
+    <div markdown="span" class="alert alert-info">:information_source:
+    <b>Note:</b> A `ParseException` will be thrown if the argument is invalid.
+    </div>
+
+4. The supplied argument will be trimmed using `String#trim()`.
+5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
+6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
+7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the manual command works:
+
+<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
 
 --------------------------------------------------------------------------------------------------------------------
 
