@@ -57,14 +57,14 @@ Tired of how messy Excel sheets can get? HustleBook...
 2. Download the latest `HustleBook` [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
    ![Where to click](images/downloadHustleBookHere.png)
 
-3. Place the file into a folder where you would like to keep it. We recommend keeping it in your `Desktop` for easier access.
+3. Place the file into a folder where you would like to keep it. We recommend keeping it in your `Desktop` folder for easier access.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. That's it. Your HustleBook is ready to go! 🎉 Keep following the steps to get to know how HustleBook can help you.
 
-6. Let's try out some features! Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Let's try out some features! Type the command in the command box and press Enter to run it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -211,7 +211,7 @@ Edits an existing client in the HustleBook.
 
 Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
 
-* Edits the client named `NAME`.
+* Edits the client with the specified `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
   * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
@@ -458,7 +458,7 @@ HustleBook to wipe your data.
 ### Saving the data
 
 HustleBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-The data is saved in a `json` file found in `data` folder. 
+The data is saved in a `json` file found in a folder named `data` at the location HustleBook is saved in.
 
 ### Editing the data file
 
