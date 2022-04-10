@@ -966,6 +966,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 3a. ContaX has no persons to list.<br>&nbsp;
   * 3a1. Use case ends.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 #### Tag-Related Use Cases
 ![Tag Use Case](images/UseCaseDiagramTags.png)
 
@@ -1075,6 +1077,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * 3a. ContaX has no persons to list.<br>&nbsp;
   * Use case ends.<br>&nbsp;
+
+<div style="page-break-after: always;"></div>
 
 #### Appointment-Related Use Cases
 ![Appointment Use Case](images/UseCaseDiagramAppointments.png)
@@ -1247,6 +1251,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 4a1. ContaX shows an error message indicating that the supplied priority is invalid<br>&nbsp;
     * Use case resumes at step 2.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 #### Import/Export CSV UseCases
 
 ![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
@@ -1275,7 +1281,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 2a. Invalid CSV file selected
     * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
     * Use case ends.<br>&nbsp;
-    
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1301,6 +1308,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * **Onboarding Guide**: The quick start guide to ContaX
 * **Disjoint Appointments**: Appointments are disjoint if the time periods they span do not overlap with each other, that is, one appointment starts after the other appointment ends
 * **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
+* **Natural Ordering**: The order in which objects should be arranged
 
 --------------------------------------------------------------------------------------------------------------------
 
