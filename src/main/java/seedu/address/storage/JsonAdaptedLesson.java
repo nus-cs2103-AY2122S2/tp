@@ -20,7 +20,7 @@ class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     public static final String STUDENT_LIST_DOES_NOT_MATCH = "Lesson's student attendance does not match with"
-            + " class group student list!";
+            + " class group student list! %d %d";
     public static final String MESSAGE_DUPLICATE_STUDENTS = "Lesson's student list contains duplicate student(s).";
     private final String weekId;
     private final List<JsonAdaptedStudentAttendance> studentAttendanceList = new ArrayList<>();
@@ -58,7 +58,9 @@ class JsonAdaptedLesson {
             throws IllegalValueException {
 
         if (classGroupStudentList.size() != studentAttendanceList.size()) {
-            throw new IllegalValueException(STUDENT_LIST_DOES_NOT_MATCH);
+            throw new IllegalValueException(
+                    String.format(STUDENT_LIST_DOES_NOT_MATCH, classGroupStudentList.size(),
+                            studentAttendanceList.size()));
         }
 
         if (weekId == null) {

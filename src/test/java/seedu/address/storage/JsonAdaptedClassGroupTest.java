@@ -21,7 +21,7 @@ import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalStudents;
 
 //@@author jxt00
-public class JsonAdaptedClassTest {
+public class JsonAdaptedClassGroupTest {
     private static final String INVALID_CG_ID = "CS2101!";
     private static final String INVALID_CG_TYPE = "LECTURE";
 
