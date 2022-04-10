@@ -12,14 +12,18 @@ skinparam Sequence {
     BoxFontColor #FFFFFF
     BoxBorderColor #FFFFFF
 
+    FontColor #000000
+    FontName Arial
+
     GroupFontColor #FF9800
     GroupBackgroundColor #FF980032
-    GroupBorderColor #FF9800    FontColor #000000
-    GroupBorderThickness 1.8    FontName Arial
+    GroupBorderColor #FF9800
+    GroupBorderThickness 1.8
     GroupHeaderFontColor #FF9800
-    GroupHeaderFontStyle bold    LifelineBorderColor #000000
+    GroupHeaderFontStyle bold
 
     LifelineBackgroundColor #FFFFFF
+    LifelineBorderColor #000000
 }
 
 skinparam Arrow {
