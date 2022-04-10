@@ -42,9 +42,15 @@ Let's get started!
 
 3. Copy `WoofAreYou.jar` to the folder you want to use as the _home folder_ for WoofAreYou.
 
-4. Double-click the file to start the app. WoofAreYou should appear in a few seconds.
+4. Launch the jar file using the `java -jar WoofAreYou.jar` command rather than double-clicking (reason: to ensure you
+   can locate the data file easily in the same folder as step 3. Use double-clicking as a last resort (this may result
+   in some difficulty locating the data file).
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   1. If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
+
+5. WoofAreYou should appear in a few seconds.
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * **`add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`** : Adds a pet named `Woofie` to WoofAreYou.
@@ -55,7 +61,7 @@ Let's get started!
 
     * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -111,7 +117,7 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]`
 * Each particular entered must strictly correspond to its legal prefix. e.g: `p/Address` is considered as invalid.
 * Phone number **must only contain numbers**.
 * `NAME_OF_PET` (pet name) and `OWNER_NAME` (owner name) **must only contain alphabets or spaces**.
-* `PHONE_NUMBER` (phone number) should be a valid Singapore phone number. It should start with **6,7,8** and should be
+* `PHONE_NUMBER` (phone number) should be a valid Singapore phone number. It should start with **6,8** and should be
   **8 digits** long.
     * You can include an optional country code in front of the phone number. `p/+6581234567` There should be no spaces
       between `+65` and the corresponding phone number.
@@ -263,9 +269,9 @@ This subsection covers the features that you may encounter when taking care of a
 Your clients may provide you with instructions on what their pets can or cannot consume, in the event that their pets suffer
 from health issues. You may wish to include a diet remark along with such pets in WoofAreYou to take note.
 
-Format: `diet INDEX d/REMARK`
+Format: `diet INDEX d/DIET`
 
-* Adds `d/REMARK` as a dietary requirement for pet at `INDEX`.
+* Adds `d/DIET` as a dietary requirement for pet at `INDEX`.
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Entering `diet INDEX d/` will remove the dietary requirements of pet at `INDEX`.
@@ -294,7 +300,7 @@ to note down the relevant details of such appointments, such as the date, time a
 
 **Add Appointment**
 
-Format: `app INDEX dt/dd-MM-yyyy HH:mm at/location`
+Format: `app INDEX dt/dd-MM-yyyy HH:mm at/LOCATION`
 
 * Adds appointment for pet at `INDEX` on a specific date at a specific location.
 * The index refers to the index number shown in the current list of pets.
@@ -388,12 +394,22 @@ You can also sort pets chronologically,
 * By their transport pick-up times
 * By their transport drop-off times
 
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Additional information about sorting by appointment:**<br>
+
+Sorting by appointment will list from the earliest appointments to the latest appointment. You should expect to see
+appointments with <span style="color:red">red</span> labels first, followed by <span style="color:lime">green</span>
+labels then <span style="color:grey">grey</span> labels.
+
+</div>
+
 Format: `sort SORT_BY`
 * **One and only one** `SORT_BY` parameter is to be used with this command.
 * The valid `SORT_BY` parameters are `name` , `owner`, `app`, `pick up` and `drop off`.
 * The parameters are case-sensitive.
 
-<div markdown="block" class="fa fa-question-circle">
+<div markdown="block" class="alert alert-secondary">
 
 **:information_source: Unusual Behaviour?:**<br>
 
@@ -409,7 +425,7 @@ Examples:
 * `sort name` will sort the pets alphabetically as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/FinalSortSS.png" alt="After sorting sample screenshot"/>
+  <img src="images/forUserGuide/SortCommandSS.png" alt="After sorting sample screenshot"/>
 </p>
 
 * `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
@@ -510,8 +526,8 @@ wish to deal with the nitty-gritty details of each feature.
 | **Delete**    | `delete id`                                                                        | `delete 1`                                                                                                            | Deletes pet at index 1 from the pet list                                                                              |
 | **Clear**     | `clear`                                                                            | `clear`                                                                                                               | Clears all pets in pet list                                                                                           |
 | **Exit**      | `exit`                                                                             | `exit`                                                                                                                | Exits WoofAreYou                                                                                                      |
-| **Diet**      | `diet INDEX d/remark`                                                              | `diet 1 d/Only feed dry kibble`                                                                                       | Adds a diet remark "Only feed dry kibble" to pet at index 1                                                           |
-| **App**       | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]`                                  | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                                                                      | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
+| **Diet**      | `diet INDEX d/DIET`                                                                | `diet 1 d/Only feed dry kibble`                                                                                       | Adds a diet remark "Only feed dry kibble" to pet at index 1                                                           |
+| **App**       | `app INDEX date/dd-MM-yyyy HH:mm at/LOCATION`                                      | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                                                                      | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
 | **App clear** | `app INDEX clear`                                                                  | `app 1 clear`                                                                                                         | Clears the current appointment of pet at index 1                                                                      |
 | **Find**      | `find NAME_OF_PET [KEYWORDS]...`                                                   | `find Woofie`                                                                                                         | Finds all pets with similar name as "Woofie"                                                                          |
 | **Sort**      | `sort SORT_BY`                                                                     | `sort name`<br>`sort owner`<br>`sort app`<br>`sort pick up`<br>`sort drop off`                                        | Sorts pet list                                                                                                        |

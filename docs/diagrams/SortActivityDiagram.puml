@@ -4,12 +4,21 @@ start
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-
-if () then ([argument == "/o"])
+switch ()
+case ( [argument == "name"] )
+    :Sort pet list by name;
+case ( [argument == "owner"] )
     :Sort pet list by owner name;
-else ([argument == "/n"])
-    :Sort pet list by pet name;
-endif
+case ( [argument == "app"] )
+    :Sort pet list by appointment;
+case ( [argument == "pick up"] )
+    :Sort pet list by pick up time;
+case ( [argument == "drop off"] )
+    :Sort pet list by drop off time;
+endswitch
+
+:Return sorted list;
+
 stop
 @enduml
 

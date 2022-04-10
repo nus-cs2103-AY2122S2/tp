@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/MainApp.java). It is responsible for:
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -68,7 +68,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -85,14 +85,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `PetBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a pet).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -109,11 +109,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `PetBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PetBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -125,7 +125,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Pet` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PetBook`, which `Pet` references. This allows `PetBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -134,18 +134,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T13-1/tp/blob/master/src/main/java/woofareyou/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both WoofAreYou data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `PetBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `woofareyou.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -164,7 +164,7 @@ and takes in a field that the user wishes to sort WoofAreYou by. The field is pa
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
 in the `Model` interface as Model#sortPetList().
 
-Currently, pet list can only be sorted by pet name or owner name. Each class implements the `Comparable` interface so that
+Pet list can only be sorted by pet name, owner name, appointment dates, pick-up time or drop-off time. Each class implements the `Comparable` interface so that
 they can be compared and sorted alphabetically.
 
 The following sequence diagram shows how the sort operation works:
@@ -189,7 +189,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The proposed charge mechanism is facilitated by `ChargeCommand` class. It extends `Command`. It takes in a pet and month the user would like to charge. These fields are parsed by `ChargeCommandParser`. Additionally, it implements the following operations:
+The proposed charge mechanism is facilitated by `ChargeCommand` class. It extends `Command`. It takes in a pet, a month with a year and the charge-per-day for that month. These fields are parsed by `ChargeCommandParser`. Additionally, it implements the following operations:
 
 * `ChargeCommand#generateSuccessMessage()` — Generates a message containing the total amount chargeable to be shown to the user.
 * `ChargeCommand#execute()` — Fetches attendance details of a pet and computes a month's total amount chargeable.
@@ -197,14 +197,13 @@ The proposed charge mechanism is facilitated by `ChargeCommand` class. It extend
 
 Given below is an example usage scenario and how the charge mechanism behaves at each step.
 
-Step 1. The user executes command `charge 1 /m03` to compute amount chargeable to the pet at index 1 in March. The `charge` command is parsed by `ChargeCommandParser` which then sends the pet index and month to create a new `ChargeCommand` instance.
-
+The user executes command `charge 1 /m03-2022 c/200` to compute total amount chargeable to the pet at index 1 in March 2022 where each day costs $200. The `charge` command is parsed by `ChargeCommandParser` which then sends the pet index, month-year and daily charge to create a new `ChargeCommand` instance.
 
 The following sequence diagram shows how the charge operation works:
 
 ![ChargeSequenceDiagram](images/ChargeSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -246,7 +245,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
-  of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only
+  of appointment details to / from a `Pet`. These 2 tasks follow a similar command format and are differentiated only
   by the prefixes / augments.
     * Pros: Easy and simple to implement.
     * Cons: User may struggle to get familiar with the command.
@@ -278,7 +277,7 @@ Each class extends the `FilterByContainsFilterWordPredicate` class, which implem
 in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a
 match in the specified field.
 
-`FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
+`FindCommand` then updates the pet book using one of the three classes (`Predicates`). Each class has a different
 way of testing `Pet`.
 
 The following sequence diagram shows how the filter operation works when `filter byTag/ beagle` is called:
@@ -304,36 +303,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo mechanism is facilitated by `VersionedPetBook`. It extends `PetBook` with an undo history, stored internally as an `petBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current WoofAreYou state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous WoofAreYou state from its history.
+* `VersionedPetBook#commit()` — Saves the current WoofAreYou state in its history.
+* `VersionedPetBook#undo()` — Restores the previous WoofAreYou state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()` and `Model#undoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitPetBook()` and `Model#undoPetBook()` respectively.
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
+Step 1. The user launches the application for the first time. The `VersionedPetBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](images/UndoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
+Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitPetBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `petBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](images/UndoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitAddressBook()`, causing another modified WoofAreYou state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitPetBook()`, causing another modified WoofAreYou state to be saved into the `petBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](images/UndoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the WoofAreYou state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitPetBook()`, so the WoofAreYou state will not be saved into the `petBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPetBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](images/UndoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. The `undo` command uses `Model#canUndoPetBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -346,13 +345,13 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitAddressBook()` or `Model#undoAddressBook()` Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitPetBook()` or `Model#undoPetBook()` Thus, the `petBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoState4](images/UndoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged.
+Step 6. The user executes `clear`, which calls `Model#commitPetBook()`. Since the `currentStatePointer` is not pointing at the end of the `petBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](images/UndoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -373,27 +372,34 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Attendance feature
 
-#### Implementation
-The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
-`PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
-on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off
-time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into
-the command classes above. The command classes are then passed on to the Model component for execution.
+#### Proposed Implementation
+The proposed attendance feature is facilitated by the two classes `PresentAttendanceCommand` and `AbsentAttendanceCommand`,
+which extend the `Command` class. The commands allow users to either mark a pet as present or absent on a particular day.
+Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off time (if applicable),
+is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into the command classes above.
+The command classes are then passed on to the `Model` component for execution.
 
-The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to
-`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the
-Model component that facilitates `Attendance` functionalities.
+During command execution, data from the user input is parsed into one of two subclasses of `AttendanceEntry` objects.
+The attendance entry is then stored into `AttendanceHashMap`. A class diagram illustrating the structure of `AttendanceHashMap`
+can be seen below.
+
+![AttendanceHashMapClassDiagram](images/AttendanceHashMapClassDiagram.png)
+
+The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet",
+and is the main repository of data within the Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods
 in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
-supported by the methods in `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes.
+supported by the `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes as well as methods.
 
 The following sequence diagram below models the interactions between the Logic as well as the Model components to
-update the backend and frontend of the application.
+update the backend and frontend of the application for the `absent` command.
 
 ![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
-The activity diagram below illustrates the workflow of attendance commands.
+The sequence model follows a similar structure for the `present` command as well.
+
+In addition, the activity diagram below illustrates the workflow of attendance commands.
 
 ![AttendanceActivityDiagram](images/AttendanceActivityDiagram.png)
 
@@ -401,14 +407,13 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 **Aspect: Attendance data within `Model` component**
 
-* **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
+* **Alternative 1 (current choice):** Attendance entries in every pet's `AttendanceHashMap`.
     * Pros: Better OOP and performance.
     * Cons: Higher memory usage.
 * **Alternative 2:** All attendance entries in a single HashMap.
     * Pros: Lesser memory usage, easier to implement.
-    * Cons: May have performance issues due to nested data structure.
-
-
+    * Cons: Nested data structure, lack of OOP and separation of concerns.
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -440,29 +445,29 @@ The activity diagram below illustrates the workflow of attendance commands.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                      | So that I can…​                                                        |
-|----------|-------------------|-------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | pet daycare owner | retrieve pet owner's contact                                      | contact pet owners                                                     |
-| `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                         |
-| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                                   |
-| `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                          |
-| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                 | charge pet owners the correct amount depending on pets attendanceEntry |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                                |
-| `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                                 |
-| `* * *`  | pet daycare owner | find pets by their INDEX                                          | retrieve the pet information accordingly                               |
-| `* * *`  | pet daycare owner | delete pet's information from the system                          | information of pets that are in the system will be up to date          |
-| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                          | bill owners accordingly                                                |
-| `* *`    | pet daycare owner | track pets' grooming appointments                                 | remember to bring them for grooming                                    |
-| `* *`    | pet daycare owner | track the allergies that each pet has                             | avoid giving them food they may be allergic to                         |
-| `* *`    | pet daycare owner | order pets chronologically by there name                          | easily search for their name in the system                             |
-| `* *`    | pet daycare owner | order pets' appointments chronologically                          | know what is the next appointment I should take note of                |
-| `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments                  |
-| `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                                 |
-| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                 | I can allow for last minute scheduling                                 |
-| `*`      | pet daycare owner | update pet's information                                          |                                                                        |
-| `*`      | pet daycare owner | update pet owner's information                                    |                                                                        |
-| `*`      | pet daycare owner | access the previous attendanceEntry of pets                       | update owners if they were to enquire                                  |
-| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                         |
+| Priority | As a …​           | I want to …​                                                    | So that I can…​                                                    |
+|----------|-------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | pet daycare owner | retrieve pet owner's contact                                    | contact pet owners                                                 |
+| `* * *`  | pet daycare owner | tag different types of pets                                     | easily differentiate between the types of pets                     |
+| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                      | schedule the school bus for each day                               |
+| `* * *`  | pet daycare owner | track the different food preferences required by different pets | make sure the pets are served the right foods                      |
+| `* * *`  | pet daycare owner | track the attendance of pets                                    | charge pet owners the correct amount depending on pet's attendance |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                               | I have a consolidated information sheet                            |
+| `* * *`  | pet daycare owner | retrieve the pets addresses                                     | inform the school bus driver correctly                             |
+| `* * *`  | pet daycare owner | find pets by their INDEX                                        | retrieve the pet information accordingly                           |
+| `* * *`  | pet daycare owner | delete pet's information from the system                        | information of pets that are in the system will be up to date      |
+| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                        | bill owners accordingly                                            |
+| `* *`    | pet daycare owner | track pets' grooming appointments                               | remember to bring them for grooming                                |
+| `* *`    | pet daycare owner | track the allergies that each pet has                           | avoid giving them food they may be allergic to                     |
+| `* *`    | pet daycare owner | order pets chronologically by there name                        | easily search for their name in the system                         |
+| `* *`    | pet daycare owner | order pets' appointments chronologically                        | know what is the next appointment I should take note of            |
+| `*`      | pet daycare owner | track the vet appointments of pets                              | make sure pets do not miss their medical appointments              |
+| `*`      | pet daycare owner | track the medicine that pets need to take                       | i can feed them medicine appropriately                             |
+| `*`      | pet daycare owner | change the attendance of pets anytime I want                    | I can allow for last minute scheduling                             |
+| `*`      | pet daycare owner | update pet's information                                        |                                                                    |
+| `*`      | pet daycare owner | update pet owner's information                                  |                                                                    |
+| `*`      | pet daycare owner | access the previous attendance of pets                          | update owners if they were to enquire                              |
+| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day      | arrange the necessary manpower                                     |
 
 ### Use cases
 
@@ -755,7 +760,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -871,26 +877,26 @@ testers are expected to do more *exploratory* testing.
 ## Model
 
 WoofAreYou's `Model` draws inspiration from original [AB3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
-However, WoofAreYou's model is more complicated because it is specifically adapted to handle pets' attributes instead of
-just Person objects.
+However, WoofAreYou's model is more complicated because it is specifically adapted to handle `Pet` attributes instead of
+just `Person` objects.
 
-In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
-essential for many of the functionalities. Not only does `AttendanceEntry` need to modify the database directly to store
+In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceHashMap` class in WoofAreYou is
+essential for many of the functionalities. Not only does `AttendanceHashMap` need to modify the database directly to store
 potentially large amount of attendance entries for each pet, it has to ensure that these data are easily retrievable.
 Similarly, the `Appointment` class has to be flexible to cater to the ever-changing nature of pets' appointments.
 These 2 classes utilised Java's `LocalDate`, `LocalTime` and `LocalDateTime` libraries to facilitate parsing of arguments
 which saved significant amount of time in handling invalid inputs.
 
-Complex attributes such as `Charge` is also implemented to calculate the specific cost every month for each pet. The
+Complex attributes such as `Charge` were also implemented to calculate the specific cost every month for each pet. The
 `Model` of WoofAreYou supports higher level features and commands like sorting, filtering and undoing to increase efficiency
 that are not present in AB3.
 
 All the different classes in WoofAreYou `Model` have to interact with one another to ensure cohesiveness and efficient
-navigability for the user. For instance, filtering and sort have to access the `AttendaceEntry` or `Appointment` class
+navigability for the user. For instance, filtering and sort have to access the `AttendanceHashMap` or `Appointment` class
 to retrieve the relevant dates. There are many ways of implementing these commands and a lot of effort is put into
 the design consideration as discussed in the previous sections.
 
-After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable model
+After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable models
 catered for its purpose.
 
 ## Logic
@@ -900,7 +906,7 @@ WoofAreYou's `Logic` is more advanced than that of AB3. WoofAreYou supports many
 `edit` and `find` are also enhanced to handle the complex `Model` of WoofAreYou.
 
 Significant effort was placed in implementing the `Logic` for WoofAreYou. It encompasses the logic for pets'
-`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
+`AttendanceHashMap`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
 for WoofAreYou.
 
 A huge amount of time was dedicated in validating user input for different commands. This is to ensure that WoofAreYou
@@ -910,7 +916,7 @@ effort was put into crafting error messages to ensure smooth handling of invalid
 ## Storage
 
 WoofAreYou's `Storage` extends that of AB3 to increase functionality and store a variety of attributes that pets may
-have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
+have. `AttendanceHashMap`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
 JSON file. Doing so ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
 
 More time and effort were spent in crafting the JSON entries of `AttendanceEntry` as it needs to store dates that

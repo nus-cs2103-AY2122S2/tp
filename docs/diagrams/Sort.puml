@@ -3,28 +3,28 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PetBookParser" as PetBookParser LOGIC_COLOR
 participant "sp:SortCommandParser" as SortCommandParser LOGIC_COLOR
 participant "s:SortCommand" as SortCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":PetBook" as PetBook MODEL_COLOR
 participant ":UniquePetList" as UniquePetList MODEL_COLOR
 end box
 
 
 
 
-[-> LogicManager : execute("sort /o")
+[-> LogicManager : execute("sort owner")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("sort /o")
-activate AddressBookParser
+LogicManager -> PetBookParser : parseCommand("sort owner")
+activate PetBookParser
 
 
-AddressBookParser -> SortCommandParser: parse("/o")
+PetBookParser -> SortCommandParser: parse("owner")
 activate SortCommandParser
 
 
@@ -38,13 +38,13 @@ deactivate SortCommand
 
 
 
-SortCommandParser --> AddressBookParser: s
+SortCommandParser --> PetBookParser: s
 deactivate SortCommandParser
 
 
 
-AddressBookParser --> LogicManager : sp
-deactivate AddressBookParser
+PetBookParser --> LogicManager : sp
+deactivate PetBookParser
 
 LogicManager -> SortCommand : execute()
 activate SortCommand
@@ -52,23 +52,23 @@ activate SortCommand
 SortCommand -> Model : sortPetList()
 activate Model
 
-Model -> AddressBook : sortPets()
-activate AddressBook
+Model -> PetBook : sortPets()
+activate PetBook
 
-AddressBook -> UniquePetList: sortPets()
+PetBook -> UniquePetList: sortPets()
 activate UniquePetList
 
 UniquePetList -> UniquePetList:  sortPetList()
 
 
-UniquePetList --> AddressBook :
+UniquePetList --> PetBook :
 deactivate UniquePetList
 
 
 
 
-AddressBook --> Model :
-deactivate AddressBook
+PetBook --> Model :
+deactivate PetBook
 
 Model --> SortCommand
 deactivate Model
