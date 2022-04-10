@@ -23,11 +23,13 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    // @@author TypeDefinition
     private final CommandExecutor commandExecutor;
     private final ArrayList<String> historyBuffer;
     private final ArrayList<String> activeBuffer;
     private int activeBufferIndex;
     private final Set<String> commands = CommandRegistry.PARSERS.keySet();
+    // @@author
 
     @FXML
     private TextField commandTextField;
@@ -39,10 +41,12 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
 
+        // @@author TypeDefinition
         // Emulates how the bash terminal handles history.
         this.historyBuffer = new ArrayList<>();
         this.activeBuffer = new ArrayList<>(Arrays.asList(""));
         this.activeBufferIndex = 0;
+        // @@author
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -92,20 +96,25 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    // @@author TypeDefinition
     private void setPreviousCommand() {
         activeBuffer.set(activeBufferIndex, commandTextField.getText());
         activeBufferIndex = Math.max(activeBufferIndex - 1, 0);
         commandTextField.setText(activeBuffer.get(activeBufferIndex));
         commandTextField.end();
     }
+    // @@author
 
+    // @@author TypeDefinition
     private void setNextCommand() {
         activeBuffer.set(activeBufferIndex, commandTextField.getText());
         activeBufferIndex = Math.min(activeBufferIndex + 1, activeBuffer.size() - 1);
         commandTextField.setText(activeBuffer.get(activeBufferIndex));
         commandTextField.end();
     }
+    // @@author
 
+    // @@author DaneMarc
     private void autocomplete(String input) {
         String trimmed = input.trim();
 
@@ -143,6 +152,7 @@ public class CommandBox extends UiPart<Region> {
 
         commandTextField.end();
     }
+    // @@author
 
     // Levenshtein distance (matrix size bounded by length of str2 aka one of the program commands)
     //@@author DaneMarc-reused
