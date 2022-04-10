@@ -14,17 +14,23 @@ package "" {
         StartDateTime = "12-12-2022 13:00"
         Duration = 30
     }
+    note bottom: Index 0
     class Appointment1 as "  __appt1:Appointment__  " {
         StartDateTime = "12-12-2022 13:30"
         Duration = 60
     }
+    note bottom: Index 1
     class Appointment2 as "  __appt2:Appointment__  " {
         StartDateTime = "12-12-2022 15:30"
         Duration = 10
     }
+    note bottom: Index 2
 }
-DisjointAppointmentList -left-> Appointment0 : Index 0
-DisjointAppointmentList -down-> Appointment1 : Index 1
-DisjointAppointmentList --> Appointment2 : Index 2
+DisjointAppointmentList -left-> Appointment0
+DisjointAppointmentList -down-> Appointment1
+DisjointAppointmentList --> Appointment2
+
+Appointment0 -right[hidden]-> Appointment1
+Appointment1 -right[hidden]-> Appointment2
 
 @end
