@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureUnfiltered;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_ENTITY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ENTITY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ENTITY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_ENTITY;
 import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 import static seedu.address.testutil.TypicalTAssist.getTypicalTAssist;
 
@@ -123,14 +125,14 @@ public class EnrolCommandTest {
 
     @Test
     public void execute_validClassAndStudentIndexUnfilteredList_failure() throws CommandException {
-        Student enrolledExistingStudent = model.getUnfilteredStudentList().get(INDEX_SECOND_ENTITY.getZeroBased());
+        Student enrolledExistingStudent = model.getUnfilteredStudentList().get(INDEX_SIXTH_ENTITY.getZeroBased());
         students.add(enrolledExistingStudent);
-        EnrolCommand enrolCommand = new EnrolCommand(INDEX_FIRST_ENTITY, students);
+        ClassGroup classGroup = model.getUnfilteredClassGroupList().get(INDEX_FIFTH_ENTITY.getZeroBased());
+        EnrolCommand enrolCommand = new EnrolCommand(INDEX_FIFTH_ENTITY, students);
         CommandResult cr = enrolCommand.execute(model);
 
-        ClassGroup classGroup = model.getUnfilteredClassGroupList().get(INDEX_FIRST_ENTITY.getZeroBased());
         TaModule newModule = classGroup.getModule();
-
+        newModule = model.getUnfilteredModuleList().stream().filter(newModule::isSameModule).findFirst().get();
         String existStudent = String.format("\t%s (%s)\n", enrolledExistingStudent.getName(),
                 enrolledExistingStudent.getStudentId());
         String existStudentMessage = String.format(EnrolCommand.STUDENT_EXISTS_CG,
@@ -141,7 +143,7 @@ public class EnrolCommandTest {
 
         assertEquals(expectedMessage, actualMessage);
         assertTrue(classGroup.hasStudent(enrolledExistingStudent));
-        //assertTrue(newModule.hasStudent(enrolledExistingStudent));
+        assertTrue(newModule.hasStudent(enrolledExistingStudent));
     }
 
     @Test
