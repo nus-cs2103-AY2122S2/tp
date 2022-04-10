@@ -1439,8 +1439,6 @@ testers are expected to do more *exploratory* testing.
    3. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimensions will not go above `700x400`.
 
-<div style="page-break-after: always;"></div>
-
 ### Sample Commands
 
 1. Launch the application and type any of the commands below into the input box. The table lists the expected action of the command.
