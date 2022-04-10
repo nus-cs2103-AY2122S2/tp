@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PetBookParser" as PetBookParser LOGIC_COLOR
 participant ":ChargeCommandParser" as ChargeCommandParser LOGIC_COLOR
 participant "c:ChargeCommand" as ChargeCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -12,17 +12,17 @@ end box
 [-> LogicManager : execute("charge 1 m/04-2022 c/200")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("charge 1 m/04-2022 c/200")
-activate AddressBookParser
+LogicManager -> PetBookParser : parseCommand("charge 1 m/04-2022 c/200")
+activate PetBookParser
 
 create ChargeCommandParser
-AddressBookParser -> ChargeCommandParser
+PetBookParser -> ChargeCommandParser
 activate ChargeCommandParser
 
-ChargeCommandParser --> AddressBookParser
+ChargeCommandParser --> PetBookParser
 deactivate ChargeCommandParser
 
-AddressBookParser -> ChargeCommandParser : parse("1 m/04-2022 c/200")
+PetBookParser -> ChargeCommandParser : parse("1 m/04-2022 c/200")
 activate ChargeCommandParser
 
 create ChargeCommand
@@ -32,14 +32,14 @@ activate ChargeCommand
 ChargeCommand --> ChargeCommandParser : c
 deactivate ChargeCommand
 
-ChargeCommandParser --> AddressBookParser : c
+ChargeCommandParser --> PetBookParser : c
 deactivate ChargeCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-ChargeCommandParser -[hidden]-> AddressBookParser
+ChargeCommandParser -[hidden]-> PetBookParser
 destroy ChargeCommandParser
 
-AddressBookParser --> LogicManager : c
-deactivate AddressBookParser
+PetBookParser --> LogicManager : c
+deactivate PetBookParser
 
 LogicManager -> ChargeCommand : execute()
 activate ChargeCommand
