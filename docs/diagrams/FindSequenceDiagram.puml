@@ -32,7 +32,7 @@ AddressBookParser -> FindCommandParser : parse("XYZ")
 activate FindCommandParser
 
 create NameContainsKeywordsPredicate
-FindCommandParser --> NameContainsKeywordsPredicate
+FindCommandParser --> NameContainsKeywordsPredicate : NameContainsKeywordsPredicate ("XYZ")
 activate NameContainsKeywordsPredicate
 NameContainsKeywordsPredicate --> FindCommandParser : person
 deactivate NameContainsKeywordsPredicate

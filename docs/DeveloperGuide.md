@@ -392,16 +392,20 @@ The find mechanism implements the following sequence for the method call execute
 
 #### What is the find feature
 
-The find feature allows users to find a particular contact in Tracey and retrieve their specific details.
+The find feature allows users to find a particular contact by its name in Tracey and retrieve their specific details.
 
 The `find` command is as follows:
 
 `find NAME`
 
-The user do not require to search the full name of the contact. However, the name must be its substring.
+The user do not require to search the full name of the contact. However,  the query substring must match the person's
+starting from the first character.
 
 e.g. `find J`
 This will return any contact details starts with J in the Tracey.
+
+e.g. `find Ja`
+This will match `Jack` while `find ck` will not match.
 
 
 The activity diagram shows the possible execution paths for the `find` command.
