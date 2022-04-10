@@ -51,9 +51,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `find` [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32),
-      `deleteModule` [#135](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/135)
-    * Modified the existing documentation for the feature `delete` [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32)
+    * Added/updated documentation for the features `find`, `delete` [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32),
+      [#105](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/105), 
+      [#126](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/126) 
+      and `deleteModule` [#135](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/135)
   * Developer Guide:
     * Added implementation details for commands: `find` [#111](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/111), 
       `delete` and `deleteModule` [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189)
