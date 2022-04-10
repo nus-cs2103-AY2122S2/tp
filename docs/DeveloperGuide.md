@@ -1280,10 +1280,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: Help Window is open
 
    1. Test case: Resize Help Window to be smaller <br>
-   Expected: The Help Window's dimensions will not go below `600x1000`.
+   Expected: The Help Window's dimensions will not go below `1000x600`.
 
    1. Test case: Resize Help Window to be larger <br>
-   Expected: The Help Window's dimensions will not go above `700x1250`.
+   Expected: The Help Window's dimensions will not go above `1250x700`.
 
 ### Resizing the Onboarding Guide prompt
 
