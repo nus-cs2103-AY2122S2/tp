@@ -271,7 +271,7 @@ Looks for a show in a list of shows and displays all the shows that match the us
 #### Implementation
 <img src="images/FindSequenceDiagram.png">
 
-After executing the `find` command, `FindCommandParser` will map any prefixes in the user's input to Trackermon's prefix syntax. Then, it will do a check whether there are any prefixes in the input. 
+After executing the `find` command, `FindCommandParser` will map any prefixes in the user's input to Trackermon's prefix syntax. It will check if there are any prefixes in the input. 
 - If prefixes are specified, a `FindCommand` object will be created with predicates looking through the specified prefixes. 
 - Else, a general show predicate will be created by scanning through the name, status, rating and tag fields of the `Show` class. 
 
@@ -613,10 +613,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list shows.
-2.  Trackermon shows a list of shows.
+1. User requests to list shows.
+2. Trackermon shows a list of shows.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Extensions**
 
@@ -662,6 +664,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Edit a show**
 
