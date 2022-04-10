@@ -169,6 +169,7 @@ The `manual` command displays the format and a short description for a particula
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `ParseException` will be thrown if the argument is invalid.
     </div>
@@ -221,7 +222,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
    and optional fields (`phone`, `telegramHandle`, `email`), by using their respective parse methods in `ParserUtil`.
 
 
-![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> If an optional field is not supplied (i.e. not found in the `ArgumentMultimap`), 
@@ -292,7 +293,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
    be executed using the parse methods in `ParserUtil` that are specific to the field. In the case of indices, an `Index` array is created in place of the `StudentId`.
     </div>
 
-![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
 8. A new `DeleteCommand` will be created (using the `StudentId` or `Index` array returned in Step 8) and returned to the `LogicManager`.
 9. The `LogicManager` will then call `DeleteCommand#execute(Model model)`.
@@ -344,7 +345,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteModuleCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
-![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
 8. The `DeleteModuleCommandParser` will create a new `ModuleCodeContainsKeywordsPredicate`.
 9. A new `DeleteModuleCommand` will be created (using the `ModuleCodeContainsKeywordsPredicate` returned in Step 8) and returned to the `LogicManager`.
@@ -395,9 +396,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    
     1. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
    
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
+       <div markdown="span" class="alert alert-info">:information_source: 
+         <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+       </div>
 
     2. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
     3. `StudentId#isValidId(String studentId)` method will then be invoked,
@@ -407,9 +408,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     4. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
        `ParserUtil#parseIndex(String oneBasedIndex)`.
        
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
+       <div markdown="span" class="alert alert-info">:information_source: 
+         <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+       </div>
    
     5.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
     6. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). 
@@ -425,11 +426,11 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     Both `ModuleCode` and `TaskName` must be provided.   
     </div>
 
-    1. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode).`
+    1. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
    
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
+       <div markdown="span" class="alert alert-info">:information_source: 
+       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+       </div>
    
     2. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
     3. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
@@ -439,9 +440,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     4. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
        `ParserUtil#parseTask(String task)`.
 
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
+       <div markdown="span" class="alert alert-info">:information_source: 
+       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+       </div>
 
     5. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
     6. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
@@ -546,20 +547,20 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
     If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
     This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`. 
 
-   <div markdown="span" class="alert alert-info">:information_source:
-   <b>Note:</b> 
-   If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
-   </div>
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b> 
+      If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
+      </div>
 
 15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)` 
     method to check if the `task` is assigned.
     If no similar `task` is found, the following step will take place.
 
-   <div markdown="span" class="alert alert-info">:information_source:
-   <b>Note:</b>
-   If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
-   If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
-   </div>
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b>
+      If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
+      If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
+      </div>
 
 16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
 17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
@@ -673,7 +674,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
    be executed using the parse methods in `ParserUtil` that are specific to the field.
     </div> 
 
-![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
 8. The `FindCommandParser` will create a new `Predicate`.
 9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
@@ -699,11 +700,13 @@ The `mark` command marks a specific undone task as done for a particular student
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "mark", `MarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
 4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into an `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
 
 5. The `MarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
     </div>
@@ -711,6 +714,7 @@ The `mark` command marks a specific undone task as done for a particular student
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `MarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
 8. The `MarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is null.
     </div>
@@ -720,6 +724,7 @@ The `mark` command marks a specific undone task as done for a particular student
 11. The `MarkCommandParser` will create a new `MarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
 12. The `LogicManager` will then call `MarkCommand#execute(Model model)`.
 13. The `MarkCommand` will call `model#markTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as done.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `CommandException` will be thrown if the supplied `index` or `studentId` is invalid, or if the task is already marked as completed.
     </div>
@@ -743,11 +748,13 @@ The `unmark` command marks a specific done task as undone for a particular stude
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "unmark", `UnmarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "unmark".
 4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into an `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
 
 5. The `UnmarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
     </div>
@@ -755,6 +762,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
 8. The `UnmarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
     </div>
@@ -764,6 +772,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 11. The `UnmarkCommandParser` will create a new `UnmarkCommand` object using the `StudentId` and `Index` created in Step 7 and 10 respectively.
 12. The `LogicManager` will then call `UnmarkCommand#execute(Model model)`.
 13. The `UnmarkCommand` will call `model#unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
+    
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `CommandException` will be thrown if the supplied `index` or `studentId` is invalid, or if the task is already marked as not complete.
     </div>
