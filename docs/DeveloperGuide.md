@@ -534,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>list shows (UC03) </ins>.
+1.  User requests to <ins>list shows (UC03)</ins>.
 2.  User adds a show in Trackermon.
 3.  Trackermon stores the show in its storage.
 
@@ -542,21 +542,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. User adds a duplicate show.
 
-  Use case resumes at step 3.
+    * 2a1. Trackermon shows an error message to user, indicating that there is a duplicate show in the list.
 
-* 3a. User adds a duplicate show.
+      Use case resumes at step 2.
 
-    * 3a1. Trackermon shows an error message to user, indicating that there is a duplicate show in the list and requests the user to either delete the show in the list or add another show.
+* 2b. User enters command with the wrong syntax.
 
-      Use case resumes at step 3.
+    * 2b1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
 
-* 3b. User enters command with the wrong syntax.
-
-    * 3b1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
-
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -570,23 +566,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>list shows (UC03) </ins>.
-3.  User requests to delete a specific show in the list.
-4.  Trackermon deletes the show.
+1.  User requests to <ins>list shows (UC03)</ins>.
+2.  User requests to delete a specific show in the list.
+3.  Trackermon deletes the show.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
+    * 2a1. Trackermon shows an error message,  indicating the index for deleting shows is invalid.
 
-* 3a. The given index is invalid.
-
-    * 3a1. Trackermon shows an error message,  indicating the index for deleting shows is invalid.
-
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -658,23 +650,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>list shows (UC03) </ins>.
-3.  User requests to edit a specific show in the list.
-4.  Trackermon edits the show.
+1.  User requests to <ins>list shows (UC03)</ins>.
+2.  User requests to edit a specific show in the list.
+3.  Trackermon edits the show.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
+    * 2a1. Trackermon shows an error message, indicating the index for editing shows is invalid.
 
-* 3a. The given index is invalid.
-
-    * 3a1. Trackermon shows an error message, indicating the index for editing shows is invalid.
-
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -720,8 +708,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to sort the current list of shows.
-2. Trackermon sort the show list.
-3. Trackermon shows a list of shows in a sorted order.
+2. Trackermon sorts the show list.
+3. Trackermon shows a list of shows in the sorted order.
 
    Use case ends.
 
@@ -803,23 +791,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>list shows (UC03) </ins>.
-3. User requests a suggestion from Trackermon.
-4. Trackermon returns a random show.
+1. User requests to <ins>list shows (UC03)</ins>.
+2. User requests a suggestion from Trackermon.
+3. Trackermon returns a random show.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The displayed list is empty.
+* 1a. The displayed list is empty.
 
-  * 2a1. Trackermon shows an error message to the user, indicating that there are no shows in the currently displayed list.
+  * 1a1. Trackermon shows an error message to the user, indicating that there are no shows in the currently displayed list.
 
     Use case ends.
 
-* 3a. The displayed list contains only one show.
+* 1a. The displayed list contains only one show.
 
-  * 3a1. Trackermon shows an error message to the user, indicating that there is only one show in the currently displayed list.
+  * 1a1. Trackermon shows an error message to the user, indicating that there is only one show in the currently displayed list.
     
     Use case ends.
 
@@ -863,7 +851,7 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Launching Trackermon.
-   1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
+   1. Prerequisites: Have a copy of `trackermon.jar` in your computer.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
    3. Test case: Initial launch <br>
