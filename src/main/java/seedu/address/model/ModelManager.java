@@ -40,28 +40,28 @@ public class ModelManager implements Model {
             + "Requirements";
     private static final String MESSAGE_CLOSE_CSV = "Please close the opened CSV before export";
 
-    private final AddressBook addressBook;
+    private final HireLah hireLah;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Interview> filteredInterviews;
     private final FilteredList<Position> filteredPositions;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given hireLah and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyHireLah addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.hireLah = new HireLah(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
-        filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
-        filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
+        filteredApplicants = new FilteredList<>(this.hireLah.getApplicantList());
+        filteredInterviews = new FilteredList<>(this.hireLah.getInterviewList());
+        filteredPositions = new FilteredList<>(this.hireLah.getPositionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HireLah(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -89,54 +89,54 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getHireLahFilePath() {
+        return userPrefs.getHireLahFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setHireLahFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setHireLahFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== HireLah ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setHireLah(ReadOnlyHireLah hireLah) {
+        this.hireLah.resetData(hireLah);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyHireLah getHireLah() {
+        return hireLah;
     }
 
     @Override
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
-        return addressBook.hasApplicant(applicant);
+        return hireLah.hasApplicant(applicant);
     }
 
     @Override
     public Applicant getApplicantWithEmail(Email email) {
         requireNonNull(email);
-        return addressBook.getApplicantWithEmail(email);
+        return hireLah.getApplicantWithEmail(email);
     }
 
     @Override
     public Applicant getApplicantWithPhone(Phone phone) {
         requireNonNull(phone);
-        return addressBook.getApplicantWithPhone(phone);
+        return hireLah.getApplicantWithPhone(phone);
     }
 
     @Override
     public void deleteApplicant(Applicant target) {
-        addressBook.removeApplicant(target);
+        hireLah.removeApplicant(target);
     }
 
     @Override
     public void addApplicant(Applicant applicant) {
-        addressBook.addApplicant(applicant);
+        hireLah.addApplicant(applicant);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
@@ -144,30 +144,30 @@ public class ModelManager implements Model {
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
-        addressBook.setApplicant(target, editedApplicant);
+        hireLah.setApplicant(target, editedApplicant);
     }
 
     @Override
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
-        return addressBook.hasInterview(interview);
+        return hireLah.hasInterview(interview);
     }
 
     @Override
     public boolean hasConflictingInterview(Interview interview) {
         requireAllNonNull(interview);
-        return addressBook.hasConflictingInterview(interview);
+        return hireLah.hasConflictingInterview(interview);
     }
 
 
     @Override
     public void deleteInterview(Interview target) {
-        addressBook.removeInterview(target);
+        hireLah.removeInterview(target);
     }
 
     @Override
     public void addInterview(Interview interview) {
-        addressBook.addInterview(interview);
+        hireLah.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
@@ -176,44 +176,44 @@ public class ModelManager implements Model {
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
-        addressBook.setInterview(target, editedInterview);
+        hireLah.setInterview(target, editedInterview);
     }
 
     @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
-        return addressBook.hasPosition(position);
+        return hireLah.hasPosition(position);
     }
 
     @Override
     public void addPosition(Position position) {
-        addressBook.addPosition(position);
+        hireLah.addPosition(position);
         updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
     }
 
     @Override
     public void deletePosition(Position target) {
-        addressBook.removePosition(target);
+        hireLah.removePosition(target);
     }
 
     @Override
     public void setPosition(Position target, Position editedPosition) {
         requireAllNonNull(target, editedPosition);
 
-        addressBook.setPosition(target, editedPosition);
+        hireLah.setPosition(target, editedPosition);
     }
 
     @Override
     public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
         requireAllNonNull(applicantToBeUpdated, newApplicant);
 
-        addressBook.updateApplicant(applicantToBeUpdated, newApplicant);
+        hireLah.updateApplicant(applicantToBeUpdated, newApplicant);
     }
 
     @Override
     public void updatePosition(Position positionToBeUpdated, Position newPosition) {
         requireAllNonNull(positionToBeUpdated, newPosition);
-        addressBook.updatePosition(positionToBeUpdated, newPosition);
+        hireLah.updatePosition(positionToBeUpdated, newPosition);
     }
 
     //=========== Filtered Applicant List Accessors =============================================================
@@ -236,14 +236,14 @@ public class ModelManager implements Model {
     @Override
     public void updateSortApplicantList(Comparator<Applicant> comparator) {
         requireNonNull(comparator);
-        addressBook.sortApplicant(comparator);
+        hireLah.sortApplicant(comparator);
         filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
     public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortApplicant(comparator);
+        hireLah.sortApplicant(comparator);
         filteredApplicants.setPredicate(predicate);
     }
 
@@ -273,25 +273,25 @@ public class ModelManager implements Model {
     @Override
     public void updateSortInterviewList(Comparator<Interview> comparator) {
         requireNonNull(comparator);
-        addressBook.sortInterview(comparator);
+        hireLah.sortInterview(comparator);
         filteredInterviews.setPredicate(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     @Override
     public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortInterview(comparator);
+        hireLah.sortInterview(comparator);
         filteredInterviews.setPredicate(predicate);
     }
 
     @Override
     public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
-        return addressBook.getApplicantsInterviews(applicant);
+        return hireLah.getApplicantsInterviews(applicant);
     }
 
     @Override
     public ArrayList<Interview> getPositionsInterviews(Position position) {
-        return addressBook.getPositionsInterview(position);
+        return hireLah.getPositionsInterview(position);
     }
 
     @Override
@@ -302,7 +302,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean isSameApplicantPosition(Applicant applicant, Position position) {
-        return addressBook.isSameApplicantPosition(applicant, position);
+        return hireLah.isSameApplicantPosition(applicant, position);
     }
 
     //=========== Filtered Position List Accessors =============================================================
@@ -320,14 +320,14 @@ public class ModelManager implements Model {
     @Override
     public void updateSortPositionList(Comparator<Position> comparator) {
         requireNonNull(comparator);
-        addressBook.sortPosition(comparator);
+        hireLah.sortPosition(comparator);
         filteredPositions.setPredicate(PREDICATE_SHOW_ALL_POSITIONS);
     }
 
     @Override
     public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortPosition(comparator);
+        hireLah.sortPosition(comparator);
         filteredPositions.setPredicate(predicate);
     }
 
@@ -352,7 +352,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return hireLah.equals(other.hireLah)
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants)
                 && filteredPositions.equals(other.filteredPositions)

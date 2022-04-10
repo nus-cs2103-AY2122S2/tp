@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HireLah;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
@@ -25,7 +25,7 @@ import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code HireLah} with sample data.
  */
 public class SampleDataUtil {
     public static Applicant[] getSampleApplicants() {
@@ -93,8 +93,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyHireLah getSampleHireLah() {
+        HireLah sampleAb = new HireLah();
         for (Applicant sampleApplicant : getSampleApplicants()) {
             sampleAb.addApplicant(sampleApplicant);
         }

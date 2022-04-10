@@ -21,7 +21,7 @@ import seedu.address.model.position.UniquePositionList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameApplicant comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class HireLah implements ReadOnlyHireLah {
 
     private final UniqueApplicantList applicants;
     private final UniqueInterviewList interviews;
@@ -40,12 +40,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         positions = new UniquePositionList();
     }
 
-    public AddressBook() {}
+    public HireLah() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an HireLah using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public HireLah(ReadOnlyHireLah toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -77,9 +77,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code HireLah} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyHireLah newData) {
         requireNonNull(newData);
 
         setApplicants(newData.getApplicantList());
@@ -135,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code HireLah}.
      * {@code key} must exist in the address book.
      */
     public void removeApplicant(Applicant key) {
@@ -169,7 +169,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code HireLah}.
      * {@code key} must exist in the address book.
      */
     public void removeInterview(Interview key) {
@@ -243,7 +243,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code HireLah}.
      * {@code key} must exist in the address book.
      */
     public void removePosition(Position key) {
@@ -317,10 +317,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && applicants.equals(((AddressBook) other).applicants)
-                && interviews.equals(((AddressBook) other).interviews)
-                && positions.equals(((AddressBook) other).positions));
+                || (other instanceof HireLah // instanceof handles nulls
+                && applicants.equals(((HireLah) other).applicants)
+                && interviews.equals(((HireLah) other).interviews)
+                && positions.equals(((HireLah) other).positions));
     }
 
     @Override
