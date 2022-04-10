@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a person to the address book.
+ * Deletes a tag from a person in the address book.
  */
 public class DeleteTagCommand extends Command {
 
@@ -30,13 +30,12 @@ public class DeleteTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 3 " + "2";
 
     public static final String MESSAGE_SUCCESS = "Deleted tag in Client: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
 
     private final Index index;
     private final int tagNumber;
 
     /**
-     * Creates an AddTagCommand to add the specified {@code Tag}
+     * Creates an DeleteTagCommand to delete the {@code Tag} specified by the index and tag number
      *
      * @param index of the person in the filtered person list to edit
      * @param tagNumber of the tag to be deleted
@@ -64,6 +63,13 @@ public class DeleteTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagDeletedPerson));
     }
 
+    /**
+     * Deletes {@code Tag} from {@code Person}
+     * @param personToEdit person whose tag should be deleted
+     * @param tagNumber serial number of tag to be deleted
+     * @return Person who is identical to personToEdit except for the deleted tag
+     * @throws CommandException if an invalid tag number is specified
+     */
     private Person deleteTagFromPerson(Person personToEdit, int tagNumber) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();

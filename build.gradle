@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'clientconnect.jar'
+    archiveName = 'ClientConnect.jar'
 }
 
 defaultTasks 'clean', 'test'
