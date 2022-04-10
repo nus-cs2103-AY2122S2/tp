@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Implemented colour-coding of role tags according to role statuses to allow users to gather information 
-  pertaining to the roles at a glance [\#181](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/181)
+  pertaining to the roles at a glance [\#181](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/181), [\#174](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/174/files)
   * Updated `Model` as a Facade class for clients to interact with its internal components and relevant test cases that
   interacted with it [\#146](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/146)
   * Updated the constraints for the comparison of `Company` and `Role` [\#133](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/133), [\#288](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/288) 
@@ -48,7 +48,7 @@ Given below are my contributions to the project.
     * Added draft for Effort section [\#301](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/301)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): examples, [\#721](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/271), [\#194](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/194), [\#167](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/167), [\#183](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/183)
+  * PRs reviewed (with non-trivial review comments): examples, [\#271](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/271), [\#194](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/194), [\#167](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/167), [\#183](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/183)
   * Reported bugs and suggestions for other teams in the class: [1](https://github.com/AY2122S2-CS2103T-T17-2/tp/issues/240#issuecomment-1094183862)
 
 
