@@ -38,6 +38,12 @@
 
 skinparam BackgroundColor #FFFFFFF
 
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
 !procedure classTitleOnly($stereotype, $color)
     skinparam Class {
         FontColor<<$stereotype>> $color
