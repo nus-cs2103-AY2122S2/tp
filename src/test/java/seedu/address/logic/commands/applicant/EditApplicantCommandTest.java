@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicantAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -20,7 +20,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.applicant.EditApplicantCommand.EditApplicantDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HireLah;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,23 +33,22 @@ import seedu.address.testutil.EditApplicantDescriptorBuilder;
  */
 public class EditApplicantCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHireLah(), new UserPrefs());
 
-    /*
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Applicant editedApplicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(editedApplicant).build();
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST_PERSON, descriptor);
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST, descriptor);
 
-        String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
+        expectedModel.updateApplicant(model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased()),
+                editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-    */
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -67,7 +66,7 @@ public class EditApplicantCommandTest {
 
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
         expectedModel.setApplicant(lastApplicant, editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -80,7 +79,7 @@ public class EditApplicantCommandTest {
 
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -96,8 +95,8 @@ public class EditApplicantCommandTest {
 
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
+        Model expectedModel = new ModelManager(new HireLah(model.getHireLah()), new UserPrefs());
+        expectedModel.updateApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -115,7 +114,7 @@ public class EditApplicantCommandTest {
         showApplicantAtIndex(model, INDEX_FIRST);
 
         // edit applicant in filtered list into a duplicate in address book
-        Applicant applicantInList = model.getAddressBook().getApplicantList().get(INDEX_SECOND.getZeroBased());
+        Applicant applicantInList = model.getHireLah().getApplicantList().get(INDEX_SECOND.getZeroBased());
         EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST,
                 new EditApplicantDescriptorBuilder(applicantInList).build());
 
@@ -141,7 +140,7 @@ public class EditApplicantCommandTest {
         showApplicantAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicantList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getHireLah().getApplicantList().size());
 
         EditApplicantCommand editApplicantCommand = new EditApplicantCommand(outOfBoundIndex,
                 new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());

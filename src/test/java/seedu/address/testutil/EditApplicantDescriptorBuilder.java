@@ -34,6 +34,7 @@ public class EditApplicantDescriptorBuilder {
     public EditApplicantDescriptorBuilder(Applicant applicant) {
         descriptor = new EditApplicantDescriptor();
         descriptor.setName(applicant.getName());
+        descriptor.setAge(applicant.getAge());
         descriptor.setPhone(applicant.getPhone());
         descriptor.setEmail(applicant.getEmail());
         descriptor.setAddress(applicant.getAddress());

@@ -45,22 +45,22 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' HireLah file path.
      */
-    Path getAddressBookFilePath();
+    Path getHireLahFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' HireLah file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setHireLahFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code hireLah}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setHireLah(ReadOnlyHireLah hireLah);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the HireLah */
+    ReadOnlyHireLah getHireLah();
 
     /**
      * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.

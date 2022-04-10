@@ -19,6 +19,10 @@ public class HiredStatus {
         value = positionName;
     }
 
+    public boolean isHired() {
+        return !value.equals("Available");
+    }
+
     @Override
     public String toString() {
         if (value.equals("Available")) {

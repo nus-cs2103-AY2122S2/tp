@@ -55,7 +55,7 @@ public class RejectInterviewCommand extends Command {
         model.setInterview(interviewToReject, rejectedInterview);
         model.updatePosition(oldPosition, newPosition);
 
-        return new CommandResult(String.format(MESSAGE_REJECT_INTERVIEW_SUCCESS, interviewToReject),
+        return new CommandResult(String.format(MESSAGE_REJECT_INTERVIEW_SUCCESS, rejectedInterview),
                 getCommandDataType());
     }
 

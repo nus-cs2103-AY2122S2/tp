@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 /**
  * Deletes an applicant identified using it's displayed index from the address book,
@@ -55,6 +56,13 @@ public class DeleteApplicantCommand extends DeleteCommand {
         ArrayList<Interview> interviewsToDelete = model.getApplicantsInterviews(applicantToDelete);
         for (Interview i : interviewsToDelete) {
             model.deleteInterview(i);
+
+            if (i.isPassedStatus()) {
+                Position oldPosition = i.getPosition();
+                Position newPosition = i.getPosition().rejectOffer();
+                model.updatePosition(oldPosition, newPosition);
+            }
+
             logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
         }
 

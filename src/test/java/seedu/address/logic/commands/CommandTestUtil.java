@@ -24,12 +24,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.commands.applicant.EditApplicantCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.position.EditPositionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HireLah;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantNamePredicate;
 import seedu.address.testutil.EditApplicantDescriptorBuilder;
+import seedu.address.testutil.EditPositionDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -106,6 +108,8 @@ public class CommandTestUtil {
 
     public static final EditApplicantCommand.EditApplicantDescriptor DESC_AMY;
     public static final EditApplicantCommand.EditApplicantDescriptor DESC_BOB;
+    public static final EditPositionCommand.EditPositionDescriptor DESC_JR_SWE;
+    public static final EditPositionCommand.EditPositionDescriptor DESC_SR_FE_SWE;
 
     static {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -114,6 +118,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_JR_SWE = new EditPositionDescriptorBuilder().withPositionName(VALID_POSITION_NAME_JR_SWE)
+                .withDescription(VALID_DESCRIPTION_NAME_JR_SWE).withNumOpenings(VALID_POSITION_OPENINGS_JR_SWE)
+                .withRequirements(VALID_REQUIREMENT_SKILL).build();
+        DESC_SR_FE_SWE = new EditPositionDescriptorBuilder().withPositionName(VALID_POSITION_NAME_SR_FE_SWE)
+                .withDescription(VALID_DESCRIPTION_NAME_SR_FE_SWE).withNumOpenings(VALID_POSITION_OPENINGS_SR_FE_SWE)
+                .withRequirements(VALID_REQUIREMENT_EXPERIENCE).build();
     }
 
     /**
@@ -125,6 +135,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(result.getFeedbackToUser());
+            System.out.println(expectedCommandResult.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -153,11 +165,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        HireLah expectedHireLah = new HireLah(actualModel.getHireLah());
         List<Applicant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedHireLah, actualModel.getHireLah());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicantList());
     }
     /**

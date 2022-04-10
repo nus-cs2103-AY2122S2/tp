@@ -12,6 +12,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 public class DeleteInterviewCommand extends DeleteCommand {
 
@@ -39,6 +40,13 @@ public class DeleteInterviewCommand extends DeleteCommand {
 
         Interview interviewToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteInterview(interviewToDelete);
+
+        if (interviewToDelete.isPassedStatus()) {
+            Position oldPosition = interviewToDelete.getPosition();
+            Position newPosition = interviewToDelete.getPosition().rejectOffer();
+            model.updatePosition(oldPosition, newPosition);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS, interviewToDelete),
                 getCommandDataType());
     }

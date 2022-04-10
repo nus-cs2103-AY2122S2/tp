@@ -123,6 +123,13 @@ public class Position {
     }
 
     /**
+     * Returns true if the number of openings is more than 0.
+     */
+    public boolean canScheduleInterview() {
+        return positionOpenings.getCount() > 0;
+    }
+
+    /**
      * Extends an offer for the current Position.
      * An offer can be extended if the current number of offers is less than the current number of openings.
      * The new position will contain a number of offers that is 1 more than the previous value.
