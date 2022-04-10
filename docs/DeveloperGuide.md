@@ -365,7 +365,8 @@ Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student
 Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
-![](images/AddStudentSequenceDiagram.png)
+![](images/AddStudentSequenceDiagram-0.png)
+![](images/AddStudentSequenceDiagram-1.png)
 
 [return to top ↑](#table-of-contents)
 
