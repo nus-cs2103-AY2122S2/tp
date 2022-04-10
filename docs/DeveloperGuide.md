@@ -447,7 +447,15 @@ In order to address these issues, we have enhanced the `EditCommand` to include 
 ####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
+Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
+will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
+for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
+  
 ####**Class Diagram of Edit Feature is shown below**
+
+![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
 
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the **EditCommand**:
 1.`MESSAGE_EDIT_PERSON_SUCCESS`:
@@ -462,15 +470,7 @@ Additionally, there are a few final static messages to be displayed to the user 
 4. `MESSAGE_SAME_INPUT`:
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
-
-![EditFeatureActivityDiagram](images/EditFeatureClassDiagram.png)
-
-The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
-
-Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
-will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
-for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-
+  
 ####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
@@ -557,7 +557,6 @@ There are two possible execution paths for this command.
 
 The sequence diagram below shows the interactions between objects during the execution of a `email` command.
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
-
 
 When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object.
 
