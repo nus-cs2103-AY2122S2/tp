@@ -310,7 +310,9 @@ The following activity diagram summarizes what happens when a user executes a va
   A for loop is implemented for the name, status, rating and tag predicates. This will allow an `AND` search within a list of keywords within these four parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
   - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.<br><br>
-  
+
+<div style="page-break-after: always;"></div>
+
 - **Alternative 2:** Directly check whether the show is in the show list in `FindCommandParser` without a predicate.
   - Pros: Developers can easily understand the code and its functionality as all the code is consolidated in a single class.
   - Cons: Bad coding and Object-Oriented Programming (OOP) practices is prominent due to the lack of abstraction.
@@ -948,6 +950,8 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
