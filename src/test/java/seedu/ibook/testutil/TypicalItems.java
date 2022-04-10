@@ -22,16 +22,16 @@ public class TypicalItems {
     public static final String QUANTITY_10 = "10";
 
     public static final ItemDescriptor Q5_2022_03_01 =
-        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).buildItemDescriptor();
+            new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).buildItemDescriptor();
 
     public static final Item Q5_2022_03_01_KAYA =
-        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
+            new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q10_2022_03_01_KAYA =
-        new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_10).build(KAYA_BREAD);
+            new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_10).build(KAYA_BREAD);
     public static final Item Q5_2020_01_01_KAYA =
-        new ItemBuilder().withExpiryDate("2020-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
+            new ItemBuilder().withExpiryDate("2020-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q5_2200_01_01_KAYA =
-        new ItemBuilder().withExpiryDate("2200-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
+            new ItemBuilder().withExpiryDate("2200-01-01").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q5_2022_03_02_KAYA =
             new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_5).build(KAYA_BREAD);
     public static final Item Q0_2022_03_01_KAYA =
@@ -45,10 +45,10 @@ public class TypicalItems {
                     LocalDate.now().plusDays(10).toString()).withQuantity(QUANTITY_5).build(KAYA_BREAD);
 
     public static final Item ITEM_A =
-        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build(PRODUCT_A);
+            new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build(PRODUCT_A);
 
     public static final Item ITEM_B =
-        new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_B).withQuantity(VALID_QUANTITY_B).build(PRODUCT_B);
+            new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_B).withQuantity(VALID_QUANTITY_B).build(PRODUCT_B);
 
     private TypicalItems() {} // prevents instantiation
 

@@ -3,36 +3,62 @@ layout: page
 title: User Guide
 ---
 
-IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
-It is designed for fast use through **command line interface**(CLI), complemented by a **graphical user interface**(GUI)
-for convenience use.
+<!-- <style>
+  hr {
+    display: none
+  }
+  h1, h2, h3, h4, h5 {
+    margin-top: 10px !important;
+  }
+</style> -->
 
-## Target User
+IBook is an inventory organizing system specially designed to manage products in a store.
 
-IBook is specially designed for small scale groceries storekeepers, who are having issues with product organization and keeping track on expiring items.
+<h2>Target User</h2>
 
-We aim to help storekeepers simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
+IBook's target user are small scale groceries storekeepers who are having issues with product organization and keeping track on expiring items.
 
---------------------------------------------------------------------------------------------------------------------
+We aim to help these storekeepers by 
+
+1. Simplifing the process of inventory organization
+2. Minimizing groceries wastage due to expiry. 
+
+<h2>Structure of This Document</h2>
+
+This document is structured in a chronological manner so that you are able to follow through this guide while using the product. 
+
+If you feel lost at any point in time, you can always refer to the Table of Contents.
+
+<hr>
+
+<div style="page-break-after: always;"></div>
+
+<h2>Table of Contents</h2>
 
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/) or above installed in your computer.
 
 2. Download the latest `ibook.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your iBook.
+3. Copy the file to the folder you want to use as the home folder for iBook.
 
-4. Double-click the file to start the app<sup>[1](#applaunch-caveat)</sup>, or type in `java -jar ibook.jar` in a terminal in the same directory as `ibook.jar`. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. If you are having issues, type in `java -jar ibook.jar` in a terminal in the same directory as the file. 
+   
+   The GUI similar to the image below should appear in a few seconds.
+   
+    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press Enter to execute it.
+  
+    Some example commands you can try:
 
    * **`list`** : Lists all products.
 
@@ -44,25 +70,21 @@ We aim to help storekeepers simplify the process of managing inventory and reduc
 
 6. Refer to the [Features](#features) below for details of each command.
 
-<a name="applaunce-caveat">1</a>: For Mac users, if you are having problems with untrusted developers, you may right click on the app and select `Open`.
+<hr/>
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## 2. About
-### 2.1 Structure of the document
+## 2. Reading the document
 
-This document is structured in a chronological manner so that you are able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
+This section will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 
-### 2.2 Reading the document
+It is important to read this section before proceeding further to avoid getting confused.
 
-This subsection will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
-It is important to read this section before proceeding further to avoid getting confused!
-
-#### 2.2.1 Special symbols
+#### 2.1 Special Boxes
 
 **Additional Information**
 
-Text that appears in an information box indicates additional information that may be useful to know.
+Text that appears in an information box indicates additional information that are useful to know.
 
 <div markdown="block" class="alert alert-info">
 
@@ -73,7 +95,7 @@ Example additional information.
 
 **Caution**
 
-Text that appears in a caution box should be followed carefully, else unintended consequences might arise.
+Text that appears in a caution box should be followed carefully to avoid unintended consequences.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -84,7 +106,7 @@ Example warnings.
 
 **Tip**
 
-Text that appears in a tip box are useful for improving your experience with iBook.
+Text that appears in a tip box are useful to improve your experience with iBook.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -95,22 +117,29 @@ Example tip.
 
 <div style="page-break-after: always;"></div>
 
-#### 2.2.2 Sections of the Application Window
+#### 2.2 Sections of the Application Window
 
-The application window is divided into a command box, results window as well as a table that includes all the products.
-![Ui](images/Ui.png)
+The application window is divided into a Command Box, Result Window as well as a Display Table that includes all the products.
+![Ui-2](images/Ui-2.png)
 
-#### 2.2.3 Navigating around
+#### 2.3 Navigating around
 
-The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
+The main mode of navigation in iBook is through the Command Line Interface (CLI). 
 
-Alternatively, you can also interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button, where a popup would be displayed for you to enter the different fields once it is clicked.
+You can enter commands into the command box and press enter to execute them. 
 
-#### 2.2.4 Command Format
+The result window would then display the results from executing the command. The table would also update accordingly based on the command ran.
 
-<div markdown="block" class="alert alert-info">
+*Alternatively*,  
 
-**:information_source: Notes about the command format:**<br>
+You can interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button. 
+
+Once the button is clicked, a popup would be shown for you to add a new product.
+
+<div style="page-break-after: always;"></div>
+
+#### 2.4 Command Format
+
 
 * Words in `UPPER_CASE` are additional user inputs supplied to a command.<br>
   e.g. in `add n:NAME`, `NAME` is an input which can be supplied as `add n:Maggie Mee`.
@@ -126,10 +155,10 @@ Alternatively, you can also interact with the application through buttons, such 
 
 * Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
   e.g. the command `exit 123` will be interpreted as `exit`.
+  
 * If two inputs of the same tag are given, the latter will be taken. <br> 
   e.g. the command `add n:Maggie Curry n:Maggie Chicken p:3.00 p:3.50` will add a product with the name Maggie Chicken and with a price of 3.50.
 
-</div>
 
 <div markdown="block" class="alert alert-warning">
 
@@ -140,13 +169,15 @@ e.g. To provide a product name of `Nescafe: special edition`, you should type `n
 
 </div>
 
-#### 2.2.5 Command inputs
+<div style="page-break-after: always;"></div>
+
+#### 2.5 Command inputs
 
 | Input            | Description                                                                                  |
 |:-----------------|:---------------------------------------------------------------------------------------------|
 | `NAME`           | Name of the product.                                                                         |
 | `CATEGORY`       | Category of the product.                                                                     |
-| `PRICE`          | Price of the product. A valid price is a positive number, *possibly prepended by a `$` sign* |
+| `PRICE`          | Price of the product. A valid price is a positive number, possibly prepended by a `$` sign |
 | `START_PRICE`    | Start price of the product. Used for `find` command.                                         |
 | `END_PRICE`      | End price of the product. Used for `find` command.                                           |
 | `DESCRIPTION`    | Description of the product.                                                                  |
@@ -155,7 +186,9 @@ e.g. To provide a product name of `Nescafe: special edition`, you should type `n
 | `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date.                       |
 | `DISCOUNT_START` | Number of days before the expiry date to start the discount.                                 |
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
+
+<div style="page-break-after: always;"></div>
 
 ## 3. Features
 
@@ -173,8 +206,6 @@ Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
-|                   |                                                              |
-|-------------------|--------------------------------------------------------------|
 | Compulsory Fields | `NAME`, `PRICE`                                              | 
 | Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
 
@@ -193,8 +224,11 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button above the table to add a new product.
 
-A pop-up window will appear, allowing you to fill in the details for name, price, description. 
-Optionally, you can also fill in the category, discount rate and discount start. 
+A pop-up window similar to the image below will appear
+
+![Ui](images/popup-add-product.png)
+
+You can now fill in the details for name, price, description. Optionally, you can also fill in the category, discount rate and discount start. 
 
 <div markdown="block" class="alert alert-info">
 
@@ -223,10 +257,14 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/edit-color.png" alt="Edit" height = "25"/> on the right side of each product to update the product.
 
-A pop-up window will appear, allowing you to change the details for name, price, description. 
+A pop-up window similar to the image below will appear
+
+![Ui](images/popup-update-product.png)
+
+You can now change the details for product.
 
 After filling in the required fields, click 
-<img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> 
+<img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to add a new product
 
 
 #### 3.1.4 Deleting products : `delete`
@@ -246,7 +284,11 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete" height = "25"/> on the right side of each product to delete the product.
 
-A pop-up window will appear, requiring you to confirm the deletion. 
+A pop-up window similar to the image below will appear 
+
+![Ui](images/popup-delete-product.png)
+
+You can now delete the product by clicking the delete button.
 
 #### 3.1.5 Finding certain products : `find`
 
@@ -349,7 +391,11 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button on the left of the product to add a new item.
 
-A pop-up window will appear, allowing you to fill in the details for expiry date and quantity.
+A pop-up window similar to the image below will appear 
+
+![Ui](images/popup-add-item.png)
+
+You can now fill in the details for expiry date and quantity.
 
 After filling in the required fields, click
 <img align="center" src = "images/ui-icons/add-icon.png" alt="Add Item" height = "25"/>
@@ -379,7 +425,11 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
 
-A pop-up window will appear, allowing you to update the details for expiry date and quantity.
+A pop-up window similar to the image below will appear 
+
+![Ui](images/popup-modify-item.png)
+
+You can now change the details for item.
 
 Then, click on the <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the item.
 
@@ -401,9 +451,11 @@ Examples:
 
 *Alternatively*,
 
-Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
+Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to update it.
 
-A pop-up window will appear.
+A pop-up window similar to the image below will appear 
+
+![Ui](images/popup-modify-item.png)
 
 Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 
@@ -469,6 +521,8 @@ Exits iBook.
 
 Format: `exit`
 
+<hr/>
+
 ## 4. Storage
 
 ### 4.1 Saving the data
@@ -483,14 +537,14 @@ iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Adv
 If your changes to the data file makes its format invalid, iBook will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 6. Glossary
 
@@ -504,7 +558,7 @@ If your changes to the data file makes its format invalid, iBook will discard al
 | **String**                        | `A sequence of characters that can have whitespace in between`                        |
 | **Substring**                     | `A contiguous sequence of characters inside a string`                                 |
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## 7. Command summary
 

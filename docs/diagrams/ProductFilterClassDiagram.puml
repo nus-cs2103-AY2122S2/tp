@@ -1,20 +1,20 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 $OverrideTheme(MODEL_COLOR)
 
-class "<<interface>>\nPredicate" as Predicate
-class "{abstract}\nAttributeFilter" as AttributeFilter
-class ProductFilter
+class "<<interface>>\nPredicate" as Predicate<<Model>>
+class "{abstract}\nAttributeFilter" as AttributeFilter<<Model>>
+class ProductFilter<<Model>>
 
-class CategoryFilter
-class DescriptionFilter
-class ExpiredFilter
-class ExpiringFilter
-class NameFilter
-class OutOfStockFilter
-class PriceFilter
-class PriceRangeFilter
+class CategoryFilter<<Model>>
+class DescriptionFilter<<Model>>
+class ExpiredFilter<<Model>>
+class ExpiringFilter<<Model>>
+class NameFilter<<Model>>
+class OutOfStockFilter<<Model>>
+class PriceFilter<<Model>>
+class PriceRangeFilter<<Model>>
 
 ProductFilter .up.|> Predicate
 AttributeFilter .up.|> Predicate

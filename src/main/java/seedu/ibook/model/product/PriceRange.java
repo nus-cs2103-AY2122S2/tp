@@ -5,7 +5,7 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a price range in the iBook.
- * Guarantees: immutable; is valid as declared in {@link #isValidPriceRange(Price, Price)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriceRange(String, String)}
  */
 public class PriceRange {
 
@@ -21,9 +21,9 @@ public class PriceRange {
      */
     public PriceRange(String startPrice, String endPrice) {
         requireAllNonNull(startPrice, endPrice);
+        checkArgument(isValidPriceRange(startPrice, endPrice), MESSAGE_CONSTRAINTS);
         Price parsedStartPrice = new Price(startPrice);
         Price parsedEndPrice = new Price(endPrice);
-        checkArgument(isValidPriceRange(parsedStartPrice, parsedEndPrice), MESSAGE_CONSTRAINTS);
 
         this.startPrice = parsedStartPrice;
         this.endPrice = parsedEndPrice;
@@ -61,8 +61,10 @@ public class PriceRange {
      * @param endPrice price to check.
      * @return Result of test.
      */
-    public static boolean isValidPriceRange(Price startPrice, Price endPrice) {
-        return !startPrice.isMoreThan(endPrice);
+    public static boolean isValidPriceRange(String startPrice, String endPrice) {
+        return Price.isValidPrice(startPrice)
+            && Price.isValidPrice(endPrice)
+            && !new Price(startPrice).isMoreThan(new Price(endPrice));
     }
 
     @Override

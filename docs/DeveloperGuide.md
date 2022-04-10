@@ -124,9 +124,12 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `IBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a product).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a product).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Commands are separated into different packages depending on its functionalities. Thus,the commands package includes the item package for item commands, product package for product commands.
+The rest of the commands that do not fit into those two are directly under the command package.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -183,6 +186,27 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Product
+
+###Implementation
+
+The implementation of product is entirely governed by the `Product` class. The `Product` class is immutable and guarantees that all fields are valid and immutable as well.
+
+Thus updating a product will create a new product class, while copying the old items entirely into the `UniqueItemList` of the new class.
+
+The following sequence diagram shows how the `Update` command works:
+
+<img src="images/UpdateExecutionSequenceDiagram.png" width="1000" />
+
+###Design Considerations
+**Aspect: How to design the product structure**
+* **Alternative 1:** Make product mutable
+  * Pros: Easy to Implement
+  * Cons: Hard to track state in undo/redo feature
+* **Alternative 2 (current choice):** Make product immutable
+  * Pros: Removes the need for listeners for UI to track product states
+  * Cons: Cost for updating a product maybe huge
 
 ### Product filters
 
@@ -595,9 +619,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data should be auto saved locally each time a new command has been entered.
 5. Should reload saved data accurately provided that data is not corrupted.
 6. System should respond within 3 seconds.
-7. UI should be clear and easy to use.
-
-*{More to be added}*
 
 ### Glossary
 

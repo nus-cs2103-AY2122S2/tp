@@ -7,6 +7,11 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
+import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
+import static seedu.ibook.logic.parser.ParserUtil.parseDescription;
+import static seedu.ibook.logic.parser.ParserUtil.parseName;
+import static seedu.ibook.logic.parser.ParserUtil.parsePrice;
+import static seedu.ibook.logic.parser.ParserUtil.parsePriceRange;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,26 +54,26 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<AttributeFilter> filterList = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            name = parseName(argMultimap.getValue(PREFIX_NAME).get());
             filterList.add(new NameFilter(name));
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            category = parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             filterList.add(new CategoryFilter(category));
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            description = parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
             filterList.add(new DescriptionFilter(description));
         }
 
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+            price = parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
             filterList.add(new PriceFilter(price));
         } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
             && argMultimap.getValue(PREFIX_END_PRICE).isPresent()) {
-            priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_START_PRICE).get(),
+            priceRange = parsePriceRange(argMultimap.getValue(PREFIX_START_PRICE).get(),
                 argMultimap.getValue(PREFIX_END_PRICE).get());
             filterList.add(new PriceRangeFilter(priceRange));
         } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
