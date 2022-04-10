@@ -252,7 +252,7 @@ This section describes some noteworthy details on how certain features are imple
 
 This section will describe tag management in the address book as well as the features implemented.
 
-### Centralising Tags in the Address Book
+#### Centralising Tags in the Address Book
 
 In the previous implementation, all `Tag` objects are independent of one another despite having the same tag names. To improve the usability of the address book, the tags are centralised so that the user can easily manage them as well as searching for `Person` objects that contain the tag.
 This is done by creating a `UniqueTagList` within `AddressBook` which will store all tags that were created by the user. Whenever a command relating to `Tag` is executed, it will not only apply the changes to the `Tag` in the `UniqueTagList` but will also propagate these changes to the relevant `Person`s who contain the specified tag.
@@ -271,7 +271,7 @@ Note: `target` refers to the tag to be updated, and `editedTag` is the replaceme
 
 ![Tag Edit](images/TagEditSequenceDiagram.png)
 
-### Serialisation and Inflation
+### Tag Serialisation and Inflation
 
 `Tag` serialisation and inflation is handled by the `Storage` component. The current implementation augments the existing method from `JsonSerializableAddressBook` through the addition of reading a list of tag names from the JSON file and saving them.
 
