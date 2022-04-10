@@ -396,7 +396,7 @@ Format: `sort [meeting|name|prev|salary]`
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD, [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -513,5 +513,5 @@ If you decide to make changes to the data file, HustleBook will not check the va
 | **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |
 | **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
 | **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James, Jake`                                                                                                                                 |
 | **Help**   | `help [COMMAND]` <br> e.g., `help meet`                                                                                                                                                     |
