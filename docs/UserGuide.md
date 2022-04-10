@@ -34,6 +34,7 @@ To get started, click on any of the headers in the table of content to jump to t
     * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Recall recent used command](#recall-recent-used-command)
   * [**Miscellaneous Features**](#miscellaneous-features)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -98,6 +99,7 @@ and meetings.
   * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [Recall recent used command](#recall-recent-used-command)
 * [Miscellaneous Features](#miscellaneous-features)
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
@@ -424,6 +426,7 @@ Here you can find useful features that can help improve your efficiency using Hu
 * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
 * [Clearing all entries : `clear`](#clearing-all-entries--clear)
 * [Exiting the program : `exit`](#exiting-the-program--exit)
+* [Recall recent used command](#recall-recent-used-command)
 
 ### Undoing the previous commands : `undo`
 
@@ -474,6 +477,13 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Recall recent used command
+
+Recalls the most recent command used and enters it into the command box.
+
+* By pressing the `UP` arrow key, the last command used is reentered into the command box.
+* Only the most recent command used can be recalled.
 
 --------------------------------------------------------------------------------------------------------------------
 
