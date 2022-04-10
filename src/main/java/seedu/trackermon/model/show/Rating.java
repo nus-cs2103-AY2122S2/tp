@@ -3,7 +3,10 @@ package seedu.trackermon.model.show;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
-
+/***
+ * Represents a Show's rating.
+ * Guarantees: immutable; rating is valid as declared in {@link #isValidScore(int) and @link #isValidScore(String)}
+ */
 public class Rating implements Comparable<Rating> {
 
     public static final String INVALID_RATING = "Rating must be a whole number from 0 to 5";
@@ -15,9 +18,8 @@ public class Rating implements Comparable<Rating> {
     public final int rating;
 
     /**
-     * Constructs a {@code rating}.
-     *
-     * @param rating A valid rating.
+     * Constructs a {@code rating} with the provided {@code int}.
+     * @param rating {@code int}.
      */
     public Rating(int rating) {
         requireNonNull(rating);
@@ -26,9 +28,8 @@ public class Rating implements Comparable<Rating> {
     }
 
     /**
-     * Constructs a {@code rating}.
-     *
-     * @param rating A valid rating.
+     * Constructs a {@code rating} with the provided {@code String}.
+     * @param rating {@code String}.
      */
     public Rating(String rating) {
         requireNonNull(rating);
@@ -37,7 +38,7 @@ public class Rating implements Comparable<Rating> {
     }
 
     /**
-     * Return true if a given rating is a valid rating.
+     * Return true if a given {@code int} is a valid rating.
      */
     public static boolean isValidScore(int rating) {
         if (rating <= MAX_RATING && rating >= 0) {
@@ -47,17 +48,25 @@ public class Rating implements Comparable<Rating> {
     }
 
     /**
-     * Return true if a given rating is a valid rating.
+     * Return true if a given {@code String} is a valid rating.
      */
     public static boolean isValidScore(String rating) {
         return rating.matches(VALIDATION_REGEX_RATING);
     }
 
+    /**
+     * Return {@String} representation of {@code Rating}.
+     */
     @Override
     public String toString() {
         return Integer.toString(rating);
     }
 
+    /**
+     * Returns whether two objects are equal or share the same rating.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this //short circuit if same object
@@ -65,6 +74,9 @@ public class Rating implements Comparable<Rating> {
                 && rating == ((Rating) other).rating);
     }
 
+    /**
+     * Returns the hashcode of the {@code Rating}.
+     */
     @Override
     public int hashCode() {
         return Integer.valueOf(rating).hashCode();

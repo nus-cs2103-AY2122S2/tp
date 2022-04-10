@@ -49,7 +49,7 @@ class JsonAdaptedShow {
      * Converts a given {@code Show} into this class for Jackson use.
      */
     public JsonAdaptedShow(Show source) {
-        name = source.getName().fullName;
+        name = source.getName().name;
         status = source.getStatus().name();
         rating = source.getRating().toString();
         tagged.addAll(source.getTags().stream()
