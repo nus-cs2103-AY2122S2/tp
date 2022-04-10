@@ -1221,6 +1221,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix 1: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1326,8 +1328,35 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: Onboarding Guide prompt is open
 
-   1. Test case: Resize Onboarding Guide prompt to be smaller <br>
+   2. Test case: Resize Onboarding Guide prompt to be smaller <br>
    Expected: The prompt's dimensions will not go below `500x150`.
 
-   1. Test case: Resize Onboarding Guide prompt to be larger <br>
+   3. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimensions will not go above `700x400`.
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix 2: Effort**
+
+* Difficulty level
+   * We developed a lot of different features with varying levels of difficulty, depth and complexity.
+   * As a whole, we felt the difficulty level of the project was Moderate.
+   * As we choose to extend AB-3, we needed an extensive understanding of the system design. This was required in order to extend the system in a way that seamlessly integrates with the existing AB-3.
+* Challenges Faced
+   * As every member worked on multiple issues and features, the following list are just some we picked out and is not exhaustive.
+     * Working with the `csv` format without a library required writing a parser from scratch
+     * Involved comparatively more UI work than AB-3, especially for onboarding components, which complicated testing.
+     * JavaFX UI elements not being consistent across platforms, requiring additional manual testing.
+     * Range and Chain commands were tough to test due to many possible test cases, requiring additional testing and fixing.
+     * Appointments subsystem was built upon the existing AB-3 system, requiring heavy modification and many additions to achieve the intended end product.
+     * In order to manage deadlines, we had to set workflows such as internal PR freeze deadlines and internal milestone closing deadlines.
+* Effort Required
+  * Extensive modification to the current code base.
+  * Extensive amount of tests written to cover as many scenarios as possible.
+  * We had extensive weekly meeting early in order to ensure every developer knows what is required for the week.
+* Achievements
+  * Built a product that we feel fulfills our initial targets.
+  * Achieved all `Must Have` User Stories.
+  * Met all milestones and deadlines, including internally set deadlines.
+* Reuse
+  * The overall design and structure took heavy inspiration from the original AB-3, and closely resembles it.
