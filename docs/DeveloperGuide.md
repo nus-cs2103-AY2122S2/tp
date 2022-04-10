@@ -98,11 +98,11 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-b 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete-b 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteBuyerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,8 +110,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddBuyerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddBuyerCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddBuyerCommandParser`, `DeleteBuyerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -195,7 +195,7 @@ Result:
     - Their House are equal (i.e, the Location and HouseType of the house matches)
 
 * An example:
-    - buyer's `PropertyToBuy`(after `edit` or `add`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
+    - buyer's `PropertyToBuy`(after `edit-b` or `add-b`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
         - `Name`: *Janald*
     
         - PropertyToBuy: 
@@ -224,7 +224,7 @@ Result:
 
 * We can match buyers with other less strict conditions as well.
 * For example, we can match buyers and sellers with only match:
-    - HouseTypes only (example: `COLONIAL`, Since buyers may be looking only for a specific HouseType, regardless of Location)
+    - HouseTypes only (example: `COLONIA`, Since buyers may be looking only for a specific HouseType, regardless of Location)
     - Location only (example: `Toa Payoh`, Since some buyers may like to buy a Property at a specific area, regardless of other conditions)
     - PriceRange only (Since buyers may just be looking for properties in their buy range)
 
@@ -235,11 +235,11 @@ Result:
 * An additional feature that could be implemented in the future.
 
 ### Add Buyer feature
-The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
+The `add-b` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
 **Step 1:**
 
-The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+The user types input E.g. `add-b n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
 
 **Step 2:**
 
@@ -247,19 +247,17 @@ The `execute(input)` method of `LogicManager`, a subclass of the Logic component
 An instance of the `AddressBookParser` will begin to parse the input into 2 main sections: the **command**
 and the **body** of the command.
 
-The main job of `AddressBookParser` at this step is to identify the `addbuyer` **command** which was supplied as the 1st word in the input string.
+The main job of `AddressBookParser` at this step is to identify the `add-b` **command** which was supplied as the 1st word in the input string.
 
 After which, control is handed over to the `AddBuyerCommandParser` component by calling its `AddBuyerCommandParser#parse(body)` method to parse the **body** which was separated out.
 
 **Step 3:**
 
-`AddBuyerCommandParser#parse(body)` verifies if required fields for `addbuyer` are present.
+`AddBuyerCommandParser#parse(body)` verifies if required fields for `add-b` are present.
 
 In our example, since `n/David p/12345678` was included, all required fields are present.
 
 At this step, the new `Buyer` will have been successfully created. A new `AddBuyerCommand` with the Buyer is returned to the `AddressBookParser` to the `LogicManager`
-
-![AddBuyerCommandObjectDiagram](images/AddBuyerCommandObjectDiagram.png)
 
 **Step 4:**
 
@@ -269,7 +267,7 @@ In this method, if the Buyer does not currently already reside in the applicatio
 
 (Refer to [Model component](#model-component) to see how Buyers are stored into the model)
 
-A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
+A new `CommandResult` representing the successful `add-b` command is initialized and returned.
 
 **Step 5:**
 
@@ -348,16 +346,16 @@ The Sequence Diagrams below summarizes the various steps involved:
 ---
 
 ### Add property for buyer feature
-The `add-ptb` command uses a similar mechanism as the `addbuyer` command mentioned [above](#add-buyer-feature), with the following differences:
+The `add-ptb` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
 
 1. An index needs to be specified along with the necessary fields
     E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
-2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 0 and Smaller than or equal to the size of the Buyer list).
-3. The updated buyer remains in the same position as before, while a new buyer is added to the end of the list
+2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and Smaller than or equal to the size of the displayed buyer list).
+3. The updated buyer remains in the same position as before.
 
 **\[Proposed\]** Alternatives considered:
 
-- Given the time, the add property to buy feature can be integrated with the `addbuyer` command to allow users to add properties with the buyer,
+- Given the time, the add property to buy feature can be integrated with the `add-b` command to allow users to add properties with the buyer,
 instead of doing it in 2 commands. 
   - Pros:
     - More flexibility for experienced users
@@ -369,11 +367,6 @@ instead of doing it in 2 commands.
   - Cons:
     - Hard to implement
     - Error prone
-
-### \[Proposed\] Add Property to sell feature
-The `add-pts` command is very similar to the above command with only slight differences:
-1. An additional field is required: `address` of the seller's house
-
 
 ### `sort` feature
 The `sort` command mechanism can be broken down into the following steps:
@@ -681,8 +674,8 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Run `java -jar addressbook.jar` in the directory containing the jar file.
+   3. Alternatively, double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -690,23 +683,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a client
-
-1. Deleting a client while all clients are being shown
-
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
