@@ -30,7 +30,7 @@ Given below are my contributions to the project.
     * Added description and instructions for clip and prioList command, supported with clear visuals. ([\#162](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/162))
   * Developer Guide:
     * Under [implementation section](../DeveloperGuide.md#Implementation), added descriptions on how clip and prioList works, supported with sequence diagrams. ([\#54](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/54), [\#162](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/162))
-    * Updated section on use cases.
+    * Updated section on use cases. ([\#176](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/176))
     * Added section on product scope. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
     * Added section on user stories. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
     * Added section on non-functional requirements. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
