@@ -36,7 +36,7 @@ Given below are my contributions to the project.
   * Implemented necessary comparator class for the additional fields and test cases.<br/>
 3. `Update GUI for Appointment` [#109](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/109):
   * Initially appointment title label reflected the color of the appointment status while the appointment information had no color label.
-  * Updated appointment title label to be one singular color label while appointment info status label had a color coding reflecting the status of the appointment. eg. `red` represent appointment is over, `green` represent appoint is today and `grey` represent appoint is in the future.<br/>
+  * Updated appointment title label to be one singular color label while appointment info status label had a color coding reflecting the status of the appointment. eg. `Red` represent appointment is over, `Green` represent appointment is today and `Grey` represent appointment is in the future.<br/>
 4. `Update GUI filtered list display` [#158](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/158):
   * Initially GUI display of filtered list formed by `find` and `filter` commands will prematurely refactor to display full unfiltered pet list when any command was executed.
   * Refined GUI filtered list behaviour to retain the filtered list display to improve user experience.
