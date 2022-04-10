@@ -1,0 +1,52 @@
+@startuml
+!include ../style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+class " __:Schedule__ " as Schedule {
+}
+
+class " __:DisjointAppointmentList__ " as DisjointAppointmentList {
+
+}
+
+class " __slotList:AppointmentSlotList__ " as AppointmentSlotList {
+    filteredRange = ("12-12-2022 12:00", "12-12-2022 15:00")
+}
+
+class "__slot1:AppointmentSlot__" as AppointmentSlot1 {
+    period = ("12-12-2022 12:00", "12-12-2022 13:00")
+}
+
+class "__slot2:AppointmentSlot__" as AppointmentSlot2 {
+    period = ("12-12-2022 14:00", "12-12-2022 14:30")
+}
+
+class "__appt1:Appointment__" as Appointment1 {
+    StartDateTime = "12-12-2022 13:00"
+    Duration = 60
+}
+
+class "__appt2:Appointment__" as Appointment2 {
+    StartDateTime = "12-12-2022 14:30"
+    Duration = 60
+}
+
+class "__:ModelManager__" as ModelManager {
+}
+
+Schedule -down-> DisjointAppointmentList
+DisjointAppointmentList -down-> Appointment1
+DisjointAppointmentList -down-> Appointment2
+ModelManager -down-> Schedule
+
+AppointmentSlotList -right-> Schedule
+
+ModelManager -down-> AppointmentSlotList
+AppointmentSlotList -down-> AppointmentSlot1
+AppointmentSlotList -down-> AppointmentSlot2
+
+@enduml

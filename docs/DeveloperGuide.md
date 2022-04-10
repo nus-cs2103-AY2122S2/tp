@@ -378,15 +378,19 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 
 #### Defensive `Schedule`
 
-`Schedule` implements the `ReadOnlySchedule` interface, which exposes only getter methods of the `Schedule` class. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule`. This prevents unintended modifications to the list of `Appointment` objects by external classes, and restricts that all modifications to `Appointment` objects must be made through `ModelManager`.
+`Schedule` implements the `ReadOnlySchedule` interface, which exposes only getter methods of the `Schedule` class. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule`. This prevents unintended modifications to the list of `Appointment` objects by external classes, and restricts that all modifications to the `Schedule` must be made through `ModelManager`.
 
 ![Read Only Schedule](images/ReadOnlyScheduleClassDiagram.png)
 
 #### Appointment Slot List
 
-The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since the list of `AppointmentSlot` objects for the `Schedule` are dependent on and change with the `Appointment` contained within it, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
-Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` are always consistent with the backing `Schedule`.
+
+The `AppointmentSlotList` must be configured with some `TimeRange` using the `AppointmentSlotList#updateFilteredRange(TimeRange, int)` method for it to generate `AppointmentSlot` objects.
+
+![Appointment Slot List](images/AppointmentSlotListObjectDiagram.png)
 
 #### Appointment and AppointmentSlot List Composition
 
@@ -396,7 +400,17 @@ Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered 
 * be chronologically sorted
 * be chronologically disjoint
 
-This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` also watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list to guarantee the 3 constraints listed above.
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list, ensuring that the 3 constraints listed above are satisfied.
+
+Using the above instance, the resultant `CompositeObservableList` is shown in the object diagram below.
+
+![Appointment Slot List](images/CompositeListObjectDiagram.png)
+
+<div markdown="span" class="alert alert-warning">
+
+:rotating_light: &nbsp; If the backing lists are not sorted, then the result list will also not be sorted.
+
+</div>
 
 ### Appointments Filtering Feature - `appointmentsbetween`
 
