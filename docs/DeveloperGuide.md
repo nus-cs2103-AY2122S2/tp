@@ -287,7 +287,6 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
   * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### Clear Filtered functionality
 The `ClearFiltered` commands works in tandem with the `Find` or `ListMembers` command. After the `Find`/`ListMembers` function populates
