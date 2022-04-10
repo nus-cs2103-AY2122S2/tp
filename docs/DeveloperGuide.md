@@ -953,6 +953,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a show (General Find)
    1. Prerequisites: None, but if the list is empty, all searches will lead to no results.
+      1. [Add shows](#adding-a-show) into the show list.
 
    2. Test case: Find single keyword
       1. Command: `find shingeki` <br>
@@ -1068,14 +1069,13 @@ testers are expected to do more *exploratory* testing.
 ### Suggesting a show
 
 1. Prerequisites: None.
-2. Launch Trackermon.
-3. Command: `suggest`
-  1. Test case: Displayed list of shows is empty.
-    2. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
-  2. Test case: Displayed list of shows only contains one show.
-    2. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.
-  3. Test case: Displayed list of shows with two or more show.
-    2. Expected: Trackermon returns a random show from the displayed list of shows.
+2. Command: `suggest`
+3. Test case: Displayed list of shows is empty.
+    1. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
+4. Test case: Displayed list of shows only contains one show.
+    1. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.
+5. Test case: Displayed list of shows with two or more show.
+    1. Expected: Trackermon returns a random show from the displayed list of shows.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -1092,8 +1092,7 @@ testers are expected to do more *exploratory* testing.
    2. Action: Select valid Trackermon data file to import.<br>
       Expected: Import succeeds, current show list is replaced with imported Trackermon data's show list.
 6. Test case: Cancelling import
-   1. Condition: None.
-   2. Action: Click "Cancel" button in File Explorer GUI.<br>
+   1. Action: Click "Cancel" button in File Explorer GUI.<br>
       Expected: Trackermon displays message saying `Import data aborted.`
 7. Test case: Importing corrupted Trackermon data file
    1. Condition: Corrupted Trackermon data file exists in storage. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
@@ -1107,7 +1106,6 @@ testers are expected to do more *exploratory* testing.
 ### Exporting Trackermon data
 
 1. Prerequisites: None.
-2. Launch Trackermon.
 3. Command: `export`
 4. Test case: Exporting data to directory without existing `trackermon.json`
     1. Condition: Directory without existing `trackermon.json` exists.
@@ -1118,12 +1116,10 @@ testers are expected to do more *exploratory* testing.
     2. Action: Select directory fulfilling condition to export Trackermon data to.<br>
        Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.
 6. Test case: Renaming exported data in File Explorer GUI.
-    1. Condition: None.
-    2. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.<br>
+    1. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.<br>
        Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
 7. Test case: Cancelling export
-    1. Condition: None.
-    2. Action: Click "Cancel" button in File Explorer GUI.<br>
+    1. Action: Click "Cancel" button in File Explorer GUI.<br>
        Expected: Trackermon displays message saying `Export data aborted.`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
