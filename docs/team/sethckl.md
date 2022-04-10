@@ -17,10 +17,13 @@ Given below are my contributions to the project.
   * contains new Gender and Age attributes to facilitate Human Resource needs.
   * contains new HiredStatus property which is referenced by Interviews and Positions for functionality.
 
-* Other notable contributions to support this feature:
-  * Refactored classes and parameters with Persons to Applicant in the codebase to reflect evolving AB-3 to 
+* Other notable contributions:
+  * Added and updated sample test data to support new Gender and Age attributes for Applicant.
+  * Added and updated unit tests for Applicant.
+  * Added and updated unit tests for Storage.
+  * Refactored classes and parameters with Persons to Applicant in the codebase to reflect evolving AB-3 to
     HireLah.
-  * Added and updated sample test data to support new Gender and Age attributes.
+  
 
 * **Code contributed**:
   * Contributed over [1700+ Loc](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=SethCKL&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
