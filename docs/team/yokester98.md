@@ -47,5 +47,6 @@ Given below are my contributions to the project.
 * **Community**:
     * Reviewed PRs of teammates
       * Total number of PRs reviewed: 18
+      * Examples: [#81](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/81) [#90](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/90) [#101](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/101)
     * Tested PRs and reported bugs to teammates.
     * Contributed to discussions on Telegram group, assisted teammates with their code and was open to receiving feedbacks.
