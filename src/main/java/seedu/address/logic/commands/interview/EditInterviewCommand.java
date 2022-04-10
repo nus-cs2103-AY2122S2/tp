@@ -119,6 +119,8 @@ public class EditInterviewCommand extends EditCommand {
             throw new CommandException(String.format(Messages.MESSAGE_APPLICANT_SAME_POSITION,
                     editedInterview.getApplicant().getName().fullName,
                     editedInterview.getPosition().getPositionName().positionName));
+        } else if (applicantEdited && editedInterview.getApplicant().isHired()) {
+            throw new CommandException(Messages.MESSAGE_APPLICANT_ALREADY_HIRED);
         }
 
         boolean dateEdited = !(interviewToEdit.getDate().equals(editedInterview.getDate()));
