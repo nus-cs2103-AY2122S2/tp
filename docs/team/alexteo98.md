@@ -10,7 +10,7 @@ HackNet helps computing students find teammates to do projects with. It allows u
 Given below are my contributions to the project.
 
 * **New Feature**:
-    * [Sort persons by Skills](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/31)
+    * [Filter persons by Skills](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/31)
       * <b>What it does: </b> This new feature allows for the user to filter out persons in HackNet who do not possess the specified skills.
       * <b>Justification: </b> This new feature is one of the features built on top of the Skills feature. It allows the user to easily find persons who are a good fit for his team that requires a certain skill.
       * <b>Highlights: </b> This feature was initially implemented to only accept one skill as its argument, but was updated to accept more than one skill as its argument after the bug was found.
