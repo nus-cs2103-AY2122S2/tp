@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -103,6 +104,13 @@ public interface Model {
     void addOnFilteredStudentList(Predicate<Student> predicate);
 
     /**
+     * Returns whether the model's UniqueStudentList is empty.
+     *
+     * @return true is the model's UniqueStudentList is empty and false otherwise.
+     */
+    boolean isStudentListEmpty();
+
+    /**
      * Returns true if a lab with the same identity as {@code lab} exists in the TAddressBook.
      */
     boolean hasLab(Lab lab);
@@ -118,4 +126,9 @@ public interface Model {
      * {@code lab} must already exist in the TAddressbook.
      */
     void removeLab(Lab lab);
+
+    /**
+     * Returns the list of labs in the Model as an ArrayList.
+     */
+    ArrayList<Lab> getLabsAsArrayList();
 }

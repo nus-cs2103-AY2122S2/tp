@@ -155,6 +155,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isStudentListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasLab(Lab lab) {
             throw new AssertionError("This method should not be called.");
         }
@@ -166,6 +171,11 @@ public class AddCommandTest {
 
         @Override
         public void removeLab(Lab lab) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Lab> getLabsAsArrayList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -193,6 +203,16 @@ public class AddCommandTest {
                 public MasterLabList getMasterLabList() {
                     return new MasterLabList();
                 }
+
+                @Override
+                public boolean isStudentListEmpty() {
+                    return true;
+                }
+
+                @Override
+                public ArrayList<Lab> getLabsAsArrayList() {
+                    return new ArrayList<>();
+                }
             };
         }
 
@@ -205,6 +225,11 @@ public class AddCommandTest {
         @Override
         public void addLab(Lab lab) {
             requireNonNull(lab);
+        }
+
+        @Override
+        public ArrayList<Lab> getLabsAsArrayList() {
+            return getAddressBook().getLabsAsArrayList();
         }
     }
 
@@ -229,6 +254,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ArrayList<Lab> getLabsAsArrayList() {
+            return new ArrayList<>();
         }
     }
 

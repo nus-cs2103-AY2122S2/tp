@@ -18,11 +18,12 @@ public class RemoveLabCommandParser implements Parser<RemoveLabCommand> {
     @Override
     public RemoveLabCommand parse(String args) throws ParseException {
         try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_LAB);
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LAB);
+
             if (!ArgumentTokenizer.isPrefixPresent(argMultimap, PREFIX_LAB) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveLabCommand.MESSAGE_USAGE));
             }
+
             Lab toRemove = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
             return new RemoveLabCommand(toRemove);
         } catch (ParseException pe) {
