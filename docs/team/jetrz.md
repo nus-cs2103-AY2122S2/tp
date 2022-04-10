@@ -10,13 +10,13 @@ ClientConnect is a desktop client address book application for insurance agents 
 Given below are my contributions to the project.
 
 * **New Feature**:
-  * ***clip*** command 
+  * ***clip*** command ([\#34](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/34), [\#70](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/70))
     * Functionality: Allows efficient copying of a client's information onto the user's clipboard.
     * Justification: It is tedious to manually copy out all of a client's details as they can be long at times.
     * Enhanced in v1.3 to allow users to specify either name or index for the client they wish to copy.
     * `NameExistsPredicate` class to compare & filter client list with provided `Name`, for facilitation of this command.
     * Testing for all relevant classes.  
-  * ***prioList*** command 
+  * ***prioList*** command  ([\#64](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/64))
     * Functionality: Allows user to sort and display their client list by the priority level of their tags.
     * Justification: Makes it easy for the user to view which clients should be prioritised.
     * `TagPriorityComparator` class to compare `Persons` and their tag priority level, for facilitation of this command.
@@ -37,6 +37,6 @@ Given below are my contributions to the project.
   
 * **Project management**:
   * Assigned & closed issues
-  * Reviewed and merged PRs
+  * Reviewed and merged PRs ([\#32](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/32), [\#65](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/65))
   * Created and assigned tags
   * Submitted all assigned deliverables by given milestone deadlines
