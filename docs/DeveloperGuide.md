@@ -151,7 +151,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -222,7 +222,16 @@ object will be created, and is subsequently executed by the `LogicManager`.
    and optional fields (`phone`, `telegramHandle`, `email`), by using their respective parse methods in `ParserUtil`.
 
 
-   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   | Field          | Parse Methods                              |
+   |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> If an optional field is not supplied (i.e. not found in the `ArgumentMultimap`), 
@@ -293,7 +302,16 @@ object will be created, and is subsequently executed by the `LogicManager`.
    be executed using the parse methods in `ParserUtil` that are specific to the field. In the case of indices, an `Index` array is created in place of the `StudentId`.
     </div>
 
-   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   | Field          | Parse Methods                              |
+   |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
 8. A new `DeleteCommand` will be created (using the `StudentId` or `Index` array returned in Step 8) and returned to the `LogicManager`.
 9. The `LogicManager` will then call `DeleteCommand#execute(Model model)`.
@@ -345,7 +363,16 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteModuleCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
-   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   | Field          | Parse Methods                              |
+   |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
 8. The `DeleteModuleCommandParser` will create a new `ModuleCodeContainsKeywordsPredicate`.
 9. A new `DeleteModuleCommand` will be created (using the `ModuleCodeContainsKeywordsPredicate` returned in Step 8) and returned to the `LogicManager`.
@@ -690,7 +717,16 @@ object will be created, and is subsequently executed by the `LogicManager`.
    be executed using the parse methods in `ParserUtil` that are specific to the field.
     </div> 
 
-   ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+   | Field          | Parse Methods                              |
+   |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
 8. The `FindCommandParser` will create a new `Predicate`.
 9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
