@@ -266,8 +266,8 @@ As the `Tag` objects are moved to its own subsystem, there is a need to synchron
 For operations involving `Person`, if there are missing tags that do not exist in the `UniqueTagList`, those tags will be added into the system before performing the operation on `Person`. 
 For operations involving `Tag`, the changes will propagate to `Person` objects that contain the specified `Tag`. See the edit tag feature below for an example of `Tag` propagation.
 
-To ensure that the tags and persons are properly synchronised, some modifications are made to `AddressBook#setPersons()` and `AddressBook#setTags()`. In the case of `AddressBook#setPersons()`, the `AddressBook` will first strip any `Tag` objects from `Person` that are not in the new list before setting the new tags to the `AddressBook`.
-In the case of `AddressBook#setTags()`, `AddressBook` will add any tags that are in `Person` but not in the tag list. This will ensure that all `Tag` objects are recorded before setting the new persons to the `AddressBook`.
+To ensure that the tags and persons are properly synchronised, some modifications are made to `AddressBook#setPersons()` and `AddressBook#setTags()`. In the case of `AddressBook#setTags()`, the `AddressBook` will first strip any `Tag` objects from `Person` that are not in the new list before setting the new tags to the `AddressBook`.
+In the case of `AddressBook#setPersons()`, `AddressBook` will add any tags that are in `Person` but not in the tag list. This will ensure that all `Tag` objects are recorded before setting the new persons to the `AddressBook`.
 
 Below are the modified sequence diagrams of `AddressBook#setPersons()` and `AddressBook#setTags()`
 
