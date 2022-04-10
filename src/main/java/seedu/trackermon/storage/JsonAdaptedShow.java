@@ -92,7 +92,7 @@ class JsonAdaptedShow {
             throw new IllegalValueException("Rating Failed");
         }
 
-        if (!Rating.isValidScore(rating)) {
+        if (!Rating.isValidRating(rating)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
 

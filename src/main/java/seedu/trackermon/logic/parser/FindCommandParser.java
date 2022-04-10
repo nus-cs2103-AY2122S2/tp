@@ -98,7 +98,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             keywordsArr = getRatingKeywords(input);
             for (int i = 0; i < keywordsArr.length; i++) {
                 keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
-                if (!Rating.isValidScore(keywordsArr[i])) {
+                if (!Rating.isValidRating(keywordsArr[i])) {
                     throw new ParseException(String.format(MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
                 }
             }

@@ -21,7 +21,7 @@ title: User Guide
     * [General find](#general-find)
     * [Precise find](#precise-find)
   * [Sorting the shows `sort`](#sorting-the-shows-sort)
-  * [Suggesting a show `suggest`](#suggest-a-show-suggest)
+  * [Suggesting a show `suggest`](#suggesting-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -32,7 +32,7 @@ title: User Guide
 
 ## Introduction
 
-Always accessing MyAnimeList or IMDB to record down the shows you watched? Or finding it difficult to search the different websites that stored your show information? Fret not because **Trackermon** is the app just for you! But hold on, you may be wondering what is Trackermon?
+Always accessing MyAnimeList or IMDB to record down the shows you have watched? Finding it difficult to search the different websites that store your shows' information? Fret not, because **Trackermon** is the application just for you! But hold on, you may be wondering, what is Trackermon?
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch. You can even review these shows!
 
@@ -65,7 +65,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
+4. Double-click the file to start Trackermon. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
    * Do note that for Linux, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! 
    * Do note that if double-clicking fails to start **Trackermon**, open a Command Prompt/Terminal in **Trackermon**'s _home folder_ and input `java -jar Trackermon.jar` to start **Trackermon**<br><br>
    
@@ -97,7 +97,7 @@ You can start communicating with Trackermon using the command box. Some example 
 
 * **`delete`** `3` : Deletes the **3rd show** shown in the current list.
 
-* **`exit`** : Exits the app.
+* **`exit`** : Exits Trackermon.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -124,9 +124,11 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | INDEX      | None   | The index of the show as shown in the show list                                     |
 | NAME       | n/     | The name to use for a show                                                          |
 | STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
-| TAG        | t/     | The tag to label a show                                                             |
-| COMMENT    | c/     | The comment to describe a show                                                      |
 | RATING     | r/     | The rating to give a show                                                           |
+| COMMENT    | c/     | The comment to describe a show                                                      |
+| TAG        | t/     | The tag to label a show                                                             |
+| ORDER      | \{n/ s/ r/ t/\} | The order in which a prefix will sort the show list                        |
+| SEQUENCE   | so/    | The order of prefixes to sort the show list                                         |
 
 <div markdown="block" class="alert alert-info">
 
@@ -150,6 +152,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* If an invalid prefix is used after a valid prefix, an error message will be displayed!
+
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -165,16 +169,17 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 | Parameter | Prefix | Condition                                                                                                                                                                                                                                                                                                                          |
 |-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`                                                                                                                                                                                                                   |
-| INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
-| NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
-| STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                               |
-| RATING    | r/     | Rating must be a **whole number** from **0 to 5**.                                                                                                                                                                                                                                                                    |
-| COMMENT   | c/     | A comment can contain **any text**, but **emojis will be removed** from input.                                                                                                                                                                                                                                                                                                                      |
-| TAG       | t/     |  Tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters.                                                         |
+| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2` |
+| INDEX     | None   | A **positive whole number within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**. |
+| NAME      | n/     | A show name must be **unique** and contain up to 500 [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
+| STATUS    | s/     | A status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_. |
+| RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
+| COMMENT   | c/     | A comment can only contain up to 300000 [**ASCII**](#glossary) values. |
+| TAG       | t/     | A tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters. |
+| ORDER      | \{n/ s/ r/ t/\} | An order can only be either `asc` or `dsc`.                |
+| SEQUENCE  | so/    | A sequence lists out the order of **all** the prefixes used to sort the show list. It can only contain the case-insensitive full names of the prefixes used. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
 
 ## Features
 
@@ -319,7 +324,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 ### Finding a show: `find`
 #### General find
 
-**Description (General Find):** Wanting to search for a show across all [parameters](#command-structure)? Find shows containing the search words!
+**Description (General Find):** Wanting to search for a show across the name, status, rating, tag [parameters](#command-structure)? Find shows containing the search words!
 
 **Format (General Find):** `find KEYWORD…​`
 
@@ -330,9 +335,9 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about General Find:**<br>
-* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
+* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching name, status, rating, tag [parameters](#command-structure) will be returned.
 * Refer to [parameter conditions](#parameter-conditions) section about `KEYWORD`.
-* `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
+* `find scary movie 4` displays all the shows in the list that contain the keywords `scary`, `movie` or `4`, whether it is a name, status, rating, or tag.
 
 </div>
 
@@ -390,108 +395,42 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-danger">
 
 :exclamation: **Caution:** 
-* You cannot undo the sort once you have applied it! 
-* Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
-* A successful sort command followed by an add command will still result in the new show being added to the last index!  
+* You cannot undo the sort once you have applied it!
+* Trackermon will only rearrange the show list after each successful sort command!
+* A successful sort command followed by an add command will still result in the new show being added to the last index!
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
-**Explanation** 
+**Explanation:** 
 
-Let's say you want to sort by name in ascending order.
-Use `sort n/asc`.
+To sort your show list by rating ascendingly, you can key in `sort r/asc`! For more examples, refer to this table below!
 
-Let's say you want to sort by name in descending order.
-Use `sort n/dsc`.
+| Sort by    | Ascending Order | Descending Order | Notes |
+| ---------- | --------------- | ---------------- | ----- |
+| name       | n/asc           | n/dsc            | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
+| status     | s/asc           | s/dsc            | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch`   |
+| rating     | r/asc           | r/dsc            |       |
+| tag        | t/asc           | t/dsc            | Tag is sorted by number of tags |
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** We sort name lexicographically, in other words, we sort it by comparing alphabets and numbers. We do not compare by combining the numbers into a unit. For example, in ascending order, 100Doggy comes before 69Doggy!   
+:exclamation: **Take note:** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order. By default, Trackermon prioritises sorting in the following order if the criteria are used: 
+
+* `name` > `status` > `rating` > `tag`
 </div>
 
-
-Let's say you want to sort by status in ascending order.
-Use `sort s/asc`. 
-
-Let's say you want to sort by status in descending order.
-Use `sort s/dsc`.
+To sort by status in ascending order, then by name in ascending order, use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
-</div>
-
-
-Let's say you want to sort by number of tags in ascending order.
-Use `sort t/asc`.
-
-Let's say you want to sort by number of tags in descending order.
-Use `sort t/dsc`.
-
-<div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** We sort tags by number of tags and not by comparing the names of tags.
-</div>
-
-Let's say you want to sort by rating in ascending order.
-Use `sort r/asc`.
-
-Let's say you want to sort by rating in descending order.
-Use `sort r/dsc`.
-
-Let's say you want to sort by name in ascending order then by status in ascending order.
-Use `sort n/asc s/asc`.
-
-<div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order
-</div>
-
-Therefore, let's say you want to sort by status in ascending order then by name in ascending order.
-Use `sort n/asc s/asc so/statusname`.
-
-<div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** We use `so/SEQUENCE` to swap the priority of the sorting criteria! By default, Trackermon always prioritises sorting in the following order if the criteria are used:
-
-  1. name
-  2. status
-  3. rating
-  4. tag
-
-So, use the "tagratingstatusname" as the `SEQUENCE` if you want to swap the ordering to:
-1. tag
-2. rating
-3. status
-4. name
-
-Additionally, when using `so/` prefix, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
-So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not provided, Trackermon will tell you the input is invalid!
-</div>
-
-<div markdown="block" class="alert alert-warning">
-
-:bulb: **Tip:** Summary:
-* `Sort` will sort according to the [prefixes](#command-structure).<br>
-* Use `n/` if you want to sort by name.
-* Use `s/` if you want to sort by status. We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
-* Use `t/` if you want to sort by number of tags.
-* Use `r/` if you want to sort by rating.
-* For the above prefixes, you have to specify the `ORDER` right after the prefix.
-* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
-* The criteria are name, status, tag, rating
-* If two or more of the above criteria are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
-* Use `so/` if you want to reorder the priority and state the `SEQUENCE`
-* List the `SEQUENCE` by listing out the full name of the criteria used in the order you want.
-* For example: you want to sort by rating, then status, followed by name, and finally tag, `SEQUENCE` will be "ratingstatusnametag"
-* `SEQUENCE` input is case-insensitive and spaces between the criteria does not matter. So the input "RaTing Status NAMETag" works too!
-* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
+:exclamation: **Take note:** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
-* By not entering any prefixes, it will sort by name in ascending order.
-* Enter the right amount of prefixes! For example: use only s/ if you are sorting by status.
-* The `ORDER` must be asc or dsc!
-* The `SEQUENCE` must contain the full name of all the criteria used!
-* For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
+* `sort` can also be used as is! It will sort by name in ascending order and is treated as a single word command that ignores extraneous parameters.
+* Refer to [parameter conditions](#parameter-conditions) section about `ORDER` `SEQUENCE`.
+* For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "ratingtagrating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
@@ -511,7 +450,7 @@ So if you use `sort n/asc s/asc so/haha`, the required criteria are name and sta
 
 ---
 
-### Suggest a Show: `suggest`
+### Suggesting a show: `suggest`
 
 **Description:** Wanting to find a random show? This suggests a random show from the displayed list!
 
@@ -616,11 +555,12 @@ So if you use `sort n/asc s/asc so/haha`, the required criteria are name and sta
 
 | Term                               | Description                                                                                                                                                                          |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                                                    |
+| **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                |
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Alphanumeric**                   | A character that is either a letter or a number.                  |
 | **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
+| **ASCII**                          | ASCII is a character encoding standard containing [128 characters](https://www.techonthenet.com/ascii/chart.php). It includes the numbers 0-9, upper and lower case English letters (A-Z) and certain special characters. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)

@@ -17,10 +17,10 @@ Given below are my contributions to the project.
     * Issues: General GUI [[\#74](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/74)], Rating GUI [[\#70](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/70)], Comment GUI [[\#73](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/73)]
     * PRs: [[\#130](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)], [[\#170](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/170)], [[\#165](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/165)]
 
-    <img src="../images/Ui.png" width="500px">>
+    <img src="../images/Ui.png" width="500px">
   
   * _Fixed storage system on MacOS and Linux not saving to the correct location_
-    * Details: MacOS and Linux data file path did not store together with the jar file. Worked together with [arcornior](arcornior.md) as he tested the storage system on MacOS and Linux.
+    * Details: MacOS and Linux data file path did not store together with the jar file. Worked together with [arcornior](http://github.com/arcornior) as he tested the storage system on MacOS and Linux.
     * Issues: Storage Fix [[\#168](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/168)], Editor Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)]
     * PRs: [[\#167](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/167)], [[\#177](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/177)]
 
@@ -44,5 +44,6 @@ Given below are my contributions to the project.
     * Formatted the structure of the manual testing section.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [[\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134)], [[\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166)]
+  * PRs reviewed (with non-trivial review comments): [[\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134)], [[\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166)], [[\#299](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/299)], [[\#290](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/290)]
   * Assisted [arcornior](http://github.com/arcornior) with his Import/Export issues. [[\#162](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/162)]
+  * Reported bugs: [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)], [[\#256](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/256)], [[\#135](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/135)], [[\#171](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/171)]
