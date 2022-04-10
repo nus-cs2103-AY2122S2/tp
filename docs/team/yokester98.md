@@ -49,4 +49,3 @@ Given below are my contributions to the project.
       * Total number of PRs reviewed: 18
     * Tested PRs and reported bugs to teammates.
     * Contributed to discussions on Telegram group, assisted teammates with their code and was open to receiving feedbacks.
-    
