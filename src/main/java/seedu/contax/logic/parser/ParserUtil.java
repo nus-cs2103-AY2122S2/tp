@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.commons.util.DateUtil;
 import seedu.contax.commons.util.StringUtil;
@@ -245,7 +246,7 @@ public class ParserUtil {
      */
     public static String parseAndCreateNewCommand(String commandInput, String index) throws ParseException {
         if (commandInput.trim().isEmpty()) {
-            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ""));
         }
         StringBuilder output = new StringBuilder();
         commandInput = commandInput.trim();
