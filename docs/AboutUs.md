@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/geralddtan.md)]
 
 * Role: Developer
-* Responsibilities: Backend
+* Responsibilities: In charge of add order functionality
 
 ### Pun Hui Min
 
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/punnyhuimin.md)]
 
 * Role: Developer
-* Responsibilities: UI/ UX
+* Responsibilities: In charge of edit order functionality
 
 ### Chua Yi Fang
 
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/onefangg.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: In charge of find order functionality
 
 ### Declan Lee Ler
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/declanleeler.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: In charge of incomplete orders functionality
 
 
 ### Darshan P Daryanani Dave
@@ -58,4 +58,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/darshan152.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of linking order to person functionality
