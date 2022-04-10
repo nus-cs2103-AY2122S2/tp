@@ -441,6 +441,8 @@ Given below is the implementation of the find task command when the user enters 
 
 ![UML Diagram for finding task/employee](images/FindTaskClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Tagging Task to Employee feature
 
 #### What is Tagging Task to Employee feature about?
