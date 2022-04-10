@@ -2,8 +2,8 @@ package woofareyou.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
+import woofareyou.model.PetBook;
 
 /**
  * Clears WoofAreYou.
@@ -11,13 +11,13 @@ import woofareyou.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "WoofAreYou has been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setPetBook(new PetBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

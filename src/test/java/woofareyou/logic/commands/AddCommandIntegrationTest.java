@@ -2,7 +2,7 @@ package woofareyou.logic.commands;
 
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandFailure;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,14 +22,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPetBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newPet_success() {
         Pet validPet = new PetBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPetBook(), new UserPrefs());
         expectedModel.addPet(validPet);
 
         assertCommandSuccess(new AddCommand(validPet), model,
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePet_throwsCommandException() {
-        Pet petInList = model.getAddressBook().getPetList().get(0);
+        Pet petInList = model.getPetBook().getPetList().get(0);
         assertCommandFailure(new AddCommand(petInList), model, AddCommand.MESSAGE_DUPLICATE_PET);
     }
 

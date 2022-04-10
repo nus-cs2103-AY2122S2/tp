@@ -82,7 +82,7 @@ public class PetTest {
         editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).build();
         assertFalse(BOBA.equals(editedAlice));
 
-        // different email -> returns false
+        // different ownerName -> returns false
         editedAlice = new PetBuilder(BOBA).withOwnerName(VALID_OWNER_NAME_BOB).build();
         assertFalse(BOBA.equals(editedAlice));
 

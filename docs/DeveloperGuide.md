@@ -3,8 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
-
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -301,7 +300,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
 
 
-### Undofeature
+### Undo feature
 
 #### Implementation
 

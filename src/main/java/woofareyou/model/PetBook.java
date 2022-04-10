@@ -9,10 +9,10 @@ import woofareyou.model.pet.Pet;
 import woofareyou.model.pet.UniquePetList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the pet-book level
  * Duplicates are not allowed (by .isSamePet comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class PetBook implements ReadOnlyPetBook {
 
     private final UniquePetList pets;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         pets = new UniquePetList();
     }
 
-    public AddressBook() {}
+    public PetBook() {}
 
     /**
-     * Creates an AddressBook using the Pets in the {@code toBeCopied}
+     * Creates an PetBook using the Pets in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public PetBook(ReadOnlyPetBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code PetBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyPetBook newData) {
         requireNonNull(newData);
         setPets(newData.getPetList());
     }
@@ -58,7 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// pet-level operations
 
     /**
-     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     * Returns true if a pet with the same identity as {@code pet} exists in PetBook.
      */
     public boolean hasPet(Pet pet) {
         requireNonNull(pet);
@@ -66,15 +66,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a pet to the address book.
-     * The pet must not already exist in the address book.
+     * Adds a pet to the pet book.
+     * The pet must not already exist in the pet book.
      */
     public void addPet(Pet p) {
         pets.add(p);
     }
 
     /**
-     * Sorts the list of pets in the address book.
+     * Sorts the list of pets in the pet book.
      * Currently, it will sort the list of pets according to the field provided.
      */
     public void sortPets(String field) {
@@ -83,8 +83,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given pet {@code target} in the list with {@code editedPet}.
-     * {@code target} must exist in the address book.
-     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     * {@code target} must exist in WoofAreYou.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in WoofAreYou.
      */
     public void setPet(Pet target, Pet editedPet) {
         requireNonNull(editedPet);
@@ -94,8 +94,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PetBook}.
+     * {@code key} must exist in the pet book.
      */
     public void removePet(Pet key) {
         pets.remove(key);
@@ -117,8 +117,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && pets.equals(((AddressBook) other).pets));
+                || (other instanceof PetBook // instanceof handles nulls
+                && pets.equals(((PetBook) other).pets));
     }
 
     @Override
