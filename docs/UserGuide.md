@@ -130,7 +130,7 @@ You can enter commands into the command box and press enter to execute them.
 
 *Alternatively*,  
 
-You can interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button.
+You can interact with the application through buttons, such as the <img align="center" src="images/ui-icons/add-product.png" alt="Add Product" height="25"/> button.
 
 Either way, the result window will then display the results of executing the command. The display table will also update accordingly based on the command run.
 

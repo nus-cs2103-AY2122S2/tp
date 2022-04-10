@@ -2,154 +2,187 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
-
-<hr/>
 
 <style>
+   hr {
+      display: none
+   }
+
+   h1, h2, h3, h4, h5 {
+      margin-top: 10px !important;
+   }
+
    p img {
       display: block;
       margin: 0 auto 30px;
    }
+
+   .btn {
+      display: unset;
+      margin: 0;
+   }
+
+  .alert {
+      border: none;
+      border-left: solid 5px;
+      padding: 25px;
+      border-radius: 5px;
+      background-image: none;
+  }
+
+  .alert-primary {
+      color: #619620;
+      border-color: #82C92A;
+      background-color: #82C92A20;
+  }
+
+  .alert-warning {
+      color: #ED4242;
+      border-color: #ED4242;
+      background-color: #ED424220;
+  }
+
+  .alert-info {
+      color: #0B8CF5;
+      border-color: #6DB0F0;
+      background-color: #6DB0F020;
+  }
 </style>
 
-## **Acknowledgements**
+<h2>Acknowledgements</h2>
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
+* Most of the images in UI are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
 
-* The Ui design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+* The UI design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
 
-<hr/>
-
-## **Setting up, getting started**
+<h2>Setting up, getting started</h2>
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
-<hr/>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+<h2>Table of Contents</h2>
+
+* Table of Contents
+{:toc}
+
+<hr />
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" alt="Architecture diagram" width="260">
 
-The ***Architecture Diagram*** given above explains the high-level design of the app.
+The Architecture Diagram given above explains the high-level design of the app.
 
 Given below is a quick overview of the main components and how they interact with each other.
 
-**Main components of the architecture**
+<h5>Main components of the architecture</h5>
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At app launch: Initializes and connects the components in the correct sequence.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-
-The rest of the App consists of four components.
+The core of the App consists of four components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
+Lastly, [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+<div style="page-break-after: always;"></div>
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+<h5>How the architecture components interact with each other</h5>
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" alt="Sequence diagram for the architecture" width="600">
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="320" />
 
-The sections below give more details of each component.
+The following sections will provide more detail about each component's structure.
 
-### Ui component
+<div style="page-break-after: always;"></div>
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java)
+### UI component
 
-The diagram below shows a simplified view of the Ui component.
+**API**: [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java).
+
+The diagram below shows a simplified view of the `Ui` component.
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-`XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc
+`XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc.
 
-The Ui consists of a `UiManager` that implements the Façade interface `Ui`.
+The UI consists of a `UiManager` that implements the Façade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow. 
 
-`UiManager` consists of a `MainWindow` that holds all Ui components of the application. 
+By having `XXX_Ui` inherit from `UiComponent`, we allow nagivation from `XXX_Ui` to `MainWindow`. The navigation is helpful for some UI components that need to call methods in `UiManager`.
 
-`UiComponent` is an abstract class that contains a reference to the MainWindow. 
+For example, `CommandBox` calls the method `executeCommand` in `MainWindow` when the user enters a command.
 
-By having `XXX_Ui` inherit from `UiComponent`, we enabled nagivation from `XXX_Ui` to MainWindow. 
+<div style="page-break-after: always;"></div>
 
-The navigation is helpful for some Ui components that are required to call methods in `UiManager`.
+<h4>The Table component</h4>
 
-For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
+UI components that are related to the main display table are grouped under the `Table` package. The diagram below shows a simplified internal structure of `Table`.
 
-#### The Structure of The Table Component
+<img src="images/UiTableDiagram.png" alt="Structure of the Table Component" width="360">
 
-Ui components that are related to the main display table are grouped in the `Table` package
+The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` objects that represent `Product`. Subsequently, each `ProductCard` may contain `ItemTable` which has multiple `ItemCard` objects to represent `Item`.
 
-The diagram below shows a simplified internal structure of `Table`.
+<div style="page-break-after: always;"></div>
 
-![Structure of the Table Component](images/UiTableDiagram.png)
+<h4>The Popup component</h4>
 
+UI components that are related to a popup window are grouped under the `Popup` package. The diagram below shows a simplified internal structure of `Popup`.
 
-The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` that represent `Product`.
+<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="340">
 
-Subsequently, each `ProductCard` may contains `ItemTable` which has multiple `ItemCard` to represent `Item`.
+`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc. The `MainWindow` contains a `PopupHandler` that provides APIs for operations related to a popup window.
 
-#### The Structure of The Popup Component
+Every popup inherits the `Popup` abstract class which contains the implementation of the common methods required in all popups, e.g `show()`, `hide()`, `setFeedbackToUser()`, etc.
 
-Ui components that are related to a popup are grouped in the `Popup` package
+The abstract class `Popup` inherits `UiComponent` for navigability to `MainWindow`.
 
-The diagram below shows a simplified internal structure of `Popup`.
+<div style="page-break-after: always;"></div>
 
-![Structure of the Popup UI](images/UiPopupDiagram.png)
+<h4>The Control component</h4>
 
-`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+UI components that are related to the `ControlBox` are grouped under the `Control` package. The diagram below shows a simplified internal structure of `Control`.
 
-The `MainWindow` contains a `PopupHandler` that provides APIs for operations related to popup.
+<img src="images/UiControlDiagram.png" alt="Structure of the Control UI" width="300">
 
-Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups
-
-e.g `show()`, `hide()`, `setFeedbackToUser()`, etc
-
-The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
-
-#### The Structure of The Control Component
-
-Ui components that are related to the `ControlBox` are grouped in the `Control` package.
-
-The `ControlBox` is the box located just above the main display table. Its main usage is to hold `Add Product` button and `Filter` tags.
-
-The diagram below shows a simplified internal structure of `Control`.
-
-![Structure of the Popup UI](images/UiControlDiagram.png)
-
-
+The `ControlBox` is the box located just above the main display table. It holds the <img class="btn" align="center" src="images/ui-icons/add-product.png" alt="Add Product" height="25"/> button and `Filter` tags.
 
 The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represent each `AttributeFilter`.
 
-#### More about Ui
+<h4>More about Ui</h4>
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in corresponding `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view) folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-The css files can be found in [`src/main/resources/view/css`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/css), the images used are located in [`src/main/resources/images`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/images)
+The css files can be found in [`src/main/resources/view/css`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/css).
+
+The images used are located in [`src/main/resources/images`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/images).
 
 The `UI` component,
 
@@ -158,57 +191,72 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Product`, `Item` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+The diagram below shows a simplified view of the `Logic` component.
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
+
 1. When `Logic` is called upon to execute a command, it uses the `IBookParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a product).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-Commands are separated into different packages depending on its functionalities. Thus,the commands package includes the item package for item commands, product package for product commands.
-The rest of the commands that do not fit into those two are directly under the command package.
+Commands are separated into different packages depending on its functionalities. Thus, the commands package includes the item package for item commands, product package for product commands. The rest of the commands that do not fit into those two are directly under the command package.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+   :information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X). But due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `IBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `IBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+The diagram below shows a simplified view of the `Model` component.
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
-* stores the IBook data i.e., all `Product` objects (which are contained in a `UniqueProductList` object).
+* stores the IBook data, i.e. all `Product` objects (which are contained in a `UniqueProductList` object).
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the current `ProductFilter` which is applied to the _filtered_ list.
-* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
+* stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 A more detailed representation of the `Product` class is shown below which includes more details regarding the `Item` class.
 
 * The `Item` object enforces a two-way relationship with `Product`.
-* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item`.
+* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item` objects.
 
 <img src="images/DetailedModelClassDiagram.png" width="450" />
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -227,6 +275,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 <hr/>
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -237,86 +287,78 @@ This section describes some noteworthy details on how certain features are imple
 
 The diagram below shows a simplified internal structure of `Popup`.
 
-![Structure of the Popup UI](images/UiPopupDiagram.png)
+<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="340">
 
 `PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
 The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
 
 The API provided by `PopupHandler` are:
-* `isShowing()` Checks if any of the popup is showing
-* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in the showing popup
-* `showPopupXXX()` Shows `PopupXXX`
-* `HidePopup()` Hides the showing popup
+* `isShowing()` checks if any of the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` shows feedback to user in the showing popup
+* `showPopupXXX()` shows `PopupXXX`
+* `hidePopup()` hides the showing popup
 
-The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to make sure that the number of popups will not flood the user's screen.
+The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to prevent overcrowding the user's screen.
 
 Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups. 
 
 The methods in `Popup` are:
-* `show()` Shows the popup window
-* `hide()` Hides the popup window
-* `isShowing()` Checks if the popup is showing
-* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in popup
-* `execute(String commandText)` Executes the `commandText`
+* `show()` shows the popup window
+* `hide()` hides the popup window
+* `isShowing()` checks if the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` shows feedback to user in popup
+* `execute(String commandText)` executes the `commandText`
 
 #### Showing a Popup
 
-The following sequence diagram shows how a `Popup` is shown once a button is clicked.
+The following sequence diagram shows how a `Popup` is displayed once a button is clicked.
 
 ![Show Popup](images/ShowPopupSequenceDiagram.png)
 
-`XXX_Ui` represents Ui components that has a button which will open a popup once it is clicked
+`XXX_Ui` represents UI components that has a button which will open a popup once clicked, e.g `ControlBox`, `ProductCard`, `ItemCard`, etc.
 
-e.g `ControlBox`, `ProductCard`, `ItemCard`, etc
+`PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
-`PopupYYY` represents different types of `Popup`
+As seen from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
 
-e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+This is to reduce coupling between the UI components by removing the dependency on `PopupHandler` to open a popup. Also, it avoids the issue of passing `PopupHandler` into a deeply nested UI component.
 
-As you can see from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
+#### Executing commands in Popup
 
-This is to reduce coupling for each of the Ui components as they will not have a dependency on `PopupHandler` to call any of the popup. Also, it avoids the issue of deeply nested passing of `PopupHandler`.
-
-#### Executing command in Popup
-
-The sequence diagram below shows successful execution of a command in popup
+The sequence diagram below describes a successful execution of a command in popup.
 
 ![Execute Popup](images/ExecutePopupSequenceDiagram.png)
 
-`PopupYYY` represents different types of `Popup`
+`PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
-e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+When a user clicks a button in `PopupYYY`, the associated command is generated from the inputs. The command is then passed to `MainWindow` for execution. This process is similar to how command is executed from `CommandBox`.
 
-When a user clicked a button in `PopupYYY`, it will generate the associated command from the inputs. The command is then passed to `MainWindow` for execution.
-
-This process is similar to how command is executed from `CommandBox`.
-
-The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` will be hidden.
+The `commandResult` will then be sent to `ResultWindow` for display and `PopupYYY` will be hidden.
 
 #### Design Considerations
 
 **Aspect: How to handle popup**
-* **Alternative 1:** Pass in popups created at `MainWindow` to Ui components that require it
-  * Pros: Less function calls and better performance
+* **Alternative 1:** Pass in popups created at `MainWindow` to UI components that require it.
+  * Pros: Less function calls and better performance.
   * Cons: 
-   1. Increase coupling as these popups might required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This cause `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`
+   1. Increases coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`.
 
    &nbsp;
 
-* **Alternative 2:** Create popup in Ui components that require it
-  * Pros: Easy solution to reduce coupling
+* **Alternative 2:** Create popup in UI components that require it
+  * Pros: Easy solution to reduce coupling.
   * Cons: 
-    1. Difficult to manage popups and check whether the popups are current showing
-    2. Two same popups might be opened at the same period of time
+    1. Difficult to manage popups and to check whether the popups are currently showing.
+    2. Two of the same popups might be opened at the same period of time.
 
    &nbsp;
 
-* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provides method for Ui component for all the `Popup`
-  * Pros: Centralized control for popup and reduce coupling
+* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provide method for all UI components to open a `Popup`.
+  * Pros: Centralized control for popup and reduces coupling.
   * Cons: 
-    1. Increase complexity for `MainWindow`
-    2. Less efficient as more function calls are required
+    1. Increases complexity for `MainWindow`.
+    2. Less efficient, as more function calls are required.
 
 
 ### Product
@@ -325,7 +367,7 @@ The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` wi
 
 The implementation of product is entirely governed by the `Product` class. The `Product` class is immutable and guarantees that all fields are valid and immutable as well.
 
-Thus updating a product will create a new product class, while copying the old items entirely into the `UniqueItemList` of the new class.
+Thus updating a product will create a new `Product` object. The items from the original `Product` will be copied entirely into the new `Product` object.
 
 The following sequence diagram shows how the `Update` command works:
 
