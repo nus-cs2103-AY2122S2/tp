@@ -58,12 +58,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         // check mode
         boolean isResetMode = false;
         if (argMultimap.getValue(PREFIX_COMMAND_OPTION).isPresent()) {
-            int optionDeclarationNumber = argMultimap.getAllValues(PREFIX_COMMAND_OPTION).size();
-            // if there are multiple '-' present
-            if (optionDeclarationNumber != 1) {
-                throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
-            }
             String option = argMultimap.getValue(PREFIX_COMMAND_OPTION).get();
             // if there is any other option declared other than the one and only currently supported option, 'r'
             if (!option.equals(EditCommand.RESET_ARG)) {

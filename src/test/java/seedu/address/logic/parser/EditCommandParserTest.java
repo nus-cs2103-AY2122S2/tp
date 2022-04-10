@@ -83,8 +83,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // second index being negative, equivalent to using an undefined option
-        assertParseFailure(parser, "3 -5",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
+        assertParseFailure(parser, "3 -5", MESSAGE_INVALID_FORMAT);
 
         // both indices being negative, equivalent to no preamble and using two undefined options
         assertParseFailure(parser, "-1 -2", MESSAGE_INVALID_FORMAT);
@@ -158,16 +157,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_multipleEditsAcceptOnlyTeamsNSkills_success() {
-        //edit name
-        //edit phone
-        //edit email
-        //edit github
-        //edit teams
-        //edit skills
-    } // this have to move to editcommandtest
-
-    @Test
     public void parse_resetMode_success() {
         //single edit for team
         EditPersonDescriptor changeTeamDescriptor =
@@ -205,9 +194,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidOption_failure() {
-        //multiple option prefix failure
-        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + EDIT_OPTION_R + EDIT_OPTION_R + NAME_DESC_AMY,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
         // unrecognized option failure
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_EDIT_OPTION_DESC + NAME_DESC_AMY,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
