@@ -43,7 +43,12 @@ title: Developer Guide
   * [Adding a company](#adding-a-company)
   * [Editing a company](#editing-a-company)
   * [Deleting a company](#deleting-a-company)
+  * [Favouriting a company](#favouriting-a-company)
+  * [Unfavouriting a company](#unfavouriting-a-company)
+  * [Adding a role](#adding-a-role)
   * [Editing a role](#editing-a-role)
+  * [Deleting a role](#deleting-a-role)
+  * [Finding a role](#finding-a-role)
   * [Using the reminder feature](#using-reminders)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -385,7 +390,7 @@ The following activity diagram summarises what happens when a user executes the 
 Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
 
 The fields of the `Reminder` that will be shown are as follows:
-* `Company Name`
+* `CompanyName`
 * `RoleName`
 * `ReminderDate`
 * `Status`
@@ -475,7 +480,7 @@ The following activity diagram summarises what happens when a user executes the 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Requirements <a id="requirements"></a>
+## Appendix: Requirements <a id="requirements"></a>
 
 ### Product scope <a id="product-scope"></a>
 
@@ -670,7 +675,7 @@ Guarantees: a specified internship role is successfully removed from the associa
 
 **Extensions**
 
-&emsp;a. The input does not adhere to the command format <br/>
+&emsp;3a. The input does not adhere to the command format <br/>
 &emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
 &emsp;&emsp;&emsp;&emsp; Use case resumes at step 2
 
@@ -679,10 +684,48 @@ Guarantees: a specified internship role is successfully removed from the associa
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
 &emsp;3c. The input internship role index is invalid <br/>
-&emsp;&emsp;c1. Tinner shows an internship role index out of bounds error message <br/>
+&emsp;&emsp;3c1. Tinner shows an internship role index out of bounds error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC07 - List all companies**
+
+**Use case: UC07 - Find a company with an internship role**
+
+Precondition: there exists at least one internship role associated with a company
+
+Guarantees: all internship role which matches the user input will be successfully displayed from
+all companies matches the user input
+
+**MSS**
+
+1. User requests to find some internship roles in some company and provides keywords for both.
+2. Tinner displays all companies that matches the company keyword and have at least one role which matches the role keyword.
+
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp;1b. The input company keyword is invalid <br/>
+&emsp;&emsp;1b1. Tinner shows invalid company name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1c. The input role keyword is invalid <br/>
+&emsp;&emsp;1c1. Tinner shows invalid role name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1d. The input role keyword is absent <br/>
+&emsp;&emsp;1d1. Tinner shows all companies that matches the company keyword and all their roles <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+&emsp;1e. The input company keyword is absent <br/>
+&emsp;&emsp;1e1. Tinner shows all companies with at least one role that matches the role keyword and display all <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+
+**Use case: UC08 - List all companies**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -695,7 +738,7 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
-**Use case: UC08 - Using the reminder feature**
+**Use case: UC09 - Using the reminder feature**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -710,7 +753,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
     
    Use case ends
 
-**Use case: UC09 - Using the set reminder window feature**
+**Use case: UC10 - Using the set reminder window feature**
 
 Guarantees: the reminder window will be successfully updated
 
@@ -728,7 +771,7 @@ Guarantees: the reminder window will be successfully updated
 &emsp;&emsp;1a1. Tinner shows an invalid input reminder window error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Use case: UC10 - Favouriting a company and viewing all favourited companies**
+**Use case: UC11 - Favouriting a company and viewing all favourited companies**
 
 Precondition: there exist at least one company in Tinner
 
@@ -759,7 +802,7 @@ Guarantees: a company is successfully favourited within Tinner
 &emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC11 - Unfavouriting a company**
+**Use case: UC12 - Unfavouriting a company**
 
 Precondition: there exist at least one company in Tinner 
 
@@ -871,6 +914,27 @@ Guarantees: a company is successfully unfavourited within Tinner
 4. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
+### Adding a role <a id="adding-a-role"></a>
+1. Prerequisites: At least 1 companies must exist and listed using the `list` command
+2. Test case: `addRole 1 n/Frontend Engineer s/pending`
+    1. Expected: The name of the lastest role from the 1<sup>st</sup> company is initialised as "Frontend Engineer", with status of "pending".
+       The response box shows the details of all the fields of the newly added role. The company list is updated with the changes.
+3. Test case: `addRole 1 n/Frontend Engineer s/complete`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that the role already exists in the company.
+4. Test case: `addRole 1 s/complete $/1000`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that the format is wrong, this is due to required field (RoleName)) not being given.
+5. Test case: `addRole 1 n/Frontend Engineer s/complete $/`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that there must be a value after a prefix, regardless of if it is optional.
+6. Other incorrect test cases to try:`addRole x1 n/VALID_ROLE_NAME s/VALID_STATUS` where x1 is an integer larger than the size of the company list or negative integer values.
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that it is an invalid command or company/role index provided is invalid.
+7. Other incorrect test cases to try:`addRole x1 n/LONG_ROLE_NAME s/VALID_STATUS $/LONG_STIPEND` where x1 is an integer larger than the size of the company list or negative integer values, and LONG_ROLE_NAME exceeds 30 characters, and LONG_STIPEND exceeds 14 characters.
+   1. Expected: No new role is added to the 1<sup>st</sup> company.
+      The response box shows error message that the role name character limit is 30 characters/the stipend character limit is 14 characters.
+
 ### Editing a role <a id="editing-a-role"></a>
 1. Prerequisites: At least 1 company with 2 roles must exist and is listed using the `list` command
 2. Test case: `editRole 1 1 n/Frontend Engineer`
@@ -889,15 +953,14 @@ Guarantees: a company is successfully unfavourited within Tinner
    1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
    The response box shows error message that it is an invalid command or company/role index provided is invalid.
 
-
-### Using the reminder feature <a id="using-reminders"></a>
-1. Prerequisites: At least 1 company with one role must exist and is listed on index 1 using the `list` command, test cases assume default reminder window of 7 days is used
-2. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS WITHIN 7 DAYS FROM TODAY>` (e.g. if today is 06-04-2022, test case should use any date between 06-04-2022 to 13-04-2022)
-   1. Expected: When you close and reopen the application, the reminder pane will show the added role.
-3. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS IN THE PAST>` (e.g. if today is 06-04-2022 , use any date before then like 05-04-2022)
-   1. Expected: The response box shows an error message that the reminder date should not be in the past.
-4. Test case: `editRole 1 n/Software Engineer r/<INSERT INVALID DATE>` (e.g. 31-04-2022)
-   1. Expected: THe response box shows an error message that the reminder date should be a valid date.
+### Deleting a role <a id="deleting-a-role"></a>
+1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
+2. Test case: `deleteRole 1 1`
+    1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is deleted.
+       The response box shows the details of all the fields of the deleted role. The company list is updated with the changes. 
+3. Other incorrect test cases to try: `deleteRole`, `deleteRole x1 x2` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values.
+   1. Expected: The intended role at company with index `x1` and role with index `x2` is not deleted.
+      The response box shows error message that it is an invalid command or company/role index provided is invalid.
 
 ### Finding a role <a id="finding-a-role"></a>
 1. Prerequisites: There must be 2 companies which are listed using the `list` command. The first company must have the name `meta` containing a role with the name `software engineer` followed by another role with the name `data engineer`. The second company must have the name `google` containing a role with the name `mobile engineer` followed by another role with the name `data engineer`.
@@ -911,10 +974,21 @@ Guarantees: a company is successfully unfavourited within Tinner
     1. Expected: Both companies are displayed with only their respective `data engineer` roles shown.
 6. Test case: `find c/meta r/engineer`
     1. Expected: Only the first company is displayed with both its roles.
-7. Test case: `find c/meta r/mobile`  
+7. Test case: `find c/meta r/mobile`
     1. Expected: No companies are displayed.
 8. Test case: `find r/mobile data software`
     1. Expected: Both companies are displayed with all their roles.
-9. Other incorrect test cases to try: `find`, `find c/`, `find c/ r/`, `find test`, `find a/ b/`
-    1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format.
+9. Test case: `find c/`, `find r/`, `find c/ r/`
+   1. Expected: The response box shows an error message that it is an invalid command as there must be a value after prefix.
+10. Other incorrect test cases to try: `find`, `find test`, `find a/ b/`
+     1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format.
+
+### Using the reminder feature <a id="using-reminders"></a>
+1. Prerequisites: At least 1 company with one role must exist and is listed on index 1 using the `list` command, test cases assume default reminder window of 7 days is used
+2. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS WITHIN 7 DAYS FROM TODAY>` (e.g. if today is 06-04-2022, test case should use any date between 06-04-2022 to 13-04-2022)
+   1. Expected: When you close and reopen the application, the reminder pane will show the added role.
+3. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS IN THE PAST>` (e.g. if today is 06-04-2022 , use any date before then like 05-04-2022)
+   1. Expected: The response box shows an error message that the reminder date should not be in the past.
+4. Test case: `editRole 1 n/Software Engineer r/<INSERT INVALID DATE>` (e.g. 31-04-2022)
+   1. Expected: THe response box shows an error message that the reminder date should be a valid date.
 

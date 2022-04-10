@@ -280,8 +280,12 @@ in the following format: dd-MM-yyyy HH:mm.
 
 # Demo Use Cases <a id="demos"></a>
 
-:information-source: Note that all these demos are done in the past, as such do remember to
+<div markdown="block" class="alert alert-info">
+
+:information_source: Note that some of these demos may be outdated, as such do remember to
 update the reminder date if you wish to follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
+
+</div>
 
 ## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
 
@@ -361,7 +365,7 @@ Thus, you can increase the reminder window by making this entry:
 1. [Set the reminder window](#c-setWindow-c) for the reminder list.
 
 
-   ![WindowrDemo](images/WindowDemo.png)
+   ![WindowDemo](images/WindowDemo.png)
 
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
 
@@ -783,9 +787,33 @@ keep better track of upcoming tasks.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Changes to the reminder window can only be observed after restarting Tinner. 
+:information_source: Changes to the reminder window can only be observed after restarting Tinner.
 
 </div>
+
+[Back to Table of Contents](#toc)
+
+
+### Clearing the company list: `clear` <a id="c-clear"></a>
+
+Start off the internship application period fresh with `clear`. Reset the list of companies and internship roles with a
+single command.
+
+**Function:** Clears the entire company list, including roles within each company.
+
+**Format:** `clear`
+
+[Back to Table of Contents](#toc)
+
+### Viewing help : `help` <a id="c-help"></a>
+
+If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
+
+**Function:** Shows a message explaining how to access the user guide and a table of commands.
+
+![help message](images/helpMessage.png)
+
+**Format:** `help`
 
 [Back to Table of Contents](#toc)
 
@@ -803,6 +831,12 @@ Use `exit` if you're too lazy to click out of the application.
 
 Tinner data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: Editing the saved json file directly might result in undesirable results if the proper formatting is not maintained. Avoid doing so at all cost if you are unsure of the format.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
