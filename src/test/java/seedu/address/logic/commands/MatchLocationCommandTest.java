@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalSellers;
 
 class MatchLocationCommandTest {
 
-    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
         TypicalSellers.getTypicalSellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
 
     @Test
@@ -44,8 +44,7 @@ class MatchLocationCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 5);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(),
-            new UserPrefs(), new SellerAddressBook(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
             TypicalBuyers.getTypicalBuyerAddressBook());
 
         expectedModel.updateFilteredSellerList(predicate);

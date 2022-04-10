@@ -19,12 +19,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.seller.PriceRangeMatchBuyerPredicate;
 import seedu.address.testutil.TypicalBuyers;
-import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalSellers;
 
 class MatchPriceRangeCommandTest {
 
-    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
         TypicalSellers.getTypicalSellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
 
     @Test
@@ -44,8 +43,7 @@ class MatchPriceRangeCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 6);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(),
-            new UserPrefs(), new SellerAddressBook(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
             TypicalBuyers.getTypicalBuyerAddressBook());
 
         expectedModel.updateFilteredSellerList(predicate);
