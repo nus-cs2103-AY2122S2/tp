@@ -1,4 +1,4 @@
-package seedu.contax.model.appointment;
+package seedu.contax.model.chrono;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.model.chrono.DateRangePredicate;
 import seedu.contax.testutil.AppointmentBuilder;
 
 public class DateRangePredicateTest {
@@ -29,30 +28,30 @@ public class DateRangePredicateTest {
 
         // Inclusive Border Tests
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:34")).build()));
+                .withStartDateTime(rangeStart).build()));
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-13T12:34")).build()));
+                .withStartDateTime(rangeEnd).build()));
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T11:34")).build()));
+                .withStartDateTime(rangeStart.minusMinutes(60)).build()));
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-13T11:34")).build()));
+                .withStartDateTime(rangeEnd.minusMinutes(60)).build()));
 
         // Containment Tests
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T13:34")).build()));
+                .withStartDateTime(rangeStart.plusMinutes(60)).build()));
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(24 * 60 * 4)
-                .withStartDateTime(LocalDateTime.parse("2022-12-11T13:34")).build())); // 4 days
+                .withStartDateTime(rangeStart.minusDays(1)).build())); // 4 days
 
         // Appointments are partially in the range
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(180)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T11:34")).build()));
+                .withStartDateTime(rangeStart.minusMinutes(60)).build()));
         assertTrue(predicate.test(new AppointmentBuilder().withDuration(180)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T11:34")).build()));
+                .withStartDateTime(rangeEnd.minusMinutes(60)).build()));
 
         // Completely disjoint
         assertFalse(predicate.test(new AppointmentBuilder().withDuration(60)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T11:33")).build()));
+                .withStartDateTime(rangeStart.minusMinutes(61)).build()));
         assertFalse(predicate.test(new AppointmentBuilder().withDuration(180)
-                .withStartDateTime(LocalDateTime.parse("2022-12-13T12:35")).build()));
+                .withStartDateTime(rangeEnd.plusMinutes(1)).build()));
     }
 }

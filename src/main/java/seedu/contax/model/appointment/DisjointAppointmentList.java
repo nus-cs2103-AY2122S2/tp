@@ -61,17 +61,6 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Replaces the entire list of appointments with {@code toCopy}.
-     *
-     * @param toCopy The {@code DisjointAppointmentList} from which the list of appointments should be
-     *               created from.
-     */
-    public void setAppointments(DisjointAppointmentList toCopy) {
-        requireNonNull(toCopy);
-        this.appointments.setAll(toCopy.appointments);
-    }
-
-    /**
      * Returns true if the list of appointments contains {@code target}.
      *
      * @param target The {@code appointment} object to check.

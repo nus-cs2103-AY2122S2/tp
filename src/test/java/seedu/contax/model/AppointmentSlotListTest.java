@@ -6,18 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.commons.util.DateUtil;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class AppointmentSlotListTest {
+
+    private static final LocalDate REF_DATE = LocalDate.of(2022, 5, 29);
 
     private Schedule schedule;
 
@@ -26,17 +31,17 @@ public class AppointmentSlotListTest {
         schedule = new ScheduleBuilder()
                 .withAppointment(new AppointmentBuilder()
                         .withName("Test 1")
-                        .withStartDateTime(LocalDateTime.of(2022, 5, 29, 12, 0))
+                        .withStartDateTime(DateUtil.combineDateTime(REF_DATE, LocalTime.of(12, 0)))
                         .withDuration(30)
                         .build()
                 ).withAppointment(new AppointmentBuilder()
                         .withName("Test 2")
-                        .withStartDateTime(LocalDateTime.of(2022, 5, 29, 13, 0))
+                        .withStartDateTime(DateUtil.combineDateTime(REF_DATE, LocalTime.of(13, 0)))
                         .withDuration(60)
                         .build()
                 ).withAppointment(new AppointmentBuilder()
                         .withName("Test 3")
-                        .withStartDateTime(LocalDateTime.of(2022, 5, 29, 15, 0))
+                        .withStartDateTime(DateUtil.combineDateTime(REF_DATE, LocalTime.of(15, 0)))
                         .withDuration(30)
                         .build()
                 ).build();
@@ -60,12 +65,12 @@ public class AppointmentSlotListTest {
         assertEquals(List.of(), slotList.getSlotList());
 
         slotList.updateFilteredRange(new TimeRange(
-                LocalDateTime.of(2022, 5, 29, 12, 0),
-                LocalDateTime.of(2022, 5, 29, 16, 0)), 60);
+                DateUtil.combineDateTime(REF_DATE, LocalTime.of(12, 0)),
+                DateUtil.combineDateTime(REF_DATE, LocalTime.of(16, 0))), 60);
         assertEquals(List.of(
                 new AppointmentSlot(new TimeRange(
-                        LocalDateTime.of(2022, 5, 29, 14, 0),
-                        LocalDateTime.of(2022, 5, 29, 15, 0)
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(14, 0)),
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(15, 0))
                 ))
         ), slotList.getSlotList());
 
@@ -73,20 +78,20 @@ public class AppointmentSlotListTest {
         schedule.removeAppointment(schedule.getAppointmentList().get(2));
         assertEquals(List.of(
                 new AppointmentSlot(new TimeRange(
-                        LocalDateTime.of(2022, 5, 29, 14, 0),
-                        LocalDateTime.of(2022, 5, 29, 16, 0)
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(14, 0)),
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(16, 0))
                 ))
         ), slotList.getSlotList());
 
         // Test add update listener
         schedule.addAppointment(new AppointmentBuilder()
                 .withName("Test 4")
-                .withStartDateTime(LocalDateTime.of(2022, 5, 29, 15, 30))
+                .withStartDateTime(DateUtil.combineDateTime(REF_DATE, LocalTime.of(15, 30)))
                 .withDuration(15).build());
         assertEquals(List.of(
                 new AppointmentSlot(new TimeRange(
-                        LocalDateTime.of(2022, 5, 29, 14, 0),
-                        LocalDateTime.of(2022, 5, 29, 15, 30)
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(14, 0)),
+                        DateUtil.combineDateTime(REF_DATE, LocalTime.of(15, 30))
                 ))
         ), slotList.getSlotList());
 
@@ -99,6 +104,7 @@ public class AppointmentSlotListTest {
     public void equals() {
         AppointmentSlotList slotList = new AppointmentSlotList(schedule);
         AppointmentSlotList slotList2 = new AppointmentSlotList(schedule);
+        LocalDateTime refDateTime = LocalDateTime.of(2020, 1, 1, 1, 1);
 
         // same values -> returns true
         assertTrue(slotList.equals(slotList2));
@@ -113,17 +119,13 @@ public class AppointmentSlotListTest {
         assertFalse(slotList.equals(new AppointmentSlotList(new Schedule())));
 
         // different time range -> returns false
-        slotList.updateFilteredRange(new TimeRange(LocalDateTime.MIN,
-                LocalDateTime.of(2020, 1, 1, 1, 1)), 1);
-        slotList2.updateFilteredRange(new TimeRange(LocalDateTime.MIN,
-                LocalDateTime.of(2021, 1, 1, 1, 1)), 1);
+        slotList.updateFilteredRange(new TimeRange(LocalDateTime.MIN, refDateTime), 1);
+        slotList2.updateFilteredRange(new TimeRange(LocalDateTime.MIN, refDateTime.plusYears(1)), 1);
         assertFalse(slotList.equals(slotList2));
 
         // different duration -> returns false
-        slotList.updateFilteredRange(new TimeRange(LocalDateTime.MIN,
-                LocalDateTime.of(2020, 1, 1, 1, 1)), 1);
-        slotList2.updateFilteredRange(new TimeRange(LocalDateTime.MIN,
-                LocalDateTime.of(2020, 1, 1, 1, 1)), 2);
+        slotList.updateFilteredRange(new TimeRange(LocalDateTime.MIN, refDateTime), 1);
+        slotList2.updateFilteredRange(new TimeRange(LocalDateTime.MIN, refDateTime), 2);
         assertFalse(slotList.equals(slotList2));
     }
 
