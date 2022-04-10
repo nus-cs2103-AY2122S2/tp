@@ -180,7 +180,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Clearing all entries : `clear`
-Clears all entries from the TAddressBook.
+Clears all entries from the TAddressBook, this includes all `Student`s as well as all `Lab`s.
 
 Format: `clear`
 
@@ -223,6 +223,9 @@ Format: `labadd l/LAB_NUMBER`
 
 * `LAB_NUMBER` must be an integer between 0 and 20 inclusive.
 * Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
+
+After adding a new lab e.g `labadd l/1` you should see this (assuming you did not originally have lab 1):
+![addLabUi](images/addLabUi.png)
 
 #### Submitting a lab : `labsub`
 Changes the status of the specified lab for the student with the specified `INDEX` from `UNSUBMITTED` to `SUBMITTED`.
