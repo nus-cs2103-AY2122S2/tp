@@ -300,7 +300,7 @@ Deletes the specified person from the application.
 
 ## Right-Click Help Menu
 
-|![RightClick](images/user-guide/rightclick.png)|
+|![RightClick](images/user-guide/rightclick.PNG)|
 |:--:|
 |*Figure 11 - Right-Click Help Menu*|
 
