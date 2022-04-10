@@ -891,7 +891,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `event name/lunch info/at HDL d/2023-11-10 t/12:12`<br>
       Expected: The new event is added into the event list and displayed on the interface. Details of the added event shown in the status message.
-   
+
    2. Test case: `event name/ info/at HDL d/2023-11-10 t/12:12` <br>
       Expected: No new event is added into the event list. Error details shown in the status message. Status bar remains the same
 
