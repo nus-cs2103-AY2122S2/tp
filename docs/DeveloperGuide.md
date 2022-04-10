@@ -460,31 +460,65 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+## Customer-Related Commands
 
-1. _{ more test cases …​ }_
+### Adding a new customer 
 
-### finding customer by name
+   1. Test case: `addc n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 rd/31-03-2022 al/Aloe Vera sep/facial sep/massage`<br>
+      Expected: A customer with the above details will be added
 
-1. finding customer by name
+   2.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
+      Expected: Error details shown in the status message about invalid command format. Status bar remains the same.<br>
+   
+   3.  Test case: Any command with invalid format for one of the keywords : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/<DATE THAT IS IN THE FUTURE>` <br>
+     Expected: Error details shown in the status message about invalid date format. Status bar remains the same.
+     
+   4.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
+     Expected: Error message saying customer already exist
 
-   1. Test case: `find name john`<br>
-      Expected: list of customers with john in their name will be shown
+### Editing a customer 
 
-   1. Test case: `find name j0hn`<br>
-      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
+  1.  Test case: `editc 1 p/91234567 e/johndoe@example.com`<br>
+      Expected: Edits the phone number and email address of the 1st customer to be 91234567 and johndoe@example.com respectively.
+      
+  2.  Test case: `editc 2 n/Betsy Crower  p/91234567 e/johndoe@example.com`<br>
+      Expected: Customer already exist error as this customer has the same phone and email as first customer after executing test case 1.
+      
+  3.  Test case: `editc 1`<br>
+      Expected: Return an error that at least one field must be provided.
+  
+  4.  Test case: `editc n/Alex` <br>
+      Expected: Return an error of invalid command format
+     
+  6.  Test case: `editc 1 al/ stp/ sep/`<br>
+      Expected: Clears the preferred staff, services and the allergies of the 1st customer. 
+ 
 
-   1. Other incorrect show commands to try: `find name`, `find x` (where x only contains english characters)<br>
-      Expected: Similar to previous.
+### Finding customers
 
-### finding customer by keyword
+  1. Test case: `findc n/Alex Yeoh`<br>
+     Expected: list of customers with Alex Yeoh in their name will be shown.
+   
+  1. Test case: `findc n/aleX Yeoh`<br>
+     Expected: list of customers with Alex Yeoh in their name will be shown.
+      
+  1. Test case: `findc h/Oily h/Dry`<br>
+     Expected: list of customers with hair type as dry only.
 
-1. finding customer by keyword type and keyword
+  1. Test case: `findc n/John h/Dry`<br>
+     Expected: list of customers who either have dry hair type or are named John.
+      
+  1. Test case: `findc e/`<br>
+     Expected: Error message saying that find command does not take empty values.
 
-   1. Test case: `find allergies nickle`<br>
-      Expected: list of customers with nickle in their allergy will be shown
+### Deleting customers 
 
-   1. Test case: `find nickle`<br>
-      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect show commands to try: `find skintype`, `find x` (where x only contains english characters)<br>
-      Expected: Similar to previous.
+   1. Test case: `deletec -1`
+      Expected: Error message saying that the command format is invalid.
+     
+   1. Test case: `deletec 30`
+      Expected: Error message saying that the index is invalid.
+      
+   1. Test case: `deletec 1,2`
+      Expected: Delete first and second customer.
