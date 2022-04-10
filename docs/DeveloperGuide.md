@@ -552,10 +552,9 @@ Challenges faced were the following:
 - Understanding and refactoring the existing AB3 code base.
 - Balancing the relationship between buyers, sellers, properties and preferences.
 - Understanding how to use JavaFX and adapting the existing JavaFX to suit our needs.
-- 
 
 ## Effort Required
-We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work. 
+We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work.
 
 ## Achievements
 RealEstatePro has been developed to become a fully functioning app that is fully capable fo fufilling the needs of a real estate agent in organising clients and is capable of
