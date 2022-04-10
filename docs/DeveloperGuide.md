@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* TAddressBook is a student project based on [AddressBook Level 3](https://github.com/se-edu/addressbook-level3).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,25 +165,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ## `labadd`: Add Lab Command Feature
-The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation relies on the following classes:
-- `Lab` that models a Lab and has an associated `LAB_NUMBER`.
-- `LabList` that stores all the labs of a `Student`.
-- `MasterLabList` that extends `LabList` and acts as a control `LabList` for the `TAddressBook` application.
-- `AddLabCommand` that extends `Command` and encapsulates information related to adding labs.
-- `AddLabCommandParser` that extends `Parser<AddLabCommand>` and parses user commands into a `AddLabCommand`.
-- `UniqueStudentList` that stores all the `Student`s.
+The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. The add lab command takes in 1 argument `LAB_NUMBER`.
 
-The command format is `labadd l/LAB_NUMBER` where `LAB_NUMBER` should be an Integer between 0 and 20 inclusive.
+The command format for add lab is `labadd l/LAB_NUMBER` where `LAB_NUMBER` should be an Integer between 0 and 20 inclusive.
 e.g `labadd l/1`
 
-The add lab mechanism is implemented as follows:
-1. When a `labadd` command is executed by the user, `AddLabCommandParser#parse(String)` will be invoked to parse the given command into a new `AddLabCommand` object instantiated with a new lab object with the given `LAB_NUMBER`. If the `LAB_NUMBER` is invalid, a `ParseException` will be thrown and displayed to the user.
-2. The `AddCommand` will then execute with the current `Model` object in the system.
+The add lab command is implemented as follows:
+1. When a `labadd` command is executed by the user, `AddLabCommandParser#parse(String)` will be invoked to parse the given command into a new `AddLabCommand` object with the given `LAB_NUMBER`. If the `LAB_NUMBER` is invalid, a `ParseException` will be thrown and displayed to the user.
+2. `AddCommand#execute(Model)` will then execute with the current `Model` object in the system.
 3. The `AddCommand` object will then check if the `Model` object already has the lab (in this case having a lab means that the `MasterLabList` has a `Lab` object with the same `LAB_NUMBER`), and if the `Model` already has the `Lab`, it will throw a new `CommandException`.
 4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, and if it is empty, the system will output a message to the user to notify the user that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
 5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` according to ascending `LAB_NUMBER`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` by increasing `LAB_NUMBER`.
 </div>
 
 The sequence for parsing the input is similar to the one shown in [this sequence diagram](#delete-sequence-diagram) above.
@@ -368,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case UC1: Add a new lab to the list of labs**
 
 **MSS**
-1. TA requests to add new lab.
+1. TA requests to add new lab with a given lab number.
 2. TAB adds a new lab to every student.
 3. TAB shows updated list of labs.
 4. TAB displays success message.
@@ -376,12 +370,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 2a. TAB detects that the student list is empty.
+* 1a. TAB detects that the student list is empty.
     * 2a1. TAB displays warning message to user (that there are no students yet).
 
+      Use case resumes from 4.
+  
+* 1b. TAB detects that an identical lab already exists.
+    * 1b1. TAB displays error message (that lab already exists).
+
       Use case ends.
-* 2b. TAB detects that an identical lab already exists.
-    * 2b1. TAB displays error message (that lab already exists).
+
+* 1c. TAB detects that the lab number provided is not an integer between 0 and 20 inclusive.
+    * 1c1. TAB displays error message (that lab number is invalid).
 
       Use case ends.
 
@@ -487,7 +487,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+**Use case UC6: Remove a  lab from the list of labs**
+
+**MSS**
+1. TA requests to remove a lab with a given lab number.
+2. TAB removes the lab from every student.
+3. TAB shows updated list of labs.
+4. TAB displays success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. TAB detects that the lab number provided is not an integer between 0 and 20 inclusive.
+    * 1a1. TAB displays error message (that lab number is invalid).
+
+      Use case ends.
+
+* 1b. TAB detects that the lab number provided is not a lab present in the TAddressBook.
+    * 1b1. TAB displays error message (that lab number does not exist).
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -501,7 +520,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
 * **Lab Status**: Refers to possible statuses of Lab assignments.
   * **UNSUBMITTED**: Status to indicate that the student has not submitted the Lab assignment.
@@ -551,12 +569,14 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a Lab
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Assuming the `LabList` is empty and the list has some `Student`s.
+   1. Test case: `labadd l/1`<br>
+   Expected: `Lab 1` will appear as a red label on each `Student`'s card in the list.
+   
+   2. Test case: `labadd l/21`<br>
+   Expected: A error message will appear with the correct command format and constraints and no lab will be added.
+   
+   3. Test case: `labadd l/-1`<br>
+   Expected: A error message will appear with the correct command format and constraints and no lab will be added.
