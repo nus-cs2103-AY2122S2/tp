@@ -91,6 +91,8 @@ The table below briefly describes each of the **4 main components**.
 | Result Display | A panel to display command results           |
 | Command Box    | A panel to enter commands                    |
 
+<div style="page-break-after: always;"></div>
+
 You can start communicating with Trackermon using the command box. Some example commands you can try are:
 
 * **`list`** : Lists all shows.
@@ -246,6 +248,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a show: `edit`
 
