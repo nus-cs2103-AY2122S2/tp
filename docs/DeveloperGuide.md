@@ -2,7 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-
 * Table of Contents 
 {:toc}
 
@@ -37,6 +36,7 @@ Find out more on the structure and architecture of **Tracey** in this section.
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
@@ -119,7 +119,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -146,7 +149,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -244,20 +249,22 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
 
-:information_source: **Note** Replace `NEW_PERSON_TAGS` in the sequence diagram with the tags stated in the notes shown in the sequence diagram.
+:information_source: **Note**<br>
+
+* The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* Replace `NEW_PERSON_TAGS` in the sequence diagram with the tags stated in the notes shown in the sequence diagram.
+
 </div>
 
 When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
 
 Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
 
-
 ### Summarise feature
 
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
-
 
 #### What is the summarise feature
 
@@ -292,7 +299,9 @@ The above class diagram shows the structure of the Summarise Command and its ass
 
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -313,7 +322,7 @@ of covid cases in that hall. Then, `filterByBlock` method is then called on the 
 At the same time, `summariseFaculty` will stored the highest number of covid cases amongst the faculties in `highestPositiveByFaculty`.
 
 Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
-A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+A pop-up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
 ### Pie Chart Window feature
 
@@ -512,7 +521,9 @@ Additionally, there are a few final static messages to be displayed to the user 
 #### **Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -716,7 +727,9 @@ Step 4. The user then decides that the initial delete was not a mistake, and dec
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo. Similarly, if `redo` is called as the first command or in succession, `personsOriginal` will be null. The `redo` command uses `Model#checkOriginal()` to check if this is the case and will also throw an error if so.
 
 </div>
@@ -736,7 +749,9 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -744,7 +759,9 @@ The following sequence diagram shows how the redo operation works:
 
 ![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -788,8 +805,8 @@ subdirectories will be saved as `ROOT/data/DATE` and the archived file path is `
 The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
 Below are links for implementation of the classes and its methods:
-* [`FileUtil`](../src/main/java/seedu/address/commons/util/FileUtil.java)
-* [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
+* [`FileUtil`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/commons/util/FileUtil.java)
+* [`ArchiveCommand`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
 #### **Class Diagram of Archive Feature is shown below:**
@@ -806,7 +823,9 @@ the archived file will be saved in its respective file path and a success messag
 
 #### **Sequence Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -845,7 +864,9 @@ display window in the GUI is resized according to the user's option. A success m
 
 The above figure illustrates the important interactions of `ResizeCommand` when the user successfully resizes the result display window.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ResizeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `ResizeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
