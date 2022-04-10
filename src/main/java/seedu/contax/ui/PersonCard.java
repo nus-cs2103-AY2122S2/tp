@@ -84,7 +84,7 @@ public class PersonCard extends UiPart<Region> implements RecyclableCard<Person>
     private Label createLabel(String tagName) {
         Label label = new Label(tagName);
         label.setWrapText(true);
-        label.maxWidthProperty().bind(cardPane.widthProperty());
+        label.setMaxWidth(400);
         return label;
     }
 
