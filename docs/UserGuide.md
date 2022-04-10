@@ -728,9 +728,9 @@ single command.
 
 ### Viewing help : `help` <a id="c-help"></a>
 
-If you're not too familiar with the CLI, `help` can help! It'll bring you right here to assist you.
+If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
 
-**Function:** Shows a message explaining how to access the User Guide.
+**Function:** Shows a message explaining how to access the user guide and a table of commands.
 
 ![help message](images/helpMessage.png)
 
