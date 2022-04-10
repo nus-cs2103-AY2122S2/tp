@@ -40,7 +40,7 @@ public class JsonAdaptedAttendance {
     }
 
     /**
-     * Constructs a given {@code Attendance} into this class for Jackson use.
+     * Constructs a given {@code AttendanceEntry} into this class for Jackson use.
      *
      * @param attendanceEntry the attendance of the pet.
      */
@@ -61,7 +61,7 @@ public class JsonAdaptedAttendance {
     }
 
     /**
-     * Converts this Jackson-friendly adapted attendance object into the model's {@code Attendance} object.
+     * Converts this Jackson-friendly adapted attendance entry into the model's {@code AttendanceEntry} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted attendance object.
      */
@@ -81,6 +81,7 @@ public class JsonAdaptedAttendance {
 
     /**
      * Creates an {@code AbsentAttendanceEntry} object for model use.
+     *
      * @param attendanceDate the attendance date in string format.
      * @return an {@code AbsentAttendanceEntry} object.
      * @throws IllegalValueException if the given attendance date string is invalid.
@@ -99,6 +100,7 @@ public class JsonAdaptedAttendance {
 
     /**
      * Creates a {@code PresentAttendanceEntry} object for model use.
+     *
      * @param attendanceDate the attendance date in string format.
      * @param pickUpTime the pick-up time in string format.
      * @param dropOffTime the drop-off time in string format.
