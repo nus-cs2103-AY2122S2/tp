@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+title ClearCommand Sequence Diagram\n
+
+box "Ui" UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ClearCommand" as ClearCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : user inputs "clear"
+activate MainWindow UI_COLOR
+
+MainWindow -> LogicManager : execute("clear")
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand("clear")
+activate AddressBookParser LOGIC_COLOR
+
+create ClearCommand
+AddressBookParser -> ClearCommand
+activate ClearCommand LOGIC_COLOR
+ClearCommand --> AddressBookParser
+deactivate ClearCommand
+
+AddressBookParser --> LogicManager : ClearCommand
+deactivate AddressBookParser
+
+LogicManager -> ClearCommand : execute(model)
+activate ClearCommand LOGIC_COLOR
+
+ClearCommand --> LogicManager : CommandResult with isClearRequest == true
+deactivate ClearCommand
+
+LogicManager --> MainWindow : CommandResult with isClearRequest == true
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleClearRequest()
+activate MainWindow UI_COLOR
+MainWindow --> MainWindow : replace CommandBox
+deactivate MainWindow
+
+[<--MainWindow : requests for user to input "confirm"
+deactivate MainWindow
+@enduml

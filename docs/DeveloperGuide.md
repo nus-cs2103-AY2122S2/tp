@@ -6,6 +6,19 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+<p align="center">
+  <img src="images/tapa banner.png">
+</p>
+
+TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
+especially for those who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+
+TAPA's developer guide is written for developers who wish to contribute to our project. 
+The developer guide will explain the technical aspects of the inner workings behind TAPA, and how the various components will come together.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
@@ -100,7 +113,7 @@ How the `Logic` component works:
 
 The Sequence Diagrams below illustrate the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-1.png)
+<img src="images/DeleteSequenceDiagramNew-1.png" width="1320" />
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-2.png)
 
@@ -115,7 +128,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="691" />
 
 
 The `Model` component,
@@ -167,7 +180,7 @@ The `manual` command displays the format and a short description for a particula
 
 The following sequence diagram shows how the manual command works:
 
-![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
+<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
 
 ### Add Command
 
@@ -232,9 +245,9 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the add operation works:
 
-![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
+<img src="images/AddCommandSequenceDiagram-1.png" width="1443" />
 
-![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
+<img src="images/AddCommandSequenceDiagram-2.png" width="849" />
 
 ### Delete Command
 
@@ -291,7 +304,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the delete operation works:
 
-![DeleteCommandSequenceDiagram-1](images/DeleteCommandSequenceDiagram-1.png)
+<img src="images/DeleteCommandSequenceDiagram-1.png" width="1330" />
 
 ![DeleteCommandSequenceDiagram-2](images/DeleteCommandSequenceDiagram-2.png)
 
@@ -343,7 +356,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 
 The following sequence diagram shows how the deleteModule operation works:
 
-![DeleteModuleCommandSequenceDiagram-1](images/DeleteModuleCommandSequenceDiagram-1.png)
+<img src="images/DeleteModuleCommandSequenceDiagram-1.png" width="1771" />
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
@@ -459,9 +472,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    
 10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
-![DeleteTaskCommandSequenceDiagram-1](images/DeleteTaskCommandSequenceDiagram-1.png)
+<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
 
-![DeleteTaskCommandSequenceDiagram-2](images/DeleteTaskCommandSequenceDiagram-2.png)
+<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
 
 ### Assign Command
 
@@ -553,7 +566,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
 19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-![AssignCommandSequenceDiagram-1](images/AssignCommandSequenceDiagram-1.png)
+<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
 
 ![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
 
@@ -612,11 +625,11 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 17. Lastly, the `TaskCommand` will create a new `CommandResult` by using the `TaskList` in Step 16.
     This `CommandResult` will then be returned to `LogicManager`.
 
-![TaskCommandSequenceDiagram-1](images/TaskCommandSequenceDiagram-1.png)
+<img src="images/TaskCommandSequenceDiagram-1.png" width="905" />
 
-![TaskCommandSequenceDiagram-2](images/TaskCommandSequenceDiagram-2.png)
+<img src="images/TaskCommandSequenceDiagram-2.png" width="881" />
 
-![TaskCommandSequenceDiagram-3](images/TaskCommandSequenceDiagram-3.png)
+<img src="images/TaskCommandSequenceDiagram-3.png" width="570" />
 
 ### Find Command
 
@@ -671,7 +684,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the find operation works:
 
-![FindCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
+<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
 
 ![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
@@ -715,7 +728,7 @@ The `mark` command marks a specific undone task as done for a particular student
 
 The following sequence diagrams shows how the mark command works:
 
-![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-1.png)
+<img src="images/MarkCommandSequenceDiagram-1.png" width="1432" />
 
 ![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-2.png)
 
@@ -759,7 +772,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 
 The following sequence diagrams shows how the unmark command works:
 
-![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-1.png)
+<img src="images/UnmarkCommandSequenceDiagram-1.png" width="1466" />
 
 ![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
 
@@ -767,21 +780,41 @@ The following sequence diagrams shows how the unmark command works:
 
 #### Description
 
-The `clear` command deletes all students currently stored in TAPA. During the execution of the `clear` command, a new `ClearCommand` object will be created, and is executed by the `LogicManager`. The `MainWindow` changes the `commandBox` to only recognise a followup `confirm` command. If the user executes a `confirm` command, a new `ConfirmClearCommand` object is created and executed by the `LogicManager`. Subsequently, `ModelManager` clears the students currently stored in TAPA.
+The `clear` command deletes all students currently stored in TAPA. Before all the students are deleted, the user will have to confirm their decision by inputting `confirm`.
 
 #### Implementation
-1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+1. When the user inputs "clear", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
-3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
+3. The `LogicManager` calls `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
 5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
-    <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than confirm for the next input. The CommandBox then returns to accepting all commands as described in the user guide.
-    </div>
-6. If the user inputs `confirm`, `LogicManager` parses the given input text using `AddressBookParser#parseCommand()` and a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+
+![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
+</div>
+
+![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
+
+6. If the user inputs "confirm", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
-8. In the `ConfirmClearCommand`, `model.setAddressBook(new AddressBook())` is invoked, resetting the current list of students stored in TAPA to an empty list.
-9. Lastly, the `ConfirmClearCommand` will create a new `CommandResult`, which will be returned to the `LogicManager`.
+8. The `ConfirmClearCommand` calls `Model#setAddressBook(new AddressBook())` which resets the current list of students stored in TAPA to an empty list.
+9. Lastly, the `ConfirmClearCommand` creates a new `CommandResult`, which is returned to the `LogicManager`.
+
+![ConfirmClearCommandSequenceDiagram](images/ConfirmClearCommandSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How TAPA confirms the user's decision to clear TAPA**
+
+* **Alternative 1 (current choice):** Have the user input "confirm", which is treated by TAPA as a command being executed.
+   * Pros: Easy to implement and test. Having the user type "confirm" is an added safety measure to ensure the user does not clear TAPA accidentally.
+   * Cons: The user would take a longer time to clear TAPA than if a "confirm" button is implemented.
+
+* **Alternative 2:** Have a pop-up window with a "confirm" button which the user can click to confirm or cancel their decision.
+   * Pros: Faster to click a button than having to type "confirm" to clear TAPA.
+   * Cons: More difficult to implement and test as it involves extending the UI.
 
 ### Archive Command
 
@@ -817,7 +850,7 @@ in most cases.
     A `CommandException` will be thrown if `ArchiveCommand` fails to populate the data file.
 12. Lastly, the `ArchiveCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
 
-![ArchiveCommandSequenceDiagram](images/ArchiveCommandSequenceDiagram.png)
+<img src="images/ArchiveCommandSequenceDiagram.png" width="1188" />
 
 ### Progress Command
 
@@ -868,7 +901,7 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 14. The output string will be used in creating a new `CommandResult` object.
 15. Lastly, the `CommandResult` object will be returned to `LogicManager`.
 
-![ProgressCommandSequenceDiagram-1](images/ProgressCommandSequenceDiagram-1.png)
+<img src="images/ProgressCommandSequenceDiagram-1.png" width="1411" />
 
 ![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
 
@@ -896,85 +929,68 @@ After which, a new `SortCommand` object will be created, and is subsequently exe
 
 ![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### History Command
 
-#### Proposed Implementation
+#### Description
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `history` command displays a list of the user's previously executed commands. It is facilitated by `CommandHistory`, which stores the list of commands.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![CommandHistoryClassDiagram](images/CommandHistoryClassDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call Model#commitAddressBook(), so the address book state will not be saved into the addressBookStateList.
-
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Note:</b> The :arrow_up_small: Up and :arrow_down_small: Down keyboard arrow keys can also be used to browse through the user's previously executed commands. This functionality is also facilitated by `CommandHistory`.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+#### Implementation
 
-![UndoRedoState3](images/UndoRedoState3.png)
+1. When the user launches the application, `ModelManager` is initialised with a new `CommandHistory` object.
+2. Whenever the user successfully executes a command, the `LogicManager` calls `Model#addToCommandHistory()`. This adds the command to the list of previously executed commands in `CommandHistory`.
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the currentStatePointer is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The undo command uses Model#canUndoAddressBook() to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
 
-</div>
+4. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
+6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
+7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
+8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
 
-The following sequence diagram shows how the undo operation works:
+![HistoryCommandSequenceDiagram](images/HistoryCommandSequenceDiagram.png)
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+### Undo Command
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The lifeline for UndoCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+#### Description
 
-</div>
+The `undo` command reverts the most recently executed command by restoring TAPA to its previous state before the last command was executed. It is facilitated by `AddressBookHistory` which saves all the details in TAPA as each command is executed during the current user session.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+![AddressBookHistoryClassDiagram](images/AddressBookHistoryClassDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the currentStatePointer is at index addressBookStateList.size() - 1, pointing to the latest address book state, then there are no undone AddressBook states to restore. The redo command uses Model#canRedoAddressBook() to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Implementation
 
-</div>
+1. When the user launches the application, `ModelManager` is initialised with a new `AddressBookHistory` object.
+2. Whenever the user successfully executes a command (excluding `clear` and `undo` itself), the `LogicManager` calls `Model#saveCurrentAddressBookToHistory()`. This adds a copy of TAPA to the list of TAPA’s previous states in `AddressBookHistory`.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
 
-![UndoRedoState4](images/UndoRedoState4.png)
+4. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+5. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
+6. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
+7. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
+8. Lastly, the `UndoCommand` creates a new `CommandResult` which is returned to the `LogicManager`.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### Design considerations
 
-The following activity diagram summarizes what happens when a user executes a new command:
+**Aspect: How the `UndoCommand` reverts the changes made by the previous command**
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+* **Alternative 1 (current choice):** Store the details of TAPA after each successfully executed command, then recover them when `undo` is executed.
+   * Pros: Easy to implement and test.
+   * Cons: Will take up more memory with each command executed.
 
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** Extend each command to be able to revert the changes it has made to TAPA.
+   * Pros: Will not incur major performance issues as it uses less memory.
+   * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
+   
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -992,17 +1008,18 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-**Target user profile**: Teaching Assistants who
+**Target user profile** <br>
+Teaching Assistants who:
+* Need to manage a significant number of students (especially across multiple modules)
+* Prefer desktop apps over other platforms
+* Can type fast
+* Prefer typing to mouse interactions
+* Are reasonably comfortable using CLI apps
 
-* has a need to manage a significant number of students (especially across multiple modules)
-* prefers desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**:  better manage the student’s contact and progress,
-especially for those who are teaching multiple classes/modules at the same time.
-It is optimised for use on CLI.
+**Value proposition** <br>
+TAPA will allow TAs to better manage their student’s contact and progress,
+especially for TAs who are teaching multiple classes/modules at the same time.
+It is optimised for use on CLI, and allows for more efficient student detail management for TAs who can type fast.
 
 
 
@@ -1053,7 +1070,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a student**
+####**Use case UC01 - Add a student**
 
 **MSS**
 
@@ -1109,7 +1126,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC03 - Delete a student**
+####**Use case UC03 - Delete a student**
 
 **MSS**
 
@@ -1138,7 +1155,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC04 - Edit a student**
+####**Use case UC04 - Edit a student**
 
 **MSS**
 
@@ -1521,14 +1538,96 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Shutdown
+   
+   1. Shut down TAPA using the `exit` command.
+   
+       Expected: TAPA exits immediately.
+
+### Adding a student
+
+1. Adding a student to TAPA
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+
+   2. Test case: `add i/A0000000R m/CS2100 n/Test`<br>
+      Expected: No student is added as there is already another student in TAPA who has the same student ID. Error message will be displayed to the user.
+
+   3. Test case: `add m/CS2100 n/Test`, `add i/AXXXXXXXR m/CS2100`, `add i/AXXXXXXXR n/Test`<br>
+      Expected: No student is added due to missing compulsory fields. Error message will be displayed to the user.
+
+   4. Test case: `add i/AXXXXXXXR m/CS2100 n/Test`<br>
+      Expected: Student is added into TAPA, even if some/all optional fields are missing.
+
+   5. Test case: `add i/A!@#$%^&R m/CS2100 n/Test`<br>
+      Expected: No student is added due to invalid format for student ID. Error message will be displayed to the user.
+
+   6. Other incorrect add commands to try: `add i/AXXXXXXXR m/CS2@00 n/Test`, `add i/AXXXXXXXR m/CS2100 n/T@st`<br>
+      Expected: Similar to previous
+
+### Checking all the tasks that a student has
+
+1. Checking all the tasks that a student has
+
+   1. Prerequisites: Sample data is loaded in TAPA. The student associated with the student ID ("A0000000Z") has a task assigned to him/her. 
+   
+   2. Test case: `task`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory field (student ID).
+   
+   3. Test case: `task i/A!@#$%^&R`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID.
+   
+   4. Test case: `task i/AXXXXXXXR`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
+   
+   5. Test case: `task i/A1111111Z`<br>
+      Expected: An error message will be displayed to the user, as there are no tasks assigned to this student.
+
+   6. Test case: `task i/A0000000Z`<br>
+      Expected: An output list will be displayed to the user, which consists of all the tasks ("Task A") that are assigned to the student.
+
+### Viewing the completion status of a particular task
+
+1. Viewing the completion status of a particular task
+
+   1. Prerequisites: Sample data is loaded in TAPA. All students taking the module ("CS2100") are being assigned with a task ("Task A").
+
+   2. Test case: `progress`, `progress m/CS2100`, `progress tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
+
+   3. Test case: `progress m/CS@@@@ tn/Task A`, `progress m/CS2100 tn/T@sk @`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for module code/task name.
+
+   4. Test case: `progress m/CS2100 tn/Task B`<br>
+      Expected: An error message will be displayed to the user, as no students who are taking "CS2100" are assigned with "Task B".
+
+   5. Test case: `progress m/CS2100 tn/Task A`<br>
+      Expected: An output list will be displayed to the user, which consists of all students (and their respective completion status) who are taking "CS2100" and are assigned with "Task A".
+
+### Archiving details
+
+1. Saving a copy of the details currently saved in TAPA into a separate file
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+   
+   2. Test Case: `archive`<br>
+      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
+
+2. Saving a copy of the details currently saved in TAPA into a separate file
+   
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. Remove the data directory's (`/data`) read and write permissions. 
+   
+   2. Test case: `archive`<br>
+      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
 
 ### Deleting a person
 
