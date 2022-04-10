@@ -411,7 +411,7 @@ Format: `sort SORT_BY`
 
 <div markdown="block" class="alert alert-secondary">
 
-**:question_mark: Unusual Behaviour?**<br>
+**:information_source: Unusual Behaviour?**<br>
 
 You may have noticed that your pet list only shows 2 pets (i.e. Woofie and Poofie) or less after executing the sort command, and
 Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *_exisitng pet list_* which in this case,
