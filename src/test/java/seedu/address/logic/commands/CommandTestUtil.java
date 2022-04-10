@@ -31,8 +31,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_INTLSTUDENT = "internationalStudent";
+    public static final String VALID_TAG_YEAR2 = "year2";
     public static final String VALID_GITHUB_AMY = "amyB";
     public static final String VALID_GITHUB_BOB = "bobC";
     public static final String VALID_TELEGRAM_AMY = "amy_B";
@@ -44,8 +44,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_YEAR2 = " " + PREFIX_TAG + VALID_TAG_YEAR2;
+    public static final String TAG_DESC_INTLSTUDENT = " " + PREFIX_TAG + VALID_TAG_INTLSTUDENT;
     public static final String GITHUB_DESC_AMY = " " + PREFIX_GITHUB + VALID_GITHUB_AMY;
     public static final String GITHUB_DESC_BOB = " " + PREFIX_GITHUB + VALID_GITHUB_BOB;
     public static final String TELEGRAM_DESC_AMY = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_AMY;
@@ -80,13 +80,13 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_FRIEND)
+                .withTags(VALID_TAG_YEAR2)
                 .withGithub(VALID_GITHUB_AMY)
                 .withTelegram(VALID_TELEGRAM_AMY)
                 .withStudentId(VALID_STUDENTID_AMY).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withTags(VALID_TAG_INTLSTUDENT, VALID_TAG_YEAR2)
                 .withGithub(VALID_GITHUB_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB)
                 .withStudentId(VALID_STUDENTID_BOB).build();

@@ -35,8 +35,8 @@ public class AddCommand extends Command {
             + PREFIX_GITHUB + "johnD "
             + PREFIX_TELEGRAM + "jDoe "
             + PREFIX_STUDENTID + "A0123456B "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "year2 "
+            + PREFIX_TAG + "Tembusu";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the TAddressBook";

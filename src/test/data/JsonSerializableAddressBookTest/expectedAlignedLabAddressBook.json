@@ -15,7 +15,7 @@
   "students" : [ {
     "name" : "Alex Yeoh",
     "email" : "alexyeoh@example.com",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "year2" ],
     "telegram" : "alex_yeoh",
     "studentId" : "A0123456B",
     "labs" : [ {
@@ -35,7 +35,7 @@
   }, {
     "name" : "Bernice Yu",
     "email" : "berniceyu@example.com",
-    "tagged" : [ "colleagues", "friends" ],
+    "tagged" : [ "RC4", "year2" ],
     "telegram" : "bernice_yu",
     "studentId" : "A1234567C",
     "labs" : [ {
@@ -55,7 +55,7 @@
   }, {
     "name" : "Charlotte Oliveiro",
     "email" : "charlotte@example.com",
-    "tagged" : [ "neighbors" ],
+    "tagged" : [ "internationalStudent" ],
     "telegram" : "charlotte_oliverio",
     "studentId" : "A0123457C",
     "labs" : [ {
@@ -75,7 +75,7 @@
   }, {
     "name" : "David Li",
     "email" : "lidavid@example.com",
-    "tagged" : [ "family" ],
+    "tagged" : [ "year1" ],
     "telegram" : "david_li",
     "studentId" : "A0123458D",
     "labs" : [ {
@@ -95,7 +95,7 @@
   }, {
     "name" : "Irfan Ibrahim",
     "email" : "irfan@example.com",
-    "tagged" : [ "classmates" ],
+    "tagged" : [ "KR" ],
     "telegram" : "irfan_ibrahim",
     "studentId" : "A0123459E",
     "labs" : [ {
@@ -115,7 +115,7 @@
   }, {
     "name" : "Roy Balakrishnan",
     "email" : "royb@example.com",
-    "tagged" : [ "colleagues" ],
+    "tagged" : [ "RC4" ],
     "telegram" : "roy_balakrishnan",
     "studentId" : "A0123450F",
     "labs" : [ {
