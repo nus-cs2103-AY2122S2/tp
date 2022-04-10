@@ -24,6 +24,8 @@ public class AcceptInterviewCommand extends Command {
 
     public static final String MESSAGE_ACCEPT_INTERVIEW_SUCCESS = "Accept Interview: %1$s";
     public static final String MESSAGE_INTERVIEW_CANNOT_BE_ACCEPTED = "Only passed interviews can be accepted!";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, "
+            + "so they cannot accept a new one.";
 
     private final Index targetIndex;
 
@@ -44,9 +46,12 @@ public class AcceptInterviewCommand extends Command {
             throw new CommandException(MESSAGE_INTERVIEW_CANNOT_BE_ACCEPTED);
         }
 
+        Applicant oldApplicant = interviewToAccept.getApplicant();
+        if (oldApplicant.isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
+        }
         Position oldPosition = interviewToAccept.getPosition();
         Position newPosition = interviewToAccept.getPosition().acceptOffer();
-        Applicant oldApplicant = interviewToAccept.getApplicant();
         Applicant newApplicant = interviewToAccept.getApplicant().setStatus(oldApplicant, newPosition);
         Interview acceptedInterview = new Interview(newApplicant, interviewToAccept.getDate(),
                 newPosition);

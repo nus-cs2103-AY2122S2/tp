@@ -101,6 +101,10 @@ public class Applicant {
         return hiredStatus;
     }
 
+    public boolean isHired() {
+        return hiredStatus.isHired();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
