@@ -7,7 +7,7 @@ end box
 
 box Logic LOGIC_COLOR_T1
 participant ":Logic" as Logic LOGIC_COLOR
-participant "command:ListAppointmentsCommand" as Command LOGIC_COLOR
+participant "command:ListAppointmentCommand" as Command LOGIC_COLOR
 end box
 
 autoactivate on
@@ -20,6 +20,7 @@ Logic <-- Command : command
 Logic -> Command : execute(model)
 Logic <-- Command : commandResult
 MainWindow <-- Logic : commandResult
+destroy Command
 MainWindow -> MainWindow : changeTabFocus(\ncommandResult.getUiContentType())
 MainWindow --> MainWindow
 [<-- MainWindow

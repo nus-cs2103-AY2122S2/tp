@@ -107,7 +107,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each of the types `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 <div markdown="span" class="alert alert-info">
 
@@ -221,7 +221,7 @@ The Schedule subcomponent is structured such that:
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
 * The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
 
-For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>` list, see the [implementation](#implementation) section.
+For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>`, see the [implementation](#implementation) section.
 
 Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
 
@@ -375,7 +375,7 @@ The scheduling-related methods of note implemented by `ScheduleItem` are:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`A2.getStartDateTime() < A1.getEndDateTime()`
+:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`S2.getStartDateTime() < S1.getEndDateTime()`
 
 </div>
 
@@ -444,7 +444,7 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 
 The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since the list of `AppointmentSlot` objects for the `Schedule` are dependent on and change with the `Appointment` contained within it, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
-Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` are always consistent with the backing `Schedule`.
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` is always consistent with the backing `Schedule`.
 
 The `AppointmentSlotList` must be configured with some `TimeRange` using the `AppointmentSlotList#updateFilteredRange(TimeRange, int)` method for it to generate `AppointmentSlot` objects.
 
@@ -460,7 +460,7 @@ Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered 
 * be chronologically sorted
 * be chronologically disjoint
 
-This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list, ensuring that the 3 constraints listed above are satisfied.
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying lists, ensuring that the 3 constraints listed above are satisfied.
 
 Using the above instance, the resultant `CompositeObservableList` is shown in the object diagram below.
 
@@ -545,7 +545,7 @@ The organization of the time parser mirrors the date parser, and their purposes 
 
 <div style="page-break-after: always;"></div>
 
-A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all classes and methods are static):
+A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all methods are static class-level members):
 
 ![Parser Flow](images/DateTimeParsingSequenceDiagram.png)
 
@@ -702,7 +702,7 @@ The sequence diagram is as follows:
 
 #### Range Command
 
-This extension allows the user to perform a command on a range of persons based on their displayed index. During the conversion from user input to list of commands `from/INDEX to/INDEX` is used to generate the new commands that will be executed.
+This extension allows the user to perform a command on a range of persons based on their displayed index. During the conversion from user input to list of commands, `from/INDEX to/INDEX` is used to generate the new commands that will be executed.
 
 <div style="page-break-after: always;"></div>
 
@@ -1339,7 +1339,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1473,11 +1474,11 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix 2: Effort**
 
-* Difficulty level
+* **Difficulty level**
    * We developed a lot of different features with varying levels of difficulty, depth and complexity.
    * As a whole, we felt the difficulty level of the project was Moderate.
    * As we choose to extend AB-3, we needed an extensive understanding of the system design. This was required in order to extend the system in a way that seamlessly integrates with the existing AB-3.
-* Challenges Faced
+* **Challenges Faced**
    * As every member worked on multiple issues and features, the following list are just some we picked out and is not exhaustive.
      * Working with the `csv` format without a library required writing a parser from scratch
      * Involved comparatively more UI work than AB-3, especially for onboarding components, which complicated testing.
@@ -1485,11 +1486,11 @@ testers are expected to do more *exploratory* testing.
      * Range and Chain commands were tough to test due to many possible test cases, requiring additional testing and fixing.
      * Appointments subsystem was built upon the existing AB-3 system, requiring heavy modification and many additions to achieve the intended end product.
      * In order to manage deadlines, we had to set workflows such as internal PR freeze deadlines and internal milestone closing deadlines.
-* Effort Required
+* **Effort Required**
   * Extensive modification to the current code base.
   * Extensive amount of tests written to cover as many scenarios as possible.
   * We had extensive weekly meeting early in order to ensure every developer knows what is required for the week.
-* Achievements
+* **Achievements**
   * Built a product that we feel fulfills our initial targets.
   * Achieved all `Must Have` User Stories.
   * Met all milestones and deadlines, including internally set deadlines.
