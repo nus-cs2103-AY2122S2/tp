@@ -560,7 +560,9 @@ Given below is the example usage scenario and how the `find` mechanism behaves a
    `ParseException` would be thrown.
 
 4. If the required prefix and attribute is present (i.e. `n/NAME`), `FindCommandParser` will then call the `ParserUtil#parseName()`
-   to check for the validity of the input `NAME`. <br><div markdown="span" class="alert alert-info">:information_source: **Note:** The `ParserUtil#parse` will follow the input of the prefix (e.g. If the prefix used is `p/` the `ParserUtil` will be `ParserUtil#parsePhone()` or `e/` then the `ParserUtil` will be `ParserUtil#parseEmail()` <br><br> At this stage, `ParseException` would be thrown if the
+   to check for the validity of the input `NAME`. <br>
+   <div markdown="span" class="alert alert-info">:information_source: **Note:** The `ParserUtil#parse` will follow the input of the prefix (e.g. If the prefix used is `p/` the `ParserUtil` will be `ParserUtil#parsePhone()` or `e/` then the `ParserUtil` will be `ParserUtil#parseEmail()`</div> 
+   <br> At this stage, `ParseException` would be thrown if the
    `NAME` specified is invalid.
 
 5. The `FindCommandParser` then creates the `FindCommand` based on the processed inputs.
