@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -71,9 +71,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/UiClassDiagramV2.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `XYZListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,53 +82,47 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Customer`, `Service`, `Booking` objects residing in the `Model`.
 
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
-
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/LogicClassDiagramV2.png)
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a customer).
+1. When `Logic` is called upon to execute a command, it uses the `TrackBeauParser` class to parse the user command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCustomerCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g., to add a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagramV2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Class Diagram](images/ModelClassDiagramV2.png)
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores TrackBeau's data i.e., all `UniqueListItem` objects (which are contained in a `UniqueList` object).
+* stores the currently 'selected' `UniqueListItem` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<UniqueListItem>` that can be 'observed' e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+The class diagram below shows more details regarding `Customer`, `Service` and `Booking` classes in the `Model` component.
+
+![Model Specific Class Diagram](images/ModelSpecificDetailsClassDiagram.png)
+
 
 </div>
 
@@ -137,16 +131,17 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F11-3/tp/tree/master/src/main/java/seedu/trackbeau/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class Diagram](images/StorageClassDiagramV2.png)
+
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both TrackBeau data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `TrackBeauStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.trackbeau.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -168,16 +163,39 @@ This section describes some noteworthy details on how certain features are imple
 ##### Design Considerations
 
 * **Alternative 1 (current choice):** Implement only allergies,staffs and services as tags
-  * Pros: Harder to implement
-  * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
+    * Pros: Harder to implement
+    * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
 
 * **Alternative 2:** Implement all additional fields as tags
   itself.
-  * Pros: Easy to implement
-  * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
-  * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
+    * Pros: Easy to implement
+    * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
+    * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
 
-#### Delete multiple customers in a single command
+
+### Add customer feature
+
+#### Overview
+
+
+#### Implementation of feature
+
+
+![Add Customer Sequence Diagram](images/AddCustomerActivityDiagram.png)
+
+
+### List customers feature
+
+#### Overview
+
+
+#### Implementation of feature
+
+
+#### Design considerations
+
+
+### Delete customer(s) feature
 
 #### Overview
 - Delete command can allow multiple indexes, this allows for faster deletion of customer profiles.
@@ -188,7 +206,7 @@ they are integers and is a valid index.
 - If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be
 executed.
 
-##### Design Considerations
+#### Design Considerations
 
 * **Option 1:** Does not abort command when an index fail the check and delete customer from valid indexes.
   * Pros: Lenient on user error.
@@ -199,37 +217,54 @@ executed.
   * Pros: It is clear about how the command is intended to be used.
   * Cons: Minor error will cause command to be aborted.
 
-### Services
+
+### Find customers feature
+
+#### Overview
 
 
-#### Add service feature
+#### Implementation of feature
 
-##### Overview
+
+#### Design considerations
+
+
+
+### Add service feature
+
+#### Overview
 The add service feature allows users to add services into TrackBeau.
 Each new service must have the data fields `ServiceName`, `Price` and `Duration`.
 
-##### Implementation of feature
+#### Implementation of feature
+The add service feature is implemented via `AddServiceCommand` which is created from `AddServiceCommandParser`.
+1. `AddServiceCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2. The mapped data fields (stored as string) are then parsed to create it with the actual data type it should be.
+3. The parser then use the data fields to create a `Service` object which is then used to create `AddServiceCommand` object.
 
-##### Design considerations
+The following activity diagram summarizes what happens when the user executes the add service command (`adds`):
 
-#### Edit service feature
+![Add Service Activity Diagram](images/AddServiceActivityDiagram.png)
 
-##### Overview
+
+### Edit service feature
+
+#### Overview
 The edit service feature allows users to edit existing services in TrackBeau.
 For each edit, at least one of the data fields `ServiceName`, `Price` and `Duration` must be modified.
 
-##### Implementation of feature
+#### Implementation of feature
+The edit service feature is implemented via `EditServiceCommand` which is created from `EditServiceCommandParser`.
+1. `EditServiceCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2. The index of the service to be edited is parsed into `Index` which is used to locate the service to be modified during the execution of the command.
+3. The mapped data fields (stored as string) are then parsed to create it with the actual data type it should be.
+4. The parser then use the data fields to create an `EditServiceDescriptor` that describes all the edited data fields.
+5. The parser then creates a `EditServiceCommand` object using the `Index` and `EditServiceDescriptor`.
 
-##### Design considerations
+The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
 
-#### Delete service feature
+![Edit Service Activity Diagram](images/EditServiceActivityDiagram.png)
 
-##### Overview
-The delete services feature allows users to remove existing services in TrackBeau.
-
-##### Implementation of feature
-
-##### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -460,31 +495,141 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+## Customer-Related Commands
 
-1. _{ more test cases …​ }_
+### Adding a new customer 
 
-### finding customer by name
+   1.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
+      Expected: Error details shown in the status message about invalid command format. Status bar remains the same.<br>
+  
+   2.  Test case: Any command with invalid format for one of the keywords : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/<DATE THAT IS IN THE FUTURE>` <br>
+     Expected: Error details shown in the status message about invalid date format. Status bar remains the same.
+     
+   3.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
+     Expected: Error message saying customer already exist
 
-1. finding customer by name
+### Editing a customer 
+      
+  1.  Test case: `editc 2 n/Betsy Crower  p/91234567 e/johndoe@example.com`<br>
+      Expected: Customer already exist error as this customer has the same phone and email as first customer after executing test case 1.
+      
+  1.  Test case: `editc 1`<br>
+      Expected: Return an error that at least one field must be provided.
 
-   1. Test case: `find name john`<br>
-      Expected: list of customers with john in their name will be shown
 
-   1. Test case: `find name j0hn`<br>
-      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
+### Finding customers
 
-   1. Other incorrect show commands to try: `find name`, `find x` (where x only contains english characters)<br>
-      Expected: Similar to previous.
+NOTE: Make sure to use `listc` between test cases.
 
-### finding customer by keyword
+  1. Test case: `findc h/Oily h/Dry`<br>
+     Expected: list of customers with hair type as dry only.
 
-1. finding customer by keyword type and keyword
+  1. Test case: `findc n/John h/Dry`<br>
+     Expected: list of customers who either have dry hair type or are named John.
+      
+  1. Test case: `findc e/`<br>
+     Expected: Error message saying that find command does not take empty values.
 
-   1. Test case: `find allergies nickle`<br>
-      Expected: list of customers with nickle in their allergy will be shown
+### Deleting customers 
 
-   1. Test case: `find nickle`<br>
-      Expected: Invalid keyword has been enter. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `deletec -1`<br>
+      Expected: Error message saying that the command format is invalid.
+     
+   1. Test case: `deletec 30`<br>
+      Expected: Error message saying that the index is invalid.
+      
+   1. Test case: `deletec 1,2`<br>
+      Expected: Delete first and second customer.
 
-   1. Other incorrect show commands to try: `find skintype`, `find x` (where x only contains english characters)<br>
-      Expected: Similar to previous.
+### Listing customers
+
+   1. Test case: `listc`
+      Expected: Shows all customers.
+     
+## Service-Related Commands
+
+### Adding service
+
+  1. Test case: Any command with either n/ or pr/ or d/ missing, example  `adds n/Acne Facial Treatment pr/138`<br>
+     Expected: Invalid command format error message.
+      
+  1. Test case: Any command with wrong format for one of the fields like `adds n/Acne Facial Treatment pr/138.123 d/15`<br>
+     Expected: Error message based on field that is wrong.
+     Name: Names should only contain alphanumeric characters and spaces, and it should not be blank<br>
+     Price: Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.<br>
+     Duration: Duration should only contain numbers and have a value that is greater than 0.<br>
+
+  1. Test case: `adds n/Acne Facial Treatment pr/138 d/120` and `adds n/Acne Facial Treatment pr/120 d/60`<br>
+     Expected: Service is already in TrackBeau error.
+      
+### Editing a Service
+
+  1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
+ 
+  1. Test case: `edits -1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Invalid command format error
+     
+  1. Test case: `edits 50 n/Dark Eye Circle Treatment d/30`<br>
+     Expected: Invalid index error 
+     
+ ### Finding a Service
+ 
+ NOTE: Make sure to use `lists` between the tests
+ 
+  1. Test case: `finds n/Facial dr/120`<br>
+     Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
+     
+ ### Deleting a Service
+ 
+   1. Test case: `deletes -1`<br>
+     Expected:  Invalid command error message.
+  
+  1. Test case: `deletes 100,1`<br>
+     Expected: Invalid index message.
+
+## Booking Commands
+
+ ### Adding a booking 
+
+  1. Test case: Any of the fields are missing, example: `addb c/1 sev/1`<br>
+     Expected: Invalid command format message.
+     
+  1. Test case: Any of the fields have invalid format, example: `addb c/1 sev/1 st/10-10-2022 10:333`<br>
+     Expected:  Invalid format error message for the field that had a mistake.
+
+ ### Editing a booking 
+  
+  1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
+ 
+  1. Test case: `editb -1 sev/1 f/Excellent Customer Service` or  `editb 100 sev/1 f/Excellent Customer Service`<br>
+     Expected:Invalid index error
+     
+  1. Test case: Invalid format for one of the parameters, example: `editb 2 st/29-02-2001 10:30`<br> 
+     Expected:Invalid format error based on the parameter
+    
+### Finding a booking 
+
+NOTE: Make sure to use `listb` between the test cases.
+
+  1. Test case: `findb f/bad st/10-04-2022` <br>
+     Expected:Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
+ 
+### Deleting a booking
+
+   1. Test case: `deleteb 1,2,3`<br>
+     Expected:Removes the 1st, 2nd and 3rd booking from the application.
+ 
+   1. Test case: `deleteb -1` or `deleteb 100`<br>
+     Expected: Invalid format or invalid index error message.
+     
+     
+## Statistics Commands
+
+   1. Test case: `plotAll`<br>
+     Expected:Plots 6 charts.
+    
+   1. Test case: `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/10-04-2022 al/Test sep/Test sep/Test stp/Test h/Test s/Test` then `plotAll` <br>
+     Expected:Plots 6 charts with updated information. Accuracy can be checked by comparing charts before and after the new customer is added.

@@ -1,0 +1,29 @@
+@startuml
+:User executes the 'edits' command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid command format])
+    :Parses the command\nusing EditServiceCommandParser;
+    if () then ([valid parameters])
+    else ([else])
+        :Shows an invalid\nparameters error message;
+        stop
+    endif
+    if () then ([any fields is edited])
+        :Save the edited service to model;
+    else ([else])
+        :Shows a service not edited error message;
+        stop
+    endif
+    if () then ([user is on Services tab])
+    else ([else])
+        :Switch to Services tab;
+    endif
+    :Displays updated service list;
+else ([else])
+    :Shows an invalid command error message;
+endif
+stop
+@enduml

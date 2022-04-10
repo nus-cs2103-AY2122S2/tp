@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Class "<<interface>>\nUniqueListItem" as UniqueListItem
+
+Class Customer
+Class Name
+Class Address
+Class "{abstract}\nDate" as Date
+Class Birthdate
+Class RegistrationDate
+Class Email
+Class Phone
+Class HairType
+Class SkinType
+Class Tag
+
+Class Service
+Class Duration
+Class ServiceName
+Class Price
+
+Class Booking
+Class BookingDateTime
+Class Feedback
+}
+
+
+Customer .up.|> UniqueListItem
+Service .up.|> UniqueListItem
+Booking .up.|> UniqueListItem
+
+Customer *--> Name
+Customer *--> Address
+Customer *--> Email
+Customer *--> Phone
+Customer *--> HairType
+Customer *--> SkinType
+Customer *--> "~*  " Tag
+
+Customer *--> Birthdate
+Customer *--> RegistrationDate
+Birthdate .down.|> Date
+RegistrationDate .down.|> Date
+
+Booking .left.> Customer
+Booking .right.> Service
+
+Booking *--> BookingDateTime
+Booking *--> Feedback
+BookingDateTime .down.|> Date
+
+Service *--> Duration
+Service *--> ServiceName
+Service *--> Price
+
+Name -[hidden]right-> Address
+Address -[hidden]right-> Email
+Email -[hidden]right-> Phone
+Phone -[hidden]right-> HairType
+HairType -[hidden]right-> SkinType
+SkinType -[hidden]right-> Tag
+Tag -[hidden]right-> Birthdate
+Birthdate -[hidden]right-> RegistrationDate
+
+Customer -[hidden]right-> Booking
+Booking -[hidden]right-> Service
+
+@enduml
