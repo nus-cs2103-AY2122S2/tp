@@ -340,7 +340,7 @@ Manage Persons faster that a typical mouse/GUI driven app.
 ## Use cases
 System: RealEstatePro (REP)
 
-**Use case: Add a client**
+### **Use case: Add a client**
 
 Actor: User
 
@@ -355,7 +355,7 @@ Actor: User
 
      Use case resumes at step 1
 
-**Use Case: Edit a client**
+### **Use Case: Edit a client**
 
 Actor: User
 
@@ -381,7 +381,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: Delete a client**
+### **Use Case: Delete a client**
 
 Actor: User
 
@@ -400,7 +400,7 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Upload Image**
+### **Use Case: Upload Image**
 
 Actor: User
 
@@ -424,7 +424,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: View Image**
+### **Use Case: View Image**
 
 Actor: User
 
@@ -553,11 +553,25 @@ Given below are instructions to test the app manually.
 3. Open Statistics window by key
    1. Test case: Press on `F2` key on your device. <br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
-## Finding a client
+## Finding clients
+1. Finding clients by keywords
+   1. Prerequisites: None
+   2. Test Case: `find name Alex Yu`<br>
+      Expected: `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   3. Test Case: `find name alex yu`<br>
+      Expected: The function is case-insensitive. `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   4. Test Case: `find all`<br>
+      Expected: List of clients showed does not change. Error message displayed.
+   5. Other incorrect add commands to try: `find`, `find all`, `find john`<br>
+      Expected: Similar to previous.
 
 ## Sorting clients
 
 ## Matching clients
+1. Matching clients
+   1. Prerequisites: None. Ideally there are existing matches, otherwise the MatchWindow that pops up is empty. 
+   2. Test Case: `match`<br>
+      Expected: MatchWindow pops up, showing matching sellers on the left and buyers on the right.
 
 ## Uploading an Image
 
