@@ -355,6 +355,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example & Output:** `find attack on titan`
 
 <img src="images/General_Find_UI.png">
@@ -421,6 +423,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
+
+<div style="page-break-after: always;"></div>
 
 **Explanation:** 
 
@@ -491,6 +495,8 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Importing a show: `import`
 
