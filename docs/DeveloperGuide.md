@@ -158,33 +158,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Applicant feature
-
-#### Proposed Implementation
-
-An applicant in HireLah is represented by `Applicant`. `Applicant` is implemented by refactoring `Persons`.
-Additionally, `Applicant` implements two new attributes which are represented by the following two new classes:
-
-* `Gender` — M refers to male, and F refers to female. Only the value M or F is allowed.
-* `Age` —  Numerical representation of the age of the applicant. Only values with two digits or more are allowed.
-
-`Gender` and `Age` class highly resemble other existing attribute classes such as `Address`, `Email`, `Name`, and
-`Phone`.
-
-These classes are contained in the `applicant` package which belongs to the `model` package.
-
-Applicant is implemented this way as for HireLah, we require new attributes such as `Gender` and `Age` to aid in the
-recruitment process. the `Person` class did not contain such attributes.
-
-Adding Gender and Age as tags using the existing functionality is not ideal as we do not want these attributes to be
-optional.
-
-A new `Applicant` class had to be created to support the functionality. It is also not ideal to keep the existing
-`Person` class as it should not be instantiated by users in HireLah.
-
-Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
-support the needs of HireLah.
-
 ### To Add: Position feature?
 A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
 * `PositionName` — M refers to the name of the job opening. 
