@@ -26,6 +26,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about `AddressBook` named classes:**<br>
+
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
+
+</div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -136,7 +144,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Candidate` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Candidate` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" />
 
 </div>
 
