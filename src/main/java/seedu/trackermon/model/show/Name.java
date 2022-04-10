@@ -10,7 +10,7 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Name should only contain alphanumeric characters and spaces, it should also not be blank";
+            "Name should only contain up to 500 alphanumeric characters and spaces, it should also not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
