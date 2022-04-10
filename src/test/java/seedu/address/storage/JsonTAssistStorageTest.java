@@ -51,12 +51,12 @@ public class JsonTAssistStorageTest {
     }
 
     @Test
-    public void readTAssist_invalidPersonTAssist_throwDataConversionException() {
+    public void readTAssist_invalidStudentTAssist_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readTAssist("invalidStudentTAssist.json"));
     }
 
     @Test
-    public void readTAssist_invalidAndValidPersonTAssist_throwDataConversionException() {
+    public void readTAssist_invalidAndValidStudentTAssist_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readTAssist("invalidAndValidStudentTAssist.json"));
     }
 
