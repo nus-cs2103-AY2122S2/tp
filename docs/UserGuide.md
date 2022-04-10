@@ -5,6 +5,8 @@ title: User Guide
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Motivation
 
 As a pet daycare owner, it takes a lot of effort to remember pets by their names,
@@ -13,6 +15,8 @@ vet appointments that you have to take note of. With WoofAreYou, these things ca
 of easily, so that you may focus on the things that **truly** matter: taking good care of the pets and ensuring their safety.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # WoofAreYou
 
 WoofAreYou is a desktop application for pet daycare owners like you to handle the administrative information of your clients.
@@ -30,6 +34,7 @@ Let's get started!
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -64,6 +69,8 @@ Let's get started!
 7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 This section will elaborate on the features WoofAreYou has and is
@@ -100,6 +107,8 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## _Basic Administration_
 
@@ -260,6 +269,8 @@ When you are done with your daily administrative duties, you can exit the progra
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 ## _Optional Requirements_
 
 This subsection covers the features that you may encounter when taking care of a pet that requires more attention.
@@ -339,6 +350,8 @@ the label will be <span style="color:grey">grey</span>.
 This can serve as a visual cue for you if you need a reminder for the pet's appointment.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## _Efficiency Enhancement_
 
