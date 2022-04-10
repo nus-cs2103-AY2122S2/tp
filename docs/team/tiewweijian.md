@@ -60,5 +60,5 @@ You may view my code contributions via the RepoSense link provided!
 
 * **Community**
   * PRs reviewed (with non-trivial review comments): [#221](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/221) [#199](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/199) [#55](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/55) [#384](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/384)
-  * PRs with suggestions: [#238](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/238) 
-  
+  * PRs with suggestions: [#238](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/238)
+
