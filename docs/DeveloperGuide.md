@@ -97,7 +97,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 <div markdown="span" class="alert alert-info">
 
@@ -159,7 +159,7 @@ The `Model` component,
 * stores and organizes all data entities used within the application in multiple *container classes*.
 * stores the currently 'selected' objects for each data entity in separate _filtered_ lists.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed externally as a `ReadOnlyUserPref` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-secondary">
 
@@ -195,7 +195,7 @@ Both the `DisjointAppointmentList` and `AppointmentSlotList` are further combine
 
 The Schedule subcomponent is structured such that:
 
-* The bulk of the time-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
+* The bulk of the scheduling-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
 * The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
 
@@ -412,7 +412,7 @@ Using the above instance, the resultant `CompositeObservableList` is shown in th
 
 </div>
 
-### Appointments Filtering Feature - `appointmentsbetween`
+### Appointments Filtering Feature - `apptbetween`
 
 The `Appointment` filtering feature mirrors the system used for `Person`, and is facilitated by `FilteredList` from the JavaFX library. This feature is implemented at the `ModelManager` level, and the related functions are:
 
@@ -462,7 +462,7 @@ However, this implementation comes with the increased risk of desynchronization 
 ### Edit Appointment Priority Feature - `prioritizeappt`
 
 The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
-The `Priority` enum values provide the display name of the enum denoting priority level, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
+The `Priority` enum values provide the display name of the priority levels, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
 ### Date Time Input Parsing
 
 The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
@@ -1268,9 +1268,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
-* **Schedule**: The part of ContaX that keeps track of Appointments
-* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications.
+* **Schedule**: The part of ContaX that keeps track of Appointments.
+* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications
 * **Onboarding Guide**: The quick start guide to ContaX
+* **Disjoint Appointments**: Appointments are disjoint if the time periods they span do not overlap with each other, that is, one appointment starts after the other appointment ends
+* **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1309,6 +1311,9 @@ testers are expected to do more *exploratory* testing.
       **Expected:** An empty AddressBook will be loaded instead. Upon an operation that interacts with the data, the existing corrupted `addressbook.json` file will be replaced with the new data.
 
    3. Test case: Invalid Person record in JSON data file (e.g. alphabets in phone number)<br>
+      **Expected:** Data is loaded into ContaX normally, with invalid entries skipped.
+
+   4. Test case: Invalid Appointment record in JSON data file (e.g. restricted symbols in appointment name)<br>
       **Expected:** Data is loaded into ContaX normally, with invalid entries skipped.
 
 2. Manually editing JSON entries

@@ -28,7 +28,7 @@ deactivate MainWindow
 [<-- UiManager
 deactivate UiManager
 
-[-> Logic : execute("appointmentsbetween \n sd/12-12-2022 st/12:00 \n ed/13-12-2022 ed/12:00")
+[-> Logic : execute("apptbetween \n sd/12-12-2022 st/12:00 \n ed/13-12-2022 ed/12:00")
 activate Logic
 create Command
 Logic -> Command
