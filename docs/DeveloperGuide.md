@@ -6,15 +6,38 @@ title: Developer Guide
 1. [Acknowledgements](#acknowledgements)
 2. [Setting Up](#setting-up)
 3. [Design](#design)
+   * [Architecture](#architecture)
+   * [UI Component](#ui-component)
+   * [Logic Component](#logic-component)
+   * [Model Component](#model-component)
+   * [Storage Component](#storage-component)
+   * [Common classes](#common-classes)
 4. [Implementation](#implementation)
+   * [Adding orders feature](#addo)
+   * [Mark/ Unmark orders feature](#marko)
+   * [Finding orders and persons through attributes](#findo-findp)
+   * [Edit Order Feature](#edito)
+   * [Listing all orders](#listo)
+   * [Find Incomplete Orders Before A Date Feature](#incompleteo)
+   * [Delete Orders](#deleteo)
+   * [Dynamic Toggling Between Application’s Data](#dynamic-toggling)
 5. [Documentation, logging, testing, configuration, dev-ops](#additional-information)
 6. [Appendix: Requirements](#requirements)
+   * [Product Scope](#product-scope)
+   * [User Stories](#user-story)
+   * [Use Cases](#use-cases)
+   * [Non-Functional Requirements](#nfr)
+   * [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements** <a name="acknowledgements"></a>
 
 * Geralddtan - Reused Leap Year Checker (DeliveryDateTime#isLeapYear) from https://www.geeksforgeeks.org/java-program-to-find-if-a-given-year-is-a-leap-year/
+* Punnyhuimin - Reused natural date checker formula (DateChecker#naturalDateCheck()) from https://coderanch.
+  com/t/385117/java/date-Monday
+* Punnyhuimin - Reused scroll bar CSS https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,10 +51,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-F09-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### Architecture <a name="architecture"/>
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -41,7 +64,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -72,9 +96,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component <a name="ui-component"/>
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -89,9 +113,9 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Order` objects residing in the `Model`.
 
-### Logic component
+### Logic component <a name="logic-component"/>
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -118,7 +142,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPersonCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPersonCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model component <a name="model-component"/>
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="700" />
@@ -139,7 +163,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### Storage component <a name="storage-component"/>
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -150,7 +174,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common classes <a name="common-classes"/>
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
@@ -160,7 +184,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding Orders Feature
+### Adding Orders Feature <a name="addo"/>
 
 This feature allows users to add orders.
 
@@ -171,11 +195,11 @@ The AddOrder feature takes in 4 required parameter and 1 optional parameter.
 
 | Prefix | Meaning                | Example               | Format                                                        | Compulsory |
 |--------|------------------------|-----------------------|---------------------------------------------------------------|------------|
-| /p     | Phone Number           | /p 90124322           | Must be a number longer than 3 digits                         | Yes        |
-| /c     | Delivery Date and Time | /c 30-06-2022 15:30   | Must follow the format dd-MM-yyyy HH:mm                       | Yes        |
-| /m     | Collection Type        | /m delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
-| /d     | Details of Order       | /d 1:Chocolate Cake   | Can take in any detail of the order                           | Yes        |
-| /r     | Remark                 | /r Put more Chocolate | Can take in any remark of the order                           | No         |
+| p/     | Phone Number           | p/ 90124322           | Must be a number longer than 3 digits                         | Yes        |
+| c/     | Delivery Date and Time | c/ 30-06-2022 15:30   | Must follow the format dd-MM-yyyy HH:mm                       | Yes        |
+| m/     | Collection Type        | m/ delivery           | Must be either `delivery` or `pickup` with any capitalisation | Yes        |
+| d/     | Details of Order       | d/ 1:Chocolate Cake   | Can take in any detail of the order                           | Yes        |
+| r/     | Remark                 | r/ Put more Chocolate | Can take in any remark of the order                           | No         |
 
 When the add order command is executed by calling `AddOrderCommand#execute`, the order is built with the
 respective phone number, delivery date time, collection type, details and remarks specific to that order. This is
@@ -216,9 +240,8 @@ The following sequence diagram illustrates how the `AddOrderCommand` works:
 5) Details has to be given in the format `NumberOfItems:NameofItem` E.g. `1:ChocolateCake`
    * There is a maximum character limit imposed of 30 for the name of the item  due to UI considerations
    * The number of items has to be in the range of 1 - 99
-   
 
-### Mark/Unmark Feature
+### Mark/Unmark Orders Feature <a name="marko"/>
 
 This feature allows users to mark the orders as complete/incomplete.
 
@@ -256,25 +279,7 @@ Similar concept applies for `UnmarkOrderCommand`.
    * Creating a marked order will duplicate the current order, while changing the `Complete` attribute
    * Then, the current order will be replaced with the new order in order to maintain immutability.
 
-### Dynamic Toggling Between Application's Data
-#### Implementation
-Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
-
-The ability to toggle through the application's data  is facilitated by `MainWindow` and `CommandResult`.
-
-In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` of the executed command is checked and the `MainWindow` then displays the appropriate information for the user.
-
-#### Design considerations:
-1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
-    * isOrderCommand - boolean  indicating whether the command is related to orders
-    * isPersonCommand - boolean  indicating whether the command is related to persons
-    * isHelpCommand - boolean indicating whether the command is related to getting help
-    * isExitCommand - boolean indicating whether the command is to exit the application
-
-The following activity diagram summarizes what happens when a user executes the different types of commands:
-![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
-
-### Finding Persons and Orders Through Selected Attribute
+### Finding Persons and Orders Through Selected Attribute <a name="findo-findp"/>
 #### Implementation
 Users are able to find specific persons/orders based on their respective attributes. For example, users can find orders that are made by a Person with name "Alex".
 
@@ -306,12 +311,12 @@ The following sequence diagram shows how the `findo` operation works:
 
 ![FindOrderSequenceDiagram](images/FindOrderSequenceDiagram.png)
 
-### Edit Order Feature
+### Edit Order Feature <a name="edito"/>
 
 This feature allows users to edit the details, collection/ delivery time, whether an order is for delivery or pickup,
 and remarks of the order that already exists in ReadyBakey. Currently, it can only edit the details of the order.
 
-### Implementation
+#### Implementation
 
 The edit orders feature consists of one command, `EditOrderCommand`. It extends `Command`.
 
@@ -320,12 +325,12 @@ These are the inputs that the edit order command will accept:
 1) It takes in an `Index` parameter to indicate the order that is to be edited.
 2) It also takes in other optional inputs based on the prefixes specified:
 
-| Prefix | Meaning                              | Example            | Format                                                                   | Compulsory |
-|--------|--------------------------------------|--------------------|--------------------------------------------------------------------------|------------|
-| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                                  | No         |
-| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation            | No         |
-| d/     | Order Details                        | d/1x Cheesecake    | \[To be implemented\] Must be in the form [NUM_ORDERS\] x \[ANY_STRING\] | No         |
-| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                                     | No         |
+| Prefix | Meaning                              | Example            | Format                                                        | Compulsory |
+|--------|--------------------------------------|--------------------|---------------------------------------------------------------|------------|
+| c/     | Collection/ delivery time            | c/30-06-2022 15:30 | Must follow the format dd-MM-yyyy HH:mm                       | No         |
+| m/     | Collection type (Pickup or Delivery) | m/delivery         | Must be either `delivery` or `pickup` with any capitalisation | No         |
+| d/     | Order Details                        | d/1x Cheesecake    | Must be in the form [NUM_ORDERS\]: \[ANY_STRING\]             | No         |
+| r/     | Order Remarks                        | r/Give me candles  | Can take in any remark for the order                          | No         |
 
 At least one of the prefixes needs to be specified to be edited.
 
@@ -335,7 +340,7 @@ collection/ delivery time, whether an order is for delivery or pickup, and remar
 is performed by the function `EditOrderCommand#createEditedOrder()`.
 
 All inputs are parsed through an EditOrderCommandParser, which parses each prefix and extracts the relevant information
-for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also does checks on the validity of the
+for each prefix. This is done in the method `EditOrderCommandParser#parse()`. It also checks on the validity of the
 user input.
 
 There are two parts to the input that will be checked for validity:
@@ -352,20 +357,43 @@ The following sequence diagram illustrates how the `EditOrderCommand` will work:
 
 #### Design considerations
 1) Delivery date and time being parsed in should allow the usage of natural dates such as `Thursday 3pm` or `Monday
-   4pm` and ReadyBakey will know the date being parsed is the next nearest Thursday at 3pm. This is alongside the
+   4pm` and ReadyBakey will know the date being parsed is the upcoming Thursday at 3pm. This is alongside the
    parsing of date and time in the format `dd-MM-yyyy HH:mm`.
     - This provides bakers with better ability to key in dates without having to stick to only keying in the full
       date and time format.
 2) Editing should not be allowed for the completion of the order. It should be done with the use of mark or unmark
    orders instead.
-3) The person's details cannot be edited through this command.
+3) The Natural Dates is sensitive to the time that is passed to it.
+   * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 08:30` will return `14th April
+        2022` as the closest Thursday.
+     * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a
+       Thursday instead.
+   * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
+     * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest
+       Thursday.
+4) The person's phone number, address, email, name, and tags cannot be edited through this command.
 
+### Listing all orders <a name="listo"/>
 
-## Find Incomplete Orders Before A Date Feature
+This feature allows users to get a list of all the orders that the user has inputted.
+
+#### Implementation
+The list orders feature consists of one command, `ListOrderCommand`. It extends `Command`.
+
+When the command is executed by calling the method `Command#execute()`, all orders will be returned out 
+through the use of a predicate. This would return a `FilteredList` of all the orders.
+
+The following sequence diagram illustrates how the `listo` command will work:
+![ListOrderSequenceDiagram](images/ListOrderSequenceDiagram.png)
+
+#### Design considerations
+1. `listo` when used with other inputs after it, will still work as per usual, which is to list the orders. 
+
+### Find Incomplete Orders Before A Date Feature <a name="incompleteo"/>
 
 This feature allows users to get a list of incomplete orders, sorted by datetime, for quick reference to orders that require attention.
 
-### Implementation
+#### Implementation
 The `incompleteo` command takes in a date as a required parameter.
 
 When the command is executed, all orders that are incomplete and before or during the given datetime will be filtered out 
@@ -385,18 +413,37 @@ and so this idea was abandoned due to time constraints. It was far more efficien
 2. The sorting functionality introduced a `SortedList` alongside `FilteredList` as a return type. This meant needing to refer to
 a common interface, `ObservableList`, wherever either were expected in the `LogicManager`.
 
-### Delete orders 
+### Delete orders <a name="deleteo"/>
 
 This feature allows the user to delete orders from the application based on the index on the displayed list in the application.
 
-### Implementation
+#### Implementation
 
-Deleting orders from the application will not affect persons in the application. This is as an Order is linked to a Person through the same phone number, which allows the Order to retrieve the same name, phone number and address.
+Deleting orders from the application will not affect Persons in the application. This is so an Order is linked to a 
+Person through the same phone number, which allows the Order to retrieve the person's name, phone number and address.
 
 The following sequence diagram shows how the `deleteo` operation works:
 
 ![DeleteOrderSequence](images/DeleteOrderSequenceDiagram.png)
 
+
+### Dynamic Toggling Between Application's Data <a name="dynamic-toggling"/>
+#### Implementation
+Users must be able to view the specific data that they need, without excess data, just by working with the command line. For example, if the user is requesting Order information, they should not be distracted by Person information as well - only Order information can be shown.
+
+The ability to toggle through the application's data  is facilitated by `MainWindow` and `CommandResult`.
+
+In `MainWindow#executeCommand(String commandText)`, the type of `CommandResult` of the executed command is checked and the `MainWindow` then displays the appropriate information for the user.
+
+#### Design considerations:
+1. `CommandResult` requires boolean attributes that indicate what kind of command has been executed.
+    * isOrderCommand - boolean  indicating whether the command is related to orders
+    * isPersonCommand - boolean  indicating whether the command is related to persons
+    * isHelpCommand - boolean indicating whether the command is related to getting help
+    * isExitCommand - boolean indicating whether the command is to exit the application
+
+The following activity diagram summarizes what happens when a user executes the different types of commands:
+![DataTogglingActivityDiagram](images/DataTogglingActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -412,7 +459,7 @@ The following sequence diagram shows how the `deleteo` operation works:
 
 ## **Appendix: Requirements** <a name="requirements"></a>
 
-### Product scope
+### Product scope <a name="product-scope"/>
 
 **Target user profile**:
 
@@ -429,8 +476,7 @@ focus on what's important -- _baking_.
 * The application organises cake orders for its fulfilment. 
 * It also acts as a centralised and structured schedule manager, tracking an individuals' baking inventory needs.
 
-
-### User stories
+### User stories <a name="user-story"/>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -445,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with multiple orders                   | add orders with custom details such as order details, delivery date and collection type | keep track of all of my orders                                                          |
 | `* * *`  | user                                        | delete orders                                                                           | remove orders in case a customer cancels their order                                    |
 | `* *`    | user                                        | hide private contact details                                                            | minimize chance of someone else seeing them by accident                                 |
-| `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a <br/><br/>person easily                                                        |
+| `*`      | user with many customer in the address book | sort customer by name                                                                   | locate a person easily                                                                  |
 | `* * *`  | home baker that has multiple customers      | clear all my data                                                                       | quickly remove demo info or restart my bakery data                                      |
 | `* * *`  | home baker that has multiple customers      | edit my customers                                                                       | edit their details if there are any changes to their address, phone number, email, name |
 | `* *`    | home baker that has multiple orders         | edit my orders                                                                          | edit their details if there are any changes to their order                              |
@@ -453,10 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | home baker that has multiple orders         | look at my orders                                                                       | access the attributes for different orders and see when it is due                       |
 | `* * *`  | home baker that has multiple orders         | mark the orders as complete or incomplete                                               | know which orders I have fulfilled or not                                               |
 | `* *`    | home baker that has multiple orders         | get a view of unfinished orders for current day                                         | see urgent orders at a glance                                                           |
-| `* *`    | home baker that has multiple orders         | generate a weekly report                                                                | track the progress of my business                                                       |
-| `*`      | home baker that has multiple orders         | get a calender view of the upcoming deadlines                                           | have a visual plan for the orders in the upcoming period                                |
 
-### Use cases
+### Use cases <a name="use-cases"/>
 
 (For all use cases below, the **System** is `ReadyBakey` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -718,6 +762,28 @@ Use case ends.
 
   Use case resumes from step 4.
 
+**Use case: Edit an Order**
+
+**MSS**
+
+1.  User requests to list orders
+2.  ReadyBakey shows a list of orders
+3.  User requests to edit a specific order in the list
+4.  ReadyBakey edits the order
+
+    Use case ends.
+
+**Extensions**
+* 3a.  Invalid parameters are passed into input
+
+    * 3a1. ReadyBakey alerts user about invalid parameters.
+
+    * 3a2. User inputs new data.
+
+    * Steps 3a1-3a2 are repeated until data entered is correct.
+
+  Use case resumes from step 4.
+
 
 **Use case: Delete an Order**
 
@@ -742,10 +808,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-
-*{More to be added}*
-
-### Non-Functional Requirements
+### Non-Functional Requirements <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 500 customers without a noticeable sluggishness in performance for typical usage.
@@ -757,9 +820,7 @@ Use case ends.
 7. The product is not required to handle the contacting of customers.
 8. The product is not required to handle the optimisation of orders fulfilment
 
-*{More to be added}*
-
-### Glossary
+### Glossary <a name="glossary"/>
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others

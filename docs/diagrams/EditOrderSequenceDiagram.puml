@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(edito 1 \n c/30-06-2022 15:30 \n g/delivery \n d/1x Cheesecake \n r/Give me candles)
+[-> LogicManager : execute(edito 1 \n c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("edito 1 \n c/30-06-2022 15:30 \n g/delivery \n d/1x Cheesecake \n r/Give me candles")
+LogicManager -> AddressBookParser : parseCommand("edito 1 \n c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles")
 activate AddressBookParser
 
 create EditOrderCommandParser
@@ -26,7 +26,7 @@ activate EditOrderCommandParser
 EditOrderCommandParser --> AddressBookParser
 deactivate EditOrderCommandParser
 
-AddressBookParser -> EditOrderCommandParser : parse("c/30-06-2022 15:30 \n g/delivery \n d/1x Cheesecake \n r/Give me candles")
+AddressBookParser -> EditOrderCommandParser : parse("c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles")
 activate EditOrderCommandParser
 
 create EditOrderCommand

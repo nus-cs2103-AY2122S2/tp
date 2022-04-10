@@ -8,6 +8,27 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 # Table of Contents
 1. [Quick Start](#quick-start)
 2. [Features](#features)
+   * [Viewing help : help](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#viewing-help--help)
+   * Person Commands
+     * [Adding a customer: addp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#adding-a-customer-addp)
+     * [Delete a customer: deletep](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#delete-a-customer-deletep)
+     * [Listing all customers: listp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-customers-listp)
+     * [Editing a customer's information : editp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-a-customers-information--editp)
+     * [Locating customers by specific attribute: findp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#locating-customers-by-specific-attribute-findp)
+   * Order Commands
+     * [Adding an order : addo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#adding-an-order--addo)
+     * [Delete an order: deleteo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#delete-an-order-deleteo)
+     * [Listing all orders: listo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-orders-listo)
+     * [Editing an order's information : edito](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-an-orders-information--edito)
+     * [Locating orders by specific attribute: findo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#locating-orders-by-specific-attribute-findo)
+     * [Mark orders as Complete: marko](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#mark-orders-as-complete-marko)
+     * [Unmark orders as incomplete: unmarko](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#unmark-orders-as-incomplete-unmarko)
+     * [Listing all incomplete orders: incompleteo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-incomplete-orders-incompleteo)
+   * [Clearing all Customers and Orders: clear](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#clearing-all-customers-and-orders-clear)
+   * [Exiting the program : exit](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#exiting-the-program--exit)
+   * [Using Natural Dates](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#using-natural-dates)
+   * [Saving the data](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#saving-the-data)
+   * [Editing the data file](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-the-data-file)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
 
@@ -420,10 +441,6 @@ ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.js
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 

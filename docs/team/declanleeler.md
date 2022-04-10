@@ -13,24 +13,24 @@ Given below are my contributions to the project.
 
 **Enhancements Implemented**
 1. Data toggling of order / person data
-   1. What it does: Displays only one list of data (order or person) at a time and toggles between lists based on the user's command.
-   2. Justification: Declutters the UI by only showing one list that is relevant to the user's interests. Immediate toggling to show relevant data is also important without a specific command to do so - any command related to orders will show order data, and any command related to persons will show person data.
-   3. Highlights: This feature affects all CommandResults as they now need to be assigned a type to indicate which data list to display to the user. 
-      It was challenging as it required understanding how the different components worked together to display the initial Persons list, before coming up with a solution to tweak this setup to include another list of data,
-      and the functionality to toggle between them.
+   * What it does: Displays only one list of data (order or person) at a time and toggles between lists based on the user's command.
+   * Justification: Declutters the UI by only showing one list that is relevant to the user's interests. Immediate toggling to show relevant data is also important without a specific command to do so - any command related to orders will show order data, and any command related to persons will show person data. 
+   * Highlights: This feature affects all CommandResults as they now need to be assigned a type to indicate which data list to display to the user. 
+         It was challenging as it required understanding how the different components worked together to display the initial Persons list, before coming up with a solution to tweak this setup to include another list of data,
+         and the functionality to toggle between them.
    
 
 2. Sorted list functionality in Model
-   1. What it does: Allows for the sorting of persons or orders through a comparator wherever required.
-   2. Justification: There are various features, exiting and potential, that could leverage on a sorting function to enhance their results. Specifically, this was required in the FindIncompleteOrders command. 
-   3. Highlights: Challenging to implement as it introduced SortedList as a return type when previously the application only worked with FilteredList.
+   * What it does: Allows for the sorting of persons or orders through a comparator wherever required. 
+   * Justification: There are various features, exiting and potential, that could leverage on a sorting function to enhance their results. Specifically, this was required in the FindIncompleteOrders command. 
+   * Highlights: Challenging to implement as it introduced SortedList as a return type when previously the application only worked with FilteredList.
       This meant relying on polymorphism to use the parent interface, ObservableList, in place of where previously FilteredList was expected.
 
    
 3. Find and sort by date incomplete orders before a given date
-   1. What it does: Highlights and sorts by date incomplete orders before a given date.
-   2. Justification: The user can use this simple command to get important information that pertains to punctual order delivery.
-   3. Highlights: Challenging to implement as it required using both FilteredLists and SortedLists.
+   * What it does: Highlights and sorts by date incomplete orders before a given date. 
+   * Justification: The user can use this simple command to get important information that pertains to punctual order delivery. 
+   * Highlights: Challenging to implement as it required using both FilteredLists and SortedLists.
    
 
 4. CSS changes to enhance the application's theme
@@ -49,12 +49,12 @@ Given below are my contributions to the project.
 2. Maintained issue tracker
 3. Release management for V1.1
 4. Informal demo of V1.2 [(Google doc link)](https://docs.google.com/document/d/1XVM0yKcbUT28I7p_NQd5p5lgvAUocCPFuJ3BB7s63lk/edit#heading=h.4y8l5hhmuf6g)
-   1. Added screenshots of features
-   2. Added explanations of features
+   * Added screenshots of features
+   * Added explanations of features
 5. Informal demo of V1.3 [(Google doc link)](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
-   1. Updated guide for some features based on the changes made in V1.3
+   * Updated guide for some features based on the changes made in V1.3
 6. Update UG for V1.3
-   1. Went through features to update their user guide based on the changes made in V1.3
+   * Went through features to update their user guide based on the changes made in V1.3
 
 **Review/mentoring contributions**
 1. [Caught violation of SLAP](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234)
