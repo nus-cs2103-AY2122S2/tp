@@ -327,7 +327,8 @@ This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps
 
 ## Target user profile
 
-- has a need to manage a significant number of Persons and their information (eg. contact, email, address...)
+Real estate agents who:
+- has a need to manage a significant number of clients and their information (eg. contact, email, address...)
 - prefer desktop apps over other types
 - can type fast and prefer typing to mouse interactions
 - is reasonably comfortable using CLI apps
