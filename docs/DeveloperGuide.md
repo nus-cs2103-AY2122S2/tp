@@ -176,12 +176,20 @@ This section describes some noteworthy details on how certain features are imple
 ### Add customer feature
 
 #### Overview
-
+The Add Customer feature is used to add customer profiles into TrackBeau. `Name`, `Phone`, `Address`, `Email` and 
+`RegistrationDate` fields are compulsory.
 
 #### Implementation of feature
+The add customer feature is implemented via `AddCustomerCommand` which is created from `AddCustomerCommandParser`.
+1. `AddCustomerCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2.  The information in the `ArgumentMultimap` is then used to create a `Customer`
+3.  A `AddCustomerCommand` containing the `Customer` is returned, to be executed by `LogicManager`
+4.  If the `Customer` to be added is unique and does not exist in TrackBeau, it will be added. If not, a `CommandException`
+    is thrown
 
+The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
 
-![Add Customer Sequence Diagram](images/AddCustomerActivityDiagram.png)
+![Add Customer Sequence Diagram](images/AddCustomerSequenceDiagram.png)
 
 
 ### List customers feature
@@ -265,6 +273,23 @@ The following activity diagram summarizes what happens when the user executes th
 
 ![Edit Service Activity Diagram](images/EditServiceActivityDiagram.png)
 
+### Plot feature
+
+#### Overview
+The plot command allows users to view customer information easily. They can plot charts about customer's allergies, 
+preferred staffs, suggested services, hair type, skin type and monthly customers gained.
+
+#### Implementation of feature
+The plot feature is implemented using the various plot commands such as `plotStaffChartCommand`.
+1. `MainWindow` takes in the argument string and uses `LogicManager` to parses it into `Command`.
+2. `LogicManager` then executes the `Command` to obtain a `CommandResult`
+3. `MainWindow` checks if the `CommandResult` should result in a chart being plotted using isPlotXYZChart() where XYZ 
+   refers to a chart type, like isPlotStaffChart()
+4. `MainWindow` then updates the data in the chart and shows the chart window.
+
+The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
+![Plot Chart Sequence Diagram](images/ChartSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -292,7 +317,8 @@ The following activity diagram summarizes what happens when the user executes th
 
 **Value proposition**:
 With many customers, it is hard for beauty salons to provide personalized customer service.
-Our product allows the user to keep track of customer information and group their customers to provide targeted services every time they return.
+Our product allows the user to keep track of customer information to better understand their customer demographics.
+This allows them to provide targeted services for customers as they return.
 It can also keep track of performance metrics, like total new memberships.
 
 
