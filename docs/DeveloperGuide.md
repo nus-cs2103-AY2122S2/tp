@@ -512,8 +512,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   
 
 ### Deleting a person
 
@@ -529,8 +528,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   
 
 ### Saving data
 
@@ -538,4 +536,8 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+1. Although the `skill` feature was built on AB3's `tag`, there was significant difficulty in implementing it as `tag` only took in 1 argument while `skill` took in 2: `skill name` and `skill proficiency` with both of different types. To add on, `tag` did not contain much interaction with the user but `skill` is used in many of HackNet's features such as `sort` and we had to maintain one unique `skill` for every person and updating it only when the `skill profiency` is different. Further abstraction was also done with the `skill` feature by implementing a `skillset` to contain all `skill`s and allow for other developers to easily interact with `skill` without knowing the implementation. 
+2. There was much difficulty faced in making the `skill` in HackNet's GUI reflect different colour based on input `skill proficiency`. This is because simply changing the `.fxml` file will not work as it was not possible to obtain the `skill proficiency` values there. After tracing the code and finding where the `Label` was created, methods such as `setTextFill()` did not work too. Finally, with help from the [forum](https://github.com/nus-cs2103-AY2122S2/forum/issues/225), a fellow student suggested a fix with `setStyle()`.
