@@ -163,16 +163,39 @@ This section describes some noteworthy details on how certain features are imple
 ##### Design Considerations
 
 * **Alternative 1 (current choice):** Implement only allergies,staffs and services as tags
-  * Pros: Harder to implement
-  * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
+    * Pros: Harder to implement
+    * Cons: Less direct to access allergies, staffs and services as compared to if a list was used
 
 * **Alternative 2:** Implement all additional fields as tags
   itself.
-  * Pros: Easy to implement
-  * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
-  * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
+    * Pros: Easy to implement
+    * Cons: Could be harder to access the necessary data for other functions like creating summary statistics
+    * Cons: Does not make sense to have multiple of certain data fields, e.g. multiple skin types, multiple birthdays
 
-#### Delete multiple customers in a single command
+
+### Add customer feature
+
+#### Overview
+
+
+#### Implementation of feature
+
+
+![Add Customer Sequence Diagram](images/AddCustomerActivityDiagram.png)
+
+
+### List customers feature
+
+#### Overview
+
+
+#### Implementation of feature
+
+
+#### Design considerations
+
+
+### Delete customer(s) feature
 
 #### Overview
 - Delete command can allow multiple indexes, this allows for faster deletion of customer profiles.
@@ -183,7 +206,7 @@ they are integers and is a valid index.
 - If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be
 executed.
 
-##### Design Considerations
+#### Design Considerations
 
 * **Option 1:** Does not abort command when an index fail the check and delete customer from valid indexes.
   * Pros: Lenient on user error.
@@ -194,37 +217,54 @@ executed.
   * Pros: It is clear about how the command is intended to be used.
   * Cons: Minor error will cause command to be aborted.
 
-### Services
+
+### Find customers feature
+
+#### Overview
 
 
-#### Add service feature
+#### Implementation of feature
 
-##### Overview
+
+#### Design considerations
+
+
+
+### Add service feature
+
+#### Overview
 The add service feature allows users to add services into TrackBeau.
 Each new service must have the data fields `ServiceName`, `Price` and `Duration`.
 
-##### Implementation of feature
+#### Implementation of feature
+The add service feature is implemented via `AddServiceCommand` which is created from `AddServiceCommandParser`.
+1. `AddServiceCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2. The mapped data fields (stored as string) are then parsed to create it with the actual data type it should be.
+3. The parser then use the data fields to create a `Service` object which is then used to create `AddServiceCommand` object.
 
-##### Design considerations
+The following activity diagram summarizes what happens when the user executes the add service command (`adds`):
 
-#### Edit service feature
+![Add Service Activity Diagram](images/AddServiceActivityDiagram.png)
 
-##### Overview
+
+### Edit service feature
+
+#### Overview
 The edit service feature allows users to edit existing services in TrackBeau.
 For each edit, at least one of the data fields `ServiceName`, `Price` and `Duration` must be modified.
 
-##### Implementation of feature
+#### Implementation of feature
+The edit service feature is implemented via `EditServiceCommand` which is created from `EditServiceCommandParser`.
+1. `EditServiceCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2. The index of the service to be edited is parsed into `Index` which is used to locate the service to be modified during the execution of the command.
+3. The mapped data fields (stored as string) are then parsed to create it with the actual data type it should be.
+4. The parser then use the data fields to create an `EditServiceDescriptor` that describes all the edited data fields.
+5. The parser then creates a `EditServiceCommand` object using the `Index` and `EditServiceDescriptor`.
 
-##### Design considerations
+The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
 
-#### Delete service feature
+![Edit Service Activity Diagram](images/EditServiceActivityDiagram.png)
 
-##### Overview
-The delete services feature allows users to remove existing services in TrackBeau.
-
-##### Implementation of feature
-
-##### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
 
