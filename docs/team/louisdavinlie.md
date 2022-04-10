@@ -5,9 +5,12 @@ title: Louis' Project Portfolio Page
 
 ### Project: Ultimate Divoc Tracker
 
-Ultimate Divoc Tracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ultimate Divoc Tracker can get your contact management tasks done faster than traditional GUI apps.
+Ultimate Divoc Tracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a 
+Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
+Ultimate Divoc Tracker can get your contact management tasks done faster than traditional GUI apps.
 
-School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases 
+amongst the student population with ease and concentrate on what matters most, the education of the students.
 
 Given below are my contributions to the project.
 
@@ -22,17 +25,28 @@ Given below are my contributions to the project.
 
 * **New Feature**: Batch update status when a person recovers [\#76](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/76)
   * What it does: 
-    * When a person recovers (`Status` changes from `Positive` to `Negative`) and there is no person in the same `ClassCode` whose `Status` is `Positive`, every person with the same `ClassCode` as the recovered person will have their status changed from `Close-Contact` to `Negative`. 
+    * When a person recovers (`Status` changes from `Positive` to `Negative`) and there is no person in the same
+    `ClassCode` whose `Status` is `Positive`, every person with the same `ClassCode` as the recovered person will have 
+    their status changed from `Close-Contact` to `Negative`. 
     * The reverse (`Status` changes from `Negative` to `Positive`) is implemented by Joshua and Jun Hong.
-  * Justification: Automate the tracking of COVID-19 in every `ClassCode`. If no more positive cases in a `ClassCode`, persons with `Close-Contact` status having the same `ClassCode` as the recovered person should change to `Negative`.
-  * Highlights: This feature is called every time a person's `Status` is changed from `Positive` to `Negative`. It requires a check whether there are still positive cases in the `ClassCode` of the recovered person.
+  * Justification: Automate the tracking of COVID-19 in every `ClassCode`. If no more positive cases in a `ClassCode`, 
+  persons with `Close-Contact` status having the same `ClassCode` as the recovered person should change to `Negative`.
+  * Highlights: This feature is called every time a person's `Status` is changed from `Positive` to `Negative`. 
+  It requires a check whether there are still positive cases in the `ClassCode` of the recovered person.
 
 * **New Feature**: Batch update status based on the same activities [\#112](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/112)
-  * What it does: Considers those with the same `Activity` close contacts instead of only those with the same `ClassCode` in the batch update status feature. 
-    * When a person becomes COVID-19 positive, those in the same `ClassCode` or `Activity` will have their status updated to `Close-Contact` if they are `Negative`.
-    * When a person recovers from COVID-19, those in the same `ClassCode` or `Activity` will have their status updated to `Negative` if they are `Close-Contact` and they are not related to any `Positive` person in the same `ClassCode` or `Activity` as them.
-  * Justification: If a person has the same `Activity` as another person, they should be considered as close contacts. Hence, this should also be included in the batch update status feature as one should be labeled as `Close-Contact` if the other is `Positive`.
-  * Highlights: One person can have multiple `Activity` so the implementation is not the same as the `ClassCode` only implementation since one person can only have one `ClassCode`.
+  * What it does: Considers those with the same `Activity` close contacts instead of only those with the same 
+  `ClassCode` in the batch update status feature. 
+    * When a person becomes COVID-19 positive, those in the same `ClassCode` or `Activity` will have their status 
+    updated to `Close-Contact` if they are `Negative`.
+    * When a person recovers from COVID-19, those in the same `ClassCode` or `Activity` will have their status updated 
+    to `Negative` if they are `Close-Contact` and they are not related to any `Positive` person in the same `ClassCode` 
+    or `Activity` as them.
+  * Justification: If a person has the same `Activity` as another person, they should be considered as close contacts. 
+  Hence, this should also be included in the batch update status feature as one should be labeled as `Close-Contact` 
+  if the other is `Positive`.
+  * Highlights: One person can have multiple `Activity` so the implementation is not the same as the `ClassCode` 
+  only implementation since one person can only have one `ClassCode`.
 
 * **JUnit Test**:
   * Added test methods for:
@@ -54,10 +68,17 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for saving and editing the data file [\#23](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/23)
     * Added command summary in user guide [\#23](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/23)
+    * Added viewing help window section (help command) [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
+    * Added limitation on the automation of status [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
   * Developer Guide:
     * Added documentation for updated AddCommand and EditCommand following the addition of ClassCode, Status and Activity attributes [\#98](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/98)
     * Added documentation for updated UI and Storage flow [\#98](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/98)
     * Added proposed enhancements for UDT [\#98](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/98)
+    * Added a sequence diagram for findstatus command execution [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
+    * Added a sequence diagram for findclasscode command execution [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)    
+    * Added a sequence diagram for findactivity command execution [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
+    * Updated the documentation for the implementation of batch update with respect to the incorporation of the `activity` attribute [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
+    * Added and edited explanations for the role of batch update in AddCommand, DeleteCommand and EditCommand [\#183](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/183)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
