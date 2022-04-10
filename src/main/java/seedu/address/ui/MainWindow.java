@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -24,6 +28,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String USER_GUIDE_URL = "https://ay2122s2-cs2103t-t12-1.github.io/tp/UserGuide.html";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -40,6 +45,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem openBrowserItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -147,6 +155,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens browser with the user guide using url link
+     */
+    @FXML
+    public void openUserGuide() {
+        try {
+            Desktop.getDesktop().browse(new URI(USER_GUIDE_URL));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -184,6 +206,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isOpenBrowser()) {
+                openUserGuide();
             }
 
             return commandResult;
