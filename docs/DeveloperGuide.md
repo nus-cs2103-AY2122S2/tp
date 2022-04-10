@@ -27,7 +27,7 @@ title: Developer Guide
       * [What it does](#what-it-does-1)
       * [Implementation](#implementation-2)
       * [Design considerations](#design-considerations-1)
-    * [Import and Export feature](#import-and-export-feature)
+    * [Import and Export command feature](#import-and-export-command-feature)
       * [What it does](#what-it-does-2)
       * [Implementation](#implementation-3)
       * [Design considerations](#design-considerations-2)
@@ -107,23 +107,23 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the Application.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/src/main/java/seedu/trackermon/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/src/main/java/seedu/trackermon/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At application launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the Application consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the Application.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the Application in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
@@ -297,7 +297,7 @@ The following activity diagram summarizes what happens when a user executes a va
   - If there are no prefixes, it will perform a general search using `ShowContainsKeywordsPredicate` which scans through the name, status, rating and tag fields in the `Show` class. 
   - Else, `ArgumentMultimap#arePrefixesPresent` will check and return a new predicate for each value after each prefix if it is present and then generate a keyword predicate that will match values in that field.
 
-  A for loop is implemented for the name, rating and tag predicates. This will allow an `AND` search within a list of keywords within these three parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
+  A for loop is implemented for the name, status, rating and tag predicates. This will allow an `AND` search within a list of keywords within these four parameters. The user does not need to type in the full word for any find searches as each predicate uses a fragmented search.
   - Pros: Abstraction of predicates and encapsulating the checking of shows allows the predicates to be used more flexibly elsewhere to match other shows.
   - Cons: More abstraction may make developers take a longer time to extend the functionality if new prefixes are being added.<br><br>
   
@@ -349,7 +349,7 @@ The following sequence diagram summarizes what happens when a user executes a so
 
 ---
 
-### Import and Export feature
+### Import and Export command feature
 
 #### What it does
 Allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
@@ -855,7 +855,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix C: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test Trackermon manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -864,7 +864,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Launching the app
+1. Launching Trackermon.
    1. Prerequisites: Have a copy of `Trackermon.jar` in your computer.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
@@ -874,10 +874,10 @@ testers are expected to do more *exploratory* testing.
       Expected: Application launched with user saved shows.
 
 2. Saving window preferences
-   1. Launch the app. <br> 
+   1. Launch Trackermon. <br> 
       Expected: The window size may not be optimum.
    2. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   3. Re-launch the app. <br> 
+   3. Re-launch Trackermon. <br> 
       Expected: The most recent window size and location is retained.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -949,20 +949,20 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Saving data between sessions
-   1. Launch the app.
+   1. Launch Trackermon.
    2. Modify the show list using any commands that affect the details of a show.
-   3. Relaunch the app. <br> 
+   3. Relaunch Trackermon. <br> 
       Expected: The most recent changes made to the shows is retained.
     
 2. Dealing with missing files
    1. Prerequisites: JSON file is missing.
       1. Delete the `data/trackermon.json` file to simulate a missing file.
-   2. Relaunch the app. <br> Expected: The app starts with the default list of show list.
+   2. Relaunch Trackermon. <br> Expected: Trackermon starts with the default list of show list.
 
 3. Dealing with corrupted files
    1. Prerequisites: JSON file is corrupted.
       1. Modify the `data/trackermon.json` file with any software that would break the JSON format to simulate corrupted file.
-   2. Relaunch the app. <br> Expected: The app starts with an empty show list.
+   2. Relaunch Trackermon. <br> Expected: Trackermon starts with an empty show list.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -1087,7 +1087,7 @@ testers are expected to do more *exploratory* testing.
 ### Suggesting a show
 
 1. Prerequisites: None.
-2. Launch the app.
+2. Launch Trackermon.
 3. Command: `suggest`
   1. Test case: Displayed list of shows is empty.
     2. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
@@ -1104,22 +1104,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: Another valid copy of Trackermon data exists.
 2. Ensure that current Trackermon data is different from data we plan to import.
-3. Launch the app.
+3. Launch Trackermon.
 4. Command: `import`
 5. Test case: Importing valid data
    1. Condition: Valid Trackermon data file exists in storage.
-   2. Action: Select valid Trackermon data file to import.
-   
+   2. Action: Select valid Trackermon data file to import.<br>
       Expected: Import succeeds, current show list is replaced with imported Trackermon data's show list.
 6. Test case: Cancelling import
    1. Condition: None.
-   2. Action: Click "Cancel" button in File Explorer GUI.
-   
+   2. Action: Click "Cancel" button in File Explorer GUI.<br>
       Expected: Trackermon displays message saying `Import data aborted.`
 7. Test case: Importing corrupted Trackermon data file
    1. Condition: Corrupted Trackermon data file exists in storage. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
-   2. Action: Select corrupted Trackermon data file to import.
-   
+   2. Action: Select corrupted Trackermon data file to import.<br>
       Expected: Trackermon displays error message saying `Could not read import data: File may be corrupted.`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -1129,27 +1126,23 @@ testers are expected to do more *exploratory* testing.
 ### Exporting Trackermon data
 
 1. Prerequisites: None.
-2. Launch the app.
+2. Launch Trackermon.
 3. Command: `export`
 4. Test case: Exporting data to directory without existing `trackermon.json`
     1. Condition: Directory without existing `trackermon.json` exists.
-    2. Action: Select directory fulfilling condition to export Trackermon data to.
-
+    2. Action: Select directory fulfilling condition to export Trackermon data to.<br>
        Expected: Export succeeds, selected directory now has `trackermon.json` file containing exported show data.
 5. Test case: Exporting data to directory with existing `trackermon.json`
     1. Condition: Directory with existing `trackermon.json` exists.
-    2. Action: Select directory fulfilling condition to export Trackermon data to.
-   
+    2. Action: Select directory fulfilling condition to export Trackermon data to.<br>
        Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.
 6. Test case: Renaming exported data in File Explorer GUI.
     1. Condition: None.
-    2. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.
-      
+    2. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.<br>
        Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
 7. Test case: Cancelling export
     1. Condition: None.
-    2. Action: Click "Cancel" button in File Explorer GUI.
-
+    2. Action: Click "Cancel" button in File Explorer GUI.<br>
        Expected: Trackermon displays message saying `Export data aborted.`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)

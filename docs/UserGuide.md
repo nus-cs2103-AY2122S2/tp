@@ -30,7 +30,7 @@ title: User Guide
 * [**Glossary**](#glossary)
 
 
-## Introduction
+## **Introduction**
 
 Always accessing MyAnimeList or IMDB to record down the shows you have watched? Finding it difficult to search the different websites that store your shows' information? Fret not, because **Trackermon** is the application just for you! But hold on, you may be wondering, what is Trackermon?
 
@@ -38,7 +38,7 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## User guide navigation
+## **User guide navigation**
 
 Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
 
@@ -55,7 +55,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## Quick start
+## **Quick start**
 
 1. Ensure you have `Java 11` or above installed in your Computer.
    * For Windows, open Command Prompt and input `java -version`
@@ -76,7 +76,7 @@ Before you continue reading the rest of our user guide, the table below displays
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## User interface
+## **User interface**
 
 <img src="images/Trackermon_UI_Info.png">
 
@@ -102,7 +102,7 @@ You can start communicating with Trackermon using the command box. Some example 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## Command structure
+## **Command structure**
 
 Let us look at what makes up a command:
 
@@ -181,7 +181,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
-## Features
+## **Features**
 
 ### Viewing help: `help`
 
@@ -517,9 +517,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
-
-## FAQ
+## **FAQ**
 
 | Question | Answer |
 | -------- | ------ |
@@ -530,7 +528,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## Command summary
+## **Command summary**
 
 | Action           | Format, Examples                                                                                                                    |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -551,7 +549,7 @@ To sort by status in ascending order, then by name in ascending order, use `sort
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## Glossary
+## **Glossary**
 
 | Term                               | Description                                                                                                                                                                          |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
