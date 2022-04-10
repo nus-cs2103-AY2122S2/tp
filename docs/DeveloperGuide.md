@@ -159,30 +159,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Manual Command
-
-#### Description
-
-The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
-    
-    <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `ParseException` will be thrown if the argument is invalid.
-    </div>
-
-4. The supplied argument will be trimmed using `String#trim()`.
-5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
-6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
-7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the manual command works:
-
-<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
-
 ### Add Command
 
 #### Description
@@ -376,232 +352,71 @@ The following sequence diagram shows how the deleteModule operation works:
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
-
-
-### DeleteTask Command
+### Find Command
 
 #### Description
 
-The `deleteTask` command allows users to delete to task that was previously assigned to students.
-During the execution of the `deleteTask` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `deleteTaskCommand` object will be created, and is subsequently executed by the LogicManager.
+The `find` command allows users to find a particular student into TAPA.
+Since not all fields are compulsory during the execution of the `find` command,
+the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
+object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
 
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
-4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
+4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-   <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, `Index`, `ModuleCode`, and `TaskName` is missing.
-    Either the pair (consisting of `StudentId` and `Index`) or the pair (consisting of `ModuleCode` and `TaskName`) must be provided.   
-   </div>
-
-
-5. If either `Index` or `StudentId` is given, the `indexOrStudentIdGiven(ArgumentMultimap argMultimap)` method is invoked.
-
-    <div markdown="span" class="alert alert-info">:information_source:
-     <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, or `Index` is missing.
-     Both `StudentId` and `Index` must be provided.   
-    </div>
-   
-    i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
-   
-   <div markdown="span" class="alert alert-info">:information_source: 
-     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div>
-
-    ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-
-    iii. `StudentId#isValidId(String studentId)` method will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
-       `ParserUtil#parseIndex(String oneBasedIndex)`.
-       
     <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-   
-    v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
+    </div> 
 
-    vi. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    vii. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
-   
-
-6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
-   
-    <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
-    Both `ModuleCode` and `TaskName` must be provided.   
-    </div>
-
-    i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
-   
-    <div markdown="span" class="alert alert-info">:information_source: 
-      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-   
-    ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
-
-    iii. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-
-    iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
-       `ParserUtil#parseTask(String task)`.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div>
-
-    v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
-
-    vi. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
-      If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
-      If the argument is not valid, a `ParseException` will be thrown.
-
-    vii. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
-
-7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
-8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
-
-   i. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
-
-   ii. This method will iterate through each `Person` object in and check for matching `studentId`.
-      If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
-      If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method. 
-      If no student with matching studentId is found, `PersonNotFoundException()` will be thrown.
-
-   iii. The updated `Person` will be replaced the current `Person` object.
-
-   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
-      updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
-   
-9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
-
-    i. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
-   
-    ii. This method will iterate through each `Person` object in and check for matching `moduleCode`.
-        If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
-        If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
-        If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
-   
-    iii. The updated `Person` will be replaced the current `Person` object.
-     
-    iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
-          updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
-   
-10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
-
-<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
-
-<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
-
-### Assign Command
-
-#### Description
-
-The `assign` command allows users to assign tasks to student.
-During the execution of the `assign` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `AssignCommand` object will be created, and is subsequently executed by the LogicManager.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
-4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
-
-   <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of `Task` is missing, or if either the prefix of `StudentId` or `ModuleCode` is missing, as they are compulsory fields.
-   </div> 
-
-5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`.
 
-   <div markdown="span" class="alert alert-info">:information_source:
+   <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div> 
+    </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked,
    which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
+   If the argument is valid, a new `StudentId` object will be created and returned to the `FindCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
-   In the case of `moduleCode`, the `Module` prefix will be used to tokenize the input.
-   Depending on the type of input field used (`studentId` or `moduleCode`), Steps 5 to 7 will be executed using the parse 
-   methods in `ParserUtil` that are specific to the field. The argument's validity would be checked in their respective classes as well.
-    </div>
+   Depending on the type of input field used (`studentId`, `name`, `moduleCode`), Steps 5 to 7 will 
+   be executed using the parse methods in `ParserUtil` that are specific to the field.
+    </div> 
 
-8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseTask(String task)`.
+   | Field          | Parse Methods                              |
+      |----------------|--------------------------------------------|
+   | Index          | parseIndex(String oneBasedIndex)           |
+   | StudentId      | parseStudentId(String studentId)           |
+   | Name           | parseName(String name)                     |
+   | ModuleCode     | parseModuleCode(String moduleCode)         |
+   | Phone          | parsePhone(String phone)                   |
+   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
+   | Email          | parseEmail(String email)                   |
+   | Task           | parseTask(String task)                     |
 
-   <div markdown="span" class="alert alert-info">:information_source:
-   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-   </div>
+8. The `FindCommandParser` will create a new `Predicate`.
+9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
+10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
+11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
+    updates the filter of the `PersonList` to filter by the given `Predicate`.
+12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
-10. `Task#isValidTaskName(String task)` will then be invoked,
-    which checks if the trimmed argument is valid (according to the Regex supplied).
-    If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
-    If the argument is not valid, a `ParseException` will be thrown.
-    
-11. A new `AssignCommand` will be created (using the `StudentId` or `ModuleCode` object and `Task` object created) and returned to the `LogicManager`.
-    
-12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
-    
-13. If `StudentId` is used, `AssignCommand#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, 
-    which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method and 
-    `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. If `ModuleCode` is used, 
-    `AssignCommand#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method will be invoked, which will in 
-    turn invoke `model#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method and 
-    `AddressBook#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method.
-    
-14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
-    If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
-    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`. 
+The following sequence diagram shows how the find operation works:
 
-      <div markdown="span" class="alert alert-info">:information_source:
-      <b>Note:</b> 
-      If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
-      </div>
+<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
 
-15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)` 
-    method to check if the `task` is assigned.
-    If no similar `task` is found, the following step will take place.
-
-      <div markdown="span" class="alert alert-info">:information_source:
-      <b>Note:</b>
-      If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
-      If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
-      </div>
-
-16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
-17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
-18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
-19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
-
-![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
-
+![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 ### Task Command
 
@@ -662,72 +477,6 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 <img src="images/TaskCommandSequenceDiagram-2.png" width="881" />
 
 <img src="images/TaskCommandSequenceDiagram-3.png" width="570" />
-
-### Find Command
-
-#### Description
-
-The `find` command allows users to find a particular student into TAPA.
-Since not all fields are compulsory during the execution of the `find` command,
-the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
-object will be created, and is subsequently executed by the `LogicManager`.
-
-#### Implementation
-
-1. Upon receiving the user input,
-   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
-2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
-   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
-4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
-
-    <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing.
-    </div> 
-
-5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-    </div> 
-
-6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-7. `StudentId#isValidId(String studentId)` will then be invoked,
-   which checks if the trimmed argument is valid (according to the Regex supplied).
-   If the argument is valid, a new `StudentId` object will be created and returned to the `FindCommandParser`.
-   If the argument is not valid, a `ParseException` will be thrown.
-
-   <div markdown="span" class="alert alert-info">:information_source: 
-   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
-   Depending on the type of input field used (`studentId`, `name`, `moduleCode`), Steps 5 to 7 will 
-   be executed using the parse methods in `ParserUtil` that are specific to the field.
-    </div> 
-
-   | Field          | Parse Methods                              |
-   |----------------|--------------------------------------------|
-   | Index          | parseIndex(String oneBasedIndex)           |
-   | StudentId      | parseStudentId(String studentId)           |
-   | Name           | parseName(String name)                     |
-   | ModuleCode     | parseModuleCode(String moduleCode)         |
-   | Phone          | parsePhone(String phone)                   |
-   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
-   | Email          | parseEmail(String email)                   |
-   | Task           | parseTask(String task)                     |
-
-8. The `FindCommandParser` will create a new `Predicate`.
-9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
-10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
-11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
-    updates the filter of the `PersonList` to filter by the given `Predicate`.
-12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
-
-The following sequence diagram shows how the find operation works:
-
-<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
-
-![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
 ### Mark Command
 
@@ -901,6 +650,100 @@ in most cases.
 
 <img src="images/ArchiveCommandSequenceDiagram.png" width="1188" />
 
+### Assign Command
+
+#### Description
+
+The `assign` command allows users to assign tasks to student.
+During the execution of the `assign` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `AssignCommand` object will be created, and is subsequently executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
+4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of `Task` is missing, or if either the prefix of `StudentId` or `ModuleCode` is missing, as they are compulsory fields.
+   </div> 
+
+5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div> 
+
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when `studentId` is used as the input field.
+   In the case of `moduleCode`, the `Module` prefix will be used to tokenize the input.
+   Depending on the type of input field used (`studentId` or `moduleCode`), Steps 5 to 7 will be executed using the parse 
+   methods in `ParserUtil` that are specific to the field. The argument's validity would be checked in their respective classes as well.
+    </div>
+
+8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseTask(String task)`.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div>
+
+9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Task#isValidTaskName(String task)` will then be invoked,
+    which checks if the trimmed argument is valid (according to the Regex supplied).
+    If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+
+11. A new `AssignCommand` will be created (using the `StudentId` or `ModuleCode` object and `Task` object created) and returned to the `LogicManager`.
+
+12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
+
+13. If `StudentId` is used, `AssignCommand#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked,
+    which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method and
+    `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. If `ModuleCode` is used,
+    `AssignCommand#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method will be invoked, which will in
+    turn invoke `model#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method and
+    `AddressBook#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method.
+
+14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
+    If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
+    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`.
+
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b> 
+      If no student(s) with a matching `studentId` or `moduleCode` is found, then `PersonNotFoundException` or `ModuleCodeNotFoundException` will be thrown.
+      </div>
+
+15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)`
+    method to check if the `task` is assigned.
+    If no similar `task` is found, the following step will take place.
+
+      <div markdown="span" class="alert alert-info">:information_source:
+      <b>Note:</b>
+      If all the student(s) has already been assigned that task, then `DuplicateTaskException` will be thrown. 
+      If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException` will be thrown.
+      </div>
+
+16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
+17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
+18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
+19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
+
+![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
+
 ### Progress Command
 
 #### Description
@@ -954,29 +797,135 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 
 ![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
 
-### Sort Command
+### DeleteTask Command
 
 #### Description
 
-The `sort` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
-During the execution of the `sort` command, the user's input is being parsed in `AddressBookParser`.
-After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+The `deleteTask` command allows users to delete to task that was previously assigned to students.
+During the execution of the `deleteTask` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `deleteTaskCommand` object will be created, and is subsequently executed by the LogicManager.
 
 #### Implementation
 
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "sort", `SortCommand()` will be called.
-4. As `SortCommand` utilizes the default constructor, it simply returns a new `SortCommand` object to
-   the `AddressBookParser`.
-5. This `SortCommand` object will then be subsequently returned to the `LogicManager`.
-6. The `LogicManager` calls `SortCommand#execute(Model model)`.
-7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order by calling `model#sortFilteredPersonListByTaskLeft()`.
-8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
-9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
+4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
+   <div markdown="span" class="alert alert-info">:information_source: 
+    <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, `Index`, `ModuleCode`, and `TaskName` is missing.
+    Either the pair (consisting of `StudentId` and `Index`) or the pair (consisting of `ModuleCode` and `TaskName`) must be provided.   
+   </div>
+
+
+5. If either `Index` or `StudentId` is given, the `indexOrStudentIdGiven(ArgumentMultimap argMultimap)` method is invoked.
+
+    <div markdown="span" class="alert alert-info">:information_source:
+     <b>Note:</b> A `ParseException` will be thrown if the prefix of `StudentId`, or `Index` is missing.
+     Both `StudentId` and `Index` must be provided.   
+    </div>
+
+   i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div>
+
+   ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+
+   iii. `StudentId#isValidId(String studentId)` method will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
+   `ParserUtil#parseIndex(String oneBasedIndex)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+
+   vi. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   vii. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+
+6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
+    Both `ModuleCode` and `TaskName` must be provided.   
+    </div>
+
+   i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+
+   iii. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into
+   `ParserUtil#parseTask(String task)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
+
+   v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+
+   vi. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+   vii. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
+8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
+
+   i. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
+
+   ii. This method will iterate through each `Person` object in and check for matching `studentId`.
+   If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`.
+   If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method.
+   If no student with matching studentId is found, `PersonNotFoundException()` will be thrown.
+
+   iii. The updated `Person` will be replaced the current `Person` object.
+
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
+   updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+
+9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
+
+   i. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
+
+   ii. This method will iterate through each `Person` object in and check for matching `moduleCode`.
+   If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
+   If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
+   If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
+
+   iii. The updated `Person` will be replaced the current `Person` object.
+
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
+   updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+
+10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
+
+<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
+
+<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
 
 ### History Command
 
@@ -1039,7 +988,54 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
 * **Alternative 2:** Extend each command to be able to revert the changes it has made to TAPA.
    * Pros: Will not incur major performance issues as it uses less memory.
    * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
-   
+
+### Sort Command
+
+#### Description
+
+The `sort` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
+During the execution of the `sort` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "sort", `SortCommand()` will be called.
+4. As `SortCommand` utilizes the default constructor, it simply returns a new `SortCommand` object to
+   the `AddressBookParser`.
+5. This `SortCommand` object will then be subsequently returned to the `LogicManager`.
+6. The `LogicManager` calls `SortCommand#execute(Model model)`.
+7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order by calling `model#sortFilteredPersonListByTaskLeft()`.
+8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
+9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+
+![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
+
+### Manual Command
+
+#### Description
+
+The `manual` command displays the format and a short description for a particular command. During the execution of the `manual` command, the user's input is being parsed in `ManualCommandParser`. After which, a new `ManualCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
+
+    <div markdown="span" class="alert alert-info">:information_source:
+    <b>Note:</b> A `ParseException` will be thrown if the argument is invalid.
+    </div>
+
+4. The supplied argument will be trimmed using `String#trim()`.
+5. The `ManualCommandParser` will create a new `ManualCommand` (using the `argument` in Step 4), which will be returned to `LogicManager`.
+6. The `LogicManager` will call `ManualCommand#execute(Model model)`. If the `argument` is invalid, a `CommandException` will be thrown.
+7. Lastly, the `ManualCommand` will create a new `CommandResult` which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the manual command works:
+
+<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1147,23 +1143,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1e1. TAPA shows an error message.
 
        Use case ends.
-
-#### Use case: UC02 - List all students
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students in alphabetical order sorted by their name.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-#### Use case UC03 - Delete a student
+   
+#### Use case UC02 - Delete a student
 
 **MSS**
 
@@ -1192,7 +1173,152 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-#### Use case UC04 - Edit a student
+#### Use case: UC03 - Delete all students from a module
+
+**MSS**
+
+1. User requests to delete all students from a particular module.
+2. TAPA deletes the students.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given module code is invalid.
+
+   * 1a1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+* 1b. There are no students taking the module specified by the given module code.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+#### Use case: UC04 - Finding a student
+
+**MSS**
+
+1. User requests to find students that match the inputted search field.
+2. TAPA displays the students who fit the request.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given student ID is invalid.
+
+   * 1a1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+* 1b. The given module code is invalid.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+#### Use case: UC05 - Check all the tasks that a student has
+
+**MSS**
+
+1. User requests to check all the tasks that a student has.
+2. TAPA shows a list of tasks that the student has.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The specified student ID is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. There is no student with the specified student ID in TAPA.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2b. The student does not have any tasks assigned to him/her.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC06 - Marking an undone task as complete
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as done.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If student ID is given, and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3c. The specified task with the given index has already been marked as complete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC07 - Marking a done task as incomplete
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as undone.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If student ID is given, and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3b. If the index is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3c. The specified task with the given index has already been marked as incomplete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case UC08 - Edit a student
 
 **MSS**
 
@@ -1227,8 +1353,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+#### Use case: UC09 - Save a copy of the data in TAPA
 
-#### Use case: UC05 - Assign a task to a student
+**MSS**
+
+1. User request to save a copy of the data that is currently being stored in TAPA.
+2. TAPA creates a new data file in the same directory as the existing stored data.
+3. TAPA copies the content of the existing stored data into the new data file.
+
+**Extensions**
+
+* 2a. There is already a data file that has the same file name as the new data file that is going to be created.
+
+   * 2a1. TAPA does not create a new data file.
+
+     Use case resumes from step 3.
+
+* 2b. User does not have the permission to create a new file.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3. There is an unexpected error when copying from the existing data file to the new data file.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC10 - List all students
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students in alphabetical order sorted by their name.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+#### Use case: UC11 - Assign a task to a student
 
 **MSS**
 1. User requests TAPA to assign a task to a student. (This can be done for an individual student or for all students taking the same module)
@@ -1256,8 +1424,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+#### Use case: UC12 - View the completion status of a particular task
 
-#### Use case: UC06 - Delete a task assigned to a student
+**MSS**
+
+1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
+2. TAPA shows a list of students who are taking this module and are currently assigned with the specified tasks (along with their respective completion status).
+
+**Extensions**
+
+* 1a. The specified task name is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. The specified module code is invalid (not in a correct format).
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2a. There are no students who are taking this module and are assigned with the specified task.
+
+   * 2a1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC13 - Delete a task assigned to a student
 
 **MSS**
 
@@ -1298,137 +1492,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC07 - Finding a student
+#### Use case: UC14 - Sorting list of students by their number of incomplete tasks in descending order
 
 **MSS**
 
-1. User requests to find students that match the inputted search field.
-2. TAPA displays the students who fit the request.
+1. User requests to sort students.
+2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
 
    Use case ends.
 
-**Extensions**
+* 2a. The list is empty.
 
-* 1a. The given student ID is invalid.
+  Use case ends.
 
-    * 1a1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-* 1b. The given module code is invalid.
-
-    * 1b1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-#### Use case: UC08 - Delete all students from a module
-
-**MSS**
-
-1. User requests to delete all students from a particular module.
-2. TAPA deletes the students.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given module code is invalid.
-
-    * 1a1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-* 1b. There are no students taking the module specified by the given module code.
-
-    * 1b1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-#### Use case: UC09 - Check all the tasks that a student has
-
-**MSS**
-
-1. User requests to check all the tasks that a student has.
-2. TAPA shows a list of tasks that the student has.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The specified student ID is invalid (not in a correct format).
-
-   * 1a1. TAPA shows an error message.
-
-     Use case ends.
-
-* 1b. There is no student with the specified student ID in TAPA.
-
-   * 1b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 2b. The student does not have any tasks assigned to him/her.
-
-   * 2b1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC10 - View the completion status of a particular task
-
-**MSS**
-
-1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
-2. TAPA shows a list of students who are taking this module and are currently assigned with the specified tasks (along with their respective completion status).
-
-**Extensions**
-
-* 1a. The specified task name is invalid (not in a correct format).
-
-   * 1a1. TAPA shows an error message.
-
-     Use case ends.
-
-* 1b. The specified module code is invalid (not in a correct format).
-
-   * 1b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 2a. There are no students who are taking this module and are assigned with the specified task.
-
-   * 2a1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC11 - Save a copy of the data in TAPA
-
-**MSS**
-
-1. User request to save a copy of the data that is currently being stored in TAPA.
-2. TAPA creates a new data file in the same directory as the existing stored data.
-3. TAPA copies the content of the existing stored data into the new data file.
-
-**Extensions**
-
-* 2a. There is already a data file that has the same file name as the new data file that is going to be created.
-
-   * 2a1. TAPA does not create a new data file.
-
-     Use case resumes from step 3.
-
-* 2b. User does not have the permission to create a new file.
-
-   * 2b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 3. There is an unexpected error when copying from the existing data file to the new data file.
-
-   * 3a1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC12 - Finding out what a certain command does
+#### Use case: UC15 - Finding out what a certain command does
 
 **MSS**
 
@@ -1452,90 +1529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1b1. TAPA shows an error message.
 
      Use case ends.
-
-#### Use case: UC13 - Marking an undone task as complete
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to mark a student's task as done.
-4. TAPA shows the updated list of students.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  
-   Use case ends.
-
-* 3a. If student ID is given, and a student with the given student ID does not exist.
-
-   * 3a1. TAPA shows an error message. 
-     
-      Use case ends.
    
-* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
-  
-   * 3b1. TAPA shows an error message. 
-     
-      Use case ends.
-
-* 3c. The specified task with the given index has already been marked as complete.
-
-   * 3c1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC14 - Marking a done task as incomplete
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to mark a student's task as undone.
-4. TAPA shows the updated list of students.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. If student ID is given, and a student with the given student ID does not exist.
-
-   * 3a1. TAPA shows an error message.
-
-     Use case ends.
-   
-* 3b. If the index is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
-
-   * 3b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 3c. The specified task with the given index has already been marked as incomplete.
-
-   * 3c1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC15 - Sorting list of students by their number of incomplete tasks in descending order
-
-**MSS**
-
-1. User requests to sort students.
-2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
-
-   Use case ends.
-
-* 2a. The list is empty. 
-  
-   Use case ends.
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1606,54 +1600,182 @@ testers are expected to do more *exploratory* testing.
 
    6. Other incorrect add commands to try: `add i/AXXXXXXXR m/CS2@00 n/Test`, `add i/AXXXXXXXR m/CS2100 n/T@st`<br>
       Expected: Similar to previous
-      
-### Assigning task(s) to students
 
-1. Assigning task(s) to students by their student ID
+### Deleting students by index or student ID
 
-   1. Prerequisites: 
-      1. Sample data is loaded in TAPA. 
-      2. The student associated with the student ID ("A0000000Z") has a task (Task A) assigned to him/her.
+1. Deleting a student(s) using their index while all students are being shown
 
-   2. Test case: `assign`, `assign i/A1111111Z`, `assign tn/Task A`<br>
-      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task name).
-      
-   3. Test case: `assign i/A!@#$%^&R tn/Task A`, `assign i/A1111111Z tn/@@@@`<br>
-      Expected: An error message will be displayed to the user, due to invalid format for student ID or task name.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   4. Test case: `assign i/AXXXXXXXR tn/Task A`<br>
+   1. Test case: `delete 1`<br>
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
+
+   1. Test case: `delete 1 2`<br>
+      Expected: First and second students are deleted from the list. Status message states that 2 students were deleted.
+
+   1. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete 0 1`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete -1`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete x`, where x > number of students in the list<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+1. Deleting a student using their student ID
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. One student has "A0000000Z" as their student ID.
+      3. No student has "A9999999X" as their student ID.
+
+   1. Test case: `delete i/A0000000Z`<br>
+      Expected: The student with student ID "A0000000Z" deleted from the list. Details of the deleted student shown in the status message.
+
+   1. Test case: `delete i/A9999999X`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete i/@@@`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete i/`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `delete`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+### Deleting students by module code
+
+1. Deleting students by module code
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. One or more students have "CS2100" as their module code.
+      3. No students have "CS9999" as their module code.
+
+   1. Test case: `deleteModule m/CS2100`<br>
+      Expected: The students with module code "CS2100" are deleted from the list. Status message states number of students deleted.
+
+   1. Test case: `deleteModule m/CS9999`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `deleteModule m/@@@`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `deleteModule m/`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `deleteModule`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+   1. Test case: `deleteModule m/CS CS`<br>
+      Expected: No student is deleted. Error details shown in the status message.
+
+### Finding students
+
+1. Finding a student using their name
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. One or more students have "John" in their name.
+      3. No students have "Dueet" in their name.
+
+   1. Test case: `find n/John`<br>
+      Expected: All students with "John" in their names (but not Johnathan, Johnny etc) are listed. Status message states how many students were listed.
+
+   1. Test case: `find n/Dueet`<br>
+      Expected: Student list displays no results. Status message states that 0 students were listed.
+
+   1. Test case: `find n/John i/AAA`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find n/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find n/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+2. Finding a student using their student ID
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. One student has "A0000000Z" as their student ID.
+      3. No student has "A9999999X" as their student ID.
+
+   1. Test case: `find i/A0000000Z`<br>
+      Expected: The student with student ID "A0000000Z" is listed. Status message states that one student was listed.
+
+   1. Test case: `find i/A9999999X`<br>
+      Expected: No students listed. Status message states that 0 students were listed.
+
+   1. Test case: `find i/A0000000Z n/John`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find i/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find i/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+3. Finding a student using their module code
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. One or more students have "CS2100" as their module code.
+      3. No student has "CS9999" as their module code.
+
+   2. Test case: `find m/CS2100`<br>
+      Expected: All students with "CS2100" as their module code are listed. Status message states how many students were listed.
+
+   3. Test case: `find m/CS9999`<br>
+      Expected: No students listed. Status message states that 0 students were listed.
+
+   4. Test case: `find m/CS2100 i/A0000000Z`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   5. Test case: `find m/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   6. Test case: `find m/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   7. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+   
+### Checking all the tasks that a student has
+
+1. Checking all the tasks that a student has
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. The student associated with the student ID ("A0000000Z") has a task assigned to him/her.
+
+   2. Test case: `task`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory field (student ID).
+
+   3. Test case: `task i/A!@#$%^&R`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID.
+
+   4. Test case: `task i/AXXXXXXXR`<br>
       Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
 
-   5. Test case: `assign i/A0000000Z tn/Task A`<br>
-      Expected: An error message will be displayed to the user, as the task (Task A) has already been assigned to the student associated with the student ID ("A0000000Z").
-      
-   6. Test case: `assign i/A0000000Z tn/Task B`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the student associated with the student ID ("A0000000Z").
-      
-2. Assigning task(s) to students by their module code
-   
-   1. Prerequisites: 
-      1. Sample data is loaded in TAPA. 
-      2. The students associated with the student ID ("A0000000Z") and ("A1111111Z") has a task (Task A) assigned to them. 
-      3. The student associated with the student ID ("A5555555Z") has the same module code (CS2100) as the student associated with the student ID ("A0000000Z").
+   5. Test case: `task i/A1111111Z`<br>
+      Expected: An error message will be displayed to the user, as there are no tasks assigned to this student.
 
-   2. Test case: `assign`, `assign m/CS2100`, `assign tn/Task A`<br>
-      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
-
-   3. Test case: `assign m/CS@@@@ tn/Task A`, `assign m/CS2100 tn/@@@@`<br>
-      Expected: An error message will be displayed to the user, due to invalid format for module code or task name.
-
-   4. Test case: `assign m/LAM1201 tn/Task A`<br>
-      Expected: An error message will be displayed to the user, as there are no students associated with this module code in TAPA.
-
-   5. Test case: `assign m/CS2101 tn/Task A`<br>
-      Expected: An error message will be displayed to the user, all the students with the module code (CS2101) already has the specified task (Task A) assigned to them.
-
-   6. Test case: `assign m/CS2100 tn/Task A`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task A) being assigned to the student associated with the student ID ("A5555555Z"). A message will be displayed to the user, informing that the task is only assigned to **some** of the students in the module (CS2100).
-
-   7. Test case: `assign m/CS2100 tn/Task B`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the students associated with the module code (CS2100).
+   6. Test case: `task i/A0000000Z`<br>
+      Expected: An output list will be displayed to the user, which consists of all the tasks ("Task A") that are assigned to the student.
 
 ### Marking an incomplete task as complete
 
@@ -1703,28 +1825,71 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `unmark i/A1111111Z idx/1`<br>
       Expected:  The list of students in TAPA will be updated, with the first task belonging to the student associated with the student ID ("A1111111Z") marked as incomplete.
 
-### Checking all the tasks that a student has
+### Archiving details
 
-1. Checking all the tasks that a student has
+1. Saving a copy of the details currently saved in TAPA into a separate file
 
-   1. Prerequisites: 
-      1. Sample data is loaded in TAPA. 
-      2. The student associated with the student ID ("A0000000Z") has a task assigned to him/her. 
-   
-   2. Test case: `task`<br>
-      Expected: An error message will be displayed to the user, due to missing compulsory field (student ID).
-   
-   3. Test case: `task i/A!@#$%^&R`<br>
-      Expected: An error message will be displayed to the user, due to invalid format for student ID.
-   
-   4. Test case: `task i/AXXXXXXXR`<br>
+   1. Prerequisites: Sample data is loaded in TAPA.
+
+   2. Test Case: `archive`<br>
+      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
+
+2. Saving a copy of the details currently saved in TAPA into a separate file
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. Remove the data directory's (`/data`) read and write permissions.
+
+   2. Test case: `archive`<br>
+      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
+
+### Assigning task(s) to students
+
+1. Assigning task(s) to students by their student ID
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. The student associated with the student ID ("A0000000Z") has a task (Task A) assigned to him/her.
+
+   2. Test case: `assign`, `assign i/A1111111Z`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task name).
+
+   3. Test case: `assign i/A!@#$%^&R tn/Task A`, `assign i/A1111111Z tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID or task name.
+
+   4. Test case: `assign i/AXXXXXXXR tn/Task A`<br>
       Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
-   
-   5. Test case: `task i/A1111111Z`<br>
-      Expected: An error message will be displayed to the user, as there are no tasks assigned to this student.
 
-   6. Test case: `task i/A0000000Z`<br>
-      Expected: An output list will be displayed to the user, which consists of all the tasks ("Task A") that are assigned to the student.
+   5. Test case: `assign i/A0000000Z tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as the task (Task A) has already been assigned to the student associated with the student ID ("A0000000Z").
+
+   6. Test case: `assign i/A0000000Z tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the student associated with the student ID ("A0000000Z").
+
+2. Assigning task(s) to students by their module code
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. The students associated with the student ID ("A0000000Z") and ("A1111111Z") has a task (Task A) assigned to them.
+      3. The student associated with the student ID ("A5555555Z") has the same module code (CS2100) as the student associated with the student ID ("A0000000Z").
+
+   2. Test case: `assign`, `assign m/CS2100`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
+
+   3. Test case: `assign m/CS@@@@ tn/Task A`, `assign m/CS2100 tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for module code or task name.
+
+   4. Test case: `assign m/LAM1201 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this module code in TAPA.
+
+   5. Test case: `assign m/CS2101 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, all the students with the module code (CS2101) already has the specified task (Task A) assigned to them.
+
+   6. Test case: `assign m/CS2100 tn/Task A`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task A) being assigned to the student associated with the student ID ("A5555555Z"). A message will be displayed to the user, informing that the task is only assigned to **some** of the students in the module (CS2100).
+
+   7. Test case: `assign m/CS2100 tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the students associated with the module code (CS2100).
 
 ### Viewing the completion status of a particular task
 
@@ -1745,7 +1910,7 @@ testers are expected to do more *exploratory* testing.
 
    5. Test case: `progress m/CS2100 tn/Task A`<br>
       Expected: An output list will be displayed to the user, which consists of all students (and their respective completion status) who are taking "CS2100" and are assigned with "Task A".
-
+   
 ### Sorting the list of students in TAPA by the number of incomplete tasks in descending order
 
 1. Sorting the list of students in TAPA by the number of incomplete tasks in **descending** order
@@ -1773,178 +1938,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `manual`<br>
       Expected: All possible commands are listed out.
-
-### Archiving details
-
-1. Saving a copy of the details currently saved in TAPA into a separate file
-
-   1. Prerequisites: Sample data is loaded in TAPA.
    
-   2. Test Case: `archive`<br>
-      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
-
-2. Saving a copy of the details currently saved in TAPA into a separate file
-   
-   1. Prerequisites: 
-      1. Sample data is loaded in TAPA. 
-      2. Remove the data directory's (`/data`) read and write permissions. 
-   
-   2. Test case: `archive`<br>
-      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
-
-### Deleting students by index or student ID
-
-1. Deleting a student(s) using their index while all students are being shown
-
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
-      
-   1. Test case: `delete 1 2`<br>
-      Expected: First and second students are deleted from the list. Status message states that 2 students were deleted.
-
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete 0 1`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete -1`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete x`, where x > number of students in the list<br>
-      Expected: No student is deleted. Error details shown in the status message.
-
-1. Deleting a student using their student ID
-
-      1. Prerequisites: 
-          1. Sample data is loaded in TAPA. 
-          2. One student has "A0000000Z" as their student ID. 
-          3. No student has "A9999999X" as their student ID. 
-
-   1. Test case: `delete i/A0000000Z`<br>
-      Expected: The student with student ID "A0000000Z" deleted from the list. Details of the deleted student shown in the status message.
-      
-   1. Test case: `delete i/A9999999X`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-
-   1. Test case: `delete i/@@@`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete i/`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-   1. Test case: `delete`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-### Deleting students by module code
-
-1. Deleting students by module code
-
-   1. Prerequisites: 
-         1. Sample data is loaded in TAPA. 
-         2. One or more students have "CS2100" as their module code.
-         3. No students have "CS9999" as their module code.
-
-   1. Test case: `deleteModule m/CS2100`<br>
-      Expected: The students with module code "CS2100" are deleted from the list. Status message states number of students deleted.
-      
-   1. Test case: `deleteModule m/CS9999`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-
-   1. Test case: `deleteModule m/@@@`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-    1. Test case: `deleteModule m/`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-    1. Test case: `deleteModule`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-    1. Test case: `deleteModule m/CS CS`<br>
-      Expected: No student is deleted. Error details shown in the status message.
-      
-### Finding students
-
-1. Finding a student using their name
-
-      1. Prerequisites: 
-          1. Sample data is loaded in TAPA. 
-          2. One or more students have "John" in their name.
-          3. No students have "Dueet" in their name.
-
-   1. Test case: `find n/John`<br>
-      Expected: All students with "John" in their names (but not Johnathan, Johnny etc) are listed. Status message states how many students were listed.
-      
-   1. Test case: `find n/Dueet`<br>
-      Expected: Student list displays no results. Status message states that 0 students were listed.
-      
-   1. Test case: `find n/John i/AAA`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find n/@@@`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-
-   1. Test case: `find n/`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-
-1. Finding a student using their student ID
-
-      1. Prerequisites: 
-          1. Sample data is loaded in TAPA. 
-          2. One student has "A0000000Z" as their student ID. 
-          3. No student has "A9999999X" as their student ID. 
-
-   1. Test case: `find i/A0000000Z`<br>
-      Expected: The student with student ID "A0000000Z" is listed. Status message states that one student was listed.
-      
-   1. Test case: `find i/A9999999X`<br>
-      Expected: No students listed. Status message states that 0 students were listed.
-      
-   1. Test case: `find i/A0000000Z n/John`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-
-   1. Test case: `find i/@@@`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find i/`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-1. Finding a student using their module code
-
-      1. Prerequisites: 
-          1. Sample data is loaded in TAPA. 
-          2. One or more students have "CS2100" as their module code. 
-          3. No student has "CS9999" as their module code. 
-
-   1. Test case: `find m/CS2100`<br>
-      Expected: All students with "CS2100" as their module code are listed. Status message states how many students were listed.
-      
-   1. Test case: `find m/CS9999`<br>
-      Expected: No students listed. Status message states that 0 students were listed.
-      
-   1. Test case: `find m/CS2100 i/A0000000Z`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-
-   1. Test case: `find m/@@@`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find m/`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-      
-   1. Test case: `find`<br>
-      Expected: Find command not executed. Error details shown in the status message.
-
 ### Saving data
 
 1. Dealing with corrupted entries
