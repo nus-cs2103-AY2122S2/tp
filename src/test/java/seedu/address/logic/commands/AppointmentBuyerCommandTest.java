@@ -21,7 +21,7 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.TypicalBuyers;
-import seedu.address.testutil.TypicalClients;
+//import seedu.address.testutil.TypicalClients;
 
 public class AppointmentBuyerCommandTest {
 

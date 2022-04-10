@@ -14,7 +14,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.SellerAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.seller.AllFieldsMatchBuyerPredicate;
@@ -48,7 +47,7 @@ public class MatchCommandTest {
 
         String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 4);
 
-        ModelManager expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(), TypicalSellers.getTypicalSellerAddressBook(),
             TypicalBuyers.getTypicalBuyerAddressBook());
 
         expectedModel.updateFilteredSellerList(predicate);
