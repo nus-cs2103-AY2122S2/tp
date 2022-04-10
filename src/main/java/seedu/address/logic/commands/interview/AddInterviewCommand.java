@@ -28,9 +28,9 @@ public class AddInterviewCommand extends AddCommand {
             + PREFIX_POSITION + "1";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
-    public static final String POSITION_NO_OPENING = "The position the applicant is interviewing for has no openings, "
-            + "so an interview cannot be scheduled.";
-    public static final String APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
+    public static final String MESSAGE_POSITION_NO_OPENING = "The position the applicant is interviewing for "
+            + "has no openings, so an interview cannot be scheduled.";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
             + "be scheduled.";
 
     private final Index applicantIndex;
@@ -59,7 +59,7 @@ public class AddInterviewCommand extends AddCommand {
         }
         Applicant applicantInInterview = lastShownApplicantList.get(applicantIndex.getZeroBased());
         if (applicantInInterview.isHired()) {
-            throw new CommandException(APPLICANT_HAS_JOB);
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
         }
 
         List<Position> lastShownPositionList = model.getFilteredPositionList();
@@ -74,7 +74,7 @@ public class AddInterviewCommand extends AddCommand {
         }
 
         if (!positionInInterview.canScheduleInterview()) {
-            throw new CommandException(POSITION_NO_OPENING);
+            throw new CommandException(MESSAGE_POSITION_NO_OPENING);
         }
 
         Interview interviewToAdd = new Interview(applicantInInterview, date, positionInInterview);

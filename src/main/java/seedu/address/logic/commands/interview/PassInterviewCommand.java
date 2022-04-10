@@ -25,7 +25,8 @@ public class PassInterviewCommand extends Command {
     public static final String MESSAGE_INTERVIEW_NOT_PENDING_STATUS = "Only pending interviews can be passed";
     public static final String MESSAGE_INTERVIEW_CANNOT_BE_PASSED = "The interview cannot be passed, "
             + "as the number of current offers will exceed the number of available positions";
-
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so this interview "
+            + "cannot be passed";
     private final Index targetIndex;
 
     public PassInterviewCommand(Index targetIndex) {
@@ -48,6 +49,9 @@ public class PassInterviewCommand extends Command {
 
         if (!interviewToPass.isPassableInterview()) {
             throw new CommandException(MESSAGE_INTERVIEW_CANNOT_BE_PASSED);
+        }
+        if (interviewToPass.getApplicant().isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
         }
 
         Position oldPosition = interviewToPass.getPosition();
