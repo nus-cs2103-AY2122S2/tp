@@ -11,16 +11,18 @@ import seedu.address.model.tag.Tag;
 public abstract class Entry {
     private final Name name;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isArchived;
 
     /**
      * Constructs a new Entry object given the name and tags.
      * @param name Name of the entry.
      * @param tags Tags associated with the entry.
      */
-    public Entry(Name name, Set<Tag> tags) {
+    public Entry(Name name, Set<Tag> tags, boolean isArchived) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.tags.addAll(tags);
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -35,6 +37,14 @@ public abstract class Entry {
         return Collections.unmodifiableSet(tags);
     }
 
+    public void setArchived(boolean newArchived) {
+        isArchived = newArchived;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two entries.
@@ -47,4 +57,10 @@ public abstract class Entry {
      * Note: This only applies for Person and Event. Company does not have any defined functionality for this.
      */
     public abstract void updateCompanyName(String oldName, String newName);
+
+    /**
+     * Returns true if the given companyName matches {@code testName}.
+     * Note: This only applies for Person and Event. Company does not have any defined functionality for this.
+     */
+    public abstract boolean hasCompanyName(String testName);
 }

@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.OrderingUtil.Ordering;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
@@ -16,15 +19,19 @@ import seedu.address.model.entry.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
-    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<Entry> PREDICATE_SHOW_ALL = unused -> true;
+    Predicate<Entry> PREDICATE_SHOW_NONE = unused -> false;
+    Predicate<Entry> PREDICATE_SHOW_UNARCHIVED_ONLY = entry -> !entry.isArchived();
+    Predicate<Entry> PREDICATE_SHOW_ARCHIVED_ONLY = Entry::isArchived;
 
-    Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
-    Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
-    Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
-
-    static enum ListType { PERSON, COMPANY, EVENT }
+    /**
+     * {@code Comparator} that compares {@code Entry}s.
+     */
+    Comparator<Person> COMPARATOR_PERSON_BY_NAME = (p1, p2) -> p1.getName().toString()
+                                                        .compareTo(p2.getName().toString());
+    Comparator<Company> COMPARATOR_COMPANY_BY_NAME = (c1, c2) -> c1.getName().toString()
+                                                        .compareTo(c2.getName().toString());
+    Comparator<Event> COMPARATOR_EVENT_BY_DATE = (e1, e2) -> e1.getDate().compareTo(e2.getDate());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -167,25 +174,50 @@ public interface Model {
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEventList(Predicate<Event> predicate);
+    void updateFilteredEventList(Predicate<? super Event> predicate);
+
+    /**
+     * Updates the filter of the currently displayed list through the {@code predicate}.
+     */
+    void updateCurrentlyDisplayedList(Predicate<Entry> predicate);
 
     /**
      * Updates filtered lists to show only the Persons list filtered through the {@code predicate}.
      */
-    void showPersonList(Predicate<Person> predicate);
+    void showPersonList(Predicate<? super Person> predicate);
 
     /**
      * Updates filtered lists to show only the Company list filtered through the {@code predicate}.
      */
-    void showCompanyList(Predicate<Company> predicate);
+    void showCompanyList(Predicate<? super Company> predicate);
 
     /**
      * Updates filtered lists to show only the Events list filtered through the {@code predicate}.
      */
-    void showEventList(Predicate<Event> predicate);
+    void showEventList(Predicate<? super Event> predicate);
+
+    /**
+     * Sort and show the filtered {@code Person} list by date and in {@code ordering} order
+     */
+    void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate);
+
+    /**
+     * Sort and show the filtered {@code Company} list by date and in {@code ordering} order
+     */
+    void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate);
+
+    /**
+     * Sort and show the filtered {@code Event} list by date and in {@code ordering} order
+     */
+    void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate);
 
     /**
      * Deletes the entry at the index of the currently displayed list and returns it.
      */
     Entry deleteEntry(int index);
+
+    /**
+     * Archives the entry at the index of the currently displayed list and returns it.
+     */
+    Entry archiveEntry(int index, boolean isArchived) throws CommandException;
 }

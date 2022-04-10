@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_ONLY;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,17 +39,17 @@ public class EditEventCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_COMPANY + "COMPANY_NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "2022-04-12 "
+            + PREFIX_DATE + "2022-04-20 "
             + PREFIX_TIME + "12:20";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the list of events.";
 
     private final Index index;
     private final EditEventCommand.EditEventDescriptor editEventDescriptor;
@@ -88,7 +88,7 @@ public class EditEventCommand extends Command {
         }
 
         model.setEvent(eventToEdit, editedEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.showEventList(PREDICATE_SHOW_UNARCHIVED_ONLY);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 

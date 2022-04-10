@@ -23,12 +23,19 @@ public class Person extends Entry {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Name companyName, Phone phone, Email email, Set<Tag> tags) {
-        super(name, tags);
+    public Person(Name name, Name companyName, Phone phone, Email email, Set<Tag> tags, boolean isArchived) {
+        super(name, tags, isArchived);
         requireAllNonNull(phone, email, companyName);
         this.companyName = companyName;
         this.phone = phone;
         this.email = email;
+    }
+
+    /**
+     * Constructor if no isArchived value is provided; default value is false.
+     */
+    public Person(Name name, Name companyName, Phone phone, Email email, Set<Tag> tags) {
+        this(name, companyName, phone, email, tags, false);
     }
 
     public Name getCompanyName() {
@@ -61,9 +68,14 @@ public class Person extends Entry {
 
     @Override
     public void updateCompanyName(String oldName, String newName) {
-        if (oldName.equals(this.companyName.toString())) {
-            this.companyName = new Name(newName);
+        if (hasCompanyName(oldName)) {
+            companyName = new Name(newName);
         }
+    }
+
+    @Override
+    public boolean hasCompanyName(String testName) {
+        return testName.equals(companyName.toString());
     }
 
     /**

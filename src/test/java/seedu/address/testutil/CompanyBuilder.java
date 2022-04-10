@@ -16,10 +16,10 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class CompanyBuilder {
 
-    public static final String DEFAULT_NAME = "DBSSS";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "14 Jurong Street";
+    public static final String DEFAULT_NAME = "shopSG";
+    public static final String DEFAULT_PHONE = "12345678";
+    public static final String DEFAULT_EMAIL = "amy@shopSG.com";
+    public static final String DEFAULT_ADDRESS = "21 Jurong Street";
 
     private Name name;
     private Phone phone;

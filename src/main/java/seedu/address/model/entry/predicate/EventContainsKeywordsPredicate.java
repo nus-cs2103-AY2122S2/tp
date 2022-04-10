@@ -3,6 +3,8 @@ package seedu.address.model.entry.predicate;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.model.entry.Date;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 
 /**
@@ -16,32 +18,37 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
 
     private final List<String> nameKeywords;
     private final List<String> companyKeywords;
-    private final List<String> dateKeywords;
+    private final Date startDate;
+    private final Date endDate;
     private final List<String> timeKeywords;
     private final List<String> locationKeywords;
     private final List<String> tagKeywords;
+    private final Predicate<Entry> searchTypePredicate;
 
     /**
      * Main Constructor for EventContainsKeywordsPredicate
      * @param nameKeywords user input to search event name
      * @param companyKeywords user input to search event companyName
-     * @param dateKeywords user input to search event date
      * @param timeKeywords user input to search event time
      * @param locationKeywords user input to search event location
      * @param tagKeywords user input to search event tag
      */
     public EventContainsKeywordsPredicate(List<String> nameKeywords,
                                           List<String> companyKeywords,
-                                          List<String> dateKeywords,
+                                          Date startDate,
+                                          Date endDate,
                                           List<String> timeKeywords,
                                           List<String> locationKeywords,
-                                          List<String> tagKeywords) {
+                                          List<String> tagKeywords,
+                                          Predicate<Entry> searchTypePredicate) {
         this.nameKeywords = nameKeywords;
         this.companyKeywords = companyKeywords;
-        this.dateKeywords = dateKeywords;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.timeKeywords = timeKeywords;
         this.locationKeywords = locationKeywords;
         this.tagKeywords = tagKeywords;
+        this.searchTypePredicate = searchTypePredicate;
     }
 
     /**
@@ -62,15 +69,16 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 || new NameContainsKeywordsPredicate(nameKeywords).test(event);
         correctCompany = invalidKeywords(companyKeywords)
                 || new CompanyNameContainsKeywordsPredicate(companyKeywords).test(event);
-        correctDate = invalidKeywords(dateKeywords)
-                || new DateContainsKeywordsPredicate(dateKeywords).test(event);
+        correctDate = (startDate == null && endDate == null)
+                || new DateWithinKeyDatesPredicate(startDate, endDate).test(event);
         correctTime = invalidKeywords(timeKeywords)
                 || new TimeContainsKeywordsPredicate(timeKeywords).test(event);
         correctLocation = invalidKeywords(locationKeywords)
                 || new LocationContainsKeywordsPredicate(locationKeywords).test(event);
         correctTag = invalidKeywords(tagKeywords) || new TagContainsKeywordsPredicate(tagKeywords).test(event);
 
-        return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag;
+        return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag
+                && searchTypePredicate.test(event);
     }
 
     @Override
@@ -79,10 +87,14 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 || (other instanceof EventContainsKeywordsPredicate // instanceof handles nulls
                 && nameKeywords.equals(((EventContainsKeywordsPredicate) other).nameKeywords)
                 && companyKeywords.equals(((EventContainsKeywordsPredicate) other).companyKeywords)
-                && dateKeywords.equals(((EventContainsKeywordsPredicate) other).dateKeywords)
+                && ((startDate == null && ((EventContainsKeywordsPredicate) other).startDate == null)
+                || startDate.equals(((EventContainsKeywordsPredicate) other).startDate))
+                && (endDate == null && ((EventContainsKeywordsPredicate) other).endDate == null
+                || endDate.equals(((EventContainsKeywordsPredicate) other).endDate))
                 && timeKeywords.equals(((EventContainsKeywordsPredicate) other).timeKeywords)
                 && locationKeywords.equals(((EventContainsKeywordsPredicate) other).locationKeywords)
-                && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)); // state check
+                && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)
+                && searchTypePredicate.equals(((EventContainsKeywordsPredicate) other).searchTypePredicate));
     }
 
     /**

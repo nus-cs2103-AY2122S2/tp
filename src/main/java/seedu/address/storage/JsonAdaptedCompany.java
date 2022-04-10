@@ -25,6 +25,7 @@ public class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final boolean isArchived;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,6 +41,7 @@ public class JsonAdaptedCompany {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        isArchived = false;
     }
 
     /**
@@ -53,6 +55,7 @@ public class JsonAdaptedCompany {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isArchived = source.isArchived();
     }
 
     /**
@@ -99,6 +102,7 @@ public class JsonAdaptedCompany {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, isArchived);
     }
 }

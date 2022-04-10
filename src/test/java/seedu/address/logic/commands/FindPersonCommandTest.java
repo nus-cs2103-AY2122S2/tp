@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEntries.CARL;
+import static seedu.address.testutil.TypicalEntries.ELLE;
+import static seedu.address.testutil.TypicalEntries.FIONA;
+import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,9 +32,11 @@ public class FindPersonCommandTest {
     public void equals() {
 
         PersonContainsKeywordsPredicate firstPredicate = new PersonContainsKeywordsPredicate(
-                List.<String>of("first"), List.<String>of(""), List.<String>of(""));
+                List.<String>of("first"), List.<String>of(""), List.<String>of(""),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
         PersonContainsKeywordsPredicate secondPredicate = new PersonContainsKeywordsPredicate(
-                List.<String>of("second"), List.<String>of(""), List.<String>of(""));
+                List.<String>of("second"), List.<String>of(""), List.<String>of(""),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
 
 
         FindPersonCommand findFirstCommand = new FindPersonCommand(firstPredicate);
@@ -72,12 +75,12 @@ public class FindPersonCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(List.<String>of("Kurz", "Elle", "Kunz"),
-                        List.<String>of(""), List.<String>of(""));
+                new PersonContainsKeywordsPredicate(List.<String>of("Kurz", "Elle", "Kunz"), List.<String>of(""),
+                        List.<String>of(""), SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
         FindPersonCommand command = new FindPersonCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.showPersonList(predicate);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }

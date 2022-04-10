@@ -9,13 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Location {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "TODO CONSTRAINTS";
+    public static final String MESSAGE_CONSTRAINTS = "Location can take any values, and it should not be blank";
 
-    /*
-     * TODO VALIDATION REGEX
-     */
-    //public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String location;
 
@@ -32,11 +28,9 @@ public class Location {
 
     /**
      * Returns true if a given string is a valid location.
-     * TODO
      */
     public static boolean isValidLocation(String test) {
-        //return test.matches(VALIDATION_REGEX);
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
 
@@ -49,7 +43,7 @@ public class Location {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Location // instanceof handles nulls
-                && location.equals(((Location) other).location)); // state check
+                && location.equalsIgnoreCase(((Location) other).location)); // state check
     }
 
     @Override

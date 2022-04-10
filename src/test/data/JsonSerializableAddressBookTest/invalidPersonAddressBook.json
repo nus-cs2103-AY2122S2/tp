@@ -3,7 +3,8 @@
     "name": "Hans Muster",
     "companyName": "Janice street",
     "phone": "9482424",
-    "email": "invalid@email!3e"
+    "email": "invalid@email!3e",
+    "isArchived": false
   } ],
   "companies": [],
   "events": []

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
@@ -23,13 +24,14 @@ public class FindCompanyCommand extends Command {
     public static final String COMMAND_WORD = "findc";
     public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies with given details of the company "
-            + "by name and tag "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies with the same details as the "
+            + "given parameters.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " sgshop dbsss ";
+            + PREFIX_NAME + "sgshop dbsss ";
 
     private final CompanyContainsKeywordsPredicate predicate;
 
@@ -45,7 +47,7 @@ public class FindCompanyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredCompanyList(predicate);
+        model.showCompanyList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()),
                 false, false, false, true, false);

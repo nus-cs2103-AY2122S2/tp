@@ -3,6 +3,7 @@ package seedu.address.model.entry.predicate;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Person;
 
 /**
@@ -16,6 +17,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> nameKeywords;
     private final List<String> companyNameKeywords;
     private final List<String> tagKeywords;
+    private final Predicate<Entry> searchTypePredicate;
 
     /**
      * Main Constructor for CompanyContainsKeywordsPredicate
@@ -24,10 +26,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * @param tagKeywords user input to search person's tag
      */
     public PersonContainsKeywordsPredicate(List<String> nameKeywords, List<String> companyNameKeywords,
-                                            List<String> tagKeywords) {
+                                            List<String> tagKeywords, Predicate<Entry> searchTypePredicate) {
         this.nameKeywords = nameKeywords;
         this.companyNameKeywords = companyNameKeywords;
         this.tagKeywords = tagKeywords;
+        this.searchTypePredicate = searchTypePredicate;
     }
 
     /**
@@ -48,7 +51,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 || new CompanyNameContainsKeywordsPredicate(companyNameKeywords).test(person);
         correctTag = invalidKeywords(tagKeywords) || new TagContainsKeywordsPredicate(tagKeywords).test(person);
 
-        return correctName && correctCompanyName && correctTag;
+        return correctName && correctCompanyName && correctTag && searchTypePredicate.test(person);
     }
 
     @Override
@@ -57,7 +60,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 || (other instanceof PersonContainsKeywordsPredicate // instanceof handles nulls
                 && nameKeywords.equals(((PersonContainsKeywordsPredicate) other).nameKeywords)
                 && companyNameKeywords.equals(((PersonContainsKeywordsPredicate) other).companyNameKeywords)
-                && tagKeywords.equals(((PersonContainsKeywordsPredicate) other).tagKeywords)); // state check
+                && tagKeywords.equals(((PersonContainsKeywordsPredicate) other).tagKeywords)
+                && searchTypePredicate.equals(((PersonContainsKeywordsPredicate) other).searchTypePredicate));
     }
 
     /**

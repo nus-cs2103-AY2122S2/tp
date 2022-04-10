@@ -43,7 +43,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Name companyName = ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY).get());
+        Name companyName = ParserUtil.parseName(argMultimap.getValue(PREFIX_COMPANY).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ENTRY_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.DBSSS;
+import static seedu.address.testutil.TypicalEntries.DBSSS;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -62,7 +62,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listPersonCommand = ListPersonCommand.COMMAND_WORD;
-        assertCommandSuccess(listPersonCommand, ListPersonCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listPersonCommand, String.format(ListPersonCommand.MESSAGE_SUCCESS, " unarchived"), model);
     }
 
     @Test
