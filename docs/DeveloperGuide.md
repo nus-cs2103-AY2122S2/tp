@@ -216,11 +216,17 @@ The table below summarises the 15 different tracking commands:
 
 The add mechanism implements the following sequence and interactions for the method call execute("add NEW_PERSON_TAGS") on a LogicManager object where NEW_PERSON_TAGS refers to the tags of a person to be added.
 
+#### What is the add feature
+
+The add feature allows users to add a student contact to the Tracey database with the specified details. 
+
 The original AB3 implementation of the add feature only had a selected general few tags to be used (name, email, address, phone, email). To address our target users for this application, we added the tags block, faculty, matriculation number and covid status.
 
 In order to accommodate this new fields, we added new attributes into the `Person` Class and also created `Block`, `Faculty`, `MatriculationNumber` and `CovidStatus` classes.
 
 This also required changes to `CLISyntax` to include the new prefixes for the added classes.
+
+These tags are compulsory: `Name`,`Block`, `Phone`, `Email`, `Address` `Faculty`, `MatriculationNumber` and `CovidStatus`
 
 **Path Execution of Add Feature:**
 ![AddFeatureActivityDiagram](images/AddFeatureActivityDiagram.png)
@@ -252,8 +258,43 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
 
-Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
+Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person does not exist, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Add Command.
 
+### Delete feature
+
+The delete mechanism implements the following sequence and interactions for the method call execute("delete INDEX") where INDEX refers to the index of the individual displayed in the result display.
+
+#### What is the delete feature
+
+The delete feature allows users to delete a student contact from the Tracey database.
+
+The `delete` command is as follows: 
+
+* `delete INDEX`
+
+**Path Execution of Delete Feature:**
+
+![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
+
+There are three possible execution paths for the delete command
+
+1. User provides an invalid delete command input <br> This results in a parse exception
+2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
+3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
+
+**Structure of Delete Feature:**
+
+![DeleteClassDiagram](images/DeleteClassDiagram.png)
+
+The class diagram above depicts the structure of `DeleteCommand`. As per any Command class, DeleteCommand needs to extend the abstract class Command.
+
+**Interaction of objects when Delete Command is executed:**
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+When a user inputs a delete command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `DeleteCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `DeleteCommand` object is instantiated.
+
+Following this, `LogicManager` will call the `execute()` method of the `DeleteCommand` object. In this method, `getFilteredPersonList()` of the `ModelManager` class is called. Then `deletePerson(Person)` method of the `Model` class will be called, deleting the student from the database.  Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Delete Command.
 
 ### Summarise feature
 
@@ -370,7 +411,7 @@ The help feature opens up a separate window that contains a simple user guide fo
 
 The `help` command is as follows:
 
-`help`
+* `help`
 
 The user can choose when to execute the `help` command.
 
@@ -548,7 +589,7 @@ The filter feature allows users to retrieve a list of specific students, filteri
 
 The `filter` command is as follows:
 
-`filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
+* `filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
 
 The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
 
@@ -603,7 +644,7 @@ The email feature opens up a separate window containing the emails of the studen
 
 The `email` command is as follows:
 
-`email`
+* `email`
 
 The user can choose when to execute the email command.
 
@@ -645,7 +686,7 @@ The exit feature allows users to exit from Tracey after they finish with it.
 
 The `exit` command is as follows:
 
-`exit`
+* `exit`
 
 The user can choose when to exit the programme <br>
 
@@ -678,7 +719,7 @@ The redo feature allows users to reverse an `undo` command.
 
 The `undo` command is as follows:
 
-`undo`
+* `undo`
 
 Calling this command undoes only the last executed add, edit or delete command, and can only be used after executing an add, edit, or delete command.
 
@@ -688,7 +729,7 @@ This command cannot be used in succession to undo previously executed commands b
 
 The `redo` command is as follows:
 
-`redo`
+* `redo`
 
 Calling this command reverses only the last executed undo command, and can only be used after executing an undo command.
 
@@ -796,7 +837,7 @@ Inside this `archive` folder will contain subdirectories named after the user's 
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
 
 The `archive` command is as follows:
-`archive`
+* `archive`
 
 #### <ins>How the feature is implemented<ins/>
 The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
@@ -844,7 +885,7 @@ This feature allows the user to resize the result display window in the case the
 which displays quite a long result feedback text.
 
 The `resize` command is as follows:
-`resize 1`
+* `resize 1`
 
 This feature provides the user with three different resizing options to choose from, which are `1`, `2` and `3` with each number being a multiplier of the default result display window size (1 being the default size).
 

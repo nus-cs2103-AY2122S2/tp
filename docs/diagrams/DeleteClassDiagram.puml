@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(model : Model) : CommandResult
+}
+
+interface Model <<interface>> {
+    + deletePerson(Person) : void
+}
+
+class ModelManager implements Model{
+    -addressBook : AddressBook
+}
+
+
+class DeleteCommand {
+    /' Fields '/
+    - targetIndex: Index
+
+    /' Methods '/
+    + execute(model : Model) : CommandResult
+    + equals(other : Object) : boolean
+}
+
+class DeleteCommandParser {
+    +parse(String) : DeleteCommand
+}
+
+DeleteCommand <.- DeleteCommandParser
+ModelManager <-- DeleteCommand
+"{abstract}\nCommand" <|-- DeleteCommand
+@enduml
+
+
+@enduml
