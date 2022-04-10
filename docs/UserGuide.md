@@ -280,8 +280,12 @@ in the following format: dd-MM-yyyy HH:mm.
 
 # Demo Use Cases <a id="demos"></a>
 
-:information-source: Note that all these demos are done in the past, as such do remember to
+<div markdown="block" class="alert alert-info">
+
+:information_source: Note that all these demos are done in the past, as such do remember to
 update the reminder date if you wish to follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
+
+</div>
 
 ## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
 
