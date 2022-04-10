@@ -62,10 +62,6 @@ public class AddInterviewCommand extends AddCommand {
             throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
         }
 
-        if (applicantInInterview.isHired()) {
-            throw new CommandException(Messages.MESSAGE_APPLICANT_ALREADY_HIRED);
-        }
-
         List<Position> lastShownPositionList = model.getFilteredPositionList();
         if (positionIndex.getZeroBased() >= lastShownPositionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_POSITION_DISPLAYED_INDEX);

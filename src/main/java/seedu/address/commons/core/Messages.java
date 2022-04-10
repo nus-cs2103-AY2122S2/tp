@@ -20,5 +20,4 @@ public class Messages {
             + " a current interview in the address book. Interviews must be "
             + "at least 1 hour apart for the same candidate.";
     public static final String MESSAGE_APPLICANT_SAME_POSITION = "%1$s already has an interview for %2$s";
-    public static final String MESSAGE_APPLICANT_ALREADY_HIRED = "This applicant is already hired";
 }
