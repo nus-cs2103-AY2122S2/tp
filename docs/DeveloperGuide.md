@@ -1309,12 +1309,16 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
-* **Schedule**: The part of ContaX that keeps track of Appointments.
+* **Schedule**: The part of ContaX that keeps track of Appointments
+* * **Contact** and **Person**: These 2 terms are used interchangably, and refer to a single record in the Address Book
+* **Appointment**: Refers to a single record in the Schedule
+* **Appointment Slot**: Refers to an empty time range in the Schedule
 * **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications
 * **Onboarding Guide**: The quick start guide to ContaX
 * **Disjoint Appointments**: Appointments are disjoint if the time periods they span do not overlap with each other, that is, one appointment starts after the other appointment ends
 * **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
 * **Natural Ordering**: The order in which objects should be arranged
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1430,6 +1434,38 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimensions will not go above `700x400`.
+
+<div style="page-break-after: always;"></div>
+
+### Sample Commands
+
+1. Launch the application and type any of the commands below into the input box. The table lists the expected action of the command.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** This section only lists a few complex commands with arguments. For more information on each of the commands, refer to the [user guide](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html).
+
+</div>
+
+| **Command**                                                                                       | **Expected Action**                                            |
+|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `addperson n/Johnny Ong p/12345678 e/sample@domain.com a/123 Chestnut Drive t/friend t/colleague` | Adds a new contact called Johnny Ong                           |
+| `deleteperson 1`                                                                                  | Deletes the contact at index 1                                 |
+| `editperson 1 n/James Lee`                                                                        | Changes the name of the contact at index 1 to James Lee        |
+| `findperson James Jake`                                                                           | Finds contacts whose name contains James or Jake               |
+| `addtag n/Clients`                                                                                | Adds a new tag called Clients                                  |
+| `edittag 1 t/Blocked`                                                                             | Edits the tag at index 1 to be named Blocked                   |
+| `deletetag 1`                                                                                     | Deletes the tag at index 1                                     |
+| `addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`                                                | Adds an appointment called Call Bob                            |
+| `deleteappt 1`                                                                                    | Deletes the appointment at index 1                             |
+| `editappt 1 n/Call Boss`                                                                          | Changes the name of the appointment at index 1 to Call Boss    |
+| `apptbetween sd/21-10-2022`                                                                       | List all appointments from 21 october 2022                     |
+| `freebetween l/40`                                                                                | Lists empty slots in the schedule that at at least 1 hour long |
+| `findappt Meeting`                                                                                | Find appointments that contain the word Meeting in the name    |
+| `batch editperson p/87654321 by/phone =/12345678`                                                 | Edits all persons whose phone numbers are 12345678             |
+| `range editperson p/87654321 from/1 to/10`                                                        | Edits all persons from index 1 to 10                           |
+| `chain editappt 1 l/360 && listappt`                                                              | Edits the appointment at index 1 and lists all appointments    |
+
 
 <div style="page-break-after: always;"></div>
 
