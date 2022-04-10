@@ -345,6 +345,8 @@ After the user input the sort command, `SortCommandParser` will parse the comman
 
 <img src="images/SortShowDiagram.png">
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram summarizes what happens when a user executes a `SortCommand`, in this case, sort without any prefixes:
 <img src="images/SortSequenceDiagram.png">
 
@@ -1091,6 +1093,8 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Suggesting a show
 
