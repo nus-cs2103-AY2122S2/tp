@@ -485,7 +485,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
          updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
-11. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
+10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
 <img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
 
