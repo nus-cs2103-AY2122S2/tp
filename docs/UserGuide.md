@@ -349,6 +349,8 @@ Format `upload INDEX [i/FilePath:description]`
 
 Opens a new window that displays the images associated to a client.
 
+![images/user-guide/viewImageWindow.png](images/user-guide/viewImageWindow.png)
+
 Format `viewimage INDEX`
 
 

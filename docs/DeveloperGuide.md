@@ -56,7 +56,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-###UI Component
+### UI Component
 
 The **API** of this component is specified in `Ui.java`
 
@@ -234,7 +234,7 @@ Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parses 
 view all the `UserImage` of the `Person`.
 
 Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
-The `viewImageWindow` is then launched after it retrieves the set from `model`
+The `viewImageWindow` is then launched after it retrieves the set from `model` using `logic`
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
