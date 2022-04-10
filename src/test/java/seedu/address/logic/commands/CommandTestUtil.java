@@ -31,6 +31,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_MULTIPLE_NAME = "Alice Bob";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -39,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_INSURANCE_PACKAGE_BOB = "Silver Pro";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+
     public static final ArrayList<Tag> VALID_TAG_HUSBAND = new ArrayList<Tag>(Arrays.asList(
                 new Tag("Husband", Priority.PRIORITY_3)));
     public static final String VALID_TAG_COMMAND_HUSBAND = "Husband :p3"; // change when needed
@@ -47,6 +49,11 @@ public class CommandTestUtil {
     public static final String VALID_TAG_COMMAND_FRIEND = "Friend :p4";
     public static final ArrayList<Tag> VALID_MULTIPLE_TAGS = new ArrayList<Tag>(Arrays.asList(
             new Tag("Husband", Priority.PRIORITY_3), new Tag("Friend", Priority.PRIORITY_4)));
+    public static final ArrayList<Tag> VALID_DIFFERENT_PRIO_ONE_TAG = new ArrayList<Tag>(Arrays.asList(
+            new Tag("Friend", Priority.PRIORITY_2), new Tag("Friend", Priority.PRIORITY_4)));
+    public static final ArrayList<Tag> VALID_DIFFERENT_PRIO_MULTI_TAG = new ArrayList<Tag>(Arrays.asList(
+            new Tag("Husband", Priority.PRIORITY_2), new Tag("Husband", Priority.PRIORITY_3),
+            new Tag("Friend", Priority.PRIORITY_2), new Tag("Friend", Priority.PRIORITY_3)));
     public static final ArrayList<Tag> VALID_NO_TAGS = new ArrayList<Tag>();
     public static final ArrayList<Tag> VALID_TAG_NULL_PRIO = new ArrayList<Tag>(Arrays.asList(
         new Tag("Null Priority", null)));
@@ -57,6 +64,9 @@ public class CommandTestUtil {
             + " " + PREFIX_ADDRESS + "Jurong Clementi";
     public static final String MULTIPLE_FIELDS_FIND_WHITESPACE = " " + PREFIX_NAME + "\n Alice \n \t Bob \t"
             + " " + PREFIX_ADDRESS + " \n Jurong \n \t Clementi   \t";
+
+    public static final List<String> VALID_MULTIPLE_NAME_KEYWORDS = Arrays.asList("Alice", "Bob");
+    public static final List<String> VALID_MULTIPLE_ADDRESS_KEYWORDS = Arrays.asList("Jurong", "Clementi");
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -85,6 +95,10 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_COMMAND = "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + INVALID_TAG_COMMAND;
+
+    public static final String INVALID_EMPTY_FIND_ARG = "     ";
+    public static final String INVALID_SINGLE_EMPTY_FIND_FIELD = " n/";
+    public static final String INVALID_MULTIPLE_EMPTY_FIND_FIELD = " n/ i/ a/";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

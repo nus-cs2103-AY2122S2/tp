@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a person to the address book.
+ * Adds tag to specified person in the address book.
  */
 public class AddTagCommand extends Command {
 
@@ -22,7 +22,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tag to the client identified "
             + "by the index number used in the displayed person list. "
-            + "Only one tag can be added at a time. "
+            + "Only one tag can be added at a time. Duplicates cannot be added. "
             + "Parameters: INDEX (must be a positive integer) + TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "owes money :p3 ";
@@ -68,7 +68,7 @@ public class AddTagCommand extends Command {
      * @param personToEdit Person to add tag to
      * @param tagToAdd Tag to be added
      * @return Person with the tag added
-     * @throws CommandException
+     * @throws CommandException if there is a duplicate tag already existing
      */
     private Person addTagToPerson(Person personToEdit, Tag tagToAdd) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);

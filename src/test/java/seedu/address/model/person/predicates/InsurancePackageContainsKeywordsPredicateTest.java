@@ -2,6 +2,7 @@ package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PACKAGE_AMY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,20 +46,20 @@ public class InsurancePackageContainsKeywordsPredicateTest {
     public void test_insurancePackageContainsKeywords_returnsTrue() {
         // One keyword
         InsurancePackageContainsKeywordsPredicate predicate =
-                new InsurancePackageContainsKeywordsPredicate(Collections.singletonList("Undecided"));
-        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage("Undecided Golden").build()));
+                new InsurancePackageContainsKeywordsPredicate(Collections.singletonList("Golden"));
+        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
 
         // Multiple keywords
-        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Undecided", "Golden"));
-        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage("Undecided Golden").build()));
+        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Golden", "Plus"));
+        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
 
         // Only one matching keyword
         predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Golden", "Premium"));
-        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage("Golden Undecided").build()));
+        assertTrue(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
 
         // Mixed-case keywords
-        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("uNdEcIdEd", "gOlDeN"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Undecided Golden").build()));
+        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("gOlDeN", "pLuS"));
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_INSURANCE_PACKAGE_AMY).build()));
     }
 
     @Test
@@ -66,16 +67,21 @@ public class InsurancePackageContainsKeywordsPredicateTest {
         // Zero keywords
         InsurancePackageContainsKeywordsPredicate predicate =
                 new InsurancePackageContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage("Golden").build()));
+        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
 
         // Non-matching keyword
         predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Undecided"));
-        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage("Golden Premium").build()));
+        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
+
+        // Multiple Non-matching keyword
+        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Undecided", "Dragon"));
+        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
 
         // Keywords match phone, email and address, but does not match insurance package
         predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
-                "Main", "Street", "Golden"));
+                "Main", "Street", "Undecided"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withInsurancePackage("Undecided").build()));
+                .withEmail("alice@email.com").withAddress("Main Street")
+                .withInsurancePackage(VALID_INSURANCE_PACKAGE_AMY).build()));
     }
 }

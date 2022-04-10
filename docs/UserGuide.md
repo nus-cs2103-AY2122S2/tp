@@ -64,7 +64,7 @@ only packages that existing people in ClientConnect have.
 
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/important`, `t/important t/discounted` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/important`, `t/important :p2 t/needs help :p1` etc.
 
 
 * Parameters can be in any order.<br>
@@ -78,8 +78,20 @@ only packages that existing people in ClientConnect have.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+**Notes about the tags:**<br>
+* Each tag has two components- a tag name, and a priority level.
+* There are 4 priority levels, with 1 being the highest and 4 being the lowest. However, a tag doesn't necessarily have to have a priority level.
+* The tag's colour depends on the priority level.
+* The priority level of a tag is indicated along with the tag name when you input the `TAG` parameter in commands. To indicate the priority level, simply follow the tag name by typing ` :p[1/2/3/4]` after the tag name
+* For example, `owes money` would create a tag with tag name "owes money", and no priority level.
+* However, `owes money :p3` would create a tag with tag name "owes money", and priority level 3.
+
+
+**Notes about the insurance packages:**<br>
+
 ### Viewing help : `help`
 ![Help button image](images/helpButtonUG.png)
+
 Shows a message explaining how to access the ClientConnect help page
 
 Format: `help`
@@ -93,15 +105,20 @@ On clicking Help, you will see this as a result:
 ![Help window image](images/helpWindowUG.png)
 
 ------------------------------------------------------------------------------------
-### Viewing Packages
+### Viewing Packages : `listp`
 ![Package button image](images/packageButtonUG.png)
+
 Opens a new window that shows the various insurance packages and their description
 
-Click on the Package button to view a dropdown window displaying a "Package" button.
+Click on the Package button to view a dropdown window displaying a "Package" button. Alternatively, you could type in `listp`.
 
-On clicking Package, you will see this as a result:
+Format: `listp`
 
-![Package window image](images/packageWindowUG.png)
+On clicking Package or typing `listp`, you will see this as a result:
+
+![result1 after 'listp'](images/listInsurancePackage1UG.png)
+
+![result2 after 'listp'](images/listInsurancePackage2UG.png)
 
 ------------------------------------------------------------------------------------
 ### Adding a person: `add`
@@ -130,7 +147,7 @@ Notes:
 ![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
 Adds a tag to the specified person in ClientConnect
 
-Format: `addTag INDEX TAG …​`
+Format: `addTag INDEX TAG`
 
 Examples:
 * `addTag 3 friend of the family`
@@ -142,7 +159,8 @@ After adding:
 
 Notes:
 * Adds tag to the person at the specified `INDEX`.
-* Only one tag can be added at a time
+* Only one tag can be added at a time.
+* Duplicate tags (same tagname and priority level) cannot be added
 
 ------------------------------------------------------------------------------------
 ### Listing all persons : `list`
@@ -177,7 +195,7 @@ Notes:
 ![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
 Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect
 
-Format: `editTag INDEX TAG_NUMBER TAG …​`
+Format: `editTag INDEX TAG_NUMBER TAG`
 
 Examples:
 * `editTag 3 1 friend of the family`
@@ -191,6 +209,7 @@ Notes:
 * Edits person at the specified `INDEX`.
 * Edits person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be edited at a time.
+* The edited tag cannot have a duplicate tag (same tagname and priority level) in the existing tag list.
 
 ------------------------------------------------------------------------------------
 ### Locating persons by field: `find`
@@ -254,7 +273,7 @@ After `delete 2`:
 ### Deleting a tag of a person: `deleteTag`
 Deletes the specified tag of the specified person in ClientConnect
 
-Format: `deleteTag INDEX TAG_NUMBER …​`
+Format: `deleteTag INDEX TAG_NUMBER`
 
 Examples:
 * `deleteTag 3 1`
@@ -338,16 +357,6 @@ Notes:
 * If the packages window was open before a package is deleted, you will have to close and reopen the window 
 to view the change.
 * If a package to be deleted is used by at least one person, it will not be deleted.
-
-------------------------------------------------------------------------------------
-### Shows all insurance package: `listp`
-Displays all your insurance packages in ClientConnect
-
-Format: `listp`
-
-![result1 after 'listp'](images/listInsurancePackage1UG.png)
-
-![result2 after 'listp'](images/listInsurancePackage2UG.png)
 
 ------------------------------------------------------------------------------------
 ### Importing ClientConnect CSV data: `import`
@@ -449,16 +458,12 @@ After `prioList`:
 Note that:
 - Clients with multiple tags have the priority level of the highest priority out of all of their tags.
 - Clients without any tags are filtered below all other clients, even those with only 'No Priority' tags.
-<p>
 
 Format: `prioList`
-
 
 Examples:
 1. `clip n/John Doe`
 2. `clip 1`
-
-</details>
 
 ------------------------------------------------------------------------------------
 ### Exiting the program : `exit`
@@ -470,29 +475,29 @@ Format: `exit`
 
 ## Command summary
 
-| Action               | Format, Examples                                                                                                                                                                                        |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action               | Format, Examples                                                                                                                                                                                     |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Person**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague` |
 | **Edit Person**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| **Delete Person**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                     |
-| **Add Tag**          | `addTag INDEX TAG`<br> e.g., `addTag 3 owes money :p2`                                                                                                                                                  |
-| **Edit Tag**         | `editTag INDEX TAG_NUMBER TAG`<br> e.g.,`edit 2 3 friend of family`                                                                                                                                     |
-| **Delete Tag**       | `deleteTag INDEX TAG_NUMBER` <br> e.g.,`deleteTag 3 2`                                                                                                                                                  |
-| **Add Package**      | `addp i/PACKAGE_NAME d/PACKAGE_DESC`<br> e.g., `addp i/Golden Package d/Covers everything!`                                                                                                             |
-| **Edit Package**     | `editp i/PACKAGE_NAME d/NEW_PACKAGE_DESC`<br> e.g., `editp i/Golden Package d/Covers everything but death.`                                                                                             |
-| **Delete Package**   | `deletep i/PACKAGE_NAME` <br> e.g.,`deletep i/Golden Package`                                                                                                                                           |
-| **Find**             | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                                      |
-| **Clip**             | `clip n/NAME`or `clip INDEX` <br> e.g., `clip n/John Doe` or `clip 1`                                                                                                                                   |
-| **List**             | `list`                                                                                                                                                                                                  |
-| **List Packages**    | `listp`                                                                                                                                                                                                 |
-| **Help**             | `help`                                                                                                                                                                                                  |
-| **Import from CSV**  | `import`                                                                                                                                                                                                |
-| **Export to CSV**    | `export`                                                                                                                                                                                                |
-| **Clear**            | `clear`                                                                                                                                                                                                 |
-| **Undo**             | `undo`                                                                                                                                                                                                  |
-| **Redo**             | `redo`                                                                                                                                                                                                  |
-| **Sort by priority** | `prioList`                                                                                                                                                                                              |
-| **Exit**             | `exit`                                                                                                                                                                                                  |
+| **Delete Person**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                  |
+| **Add Tag**          | `addTag INDEX TAG`<br> e.g., `addTag 3 owes money :p2`                                                                                                                                               |
+| **Edit Tag**         | `editTag INDEX TAG_NUMBER TAG`<br> e.g.,`edit 2 3 friend of family`                                                                                                                                  |
+| **Delete Tag**       | `deleteTag INDEX TAG_NUMBER` <br> e.g.,`deleteTag 3 2`                                                                                                                                               |
+| **Add Package**      | `addp i/PACKAGE_NAME d/PACKAGE_DESC`<br> e.g., `addp i/Golden Package d/Covers everything!`                                                                                                          |
+| **Edit Package**     | `editp i/PACKAGE_NAME d/NEW_PACKAGE_DESC`<br> e.g., `editp i/Golden Package d/Covers everything but death.`                                                                                          |
+| **Delete Package**   | `deletep i/PACKAGE_NAME` <br> e.g.,`deletep i/Golden Package`                                                                                                                                        |
+| **Find**             | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                                   |
+| **Clip**             | `clip n/NAME`or `clip INDEX` <br> e.g., `clip n/John Doe` or `clip 1`                                                                                                                                |
+| **List**             | `list`                                                                                                                                                                                               |
+| **List Packages**    | `listp`                                                                                                                                                                                              |
+| **Help**             | `help`                                                                                                                                                                                               |
+| **Import from CSV**  | `import`                                                                                                                                                                                             |
+| **Export to CSV**    | `export`                                                                                                                                                                                             |
+| **Clear**            | `clear`                                                                                                                                                                                              |
+| **Undo**             | `undo`                                                                                                                                                                                               |
+| **Redo**             | `redo`                                                                                                                                                                                               |
+| **Sort by priority** | `prioList`                                                                                                                                                                                           |
+| **Exit**             | `exit`                                                                                                                                                                                               |
 
 Fields:
 * `n/`: name

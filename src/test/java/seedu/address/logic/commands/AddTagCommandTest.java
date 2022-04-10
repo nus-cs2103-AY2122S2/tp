@@ -21,12 +21,12 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddTagCommandTest {
-    private final Tag tag1 = VALID_TAG_FRIEND.get(0);
-    private final Tag tag2 = VALID_TAG_HUSBAND.get(0);
+    static final Tag TAG_1 = VALID_TAG_FRIEND.get(0);
+    static final Tag TAG_2 = VALID_TAG_HUSBAND.get(0);
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTagCommand(null, tag1));
+        assertThrows(NullPointerException.class, () -> new AddTagCommand(null, TAG_1));
     }
 
     @Test
@@ -39,11 +39,11 @@ public class AddTagCommandTest {
         Person person = new PersonBuilder().build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
-        Tag tagToBeAdded = tag2;
+        Tag tagToBeAdded = TAG_2;
 
         Person tagAddedPerson = new PersonBuilder().build();
         ArrayList<Tag> tagList = tagAddedPerson.getTags();
-        boolean b = tagList.add(tagToBeAdded);
+        boolean wasAdded = tagList.add(tagToBeAdded);
         tagAddedPerson.setTags(tagList);
 
         ModelManager modelManager = new ModelManager();
@@ -57,7 +57,7 @@ public class AddTagCommandTest {
     @Test
     public void execute_indexOutOfBounds_throwsException() throws Exception {
         Index index = Index.fromOneBased(100);
-        Tag tagToBeAdded = tag1;
+        Tag tagToBeAdded = TAG_1;
         AddTagCommand addTagCommand = new AddTagCommand(index, tagToBeAdded);
 
         Person person = new PersonBuilder().build();
@@ -71,12 +71,12 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_duplicateTagAlreadyExists_throwsException() throws Exception {
-        ArrayList<Tag> personTagList = new ArrayList<>(List.of(tag1, tag2));
+        ArrayList<Tag> personTagList = new ArrayList<>(List.of(TAG_1, TAG_2));
         Person person = new PersonBuilder().withTags(personTagList).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
 
-        Tag alreadyPresentTag = tag2;
+        Tag alreadyPresentTag = TAG_2;
 
         ModelManager modelManager = new ModelManager();
         modelManager.setAddressBook(addressBookBuilder.build());
@@ -92,12 +92,12 @@ public class AddTagCommandTest {
         Index index1 = Index.fromZeroBased(1);
         Index index2 = Index.fromZeroBased(5);
 
-        assertEquals(new AddTagCommand(index1, tag1), new AddTagCommand(index1, tag1)); // same values
+        assertEquals(new AddTagCommand(index1, TAG_1), new AddTagCommand(index1, TAG_1)); // same values
 
-        assertNotEquals(new AddTagCommand(index1, tag1), "1"); //different types
-        assertNotEquals(new AddTagCommand(index1, tag1),
-                new AddTagCommand(index2, tag1)); //different index
-        assertNotEquals(new AddTagCommand(index1, tag1),
-                new AddTagCommand(index1, tag2)); //different tag
+        assertNotEquals(new AddTagCommand(index1, TAG_1), "1"); //different types
+        assertNotEquals(new AddTagCommand(index1, TAG_1),
+                new AddTagCommand(index2, TAG_1)); //different index
+        assertNotEquals(new AddTagCommand(index1, TAG_1),
+                new AddTagCommand(index1, TAG_2)); //different tag
     }
 }

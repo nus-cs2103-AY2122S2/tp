@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
@@ -11,7 +14,6 @@ import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose fields contain any of "
@@ -24,6 +26,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
     private final CombineContainsKeywordsPredicate predicate;
+    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
     public FindCommand(CombineContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -33,6 +36,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        logger.info("Model updated filteredPersonList with predicate");
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

@@ -1,11 +1,21 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_PACKAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.util.Pair;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,6 +24,13 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.InsurancePackageContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.TagsContainsKeywordsPredicate;
 import seedu.address.model.tag.Priority;
 import seedu.address.model.tag.Tag;
 
@@ -21,8 +38,8 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -63,10 +80,11 @@ public class ParserUtil {
      * Parses {@code numberAndWords} into an {@code Pair<Integer, String>} and returns it. Leading and trailing
      * whitespaces will be trimmed. Must contain a number at the beginning and then words.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified integer is invalid (not non-zero unsigned integer).
      */
     public static Pair<Integer, String> parseOutNumber(String numberAndWords) throws ParseException {
         String trimmedInput = numberAndWords.trim();
+
         // splitIndexAndRemainingString[0] contains number, splitIndexAndRemainingString[2] contains remaining string
         String[] splitIndexAndRemainingString;
         Integer number;
@@ -182,9 +200,9 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String tag} into a {@code Pair<String, Priority>}.
-     * Seperates the priority from the tag entered
+     * Separates the priority from the tag entered.
      */
-    public static Pair<String, Priority> parsePriority(String tag) throws ParseException {
+    public static Pair<String, Priority> parsePriority(String tag) {
         requireNonNull(tag);
         Priority priority = null;
         String tagName = "";
@@ -241,5 +259,55 @@ public class ParserUtil {
             tagList.add(parseTag(tagName));
         }
         return tagList;
+    }
+
+    /**
+     * Parses the arguments given for the find field into a List of String
+     */
+    public static List<String> parseFindKeywords(String input) {
+        return Arrays.asList(input.split("\\s+"));
+    }
+
+    /**
+     * Parses the arguments created in {@code ArgumentMultimap} to generate a List of
+     * {@code FieldContainsKeywordsPredicate}
+     */
+    public static List<FieldContainsKeywordsPredicate> parseArgMap(ArgumentMultimap argMultimap) {
+        List<FieldContainsKeywordsPredicate> predicatesList = new ArrayList<>();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            List<String> nameKeywords = ParserUtil.parseFindKeywords((argMultimap.getValue(PREFIX_NAME).get()));
+            NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+            predicatesList.add(namePredicate);
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            List<String> phoneKeywords = ParserUtil.parseFindKeywords(argMultimap.getValue(PREFIX_PHONE).get());
+            PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
+            predicatesList.add(phonePredicate);
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            List<String> emailKeywords = ParserUtil.parseFindKeywords(argMultimap.getValue(PREFIX_EMAIL).get());
+            EmailContainsKeywordsPredicate emailPredicate = new EmailContainsKeywordsPredicate(emailKeywords);
+            predicatesList.add(emailPredicate);
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            List<String> addressKeywords = ParserUtil.parseFindKeywords(argMultimap.getValue(PREFIX_ADDRESS).get());
+            AddressContainsKeywordsPredicate addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
+            predicatesList.add(addressPredicate);
+        }
+        if (argMultimap.getValue(PREFIX_INSURANCE_PACKAGE).isPresent()) {
+            List<String> insurancePackageKeywords =
+                    ParserUtil.parseFindKeywords(argMultimap.getValue(PREFIX_INSURANCE_PACKAGE).get());
+            InsurancePackageContainsKeywordsPredicate insurancePackagePredicate =
+                    new InsurancePackageContainsKeywordsPredicate(insurancePackageKeywords);
+            predicatesList.add(insurancePackagePredicate);
+        }
+        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            List<String> tagsKeywords =
+                    ParserUtil.parseFindKeywords((String.join(" ", argMultimap.getAllValues(PREFIX_TAG))));
+            TagsContainsKeywordsPredicate tagsPredicate = new TagsContainsKeywordsPredicate(tagsKeywords);
+            predicatesList.add(tagsPredicate);
+        }
+        logger.info("predicatesList for FindCommand created");
+        return predicatesList;
     }
 }

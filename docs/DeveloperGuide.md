@@ -2,8 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-# Developer Guide
----
 
 Table of Contents
   * Acknowledgements
@@ -569,12 +567,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* aThere is no command to reo.
+* There is no command to redo.
 
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
-    
+  
+**Use case: Clip a person's information to clipboard**
+
+**MSS**
+
+1. User requests to clip a person
+2. User specifies the person to clip
+3. AddressBook copies that person's information to user's system clipboard
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The specified person cannot be found.
+
+    * 2a1. AddressBook shows an error message letting the user know what went wrong.
+
+      Use case ends.
+      
+**Use case: Display client list by priority level of tags**
+
+**MSS**
+
+1. User requests to sort and display client list by priority level of tags
+2. AddressBook displays sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command was inputted wrongly.
+
+    * 1a1. AddressBook shows an error message letting the user know what went wrong.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.

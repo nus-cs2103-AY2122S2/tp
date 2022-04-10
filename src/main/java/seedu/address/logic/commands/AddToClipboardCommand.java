@@ -84,6 +84,9 @@ public class AddToClipboardCommand extends Command {
             return new CommandResult(MESSAGE_FAILURE);
         }
 
+        //@@author jetrz-reused
+        //Reused from https://stackoverflow.com/questions/6710350/copying-text-to-the-clipboard-using-java
+        //with modifications
         //Filter returns a contact, copy that contact to clipboard
         try {
             StringSelection resultToString = new StringSelection(filterResult.toString());
@@ -95,6 +98,7 @@ public class AddToClipboardCommand extends Command {
         }
         logger.log(Level.INFO, "Clip command executed successfully!");
         return new CommandResult(MESSAGE_SUCCESS);
+        //@@author
     }
 
     @Override

@@ -3,8 +3,10 @@
 
 box Parse Find Command Logic LOGIC_COLOR_T1
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
 participant "a:ArgumentMultiMap" as ArgumentMultimap LOGIC_COLOR
+participant "c:CombineContainsKeywordsPredicate" as CombineContainsKeywordsPredicate LOGIC_COLOR
 end box
 
 [-> FindCommandParser : parse(" a/Clementi t/friends")
@@ -34,6 +36,19 @@ deactivate ArgumentTokenizer
 
 ArgumentTokenizer --> FindCommandParser : a
 
-FindCommandParser -> : FindCommand(predicate)
+FindCommandParser -> ParserUtil : parseArgMap(a)
+activate ParserUtil
+
+ParserUtil --> FindCommandParser : predicatesList
+deactivate ParserUtil
+
+create CombineContainsKeywordsPredicate
+FindCommandParser -> CombineContainsKeywordsPredicate : CombineContainsKeywordsPredicate(predicatesList)
+activate CombineContainsKeywordsPredicate
+
+CombineContainsKeywordsPredicate --> FindCommandParser : c
+deactivate CombineContainsKeywordsPredicate
+
+FindCommandParser -> : FindCommand(c)
 
 @enduml

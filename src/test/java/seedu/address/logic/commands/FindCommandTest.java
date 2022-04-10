@@ -122,6 +122,56 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_zeroKeywords_multipleFieldsNoPersonFound() {
+        PredicatesListBuilder predicatesListBuilder = new PredicatesListBuilder();
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(" ");
+        List<FieldContainsKeywordsPredicate> predicatesList =
+                predicatesListBuilder
+                        .addNamePredicate(namePredicate)
+                        .addPhonePredicate(phonePredicate)
+                        .build();
+        CombineContainsKeywordsPredicate combinePredicate = new CombineContainsKeywordsPredicate(predicatesList);
+        FindCommand command = new FindCommand(combinePredicate);
+        expectedModel.updateFilteredPersonList(combinePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneKeyword_onePersonFound() {
+        PredicatesListBuilder predicatesListBuilder = new PredicatesListBuilder();
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz");
+        List<FieldContainsKeywordsPredicate> predicatesList =
+                predicatesListBuilder.addNamePredicate(namePredicate).build();
+        CombineContainsKeywordsPredicate combinePredicate = new CombineContainsKeywordsPredicate(predicatesList);
+        FindCommand command = new FindCommand(combinePredicate);
+        expectedModel.updateFilteredPersonList(combinePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneKeyword_multipleFieldsOnePersonFound() {
+        PredicatesListBuilder predicatesListBuilder = new PredicatesListBuilder();
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz");
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate("95352563");
+        List<FieldContainsKeywordsPredicate> predicatesList =
+                predicatesListBuilder
+                        .addNamePredicate(namePredicate)
+                        .addPhonePredicate(phonePredicate)
+                        .build();
+        CombineContainsKeywordsPredicate combinePredicate = new CombineContainsKeywordsPredicate(predicatesList);
+        FindCommand command = new FindCommand(combinePredicate);
+        expectedModel.updateFilteredPersonList(combinePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         PredicatesListBuilder predicatesListBuilder = new PredicatesListBuilder();
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);

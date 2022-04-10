@@ -5,7 +5,7 @@ title: Tan Jie Wei's Project Portfolio Page
 
 ### Project: ClientConnect
 
-ClientConnect is a desktop client address book application for insurance agents to manage and keep track of their clietntele seamlesssly and efficiently. Custom tailored to suit the needs of insurance agents, ClientConnect surpasses other similar applications by offering features such as grouping of clients by packages, keyboard shortcuts, a gorgeous GUI, and more.
+ClientConnect is a desktop client address book application for insurance agents to manage and keep track of their clientele seamlessly and efficiently. Custom tailored to suit the needs of insurance agents, ClientConnect surpasses other similar applications by offering features such as grouping of clients by packages, keyboard shortcuts, a gorgeous GUI, and more.
 
 Given below are my contributions to the project.
 
