@@ -450,8 +450,8 @@ Actor: User
   Use case ends
 
 * 3a. The given index is invalid
-  * 3a1. REP displays an error message 
-    
+  * 3a1. REP displays an error message
+
     Use case resumes at step 2
 
 * 3b. REP detects error in details
@@ -619,7 +619,7 @@ Given below are instructions to test the app manually.
       Expected: The first client has a Reminder set. An orange label containing the sentence "meet client for home viewing" will appear on the first client. The result display will show that the first client has a Reminder successfully set.
    3. Test case: `remind 0 r/sign contract`
       Expected: No client has a Reminder set. Error details shown in the result display. List remains the same.
-   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0). 
+   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
       Expected: Similar to previous.
 2. Editing a Reminder of a client who has an existing Reminder
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. At least one of the clients listed has to have a Reminder set.
