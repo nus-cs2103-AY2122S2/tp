@@ -11,6 +11,7 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
+Class SchedulePanel
 Class XYZListPanel
 Class XYZCard
 Class StatusBarFooter
@@ -35,10 +36,12 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "4" XYZListPanel
+MainWindow *-down-> "1" SchedulePanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 MainWindow --> "0..5" PieChartWindow
 MainWindow --> "0..1" MonthlyCustomerChartWindow
+SchedulePanel --> "7" XYZListPanel
 
 XYZListPanel -down-> "*" XYZCard
 
@@ -47,6 +50,7 @@ MainWindow -left-|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 XYZListPanel --|> UiPart
+SchedulePanel --|> UiPart
 XYZCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
@@ -62,7 +66,12 @@ note right of [XYZListPanel]
     Booking, or Schedule.
 end note
 
-XYZListPanel -[hidden]left- PieChartWindow
+note right of [SchedulePanel]
+    SchedulePanel has 7 ScheduleListPanel.
+end note
+
+XYZListPanel -[hidden]left- SchedulePanel
+SchedulePanel -[hidden]left- PieChartWindow
 PieChartWindow -[hidden]left- MonthlyCustomerChartWindow
 MonthlyCustomerChartWindow -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
