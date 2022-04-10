@@ -23,7 +23,7 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
-
+    public static final String MESSAGE_DUPLICATE_LESSONS = "ClassGroup's lesson list contains duplicate lesson(s).";
     private final String classGroupId;
     private final String classGroupType;
     private final String moduleCode;
@@ -106,9 +106,16 @@ class JsonAdaptedClassGroup {
             modelStudents.add(sObj);
         }
 
-        final List<Lesson> modelLessons = new ArrayList<Lesson>();
+        final List<Lesson> modelLessons = new ArrayList<>();
+        if (lessons.size() != ClassGroup.NUM_OF_WEEKS) {
+            throw new IllegalValueException(ClassGroup.MESSAGE_INVALID_NUM_OF_LESSONS);
+        }
         for (JsonAdaptedLesson l : lessons) {
-            modelLessons.add(l.toModelType(studentList));
+            Lesson modelLesson = l.toModelType(studentList, modelStudents.asUnmodifiableObservableList());
+            if (modelLessons.stream().anyMatch(modelLesson::isSameLesson)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSONS);
+            }
+            modelLessons.add(modelLesson);
         }
 
         return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule, modelStudents, modelLessons);

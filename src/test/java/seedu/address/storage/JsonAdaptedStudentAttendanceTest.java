@@ -29,7 +29,7 @@ public class JsonAdaptedStudentAttendanceTest {
     @Test
     public void toModelType_validStudentAttendanceDetails_returnsStudentAttendance() throws Exception {
         JsonAdaptedStudentAttendance sa = new JsonAdaptedStudentAttendance(TypicalStudentAttendances.BENSON_ATTENDANCE);
-        assertEquals(TypicalStudentAttendances.BENSON_ATTENDANCE, sa.toModelType(students));
+        assertEquals(TypicalStudentAttendances.BENSON_ATTENDANCE, sa.toModelType(students, students));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class JsonAdaptedStudentAttendanceTest {
         JsonAdaptedStudentAttendance sa =
                 new JsonAdaptedStudentAttendance(INVALID_ID, VALID_ATTENDANCE_TRUE);
         String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students, students));
     }
 
     @Test
     public void toModelType_nullStudentId_throwsIllegalValueException() {
         JsonAdaptedStudentAttendance sa = new JsonAdaptedStudentAttendance(null, VALID_ATTENDANCE_TRUE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students, students));
     }
 
     @Test
@@ -52,14 +52,14 @@ public class JsonAdaptedStudentAttendanceTest {
         JsonAdaptedStudentAttendance sa =
                 new JsonAdaptedStudentAttendance(VALID_ID, INVALID_ATTTENDANCE);
         String expectedMessage = Attendance.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students, students));
     }
 
     @Test
     public void toModelType_nullAttendance_throwsIllegalValueException() {
         JsonAdaptedStudentAttendance sa = new JsonAdaptedStudentAttendance(VALID_ID, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> sa.toModelType(students, students));
     }
 
     @Test
@@ -67,6 +67,6 @@ public class JsonAdaptedStudentAttendanceTest {
         List<Student> studentsList = new ArrayList<>(Arrays.asList(TypicalStudents.ALICE));
         JsonAdaptedStudentAttendance sa =
                 new JsonAdaptedStudentAttendance(VALID_ID, VALID_ATTENDANCE_TRUE);
-        assertThrows(IllegalValueException.class, () -> sa.toModelType(studentsList));
+        assertThrows(IllegalValueException.class, () -> sa.toModelType(studentsList, students));
     }
 }

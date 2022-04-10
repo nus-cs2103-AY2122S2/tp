@@ -16,6 +16,7 @@ import seedu.address.model.studentattendance.StudentAttendance;
 class JsonAdaptedStudentAttendance {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "StudentAttendance's %s field is missing!";
+    public static final String UNENROLLED_STUDENT = "StudentAttendance's student is not enrolled in the class group!";
     private final String studentId;
     private final String isPresent;
 
@@ -43,10 +44,15 @@ class JsonAdaptedStudentAttendance {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted student attendance.
      */
-    public StudentAttendance toModelType(List<Student> studentList) throws IllegalValueException {
+    public StudentAttendance toModelType(List<Student> studentList, List<Student> classGroupStudentList)
+            throws IllegalValueException {
 
         final Student modelStudent = StorageUtil.getStudentByStudentId(studentList, studentId,
                 MISSING_FIELD_MESSAGE_FORMAT);
+
+        if (!classGroupStudentList.contains(modelStudent)) {
+            throw new IllegalValueException(UNENROLLED_STUDENT);
+        }
 
         if (isPresent == null) {
             throw new IllegalValueException(

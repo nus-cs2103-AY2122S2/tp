@@ -35,7 +35,7 @@ public class JsonAdaptedLessonTest {
     @Test
     public void toModelType_validLessonDetails_returnsLesson() throws Exception {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_WEEK_ID, studentAttendances);
-        assertEquals(TypicalLessons.LESSON2, lesson.toModelType(students));
+        assertEquals(TypicalLessons.LESSON2, lesson.toModelType(students, students));
     }
 
     @Test
@@ -43,14 +43,14 @@ public class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(INVALID_WEEK_ID, studentAttendances);
         String expectedMessage = WeekId.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
     public void toModelType_nullWeekId_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, studentAttendances);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, WeekId.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_WEEK_ID, new ArrayList<>(Arrays.asList(invalidSA)));
         String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class JsonAdaptedLessonTest {
                 new JsonAdaptedLesson(VALID_WEEK_ID, new ArrayList<>(Arrays.asList(invalidSA)));
         String expectedMessage = String.format(
                 JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_WEEK_ID, new ArrayList<>(Arrays.asList(invalidSA)));
         String expectedMessage = Attendance.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class JsonAdaptedLessonTest {
                 new JsonAdaptedLesson(VALID_WEEK_ID, new ArrayList<>(Arrays.asList(invalidSA)));
         String expectedMessage = String.format(
                 JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students));
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(students, students));
     }
 
     @Test
@@ -100,6 +100,6 @@ public class JsonAdaptedLessonTest {
                 new JsonAdaptedStudentAttendance(VALID_ID, VALID_ATTENDANCE_TRUE);
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_WEEK_ID, new ArrayList<>(Arrays.asList(sa)));
-        assertThrows(IllegalValueException.class, () -> lesson.toModelType(studentsList));
+        assertThrows(IllegalValueException.class, () -> lesson.toModelType(studentsList, students));
     }
 }
