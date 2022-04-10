@@ -16,7 +16,7 @@ especially for those who are teaching multiple classes/modules at the same time.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Quick start
+## 1. Quick start
 
 1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your Computer.
 
@@ -48,7 +48,7 @@ Here are some example commands you can try:
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Information about contacts in TAPA
+## 2. Information about contacts in TAPA
 
 Each contact in TAPA represents a student, who can have the following fields:
 
@@ -74,7 +74,7 @@ Each contact in TAPA represents a student, who can have the following fields:
 </div>
 
 
-## Features
+## 3. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -101,7 +101,7 @@ Each contact in TAPA represents a student, who can have the following fields:
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 </div>
 
-### Adding a student: `add`
+### 3.1 Adding a student: `add`
 
 Adds a student to TAPA.
 
@@ -133,7 +133,7 @@ Adds a student to TAPA.
 
 <br>
 
-### Deleting a student: `delete`
+### 3.2 Deleting a student: `delete`
 
 Deletes a student from TAPA.
 
@@ -157,7 +157,7 @@ Deletes a student from TAPA.
 
 <br>
 
-### Deleting all students taking a particular module: `deleteModule`
+### 3.3 Deleting all students taking a particular module: `deleteModule`
 
 Deletes all students taking a particular module from TAPA.
 
@@ -172,7 +172,7 @@ Deletes all students taking a particular module from TAPA.
 
 <br>
 
-### Finding a student: `find`
+### 3.4 Finding a student: `find`
 
 Allows the user to look up the details of a particular student.
 
@@ -191,7 +191,7 @@ Allows the user to look up the details of a particular student.
 
 <br>
 
-### Checking all the tasks that a student has: `task`
+### 3.5 Checking all the tasks that a student has: `task`
 
 Displays all the tasks that are allocated to a particular student.
 
@@ -206,7 +206,7 @@ Displays all the tasks that are allocated to a particular student.
 
 <br>
 
-### Marking an undone task as done for a student: `mark`
+### 3.6 Marking an undone task as done for a student: `mark`
 
 Marks a specific undone task as done for a particular student.
 
@@ -224,7 +224,7 @@ Marks a specific undone task as done for a particular student.
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
 <br>
 
-### Marking a done task as undone for a student: `unmark`
+### 3.7 Marking a done task as undone for a student: `unmark`
 
 Marks a specific done task as undone for a particular student.
 
@@ -243,7 +243,7 @@ Marks a specific done task as undone for a particular student.
 
 <br>
 
-### Editing a student's information: `edit`
+### 3.8 Editing a student's information: `edit`
 
 Edits a student's information in TAPA.
 
@@ -270,7 +270,7 @@ Edits a student's information in TAPA.
 
 <br>
 
-### Deleting all students: `clear`
+### 3.9 Deleting all students: `clear`
 
 Clears all students from TAPA.
 
@@ -295,7 +295,7 @@ Clears all students from TAPA.
 
 <br>
 
-### Archiving details in TAPA: `archive`
+### 3.10 Archiving details in TAPA: `archive`
 
 Saves a copy of the details currently saved in TAPA into a separate file.
 
@@ -307,7 +307,7 @@ Saves a copy of the details currently saved in TAPA into a separate file.
 
 <br>
 
-### Listing the student details: `list`
+### 3.11 Listing the student details: `list`
 
 Displays all the students enrolled in a list.
 
@@ -322,7 +322,7 @@ Displays all the students enrolled in a list.
 
 <br>
 
-### Assigning tasks to a particular student: `assign`
+### 3.12 Assigning tasks to a particular student: `assign`
 
 Assigns a task to a particular student.
 
@@ -349,7 +349,7 @@ Assigns a task to a particular student.
 
 <br>
 
-### Viewing the completion status of a particular task: `progress`
+### 3.13 Viewing the completion status of a particular task: `progress`
 
 Displays a list of students who are taking the specified module, and have been assigned with a particular task.
 The completion status of each student in the list will be displayed as well.
@@ -367,7 +367,7 @@ The completion status of each student in the list will be displayed as well.
 
 <br>
 
-### Deleting previously assigned task: `deleteTask`
+### 3.14 Deleting previously assigned task: `deleteTask`
 
 Deletes a task from a particular student's list of tasks.
 
@@ -388,7 +388,7 @@ An error message will be displayed if:
     * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
 <br>
 
-### Viewing previously executed commands: `history`
+### 3.15 Viewing previously executed commands: `history`
 
 Displays a list of previous commands that were executed successfully.
 
@@ -407,7 +407,7 @@ Displays a list of previous commands that were executed successfully.
 
 <br>
 
-### Undoing the previous command: `undo`
+### 3.16 Undoing the previous command: `undo`
 
 Reverts the changes made by the previously executed command.
 
@@ -437,7 +437,7 @@ Reverts the changes made by the previously executed command.
 
 <br>
 
-### Sorting the list of students by the number of undone tasks: `sort`
+### 3.17 Sorting the list of students by the number of undone tasks: `sort`
 
 Sorts and displays the students in TAPA by the number of undone tasks in **descending** order.
 
@@ -452,7 +452,7 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 
 <br>
 
-### Displaying manual for a command: `manual`
+### 3.18 Displaying manual for a command: `manual`
 
 Display the format and a short description for a specified command.
 
@@ -470,7 +470,7 @@ Display the format and a short description for a specified command.
 
 <br>
 
-### Viewing help : `help`
+### 3.19 Viewing help : `help`
 
 Shows a pop-up window explaining how to access the user guide.
 
@@ -478,7 +478,7 @@ Shows a pop-up window explaining how to access the user guide.
 
 <br>
 
-### Exiting the program : `exit`
+### 3.20 Exiting the program : `exit`
 
 Exits the program.
 
@@ -489,7 +489,7 @@ Exits the program.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## FAQ
+## 4. FAQ
 
 **Q**: How do I get started with TAPA?<br>
 **A**: You can refer to the [Quick Start](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#quick-start) section of this guide to start using TAPA as soon as possible!
@@ -502,7 +502,7 @@ Exits the program.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## 5. Command summary
 
 You can think of this Command Summary as a cheatsheet to using TAPA.
 Each action that TAPA can perform is listed next to the format you should use to execute that command, as well as an example of how the command can be used.
@@ -536,7 +536,7 @@ If you would like to learn more about a specific command, you can read more abou
 | **Help**          | `help`                                                                                                                                                                                                         |
 | **Exit**          | `exit`                                                                                                                                                                                                         |
 
-## Glossary
+## 6. Glossary
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Module**: A specific class that a student is taking
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
