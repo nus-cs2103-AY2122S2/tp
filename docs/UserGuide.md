@@ -354,6 +354,15 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
 
+### Viewing insights
+
+Views some insights about players in the club and upcoming schedules.
+
+* The right half of the application is used to display aggregated information of the club.
+* Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
+* Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
+
+
 ### Clearing all entries : `clear`
 
 Clears all data from MyGM.
