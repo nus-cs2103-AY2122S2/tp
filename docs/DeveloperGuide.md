@@ -850,13 +850,12 @@ testers are expected to do more *exploratory* testing.
       1. [Download](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) the jar file and copy the file into an empty folder.
    2. Double-click the jar file.
    3. Test case: Initial launch <br>
-      Expected: Application launched with a set of sample shows.
+      Expected: Application launched with a set of sample shows.<br><br>
    4. Test case: Subsequent Launch <br> 
-      Expected: Application launched with user saved shows.
-
+      Expected: Application launched with user saved shows.<br><br>
 2. Saving window preferences
    1. Launch Trackermon. <br> 
-      Expected: The window size may not be optimum.
+      Expected: The window size may not be optimum.<br><br>
    2. Resize the window to an optimum size. Move the window to a different location. Close the window.
    3. Re-launch Trackermon. <br> 
       Expected: The most recent window size and location is retained.
@@ -1115,7 +1114,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.<br><br>
 6. Test case: Renaming exported data in File Explorer GUI.
     1. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.<br>
-       Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
+       Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.<br><br>
 7. Test case: Cancelling export
     1. Action: Click "Cancel" button in File Explorer GUI.<br>
        Expected: Trackermon displays message saying `Export data aborted.`
