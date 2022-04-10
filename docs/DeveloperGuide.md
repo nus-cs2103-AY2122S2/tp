@@ -98,6 +98,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+###### Delete Sequence Diagram
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
@@ -186,7 +187,7 @@ The add lab mechanism is implemented as follows:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` according to ascending `LAB_NUMBER`.
 </div>
 
-The sequence for parsing the input is similar to the one shown in [this sequence diagram](#logic-component) above.
+The sequence for parsing the input is similar to the one shown in [this sequence diagram](#delete-sequence-diagram) above.
 
 The following UML sequence diagrams shows the interaction between components during the execution of the `labadd` command:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
