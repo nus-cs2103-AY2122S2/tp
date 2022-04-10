@@ -394,29 +394,33 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
      Both `StudentId` and `Index` must be provided.   
     </div>
    
-    1. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
+    i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
    
        <div markdown="span" class="alert alert-info">:information_source: 
          <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
        </div>
 
-    2. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
-    3. `StudentId#isValidId(String studentId)` method will then be invoked,
+    ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+
+    iii. `StudentId#isValidId(String studentId)` method will then be invoked,
     which checks if the trimmed argument is valid (according to the Regex supplied).
     If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
-    4. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
+
+    iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
        `ParserUtil#parseIndex(String oneBasedIndex)`.
        
        <div markdown="span" class="alert alert-info">:information_source: 
          <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
        </div>
    
-    5.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
-    6. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). 
+    v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+
+    vi. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
     If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
-    7. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+    vii. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
    
 
 6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
@@ -426,50 +430,60 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     Both `ModuleCode` and `TaskName` must be provided.   
     </div>
 
-    1. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
+    i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
    
        <div markdown="span" class="alert alert-info">:information_source: 
        <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
        </div>
    
-    2. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
-    3. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
+    ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+
+    iii. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
     which checks if the trimmed argument is valid (according to the Regex supplied).
     If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
-    4. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
+
+    iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
        `ParserUtil#parseTask(String task)`.
 
        <div markdown="span" class="alert alert-info">:information_source: 
        <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
        </div>
 
-    5. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
-    6. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+    v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+
+    vi. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
       If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
       If the argument is not valid, a `ParseException` will be thrown.
-    7. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+    vii. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
 
 7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
 8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
-   1. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
-   2. This method will iterate through each `Person` object in and check for matching `studentId`.
+   i. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
+
+   ii. This method will iterate through each `Person` object in and check for matching `studentId`.
       If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
       If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method. 
-      If no student with matching studentId is found, `PersonNotFoundException()` will be thrown. 
-   3. The updated `Person` will be replaced the current `Person` object.
-   4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
+      If no student with matching studentId is found, `PersonNotFoundException()` will be thrown.
+
+   iii. The updated `Person` will be replaced the current `Person` object.
+
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
       updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
 9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
-   1. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
-   2. This method will iterate through each `Person` object in and check for matching `moduleCode`.
-      If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
-      If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
-      If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
-   3. The updated `Person` will be replaced the current `Person` object.
-   4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
-      updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+   i. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
+   
+   ii. This method will iterate through each `Person` object in and check for matching `moduleCode`.
+       If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
+       If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
+       If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
+   
+   iii. The updated `Person` will be replaced the current `Person` object.
+     
+   iv. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
+         updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
 10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
@@ -1720,7 +1734,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `progress m/CS2100 tn/Task A`<br>
       Expected: An output list will be displayed to the user, which consists of all students (and their respective completion status) who are taking "CS2100" and are assigned with "Task A".
 
-### Sorting the list of students in TAPA by the number of incomplete tasks in **descending** order
+### Sorting the list of students in TAPA by the number of incomplete tasks in descending order
 
 1. Sorting the list of students in TAPA by the number of incomplete tasks in **descending** order
 
