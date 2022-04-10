@@ -11,16 +11,16 @@ Given below are my contributions to the project.
 
 * **New Feature**: Patient's Medical Prescription
   
-    It allows user to add medical prescription information to the patients. This feature 
-    extends the product functionality by allowing medical professionals to keep track of
-    patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
+It allows user to add medical prescription information to the patients. This feature 
+extends the product functionality by allowing medical professionals to keep track of
+patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
 
 
 
 * **New Feature**: Command History Navigation
 
-    It enhances the user experience by allowing users to navigate through the command
-    history by pressing the `↑` and `↓` arrow keys.
+It enhances the user experience by allowing users to navigate through the command
+history by pressing the `↑` and `↓` arrow keys.
 
 
 
