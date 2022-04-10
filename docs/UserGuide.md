@@ -420,7 +420,15 @@ Examples:
 * `export -p` will export all positions to the corresponding csv file.
 * `list -a f/name a/Betsy` then `export -a` will export csv all applicants named Betsy to the corresponding csv file.
 
-## Viewing help: `help`
+## Clearing Data : `clear`
+
+Clears all data in HireLah, including all `applicants`, `positions`, and `interviews`. 
+
+Format: `clear`
+
+Warning: This command cannot be undone.
+
+## Viewing Help : `help`
 
 Lists all the command keywords with their general descriptions
 
