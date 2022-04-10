@@ -62,7 +62,7 @@ Given below are my contributions to the project.
       `archive`([#115](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/115)),
       `progress`([#115](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/115))
       and `task`([#108](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/108)) commands.
-    * Added/updated use cases: UC01([#255](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/255)), UC05([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250)), UC12([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250)), UC09([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250))
+    * Added/updated use cases: UC01([#255](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/255)), UC05([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250)), UC09([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250)), UC12([#250](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/250))
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#32](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/32),
