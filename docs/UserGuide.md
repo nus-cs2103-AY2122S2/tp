@@ -97,7 +97,7 @@ You can start communicating with Trackermon using the command box. Some example 
 
 * **`delete`** `3` : Deletes the **3rd show** shown in the current list.
 
-* **`exit`** : Exits the app.
+* **`exit`** : Exits Trackermon.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -127,7 +127,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | RATING     | r/     | The rating to give a show                                                           |
 | COMMENT    | c/     | The comment to describe a show                                                      |
 | TAG        | t/     | The tag to label a show                                                             |
-| SEQUENCE   | so/    | The order to sort the show list                                                     |
+| ORDER      | \{n/s/r/t\}/ | The order in which a prefix will sort the show list                           |
+| SEQUENCE   | so/    | The order of prefixes to sort the show list                                         |
 
 <div markdown="block" class="alert alert-info">
 
@@ -151,6 +152,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* If an invalid prefix is used after a valid prefix, an error message will be displayed!
+
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -173,7 +176,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
 | COMMENT   | c/     | A comment can only contain up to 300000 [**ASCII**](#glossary) values. |
 | TAG       | t/     | A tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters. |
-| SEQUENCE  | so/    | A sequence lists out the order of the criteria used to sort the show list. |
+| ORDER      | \{n/s/r/t\}/ | An order can only be either `asc` or `dsc`.                     |
+| SEQUENCE  | so/    | A sequence lists out the order of the prefixes used to sort the show list. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -416,25 +420,17 @@ To sort your show list by rating ascendingly, you can key in `sort r/asc`! For m
 * `name` > `status` > `rating` > `tag`
 </div>
 
-Therefore, let's say you want to sort by status in ascending order then by name in ascending order.
+Therefore, let's say you want to sort by status in ascending order, then by name in ascending order.
 Use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
-<div markdown="block" class="alert alert-warning">
-
-:bulb: **Tip:** Summary:
-* Enter all prefixes you want to use for your sort along with the order. Specify the priority of the prefixes to sort with `SEQUENCE`!
-* `sort` can also be used like this! It will sort by name in ascending order.
-</div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
-* By not entering any prefixes, it will sort by name in ascending order.
-* Enter the right amount of prefixes! For example: use only s/ if you are sorting by status.
+* `sort` can also be used as is! It will sort by name in ascending order.
 * The `ORDER` must be asc or dsc!
 * The `SEQUENCE` must contain the full name of all the criteria used!
 * For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
