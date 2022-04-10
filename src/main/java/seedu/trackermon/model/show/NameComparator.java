@@ -16,4 +16,9 @@ public class NameComparator implements Comparator<Show> {
         return show.compareNames(other);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof NameComparator);
+    }
+
 }

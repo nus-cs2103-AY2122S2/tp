@@ -17,7 +17,7 @@ public class ShowBuilder {
     public static final String DEFAULT_STATUS = "completed";
     public static final String DEFAULT_TAG = "Anime";
     public static final String DEFAULT_COMMENT = "HELP";
-    public static final String DEFAULT_RATING = "1";
+    public static final String DEFAULT_RATING = "0";
 
     private Name name;
     private Status status;

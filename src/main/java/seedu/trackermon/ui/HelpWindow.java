@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackermon.commons.core.LogsCenter;
 
+// @@author Ardentsoul-reused
+// Reused from https://youtu.be/vego72w5kPU
+// with minor modifications
 /**
  * Controller for a help page
  */
@@ -54,7 +57,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new {@code HelpWindow}.
      */
     public HelpWindow() {
         this(new Stage());
@@ -144,22 +147,24 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private static ObservableList<CommandBuilder> getCommandSummary() {
         return FXCollections.observableArrayList(
-                new CommandBuilder("Add", "add n/NAME s/STATUS [c/COMMENT] [t/TAG]…"),
-                new CommandBuilder("Clear", "clear"),
-                new CommandBuilder("Comment", "comment INDEX c/COMMENT"),
-                new CommandBuilder("Delete", "delete INDEX"),
-                new CommandBuilder("Edit", "edit INDEX [n/NAME] [s/STATUS] [c/COMMENT]"
+                new CommandBuilder("Add", "add n/NAME s/STATUS [r/RATING] [c/COMMENT] "
                         + " [t/TAG]…"),
+                new CommandBuilder("Delete", "delete INDEX"),
+                new CommandBuilder("Clear", "clear"),
+                new CommandBuilder("Edit", "edit INDEX {[n/NAME] [s/STATUS] [r/RATING] "
+                        + "[c/COMMENT] [t/TAG]…}"),
                 new CommandBuilder("Exit", "exit"),
                 new CommandBuilder("Export", "export"),
-                new CommandBuilder("Find", "find KEYWORD OR find [n/NAME] [s/STATUS]"
-                        + " [t/TAG]"),
+                new CommandBuilder("General Find", "find KEYWORD…"),
+                new CommandBuilder("Precise Find", "find {[n/NAME] [s/STATUS]"
+                        + " [r/RATING] [t/TAG]…}"),
                 new CommandBuilder("Help", "help"),
                 new CommandBuilder("Import", "import"),
                 new CommandBuilder("List", "list"),
-                new CommandBuilder("Rate", ""),
-                new CommandBuilder("Sort", "sort [sna/] [snd/] [ssa/] [ssd/] [so/]…")
+                new CommandBuilder("Sort", "sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER]"
+                        + " [so/SEQUENCE]"),
+                new CommandBuilder("Suggest", "suggest")
         );
     }
-
 }
+// @@author

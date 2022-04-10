@@ -4,6 +4,7 @@ package seedu.trackermon.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -31,30 +32,33 @@ import seedu.trackermon.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the show identified "
-            + "by the index number used in the displayed show list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+    public static final String COMMAND_FORMAT = "Parameters: INDEX "
+            + "{[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_RATING + "RATING] "
             + "[" + PREFIX_COMMENT + "COMMENT] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_TAG + "TAG]…\u200B}";
+
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Attack on Titan "
-            + PREFIX_STATUS + "watching"
+            + PREFIX_STATUS + "watching "
             + PREFIX_COMMENT + "This is not bad!";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modifies the details of the show identified "
+            + "by the index number used in the displayed show list. "
+            + "Existing values will be overwritten by the input values. "
+            + "At least one parameter must be stated in the edit command.\n"
+            + COMMAND_FORMAT + "\n" + COMMAND_EXAMPLE;
+
     public static final String MESSAGE_EDIT_SHOW_SUCCESS = "Edited Show: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SHOW = "This show already exists in Trackermon.";
 
     private final Index index;
     private final EditShowDescriptor editShowDescriptor;
 
     /**
-     * @param index of the show in the filtered show list to edit
-     * @param editShowDescriptor details to edit the show with
+     * Creates an edit constructor to edit the specified {@code Show} at a specific {@code Index}.
+     * @param index of the show in the filtered show list to edit.
+     * @param editShowDescriptor details to edit the show with.
      */
     public EditCommand(Index index, EditShowDescriptor editShowDescriptor) {
         requireNonNull(index);
@@ -64,13 +68,19 @@ public class EditCommand extends Command {
         this.editShowDescriptor = new EditShowDescriptor(editShowDescriptor);
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Show> lastShownList = model.getFilteredShowList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Show showToEdit = lastShownList.get(index.getZeroBased());
@@ -78,7 +88,7 @@ public class EditCommand extends Command {
 
 
         if (!showToEdit.isSameShow(editedShow) && model.hasShow(editedShow)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SHOW);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_SHOW);
         }
 
         model.setShow(showToEdit, editedShow);
@@ -88,6 +98,9 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Show} with the details of {@code showToEdit}
      * edited with {@code editShowDescriptor}.
+     * @param showToEdit the show to be edited.
+     * @param editShowDescriptor details to edit the show with.
+     * @return a {@code Show} with the details of {@code showToEdit}.
      */
     private static Show createEditedShow(Show showToEdit, EditShowDescriptor editShowDescriptor) {
         assert showToEdit != null;
@@ -100,6 +113,11 @@ public class EditCommand extends Command {
         return new Show(updatedName, updatedStatus, updatedTags, updateComment, updateRating);
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -129,11 +147,14 @@ public class EditCommand extends Command {
         private Comment comment;
         private Rating rating;
 
+        /**
+         * Creates a default constructor.
+         */
         public EditShowDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Creates a defensive copy of {@code tags} and it is used internally. It is a copy constructor.
+         * @param toCopy the constructor to be copied.
          */
         public EditShowDescriptor(EditShowDescriptor toCopy) {
             setName(toCopy.name);
@@ -145,6 +166,7 @@ public class EditCommand extends Command {
 
         /**
          * Returns true if at least one field is edited.
+         * @return true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, status, tags, comment, rating);
@@ -199,6 +221,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Returns whether two objects are equal.
+         * @param other the second object to be compared with.
+         * @return true if both objects are equal, else return false.
+         */
         @Override
         public boolean equals(Object other) {
             // short circuit if same object

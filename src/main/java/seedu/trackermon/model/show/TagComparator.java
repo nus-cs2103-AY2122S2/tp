@@ -16,4 +16,9 @@ public class TagComparator implements Comparator<Show> {
         return show.compareTags(other);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof TagComparator);
+    }
+
 }

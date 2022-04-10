@@ -16,6 +16,9 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.trackermon.commons.core.Config;
 import seedu.trackermon.commons.exceptions.DataConversionException;
 
+/**
+ * Contains integration tests for {@code ConfigUtil}.
+ */
 public class ConfigUtilTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ConfigUtilTest");
@@ -23,21 +26,33 @@ public class ConfigUtilTest {
     @TempDir
     public Path tempDir;
 
+    /**
+     * Tests reading of a null config file.
+     */
     @Test
     public void read_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> read(null));
     }
 
+    /**
+     * Tests a non-existent file boolean method isPresent.
+     */
     @Test
     public void read_missingFile_emptyResult() throws DataConversionException {
         assertFalse(read("NonExistentFile.json").isPresent());
     }
 
+    /**
+     * Tests whether the file is in a JSON format.
+     */
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> read("NotJsonFormatConfig.json"));
     }
 
+    /**
+     * Tests whether file has been successfully read.
+     */
     @Test
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
 
@@ -47,12 +62,18 @@ public class ConfigUtilTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests whether default values of config fill is used when reading from a file with missing values.
+     */
     @Test
     public void read_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
         Config actual = read("EmptyConfig.json").get();
         assertEquals(new Config(), actual);
     }
 
+    /**
+     * Tests whether values are ignored when reading from a file with extra values.
+     */
     @Test
     public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         Config expected = getTypicalConfig();
@@ -73,16 +94,25 @@ public class ConfigUtilTest {
         return ConfigUtil.readConfig(configFilePath);
     }
 
+    /**
+     * Tests saving of a null config file.
+     */
     @Test
     public void save_nullConfig_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> save(null, "SomeFile.json"));
     }
 
+    /**
+     * Tests saving of a null file.
+     */
     @Test
     public void save_nullFile_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> save(new Config(), null));
     }
 
+    /**
+     * Tests whether files has been successfully saved.
+     */
     @Test
     public void saveConfig_allInOrder_success() throws DataConversionException, IOException {
         Config original = getTypicalConfig();
@@ -111,6 +141,4 @@ public class ConfigUtilTest {
                                   ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
                                   : null;
     }
-
-
 }

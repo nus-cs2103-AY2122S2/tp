@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code ArgumentTokenizer}.
+ */
 public class ArgumentTokenizerTest {
 
     private final Prefix unknownPrefix = new Prefix("--u");
@@ -14,6 +17,9 @@ public class ArgumentTokenizerTest {
     private final Prefix dashT = new Prefix("-t");
     private final Prefix hatQ = new Prefix("^Q");
 
+    /**
+     * Tests tokenizing of empty argument from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_emptyArgsString_noValues() {
         String argsString = "  ";
@@ -53,6 +59,9 @@ public class ArgumentTokenizerTest {
         assertFalse(argMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Tests tokenizing of no prefixes from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
         String argsString = "  some random string /t tag with leading and trailing spaces ";
@@ -63,6 +72,9 @@ public class ArgumentTokenizerTest {
 
     }
 
+    /**
+     * Tests tokenizing of one argument from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_oneArgument() {
         // Preamble present
@@ -79,6 +91,9 @@ public class ArgumentTokenizerTest {
 
     }
 
+    /**
+     * Tests tokenizing of multiple argument from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_multipleArguments() {
         // Only two arguments are present
@@ -115,6 +130,9 @@ public class ArgumentTokenizerTest {
         assertPreamblePresent(argMultimap, argsString); // Unknown prefix is taken as part of preamble
     }
 
+    /**
+     * Tests tokenizing of multiple argument with repeat from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_multipleArgumentsWithRepeats() {
         // Two arguments repeated, some have empty values
@@ -126,6 +144,9 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, hatQ, "", "");
     }
 
+    /**
+     * Tests tokenizing of multiple arguments joined from the execution of {@code ArgumentTokenizer}.
+     */
     @Test
     public void tokenize_multipleArgumentsJoined() {
         String argsString = "SomePreambleStringp/ pSlash joined-tjoined -t not joined^Qjoined";
@@ -136,6 +157,9 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, hatQ);
     }
 
+    /**
+     *  Tests if different types of prefixes are the same.
+     */
     @Test
     public void equalsMethod() {
         Prefix aaa = new Prefix("aaa");

@@ -1,7 +1,7 @@
 package seedu.trackermon.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WONDERLAND;
@@ -12,13 +12,16 @@ import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.CommandResult;
+import seedu.trackermon.logic.commands.HelpCommand;
 import seedu.trackermon.logic.commands.ListCommand;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
@@ -32,8 +35,14 @@ import seedu.trackermon.storage.JsonUserPrefsStorage;
 import seedu.trackermon.storage.StorageManager;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code LogicManager}.
+ */
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
+
+    private static final String UNKNOWN_COMMAND_HELP = String.format(MESSAGE_UNKNOWN_COMMAND,
+            HelpCommand.MESSAGE_USAGE);
 
     @TempDir
     public Path temporaryFolder;
@@ -41,42 +50,57 @@ public class LogicManagerTest {
     private Model model = new ModelManager();
     private Logic logic;
 
+    /**
+     * Sets up JsonShowListStorage, JsonUserPrefsStorage and logic before each test.
+     */
     @BeforeEach
     public void setUp() {
         JsonShowListStorage showListStorage =
-                new JsonShowListStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonShowListStorage(temporaryFolder.resolve("Trackermon.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
+    /**
+     * Tests the parsing of invalid command format from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, UNKNOWN_COMMAND_HELP);
     }
 
+    /**
+     * Tests the parsing of command error from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_INDEX);
     }
 
+    /**
+     * Tests the parsing of valid command from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
+    /**
+     * Tests if storage throws IO exception from the execution of {@code LogicManager}.
+     */
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonShowListIoExceptionThrowingStub
 
-        JsonShowListStorage addressBookStorage =
-                new JsonShowListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonShowListStorage showListStorage =
+                new JsonShowListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionShowList.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -89,9 +113,29 @@ public class LogicManagerTest {
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests unsupported operation exception from the execution of {@code LogicManager}.
+     */
     @Test
     public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredShowList().remove(0));
+    }
+
+    /**
+     * Tests the getters from the execution of {@code LogicManager}.
+     */
+    @Test
+    public void testGetters() {
+        // Checking showListFilePath
+        assertEquals(model.getShowListFilePath(), logic.getShowListFilePath());
+
+        // Checking showList
+        model.addShow(ALICE_IN_WONDERLAND);
+
+        assertEquals(Arrays.asList(ALICE_IN_WONDERLAND), logic.getShowList().getShows());
+
+        // Checking GuiSettings
+        assertEquals(new GuiSettings(), logic.getGuiSettings());
     }
 
     /**

@@ -13,8 +13,15 @@ import org.junit.jupiter.api.Test;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code EditShowDescriptor}.
+ */
 public class EditShowDescriptorTest {
 
+    /**
+     *  Tests if different types of EditShowDescriptorTest
+     *  are the same from the execution of {@code EditShowDescriptorTest}.
+     */
     @Test
     public void equals() {
         // same values -> returns true
