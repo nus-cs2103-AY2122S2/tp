@@ -402,8 +402,6 @@ Step 7. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
 
 ![](images/DeleteLessonSequenceDiagram.png)
 
-
-
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
 - the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
@@ -710,7 +708,26 @@ TODO
 
 ### Deleting a student
 
-TODO
+This command requires you to have at least one existing student.
+* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+  user guide section to add a student.
+
+1. Testcase 1: Delete `student` of index 1 on the viewable student list.
+   1. Execute `liststudents` to ensure that your lists includes all students.
+   2. Execute `rmstudent 1` or the shortcut `rms 1`.
+   3. Expected: The student of index 1 on the viewable student list is deleted.
+
+2. Testcase 2: Delete `student` with invalid index
+    1. Execute `liststudents` to ensure that your lists includes all students.
+    2. Execute `rmstudent 0` or the shortcut `rms 0`.
+    3. Expected: An invalid index error message is shown.
+* Note: An invalid index is any value that is not a positive integer of type `java.lang.Integer`. (e.g. if index is greater than`Integer.MAX_VALUE` or less than 0 or is not of type `java.util.Integer`)
+
+3. Testcase 3: Delete `student` with out-of-bounds index
+    1. Execute `liststudents` to ensure that your lists includes all students. (Ensure there are only two students)
+    2. Execute `rmstudent 3` or the shortcut `rms 3`.
+    3. Expected: An out-of-bounds error message is shown.
+* Note: An out-of-bounds index is a positive integer of type `java.lang.Integer` but is a greater than the viewable student list.
 
 ### Saving data
 
