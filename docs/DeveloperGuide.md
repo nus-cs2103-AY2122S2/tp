@@ -650,3 +650,27 @@ testers are expected to do more *exploratory* testing.
    1. Delete `addressbook.json`
    2. Start InternBuddy <br>
    Expected: Sample company list is displayed. Persons and Events list also have sample entries.
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+**Difficulty Level**: Medium
+
+**Effort Required**: Around or slightly below the effort level required for AB3
+
+**Challenges Faced**:
+* implementing the commands to work for all 3 types of entries
+* extending and refactoring existing architecture to work for all 3 types of entries
+* maintaining OOP design and keeping dependencies and code reuse to a minimum
+* adding multiple new features that didn't have an existing framework in AB3 originally, such as Archive and Sorting
+* finding bugs and writing automated tests for all the new features
+* maintaining the property that all `Event` and `Person` objects must refer to a `Company` object - even through editing and deletion
+* updating the UI to give it a new look as well as handle the new entries
+
+**Achievements of the Project**:
+* enhanced the original AB3 project with all new features, such as Archiving and Sorting
+* updated AB3 to support `Companies` and `Events` along with the original `Persons`, including updating all existing commands
+ to handle each type of entry
+* added many Quality-of-Life commands to improve use, such as a command to delete all entries in a list and being able
+  to find entries by attributes other than the name
+* did all of the above while keeping the project OOP, clean, and extendable
