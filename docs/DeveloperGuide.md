@@ -217,6 +217,9 @@ This command is used to display a list of people who has the skill specified in 
 #### Execution
 
 Below is a sequence diagram showing the execution path when this command is entered.
+The execution path for this diagram only shows the creation of the `FilterSkillCommand`.
+The execution of the command is the same as all other commands (e.g. `Delete` and `Add`).
+You may refer to them if you require so.
 
 ![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
 
