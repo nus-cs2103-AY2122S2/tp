@@ -497,6 +497,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding customers
 
+NOTE: Make sure to use `listc` between test cases.
+
   1. Test case: `findc n/Alex Yeoh`<br>
      Expected: list of customers with Alex Yeoh in their name will be shown.
    
@@ -514,11 +516,139 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting customers 
 
-   1. Test case: `deletec -1`
+   1. Test case: `deletec -1`<br>
       Expected: Error message saying that the command format is invalid.
      
-   1. Test case: `deletec 30`
+   1. Test case: `deletec 30`<br>
       Expected: Error message saying that the index is invalid.
       
-   1. Test case: `deletec 1,2`
+   1. Test case: `deletec 1,2`<br>
       Expected: Delete first and second customer.
+
+### Listing customers
+
+   1. Test case: `listc`
+      Expected: Shows all customers.
+     
+## Service-Related Commands
+
+### Adding service
+
+  1. Test case: `adds n/Acne Facial Treatment pr/138 d/120`<br>
+     Expected: Adds a service with the given information.
+   
+  1. Test case: Any command with either n/ or pr/ or d/ missing, example  `adds n/Acne Facial Treatment pr/138`<br>
+     Expected: Invalid command format error message.
+      
+  1. Test case: Any command with wrong format for one of the fields like `adds n/Acne Facial Treatment pr/138.123 d/15`<br>
+     Expected: Error message based on field that is wrong.
+     Name: Names should only contain alphanumeric characters and spaces, and it should not be blank<br>
+     Price: Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.<br>
+     Duration: Duration should only contain numbers and have a value that is greater than 0.<br>
+
+  1. Test case: `adds n/Acne Facial Treatment pr/138 d/120` and `adds n/Acne Facial Treatment pr/120 d/60`<br>
+     Expected: Service is already in TrackBeau error.
+      
+### Editing a Service
+
+  1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
+ 
+  1. Test case: `edits -1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Invalid command format error
+     
+  1. Test case: `edits 50 n/Dark Eye Circle Treatment d/30`<br>
+     Expected: Invalid index error 
+     
+ ### Finding a Service
+ 
+ NOTE: Make sure to use `lists` between the tests
+ 
+  1. Test case: `finds n/Facial`<br>
+     Expected:  Returns services that contain the word 'Facial', for example Organic Radiance Facial and Bio Ageless Facial
+  
+  1. Test case: `finds n/facial`<br>
+     Expected:Returns services that cfntain the word 'Facial', for example Organic Radiance Facial and Bio Ageless Facial
+     
+  1. Test case: `finds n/Facial dr/120`<br>
+     Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
+     
+ ### Deleting a Service
+ 
+   1. Test case: `deletes -1`<br>
+     Expected:  Invalid command error message.
+  
+  1. Test case: `deletes 100,1`<br>
+     Expected: Invalid index message.
+     
+  1. Test case: `deletes 1,2,3`<br>
+     Expected:  Removes the 1st, 2nd and 3rd service from the application.
+     
+ ### List services
+ 
+   1. Test case: `lists`<br>
+     Expected:  List all services.
+ 
+## Booking Commands
+
+ ### Adding a booking 
+ 
+   1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30`<br>
+     Expected:  Adds a booking for the customer with index 1 with service (index 1) on 10-10-2022 10:30
+  
+  1. Test case: Any of the fields are missing, example: `addb c/1 sev/1`<br>
+     Expected: Invalid command format message.
+     
+  1. Test case: Any of the fields have invalid format, example: `addb c/1 sev/1 st/10-10-2022 10:333`<br>
+     Expected:  Invalid format error message for the field that had a mistake.
+
+ ### Editing a booking 
+  
+  1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
+     Expected:Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
+ 
+  1. Test case: `editb -1 sev/1 f/Excellent Customer Service` or  `editb 100 sev/1 f/Excellent Customer Service`<br>
+     Expected:Invalid index error
+     
+  1. Test case: Invalid format for one of the parameters, example: `editb 2 st/29-02-2001 10:30`<br> 
+     Expected:Invalid format error based on the parameter
+    
+### Finding a booking 
+
+NOTE: Make sure to use `listb` between the test cases.
+
+  1. Test case: `findb f/bad` <br>
+     Expected:Returns feedback saying "Bad service" and "Service was bad".
+ 
+  1. Test case: `findb st/10-10-202`<br>
+     Expected: Will not return any customers as only full words will be matched.
+     
+### Deleting a booking
+
+   1. Test case: `deleteb 1,2,3`<br>
+     Expected:Removes the 1st, 2nd and 3rd booking from the application.
+ 
+   1. Test case: `deleteb -1` or `deleteb 100`<br>
+     Expected: Invalid format or invalid index error message.
+     
+### Listing a booking
+
+   1. Test case: `listb`<br>
+     Expected:Lists all bookings.
+     
+## Statistics Commands
+
+
+   1. Test case: `plotAll`<br>
+     Expected:Plots 6 charts.
+    
+   1. Test case: `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/10-04-2022 al/Test sep/Test sep/Test stp/Test h/Test s/Test` then `plotAll` <br>
+     Expected:Plots 6 charts with updated information. Accuracy can be checked by comparing charts before and after the new customer is added.
+
+## Miscellaneous 
+
+   1. Test case: `help` <br>
+     Expected:Shows a help window with URL to User guide.
+     
+   1. Test case: `exit` <br>
+     Expected:Closes all windows and exits the application.
