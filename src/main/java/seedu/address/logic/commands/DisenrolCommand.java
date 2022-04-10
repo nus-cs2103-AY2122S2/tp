@@ -73,6 +73,7 @@ public class DisenrolCommand extends Command {
         ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
         int notDisenrolled = 0;
+        //model.getUnfilteredClassGroupList().get(classGroupIndex.getZeroBased()).getLessons().forEach(x -> System.out.println(String.format("%s %s", x.getWeekId(), x.getStudents())));
         for (Student s : students) {
             if (newCg.hasStudent(s)) {
                 newCg.removeStudent(s);
