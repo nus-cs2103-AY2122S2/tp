@@ -228,12 +228,12 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 These tags are compulsory: `Name`,`Block`, `Phone`, `Email`, `Address` `Faculty`, `MatriculationNumber` and `CovidStatus`
 
-**Path Execution of Add Feature:**
+####**Path Execution of Add Feature:**
 ![AddFeatureActivityDiagram](images/AddFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
-**Structure of Add Feature:**
+####**Structure of Add Feature:**
 ![AddClassDiagram](images/AddClassDiagram.png)
 
 The class diagram above depicts the structure of `AddCommand`. As per any Command class, AddCommand needs to extend the abstract class Command.
@@ -247,7 +247,7 @@ Additionally, there are a few final static messages to be displayed to the user 
    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
-**Interaction of objects when Add Command is executed:**
+####**Interaction of objects when Add Command is executed:**
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
@@ -272,7 +272,7 @@ The `delete` command is as follows:
 
 * `delete INDEX`
 
-**Path Execution of Delete Feature:**
+####**Path Execution of Delete Feature:**
 
 ![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
 
@@ -282,13 +282,13 @@ There are three possible execution paths for the delete command
 2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
 3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
 
-**Structure of Delete Feature:**
+####**Structure of Delete Feature:**
 
 ![DeleteClassDiagram](images/DeleteClassDiagram.png)
 
 The class diagram above depicts the structure of `DeleteCommand`. As per any Command class, DeleteCommand needs to extend the abstract class Command.
 
-**Interaction of objects when Delete Command is executed:**
+####**Interaction of objects when Delete Command is executed:**
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
@@ -309,7 +309,7 @@ Data on each block and faculties will be drawn as pie charts and bar chart on a 
 This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
 their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
 
-**Path Execution of Summarise Feature Activity Diagram is shown below:**
+####**Path Execution of Summarise Feature Activity Diagram is shown below:**
 ![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
 
 There are three possible execution paths for this command.
@@ -317,13 +317,13 @@ There are three possible execution paths for this command.
 2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
 3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
 
-**Class Diagram of Summarise Feature is shown below:**
+####**Class Diagram of Summarise Feature is shown below:**
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
 
 The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces. 
 
-**Sequence Diagram of Summarise Feature is shown below:**
+####**Sequence Diagram of Summarise Feature is shown below:**
 
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
@@ -417,19 +417,19 @@ The user can choose when to execute the `help` command.
 
 The activity diagram shows the possible execution paths for the `help` command.
 
-**Path Execution of Help Feature:**
+####**Path Execution of Help Feature:**
 
 ![HelpActivityDiagram](images/HelpActivityDiagram.png)
 
 When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
 
-**Structure of Help Feature:**
+####**Structure of Help Feature:**
 
 ![HelpClassDiagram](images/HelpClassDiagram.png)
 
 The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
 
-**Interaction of objects when Help Command is executed:**
+####**Interaction of objects when Help Command is executed:**
 
 ![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
 
@@ -650,7 +650,7 @@ The user can choose when to execute the email command.
 
 The activity diagram shows the possible execution paths for the `email` command.
 
-**Path Execution of Email Feature:**
+####**Path Execution of Email Feature:**
 
 ![EmailActivityDiagram](images/EmailActivityDiagram.png)
 
@@ -658,13 +658,13 @@ There are two possible execution paths for this command.
 1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
 2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
 
-**Structure of Email Feature:**
+####**Structure of Email Feature:**
 
 ![EmailClassDiagram](images/EmailClassDiagram.png)
 
 The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
 
-**Interactions between objects when Email Command is executed:**
+####**Interactions between objects when Email Command is executed:**
 
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
@@ -692,18 +692,35 @@ The user can choose when to exit the programme <br>
 
 The activity diagram shows the possible execution paths for the `exit` command.
 
-**Path Execution of Exit Feature Activity Diagram is shown below:**
-![ExitFeatureActivityDiagram](images/ExitFeatureActivityDiagram.jpg)
+####**Path Execution of Exit Feature:**
 
-There is one possible execution path for this command.
+![ExitActivityDiagram](images/ExitActivityDiagram.png)
 
-1. User inputs the `exit` command, triggering Tracey to close its programme
+There are three possible execution path for this command.
+
+1. User inputs the `exit` command with additional parameters <br> A ParseException is thrown
+2. User correctly inputs `exit` command but secondary windows are open <br> Secondary windows are hidden first before the application closes
+3. User correctly inputs `exit` command and no secondary windows are open <br> Application closes
 
 The sequence diagram below shows the interactions between objects during the execution of a `exit` command.
 
-**Sequence Diagram of Exit Feature is shown below:**
-![ExitSequenceDiagram](images/ExitFeatureSequenceDiagram.jpg)
+####**Structure of Exit Feature**
 
+![ExitClassDiagram](images/ExitClassDiagram.png)
+
+The class diagram above depicts the structure of `ExitCommand`. As per any Command class, ExitCommand needs to extend the abstract class Command.
+
+####**Interaction between objects when Exit Command is executed:**
+
+![ExitCommandSequenceDiagram](images/ExitCommandSequenceDiagram.png)
+
+When a user inputs an exit command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ExitCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `ExitCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleExit()` method which will hide all windows and the primary stage.
+
+Subsequently, the application closes and the MainWindow is deleted.
 
 ### Undo/Redo features
 
