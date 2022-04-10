@@ -309,7 +309,7 @@ Scenario for redoing after undoing an edit command:
 ![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
 
 Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
-to counteract the effects of the `undo` command on the `edit` command, and the overall results in the tags being removed from Jane Doe.
+to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
@@ -385,7 +385,7 @@ There is also a `Show Email` button on the GUI which you can click to open the s
 
 ![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
 
-From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarise the statistics of the student records inside Tracey.
