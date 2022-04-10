@@ -28,7 +28,9 @@ public class TypicalClassGroups {
             .withClassGroupType("RECITATION").withModule(TypicalModules.CS2030)
             .withUniqueStudentList(TypicalStudents.ALICE, TypicalStudents.ELLE, TypicalStudents.FIONA)
             .withLessons(TypicalLessons.LESSON1, TypicalLessons.LESSON13).build();
-
+    public static final ClassGroup CS2103TT13 = new ClassGroupBuilder().withClassGroupId("T13")
+            .withClassGroupType("TUTORIAL").withModule(TypicalModules.CS2103T_WITH_STUDENT)
+            .withUniqueStudentList(TypicalStudents.getTypicalStudents()).build();
     private TypicalClassGroups() {} // prevents instantiation
 
     public static List<ClassGroup> getTypicalClassGroups() {
