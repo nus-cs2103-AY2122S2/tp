@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedClassGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,12 +37,14 @@ public class JsonAdaptedClassGroupTest {
     private static final List<JsonAdaptedLesson> lessons = TypicalClassGroups.CS2101G09.getLessons()
             .stream().map(JsonAdaptedLesson::new).collect(Collectors.toList());
 
-    //    @Test
-    //    public void toModelType_validClassGroupDetails_returnsClassGroup() throws Exception {
-    //        JsonAdaptedClassGroup classGroup = new JsonAdaptedClassGroup(
-    //                VALID_CG_ID, VALID_CG_TYPE, VALID_MODULE_CODE, VALID_ACAD_YEAR, studentIds, lessons);
-    //        assertEquals(TypicalClassGroups.CS2101G09, classGroup.toModelType(modules, students));
-    //    }
+    @Test
+    public void toModelType_validClassGroupDetails_returnsClassGroup() throws Exception {
+        JsonAdaptedClassGroup classGroup = new JsonAdaptedClassGroup(
+                VALID_CG_ID, VALID_CG_TYPE, VALID_MODULE_CODE, VALID_ACAD_YEAR, studentIds, lessons);
+        System.out.println(classGroup.toModelType(modules, students).getLessons());
+        System.out.println(TypicalClassGroups.CS2101G09.getLessons());
+        assertEquals(TypicalClassGroups.CS2101G09, classGroup.toModelType(modules, students));
+    }
 
     @Test
     public void toModelType_invalidClassGroupId_throwsIllegalValueException() {
