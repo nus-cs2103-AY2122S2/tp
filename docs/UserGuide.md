@@ -365,6 +365,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Precise find
 
 **Description (Precise Find):** Wanting to search for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
@@ -374,8 +376,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -395,8 +395,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 * `find s/completed watching` does not mean `find s/completed s/watching`. The former will find all shows with both **completed and watching** status, while the latter will find all shows with a **watching** status. This is only applicable to the `STATUS` parameter.
 
 </div>
-
-<div style="page-break-after: always;"></div>
 
 **Example & Output:** `find n/Shutter Island`
 
