@@ -1,7 +1,6 @@
 package seedu.trackermon.model.show;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 
@@ -16,15 +15,9 @@ public class CommentTest {
 
     @Test
     void testToString() {
-
-        String testEmoji = "laugh\uD83D\uDE00";
-        String testClean = "laugh";
-
-        Comment testCleanComment = new Comment(testClean);
-        Comment testEmojiComment = new Comment(testEmoji); //removal of emojis
-
-        assertNotEquals(testEmoji, testEmojiComment.comment); //Emoji should be removed
-        assertEquals(testClean, testCleanComment.comment);
+        String test1 = "laugh1";
+        Comment testComment1 = new Comment(test1);
+        assertEquals(test1, testComment1.comment);
     }
 
     @Test
