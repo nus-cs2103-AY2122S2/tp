@@ -48,7 +48,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteBuyerCommand : execute()
 activate DeleteBuyerCommand
 
-DeleteBuyerCommand -> Model : deleteBuyer(1)
+DeleteBuyerCommand -> Model : deleteBuyer()
 activate Model
 
 Model --> DeleteBuyerCommand

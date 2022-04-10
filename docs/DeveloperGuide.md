@@ -110,8 +110,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddBuyerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddBuyerCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddBuyerCommandParser`, `DeleteBuyerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -224,7 +224,7 @@ Result:
 
 * We can match buyers with other less strict conditions as well.
 * For example, we can match buyers and sellers with only match:
-    - HouseTypes only (example: `COLONIAL`, Since buyers may be looking only for a specific HouseType, regardless of Location)
+    - HouseTypes only (example: `COLONIA`, Since buyers may be looking only for a specific HouseType, regardless of Location)
     - Location only (example: `Toa Payoh`, Since some buyers may like to buy a Property at a specific area, regardless of other conditions)
     - PriceRange only (Since buyers may just be looking for properties in their buy range)
 
@@ -235,11 +235,11 @@ Result:
 * An additional feature that could be implemented in the future.
 
 ### Add Buyer feature
-The `addbuyer` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
+The `add-b` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
 **Step 1:**
 
-The user types input E.g. `addbuyer n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+The user types input E.g. `add-b n/David p/12345678` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
 
 **Step 2:**
 
@@ -247,19 +247,17 @@ The `execute(input)` method of `LogicManager`, a subclass of the Logic component
 An instance of the `AddressBookParser` will begin to parse the input into 2 main sections: the **command**
 and the **body** of the command.
 
-The main job of `AddressBookParser` at this step is to identify the `addbuyer` **command** which was supplied as the 1st word in the input string.
+The main job of `AddressBookParser` at this step is to identify the `add-b` **command** which was supplied as the 1st word in the input string.
 
 After which, control is handed over to the `AddBuyerCommandParser` component by calling its `AddBuyerCommandParser#parse(body)` method to parse the **body** which was separated out.
 
 **Step 3:**
 
-`AddBuyerCommandParser#parse(body)` verifies if required fields for `addbuyer` are present.
+`AddBuyerCommandParser#parse(body)` verifies if required fields for `add-b` are present.
 
 In our example, since `n/David p/12345678` was included, all required fields are present.
 
 At this step, the new `Buyer` will have been successfully created. A new `AddBuyerCommand` with the Buyer is returned to the `AddressBookParser` to the `LogicManager`
-
-![AddBuyerCommandObjectDiagram](images/AddBuyerCommandObjectDiagram.png)
 
 **Step 4:**
 
@@ -269,7 +267,7 @@ In this method, if the Buyer does not currently already reside in the applicatio
 
 (Refer to [Model component](#model-component) to see how Buyers are stored into the model)
 
-A new `CommandResult` representing the successful `addbuyer` command is initialized and returned.
+A new `CommandResult` representing the successful `add-b` command is initialized and returned.
 
 **Step 5:**
 
