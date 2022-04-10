@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant  ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniqueTagList" as UniqueTagList MODEL_COLOR
+end box
+
+[-> AddressBook : setTags(tags)
+activate AddressBook
+loop for each p in persons
+    AddressBook -> AddressBook : stripTagsFromPerson(p, tags)
+end
+
+AddressBook -> UniqueTagList : setTags(tags)
+activate UniqueTagList
+UniqueTagList --> AddressBook
+deactivate UniqueTagList
+[<-- AddressBook
+
+@enduml

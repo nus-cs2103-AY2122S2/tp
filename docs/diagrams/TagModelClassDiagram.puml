@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Partial Tag Subsystem Class Diagram
+
+package "Tag \nSubsystem"{
+    class Tag {
+        tagName : Name
+    }
+
+    class UniqueTagList {
+
+    }
+}
+
+class ModelManager
+class AddressBook
+class Person
+
+ModelManager -> AddressBook
+ModelManager ..> Tag
+AddressBook *-down-> "1"UniqueTagList
+UniqueTagList -> "*" Tag
+Person "*" -up-> "*" Tag
+
+
+@enduml
