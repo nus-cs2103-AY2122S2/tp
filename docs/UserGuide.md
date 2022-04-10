@@ -178,7 +178,8 @@ Format: `edit INDEX [o/OPTION] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] 
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
 * At least one of the optional fields must be provided besides `[o/OPTION]`.
-* Team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Refer to the examples below.
+* Team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Any excess commas after values will be ignored. Refer to the examples below.
+* Spaces before and after commas are ignored, so `t/team a, team b` will be treated the same as `t/team a,team b`. The same applies to `[s/SKILLNAME_SKILLPROFICENCY…]`.
 * Existing values will be updated to the input values.
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 
@@ -204,6 +205,7 @@ Format: `edit INDEX… [o/OPTION] [t/TEAM…] [s/SKILLNAME_SKILLPROFICENCY…]`
 
 * `edit` command behaves as batch edit only when at least two indices are provided for `INDEX…`. Otherwise, `edit` behaves as single edit.
 * Edit the `Team` and `Skill` field of multiple contacts specified by the indexes simultaneously.
+* Syntax for passing multiple values for `Team` and `Skill` is the same as single edit. Values should be separated by a comma and whitespaces before and after commas, and any excess commas after the values will be ignored.
 * Indices must be separated by a whitespace as opposed to teams and skills. All index **must be a positive integer that is in the contact list** `1, 2, 3, …`
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 * In the case that same index is present multiple times for `INDEX…`, HackNet will still successfully execute the edit command as long as the index is valid.

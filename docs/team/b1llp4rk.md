@@ -23,12 +23,12 @@ Given below are my contributions to the project.
     * Enable comma separation of multiple values for teams and skills
         * **What it does:** The user can use a comma to separate multiple values of teams or skills, for `add` and `edit` command.
         * **Justification:** The previous design of passing in multiple values of teams and skills required user to prefix each value with `t/` or `s/`. Using a comma is easier, especially when passing a large number of teams or skills. This feature was first implemented on [`edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command, and was later added to [`add`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/87) command.
-        * **Highlights:** Consecutive whitespaces before and after the commas are ignored. This is an attempt to take into account that normal use of comma is followed by a space, and to be generous towards mistakes where multiple spaces are used.
-
+      
 * **Bug Fixes**
     * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills when editing multiple persons in batch, as UserGuide states. This prevents such case when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
     * Inability to redo some edit commands was discovered while [reinforcing integration test of edit command](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156), and was fixed.
         * Commands that alter the data of HackNet have to commit the changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
+    * [Fixed a bug](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/196) that valid team names do not get accepted.
 
 * **Contributions to the UG**:
     * Updated section of `edit` command on how to edit multiple persons, and using the reset and default mode.
