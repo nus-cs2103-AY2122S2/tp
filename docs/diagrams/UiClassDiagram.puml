@@ -70,4 +70,7 @@ InfoPanel -[hidden]right- StudentListPanel
 StudentListPanel -[hidden]right- LessonListPanel
 
 MainWindow -[hidden]-|> UiPart
+
+hide class fields
+hide class methods
 @enduml

@@ -768,6 +768,14 @@ TeachWhat! allows you to store details of a lesson and view it back later on.
 The list of lessons displayed is sorted by the next upcoming lesson date.
 </div>
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Input constraints:**<br>
+ - Lesson name must be alphabetic.
+ - Lesson name is limited to 50 characters.
+ - Subject is limited to 50 characters.
+ - Address is limited to 100 characters.
+</div>
+
 [return to top ↑](#table-of-contents)
 
 ### Adding a student / Viewing a student's details
@@ -780,6 +788,16 @@ TeachWhat! allows you to store details of a student and view it back later on.
    1. Condition: An existing student should be in the list.
    2. Assuming an existing student has an index of 1, enter the command `student 1`.
    3. Expected: The details of that student should be shown on the right.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Input constraints:**<br>
+ - Student name must be alphanumeric.
+ - Student name is limited to 50 characters.
+ - Phone number is limited to 20 digits.
+ - Address is limited to 100 characters.
+ - Email address is limited to 100 characters.
+ - Email address must have 2 characters after the @ symbol.
+</div>
 
 [return to top ↑](#table-of-contents)
 
