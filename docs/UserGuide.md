@@ -31,7 +31,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Upload an image: `upload`](#upload-an-image--upload)
   - [View image of client: `viewimage`](#view-image-of-client-viewimage)
   - [Setting a reminder for a client: `remind`](#setting-a-reminder-for-a-client-remind)
-  - [Open Reminder window: `rm`](#open-reminder-window)
+  - [Open Reminder window: `rm`](#open-reminders-window-rm)
   - [Displaying statistics: `stats`](#displaying-statistics-stats)
 - [Future Features](#future-features-coming-soon)
 - [Storage](#storage)
