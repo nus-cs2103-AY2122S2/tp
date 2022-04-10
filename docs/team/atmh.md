@@ -55,17 +55,17 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * Updated `Person#toString()`to better represent tags when displayed (PR [\#184](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/184))
   <br><br>
   * Contributed significantly to improving test coverage (PR [\#50](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/50), [\#58](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/58), [\#88](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/88), [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94), [\#114](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/114), [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133), [\#150](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/150), [\#163](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/163), [\#178](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/178), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
-  
+  <br><br>
 
 * **Documentation**:
-  <br><br>
+  
   * User Guide:
     * Added documentation for `Memo`, `ContactedDate`, `undo`, `redo`, `deletetag`, preventing duplicates, ignoring case sensitivity, trimming extra spaces, preventing extraneous parameters, `add` and `edit` (PR [\#25](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/25), [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94), [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133), [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144), [\#168](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/168), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#234](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/234), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#239](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/239), [\#240](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/240))
     * Updated FAQ (PR [\#152](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/152))
     * Updated Quick start (PR [\#275](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/275))
     * Updated details about max integer and chronological ordering of contacts ([\#283](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/283))
     * Improved UserGuide formatting (PR [\#157](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/157), [\#159](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/159), [\#161](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/161), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#275](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/275), [\#283](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/283))
-  <br><br>
+  
   * Developer Guide:
     * Added implementation details of the `undo` and `redo` feature (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93))
     * Added design consideration details of the `Memo` and `ContactedDate` feature (PR [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144))
@@ -73,7 +73,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Updated UML diagrams ModelClassDiagram and BetterModelClassDiagram (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93), [\#109](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/109))
     * Added instructions for manual testing (PR [\#278](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/278))
     * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165))
-
+    <br><br>
     
 * **Contributions to team-based tasks**:
   * Setting up the GitHub organisation and team repo.
@@ -86,7 +86,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * Update index (PR [\#287](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/287))
   * Managed milestones `v1.1` - `v1.4b` (7 milestones) on GitHub ([link](https://github.com/AY2122S2-CS2103T-T17-4/tp/milestones?state=closed))
   * Managed releases `v1.2` - `v1.4` (6 releases) on GitHub ([link](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases))
-
+  <br><br>
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): (PR [\#61](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/61), [\#73](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/73), [\#77](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/77), [\#103](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/103), [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#132](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/132), [\#166](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/166), [\#174](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/174), [\#247](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/247), [\#250](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/250))
