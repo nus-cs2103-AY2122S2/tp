@@ -1103,7 +1103,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case UC01 - Add a student
+#### UC01 - Add a student
 
 **MSS**
 
@@ -1144,7 +1144,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
        Use case ends.
    
-#### Use case UC02 - Delete a student
+#### UC02 - Delete a student
 
 **MSS**
 
@@ -1173,7 +1173,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-#### Use case: UC03 - Delete all students from a module
+#### UC03 - Delete all students from a module
 
 **MSS**
 
@@ -1196,7 +1196,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case resumes from step 1.
 
-#### Use case: UC04 - Finding a student
+#### UC04 - Finding a student
 
 **MSS**
 
@@ -1219,7 +1219,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case resumes from step 1.
 
-#### Use case: UC05 - Check all the tasks that a student has
+#### UC05 - Check all the tasks that a student has
 
 **MSS**
 
@@ -1248,7 +1248,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-#### Use case: UC06 - Marking an undone task as complete
+#### UC06 - Marking an undone task as complete
 
 **MSS**
 
@@ -1283,7 +1283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-#### Use case: UC07 - Marking a done task as incomplete
+#### UC07 - Marking a done task as incomplete
 
 **MSS**
 
@@ -1318,7 +1318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-#### Use case UC08 - Edit a student
+#### UC08 - Edit a student
 
 **MSS**
 
@@ -1353,7 +1353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-#### Use case: UC09 - Save a copy of the data in TAPA
+#### UC09 - Save a copy of the data in TAPA
 
 **MSS**
 
@@ -1381,7 +1381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-#### Use case: UC10 - List all students
+#### UC10 - List all students
 
 **MSS**
 
@@ -1396,7 +1396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC11 - Assign a task to a student
+#### UC11 - Assign a task to a student
 
 **MSS**
 1. User requests TAPA to assign a task to a student. (This can be done for an individual student or for all students taking the same module)
@@ -1424,7 +1424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC12 - View the completion status of a particular task
+#### UC12 - View the completion status of a particular task
 
 **MSS**
 
@@ -1451,7 +1451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-#### Use case: UC13 - Delete a task assigned to a student
+#### UC13 - Delete a task assigned to a student
 
 **MSS**
 
@@ -1492,7 +1492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC14 - Sorting list of students by their number of incomplete tasks in descending order
+#### UC14 - Sorting list of students by their number of incomplete tasks in descending order
 
 **MSS**
 
@@ -1505,7 +1505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC15 - Finding out what a certain command does
+#### UC15 - Finding out what a certain command does
 
 **MSS**
 
