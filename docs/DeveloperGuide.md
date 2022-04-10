@@ -355,6 +355,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 | B        | Users who can type fast                             | Enter commands quickly on HackNet                                     | Navigate through HackNet faster                                                       |
 | B        | Users with need to manage large number of contacts  | Manage large number of contacts effortlessly                          | Search for contacts through the use of different search options easily / add contacts |
 | B        | User who value my privacy                           | Make my contact private so others cannot share it                     | Only users that directly share contacts with me will have my contact                  |
+
 *{More to be added}*
 
 ### Use cases
