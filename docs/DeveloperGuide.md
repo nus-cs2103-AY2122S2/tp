@@ -62,6 +62,11 @@ Refer to the guide [Setting up and getting started](SettingUp.md).
 --------------------------------------------------------------------------------------------------------------------
 
 ## Design <a id="design"></a>
+<div markdown="span" class="alert alert-primary">
+
+:bulb: if the image is too small, try opening it in a new tab by right-clicking the image and select "Open image in new tab" for a better view.
+
+</div>
 
 ### Architecture <a id="architecture"></a>
 ![Architecture Diagram of the Tinner](images/ArchitectureDiagram.png)
@@ -926,10 +931,9 @@ Tinner is a challenging venture as we are modifying the AB3 address book applica
 
 Some of the difficulties and challenges faced when implementing the features are as followed: <br/>
 * `addRole`, `editRole`, `deleteRole`:  Even though the implementation of `Role` commands are adapted from the commands in AB3, it was challenging due to the close coupling between `Company` and `Role`. While having separate logic and commands for both entities, there is also a need to ensure data consistency for cases such as `Role` cannot exist without `Company`. Thus, features such as `deleteCompany` have a cascade effect where the removing of a company will remove all `Role` associated with it. <br/>
-* `find`: <br/>
-* `reminder`: <br/>
-* `setWindow` <br/>
-* `favourite`, `unfavourite`, `listFavourite` <br/>
+* `find`: The implementation of the find was different from that of AB3's as we needed to account for two separate search predicates: company and role. Thus, it was rather complicated due to the fact that we had to run the company list through multiple filters based on different search scenarios such as when just the role is specified, just the company is specified, or both. <br/>
+* `reminder`: The implementation of the reminder system was rather tricky because it was our first time using the singleton pattern across the application. The UniqueReminderList behaves as a class that contains a single instance of a reminder list that can be retrieved with getInstance(); this took a while to get used to as it meant that the reminder list could be readily retrieved from almost anywhere within the application. The second hurdle was the implementation of the actual reminder window, since it involved the creation of new UI components and entailed several changes to the UniqueReminderList in terms of how Reminder items were retrieved. Wireframing software like Figma especially came in handy when drafting out the UI components before the writing them in JavaFX. <br/>
+* `setWindow`: The implementation of the setWindow command is quite unique as it is the only command that edits the UserPrefs. Challenges faced with this implementation included the testing of the command as the update of the reminder window only occurs after the application is restarted, making it only possible to test manually. <br/>
 
 Overall, we estimate our effort to be 20% more than the implementation of AB3. This is due to the implementation of `Role` as a key entity with many closely coupled relationships with other components. Also, managing both `Role` and `Company` entities separately, and we implemented close to double the key features implemented in AB3. 
 
