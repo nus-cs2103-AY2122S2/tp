@@ -265,7 +265,7 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
   and mm should only be between 00 and 59.
 * For Todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
 and time field to be edited. 
-* You can update a task with the same description, date and/or time.  
+* You can update a task to the same description, date and/or time.  
 
 <div style="page-break-after: always;"></div>
 
@@ -289,7 +289,9 @@ For Deadline and Event, the DATE must be in this format: YYYY-MM-DD <br><br>
  
 For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23 and mm should only be between 00 and 59. <br><br>
 
-For Event, the START_TIME must be earlier than the END_TIME.
+For Event, the START_TIME must be earlier than the END_TIME. <br><br>
+
+Editing a Task to another already existing task will result in an error.
 
 </div>
 
