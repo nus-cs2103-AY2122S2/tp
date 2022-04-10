@@ -392,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is`TrackBeau` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: find customer's detail by their name**
+**Use Case 1: find customer's detail by their name**
 
 **MSS**
 
@@ -407,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: find customer's details associated with a keyword**
+**Use Case 2: find customer's details associated with a keyword**
 
 **MSS**
 
@@ -420,15 +420,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Add a customer**
+**Use Case 3: Add a customer**
 
 
 **MSS**
 
-1.  User requests to see input format for adding a customer using `help`
-2.  TrackBeau shows command input formats
-3.  User requests to add a customer based on the input format
-4.  TrackBeau adds the customer to the list
+1.  User requests to add a customer using specified input format
+2.  TrackBeau adds the customer to the list
 
     Use case ends.
 
@@ -436,10 +434,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The input format is wrong.
     * 2a1. TrackBeau shows an error message.
+    * 2a2. User requests to see input format for adding a customer using `help`
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
-**Use case: Edit a customer**
+**Use Case 4: Edit a customer**
 
 **MSS**
 
@@ -457,16 +456,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-*{More to be added}*
-
-**Use case: user wishes to exit the application**
+**Use Case 5: user wishes to exit the application**
 
 1.  User requests to exit the application
 2.  AddressBook closes the application
 
     Use case ends.
 
-**Use case: add a booking**
+**Use Case 6: add a booking**
 
 **MSS**
 
@@ -477,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-**Use case: delete a booking**
+**Use Case 7: delete a booking**
 
 **MSS**
 
@@ -491,6 +488,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+ **Use Case 8: Plot a chart**
+
+**MSS**
+
+1.  User updates customer information
+2.  User requests to plot a chart using specified command.
+3.  TrackBeau shows the chart window as a pop-up.
+
+    Use case ends.
+
+**Extensions**
+
+ 
+* 1a. Refer to Use Case 3
+ 
+* 2a. The input format is wrong.
+    * 2a1. TrackBeau shows an error message.
+    * 2a2. User requests to see input format for plotting a chart using `help`
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 

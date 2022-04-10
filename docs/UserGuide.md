@@ -228,7 +228,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 **:exclamation: Caution:**<br>
 * When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.<br>
 * By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.
-* Note that 2 customers cannot have the same phone number.
+* Note that 2 customers cannot have the same phone number or same email.
 
 </div>
 
@@ -252,7 +252,6 @@ Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 **:exclamation: Caution:**<br>
 * KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`
 * For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
-* For tags, using `findc h/Oily Dry` will search for customers that either have oily or dry hair.
 * The search is case-insensitive. e.g, `John` will match `john`
 * Only full words will be matched e.g. `findc n/Alex Yeoh` will not match customers who are `Alex Tan`, even if they both are called `Alex`
 
@@ -484,7 +483,6 @@ Examples:
 * `plotAll`
    
 #### 4.4.3 Plot chart on popular staff amongst customers: `plotStaff`
-![image](https://user-images.githubusercontent.com/83572953/160984633-ba703f5b-0dda-4a88-b31c-d4f317eeb4f9.png)
 
 Plots a pie chart on the most popular staff as indicated by customers as their preferred staff. If there are most than 10 staffs indicated as preferred by customers in TrackBeau, only the top 10 most popular staff will be included in the piechart to let the chart be still meaningful.
 
@@ -494,7 +492,6 @@ Examples:
 * `plotStaff`
 
 #### 4.4.4 Plot chart on popular services amongst customers: `plotService`
-![image](https://user-images.githubusercontent.com/83572953/160984673-67637ccd-4104-40a0-a21f-0cca42e7d8ee.png)
 
 Plots a pie chart on the most popular service as indicated by customers as their preferred service. If there are most than 10 services indicated as preferred by customers in TrackBeau, only the top 10 most popular services will be included in the piechart to let the chart be still meaningful.
 
@@ -504,7 +501,6 @@ Examples:
 * `plotService`
    
 #### 4.4.5 Plot chart on common allergies amongst customers: `plotAllergy`
-![image](https://user-images.githubusercontent.com/83572953/160984906-59c238f4-d145-495a-8cf2-64e525014fc8.png)
 
 Plots a pie chart on the most common allergies amongst customers. If there are most than 10 allergies in customer data, only the top 10 most common allergies will be included in the piechart to let the chart be still meaningful.
 
@@ -524,7 +520,6 @@ Examples:
 * `plotSkin`   
 
 #### 4.4.7 Plot chart on common hair type amongst customers: `plotHair`
-![image](https://user-images.githubusercontent.com/83572953/160984823-3a8c47cc-8942-4d5a-87c9-cf0661f724c2.png)
 
 Plots a pie chart on the most common hair type amongst customers. If there are most than 10 hair type in customer data, only the top 10 most hair types will be included in the piechart to let the chart be still meaningful.
 
@@ -534,7 +529,6 @@ Examples:
 * `plotHair`
    
 #### 4.4.8 Plot chart on monthly customers gained in the current year: `plotMonthlyCustomers`
-![image](https://user-images.githubusercontent.com/83572953/160984859-f1d0a4f4-00f6-4719-b6ab-02da9a47da8f.png)
 
 Plots a pie chart on monthly customers gained in the current year.
 
