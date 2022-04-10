@@ -77,6 +77,7 @@ to see the code contributions I have made.
    * Included object diagrams to depict the state of the relevant classes at different points of the command execution.
    * Used sequence diagram to show the interaction between entities of the program.
 2. Added the details of the [`Storage` component](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/DeveloperGuide.md#storage-component)
+3. Added manual testing instructions for `Assign` and `Unassign` command.
 ---
 
 ### Contributions to team-based tasks
