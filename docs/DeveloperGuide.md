@@ -26,6 +26,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about `AddressBook` named classes/packages:**<br>
+
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes or the application's package, unless otherwise stated.
+
+</div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -123,22 +131,17 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
-* stores the currently 'selected' `Candidate` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the TAlent Assistant™'s data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
+* stores the currently 'selected' `Candidate` objects (e.g., results of a `find` or `sort` query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bounded to this list so that the UI automatically updates when the data in the list change.
+* stores Candidates' `Interview` objects (which are contained in a `UniqueInterviewList` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Candidate` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Candidate` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 ### Storage component
 
@@ -168,26 +171,6 @@ This section describes some noteworthy details on how certain features are imple
 TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
 
 </div>
-
-### Candidate model
-
-#### Previous Implementation
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-#### Current Implementation
-
-To suit the direction of where TAlent Assistant™ is headed to, the previous `Candidate` model has been refactored. Some new entities have been introduced to the new `Candidate` model.
-
-List of new entities:
-1. `StudentId`
-2. `Course`
-3. `Seniority`
-4. `ApplicationStatus`
-5. `InterviewStatus`
-6. `Availability`
-
-<img src="images/CandidateModelClassDiagram.png" />
 
 ### Add feature
 
@@ -710,16 +693,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | update the remark for a candidate in the system         | keep a note of important details relating to the candidate.                        |
 | `* * *`  | new user | view all available commands                             | get familiarised with the system.                                                  |
 
-
 ### Use cases
 
 (For all use cases below, the **System** is `TAlent Assistant™` and the **Actor** is the `professor`, unless specified otherwise)
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes on the abbreviations:**<br>
-
-TA - Teaching Assistant
+**:information_source: Notes on the abbreviations:** TA - Teaching Assistant
 
 </div>
 
