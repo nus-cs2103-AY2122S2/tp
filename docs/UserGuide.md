@@ -206,8 +206,6 @@ Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
-|                   |                                                              |
-|-------------------|--------------------------------------------------------------|
 | Compulsory Fields | `NAME`, `PRICE`                                              | 
 | Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
 
