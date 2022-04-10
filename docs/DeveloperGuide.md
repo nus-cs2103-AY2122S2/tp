@@ -683,6 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​  | I want to …​                                            | So that I can…​                                                                    |
 |----------|----------|---------------------------------------------------------|------------------------------------------------------------------------------------|
 | `* * *`  | user     | add a candidate to the system                           | keep track of their application details for consideration.                         |
+| `* * *`  | user     | focus on a specific candidate from the system           | have a better understanding of the candidate.                                      |
 | `* * *`  | user     | edit a candidate in the system                          | correct any wrong inputs when I added this candidate.                              |
 | `* * *`  | user     | delete a candidate from the system                      | remove entries that I no longer need.                                              |
 | `* * *`  | user     | find a candidate in the system                          | access details of the candidate without having to go through the entire list.      |
@@ -690,6 +691,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | sort candidates in the system                           | view the candidates in a more organised manner based on a certain attribute field. |
 | `* * *`  | user     | view scheduled interviews within a specific time period | keep track of the upcoming interview schedule.                                     |
 | `* * *`  | user     | schedule TA candidates for interviews                   | keep track of the interview schedule.                                              |
+| `* * *`  | user     | retrieve the scheduled interview details of a candidate | work around my schedule for the interview.                                         |
+| `* * *`  | user     | re-schedule an interview                                | fit this interview into the candidate's schedule or even mine.                     |
+| `* * *`  | user     | unschedule a candidate with an interview                | revert the scheduling of the specific candidate.                                   |
 | `* * *`  | user     | update the remark for a candidate in the system         | keep a note of important details relating to the candidate.                        |
 | `* * *`  | new user | view all available commands                             | get familiarised with the system.                                                  |
 
