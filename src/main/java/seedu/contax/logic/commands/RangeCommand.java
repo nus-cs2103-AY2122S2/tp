@@ -130,7 +130,7 @@ public class RangeCommand extends Command {
      *
      * @param commandText            String of command
      */
-    private void checkCommandText(String commandText) throws CommandException{
+    private void checkCommandText(String commandText) throws CommandException {
         if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
                 && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
