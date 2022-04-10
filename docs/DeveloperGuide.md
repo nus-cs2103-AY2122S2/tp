@@ -280,7 +280,7 @@ There are three possible execution paths for this command.
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
 
-The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces. 
+The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
 
 **Sequence Diagram of Summarise Feature is shown below:**
 
@@ -318,7 +318,7 @@ The pie chart window mechanism implements the following sequence and interaction
 
 Pie Chart Window feature opens up a separate window that contains charts for the user to view.
 The window contains pie charts that summarises how each block is doing according to the types of covid statuses and a bar chart that
-summarises how many covid positive students each faculty has in the hall. 
+summarises how many covid positive students each faculty has in the hall.
 
 **Class Diagram of Pie Chart Window Feature is shown below:**
 
@@ -422,7 +422,7 @@ Additionally, there is a static final static message to be displayed to the user
 1. `MESSAGE_SUCCESS`
    - Scenario: Tracey database successfully cleared.
    - Message: "Tracey has been cleared!".
-   
+    
 **Interaction between objects when Clear Command is executed:**
 
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
@@ -483,23 +483,23 @@ The `edit` command is as follows:
 
 `edit [INDEX] [PREFIX/NEW_VALUE]...` where `[PREFIX/NEW_VALUE]...` indicates one or more new fields in which the user wishes to edit.
 
-The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work. 
+The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work.
 In addition, for attribute types that need to be unique for each `Person` e.g. `Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in Tracey.
 <br>e.g. Given the two following `Person` objects in Tracey:
 * `name`: John `Email`: john123@gmail.com (indexed 1)
 * `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
 
 The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
- 
+
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
 ####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
+Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-  
+
 ####**Class Diagram of Edit Feature is shown below**
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
@@ -519,7 +519,7 @@ Additionally, there are a few final static messages to be displayed to the user 
 4. `MESSAGE_SAME_INPUT`:
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
-  
+
 ####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
@@ -570,7 +570,7 @@ There are two possible execution paths for this command.
 
 #### Structure of Filter feature
 
-The following is a class diagram of the filter feature. 
+The following is a class diagram of the filter feature.
 
 **Class diagram of Filter feature is shown below:**
 ![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
@@ -599,7 +599,7 @@ The list mechanism implements the following sequence for the method call execute
 
 #### What is the list feature
 
-The list feature will display all students and their details on the main window. 
+The list feature will display all students and their details on the main window.
 Each student's name, phone number, email, address, block letter, faculty, matriculation number, covid status and tags will be shown in the form of cards.
 
 The `list` command is as follows:
@@ -712,7 +712,7 @@ In this section, the functionality of the undo and redo features, the expected e
 
 The undo feature allows users reverse an `add`, `edit`, or `delete` command.
 
-The redo feature allows users to reverse an `undo` command. 
+The redo feature allows users to reverse an `undo` command.
 
 #### Execution of undo feature
 
@@ -755,7 +755,7 @@ The restoreHistory() and restoreOriginal() operations are exposed in the `Model`
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`. 
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
@@ -830,7 +830,7 @@ In this section, the functionality of the `archive` feature, the expected execut
 
 This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
-This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date. 
+This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date.
 When the user uses this command, a folder named `archive` will be created if it is not yet created at the directory relative to the database file.
 Inside this `archive` folder will contain subdirectories named after the user's computer local date in `DDMMYY` format and inside these subdirectories will contain the archived files which is named after the user's computer
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
@@ -859,7 +859,7 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 ####**Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
+Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
@@ -872,7 +872,7 @@ the archived file will be saved in its respective file path and a success messag
 The above figure illustrates the important interactions of `ArchiveCommand` when the user successfully archived the current working database file.
 
 When a user inputs `archive`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser` to check if there are any extra parameters. If the input is valid, the file path of
-the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the 
+the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
 ### Resizing result display window feature
@@ -1277,8 +1277,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing the data
 
-1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student 
-   
+1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
    a. Test case: `list` <br>
    Expected: All students are shown on the Main Window.
 
