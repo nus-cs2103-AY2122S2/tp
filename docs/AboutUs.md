@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tan Jie Wei
 
-<img src="images/jiewei98.jpg" width="200px">
+<img src="images/jiewei98.png" width="200px">
 
 [[github](http://github.com/jiewei98)]
 [[portfolio](team/jiewei98.md)]
