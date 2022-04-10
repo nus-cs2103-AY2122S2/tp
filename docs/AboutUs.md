@@ -52,8 +52,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/goalfix.png" width="200px">
 
-[Github](http://github.com/goalfix)
-[portfolio](team/goalfix.md)
+[[Github](http://github.com/goalfix)]
+[[portfolio](team/goalfix.md)]
 
 * Role: Developer
 * Responsibilities: Git expert, Scheduling and tracking, In charge of `Interview` component.
