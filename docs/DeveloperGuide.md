@@ -616,11 +616,37 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `archive 1`<br>
        Expected: No change. Status message says that the entry is already unarchived.
 
-5. Unarchiving/archiving persons or companies
+5. Archiving all persons
+    1. Prerequisites: List all unarchived persons using the `listp s/unarchived` command. Multiple persons in the list.
+    2. Test case: `archive_all`<br>
+       Expected: Empty list is displayed. Status message says something to the effect of "archived all entries"
+
+6. Unarchiving all persons
+    1. Prerequisites: List all archived persons using the `listp s/archived` command. Multiple persons in the list.
+    2. Test case: `unarchive_all`<br>
+       Expected: Empty list is displayed. Status message says something to the effect of "unarchived all entries"
+
+7. Unarchiving/archiving persons or companies
    1. Follow similar procedure to the above, but use `listc` or `liste` beforehand instead of `listp`.
+
+### Finding entries
+
+[TODO]
+
+### Sorting entries
+
+[TODO]
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data file
+   1. Open `addressbook.json` in the `data/` folder
+   2. In the first line, add the letter `a` after the bracket
+   3. Save and close the file
+   4. Start InternBuddy <br>
+   Expected: All lists are empty.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}
+2. Dealing with missing data file
+   1. Delete `addressbook.json`
+   2. Start InternBuddy <br>
+   Expected: Sample company list is displayed. Persons and Events list also have sample entries.
