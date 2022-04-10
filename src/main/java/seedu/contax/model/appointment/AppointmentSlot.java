@@ -25,4 +25,20 @@ public class AppointmentSlot extends ScheduleItem {
                 + "; End Date Time: "
                 + getEndDateTime();
     }
+
+    /**
+     * Returns true if {@code other} is an {@code AppointmentSlot} and spans the same {@code TimeRange}.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AppointmentSlot)) {
+            return false;
+        }
+
+        return super.equals(other);
+    }
 }

@@ -7,7 +7,6 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
@@ -25,13 +24,6 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
-
-    /**
-     * Returns the AddressBook.
-     *
-     * @see seedu.contax.model.Model#getAddressBook()
-     */
-    ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons. */
     ObservableList<Person> getFilteredPersonList();
