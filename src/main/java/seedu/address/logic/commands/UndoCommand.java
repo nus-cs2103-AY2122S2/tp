@@ -11,8 +11,6 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_NO_COMMAND_TO_UNDO = "There are no commands to undo.";
-    public static final String MESSAGE_NO_PREVIOUS_ADDRESS_BOOK_STATE =
-            "There is no saved history of TAPA to revert to.";
     public static final String MESSAGE_SUCCESS = "Command undone:\n\"%1$s\"";
 
     @Override
@@ -25,7 +23,7 @@ public class UndoCommand extends Command {
         String previousCommand = model.getPreviousCommandText();
 
         if (model.isAddressBookHistoryEmpty() || model.getAddressBookHistory() == null) {
-            throw new CommandException(MESSAGE_NO_PREVIOUS_ADDRESS_BOOK_STATE);
+            throw new CommandException(MESSAGE_NO_COMMAND_TO_UNDO);
         }
 
         model.undoAddressBook();

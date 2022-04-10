@@ -65,7 +65,7 @@ public class UndoCommandTest {
         model.getAddressBookHistory().getAddressBooks().clear();
 
         UndoCommand undoCommand = new UndoCommand();
-        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_PREVIOUS_ADDRESS_BOOK_STATE);
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_NO_COMMAND_TO_UNDO);
     }
 
     @Test
