@@ -50,19 +50,16 @@ public class SortSellerCommandParserTest {
     @Test
     public void parse_wrongComparedItem_failure() {
         assertParseFailure(parser, " " + PREFIX_COMPARE + "money " + PREFIX_ORDER + "asc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortSellerCommand.MESSAGE_NOT_SORTABLE));
+                SortSellerCommand.MESSAGE_NOT_SORTABLE);
     }
 
     @Test
     public void parse_wrongOrder_failure() {
         assertParseFailure(parser, " " + PREFIX_COMPARE + "time " + PREFIX_ORDER + "ascending",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortSellerCommand.MESSAGE_INCORRECT_ORDER));
+                SortSellerCommand.MESSAGE_INCORRECT_ORDER);
 
         assertParseFailure(parser, " " + PREFIX_COMPARE + "name " + PREFIX_ORDER + "descending",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortSellerCommand.MESSAGE_INCORRECT_ORDER));
+                SortSellerCommand.MESSAGE_INCORRECT_ORDER);
     }
 
 
