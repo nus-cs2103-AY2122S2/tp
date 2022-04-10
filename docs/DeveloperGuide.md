@@ -670,7 +670,7 @@ Guarantees: a specified internship role is successfully removed from the associa
 
 **Extensions**
 
-&emsp;a. The input does not adhere to the command format <br/>
+&emsp;3a. The input does not adhere to the command format <br/>
 &emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
 &emsp;&emsp;&emsp;&emsp; Use case resumes at step 2
 
@@ -679,10 +679,48 @@ Guarantees: a specified internship role is successfully removed from the associa
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
 &emsp;3c. The input internship role index is invalid <br/>
-&emsp;&emsp;c1. Tinner shows an internship role index out of bounds error message <br/>
+&emsp;&emsp;3c1. Tinner shows an internship role index out of bounds error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC07 - List all companies**
+
+**Use case: UC07 - Find a company with an internship role**
+
+Precondition: there exists at least one internship role associated with a company
+
+Guarantees: all internship role which matches the user input will be successfully displayed from
+all companies matches the user input
+
+**MSS**
+
+1. User requests to find some internship roles in some company and provides keywords for both.
+2. Tinner displays all companies that matches the company keyword and have at least one role which matches the role keyword.
+
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp;1b. The input company keyword is invalid <br/>
+&emsp;&emsp;1b1. Tinner shows invalid company name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1c. The input role keyword is invalid <br/>
+&emsp;&emsp;1c1. Tinner shows invalid role name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1d. The input role keyword is absent <br/>
+&emsp;&emsp;1d1. Tinner shows all companies that matches the company keyword and all their roles <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+&emsp;1e. The input company keyword is absent <br/>
+&emsp;&emsp;1e1. Tinner shows all companies with at least one role that matches the role keyword and display all <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+
+**Use case: UC08 - List all companies**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -695,7 +733,7 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
-**Use case: UC08 - Using the reminder feature**
+**Use case: UC09 - Using the reminder feature**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -710,7 +748,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
     
    Use case ends
 
-**Use case: UC09 - Using the set reminder window feature**
+**Use case: UC10 - Using the set reminder window feature**
 
 Guarantees: the reminder window will be successfully updated
 
@@ -728,7 +766,7 @@ Guarantees: the reminder window will be successfully updated
 &emsp;&emsp;1a1. Tinner shows an invalid input reminder window error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Use case: UC10 - Favouriting a company and viewing all favourited companies**
+**Use case: UC11 - Favouriting a company and viewing all favourited companies**
 
 Precondition: there exist at least one company in Tinner
 
@@ -759,7 +797,7 @@ Guarantees: a company is successfully favourited within Tinner
 &emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC11 - Unfavouriting a company**
+**Use case: UC12 - Unfavouriting a company**
 
 Precondition: there exist at least one company in Tinner 
 
