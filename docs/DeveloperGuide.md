@@ -1458,7 +1458,7 @@ testers are expected to do more *exploratory* testing.
 | `addtag n/Clients`                                                      | Adds a new tag called Clients                                  |
 | `edittag 1 t/Blocked`                                                   | Edits the tag at index 1 to be named Blocked                   |
 | `deletetag 1`                                                           | Deletes the tag at index 1                                     |
-| `addappt n/Call Bob d/14-02-2022 t/11:00 p/2 l/60`                      | Adds an appointment named Call Bob                             |
+| `addappt n/Call Bob d/14-02-2022 t/11:00 l/60`                          | Adds an appointment named Call Bob                             |
 | `deleteappt 1`                                                          | Deletes the appointment at index 1                             |
 | `editappt 1 n/Call Boss`                                                | Changes the name of the appointment at index 1 to Call Boss    |
 | `apptbetween sd/21-10-2022`                                             | List all appointments from 21 october 2022                     |
