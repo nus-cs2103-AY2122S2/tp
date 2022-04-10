@@ -51,8 +51,9 @@ public class AddTaskCommand extends Command {
 
             Group groupToAddTask = specificGroup;
             Group groupAddedTask = createAddedTaskGroup(groupToAddTask, taskToAdd, model);
+            assert groupToAddTask.isSameGroup(groupAddedTask) : "The identity of the two groups should be the same";
 
-            model.setGroup(specificGroup, groupAddedTask);
+            model.setGroup(groupToAddTask, groupAddedTask);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd));
         } else {
@@ -64,11 +65,10 @@ public class AddTaskCommand extends Command {
      * Creates and returns a {@code Group} with the details of {@code groupToAddTask}
      */
     private static Group createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model) {
-        assert groupToAddTask != null;
-        assert taskToAdd != null;
-
         model.addTask(taskToAdd, groupToAddTask);
+
         Group groupAddedTask = model.getGroup(groupToAddTask);
+        assert groupAddedTask != null : "group should not be null";
 
         return groupAddedTask;
     }

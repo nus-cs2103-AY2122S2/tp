@@ -40,6 +40,7 @@ public class DeleteGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Group> lastShownList = model.getFilteredGroupList();
+        assert lastShownList != null : "lastShownList should not be null";
 
         if (!lastShownList.contains(group)) {
             throw new CommandException(MESSAGE_NON_EXISTENT_GROUP);

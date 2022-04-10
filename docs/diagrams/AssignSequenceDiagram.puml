@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
 participant ":AssignCommandParser" as AssignCommandParser LOGIC_COLOR
-participant "g:AssignCommand" as AssignCommand LOGIC_COLOR
+participant "a:AssignCommand" as AssignCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,23 +33,23 @@ create AssignCommand
 AssignCommandParser -> AssignCommand
 activate AssignCommand
 
-AssignCommand --> AssignCommandParser : g
+AssignCommand --> AssignCommandParser : a
 deactivate AssignCommand
 
-AssignCommandParser --> ArchDukeParser : g
+AssignCommandParser --> ArchDukeParser : a
 deactivate AssignCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AssignCommandParser -[hidden]-> ArchDukeParser
 destroy AssignCommandParser
 
-ArchDukeParser --> LogicManager : g
+ArchDukeParser --> LogicManager : a
 deactivate ArchDukeParser
 
 LogicManager -> AssignCommand : execute()
 activate AssignCommand
 
-AssignCommand -> Model : assignPerson(1, example)
+AssignCommand -> Model : assignPerson(p, example)
 activate Model
 
 Model --> AssignCommand

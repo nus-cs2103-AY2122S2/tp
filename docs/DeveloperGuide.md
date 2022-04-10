@@ -7,12 +7,6 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -161,7 +155,64 @@ This section describes some noteworthy details on how certain features are imple
 
 ### About delete student contact feature
 
-The delete student contact feature allows users to delete an existing student contact from the student contact list.
+The delete student contact feature allows users to delete an existing student contact from the student contact list
+via the command `delete INDEX`.
+
+### How it is implemented
+
+The `delete` command mechanism is facilitated by the `DeleteCommand` and the `DeleteCommandParser`.
+It allows users to delete a student contact from the student contact list.
+It uses the `AddressBook#removePerson(Person key)` which is exposed in the `Model`
+interface as `Model#deletePerson(Person personToDelete)`. Then, the `remove(Person person)` is called on the `UniquePersonList`
+in `AddressBook` to delete the student contact from the list. <br>
+
+A modification from AB3 delete mechanism is that the `delete` command also involves the facilitation of the `AddressBook#deassignPerson(Person persontToDeassign, Group group)`
+which is exposed in the `Model` interface as `Model#deassignPerson(Person person, Group group)`, which result in the call of `Group#deassign(Person person)` to 
+deassign the deleted student contact from all previously assigned groups.
+
+#### Parsing user input
+
+1. The user inputs the `delete` command.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteCommandParser`.
+
+3. The `DeleteCommandParser` then calls the `ParserUtil#parseIndex()` to check for the validity of the `INDEX`. 
+At this stage, if the `INDEX is invalid or is not present`, `ParseException` would be thrown.
+
+4. The `DeleteCommandParser` then creates the `DeleteCommand` based on the processed input.
+
+#### Command execution
+
+5. The `LogicManager` executes the `DeleteCommand`.
+
+6. The `DeleteCommand` calls the `Model#getFilteredPersonList()` to get the unmodifiable view of the filtered person list to get the target 
+person to delete based on the provided `INDEX`. <br><br> At this stage, `CommandException` would be thrown if the input `INDEX` 
+is invalid (i.e. `INDEX` exceeds the size of the student contact list). 
+
+7. The `DeleteCommand` the calls the `Model#deletePerson(Person personToDelete)` to delete the target student contact from the 
+student contact list.
+
+8. After which, the `Model#getFilteredGroupList()` is called to get the unmodifiable view of the filtered group list.
+
+9. The iteration through the groups in the obtained group list is being done to check if the target student contact was assigned 
+to the groups. `Model#deassignPerson(Person person, Group group)` is called to deassign the student contact from all previously assigned groups. 
+
+#### Displaying of result
+
+10. Finally, the `DeleteCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+   The GUI would also be updated on this change in the student contact list and group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `delete` mechanism works:
+
+![](images/DeleteUpdatedSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `delete` command:
+
+![](images/DeleteCommandActivityDiagram.png)
 
 ## Add group feature
 
@@ -598,10 +649,10 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 2**: finds through partial search (eg. `Dav` to find `David`)
     * Pros: Allows the users to save time as they are not required to input the full details.
     * Cons: In a situation when there are multiple contacts with similar names (i.e. `Ben`, `Benedict`, `Benny`), a partial search may not be really beneficial as the users would still require to input the almost to full name in order to get the desired person.
-  
+
 ## \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -676,12 +727,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+  
 
 
 
