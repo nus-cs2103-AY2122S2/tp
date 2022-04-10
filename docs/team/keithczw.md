@@ -13,18 +13,27 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
 
 ### My Contributions
 
-* **New Features**:
+* **New Feature**:
   * Added ability to add/remove memberships to/from clients (Pull request [\#69](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/69))
     * Functionality: Allow the user to add membership to a client by specifying the client and membership 
     tier (Gold,Silver,Bronze). The membership is displayed on the UI as a different color based on the tier.
     * Justification: This function allows business owners to award their clients by giving them memberships.
+
+
+* **New Feature**:
   * Allowed ability to find all clients by membership (Pull request [\#127](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/127))
     * Functionality: Allow the user to filter clients based on their membership tier, or filter all clients with a membership.
     * Justification: This function allows business owners more easily find their members.
+
+
+* **New Feature**:
   * Added ability to delete filtered contacts from find function or listMembers function (Pull request [\#9](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/9))
     * Functionality: Allow the user to delete clients based on what they have filtered from either the find function or listMembers function.
     * Justification: This function allows business owners to more easily manage their clients by removing groups of them based on filters.
 
+
+* **Enhancements to existing features**:
+  * Made the find function able to search for membership start dates
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=KeithCZW)
 
@@ -36,10 +45,12 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the `clearFiltered` feature [\#9](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/9)
-    * Added documentation for `Memberships` [\#69](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/69)
+    * Added documentation for the `clearFiltered` feature [\#158](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/158)
+    * Added documentation for `Memberships` [\#158](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/158)
+      * Includes documentation for  `addMembership`,`removeMembership` and `listMembers`
   * Developer Guide:
-    * Added implementation details of the `clearFiltered` feature
+    * Added implementation details of `ClearFiltered`
+    * Added manual testing instructions for `Membership` functionality and clearing filtered clients
     * Added implementation details of `Memberships`
 
 * **Community**:
