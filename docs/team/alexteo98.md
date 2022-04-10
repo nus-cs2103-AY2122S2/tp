@@ -33,6 +33,8 @@ had to be updated and new tests had to be created for the new class and commands
       * Identified previously closed issue regarding test routines, due to missing update on test data files.
     * [Fix bug on Filter feature on multiple skill inputs](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62)
       * Fixed bug on Filter feature doing nothing when multiple skills are entered as filter criteria. Improved upon the feature to accept multiple skills afterwards.
+    * [Fix `NumberFormatException` when parsing large skill proficiencies](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/177)
+      * Identified and fixed bug when large integers caused `NumberFormatException` to be thrown when a large value was entered for skill proficiency.
 
 * **Documentation**:
     * User Guide:
@@ -50,5 +52,6 @@ had to be updated and new tests had to be created for the new class and commands
 [#57](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/57),
 [#63](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/63),
 [#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154),
-[#164](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/164)
+[#164](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/164),
+[#167](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/167)
 
