@@ -8,8 +8,8 @@ if () then ([User inputted additional\nparameters besides just "list"])
     : Tracey throws ParseException;
 
     else ([Else])
-        :show the user a list of\nstudents with their particulars;
-        :send a SUCCESS message;
+        :Show the user a list of\nstudents with their particulars;
+        :Send a SUCCESS message;
 
 endif
 :A response is returned to user;
