@@ -18,7 +18,7 @@ LogicManager -> AddressBookParser : parseCommand(redo)
 activate AddressBookParser
 
 create RedoCommand
-AddressBookParser -> RedoCommand
+AddressBookParser -> RedoCommand : RedoCommand()
 activate RedoCommand
 
 RedoCommand --> AddressBookParser
