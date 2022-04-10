@@ -1759,30 +1759,30 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting students by index or student ID
 
-1. Deleting a student using their index while all students are being shown
+1. Deleting a student(s) using their index while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
       
    1. Test case: `delete 1 2`<br>
-      Expected: First and second contacts are deleted from the list. Status message states that 2 students were deleted.
+      Expected: First and second students are deleted from the list. Status message states that 2 students were deleted.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete 0 1`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete -1`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete x`, where x > number of students in the list<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
 
 1. Deleting a student using their student ID
 
@@ -1795,16 +1795,16 @@ testers are expected to do more *exploratory* testing.
       Expected: The student with student ID "A0000000Z" deleted from the list. Details of the deleted student shown in the status message.
       
    1. Test case: `delete i/A9999999X`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
 
    1. Test case: `delete i/@@@`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete i/`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
    1. Test case: `delete`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
 ### Deleting students by module code
 
@@ -1819,19 +1819,96 @@ testers are expected to do more *exploratory* testing.
       Expected: The students with module code "CS2100" are deleted from the list. Status message states number of students deleted.
       
    1. Test case: `deleteModule m/CS9999`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
 
    1. Test case: `deleteModule m/@@@`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
     1. Test case: `deleteModule m/`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
     1. Test case: `deleteModule`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
       
     1. Test case: `deleteModule m/CS CS`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
+      
+### Finding students
+
+1. Finding a student using their name
+
+      1. Prerequisites: 
+          1. Sample data is loaded in TAPA. 
+          2. One or more students have "John" in their name.
+          3. No students have "Dueet" in their name.
+
+   1. Test case: `find n/John`<br>
+      Expected: All students with "John" in their names are listed. Status message states how many students were listed.
+      
+   1. Test case: `find n/Dueet`<br>
+      Expected: Student list displays no results. Status message states that 0 students were listed.
+      
+   1. Test case: `find n/John i/AAA`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find n/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find n/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+1. Finding a student using their student ID
+
+      1. Prerequisites: 
+          1. Sample data is loaded in TAPA. 
+          2. One student has "A0000000Z" as their student ID. 
+          3. No student has "A9999999X" as their student ID. 
+
+   1. Test case: `find i/A0000000Z`<br>
+      Expected: The student with student ID "A0000000Z" is listed. Status message states that one student was listed.
+      
+   1. Test case: `find i/A9999999X`<br>
+      Expected: No students listed. Status message states that 0 students were listed.
+      
+   1. Test case: `find i/A0000000Z n/John`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find i/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find i/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+1. Finding a student using their module code
+
+      1. Prerequisites: 
+          1. Sample data is loaded in TAPA. 
+          2. One or more students have "CS2100" as their module code. 
+          3. No student has "CS9999" as their module code. 
+
+   1. Test case: `find m/CS2100`<br>
+      Expected: All students with "CS2100" as their module code are listed. Status message states how many students were listed.
+      
+   1. Test case: `find m/CS9999`<br>
+      Expected: No students listed. Status message states that 0 students were listed.
+      
+   1. Test case: `find m/CS2100 i/A0000000Z`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+
+   1. Test case: `find m/@@@`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find m/`<br>
+      Expected: Find command not executed. Error details shown in the status message.
+      
+   1. Test case: `find`<br>
+      Expected: Find command not executed. Error details shown in the status message.
 
 ### Saving data
 
