@@ -130,7 +130,7 @@ Adds a student to TeachWhat!
 
 **Command word**: `addstudent` / `as`
 
-**Format**: `addstudent <-n STUDENT_NAME> -p <PHONE_NO> [-e EMAIL] [-a ADDRESS] [-t TAG]` 
+**Format**: `addstudent <-n NAME> -p <PHONE_NO> [-e EMAIL] [-a ADDRESS] [-t TAG]` 
 
 **Example**: `addstudent -n James -p 999 -e jamesboyo@gmail.com -a 34 Lor 11 Geylang -t hardworking -t small`
 
