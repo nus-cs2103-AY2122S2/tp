@@ -1144,26 +1144,26 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `focus` on a `Candidate` in the system. <br>
    Expected: The `Candidate's` information will be shown on the center panel.
    
-   4. Test case: `focus` on an `INDEX` that is out of bounds. <br>
+   2. Test case: `focus` on an `INDEX` that is out of bounds. <br>
       Expected: No `Candidate` will be shown in the center panel, and an error message will be displayed. 
 
-   5. Test case: `schedule clear` when `Candidate's` information is currently displayed on the center panel. <br>
+   3. Test case: `schedule clear` when `Candidate's` information is currently displayed on the center panel. <br>
       Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
    
-   6. Test case: `schedule add` when `Candidate's` information is currently displayed on the center panel. <br>
+   4. Test case: `schedule add` when `Candidate's` information is currently displayed on the center panel. <br>
       Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
    
-   7. Test case: `schedule edit` when `Candidate's` information is currently displayed on the center panel. <br>
+   5. Test case: `schedule edit` when `Candidate's` information is currently displayed on the center panel. <br>
       Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
    
-   8. Test case: `edit as/` when `Candidate's` information is currently displayed on the center panel.<br>
+   6. Test case: `edit as/` when `Candidate's` information is currently displayed on the center panel.<br>
       Expected: `Candidate's` `ApplicationStatus` will be automatically refreshed on the center panel.
 
-   9. Test case: `edit` other attributes of `Candidate` when `Candidate's` information is currently displayed on the center panel. <br>
+   7. Test case: `edit` other attributes of `Candidate` when `Candidate's` information is currently displayed on the center panel. <br>
       Expected: The center panel will be cleared. 
 
-   10. Test case: `clear` when `Candidate's` information is currently displayed on the center panel. <br>
-       Expected: The center panel will be cleared.
+   8. Test case: `clear` when `Candidate's` information is currently displayed on the center panel. <br>
+      Expected: The center panel will be cleared.
 
 ### Saving data
 
