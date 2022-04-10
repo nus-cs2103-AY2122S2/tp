@@ -382,6 +382,8 @@ In `LogicManager`, the new data will be read and converted into an `Optional<Rea
 The old data is stored as another `ReadOnlyShowList`, and `Model#setShowList` is called to update `Model`'s show list with the new data if it exists. 
 If the new data does not exist, the show list will not be updated. Finally, `Storage#saveShowList` is called to update the actual data file.
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `LogicManager`, `ImportCommand`, `JsonFileManager`, and `CommandResult`.
 
 <img src="images/ImportSequenceDiagram.png">
@@ -625,6 +627,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC04 - View a list of commands**
 
 **Preconditions: Trackermon application is started.**
@@ -659,6 +663,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Edit a show**
 
