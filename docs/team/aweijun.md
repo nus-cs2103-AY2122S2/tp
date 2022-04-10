@@ -71,5 +71,5 @@ Given below are my contributions to the project.
   [[\#176]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/176#discussion_r835937502),
   [[\#108]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/108#discussion_r828101674)
   * Contributed to issue discussion: [[\#63]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63), [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283), [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283)
-  * Reported bugs and suggestions:  [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283)
+  * Reported bugs and suggestions:  [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283), [[\#314]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/314)
 
