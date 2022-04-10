@@ -716,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list candidates
 2.  TAlent Assistant™ shows all candidates
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -736,7 +736,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User inputs details
 4.  TAlent Assistant™ adds the new candidate
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -776,15 +776,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to delete a specific candidate in the list
 4.  TAlent Assistant™ deletes the candidate from the list and displays the deleted entry
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 3a. The list is empty
 
   Use case ends.
-* 3b. The given index is invalid.
 
+* 3b. The given index is invalid.
     * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 2.
@@ -800,21 +800,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to schedule a specific candidate in the list for an interview on a particular date and time
 4.  TAlent Assistant™ schedules the interview and marks the Interview Status of the candidate as Scheduled.
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty
 
   Use case ends.
-* 3a. The given index is invalid
 
+* 3a. The given index is invalid
     * 3a1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 2.
 
 * 3b. The given date and/or time format is invalid
-
     * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 2.
@@ -828,7 +827,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TAlent Assistant™ returns a list of candidates that contain one or more of the given keyword(s)
    in the specified attribute field
 
-   Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -851,7 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to sort candidates by a specific attribute field
 2. TAlent Assistant™ returns a list of candidates sorted with regard to the specified attribute field
 
-   Use case ends.
+  Use case ends.
 
 * 2b. The specified attribute field is invalid
     * 2b1. TAlent Assistant™ returns an error message
@@ -867,7 +866,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to view scheduled interviews within a specific time period
 2. TAlent Assistant™ returns a list of scheduled interviews within the specified time period, sorted from earliest to latest
 
-   Use case ends.
+  Use case ends.
 
 * 2b. The specified time period is invalid
     * 2b1. TAlent Assistant™ returns an error message
@@ -883,7 +882,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to update the remark of a candidate in the system
 2. TAlent Assistant™ returns the candidate with the updated remark in the feedback panel
 
-   Use case ends.
+  Use case ends.
 
 * 2b. The candidate specified is displayed in the focus panel
     * 2b1. TAlent Assistant™ updates the candidate's remark displayed
@@ -953,9 +952,8 @@ Preconditions: Candidate has an interview scheduled.
     * 2a1. TAlent Assistant™ returns an error message
 
       Use case ends.
-<hr>
 
-*{More to be added}*
+<hr>
 
 ### Non-Functional Requirements
 
