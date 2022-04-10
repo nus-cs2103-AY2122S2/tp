@@ -429,6 +429,8 @@ Format: `stats`
 
 <img src="images/user-guide/Stats.png" height="400px">
 
+<div style="page-break-after: always;"></div>
+
 ## Future Features **[Coming soon]**
 1. More types of sizes and increased details such as floor size, landed properties.
 2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
@@ -451,8 +453,6 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 </div>
 
 <div style="page-break-after: always;"></div>
-
-# FAQ
 
 # Command Summary
 
