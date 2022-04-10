@@ -408,22 +408,22 @@ The find feature utilizes mainly the following classes:
   * `TaskMultiplePredicate` for filtering task and `PersonMultiplePredicate` for filtering employees.
   
 #### Implementation flow for the find task/employee feature
-Given below is the implementation of the find task command when the user enters `findTask priority/HIGH event/`
+Given below is the implementation of the find task command when the user enters `findTask todo/`
 
 1. The user input will be sent to `FindTaskCommandParser`
-2. `FindTaskCommandParser` will note down that the task type to search for is an event with a high priority.
-3. Since the inputs that the user entered is valid, the parser will create a `TaskMultiplePredicate` using priority 
-   `high` and task type `event` while setting the rest of the attributes to `null`.
+2. `FindTaskCommandParser` will note down that the task type to search.
+3. Since the inputs that the user entered is valid, the parser will create a `TaskMultiplePredicate` task type `todo` 
+   while setting the rest of the attributes to `null`.
 4. The attribute will be used as the argument to create the `FindTaskCommand`
 5. When the `FindTaskCommand` executes, the predicate will be sent to the `ModelManager` to filter out tasks that 
    satisfy the predicate.
 
 ![Expected find task command result](images/FindTaskCommand.png)
 
-*The expected result for `findTask priority/HIGH event/`*
+*The expected result for `findTask todo/`*
 
 <img src="images/FindTaskCommandSequenceDiagram.png">
-*The UML Sequence diagram for `findTask priority/HIGH event/`*
+*The UML Sequence diagram for `findTask todo/`*
 
 #### Design Consideration
 * Allow usage of multiple attributes as search term to filter out tasks/employee that has the specified attributes.
