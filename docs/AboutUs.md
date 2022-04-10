@@ -43,8 +43,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/kristopherptaslim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/punpun1643.md)]
+[[github](http://github.com/kristopherptaslim)]
+[[portfolio](team/kristopherptaslim.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -53,8 +53,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/likhern.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/punpun1643.md)]
+[[github](http://github.com/likhern)]
+[[portfolio](team/likhern.md)]
 
 * Role: TBC
 * Responsibilities: TBC
