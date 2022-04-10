@@ -140,12 +140,23 @@ Deletes a student from TAPA.
 **Format**: `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID`
 
 * The student corresponding to the index or student ID (matriculation number) specified after the `delete` command, will be removed from TAPA.
+
+:warning: <b>Warning!</b>
+
 * An error message will be displayed to the user if:
   * the specified index is 0
   * the specified index is a negative number
   * the specified index is larger than the number of students in TAPA
   * there is no student with the specified matriculation number
-* Multiple indices can be inputted in order to delete multiple students. All inputted indices must be valid in order for the command to execute successfully.
+
+</div>
+
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
+
+* Multiple indices can be inputted in order to delete multiple students. 
+* All inputted indices must be valid in order for the command to execute successfully.
+</div>
+
 
 **Example**:
 * `delete 10`
@@ -164,7 +175,12 @@ Deletes all students taking a particular module from TAPA.
 **Format**: `deleteModule m/MODULE_CODE`
 
 * All students who are taking the module with the module code specified after the `deleteModule` command will be removed from TAPA.
+
+:warning: <b>Warning!</b>
+
 * An error message will be displayed to the user if there are no students taking the specified module.
+
+</div>
 
 **Example**:
 * `deleteModule m/CS2100`
@@ -179,7 +195,12 @@ Allows the user to look up the details of a particular student.
 **Format**: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
 * The student whose name, student ID or module code is specified after the `find` command will appear in the resulting list.
+
+:warning: <b>Warning!</b>
+
 * Search fields must be exact matches in order for the `find` command to display the result. For example, given a student John in TAPA, `find n/John` will successfully display this student but not `find n/Joh` or `find n/Jo`.
+
+</div>
 
 **Example**:
 * `find n/John`
