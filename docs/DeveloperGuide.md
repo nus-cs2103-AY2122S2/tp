@@ -544,13 +544,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User adds a duplicate show.
 
-    * 2a1. Trackermon shows an error message to user, indicating that there is a duplicate show in the list.
+    * 2a1. Trackermon shows an error message to the user.
 
       Use case resumes at step 2.
 
 * 2b. User enters command with the wrong syntax.
 
-    * 2b1. Trackermon shows an error message to user, indicating the format for adding shows is incorrect, and attaches the correct syntax format.
+    * 2b1. Trackermon shows an error message to the user.
 
       Use case resumes at step 2.
 
@@ -576,7 +576,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
 
-    * 2a1. Trackermon shows an error message,  indicating the index for deleting shows is invalid.
+    * 2a1. Trackermon shows an error message to the user.
 
       Use case resumes at step 2.
 
@@ -660,7 +660,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
 
-    * 2a1. Trackermon shows an error message, indicating the index for editing shows is invalid.
+    * 2a1. Trackermon shows an error message to the user.
 
       Use case resumes at step 2.
 
@@ -684,16 +684,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User enters the command with the wrong syntax.
+* 1a. User does not provide a keyword for a prefix.
 
-    * 1a1. Trackermon shows an error message to user, indicating the format for finding shows is incorrect, and attaches the correct syntax format.
+    * 1a1. Trackermon shows an error message to the user.
 
       Use case resumes at step 1.
-  
-* 3a. Trackermon shows an empty search result.
-    * 3a1. Trackermon shows a message informing the user that 0 shows are found.
-  
-    Use case ends.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -737,13 +732,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User closes the file explorer GUI.
-    * 2a1. Trackermon shows an error message to user, indicating the import has failed.
+    * 2a1. Trackermon shows an error message to the user.
 
       Use case ends.
     
 * 5a. Chosen file is a corrupted JSON file.
 
-    * 5a1. Trackermon shows a message informing the user that the chosen file may be corrupted.
+    * 5a1. Trackermon shows an error message to the user.
 
       Use case ends.
 
@@ -771,7 +766,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User closes the file explorer GUI.
 
-    * 2a1. Trackermon shows an error message to user, indicating the export has failed.
+    * 2a1. Trackermon shows an error message to the user.
 
       Use case ends.
 
@@ -787,7 +782,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Preconditions: Trackermon application is started.**
 
-**Guarantees: A random show from the currently displayed list of shows will be displayed. **
+**Guarantees: A random show from the currently displayed list of shows will be displayed.**
 
 **MSS**
 
@@ -801,13 +796,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The displayed list is empty.
 
-  * 1a1. Trackermon shows an error message to the user, indicating that there are no shows in the currently displayed list.
+  * 1a1. Trackermon shows an error message to the user.
 
     Use case ends.
 
 * 1a. The displayed list contains only one show.
 
-  * 1a1. Trackermon shows an error message to the user, indicating that there is only one show in the currently displayed list.
+  * 1a1. Trackermon shows an error message to the user.
     
     Use case ends.
 
