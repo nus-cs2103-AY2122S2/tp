@@ -116,7 +116,7 @@ public class RangeCommandTest {
         String sampleCommand = "";
         RangeCommand rangeCommand =
                 new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(2), sampleCommand);
-        assertCommandFailure(rangeCommand, model, RangeCommand.MESSAGE_EMPTY_COMMAND);
+        assertCommandFailure(rangeCommand, model, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ""));
     }
 
     @Test

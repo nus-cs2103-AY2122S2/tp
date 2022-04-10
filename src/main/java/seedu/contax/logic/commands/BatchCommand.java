@@ -156,30 +156,35 @@ public class BatchCommand extends Command {
                 targetField = person.getName().toString();
                 break;
             }
-            if (!targetField.isEmpty()) {
-                switch (batchType) {
-                case EQUALS:
-                    if (targetField.equals(userValue)) {
-                        indexList.add(index);
-                    }
-                    break;
-                case START:
-                    if (targetField.startsWith(userValue)) {
-                        indexList.add(index);
-                    }
-                    break;
-                case END:
-                    if (targetField.endsWith(userValue)) {
-                        indexList.add(index);
-                    }
-                    break;
-                default:
-                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            BatchCommand.MESSAGE_USAGE));
-                }
-            }
+            createIndexList(indexList, targetField, index);
         }
         return indexList;
+    }
+
+    private void createIndexList(List<Index> indexList, String targetField, Index index)
+            throws CommandException {
+        if (!targetField.isEmpty()) {
+            switch (batchType) {
+            case EQUALS:
+                if (targetField.equals(userValue)) {
+                    indexList.add(index);
+                }
+                break;
+            case START:
+                if (targetField.startsWith(userValue)) {
+                    indexList.add(index);
+                }
+                break;
+            case END:
+                if (targetField.endsWith(userValue)) {
+                    indexList.add(index);
+                }
+                break;
+            default:
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        BatchCommand.MESSAGE_USAGE));
+            }
+        }
     }
 
     @Override

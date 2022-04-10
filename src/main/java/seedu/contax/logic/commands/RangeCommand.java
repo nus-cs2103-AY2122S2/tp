@@ -40,8 +40,6 @@ public class RangeCommand extends Command {
             + PREFIX_RANGE_FROM + "1 "
             + PREFIX_RANGE_TO + "3 `";
 
-    public static final String MESSAGE_EMPTY_COMMAND = "Empty command found, please provide valid command after range.";
-
     private final Logger logger = LogsCenter.getLogger(RangeCommand.class);
 
     private final Index fromIndex;
