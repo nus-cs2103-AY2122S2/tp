@@ -429,7 +429,7 @@ Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
 - the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
-- the `AddLessonCommandParser` then maps the arguments into the prefixes `name`, `subject`, `address`, `date`, `startTime` and `recurring`
+- the `AddLessonCommandParser` then maps the arguments into the prefixes `name`, `subject`, `address`, `date`, `startTime`, `recurring`, `hours` and `minutes`
 - after which it constructs a new `Lesson` and passes it to the `AddLessonComand` 
 
 The following sequence diagram shows how the add lesson operation works when a user enters the following command:
