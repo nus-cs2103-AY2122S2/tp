@@ -832,6 +832,12 @@ Use `exit` if you're too lazy to click out of the application.
 Tinner data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: Editing the saved json file directly might result in undesirable results if the proper formatting is not maintained. Avoid doing so at all cost if you are unsure of the format.
+
+</div>
+
 [Back to Table of Contents](#toc)
 
 ## Coming soon <a id="coming-soon"></a>
