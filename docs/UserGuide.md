@@ -231,17 +231,15 @@ Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 * The `INDEX` refers to the Index number shown in the displayed contact list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * If no `INDEX` is specified, **all contacts will be copied**.
-* Choice of format is default, csv and json.
-* **Default simply displays attribute line by line**, while csv format separates attributes via a `|` delimiter.
-* JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
 * Order of field names determines the order of attributes in the output.
 * Choice of format is **default**, **csv** and **json**.
+* If no format is specified, **default format will be used**.
   
 | Format  | Description                                               | Example                                                                                                           |
 |---------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | default | Displays attributes separated by a newline                | mary<br/>91282770<br/>coast residences                                                                            |
 | csv     | Displays attributes separated by a delimiter <code>&#124; | mary  &#124; 91282770 &#124; coast residences                                                                     |    
-| json    | Displays information in json format                       | {<br/>  &nbsp;"name" : "mary",<br/>  &nbsp;"phone" : "91282270",<br/>  &nbsp;"address" : "coast residences"<br/>} | 
+| json    | Displays information in JSON format                       | {<br/>  &nbsp;"name" : "mary",<br/>  &nbsp;"phone" : "91282270",<br/>  &nbsp;"address" : "coast residences"<br/>} | 
 
 
 Examples:
@@ -307,6 +305,7 @@ Examples:
 * `list` followed by `deletemodules 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMateFinder.
 * `find Betsy` followed by `deletemodules 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st contact in the results of the `find` command.
 * `deletemodules 1 m/CS2102 m/CS2040S` will fail when user has CS2102 but does not have CS2040S.
+* `filter cs2103t` followed by `deletemodules 1 m/cs2103t` will cause the person to not be displayed in filtered list.
 
 ### Editing a contact : `edit`
 
@@ -531,28 +530,28 @@ A: You may have seniors who have graduated, but you would like to seek advise fr
 
 ## Command summary
 
-| Action                                               | Format                                                                                               | Examples                               |
-|------------------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------|
-| **Help**                                             | `help`                                                                                               | `help`                                 |
-| **List**                                             | `list`                                                                                               | `list`                                 |
-| **Add Contact**                                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                        | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Add Module(s)**                                    | `addmodules INDEX m/MODULE`                                                                          | `addmodules 4 m/CS2100`                |
-| **Comment on a Contact**                             | `comment INDEX c/COMMENT`                                                                            | `comment 1 c/Good at math`             |
-| **Status of a Contact**                              | `status INDEX s/STATUS`                                                                              | `status 2 s/favourite`                 |
-| **Copy**                                             | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]` | `copy 3 n/ e/ f/csv`                   |
-| **Clear All Data**                                   | `clear`                                                                                              | `clear`                                |
-| **Clear Module(s) From Contact**                     | `clearmodules INDEX`                                                                                 | `clearmodules 3`                       |
-| **Delete Contact**                                   | `delete INDEX`                                                                                       | `delete 3`                             |
-| **Delete Module(s) from Contact**                    | `deletemodules INDEX m/MODULE [m/MODULE]...`                                                         | `deletemodules 1 m/CS1231 m/CS2102`    |
-| **Edit**                                             | `edit Index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                | `edit 1 n/Alice`                       |
-| **Find**                                             | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                      |
-| **Filter**                                           | `filter MODULE`                                                                                      | `filter CS3230`                        |
-| **Sort**                                             | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [c/COMMENT]`                    | `sort n/asc p/ a/asc`                  |
-| **Archive a Contact**                                | `archive INDEX`                                                                                      | `archive 1`                            |
-| **Unarchive Contact**                                | `unarchive INDEX`                                                                                    | `unarchive 1`                          |
-| **Switch between default and archived contact list** | `switch`                                                                                             | `switch`                               |
-| **Undo**                                             | `undo`                                                                                               | `undo`                                 |
-| **Redo**                                             | `redo`                                                                                               | `redo`                                 |
-| **Exit**                                             | `exit`                                                                                               | `exit`                                 |
+| Action                                               | Format                                                         | Examples                               |
+|------------------------------------------------------|----------------------------------------------------------------|----------------------------------------|
+| **Help**                                             | `help`                                                         | `help`                                 |
+| **List**                                             | `list`                                                         | `list`                                 |
+| **Add Contact**                                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                  | `add n/Bob p/87654321 e/bob@u.nus.edu` |
+| **Add Module(s)**                                    | `addmodules INDEX m/MODULE`                                    | `addmodules 4 m/CS2100`                |
+| **Comment on a Contact**                             | `comment INDEX c/COMMENT`                                      | `comment 1 c/Good at math`             |
+| **Status of a Contact**                              | `status INDEX s/STATUS`                                        | `status 2 s/favourite`                 |
+| **Copy**                                             | `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`        | `copy 3 n/ e/ f/csv`                   |
+| **Clear All Data**                                   | `clear`                                                        | `clear`                                |
+| **Clear Module(s) From Contact**                     | `clearmodules INDEX`                                           | `clearmodules 3`                       |
+| **Delete Contact**                                   | `delete INDEX`                                                 | `delete 3`                             |
+| **Delete Module(s) from Contact**                    | `deletemodules INDEX m/MODULE [m/MODULE]...`                   | `deletemodules 1 m/CS1231 m/CS2102`    |
+| **Edit**                                             | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`          | `edit 1 n/Alice`                       |
+| **Find**                                             | `find KEYWORD [MORE_KEYWORDS]`                                 | `find James Jake`                      |
+| **Filter**                                           | `filter MODULE`                                                | `filter CS3230`                        |
+| **Sort**                                             | `sort [n/ASC] [p/ASC] [e/ASC] [a/ASC] [s/ASC] [m/ASC] [c/ASC]` | `sort n/asc p/desc a/`                 |
+| **Archive a Contact**                                | `archive INDEX`                                                | `archive 1`                            |
+| **Unarchive Contact**                                | `unarchive INDEX`                                              | `unarchive 1`                          |
+| **Switch between default and archived contact list** | `switch`                                                       | `switch`                               |
+| **Undo**                                             | `undo`                                                         | `undo`                                 |
+| **Redo**                                             | `redo`                                                         | `redo`                                 |
+| **Exit**                                             | `exit`                                                         | `exit`                                 |
 
 
