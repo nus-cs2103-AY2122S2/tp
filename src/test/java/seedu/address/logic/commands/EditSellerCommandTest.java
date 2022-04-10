@@ -35,7 +35,7 @@ import seedu.address.testutil.SellerBuilder;
  */
 public class EditSellerCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalSellerAddressBook(),
+    private Model model = new ModelManager(new UserPrefs(), getTypicalSellerAddressBook(),
             new BuyerAddressBook());
 
     @Test
@@ -46,7 +46,7 @@ public class EditSellerCommandTest {
 
         String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS, editedSeller);
         System.out.println(expectedMessage);
-        Model expectedModel = new ModelManager(new AddressBook() , new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(model.getSellerAddressBook()), new BuyerAddressBook());
         expectedModel.setSeller(model.getFilteredSellerList().get(0), editedSeller);
         assertCommandSuccess(editSellerCommand, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class EditSellerCommandTest {
 
         String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS, editedSeller);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(model.getSellerAddressBook()), new BuyerAddressBook());
         expectedModel.setSeller(lastSeller, editedSeller);
 
@@ -81,7 +81,7 @@ public class EditSellerCommandTest {
 
         String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS, editedSeller);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(model.getSellerAddressBook()), new BuyerAddressBook());
 
         assertCommandSuccess(editSellerCommand, model, expectedMessage, expectedModel);
@@ -98,7 +98,7 @@ public class EditSellerCommandTest {
 
         String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS, editedSeller);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(model.getSellerAddressBook()), new BuyerAddressBook());
         expectedModel.setSeller(model.getFilteredSellerList().get(0), editedSeller);
 

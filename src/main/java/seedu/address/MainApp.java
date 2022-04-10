@@ -90,12 +90,10 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlySellerAddressBook> sellerAddressBookOptional;
         Optional<ReadOnlyBuyerAddressBook> buyerAddressBookOptional;
-        // Create dummy value for initialData
-        ReadOnlyAddressBook initialData;
+
         ReadOnlySellerAddressBook initialSellerData;
         ReadOnlyBuyerAddressBook initialBuyerData;
-        //Dummy AddressBook (will be delete later)
-        initialData = new AddressBook();
+
         try {
             buyerAddressBookOptional = storage.readBuyerAddressBook();
             if (!buyerAddressBookOptional.isPresent()) {
@@ -125,7 +123,7 @@ public class MainApp extends Application {
             initialSellerData = new SellerAddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialSellerData, initialBuyerData);
+        return new ModelManager(userPrefs, initialSellerData, initialBuyerData);
     }
 
     private void initLogging(Config config) {

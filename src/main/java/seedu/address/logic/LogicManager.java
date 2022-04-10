@@ -60,20 +60,20 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
-    }
-
-    @Override
-    public ObservableList<Client> getFilteredclientList() {
-        return model.getFilteredClientList();
-    }
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
-    }
+    // @Override
+    // public ReadOnlyAddressBook getAddressBook() {
+    //     return model.getAddressBook();
+    // }
+    //
+    // @Override
+    // public ObservableList<Client> getFilteredclientList() {
+    //     return model.getFilteredClientList();
+    // }
+    //
+    // @Override
+    // public Path getAddressBookFilePath() {
+    //     return model.getAddressBookFilePath();
+    // }
 
     @Override
     public GuiSettings getGuiSettings() {
