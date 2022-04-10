@@ -79,7 +79,7 @@ public class ParserUtil {
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
-        if (!Rating.isValidScore(rating)) {
+        if (!Rating.isValidRating(rating)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
         }
         return new Rating(rating);

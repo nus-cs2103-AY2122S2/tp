@@ -19,17 +19,25 @@ import org.junit.jupiter.api.Test;
 import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.ShowBuilder;
 
-
+/**
+ * Contains unit tests for {@code Show}.
+ */
 public class ShowTest {
 
+    /**
+     * Tests immutability of Show.
+     */
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Show show = new ShowBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> show.getTags().remove(0));
     }
 
+    /**
+     * Test isSameShow method of {@code Show}.
+     */
     @Test
-    public void isSameShow() {
+    public void testIsSameShow() {
         // same object -> returns true
         assertTrue(ALICE_IN_WONDERLAND.isSameShow(ALICE_IN_WONDERLAND));
 
@@ -55,8 +63,11 @@ public class ShowTest {
         assertFalse(WEATHERING_WITH_YOU.isSameShow(editedYou));
     }
 
+    /**
+     * Tests equals method of {@code Show}.
+     */
     @Test
-    public void equals() {
+    public void testEquals() {
         // same values -> returns true
         Show aliceCopy = new ShowBuilder(ALICE_IN_WONDERLAND).build();
         assertTrue(ALICE_IN_WONDERLAND.equals(aliceCopy));
@@ -86,6 +97,9 @@ public class ShowTest {
         assertFalse(ALICE_IN_WONDERLAND.equals(editedAlice));
     }
 
+    /**
+     * Tests getter method of {@code Show}.
+     */
     @Test
     void testGetters() {
         // test name getter
@@ -104,12 +118,18 @@ public class ShowTest {
         assertEquals(new Rating(5), ALICE_IN_WONDERLAND.getRating());
     }
 
+    /**
+     * Tests hashcode method of {@code Show}.
+     */
     @Test
     void testHashCode() {
         assertEquals(Objects.hash(new Name("Alice in WonderLand"),
                 Set.of(new Tag("movie"))), ALICE_IN_WONDERLAND.hashCode());
     }
 
+    /**
+     * Tests toString method of {@code Show}.
+     */
     @Test
     void testToString() {
 
