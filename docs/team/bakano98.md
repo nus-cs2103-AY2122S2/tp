@@ -11,7 +11,7 @@ ModuleMateFinder is a desktop address-book-like application used to keep track o
 Given below are my contributions to the project.
 
 
-- **New Feature**: Added the ability to blacklist/favourite users [(PR #15)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/15)
+- **New Feature**: Added the ability to assign `Status`(blacklist/favourite) users [(PR #15)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/15)
   - **What it does**: Allows users to set a status (blacklist/favourite) to any contact. A user is known to be blacklisted/favourited through the UI.
   - **Justification**: This feature improves the product significantly as users want to know who they should be wary of when thinking about forming groups for their modules.
   - **Highlights**: This enhancement does not affect existing commands too much, and required understanding of a `Person`'s structure, modifying and adding new fields to it.
@@ -55,6 +55,10 @@ Given below are my contributions to the project.
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=bakano98&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=bakano98&tabRepo=AY2122S2-CS2103T-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code&authorshipIsBinaryFileTypeChecked=false)
 - **Project Management**:
+  - Managed releases for `v1.2` and `v1.4`.
+  - Managed demo videos done for the group.
+  - Set up team repo (CodeCov, GitHub environments) for the team.
+  - Set up PR review system for the team.
   - Made new commits and PRs weekly -- and never missed a deadline.
   - Ensure team was on track.
   - Ensure I kept everyone up to date with what I was doing.
@@ -74,7 +78,6 @@ Given below are my contributions to the project.
     - Add use cases for `archive`, `unarchive`, `switch`, `deletemodules`, and `clearmodules` [(PR #203)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/203)
     - Reordered use cases to follow the format in the user guide.
     - Updated UML diagram for Ui component and add information regarding the additions (`EditWindow`, `AddWindow`), also added an activity diagram, sequence diagram for `add` [(PR #84)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/84)
-    - 
   - README:
     - Did the mockup UI and the description of ModuleMateFinder [here](https://github.com/AY2122S2-CS2103T-T13-4/tp/commit/f054e1d2871e6e5904d473b9203e7874340f0633)
   
@@ -87,9 +90,12 @@ Given below are my contributions to the project.
   - Non-trivial PRs reviewed and commented on for Julio:
     - [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62)
     - [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90)
+    - [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
   - Non-trivial PRs reviewed for Bryan:
     - [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91)
-- Reviewed some PRs by Wei Ming and Benjamin
+    - [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116)
+    - [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
+- Reviewed most PRs by Wei Ming and Benjamin
   - Non-trivial PRs reviewed and commented on for Wei Ming
     - [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
     - [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
