@@ -18,7 +18,7 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox spacing="5" alignment="TOP_LEFT">
         <padding>
           <Insets top="5" right="5" bottom="5"/>
         </padding>
@@ -36,16 +36,16 @@
         <padding>
           <Insets top="5" right="5" bottom="0"/>
         </padding>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone \$email" />
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      </HBox>
-      <HBox spacing = "5" alignment="CENTER_LEFT">
-        <padding>
-          <Insets top="0" right="5" bottom="5"/>
-        </padding>
         <Label fx:id="jerseyNumber" styleClass="cell_small_label" text="\$jerseyNumber" />
         <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
         <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
+      </HBox>
+      <HBox spacing = "5" alignment="TOP_LEFT">
+        <padding>
+          <Insets top="0" right="5" bottom="5"/>
+        </padding>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone \$email" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       </HBox>
     </VBox>
   </GridPane>
