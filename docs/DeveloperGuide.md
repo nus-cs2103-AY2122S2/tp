@@ -104,7 +104,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/developer-guide/RealEstateProModel.png" width="800px">
+<img src="images/developer-guide/RealEstateProModel.png" width="800px" height="800px">
 
 
 The `Model` component,
@@ -112,12 +112,6 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -513,9 +507,12 @@ Given below are instructions to test the app manually.
 
 1. Favouriting a client while all clients are being shown
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
-    2. Test case: `favourite 1`<br>Expected: First client is deleted from the list. The result display will show that the first client is successfully favourited.
+    2. Test case: `favourite 1`<br>Expected: First client is favourited, thus a 🌟 shows for the client. The result display will show that the first client is successfully favourited.
     3. Test case: `favourite 0`<br>Expected: No client is favourited. Error details shown in the result display. List remains the same.
     4. Other incorrect favourite commands to try: `favourite`, `favourite x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+2. Unfavouriting a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. Make sure there is at least 1 client that has already been favourited.
+   2. Test case: `favourite 3` where the 3rd client in the listing has been favourited. <br>Expected: Third client is unfavourited, thus removing the 🌟. The result display will show that the third client is successfully unfavourited.
 
 ## Opening Favourites window
 
