@@ -8,14 +8,16 @@ participant ":OnboardingInstruction" as OnboardingInstruction UI_COLOR
 participant ":OnboardingCommandBox" as OnboardingCommandBox UI_COLOR
 end box
 
-activate OnboardingWindow
-activate Overlay
-activate OnboardingCommandBox
-activate OnboardingInstruction
 
-OnboardingWindow -> OnboardingWindow : processStep(OnboardingStep);
-OnboardingWindow -> OnboardingCommandBox : highlight();
+autoactivate on
+
+[-> OnboardingWindow : processStep(OnboardingStep)
+OnboardingWindow -> OnboardingCommandBox : highlight()
+OnboardingCommandBox --> OnboardingWindow
 OnboardingWindow -> OnboardingInstruction : setText(newMessage)
+OnboardingInstruction --> OnboardingWindow
 OnboardingWindow -> Overlay : showOnly(menuBar, overlayOption)
+Overlay --> OnboardingWindow
+[<--OnboardingWindow
 
 @enduml

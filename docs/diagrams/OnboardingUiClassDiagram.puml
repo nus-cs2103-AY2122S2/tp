@@ -8,26 +8,22 @@ package UI <<Rectangle>>{
 Class "{abstract}\nUiPart" as UiPart
 Class OnboardingWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class " ListPanel<T> " as ListPanel
 Class Overlay
 Class OnboardingCommandBox
 Class OnboardingInstruction
 }
 
+OnboardingWindow *-down-> "3" ListPanel
 OnboardingWindow *-down-> "1" ResultDisplay
-OnboardingWindow *-down-> "1" PersonListPanel
 OnboardingWindow *-down-> "1" OnboardingCommandBox
 OnboardingWindow *-down-> "1" OnboardingInstruction
 OnboardingWindow *-down-> "1" Overlay
 
-PersonListPanel -down-> "*" PersonCard
-
+ListPanel --|> UiPart
 ResultDisplay --|> UiPart
-PersonListPanel --|> UiPart
 OnboardingCommandBox --|> UiPart
 OnboardingInstruction --|> UiPart
 Overlay --|> UiPart
-PersonCard -right-|> UiPart
 OnboardingWindow -[hidden]-|> UiPart
 @enduml
