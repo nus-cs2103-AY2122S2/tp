@@ -384,39 +384,51 @@ There is also a `Show Email` button on the GUI which you can click to open the s
 From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
-Summarises the statistics of the student records inside Tracey.
+Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
-* You can get an overview of the students in Tracey if you want to get an idea of the location where Covid is more prevalent.
-* You can see which faculty has the highest number of Covid cases.
+* You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
+* You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
+<div style="display:flex">
 ![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
+</div>
 
-From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
-Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-* `[ROOT]`: The folder where the Tracey.jar is in.
-* `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
+Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
+* `ROOT`: The folder where the Tracey.jar is in.
+* `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
   * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
-* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
-  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
+* `ARCHIVED_FILE`: Archived file name named using your local PC's date and time in the format of DDMMYY_HHmmssSSS which is stored as a `json` file.
+  * The hour is abbreviated as HH, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
-Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (hh:mm:ss:SSS in 24-hour notation).
-* The archived file will be saved **in** `[ROOT]/data/archive/270322123`.
-* The archived file will be saved **as** `270322_152833`.
-* The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
+Examples of usage:
+* Given the current date and time on your local PC in which the `archive` command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (HH:mm:ss:SSS in 24-hour notation).
+  * The archived file will be saved **in** `ROOT/data/archive/270322`.
+  * The archived file will be saved **as** `270322_152833123.json`. (`json` is the suffix (after the period) to indicate the file type)
+  * The file path will be `ROOT/data/archive/270322/270322_152833123.json`.
+* To retrieve your archived file:
+  1. Open the folder in which your Tracey.jar is stored in.
+  2. Open the folder named `data`.
+  3. Open the folder named `archive`.
+  4. Open the folder named `270322`.
+  5. Your archived file is named `270322_152833123.json`.
+
+<div markdown="span" class="alert alert-alert">:warning: **Warning:**
+* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * You can rename the archived file in the file path manually for easier reference.
-  * Features for naming of the archived file via the CLI will be available in later releases.
-* To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+  * Features for naming the archived file using the CLI will be available in later releases.
+* To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 </div>
 
 ### Resizing the result display window
