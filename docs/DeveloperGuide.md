@@ -294,7 +294,7 @@ This section describes the implementation of the models used by the Schedule sub
 
 <div markdown="span" class="alert alert-info">
 
-:bulb: The overall **design goal** of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+:bulb: The overall **design goal** of the Schedule subsystem is to expose a **single** list of `ScheduleItem` objects through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display.<br> This list includes both `Appointment` and `AppointmentSlot` objects sorted in **chronological** order so that it can be directly used by external classes, unifying the ordering maintenance to the Model component.
 
 </div>
 
@@ -313,7 +313,7 @@ Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. 
 
 ![Appointment Models](images/ScheduleItemClassDiagram.png)
 
-In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering. This ordering is used by the lists used to contain these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
 The time-related methods of note implemented by `ScheduleItem` are:
 
