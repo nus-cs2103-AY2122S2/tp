@@ -226,11 +226,15 @@ Additionally, it implements the follow operations which are exposed in the `Stor
 - `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the state of CinnamonBun and keep track of the version.
 - `SerializableTempAddressBookStorage#popTempAddressFileData()` --- Gets the latest state of CinnamonBun stored in `SerializableTempAddressBookStorage`.
 
+![Undo activity diagram](images/TemporaryAddressBookStorage.png)
+
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `SerializableTempAddressBookStorage` will be initialized
 with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
 temporary files that will be created.
+
+![State 1 undo image](images/UndoState.png)
 
 Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th client in the client list.
 In `LogicManager`, before executing the command, it will locally store the current clients' list state.
@@ -253,8 +257,13 @@ a temporary file, thus, the modification cannot be undone.
 
 </div>
 
+![State 2 undo image](images/UndoState1.png)
+
+
 Step 3. The user executed `add n/David...` to add a new client. The steps mentioned in step 2 would be repeated. Thus, `tempFiles` will now store
 2 file paths to the 2 temporary files created.
+
+![State 3 undo image](images/UndoState2.png)
 
 Step 4. The user now decides that adding the client was a mistake and decides to undo that action by executing the `undo` command.
 The `undo` command will call `LogicManager#undoPrevModification()`, which calls `Storage#popTempAddressFileData()`. This will obtain
@@ -270,8 +279,17 @@ be undone and an error message will be shown there was issue reading the file.
 
 </div>
 
+![State 4 undo image](images/UndoState3.png)
+
+The following sequence diagram shows how the undo operation works:
+
+![Undo sequence diagram](images/UndoSequenceDiagram.png)
+
+
 Step 5. The user executed the command `filter Daniel` to find all Daniels. This command do not modify the clients' list.
 Hence, `Storage#addNewTempAddressBookFile()` will not be called and no new temporary files will be added.
+
+![State 5 undo image](images/UndoState4.png)
 
 Step 6. The user closes the CinnamonBun application. All temporary files created will be deleted.
 
@@ -286,6 +304,7 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
 * **Alternative 2:** Individual command knows how to undo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
+  
 
 _{more aspects and alternatives to be added}_
 
