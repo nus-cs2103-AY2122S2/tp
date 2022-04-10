@@ -1153,19 +1153,19 @@ testers are expected to do more *exploratory* testing.
 #### Editing a log
 
 1. Editing a friend's log while all friends are being shown
-    1. Prerequisites: Atleast one friend with a log is present.
+    1. Prerequisites: Atleast two friends each with a log is present.
 
     2. Test case: `editlog n/Alex Yeoh id/1 ttl/New Log Title` <br>
        Expected: `Alex Yeoh`'s first log's title is changed to `New Log description`
 
-    3. Test case: `editfriend 2 id/1 d/The new description` <br>
+    3. Test case: `editlog 2 id/1 d/The new description` <br>
        Expected: First log's description of friend at index `2` in the friend list is edited to have a description `New Log description`
     
 ### Event management
 
 #### Adding an event
 
-1. Adding an event while all events are being shown
+1. Adding an event while all upcoming events are being shown
     1. Test case: `addevent n/Old Event dt/14-04-2020 1600` <br>
        Expected: No change in the GUI as the event is past event, although if `listevent -a` is run this event should be visable.
     2. Test case: `addevent n/Future Event dt/14-04-2023 1300` <br>
@@ -1176,7 +1176,7 @@ testers are expected to do more *exploratory* testing.
 2. Adding an event while in another tab
     1. Prerequisites: Must be in either `Friends` or `Insights` tab.
 
-    2. Test case: `addevent n/Party dt/14-04-2023 d/Cool party` <br>
+    2. Test case: `addevent n/Party dt/14-04-2023 1400 d/Cool party` <br>
        Expected: Tab should switch to `Events` tab and a new event `Party` should be present in the events list.
 
 #### Deleting an event
@@ -1221,9 +1221,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Events whose friends contain `Alex Row` are displayed
 
     4. Test case: `findevent ds/10-03-2022` <br>
-       Expected: Events which occur after `10-03-2022` are displayed,
+       Expected: Events which occur on `10-03-2022` and after are displayed,
    
-    5. Test case: `findevent n/Birthday f/Alex Row  ds/10-03-2022 1400` <br>
+    5. Test case: `findevent n/Birthday f/Alex Row  ds/10-03-2022` <br>
        Expected: All the events matching the above predicates are displayed
 
 ### Saving data
