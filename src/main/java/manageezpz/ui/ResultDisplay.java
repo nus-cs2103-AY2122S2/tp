@@ -17,6 +17,10 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Initializes a {@code ResultDisplay} and sets the welcome message on
+     * {@code TextArea} resultDisplay.
+     */
     public ResultDisplay() {
         super(FXML);
         resultDisplay.setText(WELCOME_MESSAGE);
@@ -26,5 +30,4 @@ public class ResultDisplay extends UiPart<Region> {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
     }
-
 }
