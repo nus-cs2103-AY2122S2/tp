@@ -21,7 +21,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 3. Copy the file to the folder you want to use as the _home folder_ for your TAddressBook.
 
 4. Double-click the file to start the app. A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/sampleUI.png)
+   ![Ui](images/sampleUi.png)
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -94,7 +94,8 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 ### System-related features
 
 #### Viewing help : `help`
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page.<br>
+![helpMessage](images/helpMessage.png)
 
 Format: `help`
 
@@ -124,7 +125,7 @@ Adds a student to the TAddressBook with the provided attributes.
 Format: `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+A student can have any number of tags (including 0). Tags must be a single word of only alphanumeric characters.
 </div>
 
 Examples:
@@ -203,7 +204,7 @@ Example:
 #### View student details : `view`
 View a student's details from the TAddressBook. This includes their personal information (i.e. email, GitHub username, etc.)
 as well as the status and/or marks achieved for their Labs. A sample result is shown below.<br>
-![viewUi](images/viewUI.png)
+![viewUi](images/viewUi.png)
 
 Format: `view INDEX`
 
