@@ -21,8 +21,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.util.SearchType;
 
-
-
+//@@author HanJiyao
 /**
  * Batch edits or deletes a person identified using base on string =/ provided.
  */
@@ -87,13 +86,21 @@ public class BatchCommand extends Command {
         Collections.reverse(indexList);
         List<CommandResult> commandResultList = new ArrayList<>();
         Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
+        AddressBookParser addressBookParser = new AddressBookParser();
+
         for (Index index: indexList) {
-            AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(
                         commandInput, Integer.toString(index.getOneBased()));
+
+                if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
+                        && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
+                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            BatchCommand.MESSAGE_USAGE));
+                }
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
+
                 try {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {

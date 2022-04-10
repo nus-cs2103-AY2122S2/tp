@@ -1,6 +1,7 @@
 package seedu.contax.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_RANGE_FROM;
@@ -20,13 +21,14 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 
+//@@author HanJiyao
 /**
  * Range edit or delete a person identified using it's displayed from index and to index from the address book.
  */
 public class RangeCommand extends Command {
     public static final String COMMAND_WORD = "range";
 
-    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in range"
+    public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Perform command in range "
             + "by the index number used in the displayed person list.**"
             + "\nParameters: *"
             + "COMMAND (must be valid command without index) "
@@ -66,10 +68,19 @@ public class RangeCommand extends Command {
         Person restorePerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
+
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
+
+                if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
+                        && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
+                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            RangeCommand.MESSAGE_USAGE));
+                }
+
                 logger.info("----------------[RANGE COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
+
                 try {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
