@@ -58,7 +58,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Structure of the UI Component](images/ArchitectureSequenceDiagramV2.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -121,14 +121,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 The class diagram below shows more details regarding `Customer`, `Service` and `Booking` classes in the `Model` component.
 
 ![Model Specific Class Diagram](images/ModelSpecificDetailsClassDiagram.png)
 
-
-</div>
 
 
 ### Storage component
@@ -199,12 +196,29 @@ The following activity diagram summarizes what happens when the user executes th
 ### List customers feature
 
 #### Overview
-
+The list customers feature allows the user to view all the customers in TrackBeau.
 
 #### Implementation of feature
+The list customers feature is implemented via `ListCustomersCommand`.
+1. The `ListCustomersCommand` calls `model#updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS)`.
+2. The `FilteredList<Customer>` in model will then be updated to have all the customers in TrackBeau.
+3. The Ui will then be updated with the latest `FilteredList<Customer>` automatically due to the underlying data structure of the customer list (`ObservableList`).
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+
+the source of `FilteredList<Customer>` is `UniqueList`, a data structure that stores all the items of a list.
+The `UniqueList` uses Java's generics and contains items that implements the `UniqueListItem` interface (the class diagrams are shown in [Model Component](#model-component)).  
+
+</div>
 
 #### Design considerations
+* **Option 1:** Do not abstract the common functionalities.
+    * Pros: Each member can being working on their own implementation of UniqueList (e.g., UniqueCustomerList, UniqueBookingList, UniqueServiceList) immediately and independently.
+    * Cons: Violates Don't Repeat Yourself (DRY) principle and results in huge chunk of repeated code and functionality.
+* **Option 2 (Current choice):** Abstract the common functionalities of the different types of unique list into one generic `UniqueList` class.
+    * Pros: Makes use of the DRY principle which prevents duplication of codes.
+    * Pros: Reduces total man-hours required to create each individual unique list.
+    * Cons: Requires `UniqueList` to be implemented first before members working on the different types in TrackBeau (Customer/Booking/Service) can start implementing a unique list.
 
 
 ### Delete customer(s) feature
@@ -276,6 +290,10 @@ The following activity diagram summarizes what happens when the user executes th
 
 ![Edit Service Activity Diagram](images/EditServiceActivityDiagram.png)
 
+The following sequence diagram shows the interactions within the `Logic` and `Model` components when the user inputs `edits 1 pr/100` command.
+
+![Edit Service Sequence Diagram](images/EditServiceSequenceDiagram.png)
+
 ### Plot feature
 
 #### Overview
@@ -292,6 +310,7 @@ The plot feature is implemented using the various plot commands such as `plotSta
 
 The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
 ![Plot Chart Sequence Diagram](images/ChartSequenceDiagram.png)
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -527,7 +546,7 @@ testers are expected to do more *exploratory* testing.
       
 ## Customer-Related Commands
 
-### Adding a new customer 
+### Adding a customer 
 
    1.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
       Expected: Error details shown in the status message about invalid command format. Status bar remains the same.<br>
@@ -547,7 +566,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Return an error that at least one field must be provided.
 
 
-### Finding customers
+### Finding customer(s)
 
 NOTE: Make sure to use `listc` between test cases.
 
@@ -560,7 +579,7 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `findc e/`<br>
      Expected: Error message saying that find command does not take empty values.
 
-### Deleting customers 
+### Deleting customer(s) 
 
    1. Test case: `deletec -1`<br>
       Expected: Error message saying that the command format is invalid.
@@ -578,21 +597,21 @@ NOTE: Make sure to use `listc` between test cases.
      
 ## Service-Related Commands
 
-### Adding service
+### Adding a service
 
   1. Test case: Any command with either n/ or pr/ or d/ missing, example  `adds n/Acne Facial Treatment pr/138`<br>
      Expected: Invalid command format error message.
       
   1. Test case: Any command with wrong format for one of the fields like `adds n/Acne Facial Treatment pr/138.123 d/15`<br>
-     Expected: Error message based on field that is wrong.
-     Name: Names should only contain alphanumeric characters and spaces, and it should not be blank<br>
+     Expected: Error message based on field that is wrong.<br>
+     Service Name: Names should only contain alphanumeric characters, hyphens and spaces, and it should not be blank<br>
      Price: Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.<br>
      Duration: Duration should only contain numbers and have a value that is greater than 0.<br>
 
   1. Test case: `adds n/Acne Facial Treatment pr/138 d/120` and `adds n/Acne Facial Treatment pr/120 d/60`<br>
      Expected: Service is already in TrackBeau error.
       
-### Editing a Service
+### Editing a service
 
   1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
      Expected:Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
@@ -603,14 +622,14 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `edits 50 n/Dark Eye Circle Treatment d/30`<br>
      Expected: Invalid index error 
      
- ### Finding a Service
+### Finding services
  
  NOTE: Make sure to use `lists` between the tests
  
   1. Test case: `finds n/Facial dr/120`<br>
      Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
      
- ### Deleting a Service
+### Deleting service(s)
  
    1. Test case: `deletes -1`<br>
      Expected:  Invalid command error message.
@@ -620,7 +639,7 @@ NOTE: Make sure to use `listc` between test cases.
 
 ## Booking Commands
 
- ### Adding a booking 
+### Adding a booking 
 
   1. Test case: Any of the fields are missing, example: `addb c/1 sev/1`<br>
      Expected: Invalid command format message.
@@ -628,7 +647,7 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: Any of the fields have invalid format, example: `addb c/1 sev/1 st/10-10-2022 10:333`<br>
      Expected:  Invalid format error message for the field that had a mistake.
 
- ### Editing a booking 
+### Editing a booking 
   
   1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
      Expected:Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
@@ -639,14 +658,14 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: Invalid format for one of the parameters, example: `editb 2 st/29-02-2001 10:30`<br> 
      Expected:Invalid format error based on the parameter
     
-### Finding a booking 
+### Finding bookings
 
 NOTE: Make sure to use `listb` between the test cases.
 
   1. Test case: `findb f/bad st/10-04-2022` <br>
      Expected:Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
  
-### Deleting a booking
+### Deleting booking(s)
 
    1. Test case: `deleteb 1,2,3`<br>
      Expected:Removes the 1st, 2nd and 3rd booking from the application.
