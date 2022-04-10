@@ -289,9 +289,13 @@ Say you found a company with an opening that you are interested in. You did your
 pertaining to the company and the role. Here's how you can input this data in the application:
 
 1. [Add the company](#c-add-c) to the company list.
+
+
    ![AddCompanyDemo](images/AddCompanyDemo.png)
 
 2. [Add the role](#c-add-c-r) under the added company.
+
+
    ![AddRoleDemo](images/AddRoleDemo.png)
 
 <div markdown="block" class="alert alert-info">
@@ -310,9 +314,13 @@ vision were not in line with your values or maybe you realised the role isn't fo
 entries from the application:
 
 1. [Delete the role](#c-delete-c-r) from a given company.
+
+
    ![DeleteRoleDemo](images/DeleteRoleDemo.png)
 
 2. [Delete the company](#c-delete-c) from the company list.
+
+
    ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
 
 ## Use Case #3: Editing a company or a role <a id="usecase3"></a>
@@ -320,13 +328,17 @@ entries from the application:
 Say you received an email for an interview and the point of contact's email is different. Here's how you can make
 changes to the application:
 
-1. [Edit the company](#c-edit-c) from the company list.  
+1. [Edit the company](#c-edit-c) from the company list.
+
+
    ![EditCompanyDemo](images/EditCompanyDemo.png)
 
 Also, you can change the status of your internship application and set the reminder for the interview date by making
 this entry:
 
-2. [Edit the role](#c-edit-r) from a given company.  
+2. [Edit the role](#c-edit-r) from a given company.
+
+
    ![EditRoleDemo](images/EditRoleDemo.png)
 
 <div markdown="block" class="alert alert-info">
@@ -338,14 +350,17 @@ this entry:
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
 Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of
-Tinner, you will be able to see a reminder pop-out box like this:   
+Tinner, you will be able to see a reminder pop-out box like this:
+
 ![ReminderDemo](images/ReminderDemo.png)
 
 If you do not see the intended reminder, it is likely that the reminder date is not within
 the [reminder window](#c-setWindow-c).  
 Thus, you can increase the reminder window by making this entry:
 
-1. [Set the reminder window](#c-setWindow-c) for the reminder list.  
+1. [Set the reminder window](#c-setWindow-c) for the reminder list.
+
+
    ![WindowrDemo](images/WindowDemo.png)
 
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
@@ -354,7 +369,9 @@ A scenario where multiple companies have sent you offers and you may want to sto
 a [list of favourites](#c-listfavourite) for ease of reference.  
 You can favourite a company by making this entry:
 
-1. [Favourite a company](#c-favourite-c) from the company list.  
+1. [Favourite a company](#c-favourite-c) from the company list.
+
+
    ![FavouriteDemo](images/FavouriteDemo.png)
    
 
@@ -373,7 +390,9 @@ companies which have sent you offers.
 
 You can choose to unfavourite by making this entry:
 
-2. [Unfavourite a company](#c-favourite-c) from the company list.  
+2. [Unfavourite a company](#c-favourite-c) from the company list.
+
+
    ![UnfavouriteDemo](images/UnfavouriteDemo.png)
 
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
@@ -386,11 +405,15 @@ In the future when you have many applications, finding specific applications can
 Say you are interested in finding out what are the roles you had applied to at Google,
 you can make this entry:
 1. [Finding a company](#c-find-c-r) from the company list.
+
+
    ![FindCompanyDemo](images/FindCompanyDemo.png)
 
 Then after realising that you have an interview for a backend role at Google, you want to check out the progress of similar roles.
 You can search for other backend roles by making this entry:
 2. [Finding all roles](#c-find-c-r) from the company list.
+
+
    ![FindRoleDemo](images/FindRoleDemo.png)
 
 <div markdown="span" class="alert alert-primary">
