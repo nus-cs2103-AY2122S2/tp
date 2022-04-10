@@ -343,7 +343,7 @@ Assigns a task to a particular student.
 <div markdown="block" class="alert alert-info">:information_source:
 <b>Note:</b>
 
-The name of the assigned task will be converted to Title Case.
+* The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
