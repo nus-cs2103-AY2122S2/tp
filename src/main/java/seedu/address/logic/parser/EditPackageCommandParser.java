@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditPackageCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class EditPackageCommandParser {
+public class EditPackageCommandParser implements Parser<EditPackageCommand>  {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPackageCommand

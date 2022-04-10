@@ -45,6 +45,7 @@ public class AddPackageCommand extends Command {
         }
 
         model.addInsurancePackage(toAdd);
+        assert model.hasInsurancePackage(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

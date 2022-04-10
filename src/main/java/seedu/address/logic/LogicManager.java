@@ -55,7 +55,9 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            logger.info("AddressBook saved!");
             storage.saveInsurancePackages(model.getInsurancePackagesSet());
+            logger.info("Insurance Packages saved!");
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
