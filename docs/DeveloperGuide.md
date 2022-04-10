@@ -1005,7 +1005,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown (WIP)
+### Launch and shutdown
 
 1. Initial launch
 
@@ -1013,14 +1013,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample candidates. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+   
+3. Resizing panels
 
-1. _{ more test cases …​ }_
+   1. Resize the bottom panels accordingly. Close the window.
+
+   2. Re-launch the app by double-clicking the jar file<br>
+      Expected: The panels will be resized to its default size. All three panels will have equal width.
 
 ### Deleting a candidate (WIP)
 
@@ -1131,6 +1136,34 @@ testers are expected to do more *exploratory* testing.
    1. Incorrect find commands to try: `find`, `find f/xxx` (where xxx is any invalid attribute field to search by)<br>
       Expected: No change to the list of candidates already displayed. Error message is shown in the feedback panel.
 
+
+### Bringing candidate data to center panel
+
+1. Loading up `Candidate's` details into the center panel in the application. 
+
+   1. Test case: `focus` on a `Candidate` in the system. <br>
+      Expecteed: The `Candidate's` information will be shown on the center panel.
+   
+   2. Test case: `focus` on an `INDEX` that is out of bounds.
+      Expected: No `Candidate` will be shown in the center panel, and an error message will be displayed. 
+
+   3. Test case: `schedule clear` when `Candidate's` information is currently displayed on the center panel. 
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   4. Test case: `schedule add` when `Candidate's` information is currently displayed on the center panel.
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   5. Test case: `schedule edit` when `Candidate's` information is currently displayed on the center panel.
+      Expected: `Candidate's` interview schedule will be automatically refreshed on the center panel.
+   
+   6. Test case: `edit as/` when `Candidate's` information is currently displayed on the center panel. 
+      Expected: `Candidate's` `ApplicationStatus` will be automatically refreshed on the center panel.
+
+   7. Test case: `edit` other attributes of `Candidate` when `Candidate's` information is currently displayed on the center panel.
+      Expected: The center panel will be cleared. 
+
+   7. Test case: `clear` when `Candidate's` information is currently displayed on the center panel.
+      Expected: The center panel will be cleared.
 
 ### Saving data
 
