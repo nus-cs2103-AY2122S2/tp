@@ -451,7 +451,7 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Add Todo Task**     | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`                                                             |
 | **Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/2022-02-16 1800`                    |
 | **Add Event Task**    | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/2022-02-17 1900 2000` 
-  **Edit Task**         | `editTask desc/TASK_DESCRIPTION date/DATE at/TIME` <br> e.g., `editTask desc/homework deadline date/2022-03-15 at/1700`
+  **Edit Task**         | `editTask INDEX desc/TASK_DESCRIPTION date/DATE at/TIME` <br> e.g., `editTask 3 desc/homework deadline date/2022-03-15 at/1700`
 | **List Tasks**        | `listTasks`                                                                                                                     |
 | **Find Task**         | `findTask OPTIONS` <br> e.g.,`findTask todo/`                                                                                   |
 | **Mark Task**         | `markTask INDEX` <br> e.g., `markTask 2`                                                                                        |
