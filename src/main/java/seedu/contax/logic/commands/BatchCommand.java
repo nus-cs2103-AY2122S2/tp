@@ -42,7 +42,7 @@ public class BatchCommand extends Command {
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
             + PREFIX_EQUALS + "VALUE*\n"
-            + "Example: `" + COMMAND_WORD + " edit "
+            + "Example: `" + COMMAND_WORD + " editperson "
             + PREFIX_ADDRESS + "new address "
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 `";
