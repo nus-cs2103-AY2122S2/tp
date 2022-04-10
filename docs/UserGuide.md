@@ -42,6 +42,8 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Glossary](#glossary)
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -86,6 +88,8 @@ Some example commands you can try:
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the property and preference format:**<br>
@@ -111,7 +115,7 @@ Some example commands you can try:
 
 </div>
 
-
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
