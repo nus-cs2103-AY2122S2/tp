@@ -22,7 +22,7 @@ import seedu.address.model.student.Telegram;
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#year2";
     private static final String INVALID_GITHUB = "--example";
     private static final String INVALID_TELEGRAM = "R@chel";
     private static final String INVALID_STUDENTID = "A01234567";

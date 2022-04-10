@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTLSTUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_YEAR2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
@@ -29,7 +29,7 @@ import seedu.address.model.util.LabTriplet;
 public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
-            .withTags("friends")
+            .withTags("year2")
             .withGithub("aliceP")
             .withTelegram("alice_P")
             .withStudentId("A0123456B")
@@ -37,7 +37,7 @@ public class TypicalStudents {
                     new LabTriplet("2", "GRADED", "11")).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")
-            .withTags("owesMoney", "friends")
+            .withTags("Tembusu", "year2")
             .withGithub("bensonM")
             .withTelegram("benson_M")
             .withStudentId("A0123457C")
@@ -52,7 +52,7 @@ public class TypicalStudents {
                     new LabTriplet("2", "UNSUBMITTED")).build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com")
-            .withTags("friends")
+            .withTags("year2")
             .withGithub("danielM")
             .withTelegram("daniel_M")
             .withStudentId("A0123459E")
@@ -97,14 +97,14 @@ public class TypicalStudents {
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY)
             .withEmail(VALID_EMAIL_AMY)
-            .withTags(VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_YEAR2)
             .withGithub(VALID_GITHUB_AMY)
             .withTelegram(VALID_TELEGRAM_AMY)
             .withStudentId(VALID_STUDENTID_AMY)
             .build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB)
             .withEmail(VALID_EMAIL_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withTags(VALID_TAG_INTLSTUDENT, VALID_TAG_YEAR2)
             .withGithub(VALID_GITHUB_BOB)
             .withTelegram(VALID_TELEGRAM_BOB)
             .withStudentId(VALID_STUDENTID_BOB)

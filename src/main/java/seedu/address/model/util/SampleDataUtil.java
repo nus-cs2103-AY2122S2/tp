@@ -23,18 +23,18 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[]{
-            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), getTagSet("friends"),
+            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), getTagSet("year2"),
                 new GithubUsername("alexyeoh"), new Telegram("alex_yeoh"), new StudentId("A0123456B")),
-            new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"), getTagSet("colleagues", "friends"),
+            new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"), getTagSet("RC4", "year2"),
                 new GithubUsername("berniceyu"), new Telegram("bernice_yu"), new StudentId("A1234567C")),
-            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"), getTagSet("neighbors"),
-                new GithubUsername("charlotteoliveiro"), new Telegram("charlotte_oliverio"),
-                new StudentId("A0123457C")),
-            new Student(new Name("David Li"), new Email("lidavid@example.com"), getTagSet("family"),
+            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
+                getTagSet("internationalStudent"), new GithubUsername("charlotteoliveiro"),
+                new Telegram("charlotte_oliverio"), new StudentId("A0123457C")),
+            new Student(new Name("David Li"), new Email("lidavid@example.com"), getTagSet("year1"),
                 new GithubUsername("davidli"), new Telegram("david_li"), new StudentId("A0123458D")),
-            new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), getTagSet("classmates"),
+            new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), getTagSet("KR"),
                 new GithubUsername("irfanibrahim"), new Telegram("irfan_ibrahim"), new StudentId("A0123459E")),
-            new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"), getTagSet("colleagues"),
+            new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"), getTagSet("RC4"),
                 new GithubUsername("roybalakrishnan"), new Telegram("roy_balakrishnan"),
                 new StudentId("A0123450F"))
         };

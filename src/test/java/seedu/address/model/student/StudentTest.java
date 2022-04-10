@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTLSTUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
@@ -34,7 +34,7 @@ public class StudentTest {
 
         // same student id, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
-                .withGithub(VALID_GITHUB_BOB).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withGithub(VALID_GITHUB_BOB).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_INTLSTUDENT).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different student id, all other attributes same -> returns false
@@ -68,7 +68,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_INTLSTUDENT).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different github -> returns false
