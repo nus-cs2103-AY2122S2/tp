@@ -106,7 +106,6 @@ public class EditCommand extends Command {
                 listSize = lastShownList.size();
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
-
             targetIndex = model.getPersonListIndex(targetName);
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);

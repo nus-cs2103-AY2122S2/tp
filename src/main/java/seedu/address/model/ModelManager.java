@@ -159,8 +159,8 @@ public class ModelManager implements Model {
         Index result = Index.fromZeroBased(0);
         String personName = name.fullName;
         for (Person i : filteredPersons) {
-            String currName = i.getName().fullName;
-            if (currName.toLowerCase().contains(personName.toLowerCase())) {
+            Name currName = i.getName();
+            if (currName.containsKeyword(personName)) {
                 break;
             }
             result.increment(1);
