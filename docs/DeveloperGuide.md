@@ -338,24 +338,24 @@ Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The use
 
 Given below is an example scenario:
 
-Step 1. The user requests to add a student that has the following details,
+The user wants to add a student that has the following details,
 - `name`: Samuel
 - `phone number`: 64874982
 - `email`: simp4raiden@gmail.com
 - `address`: 6 Raffles Quay Singapore, 048580 Singapore
 - `tag`: struggling in math, good in cs
 
-Step 2. The user enters the command
+Step 1. The user enters the command
 
 ``addstudent -n Samuel -p 64874982 -e simp4raiden@gmail.com -a 6 Raffles Quay Singapore, 048580 Singapore -t struggling in math -t good in cs``
 
-Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+Step 2. The user input is passed into `LogicManager#execute(commandText)`.
 
-Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+Step 3. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
 
-Step 5. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
+Step 4. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
 
-Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
+Step 5. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
 `AddStudentCommand` which it then returns.
 
 * Constraints
@@ -366,7 +366,7 @@ Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student
 
 <img src="images/AddStudentSequenceDiagram-0.png" width="550"/>
 
-Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
+Step 6. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
 
@@ -380,17 +380,17 @@ Deleting a `Student` or `Lesson` to TeachWhat! is done through the `LogicManager
 
 Given below is an example scenario:
 
-Step 1. The user requests to delete student that is of index 1 on the viewable student list,
+The user wants to delete a student that is of index 1 on the viewable student list,
 
-Step 2. The user enters the command `rml 1`
+Step 1. The user enters the command `rml 1`
 
-Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+Step 2. The user input is passed into `LogicManager#execute(commandText)`.
 
-Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+Step 3. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
 
-Step 5. The `TeachWhatParser` detects the command word `rml` and passes the student details to `DeleteLessonCommandParser#parse(args)`.
+Step 4. The `TeachWhatParser` detects the command word `rml` and passes the student details to `DeleteLessonCommandParser#parse(args)`.
 
-Step 6. The `DeleteLessonCommandParser` uses `ParserUtil#parseIndex(oneBasedIndex)` to parse the one-based index of the lesson to be deleted into a zero-based `Index`. This is used to construct a new
+Step 5. The `DeleteLessonCommandParser` uses `ParserUtil#parseIndex(oneBasedIndex)` to parse the one-based index of the lesson to be deleted into a zero-based `Index`. This is used to construct a new
 `DeleteLessonCommand` which it then returns.
 
 * Constraints
@@ -398,7 +398,7 @@ Step 6. The `DeleteLessonCommandParser` uses `ParserUtil#parseIndex(oneBasedInde
    * `ParserUtil#parseIndex(oneBasedIndex)` rejects values that are not of type `java.lang.Integer`
      `ParseException` will be thrown if the constraints are violated
 
-Step 7. The `LogicManager` then executes the `DeleteLessonCommand` and the `Lesson` is removed from the `Lesson Book`.
+Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Lesson` is removed from the `Lesson Book`.
 
 * Constraint
   * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
