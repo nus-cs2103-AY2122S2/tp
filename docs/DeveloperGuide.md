@@ -1007,6 +1007,19 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file<br>
       Expected: The panels will be resized to its default size. All three panels will have equal width.
 
+### Adding a candidate
+
+1. Adding a candidate into the system
+
+   1. Test case: `add id\A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
+      Expected: 1st parameter is incorrect. It should be `id/A0123456B` with a forward slash `/`. All prefixes and its value are tied with a forward slash `/`.
+   
+   2. Test case: `add id/A0123456B`
+      Expected: All attributes of a `Candidate` should be present in the `add` command. An error message will be shown with the full `add` command statement.
+
+   3. Test case: `add id/A0123456B n/John Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`
+      Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `add` command will be validated by the system. 
+
 ### Deleting a candidate (WIP)
 
 1. Deleting a candidate while all candidates are being shown
