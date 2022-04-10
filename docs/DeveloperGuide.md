@@ -339,11 +339,11 @@ Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The use
 Given below is an example scenario:
 
 The user wants to add a student that has the following details,
-- `name`: Samuel
-- `phone number`: 64874982
-- `email`: simp4raiden@gmail.com
-- `address`: 6 Raffles Quay Singapore, 048580 Singapore
-- `tag`: struggling in math, good in cs
+- `Name`: Samuel
+- `Phone number`: 64874982
+- `Email`: simp4raiden@gmail.com
+- `Address`: 6 Raffles Quay Singapore, 048580 Singapore
+- `Tag`: struggling in math, good in cs
 
 Step 1. The user enters the command
 
@@ -355,11 +355,11 @@ Step 3. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to par
 
 Step 4. The `TeachWhatParser` detects the command word `addstudent` and passes the student details to `AddStudentCommandParser#parse(args)`.
 
-Step 5. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `name`, `phone`, `email`, `address` and `tag`, and constructs a new `Student` and passes the `Student` to
+Step 5. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student details into the prefixes `Name`, `Phone`, `Email`, `Address` and `Tag`, and constructs a new `Student` and passes the `Student` to
 `AddStudentCommand` which it then returns.
 
 * Constraints
-    * Multiple `tag` prefixes can be given but only one `name`, `phone`, `email` and `address` can be given.
+    * Multiple `Tag` prefixes can be given but only one `Name`, `Phone`, `Email` and `Address` can be given.
     * All the prefixes are optional except for `name` and `phone`
 
       `ParseException` will be thrown if the constraints are violated
@@ -371,6 +371,24 @@ Step 6. The `LogicManager` then executes the `AddStudentCommand` and the `Studen
 The following sequence diagram shows how the add student command works.
 
 <img src="images/AddStudentSequenceDiagram-1.png" width="550"/>
+
+#### Design Considerations
+
+**Choice 1**  
+Compulsory prefixes: `Name` and `Phone`
+Optional prefixes: `Email`, `Address` and `Tag`
+Advantages: This improves user experience as the tutor may not want to keep track of them.
+Disadvantages: It may cause some students to have email address and some to not have them. This may cause inconsistencies.
+
+**Choice 2**  
+Compulsory prefixes: `Name`, `Phone` and `Email`
+Optional prefixes: `Address` and `Tag`
+Advantages: This improves user experience as the tutor may not want to keep track of addresses.
+Disadvantages: It requires the tutor to know the email address as well for all his students.
+
+**Choice 1** was picked because it felt tedious for the user to ask for the email address of every student.
+This split of compulsory and optional fields allows us to maintain the minimal amount of information required by a tutor 
+and improve user experience by improving typing speed as the user does not have to enter every field.
 
 [return to top ↑](#table-of-contents)
 
@@ -502,6 +520,24 @@ The following sequence diagram shows how the assign operation works.
 > PlantUML, the lifeline reaches the end of diagram.
 
 [return to top ↑](#table-of-contents)
+
+
+### Help feature
+
+The feature shows a table of commands with a short description, the command words and their shortcuts. 
+If the user wants to know more about the commands, there is a hyperlink to the user guide.
+
+This feature is implemented in the `HelpWindow`.
+
+All commands are stored as `CommandCard` that is used by a `TableView<CommandCard>` to display the information.
+The `TableView<CommandCard` is made up of three `TableColumn<CommandCard>` corresponding to each field of a `CommandCard`.
+
+A `CommandCard` contains the `description`, `commandWord` and `commandShortcut` fields.
+These are used by `TableColumn<CommandCard>` to create the columns of each corresponding field.
+
+Given below is a class diagram of `TableView<CommandCard>`  
+
+<img align="center" src="images/TableView.png"/>
 
 --------------------------------------------------------------------------------------------------------------------
 
