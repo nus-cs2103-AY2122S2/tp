@@ -74,6 +74,15 @@ public class ModuleBuilder {
         return this;
     }
 
+    public ModuleBuilder withUniqueStudentList(Student... students) {
+        UniqueStudentList newStudentList = new UniqueStudentList();
+        for (Student s : students) {
+            newStudentList.add(s);
+        }
+        newStudentList.setStudents(newStudentList);
+        return this;
+    }
+
 
     public TaModule build() {
         return new TaModule(moduleName, moduleCode, academicYear, studentList);
