@@ -29,7 +29,9 @@ Given below are my contributions to the project.
         * Wrote the documentation for commands relating to plotting charts.
         * Fixed documentation flaws in the user guide.
     * Developer Guide:
-        * To be added soon
+        * Added the manual testing cases
+        * Added the chart sequence diagram for plot command implementations
+        * Made the add customer sequence diagram for implementation of add customer
 
 * **Community**:
     * Helped to peer review code.
