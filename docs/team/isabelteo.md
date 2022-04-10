@@ -10,7 +10,8 @@ TrackBeau is a desktop application built for beauty salons to manage their custo
 Given below are my contributions to the project.
 
 * **New Feature**: 
-* Added feature to obtain summary data on customer information such as pie charts on customer attributes and line chart on customers gained per month in the current year
+* Added feature to obtain summary data on customer information such as pie charts on customer attributes and line chart on customers gained per month in the current year. A total of 7 chart commands were added to enable experienced users with a large customer base to easily understand their customer demographics.
+** Challenges faced: Explored different design considerations such as a statistics panel with all charts and later decided on a pop-up window style for the charts to facilitate access to the charts. 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=isabelteo&tabRepo=AY2122S2-CS2103-F11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -19,13 +20,18 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Added attributes to customers for salons to track such as birthday, registration date, skin type, hair type, preferred staff, preferred services and allergies.
+    * Added feature to find by registration date and birthdate.
+    * Made customers unique by phone number and email, rather than just by name, to facilitate the implementation of other features like Booking.
+   
 * **Documentation**:
     * User Guide:
         * Contributed to the documentation for commands relating to customers.
         * Wrote the documentation for commands relating to plotting charts.
         * Fixed documentation flaws in the user guide.
     * Developer Guide:
-        * To be added soon
+        * Added the manual testing cases
+        * Added the chart sequence diagram for plot command implementations
+        * Made the add customer sequence diagram for implementation of add customer
 
 * **Community**:
     * Helped to peer review code.
@@ -33,4 +39,4 @@ Given below are my contributions to the project.
     * Worked with teammates to discuss about how to implement more complicated features.
 
 * **Tools**:
-    * To be added soon
+    * JavaFX Charts
