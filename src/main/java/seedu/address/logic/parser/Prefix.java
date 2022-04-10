@@ -12,8 +12,7 @@ public class Prefix implements Serializable {
     private final boolean isFlag;
 
     /**
-     * Placeholder
-     * @param prefix placeholder
+     * Creates a prefix with a string. The prefix defaults to a non-required, non-flag prefix.
      */
     public Prefix(String prefix) {
         this.prefix = prefix;
@@ -22,9 +21,7 @@ public class Prefix implements Serializable {
     }
 
     /**
-     * Placeholder
-     * @param prefix placeholder
-     * @param isRequired placeholder
+     * Creates a prefix with a string. The prefix defaults to a non-flag prefix.
      */
     public Prefix(String prefix, boolean isRequired) {
         this.prefix = prefix;
@@ -33,10 +30,7 @@ public class Prefix implements Serializable {
     }
 
     /**
-     * Placeholder
-     * @param prefix placeholder
-     * @param isRequired placeholder
-     * @param isFlag placeholder
+     * Creates a prefix with a string.
      */
     public Prefix(String prefix, boolean isRequired, boolean isFlag) {
         this.prefix = prefix;
