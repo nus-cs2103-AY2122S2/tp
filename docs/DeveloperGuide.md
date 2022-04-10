@@ -222,12 +222,12 @@ In order to accommodate this new fields, we added new attributes into the `Perso
 
 This also required changes to `CLISyntax` to include the new prefixes for the added classes.
 
-**Path Execution of Add Feature Activity Diagram is shown below:**
+**Path Execution of Add Feature:**
 ![AddFeatureActivityDiagram](images/AddFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
-**Class Diagram of Add Feature is shown below:**
+**Structure of Add Feature:**
 ![AddClassDiagram](images/AddClassDiagram.png)
 
 The class diagram above depicts the structure of `AddCommand`. As per any Command class, AddCommand needs to extend the abstract class Command.
@@ -241,7 +241,7 @@ Additionally, there are a few final static messages to be displayed to the user 
    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
-**Sequence Diagram of Add Feature is shown below:**
+**Interaction of objects when Add Command is executed:**
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
@@ -257,15 +257,16 @@ Following this, `LogicManager` will call the `execute()` method of the `AddComma
 
 ### Summarise feature
 
-The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
+The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
 
-In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
-students who are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
-This helps the hall masters determine if there is a spread of virus in any particular block.
+#### What is the sumamrise feature
 
-Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
-comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
-their hall safe.
+The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
+Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
+Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
+
+This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
+their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
 
 **Path Execution of Summarise Feature Activity Diagram is shown below:**
 ![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
@@ -375,19 +376,19 @@ The user can choose when to execute the `help` command.
 
 The activity diagram shows the possible execution paths for the `help` command.
 
-**Path Execution of Help Feature Activity Diagram is shown below:**
+**Path Execution of Help Feature:**
 
 ![HelpActivityDiagram](images/HelpActivityDiagram.png)
 
 When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
 
-**Class Diagram of Help Feature is shown below:**
+**Structure of Help Feature:**
 
 ![HelpClassDiagram](images/HelpClassDiagram.png)
 
 The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
 
-**Sequence Diagram of Help Feature is shown below:**
+**Interaction of objects when Help Command is executed:**
 
 ![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
 
@@ -415,7 +416,7 @@ user to replace the list of students with an empty one. Previous data are swiped
 
 ![ClearClassDiagram](images/ClearClassDiagram.png)
 
-The class diagram above depicts the structure of `CLearCommand`. As per any Command class, ClearCommand needs to extend the abstract class Command.
+The class diagram above depicts the structure of `ClearCommand`. As per any Command class, ClearCommand needs to extend the abstract class Command.
 
 Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
 
@@ -595,7 +596,7 @@ There are two possible execution paths for this command.
 
 The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
 
-**Interactions between objects when EmailCommand is executed:**
+**Interactions between objects when Email Command is executed:**
 
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
