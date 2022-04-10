@@ -23,30 +23,26 @@ Given below are my contributions to the project.
   - **Highlights**: This feature was relatively challenging despite being similar to `find` command. It required a proper analysis of `find` in order to understand the inner workings of it, and then following a similar implementation of it.
   - **Credits**: Main idea of implementing `filter` is derived from `find`
 
+
 - **New Feature**: Added the ability to unarchive users from `archiveBook`, revamped underlying architecture of `archive` command. [(PR #135)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/135)
   - **What it does**: Allows you to archive/unarchive contacts in ModuleMateFinder.
   - **Justification**: This features improves the product as it allows users to organise their contacts better. For example, they can put all graduate students in `archive`, and keep them in mind in the event they want to contact them for module feedback.
-  - **Highlights**: This was a tough feature to implement. I had to modify the underlying architecture (in `Model`) in order to fit another `AddressBook`. This additional `AddressBook` is used as a reference for `archiveBook`. With these changes, methods have to be made with respect to `archiveBook`, and then we need a way to identify which `AddressBook` we're currently in. This is retrieved through GUI methods.
+  - **Highlights**: Modifications to the underlying architecture (in `Model`) is necessary to fit another `AddressBook`, for it be used as `archiveBook`. It also took awhile to figure out how to retrieve which `AddressBook` the user is viewing.
   - **Enhancements**: `switch` was binded to F10 [(PR #122)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/122)
+
 
 - **New Feature**: Added GUI, `AddWindow` for adding a new Person into ModuleMateFinder. [(PR #46)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/46)
   - **What it does**: Allows users to add a new contact into ModuleMateFinder.
-  - **Justification**: This feature improves the product significantly as not all users will be familiar with CLI application, or simply do not want to memorise the commands. Provides ease of use, and allows execution of multiple commands by abstracting details.
-  - **Highlights**: This feature was challenging as it required good understanding of JavaFX, which required digging deeper into JavaFX and how it integrates with Java.
-  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module`, `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72) and `Comment`[(PR #88)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/88). Binded the `ENTER` key to act as a `Submit` button, when mandatory fields are added. Reset focus on first `TextField` when window loses focus [(PR #102)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/102)
-  - **Credits**: Some code reuse from `HelpWindow`, which served as the _baseline_ to start implementation of `AddWindow`
-
-
-- **New Feature**: Added GUI, `EditWindow` for editing a Person within ModuleMateFinder. [(PR #81)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81)
-  - **What it does**: Allows users to easily edit a contact in ModuleMateFinder
-  - **Justification**: Not all users are familiar with the command syntax and would prefer something more guided. This provides that guidance while still giving the benefit of typing fast.
-  - **Enhancements**: Reset focus onto first `TextField` when window loses focus. Binded `ENTER` key to act as a `Submit` button, as long as the given input is valid. [(PR #102)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/102)
-  - **Credits**: Some code reuse from `HelpWindow`, which served as the _baseline_ to start implementation of `EditWindow`
-
+  - **Justification**: This feature improves the product significantly as not all users will be familiar with CLI application, or simply do not want to memorise the commands. It provides ease of use, and allows execution of multiple commands by abstracting details.
+  - **Highlights**: Required playing around with JavaFX and SceneBuilder to figure out the best layout.
+  - **Enhancements**: Extended the feature to allow for adding _optional_ fields like `Module`, `Status`[(PR #72)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72) and `Comment`[(PR #88)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/88). Binded the `ENTER` key to act as a `Submit` button, when mandatory fields are added. Reset focus on first `TextField` when window loses focus [(PR #102)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/102). Extended this window functionality to for `EditCommand` as well, named `EditWindow` [(PR #81)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81).
+  - **Credits**: Code reuse from `HelpWindow`, which serves as the _baseline_ for any additional windows.
+  
 
 - **GUI Update**: Recoloured GUI, and moved certain fields around. [(PR #112)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/112)
   - **What it does**: Makes ModuleMateFinder more distinct and recognisable with a new colour theme.
   - **Justification**: Less semblance to `AddressBook3`, so it has a more original feel to it.
+
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=bakano98&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=bakano98&tabRepo=AY2122S2-CS2103T-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code&authorshipIsBinaryFileTypeChecked=false)
 - **Project Management**:
@@ -60,21 +56,11 @@ Given below are my contributions to the project.
 
 **Community**
 - Reviewed all PRs done by Julio and Bryan
-  - Non-trivial PRs reviewed and commented on for Julio:
-    - [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62)
-    - [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90)
-    - [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
-  - Non-trivial PRs reviewed for Bryan:
-    - [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91)
-    - [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116)
-    - [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
+  - Non-trivial PRs reviewed and commented on for Julio are: [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62), [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90), [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
+  - Non-trivial PRs reviewed and commented on for Bryan are: [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91), [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116), [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
 - Reviewed most PRs by Wei Ming and Benjamin
-  - Non-trivial PRs reviewed and commented on for Wei Ming
-    - [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
-    - [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
-  - Non-trivial PRs reviewed and commented on for Benjamin
-    - [PR #65](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/65)
-    - [PR #83](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/83)
+  - Non-trivial PRs reviewed and commented on for Wei Ming are: [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44), [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
+  - Non-trivial PRs reviewed and commented on for Benjamin are: [PR #65](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/65) [PR #83](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/83)
 
 
 - **Documentation**:
