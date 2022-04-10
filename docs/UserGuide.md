@@ -520,7 +520,12 @@ Format: `undo`
 
 :bulb: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
 
-:exclamation: Undo does not preserve the order of the list, thus a product/item deleted and later added back by undo may have a different index
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+:exclamation: Undo does not preserve the order of the list, thus a product/item deleted and later added back by undo may have a different index.
+
 </div>
 
 #### 3.3.3 Redoing most recent undone changes : `redo`
