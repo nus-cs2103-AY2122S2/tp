@@ -349,6 +349,10 @@
     -fx-text-fill: #F70D1A;
 }
 
+#banner > .label {
+    -fx-graphic: url("../images/banner.png");
+}
+
 #commandTextField {
     -fx-background-color: #273069 #273069 #273069 #273069;
     -fx-background-insets: 0;
