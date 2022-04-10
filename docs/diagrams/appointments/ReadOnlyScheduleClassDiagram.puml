@@ -1,0 +1,48 @@
+@startuml
+!include ../style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Partial Schedule Class Diagram
+
+package Model {
+    class ModelManager {
+
+    }
+
+    class "<<interface>>\n Model " as Model {
+
+    }
+
+    class Schedule {
+        getAppointmentList()
+        hasOverlappingAppointment(Appointment)
+        hasAppointment(Appointment)
+        findSlotsBetweenAppointments(LocalDateTime, LocalDateTime, int)
+        setAppointments(List<Appointment>)
+        addAppointment(Appointment)
+        setAppointment(Appointment, Appointment)
+        removeAppointment(Appointment)
+    }
+
+    class "<<interface>>\n ReadOnlySchedule " as ReadOnlySchedule {
+        getAppointmentList()
+        hasOverlappingAppointment(Appointment)
+        hasAppointment(Appointment)
+        findSlotsBetweenAppointments(LocalDateTime, LocalDateTime, int)
+    }
+}
+
+class "External Class" as External
+
+Schedule .up.|> ReadOnlySchedule
+ModelManager -left-> Schedule
+ModelManager .up...|> Model
+
+External .down.> ReadOnlySchedule
+External .down.> Model
+
+@enduml

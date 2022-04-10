@@ -8,30 +8,33 @@ skinparam ClassBorderColor #000000
 
 title Partial ScheduleItem Class Diagram
 
-package "ScheduleItem" {
-    class Appointment {
-    }
+class Appointment {
+    name: Name
+    startDateTime: StartDateTime
+    duration: Duration
+    person: Person
+    priority: Priority
+}
 
-    class AppointmentSlot {
+class AppointmentSlot {
 
-    }
+}
 
-    class "{abstract}\n ScheduleItem " as ScheduleItem {
-        getStartDateTime()
-        getEndDateTime()
-        getComparableDateTime()
-        isOverlapping(ScheduleItem)
-        compareTo(TemporalComparable)
-    }
+class "{abstract}\n ScheduleItem " as ScheduleItem {
+    getStartDateTime()
+    getEndDateTime()
+    getComparableDateTime()
+    isOverlapping(ScheduleItem)
+    compareTo(TemporalComparable)
+}
 
-    class "<<interface>>\n TemporalComparable " as TemporalComparable {
-        getComparableDateTime()
-        compareTo(TemporalComparable)
-    }
+class "<<interface>>\n TemporalComparable " as TemporalComparable {
+    getComparableDateTime()
+    compareTo(TemporalComparable)
+}
 
-    class "<<interface>>\n Comparable<T> " as Comparable {
-        compareTo(T)
-    }
+class "<<interface>>\n Comparable<T> " as Comparable {
+    compareTo(T)
 }
 
 AppointmentSlot -[hidden]right- Appointment
