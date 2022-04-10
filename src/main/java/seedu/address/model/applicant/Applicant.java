@@ -102,7 +102,7 @@ public class Applicant {
     }
 
     public boolean isHired() {
-        return !hiredStatus.getValue().equals("Available");
+        return hiredStatus.isHired();
     }
 
     /**

@@ -78,7 +78,7 @@ Format: `add -TYPE …​`
    * `-i` to indicate adding an interview
    * `-p` to indicate adding a position
 
-### Adding an Applicant: `add -a`
+### Adding Applicant: `add -a`
 
 Adds a new applicant to HireLah
 
@@ -107,6 +107,7 @@ Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
   an applicant can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
   but not at `2022-01-01 13:50`.
 * A candidate can only have **at most one interview for each unique position** in the position list.
+* An interview cannot be created for a Position that has no openings.
 * The `APPLICANT_INDEX` refers to the index number shown in the last displayed Applicant
   list.
 * The `POSITION_INDEX` refers to the index number shown in the last displayed Position
@@ -116,7 +117,7 @@ Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
 Examples:
 * `add -i 1 d/2022-01-01 14:00 p/2`
 
-### Adding positions : `add -p`
+### Adding Positions : `add -p`
 
 Adds a new open position to HireLah.
 
@@ -145,7 +146,7 @@ Format: `edit -TYPE …​`
    * `-i` to indicate editing an interview
    * `-p` to indicate editing a position
 
-### Editing an Applicant : `edit -a`
+### Editing Applicant : `edit -a`
 
 Edits an existing Applicant in HireLah.
 
@@ -164,7 +165,7 @@ Examples:
 *  `edit -a 1 n/Belle ag/43 g/F p/81234567` 
 *  `edit -a 2 e/cedric@yahoo.com a/13 Computing Drive 612345 t/`
 
-### Editing an Interview : `edit -i`
+### Editing Interview : `edit -i`
 
 Edits an existing interview in HireLah.
 
@@ -183,7 +184,7 @@ Examples:
 * `edit -i 3 a/1 d/2022-01-01 15:00 p/1`
 
 
-### Edit positions : `edit -p`
+### Editing Positions : `edit -p`
 
 Edits an existing position in HireLah.
 
@@ -196,6 +197,7 @@ Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTIO
 * When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
 * Requirements can be removed by providing an empty requirement field. i.e. r/
 * Number of openings in the position must be between **1 and 5 digits**.
+* Number of openings in the position cannot be edited to be lower than the current number of outstanding offers.
 * Description must be between **1 and 200 characters**.
 * Name must be between **1 and 100 characters**.
 
@@ -213,39 +215,42 @@ Format: `delete -TYPE …​`
    * `-i` to indicate deleting an interview
    * `-p` to indicate deleting a position
 
-### Deleting an Applicant : `delete -a`
+### Deleting Applicant : `delete -a`
 
 Deletes the specified Applicant from HireLah.
 
 Format: `delete -a APPLICANT_INDEX`
 
 * Deletes the Applicant at the specified `APPLICANT_INDEX`.
-* Interviews that contain said applicant are also deleted. 
+* Interviews that contain said applicant are also deleted.
+* Offers for Positions handed out to said applicant will also be removed. 
 * The index refers to the index number shown in the displayed Applicant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `delete -a 1`
 
-### Deleting an Interview: `delete -i`
+### Deleting Interview: `delete -i`
 
 Deletes an existing interview in HireLah.
 
 Format: `delete -i INTERVIEW_INDEX`
 * Deletes the Interview at the specified `INTERVIEW_INDEX`.
+* Offer for Position handed out via the interview will also be removed.
 * The index refers to the index number shown in the displayed Interview list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `delete -i 2`
 
-### Delete positions : `delete -p`
+### Deleting Positions : `delete -p`
 
 Deletes an existing position in HireLah.
 
 Format: `delete -p POSITION_INDEX`
 * Deletes the Position at the specified `POSITION_INDEX`.
 * Interviews that contain said position are also deleted.
+* However, Applicants that have already accepted a job at said Position, will retain their status as being hired for that Position.
 * The index refers to the index number shown in the displayed Position list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -273,7 +278,7 @@ Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
   * Can either be `asc` or `dsc`.
   * Sorting only works based on a predetermined attribute, and different data types will be sorted according to different attributes, as elaborated in the table below.
 
-### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+### Listing Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI.
 
 The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
@@ -314,7 +319,7 @@ Examples:
 - `list -i f/date a/2022-05-04`
 - `list -i f/status a/accepted s/asc`
 
-### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+### Listing Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 
 Lists all existing positions by default. Automatically toggles view to the position tab on the GUI.
 
