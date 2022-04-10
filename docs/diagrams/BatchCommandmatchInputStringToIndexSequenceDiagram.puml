@@ -13,6 +13,7 @@ box Model MODEL_COLOR_T1
 participant ":Person"  as Person MODEL_COLOR
 box end
 
+[-> LogicManager
 activate LogicManager
 create BatchCommandParser
 LogicManager -> BatchCommandParser: parseCommand()
@@ -47,4 +48,7 @@ activate Person
 Person --> BatchCommand
 deactivate Person
 return
+
+[<-- LogicManager
+deactivate LogicManager
 @enduml
