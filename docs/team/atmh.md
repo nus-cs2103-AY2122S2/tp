@@ -14,7 +14,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 * **Code contributed:** [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=atmh&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Features and Enhancements implemented:**
-  <br><br>
+
   * Undo and redo command (PR [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94)):
     * What it does: Allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
     * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
@@ -58,7 +58,6 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   <br><br>
 
 * **Documentation**:
-  
   * User Guide:
     * Added documentation for `Memo`, `ContactedDate`, `undo`, `redo`, `deletetag`, preventing duplicates, ignoring case sensitivity, trimming extra spaces, preventing extraneous parameters, `add` and `edit` (PR [\#25](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/25), [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94), [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133), [\#144](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/144), [\#168](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/168), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#234](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/234), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#239](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/239), [\#240](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/240))
     * Updated FAQ (PR [\#152](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/152))
