@@ -17,8 +17,8 @@ This is a brownfield project that bases from the Project template [AddressBook L
     - [storage Component](#storage-component)
     - [Common classes](#common-classes)
 - [Implementation](#implementation)
-- [Glossary](#glossary)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Glossary](#appendix-glossary)
 - [Appendix: Requirements](#appendix-requirements)
   - [Target User Profile](#target-user-profile)
   - [Value proposition](#value-proposition)
@@ -300,13 +300,6 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
 
-
-## Glossary
-- **Users**: Real estate agents.
-- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
-- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
-- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
-
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
@@ -322,6 +315,12 @@ This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 **Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
+
+# Appendix: Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Requirements
 
