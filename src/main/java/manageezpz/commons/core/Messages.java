@@ -24,7 +24,10 @@ public class Messages {
             "The time range you provided is invalid as end time should be after start time!";
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format!";
 
+    public static final String MESSAGE_DUPLICATE_PERSON = "Employee, phone number or email "
+            + "already exists in manageEZPZ! Please check again! \n\n%1$s";
+
     public static final String MESSAGE_DUPLICATE_TASK = "Task with the same description '%1$s' already exists! \n\n";
 
-    public static final String MESSAGE_FIELD_NOT_EDITED = "At least one of the fields to edit must be provided.\n\n";
+    public static final String MESSAGE_FIELD_NOT_EDITED = "At least one of the fields to edit must be provided. \n\n";
 }

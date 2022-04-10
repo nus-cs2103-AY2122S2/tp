@@ -37,19 +37,21 @@ public class DeleteTaskCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> fullPersonList = model.getAddressBook().getPersonList();
         List<Task> lastShownTaskList = model.getFilteredTaskList();
+        List<Person> fullPersonList = model.getAddressBook().getPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task taskToDelete = lastShownTaskList.get(targetIndex.getZeroBased());
-        model.deleteTask(taskToDelete);
 
         List<Person> affectedPersonList = taskToDelete.getAssignees();
 
@@ -58,6 +60,7 @@ public class DeleteTaskCommand extends Command {
             model.decreaseNumOfTasks(personToUpdate);
         }
 
+        model.deleteTask(taskToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
