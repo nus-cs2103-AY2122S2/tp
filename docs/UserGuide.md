@@ -237,6 +237,8 @@ Format: `favourite INDEX`
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
+<div style="page-break-after: always;"></div>
+
 ### Open Favourites window: `fw`
 
 Opens a new window that displays the compacted list of clients that have been favourited.
@@ -252,6 +254,8 @@ Format:  `fw`
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding clients by keyword: `find`
 
@@ -287,6 +291,8 @@ Examples:
 - `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
     ![images/user-guide/findRobinJohan.png](images/user-guide/findRobinJohan.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting clients: `sort`
 
