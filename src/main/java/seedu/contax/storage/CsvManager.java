@@ -20,19 +20,13 @@ import seedu.contax.model.Model;
 public class CsvManager {
     private static final String CSV_HEADER = "Name,Phone,Email,Address,Tagged";
 
-    private Model model;
     private BiFunction<Integer, String[], Boolean> lineAction;
     private UnaryOperator<List<String[]>> csvLines;
-
-    public CsvManager(Model model) {
-        this.model = model;
-    }
 
     /**
      * Creates a CsvManager to import to specified {@code model}.
      */
     public CsvManager(Model model, BiFunction<Integer, String[], Boolean> lineAction) {
-        this.model = model;
         this.lineAction = lineAction;
     }
 
@@ -40,7 +34,6 @@ public class CsvManager {
      * Creates a CsvManager to import to specified {@code model}.
      */
     public CsvManager(Model model, UnaryOperator<List<String[]>> csvLines) {
-        this.model = model;
         this.csvLines = csvLines;
     }
 

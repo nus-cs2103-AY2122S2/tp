@@ -519,12 +519,21 @@ Appointment data are saved in the hard disk automatically after any command that
 
 Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
+ContaX formatted CSV files are as follows:
+* First row contains headers delimited by commas. Headers used are `Name`, `Phone`, `Email`, `Address`, `Tagged`
+* Second row onwards will contain contact information corresponding to the column headers.
+
+An example exported CSV file is as follows. This can be opened by text editors or spreadsheet management applications like Microsoft Excel.
+
+![ExportedCsvExample](images/ExportedCsvExample.png)
+
 Format: `exportcsv`
 * Exports CSV as per ContaX format. This file can be imported by other instances of ContaX.
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
 * `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
+
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.

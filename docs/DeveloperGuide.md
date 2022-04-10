@@ -1274,7 +1274,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix 1: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1289,41 +1289,62 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Missing data file<br>
+      **Expected:** Default contacts are loaded instead. Upon an operation that interacts with the data, e.g. add/delete/edit persons, the data will then be saved as `addressbook.json`.
+   
+   2. Test case: Corrupted JSON Structure in data file<br>
+      **Expected:** An empty AddressBook will be loaded instead. Upon an operation that interacts with the data, the existing corrupted `addressbook.json` file will be replaced with the new data.
 
-1. _{ more test cases …​ }_
+   3. Test case: Invalid Person record in JSON data file (e.g. alphabets in phone number)<br>
+      **Expected:** Data is loaded into ContaX normally, with invalid entries skipped.
+
+2. Manually editing JSON entries
+
+   1. Prerequisites: Do not have an active instance of ContaX open.
+   
+   2. Test case: Editing the entries directly from the JSON file <br>
+      **Expected:** Upon opening of ContaX, the previously edited data is loaded into ContaX normally.
+   
+   3. Test case: Editing the entries but with invalid data <br>
+      **Expected:** Upon opening of ContaX, the particular entry will be skipped.
+
+### Importing Contacts from CSV Files
+
+1. Importing contacts from a CSV File
+
+   1. Prerequisites: Must have an existing CSV File with contact information.
+   
+   2. Test case: CSV File was exported previously from another instance of ContaX, or is in proper ContaX format (ContaX format details can be found [here](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html#exporting-the-data-exportcsv)) <br>
+      **Expected:** Entries in the CSV file are successfully appended into ContaX.
+   
+   3. Test case: CSV File was in another format but has the necessary entries of each contact (Name, Phone, Email, Address, Tags). `importcsv` command executed specifying each of the column numbers to read from. <br>
+      **Expected:** Entries in the CSV file are successfully appended into ContaX.
+   
+   4. Test case: Contact information in CSV File has invalid information (e.g. alphabets in phone number)<br>
+      **Expected:** The particular entries that have invalid information will be skipped during the import.
+
+### Exporting Contacts as CSV Files
+
+1. Exporting contacts from a CSV File
+
+   1. Test case: `exportcsv` command executed <br>
+      **Expected:** Current contact information will be saved to the file location `data\addressbook.csv`
+   
+   2. Test case: Command executed with empty address book <br>
+      **Expected:** File is still created but only contains the headers.
 
 ### Resizing the Help Window
 

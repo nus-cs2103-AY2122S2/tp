@@ -15,7 +15,8 @@ public class ChainCommand extends Command {
     public static final String COMMAND_WORD = "chain";
     public static final String MESSAGE_USAGE = "`" + COMMAND_WORD + "`: **Chain two commands together for execution**"
             + "\nParameters: *[Command] && [Command]*"
-            + "\nExample: `deleteperson 1 addperson n/Alice p/91231231 e/alice@example.com a/Address`";
+            + "\nExample: `" + COMMAND_WORD + "deleteperson 1 "
+            + "&& addperson n/Alice p/91231231 e/alice@example.com a/Address`";
 
     private final List<Command> commands;
     /**
