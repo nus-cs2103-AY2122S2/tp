@@ -95,13 +95,25 @@ and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/p
     * Wrote all notes, tips, and limitations.
     
   * Developer Guide:
-    * to be added soon
-
+    * Edit diagram for UI component.
+    * Edit diagram and explanation for Model component.
+    * Edit diagram for Storage component.
+    * Write explanations, design considerations, and make diagrams implementation these features: `delete`, `addgroup`, `delgroup`, 
+    `addtask`, `deltask` , `viewtask`, `assign`.
+    * Wrote and defined product scope including: target user profile and value proposition.
+    * Wrote the user stories.
+    * Wrote and modified all 15 use cases.
+    * Wrote and defined all Non-Functional Requirements.
+    * Wrote and defined all terms in the glossary.
+    * Wrote all instructions for manual testing including these features: `list`, `clear`, `exit`, `help`, `add`, `delete`,
+    `find`, `addgroup`, `delgroup`, `assign`, `deassign`, `viewcontact`, `addtask`, `deltask`, `viewtask` and instructions on saving data.
+    
 * **Community**:
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/227), 
   [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/212), 
   [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/171), 
-  [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/68#issuecomment-1026547436))
+  [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/68#issuecomment-1026547436),
+  [5](https://github.com/nus-cs2103-AY2122S2/forum/issues/255#issuecomment-1090190968))
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Punpun1643/ped/issues/9), 
   [2](https://github.com/Punpun1643/ped/issues/13), 
   [3](https://github.com/Punpun1643/ped/issues/15))
