@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -10,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-//import seedu.address.model.BuyerAddressBook;
-//import seedu.address.testutil.TypicalBuyers;
 
 public class JsonSerializableBuyerAddressBookTest {
 
@@ -20,16 +17,6 @@ public class JsonSerializableBuyerAddressBookTest {
     private static final Path TYPICAL_BUYER_FILE = TEST_DATA_FOLDER.resolve("typicalBuyerAddressBook.json");
     private static final Path INVALID_BUYER_FILE = TEST_DATA_FOLDER.resolve("invalidBuyerAddressBook.json");
     private static final Path DUPLICATE_BUYER_FILE = TEST_DATA_FOLDER.resolve("duplicateBuyerAddressBook.json");
-
-    //@Test
-    //Todo: Fix this error
-    //public void toModelType_typicalBuyersFile_success() throws Exception {
-    //    JsonSerializableBuyerAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_BUYER_FILE,
-    //            JsonSerializableBuyerAddressBook.class).get();
-    //    BuyerAddressBook addressBookFromFile = dataFromFile.toModelType();
-    //    BuyerAddressBook typicalBuyerAddressBook = TypicalBuyers.getTypicalBuyerAddressBook();
-    //    assertEquals(addressBookFromFile, typicalBuyerAddressBook);
-    //}
 
     @Test
     public void toModelType_invalidBuyerFile_throwsIllegalValueException() throws Exception {

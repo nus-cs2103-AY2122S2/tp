@@ -12,15 +12,15 @@ import static seedu.address.testutil.TypicalBuyers.BOB;
 import static seedu.address.testutil.TypicalSellers.BENSON;
 import static seedu.address.testutil.TypicalSellers.CARL;
 
-import java.nio.file.Path;
+//import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.client.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+//import seedu.address.model.client.NameContainsKeywordsPredicate;
+//import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.BuyerAddressBookBuilder;
 import seedu.address.testutil.SellerAddressBookBuilder;
 
@@ -102,7 +102,8 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         BuyerAddressBook buyerAddressBook = new BuyerAddressBookBuilder().withBuyer(ALICE).withBuyer(BOB).build();
-        SellerAddressBook sellerAddressBook = new SellerAddressBookBuilder().withSeller(BENSON).withSeller(CARL).build();
+        SellerAddressBook sellerAddressBook = new SellerAddressBookBuilder()
+            .withSeller(BENSON).withSeller(CARL).build();
 
         BuyerAddressBook differentBuyerAddressBook = new BuyerAddressBook();
         SellerAddressBook differentSellerAddressBook = new SellerAddressBook();

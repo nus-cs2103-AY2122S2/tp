@@ -108,9 +108,6 @@ public class EditBuyerCommand extends Command {
 
         assert buyerToEdit != null;
 
-        //Todo: add property
-        //PropertyToBuy updatedPropertyToBuy = editBuyerDescriptor.getPropertyToBuy()
-        //        .orElse(NullPropertyToBuy.getNullPropertyToBuy());
         if (editBuyerDescriptor.isAnyPropertyFieldEdited()
             && buyerToEdit.getPropertyToBuy() instanceof NullPropertyToBuy) {
             throw new CommandException(MESSAGE_NO_PROPERTY_YET);

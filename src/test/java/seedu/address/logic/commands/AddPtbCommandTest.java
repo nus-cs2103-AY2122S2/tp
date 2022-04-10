@@ -26,7 +26,7 @@ import seedu.address.model.property.PropertyToBuy;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.PropertyToBuyBuilder;
 import seedu.address.testutil.TypicalBuyers;
-import seedu.address.testutil.TypicalClients;
+//import seedu.address.testutil.TypicalClients;
 
 public class AddPtbCommandTest {
 

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.client.Client;
+//import seedu.address.model.client.Client;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -119,7 +119,8 @@ public interface Model {
     // /**
     //  * Replaces the given person {@code target} with {@code editedPerson}.
     //  * {@code target} must exist in the address book.
-    //  * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+    //  * The person identity of {@code editedPerson} must not be the same as
+    //  another existing person in the address book.
     //  */
     // void setClient(Client target, Client editedClient);
     //

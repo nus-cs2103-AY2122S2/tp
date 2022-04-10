@@ -15,7 +15,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.BuyerAddressBook;
+//import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SellerAddressBook;
@@ -29,7 +29,7 @@ public class FindBuyerCommandTest {
     private Model model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
             getTypicalBuyerAddressBook());
     private Model expectedModel = new ModelManager(new UserPrefs(),
-            new SellerAddressBook(), new BuyerAddressBook());
+            new SellerAddressBook(), getTypicalBuyerAddressBook());
 
     @Test
     public void equals() {

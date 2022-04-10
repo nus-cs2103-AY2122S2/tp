@@ -26,7 +26,7 @@ import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.seller.Seller;
 import seedu.address.testutil.PropertyToSellBuilder;
 import seedu.address.testutil.SellerBuilder;
-import seedu.address.testutil.TypicalClients;
+//import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalSellers;
 
 public class AddPtsCommandTest {
