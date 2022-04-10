@@ -123,7 +123,7 @@ How the parsing works:
 <img src="images/ModelClassDiagram.png" width="450" />
 <br/>
 
-In the `Model`, `ModelManager` contains three different `DataType` – `Applicant`, `Position` and `Interview`, each with their own `UniqueXYZList` contained in `AddressBook`. The class diagrams for each `DataType` are separated below for better clarity.
+In the `Model`, `ModelManager` contains three different `DataType` – `Applicant`, `Position` and `Interview`, each with their own `UniqueXYZList` contained in `HireLah`. The class diagrams for each `DataType` are separated below for better clarity.
 
 `Applicant` class diagram:
 

@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Class AddressBook
+Class HireLah
 Class ModelManager
 
 Package PositionDataType <<Rectangle>>{
@@ -20,7 +20,7 @@ Class Requirement
 
 ModelManager -->"~* filtered" Position
 
-AddressBook *--> "1" UniquePositionList
+HireLah *--> "1" UniquePositionList
 UniquePositionList --> "~* all" Position
 Position *--> Description
 Position *--> PositionName
@@ -28,7 +28,7 @@ Position *--> PositionOffers
 Position *--> PositionOpenings
 Position *--> "*" Requirement
 
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" HireLah
 
 PositionName -[hidden]right-> Description
 

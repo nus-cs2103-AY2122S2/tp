@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Class AddressBook
+Class HireLah
 Class ModelManager
 
 Package ApplicantDataType <<Rectangle>>{
@@ -23,7 +23,7 @@ Class Tag
 
 ModelManager -->"~* filtered" Applicant
 
-AddressBook *--> "1" UniqueApplicantList
+HireLah *--> "1" UniqueApplicantList
 UniqueApplicantList --> "~* all" Applicant
 Applicant *--> Name
 Applicant *--> Phone
@@ -38,6 +38,6 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" HireLah
 
 @enduml
