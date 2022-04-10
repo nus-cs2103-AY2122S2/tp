@@ -1220,7 +1220,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3b. If the value of index is less than 1 or greater than the number of tasks assigned to that person.
+* 3b. If the value of the specified index is less than 1 or greater than the number of tasks assigned to that student.
 
    * 3b1. TAPA shows an error message.
 
