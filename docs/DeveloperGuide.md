@@ -1757,22 +1757,81 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `archive`<br>
       Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
 
-### Deleting a person
+### Deleting students by index or student ID
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student using their index while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      
+   1. Test case: `delete 1 2`<br>
+      Expected: First and second contacts are deleted from the list. Status message states that 2 students were deleted.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete 0 1`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete -1`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete x`, where x > number of students in the list<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting a student using their student ID
 
-1. _{ more test cases …​ }_
+      1. Prerequisites: 
+          1. Sample data is loaded in TAPA. 
+          2. One student has "A0000000Z" as their student ID. 
+          3. No student has "A9999999X" as their student ID. 
+
+   1. Test case: `delete i/A0000000Z`<br>
+      Expected: The student with student ID "A0000000Z" deleted from the list. Details of the deleted student shown in the status message.
+      
+   1. Test case: `delete i/A9999999X`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+
+   1. Test case: `delete i/@@@`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete i/`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+   1. Test case: `delete`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+### Deleting students by module code
+
+1. Deleting students by module code
+
+   1. Prerequisites: 
+         1. Sample data is loaded in TAPA. 
+         2. One or more students have "CS2100" as their module code.
+         3. No students have "CS9999" as their module code.
+
+   1. Test case: `deleteModule m/CS2100`<br>
+      Expected: The students with module code "CS2100" are deleted from the list. Status message states number of students deleted.
+      
+   1. Test case: `deleteModule m/CS9999`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+
+   1. Test case: `deleteModule m/@@@`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+    1. Test case: `deleteModule m/`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+    1. Test case: `deleteModule`<br>
+      Expected: No person is deleted. Error details shown in the status message.
+      
+    1. Test case: `deleteModule m/CS CS`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
 ### Saving data
 
