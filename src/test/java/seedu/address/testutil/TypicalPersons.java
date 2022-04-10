@@ -45,6 +45,9 @@ public class TypicalPersons {
             .withFavourite(true).withEmail("anna@example.com").withAddress("4th street")//.withPreference()
             //.withProperties("East,4th street,1-room,$100000").withUserType("seller").build();
             .withUserType("buyer").build();
+    public static final Person JORGE = new PersonBuilder().withName("Jorge").withPhone("91234567")
+            .withEmail("jorge@example.com").withAddress("palhaza").withUserType("seller").withPreference()
+                .withProperties("North,Computing Drive 1 #01-01,4-room,$250000").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -93,8 +96,23 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with typical persons, including a seller.
+     */
+    public static AddressBook getAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsInclSeller()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsInclSeller() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JORGE));
     }
 
     /**
