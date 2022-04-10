@@ -1,14 +1,18 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
-  } ]
+  "students" : [
+    {
+      "studentId" : "E0123457",
+      "name" : "Alice Pauline",
+      "email" : "alice@example.com",
+      "telegram" : "alicehandle"
+    }, {
+      "studentId" : "E0123457",
+      "name" : "Alice Pauline",
+      "email" : "alice@example.com",
+      "telegram" : "alicehandle"
+    }
+  ],
+  "modules" : [ ],
+  "classGroups" : [ ],
+  "assessments" : [ ]
 }
