@@ -351,7 +351,7 @@ under applicant. The comparator implements Java's Comparator<Applicant> interfac
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
-
+    
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
