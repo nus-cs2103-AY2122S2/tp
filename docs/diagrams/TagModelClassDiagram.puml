@@ -24,7 +24,7 @@ class Person
 
 ModelManager -> AddressBook
 ModelManager ..> Tag
-AddressBook -down-> "1"UniqueTagList
+AddressBook *-down-> "1"UniqueTagList
 UniqueTagList -> "*" Tag
 Person "*" -up-> "*" Tag
 

@@ -273,7 +273,7 @@ Below are the modified sequence diagrams of `AddressBook#setPersons()` and `Addr
 
 ![AddressBook SetPersons](images/AddressBookSetPersonsSequenceDiagram.png)
 
-![AddressBook SetTags](images/AddressBookSetPersonsSequenceDiagram.png)
+![AddressBook SetTags](images/AddressBookSetTagsSequenceDiagram.png)
 
 ### Edit Tag Feature - `edittag`
 

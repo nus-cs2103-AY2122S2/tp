@@ -2,7 +2,6 @@
 !include style.puml
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
 participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":Person" as Person MODEL_COLOR
 participant ":Tag" as Tag MODEL_COLOR
