@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.FindEventCommand;
+import seedu.address.model.entry.Date;
 import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
 
 
@@ -27,15 +28,25 @@ public class FindEventCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(
-                List.<String>of("interview", "assessment"), List.<String>of(""), null, null,
-                List.<String>of(""), List.<String>of(""), List.<String>of(""),
+                List.of("interview", "assessment"), List.of(""), null, null,
+                List.of(""), List.of(""), List.of(""),
                 SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
-        FindEventCommand expectedFindEventCommand =
-                new FindEventCommand(predicate);
+        FindEventCommand expectedFindEventCommand = new FindEventCommand(predicate);
+
         assertParseSuccess(parser, " n/ interview assessment ", expectedFindEventCommand);
 
         //multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/  interview \n \t assessment  \t", expectedFindEventCommand);
+
+        // no leading and trailing whitespaces
+        predicate = new EventContainsKeywordsPredicate(
+                List.of("seminar"), List.of("DBSSS"), new Date("2022-01-01"), new Date("2022-01-15"),
+                List.of("12:30"), List.of("Zoom"), List.of("fintech"),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.ARCHIVED_ONLY));
+        expectedFindEventCommand = new FindEventCommand(predicate);
+
+        assertParseSuccess(parser, " n/seminar sd/2022-01-01 l/Zoom t/fintech ti/12:30 ed/2022-01-15 c/DBSSS"
+                + " s/archived", expectedFindEventCommand);
     }
 
 }

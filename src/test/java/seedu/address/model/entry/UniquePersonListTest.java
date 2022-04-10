@@ -1,7 +1,8 @@
-package seedu.address.model.person;
+package seedu.address.model.entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -15,8 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.entry.Person;
-import seedu.address.model.entry.UniqueEntryList;
 import seedu.address.model.entry.exceptions.DuplicateEntryException;
 import seedu.address.model.entry.exceptions.EntryNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -170,5 +169,23 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void findPerson_emptyList_returnsNull() {
+        assertNull(uniquePersonList.find(ALICE));
+    }
+
+    @Test
+    public void archivePerson_emptyList_throwsEntryNotFoundException() {
+        assertThrows(EntryNotFoundException.class, () -> uniquePersonList.setArchived(ALICE, true));
+    }
+
+    @Test
+    public void removeMatchingCompanyName_personInList_throwsEntryNotFoundException() {
+        uniquePersonList.add(ALICE);
+        UniqueEntryList<Person> expectedUniquePersonList = new UniqueEntryList<>();
+        uniquePersonList.removeMatchingCompanyName("DBSSS");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }

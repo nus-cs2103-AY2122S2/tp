@@ -1,12 +1,13 @@
-package seedu.address.model.person;
+package seedu.address.model.entry;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
 
-import seedu.address.model.entry.Date;
+import org.junit.jupiter.api.Test;
 
 public class DateTest {
     @Test
@@ -21,6 +22,17 @@ public class DateTest {
     }
 
     @Test
+    public void constructor_todayRelativeDate_success() {
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        Date todayDate = new Date("today");
+        Date tomorrowDate = new Date("today 1");
+
+        assertEquals(today, todayDate.getPure());
+        assertEquals(tomorrow, tomorrowDate.getPure());
+    }
+
+    @Test
     public void isValidDate() {
         // null
         assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
@@ -29,7 +41,7 @@ public class DateTest {
         assertFalse(Date.isValidDate(""));
         assertFalse(Date.isValidDate(" "));
 
-        // invalid time formats
+        // invalid date formats
         assertFalse(Date.isValidDate("Abba"));
         assertFalse(Date.isValidDate("1234"));
         assertFalse(Date.isValidDate("FAAFLJAJL14@$$?LK}!%%K!"));
@@ -41,6 +53,7 @@ public class DateTest {
         assertFalse(Date.isValidDate("2021-08-1")); // day only 1 character long
         assertFalse(Date.isValidDate("2021-5-19")); // month only 1 character long
         assertFalse(Date.isValidDate("999-06-14")); // year only 3 characters long
+        assertFalse(Date.isValidDate("today f")); // second word needs to be anumber
 
         // invalid dates
         assertFalse(Date.isValidDate("2019-13-01")); // month too high
@@ -59,5 +72,9 @@ public class DateTest {
         assertTrue(Date.isValidDate("2020-02-29")); // highest possible day value
         assertTrue(Date.isValidDate("2019-07-01")); // lowest possible day value
         assertTrue(Date.isValidDate("2015-10-17")); // average year/month/day value
+        assertTrue(Date.isValidDate("today"));
+        assertTrue(Date.isValidDate("TODAY"));
+        assertTrue(Date.isValidDate("tOdAy -1"));
+        assertTrue(Date.isValidDate("ToDaY 44"));
     }
 }

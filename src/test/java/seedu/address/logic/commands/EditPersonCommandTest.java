@@ -158,6 +158,14 @@ public class EditPersonCommandTest {
     }
 
     @Test
+    public void execute_invalidCompany_failure() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCompanyName("Fake").build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST_ENTRY, descriptor);
+
+        assertCommandFailure(editPersonCommand, model, Messages.MESSAGE_NONEXISTENT_COMPANY);
+    }
+
+    @Test
     public void equals() {
         final EditPersonCommand standardCommand = new EditPersonCommand(INDEX_FIRST_ENTRY, DESC_AMY);
 

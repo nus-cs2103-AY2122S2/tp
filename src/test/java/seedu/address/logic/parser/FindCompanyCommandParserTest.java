@@ -27,14 +27,20 @@ public class FindCompanyCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         CompanyContainsKeywordsPredicate predicate = new CompanyContainsKeywordsPredicate(
-                List.<String>of("dbsss", "shopsg"), List.<String>of(""),
+                List.of("dbsss", "shopsg"), List.of(""),
                 SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
-        FindCompanyCommand expectedFindCompanyCommand =
-                new FindCompanyCommand(predicate);
+        FindCompanyCommand expectedFindCompanyCommand = new FindCompanyCommand(predicate);
         assertParseSuccess(parser, " n/ dbsss shopsg", expectedFindCompanyCommand);
 
         //multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/  dbsss \n \t shopsg  \t", expectedFindCompanyCommand);
+
+        predicate = new CompanyContainsKeywordsPredicate(
+                List.of("DBSSS"), List.of("fintech"),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.ALL));
+        expectedFindCompanyCommand = new FindCompanyCommand(predicate);
+
+        assertParseSuccess(parser, " n/DBSSS t/fintech s/all", expectedFindCompanyCommand);
     }
 
 }

@@ -11,7 +11,7 @@ public class DeleteAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all entries in the displayed entry list.";
 
-    public static final String MESSAGE_DELETE_ALL_SUCCESS = "Deleted all entries.";
+    public static final String MESSAGE_SUCCESS = "Deleted all entries.";
 
     @Override
     public CommandResult execute(Model model) {
@@ -23,7 +23,7 @@ public class DeleteAllCommand extends Command {
             deletedEntry = model.deleteEntry(0);
         }
 
-        return new CommandResult(MESSAGE_DELETE_ALL_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

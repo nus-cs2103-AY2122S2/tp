@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -58,11 +60,23 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_returnsListCommandUnarchived() {
-        assertParseSuccess(listCompanyCommandParser, "a", new ListCompanyCommand(SearchType.UNARCHIVED_ONLY));
+    public void parse_noSearchTypeArgs_returnsListCommandUnarchived() {
+        assertParseSuccess(listCompanyCommandParser, " ", new ListCompanyCommand(SearchType.UNARCHIVED_ONLY));
 
-        assertParseSuccess(listPersonCommandParser, "a", new ListPersonCommand(SearchType.UNARCHIVED_ONLY));
+        assertParseSuccess(listPersonCommandParser, " ", new ListPersonCommand(SearchType.UNARCHIVED_ONLY));
 
-        assertParseSuccess(listEventCommandParser, "a", new ListEventCommand(SearchType.UNARCHIVED_ONLY));
+        assertParseSuccess(listEventCommandParser, " ", new ListEventCommand(SearchType.UNARCHIVED_ONLY));
+    }
+
+    @Test
+    public void parse_invalidSearchTypeArgs_returnsListCommandUnarchived() {
+        assertParseFailure(listCompanyCommandParser, " s/a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCompanyCommand.MESSAGE_USAGE));
+
+        assertParseFailure(listPersonCommandParser, " s/a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPersonCommand.MESSAGE_USAGE));
+
+        assertParseFailure(listEventCommandParser, " s/a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
     }
 }

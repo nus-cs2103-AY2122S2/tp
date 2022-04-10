@@ -27,7 +27,7 @@ public abstract class ListCommand extends Command {
             return "";
         default:
             // Should not reach here
-            return null;
+            throw new IllegalArgumentException("Inavlid searchType passed");
         }
     }
 }
