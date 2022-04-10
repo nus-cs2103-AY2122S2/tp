@@ -97,7 +97,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `rms 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -184,7 +184,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rms 1")` API call.
 
-![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -365,9 +365,42 @@ Step 6. The `AddStudentCommandParser` uses `ArgumentMultimap` to map the student
 Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
 The following sequence diagram shows how the add student command works.
-![](images/AddStudentSequenceDiagram.png)
+![](images/AddStudentSequenceDiagram-0.png)
+![](images/AddStudentSequenceDiagram-1.png)
 
 [return to top ↑](#table-of-contents)
+
+### Delete student or lesson
+Deleting a `Student` or `Lesson` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the
+`TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
+
+Given below is an example scenario:
+
+Step 1. The user requests to delete student that is of index 1 on the viewable student list,
+
+Step 2. The user enters the command `rml 1`
+
+Step 3. The user input is passed into `LogicManager#execute(commandText)`.
+
+Step 4. `LogicManager` uses the `TeachWhatParser#parseCommand(userInput)` to parse the user input.
+
+Step 5. The `TeachWhatParser` detects the command word `rml` and passes the student details to `DeleteLessonCommandParser#parse(args)`.
+
+Step 6. The `DeleteLessonCommandParser` uses `ParserUtil#parseIndex(oneBasedIndex)` to parse the one-based index of the lesson to be deleted into a zero-based `Index`. This is used to construct a new
+`DeleteLessonCommand` which it then returns.
+
+* Constraints
+   * `ParserUtil#parseIndex(oneBasedIndex)` rejects non-positive integers (i <= 0)
+   * `ParserUtil#parseIndex(oneBasedIndex)` rejects values that are not of type `java.lang.Integer`
+     `ParseException` will be thrown if the constraints are violated
+
+Step 7. The `LogicManager` then executes the `DeleteLessonCommand` and the `Lesson` is removed from the `Lesson Book`.
+
+* Constraint
+  * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
+    `ParseException` will be thrown if the constraints are violated
+
+![](images/DeleteLessonSequenceDiagram.png)
 
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
@@ -675,7 +708,26 @@ TODO
 
 ### Deleting a student
 
-TODO
+This command requires you to have at least one existing student.
+* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+  user guide section to add a student.
+
+1. Testcase 1: Delete `student` of index 1 on the viewable student list.
+   1. Execute `liststudents` to ensure that your lists includes all students.
+   2. Execute `rmstudent 1` or the shortcut `rms 1`.
+   3. Expected: The student of index 1 on the viewable student list is deleted.
+
+2. Testcase 2: Delete `student` with invalid index
+    1. Execute `liststudents` to ensure that your lists includes all students.
+    2. Execute `rmstudent 0` or the shortcut `rms 0`.
+    3. Expected: An invalid index error message is shown.
+* Note: An invalid index is any value that is not a positive integer of type `java.lang.Integer`. (e.g. if index is greater than`Integer.MAX_VALUE` or less than 0 or is not of type `java.util.Integer`)
+
+3. Testcase 3: Delete `student` with out-of-bounds index
+    1. Execute `liststudents` to ensure that your lists includes all students. (Ensure there are only two students)
+    2. Execute `rmstudent 3` or the shortcut `rms 3`.
+    3. Expected: An out-of-bounds error message is shown.
+* Note: An out-of-bounds index is a positive integer of type `java.lang.Integer` but is a greater than the viewable student list.
 
 ### Assigning a student
 
