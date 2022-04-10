@@ -24,9 +24,9 @@ Given below are my contributions to the project.
 * **New Feature:** Filter list by clicking a tag label
   - What it does: Allows the user to filter the Person/Meeting list by clicking on a tag label in the tag panel.
 
-  - Justification: This feature improves the product significantly because a user can conveniently filter for groups of people/meeting with just a click, which is a key feature.
+  - Justification: This feature improves the product significantly because a user can conveniently filter for groups of people/meeting with just a click, which is a key feature of our product.
 
-* **Enhancement:** Add `SocialMedia` to `Person`
+* **New Feature:** Add `SocialMedia` to `Person`
   - What it does: Allows `Person` instances to contain information about any number of social media handles. Users can add/delete/edit specific `SocialMedia` entries for each person easily.
 
   - Justification: Storing multiple and manipulating social media handles for each person is part of our product's feature.
@@ -44,7 +44,7 @@ Given below are my contributions to the project.
   * Managed releases `1.2`, `1.3.trial`, `1.3.1`
 
 * **Enhancements to existing features**:
-  * `To be added soon`
+  * UI 
   * `To be added soon`
 
 * **Documentation**:
