@@ -24,6 +24,7 @@ user adds extra arguments])
         command is returned;
     else ([else])
    endif
+   endif
 endif
 stop
 @enduml
