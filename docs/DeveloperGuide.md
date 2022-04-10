@@ -206,7 +206,7 @@ Below is a sequence diagram showing the execution path for this command
 
 By making use of the enumeration `TeamAction`, this command decides its execution path to either add or remove someone from the list of potential teammates.
 
-Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of have 2 out-of-sync commands.
+Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of having 2 out-of-sync commands.
 
 ### Filtering feature
 
