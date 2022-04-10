@@ -174,7 +174,7 @@ Edits the details of specific person in HackNet.
 
 Format: `edit INDEX [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the person detail fields must be provided besides `[-r]`.
 * Team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Refer to the examples below.
 * Existing values will be updated to the input values.
