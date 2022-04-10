@@ -182,7 +182,6 @@ The add lab mechanism is implemented as follows:
 3. The `AddCommand` object will then check if the `Model` object already has the lab (in this case having a lab means that the `MasterLabList` has a `Lab` object with the same `LAB_NUMBER`), and if the `Model` already has the `Lab`, it will throw a new `CommandException`.
 4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, and if it is empty, the system will output a message to the user to notify the user that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
 5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
-6. After every add command, the `Lab`s in every `LabList` including the `MasterLabList` will be sorted by increasing `LAB_NUMBER`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` according to ascending `LAB_NUMBER`.
 </div>
@@ -191,13 +190,15 @@ The sequence for parsing the input is similar to the one shown in [this sequence
 
 The following UML sequence diagrams shows the interaction between components during the execution of the `labadd` command:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
-The method `addLabToAll` in `UniqueStudentList` will call `LabList#add()`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
+The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
 </div>
 
 <img src="images/AddLabCommandSequenceDiagram.png" width="550" />
 
 The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.
+
 The sequence diagram for the implementation of `LabList#add(Lab)` will be shown seperately below. <br>
+
 **Note:** Instead of putting a reference frame in the above UML diagram for the sequence diagram of `LabList#add(Lab)`, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead, this short note will suffice.
 
 The following UML sequence diagram shows how `add(Lab)` is implemented in `LabList`:
