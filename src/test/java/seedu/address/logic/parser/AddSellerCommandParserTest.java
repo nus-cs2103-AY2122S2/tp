@@ -37,9 +37,9 @@ import static seedu.address.testutil.TypicalSellers.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddSellerCommand;
-import seedu.address.model.seller.Seller;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.seller.Seller;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.SellerBuilder;
 
