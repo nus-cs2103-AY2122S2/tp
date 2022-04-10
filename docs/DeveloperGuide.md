@@ -211,9 +211,9 @@ keep track of offers handed out.
 
 #### Implementation
 
-Currently, there are 5 possible status for interviews which represents where a candidate is in the hiring pipeline.
+Currently, there are 5 possible status for interviews which represents where an applicant is in the hiring pipeline.
 * `Pending` - Interview has been created / scheduled, applicant yet to go for interview.
-* `Passed` - Applicant has passed the interview. A job **offer is automatically extended** to the applicant at this stage.
+* `Passed - waiting for applicant` - Applicant has passed the interview. A job **offer is automatically extended** to the applicant at this stage.
 * `Failed` - Applicant has failed the interview.
 * `Accepted` - Applicant has accepted the job offer. Applicant job role will be updated in Applicants tab.
 * `Rejected` - Applicant has rejected the job offer.
@@ -222,6 +222,21 @@ The **activity diagram** below shows the workflows between different interview s
 and `Applicant` classes.
 
 ![Activity diagram between different interview status](images/InterviewStatus.png)
+
+#### Design considerations:
+
+Aspect: Number of interviews per applicant allowed for each unique role
+
+* **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
+    * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
+    * Cons: May not model the real-world hiring process accurately where some roles require multiple interviews.
+    
+
+* **Alternative 2:** An applicant can schedule multiple interviews for a unique position they apply for.
+    * Pros: A more accurate modelling of real-world hiring processes.
+    * Cons: Increased complexity of hiring process. 
+      Need to keep track of different number of interviews required for every unique position and where each applicant is 
+      at which stage e.g "Finished HR interview" / "Finished Online Assessment", which may result in more bugs.
 
 ### Adding of Data 
 
@@ -360,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HireLah Application` and the **Actor** is the `user`, unless specified otherwise)
 
-####**Use case 01: Delete a applicant**
+#### **Use case 01: Delete a applicant**
 
 **MSS**
 
@@ -383,28 +398,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-####**Use case 02: Add an interview**
+#### **Use case 02: Add an interview**
 
 **MSS**
 
-1.  User requests to list applicants
-2.  HireLah shows a list of applicants
-3.  User requests to add a specific interview to a applicant in the list
-4.  HireLah adds the interview to the applicant.
-
+1. User requests to list applicants
+2. HireLah shows a list of applicants
+3. User request to list positions
+4. HireLah shows a list of positions
+5. User requests to add an interview, for a specific position to an applicant in the list
+6. HireLah adds the interview to the applicant
+   <br/><br/>
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
+  <br/><br/>
   Use case ends.
+  <br/><br/>
+* 4a. The list is empty.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 5a. The given index is invalid.
 
-* 3a. The given index is invalid.
+    * 5a1. HireLah shows an error message.
 
-    * 3a1. HireLah shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 4.
 
 #### **Use case 03: Editing position**
 
