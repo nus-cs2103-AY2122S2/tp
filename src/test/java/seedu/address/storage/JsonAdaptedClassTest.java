@@ -21,7 +21,7 @@ import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalStudents;
 
 //@@author jxt00
-public class JsonAdaptedClassGroupTest {
+public class JsonAdaptedClassTest {
     private static final String INVALID_CG_ID = "CS2101!";
     private static final String INVALID_CG_TYPE = "LECTURE";
 
@@ -41,8 +41,7 @@ public class JsonAdaptedClassGroupTest {
     public void toModelType_validClassGroupDetails_returnsClassGroup() throws Exception {
         JsonAdaptedClassGroup classGroup = new JsonAdaptedClassGroup(
                 VALID_CG_ID, VALID_CG_TYPE, VALID_MODULE_CODE, VALID_ACAD_YEAR, studentIds, lessons);
-        System.out.println(classGroup.toModelType(modules, students).getLessons());
-        System.out.println(TypicalClassGroups.CS2101G09.getLessons());
+
         assertEquals(TypicalClassGroups.CS2101G09, classGroup.toModelType(modules, students));
     }
 
