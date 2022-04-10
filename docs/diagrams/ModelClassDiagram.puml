@@ -12,14 +12,19 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueStudentList
+Class Student
+Class Telegram
 Class Email
 Class Name
-Class Phone
+Class GithubUsername
+Class StudentId
 Class Tag
-
+Package Lab {
+    Class LabList
+    Class MasterLabList
+    Class Lab
+    }
 }
 
 Class HiddenOutside #FFFFFF
@@ -34,17 +39,26 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all    " Student
+Student *--> "1" Name
+Student *--> "1" GithubUsername
+Student *--> "1" Email
+Student *--> "1" Telegram
+Student *--> "1  " StudentId
+Student *--> "*" Tag
+Student *-down--> "1" LabList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+LabList -down-> "~*" Lab
+
+MasterLabList -left-|> LabList
+AddressBook *--> "1  " MasterLabList
+
+Name -[hidden]right-> GithubUsername
+Name -[hidden]down-> MasterLabList
+GithubUsername -[hidden]right-> Telegram
+Telegram -[hidden]right-> StudentId
+
+ModelManager --> "~* filtered" Student
 @enduml

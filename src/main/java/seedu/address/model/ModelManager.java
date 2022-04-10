@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -133,6 +134,11 @@ public class ModelManager implements Model {
         addressBook.removeLab(lab);
     }
 
+    @Override
+    public ArrayList<Lab> getLabsAsArrayList() {
+        return addressBook.getLabsAsArrayList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -158,6 +164,11 @@ public class ModelManager implements Model {
         Predicate<Student> newPredicate = predicate.and(prevPredicate.orElse(x -> true));
 
         filteredStudents.setPredicate(newPredicate);
+    }
+
+    @Override
+    public boolean isStudentListEmpty() {
+        return addressBook.isStudentListEmpty();
     }
 
     @Override

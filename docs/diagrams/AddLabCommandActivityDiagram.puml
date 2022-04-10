@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes add lab command with a Lab Number;
+if () then ([valid Lab Number])
+  if () then ([duplicate lab])
+    :Displays error message;
+  else ([else])
+    :Adds a new Lab with the specified Lab Number
+    to every student in the list and displays it;
+  endif
+ else ([invalid Lab Number])
+    :Displays error message;
+ endif
+stop
+
+@enduml

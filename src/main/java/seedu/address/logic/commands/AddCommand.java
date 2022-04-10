@@ -56,7 +56,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         LabList plainLabList = new LabList();
-        for (Lab l : model.getAddressBook().getMasterLabList().getMasterList()) {
+        for (Lab l : model.getLabsAsArrayList()) {
             plainLabList.add(l.createCopy());
         }
         toAdd.setLabs(plainLabList);

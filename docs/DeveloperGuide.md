@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-F10-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,11 +69,11 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,11 +82,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -126,24 +126,25 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
-#### Lab Component
+#### Lab Component (Subcomponent of Model)
 
 The `Lab` Component is a subcomponent of the `Model` component.
 
 * stores all Lab related data.
 * stores all `Lab` objects related to a `Student` object in `LabList`. (each `Student` object has its own copy of a `LabList`).
 * the `MasterLabList` stores all the labs added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any one time).
+* `LabList` is exposed to outsiders as an `ObservableList<Lab>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -161,6 +162,51 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+## `labadd`: Add Lab Command Feature
+The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation relies on the following classes:
+- `Lab` that models a Lab and has an associated `LAB_NUMBER`.
+- `LabList` that stores all the labs of a `Student`.
+- `MasterLabList` that extends `LabList` and acts as a control `LabList` for the `TAddressBook` application.
+- `AddLabCommand` that extends `Command` and encapsulates information related to adding labs.
+- `AddLabCommandParser` that extends `Parser<AddLabCommand>` and parses user commands into a `AddLabCommand`.
+- `UniqueStudentList` that stores all the `Student`s.
+
+The command format is `labadd l/LAB_NUMBER` where `LAB_NUMBER` should be an Integer between 0 and 20 inclusive.
+e.g `labadd l/1`
+
+The add lab mechanism is implemented as follows:
+1. When a `labadd` command is executed by the user, `AddLabCommandParser#parse(String)` will be invoked to parse the given command into a new `AddLabCommand` object instantiated with a new lab object with the given `LAB_NUMBER`. If the `LAB_NUMBER` is invalid, a `ParseException` will be thrown and displayed to the user.
+2. The `AddCommand` will then execute with the current `Model` object in the system.
+3. The `AddCommand` object will then check if the `Model` object already has the lab (in this case having a lab means that the `MasterLabList` has a `Lab` object with the same `LAB_NUMBER`), and if the `Model` already has the `Lab`, it will throw a new `CommandException`.
+4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, and if it is empty, the system will output a message to the user to notify the user that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
+5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
+6. After every add command, the `Lab`s in every `LabList` including the `MasterLabList` will be sorted by increasing `LAB_NUMBER`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` according to ascending `LAB_NUMBER`.
+</div>
+
+The sequence for parsing the input is similar to the one shown in [this sequence diagram](#logic-component) above.
+
+The following UML sequence diagrams shows the interaction between components during the execution of the `labadd` command:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
+The method `addLabToAll` in `UniqueStudentList` will call `LabList#add()`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
+</div>
+
+<img src="images/AddLabCommandSequenceDiagram.png" width="550" />
+
+The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.
+The sequence diagram for the implementation of `LabList#add(Lab)` will be shown seperately below. <br>
+**Note:** Instead of putting a reference frame in the above UML diagram for the sequence diagram of `LabList#add(Lab)`, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead, this short note will suffice.
+
+The following UML sequence diagram shows how `add(Lab)` is implemented in `LabList`:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
+</div>
+<img src="images/LabListAddSequenceDiagram.png" width="550" />
+
+The following UML activity diagram shows what happens when a user executes a `labadd` command:
+
+<img src="images/AddLabCommandActivityDiagram.png" width="550" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -180,11 +226,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -192,7 +238,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -237,7 +283,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -308,6 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA      | update status of a lab when a student has submitted it           | keep track of which labs students have submitted                                                            |
 | `* * *`  | TA      | update status of a lab and add marks to it when I have graded it | keep track of what labs I have graded and how I have graded them                                            |
 | `* * *`  | TA      | edit status and marks of a lab                                   | edit lab statuses and marks I changed or entered by mistake                                                 |
+| `* * *`  | TA      | remove a lab assignment from the TAddressBook                    | delete any labs that i've previously inputted by accident                                                   |
 | `* *`    | TA      | add students without filling in all attributes                   | keep track of students even if I do not know all their details                                              |
 
 *{More to be added}*
@@ -487,17 +534,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a Student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No students is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

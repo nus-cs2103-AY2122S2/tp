@@ -45,7 +45,7 @@ public class AddLabCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_LAB);
         }
 
-        if (model.getAddressBook().getStudentList().isEmpty()) {
+        if (model.isStudentListEmpty()) {
             resultString = MESSAGE_EMPTY_STUDENT_LIST;
         }
 
