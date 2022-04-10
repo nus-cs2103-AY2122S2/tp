@@ -421,7 +421,7 @@ sorted based on their addresses.
 Thus, after creating the `Comparator` for a particular field, it'll be added upon a previously created `Comparator` using `Comparator#thenComparing()`.
 
 To be able to sort the client list, we expose an operation in the `Model` interface as `Model#sortPersonList()`.
-We then passed the `comparator` created to `Model#sortPersonList()` in `SortCommand#execute()`.
+We then passed the `Comparator` created to `Model#sortPersonList()` in `SortCommand#execute()`.
 
 Java's `List` library will then handle the sorting based on the `Comparator`.
 
