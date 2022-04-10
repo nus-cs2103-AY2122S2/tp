@@ -354,7 +354,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredApplicants.equals(other.filteredApplicants);
+                && filteredApplicants.equals(other.filteredApplicants)
+                && filteredPositions.equals(other.filteredPositions)
+                && filteredInterviews.equals(other.filteredInterviews);
     }
 
     private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream)

@@ -35,21 +35,20 @@ public class EditApplicantCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    /*
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Applicant editedApplicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(editedApplicant).build();
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST_PERSON, descriptor);
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST, descriptor);
 
-        String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        expectedModel.updateApplicant(model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased()),
+                editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-    */
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -97,7 +96,7 @@ public class EditApplicantCommandTest {
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
+        expectedModel.updateApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
