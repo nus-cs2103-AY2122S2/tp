@@ -2,8 +2,9 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -481,14 +482,14 @@ The command `edit 2 e/john123@gmail.com` still works and the new `Email` value f
  
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-####**Path Execution of Edit Feature Activity Diagram is shown below:**
+#### **Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
   
-####**Class Diagram of Edit Feature is shown below**
+#### **Class Diagram of Edit Feature is shown below**
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
 
@@ -508,7 +509,7 @@ Additionally, there are a few final static messages to be displayed to the user 
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
   
-####**Sequence Diagram of Edit Feature is shown below:**
+#### **Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -791,19 +792,19 @@ Below are links for implementation of the classes and its methods:
 * [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-####**Class Diagram of Archive Feature is shown below:**
+#### **Class Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-####**Path Execution of Archive Feature Activity Diagram is shown below:**
+#### **Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
-####**Sequence Diagram of Archive Feature is shown below:**
+#### **Sequence Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -828,18 +829,18 @@ The `resize` command is as follows:
 
 This feature provides the user with three different resizing options to choose from, which are `1`, `2` and `3` with each number being a multiplier of the default result display window size (1 being the default size).
 
-**Class Diagram of Resize Feature is shown below:**
+#### **Class Diagram of Resize Feature is shown below:**
 ![ResizeFeatureClassDiagram](images/ResizeCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ResizeCommand`. As per any `Command` class, `ResizeCommand` needs to extend the abstract class `Command`.
 
-**Path Execution of Resize Feature Activity Diagram is shown below:**
+#### **Path Execution of Resize Feature Activity Diagram is shown below:**
 ![ResizeFeatureActivityDiagram](images/ResizeFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a `ParseException` will be thrown, else the result
 display window in the GUI is resized according to the user's option. A success message is then displayed to the user.
 
-**Sequence Diagram of Resize Feature is shown below:**
+#### **Sequence Diagram of Resize Feature is shown below:**
 ![ResizeFeatureSequenceDiagram](images/ResizeFeatureSequenceDiagram.png)
 
 The above figure illustrates the important interactions of `ResizeCommand` when the user successfully resizes the result display window.
