@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 skinparam genericDisplay old
+skinparam classAttributeFontColor white
 
 class CommandCard {
  description
