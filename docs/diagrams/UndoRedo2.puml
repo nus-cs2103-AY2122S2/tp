@@ -1,0 +1,5 @@
+@startuml
+hide circle
+StackUndoRedo *-- undoStack
+StackUndoRedo *-- redoStack
+@enduml

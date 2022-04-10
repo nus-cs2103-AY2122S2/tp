@@ -1,0 +1,7 @@
+@startuml
+hide circle
+StackUndoRedo *-- undoStack
+StackUndoRedo *-- redoStack
+
+undoStack o-- DeleteModuleCommand
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+hide circle
+
+
+Command <|-- RedoableCommand
+
+class Command {
+  # undoRedoStack: StackUndoRedo 
+  + execute(): CommandResult 
+  + setData(): void
+}
+
+class RedoableCommand
+ {
+   - previousAddressBook: ReadOnlyAddressBook 
+   - previousArchiveBook: ReadOnlyAddressBook 
+   - isSwapped: boolean
+   - saveAddressBookSnapshot(): void
+   # undo(): void
+   # redo(): void
+   + execute(): CommandResult
+}
+@enduml
