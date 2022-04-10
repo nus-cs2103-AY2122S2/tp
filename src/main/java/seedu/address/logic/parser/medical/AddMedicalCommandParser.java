@@ -40,7 +40,7 @@ import seedu.address.model.medical.Weight;
 import seedu.address.model.patient.Nric;
 
 public class AddMedicalCommandParser implements Parser<AddMedicalCommand> {
-    public static final String EMPTY_PLACEHOLDER = "nil";
+    public static final String EMPTY_PLACEHOLDER = "NIL";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
