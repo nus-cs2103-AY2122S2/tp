@@ -65,12 +65,14 @@ _Amigos_ is designed to help you keep track of the friends in your life.
 
 ### Adding a friend: `addfriend` or `af`
 
-Adds a new friend to _Amigos_. A friend has:
+Adds a new friend to _Amigos_.
 
 **Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
 * Note that `NAME` field is minimally compulsory. `p/`, `e/`, `a/` and `d/` `t/` flags and their arguments are optional.
-* Note that there can be no duplicate friends having the same name.
+* Note that there can be no duplicate friends having the same name (case-insensitive).
+* Note that names have to be exactly matched (in a case-insensitive manner) to be considered as duplicates. For example,
+  `John Doe` and `John  Doe` (with the extra space) are considered as different friends.
 
 **Examples**:
 
