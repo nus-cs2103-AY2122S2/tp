@@ -255,20 +255,42 @@ Following this, `LogicManager` will call the `execute()` method of the `AddComma
 
 ### Summarise feature
 
-The summarise mechanism implements the following sequence and interactions for the method call execute("summarise") on a LogicManager object.
+The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
 
-In order for this feature to be unique and not overlap what the List feature has to offer, summarise helps to calculate how many
-students who are covid positive in each block of the hall, alongside those who are negative and on health risk notice.
-This helps the hall masters determine if there is a spread of virus in any particular block.
 
-Tracey will then calculate those that are positive and which faculty they come from. This is helpful to determine if the superspreader
-comes from the faculty building itself. The hall masters and leaders can be more certain on their follow up actions to keep
-their hall safe.
+#### What is the summarise feature
+
+The summarise feature allow users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
+Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
+Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
+
+This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
+their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
+
+The `summarise` command is as follows:
+
+`summarise`
+
+The user can choose when to execute the summarise command.
 
 **Path Execution of Summarise Feature Activity Diagram is shown below:**
 ![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
 
+There are three possible execution paths for this command.
+1. User inputs `summarise` command with students' records stored in Tracey. After the Pie Chart Window opens, the user can scroll through the window to see the pie charts for each block followed by the bar chart categorised by faculty.
+2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
+3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
+
+The sequence diagram below shows the interactions between objects during the execution of a `summarise` command.
+
+**Class Diagram of Summarise Feature is shown below:**
+
+![SummariseClassDiagram](images/SummariseClassDiagram.png)
+
+The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
+
 **Sequence Diagram of Summarise Feature is shown below:**
+
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -277,39 +299,54 @@ their hall safe.
 
 When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
 
-When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
-If the input is valid, an `AddCommand` object will be instantiated.
+When a user inputs a summarise command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
+If the input is valid, an `SummariseCommand` object will be instantiated. If the input is invalid with additional parameters beside `summarise`, an exception will be thrown.
 
-Following this, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
-the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed.
-After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate message regarding total number
-of covid cases in that hall. `filterByBlock` method is then called on the list again to generate statistics of covid statuses in each block of the hall.
-`filerByfaculty` is then called on the list once again to generate statistics of covid statuses in each faculty of students in the hall.
+Following the valid input, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
+the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the UI.
+After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate a message regarding total number
+of covid cases in that hall. Then, `filterByBlock` method is then called on the same list again to organise the students into separate lists according to their block.
+`filterByBlock` will call on its own `summariseBlock` method to generate statistics of covid statuses in each block of the hall. The statistics will be stored in `covidStatsByBlockDataList`.
+`filerByFaculty` is then called on the list once again to organise the students into separate lists according to their faculty.
+`summariseFaculty` method is then called to generate statistics of covid statuses in each faculty of students in the hall. The statistics will be stored in `positiveStatsByFacultyData`.
+At the same time, `summariseFaculty` will stored the highest number of covid cases amongst the faculties in `highestPositiveByFaculty`.
 
 Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
 A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
-
 ### Pie Chart Window feature
 
-#### <ins>How the feature is implemented<ins/>
+The pie chart window mechanism implements the following sequence and interactions for the method call execute("summarise").
+
+#### What is the Pie Chart Window feature
+
+Pie Chart Window feature opens up a separate window that contains charts for the user to view.
+The window contains pie charts that summarises how each block is doing according to the types of covid statuses and a bar chart that
+summarises how many covid positive students each faculty has in the hall. 
+
+**Class Diagram of Pie Chart Window Feature is shown below:**
+
+![PieChartWindowClassDiagram](images/PieChartWindowClassDiagram.png)
+
+The above class diagram shows the structure of the Pie Chart Window and its associated classes and interfaces.
+The Pie Chart Window has dependencies on the UiPart class as it uses the method `UiPart#getRoot()` from it to make the window.
+
+**Sequence Diagram of Pie Chart Window Feature is shown below:**
+
+![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
 
 This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow`.
 When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will
 be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`,
-it will invoke `MainWindow#handleSummarise()` which first check whether the pie chart window is to be display by calling `SummariseCommand#shouldOpenPieChartWindow()`.
-If true, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` to create the pie chart and opens a new window.
+it will invoke `MainWindow#handleSummarise()` which first check whether the pie chart window is to be displayed by calling `SummariseCommand#shouldOpenPieChartWindow()`.
+If true and the window is already opened previously by the user, `MainWindow#handleSummarise()` will call `PieChartWindow#hide()` to close the window.
+Regardless, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` to create the pie chart and opens a new window.
 The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
-
 
 Below are links for implementation of the classes and its methods:
 * [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
 * [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
 * [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
-
-**Sequence Diagram of Pie Chart Window Feature is shown below:**
-
-![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
 
 #### <ins>Why it is implemented that way<ins/>
 The data needed for the pie charts should be coupled with `SummariseCommand`, therefore it is necessary to implement this feature in such a way that the pie chart data is created upon invocation `SummariseCommand`. A `PieChartWindow` controller and FXML class is also needed to abstract the creation of the pie charts and opening a new window respectively. The `MainWindow` class is then modified accordingly.
