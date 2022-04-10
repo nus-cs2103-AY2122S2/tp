@@ -435,6 +435,49 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Set a Reminder for a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to set a Reminder for a specific client.
+4. REP set a Reminder for the client in the system.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+  * 3a1. REP displays an error message 
+    
+    Use case resumes at step 2
+
+* 3b. REP detects error in details
+  * 3b1. REP displays an error message
+
+    Use case resumes at step 2
+
+**Use Case: View Reminders for clients**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to view Reminders for all clients.
+4. REP shows a list of current Reminders set.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. REP detects error in details
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
