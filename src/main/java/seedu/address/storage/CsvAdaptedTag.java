@@ -61,16 +61,10 @@ class CsvAdaptedTag {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof CsvAdaptedTag)) {
-            return false;
-        }
-
-        CsvAdaptedTag otherTag = (CsvAdaptedTag) other;
-        return tagName.equals(otherTag.tagName) && tagPriority == otherTag.tagPriority;
+        return other == this // short circuit if same object
+                || (other instanceof CsvAdaptedTag // instanceof handles nulls
+                && tagName.equals(((CsvAdaptedTag) other).tagName)
+                && tagPriority == ((CsvAdaptedTag) other).tagPriority);
     }
 
     @Override

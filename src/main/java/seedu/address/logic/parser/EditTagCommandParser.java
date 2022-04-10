@@ -9,32 +9,32 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new EditTagCommand object
  */
 public class EditTagCommandParser implements Parser<EditTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditTagCommand
+     * and returns an EditTagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args);
-        Pair<Index, String> userInputs;
-        Pair<Integer, String> trimOutNumber;
+        Pair<Index, String> indexAndRemaining;
+        Pair<Integer, String> tagNumberAndNewTag;
 
         try {
-            userInputs = ParserUtil.parseOutIndex(argMultimap.getPreamble());
-            trimOutNumber = ParserUtil.parseOutNumber(userInputs.getValue());
+            indexAndRemaining = ParserUtil.parseOutIndex(argMultimap.getPreamble());
+            tagNumberAndNewTag = ParserUtil.parseOutNumber(indexAndRemaining.getValue());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE), pe);
         }
 
-        Index index = userInputs.getKey();
-        Integer tagNumber = trimOutNumber.getKey();
-        Tag tag = ParserUtil.parseTag(trimOutNumber.getValue());
-        return new EditTagCommand(index, tagNumber, tag);
+        Index index = indexAndRemaining.getKey();
+        Integer tagNumber = tagNumberAndNewTag.getKey();
+        Tag newTag = ParserUtil.parseTag(tagNumberAndNewTag.getValue());
+        return new EditTagCommand(index, tagNumber, newTag);
     }
 
 }

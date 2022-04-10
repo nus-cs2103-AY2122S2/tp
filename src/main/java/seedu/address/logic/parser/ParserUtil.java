@@ -80,10 +80,11 @@ public class ParserUtil {
      * Parses {@code numberAndWords} into an {@code Pair<Integer, String>} and returns it. Leading and trailing
      * whitespaces will be trimmed. Must contain a number at the beginning and then words.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified integer is invalid (not non-zero unsigned integer).
      */
     public static Pair<Integer, String> parseOutNumber(String numberAndWords) throws ParseException {
         String trimmedInput = numberAndWords.trim();
+
         // splitIndexAndRemainingString[0] contains number, splitIndexAndRemainingString[2] contains remaining string
         String[] splitIndexAndRemainingString;
         Integer number;
@@ -199,9 +200,9 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String tag} into a {@code Pair<String, Priority>}.
-     * Seperates the priority from the tag entered
+     * Separates the priority from the tag entered.
      */
-    public static Pair<String, Priority> parsePriority(String tag) throws ParseException {
+    public static Pair<String, Priority> parsePriority(String tag) {
         requireNonNull(tag);
         Priority priority = null;
         String tagName = "";
