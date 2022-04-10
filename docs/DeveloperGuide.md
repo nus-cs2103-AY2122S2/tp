@@ -27,7 +27,6 @@ This is a brownfield project that bases from the Project template [AddressBook L
   - [Non-functional Requirements](#non-functional-requirements)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 - [Appendix: Effort](#appendix-effort)
-- 
 
 # Setting up, getting started
 
@@ -165,10 +164,10 @@ Step 1. The user starts the application with pre-loaded data of Persons.
 
 Step 2. Assuming there is a Person with the index number 1. User then executes `favourite 1` command to favourite the Person with index number 1 in the application. The system will create a new Person with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this Person to be a favourited instance of the same Person.
 
-<aside>
-💡 **Note:** Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
+</div>
 
-</aside>
 
 Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ instance's value set as True. The user can also input the command `fw` to open up the Favourites window through this CLI command.
 
@@ -312,8 +311,8 @@ This is how we do our [configurations](https://ay2122s2-cs2103-w16-4.github.io/t
 
 This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps.html).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
 
 # Appendix: Glossary
@@ -343,23 +342,23 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 ## User stories
 
 | Priority | As a ... | I want to ...                                                                                                                                                                      | So that i can...                                                                                    |
-|----------| --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| High     | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
-| High     | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
-| High     | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
-| High     | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
-| High     | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High     | User | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
-| High     | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
-| High     | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
-| High     | User | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
-| High     | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
-| High     | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
-| medium   | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
-| medium   | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
-| medium   | User | Sort the list of clients by their attributes                                                                                                                                       | Better organize my clients                                                                          |
-| medium   | User | set reminders for things to do                                                                                                                                                     | Make sure i do not forget to do certain tasks                                                       |
-| medium   | User | Find clients based on their information                                                                                                                                            | Easily find a particular client to get the details i need                                           |
+|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| High     | User     | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
+| High     | User     | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
+| High     | User     | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
+| High     | User     | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
+| High     | User     | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
+| High     | User     | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High     | User     | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
+| High     | User     | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
+| High     | User     | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
+| High     | User     | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
+| High     | User     | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
+| medium   | User     | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| medium   | User     | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+| medium   | User     | Sort the list of clients by their attributes                                                                                                                                       | Better organize my clients                                                                          |
+| medium   | User     | set reminders for things to do                                                                                                                                                     | Make sure i do not forget to do certain tasks                                                       |
+| medium   | User     | Find clients based on their information                                                                                                                                            | Easily find a particular client to get the details i need                                           |
 
 ## Use cases
 System: RealEstatePro (REP)
@@ -484,8 +483,8 @@ Actor: User
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
 </div>
 
 ## Launch and shutdown
