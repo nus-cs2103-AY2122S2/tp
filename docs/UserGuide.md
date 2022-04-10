@@ -396,8 +396,8 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-danger">
 
 :exclamation: **Caution:** 
-* You cannot undo the sort once you have applied it! 
-* Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
+* You cannot undo the sort once you have applied it!
+* Trackermon will only rearrange the show list after each successful sort command!
 * A successful sort command followed by an add command will still result in the new show being added to the last index!
 </div>
 
@@ -420,8 +420,7 @@ To sort your show list by rating ascendingly, you can key in `sort r/asc`! For m
 * `name` > `status` > `rating` > `tag`
 </div>
 
-Therefore, let's say you want to sort by status in ascending order, then by name in ascending order.
-Use `sort n/asc s/asc so/statusname`.
+To sort by status in ascending order, then by name in ascending order, use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note:** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
@@ -430,7 +429,7 @@ Use `sort n/asc s/asc so/statusname`.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Sort:**<br>
-* `sort` can also be used as is! It will sort by name in ascending order.
+* `sort` can also be used as is! It will sort by name in ascending order and is treated as a single word command that ignores extraneous parameters.
 * Refer to [parameter conditions](#parameter-conditions) section about `ORDER` `SEQUENCE`.
 * For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "ratingtagrating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
