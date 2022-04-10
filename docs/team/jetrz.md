@@ -27,12 +27,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added description and instructions for clip and prioList command, supported with clear visuals.
+    * Added description and instructions for clip and prioList command, supported with clear visuals. ([\#162](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/162))
   * Developer Guide:
-    * Under [implementation section](../DeveloperGuide.md#Implementation), added descriptions on how clip and prioList works, supported with sequence diagrams.
-    * Added section on product scope.
-    * Added section on user stories.
-    * Added section on non-functional requirements.
+    * Under [implementation section](../DeveloperGuide.md#Implementation), added descriptions on how clip and prioList works, supported with sequence diagrams. ([\#54](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/54), [\#162](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/162))
+    * Updated section on use cases.
+    * Added section on product scope. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
+    * Added section on user stories. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
+    * Added section on non-functional requirements. ([\#16](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/16))
     * Improved overall styling.
   
 * **Project management**:
@@ -40,3 +41,6 @@ Given below are my contributions to the project.
   * Reviewed and merged PRs ([\#32](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/32), [\#65](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/65))
   * Created and assigned tags
   * Submitted all assigned deliverables by given milestone deadlines
+
+* **Community**:
+  * Reported [bugs](https://github.com/jetrz/ped/issues) for other teams
