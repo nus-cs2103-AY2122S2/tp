@@ -277,8 +277,6 @@ After executing the `find` command, `FindCommandParser` will map any prefixes in
 
 Then, `LogicManager` will execute the given `findCommand` object and scan through the shows in the model's list of shows while checking if any shows matches the user's input. The model is then updated with the filtered show list.
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the parsing implementation of `FindCommandParser`.
 
 <img src="images/FindSequenceReferenceDiagram.png">
