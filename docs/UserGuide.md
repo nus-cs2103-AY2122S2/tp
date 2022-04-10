@@ -32,7 +32,7 @@ title: User Guide
 
 ## Introduction
 
-Always accessing MyAnimeList or IMDB to record down the shows you watched? Or finding it difficult to search the different websites that stored your show information? Fret not because **Trackermon** is the app just for you! But hold on, you may be wondering what is Trackermon?
+Always accessing MyAnimeList or IMDB to record down the shows you have watched? Finding it difficult to search the different websites that store your shows' information? Fret not, because **Trackermon** is the application just for you! But hold on, you may be wondering, what is Trackermon?
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch. You can even review these shows!
 
@@ -65,7 +65,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
+4. Double-click the file to start Trackermon. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
    * Do note that for Linux, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! 
    * Do note that if double-clicking fails to start **Trackermon**, open a Command Prompt/Terminal in **Trackermon**'s _home folder_ and input `java -jar Trackermon.jar` to start **Trackermon**<br><br>
    
@@ -124,9 +124,10 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | INDEX      | None   | The index of the show as shown in the show list                                     |
 | NAME       | n/     | The name to use for a show                                                          |
 | STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
-| TAG        | t/     | The tag to label a show                                                             |
-| COMMENT    | c/     | The comment to describe a show                                                      |
 | RATING     | r/     | The rating to give a show                                                           |
+| COMMENT    | c/     | The comment to describe a show                                                      |
+| TAG        | t/     | The tag to label a show                                                             |
+| SEQUENCE   | so/    | The order to sort the show list                                                     |
 
 <div markdown="block" class="alert alert-info">
 
@@ -165,13 +166,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 | Parameter | Prefix | Condition                                                                                                                                                                                                                                                                                                                          |
 |-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`                                                                                                                                                                                                                   |
-| INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
-| NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
-| STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                               |
-| RATING    | r/     | Rating must be a **whole number** from **0 to 5**.                                                                                                                                                                                                                                                                    |
-| COMMENT   | c/     | A comment can contain **any text**, but **emojis will be removed** from input.                                                                                                                                                                                                                                                                                                                      |
-| TAG       | t/     |  Tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters.                                                         |
+| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2` |
+| INDEX     | None   | A **positive whole number within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**. |
+| NAME      | n/     | A show name must be **unique** and contain only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
+| STATUS    | s/     | A status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_. |
+| RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
+| COMMENT   | c/     | A comment can contain **any text**, but **emojis will be removed** from input. |
+| TAG       | t/     | A tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters. |
+| SEQUENCE  | so/    | A sequence lists out the order of the criteria used to sort the show list. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -319,7 +321,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 ### Finding a show: `find`
 #### General find
 
-**Description (General Find):** Wanting to search for a show across all [parameters](#command-structure)? Find shows containing the search words!
+**Description (General Find):** Wanting to search for a show across the name, status, rating, tag [parameters](#command-structure)? Find shows containing the search words!
 
 **Format (General Find):** `find KEYWORD…​`
 
@@ -330,9 +332,9 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about General Find:**<br>
-* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
+* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching name, status, rating, tag [parameters](#command-structure) will be returned.
 * Refer to [parameter conditions](#parameter-conditions) section about `KEYWORD`.
-* `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
+* `find scary movie 4` displays all the shows in the list that contain the keywords `scary`, `movie` or `4`, whether it is a name, status, rating, or tag.
 
 </div>
 
