@@ -358,6 +358,16 @@ Format: `find NAME_OF_PET [KEYWORDS]...`
 Examples:
 * `find poofie woofie` will return a list of pets containing all pets named Poofie and Woofie.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Additional information about `find`:**<br>
+
+You may have noticed that `find oo` or `find ie` will result in a match with Woofie. This is an intended feature of WoofAreYou
+as it will return a match **as long as the pet's name contains `NAME_OF_PET` or `[KEYWORDS]...`** that you have provided. If
+you want a more refined search, you may consider keying in a longer and more specific input!
+
+</div>
+
 <p align="center">
   <img src="images/forUserGuide/FinalFindSS.png" alt="After finding sample screenshot"/>
 </p>
