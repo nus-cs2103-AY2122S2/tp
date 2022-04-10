@@ -43,7 +43,7 @@ Here are some example commands you can try:
 
    * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) section below for details of each command.
+7. Refer to the [Features](#3.-features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -70,7 +70,7 @@ Each contact in TAPA represents a student, who can have the following fields:
 
 * In TAPA, two students are considered as equal only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not student ID).
 
-* More details regarding the use of prefix can be found in the [Features](#features) section below.
+* More details regarding the use of prefix can be found in the [Features](#3.-features) section below.
 </div>
 
 
@@ -124,7 +124,7 @@ Adds a student to TAPA.
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
 * The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
-* You may refer to the [table](#information-about-contacts-in-tapa) above for more information about each individual field of a student.
+* You may refer to the [table](#2.-information-about-contacts-in-tapa) above for more information about each individual field of a student.
 </div>
 
 **Example**:
