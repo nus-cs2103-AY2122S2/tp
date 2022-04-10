@@ -171,7 +171,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | NAME      | n/     | A show name must be **unique** and contain only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
 | STATUS    | s/     | A status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_. |
 | RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
-| COMMENT   | c/     | A comment can contain **any text**, but **emojis will be removed** from input. |
+| COMMENT   | c/     | A comment can only contain up to 300000 [**ASCII**](#glossary) values. |
 | TAG       | t/     | A tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters. |
 | SEQUENCE  | so/    | A sequence lists out the order of the criteria used to sort the show list. |
 
@@ -618,11 +618,12 @@ So if you use `sort n/asc s/asc so/haha`, the required criteria are name and sta
 
 | Term                               | Description                                                                                                                                                                          |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                                                    |
+| **AND search**                     | AND search finds all of the keywords.  For example, `find n/Shutter Island` returns only results that contain Shutter and Island.                |
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Alphanumeric**                   | A character that is either a letter or a number.                  |
 | **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
+| **ASCII**                   | ASCII is a character encoding standard containing [128 characters](https://www.techonthenet.com/ascii/chart.php). It includes the numbers 0-9, upper and lower case English letters (A-Z) and certain special characters.                |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
