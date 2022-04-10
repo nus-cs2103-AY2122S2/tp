@@ -260,7 +260,7 @@ The summarise mechanism implements the following sequence and interactions for t
 
 #### What is the summarise feature
 
-The summarise feature allow users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
+The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
 Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
 Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
 
@@ -281,8 +281,6 @@ There are three possible execution paths for this command.
 2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
 3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
 
-The sequence diagram below shows the interactions between objects during the execution of a `summarise` command.
-
 **Class Diagram of Summarise Feature is shown below:**
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
@@ -296,6 +294,8 @@ The above class diagram shows the structure of the Summarise Command and its ass
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
+
+The sequence diagram below shows the interactions between objects during the execution of a `summarise` command.
 
 When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
 
