@@ -1,5 +1,9 @@
 package seedu.address.model.person.predicates;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_NAME;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -63,23 +67,23 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                     .addNamePredicate(new NameContainsKeywordsPredicate(Collections.singletonList("Alice")))
                     .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
 
         // Multiple keywords, One Field
         predicate = new CombineContainsKeywordsPredicate(
                         new PredicatesListBuilder()
                             .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")))
                             .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
 
         // Multiple keywords, Multiple Fields have all match
         predicate = new CombineContainsKeywordsPredicate(
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")))
-                        .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Jurong", "Wast")))
+                        .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Amy", "Street")))
                         .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob")
-                                                    .withAddress("123, Jurong West Ave 6, #08-111")
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                                                    .withAddress(VALID_ADDRESS_AMY)
                                                     .build()));
 
         // Only one matching keyword
@@ -87,16 +91,16 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol")))
                         .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
 
         // Only one matching keyword, Multiple Fields each have at least one match
         predicate = new CombineContainsKeywordsPredicate(
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol")))
-                        .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Jurong", "East")))
+                        .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Amy", "East")))
                         .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol")
-                                                        .withAddress("123, Jurong West Ave 6, #08-111")
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                                                        .withAddress(VALID_ADDRESS_AMY)
                                                         .build()));
 
         // Mixed-case keywords
@@ -104,7 +108,7 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB")))
                         .build());
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
     }
 
     @Test
@@ -114,7 +118,7 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Collections.emptyList()))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_NAME_AMY).build()));
 
         // Only one matching keyword, Multiple Fields, some have no match
         predicate = new CombineContainsKeywordsPredicate(
@@ -122,8 +126,8 @@ public class CombineContainsKeywordsPredicateTest {
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol")))
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Bedok", "East")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Carol")
-                .withAddress("123, Jurong West Ave 6, #08-111")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                .withAddress(VALID_ADDRESS_AMY)
                 .build()));
 
         // Non-matching single keyword
@@ -131,7 +135,7 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Carol")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
 
         // Non-matching single keyword for multiple fields
         predicate = new CombineContainsKeywordsPredicate(
@@ -139,8 +143,8 @@ public class CombineContainsKeywordsPredicateTest {
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Carol")))
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Bedok")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob")
-                                                        .withAddress("123, Jurong West Ave 6, #08-111")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                                                        .withAddress(VALID_ADDRESS_AMY)
                                                         .build()));
 
         // Matching single keyword for one field, non-matching for other fields
@@ -149,18 +153,18 @@ public class CombineContainsKeywordsPredicateTest {
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice")))
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Bedok")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob")
-                .withAddress("123, Jurong West Ave 6, #08-111")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                .withAddress(VALID_ADDRESS_AMY)
                 .build()));
 
         // Multiple keywords match for one field, Multiple Fields, some fields have no match
         predicate = new CombineContainsKeywordsPredicate(
                 new PredicatesListBuilder()
-                        .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Carol")))
+                        .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")))
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Bedok", "East")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Carol")
-                .withAddress("123, Jurong West Ave 6, #08-111")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                .withAddress(VALID_ADDRESS_AMY)
                 .build()));
 
         // Multiple Non-matching keywords
@@ -168,7 +172,7 @@ public class CombineContainsKeywordsPredicateTest {
                 new PredicatesListBuilder()
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Jane", "Carol")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME).build()));
 
         // Multiple Non-matching keywords for multiple fields
         predicate = new CombineContainsKeywordsPredicate(
@@ -176,8 +180,8 @@ public class CombineContainsKeywordsPredicateTest {
                         .addNamePredicate(new NameContainsKeywordsPredicate(Arrays.asList("Jane", "Carol")))
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Bedok", "East")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob")
-                                                        .withAddress("123, Jurong West Ave 6, #08-111")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_MULTIPLE_NAME)
+                                                        .withAddress(VALID_ADDRESS_AMY)
                                                         .build()));
 
         // Keywords match phone, email and address, but does not match name
@@ -188,7 +192,7 @@ public class CombineContainsKeywordsPredicateTest {
                         .addAddressPredicate(new AddressContainsKeywordsPredicate(Arrays.asList("Main", "Street")))
                         .addPhonePredicate(new PhoneContainsKeywordsPredicate(Arrays.asList("12345")))
                         .build());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withName(VALID_NAME_AMY).withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }
