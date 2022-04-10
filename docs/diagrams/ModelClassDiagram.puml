@@ -31,8 +31,8 @@ ModelManager -left-> "1" TrackBeau
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-TrackBeau *--> "1" UniqueList
-UniqueList -down-> "~* all" UniqueListItem
+TrackBeau *--> "3 " UniqueList
+UniqueList -down-> "~* all " UniqueListItem
 Customer .up.|> UniqueListItem
 Service .up.|> UniqueListItem
 Booking .up.|> UniqueListItem
