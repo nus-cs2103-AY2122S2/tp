@@ -365,10 +365,11 @@ Format `upload INDEX [i/FilePath:description]`
 
 Opens a new window that displays the images associated to a client.
 
-![images/user-guide/viewImageWindow.png](images/user-guide/viewImageWindow.png)
+<img src="images/user-guide/viewImageWindow.png" height="400px">
 
 Format `viewimage INDEX`
 
+<div style="page-break-after: always;"></div>
 
 ### Setting a Reminder for a client: `remind`
 <img src="images/user-guide/successfulRemindCommand.png" height="400px">
