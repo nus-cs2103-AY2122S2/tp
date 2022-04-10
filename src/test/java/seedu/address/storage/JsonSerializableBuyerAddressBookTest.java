@@ -22,7 +22,6 @@ public class JsonSerializableBuyerAddressBookTest {
     private static final Path DUPLICATE_BUYER_FILE = TEST_DATA_FOLDER.resolve("duplicateBuyerAddressBook.json");
 
     @Test
-    //Todo: Fix this error
     public void toModelType_typicalBuyersFile_success() throws Exception {
         JsonSerializableBuyerAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_BUYER_FILE,
                 JsonSerializableBuyerAddressBook.class).get();
