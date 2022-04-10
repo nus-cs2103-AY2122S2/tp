@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_SELLERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.SellerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.CARL;
-import static seedu.address.testutil.TypicalClients.ELLE;
-import static seedu.address.testutil.TypicalClients.FIONA;
 import static seedu.address.testutil.TypicalSellers.getTypicalSellerAddressBook;
 
 import java.util.Arrays;
