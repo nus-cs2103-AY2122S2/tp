@@ -305,6 +305,12 @@ The implementation of filtering data is done as an extension of the `list -X` co
 
 To support different filters for different data types, each filter is a predicate class in the `Model` component. For example, to support filtering applicants by gender, there is a [`ApplicantGenderPredicate`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/model/applicant/ApplicantGenderPredicate.java) in the `Model` component under `applicant`. The predicate implements Java's `Predicate<Applicant>` interface for filtered lists.
 
+Here is the sequence diagram for a filter command: 
+
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `list -a f/name a/Bob` command.
+
+<img src="images/FilterSequenceDiagram.png">
+
 #### Design considerations:
 
 #### Aspect: Should the filter feature be a separate command by itself?
