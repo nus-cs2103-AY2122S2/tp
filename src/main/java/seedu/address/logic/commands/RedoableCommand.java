@@ -14,8 +14,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 public abstract class RedoableCommand extends Command {
 
     private ReadOnlyAddressBook previousAddressBook;
-    private ReadOnlyAddressBook previousArchiveBook;
-    private boolean isSwapped;
+
     protected abstract CommandResult executeUndoableCommand(Model model) throws CommandException;
 
     /**
@@ -24,8 +23,6 @@ public abstract class RedoableCommand extends Command {
     private void saveAddressBookSnapshot(Model model) {
         requireNonNull(model);
         this.previousAddressBook = new AddressBook(model.getAddressBook());
-        this.previousArchiveBook = new AddressBook(model.getArchiveBook());
-        this.isSwapped = model.isSwapped();
     }
 
     /**
@@ -36,7 +33,7 @@ public abstract class RedoableCommand extends Command {
     protected final void undo(Model model) {
         requireAllNonNull(model, this.previousAddressBook);
 
-        model.setSwappedAddressBook(this.isSwapped, this.previousAddressBook, this.previousArchiveBook);
+        model.setAddressBook(this.previousAddressBook);
 
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -47,12 +44,14 @@ public abstract class RedoableCommand extends Command {
      */
     protected final void redo(Model model) {
         requireNonNull(model);
+
         try {
             executeUndoableCommand(model);
         } catch (CommandException ce) {
             throw new AssertionError("The command has been successfully executed previously; "
                     + "it should not fail now");
         }
+
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
