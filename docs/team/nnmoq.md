@@ -50,12 +50,17 @@ Given below are my contributions to the project.
 ### Contributions to the UG
       
 1. Created the initial format and draft of the user guide on our Team's shared google docs.
-2. Updated the user guide to use consistent wording.
+2. Added the command shortcuts to user guide.
+3. Updated the user guide to use consistent wording.
 
 ### Contributions to the DG
 
 1. Added functionality and use-cases for `AddStudent` command.
 2. Added Sequence Diagram for `AddStudent` command.
+3. Updated Logic Component section
+4. Updated Architecture Sequence Diagram
+5. Add testcases for deleting a student
+6. Add help feature and class diagram
 
 ### Contributions to team-based tasks
 1. Created and assigned tasks to milestones 1.3 and 1.4
