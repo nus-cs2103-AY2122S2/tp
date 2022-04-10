@@ -42,23 +42,28 @@ Given below are my contributions to the project.
   * Modified the `assign` feature to allow assigning tasks to all students whom are taking a particular module. [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102)
     * The `assign` feature was previously implemented [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/53) in v1.2. It was enhanced in v1.3 to allow users to assign tasks to students in the same module more easily.
   * Wrote additional tests for new and existing features to increase code coverage. ([#112](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/112), [#117](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/117), [#196](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/196), [#199](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/199))
+  * Morphed AB3 into TAPA by refactoring test cases. ([#210](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/210), [#222](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/222), [#226](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/222))
 
 
 * **Contribution to team-based tasks**:
   * Shared effort in renaming the product to "TAPA".
   * Shared effort in creating "TAPA" icon.
-  * Shared effort in morphing product into "TAPA" by removing unused fields.
+  * Shared effort in morphing product into "TAPA" by removing unused fields, updating the diagrams in the Developer Guide [#232](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/232), and adding an introduction. [#261](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/261) 
   * Maintained the issue tracker by assigning/labelling some issues.
   * Updated Developer Guide by adding and editing user stories in the `Appendix` section. [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93)
+  * Maintained the User Guide and Developer Guide by formatting them. ([#213](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/213), [#234](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/234), [#258](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/258), [#259](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/259), [#263](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/263))
 
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `manual`, `unmark`, `mark` [#39](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/39) and `sort` [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
-    * Updated documentation for the feature `assign` [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
+    * Added documentation for the features `manual`, `unmark`, `mark` [#39](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/39) and `sort`. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
+    * Updated documentation for the feature `assign`. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
   * Developer Guide:
     * Added and updated user stories [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93)
-    * Added implementation details for commands: `manual`, `mark` and `unmark` [#106](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/106)
+    * Added implementation details for commands: `manual`, `mark`,`unmark` [#106](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/106) and `sort `. [#215](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/215)
+    * Updated implementation details for command: `assign`. [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231)
+    * Added use cases: UC06, UC07, UC14, UC15. [#253](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/253)
+    * Added manual test cases for `assign`, `mark`, `unmark`, `sort` and `manual`. [#268](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/268)
 
 
 * **Community**:
