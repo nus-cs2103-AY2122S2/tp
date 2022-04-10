@@ -347,6 +347,30 @@ The `Find` command searches for contacts that satisfy any of the given predicate
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 
+Below is an example scenario of how the finding mechanism behaves at each step:
+**Step 1.** The user enters the valid `FindCommand` : `find n/Alex Yeoh edu/computer science` and `LogicManager` would execute it.
+
+**Step 2.** `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `FindCommand`.
+It will then pass the arguments to `FindCommandParser` to handle the parsing for the identified `FindCommand`.
+
+**Step 3.** `FindCommandParser` would separately parse the arguments according to prefixes. So in this case, it would parse the name
+as 'Alex Yeoh' and the education tag as 'computer science'. These would be identified as the fields being searched for. The parsing functions
+are in ParserUtil (in this case, `ParserUtil#parseNames()` and `ParserUtil#parseTagsForFind()`)
+
+**Step 4.** After parsing the arguments, a FindOrPredicateParser object containing these arguments (in the form of a `FindPersonDescriptor` object)
+is created. FindOrPredicateParser converts the fields searched for into classes that extends `Predicate<Person>` (such as
+`NameConatainsKeywordPredicateOr` for the name field). It then does the logical 'OR' operation on all the predicates
+
+**Step 5.** Control is then handed over to FindCommand which takes the predicate as a constructor argument. `FindCommand#execute()`
+then calls `ModelManager#updateFilteredPersonList()` with the predicate as the argument. This changes the filteredList that is
+rendered by the UI to only show the contacts for which the predicate evaluates to True. Finally, a CommandResult object with a success
+message is returned.
+
+The following class diagram shows important classes for the `find` command and their relationships. Note that there are similar classes
+for `find -s` and `find -e`
+
+![Find Class Diagram](images/FindClassDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -457,7 +481,7 @@ _{more aspects and alternatives to be added}_
 
 ### User stories
 
-Priorities: 
+Priorities:
 * `* * *` - High (must have)
 * `* *` - Medium (nice to have)
 * `*` - Low (unlikely to have)
