@@ -185,16 +185,19 @@ A new `Applicant` class had to be created to support the functionality. It is al
 Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
 support the needs of HireLah.
 
-### To Add: Position feature?
+### To Add: Position feature
+
+#### Proposed Implementation
+
 A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
-* `PositionName` — M refers to the name of the job opening. 
+* `PositionName` —  refers to the name of the job opening. 
   Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 100 characters.
-* `Description` — M refers to the description of the position. 
+* `Description` —  refers to the description of the position. 
   Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 200 characters.
-* `PositionOpenings` — M refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
-* `PositionOffers` — M refers to the number of outstanding offers handed out for the position. 
+* `PositionOpenings` —  refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
+* `PositionOffers` —  refers to the number of outstanding offers handed out for the position. 
   Number of offers is initialized as 0 when a position is created. Number of offers cannot be directly mutated, and is only altered through commands of `pass`, `accept`, `reject`.
-* `Set<Requirement>` — M refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
+* `Set<Requirement>` —  refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
   There can be any number of requirements for the `Position`.
   
 These classes are contained in the `position` package which belongs to the `model` package.
