@@ -325,14 +325,38 @@ The following sequence diagram shows how the tag operation works:
 ### Edit Feature
 
 #### Original Implementation
-The edit command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
+The `edit` command uses an `EditPersonDescriptor` to store the new information that is to be changed in the person. The
 `EditCommandParser` parses the information input and then creates an `EditPersonDescriptor` where the unchanged fields
 are copied over from the existing person and the fields to be overwritten are changed. The Find command then takes in
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
 #### Current Implementation
-The edit command has now been upgraded to support the functionality for multiple tags. Existing tags of a person will not be affected.
+We initially built the `edit` command to allow overwriting of the tag lists. However later we removed that functionality so the command 
+can only be used to edit the main fields. This is because we realised that it is easier to use the `tag` and `removetag` commands to
+edit the tag lists instead.
 
+Below is an example usage scenario and how the edit mechanism behaves at each step:
+
+**Step 1.** The user enters a valid `EditCommand` : `edit 1 n/Alex Ho p/87497763` and `LogicManager` would execute it.
+
+**Step 2.** `LogicManager` would pass the argument to `AddressBookParser` to parse the command and identify it as a `EditCommand`.
+It will then pass the arguments to the `EditCommandParser` to handle the parsing for the identified `EditCommand`.
+
+**Step 3.** `EditCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to edit.
+Afterwards, it would separately parse the arguments according to prefixes using `ArgumentTokenizer#Tokerize()`. 
+In this case it would use the parsing functions `ParserUtil#parseName()` and `ParserUtil#parsePhone()` to parse the name and phone number into
+`Name` and `Phone` objects. 
+
+**Step 4.** These parsed fields are then stored in a `EditPersonDescriptor` object, which is then passed into `FindCommand`.
+Control is handed over to `FindCommand` which will eventually return to `LogicManager`, which will call `FindCommand#Execute()` to
+execute the command.
+
+**Step 5.** Upon execution, the person will be fetched and edited using `Model#setPerson`. The edited person would then be updated
+and stored in the addressbook. `CommandResult` would then generate a success message to inform the user the person has been edited
+successfully.
+
+The following sequence diagram shows how the edit operation works:
+![EditCommand Sequence Diagram](images/EditSequenceDiagram0.png)
 
 ### Find feature
 
@@ -346,6 +370,12 @@ specific tags.
 The `Find` command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
+
+The find command uses several `Predicate` classes in its implementation of the feature. The partial class diagram below describes
+the relationship between these classes. The predicates for Email and Address follow the same pattern as the ones for Name and Phone.
+The predicates for Internship and Education follow the same pattern as those for Cca and Module. They were left out to simplify the diagram.
+
+![Class diagram for FindPredicates](images/FindPredicatesClassDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -572,7 +602,7 @@ Priorities:
 1. User requests to list all persons.
 2. NUSocials shows a list of all persons from its addressbook.
 3. Users requests to overwrite certain fields of the person with updated information.
-4. NUSocials tags the person.
+4. NUSocials edits the person.
 
     Use case ends.
 ````
