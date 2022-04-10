@@ -45,6 +45,7 @@ title: Developer Guide
   * [Deleting a company](#deleting-a-company)
   * [Editing a role](#editing-a-role)
   * [Using the reminder feature](#using-reminders)
+* [Appendix: Effort](#effort)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -918,4 +919,17 @@ Guarantees: a company is successfully unfavourited within Tinner
     1. Expected: Both companies are displayed with all their roles.
 9. Other incorrect test cases to try: `find`, `find c/`, `find c/ r/`, `find test`, `find a/ b/`
     1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format.
+
+## Appendix: Effort <a id="effort"></a>
+
+Tinner is a challenging venture as we are modifying the AB3 address book application to an internship application. The introduction of `Role` requires much consideration into the interaction, management and storage of information within and across components to ensure ample usage of Object-Oriented Programming (OOP) and Design Patterns. Moreover, there were many modifications to AB3's commands, such as `find` to optimise searches on internship applications within Tinner. As a result, there were major changes in components such as `Model` and `Logic` while seeking out the best design practices. Additionally, the `Reminder` feature requires a separate window thus, designing a new interface is required to display essential information.
+
+Some of the difficulties and challenges faced when implementing the features are as followed: <br/>
+* `addRole`, `editRole`, `deleteRole`:  Even though the implementation of `Role` commands are adapted from the commands in AB3, it was challenging due to the close coupling between `Company` and `Role`. While having separate logic and commands for both entities, there is also a need to ensure data consistency for cases such as `Role` cannot exist without `Company`. Thus, features such as `deleteCompany` have a cascade effect where the removing of a company will remove all `Role` associated with it. <br/>
+* `find`: <br/>
+* `reminder`: <br/>
+* `setWindow` <br/>
+* `favourite`, `unfavourite`, `listFavourite` <br/>
+
+Overall, we estimate our effort to be 20% more than the implementation of AB3. This is due to the implementation of `Role` as a key entity with many closely coupled relationships with other components. Also, managing both `Role` and `Company` entities separately, and we implemented close to double the key features implemented in AB3. 
 
