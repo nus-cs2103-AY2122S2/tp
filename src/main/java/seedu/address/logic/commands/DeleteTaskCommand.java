@@ -60,6 +60,8 @@ public class DeleteTaskCommand extends Command {
             Group groupToDeleteTask = group;
             Group groupDeletedTask = createDeletedTaskGroup(groupToDeleteTask, task, model);
 
+            assert groupToDeleteTask.isSameGroup(groupDeletedTask) : "two groups should have the same identity";
+
             model.setGroup(group, groupDeletedTask);
 
             return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, task));
@@ -72,10 +74,11 @@ public class DeleteTaskCommand extends Command {
      * Creates and returns a {@code Group} with the details of {@code groupToDeleteTask}
      */
     private static Group createDeletedTaskGroup(Group groupToDeleteTask, Task taskToDelete, Model model) {
-        assert groupToDeleteTask != null;
 
         model.deleteTask(taskToDelete, groupToDeleteTask);
         Group groupDeletedTask = model.getGroup(groupToDeleteTask);
+
+        assert groupDeletedTask != null : "groupDeletedTask should not be null";
 
         return groupDeletedTask;
     }

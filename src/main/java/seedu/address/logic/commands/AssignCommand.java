@@ -74,6 +74,8 @@ public class AssignCommand extends Command {
             }
         }
 
+        assert assignedGroup != null : "The assigned group should not be null";
+
         Person personToAssign = persons.get(index.getZeroBased());
 
         if (assignedGroup.personExists(personToAssign)) {
