@@ -283,7 +283,6 @@ The order of the keywords does not matter. e.g. `2040 CS` will match `CS 2040`.
 > `find cs` does the same as above.
 
 
-
 ## 3. Editing details of a meeting: `edit`
 
 **Format:** `edit INDEX [n/TITLE] [l/LINK] [s/START_TIME] [d/DURATION] [t/TAG]…`
