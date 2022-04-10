@@ -37,6 +37,9 @@ public class JsonAdaptedClassGroupTest {
     private static final List<JsonAdaptedLesson> lessons = TypicalClassGroups.CS2101G09.getLessons()
             .stream().map(JsonAdaptedLesson::new).collect(Collectors.toList());
 
+    // Test case does not work for ubuntu but work for mac and windows
+    // Check CI at:
+    // https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/234/commits/dba66eb12494fcac78e34218185f93c3d9cfb960
     @Test
     public void toModelType_validClassGroupDetails_returnsClassGroup() throws Exception {
         JsonAdaptedClassGroup classGroup = new JsonAdaptedClassGroup(

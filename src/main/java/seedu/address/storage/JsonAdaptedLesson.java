@@ -20,7 +20,7 @@ class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     public static final String STUDENT_LIST_DOES_NOT_MATCH = "Lesson's student attendance does not match with"
-            + " class group student list! %d %d %s %d";
+            + " class group student list! %d %d %s %s";
     public static final String MESSAGE_DUPLICATE_STUDENTS = "Lesson's student list contains duplicate student(s).";
     private final String weekId;
     private final List<JsonAdaptedStudentAttendance> studentAttendanceList = new ArrayList<>();
