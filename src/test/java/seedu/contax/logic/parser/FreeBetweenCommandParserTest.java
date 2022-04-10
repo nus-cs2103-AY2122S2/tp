@@ -1,7 +1,7 @@
 package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_ALONE;
+import static seedu.contax.commons.util.DateUtil.combineDateTime;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DURATION;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_TIME;
@@ -37,6 +37,11 @@ public class FreeBetweenCommandParserTest {
     private static final String INPUT_END_TIME = " " + PREFIX_TIME_END + VALID_TIME;
     private static final String INPUT_DURATION = " " + PREFIX_DURATION + VALID_APPOINTMENT_DURATION_HOUR;
 
+    private static final LocalDate START_DATE_OBJ = DateUtil.parseDate(VALID_DATE2).get();
+    private static final LocalTime START_TIME_OBJ = DateUtil.parseTime(VALID_TIME2).get();
+    private static final LocalDate END_DATE_OBJ = DateUtil.parseDate(VALID_DATE).get();
+    private static final LocalTime END_TIME_OBJ = DateUtil.parseTime(VALID_TIME).get();
+
     private final FreeBetweenCommandParser parser = new FreeBetweenCommandParser();
 
     @Test
@@ -57,36 +62,30 @@ public class FreeBetweenCommandParserTest {
     public void parse_optionalFieldsPresent_success() {
         LocalDate defaultStartDate = LocalDate.now();
         LocalDate defaultEndDate = LocalDate.MAX;
+        LocalTime defaultStartTime = LocalTime.of(0, 0);
         LocalTime defaultEndTime = LocalTime.of(23, 59);
-        LocalDateTime defaultEnd = DateUtil.combineDateTime(defaultEndDate, defaultEndTime);
-        LocalDate modifiedStartDate = DateUtil.parseDate(VALID_DATE2).get();
-        LocalTime modifiedStartTime = DateUtil.parseTime(VALID_TIME2).get();
-        LocalDate modifiedEndDate = DateUtil.parseDate(VALID_DATE).get();
-        LocalTime modifiedEndTime = DateUtil.parseTime(VALID_TIME).get();
+        LocalDateTime defaultStart = combineDateTime(defaultStartDate, defaultStartTime);
+        LocalDateTime defaultEnd = combineDateTime(defaultEndDate, defaultEndTime);
 
         // Change start. Default values for start date/time tested in compulsory field test
         assertParseSuccess(parser, INPUT_START_DATE + INPUT_DURATION,
-                new FreeBetweenCommand(modifiedStartDate.atStartOfDay(), defaultEnd, 60));
+                new FreeBetweenCommand(combineDateTime(START_DATE_OBJ, defaultStartTime), defaultEnd, 60));
         assertParseSuccess(parser, INPUT_START_TIME + INPUT_DURATION,
-                new FreeBetweenCommand(DateUtil.combineDateTime(defaultStartDate, modifiedStartTime),
-                        defaultEnd, 60));
+                new FreeBetweenCommand(combineDateTime(defaultStartDate, START_TIME_OBJ), defaultEnd, 60));
         assertParseSuccess(parser, INPUT_START_TIME + INPUT_START_DATE + INPUT_DURATION,
-                new FreeBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
-                        defaultEnd, 60));
+                new FreeBetweenCommand(combineDateTime(START_DATE_OBJ, START_TIME_OBJ), defaultEnd, 60));
 
         // Change end
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE + INPUT_DURATION,
-                new FreeBetweenCommand(modifiedStartDate.atStartOfDay(),
-                        DateUtil.combineDateTime(modifiedEndDate, defaultEndTime), 60));
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE + INPUT_END_TIME + INPUT_DURATION,
-                new FreeBetweenCommand(modifiedStartDate.atStartOfDay(),
-                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime), 60));
+        assertParseSuccess(parser, INPUT_END_DATE + INPUT_DURATION,
+                new FreeBetweenCommand(defaultStart, combineDateTime(END_DATE_OBJ, defaultEndTime), 60));
+        assertParseSuccess(parser, INPUT_END_DATE + INPUT_END_TIME + INPUT_DURATION,
+                new FreeBetweenCommand(defaultStart, combineDateTime(END_DATE_OBJ, END_TIME_OBJ), 60));
 
         // All fields present
         assertParseSuccess(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME
                         + INPUT_DURATION,
-                new FreeBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
-                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime), 60));
+                new FreeBetweenCommand(combineDateTime(START_DATE_OBJ, START_TIME_OBJ),
+                        combineDateTime(END_DATE_OBJ, END_TIME_OBJ), 60));
     }
 
     @Test
@@ -103,43 +102,46 @@ public class FreeBetweenCommandParserTest {
         // missing duration
         assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
                 + INPUT_END_TIME, expectedMessage);
+
         // all fields missing
-        assertParseFailure(parser, APPOINTMENT_NAME_ALONE, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
+
+        // all fields missing
+        assertParseFailure(parser, PREAMBLE_WHITESPACE, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+        // non-empty preamble
+        assertParseFailure(parser, "1 " + INPUT_DURATION,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FreeBetweenCommand.MESSAGE_USAGE));
+
         // invalid start date
-        assertParseFailure(parser, " " + PREFIX_DATE_START + INVALID_DATE + INPUT_START_TIME
-                + INPUT_END_DATE + INPUT_END_TIME + INPUT_DURATION,
+        assertParseFailure(parser, " " + PREFIX_DATE_START + INVALID_DATE + INPUT_DURATION,
                 FreeBetweenCommand.MESSAGE_START_DATE_INVALID);
 
         // invalid start time
-        assertParseFailure(parser, INPUT_START_DATE + " " + PREFIX_TIME_START + INVALID_TIME
-                + INPUT_END_DATE + INPUT_END_TIME + INPUT_DURATION,
+        assertParseFailure(parser, " " + PREFIX_TIME_START + INVALID_TIME + INPUT_DURATION,
                 FreeBetweenCommand.MESSAGE_START_TIME_INVALID);
 
         // invalid end date
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + " " + PREFIX_DATE_END
-                + INVALID_DATE + " " + INPUT_END_TIME + INPUT_DURATION,
+        assertParseFailure(parser, " " + PREFIX_DATE_END + INVALID_DATE + INPUT_DURATION,
                 FreeBetweenCommand.MESSAGE_END_DATE_INVALID);
 
-        // invalid start time
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
-                + " " + PREFIX_TIME_END + INVALID_TIME + INPUT_DURATION,
+        // invalid end time, which must be specified with some end date
+        assertParseFailure(parser, INPUT_END_DATE + " " + PREFIX_TIME_END + INVALID_TIME + INPUT_DURATION,
                 FreeBetweenCommand.MESSAGE_END_TIME_INVALID);
 
         // invalid duration
-        assertParseFailure(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE
-                + INPUT_END_TIME + " " + PREFIX_DURATION + INVALID_APPOINTMENT_DURATION,
+        assertParseFailure(parser, " " + PREFIX_DURATION + INVALID_APPOINTMENT_DURATION,
                 Duration.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_duplicatedInvalidValid_success() {
-        LocalDateTime expectedStart = DateUtil.combineDateTime(
+        LocalDateTime expectedStart = combineDateTime(
                 DateUtil.parseDate(VALID_DATE2).get(), DateUtil.parseTime(VALID_TIME2).get());
-        LocalDateTime expectedEnd = DateUtil.combineDateTime(
+        LocalDateTime expectedEnd = combineDateTime(
                 DateUtil.parseDate(VALID_DATE).get(), DateUtil.parseTime(VALID_TIME).get());
         FreeBetweenCommand expectedCommand = new FreeBetweenCommand(expectedStart, expectedEnd, 60);
 
@@ -192,7 +194,7 @@ public class FreeBetweenCommandParserTest {
         String endDate = " " + PREFIX_DATE_END + VALID_DATE;
         String startTime = " " + PREFIX_TIME_START + VALID_TIME;
         String endTime = " " + PREFIX_TIME_END + VALID_TIME;
-        LocalDateTime expectedStartEnd = DateUtil.combineDateTime(
+        LocalDateTime expectedStartEnd = combineDateTime(
                 DateUtil.parseDate(VALID_DATE).get(), DateUtil.parseTime(VALID_TIME).get());
 
         assertParseSuccess(parser, startDate + startTime + endDate + endTime + INPUT_DURATION,

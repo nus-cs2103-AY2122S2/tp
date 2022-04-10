@@ -10,29 +10,30 @@ import org.junit.jupiter.api.Test;
 
 public class DurationTest {
 
+    private static final int INVALID_DURATION = -1;
+
     @Test
     public void constructor_invalidDuration_throwsIllegalArgumentException() {
-        int invalidDuration = -1;
-        assertThrows(IllegalArgumentException.class, () -> new Duration(invalidDuration));
+        assertThrows(IllegalArgumentException.class, () -> new Duration(INVALID_DURATION));
     }
 
     @Test
     public void isValidDuration() {
-        // invalid duration
-        assertFalse(Duration.isValidDuration(-1)); // negative integer
-        assertFalse(Duration.isValidDuration(-123456789)); // negative integer
-        assertFalse(Duration.isValidDuration(0)); // zero is also not allowed
+        // EP: < 1, Invalid Duration
+        assertFalse(Duration.isValidDuration(INVALID_DURATION));
+        assertFalse(Duration.isValidDuration(-123456789));
+        assertFalse(Duration.isValidDuration(0)); // Boundary of validity
 
-        // valid duration
-        assertTrue(Duration.isValidDuration(1)); // edge of validity
-        assertTrue(Duration.isValidDuration(10)); // small integer
-        assertTrue(Duration.isValidDuration(2147483646)); // large integer
+        // EP: >= 1, Valid Duration
+        assertTrue(Duration.isValidDuration(1)); // Boundary of validity
+        assertTrue(Duration.isValidDuration(10)); // Small Integer
+        assertTrue(Duration.isValidDuration(Integer.MAX_VALUE)); // Large integer
     }
 
     @Test
     public void stringConversion() {
         assertEquals("100 Minutes", new Duration(100).toString());
-        assertEquals("2147483646 Minutes", new Duration(2147483646).toString());
+        assertEquals("2147483647 Minutes", new Duration(2147483647).toString());
     }
 
     @Test
@@ -40,13 +41,14 @@ public class DurationTest {
         Duration reference1 = new Duration(1);
         Duration reference2 = new Duration(2);
 
-        assertTrue(reference1.equals(new Duration(1)));
-        assertTrue(reference2.equals(new Duration(2)));
         assertTrue(reference1.equals(reference1));
+        assertTrue(reference1.equals(new Duration(1)));
 
-        assertFalse(reference1.equals(123456));
-        assertFalse(reference1.equals(reference2));
-        assertFalse(reference1.equals(new Duration(3)));
+        assertFalse(reference1.equals(null)); // Null
+        assertFalse(reference1.equals(123456)); // Different Type
+
+        assertFalse(reference1.equals(reference2)); // Different data
+        assertFalse(reference1.equals(new Duration(3))); // Different data
     }
 
     @Test

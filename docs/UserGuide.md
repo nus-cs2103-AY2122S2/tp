@@ -44,7 +44,7 @@ ContaX is designed with versatility in mind, so it does not place unnecessarily 
 
    * **`deleteperson`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all contacts and appointments.
 
    * **`exit`** : Exits the app.
 
@@ -61,7 +61,7 @@ ContaX is generally designed to impose as little constraints on inputs as possib
 * **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
   Any value above this limit will not be considered an integer.
 * Leading and Trailing **Whitespaces** are ignored for ***ALL*** user inputs.<br>
-  e.g. `My Tag   &nbsp;` is treated simply as `My Tag`.
+  e.g. "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Tag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" is treated simply as "My Tag".
 
 </div>
 
@@ -74,7 +74,7 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 
 <div markdown="block" class="alert alert-warning">
 
-:rotating_light: **Warning:** The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
+:rotating_light: **Warning:** The displayed index for a record may change after commands are executed. Always check the displayed index before using it in a command.
 
 </div>
 
@@ -156,7 +156,11 @@ The onboarding guide will cover the following:
 - Delete person
 - List persons
 
+<div markdown="block" class="alert alert-warning">
+
 :rotating_light: **Important Note:** The order and case-sensitivity of keywords for `findperson` is only fixed for the Onboarding Guide.
+
+</div>
 
 ### Viewing help : `help`
 
@@ -519,12 +523,21 @@ Appointment data are saved in the hard disk automatically after any command that
 
 Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
+ContaX formatted CSV files are as follows:
+* First row contains headers delimited by commas. Headers used are `Name`, `Phone`, `Email`, `Address`, `Tagged`
+* Second row onwards will contain contact information corresponding to the column headers.
+
+An example exported CSV file is as follows. This can be opened by text editors or spreadsheet management applications like Microsoft Excel.
+
+![ExportedCsvExample](images/ExportedCsvExample.png)
+
 Format: `exportcsv`
 * Exports CSV as per ContaX format. This file can be imported by other instances of ContaX.
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
 * `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
+
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -578,8 +591,8 @@ Performs operations on contacts in the address book that match the given conditi
 Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WITH]`
 
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
-  * edit
-  * delete
+  * editperson
+  * deleteperson
 * The `FIELD` provided must be provided, and must match one of the following:
   * `Name`
   * `Address`
@@ -595,7 +608,7 @@ Examples:
 * `batch deleteperson by/name start/A`
   * Deletes all persons whose name start with A (case-sensitive)
 * `batch editperson p/87438806 by/phone =/87438807 `
-  * Edit contact with phone matches keyword 87438807 change to 87438806
+  * Edit contact with phone number matching keyword 87438807 and changes them to 87438806
 
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The `batch` operation is transactional, either all changes succeed or all changes fail (should an operation within `batch` fails). Any error message shown is from the failing operation.
@@ -609,8 +622,8 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
 * Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive.
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
-  * edit
-  * delete
+  * editperson
+  * deleteperson
 * The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed person list**.
 * `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
 * The resultant effect of the command is dependent on the performed action.
@@ -630,6 +643,12 @@ The `range` operation is transactional, either all changes succeed or all change
 Perform multiple actions in a single command.
 
 Format: `chain COMMAND_A && COMMAND_B [&& COMMAND_C ...]`
+
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+
+The commands cannot contain the special character `&&`.
+
+</div>
 
 * Calls multiple specified commands.
 * A valid command (i.e. The syntax of `COMMAND` must be correct) must be supplied before and after the `&&` operator, otherwise the command will fail

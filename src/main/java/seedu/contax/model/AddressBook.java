@@ -47,14 +47,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the person list with {@code persons} and adds any tags that does not exist in the tag
+     * list.
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
+        requireNonNull(persons);
+
+        persons.forEach(this::addTagsNotInList);
+
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the tag list with {@code tags} and strips tags in persons that are not in {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
     public void setTags(List<Tag> tags) {
+        requireNonNull(tags);
+
+        persons.forEach(p -> stripTagsFromPerson(p, tags));
         this.tags.setTags(tags);
     }
 
@@ -64,8 +76,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        // Duplicate check not required as ReadOnlyAddressBook ensures unique tags and persons
+        // Ensures all tags are added first.
         setTags(newData.getTagList());
+        setPersons(newData.getPersonList());
     }
 
     //// person-level operations
@@ -185,6 +199,21 @@ public class AddressBook implements ReadOnlyAddressBook {
             Person editedPerson = person.withoutTag(target).withTag(editedTag);
             setPerson(person, editedPerson);
         }
+    }
+
+    /**
+     * Removes all tags from {@code person} if the tag does not exist in {@code tagList}.
+     */
+    private void stripTagsFromPerson(Person person, List<Tag> tagList) {
+        Set<Tag> personTags = person.getTags();
+
+        Person newPerson = person;
+        for (Tag pTag : personTags) {
+            if (!tagList.contains(pTag)) {
+                newPerson = newPerson.withoutTag(pTag);
+            }
+        }
+        setPerson(person, newPerson);
     }
 
     //// util methods

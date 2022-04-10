@@ -60,14 +60,14 @@ public class AddAppointmentCommandTest {
     @Test
     public void execute_appointmentWithPersonAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-        Appointment validAppointment = new AppointmentBuilder(APPOINTMENT_ALICE).build();
+        Appointment validAppointment = new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(null).build();
 
         CommandResult commandResult = new AddAppointmentCommand(validAppointment, Index.fromZeroBased(0))
                 .execute(modelStub);
 
-        assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment),
+        assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, APPOINTMENT_ALICE),
                 commandResult.getFeedbackToUser());
-        assertEquals(List.of(validAppointment), modelStub.appointmentsAdded);
+        assertEquals(List.of(APPOINTMENT_ALICE), modelStub.appointmentsAdded);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class AddAppointmentCommandTest {
     }
 
     @Test
-    public void execute_appointmentWithInvalidPersonIndex_throwsCommandException() throws Exception {
+    public void execute_appointmentWithInvalidPersonIndex_throwsCommandException() {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         Appointment validAppointment = new AppointmentBuilder(APPOINTMENT_ALICE).build();
 

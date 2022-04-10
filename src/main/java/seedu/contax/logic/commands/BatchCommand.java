@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,8 +21,7 @@ import seedu.contax.model.Model;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.util.SearchType;
 
-
-
+//@@author HanJiyao
 /**
  * Batch edits or deletes a person identified using base on string =/ provided.
  */
@@ -41,7 +41,7 @@ public class BatchCommand extends Command {
             + "COMMAND (must be valid command without index) "
             + PREFIX_SEARCH_TYPE + "SEARCH_TYPE "
             + PREFIX_EQUALS + "VALUE*\n"
-            + "Example: `" + COMMAND_WORD + " edit "
+            + "Example: `" + COMMAND_WORD + " editperson "
             + PREFIX_ADDRESS + "new address "
             + PREFIX_SEARCH_TYPE + "phone "
             + PREFIX_EQUALS + "123 `";
@@ -83,15 +83,24 @@ public class BatchCommand extends Command {
             return new CommandResult(COMMAND_WORD
                     + ": No result matching \"" + userValue + "\"");
         }
+        Collections.reverse(indexList);
         List<CommandResult> commandResultList = new ArrayList<>();
         Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
+        AddressBookParser addressBookParser = new AddressBookParser();
+
         for (Index index: indexList) {
-            AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(
                         commandInput, Integer.toString(index.getOneBased()));
+
+                if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
+                        && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
+                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            BatchCommand.MESSAGE_USAGE));
+                }
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
+
                 try {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {

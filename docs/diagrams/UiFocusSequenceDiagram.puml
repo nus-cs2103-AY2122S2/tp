@@ -11,16 +11,16 @@ participant "command:ListAppointmentsCommand" as Command LOGIC_COLOR
 end box
 
 autoactivate on
-[-> MainWindow : executeCommand("listappointments")
+[-> MainWindow : executeCommand("listappt")
 
-MainWindow -> Logic : execute("listappointments")
+MainWindow -> Logic : execute("listappt")
 create Command
 Logic -> Command
 Logic <-- Command : command
 Logic -> Command : execute(model)
 Logic <-- Command : commandResult
 MainWindow <-- Logic : commandResult
-MainWindow -> MainWindow : changeListContentType(\ncommandResult.getUiContentType())
+MainWindow -> MainWindow : changeTabFocus(\ncommandResult.getUiContentType())
 MainWindow --> MainWindow
 [<-- MainWindow
 

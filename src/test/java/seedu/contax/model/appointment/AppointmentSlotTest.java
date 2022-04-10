@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
 public class AppointmentSlotTest {
@@ -32,10 +33,24 @@ public class AppointmentSlotTest {
     public void equals() {
         LocalDateTime startTime = LocalDateTime.MIN;
         LocalDateTime endTime = LocalDateTime.MAX;
-        AppointmentSlot appointmentSlot = new AppointmentSlot(new TimeRange(startTime, endTime));
+        AppointmentSlot referenceObj = new AppointmentSlot(new TimeRange(startTime, endTime));
+        AppointmentSlot copyObj = new AppointmentSlot(new TimeRange(startTime, endTime));
 
-        assertTrue(appointmentSlot.equals(appointmentSlot));
-        assertTrue(appointmentSlot.equals(new AppointmentSlot(new TimeRange(startTime, endTime))));
-        assertFalse(appointmentSlot.equals(new AppointmentSlot(new TimeRange(startTime, startTime))));
+        assertTrue(referenceObj.equals(referenceObj));
+        assertTrue(referenceObj.equals(copyObj));
+
+        assertFalse(referenceObj.equals(null));
+        assertFalse(referenceObj.equals(123));
+        assertFalse(referenceObj.equals("string"));
+        assertFalse(referenceObj.equals(new ScheduleItemStub(new TimeRange(startTime, endTime))));
+        // Different range
+        assertFalse(referenceObj.equals(new AppointmentSlot(new TimeRange(startTime, startTime))));
+    }
+
+    /** Dummy class of a different ScheduleItem type. */
+    private static class ScheduleItemStub extends ScheduleItem {
+        public ScheduleItemStub(TimeRange period) {
+            super(period);
+        }
     }
 }

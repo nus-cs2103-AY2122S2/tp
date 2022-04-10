@@ -9,6 +9,7 @@ participant ":Command" as Command LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+[-> LogicManager
 activate LogicManager
 create ChainCommandParser
 LogicManager -> ChainCommandParser: parseCommand()
@@ -39,4 +40,6 @@ loop for all command in commands
 end
 
 return
+[<-- LogicManager
+deactivate LogicManager
 @enduml

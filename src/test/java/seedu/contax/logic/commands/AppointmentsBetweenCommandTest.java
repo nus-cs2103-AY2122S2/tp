@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class AppointmentsBetweenCommandTest {
             .withStartDateTime(BASE_DATE_TIME.plusMinutes(60)).withDuration(60).build();
     private static final Appointment APPOINTMENT4 = new AppointmentBuilder(APPOINTMENT_ALONE)
             .withStartDateTime(BASE_DATE_TIME.plusMinutes(120)).withDuration(10).build();
+    private static final LocalDateTime VALID_DATETIME = LocalDateTime.parse("2022-12-12T12:34");
 
     private Model model;
 
@@ -45,81 +47,79 @@ public class AppointmentsBetweenCommandTest {
 
     @Test
     public void constructor_nullRangeDates_throwsNullPointerException() {
-        LocalDateTime refDateTime = LocalDateTime.parse("2022-12-12T12:34");
         assertThrows(NullPointerException.class, ()
             -> new AppointmentsBetweenCommand(null, null));
         assertThrows(NullPointerException.class, ()
-            -> new AppointmentsBetweenCommand(refDateTime, null));
+            -> new AppointmentsBetweenCommand(VALID_DATETIME, null));
         assertThrows(NullPointerException.class, ()
-            -> new AppointmentsBetweenCommand(null, refDateTime));
+            -> new AppointmentsBetweenCommand(null, VALID_DATETIME));
     }
 
     @Test
-    public void execute_borderDates_filtersAppointmentList() throws Exception {
+    public void execute_borderDates_filtersAppointmentList() {
 
         ModelManager copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME).execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(29)).execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(30)).execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1, APPOINTMENT2), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1, APPOINTMENT2), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(30), BASE_DATE_TIME.plusMinutes(60))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(31), BASE_DATE_TIME.plusMinutes(58))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT2), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT2), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(30), BASE_DATE_TIME.plusMinutes(59))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1, APPOINTMENT2), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1, APPOINTMENT2), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(31), BASE_DATE_TIME.plusMinutes(60))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT2, APPOINTMENT3), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT2, APPOINTMENT3), copyModel);
 
     }
 
     @Test
-    public void execute_partialRanges_filtersAppointmentList() throws Exception {
+    public void execute_partialRanges_filtersAppointmentList() {
 
         ModelManager copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.minusMinutes(1), BASE_DATE_TIME.plusMinutes(10))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(125), BASE_DATE_TIME.plusMinutes(135))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT4), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT4), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.plusMinutes(10), BASE_DATE_TIME.plusMinutes(20))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1), copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1), copyModel);
 
         copyModel = resetModel();
         new AppointmentsBetweenCommand(BASE_DATE_TIME.minusMinutes(10), BASE_DATE_TIME.plusMinutes(150))
                 .execute(copyModel);
-        assertEquals(List.of(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4),
-                copyModel.getFilteredAppointmentList());
+        assertEqualLists(List.of(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4), copyModel);
 
     }
 
     @Test
     public void execute_noUpperLimit_messageUpperLimitIsForever() {
-        assertTrue(new AppointmentsBetweenCommand(BASE_DATE_TIME, LocalDateTime.MAX)
+        assertTrue(new AppointmentsBetweenCommand(BASE_DATE_TIME, LocalDate.MAX.atTime(23, 59))
                 .execute(new ModelManager()).getFeedbackToUser().contains("to "
                         + AppointmentsBetweenCommand.PHRASE_NO_END_RANGE));
     }
@@ -150,6 +150,11 @@ public class AppointmentsBetweenCommandTest {
 
         // different end datetime -> returns false
         assertFalse(command1.equals(new AppointmentsBetweenCommand(refDate1, afterRefDate2)));
+    }
+
+    private void assertEqualLists(List<Appointment> expectedAppointments, ModelManager model) {
+        assertEquals(expectedAppointments, model.getScheduleItemList());
+        assertEquals(expectedAppointments, model.getFilteredAppointmentList());
     }
 
     private ModelManager resetModel() {

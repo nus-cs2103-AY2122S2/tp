@@ -15,6 +15,8 @@ import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
+import static seedu.contax.testutil.TypicalPersons.HOON;
+import static seedu.contax.testutil.TypicalPersons.IDA;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
@@ -23,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,6 +37,7 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.model.person.NameContainsKeywordsPredicate;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
@@ -43,6 +47,26 @@ import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.ScheduleBuilder;
 
 public class ModelManagerTest {
+
+    private static final Appointment SAMPLE_APPOINTMENT1 = new AppointmentBuilder().withName("Test 1")
+            .withStartDateTime(LocalDateTime.of(2022, 5, 3, 12, 0))
+            .withDuration(30).build();
+    private static final Appointment SAMPLE_APPOINTMENT2 = new AppointmentBuilder().withName("Test 2")
+            .withStartDateTime(LocalDateTime.of(2022, 5, 3, 14, 0))
+            .withDuration(60).build();
+    private static final TimeRange SAMPLE_TIMERANGE = new TimeRange(
+            LocalDate.of(2022, 5, 3).atTime(10, 59),
+            LocalDate.of(2022, 5, 3).atTime(15, 0));
+    private static final List<AppointmentSlot> SAMPLE_APPOINTMENT_SLOTS = List.of(
+            new AppointmentSlot(new TimeRange(
+                    LocalDate.of(2022, 5, 3).atTime(10, 59),
+                    LocalDate.of(2022, 5, 3).atTime(12, 0))
+            ),
+            new AppointmentSlot(new TimeRange(
+                    LocalDate.of(2022, 5, 3).atTime(12, 30),
+                    LocalDate.of(2022, 5, 3).atTime(14, 0))
+            )
+    );
 
     private ModelManager modelManager = new ModelManager();
 
@@ -115,8 +139,12 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBook_validAddressBook_success() {
+        modelManager.addAppointment(new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(HOON).build());
+        modelManager.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(IDA).build());
         modelManager.setAddressBook(getTypicalAddressBook());
         assertEquals(getTypicalAddressBook(), modelManager.getAddressBook());
+        assertEquals(List.of(APPOINTMENT_ALONE, APPOINTMENT_ALICE.withPerson(null)),
+                modelManager.getSchedule().getAppointmentList());
     }
 
     @Test
@@ -272,13 +300,15 @@ public class ModelManagerTest {
     public void setSchedule_validSchedule_success() {
         modelManager.setSchedule(getTypicalSchedule());
         assertEquals(getTypicalSchedule(), modelManager.getSchedule());
+        assertEquals(List.of(ALICE), modelManager.getFilteredPersonList());
     }
 
     @Test
     public void getSchedule() {
         modelManager.addAppointment(APPOINTMENT_ALICE);
-        assertEquals(1, modelManager.getFilteredAppointmentList().size());
-        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(0));
+        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE).build();
+        assertEquals(expectedSchedule, modelManager.getSchedule());
+        assertEquals(List.of(APPOINTMENT_ALICE), modelManager.getFilteredAppointmentList());
     }
 
     @Test
@@ -348,8 +378,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class, ()
-            -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
+        assertThrows(AppointmentNotFoundException.class, () -> modelManager.deleteAppointment(APPOINTMENT_ALICE));
     }
 
     @Test
@@ -378,8 +407,7 @@ public class ModelManagerTest {
         modelManager.addAppointment(APPOINTMENT_EXTRA);
 
         modelManager.updateFilteredAppointmentList(appointment -> !appointment.equals(APPOINTMENT_ALONE));
-        assertEquals(APPOINTMENT_EXTRA, modelManager.getFilteredAppointmentList().get(0));
-        assertEquals(APPOINTMENT_ALICE, modelManager.getFilteredAppointmentList().get(1));
+        assertEquals(List.of(APPOINTMENT_EXTRA, APPOINTMENT_ALICE), modelManager.getFilteredAppointmentList());
     }
 
     @Test
@@ -389,34 +417,23 @@ public class ModelManagerTest {
 
     @Test
     public void setDisplayedAppointmentSlots_validTimeRange_success() {
-        List<AppointmentSlot> sampleSlots = List.of(
-                new AppointmentSlot(new TimeRange(
-                        LocalDate.of(2022, 5, 3).atTime(10, 59),
-                        LocalDate.of(2022, 5, 3).atTime(12, 0))
-                ),
-                new AppointmentSlot(new TimeRange(
-                        LocalDate.of(2022, 5, 3).atTime(12, 30),
-                        LocalDate.of(2022, 5, 3).atTime(14, 0))
-                )
-        );
-        modelManager.addAppointment(new AppointmentBuilder().withName("Test 1")
-                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 12, 0))
-                .withDuration(30).build()
-        );
-        modelManager.addAppointment(new AppointmentBuilder().withName("Test 2")
-                .withStartDateTime(LocalDateTime.of(2022, 5, 3, 14, 0))
-                .withDuration(60).build()
-        );
+        setupSampleAppointments();
 
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
-        modelManager.setDisplayedAppointmentSlotRange(
-                new TimeRange(
-                        LocalDate.of(2022, 5, 3).atTime(10, 59),
-                        LocalDate.of(2022, 5, 3).atTime(15, 0)
-                ), 61);
-        assertEquals(sampleSlots, modelManager.getDisplayedAppointmentSlots());
+        modelManager.setDisplayedAppointmentSlotRange(SAMPLE_TIMERANGE, 61);
+        assertEquals(SAMPLE_APPOINTMENT_SLOTS, modelManager.getDisplayedAppointmentSlots());
+
         modelManager.clearDisplayedAppointmentSlots();
         assertEquals(List.of(), modelManager.getDisplayedAppointmentSlots());
+    }
+
+    @Test
+    public void getScheduleItemList_validTimeRange_success() {
+        setupSampleAppointments();
+        List<ScheduleItem> expectedList = getSampleCombinedList();
+
+        modelManager.setDisplayedAppointmentSlotRange(SAMPLE_TIMERANGE, 61);
+        assertEquals(expectedList, modelManager.getScheduleItemList());
     }
 
     @Test
@@ -473,5 +490,22 @@ public class ModelManagerTest {
         differentModelManager.setDisplayedAppointmentSlotRange(new TimeRange(LocalDateTime.MIN,
                 LocalDateTime.MAX), 1);
         assertFalse(modelManager.equals(differentModelManager));
+    }
+
+    /** Populates {@code modelManager} with a set of sample appointments. */
+    private void setupSampleAppointments() {
+        modelManager.addAppointment(SAMPLE_APPOINTMENT1);
+        modelManager.addAppointment(SAMPLE_APPOINTMENT2);
+    }
+
+    /**
+     * Returns a combined list of appointments and appointment slots in the sample instance from
+     * {@link #setupSampleAppointments()}.
+     */
+    private List<ScheduleItem> getSampleCombinedList() {
+        List<ScheduleItem> items = new ArrayList<>(SAMPLE_APPOINTMENT_SLOTS);
+        items.add(1, SAMPLE_APPOINTMENT1);
+        items.add(SAMPLE_APPOINTMENT2);
+        return items;
     }
 }

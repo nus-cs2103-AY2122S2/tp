@@ -97,7 +97,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 <div markdown="span" class="alert alert-info">
 
@@ -159,7 +159,7 @@ The `Model` component,
 * stores and organizes all data entities used within the application in multiple *container classes*.
 * stores the currently 'selected' objects for each data entity in separate _filtered_ lists.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed externally as a `ReadOnlyUserPref` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-secondary">
 
@@ -195,7 +195,7 @@ Both the `DisjointAppointmentList` and `AppointmentSlotList` are further combine
 
 The Schedule subcomponent is structured such that:
 
-* The bulk of the time-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
+* The bulk of the scheduling-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
 * The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
 
@@ -246,7 +246,7 @@ As such, detailed descriptions for the Address Book subsystem can be easily tran
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. The section is organized by functionality.
 
 ### Centralising Tags in the Address Book
 
@@ -305,19 +305,30 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ### The Schedule and Appointment Models
 
-This section will describe the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. The overall *design goal* of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+This section describes the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. It starts from the lowest level, and slowly works its way upwards.
 
-An overview is shown in the partial class diagram below.
+<div markdown="span" class="alert alert-info">
+
+:information_source: The overall **design goal** of the Schedule subsystem is to expose a **single** list of `ScheduleItem` objects through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display.<br> This list includes both `Appointment` and `AppointmentSlot` objects sorted in **chronological** order so that it can be directly used by external classes, unifying the ordering maintenance to the Model component.
+
+</div>
+
+An overview of the structure is shown in the partial class diagram below. Note that this diagram omits unrelated methods, and shows a high-level view of how classes are organized.
 
 ![Appointment Models](images/AppointmentModelClassDiagram.png)
 
 #### The `ScheduleItem` Class
 
-The data models `Appointment` and `AppointmentSlot` models inherit from the `ScheduleItem` class. The classes are structured such that common logic related to time are mostly handled in the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
+There are 2 classes that represent items in the schedule, namely
+
+- **`Appointment`**: Represents a user-defined appointment in the `Schedule`.
+- **`AppointmentSlot`**: Represents empty slots in the `Schedule`, which are automatically computed based on `Appointment` objects.
+
+Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. The classes are structured such that common scheduling-related logic are abstracted into the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
 
 ![Appointment Models](images/ScheduleItemClassDiagram.png)
 
-In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering used by both `CompositeObservableList` and `DisjointAppointmentList`.
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` objects through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
 The time-related methods of note implemented by `ScheduleItem` are:
 
@@ -325,13 +336,20 @@ The time-related methods of note implemented by `ScheduleItem` are:
 * Comparator helper method `getComparableDateTime()`
 * Comparable method `compareTo(ScheduleItem)`
 * Helper method `isOverlapping(ScheduleItem)` for checking if the `ScheduleItem` overlaps with another `ScheduleItem`
-  * Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`A2.getStartDateTime() < A1.getEndDateTime()`
+
+</div>
 
 #### The `DisjointAppointmentList` Class
 
-All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
+All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
 * All `Appointment` objects in the list *must not* have overlapping periods, enforced through the `ScheduleItem#isOverlapping(ScheduleItem)` method.
-  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.getStartDateTime() >= A2.getEndDateTime()` or `A2.getStartDateTime() >= A1.getEndDateTime()`.
+  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list,
+    * `A1.getStartDateTime() >= A2.getEndDateTime()` or
+    * `A2.getStartDateTime() >= A1.getEndDateTime()`.
 * All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
 
 |<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
@@ -339,38 +357,55 @@ All persistent `Appointment` objects in the system are stored in a `DisjointAppo
 |<img src="images/DisjointAppointmentListStateDisallowed.png" width="550" />|
 
 
-The no-overlap constraint is enforced at such a low level as a defensive measure so that all higher-level classes that use this class is guaranteed a list of appointments that is consistent with the application constraints (that is to have no overlapping appointments in the schedule). This eliminates the need for higher-level classes to check and possibly recover from an inconsistent list.
+The no-overlap constraint is enforced at such a low level as a defensive measure so that all higher-level classes that use `DisjointAppointmentList` are guaranteed a list of appointments that is consistent with the application constraints (that is to have no overlapping appointments in the schedule). This eliminates the need for higher-level classes to check and possibly recover from an inconsistent list.
 
 While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
-In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **QuickSort vs Insertion Sort**<br>The built-in Java *QuickSort* is still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+
+</div>
 
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
 
-The built-in Java *QuickSort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
 
 #### The `Schedule` Wrapper Class
 
-The `Schedule` class is a mutable wrapper around an underlying `DisjointAppointmentList` that logically represents a container for `Appointment` objects in the system. A `Schedule` object is contained in the `Model` stored in `MainApp#model`, and serves as the single point of truth for all the `Appointment` models in the Appointment subsystem. Multiple `Schedule` objects may exist concurrently in the system, but should be avoided where possible.
+The `Schedule` class is a mutable wrapper around an underlying `DisjointAppointmentList` that logically represents a container for `Appointment` objects in the system. A `Schedule` object is contained in the `Model` object stored in `MainApp#model`, and serves as the single point of truth for all the persistent `Appointment` models in the Appointment subsystem.
 
-In terms of implementation, `Schedule` simply passes through the methods implemented by the backing `DisjointAppointmentList`. A defensive read-only copy of the underlying `DisjointAppointmentList` can be obtained from `Schedule#getAppointmentList()`.
+<div markdown="span" class="alert alert-warning">
+
+:rotating_light: &nbsp; Multiple `Schedule` objects may exist concurrently in the system, but should be avoided where possible.
+
+</div>
+
+In terms of implementation, `Schedule` simply passes through the methods implemented by the backing `DisjointAppointmentList`. A defensive **read-only copy** of the underlying `DisjointAppointmentList` can be obtained from `Schedule#getAppointmentList()`.
 
 A call of `Model#addAppointment()` is shown below to illustrate how a call is propagated through the model classes. Note how underlying calls are progressively abstracted from upper levels.
 
-![Appointment Models](images/AppointmentAddSequenceDiagram.png)
+![Appointment Add Sequence](images/AppointmentAddSequenceDiagram.png)
 
 #### Defensive `Schedule`
 
-`Schedule` implements the `ReadOnlySchedule` interface, which exposes only the getter method `Schedule#getAppointmentList()` for the underlying `DisjointAppointmentList`. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule` to prevent unintended modifications to the list of `Appointment` objects.
+`Schedule` implements the `ReadOnlySchedule` interface, which exposes only getter methods of the `Schedule` class. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule`. This prevents unintended modifications to the list of `Appointment` objects by external classes, and restricts that all modifications to the `Schedule` must be made through `ModelManager`.
+
+![Read Only Schedule](images/ReadOnlyScheduleClassDiagram.png)
 
 #### Appointment Slot List
 
-The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since the list of `AppointmentSlot` objects for the `Schedule` are dependent on and change with the `Appointment` contained within it, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
-Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` are always consistent with the backing `Schedule`.
+
+The `AppointmentSlotList` must be configured with some `TimeRange` using the `AppointmentSlotList#updateFilteredRange(TimeRange, int)` method for it to generate `AppointmentSlot` objects.
+
+![Appointment Slot List](images/AppointmentSlotListObjectDiagram.png)
 
 #### Appointment and AppointmentSlot List Composition
 
@@ -380,9 +415,19 @@ Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered 
 * be chronologically sorted
 * be chronologically disjoint
 
-This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` also watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list to guarantee the 3 constraints listed above.
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list, ensuring that the 3 constraints listed above are satisfied.
 
-### Appointments Filtering Feature - `appointmentsbetween`
+Using the above instance, the resultant `CompositeObservableList` is shown in the object diagram below.
+
+![Appointment Slot List](images/CompositeListObjectDiagram.png)
+
+<div markdown="span" class="alert alert-warning">
+
+:rotating_light: &nbsp; If the backing lists are not sorted, then the result list will also not be sorted.
+
+</div>
+
+### Appointments Filtering Feature - `apptbetween`
 
 The `Appointment` filtering feature mirrors the system used for `Person`, and is facilitated by `FilteredList` from the JavaFX library. This feature is implemented at the `ModelManager` level, and the related functions are:
 
@@ -392,13 +437,20 @@ The `Appointment` filtering feature mirrors the system used for `Person`, and is
 The filtering is implemented at the `ModelManager` level because it is the highest common level that can be accessed by both the `Logic` and `UI` components.
 This allows code for filtering to be centralized, while allowing the lower level classes in the `Model` component access to the full unfiltered list of `Appointment` objects.
 
-The sequence diagram below illustrates an example of both `Parser` and `UI` accessing the appointment filtering functionality.
+The sequence diagram below illustrates an example of both `Logic` and `UI` accessing the appointment filtering functionality.
 
 ![Appointment Filter](images/AppointmentFilterSequenceDiagram.png)
 
 ### Schedule Serialization and Inflation
 
-`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`.
+
+<div markdown="span" class="alert alert-warning">
+
+:rotating_light: **Important Note:**<br>
+Because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+
+</div>
 
 The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
 
@@ -418,14 +470,14 @@ It is important to note the design consideration that the coupling of `AddressBo
 
 #### Schedule Data as a Separate JSON File
 
-The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file should be user-editable. Clustering both AddressBook and Schedule data into a single file would have made the JSON file extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook allows the user to quickly narrow down the area to edit, making the task slightly easier.
+The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file(s) should be user-editable. Clustering both the AddressBook and Schedule data into a single JSON file would have made it extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook data files allows the user to quickly narrow down the area to edit, making the task slightly easier.
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
 
 ### Edit Appointment Priority Feature - `prioritizeappt`
 
 The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
-The `Priority` enum values provide the display name of the enum denoting priority level, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
+The `Priority` enum values provide the display name of the priority levels, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
 ### Date Time Input Parsing
 
 The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
@@ -499,7 +551,7 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
 
 ### Markdown-like Text Processing
-The `TextStyleHelper` class contains a text processor that processes common text modifications into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
+The `TextStyleHelper` class contains a text processor that processes common text stylings into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
 
 Example of styled text:
 ![StyledTextExample](images/StyledTextExample.png)
@@ -577,7 +629,7 @@ The sequence diagram is as follows:
 
 #### Range Command
 
-This extension allows the user to perform range of commands based on `index`. During the conversion from user input to list of commands `from/INDEX to/INDEX` is essential for parsing to generate new commands. The validation for `INDEX` followed as original edit command index validation.
+This extension allows the user to perform a command on a range of persons based on their displayed index. During the conversion from user input to list of commands `from/INDEX to/INDEX` is used to generate the new commands that will be executed.
 
 #### Batch Command
 
@@ -1161,13 +1213,15 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
-* **Schedule**: The part of ContaX that keeps track of Appointments
-* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications.
+* **Schedule**: The part of ContaX that keeps track of Appointments.
+* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications
 * **Onboarding Guide**: The quick start guide to ContaX
+* **Disjoint Appointments**: Appointments are disjoint if the time periods they span do not overlap with each other, that is, one appointment starts after the other appointment ends
+* **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix 1: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1182,16 +1236,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Tabbed View
 1. Tabs automatically change on `list*` command
@@ -1209,6 +1261,73 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Missing data file<br>
+      **Expected:** Default contacts are loaded instead. Upon an operation that interacts with the data, e.g. add/delete/edit persons, the data will then be saved as `addressbook.json`.
+   
+   2. Test case: Corrupted JSON Structure in data file<br>
+      **Expected:** An empty AddressBook will be loaded instead. Upon an operation that interacts with the data, the existing corrupted `addressbook.json` file will be replaced with the new data.
 
-1. _{ more test cases …​ }_
+   3. Test case: Invalid Person record in JSON data file (e.g. alphabets in phone number)<br>
+      **Expected:** Data is loaded into ContaX normally, with invalid entries skipped.
+
+   4. Test case: Invalid Appointment record in JSON data file (e.g. restricted symbols in appointment name)<br>
+      **Expected:** Data is loaded into ContaX normally, with invalid entries skipped.
+
+2. Manually editing JSON entries
+
+   1. Prerequisites: Do not have an active instance of ContaX open.
+   
+   2. Test case: Editing the entries directly from the JSON file <br>
+      **Expected:** Upon opening of ContaX, the previously edited data is loaded into ContaX normally.
+   
+   3. Test case: Editing the entries but with invalid data <br>
+      **Expected:** Upon opening of ContaX, the particular entry will be skipped.
+
+### Importing Contacts from CSV Files
+
+1. Importing contacts from a CSV File
+
+   1. Prerequisites: Must have an existing CSV File with contact information.
+   
+   2. Test case: CSV File was exported previously from another instance of ContaX, or is in proper ContaX format (ContaX format details can be found [here](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html#exporting-the-data-exportcsv)) <br>
+      **Expected:** Entries in the CSV file are successfully appended into ContaX.
+   
+   3. Test case: CSV File was in another format but has the necessary entries of each contact (Name, Phone, Email, Address, Tags). `importcsv` command executed specifying each of the column numbers to read from. <br>
+      **Expected:** Entries in the CSV file are successfully appended into ContaX.
+   
+   4. Test case: Contact information in CSV File has invalid information (e.g. alphabets in phone number)<br>
+      **Expected:** The particular entries that have invalid information will be skipped during the import.
+
+### Exporting Contacts as CSV Files
+
+1. Exporting contacts from a CSV File
+
+   1. Test case: `exportcsv` command executed <br>
+      **Expected:** Current contact information will be saved to the file location `data\addressbook.csv`
+   
+   2. Test case: Command executed with empty address book <br>
+      **Expected:** File is still created but only contains the headers.
+
+### Resizing the Help Window
+
+1. Resizing the Help Window
+
+   1. Prerequisite: Help Window is open
+
+   1. Test case: Resize Help Window to be smaller <br>
+   Expected: The Help Window's dimensions will not go below `1000x600`.
+
+   1. Test case: Resize Help Window to be larger <br>
+   Expected: The Help Window's dimensions will not go above `1250x700`.
+
+### Resizing the Onboarding Guide prompt
+
+1. Resizing the Onboarding Guide prompt
+
+   1. Prerequisite: Onboarding Guide prompt is open
+
+   1. Test case: Resize Onboarding Guide prompt to be smaller <br>
+   Expected: The prompt's dimensions will not go below `500x150`.
+
+   1. Test case: Resize Onboarding Guide prompt to be larger <br>
+   Expected: The prompt's dimensions will not go above `700x400`.

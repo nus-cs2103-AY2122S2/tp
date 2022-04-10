@@ -31,7 +31,7 @@ activate ImportCsvCommand
 
 
 create CsvManager
-ImportCsvCommand -> CsvManager : Function to parse persons into model
+ImportCsvCommand -> CsvManager : CsvManager(Function to parse persons into model)
 
 activate CsvManager
 ImportCsvCommand -> CsvManager : importCsv(toImport)

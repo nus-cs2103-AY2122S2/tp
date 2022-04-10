@@ -21,54 +21,63 @@ public class StartDateTimeTest {
     @Test
     public void stringConversion() {
         LocalDateTime referenceTime = LocalDateTime.parse("2020-10-30T12:34:56");
-        LocalDateTime referenceNow = LocalDateTime.now();
         DateTimeFormatter formatter = StartDateTime.DATETIME_FORMATTER;
 
-        assertEquals("30-10-2020 12:34", new StartDateTime(referenceTime).toString());
-        assertEquals(referenceNow.format(formatter), new StartDateTime(referenceNow).toString());
+        assertEquals(formatter.format(referenceTime), new StartDateTime(referenceTime).toString());
+        assertEquals(formatter.format(LocalDateTime.MAX), new StartDateTime(LocalDateTime.MAX).toString());
+        assertEquals(formatter.format(LocalDateTime.MIN), new StartDateTime(LocalDateTime.MIN).toString());
     }
 
     @Test
     public void objectEquality() {
-        LocalDateTime referenceTime1 = LocalDateTime.parse("2020-10-30T12:34:56");
-        LocalDateTime referenceTime2 = LocalDateTime.now();
-        LocalDateTime referenceTime3 = LocalDateTime.parse("2020-10-30T12:34:46");
-        LocalDateTime referenceTime4 = LocalDateTime.parse("2020-10-30T12:34:00");
+        LocalDateTime referenceTime = LocalDateTime.parse("2020-10-30T12:34:56");
+        LocalDateTime roundedReferenceTime = LocalDateTime.parse("2020-10-30T12:34:00");
+        LocalDateTime differentSeconds = LocalDateTime.parse("2020-10-30T12:34:46");
+        LocalDateTime differentTime = LocalDateTime.parse("2020-10-30T11:20:56");
+        LocalDateTime differentDate = LocalDateTime.parse("2021-09-29T12:34:56");
 
-        StartDateTime reference1 = new StartDateTime(referenceTime1);
-        StartDateTime reference2 = new StartDateTime(referenceTime2);
+        StartDateTime referenceObj = new StartDateTime(referenceTime);
+        StartDateTime differentSecondsObj = new StartDateTime(differentSeconds);
+        StartDateTime differentTimeObj = new StartDateTime(differentTime);
+        StartDateTime differentDateObj = new StartDateTime(differentDate);
 
-        assertTrue(reference1.equals(new StartDateTime(referenceTime1)));
-        assertTrue(reference2.equals(new StartDateTime(referenceTime2)));
-        assertTrue(reference1.equals(new StartDateTime(referenceTime3))); // Only differ in seconds
-        assertEquals(referenceTime4, reference1.value);
-        assertTrue(reference1.equals(reference1));
+        assertTrue(referenceObj.equals(referenceObj));
+        assertTrue(referenceObj.equals(new StartDateTime(referenceTime)));
+        assertTrue(referenceObj.equals(differentSecondsObj));
+        assertEquals(roundedReferenceTime, referenceObj.value);
 
-        assertFalse(reference1.equals("some string"));
-        assertFalse(reference1.equals(reference2));
-        assertFalse(reference1.equals(new StartDateTime(LocalDateTime.parse("2021-09-29T10:10:10"))));
+        assertFalse(referenceObj.equals(null)); // Null
+        assertFalse(referenceObj.equals("some string")); // Different Type
+        assertFalse(referenceObj.equals(differentTimeObj)); // Different Time
+        assertFalse(referenceObj.equals(differentDateObj)); // Different Date
     }
 
     @Test
     public void hashCodeEquality() {
-        LocalDateTime referenceTime1 = LocalDateTime.parse("2020-10-30T12:34:56");
-        LocalDateTime referenceTime2 = LocalDateTime.parse("2020-10-29T12:34:56");
-        StartDateTime reference = new StartDateTime(referenceTime1);
+        LocalDateTime referenceTime = LocalDateTime.parse("2020-10-30T12:34:56");
+        LocalDateTime differentDate = LocalDateTime.parse("2020-10-29T12:34:56");
+        StartDateTime reference = new StartDateTime(referenceTime);
 
-        assertEquals(reference.hashCode(), new StartDateTime(referenceTime1).hashCode());
-        assertNotEquals(reference.hashCode(), new StartDateTime(referenceTime2).hashCode());
+        assertEquals(reference.hashCode(), new StartDateTime(referenceTime).hashCode());
+        assertNotEquals(reference.hashCode(), new StartDateTime(differentDate).hashCode());
     }
 
     @Test
     public void comparisonTest() {
         StartDateTime refTime = new StartDateTime(LocalDateTime.parse("2020-10-30T12:34:00"));
         StartDateTime timeBefore = new StartDateTime(LocalDateTime.parse("2020-10-30T12:33:00"));
+        StartDateTime dateBefore = new StartDateTime(LocalDateTime.parse("2020-10-29T12:34:00"));
         StartDateTime timeAfter = new StartDateTime(LocalDateTime.parse("2020-10-30T12:35:00"));
+        StartDateTime dateAfter = new StartDateTime(LocalDateTime.parse("2020-11-01T12:34:00"));
         StartDateTime refTimeDifferentSeconds = new StartDateTime(LocalDateTime.parse("2020-10-30T12:34:54"));
 
         assertEquals(0, refTime.compareTo(refTime));
         assertEquals(0, refTime.compareTo(refTimeDifferentSeconds));
-        assertEquals(1, refTime.compareTo(timeBefore));
-        assertEquals(-1, refTime.compareTo(timeAfter));
+
+        assertTrue(refTime.compareTo(timeBefore) > 0); // Different Time
+        assertTrue(refTime.compareTo(dateBefore) > 0); // Different Date
+
+        assertTrue(refTime.compareTo(timeAfter) < 0); // Different Time
+        assertTrue(refTime.compareTo(dateAfter) < 0); // Different Date
     }
 }

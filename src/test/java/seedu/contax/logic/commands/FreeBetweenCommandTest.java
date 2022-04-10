@@ -7,6 +7,7 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ import seedu.contax.model.ModelManager;
 import seedu.contax.model.UserPrefs;
 import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.appointment.AppointmentSlot;
+import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 import seedu.contax.testutil.AppointmentBuilder;
 
@@ -69,23 +71,23 @@ public class FreeBetweenCommandTest {
 
         ModelManager copyModel = resetModel();
         new FreeBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(60), 30).execute(copyModel);
-        assertEquals(List.of(
+        assertListEquals(List.of(
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(30), BASE_DATE_TIME.plusMinutes(60)))
-        ), copyModel.getDisplayedAppointmentSlots());
+        ), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(60), 31).execute(copyModel);
-        assertEquals(List.of(), copyModel.getDisplayedAppointmentSlots());
+        assertListEquals(List.of(), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(150), 30).execute(copyModel);
-        assertEquals(List.of(
+        assertListEquals(List.of(
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(30), BASE_DATE_TIME.plusMinutes(60))),
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(90), BASE_DATE_TIME.plusMinutes(150)))
-        ), copyModel.getDisplayedAppointmentSlots());
+        ), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME, BASE_DATE_TIME.plusMinutes(150), 35).execute(copyModel);
-        assertEquals(List.of(
+        assertListEquals(List.of(
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(90), BASE_DATE_TIME.plusMinutes(150)))
-        ), copyModel.getDisplayedAppointmentSlots());
+        ), copyModel);
     }
 
     @Test
@@ -94,23 +96,23 @@ public class FreeBetweenCommandTest {
         ModelManager copyModel = resetModel();
         new FreeBetweenCommand(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(50), 15)
                 .execute(copyModel);
-        assertEquals(List.of(
+        assertListEquals(List.of(
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(50)))
-        ), copyModel.getDisplayedAppointmentSlots());
+        ), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(50), 20)
                 .execute(copyModel);
-        assertEquals(List.of(), copyModel.getDisplayedAppointmentSlots());
+        assertListEquals(List.of(), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(70), 25)
                 .execute(copyModel);
-        assertEquals(List.of(
+        assertListEquals(List.of(
                 new AppointmentSlot(new TimeRange(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(60)))
-        ), copyModel.getDisplayedAppointmentSlots());
+        ), copyModel);
 
         new FreeBetweenCommand(BASE_DATE_TIME.plusMinutes(35), BASE_DATE_TIME.plusMinutes(70), 26)
                 .execute(copyModel);
-        assertEquals(List.of(), copyModel.getDisplayedAppointmentSlots());
+        assertListEquals(List.of(), copyModel);
 
     }
 
@@ -150,6 +152,15 @@ public class FreeBetweenCommandTest {
 
         // different duration -> returns false
         assertFalse(command1.equals(new FreeBetweenCommand(refDate1, refDate2, 29)));
+    }
+
+    private void assertListEquals(List<AppointmentSlot> slotList, ModelManager model) {
+        List<ScheduleItem> combinedList = new ArrayList<>(slotList);
+        combinedList.addAll(model.getFilteredAppointmentList());
+        combinedList.sort(ScheduleItem::compareTo);
+
+        assertEquals(slotList, model.getDisplayedAppointmentSlots());
+        assertEquals(combinedList, model.getScheduleItemList());
     }
 
     private ModelManager resetModel() {

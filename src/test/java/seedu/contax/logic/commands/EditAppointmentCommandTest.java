@@ -13,6 +13,7 @@ import static seedu.contax.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.contax.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.function.Predicate;
 
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.Messages;
 import seedu.contax.commons.core.index.Index;
+import seedu.contax.commons.util.DateUtil;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.Model;
@@ -36,6 +38,7 @@ import seedu.contax.testutil.EditAppointmentDescriptorBuilder;
  */
 public class EditAppointmentCommandTest {
 
+    private static final LocalDate REF_DATE = LocalDate.of(2010, 3, 20);
     private Model model = new ModelManager(new AddressBook(), getTypicalSchedule(), new UserPrefs());
 
     @Test
@@ -97,12 +100,32 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
+    public void execute_partialDateSpecified_success() {
+        Index indexLastPosition = Index.fromOneBased(model.getFilteredAppointmentList().size());
+        Appointment lastAppointment = model.getFilteredAppointmentList().get(indexLastPosition.getZeroBased());
+
+        Appointment editedAppointment = new AppointmentBuilder(lastAppointment)
+                .withStartDateTime(DateUtil.updateDate(lastAppointment.getStartDateTime(), REF_DATE)).build();
+
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withStartDate(DateInputUtil.formatDateToInputString(REF_DATE)).build();
+        EditAppointmentCommand editCommand = new EditAppointmentCommand(indexLastPosition, descriptor);
+
+        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
+                editedAppointment);
+
+        Model expectedModel = new ModelManager(new AddressBook(), new Schedule(model.getSchedule()),
+                new UserPrefs());
+        expectedModel.setAppointment(lastAppointment, editedAppointment);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_noFieldSpecified_success() {
         EditAppointmentCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor());
-        Appointment targetAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_NOT_EDITED, targetAppointment);
+        String expectedMessage = EditAppointmentCommand.MESSAGE_NOT_EDITED;
 
         Model expectedModel = new ModelManager(new AddressBook(), new Schedule(model.getSchedule()),
                 new UserPrefs());
@@ -217,6 +240,8 @@ public class EditAppointmentCommandTest {
 
         assertFalse(refDescriptor.equals(null));
         assertFalse(refDescriptor.equals(1));
+
+        // Different values
         assertFalse(refDescriptor.equals(new EditAppointmentDescriptorBuilder(refDescriptor)
                 .withName("Another Name").build()));
         assertFalse(refDescriptor.equals(new EditAppointmentDescriptorBuilder(refDescriptor)

@@ -1,5 +1,6 @@
 package seedu.contax.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
@@ -11,6 +12,10 @@ import org.junit.jupiter.api.Test;
 import seedu.contax.commons.core.GuiSettings;
 
 public class UserPrefsTest {
+
+    private static final GuiSettings SAMPLE_GUI_SETTINGS = new GuiSettings(1, 1, 1, 1);
+    private static final Path SAMPLE_PATH1 = Path.of("/test/path1");
+    private static final Path SAMPLE_PATH2 = Path.of("/test/path2");
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
@@ -31,42 +36,74 @@ public class UserPrefsTest {
     }
 
     @Test
+    public void resetData() {
+        UserPrefs refUserPref = new UserPrefs();
+        refUserPref.setGuiSettings(SAMPLE_GUI_SETTINGS);
+        refUserPref.setAddressBookFilePath(SAMPLE_PATH1);
+        refUserPref.setScheduleFilePath(SAMPLE_PATH2);
+
+        UserPrefs newUserPref = new UserPrefs(refUserPref);
+        assertEquals(SAMPLE_GUI_SETTINGS, newUserPref.getGuiSettings());
+        assertEquals(SAMPLE_PATH1, newUserPref.getAddressBookFilePath());
+        assertEquals(SAMPLE_PATH2, newUserPref.getScheduleFilePath());
+    }
+
+    @Test
+    public void toStringTest() {
+        UserPrefs refUserPref = new UserPrefs();
+        refUserPref.setGuiSettings(SAMPLE_GUI_SETTINGS);
+        refUserPref.setAddressBookFilePath(SAMPLE_PATH1);
+        refUserPref.setScheduleFilePath(SAMPLE_PATH2);
+
+        String stringConversion = refUserPref.toString();
+        assertTrue(stringConversion.contains("Gui Settings : " + SAMPLE_GUI_SETTINGS));
+        assertTrue(stringConversion.contains("Address Book data file location : " + SAMPLE_PATH1));
+        assertTrue(stringConversion.contains("Schedule data file location: " + SAMPLE_PATH2));
+    }
+
+    @Test
     public void equals() {
-        UserPrefs userPref1 = new UserPrefs();
+        UserPrefs refUserPref = new UserPrefs();
 
-        UserPrefs userPref2 = new UserPrefs();
-        userPref2.setGuiSettings(new GuiSettings(1, 1, 1, 1));
-        UserPrefs userPref3 = new UserPrefs();
-        userPref3.setAddressBookFilePath(Path.of("/test/path"));
-        UserPrefs userPref4 = new UserPrefs();
-        userPref4.setScheduleFilePath(Path.of("/test/path2"));
+        UserPrefs differentGuiSettings = new UserPrefs();
+        differentGuiSettings.setGuiSettings(SAMPLE_GUI_SETTINGS);
 
-        assertTrue(userPref1.equals(userPref1));
-        assertTrue(userPref1.equals(new UserPrefs()));
+        UserPrefs differentAddressBookPath = new UserPrefs();
+        differentAddressBookPath.setAddressBookFilePath(SAMPLE_PATH1);
 
-        assertFalse(userPref1.equals(null));
-        assertFalse(userPref1.equals(1));
-        assertFalse(userPref1.equals(userPref2));
-        assertFalse(userPref1.equals(userPref3));
-        assertFalse(userPref1.equals(userPref4));
+        UserPrefs differentSchedulePath = new UserPrefs();
+        differentSchedulePath.setScheduleFilePath(SAMPLE_PATH2);
+
+        assertTrue(refUserPref.equals(refUserPref)); // Same object
+        assertTrue(refUserPref.equals(new UserPrefs())); // Same data
+
+        assertFalse(refUserPref.equals(null)); // Null
+        assertFalse(refUserPref.equals(1)); // Different type
+
+        // Different data
+        assertFalse(refUserPref.equals(differentGuiSettings));
+        assertFalse(refUserPref.equals(differentAddressBookPath));
+        assertFalse(refUserPref.equals(differentSchedulePath));
     }
 
     @Test
     public void hashcode() {
-        UserPrefs userPref1 = new UserPrefs();
+        UserPrefs refUserPref = new UserPrefs();
 
-        UserPrefs userPref2 = new UserPrefs();
-        userPref2.setGuiSettings(new GuiSettings(1, 1, 1, 1));
-        UserPrefs userPref3 = new UserPrefs();
-        userPref3.setAddressBookFilePath(Path.of("/test/path"));
-        UserPrefs userPref4 = new UserPrefs();
-        userPref4.setScheduleFilePath(Path.of("/test/path2"));
+        UserPrefs differentGuiSettings = new UserPrefs();
+        differentGuiSettings.setGuiSettings(SAMPLE_GUI_SETTINGS);
 
-        assertTrue(userPref1.hashCode() == new UserPrefs().hashCode());
+        UserPrefs differentAddressBookPath = new UserPrefs();
+        differentAddressBookPath.setAddressBookFilePath(SAMPLE_PATH1);
 
-        assertFalse(userPref1.hashCode() == userPref2.hashCode());
-        assertFalse(userPref1.hashCode() == userPref3.hashCode());
-        assertFalse(userPref1.hashCode() == userPref4.hashCode());
+        UserPrefs differentSchedulePath = new UserPrefs();
+        differentSchedulePath.setScheduleFilePath(SAMPLE_PATH2);
+
+        assertTrue(refUserPref.hashCode() == new UserPrefs().hashCode());
+
+        assertFalse(refUserPref.hashCode() == differentGuiSettings.hashCode());
+        assertFalse(refUserPref.hashCode() == differentGuiSettings.hashCode());
+        assertFalse(refUserPref.hashCode() == differentGuiSettings.hashCode());
     }
 
 }
