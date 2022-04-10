@@ -23,7 +23,7 @@ public class AddSellerCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
     }
 
@@ -31,7 +31,7 @@ public class AddSellerCommandIntegrationTest {
     public void execute_newSeller_success() {
         Seller validSeller = new SellerBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getSellerAddressBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), model.getSellerAddressBook(),
                 model.getBuyerAddressBook());
         expectedModel.addSeller(validSeller);
 

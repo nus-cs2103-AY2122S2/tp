@@ -22,9 +22,9 @@ public class ListSellerCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
     }
 
