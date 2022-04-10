@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AddTodoTaskCommandParser" as AddTodoTaskCommandParser LOGIC_COLOR
-participant "d:AddTodoTaskCommand" as AddTodoTaskCommand LOGIC_COLOR
+participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
+participant "d:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +13,56 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addTodo")
+[-> LogicManager : execute("deleteTask 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addTodo")
+LogicManager -> AddressBookParser : parseCommand("deleteTask 1")
 activate AddressBookParser
 
-create AddTodoTaskCommandParser
-AddressBookParser -> AddTodoTaskCommandParser
-activate AddTodoTaskCommandParser
+create DeleteTaskCommandParser
+AddressBookParser -> DeleteTaskCommandParser
+activate DeleteTaskCommandParser
 
-AddTodoTaskCommandParser --> AddressBookParser
-deactivate AddTodoTaskCommandParser
+DeleteTaskCommandParser --> AddressBookParser
+deactivate DeleteTaskCommandParser
 
-AddressBookParser -> AddTodoTaskCommandParser : parse("addTodo")
-activate AddTodoTaskCommandParser
+AddressBookParser -> DeleteTaskCommandParser : parse("deleteTask 1")
+activate DeleteTaskCommandParser
 
-create AddTodoTaskCommand
-AddTodoTaskCommandParser -> AddTodoTaskCommand
-activate AddTodoTaskCommand
+create DeleteTaskCommand
+DeleteTaskCommandParser -> DeleteTaskCommand
+activate DeleteTaskCommand
 
-AddTodoTaskCommand --> AddTodoTaskCommandParser : d
-deactivate AddTodoTaskCommand
+DeleteTaskCommand --> DeleteTaskCommandParser : d
+deactivate DeleteTaskCommand
 
-AddTodoTaskCommandParser --> AddressBookParser : d
-deactivate AddTodoTaskCommandParser
+DeleteTaskCommandParser --> AddressBookParser : d
+deactivate DeleteTaskCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddTodoTaskCommandParser -[hidden]-> AddressBookParser
-destroy AddTodoTaskCommandParser
+DeleteTaskCommandParser -[hidden]-> AddressBookParser
+destroy DeleteTaskCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> AddTodoTaskCommand : execute()
-activate AddTodoTaskCommand
+LogicManager -> DeleteTaskCommand : execute()
+activate DeleteTaskCommand
 
-AddTodoTaskCommand -> Model : addTodoTask()
+DeleteTaskCommand -> Model : deleteTask(1)
 activate Model
 
-Model --> AddTodoTaskCommand
+Model --> DeleteTaskCommand
 deactivate Model
 
 create CommandResult
-AddTodoTaskCommand -> CommandResult
+DeleteTaskCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddTodoTaskCommand
+CommandResult --> DeleteTaskCommand
 deactivate CommandResult
 
-AddTodoTaskCommand --> LogicManager : result
-deactivate AddTodoTaskCommand
+DeleteTaskCommand --> LogicManager : result
+deactivate DeleteTaskCommand
 
 [<--LogicManager
 deactivate LogicManager
