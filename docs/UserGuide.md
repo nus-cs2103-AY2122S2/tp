@@ -115,6 +115,10 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+* You can also use the `F1` key to open the pop-up window.
+</div>
+
 Format: `help`
 
 ### Importing Excel sheet
