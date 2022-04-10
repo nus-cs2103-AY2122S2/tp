@@ -5,15 +5,15 @@ hide circle
 Command <|-- RedoableCommand
 
 class Command {
-  # undoRedoStack: StackUndoRedo 
-  + execute(): CommandResult 
+  # undoRedoStack: StackUndoRedo
+  + execute(): CommandResult
   + setData(): void
 }
 
 class RedoableCommand
  {
-   - previousAddressBook: ReadOnlyAddressBook 
-   - previousArchiveBook: ReadOnlyAddressBook 
+   - previousAddressBook: ReadOnlyAddressBook
+   - previousArchiveBook: ReadOnlyAddressBook
    - isSwapped: boolean
    - saveAddressBookSnapshot(): void
    # undo(): void
