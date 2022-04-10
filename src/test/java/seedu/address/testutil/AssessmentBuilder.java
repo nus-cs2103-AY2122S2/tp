@@ -72,7 +72,7 @@ public class AssessmentBuilder {
      * Sets the {@code studentList} of the {@code Module} that we are building.
      */
     public AssessmentBuilder withAttempts(Map<Student, Grade> attempts) {
-        this.attempts = FXCollections.observableMap(attempts);
+        this.attempts.putAll(attempts);
         return this;
     }
 
