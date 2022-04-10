@@ -30,6 +30,7 @@ import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Contains helper methods for testing commands.
@@ -255,11 +256,13 @@ public class CommandTestUtil {
         case ASSESSMENT:
             assertTrue(targetIndex.getZeroBased() < model.getFilteredAssessmentList().size());
             Assessment assessment = model.getFilteredAssessmentList().get(targetIndex.getZeroBased());
-            AssessmentName assessmentNameName = assessment.getAssessmentName();
+            AssessmentName assessmentName = assessment.getAssessmentName();
+            TaModule module = assessment.getModule();
             model.updateFilteredAssessmentList(new Predicate<Assessment>() {
                 @Override
                 public boolean test(Assessment assessment) {
-                    return (assessment.getAssessmentName().equals(assessmentNameName));
+                    return (assessment.getAssessmentName().equals(assessmentName)
+                            && assessment.getModule().equals(module));
                 }
             });
             assertEquals(1, model.getFilteredAssessmentList().size());
