@@ -163,6 +163,11 @@ The left column shows the sellers, while the right column shows the buyers.
 
 Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
 
+A property matches with a preference if
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
+
 ## Help Feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
 
@@ -284,6 +289,14 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
+
+This function does an OR search based on words separated by spaces. If the attribute(s) as specified by the user input 
+of a `Person` contain(s) at least one of the keywords specified by the user input, this `Person` is returned.
+
+Attributes supported are: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`, 
+among which `all` looks for the keywords in all other attributes. 
+`property` and `preference` are converted into a string representation concatenating all their fields separating with spaces, and the string is then checked for keywords.
+For all other attributes, their original string representation is used. 
 
 # Documentation, logging, testing, configuration, dev-ops
 

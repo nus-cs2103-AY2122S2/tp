@@ -24,7 +24,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Deleting a client: `delete`](#deleting-a-client-delete)
   - [Favourite a client: `favourite`](#favourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
-  - [Locating clients by name: `find`](#locating-clients-by-name-find)
+  - [Finding clients by keyword: `find`](#locating-clients-by-name-find)
   - [Sorting clients: `sort`](#sorting-clients-sort)
 - [Tools](#tools)
   - [Matching properties and preferences: `match`](#matching-properties-and-preferences-match)
