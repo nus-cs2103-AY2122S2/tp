@@ -1058,8 +1058,8 @@ testers are expected to do more *exploratory* testing.
       Expected: The list of shows is sorted by status in ascending order. 
    
 5. Test case: Sort with multiple different prefixes
-   1. Command: `sort n/asc s/dsc` <br>
-      Expected: The list of shows is sorted by name in ascending order followed by status in descending order.
+   1. Command: `sort r/asc s/dsc` <br>
+      Expected: The list of shows is sorted by status in descending order followed by rating in ascending order.
    
    2. Command: `sort n/asc s/dsc so/statusname`<br>
       Expected: The list of shows is sorted by status in descending order followed by name in ascending order.

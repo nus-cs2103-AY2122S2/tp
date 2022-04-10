@@ -410,7 +410,7 @@ To sort your show list by rating ascendingly, you can key in `sort r/asc`! For m
 | ---------- | --------------- | ---------------- | ----- |
 | name       | n/asc           | n/dsc            | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
 | status     | s/asc           | s/dsc            | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch`   |
-| rating     | r/asc           | r/dsc            |       |
+| rating     | r/asc           | r/dsc            | Rating is sorted by numerical value     |
 | tag        | t/asc           | t/dsc            | Tag is sorted by number of tags |
 
 <div markdown="block" class="alert alert-warning">
