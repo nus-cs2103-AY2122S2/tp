@@ -54,7 +54,7 @@ Candidate *--> Course
 Candidate *--> Seniority
 Candidate *--> ApplicationStatus
 Candidate *--> InterviewStatus
-Candidate *--> "*" Availability
+Candidate *--> Availability
 
 StudentId -[hidden]right-> Name
 Name -[hidden]right-> Phone
