@@ -543,8 +543,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 ### Use cases
 
 (For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
@@ -570,6 +568,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Trackermon shows an error message to the user.
 
       Use case resumes at step 2.
+
+<div style="page-break-after: always;"></div>
 
 * 2b. User enters command with the wrong syntax.
 
@@ -647,8 +647,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 **Use case: UC05 - Exit Trackermon**
 
 **Preconditions: Trackermon application is started.**
@@ -666,8 +664,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Edit a show**
 
