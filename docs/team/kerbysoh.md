@@ -28,6 +28,7 @@ Given below are my contributions to the project.
   * Adapted code from Address Book 3 to suit the context of Tinner (Pull requests [\#43](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/43), [\#47](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/47))
   * Implemented a new RoleManager class to handle role related operations (Pull request [\#49](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/49))
   * Updated the GUI to display roles and role tags (Pull requests [\#69](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/69), [\#72](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/72))
+  * Wrote additional tests for existing features to increase coverage from 66% to 69% (Pull requests [\#274](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/274), [\#282](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/282), [\#286](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/286))
 
 * **Documentation**:
   * User Guide:
@@ -42,6 +43,7 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): (Pull requests [\#142](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/142), [\#196](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/196), [\#200](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/200))
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/kerbysoh/ped/issues/15), [2](https://github.com/kerbysoh/ped/issues/13), [3](https://github.com/kerbysoh/ped/issues/9))
+  * Participated in internal PE-D with other teams in tutorial group G11 ([Issues](https://github.com/AY2122S2-CS2103T-T17-2/tp/issues/240))
   
 
 
