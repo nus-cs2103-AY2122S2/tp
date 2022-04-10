@@ -9,6 +9,8 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 ContaX is designed with versatility in mind, so it does not place unnecessarily strict constraints on your inputs. It accepts all inputs, even those that remotely have a chance of being valid. For more details, see the [Global Input Constraints](#global-input-constraints) section.
 
+<div style="page-break-after: always;"></div>
+
 * Table of Contents
 {:toc}
 
@@ -33,7 +35,7 @@ ContaX is designed with versatility in mind, so it does not place unnecessarily 
    </div>
 
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" width="550"/>
 
 6. If this is your first time running ContaX, you will be prompted to go through an [Interactive Onboarding Guide](#onboarding-guide) to learn the basics, or you can choose to explore the application by yourself.
 
@@ -53,6 +55,8 @@ ContaX is designed with versatility in mind, so it does not place unnecessarily 
 8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Global Input Constraints
 
@@ -79,6 +83,8 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 :rotating_light: **Warning:** The displayed index for a record may change after commands are executed. Always check the displayed index before using it in a command.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Common Date and Time Syntax
 
@@ -111,6 +117,10 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -138,6 +148,8 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Onboarding guide
 
 **Prompt on first run**
@@ -145,6 +157,8 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 When you run the program for the first time, you will be prompted to take a quick tour of the ContaX's basic functions guided through a series of step-by-step instructions. You will be taken to the onboarding guide window if you select yes. If you choose no, the prompt will just close.
 
 ![](images/OnboardingPrompt.png)
+
+<div style="page-break-after: always;"></div>
 
 <br>
 When going through the onboarding guide, instructions such as the one shown below will be displayed, and important areas will be highlighted.
@@ -164,6 +178,8 @@ The onboarding guide will cover the following:
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows the commands available and the syntax for all of them. It also includes a link to this user guide for further reading.
@@ -177,6 +193,8 @@ Format: `help`
 Clears all contacts and tags from the address book and all appointments from the schedule.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `addperson`
 
@@ -232,6 +250,8 @@ Examples:
 *  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `editperson 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
+
 ### Locating persons by attribute: `findperson`
 
 Finds persons whose names contain any of the given keywords.
@@ -256,6 +276,8 @@ Examples:
 * `findperson 87438807 by/phone` lists all persons whose phone number matches "87438807"
 * `findperson alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `deleteperson`
 
@@ -284,6 +306,8 @@ Format: `addtag n/TAGNAME`
 Examples:
 * `addtag n/Potential Clients` Creates a tag named *potential clients* in the address book (if it does not exist).
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Tag : `edittag`
 
 Edits an existing tag in ContaX.
@@ -308,6 +332,8 @@ Format: `listtags`
 **Example output**
 
 ![List Tags](images/ListTag.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Tag : `deletetag`
 
@@ -335,6 +361,8 @@ Examples:
 * `findbytag t/friends` Displays the contact information of contacts who have the *friends* tag.
 
 ![Find Tags](images/FindTag.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Creating an Appointment : `addappt`
 
@@ -369,6 +397,8 @@ Format: `listappt`
 **Example output**
 
 ![List Appointments Result](images/ListAppointments.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Appointment : `deleteappt`
 
@@ -405,6 +435,8 @@ Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `editappt 6 l/300 p/none` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*, and removes the person associated with the appointment. No other properties are changed.
 * `editappt 2 n/Call Juliet t/13:45 p/1` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"*, changes the time to *1:45 PM* and associates the appointment to the first person in the displayed persons list. No other properties are changed.
@@ -438,9 +470,13 @@ Example:
 * `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
 * `apptbetween st/08:00` Lists all appointments from *8AM Today*.
 
+<div style="page-break-after: always;"></div>
+
 **Example Output:**
 
 ![Appointments Between Wireframe](images/AppointmentsBetween.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing Empty Slots in Schedule Within A Period : `freebetween`
 
@@ -470,9 +506,13 @@ Example:
 * `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
 * `freebetween st/09:30 l/20` Lists all empty slots in the schedule that are at least *20 minutes* long from *9:30AM* today.
 
+<div style="page-break-after: always;"></div>
+
 **Example Output:**
 
 ![Appointments Between Wireframe](images/FreeBetween.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Priority Level of an Appointment : `prioritizeappt`
 
@@ -492,6 +532,8 @@ Format: `prioritizeappt INDEX pri/PRIORITY`
 Examples:
 * `prioritizeappt 6 pri/high` Edits the *6th* appointment priority level in the list of appointments to have a status of *high*.
 * `prioritizeappt 2 pri/none` Removes the *second* appointment priority and set status to *none*.
+
+<div style="page-break-after: always;"></div>
 
 **Example Output:**
 
@@ -515,6 +557,8 @@ Format: `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]`
 Example:
 * `findappt Meeting` Lists all appointments with name that contains `Meeting`.
 * `findappt Johnny by/person` Lists all appointments with person name that contains `Johnny`.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -540,6 +584,8 @@ Format: `exportcsv`
 Examples:
 * `exportcsv`: Exports the current address book as a CSV file at `[JAR file location]/data/addressbook.csv`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing the data file
 
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -558,6 +604,8 @@ In order to import data from external sources into ContaX, there are the followi
 
 * Replacing `addressbook.json` or `schedule.json` file with a valid ContaX formatted generated by another system with ContaX
 * [Importing CSV Files](#importing-csv-files-importcsv)
+
+<div style="page-break-after: always;"></div>
 
 ### Importing CSV Files: `importcsv`
 
@@ -585,6 +633,8 @@ Examples:
   * Reads from CSV treating the 2nd column as names, 3rd column as phone numbers, 4th column as email addresses, 5th column as tags.
 * `importcsv f/file.csv`
   * Reads from CSV with default ContaX format positions
+
+<div style="page-break-after: always;"></div>
 
 ### Operate on Contacts by Conditional Clause : `batch`
 
@@ -616,6 +666,8 @@ Examples:
 The `batch` operation is transactional, either all changes succeed or all changes fail (should an operation within `batch` fails). Any error message shown is from the failing operation.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Operate on Contacts within Range : `range`
 
 Perform actions on a group of contacts.
@@ -639,6 +691,8 @@ Examples:
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The `range` operation is transactional, either all changes succeed or all changes fail (should an operation within `range` fails). Any error message shown is from the failing operation.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Chaining Commands: `chain`
 
@@ -674,6 +728,8 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -699,6 +755,8 @@ It is recommended that you create a backup of the entire data folder before you 
 **A**: There is probably some invalid information in your data file. Invalid records are discarded during loading, and those records you do not see might be invalid. Do not enter any command, close the application, and fix your data file!
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
