@@ -51,16 +51,16 @@ Given below are my contributions to the project.
   - Set up PR review system for the team.
   - Weekly commits and no deadlines missed.
 
-**Bugfixes**
-- See [here](https://github.com/AY2122S2-CS2103T-T13-4/tp/issues?q=assignee%3Abakano98+label%3Atype.Bug+)
+- **Bugfixes**
+  - See [here](https://github.com/AY2122S2-CS2103T-T13-4/tp/issues?q=assignee%3Abakano98+label%3Atype.Bug+)
 
-**Community**
-- Reviewed all PRs done by Julio and Bryan
-  - Non-trivial PRs reviewed and commented on for Julio are: [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62), [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90), [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
-  - Non-trivial PRs reviewed and commented on for Bryan are: [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91), [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116), [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
-- Reviewed most PRs by Wei Ming and Benjamin
-  - Non-trivial PRs reviewed and commented on for Wei Ming are: [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44), [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
-  - Non-trivial PRs reviewed and commented on for Benjamin are: [PR #65](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/65) [PR #83](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/83)
+- **Community**
+  - Reviewed all PRs done by Julio and Bryan
+    - Non-trivial PRs reviewed and commented on for Julio are: [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62), [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90), [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
+    - Non-trivial PRs reviewed and commented on for Bryan are: [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91), [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116), [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
+  - Reviewed most PRs by Wei Ming and Benjamin
+    - Non-trivial PRs reviewed and commented on for Wei Ming are: [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44), [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
+    - Non-trivial PRs reviewed and commented on for Benjamin are: [PR #65](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/65) [PR #83](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/83)
 
 
 - **Documentation**:
