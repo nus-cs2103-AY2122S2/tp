@@ -789,13 +789,13 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
 5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
 
-![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
-</div>
-
-![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
+   ![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
+   
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
+   </div>
+   
+   ![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
 
 6. If the user inputs "confirm", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
@@ -946,13 +946,13 @@ The `history` command displays a list of the user's previously executed commands
 1. When the user launches the application, `ModelManager` is initialised with a new `CommandHistory` object.
 2. Whenever the user successfully executes a command, the `LogicManager` calls `Model#addToCommandHistory()`. This adds the command to the list of previously executed commands in `CommandHistory`.
 
-![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
+   ![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
 
-4. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
-5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
-6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
-7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
-8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
+3. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
+5. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
+6. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
+7. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
 
 ![HistoryCommandSequenceDiagram](images/HistoryCommandSequenceDiagram.png)
 
@@ -969,13 +969,13 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
 1. When the user launches the application, `ModelManager` is initialised with a new `AddressBookHistory` object.
 2. Whenever the user successfully executes a command (excluding `clear` and `undo` itself), the `LogicManager` calls `Model#saveCurrentAddressBookToHistory()`. This adds a copy of TAPA to the list of TAPA’s previous states in `AddressBookHistory`.
 
-![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
+   ![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
 
-4. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
-5. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
-6. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
-7. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
-8. Lastly, the `UndoCommand` creates a new `CommandResult` which is returned to the `LogicManager`.
+3. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
+5. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
+6. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
+7. Lastly, the `UndoCommand` creates a new `CommandResult` which is returned to the `LogicManager`.
 
 ![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
 
@@ -1525,7 +1525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
-:information_source:<b>Note:</b> These instructions only provide a starting point for testers to work on;
+:information_source:<b> Note:</b> These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
