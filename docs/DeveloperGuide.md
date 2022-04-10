@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-F11-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -92,10 +92,9 @@ All classes associated with `MainWindow` and itself are connected to this abstra
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CandidateListPanel`, `InterviewListPanel`, `FocusCard`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
-
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
@@ -103,7 +102,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -145,7 +144,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -206,84 +205,6 @@ The following activity diagram summarizes what happens when a user executes an `
 
 <img src="images/AddActivityDiagram.png" />
 
-### Delete feature
-
-#### What is the feature about?
-The `delete` feature allows the user to delete a Candidate from the system.
-This feature has been enhanced based on the initial implementation of the `delete` command in `AddressBook`.
-
-#### How is the feature implemented?
-The main logic is implemented within `DeleteCommand` (which extends from `Command`) and `DeleteCommandParser`.
-A minor enhancement was added to `DeleteCommand` such that if the candidate list is empty, a message indicating that
-there are no candidates in the system is shown to the user (instead of invalid index),
-improving the accuracy of the feedback.
-
-
-#### Why is the feature implemented as such?
-**1. Deleting a candidate by `INDEX`** <br>
-The team's original idea was to delete a candidate by its attribute `StudentId` instead of `INDEX`
-as every candidate has their own unique `StudentId`. However, upon careful consideration, we realised
-that there are two possible problems that could arise from this alternative implementation:
-1. App requirements - TAlent Assistant should be faster than GUI
-2. Performance - Each time a delete command is executed, the system will be required to iterate through the entire candidate
-   list to search for the candidate with the matching `StudentId`.
-
-#### UML Diagrams
-**Activity Diagram**<br>
-The following activity diagram summarizes what happens when a user executes a `delete` command: <br>
-<img src="images/DeleteActivityDiagram.png" width="550" />
-
-### List Feature
-
-#### What is this feature about?
-The `list` feature allows the user to view all available Candidates in the system through the CLI.
-
-This feature in TAlent Assistant™ has been enhanced based on the initial implementation of the `list` command in `AddressBook`.
-
-#### How is this feature implemented?
-The proposed `list` feature is implemented within `ListCommand` (which extends from `Command`) in `AddressBook`.
-
-A minor enhancement was added to this `list` feature to produce another message to indicate that there are no Candidates
-in the system.
-
-#### Why is the feature implemented as such?
-Instead of the same message being produced in both scenarios, when there are Candidates in the system, or when there are
-no Candidates in the system, a new message would allow the user to differentiate between the two. The user would not be
-confused in possibly thinking that the TAlent Assistant™ program is unresponsive.
-
-#### UML Diagram
-The following activity diagram summarizes what happens when a user executes a `list` command: <br>
-<img src="images/ListActivityDiagram.png" width="250" />
-
-### Edit Feature
-
-#### What is this feature about?
-The `edit` feature allows the user to change the attributes of the Candidate in the system though the CLI.
-This feature has been enhanced based on the initial implementation of the `edit` command in `AddressBook`.
-
-#### How is this feature implemented?
-
-The proposed edit mechanism is facilitated by `EditCommand`. It is supported by `EditCommandParser` and `EditCandidateDescriptor` where it will retrieve the attributes that can be edited.
-
-The user is able to edit key attributes of the Candidate, such as
-* Phone Number
-* ApplicationStatus
-
-Based on the fields that are edited by the user, the EditCommandParser will retreive the information, and update the attributes accordingly.
-This `EditCandidateDescriptor` class will take in the current attributes of the Candidate, and update the fields accordingly by the `EditCommandParser`.
-
-#### Why is the feature implemented as such?
-
-**1. We have implemented the `EditCommand` in this manner because it will help enhance the user experience.
-One alternative method we had was to allow the user to update the candidate by retyping all the fields of the Candidate.
-However, this proved to be not efficient, and hence we implemented it this way. With `EditCommandParser` and `EditCandidateDescriptor`,
-the user can edit one attribute of the candidate without typing every attribute of the Candidate.
-
-#### UML Diagram
-The following activity diagram summarizes what happens when a user executes a `edit` command. <br>
-<img src="images/EditCommandDiagram.png" width="550" />
-
-
 ### ApplicationStatus Feature
 
 #### What is the feature about?
@@ -310,7 +231,7 @@ from being entered.
 #### UML Diagrams
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens when a user executes a `Edit ApplicationStatus` command: <br>
-<img src="images/ApplicationStatusCommandDiagram.png" width="550" />
+<img src="images/ApplicationStatusCommandDiagram.png" />
 
 
 ### InterviewStatus Feature
@@ -347,7 +268,7 @@ another interview (by checking their `InterviewStatus`)
 #### UML Diagrams
 **Activity Diagram**<br>
 The following activity diagram summarizes what happens for the `InterviewStatus` <br>
-<img src="images/InterviewStatusDiagram.png" width="550" />
+<img src="images/InterviewStatusDiagram.png" />
 
 
 
@@ -425,7 +346,6 @@ A new `s/` prefix is added in the `CliSyntax`, which is used to accurately parse
 would like to sort the existing candidate list by. The implementation works by calling `model.updateSortedCandidateList(sortComparator)`,
 which updates the sorted order of the existing `CandidateList` in the system.
 
-
 #### How is the feature implemented?
 The parser for the `sort` command works similarly to all other commands implemented. In this case, as the user
 may potentially key in multiple valid `s/` prefix fields, we utilise the `ArgumentTokenizer` in order to parse
@@ -448,45 +368,6 @@ the new `CandidateList` in the system to be that of the sorted copy.
 #### UML Diagrams (WIP)
 
 
-### View feature
-
-#### What is the feature about?
-This feature allows the user to view interviews scheduled within 3 time periods: `today`, this `week` and this `month`.
-
-#### How is the feature implemented? (WIP)
-The view feature implements a similar logic to the `find` command, whereby we make use of predicate classes in order to
-check if we should display a particular interview.
-
-#### Why is the feature implemented as such? (WIP)
-**1. Utilising multiple predicate classes** <br>
-
-#### UML Diagrams (WIP)
-
-### Help Window Feature
-
-#### What is this feature about?
-The `help` feature allows the user see the available commands on the system.
-This feature has been enhanced based on the initial implementation of the `help` command in `AddressBook3`.
-
-#### How is this feature implemented?
-
-The proposed `help` mechanism is facilitated by `HelpWindow`. It is supported by `HelpWindowUtil` where it will help the user open the User Guide on their desktop.
-We used the existing implementation, and we modified it that the user can view the full user guide on their personal desktop with the click of a button.
-For this feature, we used the [Desktop API](https://docs.oracle.com/javase/9/docs/api/java/awt/Desktop.html) from Java 9.
-
-#### Why is the feature implemented as such?
-
-**1. Why allow user to visit full user guide? <br>
-We initially proposed to put the full list of commands and tips on the Help Window. However, we think that this does not improve user experience as
-there will be too many commands available in the window. Hence we decided that we should streamline the important commands on the `HelpWindow`, and the
-other information will be available on the User Guide.
-
-As the user will not be able to remember the link to our User Guide, we hyperlinked it using the Desktop API that was available from Java.
-
-#### UML Diagram
-The following activity diagram summarizes what happens when a user executes a `edit` command for `ApplicationStatus` and `InterviewStatus` <br>
-<img src="images/HelpWindowActivityDiagram.png" width="250" />
-
 ### Focus Feature
 
 #### What is this feature about?
@@ -506,8 +387,8 @@ that this will be a heavy headway for our application.
 
 #### UML Diagram
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
-<img src="images/FocusCommandDiagram.png" width="250" />
 
+<img src="images/FocusCommandDiagram.png" />
 
 ### Scheduling interviews feature
 
@@ -562,91 +443,6 @@ which then calls `AddScheduleCommandParser#parse` to create a new `AddScheduleCo
 **Step 7.** After the interview is successfully added, we call the `Candidate#triggerInterviewStatusScheduled` method which returns
 the `Candidate` with his interview status set to `Scheduled`. The Model will then call Model#setCandidate to update the candidate in the list.
 
-# TO DELETE ****
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th candidate in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new candidate. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the candidate was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the candidate being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -666,7 +462,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * Professor from NUS School of Computing
-* Needs to manage a significant number of TA applications
+* Needs to manage a significant number of TA applications for a particular module
 * Prefers desktop apps to other platform apps
 * Possesses fast typing speed
 * Prefers typing to mouse interactions
@@ -955,15 +751,17 @@ Preconditions: Candidate has an interview scheduled.
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 entries in the local database with at most 5 seconds delay in performance for typical usage.
-3. Should work even without Internet connection.
-4. Should work on both 32-bit and 64-bit environments.
-5. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-6. The response to any user action should become visible within 3 seconds.
-7. Colors used for the user interface should be pleasant and not straining on the eyes.
+1. TAlent Assistant™ should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. TAlent Assistant™ should work on both 32-bit and 64-bit environments.
+3. TAlent Assistant™ should be able to hold up to 100 candidate entries in the local database with at most 2 seconds delay in performance for typical usage.
+4. TAlent Assistant™ should be able to hold up to 100 scheduled interview entries in the local database with at most 2 seconds delay in performance for typical usage.
+5. TAlent Assistant™ should work under common screen resolutions.
+6. TAlent Assistant™ is for individual use.
+7. TAlent Assistant™ should work even without Internet connection.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+9. The response to any user action should become visible within 3 seconds.
+10. Colors used for the user interface should be pleasant and not straining on the eyes.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -1122,7 +920,7 @@ testers are expected to do more *exploratory* testing.
 1. Loading up `Candidate's` details into the center panel in the application. 
 
    1. Test case: `focus` on a `Candidate` in the system. <br>
-      Expecteed: The `Candidate's` information will be shown on the center panel.
+      Expected: The `Candidate's` information will be shown on the center panel.
    
    2. Test case: `focus` on an `INDEX` that is out of bounds.
       Expected: No `Candidate` will be shown in the center panel, and an error message will be displayed. 
