@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Class AddressBook
+Class HireLah
 Class ModelManager
 
 Package InterviewDataType <<Rectangle>>{
@@ -18,7 +18,7 @@ Class Status
 
 ModelManager -->"~* filtered" Interview
 
-AddressBook *--> "1" UniqueInterviewList
+HireLah *--> "1" UniqueInterviewList
 UniqueInterviewList --> "~* all" Interview
 Interview *--> Status
 Interview *--> "1" Applicant
@@ -27,6 +27,6 @@ Interview *--> "1" Position
 Applicant -[hidden]right-> Position
 Position -[hidden]right-> Status
 
-ModelManager -right-> "1" AddressBook
+ModelManager -right-> "1" HireLah
 
 @enduml

@@ -123,7 +123,7 @@ How the parsing works:
 <img src="images/ModelClassDiagram.png" width="450" />
 <br/>
 
-In the `Model`, `ModelManager` contains three different `DataType` – `Applicant`, `Position` and `Interview`, each with their own `UniqueXYZList` contained in `AddressBook`. The class diagrams for each `DataType` are separated below for better clarity.
+In the `Model`, `ModelManager` contains three different `DataType` – `Applicant`, `Position` and `Interview`, each with their own `UniqueXYZList` contained in `HireLah`. The class diagrams for each `DataType` are separated below for better clarity.
 
 `Applicant` class diagram:
 
@@ -317,6 +317,12 @@ Hence, it is important to delete the associated interview(s) when deleting an ap
 The implementation of filtering data is done as an extension of the `list -X` command, which takes in optional parameters that will trigger the filtering of data to display if given. The filtering of data is done similar to the `find` command in AB3, which is now deprecated in HireLah. It applies a predicate to the `filteredXYZ` filtered lists in the `ModelManager`, which the `UI` will pick up and display the latest filtered list of the data to the user.
 
 To support different filters for different data types, each filter is a predicate class in the `Model` component. For example, to support filtering applicants by gender, there is a [`ApplicantGenderPredicate`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/model/applicant/ApplicantGenderPredicate.java) in the `Model` component under `applicant`. The predicate implements Java's `Predicate<Applicant>` interface for filtered lists.
+
+Here is the sequence diagram for a filter command: 
+
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `list -a f/name a/Bob` command.
+
+<img src="images/FilterSequenceDiagram.png">
 
 #### Design considerations:
 
