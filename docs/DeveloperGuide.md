@@ -1265,7 +1265,7 @@ testers are expected to do more *exploratory* testing.
   1. Other incorrect add commands to try: `add`, `add student id/E012345a n/John Doe e/johnd@u.nus.edu`, `...` (where `E012345a` is an invalid student ID)<br>
      Expected: Similar to previous.
 
-  1. The above test cases can be repeated with the other entities and also by using their shorthand forms.<br>
+  1. The above test cases can be repeated with the other entities (and their respective parameters) and also by using their shorthand forms.<br>
      Examples: `add s id/E0123456 n/John Doe e/johnd@u.nus.edu`, `add m n/Software Engineering Project c/CS2103T a/21S1`, `add c id/T13 t/tutorial m/1`, `add a n/Test m/1`.
 
 ### Listing and filtering entities
@@ -1273,7 +1273,7 @@ testers are expected to do more *exploratory* testing.
 1. Listing and filtering entities (module/student/class group/assessment).
 
   1. Test case: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
-     Filters may be used in the `list` command for students, class groups and assessments, e.g. `list student m/1`, `list class m/1`, `list assessment m/1`.
+     Filters may be used in the `list` command for students, class groups and assessments, e.g. `list student m/1`, `list class m/1`, `list assessment m/1`.<br>
      Expected: Details of the listed entities shown in their respective GUI panels.
 
   1. Test case: `list`<br>
@@ -1289,7 +1289,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding students by their name.
 
-  1. Test case: `find John`.
+  1. Test case: `find John`.<br>
      Expected: Students whose name contains `John` is listed.
 
   1. Test case: `find`<br>
@@ -1319,13 +1319,13 @@ testers are expected to do more *exploratory* testing.
 1. Enrolling and disenrolling students.
 
   1. Test case: `enrol c/1 s/all`<br>
-     Expected: All students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+     Expected: All students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
 
   1. Test case: `enrol c/1 s/1,2,3,4,5,6`<br>
-     Expected: The 1st 6 students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+     Expected: The 1st 6 students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
 
   1. Test case: `enrol c/1 s/e0123456,e0234567`<br>
-     Expected: Students with ID `E0123456` and `E02345767` will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+     Expected: Students with ID `E0123456` and `E02345767` will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
 
   1. Test case: `enrol c/1`<br>
      Expected: No student is enrolled. Error details shown in the status message.
