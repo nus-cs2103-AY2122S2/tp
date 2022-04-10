@@ -27,8 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/howardwhw2.md)]
 
 * Role: Developer
-* Responsibilities: User Guide
-
+* Responsibilities: UI
 ### Bryan Zheng
 
 <img src="images/ashuh.png" width="200px">
