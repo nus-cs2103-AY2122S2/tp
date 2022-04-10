@@ -5,7 +5,7 @@
   <p><h1>Teaching Assistant's Personal Assistant (TAPA)</h1></p>
 </p>
 
-![Ui](docs/images/Ui-Sample-Data.png)
+![Ui](docs/images/Ui.png)
 
 * **TAPA** allows TAs to better manage their student’s contact details and progress, especially for TAs who are teaching multiple classes/modules at the same time. It is optimised for use on CLI.<br>
   Usage:
