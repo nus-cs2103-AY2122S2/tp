@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete -a 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -118,23 +118,34 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<br/>
+
+In the `Model`, `ModelManager` contains three different `DataType` – `Applicant`, `Position` and `Interview`, each with their own `UniqueXYZList` contained in `AddressBook`. The class diagrams for each `DataType` are separated below for better clarity.
+
+`Applicant` class diagram:
+
+<img src="images/ModelApplicantClassDiagram.png" /> 
+
+`Position` class diagram:
+
+<img src="images/ModelPositionClassDiagram.png" /> 
+
+`Interview` class diagram:
+
+<img src="images/ModelInterviewClassDiagram.png" /> 
+
+Note that the `Interview` class contains `Applicant` and `Position`.
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores all the data i.e., all `Applicant`, `Position`, and `Interview` objects (which are contained in `UniqueApplicantList`, `UniquePositionList`, and `UniqueInterviewList` objects respectively).
+* stores the currently 'selected' `Applicant`, `Position`, and `Interview` objects (e.g., results after a list command with filter applied) as a separate _filtered_ list which is exposed to outsiders as unmodifiable Java's Observable List (i.e., `ObservableList<Applicant>`, `ObservableList<Position>` and `ObservableList<Interview>` for the different types) that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -144,8 +155,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both HireLah data, which consists of `Applicants`, `Interviews` and `Positions`; and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `HireLahStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -210,7 +221,36 @@ It is implemented in this way, so that it accurately reflects the number of `App
 the position. It would defeat the purpose if `PositionOffers` can be set to any number, as it would no longer be able to accurately
 keep track of offers handed out.
 
-### To Add: Interview feature?
+### Tracking Interview Status
+
+#### Implementation
+
+Currently, there are 5 possible status for interviews which represents where an applicant is in the hiring pipeline.
+* `Pending` - Interview has been created / scheduled, applicant yet to go for interview.
+* `Passed - waiting for applicant` - Applicant has passed the interview. A job **offer is automatically extended** to the applicant at this stage.
+* `Failed` - Applicant has failed the interview.
+* `Accepted` - Applicant has accepted the job offer. Applicant job role will be updated in Applicants tab.
+* `Rejected` - Applicant has rejected the job offer.
+
+The **activity diagram** below shows the workflows between different interview status and corresponding updates to `Position`
+and `Applicant` classes.
+
+![Activity diagram between different interview status](images/InterviewStatus.png)
+
+#### Design considerations:
+
+Aspect: Number of interviews per applicant allowed for each unique role
+
+* **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
+    * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
+    * Cons: May not model the real-world hiring process accurately where some roles require multiple interviews.
+    
+
+* **Alternative 2:** An applicant can schedule multiple interviews for a unique position they apply for.
+    * Pros: A more accurate modelling of real-world hiring processes.
+    * Cons: Increased complexity of hiring process. 
+      Need to keep track of different number of interviews required for every unique position and where each applicant is 
+      at which stage e.g "Finished HR interview" / "Finished Online Assessment", which may result in more bugs.
 
 ### Adding of Data 
 
@@ -349,7 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `HireLah Application` and the **Actor** is the `user`, unless specified otherwise)
 
-####**Use case 01: Delete a applicant**
+#### **Use case 01: Delete a applicant**
 
 **MSS**
 
@@ -372,28 +412,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-####**Use case 02: Add an interview**
+#### **Use case 02: Add an interview**
 
 **MSS**
 
-1.  User requests to list applicants
-2.  HireLah shows a list of applicants
-3.  User requests to add a specific interview to a applicant in the list
-4.  HireLah adds the interview to the applicant.
-
+1. User requests to list applicants
+2. HireLah shows a list of applicants
+3. User request to list positions
+4. HireLah shows a list of positions
+5. User requests to add an interview, for a specific position to an applicant in the list
+6. HireLah adds the interview to the applicant
+   <br/><br/>
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
+  <br/><br/>
   Use case ends.
+  <br/><br/>
+* 4a. The list is empty.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 5a. The given index is invalid.
 
-* 3a. The given index is invalid.
+    * 5a1. HireLah shows an error message.
 
-    * 3a1. HireLah shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 4.
 
 #### **Use case 03: Editing position**
 
@@ -417,7 +463,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br/><br/>
   Use case ends.
 
-#### **Use case 04: Filtering data**
+**Use case 04: Viewing help**
+
+**MSS**
+1. User requests to view help
+2. HireLah shows a list of commands and its briefly description
+3. User chooses to close the help box
+4. HireLah closes the help box
+
+Use case ends.
+
+**Use case 05: Viewing detail help for a specific command**
+
+**MSS**
+1. User <u>open the list of commands and general description (UC4).<u>
+2. User chooses a specific command and view its detail description.
+3. HireLah displays the detail description of that command
+4. User chooses to close the box.
+5. HireLah closes the box.
+
+Use case ends.
+#### **Use case 06: Filtering data**
+
 
 **MSS**
 1. User requests to list data with filter applied.

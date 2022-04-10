@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Create Interview with Status: "Pending";
+if () then (pass)
+  :Change Status to: "Passed - waiting for applicant";
+  :Increase number of position offers;
+  if () then (accept)
+    :Change Status to: "Accepted";
+    :Update applicant job role;
+    :Decrease number of position openings;
+  else (reject)
+    :Change Status to "Rejected";
+  endif
+  :Decrease number of position offers;
+else (fail)
+  :Change Status to: "Failed";
+endif
+stop
+
+@enduml
