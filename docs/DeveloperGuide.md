@@ -239,6 +239,19 @@ and `Applicant` classes.
 
 #### Design considerations:
 
+Aspect: When an applicant is considered to be matched with a job:
+
+* **Alternative 1 (current choice):** An applicant must accept a passed interview before the applicant is hired for that position.
+    * Pros: A more accurate modelling of real-world hiring processes, whereby an applicant may actually be accepted into multiple roles, and has to choose one role to accept.
+    * Cons: Have to track number of position offers currently given out with respect to number of open positions, 
+  preventing a scenario where multiple people accept the offer but there is a shortage of actual position openings. 
+  More complex model which may be bug-prone.
+
+
+* **Alternative 2:** An applicant is considered to be hired after passing the interview.
+    * Pros: A simplified way of matching, reduces complexity of interview and coupling between Interview and Positions.
+    * Cons: Does not model real-world interview processes accurately, since in reality applicants can have competing offers before choosing to accept one. 
+
 Aspect: Number of interviews per applicant allowed for each unique role
 
 * **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
