@@ -3,17 +3,13 @@
 
 box Model MODEL_COLOR_T1
 participant ":AddressBook" as AddressBook MODEL_COLOR
-participant ":Person" as Person MODEL_COLOR
 participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
 end box
 
 [-> AddressBook : setPersons(persons)
 activate AddressBook
 loop for each p in persons
-    AddressBook -> Person : addTagsNotInList(p)
-    activate Person
-    Person --> AddressBook
-    deactivate Person
+    AddressBook -> AddressBook : addTagsNotInList(p)
 end
 AddressBook -> UniquePersonList : setPersons(persons)
 activate UniquePersonList
