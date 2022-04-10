@@ -14,7 +14,7 @@ public class ShowEventsCommand extends Command {
     public static final String COMMAND_WORD = "listevents";
     public static final String COMMAND_ALIAS = "le";
 
-    public static final String MESSAGE_USAGE = "showevents [-a]";
+    public static final String MESSAGE_USAGE = "listevents [-a]";
 
     public static final String MESSAGE_SUCCESS = "Listed all upcoming events. To see past events use the -a flag";
 
