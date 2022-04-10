@@ -46,6 +46,7 @@ Given below are my contributions to the project.
     * Developer Guide:
       * Added implementation details of enhanced Person object. (Pull request [#64](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/64))
       * Added implementation details of Grab Command. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205))
-      * Added some test cases for manual testing. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205)) 
+      * Added some test cases for manual testing. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205))
+      * Refactor all the plant uml files in DG update from addressbook to Unite. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205)) 
 * **Community**:
     * Reported bugs and suggestions for other teams in the class: [PED](https://github.com/junjieteoh/ped/issues)

@@ -46,4 +46,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/junjieteoh.md)]
 
 * Role: Developer
-* Responsibilities: Testing, In charge of Person class,  
+* Responsibilities: Checker of DG/UG, Tester, In charge of Person object,  
