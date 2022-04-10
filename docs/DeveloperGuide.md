@@ -375,9 +375,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Proposed Implementation
 The proposed attendance feature is facilitated by the two classes `PresentAttendanceCommand` and `AbsentAttendanceCommand`,
-which extend the `Command` class. The commands allow users to either mark a pet as present or absent on a particular day. 
-Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off time (if applicable), 
-is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into the command classes above. 
+which extend the `Command` class. The commands allow users to either mark a pet as present or absent on a particular day.
+Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off time (if applicable),
+is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into the command classes above.
 The command classes are then passed on to the `Model` component for execution.
 
 During command execution, data from the user input is parsed into one of two subclasses of `AttendanceEntry` objects.
@@ -386,7 +386,7 @@ can be seen below.
 
 ![AttendanceHashMapClassDiagram](images/AttendanceHashMapClassDiagram.png)
 
-The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet", 
+The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet",
 and is the main repository of data within the Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods
