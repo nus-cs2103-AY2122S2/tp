@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-primary">:bulb: **Note**<br>
 
 The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -32,7 +32,7 @@ The `.puml` files used to create diagrams in this document can be found in the [
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
-*Figure: High-level architecture diagram of the CinnamonBun.*
+*Figure: High-level architecture diagram of CinnamonBun.*
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -111,7 +111,7 @@ How the `Logic` component works:
 
 *Figure: Interactions inside the logic component for the `delete 1` command.*
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
 The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -152,7 +152,7 @@ The `Model` component,
 The `Storage` component,
 * stores user preference data in json format, and reads it back into corresponding objects.
 * stores client and transaction data in binary format, and reads it back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `AddressBookStorage`, `TempAddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -186,13 +186,13 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 
 *Figure: Simplified sequence diagram of `AppendCommand`.*
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
 The lifeline for `AppendCommandParser` and `AppendCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-info">:bulb: **Note**<br>
 
 * The above sequence diagram has been simplified to provide a more comprehensible overview. It is not completely accurate as some unnecessary details have been omitted.
 * While not shown here, `AddCommand`, `EditCommand`, `RemarkCommand`, `RemoveCommand` work very similarly to `AppendCommand`, and their sequence diagram will be almost identical to `AppendCommand`'s.
@@ -205,7 +205,7 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 * **Alternative 1 (original AB-3 method)**:
   Hard-code every field directly into `Person`.
     * Pros: None.
-    * Cons: Extremely highly coupled code that requires many changes to be done everytime a new field is added. Pront to bugs.
+    * Cons: Extremely highly coupled code that requires many changes to be done everytime a new field is added. Prone to bugs.
 * **Alternative 2 (current choice)**
   Make `Person` modular by storing a `HashMap<Prefix, Field>` of fields instead.
     * Pros: Code is much less coupled. Much easier to maintain.
@@ -215,15 +215,15 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 
 #### Implementation
 
-The undo mechanism is facilitated by `SerializableTempAddressBookStorage`. It extends `TempAddressBookStorage` 
-an interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
+The undo mechanism is facilitated by `SerializableTempAddressBookStorage`.
+It extends the `TempAddressBookStorage` interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
 
-This mechanism will store previous states of CinnamonBun when a modification or change is made to the data in temporary files.
-When users type the `undo` command, the latest state stored will be restored.
+This mechanism will store the previous states of CinnamonBun in temporary files when a modification or change is made to the data.
+When users type the `undo` command, the latest stored state will be restored.
 
 Additionally, it implements the follow operations which are exposed in the `Storage` interface:
 - `SerializableTempAddressBookStorage#getTempAddressBookFilepath()` --- Gets the file path of where the temporary files are stored.
-- `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the state of CinnamonBun and keep track of the version.
+- `SerializableTempAddressBookStorage#addNewTempAddressBookFile()` --- Saves the current state of CinnamonBun and keep track of the version.
 - `SerializableTempAddressBookStorage#popTempAddressFileData()` --- Gets the latest state of CinnamonBun stored in `SerializableTempAddressBookStorage`.
 
 ![Undo activity diagram](images/TemporaryAddressBookStorage.png)
@@ -231,23 +231,23 @@ Additionally, it implements the follow operations which are exposed in the `Stor
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `SerializableTempAddressBookStorage` will be initialized
-with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
+with the file path of where the temporary files will be saved, and an empty `ArrayList<Path>` named `tempFiles` is created to store the file paths of the
 temporary files that will be created.
 
 ![State 1 undo image](images/UndoState.png)
 
-Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th client in the client list.
-In `LogicManager`, before executing the command, it will locally store the current clients' list state.
+Step 2. The user makes a modification to the client list such as executing the command `delete 5` to delete the 5th client.
+In `LogicManager`, before executing the command, it will locally store the current client list's state.
 
-After executing the command, it will compare the previous state with the current state of the clients' list. If it senses they are different, such as in this
+After executing the command, it will compare the previous state with the current state of the client list. If it senses they are different, such as in this
 case since user has deleted the 5th client, it will call `LogicManager#savePrevAddressBookDataInTemp()`. 
 
-From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the clients' list, before the `delete 5` was executed, will be saved as a temporary file.
+From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the client list, before the `delete 5` was executed, will be saved as a temporary file.
 The new temporary file will then be added into `tempFiles` list in `SerializableTempAddressBookStorage`.
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
-Only modifications made to the clients' list will be saved. See the user guide for more info.
+Only modifications made to the client list or transaction list will be saved. See the user guide for more info.
 
 `SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will remove
 the earliest modification saved and delete the temporary file for it.
@@ -267,7 +267,7 @@ Step 3. The user executed `add n/David...` to add a new client. The steps mentio
 
 Step 4. The user now decides that adding the client was a mistake and decides to undo that action by executing the `undo` command.
 The `undo` command will call `LogicManager#undoPrevModification()`, which calls `Storage#popTempAddressFileData()`. This will obtain
-the latest temporary file added and restore the clients' list to the state saved in the temporary file (the state of the clients' list before add the new client, so before step 3).
+the latest temporary file added and restore the client list to the state saved in the temporary file (the state of the client list before add the new client, so before step 3).
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
@@ -286,7 +286,7 @@ The following sequence diagram shows how the undo operation works:
 ![Undo sequence diagram](images/UndoSequenceDiagram.png)
 
 
-Step 5. The user executed the command `filter Daniel` to find all Daniels. This command do not modify the clients' list.
+Step 5. The user executed the command `filter Daniel` to find all Daniels. This command does not modify the client list.
 Hence, `Storage#addNewTempAddressBookFile()` will not be called and no new temporary files will be added.
 
 ![State 5 undo image](images/UndoState4.png)
@@ -304,34 +304,33 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
 * **Alternative 2:** Individual command knows how to undo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-  
-
 
 ### Clear Filtered functionality
-The `ClearFiltered` commands works in tandem with the `Find` or `ListMembers` command. After the `Find`/`ListMembers` function populates
-`FilteredPersonList`, the `ClearFiltered` commands retrieves the `FilteredPersonList` from the `Model` and
-deletes all people in the `FilteredPersonList` using the `deletePerson` function from `Model`.
 
-If the `Find` or `ListMembers` function had not been executed beforehand, the `ClearFiltered` command will still function
-as if clearing the entire address book, as by default, the `FilteredPersonList` will be the whole address book.
+The `clearFiltered` commands works in tandem with the `find` or `listMembers` command. After the `find`/`listMembers` function populates
+`ModelManager`'s `filteredPersons`, the `clearFiltered` commands retrieves the `filteredPersons` from the `Model` and
+deletes all people in `filteredPersons` using the `deletePerson` function from `Model`.
 
-If there are no people in the `FilteredPersonList`, the `CommandResult` returned has a message "No clients to delete.".
+If the `find` or `listMembers` command had not been executed beforehand, the `clearFiltered` command will still function
+as if clearing the entire address book, as by default, the `filteredPersons` will be the whole address book.
+
+If there are no people in the `filteredPersons`, the `CommandResult` returned has a message "No clients to delete.".
 
 Below is a sequence diagram to show how the `ClearFilteredCommand` executes.
 
 ![Clear Filtered Sequence Diagram](images/ClearFilteredSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
-The lifeline for `ClearFilteredCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for `ClearFilteredCommand` should end at its destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
   
 </div>
 
 ### Membership functionality
 
 #### Implementation
-The membership functionality allows users to be assigned a membership tier, either 'Bronze','Silver' or 'Gold'. It inherits
-from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
+The membership functionality allows users to be assigned a membership tier, either 'Bronze', 'Silver' or 'Gold'.
+It inherits from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
 
 Below is a figure of the class diagram of the `Membership` class.
 
@@ -344,7 +343,7 @@ The `ALL` tier in the `Tier` enum is used for `listMembers` functionality.
 </div>
 
 When the user calls the `addMembership` functionality along with a specified client and membership tier, a Membership 
-object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions as if any other `Field`.
+object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions like any other `Field`.
 The `removeMembership` functions in a similar manner to other fields in that the `Field` with the `Membership` prefix is removed
 from the fields HashMap.
 
@@ -354,18 +353,18 @@ in its fields HashMap.
 
 When a client's membership is displayed on the screen, the colour of the membership `Label` changes according to the membership
 tier. This is done by having a `FlowPane` stored in the `PersonCard` class. When a membership is displayed, a `Label` with
-a different tier is created with a different id. The CSS files (Cinnamon.css or Caramel.css) then decides what colour to render the label background accordingly.
+a different tier is created with a different id. The CSS files (`Cinnamon.css` or `Caramel.css`) then decides what colour to render the label background accordingly.
 
 #### Design considerations
 
 **Aspect: How it executes**
 
-* **Alternative 1 (current choice):** Store each Membership in each user.
-  * Pros: Easy to implement
-  * Cons: Membership functionality is limited (only able to have predefined membership tiers)
+* **Alternative 1 (current choice):** Store a `Membership` object in each user.
+  * Pros: Easy to implement.
+  * Cons: Membership functionality is limited (only able to have predefined membership tiers).
 
 * **Alternative 2:** Create a list of memberships and assign users a membership index.
-  * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions
+  * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions.
   * Cons: Harder to implement.
 
 ### Transaction functionality
@@ -403,49 +402,47 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
     in comparison to the `Person` class.
 
 ### Sort functionality
+
 **Implementation**
 
 The sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
 `execute` function which returns a `CommandResult` object.
 
 The `SortCommand#execute()` function would first parse the user's inputs. For every field parsed, the function would create a 
-`comparator` for that field using either of the functions:
+`Comparator` for that field using either of the functions:
 
-* `SortCommand#getComparatorDefault()` --- Creates a comparator with the field specified in ascending order
-* `SortCommand#getComparatorDescending()` --- Creates a comparator with the field specified in descending order
+* `SortCommand#getComparatorDefault()` --- Creates a comparator with the field specified in ascending order.
+* `SortCommand#getComparatorDescending()` --- Creates a comparator with the field specified in descending order.
 
 One sort command allows for sorting multiple fields at a time in the order specified. Stating `sort n/ a/` means 
 sort the list by name in ascending order followed by the client's addresses. Clients with same name would be then
 sorted based on their addresses. 
 
-Thus, after creating the `comparator` for a particular field, it'll be added upon a previously created comparator using.
+Thus, after creating the `Comparator` for a particular field, it'll be added upon a previously created `Comparator` using `Comparator#thenComparing()`.
 
-To be able to sort the client's list, we exposed an operation in the `Model` interface as `Model#sortPersonList()`.
-We then passed the `comparator` created and passed it to `Model#sortPersonList()` in `SortCommand#execute()`.
+To be able to sort the client list, we expose an operation in the `Model` interface as `Model#sortPersonList()`.
+We then passed the `comparator` created to `Model#sortPersonList()` in `SortCommand#execute()`.
 
-Java's `list` library will then handle the sorting based on the `comparator`.
+Java's `List` library will then handle the sorting based on the `Comparator`.
 
 #### Design considerations
 
 **Aspect: How it executes**
 
-* **Alternative 1 (current choice):** Each field class will handle how to sort its own data, `SortCommand` will then
+* **Alternative 1 (current choice):** Each `Field` class will handle how to sort its own data, `SortCommand` will then
 wrap it into a comparator and pass to `Model#sortPersonList()`.
   * Pros: Easy to implement, each field class can handle their own sorting of its data. Will not clutter `SortCommand`.
-  * Cons: Does not allow for more complicated chaining of fields since the way each field is being sorted is independent of the other.
-  
+  * Cons: Does not allow for more complicated chaining of fields since the way each field is being sorted is independent of others.
 
 * **Alternative 2:** `SortCommand` will determine how the fields are to be sorted.
-    * Pros: Allows `SortCommand` to have full flexibility in deciding how the fields are to be sorted and may allow for
-  more complicated chaining of fields.
-    * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
-
+  * Pros: Allows `SortCommand` to have full flexibility in deciding how the fields are to be sorted and may allow for more complicated chaining of fields.
+  * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
 
 ### Command chaining
 
 #### Implementation
 
-The command chaining mechanism is handled in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
+The command chaining mechanism is handled in the `execute()` function of the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
 
 To handle multiple commands, the program splits the given user input using the `|` delimiter used to separate the multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands.
 
@@ -464,6 +461,7 @@ While iterating through the individual commands, the program checks if any of th
     * Cons: Command validity has to be caught and handled in execution() which may slow down performance.
 
 ### Command completion/correction
+
 **Implementation**
 
 First, the program checks if the given input or the last command is blank. It is hardcoded to complete such cases with an `add` command as I thought that was more fitting and also because it would most probably get completed with `add` anyway after running through the completion algorithm.
@@ -482,7 +480,6 @@ The Levenshtein distance is calculated using the `editDistance(String str1, Stri
     * Pros: The user will be able to view each suggestion and will have much more information and freedom to decide whether to take up a suggestion.
     * Cons: A lot harder to implement in terms of logic, storage and UI.
 
-
 * **Alternative 2 (current choice):** Complete/correct on demand. Take away user choice and provide what the program thinks is the most accurate replacement.
     * Pros: Less computationally intensive and a lot easier to implement.
     * Cons: The user will not have a choice of suggestions and will not know what they'll get (blackbox).
@@ -499,9 +496,9 @@ Here is a brief example of how the command history works:
 * Each time the user presses the up arrow key, the command box will be replaced with the command they previously executed, until they reach the start of their history.
 * Each time the user presses the down arrow key, the command box will be replaced with the command they next executed, until they reach the latest command (the current one they have not executed).
 * If the user executes duplicate commands one after another, only the first will be added to history.
-  * For example, if the user executes `list`, `list`, `list`, only the first list is added to history. 
+  * For example, if the user executes `list`, `list`, `list`, only the first `list` is added to history. 
   
-The command history works with the use of two `ArrayList<String>`, `historyBuffer` and `activeBuffer`.
+The command history works with the use of two `ArrayList<String>` named `historyBuffer` and `activeBuffer`.
 
 `historyBuffer` contains the commands that was actually executed by the user (i.e., the user pressed enter).
 Whenever the user executes a command, regardless whether it is valid or not, the command is added to a `historyBuffer`.
@@ -512,51 +509,53 @@ When the user edits a previous command and executes, the content of that command
 
 Example usage (red arrow is what the command box is displaying):
 
-1. ![Command History Flow 1](images/CommandHistoryFlow1.png)
+Step 1. ![Command History Flow 1](images/CommandHistoryFlow1.png)
 
 *Figure: User starts with a blank command box.*
 
-2. ![Command History Flow 2](images/CommandHistoryFlow2.png)
+Step 2. ![Command History Flow 2](images/CommandHistoryFlow2.png)
 
 *Figure: User types `append 1 t/vendor`.*
 
-3. ![Command History Flow 3](images/CommandHistoryFlow3.png)
+Step 3. ![Command History Flow 3](images/CommandHistoryFlow3.png)
 
 *Figure: User executes `append 1 t/vendor`. `append 1 t/vendor` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again.*
 
-4. ![Command History Flow 4](images/CommandHistoryFlow4.png)
+Step 4. ![Command History Flow 4](images/CommandHistoryFlow4.png)
 
 *Figure: User types `edit 2 e/` but does not execute. User then presses the up arrow key to cycle to `addMembership 1 m/silver`.*
 
-5. ![Command History Flow 5](images/CommandHistoryFlow5.png)
+Step 5. ![Command History Flow 5](images/CommandHistoryFlow5.png)
 
 *Figure: User changes `addMembership 1 m/silver` to `addMembership 3 m/bronze`.*
 
-6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
+Step 6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
 
 *Figure: User executes `addMembership 3 m/bronze`. `addMembership 3 m/bronze` is appended to `historyBuffer` and `activeBuffer`. Un-executed command `edit 2 e/` is erased. Command box is blank again. `addMembership 1 m/silver` in `activeBuffer` is restored.*
 
-7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
+Step 7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
 
 *Figure: User cycles to `listTransaction` and changes it to `random invalid string`.*
 
-8. ![Command History Flow 8](images/CommandHistoryFlow8.png)
+Step 8. ![Command History Flow 8](images/CommandHistoryFlow8.png)
 
 *Figure: User cycles to `delete 5` and changes it to `delete 7`.*
 
-9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
+Step 9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
 
 *Figure: User executes `delete 7`. `delete 7` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again. `delete 5` in `activeBuffer` is restored. `listTransaction` is not restored.*
 
 #### Design considerations
 
 **Aspect: Functionality**
+
 * **Alternative 1**:
 Have a very simple implementation with only one history list.
 Do not store edits for every single entry, and simply replace the command box with the previous command. 
 If the user presses up or down, any edits are lost.
   * Pros: Very simple to implement.
   * Cons: Less feature rich.
+
 * **Alternative 2 (current choice)**
 Store the history using two lists, and store edits for every command. If the user presses up or down, edits are not lost.
   * Pros: Very similar to Linux Bash terminal, intuitive for experienced command line users.
@@ -593,7 +592,6 @@ A small business owner or freelancer that:
 CinnamonBun is a free, open source, purpose built application that handles client and transaction information easily.
 CinnamonBun helps small businesses and freelancers on a budget to get up and running quickly. 
 
-
 ### User stories
 
 Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
@@ -627,7 +625,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 ### Use cases
 
-(For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.)
+**For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.**
 
 #### Use case: Get client list
 
@@ -680,7 +678,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
       Use case resumes at step 2.
 
-* 2b. Some fields are inputed wrongly
+* 2b. Some fields are inputted wrongly
     * 2b1. CinnamonBun shows the appropriate error message.
 
       Use case resumes at step 2.
@@ -809,7 +807,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 1. User undos the latest modification made to the Clients' list in the CinnamonBun.
 2. The modifications have been undone.
-3. CinnamonBun shows the earlier clients' list without the modifications.
+3. CinnamonBun shows the earlier client list without the modifications.
 
    Use case ends.
 
@@ -866,7 +864,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+<div markdown="1" class="alert alert-info">:bulb: **Note**<br>
 
 These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
@@ -894,7 +892,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Editing a client
 
 * Editing a client while all clients are being shown
-  1. Prerequisites: There needs to be existing client data in the client's list.
+  1. Prerequisites: There needs to be existing client data in the client list.
   2. Test case: `edit 1 e/client_name@example.com`<br>
      Expected: First client's email is changed to `client_name@example.com`.
   3. Test case: `edit 2 e/client_name@example.com`<br>
@@ -903,7 +901,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Append fields to a client
 
 * Append fields to a client.
-    1. Prerequisites: There needs to be existing client data in the client's list.
+    1. Prerequisites: There needs to be existing client data in the client list.
     2. Test case: `append 1 b/1999-02-17`<br>
        Expected: First client's birthday is set to `1999-02-17`.
     3. Test case: `append 1 n/Ookami Mio`<br>
@@ -912,7 +910,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Remove fields from a client
 
 * Remove fields from a client.
-    1. Prerequisites: There needs to be existing client data in the client's list.
+    1. Prerequisites: There needs to be existing client data in the client list.
     2. Append a tag and birthday to the first client using the command `append 1 t/vendor b/1999-02-17`.
     3. Test case: `remove 1 b/`<br>
        Expected: First client's birthday is removed.
@@ -924,7 +922,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Add or remove remark from a client
 
 * Add or remove remark from a client.
-    1. Prerequisites: There needs to be existing client data in the client's list.
+    1. Prerequisites: There needs to be existing client data in the client list.
     2. Test case: `remark 1 r/High shipping cost.`<br>
        Expected: First client's remark is set to `High shipping cost.`.
     3. Test case: `remark 1 r/`<br>
@@ -933,7 +931,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Deleting a client
 
 * Deleting a client while all clients are being shown
-    1. Prerequisites: There needs to be existing client data in the client's list.
+    1. Prerequisites: There needs to be existing client data in the client list.
     2. Test case: `delete 1`<br>
        Expected: First client is deleted from the list.
     3. Test case: `delete 0`<br>
@@ -941,14 +939,14 @@ These instructions only provide a starting point for testers to work on; testers
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: No client is deleted. Error message is shown.
 
-### Sorting client's list
+### Sorting the client list
 
-* Sorting the client's list based on certain fields
-   1. Prerequisites: There needs to be existing client data in the client's list.
+* Sorting the client list based on certain fields
+   1. Prerequisites: There needs to be existing client data in the client list.
    2. Test case: `sort n/`<br>
-      Expected: The client's list will display the clients in ascending alphabetical order.
+      Expected: The client list will display the clients in ascending alphabetical order.
    3. Test case: `sort n/ a/ p/ desc`<br>
-      Expected: The client's list will display the clients in ascending alphabetical order. Clients with the same name will
+      Expected: The client list will display the clients in ascending alphabetical order. Clients with the same name will
       then be displayed according to their addresses in ascending order. And if they also have the same address, they'll be 
       displayed based on their phone number in descending order.
    4. Test case: `sort l:)/ djewijw p/`<br>
@@ -957,10 +955,10 @@ These instructions only provide a starting point for testers to work on; testers
 ### Undo data modifications
 
 * Undo a modification that was previously made
-   1. Prerequisites: There needs to be modifications made to the clients' list.
+   1. Prerequisites: There needs to be modifications made to the client list.
    2. Test case: `undo` <br>
       Expected: The previous modification done will be reverted and the application will display the previous version
-      of the clients' list.
+      of the client list.
 * Undo a modification when there are none
    1. Prerequisites: No modifications were made since the start of the application or all modifications have been reverted.
    2. Test case: `undo` <br>
@@ -968,24 +966,24 @@ These instructions only provide a starting point for testers to work on; testers
 * Only able to undo the 10 latest modifications.
    1. Prerequisites: More than 10 modifications were made without reverting any of them.
    2. Test case: `undo` 11 times <br>
-      Expected: Notice that it can only revert the clients' list by the latest 10 modifications made and not the modifications before those.
+      Expected: Notice that it can only revert the client list by the latest 10 modifications made and not the modifications before those.
       At the 11th `undo`, will show an error message stating that there is nothing to undo since there are no modifications.
 * Handling temporary file corruption.
    1. Prerequisites: Some modifications were made, but the latest temporary files in the `data\.tempdata` are either corrupted or deleted
    by the user and not the application.
    2. Test case: `undo` <br>
       Expected: An error message would be shown stating it cannot read the temporary file. The temporary file if it's not
-      already deleted by the user, will then be deleted by the application. The clients' list will not be able to revert to before the modification stored 
+      already deleted by the user, will then be deleted by the application. The client list will not be able to revert to before the modification stored 
       in the corrupted temporary file. 
    
-      However, if the user were to call `undo` again, and if the second latest temporary file data
-      is not corrupted or deleted by user, the application will be able to revert the clients' list to the state stored in the temporary file.
+      However, if the user were to call `undo` again, and if the second-latest temporary file data
+      is not corrupted or deleted by user, the application will be able to revert the client list to the state stored in the temporary file.
       Thus, effectively undoing the latest 2 modifications.
 
 ### Adding membership
 
 * Adding a membership to a user
-    1. Prerequisites: There needs to be existing client data in the client's list.
+    1. Prerequisites: There needs to be existing client data in the client list.
     2. Test case: `addMembership 1 m/gold`<br>
        Expected: The client at index 1 will have a gold membership assigned to him.
     3. Test case: `addMembership 3 m/bronze`<br>
@@ -998,7 +996,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Removing membership
 
 * Removing a membership from a user
-    1. Prerequisites: There needs to be existing client data in the client's list with a membership.
+    1. Prerequisites: There needs to be existing client data in the client list with a membership.
     2. Test case: `removeMembership 1` (User at index 1 has a membership)<br>
        Expected: The client at index 1 will have his membership removed.
     3. Test case: `removeMembership 1` (User at index 1 has no membership)<br>
@@ -1009,7 +1007,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Listing all members
 
 * Listing members
-    1. Prerequisites: There needs to be existing client data in the client's list with memberships.
+    1. Prerequisites: There needs to be existing client data in the client list with memberships.
     2. Test case: `listMembers` (Some users have memberships)<br>
        Expected: List of all members will be displayed.
     3. Test case: `listMembers` (No users have memberships)<br>
