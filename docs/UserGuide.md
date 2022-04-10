@@ -411,7 +411,7 @@ An example of such an error would be conflicting lessons being found in the data
 
 | Action               | Format, Examples                                                                                                                                                                          |
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**      | `addstudent <STUDENT_NAME>` e.g. `addstudent sammy boyo`                                                                                                                                  |
+| **Add Student**      | `addstudent <NAME>` e.g. `addstudent sammy boyo`                                                                                                                                          |
 | **Add lesson**       | `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>` |
 | **Delete Student**   | `rmstudent <STUDENT_ID>` e.g. `rmstudent 13`                                                                                                                                              |
 | **Delete lesson**    | `rmlesson <LESSON_ID>` e.g.`rmlesson 5`                                                                                                                                                   |
@@ -425,6 +425,6 @@ An example of such an error would be conflicting lessons being found in the data
 | **View lesson**      | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
 | **Find Student**     | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
 | **Find Lesson**      | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
-| **Clearing all entries**      | `clear -f`                                                                                                                                                             |
+| **Clearing all entries**      | `clear -f`                                                                                                                                                                                |
 | **Help**             | `help`                                                                                                                                                                                    |
 | **Exit**             | `exit`                                                                                                                                                                                    |
