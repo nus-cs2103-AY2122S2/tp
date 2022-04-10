@@ -79,7 +79,7 @@ public class ParserUtil {
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
-        if (!Rating.isValidScore(rating)) {
+        if (!Rating.isValidRating(rating)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
         }
         return new Rating(rating);
@@ -122,8 +122,11 @@ public class ParserUtil {
      * @param comment a {@code String comment}.
      * @return a {@code Comment}.
      */
-    public static Comment parseComment(String comment) {
+    public static Comment parseComment(String comment) throws ParseException {
         requireNonNull(comment);
+        if (!Comment.isValidComment(comment)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Comment.MESSAGE_CONSTRAINTS));
+        }
         Comment validComment = new Comment(comment);
         return validComment;
     }

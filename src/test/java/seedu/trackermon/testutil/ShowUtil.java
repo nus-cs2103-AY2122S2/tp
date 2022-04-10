@@ -32,7 +32,7 @@ public class ShowUtil {
      */
     public static String getShowDetails(Show show) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + show.getName().fullName + " ");
+        sb.append(PREFIX_NAME + show.getName().name + " ");
         sb.append(PREFIX_COMMENT + show.getComment().comment + " ");
         sb.append(PREFIX_STATUS + show.getStatus().name() + " ");
         sb.append(PREFIX_RATING + show.getRating().toString() + " ");
@@ -47,7 +47,7 @@ public class ShowUtil {
      */
     public static String getEditShowDescriptorDetails(EditShowDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.name).append(" "));
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.name()).append(" "));
         descriptor.getComment().ifPresent(status -> sb.append(PREFIX_COMMENT).append(status.comment).append(" "));
         descriptor.getRating().ifPresent(status -> sb.append(PREFIX_RATING)

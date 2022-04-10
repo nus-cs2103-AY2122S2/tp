@@ -49,7 +49,7 @@ class JsonAdaptedShow {
      * Converts a given {@code Show} into this class for Jackson use.
      */
     public JsonAdaptedShow(Show source) {
-        name = source.getName().fullName;
+        name = source.getName().name;
         status = source.getStatus().name();
         rating = source.getRating().toString();
         tagged.addAll(source.getTags().stream()
@@ -92,7 +92,7 @@ class JsonAdaptedShow {
             throw new IllegalValueException("Rating Failed");
         }
 
-        if (!Rating.isValidScore(rating)) {
+        if (!Rating.isValidRating(rating)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
 

@@ -15,6 +15,9 @@ import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code StorageManager}.
+ */
 public class StorageManagerTest {
 
     @TempDir
@@ -33,6 +36,10 @@ public class StorageManagerTest {
         return testFolder.resolve(fileName);
     }
 
+    /**
+     * Tests that the {@code StorageManager} is properly wired to {@link JsonUserPrefsStorage} by checking the
+     * {@code UserPrefs} are saved and read correctly.
+     */
     @Test
     public void prefsReadSave() throws Exception {
         /*
@@ -47,6 +54,10 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
+    /**
+     * Tests that the {@code StorageManager} is properly wired to {@link JsonUserPrefsStorage} by checking that
+     * {@code ShowList} is saved and read correctly.
+     */
     @Test
     public void showListReadSave() throws Exception {
         /*
@@ -60,6 +71,9 @@ public class StorageManagerTest {
         assertEquals(original, new ShowList(retrieved));
     }
 
+    /**
+     * Tests that {@code getShowListFilePath} does not return null.
+     */
     @Test
     public void getShowListFilePath() {
         assertNotNull(storageManager.getShowListFilePath());
