@@ -32,6 +32,8 @@ public class AssignCommandParser implements Parser<AssignCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
         }
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        assert index.getOneBased() != 0 : "index should not be zero";
+
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).orElse(""));
         Group group = new Group(groupName);
 
