@@ -362,18 +362,6 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
    which checks if the trimmed argument is valid (according to the Regex supplied).
    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteModuleCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
-
-   | Field          | Parse Methods                              |
-   |----------------|--------------------------------------------|
-   | Index          | parseIndex(String oneBasedIndex)           |
-   | StudentId      | parseStudentId(String studentId)           |
-   | Name           | parseName(String name)                     |
-   | ModuleCode     | parseModuleCode(String moduleCode)         |
-   | Phone          | parsePhone(String phone)                   |
-   | TelegramHandle | parseTelegramHandle(String telegramHandle) |
-   | Email          | parseEmail(String email)                   |
-   | Task           | parseTask(String task)                     |
-
 8. The `DeleteModuleCommandParser` will create a new `ModuleCodeContainsKeywordsPredicate`.
 9. A new `DeleteModuleCommand` will be created (using the `ModuleCodeContainsKeywordsPredicate` returned in Step 8) and returned to the `LogicManager`.
 10. The `LogicManager` will then call `DeleteModuleCommand#execute(Model model)`.
