@@ -1070,7 +1070,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-####**Use case UC01 - Add a student**
+#### **Use case UC01 - Add a student**
 
 **MSS**
 
@@ -1111,7 +1111,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
        Use case ends.
 
-**Use case: UC02 - List all students**
+#### **Use case: UC02 - List all students**
 
 **MSS**
 
@@ -1126,7 +1126,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-####**Use case UC03 - Delete a student**
+#### **Use case UC03 - Delete a student**
 
 **MSS**
 
@@ -1155,7 +1155,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-####**Use case UC04 - Edit a student**
+#### **Use case UC04 - Edit a student**
 
 **MSS**
 
@@ -1191,7 +1191,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-**Use case: UC05 - Assign a task to a student**
+#### **Use case: UC05 - Assign a task to a student**
 
 **MSS**
 1. User requests TAPA to assign a task to a student. (This can be done for an individual student or for all students taking the same module)
@@ -1220,7 +1220,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC06 - Delete a task assigned to a student**
+#### **Use case: UC06 - Delete a task assigned to a student**
 
 **MSS**
 
@@ -1261,7 +1261,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Finding a student**
+#### **Use case: UC07 - Finding a student**
 
 **MSS**
 
@@ -1284,7 +1284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-**Use case: UC08 - Delete all students from a module**
+#### **Use case: UC08 - Delete all students from a module**
 
 **MSS**
 
@@ -1306,8 +1306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. TAPA shows an error message.
 
       Use case resumes from step 1.
-   
-**Use case: UC09 - Check all the tasks that a student has**
+
+#### **Use case: UC09 - Check all the tasks that a student has**
 
 **MSS**
 
@@ -1336,7 +1336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC10 - View the completion status of a particular task**
+#### **Use case: UC10 - View the completion status of a particular task**
 
 **MSS**
 
@@ -1363,7 +1363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC11 - Save a copy of the data in TAPA**
+#### **Use case: UC11 - Save a copy of the data in TAPA**
 
 **MSS**
 
@@ -1391,7 +1391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC12 - Finding out what a certain command does**
+#### **Use case: UC12 - Finding out what a certain command does**
 
 **MSS**
 
@@ -1416,7 +1416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC13 - Marking an undone task as complete**
+#### **Use case: UC13 - Marking an undone task as complete**
 
 **MSS**
 
@@ -1451,7 +1451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC14 - Marking a done task as incomplete**
+#### **Use case: UC14 - Marking a done task as incomplete**
 
 **MSS**
 
@@ -1486,7 +1486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
-**Use case: UC15 - Sorting list of students by their number of incomplete tasks in descending order**
+#### **Use case: UC15 - Sorting list of students by their number of incomplete tasks in descending order**
 
 **MSS**
 
