@@ -8,7 +8,6 @@ title: S Dinesh Raj's Project Portfolio Page
 WoofAreYou is a desktop app for pet daycare owners to handle the administrative information of their pets. If you can type fast, WoofAreYou can get your contact management tasks done faster than traditional GUI apps.The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
-***
 
 * **New Feature**:
 1. **Appointment Command** [#74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74) [#82](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/82)
@@ -44,14 +43,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-  1. Added Add Command, Appointment Command, Clear Command, Edit Command, List Command and Help Command.[#55](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/55) [#74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74) [#86](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/86).
-  2. Updated Sort Command. [#89](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/89).
+  1. Added Add Command, Appointment Command, Clear Command, Edit Command, List Command and Help Command.[#55](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/55) [#74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74) [#86](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/86)
+  2. Updated Sort Command. [#89](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/89)
   * Developer Guide:
   1. Assisted with the offline generation of user stories.
-  2. Added developer documentation for Appointment feature. [#82](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/82).
+  2. Added developer documentation for Appointment feature. [#82](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/82)
 
 * **Community**:
-1. Served as a second pair of eyes to check and review teammate codes. [#75](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/55) [#169](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/169)
+1. Served as a second pair of eyes to check and review teammate codes. [#75](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/75) [#169](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/169)
 2. Reported bugs spotted. [#106](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/106) [#110](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/110)
 
 
