@@ -11,8 +11,8 @@ public class Messages {
             + "a valid prefix required! "
             + "\nThe index has to be a non-negative integer lesser than or equal to the size of the list. "
             + "\n%1$s";
-    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
-    public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid.";
+    public static final String MESSAGE_OOB_STUDENT_DISPLAYED_INDEX = "The student index provided is out-of-bounds";
+    public static final String MESSAGE_OOB_LESSON_DISPLAYED_INDEX = "The lesson index provided is out-of-bounds.";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lessons listed!";
 

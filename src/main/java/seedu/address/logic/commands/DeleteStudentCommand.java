@@ -40,7 +40,7 @@ public class DeleteStudentCommand extends Command {
 
         boolean isIndexOutOfBounds = targetIndex.getZeroBased() >= lastShownList.size();
         if (isIndexOutOfBounds) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_OOB_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());

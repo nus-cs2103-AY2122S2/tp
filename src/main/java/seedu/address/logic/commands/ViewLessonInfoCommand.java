@@ -41,7 +41,7 @@ public class ViewLessonInfoCommand extends Command {
 
         boolean isIndexOutOfBounds = targetIndex.getZeroBased() >= lastShownList.size();
         if (isIndexOutOfBounds) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_OOB_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToSelect = lastShownList.get(targetIndex.getZeroBased());

@@ -44,7 +44,7 @@ public class DeleteStudentCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_OOB_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class DeleteStudentCommandTest {
 
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteStudentCommand, model, Messages.MESSAGE_OOB_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
