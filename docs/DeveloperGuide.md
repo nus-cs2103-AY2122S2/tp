@@ -1169,6 +1169,8 @@ testers are expected to do more *exploratory* testing.
    3. Relaunch the app. <br>
       Expected: ManageEZPZ would retain the recent changes.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 **Difficulty Level** :
