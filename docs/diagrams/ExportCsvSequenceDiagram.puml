@@ -31,7 +31,7 @@ activate ExportCsvCommand
 
 
 create CsvManager
-ExportCsvCommand -> CsvManager : Function to parse persons
+ExportCsvCommand -> CsvManager : CsvManager(Function to parse persons into model)
 
 activate CsvManager
 ExportCsvCommand -> CsvManager : exportCsv(defaultFilePath)

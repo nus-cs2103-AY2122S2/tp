@@ -46,6 +46,8 @@ public class RangeCommand extends Command {
     private final Index toIndex;
     private final String commandInput;
     /**
+     * Creates an {@code RangeCommand} object.
+     *
      * @param fromIndex              of the person in the filtered person list to edit
      * @param toIndex                of the person in the filtered person list to edit
      * @param commandInput           details to word of command
@@ -61,35 +63,21 @@ public class RangeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        checkIndex(model, fromIndex, toIndex);
         List<CommandResult> commandResultList = new ArrayList<>();
         Person restorePerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
-
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
-
-                if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
-                        && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
-                    throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            RangeCommand.MESSAGE_USAGE));
-                }
-
+                checkCommandText(commandText);
                 logger.info("----------------[RANGE COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
-
                 try {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
-                    // special case: duplicated name editing, restore to previous name
-                    if (fromIndex.getZeroBased() != toIndex.getZeroBased()
-                            && commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
-                        model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
-                    }
+                    revertPersonList(model, fromIndex, toIndex, commandText, restorePerson);
                     commandResultList.add(new CommandResult(ce.getMessage()));
                     break;
                 }
@@ -102,6 +90,50 @@ public class RangeCommand extends Command {
             resultOutput.append(result.getFeedbackToUser()).append("\n");
         }
         return new CommandResult(resultOutput.toString());
+    }
+
+    /**
+     * Restores to previous name in special case when duplicated name editing.
+     *
+     * @param model                  model for command
+     * @param fromIndex              of the person in the filtered person list to edit
+     * @param toIndex                of the person in the filtered person list to edit
+     * @param commandText            String of command
+     * @param restorePerson          revert of person
+     */
+    private void revertPersonList(Model model, Index fromIndex, Index toIndex,
+                                  String commandText, Person restorePerson) {
+        if (fromIndex.getZeroBased() != toIndex.getZeroBased()
+                && commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
+            model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
+        }
+    }
+
+    /**
+     * Checks the to index is larger than from index and valid bound for person list.
+     *
+     * @param model                  model for command
+     * @param fromIndex              of the person in the filtered person list to edit
+     * @param toIndex                of the person in the filtered person list to edit
+     */
+    private void checkIndex(Model model, Index fromIndex, Index toIndex) throws CommandException {
+        if (fromIndex.getZeroBased() > toIndex.getZeroBased() || fromIndex.getZeroBased() < 0
+                || toIndex.getOneBased() > model.getFilteredPersonList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * Checks validity of command text.
+     *
+     * @param commandText            String of command
+     */
+    private void checkCommandText(String commandText) throws CommandException {
+        if (!commandText.startsWith(EditPersonCommand.COMMAND_WORD)
+                && !commandText.startsWith(DeletePersonCommand.COMMAND_WORD)) {
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RangeCommand.MESSAGE_USAGE));
+        }
     }
 
 

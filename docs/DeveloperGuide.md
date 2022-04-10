@@ -248,10 +248,6 @@ As such, detailed descriptions for the Address Book subsystem can be easily tran
 
 This section describes some noteworthy details on how certain features are implemented. The section is organized by functionality.
 
-### Tag Management
-
-This section will describe tag management in the address book as well as the features implemented.
-
 ### Centralising Tags in the Address Book
 
 In the previous implementation, all `Tag` objects are independent of one another despite having the same tag names. To improve the usability of the address book, the tags are centralised so that the user can easily manage them as well as searching for `Person` objects that contain the tag.
@@ -259,6 +255,25 @@ This is done by creating a `UniqueTagList` within `AddressBook` which will store
 All operations relating to the `Tag` objects are done at the `AddressBook` level to ensure that the `Tag` objects and `Person` objects are properly synchronised.
 
 Another benefit that comes with the centralised tag list is that the user can maintain tags even if it is not associated with any `Person` objects. The rationale to maintain `Tag` separately is to allow the user to reuse the tag depending on their workflow (i.e. A user may want to maintain the `prospective clients` tag even if he/she currently does not have any prospective clients.)
+
+Below is a partial class diagram of the Tag subsystem.
+
+![Tag Subsystem](images/TagModelClassDiagram.png)
+
+### Defensive `AddressBook`
+
+As the `Tag` objects are moved to its own subsystem, there is a need to synchronise the `Tag` and `Person` subsystems which is done through cascading any changes made from `Tag` to `Person`. For example, if a `Tag` object is deleted, this tag should also be removed for all `Person` objects containing that tag. 
+For operations involving `Person`, if there are missing tags that do not exist in the `UniqueTagList`, those tags will be added into the system before performing the operation on `Person`. 
+For operations involving `Tag`, the changes will propagate to `Person` objects that contain the specified `Tag`. See the edit tag feature below for an example of `Tag` propagation.
+
+To ensure that the tags and persons are properly synchronised, some modifications are made to `AddressBook#setPersons()` and `AddressBook#setTags()`. In the case of `AddressBook#setTags()`, the `AddressBook` will first strip any `Tag` objects from `Person` that are not in the new list before setting the new tags to the `AddressBook`.
+In the case of `AddressBook#setPersons()`, `AddressBook` will add any tags that are in `Person` but not in the tag list. This will ensure that all `Tag` objects are recorded before setting the new persons to the `AddressBook`.
+
+Below are the modified sequence diagrams of `AddressBook#setPersons()` and `AddressBook#setTags()`
+
+![AddressBook SetPersons](images/AddressBookSetPersonsSequenceDiagram.png)
+
+![AddressBook SetTags](images/AddressBookSetTagsSequenceDiagram.png)
 
 ### Edit Tag Feature - `edittag`
 
@@ -271,7 +286,7 @@ Note: `target` refers to the tag to be updated, and `editedTag` is the replaceme
 
 ![Tag Edit](images/TagEditSequenceDiagram.png)
 
-### Serialisation and Inflation
+### Tag Serialisation and Inflation
 
 `Tag` serialisation and inflation is handled by the `Storage` component. The current implementation augments the existing method from `JsonSerializableAddressBook` through the addition of reading a list of tag names from the JSON file and saving them.
 
@@ -536,7 +551,7 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
 
 ### Markdown-like Text Processing
-The `TextStyleHelper` class contains a text processor that processes common text modifications into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
+The `TextStyleHelper` class contains a text processor that processes common text stylings into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
 
 Example of styled text:
 ![StyledTextExample](images/StyledTextExample.png)
@@ -626,91 +641,19 @@ The sequence diagram is as follows:
 
 The multiple commands executed will return a `CommandResult` which contains a list of feedback messages of the results executed combined all together and returned as `feedbackToUser`
 
+### \[Proposed\] Tag Finding Feature
 
-### \[Proposed\] Undo/redo feature
+The proposed find tag feature is similar to `findperson` where the user can search for tags from the specified keywords. This feature was not implemented as our target user need not maintain a large number of tags (compared to persons and appointments). However, if this feature is required in the future, the developer simply needs to implement the `Logic` components as the required components in `Model` already exists.
+Similar to the system used for person, `Tag` filtering is facilitated by `FilteredList` from the JavaFX library which is implemented at the `ModelManager` level, and the related functions are:
 
-#### Proposed Implementation
+* `Model#updateFilteredTagList()`
+* `Model#getFilteredTagList()`
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The filtering is implemented at the `ModelManager` level as it is the highest common level between the `Logic` and `Ui` components which allows the filtering to be centralized, while allowing the lower level classes in the `Model` component access the unfiltered list of the `Tag` object.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The sequence diagrams below illustrates the proposed implementations to access the tag filtering functionality.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+![Tag Find](images/TagFindSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -733,7 +676,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Needs to manage a large number of contacts
 * Has a busy schedule with many appointments and meetings
 * Needs to know when he is free very quickly
-* May need documents or information related to contacts or meetings
+* Needs to manage information related to contacts and meetings efficiently
 * Prefers keyboard over mouse interactions for on-the-go usage
 * Is reasonably comfortable using apps with text-based inputs
 * Currently uses excel for managing contacts
@@ -780,26 +723,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 The following user stories were considered but ultimately not implemented. Some reasons for not implementing are listed below.
 
 * The UI was made intuitive with only 1 text field for input so that there is no ambiguity for the user
-* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fiels
+* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fields
 * A To-Do list does not add value to the problem that is being tackled
 * Custom commands add significant complexity without much value. It was decided that keeping the commands simple and short would eliminate the need for this entirely.
+* Finding tags by name does not add value to the problem that is being tackled
 
-| Priority | As a …​     | I want to …​                                                     | So that I can…​                                                     |
-|----------|----------------|------------------------------------------------------------------| ---------------------------------------------------------------------- |
-| `*    `  | beginner user  | see usage instructions and tutorials                             | remember how to perform certain tasks                                  |
-| `*    `  | power user     | link documents to a person                                       | easily locate related documents for a person                           |
-| `*    `  | power user     | unlink documents from a person                                   | remove documents no longer required for a person                       |
-| `*    `  | user           | view all appointments on a calendar interface                    | get an overview of all my appointments in the month                    |
-| `* *  `  | user           | be reminded of things that are happening on a particular day     | remember to attend them                                                |
-| `* *  `  | power user     | add a to-do list to an appointment                               | be reminded to make preparations for that appointment                  |
-| `* *  `  | power user     | view the to-do list of an appointment                            | ensure that I am fully prepared for the appointment                    |
-| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done   | keep track of the things that are already done                         |
-| `* *  `  | power user     | search for appointments by tags and other filters                | easily find appointments amongst my large address book                 |
-| `* *  `  | power user     | link documents to an appointment                                 | easily find them to prepare for my appointment                         |
-| `*    `  | seasoned user  | export contact information to PDF                                | easily print mailing labels for contacts                               |
-| `*    `  | seasoned user  | export all my data files as backup                               | have a copy of the contact list and import it in case of data loss     |
-| `*    `  | seasoned user  | customise the names and format of text-based commands            | easily remember and use commands I need                                |
-| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command  | perform complex actions that I need in 1 command                       |
+| Priority | As a …​        | I want to …​                                                    | So that I can…​                                                    |
+|----------|----------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `*    `  | beginner user  | see usage instructions and tutorials                            | remember how to perform certain tasks                              |
+| `*    `  | power user     | link documents to a person                                      | easily locate related documents for a person                       |
+| `*    `  | power user     | unlink documents from a person                                  | remove documents no longer required for a person                   |
+| `*    `  | user           | view all appointments on a calendar interface                   | get an overview of all my appointments in the month                |
+| `* *  `  | user           | be reminded of things that are happening on a particular day    | remember to attend them                                            |
+| `* *  `  | forgetful user | find a tag by name                                              | locate details of tag without having to go through the entire list |
+| `* *  `  | power user     | add a to-do list to an appointment                              | be reminded to make preparations for that appointment              |
+| `* *  `  | power user     | view the to-do list of an appointment                           | ensure that I am fully prepared for the appointment                |
+| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done  | keep track of the things that are already done                     |
+| `* *  `  | power user     | search for appointments by tags and other filters               | easily find appointments amongst my large address book             |
+| `* *  `  | power user     | link documents to an appointment                                | easily find them to prepare for my appointment                     |
+| `*    `  | seasoned user  | export contact information to PDF                               | easily print mailing labels for contacts                           |
+| `*    `  | seasoned user  | export all my data files as backup                              | have a copy of the contact list and import it in case of data loss |
+| `*    `  | seasoned user  | customise the names and format of text-based commands           | easily remember and use commands I need                            |
+| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command | perform complex actions that I need in 1 command                   |
 
 
 ### Use cases
@@ -816,8 +761,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **MSS**
 
 1. User requests to list persons.
-2. ContaX shows a list of persons.
-    Use case ends.
+2. ContaX shows a list of persons.<br>&nbsp;
+    Use case ends.<br>&nbsp;
 
 **UC2: Add Person**
 
@@ -826,22 +771,22 @@ Note that since underline is not allowed in markdown, included use cases are **b
 1. User requests to add a person.
 2. User enters details of the new person.
 3. ContaX adds the new person.
-4. ContaX shows that the person has been added successfully.
-    Use case ends.
+4. ContaX shows that the person has been added successfully.<br>&nbsp;
+    Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 2a. ContaX detects that a required person attribute was not supplied.
-    * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * 2a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 2b. ContaX detects that a supplied attribute has an invalid value.
     * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
-    * 2b2. ContaX shows the expected allowed values.
+    * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 2c. ContaX detects that the person already exists.
-    * 2c1. ContaX shows an error message indicating that the person already exists.
+    * 2c1. ContaX shows an error message indicating that the person already exists.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 **UC3: Delete Person**
@@ -853,8 +798,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User requests to delete a person.
 4. User selects the person to delete.
 5. ContaX deletes the person.
-6. ContaX displays a message indicating that the person was successfully deleted.
-    Use case ends.
+6. ContaX displays a message indicating that the person was successfully deleted.<br>&nbsp;
+    Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -866,11 +811,11 @@ Note that since underline is not allowed in markdown, included use cases are **b
   * 1b1. User **finds person by tag (UC10)**.
   * Use case resumes from step 2.<br>&nbsp;
 
-* 2a. ContaX has no persons to list.
+* 2a. ContaX has no persons to list.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 3a. ContaX cannot find the requested person to delete.
-  * 3a1. ContaX shows an error message indicating that no such person exists.
+  * 3a1. ContaX shows an error message indicating that no such person exists.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 **UC4: Edit Person**
@@ -882,8 +827,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User requests to edit person.
 4. User enters details to modify a specific person.
 5. ContaX updates the specified person.
-6. ContaX displays a message indicating that the person was successfully edited.
-    Use case ends.
+6. ContaX displays a message indicating that the person was successfully edited.<br>&nbsp;
+    Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -895,24 +840,24 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 1b1. User **finds person by tag (UC10)**.
     * Use case resumes from step 2.<br>&nbsp;
 
-* 2a. ContaX has no persons to list.
+* 2a. ContaX has no persons to list.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 4a. ContaX detects that a required person attribute was not supplied.
-    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 4b. ContaX detects that a supplied attribute has an invalid value
     * 4b1. ContaX shows an error message indicating that the supplied parameter is invalid.
-    * 4b2. ContaX shows the expected allowed values.
+    * 4b2. ContaX shows the expected allowed values.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 5a. ContaX cannot find the requested person to edit.
-    * 5a1. ContaX shows an error message indicating that no such person exists.
+    * 5a1. ContaX shows an error message indicating that no such person exists.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 5b. ContaX detects that a person with the same name already exists.
-    * 5b1. ContaX shows an error message indicating that the person already exists.
+    * 5b1. ContaX shows an error message indicating that the person already exists.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 **UC5: Find Persons**
@@ -921,21 +866,21 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to find persons.
 2. User enters details to find person by.
-3. ContaX shows a list of persons that matches the specified details.
-   Use case ends.
+3. ContaX shows a list of persons that matches the specified details.<br>&nbsp;
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 2a. ContaX detects that a required person attribute was not supplied.
-  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 2b. ContaX detects that a supplied attribute has an invalid value
   * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
-  * 2b2. ContaX shows the expected allowed values.
+  * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
-* 3a. ContaX has no persons to list.
+* 3a. ContaX has no persons to list.<br>&nbsp;
   * 3a1. Use case ends.<br>&nbsp;
 
 #### Tag-Related Use Cases
@@ -946,8 +891,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **MSS**
 
 1. User requests to list tags.
-2. ContaX shows a list of tags
-    Use case ends.
+2. ContaX shows a list of tags.<br>&nbsp;
+    Use case ends.<br>&nbsp;
 
 **UC7: Add Person Tag**
 
@@ -956,22 +901,22 @@ Note that since underline is not allowed in markdown, included use cases are **b
 1. User requests to add tag.
 2. User enters details to add tag.
 3. ContaX adds new tag.
-4. ContaX shows that the appointment has been added successfully.
-   Use case ends.
+4. ContaX shows that the appointment has been added successfully.<br>&nbsp;
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 2a. ContaX detects that the required tag attributed was not supplied.
-  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 2b. ContaX detects that invalid characters were supplied.
   * 2b1. ContaX shows an error message indicating that an invalid character was found.
-  * 2b2. ContaX shows the expected allowed values.
+  * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 3a. ContaX detects that the tag already exists.
-  * 3a1. ContaX shows an error message indicating that the tag already exists in the system.
+  * 3a1. ContaX shows an error message indicating that the tag already exists in the system.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 **UC8: Edit Person Tag**
@@ -982,26 +927,26 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User requests to edit tag.
 3. User enters details to edit tag.
 4. ContaX updates the specified tag.
-5. ContaX shows that the tag has been edited successfully.
-   Use case ends.
+5. ContaX shows that the tag has been edited successfully.<br>&nbsp;
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 3a. ContaX detects that the required tag attributed was not supplied.
-    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 3b. ContaX detects that invalid characters were supplied.
     * 3b1. ContaX shows an error message indicating that an invalid character was found.
-    * 3b2. ContaX shows the expected allowed values.
+    * 3b2. ContaX shows the expected allowed values.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 4a. ContaX cannot find the requested tag to edit.
-  * 4a1. ContaX shows an error message indicating that no such tag exists.
+  * 4a1. ContaX shows an error message indicating that no such tag exists.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 4b. ContaX detects that the updated tag already exists.
-  * 4b1. Contax shows an error message indicating that the tag already exists in the system.
+  * 4b1. Contax shows an error message indicating that the tag already exists in the system.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 **UC9: Delete Person Tag**
@@ -1012,17 +957,17 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User requests to delete tag.
 3. User enters details to delete tag.
 4. ContaX deletes the specified tag.
-5. ContaX shows that the tag has been deleted successfully.
-   Use case ends.
+5. ContaX shows that the tag has been deleted successfully.<br>&nbsp;
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 3a. ContaX detects that the required tag attributed was not supplied.
-    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 * 4a. ContaX cannot find the requested tag to delete.
-    * 4a1. ContaX shows an error message indicating that no such tag exists.
+    * 4a1. ContaX shows an error message indicating that no such tag exists.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
 **UC10: Find Persons By Tag**
@@ -1031,21 +976,21 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to find persons by tag.
 2. User enters keyword to search by.
-3. ContaX shows a list of persons whose tags contain the specified keyword.
-   Use case ends.
+3. ContaX shows a list of persons whose tags contain the specified keyword.<br>&nbsp;
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
 * 2a. ContaX detects that the keyword was not supplied.
-  * 2a1. ContaX shows an error message prompting for the keyword.
+  * 2a1. ContaX shows an error message prompting for the keyword.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 * 2b. ContaX detects that invalid characters were supplied.
     * 2b1. ContaX shows an error message indicating that an invalid character was found.
-    * 2b2. ContaX shows the expected allowed values.
+    * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
     * Use case ends.<br>&nbsp;
 
-* 3a. ContaX has no persons to list.
+* 3a. ContaX has no persons to list.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
 #### Appointment-Related Use Cases
@@ -1252,9 +1197,9 @@ Note that since underline is not allowed in markdown, included use cases are **b
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 persons and appointments without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be intutitive for a first-time user to perform basic actions.
+4.  Should be intuitive for a first-time user to perform basic actions.
 5.  The data file should be understandable to tech-savvy human readers.
 6.  The system's design should follow the *Object-Oriented Paradigm (OOP)*.
 7.  Should be packageable into a single JAR file.
@@ -1275,6 +1220,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix 1: Instructions for manual testing**
 
@@ -1299,6 +1246,18 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Tabbed View
+1. Tabs automatically change on `list*` command
+
+   1. Test case: `listtags` <br>
+      Expected: The selected tab should be changed to `Tags` if the user was not at that tab.
+   
+  2. Test case: `listpersons` <br>
+     Expected: The selected tab should be changed to `Persons` if the user was not at that tab.
+
+  3. Test case: `listappt` <br>
+     Expected: The selected tab should be changed to `Appointments` if the user was not at that tab.
 
 ### Saving data
 
@@ -1369,8 +1328,35 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: Onboarding Guide prompt is open
 
-   1. Test case: Resize Onboarding Guide prompt to be smaller <br>
+   2. Test case: Resize Onboarding Guide prompt to be smaller <br>
    Expected: The prompt's dimensions will not go below `500x150`.
 
-   1. Test case: Resize Onboarding Guide prompt to be larger <br>
+   3. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimensions will not go above `700x400`.
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix 2: Effort**
+
+* Difficulty level
+   * We developed a lot of different features with varying levels of difficulty, depth and complexity.
+   * As a whole, we felt the difficulty level of the project was Moderate.
+   * As we choose to extend AB-3, we needed an extensive understanding of the system design. This was required in order to extend the system in a way that seamlessly integrates with the existing AB-3.
+* Challenges Faced
+   * As every member worked on multiple issues and features, the following list are just some we picked out and is not exhaustive.
+     * Working with the `csv` format without a library required writing a parser from scratch
+     * Involved comparatively more UI work than AB-3, especially for onboarding components, which complicated testing.
+     * JavaFX UI elements not being consistent across platforms, requiring additional manual testing.
+     * Range and Chain commands were tough to test due to many possible test cases, requiring additional testing and fixing.
+     * Appointments subsystem was built upon the existing AB-3 system, requiring heavy modification and many additions to achieve the intended end product.
+     * In order to manage deadlines, we had to set workflows such as internal PR freeze deadlines and internal milestone closing deadlines.
+* Effort Required
+  * Extensive modification to the current code base.
+  * Extensive amount of tests written to cover as many scenarios as possible.
+  * We had extensive weekly meeting early in order to ensure every developer knows what is required for the week.
+* Achievements
+  * Built a product that we feel fulfills our initial targets.
+  * Achieved all `Must Have` User Stories.
+  * Met all milestones and deadlines, including internally set deadlines.
+* Reuse
+  * The overall design and structure took heavy inspiration from the original AB-3, and closely resembles it.

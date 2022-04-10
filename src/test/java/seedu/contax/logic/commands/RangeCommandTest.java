@@ -2,6 +2,7 @@ package seedu.contax.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.contax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
@@ -81,7 +82,7 @@ public class RangeCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_invalidIndex() throws Exception {
+    public void execute_invalidIndex_failure() throws Exception {
         String sampleCommand = "deleteperson from/2 to/1";
         ArgumentMultimap argumentMultimap = new ArgumentMultimap();
         argumentMultimap.put(new Prefix(""), "delete");
@@ -90,5 +91,41 @@ public class RangeCommandTest {
         RangeCommand rangeCommand =
                 new RangeCommand(Index.fromZeroBased(2), Index.fromZeroBased(1), sampleCommand);
         assertCommandFailure(rangeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_notSupportCommand_failure() throws Exception {
+        String sampleCommand = "listpersons";
+        RangeCommand rangeCommand =
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(2), sampleCommand);
+        assertCommandFailure(rangeCommand, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RangeCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_parseException_failure() throws Exception {
+        String sampleCommand = "invalid";
+        RangeCommand rangeCommand =
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(2), sampleCommand);
+        assertCommandFailure(rangeCommand, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RangeCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_emptyParseException_failure() throws Exception {
+        String sampleCommand = "";
+        RangeCommand rangeCommand =
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(2), sampleCommand);
+        assertCommandFailure(rangeCommand, model, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ""));
+    }
+
+    @Test
+    public void execute_duplicateNameRevert_success() throws Exception {
+        String sampleCommand = "editperson n/123";
+        RangeCommand rangeCommand =
+                new RangeCommand(Index.fromZeroBased(1), Index.fromZeroBased(2), sampleCommand);
+        CommandResult commandResult = rangeCommand.execute(model);
+        Model expectedModel = model;
+        assertCommandSuccess(rangeCommand, model, commandResult, expectedModel);
     }
 }
