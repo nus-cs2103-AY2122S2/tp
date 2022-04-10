@@ -1252,22 +1252,24 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a student
+### Deleting an entity
 
-1. Deleting a student while all students are being shown
+1. Deleting an entity (module/student/class group/assessment) while all entities are being shown in their respective list.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+  1. Prerequisites: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Filters may be used in the `list` command for students, class groups and assessments as well, e.g. `list students m/1`.
 
-   1. Test case: `delete student 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+  1. Test case: `delete module 1`, `delete m 1`<br>
+     Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
 
-   1. Test case: `delete student 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+  1. Test case: `delete module 0`, `delete m 0`<br>
+     Expected: No module is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete student x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+  1. Other incorrect delete commands to try: `delete`, `delete module x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+  1. The above test cases can be repeated with the other entities by replacing `module` with `student`/`class`/`assessment` and also by using their shorthand forms.<br>
+     Examples: `delete student 1`, `delete class 1`, `delete assessment 1`, `delete s 1`, `delete c 1`, `delete a 1`.
 
 ### Saving data
 
