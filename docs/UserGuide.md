@@ -29,6 +29,7 @@ title: User Guide
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
+<div style="page-break-after: always;"></div>
 
 ## **Introduction**
 
@@ -75,6 +76,7 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **User interface**
 
@@ -160,6 +162,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Parameter conditions
 
 <div markdown="block" class="alert alert-info">
@@ -181,6 +185,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## **Features**
 
 ### Viewing help: `help`
@@ -196,6 +202,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a show: `add`
 
