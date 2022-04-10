@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_OPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,7 +39,8 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String RESET_ARG = "r";
     public static final String MESSAGE_USAGE_OPTIONS =
-        "The symbol '-' is used to declare options for edit command, and can be declared only once in the command.\n"
+        "The prefix " + PREFIX_COMMAND_OPTION
+            + " is used to declare options for edit command.\n"
             + "The only available option is 'r', which makes the edit command execute in reset mode.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person(s) identified "
@@ -54,7 +56,7 @@ public class EditCommand extends Command {
         + "Only Teams and Skills will be changed when editing multiple persons in batch.\n"
         + "Other changes such as Name and Email will be silently ignored, if provided.\n"
         + "Parameters: INDEX [INDEX...] (must be a positive integer) "
-        + "[-r](activates reset mode)"
+        + "[ " + PREFIX_COMMAND_OPTION + "r](activates reset mode)"
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_PHONE + "PHONE] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -197,7 +199,7 @@ public class EditCommand extends Command {
         }
         if (modelToCheckAgainst.hasPerson(editedPerson)) {
             String duplicatedField = modelToCheckAgainst.getDuplicateField(editedPerson);
-            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);

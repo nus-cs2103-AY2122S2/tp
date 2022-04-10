@@ -12,6 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_GITHUB_USERNAME = new Prefix("g/");
     public static final Prefix PREFIX_TEAM = new Prefix("t/");
     public static final Prefix PREFIX_SKILL = new Prefix("s/");
-    public static final Prefix PREFIX_COMMAND_OPTION = new Prefix("-");
+    public static final Prefix PREFIX_COMMAND_OPTION = new Prefix("o/");
 
 }
