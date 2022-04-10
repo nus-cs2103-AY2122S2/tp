@@ -396,9 +396,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    
     i. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
    
-       <div markdown="span" class="alert alert-info">:information_source: 
-         <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-       </div>
+   <div markdown="span" class="alert alert-info">:information_source: 
+     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+   </div>
 
     ii. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 
@@ -410,9 +410,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     iv. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
        `ParserUtil#parseIndex(String oneBasedIndex)`.
        
-       <div markdown="span" class="alert alert-info">:information_source: 
-         <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-       </div>
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
    
     v.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
 
@@ -426,15 +426,15 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
 6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
    
     <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
+      <b>Note:</b> A `ParseException` will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
     Both `ModuleCode` and `TaskName` must be provided.   
     </div>
 
     i. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode)`.
    
-       <div markdown="span" class="alert alert-info">:information_source: 
-       <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-       </div>
+    <div markdown="span" class="alert alert-info">:information_source: 
+      <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
+    </div>
    
     ii. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
 
@@ -446,9 +446,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     iv. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
        `ParserUtil#parseTask(String task)`.
 
-       <div markdown="span" class="alert alert-info">:information_source: 
+    <div markdown="span" class="alert alert-info">:information_source: 
        <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
-       </div>
+    </div>
 
     v. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
 
