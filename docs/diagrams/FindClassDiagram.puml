@@ -6,13 +6,13 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Class "FindCommand" as FindCommand
 Command <|-- FindCommand
-FindCommand --righto "1" Predicate : contains
+FindCommand o--right "1" Predicate : contains
 FindPersonDescriptor .up. FindCommand
 
-Name "*" *-up- FindPersonDescriptor
-Phone "*" *-up- FindPersonDescriptor
-Address "*" *-up- FindPersonDescriptor
-Tag "*" *-up- FindPersonDescriptor
+Name "*" -up-* FindPersonDescriptor
+Phone "*" -up-* FindPersonDescriptor
+Address "*" -up-* FindPersonDescriptor
+Tag "*" -up-* FindPersonDescriptor
 
 FindOrPredicateParser .right. FindCommand
 FindOrPredicateParser .right. FindPersonDescriptor
