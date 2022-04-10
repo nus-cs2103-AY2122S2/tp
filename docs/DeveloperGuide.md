@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1")` API call.
 
-![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagramV2.png)
+![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -224,24 +224,26 @@ The `UniqueList` uses Java's generics and contains items that implements the `Un
 ### Delete customer(s) feature
 
 #### Overview
-- Delete command can allow multiple indexes, this allows for faster deletion of customer profiles.
+Delete command allows users to delete multiple customers at once for fast removal of unwanted customer profiles.
 
-#### Implementation
-- Current implementation allows user to enter multiple indexes seperated by comma. All the indexes will be checked if
-they are integers and is a valid index.
-- If any indexes fail the check, the command with be aborted. Only if all indexes pass the check, then command with be
-executed.
+#### Implementation of feature
+The current implementation allows users to enter multiple indexes separated by commas. All the indexes will be checked if
+they are integers and valid indexes. Users have to make sure that all indexes pass the check, the command will be aborted 
+if any indexes fail the check. Only if all indexes pass the check, then the command with be executed.
 
 #### Design Considerations
 
 * **Option 1:** Does not abort command when an index fail the check and delete customer from valid indexes.
   * Pros: Lenient on user error.
-  * Cons: User might be confused of the intended behavior of the command where different input can produce same effect.
-  * Cons: Difficult to decide what error should be allowed and not allowed.
+  * Cons: User might be confused of the intended behavior of the command where different inputs can produce the same effect.
+  * Cons: Difficult to decide what errors should be allowed and not allowed.
 * **Option 2 (Current choice):** Only if all indexes pass the check, then command with be executed.
   * Pros: Straightforward to implement.
   * Pros: It is clear about how the command is intended to be used.
-  * Cons: Minor error will cause command to be aborted.
+  * Cons: Minor error in the input will cause the whole command to be aborted.
+
+The following activity diagram summarizes what happens when the user executes the delete customer command (`deletec`):
+![Delete Customer(s) Activity Diagram](images/DeleteCustomerActivityDiagram.png)
 
 
 ### Find customers feature
@@ -308,7 +310,7 @@ The plot feature is implemented using the various plot commands such as `plotSta
    refers to a chart type, like isPlotStaffChart()
 4. `MainWindow` then updates the data in the chart and shows the chart window.
 
-The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
+The following sequence diagram summarizes what happens when the user executes the plot command (`plot`):
 ![Plot Chart Sequence Diagram](images/ChartSequenceDiagram.png)
 
 
