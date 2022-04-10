@@ -18,9 +18,10 @@ import seedu.unite.logic.Logic;
 import seedu.unite.logic.commands.CommandResult;
 import seedu.unite.logic.commands.exceptions.CommandException;
 import seedu.unite.logic.parser.exceptions.ParseException;
-import seedu.unite.model.theme.DarkTheme;
-import seedu.unite.model.theme.LightTheme;
+import seedu.unite.model.Model;
 import seedu.unite.ui.general.GeneralDisplay;
+import seedu.unite.ui.theme.DarkTheme;
+import seedu.unite.ui.theme.LightTheme;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -245,9 +246,10 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            Model model = logic.getModel();
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            if (logic.getModel().isMouseUxEnabled()) {
+            if (model.isMouseUxEnabled()) {
                 addMenu.setVisible(true);
                 newTagMenu.setVisible(true);
                 themeMenu.setVisible(true);
@@ -263,33 +265,33 @@ public class MainWindow extends UiPart<Stage> {
 
             // when the command is a delete command, and the current profile is displaying the person being deleted,
             // the profile will reset and the current selection after deletion is cleared.
-            if (commandResult.isRemoveProfile() && generalDisplay.getProfileDisplayPlaceholder().isVisible()
-                    && generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
+            if (model.isRemoveProfile() && generalDisplay.getProfileDisplayPlaceholder().isVisible()
+                    && generalDisplay.getProfile().getPerson().isSamePerson(model.getPerson())) {
                 generalDisplay.resetProfile();
                 personListPanel.getPersonListView().getSelectionModel().clearSelection();
             }
 
-            if (commandResult.isRemoveProfile() && generalDisplay.getTagListPlaceholder().isVisible()) {
+            if (model.isRemoveProfile() && generalDisplay.getTagListPlaceholder().isVisible()) {
                 generalDisplay.getTagList().getTagListView().refresh();
             }
 
-            if (commandResult.isShowProfile()) {
-                generalDisplay.setProfile(commandResult.getPerson());
+            if (model.isShowProfile()) {
+                generalDisplay.setProfile(logic.getModel().getPerson());
                 personListPanel.getPersonListView().scrollTo(generalDisplay.getProfile().getIndex().getZeroBased());
                 personListPanel.getPersonListView().getSelectionModel().select(generalDisplay
                         .getProfile().getIndex().getZeroBased());
             }
 
-            if (commandResult.isShowTagList()) {
+            if (model.isShowTagList()) {
                 generalDisplay.setTagList(logic.getModel().getTagList());
             }
 
-            if (commandResult.isSwitchTheme()) {
-                commandResult.getTheme().applyTheme(primaryStage, addTagWindow, addProfileWindow);
+            if (model.isSwitchTheme()) {
+                model.getTheme().applyTheme(primaryStage, addTagWindow, addProfileWindow);
             }
 
-            if (commandResult.isShowGrabResult()) {
-                generalDisplay.setGrabResult(commandResult.getGrabResult());
+            if (model.isShowGrabResult()) {
+                generalDisplay.setGrabResult(model.getGrabResult());
             }
 
             if (commandResult.isShowHelp()) {

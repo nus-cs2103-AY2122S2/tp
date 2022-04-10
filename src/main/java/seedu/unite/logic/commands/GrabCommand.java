@@ -84,7 +84,8 @@ public class GrabCommand extends Command {
                 Person personToBeGrabbed = currUnite.get(personIndex - 1);
                 builder.append(grabOnePerson(personToBeGrabbed));
             }
-            return new CommandResult(MESSAGE_SUCCESS, true, builder.toString());
+            model.showGrabResult(builder.toString());
+            return new CommandResult(MESSAGE_SUCCESS);
         } else {
             if (index.equals("")) {
                 ObservableList<Person> newPersonList =
@@ -97,7 +98,8 @@ public class GrabCommand extends Command {
                 // extra index is found
                 throw new CommandException(MESSAGE_GRAB_ONLY_BY_TAG);
             }
-            return new CommandResult(MESSAGE_SUCCESS + '\n', true, builder.toString());
+            model.showGrabResult(builder.toString());
+            return new CommandResult(MESSAGE_SUCCESS + '\n');
         }
     }
 

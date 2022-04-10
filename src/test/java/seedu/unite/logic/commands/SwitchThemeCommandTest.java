@@ -8,9 +8,9 @@ import seedu.unite.logic.commands.exceptions.CommandException;
 import seedu.unite.model.Model;
 import seedu.unite.model.ModelManager;
 import seedu.unite.model.UserPrefs;
-import seedu.unite.model.theme.DarkTheme;
-import seedu.unite.model.theme.LightTheme;
-import seedu.unite.model.theme.Theme;
+import seedu.unite.ui.theme.DarkTheme;
+import seedu.unite.ui.theme.LightTheme;
+import seedu.unite.ui.theme.Theme;
 
 public class SwitchThemeCommandTest {
 

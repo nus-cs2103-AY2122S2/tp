@@ -6,7 +6,7 @@ import static seedu.unite.testutil.Assert.assertThrows;
 import static seedu.unite.testutil.TypicalPersons.ALICE;
 import static seedu.unite.testutil.TypicalPersons.HOON;
 import static seedu.unite.testutil.TypicalPersons.IDA;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,11 +26,11 @@ public class JsonUniteStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readUnite_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readUnite(null));
     }
 
-    private java.util.Optional<ReadOnlyUnite> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyUnite> readUnite(String filePath) throws Exception {
         return new JsonUniteStorage(Paths.get(filePath)).readUnite(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,69 +42,69 @@ public class JsonUniteStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readUnite("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatUnite.json"));
+        assertThrows(DataConversionException.class, () -> readUnite("notJsonFormatUnite.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonUnite.json"));
+    public void readUnite_invalidPersonUnite_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readUnite("invalidPersonUnite.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonUnite.json"));
+    public void readUnite_invalidAndValidPersonUnite_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readUnite("invalidAndValidPersonUnite.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
-        Unite original = getTypicalAddressBook();
-        JsonUniteStorage jsonAddressBookStorage = new JsonUniteStorage(filePath);
+    public void readAndSaveUnite_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempUnite.json");
+        Unite original = getTypicalUnite();
+        JsonUniteStorage jsonUniteStorage = new JsonUniteStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveUnite(original, filePath);
-        ReadOnlyUnite readBack = jsonAddressBookStorage.readUnite(filePath).get();
+        jsonUniteStorage.saveUnite(original, filePath);
+        ReadOnlyUnite readBack = jsonUniteStorage.readUnite(filePath).get();
         assertEquals(original, new Unite(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveUnite(original, filePath);
-        readBack = jsonAddressBookStorage.readUnite(filePath).get();
+        jsonUniteStorage.saveUnite(original, filePath);
+        readBack = jsonUniteStorage.readUnite(filePath).get();
         assertEquals(original, new Unite(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveUnite(original); // file path not specified
-        readBack = jsonAddressBookStorage.readUnite().get(); // file path not specified
+        jsonUniteStorage.saveUnite(original); // file path not specified
+        readBack = jsonUniteStorage.readUnite().get(); // file path not specified
         assertEquals(original, new Unite(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveUnite_nullUnite_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveUnite(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code Unite} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyUnite addressBook, String filePath) {
+    private void saveUnite(ReadOnlyUnite unite, String filePath) {
         try {
             new JsonUniteStorage(Paths.get(filePath))
-                    .saveUnite(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveUnite(unite, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new Unite(), null));
+    public void saveUnite_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveUnite(new Unite(), null));
     }
 }

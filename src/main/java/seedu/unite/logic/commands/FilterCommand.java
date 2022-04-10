@@ -40,9 +40,8 @@ public class FilterCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG_NAME);
         }
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
-                        + MESSAGE_SUCCESS);
+        return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                model.getFilteredPersonList().size()) + MESSAGE_SUCCESS);
     }
 
     @Override

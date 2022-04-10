@@ -81,9 +81,8 @@ public class AttachTagCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
         model.setPerson(personToAttachNewTag, personWithNewTag);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttachNewTag.getName()),
-                true, false, false, personWithNewTag);
+        model.showProfile(personWithNewTag);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAttach, personToAttachNewTag.getName()));
     }
 
 

@@ -7,7 +7,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.unite.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -68,7 +68,7 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of unite list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getUnite().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

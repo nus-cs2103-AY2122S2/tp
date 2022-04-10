@@ -1,7 +1,7 @@
 package seedu.unite.logic.commands;
 
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ListTagCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalUnite(), new UserPrefs());
         expectedModel = new ModelManager(model.getUnite(), new UserPrefs());
     }
 

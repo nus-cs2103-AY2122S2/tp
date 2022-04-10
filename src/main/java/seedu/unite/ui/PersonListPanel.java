@@ -45,7 +45,6 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, Logic logic, UiManager uiManager) {
         super(FXML);
         personListView.setItems(personList);
-        //personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setCellFactory(new PersonListCellFactory());
         personListView.setContextMenu(contextMenu);
         PersonListPanel.logic = logic;
@@ -108,7 +107,7 @@ public class PersonListPanel extends UiPart<Region> {
     public static void handleSetProfile(int index) {
         try {
             CommandResult commandResult = logic.execute(ProfileCommand.COMMAND_WORD + " " + index);
-            uiManager.getMainWindow().getGeneralDisplay().setProfile(commandResult.getPerson());
+            uiManager.getMainWindow().getGeneralDisplay().setProfile(logic.getModel().getPerson());
             uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
         } catch (ParseException | CommandException e) {
             uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
@@ -125,14 +124,14 @@ public class PersonListPanel extends UiPart<Region> {
         delete.setOnAction(event -> {
             try {
                 CommandResult commandResult = logic.execute(DeleteCommand.COMMAND_WORD + " " + index);
-                Person personToDelete = commandResult.getPerson();
+                Person personToDelete = logic.getModel().getPerson();
                 // clear the person list selection immediately after deletion
                 param.getSelectionModel().clearSelection();
                 // if the current profile is displaying the person being deleted, the profile will reset
                 GeneralDisplay generalDisplay = uiManager.getMainWindow().getGeneralDisplay();
                 Person currentPersonInProfile = generalDisplay.getProfile().getPerson();
                 if (generalDisplay.getProfileDisplayPlaceholder().isVisible()
-                        && currentPersonInProfile.isSamePerson(commandResult.getPerson())) {
+                        && currentPersonInProfile.isSamePerson(personToDelete)) {
                     uiManager.getMainWindow().getGeneralDisplay().resetProfile();
                 } else if (currentPersonInProfile != null && !currentPersonInProfile.isSamePerson(personToDelete)) {
                     // otherwise, select the person that is currently being displayed in profile.

@@ -9,9 +9,10 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.testutil.TypicalPersons.ALICE;
 import static seedu.unite.testutil.TypicalPersons.BENSON;
 import static seedu.unite.testutil.TypicalPersons.DANIEL;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +25,8 @@ import seedu.unite.model.tag.Tag;
 
 
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -62,16 +63,16 @@ public class FilterCommandTest {
         Tag tag = new Tag("family");
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
         newModel.addTag(tag);
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
         newExpectedModel.addTag(tag);
 
         PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(tag);
         FilterCommand command = new FilterCommand(predicate, tag);
         newExpectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
-        assertEquals(Arrays.asList(), newModel.getFilteredPersonList());
+        assertEquals(List.of(), newModel.getFilteredPersonList());
     }
 
     @Test

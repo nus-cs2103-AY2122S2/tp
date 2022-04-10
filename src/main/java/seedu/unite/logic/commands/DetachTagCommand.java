@@ -80,9 +80,8 @@ public class DetachTagCommand extends Command {
 
         model.setPerson(personToDetachTagFrom, personAfterDetach);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach,
-                personToDetachTagFrom.getName()),
-                true, false, false, personAfterDetach);
+        model.showProfile(personAfterDetach);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach, personToDetachTagFrom.getName()));
     }
 
 

@@ -48,9 +48,8 @@ public class AddTagCommand extends Command {
         }
 
         model.addTag(toAdd);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
-                false, true, false, null);
+        model.showTagList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

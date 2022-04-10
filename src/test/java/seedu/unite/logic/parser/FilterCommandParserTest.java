@@ -13,7 +13,7 @@ import seedu.unite.model.tag.Tag;
 
 public class FilterCommandParserTest {
 
-    private FilterCommandParser parser = new FilterCommandParser();
+    private final FilterCommandParser parser = new FilterCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

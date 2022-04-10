@@ -3,7 +3,7 @@ package seedu.unite.logic.commands;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalUnite(), new UserPrefs());
         expectedModel = new ModelManager(model.getUnite(), new UserPrefs());
     }
 

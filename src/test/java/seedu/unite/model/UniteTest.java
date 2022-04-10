@@ -7,7 +7,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.unite.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unite.testutil.Assert.assertThrows;
 import static seedu.unite.testutil.TypicalPersons.ALICE;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,8 +38,8 @@ public class UniteTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Unite newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyUnite_replacesData() {
+        Unite newData = getTypicalUnite();
         unite.resetData(newData);
         assertEquals(newData, unite);
     }
@@ -61,18 +61,18 @@ public class UniteTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInUnite_returnsFalse() {
         assertFalse(unite.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInUnite_returnsTrue() {
         unite.addPerson(ALICE);
         assertTrue(unite.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInUnite_returnsTrue() {
         unite.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

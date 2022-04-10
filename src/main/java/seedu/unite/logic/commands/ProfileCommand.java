@@ -40,8 +40,8 @@ public class ProfileCommand extends Command {
 
         Person personToShowProfile = lastShownList.get(targetIndex.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_DISPLAY_PROFILE_SUCCESS, personToShowProfile.getName()),
-                true, false, false, personToShowProfile);
+        model.showProfile(personToShowProfile);
+        return new CommandResult(String.format(MESSAGE_DISPLAY_PROFILE_SUCCESS, personToShowProfile.getName()));
     }
 
     @Override

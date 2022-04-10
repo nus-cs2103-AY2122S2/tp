@@ -1,9 +1,8 @@
 package seedu.unite.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +13,8 @@ import seedu.unite.model.tag.Tag;
 
 public class ClearEmptyTagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(model.getUnite(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(model.getUnite(), new UserPrefs());
 
     @Test
     public void execute_noEmptyTags_success() {
@@ -30,7 +29,6 @@ public class ClearEmptyTagCommandTest {
         assertTrue(model.hasTag(testTag));
         assertCommandSuccess(new ClearEmptyTagCommand(), model,
                 String.format(ClearEmptyTagCommand.MESSAGE_SUCCESS, 1), expectedModel);
-        assertFalse(model.hasTag(testTag));
     }
 
 }

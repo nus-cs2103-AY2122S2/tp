@@ -8,9 +8,9 @@ import static seedu.unite.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import seedu.unite.logic.commands.SwitchThemeCommand;
-import seedu.unite.model.theme.DarkTheme;
-import seedu.unite.model.theme.LightTheme;
-import seedu.unite.model.theme.Theme;
+import seedu.unite.ui.theme.DarkTheme;
+import seedu.unite.ui.theme.LightTheme;
+import seedu.unite.ui.theme.Theme;
 
 public class SwitchThemeCommandParserTest {
     private final SwitchThemeCommandParser parser = new SwitchThemeCommandParser();

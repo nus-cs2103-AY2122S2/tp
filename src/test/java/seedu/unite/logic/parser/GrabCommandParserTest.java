@@ -17,7 +17,7 @@ import seedu.unite.logic.commands.GrabCommand;
 
 public class GrabCommandParserTest {
 
-    private GrabCommandParser parser = new GrabCommandParser();
+    private final GrabCommandParser parser = new GrabCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

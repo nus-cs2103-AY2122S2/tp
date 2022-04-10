@@ -2,7 +2,7 @@ package seedu.unite.logic.commands;
 
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalUnite(), new UserPrefs());
     }
 
     @Test
@@ -32,8 +32,8 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getUnite(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validPerson), model, String.format(AddCommand.MESSAGE_SUCCESS, validPerson),
+                expectedModel);
     }
 
     @Test

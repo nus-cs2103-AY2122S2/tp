@@ -8,7 +8,7 @@ import static seedu.unite.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +23,7 @@ import seedu.unite.model.Unite;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;
 import seedu.unite.testutil.PersonBuilder;
+import seedu.unite.ui.theme.Theme;
 
 public class AddCommandTest {
 
@@ -39,7 +40,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
@@ -78,7 +79,9 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
+        private boolean isShowProfile;
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -116,7 +119,7 @@ public class AddCommandTest {
 
         @Override
         public void addTag(Tag tag) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -198,12 +201,77 @@ public class AddCommandTest {
         public int countPersonsInTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void showProfile(Person person) {
+            isShowProfile = true;
+        }
+
+        @Override
+        public void showTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showGrabResult(String grabResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeProfile(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchTheme(Theme theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isShowProfile() {
+            return isShowProfile;
+        }
+
+        @Override
+        public boolean isShowTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isShowGrabResult() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRemoveProfile() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSwitchTheme() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getGrabResult() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Theme getTheme() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private static class ModelStubWithPerson extends ModelStub {
         private final Person person;
 
         ModelStubWithPerson(Person person) {

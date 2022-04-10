@@ -49,9 +49,8 @@ public class RemarkTagCommand extends Command {
                 allTag.changeRemark(remark);
             }
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tag),
-                false, true, false, null);
+        model.showTagList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tag));
     }
 
 

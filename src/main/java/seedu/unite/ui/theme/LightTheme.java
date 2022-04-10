@@ -1,4 +1,4 @@
-package seedu.unite.model.theme;
+package seedu.unite.ui.theme;
 
 import static java.util.Objects.requireNonNull;
 

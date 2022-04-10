@@ -4,7 +4,7 @@ import static seedu.unite.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.unite.logic.commands.SwitchThemeCommand;
 import seedu.unite.logic.parser.exceptions.ParseException;
-import seedu.unite.model.theme.Theme;
+import seedu.unite.ui.theme.Theme;
 
 public class SwitchThemeCommandParser implements Parser<SwitchThemeCommand> {
     /**

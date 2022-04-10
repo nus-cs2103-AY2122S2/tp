@@ -41,28 +41,28 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
-        JsonUniteStorage addressBookStorage =
-                new JsonUniteStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUniteStorage uniteStorage =
+                new JsonUniteStorage(temporaryFolder.resolve("unite.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(uniteStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand);
     }
 
     @Test
@@ -74,11 +74,11 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonUniteIoExceptionThrowingStub
-        JsonUniteStorage addressBookStorage =
-                new JsonUniteIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUniteStorage uniteStorage =
+                new JsonUniteIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionUnite.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(uniteStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -115,16 +115,16 @@ public class LogicManagerTest {
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertParseException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
+    private void assertParseException(String inputCommand) {
+        assertCommandFailure(inputCommand, ParseException.class, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
+    private void assertCommandException(String inputCommand) {
+        assertCommandFailure(inputCommand, CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**

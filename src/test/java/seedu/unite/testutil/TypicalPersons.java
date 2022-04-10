@@ -79,7 +79,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code Unite} with all the typical persons and tags.
      */
-    public static Unite getTypicalAddressBook() {
+    public static Unite getTypicalUnite() {
         Unite ab = new Unite();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

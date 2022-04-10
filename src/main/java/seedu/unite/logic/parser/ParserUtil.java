@@ -18,9 +18,9 @@ import seedu.unite.model.person.Name;
 import seedu.unite.model.person.Phone;
 import seedu.unite.model.person.Telegram;
 import seedu.unite.model.tag.Tag;
-import seedu.unite.model.theme.DarkTheme;
-import seedu.unite.model.theme.LightTheme;
-import seedu.unite.model.theme.Theme;
+import seedu.unite.ui.theme.DarkTheme;
+import seedu.unite.ui.theme.LightTheme;
+import seedu.unite.ui.theme.Theme;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

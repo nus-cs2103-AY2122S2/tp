@@ -34,7 +34,7 @@ public class JsonSerializableUniteTest {
                 }
             }
         }
-        Unite typicalPersonsUnite = TypicalPersons.getTypicalAddressBook();
+        Unite typicalPersonsUnite = TypicalPersons.getTypicalUnite();
         assertEquals(uniteFromFile, typicalPersonsUnite);
     }
 

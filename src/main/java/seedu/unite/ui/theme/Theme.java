@@ -1,4 +1,4 @@
-package seedu.unite.model.theme;
+package seedu.unite.ui.theme;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
