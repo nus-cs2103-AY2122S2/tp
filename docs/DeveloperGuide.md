@@ -553,7 +553,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample data. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -561,30 +561,157 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+   
 
-1. _{ more test cases …​ }_
+### Deleting Data
 
-### Deleting a applicant
+1. Deleting an applicant while all applicants are being shown
 
-1. Deleting a applicant while all applicants are being shown
+   1. Prerequisites: List all applicants using the `list -a` command. Multiple applicants in the list.
 
-   1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+   1. Test case: `delete -a 1`<br>
+      Expected: First applicant is deleted from the list. Details of the deleted applicant shown together with the number of deleted interview(s). Use `list -i` to verify that the interview(s) involving the deleted applicant no longer exists.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete -a 0`<br>
+      Expected: No applicant is deleted. Error details shown.
 
-   1. Test case: `delete 0`<br>
-      Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete applicant commands to try: `delete -a`, `delete -a x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting an applicant while the applicant list is filtered
 
+    1. Prerequisites: Filter the applicants using the `list -a f/name a/xxx` command (where xxx is an existing applicant name). At least one applicant in the list.
+
+    1. Test case: `delete -a 1`<br>
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown together with the number of deleted interview(s). Use `list -i` to verify that the interview(s) involving the deleted position no longer exists.
+
+    1. Test case: `delete -a 0`<br>
+       Expected: No applicant is deleted. Error details shown.
+
+3. Deleting a position
+    1. Prerequisites: List positions using the `list -p` command, may choose to apply a valid filter. Multiple positions in the list.
+
+    2. Test case: `delete -p 2`<br>
+       Expected: Second position is deleted from the list. Details of the deleted position shown together with the number of deleted interview(s).
+
+    3. Test case: `delete -p 0`<br>
+       Expected: No position is deleted. Error details shown.
+
+    4. Other incorrect delete position commands to try: `delete -p`, `delete -p x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+   
+4. Deleting an interview
+   1. Prerequisites: List interviews using the `list -i` command, may choose to apply a valid filter. Multiple interviews in the list.
+
+   2. Test case: `delete -i 1`<br>
+      Expected: First interview is deleted from the list. Details of the deleted interview shown.
+
+   3. Test case: `delete -i 0`<br>
+      Expected: No interview is deleted. Error details shown.
+
+   4. Other incorrect delete position commands to try: `delete -i`, `delete -i x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   
+5. Delete without any flag specified
+   1. Test case: `delete`<br>
+      Expected: No data is deleted. "No flag" error shown.
+   
+   2. Test case: `delete 2`<br>
+      Expected: No data is deleted. "No flag" error shown.
+
+### Filtering Data
+
+1. Filtering applicants
+   1. Prerequisites: List all applicants using the `list -a` command. Multiple applicants in the list.
+   
+   2. Test case: `list -a f/name a/xxx` where xxx is a valid name of an applicant in the list. <br>
+      Expected: The list refreshes showing only applicants whose name matches the name given. Shows message of how many applicants are listed.
+   
+   3. Test case: `list -a f/name a/xxx` where xxx is not a name of any applicant in the list. <br>
+      Expected: An empty applicant list is shown.
+   
+   4. Test case: `list -a f/name` <br>
+      Expected: The applicant list does not refresh. Error message shown.
+
+   5. Other incorrect filter applicant commands to try: `list -a f/abc a/abc`, `list -a a/John`<br>
+      Expected: Similar to previous.
+
+2. Filtering positions
+    1. Prerequisites: List all positions using the `list -p` command. Multiple positions in the list.
+
+    2. Test case: `list -p f/name a/xxx` where xxx is a valid name of a position in the list. <br>
+       Expected: The list refreshes showing only positions with name that matches the name given. Shows message of how many positions are listed.
+
+    3. Test case: `list -p f/name a/xxx` where xxx is not a name of any position in the list. <br>
+       Expected: An empty position list is shown.
+
+    4. Test case: `list -p f/name` <br>
+       Expected: The position list does not refresh. Error message shown.
+
+    5. Other incorrect filter applicant commands to try: `list -p f/abc a/abc`, `list -p a/Software`<br>
+       Expected: Similar to previous.
+
+3. Filtering interviews
+    1. Prerequisites: List all interviews using the `list -i` command. Multiple interviews in the list.
+
+    2. Test case: `list -i f/date a/yyyy-mm-dd` where yyyy-mm-dd is a valid date of an interview in the list. <br>
+       Expected: The list refreshes showing only interviews with date that falls the date given. Shows message of how many interviews are listed.
+
+    3. Test case: `list -i f/date a/yyyy-mm-dd` where yyyy-mm-dd is a date of any interview in the list. <br>
+       Expected: An empty interview list is shown.
+
+    4. Test case: `list -i f/date` <br>
+       Expected: The position list does not refresh. Error message shown.
+
+    5. Other incorrect filter interview commands to try: `list -i f/abc a/abc`, `list -i a/2022-05-05`<br>
+       Expected: Similar to previous.
+
+### Sorting Data
+1. Sorting applicants
+    1. Prerequisites: List all applicants using the `list -a` command. At least two applicants in the list.
+
+    2. Test case: `list -a s/asc` <br>
+       Expected: The list refreshes showing the list of all applicants sorted by their names in ascending order (if not already).
+
+    3. Test case: `list -a s/abc` <br>
+       Expected: An error message is shown.
+
+2. Sorting positions
+    1. Prerequisites: List all positions using the `list -p` command. At least two positions in the list.
+
+    2. Test case: `list -p s/asc` <br>
+       Expected: The list refreshes showing the list of all positions sorted by their names in ascending order (if not already).
+
+    3. Test case: `list -p s/abc` <br>
+       Expected: An error message is shown.
+
+2. Sorting interviews
+    1. Prerequisites: List all interviews using the `list -i` command. At least two interviews in the list.
+
+    2. Test case: `list -i s/asc` <br>
+       Expected: The list refreshes showing the list of all interviews sorted by their date in ascending order (if not already).
+
+    3. Test case: `list -i s/abc` <br>
+       Expected: An error message is shown.
+
+       
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Saving newly added/edited data
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Add/edit any data in the app (applicant / position / interview).
+   2. Restart the app by exiting and opening the jar file. <br>
+      Expected: Any changes made to the data is retained.
 
-1. _{ more test cases …​ }_
+2. Dealing with missing data file
+
+    1. Exit the app and delete the storage file at `/data/HireLah.json`.
+    2. Re-launch the app by opening the jar file. <br>
+       Expected: The app launches with sample data.
+   
+2. Dealing with corrupted data file
+
+   1. Exit the app and open the storage file at `/data/HireLah.json`.
+   2. Remove a comma `,` from the file.
+   3. Re-launch the app by opening the jar file. <br>
+      Expected: The app launches with no data. Gives warning in log.
