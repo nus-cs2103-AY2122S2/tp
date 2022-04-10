@@ -15,15 +15,15 @@ import static seedu.address.testutil.TypicalSellers.FIONA;
 import static seedu.address.testutil.TypicalSellers.GEORGE;
 import static seedu.address.testutil.TypicalSellers.getTypicalSellerAddressBook;
 
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.seller.Seller;
@@ -63,7 +63,8 @@ public class SellerAddressBookTest {
         Seller editedAlice = new SellerBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Seller> newSellers = Arrays.asList(ALICE, editedAlice);
-        SellerAddressBookTest.SellerAddressBookStub newData = new SellerAddressBookTest.SellerAddressBookStub(newSellers);
+        SellerAddressBookTest.SellerAddressBookStub newData = new SellerAddressBookTest
+                .SellerAddressBookStub(newSellers);
 
         assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
     }
