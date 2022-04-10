@@ -1018,7 +1018,7 @@ testers are expected to do more *exploratory* testing.
    1. [Add shows](#adding-a-show) into the show list.
 2. Test case: Sort with no prefix
    1. Command: `sort` <br>
-      Expected: The list of shows will default to being sorted by name in ascending order.
+      Expected: The list of shows will default to being sorted by name in ascending order.<br><br>
 
 3. Test case: Sort with single prefix 
    1. Command: `sort n/asc` <br>
