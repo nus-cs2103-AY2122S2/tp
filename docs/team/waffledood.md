@@ -5,19 +5,19 @@ title: Haikal Yusuf's Project Portfolio Page
 
 ### Project: RealEstatePro
 
-RealEstatePro is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to mark a client as a buyer or seller.
   * What it does: allows the user to indicate a client as a buyer or seller. The user does not have to explicitly input "buyer" or "seller" when creating a new client, RealEstatePro will be able to infer based on the client's details.
   * Justification: This feature improves the product significantly because a user will need to input lesser details.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands & had a lot of regressions in the main and test code, as this feature was initially refactored from the Tag feature.
-  * Credits: this feature is completely original, with no reference materials.
+  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands & had a lot of regressions in the main and test code, as this feature was initially refactored from the `Tag` feature.
+  * Credits: This feature is completely original, with no reference materials.
 
-* **New Feature**: Added a remind command that allows the user to indicate clients they wish to be reminded of.
+* **New Feature**: Added a `Remind` command that allows the user to indicate clients they wish to be reminded of.
   * What it does: Allows the user to set reminders for themselves to contact a client/clients, frequently reminds the user by launching the Reminder window if it's not active, or focusing on the Reminder window if it's already active.
-  * Justification: This feature improves the product as the user will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app. A separate Reminder Window containing the clients with Reminders helps the user focus on
+  * Justification: This feature improves the product as the user will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app. A separate Reminder Window containing the clients with Reminders helps the user focus on specifically these clients.
   * Highlights: This feature involves the usage of Threads and was quite tricky to implement because improper handling or usage of Threads could result in performance issues, and the app not behaving properly (closing the app with the Thread still running did not fully close the app & forcing the app to shutdown via IntelliJ resulted in an exit code error).
   * Credits: this feature was implemented with the help of these online resources: [Java Timer](https://www.baeldung.com/java-timer-and-timertask)
 
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user to directly view a compact list of clients which have Reminders set by the user (real estate agent).
   * Justification: This feature improves the product as the user will be able to quickly open up the Reminder window from just their keyboard!
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=w16-4&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=waffledood&tabRepo=AY2122S2-CS2103-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Managed releases `v1.2` (1 release) on GitHub
@@ -47,5 +47,5 @@ Given below are my contributions to the project.
   * Reported bugs and suggestions of the tP: [\#73](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/73), [\#75](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/75), [\#82](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/82)
 
 * **Tools**:
-  * Integrated a third party library (ControlsFX) to the project ([\#42]())
+  * Introduced Notion as the team's workspace.
 
