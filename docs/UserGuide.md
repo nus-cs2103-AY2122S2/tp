@@ -141,7 +141,7 @@ Adds a student to the tracking list
 
 > :bulb: **Tips:**
 > - Multiple activity tags can be added to a single student by using multiple `act/` prefixes
-    >   - Eg. `act/choir act/dance`
+> - Eg. `act/choir act/dance`
 > - A student can also have no activity tags
 > - User inputs can be in any order
 
@@ -157,7 +157,7 @@ Adds a student to the tracking list
 Shows a list of all students in the application.
 - Format: `list`
   - Any user input after `list` is ignored
-    - `list 12345 john` is the same as `list`
+  - `list 12345 john` is the same as `list`
 
 <div markdown="block" class="alert alert-primary" role="alert">
 
@@ -251,7 +251,7 @@ Edits an existing student's details in the list Index provided and the parts tha
 > :information_source: **Notes:**
 > - Capitalization of text will be reflected in the User Interface
 > - Editing `Activity` of a student will **replace** all activities with the newly added ones
-    >   - Eg. `edit 1 act/tennis` will replace the `Activity` of the 1st student in the list with _"tennis"_
+> - Eg. `edit 1 act/tennis` will replace the `Activity` of the 1st student in the list with _"tennis"_
 
 </div>
 
@@ -362,7 +362,7 @@ Highlights all the text that is currently in the Command Box
 Displays a list of commands to use and a link to our user guide. A `Copy URL` button is provided to copy the link.
 - Format: `help`
   - Any user input after `help` is ignored
-    - `help 12345 john` is the same as `help`
+  - `help 12345 john` is the same as `help`
 
 |![help command](images/user-guide/help.png)|
 |:--:|
@@ -420,6 +420,7 @@ A: We are working on a feature to allow importing of **.csv** files into _**UDT*
 
 Q: What if I key in the wrong command?
 A: An error message colored in red will appear stating that you have typed an unknown command.
+
 ![invalid command](images/user-guide/invalidcommand.png)
 
 
