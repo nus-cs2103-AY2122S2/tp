@@ -306,7 +306,6 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
   * Cons: We must ensure that the implementation of each individual command are correct.
   
 
-_{more aspects and alternatives to be added}_
 
 ### Clear Filtered functionality
 The `ClearFiltered` commands works in tandem with the `Find` or `ListMembers` command. After the `Find`/`ListMembers` function populates
@@ -333,6 +332,16 @@ The lifeline for `ClearFilteredCommand` should end at their destroy markers (X) 
 #### Implementation
 The membership functionality allows users to be assigned a membership tier, either 'Bronze','Silver' or 'Gold'. It inherits
 from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
+
+Below is a figure of the class diagram of the `Membership` class.
+
+![Membership Class Diagram](images/MembershipClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+
+The `ALL` tier in the `Tier` enum is used for `listMembers` functionality.
+
+</div>
 
 When the user calls the `addMembership` functionality along with a specified client and membership tier, a Membership 
 object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions as if any other `Field`.
