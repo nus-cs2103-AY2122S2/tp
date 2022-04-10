@@ -93,15 +93,20 @@ On clicking Help, you will see this as a result:
 ![Help window image](images/helpWindowUG.png)
 
 ------------------------------------------------------------------------------------
-### Viewing Packages
+### Viewing Packages : `listp`
 ![Package button image](images/packageButtonUG.png)
+
 Opens a new window that shows the various insurance packages and their description
 
-Click on the Package button to view a dropdown window displaying a "Package" button.
+Click on the Package button to view a dropdown window displaying a "Package" button. Alternatively, you could type in `listp`.
 
-On clicking Package, you will see this as a result:
+Format: `listp`
 
-![Package window image](images/packageWindowUG.png)
+On clicking Package or typing `listp`, you will see this as a result:
+
+![result1 after 'listp'](images/listInsurancePackage1UG.png)
+
+![result2 after 'listp'](images/listInsurancePackage2UG.png)
 
 ------------------------------------------------------------------------------------
 ### Adding a person: `add`
@@ -335,16 +340,6 @@ Note:
 * If the packages window was open before a package is deleted, you will have to close and reopen the window 
 to view the change.
 * If a package to be deleted is used by at least one person, it will not be deleted.
-
-------------------------------------------------------------------------------------
-### Shows all insurance package: `listp`
-Displays all your insurance packages in ClientConnect
-
-Format: `listp`
-
-![result1 after 'listp'](images/listInsurancePackage1UG.png)
-
-![result2 after 'listp'](images/listInsurancePackage2UG.png)
 
 ------------------------------------------------------------------------------------
 ### Importing ClientConnect CSV data: `import`
