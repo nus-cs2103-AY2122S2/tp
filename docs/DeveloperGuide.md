@@ -519,6 +519,12 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 ### Scheduling interviews feature
 
+Below is a simplified sequence diagram showing how a `AddScheduleCommand` is parsed under the `Logic` 
+component when a user adds an interview to the schedule. Note that all four schedule commands `add`. `delete`, `edit` 
+and `clear` follow a similar structure.
+
+<img src="images/ScheduleLogicDiagram.png"/>
+
 Below is a sequence diagram and explanation of how the `AddScheduleCommand` is executed.
 
 <img src="images/AddScheduleSequenceDiagram.png"/>
@@ -530,9 +536,9 @@ which then calls `AddScheduleCommandParser#parse` to create a new `AddScheduleCo
 
 **Step 3.** The `AddScheduleCommand` will then be executed by calling its `execute` method.
 
-**Step 4.** Since the Model is passed to AddScheduleCommand#execute, it is able to call a method `Model#getFilteredCandidateList` to get the last candidate list shown.
+**Step 4.** Since the Model is passed to `AddScheduleCommand#execute`, it is able to call a method `Model#getFilteredCandidateList` to get the last candidate list shown.
 
-**Step 5.** From the candidate list, we can find the desired candidate to schedule for interview by calling the get function with the specified Index.
+**Step 5.** From the candidate list, we can find the desired candidate to schedule for interview by calling the `get` function with the specified Index.
 
 **Step 6.** A new `Interview` is created for the candidate and the Model#addInterview method is called to add the `Interview` to the Model.
 
