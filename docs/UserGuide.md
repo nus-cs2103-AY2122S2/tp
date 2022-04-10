@@ -587,8 +587,8 @@ Performs operations on contacts in the address book that match the given conditi
 Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WITH]`
 
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
-  * edit
-  * delete
+  * editperson
+  * deleteperson
 * The `FIELD` provided must be provided, and must match one of the following:
   * `Name`
   * `Address`
@@ -618,8 +618,8 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
 * Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive.
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
-  * edit
-  * delete
+  * editperson
+  * deleteperson
 * The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed person list**.
 * `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
 * The resultant effect of the command is dependent on the performed action.
