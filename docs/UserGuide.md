@@ -563,6 +563,6 @@ Use `sort n/asc s/asc so/statusname`.
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Alphanumeric**                   | A character that is either a letter or a number.                  |
 | **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
-| **ASCII**                   | ASCII is a character encoding standard containing [128 characters](https://www.techonthenet.com/ascii/chart.php). It includes the numbers 0-9, upper and lower case English letters (A-Z) and certain special characters.                |
+| **ASCII**                          | ASCII is a character encoding standard containing [128 characters](https://www.techonthenet.com/ascii/chart.php). It includes the numbers 0-9, upper and lower case English letters (A-Z) and certain special characters. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
