@@ -49,6 +49,7 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
     * Added documentation for `Memberships` [\#158](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/158)
       * Includes documentation for  `addMembership`,`removeMembership` and `listMembers`
   * Developer Guide:
+    * Added implementation details of `ClearFiltered`
     * Added manual testing instructions for `Membership` functionality and clearing filtered clients
     * Added implementation details of `Memberships`
 
