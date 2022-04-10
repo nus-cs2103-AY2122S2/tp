@@ -100,34 +100,46 @@ public class Interview {
     public static boolean isValidDateTime(LocalDateTime localDateTime) {
         return LocalDateTime.now().isBefore(localDateTime);
     }
-
+    /**
+     * Returns the candidate of the interview.
+     */
     public Candidate getCandidate() {
         return this.candidate;
     }
-
+    /**
+     * Returns the (start) date and time of the interview.
+     */
     public LocalDateTime getInterviewDateTime() {
         return this.interviewDateTime;
     }
-
+    /**
+     * Returns the day of the interview.
+     */
     public int getInterviewDay() {
         return this.interviewDay;
     }
-
+    /**
+     * Returns the start time of the interview.
+     */
     public LocalTime getInterviewStartTime() {
         return this.interviewDateTime.toLocalTime();
     }
+    /**
+     * Returns the end date and time of the interview.
+     */
     public LocalDateTime getInterviewEndDateTime() {
         return this.interviewEndDateTime;
     }
-
+    /**
+     * Returns the date of the interview.
+     */
     public LocalDate getInterviewDate() {
         return this.interviewDateTime.toLocalDate();
     }
 
 
     /**
-     * Returns true if both candidates have the same identity and data fields.
-     * This defines a stronger notion of equality between two candidates.
+     * Returns true if both interviews have the same identity and fields.
      */
     @Override
     public boolean equals(Object other) {
