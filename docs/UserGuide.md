@@ -330,7 +330,7 @@ Format `viewimage INDEX`
 ### Setting a Reminder for a client: `remind`
 <img src="images/user-guide/successfulRemindCommand.png" height="400px">
 
-Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminder-window).
+Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminders-window-rm).
 
 <div markdown="block" class="alert alert-info">
 
