@@ -24,7 +24,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Deleting a client: `delete`](#deleting-a-client-delete)
   - [Favourite a client: `favourite`](#favourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
-  - [Locating clients by name: `find`](#locating-clients-by-name-find)
+  - [Finding clients by keyword: `find`](#finding-clients-by-keyword-find)
   - [Sorting clients: `sort`](#sorting-clients-sort)
 - [Tools](#tools)
   - [Matching properties and preferences: `match`](#matching-properties-and-preferences-match)
@@ -243,7 +243,7 @@ Format:  `fw`
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
 
-### Locating clients by name: `find`
+### Finding clients by keyword: `find`
 
 Finds clients whose specified attribute contain any of the given keywords.
 
@@ -258,8 +258,23 @@ Format: `find ATTRIBUTE KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find name John` returns `john` and `John Doe`
 - `find name robin johan` returns `Robin Hood`, `Johan Ng`
+- `find phone 99272758` returns `Bernice Yu`
+- `find email charlotte@example.com` return `Charlotte Oliveiro`
+- `find address 436` return `David Li`
+- `find properties jurong` return `Albus Dumbledore`
+- `find properties north` return `Bellatrix Lestrange`
+- `find properties 2-room` return `Cornelius Fudge`
+- `find properties $300` return `Draco Malfoy`
+- `find properties jurong north 2-room $300` return `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find preference east` return `Ernie Mcmillan`
+- `find preference 4-room` return `Fred Weasley`
+- `find preference $100` return `George Weasley`
+- `find preference $200` return `Harry Potter`
+- `find preference east 4-room $100 $200` return `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
+- `find all alex 99272758 charlotte@example.com 436 jurong $200` return `Alex Yeoh`, `Bernice Yu`, `Charlotte Oliveiro`, `David Li`, `Albus Dumbledore`, `Harry Potter`
+- `find usertype seller` return `Bernice Yu`, `David Li`, `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
     ![images/user-guide/findRobinJohan.png](images/user-guide/findRobinJohan.png)
 
@@ -310,6 +325,11 @@ To sort by number of properties in the default order, but with buyers shifted to
 ### Matching properties and preferences: `match`
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
+
+A preference matches with a property if 
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference. 
 
 Format: `match`
 
