@@ -45,7 +45,7 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the `clearFiltered` feature [\#9](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/9)
+    * Added documentation for the `clearFiltered` feature [\#158](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/158)
     * Added documentation for `Memberships` [\#158](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/158)
       * Includes documentation for  `addMembership`,`removeMembership` and `listMembers`
   * Developer Guide:
