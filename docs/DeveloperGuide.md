@@ -599,7 +599,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Allows the users to save time as they are not required to input the full details.
     * Cons: In a situation when there are multiple contacts with similar names (i.e. `Ben`, `Benedict`, `Benny`), a partial search may not be really beneficial as the users would still require to input the almost to full name in order to get the desired person.
   
-### \[Proposed\] Undo/redo feature
+## \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
