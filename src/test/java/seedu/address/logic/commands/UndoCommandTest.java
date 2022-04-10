@@ -19,14 +19,14 @@ public class UndoCommandTest {
 
     @BeforeEach
     public void setUp() {
-        //Initialise models without commandHistory and addressBookHistory
+        // Initialise models without commandHistory and addressBookHistory
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_onlyCommandHistoryIsEmpty_commandExceptionThrown() {
-        //Ensure AddressBookHistory is not empty
+        // Ensure AddressBookHistory is not empty
         model.saveCurrentAddressBookToHistory();
 
         UndoCommand undoCommand = new UndoCommand();
@@ -35,7 +35,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_onlyCommandHistoryIsEmpty_commandExceptionMessageMatchesNoCommandToUndoMessage() {
-        //Ensure AddressBookHistory is not empty
+        // Ensure AddressBookHistory is not empty
         model.saveCurrentAddressBookToHistory();
 
         UndoCommand undoCommand = new UndoCommand();
@@ -44,11 +44,11 @@ public class UndoCommandTest {
 
     @Test
     public void execute_onlyAddressBookHistoryIsEmpty_commandExceptionThrown() {
-        //Ensure CommandHistory is not empty
+        // Ensure CommandHistory is not empty
         String testCommandWord = ListCommand.COMMAND_WORD;
         model.addToCommandHistory(testCommandWord);
 
-        //Ensure AddressBookHistory is empty
+        // Ensure AddressBookHistory is empty
         model.getAddressBookHistory().getAddressBooks().clear();
 
         UndoCommand undoCommand = new UndoCommand();
@@ -57,11 +57,11 @@ public class UndoCommandTest {
 
     @Test
     public void execute_onlyAddressBookHistoryIsEmpty_commandExceptionMessageMatchesNoPreviousAddressBookMessage() {
-        //Ensure CommandHistory is not empty
+        // Ensure CommandHistory is not empty
         String testCommandWord = ListCommand.COMMAND_WORD;
         model.addToCommandHistory(testCommandWord);
 
-        //Ensure AddressBookHistory is empty
+        // Ensure AddressBookHistory is empty
         model.getAddressBookHistory().getAddressBooks().clear();
 
         UndoCommand undoCommand = new UndoCommand();
@@ -70,15 +70,15 @@ public class UndoCommandTest {
 
     @Test
     public void execute_commandHistoryAndAddressBookHistoryAreNotEmpty_success() {
-        //Using List as a test command to be undone
+        // Using List as a test command to be undone
         ListCommand listCommand = new ListCommand();
         listCommand.execute(model);
 
-        //Update CommandHistory
+        // Update CommandHistory
         String testCommandWord = ListCommand.COMMAND_WORD;
         model.addToCommandHistory(testCommandWord);
 
-        //Update AddressBookHistory
+        // Update AddressBookHistory
         model.saveCurrentAddressBookToHistory();
 
         UndoCommand undoCommand = new UndoCommand();

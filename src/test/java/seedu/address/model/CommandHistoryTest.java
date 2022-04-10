@@ -106,7 +106,7 @@ public class CommandHistoryTest {
     public void equals() {
         String testCommand = ListCommand.COMMAND_WORD;
 
-        //no commands in history -> true
+        // no commands in history -> true
         CommandHistory copyOfCommandHistory = new CommandHistory();
         assertTrue(commandHistory.equals(copyOfCommandHistory));
 
@@ -119,7 +119,7 @@ public class CommandHistoryTest {
         // different types -> false
         assertFalse(commandHistory.equals(5));
 
-        //same commands in history -> true
+        // same commands in history -> true
         copyOfCommandHistory.addToHistory(testCommand);
         commandHistory.addToHistory(testCommand);
         assertTrue(commandHistory.equals(copyOfCommandHistory));

@@ -37,7 +37,7 @@ public class HistoryCommandTest {
 
     @Test
     public void execute_commandHistoryIsNotEmpty_success() {
-        //add the same command to commandHistory in both model and expectedModel
+        // Add the same command to commandHistory in both model and expectedModel
         String testCommandWord = ListCommand.COMMAND_WORD;
         model.addToCommandHistory(testCommandWord);
         expectedModel.addToCommandHistory(testCommandWord);
