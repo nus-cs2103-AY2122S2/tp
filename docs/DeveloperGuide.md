@@ -371,6 +371,30 @@ The `Find` command searches for contacts that satisfy any of the given predicate
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 
+Below is an example scenario of how the finding mechanism behaves at each step:
+**Step 1.** The user enters the valid `FindCommand` : `find n/Alex Yeoh edu/computer science` and `LogicManager` would execute it.
+
+**Step 2.** `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `FindCommand`.
+It will then pass the arguments to `FindCommandParser` to handle the parsing for the identified `FindCommand`.
+
+**Step 3.** `FindCommandParser` would separately parse the arguments according to prefixes. So in this case, it would parse the name
+as 'Alex Yeoh' and the education tag as 'computer science'. These would be identified as the fields being searched for. The parsing functions
+are in ParserUtil (in this case, `ParserUtil#parseNames()` and `ParserUtil#parseTagsForFind()`)
+
+**Step 4.** After parsing the arguments, a FindOrPredicateParser object containing these arguments (in the form of a `FindPersonDescriptor` object)
+is created. FindOrPredicateParser converts the fields searched for into classes that extends `Predicate<Person>` (such as
+`NameConatainsKeywordPredicateOr` for the name field). It then does the logical 'OR' operation on all the predicates
+
+**Step 5.** Control is then handed over to FindCommand which takes the predicate as a constructor argument. `FindCommand#execute()`
+then calls `ModelManager#updateFilteredPersonList()` with the predicate as the argument. This changes the filteredList that is
+rendered by the UI to only show the contacts for which the predicate evaluates to True. Finally, a CommandResult object with a success
+message is returned.
+
+The following class diagram shows important classes for the `find` command and their relationships. Note that there are similar classes
+for `find -s` and `find -e`
+
+![Find Class Diagram](images/FindClassDiagram.png)
+
 The find command uses several `Predicate` classes in its implementation of the feature. The partial class diagram below describes
 the relationship between these classes. The predicates for Email and Address follow the same pattern as the ones for Name and Phone.
 The predicates for Internship and Education follow the same pattern as those for Cca and Module. They were left out to simplify the diagram.
@@ -487,7 +511,7 @@ _{more aspects and alternatives to be added}_
 
 ### User stories
 
-Priorities: 
+Priorities:
 * `* * *` - High (must have)
 * `* *` - Medium (nice to have)
 * `*` - Low (unlikely to have)
@@ -858,7 +882,109 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete 1 0 2 3` , `delete 0 1 2 3`<br>
       Expected: No persons are deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `delete 1 x 2 3`, `delete 1 2 3 x` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete 1 x 2 3`, `delete 1 2 3 x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding an event
+
+1. Adding an event
+
+   1. Test case: `event name/lunch info/at HDL d/2023-11-10 t/12:12`<br>
+      Expected: The new event is added into the event list and displayed on the interface. Details of the added event shown in the status message.
+   
+   2. Test case: `event name/ info/at HDL d/2023-11-10 t/12:12` <br>
+      Expected: No new event is added into the event list. Error details shown in the status message. Status bar remains the same
+   
+   3. Other incorrect event commands to try: `event name/lunch info/ d/2023-11-10 t/12:12`, `event name/lunch info/at HDL d/2019-11-10 t/12:12`, `event name/lunch info/at HDL d/2023-11-10 t/28:12`<br>
+      Expected: Similar to previous.
+
+### Cancelling an event
+
+1. Cancelling an event while all events are being shown
+
+    1. Prerequisites: List all events using the `showevents` command. Multiple events in the list. 
+       If event list is empty, add new events to the list first. (At least 1 event is added) 
+
+    2. Test case: `cancelevent 1`<br>
+       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+    3. Test case: `cancelevent 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect cancelevent commands to try: `cancelevent`, `cancelevent x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Cancelling multiple events while all events are being shown
+
+    1. Prerequisites: List all events using the `showevents` command. Multiple events in the list.
+       If event list is empty, add new events to the list first. (At least 2 events are added)
+
+    3. Test case: `cancelevent 1 2`<br>
+       Expected: First and second events are deleted from the list. Details of the deleted events shown in the status message.
+
+    4. Test case: `cancelevent 1 0 2` , `delete 0 1 2`<br>
+       Expected: No events are deleted. Error details shown in the status message. Status bar remains the same.
+
+    5. Other incorrect cancelevent commands to try: `delete 1 1 2`, `delete 1 2 x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+## Tagging information to an existing person
+
+1. Tagging cca information to a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+      If person list is empty, add new persons to the list first. (At least 1 person is added)
+   
+   2. Test case: `tag 1 c/bouldering`
+      Expected: First person is tagged with the cca information and the information is displayed on the first person's contact card.
+      Details of the updated tag information of the person is shown in the status message.
+   
+   3. Test case: `tag 1 c/$$`
+      Expected: First person is not tagged with the cca information. Error details shown in the status message. Status bar remains the same.
+   
+   4. Other incorrect tag commands to try: `tag 1 c/`, `tag 1 c/ `
+      Expected: Similar to previous.
+
+2. Tagging education information to a person
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+       If person list is empty, add new persons to the list first. (At least 1 person is added)
+
+    2. Test case: `tag 1 edu/computer science`
+       Expected: First person is tagged with the education information and the information is displayed on the first person's contact card.
+       Details of the updated tag information of the person is shown in the status message.
+
+    3. Test case: `tag 1 edu/$$`
+       Expected: First person is not tagged with the education information. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect tag commands to try: `tag 1 edu/`, `tag 1 edu/ `
+       Expected: Similar to previous.
+
+3. Tagging internship information to a person
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+       If person list is empty, add new persons to the list first. (At least 1 person is added)
+
+    2. Test case: `tag 1 i/shopee`
+       Expected: First person is tagged with the internship information and the information is displayed on the first person's contact card.
+       Details of the updated tag information of the person is shown in the status message.
+
+    3. Test case: `tag 1 i/$$`
+       Expected: First person is not tagged with the internship information. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect tag commands to try: `tag 1 i/`, `tag 1 i/ `
+       Expected: Similar to previous.
+
+4. Tagging module information to a person
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+       If person list is empty, add new persons to the list first. (At least 1 person is added)
+
+    2. Test case: `tag 1 m/cs2040s`
+       Expected: First person is tagged with the module information and the information is displayed on the first person's contact card.
+       Details of the updated tag information of the person is shown in the status message.
+
+    3. Test case: `tag 1 m/$$`
+       Expected: First person is not tagged with the module information. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect tag commands to try: `tag 1 m/`, `tag 1 m/ `
        Expected: Similar to previous.
 
 
