@@ -7,6 +7,16 @@ title: Developer Guide
 
 This is a brownfield project that bases from the Project template [AddressBook Level 3 (AB3)](https://se-education.org/docs/templates.html) from se-education.org.
 
+# Table of contents
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+- [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- 
+
 # Setting up, getting started
 
 Get started by following these instructions from our [guide](https://ay2122s2-cs2103-w16-4.github.io/tp/SettingUp.html).
@@ -561,12 +571,12 @@ Given below are instructions to test the app manually.
 ## Viewing an Image
 
 1.Uploading an Image to an existing client
-1. Prerequisites:
-   1. There must be at least a client in the list.
-   2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
-   3. client must have at least one image associated with
-2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
-3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+   1. Prerequisites:
+      1. There must be at least a client in the list.
+      2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+      3. client must have at least one image associated with
+   2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
+   3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
 
 ## Setting reminders
 
