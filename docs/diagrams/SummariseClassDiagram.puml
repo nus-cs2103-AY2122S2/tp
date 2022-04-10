@@ -56,7 +56,24 @@ class SummariseCommand {
     + {static} getHighestPositiveByFaculty() : int
 }
 
+class MainWindow {
+    /' Methods '/
+    - handleSummarise()
+}
+
+class PieChartWindow {
+     /' Methods '/
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + execute()
+     + show()
+ }
+
 ModelManager <-- SummariseCommand
 "{abstract}\nCommand" <|-- SummariseCommand
 SummariseCommand --> Person
+MainWindow --> SummariseCommand
+MainWindow *-- PieChartWindow
+
 @enduml
