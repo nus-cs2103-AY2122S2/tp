@@ -18,15 +18,15 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * Undo and redo command (PR [\#94](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/94)):
     * What it does: Allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
     * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This feature affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+    * Highlights: This feature affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation was challenging as it required changes to existing commands.
     * Credits: https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
   <br><br>
   * Revamp duplicate detection (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
-    * What it does: Prevents duplicate entries of identical name, phone and email when using add and edit commands.
-    * Justification: This feature improves the product by helping users manage duplicates by preventing duplicated contacts with the exact same name, phone and email.
-    * Highlights: This feature affects existing and future person attributes on how uniqueness is determined, and needs to be integrated with the existing commands. Duplicate detection is not trivial, detecting only exact string matches is not enough. It was meticulously implemented to behave closely to how these attributes are in the real world. For example, "John &#160;&#160;&#160; Doe" and "john doe" are likely to be the same person, even though there are differences in white spaces and capitalization. The implementation was tedious and challenging as it required changes in many of the existing and future classes.
+    * What it does: Prevents duplicate entries with the same name, phone and email when using add and edit commands.
+    * Justification: This feature improves the product by helping users manage duplicates by preventing duplicated contacts with the same name, phone and email.
+    * Highlights: This feature affects existing and future person attributes on how uniqueness is determined, and needs to be integrated with the existing commands. Duplicate detection is not trivial, detecting only exact string matches is not enough. It was meticulously implemented to behave closely to how these attributes are in the real world. For example, "John &#160;&#160;&#160; Doe" and "john doe" are likely to be the same person, even though there are differences in white spaces and capitalization. The implementation was tedious and challenging as it required changes in many of the existing classes.
   <br><br>
-  * Handle case sensitivity by ignoring case difference for all person attributes (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
+  * Case insensitivity for all person attributes (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
     * Related to duplicate detection.
   <br><br>
   * Trim extra spaces between words (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
@@ -38,19 +38,19 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Highlights: This feature was integrated into existing add and edit commands, adhering to OOP principles such as DRY and Single Responsibility Principle. The UI also needed to be updated to be seamless, such that if memo is empty, the memo row in the UI must not appear. A limit was also imposed to protect from unnecessarily long inputs.
   <br><br>
   * ContactedDate attribute (PR [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133))
-    * What it does: Allows the user to keep track of the last time that they contacted an individual.
+    * What it does: Allows the user to keep track of the last time that they contacted a person.
     * Justification: This feature improves the product by giving users an optional data field to store the last contacted date of a contact.
     * Highlights: This feature was integrated into existing add and edit commands, adhering to OOP principles such as DRY and Single Responsibility Principle. It was tricky to protect from edge cases. Proper date validation was required to ensure that the date given is a valid date following the dd-mm-yyyy format and is not a future date. Moreover, the date validation needs to properly handle leap dates and non-existent dates such as 30th February.
   <br><br>
   * Deletetag command (PR [\#178](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/178))
     * What it does: Allows the user delete one or more tags of a contact.
     * Justification: This feature improves the product by giving users the flexibility to delete one or more tags of a person. The alternative previously was the edit command, but edit overwrites all existing tags, which could be inconvenient for users. 
-    * Highlights: This feature required careful implementation to ensure that it adheres to the code base design and OOP principles. This feature also indirectly affected duplicate detection, on what is considered as the same tag. Certain inputs such as deletion of both valid and invalid tag in one command execution had to be handled properly as well. 
+    * Highlights: This feature required careful implementation to ensure that it adheres to the code base design and OOP principles. This feature also indirectly affected duplicate detection, on what is considered as the same tag. Certain user inputs, such as the deletion of both valid and invalid tag in one command execution had to be handled properly as well. 
   <br><br>
   * Prevent extraneous parameters for commands that do not take in parameters (PR [\#150](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/150))
     * What it does: Prevents commands that do not take in parameters from executing when the user input has extra/trailing characters after the command word.
     * Justification: This feature improves the product by protecting the user from accidental invocations of the wrong command. E.g. if you want to delete the first person and mistakenly call `clear 1` instead of `delete 1`, it will now be interpreted as an invalid command to protect users from accidentally clearing the entire address book unintentionally. The proper format to execute clear is just `clear`.
-    * Highlights: This feature required additional checks for all existing and future commands that take no parameters.
+    * Highlights: This feature required additional checks for all existing commands that take no parameters.
   <br><br>
   * Updated `Person#toString()`to better represent tags when displayed (PR [\#184](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/184))
   <br><br>
