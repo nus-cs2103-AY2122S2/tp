@@ -17,13 +17,13 @@ Given below are my contributions to the project.
 * **New Component**: Added `Preference` attribute (Pull Request [#79](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/79)).
   * What it does: a new attribute of a `Person`. Specifies the preference of a potential buyer.
 
+* **Enhancements to existing features**:
+  * Enhanced `find` feature to be able to find keywords not only in names but also in all other attributes of a person (Pull Request [#97](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/97)).
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=cindyangXQ&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18).
 
 * **Project management**:
   * Managed releases `v1.1` `v1.3.1` `v1.3.2` (3 releases) on GitHub.
-
-* **Enhancements to existing features**: 
-  * Enhanced `find` feature to be able to find keywords not only in names but also in all other attributes of a person (Pull Request [#97](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/97)).
  
 * **Documentation**:
   * User Guide:
@@ -35,6 +35,8 @@ Given below are my contributions to the project.
     * Added implementation details of the `match` feature.
     * Added implementation details of the `Preference` attribute.
     * Added implementation details of the enhanced `find` feature.
+    * Added manual testing for the `match` feature.
+    * Added manual testing for the `find` feature. 
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#50](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/50), [\#67](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/67), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94).
