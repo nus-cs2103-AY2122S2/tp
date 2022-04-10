@@ -1143,23 +1143,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1e1. TAPA shows an error message.
 
        Use case ends.
-
-#### Use case: UC02 - List all students
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students in alphabetical order sorted by their name.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-#### Use case UC03 - Delete a student
+   
+#### Use case UC02 - Delete a student
 
 **MSS**
 
@@ -1188,7 +1173,152 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-#### Use case UC04 - Edit a student
+#### Use case: UC03 - Delete all students from a module
+
+**MSS**
+
+1. User requests to delete all students from a particular module.
+2. TAPA deletes the students.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given module code is invalid.
+
+   * 1a1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+* 1b. There are no students taking the module specified by the given module code.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+#### Use case: UC04 - Finding a student
+
+**MSS**
+
+1. User requests to find students that match the inputted search field.
+2. TAPA displays the students who fit the request.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given student ID is invalid.
+
+   * 1a1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+* 1b. The given module code is invalid.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case resumes from step 1.
+
+#### Use case: UC05 - Check all the tasks that a student has
+
+**MSS**
+
+1. User requests to check all the tasks that a student has.
+2. TAPA shows a list of tasks that the student has.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The specified student ID is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. There is no student with the specified student ID in TAPA.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2b. The student does not have any tasks assigned to him/her.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC06 - Marking an undone task as complete
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as done.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If student ID is given, and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3c. The specified task with the given index has already been marked as complete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC07 - Marking a done task as incomplete
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as undone.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If student ID is given, and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3b. If the index is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3c. The specified task with the given index has already been marked as incomplete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case UC08 - Edit a student
 
 **MSS**
 
@@ -1223,8 +1353,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+#### Use case: UC09 - Save a copy of the data in TAPA
 
-#### Use case: UC05 - Assign a task to a student
+**MSS**
+
+1. User request to save a copy of the data that is currently being stored in TAPA.
+2. TAPA creates a new data file in the same directory as the existing stored data.
+3. TAPA copies the content of the existing stored data into the new data file.
+
+**Extensions**
+
+* 2a. There is already a data file that has the same file name as the new data file that is going to be created.
+
+   * 2a1. TAPA does not create a new data file.
+
+     Use case resumes from step 3.
+
+* 2b. User does not have the permission to create a new file.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3. There is an unexpected error when copying from the existing data file to the new data file.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC10 - List all students
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students in alphabetical order sorted by their name.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+#### Use case: UC11 - Assign a task to a student
 
 **MSS**
 1. User requests TAPA to assign a task to a student. (This can be done for an individual student or for all students taking the same module)
@@ -1252,8 +1424,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+#### Use case: UC12 - View the completion status of a particular task
 
-#### Use case: UC06 - Delete a task assigned to a student
+**MSS**
+
+1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
+2. TAPA shows a list of students who are taking this module and are currently assigned with the specified tasks (along with their respective completion status).
+
+**Extensions**
+
+* 1a. The specified task name is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. The specified module code is invalid (not in a correct format).
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2a. There are no students who are taking this module and are assigned with the specified task.
+
+   * 2a1. TAPA shows an error message.
+
+     Use case ends.
+
+#### Use case: UC13 - Delete a task assigned to a student
 
 **MSS**
 
@@ -1294,137 +1492,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC07 - Finding a student
+#### Use case: UC14 - Sorting list of students by their number of incomplete tasks in descending order
 
 **MSS**
 
-1. User requests to find students that match the inputted search field.
-2. TAPA displays the students who fit the request.
+1. User requests to sort students.
+2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
 
    Use case ends.
 
-**Extensions**
+* 2a. The list is empty.
 
-* 1a. The given student ID is invalid.
+  Use case ends.
 
-    * 1a1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-* 1b. The given module code is invalid.
-
-    * 1b1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-#### Use case: UC08 - Delete all students from a module
-
-**MSS**
-
-1. User requests to delete all students from a particular module.
-2. TAPA deletes the students.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given module code is invalid.
-
-    * 1a1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-* 1b. There are no students taking the module specified by the given module code.
-
-    * 1b1. TAPA shows an error message.
-
-      Use case resumes from step 1.
-
-#### Use case: UC09 - Check all the tasks that a student has
-
-**MSS**
-
-1. User requests to check all the tasks that a student has.
-2. TAPA shows a list of tasks that the student has.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The specified student ID is invalid (not in a correct format).
-
-   * 1a1. TAPA shows an error message.
-
-     Use case ends.
-
-* 1b. There is no student with the specified student ID in TAPA.
-
-   * 1b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 2b. The student does not have any tasks assigned to him/her.
-
-   * 2b1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC10 - View the completion status of a particular task
-
-**MSS**
-
-1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
-2. TAPA shows a list of students who are taking this module and are currently assigned with the specified tasks (along with their respective completion status).
-
-**Extensions**
-
-* 1a. The specified task name is invalid (not in a correct format).
-
-   * 1a1. TAPA shows an error message.
-
-     Use case ends.
-
-* 1b. The specified module code is invalid (not in a correct format).
-
-   * 1b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 2a. There are no students who are taking this module and are assigned with the specified task.
-
-   * 2a1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC11 - Save a copy of the data in TAPA
-
-**MSS**
-
-1. User request to save a copy of the data that is currently being stored in TAPA.
-2. TAPA creates a new data file in the same directory as the existing stored data.
-3. TAPA copies the content of the existing stored data into the new data file.
-
-**Extensions**
-
-* 2a. There is already a data file that has the same file name as the new data file that is going to be created.
-
-   * 2a1. TAPA does not create a new data file.
-
-     Use case resumes from step 3.
-
-* 2b. User does not have the permission to create a new file.
-
-   * 2b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 3. There is an unexpected error when copying from the existing data file to the new data file.
-
-   * 3a1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC12 - Finding out what a certain command does
+#### Use case: UC15 - Finding out what a certain command does
 
 **MSS**
 
@@ -1448,90 +1529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1b1. TAPA shows an error message.
 
      Use case ends.
-
-#### Use case: UC13 - Marking an undone task as complete
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to mark a student's task as done.
-4. TAPA shows the updated list of students.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  
-   Use case ends.
-
-* 3a. If student ID is given, and a student with the given student ID does not exist.
-
-   * 3a1. TAPA shows an error message. 
-     
-      Use case ends.
    
-* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
-  
-   * 3b1. TAPA shows an error message. 
-     
-      Use case ends.
-
-* 3c. The specified task with the given index has already been marked as complete.
-
-   * 3c1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC14 - Marking a done task as incomplete
-
-**MSS**
-
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to mark a student's task as undone.
-4. TAPA shows the updated list of students.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. If student ID is given, and a student with the given student ID does not exist.
-
-   * 3a1. TAPA shows an error message.
-
-     Use case ends.
-   
-* 3b. If the index is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
-
-   * 3b1. TAPA shows an error message.
-
-     Use case ends.
-
-* 3c. The specified task with the given index has already been marked as incomplete.
-
-   * 3c1. TAPA shows an error message.
-
-     Use case ends.
-
-#### Use case: UC15 - Sorting list of students by their number of incomplete tasks in descending order
-
-**MSS**
-
-1. User requests to sort students.
-2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
-
-   Use case ends.
-
-* 2a. The list is empty. 
-  
-   Use case ends.
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
