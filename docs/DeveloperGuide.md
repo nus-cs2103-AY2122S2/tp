@@ -519,15 +519,40 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 ### Scheduling interviews feature
 
-Below is a simplified sequence diagram showing how a `AddScheduleCommand` is parsed under the `Logic` 
-component when a user adds an interview to the schedule. Note that all four schedule commands `add`. `delete`, `edit` 
-and `clear` follow a similar structure.
+#### What is this feature about?
+The `AddScheduleCommand`, `EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` features allow 
+the user to add, edit, delete or clear all interviews respectively.
+
+#### How is this feature implemented?
+This feature is modelled after AB3's `add`, `edit`, `delete` and `clear` commands for consistency. Interview objects 
+created upon the `schedule add` command are contained in a `UniqueInterviewList` object and exposed to outsiders as 
+an unmodifiable `ObservableList<Interview>`.
+
+#### Why is this feature implemented as such?
+* **Alternative 1 (Current Choice)**: Newly created interviews are added to a list of interviews, and
+  each interview object contains its corresponding `Candidate`.
+    * Pros: No need to iterate through every candidate to initialise the interview schedule. Better performanece when
+      editing or deleting interviews by index in the interview schedule.
+    * Cons: Editing a `Candidate` attribute requires an update to their corresponding `Interview`'s `Candidate` object.
+* Alternative 2: Every candidate has an `Interview` attribute, initialised to null. When a candidate is scheduled for an
+  interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
+    * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
+    * Cons: Interview schedule has to iterate through every candidate to search for existing interviews during initialisation. 
+  Editing or deleting interviews by index from the interview schedule would require further iterations through the candidate list
+  to find the target interview.
+    
+#### UML Diagram
+Below is a simplified sequence diagram showing how an `AddScheduleCommand` is parsed under the `Logic` 
+component when a user adds an interview to the schedule. Note that all four schedule commands `AddScheduleCommand`, 
+`EditScheduleCommand`, `DeleteScheduleCommand` and `ClearScheduleCommand` follow a similar structure.
 
 <img src="images/ScheduleLogicDiagram.png"/>
 
-Below is a sequence diagram and explanation of how the `AddScheduleCommand` is executed.
+Below is another sequence diagram with a more in depth view of how the `AddScheduleCommand` is executed after parsing.
 
 <img src="images/AddScheduleSequenceDiagram.png"/>
+
+Explanation of sequence when a `AddScheduleCommand` is called.
 
 **Step 1.** The user executes the command `schedule add candidate/1 at/24-05-2022`.
 
@@ -544,18 +569,6 @@ which then calls `AddScheduleCommandParser#parse` to create a new `AddScheduleCo
 
 **Step 7.** After the interview is successfully added, we call the `Candidate#triggerInterviewStatusScheduled` method which returns
 the `Candidate` with his interview status set to `Scheduled`. The Model will then call Model#setCandidate to update the candidate in the list.
-
-#### Design Consideration
-* **Alternative 1 (Current Choice)**: Newly created interviews are added to a list of interviews, and
-each interview object contains its corresponding `Candidate`.
-  * Pros: No need to iterate through every candidate to initialise the interview schedule. Better performanece when 
-  editing or deleting interviews by index in the interview schedule.
-  * Cons: Editing a `Candidate` requires an update to their corresponding `Interview`.
-* Alternative 2: Every candidate has an `Interview` attribute, initialised to null. When a candidate is scheduled for an
-interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
-  * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
-  * Cons: Interview schedule has to iterate through every candidate to check.
-
 
 # TO DELETE ****
 ### \[Proposed\] Undo/redo feature
