@@ -8,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 public class RegistrationDate extends Date {
-    public static final String MESSAGE_CONSTRAINTS = "RegistrationDate should follow dd-MM-yyyy and be valid date.";
+    public static final String MESSAGE_CONSTRAINTS = "RegistrationDate should follow dd-MM-yyyy. "
+            + "It should be a date before the current date and a valid date.";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
     private static final String EMPTY_DATE = "01-01-1000"; //impossible date

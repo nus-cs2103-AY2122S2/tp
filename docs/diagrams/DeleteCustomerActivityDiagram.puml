@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes the 'deletec' command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid command format])
+    :Parses the command using \nDeleteCustomerCommandParser;
+    if () then ([valid parameters])
+        :Get the list of customers to be deleted \nfrom the model specified by the indexes ;
+        :Get the list of future bookings that belong \nto these customers from the model ;
+        :Delete the bookings in the list from the model;
+        :Delete the customers in the list from the model;
+    else ([else])
+        :Shows an invalid \nparameters error message;
+        stop
+    endif
+    if () then ([user is on Bookings tab])
+    else ([else])
+        :Switch to Bookings tab;
+    endif
+    :Displays updated booking list;
+else ([else])
+    :Shows an invalid command error message;
+endif
+stop
+@enduml
