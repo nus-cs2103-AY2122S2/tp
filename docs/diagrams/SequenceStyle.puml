@@ -26,12 +26,6 @@ skinparam Sequence {
     LifelineBorderColor #000000
 }
 
-skinparam Arrow {
-    Color #000000
-    FontSize 13
-    Thickness 1.1
-}
-
 skinparam Participant {
     FontColor #FFFFFFF
     Padding 10
