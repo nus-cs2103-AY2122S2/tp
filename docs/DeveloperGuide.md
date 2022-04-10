@@ -54,7 +54,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Structure of the UI Component](images/ArchitectureSequenceDiagramV2.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -117,14 +117,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 The class diagram below shows more details regarding `Customer`, `Service` and `Booking` classes in the `Model` component.
 
 ![Model Specific Class Diagram](images/ModelSpecificDetailsClassDiagram.png)
 
-
-</div>
 
 
 ### Storage component
