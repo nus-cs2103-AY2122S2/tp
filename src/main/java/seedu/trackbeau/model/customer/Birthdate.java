@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 public class Birthdate extends Date {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-MM-yyyy. " +
-            "It should be a date before the current date and a valid date.";
+    public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-MM-yyyy. "
+            + "It should be a date before the current date and a valid date.";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
     public final LocalDate value;
