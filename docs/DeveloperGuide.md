@@ -378,19 +378,19 @@ The following sequence diagram shows how the add student command works.
 #### Design Considerations
 
 **Choice 1**  
-Compulsory prefixes: `Name` and `Phone`
-Optional prefixes: `Email`, `Address` and `Tag`
+Required prefixes: `name` and `phone`
+Optional prefixes: `email`, `address` and `tag`
 Advantages: This improves user experience as the tutor may not want to keep track of them.
 Disadvantages: It may cause some students to have email address and some to not have them. This may cause inconsistencies.
 
 **Choice 2**  
-Compulsory prefixes: `Name`, `Phone` and `Email`
-Optional prefixes: `Address` and `Tag`
+Required prefixes: `name`, `phone` and `email`
+Optional prefixes: `address` and `tag`
 Advantages: This improves user experience as the tutor may not want to keep track of addresses.
 Disadvantages: It requires the tutor to know the email address as well for all his students.
 
-**Choice 1** was picked because it felt tedious for the user to ask for the email address of every student.
-This split of compulsory and optional fields allows us to maintain the minimal amount of information required by a tutor 
+We decided on **Choice 1** because it felt tedious for the user to ask for the email address of every student.
+This split of required and optional fields allows us to maintain the minimal amount of information required by a tutor 
 and improve user experience by improving typing speed as the user does not have to enter every field.
 
 [return to top ↑](#table-of-contents)
