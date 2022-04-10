@@ -60,3 +60,5 @@ Given below are my contributions to the project.
       * [Add a new field 'description' and 'remark' ](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/71)
       * [Bug fix](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/84)
       * [Add House Class, HouseType <Enum>, Location, and PriceRange](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/87)
+
+ 
