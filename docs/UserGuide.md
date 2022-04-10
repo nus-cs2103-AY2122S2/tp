@@ -171,7 +171,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 |-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2` |
 | INDEX     | None   | A **positive whole number within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**. |
-| NAME      | n/     | A show name must be **unique** and contain only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
+| NAME      | n/     | A show name must be **unique** and contain up to 500 [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
 | STATUS    | s/     | A status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_. |
 | RATING    | r/     | A rating must be a **whole number** from **0 to 5**. |
 | COMMENT   | c/     | A comment can only contain up to 300000 [**ASCII**](#glossary) values. |
@@ -180,7 +180,6 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | SEQUENCE  | so/    | A sequence lists out the order of **all** the prefixes used to sort the show list. It can only contain the case-insensitive full names of the prefixes used. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
 
 ## Features
 

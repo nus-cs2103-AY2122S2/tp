@@ -16,5 +16,7 @@ Show -up-> "*" Tag
 
 Show *--> Name
 Show *--> Status
+Show *--> Rating
 Show *--> Comment
+
 @enduml
