@@ -3,39 +3,27 @@
 
 $OverrideTheme(UI_COLOR)
 
-package UI as UiPackage<<Ui>> {
-    class "{abstract}\nUiComponent" as UiComponent<<Ui>>
-    class MainWindow<<Ui>>
+package UI <<Ui>> {
+    class MainWindow <<Ui>>
 
-    package Table as Table<<Ui>> {
-        class ProductCard<<Ui>>
-        class Table<<Ui>>
-        class TableContent<<Ui>>
-        class TableHeader<<Ui>>
+    package Table <<Ui>> {
+        class ProductCard <<Ui>>
+        class ProductTable <<Ui>>
+
+        package Item <<Ui>> {
+            class ItemCard <<Ui>>
+            class ItemTable <<Ui>>
+        }
     }
 }
 
-class Model<<Model>>
-class Logic<<Logic>>
+MainWindow *--> "1" ProductTable
 
-MainWindow *-right-> "1" Table
+ProductTable *-right-> "*" ProductCard
 
-Table *--> "1" TableContent
-Table *--> "1" TableHeader
+ProductCard *--> "0..1" ItemTable
 
-TableContent *--> "*" ProductCard
+ItemTable *-left-> "*" ItemCard
 
-ProductCard --|> UiComponent
-Table --|> UiComponent
-TableContent --|> UiComponent
-TableHeader --|> UiComponent
-
-TableContent ..> Model
-MainWindow ..> Model
-ProductCard ..> Model
-
-UiComponent -left-> MainWindow
-
-MainWindow -right-> Logic
 
 @enduml

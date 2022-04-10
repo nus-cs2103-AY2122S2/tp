@@ -5,19 +5,30 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
+
+<style>
+   p img {
+      display: block;
+      margin: 0 auto 30px;
+   }
+</style>
 
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
---------------------------------------------------------------------------------------------------------------------
+* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
+
+* The Ui design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+
+<hr/>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Design**
 
@@ -30,9 +41,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the app.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -67,52 +78,85 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### Ui component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java)
 
+The diagram below shows a simplified view of the Ui component.
+
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultWindow`, `Table`, `Popup` etc. The `MainWindow` and `UiComponent` inherits from `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+`XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc
 
-`UiComponent` is an abstract class that contains a reference to the MainWindow. Notice how all the other Ui components inherit from `UiComponent`. This is to enable the individual Ui components to navigate back to MainWindow. The navigation is helpful for certain Ui components that requires to call the methods resides in MainWindow. For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
+The Ui consists of a `UiManager` that implements the Façade interface `Ui`.
+
+`UiManager` consists of a `MainWindow` that holds all Ui components of the application. 
+
+`UiComponent` is an abstract class that contains a reference to the MainWindow. 
+
+By having `XXX_Ui` inherit from `UiComponent`, we enabled nagivation from `XXX_Ui` to MainWindow. 
+
+The navigation is helpful for some Ui components that are required to call methods in `UiManager`.
+
+For example, `CommandBox` calls method `executeCommand` in `MainWindow` when user enter a command.
 
 #### The Structure of The Table Component
 
+Ui components that are related to the main display table are grouped in the `Table` package
+
+The diagram below shows a simplified internal structure of `Table`.
+
 ![Structure of the Table Component](images/UiTableDiagram.png)
 
-The diagram above shows the internal structure of the `Table` component.
 
-The `MainWindow` contains a `Table`, which holds a `TableHeader` and a `TableContent`.
+The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` that represent `Product`.
 
-`TableContent` has multiple `ProductCard` that represents each `Product` in the table.
-
-Here, `ProductCard` and `TableContent` has a dependency on `Model` to get the attributes of a `Product`
-
-As usual, all Ui components are inherited from `UiComponent` for navigability back to `MainWindow`
+Subsequently, each `ProductCard` may contains `ItemTable` which has multiple `ItemCard` to represent `Item`.
 
 #### The Structure of The Popup Component
 
+Ui components that are related to a popup are grouped in the `Popup` package
+
+The diagram below shows a simplified internal structure of `Popup`.
+
 ![Structure of the Popup UI](images/UiPopupDiagram.png)
 
-The diagram above shows the internal structure of the `Popup` component.
+`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
-Firstly, `MainWindow` contains a `PopupHandler` that provides several APIs for operations related to popup.
+The `MainWindow` contains a `PopupHandler` that provides APIs for operations related to popup.
 
-Every popup is inherited from the `Popup` abstract class which contains the implementation of the common attribute across all popups. The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
+Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups
 
-Popups depends on several classes in `Logic` and `Model`.
+e.g `show()`, `hide()`, `setFeedbackToUser()`, etc
 
-`Model` is needed to show the relevant product information to the user. `Logic` on the other hand, is required to forge commands to add product and update product.
+The abstract class `Popup` is again inherited from `UiComponent` for navigability to `MainWindow`
+
+#### The Structure of The Control Component
+
+Ui components that are related to the `ControlBox` are grouped in the `Control` package.
+
+The `ControlBox` is the box located just above the main display table. Its main usage is to hold `Add Product` button and `Filter` tags.
+
+The diagram below shows a simplified internal structure of `Control`.
+
+![Structure of the Popup UI](images/UiControlDiagram.png)
+
+
+
+The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represent each `AttributeFilter`.
+
+#### More about Ui
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The css files can be found in [`src/main/resources/view/css`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/css), the images used are located in [`src/main/resources/images`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/images)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Product` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Product`, `Item` object residing in the `Model`.
 
 ### Logic component
 
@@ -181,15 +225,103 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Popups
+
+#### Implementation
+
+The diagram below shows a simplified internal structure of `Popup`.
+
+![Structure of the Popup UI](images/UiPopupDiagram.png)
+
+`PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
+
+The API provided by `PopupHandler` are:
+* `isShowing()` Checks if any of the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in the showing popup
+* `showPopupXXX()` Shows `PopupXXX`
+* `HidePopup()` Hides the showing popup
+
+The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to make sure that the number of popups will not flood the user's screen.
+
+Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups. 
+
+The methods in `Popup` are:
+* `show()` Shows the popup window
+* `hide()` Hides the popup window
+* `isShowing()` Checks if the popup is showing
+* `setFeedbackToUser(String feedbackToUser)` Shows feedback to user in popup
+* `execute(String commandText)` Executes the `commandText`
+
+#### Showing a Popup
+
+The following sequence diagram shows how a `Popup` is shown once a button is clicked.
+
+![Show Popup](images/ShowPopupSequenceDiagram.png)
+
+`XXX_Ui` represents Ui components that has a button which will open a popup once it is clicked
+
+e.g `ControlBox`, `ProductCard`, `ItemCard`, etc
+
+`PopupYYY` represents different types of `Popup`
+
+e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+As you can see from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
+
+This is to reduce coupling for each of the Ui components as they will not have a dependency on `PopupHandler` to call any of the popup. Also, it avoids the issue of deeply nested passing of `PopupHandler`.
+
+#### Executing command in Popup
+
+The sequence diagram below shows successful execution of a command in popup
+
+![Execute Popup](images/ExecutePopupSequenceDiagram.png)
+
+`PopupYYY` represents different types of `Popup`
+
+e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
+
+When a user clicked a button in `PopupYYY`, it will generate the associated command from the inputs. The command is then passed to `MainWindow` for execution.
+
+This process is similar to how command is executed from `CommandBox`.
+
+The `commandResult` is then sent to `ResultWindow` for display and `PopupYYY` will be hidden.
+
+#### Design Considerations
+
+**Aspect: How to handle popup**
+* **Alternative 1:** Pass in popups created at `MainWindow` to Ui components that require it
+  * Pros: Less function calls and better performance
+  * Cons: 
+   1. Increase coupling as these popups might required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This cause `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`
+
+   &nbsp;
+
+* **Alternative 2:** Create popup in Ui components that require it
+  * Pros: Easy solution to reduce coupling
+  * Cons: 
+    1. Difficult to manage popups and check whether the popups are current showing
+    2. Two same popups might be opened at the same period of time
+
+   &nbsp;
+
+* **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provides method for Ui component for all the `Popup`
+  * Pros: Centralized control for popup and reduce coupling
+  * Cons: 
+    1. Increase complexity for `MainWindow`
+    2. Less efficient as more function calls are required
+
+
 ### Product
 
-###Implementation
+#### Implementation
 
 The implementation of product is entirely governed by the `Product` class. The `Product` class is immutable and guarantees that all fields are valid and immutable as well.
 
@@ -199,7 +331,7 @@ The following sequence diagram shows how the `Update` command works:
 
 <img src="images/UpdateExecutionSequenceDiagram.png" width="1000" />
 
-###Design Considerations
+#### Design Considerations
 **Aspect: How to design the product structure**
 * **Alternative 1:** Make product mutable
   * Pros: Easy to Implement
@@ -250,6 +382,61 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
     * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
     * Cons: More complicated to implement.
 
+### Item
+
+#### Implementation
+
+The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and `Quantity`, under `Product` with a one-to-many relationship, i.e. one `Product` can have multiple `Item` objects under it.
+
+Listed below are the few behavioral requirements for `Item`, along with the classes/interfaces related to it.
+
+* A `Product` must not have two `Item` objects that are considered the same: `UniqueItemList`
+* An `Item` cannot exist without a `Parent` it's under: `ItemDescriptor`
+
+`ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
+
+The motivation for such implementation is due to the parsing of the `add-item` command, when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
+
+*The reason of choosing this design solution will be justified in the next section.*
+
+##### Adding an Item
+
+Given below is a sequence diagram to show how `add-item 1 e:2022-12-13 q:10` is handled:
+
+![Sequence diagram for `add-item` command](images/AddItemSequenceDiagram.png)
+
+The details of `AddItemCommand#execute()` are omitted from the sequence diagram above, and are illustrated below:
+
+![Detailed sequence diagram for the command execution](images/AddItemToModelSequenceDiagram.png)
+
+The sequence diagram below shows how an `Item` is added to a `Product`'s `UniqueItemList`. This happens within `ModelManager` which implements the interface `Model` containing the method `Model#addItem(Product, Item)`.
+
+![Sequence diagram for `ModelManager#addItem` internal details](images/AddItemToUniqueItemList.png)
+
+##### Updating and deleting an Item
+These two operations are similar to adding an `Item` as shown in the section above.
+
+#### Design considerations
+
+**Aspect: How to create `Item` and ensure it  when user executes `add-item` command:**
+
+* **Alternative 1:** Retrieve the respective `Product` within the parser.
+    * Pros: Easy solution.
+    * Cons: Allows the parser to interact with model and logic, which also increases coupling.
+
+      &nbsp;
+* **Alternative 2:** Create command object with each field as a parameter.
+    * Pros: Easy solution.
+    * Cons:
+        * Complicates the `AddItemCommand` constructor and requires modification of constructor signature whenever there are updates to `Item` fields.
+        * If more commands that have the same issue are implemented, the amount of modification will increase.
+
+      &nbsp;
+* **Alternative 3 (current choice):** `ItemDescriptor` to temporarily hold the fields' value, then converted to `Item` later when `Product` is specified.
+    * Pros: Good abstraction.
+    * Cons: Requires an extra class to be created.
+
+
 ### Undo/redo feature
 
 #### Implementation
@@ -257,7 +444,7 @@ When executing the `FindCommand`, the `clearProductFilters` method of the `Model
 The undo/redo mechanism is facilitated by `ReversibleIBook`. It extends `IBook` with versions of methods that are reversible and uses `StateChangeRecorder` to record all changes made to `IBook`, which internally store changes as a `StateChange`. `ReversibleIBook` implements the following operations:
 
 * `ReversibleIBook#prepareForChanges()` — Prepares a clean workspace to record next possible changes.
-* `ReversibleIBook#saveChanges()` — Saves all changes made to `Ibook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
+* `ReversibleIBook#saveChanges()` — Saves all changes made to `IBook` as a `StateChange` (recorded and stored in `StateChangeRecorder`).
 * `ReversibleIBook#undo()` — Reverts the most currently changes.
 * `ReversibleIBook#redo()` — Restores the most currently undone changes.
 
@@ -328,13 +515,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
   * Cons: We must ensure that the implementation of each individual method are correct.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -344,7 +525,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Appendix: Requirements**
 
@@ -394,16 +575,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list products according to a filter.
-2. IBook shows a list of products.
+1. User requests to list all products.
+2. IBook removes all active filters and shows the list of products.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
-  Use case ends.
+    * 1a1. IBook shows an empty table.
+
+    Use case ends.
 
 #### UC2: Adding a product
 
@@ -420,36 +603,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1b. Not all required fields are present (e.g. Name).
 
     * 1b1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1c. Optional fields like Category is missing.
 
     * 1c1. IBook automatically sets the category to miscellaneous.
-      Use case resumes at step 1.
+
+      Use case resumes at step 2.
 
 #### UC3: Delete a product
 
 **MSS**
 
 1. User requests to list products ([UC1](#uc1-listing-products)).
-2. User requests to delete a product in the list specified by the index
-3. IBook deletes the product
+2. User requests to delete a product in the list specified by the index.
+3. IBook deletes the product.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. Index is not provided.
 
     * 2a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
 
 #### UC4: Update a product
 
@@ -463,28 +653,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. Index is not provided.
 
     * 2a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC5: Find a product
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC5: Find products
 
 **MSS**
 
-1. User requests to find products.
+1. User requests to find products by providing filters.
 2. IBook updates the list to show the requested products.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Requested fields are invalid.
+* 1a. Requested fields are invalid.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+* 1b. No product matches the given filter.
+
+    * 1b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
 
 #### UC6: Find out of stock products
 
@@ -497,13 +699,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No products found.
+* 1a. No products found.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+    * 1a1. IBook shows a cute image stating nothing found.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC7: Find expired items
+#### UC7: Add an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products))
+2. User request to add an item to a product in IBook.
+3. IBook adds the item to the product.
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. Required fields are all present but are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case ends.
+
+* 1b. Not all required fields are present (e.g. Expiry Date).
+
+    * 1b1. IBook shows an error message.
+
+      Use case ends.
+
+* 1c. Optional fields like Quantity is missing.
+
+    * 1c1. IBook automatically sets the quantity to 0.
+
+      Use case resumes at step 2.
+
+#### UC8: Delete an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products)).
+2. User requests to delete an item in the list specified by the index.
+3. IBook deletes the item.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Index is not provided.
+
+    * 2a1. IBook shows an error message.
+
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC9: Update an item
+
+**MSS**
+
+1. User requests to list products ([UC1](#uc1-listing-products)).
+2. User requests to update an item in the list specified by the index.
+3. IBook updates the product.
+   
+   Use case ends.
+
+**Extensions**
+
+* 2a. Index is not provided.
+
+    * 2a1. IBook shows an error message.
+
+      Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. IBook shows an error message.
+
+      Use case ends.
+
+#### UC10: Find items
+
+**MSS**
+
+1. User requests to find items by providing filters.
+2. IBook updates the list to show the requested items.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Requested fields are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case ends.
+
+* 1b. No product matches the given filter.
+
+    * 1b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
+
+#### UC11: Find expired items
 
 **MSS**
 
@@ -514,13 +817,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No items found.
+* 1a. No items found.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+    * 1a1. IBook shows a cute image stating nothing found.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC8: Find expiring items
+#### UC12: Find expiring items
 
 **MSS**
 
@@ -531,11 +834,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No items found.
+* 1a. Number of days is invalid.
+		
+    * 2a1. IBook show an error message.
 
-    * 2a1. IBook shows a cute image stating nothing found.
+      Use case ends.
 
-#### UC9: Update all products
+* 1b. No items found.
+
+    * 2b1. IBook shows a cute image stating nothing found.
+
+      Use case ends.
+
+#### UC13: Update all products
 
 **MSS**
 
@@ -550,15 +861,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 2a. The current display list is empty.
+* 1a. The current display list is empty.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC10: Delete all products
+#### UC14: Delete all products
 
 **MSS**
 
@@ -569,13 +880,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The current display list is empty.
+* 1a. The current display list is empty.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC11: Undo changes
+#### UC15: Undo changes
 
 **MSS**
 
@@ -586,13 +897,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. There are no changes that can be reverted.
+* 1a. There are no changes that can be reverted.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-#### UC12: Redo changes
+#### UC16: Redo changes
 
 **MSS**
 
@@ -603,11 +914,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. There are no changes that can be restored.
+* 1a. There are no changes that can be restored.
 
-    * 2a1. IBook shows an error message.
+    * 1a1. IBook shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 *{More to be added}*
 
@@ -624,7 +935,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
---------------------------------------------------------------------------------------------------------------------
+<hr/>
 
 ## **Appendix: Instructions for manual testing**
 

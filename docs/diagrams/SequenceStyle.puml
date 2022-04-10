@@ -12,15 +12,20 @@ skinparam Sequence {
     BoxFontColor #FFFFFF
     BoxBorderColor #FFFFFF
 
-    FontColor #000000
-    FontName Arial
-
-    GroupFontColor #FF9800
+    GroupFontColor #DF7800
     GroupBackgroundColor #FF980032
     GroupBorderColor #FF9800
     GroupBorderThickness 1.8
-    GroupHeaderFontColor #FF9800
+    GroupHeaderFontColor #DF7800
     GroupHeaderFontStyle bold
+
+    ReferenceFontColor #DF7800
+    ReferenceBackgroundColor #FF9C0532
+    ReferenceHeaderBackgroundColor #FF980032
+    ReferenceBorderColor #FF9800
+    ReferenceBorderThickness 1.8
+    ReferenceHeaderFontColor #DF7800
+    ReferenceHeaderFontStyle bold
 
     LifelineBackgroundColor #FFFFFF
     LifelineBorderColor #000000

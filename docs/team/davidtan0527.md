@@ -31,5 +31,5 @@ title: Weiu Cheng's Project Portfolio Page
        * Model section
        * General UML diagram enhancements
 
- * **Community**: Reviewed PRs, provided code and design suggestions for various features.
-   * (Non-exhaustive) list of PRs reviewed/commented on: [#69](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/69), [#108](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/108), [#135](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/135)
+ * **Community**:
+   * PRs reviewed (with non-trivial review comments): [#69](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/69), [#108](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/108), [#135](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/135)

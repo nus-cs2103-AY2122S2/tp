@@ -3,49 +3,36 @@
 
 $OverrideTheme(UI_COLOR)
 
-package UI as UiPackage<<Ui>> {
+package UI <<Ui>> {
     class "<<interface>>\nUi" as Ui<<Ui>>
     class "{abstract}\nUiPart" as UiPart<<Ui>>
     class "{abstract}\nUiComponent" as UiComponent<<Ui>>
     class UiManager<<Ui>>
     class MainWindow<<Ui>>
-    class MenuToolbar<<Ui>>
-    class CommandBox<<Ui>>
-    class ResultWindow<<Ui>>
-
-    class Table<<Ui>>
-    class Popup<<Ui>>
+    class XXX_Ui<<Ui>>
 }
 
-class Model<<Model>>
-class Logic<<Logic>>
+class Model <<Model>>
+
+class Logic <<Logic>>
 
 class HiddenOutside<<Hidden>>
-HiddenOutside ..> Ui
+HiddenOutside .down.> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *--> "1" MenuToolbar
-MainWindow *--> "1" CommandBox
-MainWindow *--> "1" ResultWindow
-MainWindow --> Table
-MainWindow -right-> Popup
-
-MenuToolbar --up-|> UiComponent
-CommandBox --up-|> UiComponent
-ResultWindow --up-|> UiComponent
+UiManager --> "1" MainWindow
 
 MainWindow -up-|> UiPart
 UiComponent -up-|> UiPart
 
-UiManager -right-> Logic
-MainWindow --> Logic
-Popup ..> Logic
-Popup --[hidden]-> Table
+UiManager --> Logic
+MainWindow -right-> Logic
 
 MainWindow ..> Model
-Popup ...> Model
-Table .right.> Model
+
+XXX_Ui -up-|> UiComponent
+MainWindow *--> XXX_Ui
+XXX_Ui .left.> Model
 
 UiComponent -left-> MainWindow
 

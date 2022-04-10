@@ -1,5 +1,7 @@
 package seedu.ibook.ui.table.item;
 
+import java.util.ArrayList;
+
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -20,6 +22,7 @@ public class ItemTable extends UiComponent<VBox> {
     private final int productIndex;
 
     private final FilteredItemList filteredItem;
+    private final ArrayList<ItemCard> itemCards = new ArrayList<>();
 
     private final Listener listener = new Listener();
 
@@ -44,6 +47,7 @@ public class ItemTable extends UiComponent<VBox> {
 
     private void populateField() {
         content.getChildren().clear();
+        itemCards.clear();
         if (filteredItem.isEmpty()) {
             EmptyItemTableState emptyState = new EmptyItemTableState(productIndex, product, getMainWindow());
             content.getChildren().add(emptyState.getRoot());
@@ -52,6 +56,7 @@ public class ItemTable extends UiComponent<VBox> {
                 Item item = filteredItem.get(i);
                 ItemCard itemCard = new ItemCard(productIndex, i + 1, product, item, getMainWindow());
                 content.getChildren().add(itemCard.getRoot());
+                itemCards.add(itemCard);
             }
         }
     }

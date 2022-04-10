@@ -33,7 +33,6 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#44](), [\#79](), [\#93](), [\#103](), [\#104](), [\#113](), [\#134](), [\#219](), [\#223](), [\#229](), [\#240]()
 
-* **Tools**: 
+* **Tools**:
   * Used JavaFX to implement the UI
   * Used JUnit for testing
-
