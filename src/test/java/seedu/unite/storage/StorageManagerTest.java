@@ -2,7 +2,7 @@ package seedu.unite.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.nio.file.Path;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonUniteStorage addressBookStorage = new JsonUniteStorage(getTempFilePath("ab"));
+        JsonUniteStorage uniteStorage = new JsonUniteStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(uniteStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void uniteReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonUniteStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUniteStorageTest} class.
          */
-        Unite original = getTypicalAddressBook();
+        Unite original = getTypicalUnite();
         storageManager.saveUnite(original);
         ReadOnlyUnite retrieved = storageManager.readUnite().get();
         assertEquals(original, new Unite(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getUniteFilePath() {
         assertNotNull(storageManager.getUniteFilePath());
     }
 

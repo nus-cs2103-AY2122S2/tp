@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class RemarkTest {
 
-    private final String normalRemark = "This is a remark.";
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Remark(null));
@@ -18,7 +16,7 @@ public class RemarkTest {
     @Test
     public void equals() {
         Remark firstRemark = new Remark("");
-        Remark secondRemark = new Remark(normalRemark);
+        Remark secondRemark = new Remark("This is a remark.");
 
         //different remark message -> returns false
         assertFalse(firstRemark.equals(secondRemark));

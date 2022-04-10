@@ -33,16 +33,16 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        sb.append(PREFIX_NAME).append(person.getName().fullName).append(" ");
+        sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
+        sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
+        sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
+        person.getTags().forEach(
+            s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
-        sb.append(PREFIX_COURSE + person.getCourse().value + " ");
-        sb.append(PREFIX_MATRICCARD + person.getMatricCard().value + " ");
-        sb.append(PREFIX_TELEGRAM + person.getTelegram().id + " ");
+        sb.append(PREFIX_COURSE).append(person.getCourse().value).append(" ");
+        sb.append(PREFIX_MATRICCARD).append(person.getMatricCard().value).append(" ");
+        sb.append(PREFIX_TELEGRAM).append(person.getTelegram().id).append(" ");
 
         return sb.toString();
     }

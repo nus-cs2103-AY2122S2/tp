@@ -21,8 +21,6 @@ public class ListTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // todo: implement relevant UI
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Tag> tags = model.getTagList();
         StringBuilder result = new StringBuilder(MESSAGE_SUCCESS);
         for (Tag tag : tags) {
@@ -30,7 +28,7 @@ public class ListTagCommand extends Command {
         }
         result.append(" ]");
 
-        return new CommandResult(result.toString(),
-                false, true, false, null);
+        model.showTagList();
+        return new CommandResult(result.toString());
     }
 }

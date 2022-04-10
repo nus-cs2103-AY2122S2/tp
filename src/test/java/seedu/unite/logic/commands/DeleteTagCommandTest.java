@@ -6,7 +6,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_TAG;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_SECOND_TAG;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ import seedu.unite.model.tag.Tag;
  */
 public class DeleteTagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

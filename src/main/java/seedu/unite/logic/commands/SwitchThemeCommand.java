@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.unite.logic.commands.exceptions.CommandException;
 import seedu.unite.model.Model;
-import seedu.unite.model.theme.Theme;
+import seedu.unite.ui.theme.Theme;
 
 /**
  * Switch the current theme to either light or dark.
@@ -36,7 +36,8 @@ public class SwitchThemeCommand extends Command {
         requireNonNull(model);
         logger.log(Level.INFO, this.theme.toString());
 
-        return new CommandResult(String.format(MESSAGE_SWITCH_THEME_SUCCESS, theme), true, theme);
+        model.switchTheme(theme);
+        return new CommandResult(String.format(MESSAGE_SWITCH_THEME_SUCCESS, theme));
     }
 
     @Override

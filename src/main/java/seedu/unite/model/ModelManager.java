@@ -14,6 +14,7 @@ import seedu.unite.commons.core.GuiSettings;
 import seedu.unite.commons.core.LogsCenter;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;
+import seedu.unite.ui.theme.Theme;
 
 /**
  * Represents the in-memory model of the unite data.
@@ -27,6 +28,15 @@ public class ModelManager implements Model {
     private final ObservableList<Person> fullPersonList;
     private final ObservableList<Tag> tags;
     private boolean isMouseUxEnabled;
+    private boolean isShowProfile;
+    private boolean isShowTagList;
+    private boolean isRemoveProfile;
+    private boolean isShowGrabResult;
+    private boolean isSwitchTheme;
+    private Person person;
+    private Theme theme;
+    private String grabResult;
+
 
     /**
      * Initializes a ModelManager with the given unite and userPrefs.
@@ -161,6 +171,96 @@ public class ModelManager implements Model {
     public boolean isMouseUxEnabled() {
         return isMouseUxEnabled;
     }
+
+    @Override
+    public void showProfile(Person person) {
+        isShowProfile = true;
+        isShowTagList = false;
+        isRemoveProfile = false;
+        isShowGrabResult = false;
+        isSwitchTheme = false;
+        this.person = person;
+    }
+
+    @Override
+    public void showTagList() {
+        isShowProfile = false;
+        isShowTagList = true;
+        isRemoveProfile = false;
+        isShowGrabResult = false;
+        isSwitchTheme = false;
+    }
+
+    @Override
+    public void showGrabResult(String grabResult) {
+        isShowProfile = false;
+        isShowTagList = false;
+        isRemoveProfile = false;
+        isShowGrabResult = true;
+        isSwitchTheme = false;
+        this.grabResult = grabResult;
+    }
+
+    @Override
+    public void removeProfile(Person person) {
+        isShowProfile = false;
+        isShowTagList = false;
+        isRemoveProfile = true;
+        isShowGrabResult = false;
+        isSwitchTheme = false;
+        this.person = person;
+    }
+
+    @Override
+    public void switchTheme(Theme theme) {
+        isShowProfile = false;
+        isShowTagList = false;
+        isRemoveProfile = false;
+        isShowGrabResult = false;
+        isSwitchTheme = true;
+        this.theme = theme;
+    }
+
+    @Override
+    public boolean isShowProfile() {
+        return isShowProfile;
+    }
+
+    @Override
+    public boolean isShowTagList() {
+        return isShowTagList;
+    }
+
+    @Override
+    public boolean isShowGrabResult() {
+        return isShowGrabResult;
+    }
+
+    @Override
+    public boolean isRemoveProfile() {
+        return isRemoveProfile;
+    }
+
+    @Override
+    public boolean isSwitchTheme() {
+        return isSwitchTheme;
+    }
+
+    @Override
+    public Person getPerson() {
+        return person;
+    }
+
+    @Override
+    public String getGrabResult() {
+        return grabResult;
+    }
+
+    @Override
+    public Theme getTheme() {
+        return theme;
+    }
+
 
     @Override
     public int countPersonsInTag(Tag tag) {

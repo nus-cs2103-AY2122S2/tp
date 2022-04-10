@@ -56,8 +56,8 @@ public class DeleteTagCommand extends Command {
             model.setPerson(currPerson, newPerson);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete),
-                false, true, false, null);
+        model.showTagList();
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
     }
 
     @Override

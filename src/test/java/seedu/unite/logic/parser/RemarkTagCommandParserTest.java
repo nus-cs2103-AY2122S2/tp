@@ -15,7 +15,7 @@ import seedu.unite.model.tag.Tag;
 
 public class RemarkTagCommandParserTest {
 
-    private RemarkTagCommandParser parser = new RemarkTagCommandParser();
+    private final RemarkTagCommandParser parser = new RemarkTagCommandParser();
     private final String validTagName = "tagName";
     private final String validRemark = "This is a remark.";
     private final String userInput = " " + PREFIX_TAG + validTagName + " " + PREFIX_REMARK + validRemark;

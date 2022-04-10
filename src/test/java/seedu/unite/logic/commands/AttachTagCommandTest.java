@@ -7,7 +7,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 import static seedu.unite.testutil.TypicalTags.FRIEND;
 import static seedu.unite.testutil.TypicalTags.NONEXIST;
 import static seedu.unite.testutil.TypicalTags.OWEMONEY;
@@ -33,7 +33,7 @@ import seedu.unite.testutil.TagBuilder;
  */
 public class AttachTagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfiltered_success() {
@@ -112,13 +112,13 @@ public class AttachTagCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of unite
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of unite list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getUnite().getPersonList().size());
 
         AttachTagCommand attachTagCommand = new AttachTagCommand(OWEMONEY, outOfBoundIndex);

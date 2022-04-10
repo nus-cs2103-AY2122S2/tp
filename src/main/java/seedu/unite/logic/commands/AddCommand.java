@@ -78,9 +78,8 @@ public class AddCommand extends Command {
                 model.addTag(newTag);
             }
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
-                true, false, false, toAdd);
+        model.showProfile(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

@@ -8,7 +8,7 @@ import static seedu.unite.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ import seedu.unite.model.Unite;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;
 import seedu.unite.testutil.TagBuilder;
-
+import seedu.unite.ui.theme.Theme;
 
 public class AddTagCommandTest {
     @Test
@@ -33,19 +33,19 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_tagAcceptedByModel_addSuccessful() throws Exception {
-        AddTagCommandTest.ModelStubAcceptingTagAdded modelStub = new AddTagCommandTest.ModelStubAcceptingTagAdded();
+        AddTagCommandTest.ModelStubAcceptingTagAdded modelStub = new ModelStubAcceptingTagAdded();
         Tag validTag = new TagBuilder().build();
 
         CommandResult commandResult = new AddTagCommand(validTag).execute(modelStub);
         assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, validTag), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
+        assertEquals(List.of(validTag), modelStub.tagsAdded);
     }
 
     @Test
     public void execute_duplicateTag_throwsCommandException() {
         Tag validTag = new TagBuilder().build();
         AddTagCommand addTagCommand = new AddTagCommand(validTag);
-        AddTagCommandTest.ModelStub modelStub = new AddTagCommandTest.ModelStubWithTag(validTag);
+        AddTagCommandTest.ModelStub modelStub = new ModelStubWithTag(validTag);
 
         assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () ->
                 addTagCommand.execute(modelStub));
@@ -78,7 +78,9 @@ public class AddTagCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
+        private boolean isShowTagList;
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -198,12 +200,78 @@ public class AddTagCommandTest {
         public int countPersonsInTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
+
+
+        @Override
+        public void showProfile(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showTagList() {
+            isShowTagList = true;
+        }
+
+        @Override
+        public void showGrabResult(String grabResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeProfile(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchTheme(Theme theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isShowProfile() {
+            return isShowTagList;
+        }
+
+        @Override
+        public boolean isShowTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isShowGrabResult() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRemoveProfile() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSwitchTheme() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getGrabResult() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Theme getTheme() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single tag.
      */
-    private class ModelStubWithTag extends AddTagCommandTest.ModelStub {
+    private static class ModelStubWithTag extends AddTagCommandTest.ModelStub {
         private final Tag tag;
 
         ModelStubWithTag(Tag tag) {
@@ -221,7 +289,7 @@ public class AddTagCommandTest {
     /**
      * A Model stub that always accept the tag being added.
      */
-    private class ModelStubAcceptingTagAdded extends AddTagCommandTest.ModelStub {
+    private static class ModelStubAcceptingTagAdded extends AddTagCommandTest.ModelStub {
         final ArrayList<Tag> tagsAdded = new ArrayList<>();
 
         @Override

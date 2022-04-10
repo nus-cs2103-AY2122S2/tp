@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.unite.commons.core.GuiSettings;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;
+import seedu.unite.ui.theme.Theme;
 
 /**
  * The API of the Model component.
@@ -128,4 +129,42 @@ public interface Model {
     /** Counts the number of persons attached to the given tag */
     int countPersonsInTag(Tag tag);
 
+    /** Change general display to show profile of the given person  */
+    void showProfile(Person person);
+
+    /** Change general display to show tag list */
+    void showTagList();
+
+    /** Change general display to show grab result */
+    void showGrabResult(String grabResult);
+
+    /** Indicate a profile is being removed */
+    void removeProfile(Person person);
+
+    /** Indicate a switch theme operation */
+    void switchTheme(Theme theme);
+
+    /** Returns true if the general display is required to show profile */
+    boolean isShowProfile();
+
+    /** Returns true if the general display is required to show tag list */
+    boolean isShowTagList();
+
+    /** Returns true if the general display is required to show grab result */
+    boolean isShowGrabResult();
+
+    /** Returns true if the general display is required to update the profile if a person is being deleted */
+    boolean isRemoveProfile();
+
+    /** Returns true if unite is required to switch theme */
+    boolean isSwitchTheme();
+
+    /** Returns the person from show profile or remove profile */
+    Person getPerson();
+
+    /** Returns the grab result */
+    String getGrabResult();
+
+    /** Returns the given theme to change to */
+    Theme getTheme();
 }

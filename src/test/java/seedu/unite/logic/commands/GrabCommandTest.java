@@ -11,7 +11,7 @@ import static seedu.unite.logic.parser.CliSyntax.PREFIX_MATRICCARD;
 import static seedu.unite.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unite.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.unite.logic.parser.CliSyntax.PREFIX_TELEGRAM;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +29,14 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_GRAB_ONLY_BY_TAG;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
-        ObservableList<Tag> listOfTags = getTypicalAddressBook().getTagList();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
+        ObservableList<Tag> listOfTags = getTypicalUnite().getTagList();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
             for (Tag tag: listOfTags) {
-                GrabCommand command = new GrabCommand(PREFIX_NAME, i.toString(), tag);
+                GrabCommand command = new GrabCommand(PREFIX_NAME, Integer.toString(i), tag);
                 assertCommandFailure(command, newModel, expectedMessage);
             }
         }
@@ -47,12 +47,12 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_GRAB_ONLY_BY_TAG;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_NAME, i.toString(), new Tag("friendsdd"));
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_NAME, Integer.toString(i), new Tag("friendsdd"));
             assertCommandFailure(command, newModel, expectedMessage);
         }
     }
@@ -62,16 +62,16 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS + "\n";
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        ObservableList<Tag> listOfTags = getTypicalAddressBook().getTagList();
+        ObservableList<Tag> listOfTags = getTypicalUnite().getTagList();
 
         for (Tag tag: listOfTags) {
             GrabCommand command = new GrabCommand(PREFIX_NAME, "", tag);
 
             ObservableList<Person> newPersonList =
-                    getTypicalAddressBook().getPersonList().filtered(t->t.getTags().contains(tag));
+                    getTypicalUnite().getPersonList().filtered(t->t.getTags().contains(tag));
 
             if (newPersonList.size() > 0) {
                 assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
@@ -84,12 +84,11 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_MISSING_TAG;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        ObservableList<Tag> listOfTags = getTypicalAddressBook().getTagList();
+        ObservableList<Tag> listOfTags = getTypicalUnite().getTagList();
 
-        for (Tag tag: listOfTags) {
+        for (int i = 0; i < listOfTags.size(); i++) {
             GrabCommand command = new GrabCommand(PREFIX_NAME, "", new Tag("friendsdd"));
             assertCommandFailure(command, newModel, expectedMessage);
         }
@@ -100,13 +99,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_NAME, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_NAME, Integer.toString(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -116,22 +115,21 @@ public class GrabCommandTest {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        Integer zeroIndex = 0;
-        Integer largeIndex = sizeOfAddressBook + 1;
-        Integer negativeIndex = -3;
+        int zeroIndex = 0;
+        int largeIndex = sizeOfAddressBook + 1;
+        int negativeIndex = -3;
 
-        GrabCommand zeroIndexCommand = new GrabCommand(PREFIX_NAME, zeroIndex.toString(), null);
+        GrabCommand zeroIndexCommand = new GrabCommand(PREFIX_NAME, String.valueOf(zeroIndex), null);
         assertCommandFailure(zeroIndexCommand, newModel, expectedMessage);
 
-        GrabCommand largeIndexCommand = new GrabCommand(PREFIX_NAME, largeIndex.toString(), null);
+        GrabCommand largeIndexCommand = new GrabCommand(PREFIX_NAME, String.valueOf(largeIndex), null);
         assertCommandFailure(largeIndexCommand, newModel, expectedMessage);
 
-        GrabCommand negativeIndexCommand = new GrabCommand(PREFIX_NAME, negativeIndex.toString(), null);
+        GrabCommand negativeIndexCommand = new GrabCommand(PREFIX_NAME, String.valueOf(negativeIndex), null);
         assertCommandFailure(negativeIndexCommand, newModel, expectedMessage);
     }
 
@@ -140,13 +138,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_PHONE, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_PHONE, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -156,13 +154,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_EMAIL, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_EMAIL, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -172,13 +170,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_ADDRESS, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_ADDRESS, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -188,13 +186,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_COURSE, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_COURSE, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -204,13 +202,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_TELEGRAM, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_TELEGRAM, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }
@@ -220,13 +218,13 @@ public class GrabCommandTest {
         String expectedMessage = GrabCommand.MESSAGE_SUCCESS;
 
         //Set up tag in models
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model newExpectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model newModel = new ModelManager(getTypicalUnite(), new UserPrefs());
+        Model newExpectedModel = new ModelManager(getTypicalUnite(), new UserPrefs());
 
-        int sizeOfAddressBook = getTypicalAddressBook().getPersonList().size();
+        int sizeOfAddressBook = getTypicalUnite().getPersonList().size();
 
-        for (Integer i = 1; i < sizeOfAddressBook + 1; i++) {
-            GrabCommand command = new GrabCommand(PREFIX_MATRICCARD, i.toString(), null);
+        for (int i = 1; i < sizeOfAddressBook + 1; i++) {
+            GrabCommand command = new GrabCommand(PREFIX_MATRICCARD, String.valueOf(i), null);
             assertCommandSuccess(command, newModel, expectedMessage, newExpectedModel);
         }
     }

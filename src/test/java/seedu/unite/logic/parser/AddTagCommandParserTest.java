@@ -17,7 +17,7 @@ import seedu.unite.model.tag.Tag;
 import seedu.unite.testutil.TagBuilder;
 
 public class AddTagCommandParserTest {
-    private AddTagCommandParser parser = new AddTagCommandParser();
+    private final AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

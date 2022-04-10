@@ -12,7 +12,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import java.util.Set;
 
@@ -36,7 +36,7 @@ import seedu.unite.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.unite.commons.core.GuiSettings;
 import seedu.unite.model.person.NameContainsKeywordsPredicate;
-import seedu.unite.testutil.AddressBookBuilder;
+import seedu.unite.testutil.UniteBuilder;
 
 public class ModelManagerTest {
 
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setUniteFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setUniteFilePath(Paths.get("unite/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setUniteFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setUniteFilePath(Paths.get("new/unite/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,13 +61,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setUniteFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUniteFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+    public void setUniteFilePath_validPath_setsUniteFilePath() {
+        Path path = Paths.get("unite/file/path");
         modelManager.setUniteFilePath(path);
         assertEquals(path, modelManager.getUniteFilePath());
     }
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInUnite_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInUnite_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Unite unite = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Unite unite = new UniteBuilder().withPerson(ALICE).withPerson(BENSON).build();
         Unite differentUnite = new Unite();
         UserPrefs userPrefs = new UserPrefs();
 

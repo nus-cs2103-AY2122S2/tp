@@ -18,7 +18,7 @@ import seedu.unite.logic.commands.DeleteTagCommand;
  */
 public class DeleteTagCommandParserTest {
 
-    private DeleteTagCommandParser parser = new DeleteTagCommandParser();
+    private final DeleteTagCommandParser parser = new DeleteTagCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

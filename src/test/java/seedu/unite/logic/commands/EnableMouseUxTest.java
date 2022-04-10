@@ -3,7 +3,7 @@ package seedu.unite.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import seedu.unite.model.UserPrefs;
 
 public class EnableMouseUxTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void execute_enable_success() {

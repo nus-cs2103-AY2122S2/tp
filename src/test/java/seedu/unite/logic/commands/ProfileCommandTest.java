@@ -5,7 +5,7 @@ import static seedu.unite.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unite.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.unite.testutil.TypicalIndexes.INDEX_PERSON_NOT_EXIST;
-import static seedu.unite.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unite.testutil.TypicalPersons.getTypicalUnite;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import seedu.unite.model.ModelManager;
 import seedu.unite.model.UserPrefs;
 
 public class ProfileCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUnite(), new UserPrefs());
 
     @Test
     public void execute_validIndex_displaysProfile() throws CommandException {
