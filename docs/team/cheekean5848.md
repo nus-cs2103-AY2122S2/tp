@@ -10,8 +10,8 @@ MedBook is a **desktop app health monitoring system for healthcare professionals
 Given below are my contributions to the project.
 
 * **New Feature**: Patient's Medical Prescription
-  
-It allows user to add medical prescription information to the patients. This feature 
+
+It allows user to add medical prescription information to the patients. This feature
 extends the product functionality by allowing medical professionals to keep track of
 patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
 
@@ -36,12 +36,12 @@ history by pressing the `↑` and `↓` arrow keys.
     * Command Manager
         * Created a manager to parse the user's command type and execute the relevant command.
         * Maintain a view state to keep track of user's latest viewing state.
-    
+
 
 * **Contributions to the UG**:
 
     * Add patients' medical prescription section.
-    * Created Command Summary Section
+    * Created Command Summary Section.
 
 
 * **Contributions to the DG**: to be added soon
@@ -58,3 +58,4 @@ history by pressing the `↑` and `↓` arrow keys.
         * Provide reviews and comments to PR made by teammates. Pull requests: [#58](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/58), [#219](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/219)
     * Beyond Team
         * Reported bugs and suggestions for other team: [1](https://github.com/cheekean5848/ped/issues/3), [2](https://github.com/cheekean5848/ped/issues/2)
+    
