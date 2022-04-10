@@ -520,7 +520,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
 * **Lab Status**: Refers to possible statuses of Lab assignments.
   * **UNSUBMITTED**: Status to indicate that the student has not submitted the Lab assignment.
@@ -570,12 +569,14 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a Lab
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Assuming the `LabList` is empty and the list has some `Student`s.
+   1. Test case: `labadd l/1`<br>
+   Expected: `Lab 1` will appear as a red label on each `Student`'s card in the list.
+   
+   2. Test case: `labadd l/21`<br>
+   Expected: A error message will appear with the correct command format and constraints and no lab will be added.
+   
+   3. Test case: `labadd l/-1`<br>
+   Expected: A error message will appear with the correct command format and constraints and no lab will be added.
