@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalBuyers.ELLE;
 import static seedu.address.testutil.TypicalBuyers.FIONA;
 import static seedu.address.testutil.TypicalBuyers.GEORGE;
 import static seedu.address.testutil.TypicalBuyers.getTypicalBuyerAddressBook;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,9 +31,10 @@ import seedu.address.model.buyer.BuyerPhoneContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindBuyerCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+    private Model model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
             getTypicalBuyerAddressBook());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+
+    private Model expectedModel = new ModelManager(new UserPrefs(),
             new SellerAddressBook(), getTypicalBuyerAddressBook());
 
     @Test

@@ -27,14 +27,12 @@ public class BuyerAddressBook implements ReadOnlyBuyerAddressBook {
     public BuyerAddressBook() {}
 
     /**
-     * Creates an AddressBook using the buyers in the {@code toBeCopied}
+     * Creates an BuyerAddressBook using the buyers in the {@code toBeCopied}
      */
     public BuyerAddressBook(ReadOnlyBuyerAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
-
-    //// list overwrite operations
 
     /**
      * Replaces the contents of the buyer list with {@code buyers}.
@@ -45,7 +43,7 @@ public class BuyerAddressBook implements ReadOnlyBuyerAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code SellerAddressBook} with {@code newData}.
+     * Resets the existing data of this {@code BuyerAddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyBuyerAddressBook newData) {
         requireNonNull(newData);
@@ -87,14 +85,12 @@ public class BuyerAddressBook implements ReadOnlyBuyerAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code BuyerAddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removeBuyer(Buyer key) {
         buyers.remove(key);
     }
-
-    //// util methods
 
     @Override
     public String toString() {

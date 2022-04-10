@@ -26,12 +26,12 @@ import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.seller.Seller;
 import seedu.address.testutil.PropertyToSellBuilder;
 import seedu.address.testutil.SellerBuilder;
-import seedu.address.testutil.TypicalClients;
+//import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalSellers;
 
 public class AddPtsCommandTest {
 
-    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
             TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
 
     private PropertyToSell nullProperty = NullPropertyToSell.getNullPropertyToSell();
@@ -45,7 +45,7 @@ public class AddPtsCommandTest {
         AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(testProperty).build());
         assertCommandSuccess(ptsCommand, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class AddPtsCommandTest {
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(testProperty).build());
         assertCommandSuccess(ptsCommand, model, expectedMessage, expectedModel);

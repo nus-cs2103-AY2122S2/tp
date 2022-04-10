@@ -13,9 +13,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.client.Client;
+import seedu.address.model.SellerAddressBook;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;
@@ -118,12 +117,12 @@ public class SellerCommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredClientList());
+        SellerAddressBook expectedSellerAddressBook = new SellerAddressBook(actualModel.getSellerAddressBook());
+        List<Seller> expectedFilteredSellerList = new ArrayList<>(actualModel.getFilteredSellerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
+        assertEquals(expectedSellerAddressBook, actualModel.getSellerAddressBook());
+        assertEquals(expectedFilteredSellerList, actualModel.getFilteredSellerList());
     }
 
     /**
@@ -135,11 +134,12 @@ public class SellerCommandTestUtil {
     public static void assertSellerCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+
+        SellerAddressBook expectedSellerAddressBook = new SellerAddressBook(actualModel.getSellerAddressBook());
         List<Seller> expectedFilteredSellerList = new ArrayList<>(actualModel.getFilteredSellerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedSellerAddressBook, actualModel.getSellerAddressBook());
         assertEquals(expectedFilteredSellerList, actualModel.getFilteredSellerList());
     }
 

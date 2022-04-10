@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+//import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +25,9 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        Model model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
         expectedModel.setBuyerAddressBook(new BuyerAddressBook());
         expectedModel.setSellerAddressBook(new SellerAddressBook());
