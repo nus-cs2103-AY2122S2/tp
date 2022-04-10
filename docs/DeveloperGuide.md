@@ -829,19 +829,19 @@ The following sequence diagrams shows how the unmark command works:
 
 #### Description
 
-The `clear` command deletes all students currently stored in TAPA. Before all the students are deleted, the user will have to confirm their decision by inputting `confirm`.
+The `clear` command deletes all students currently stored in TAPA. Before all the students are deleted, the user will have to confirm their decision by inputting "confirm".
 
 #### Implementation
 1. When the user inputs "clear", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
 3. The `LogicManager` calls `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
-5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
+5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a "confirm" input for the next command.
 
    ![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
    
    <div markdown="span" class="alert alert-info">:information_source:
-   <b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
+   <b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than "confirm" for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
    </div>
    
    ![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
