@@ -11,10 +11,22 @@ This is a brownfield project that bases from the Project template [AddressBook L
 - [Setting up, getting started](#setting-up-getting-started)
 - [Design](#design)
   - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [Logic Component](#logic-component)
+    - [Model Component](#model-component)
+    - [storage Component](#storage-component)
+    - [Common classes](#common-classes)
 - [Implementation](#implementation)
+- [Glossary](#glossary)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
+  - [Target User Profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-functional Requirements](#non-functional-requirements)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- [Appendix: Effort](#appendix-effort)
 - 
 
 # Setting up, getting started
@@ -288,6 +300,13 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
 
+
+## Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
@@ -320,19 +339,23 @@ Manage Persons faster that a typical mouse/GUI driven app.
 ## User stories
 
 | Priority | As a ... | I want to ...                                                                                                                                                                      | So that i can...                                                                                    |
-| --- | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| High | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
-| High | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
-| High | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
-| High | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High | User | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
-| High | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
-| High | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
-| High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
-| High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
-| High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
-| High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+|----------| --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| High     | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
+| High     | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
+| High     | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
+| High     | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
+| High     | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
+| High     | User | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High     | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
+| High     | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
+| High     | User | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
+| High     | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
+| High     | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
+| medium   | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| medium   | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+| medium   | User | Sort the list of clients by their attributes                                                                                                                                       | Better organize my clients                                                                          |
+| medium   | User | set reminders for things to do                                                                                                                                                     | Make sure i do not forget to do certain tasks                                                       |
+| medium   | User | Find clients based on their information                                                                                                                                            | Easily find a particular client to get the details i need                                           |
 
 ## Use cases
 System: RealEstatePro (REP)
@@ -452,12 +475,6 @@ Actor: User
 3. No lag of more than one second when executing commands
 4. Should be able to hold up to 1000 Persons without a noticeable sluggishness in performance for typical usage.
 5. The application will not be able to prevent any data privacy violated by other programs.
-
-## Glossary
-- **Users**: Real estate agents.
-- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
-- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
-- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Instructions for manual testing
 
@@ -580,7 +597,7 @@ Given below are instructions to test the app manually.
 
 ## Setting reminders
 
-# Effort
+# Appendix: Effort
 
 ## Difficulty level
 The development was of moderate difficulty due to having to understand the existing codebase and adapting it for our project. We also had trouble integrating the various features together especially the buyer and seller feature.
