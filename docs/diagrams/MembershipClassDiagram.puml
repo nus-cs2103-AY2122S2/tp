@@ -1,0 +1,20 @@
+@startuml
+
+class Membership {
+    + {static}PREFIX : final Prefix
+    + {static}DATE_PREFIX: final Prefix
+    - tier : Tier
+    - date : LocalDate
+
+    + hasField(Prefix) : boolean
+}
+
+class Field {
+    + prefix : Prefix
+
+    + getValue() : String
+}
+
+Membership --|> Field
+
+@enduml

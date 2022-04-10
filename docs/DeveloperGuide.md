@@ -305,6 +305,29 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
   * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
   
+
+_{more aspects and alternatives to be added}_
+
+### Clear Filtered functionality
+The `ClearFiltered` commands works in tandem with the `Find` or `ListMembers` command. After the `Find`/`ListMembers` function populates
+`FilteredPersonList`, the `ClearFiltered` commands retrieves the `FilteredPersonList` from the `Model` and
+deletes all people in the `FilteredPersonList` using the `deletePerson` function from `Model`.
+
+If the `Find` or `ListMembers` function had not been executed beforehand, the `ClearFiltered` command will still function
+as if clearing the entire address book, as by default, the `FilteredPersonList` will be the whole address book.
+
+If there are no people in the `FilteredPersonList`, the `CommandResult` returned has a message "No clients to delete.".
+
+Below is a sequence diagram to show how the `ClearFilteredCommand` executes.
+
+![Clear Filtered Sequence Diagram](images/ClearFilteredSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+
+The lifeline for `ClearFilteredCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+  
+</div>
+
 ### Membership functionality
 
 #### Implementation

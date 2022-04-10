@@ -343,6 +343,7 @@ Format: `clearFiltered`
 
 * `clearFiltered` deletes all the clients shown in the filtered client list.
 * Use [`find`](#find-client-by-keyword-find) to filter the clients to delete.
+* Alternatively, use [`listMembers`](#list-members-listmembers) to filter clients by membership to delete.
 * Otherwise, if the client list is not filtered, it acts like [`clear`](#delete-all-entries-clear).
 * When the client is deleted, all of its transactions are also deleted.
 
@@ -350,6 +351,8 @@ Format: `clearFiltered`
 
 Examples:
 * `find Bob` followed by `clearFiltered` deletes all people named Bob. Alternatively, `find Bob | clearFiltered` does the same thing.
+* `listMembers` followed by `clearFiltered` deletes all people with a membership.
+* `listMembers gold` followed by `clearFiltered` deletes all people with a gold membership.
 
 ### Add Transaction (`addTransaction`)
 
