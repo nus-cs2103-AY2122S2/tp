@@ -56,7 +56,6 @@ FindCommandParser --> CompanyListParser : FindCommand
 deactivate FindCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FindCommandParser -[hidden]-> CompanyListParser
-destroy FindCommandParser
 
 CompanyListParser --> LogicManager : FindCommand
 deactivate CompanyListParser
