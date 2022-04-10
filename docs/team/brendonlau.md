@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=brendonlau&breakdown=true)
 
 * **Project management**:
-  * Managed releases {v1.2 to v1.4(PED)} (4 releases) on GitHub
+  * Managed all releases {v1.2 to v1.4.1} (4 releases) on GitHub
   * Facilitate weekly meeting with updated agendas
   * Keep track of the tasks required to be completed by the team
   * Keep track of milestones such as making sure issues are completed or carry over to the next milestone
