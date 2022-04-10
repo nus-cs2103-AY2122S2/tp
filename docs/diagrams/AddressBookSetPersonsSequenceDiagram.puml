@@ -4,29 +4,22 @@
 box Model MODEL_COLOR_T1
 participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":Person" as Person MODEL_COLOR
-participant ":Tag" as Tag MODEL_COLOR
-participant "tags:UniqueTagList" as UniqueTagList MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
 end box
 
-[-> AddressBook : setPersons(personList)
+[-> AddressBook : setPersons(persons)
 activate AddressBook
-loop for each p in personList
-    AddressBook -> Person : getTags()
+loop for each p in persons
+    AddressBook -> Person : addTagsNotInList(p)
     activate Person
-    Person --> AddressBook : tagSet
+    Person --> AddressBook
     deactivate Person
-    loop for personTag in tagSet
-        alt personTag not in tagList
-            AddressBook -> Tag : addTag(personTag)
-            activate Tag
-            Tag --> AddressBook
-            deactivate Tag
-    end
 end
-AddressBook -> UniqueTagList : setTags(tags)
-activate UniqueTagList
-UniqueTagList --> AddressBook
-deactivate UniqueTagList
+AddressBook -> UniquePersonList : setPersons(persons)
+activate UniquePersonList
+UniquePersonList --> AddressBook
+deactivate UniquePersonList
 [<-- AddressBook
+deactivate AddressBook
 
 @enduml
