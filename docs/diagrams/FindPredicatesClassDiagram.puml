@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class "<<interface>>\nPredicate" as Predicate
+class "{abstract}\nContainsKeywordPredicate" as ckp
+Predicate <|-- ckp
+class "{abstract}\nFieldContainsKeywordPredicateAnd" as fckpAnd
+class "{abstract}\nFieldContainsKeywordPredicateOr" as fckpOr
+ckp <|-- fckpAnd
+ckp <|--- fckpOr
+class "{abstract}\nTagsContainsKeywordPredicateAnd" as tckpAnd
+class "{abstract}\nTagsContainsKeywordPredicateOr" as tckpOr
+ckp <|---- tckpAnd
+ckp <|----- tckpOr
+class "{abstract}\nNameContainsKeywordPredicateAnd" as nckpAnd
+class "{abstract}\nNameContainsKeywordPredicateOr" as nckpOr
+class "{abstract}\nPhoneContainsKeywordPredicateAnd" as pckpAnd
+class "{abstract}\nPhoneContainsKeywordPredicateOr" as pckpOr
+fckpAnd <|-- nckpAnd
+fckpOr <|-- nckpOr
+fckpAnd <|-- pckpAnd
+fckpOr <|-- pckpOr
+class "{abstract}\nCcaContainsKeywordPredicateAnd" as cckpAnd
+class "{abstract}\nCcaContainsKeywordPredicateOr" as cckpOr
+class "{abstract}\nModuleContainsKeywordPredicateAnd" as mckpAnd
+class "{abstract}\nModuleContainsKeywordPredicateOr" as mckpOr
+tckpAnd <|-- cckpAnd
+tckpOr <|-- cckpOr
+tckpAnd <|-- mckpAnd
+tckpOr <|-- mckpOr
+@enduml
