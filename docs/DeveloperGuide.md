@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete P/John Doe`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Schedule` objects residing in the `Model`.
 
 ### Logic component
 
@@ -98,9 +98,9 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete P/John Doe")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete P/John Doe` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -121,8 +121,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the MyGM data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Schedule` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Schedule>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -170,7 +171,7 @@ The proposed add player functionality will create a new `Person` with the specif
 #### Proposed implementation
 The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the add lineup operation works:
 ![AddLineup](images/Add.png)
 
 #### Design Consideration
@@ -387,6 +388,24 @@ Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` b
 
 #### Proposed implementation
 Purges all data by cleaning `addressbook.json`.
+
+### 7. Theme feature
+
+### Proposed implementation
+Changes the theme of the UI between light and dark mode.
+The theme feature is implemented in the `ThemeCommand` class. The following is an example usage scenario.
+
+![Theme](images/ThemeSequenceDiagram.png)
+
+Step 1. The user executes theme to switch to a different theme.
+
+Step 2. The UI component then passes the target theme to the `LogicManager` class in `Logic` component.
+
+Step 3. The `Logic` component executes the command which set the boolean isToLight or isToDark to true given the input which is then passed back to the UI component.
+
+Step 4. The `UI` component loads the appropriate fxml file containing the target theme and is displayed back to the user.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -614,13 +633,5 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete John`, `...` (where the prefix is missing)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
