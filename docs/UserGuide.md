@@ -258,7 +258,7 @@ Format:  `fw`
 
 #### By Key: `F3`
 
-1) Press `F3`.
+1) Press `F3`.<br>
 2) The system will pop up the Favourites window.
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
@@ -490,12 +490,12 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 | Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                              | e.g. find name James Jake                                                                                                                                        |
 | Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                                    | e.g. sort name !phone email                                                                                                                                      |
 | Remind            | remind INDEX r/reminderDetails                                                                         | e.g. remind 1 r/home viewing                                                                                                                                     |
-| Upload            | upload INDEX i/FilePath[:Description]…                                                                 | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                                                                        |
+| Upload            | upload INDEX i/FilePath[:Description]…                                                                 | e.g. upload 1 i/livingroom.png:Living room of 4-room flat                                                                                                        |
 | viewimage         | viewimage INDEX                                                                                        | e.g. viewimage 1                                                                                                                                                 |
 | List              | list                                                                                                   | -                                                                                                                                                                |
 | Help              | help                                                                                                   | -                                                                                                                                                                |
 | Match             | match                                                                                                  | -                                                                                                                                                                |
-| Favourite         | favourite INDEX                                                                                        | e.g., favourite 3                                                                                                                                                |
+| Favourite         | favourite INDEX                                                                                        | e.g. favourite 3                                                                                                                                                 |
 | Favourites window | fw                                                                                                     | -                                                                                                                                                                |
 | Statistics window | stats                                                                                                  | -                                                                                                                                                                |
 | Reminder window   | rm                                                                                                     | -                                                                                                                                                                |
