@@ -257,7 +257,7 @@ public class Module {
     /**
      * Edits the information of the group in the respective index
      */
-    public void addToGroupByName(String name, Student s) throws CommandException {
+    public void addToGroupByName(String name, Student s) {
         Group group = getGroupByName(name);
         int idx = groups.indexOf(group);
         group.addMember(s);

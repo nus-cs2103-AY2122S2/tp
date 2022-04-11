@@ -279,7 +279,7 @@ public class MainWindow extends UiPart<Stage> {
      * Enum definition for flag to indicate when list panel is showing modules or people.
      */
     private enum ListPaneFlag {
-        PEOPLE, MODULES, GROUPS;
+        PEOPLE, MODULES, GROUPS
     }
 
 }

@@ -176,7 +176,8 @@ public abstract class JsonAdaptedPerson {
             try {
                 moduleObjs.add(uniBook.getModuleByCode(moduleCode.toModelType()));
             } catch (ModuleNotFoundException m) {
-                throw new IllegalValueException(String.format(MODULE_DOES_NOT_EXIST_MESSAGE, moduleCode));
+                throw new IllegalValueException(String.format(MODULE_DOES_NOT_EXIST_MESSAGE,
+                        moduleCode.getModuleCode()));
             }
         }
         return moduleObjs;

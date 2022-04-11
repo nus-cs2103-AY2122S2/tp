@@ -85,6 +85,14 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code groups} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withGroups(Set<Group> groups) {
+        this.groups = groups;
+        return this;
+    }
+
 
     public Student build() {
         return new Student(name, phone, email, tags, modules, groups);
