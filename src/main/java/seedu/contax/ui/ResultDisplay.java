@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 /**
- * Ui for the status bar that is displayed at the header of the application.
+ * Represents the status bar that is displayed at the header of the application.
  */
 public class ResultDisplay extends UiPart<Region> {
 

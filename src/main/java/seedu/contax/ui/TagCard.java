@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.contax.model.tag.Tag;
 
 /**
- * An UI components that displays the information in an {@code Tag}.
+ * Represents a UI component that displays the information in an {@code Tag}.
  */
 public class TagCard extends UiPart<Region> implements RecyclableCard<Tag> {
     private static final String FXML = "TagListCard.fxml";

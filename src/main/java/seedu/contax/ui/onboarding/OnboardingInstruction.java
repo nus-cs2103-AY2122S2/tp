@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.contax.ui.UiPart;
 
+/**
+ * Represents an instruction box in the onboarding flow.
+ */
 public class OnboardingInstruction extends UiPart<Region> {
 
     private static final String FXML = "onboarding/OnboardingInstruction.fxml";

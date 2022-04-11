@@ -12,7 +12,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * API of the Logic component
+ * Defines the API of the Logic component.
  */
 public interface Logic {
     /**

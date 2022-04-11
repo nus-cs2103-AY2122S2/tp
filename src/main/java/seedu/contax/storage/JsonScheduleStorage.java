@@ -16,7 +16,7 @@ import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.ReadOnlySchedule;
 
 /**
- * A class to access Schedule data stored as a json file on the hard disk.
+ * Allows accessing Schedule data stored as a json file on the hard disk.
  */
 public class JsonScheduleStorage implements ScheduleStorage {
 

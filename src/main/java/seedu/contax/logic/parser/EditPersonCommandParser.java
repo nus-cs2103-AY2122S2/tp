@@ -20,7 +20,7 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditPersonCommand object.
  */
 public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 

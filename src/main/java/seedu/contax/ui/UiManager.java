@@ -13,7 +13,7 @@ import seedu.contax.commons.util.StringUtil;
 import seedu.contax.logic.Logic;
 
 /**
- * The manager of the UI component.
+ * Represents the manager of the UI component.
  */
 public class UiManager implements Ui {
 

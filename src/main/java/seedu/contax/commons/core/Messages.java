@@ -1,7 +1,7 @@
 package seedu.contax.commons.core;
 
 /**
- * Container for user visible messages.
+ * Contains user visible messages.
  */
 public class Messages {
 

@@ -23,7 +23,8 @@ import seedu.contax.model.person.Person;
 
 //@@author HanJiyao
 /**
- * Range edit or delete a person identified using it's displayed from index and to index from the address book.
+ * Edits or deletes a range of Persons identified using it's displayed from index and to index from the
+ * address book.
  */
 public class RangeCommand extends Command {
     public static final String COMMAND_WORD = "range";

@@ -7,7 +7,7 @@ import seedu.contax.logic.commands.DeletePersonCommand;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeletePersonCommand object.
  */
 public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
 

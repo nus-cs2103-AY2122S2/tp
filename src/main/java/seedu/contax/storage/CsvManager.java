@@ -15,7 +15,7 @@ import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.Model;
 
 /**
- * Manager to handle import/export csv logic.
+ * Defines a manager to handle import/export csv logic.
  */
 public class CsvManager {
     private static final String CSV_HEADER = "Name,Phone,Email,Address,Tagged";

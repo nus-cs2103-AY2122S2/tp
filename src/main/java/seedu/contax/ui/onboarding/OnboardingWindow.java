@@ -18,7 +18,7 @@ import seedu.contax.ui.PersonCard;
 import seedu.contax.ui.UiPart;
 
 /**
- * The Onboarding Window. Provides a step-by-step guide for first time users
+ * Represents the Onboarding Window. Provides a step-by-step guide for first time users.
  * on the basic functions of ContaX.
  */
 public class OnboardingWindow extends UiPart<Stage> {

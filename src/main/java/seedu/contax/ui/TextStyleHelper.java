@@ -10,7 +10,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- * Helper class containing functions for text styling.
+ * Defines helper functions for text styling.
  */
 public class TextStyleHelper {
 

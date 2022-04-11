@@ -5,7 +5,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Unmodifiable view of an address book.
+ * Represents an unmodifiable view of an address book.
  */
 public interface ReadOnlyAddressBook {
 

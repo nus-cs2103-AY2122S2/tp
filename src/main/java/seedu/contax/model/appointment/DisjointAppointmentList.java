@@ -19,9 +19,9 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * A list of {@link Appointment} objects that enforces that its elements cannot have overlapping periods and
- * does not allow nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and
- * will be performed upon any modification to the list. It also enforces a chronological ordering of the
+ * Represents a list of {@link Appointment} objects that enforces that its elements cannot have overlapping
+ * periods and does not allow nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)},
+ * and will be performed upon any modification to the list. It also enforces a chronological ordering of the
  * appointments in the list, done using the {@code Comparable} interface that {@code Appointment} implements.
  *
  * Note that {@link #remove(Appointment)} uses {@link Appointment#equals(Object)} to find the target

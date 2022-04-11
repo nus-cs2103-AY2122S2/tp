@@ -17,7 +17,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * Represents an Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {

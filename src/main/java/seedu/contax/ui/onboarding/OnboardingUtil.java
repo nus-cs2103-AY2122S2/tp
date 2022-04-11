@@ -6,7 +6,7 @@ import seedu.contax.model.util.SampleDataUtil;
 
 
 /**
- * This class provides utilities functions for the onboarding window.
+ * Provides utilities functions for the onboarding window.
  */
 public class OnboardingUtil {
 

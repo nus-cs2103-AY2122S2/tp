@@ -13,7 +13,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * The API of the Model component.
+ * Defines the API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */

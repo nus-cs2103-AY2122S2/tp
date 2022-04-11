@@ -10,6 +10,9 @@ import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.ui.HelpWindow;
 import seedu.contax.ui.UiPart;
 
+/**
+ * Represents the initial prompt for starting the onboarding process.
+ */
 public class OnboardingPrompt extends UiPart<Stage> {
 
 

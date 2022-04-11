@@ -11,7 +11,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * Defines the API of the Storage component.
  */
 public interface Storage extends AddressBookStorage, ScheduleStorage, UserPrefsStorage {
 
