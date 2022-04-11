@@ -475,19 +475,19 @@ If your changes to the data file makes its format invalid, ReadyBakey will disca
 
 ## Command summary <a name="command-summary"></a>
 
-| Action      | Format                                                                           | Example                                                                                                          |
-|-------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`                      | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney` |
-| **deletep** | `deletep INDEX`                                                                  | `deletep 2`                                                                                                      |
-| **listp**   | `listp`                                                                          | `listp`                                                                                                          |
-| **editp**   | `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`       | `editp 1 p/12345678 n/John Doey a/NUS r/loves chocolate t/member`                                                |
-| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                            | `findp n/Gerald`                                                                                                 |
-| **addo**    | `addo p/PHONE_NUM r/REMARK d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE`       | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                                  |
-| **deleteo** | `deleteo INDEX`                                                                  | `deleteo 2`                                                                                                      |
-| **listo**   | `listo`                                                                          | `listo`                                                                                                          |
-| **marko**   | `marko INDEX`                                                                    | `marko 1`                                                                                                        |
-| **unmarko** | `unmarko INDEX`                                                                  | `unmarko 1`                                                                                                      |
-| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARK] [d/DETAIL]…​`   | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
-| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                            | `findo n/Gerald Declan`                                                                                          |
-| **clear**   | `clear`                                                                          | `clear`                                                                                                          |
-| **exit**    | `exit`                                                                           | `exit`                                                                                                           |
+| Action      | Format                                                                          | Example                                                                                                          |
+|-------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **addp**    | `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`                     | `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/owesMoney` |
+| **deletep** | `deletep INDEX`                                                                 | `deletep 2`                                                                                                      |
+| **listp**   | `listp`                                                                         | `listp`                                                                                                          |
+| **editp**   | `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`      | `editp 1 p/12345678 n/John Doey a/NUS r/loves chocolate t/member`                                                |
+| **findp**   | `findp [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                           | `findp n/Gerald`                                                                                                 |
+| **addo**    | `addo p/PHONE_NUM [r/REMARK] d/DETAILS... c/DELIVERYDATETIME m/COLLECTION_TYPE` | `addo p/87654321 r/no candles d/1:Chocolate Cake c/27-12-2022 12:30 m/Delivery`                                  |
+| **deleteo** | `deleteo INDEX`                                                                 | `deleteo 2`                                                                                                      |
+| **listo**   | `listo`                                                                         | `listo`                                                                                                          |
+| **marko**   | `marko INDEX`                                                                   | `marko 1`                                                                                                        |
+| **unmarko** | `unmarko INDEX`                                                                 | `unmarko 1`                                                                                                      |
+| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARK] [d/DETAIL]…​`  | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
+| **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                           | `findo n/Gerald Declan`                                                                                          |
+| **clear**   | `clear`                                                                         | `clear`                                                                                                          |
+| **exit**    | `exit`                                                                          | `exit`                                                                                                           |
