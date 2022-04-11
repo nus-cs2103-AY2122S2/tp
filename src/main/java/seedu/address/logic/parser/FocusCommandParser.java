@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class FocusCommandParser implements Parser<FocusCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FocusCommand
+     * and returns a FocusCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FocusCommand parse(String args) throws ParseException {
