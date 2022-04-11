@@ -84,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -911,7 +911,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `cancelevent 0`<br>
        Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect cancelevent commands to try: `cancelevent`, `cancelevent x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect cancel event commands to try: `cancelevent`, `cancelevent x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Cancelling multiple events while all events are being shown
@@ -925,10 +925,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `cancelevent 1 0 2` , `cancelevent 0 1 2`<br>
        Expected: No events are deleted. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect cancelevent commands to try: `cancelevent 1 1 2`, `cancelevent 1 2 x` (where x is larger than the list size)<br>
+    5. Other incorrect cancel event commands to try: `cancelevent 1 1 2`, `cancelevent 1 2 x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-## Tagging information to an existing person
+### Tagging information to an existing person
 
 1. Tagging cca information to a person
 
@@ -987,7 +987,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect tag commands to try: `tag 1 m/`, `tag 1 m/ `
        Expected: Similar to previous.
 
-## Removing tags from an existing person
+### Removing tags from an existing person
 
 1. Removing tags
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
