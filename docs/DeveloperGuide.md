@@ -800,6 +800,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC9: Update an item
 
 **MSS**
@@ -1115,6 +1117,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect commands to try: `remind blabla`, `remind 9999999999999`<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Undo/redo changes
 
