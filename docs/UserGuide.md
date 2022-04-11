@@ -181,7 +181,7 @@ Format: `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…
 `3` - Assignment Release  
 `4` - Assignment Due  
 * The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-* The format of `ke/KEYEVENTTYPE dt/DATETIME` has to be **strictly followed**.
+* The format of `ke/KEYEVENTTYPE dt/DATETIME` **must be strictly followed**. Otherwise, the datetime will be parsed as part of the other fields, depending on which prefix was entered before it.
 * Duplicate Module Codes are **not allowed**, however duplicate Module Names are allowed as modules may have same names.
 * Example: `add o/module n/Computer Organisation m/CS2100 ke/1 dt/2022-05-04 13:00`  
 * Adds a module "Computer Organisation" with module code CS2100 to the UniBook. The module will have a key event of type "Exam" on the datetime specified.

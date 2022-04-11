@@ -588,6 +588,41 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `list o/view v/groups`<br>
       Expected: The UniBook switches to the `Groups` view and lists all entries there.
 
+### Adding entries  
+1. Add a module with key events.
+   1. Test Case: `add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-04-28 13:00 ke/3 dt/2022-04-15 23:59`  
+      Expected: The UniBook adds this module with the specified key events to the UniBook.  
+
+2. Add a group with meeting times to a module.
+   1. Prerequisites: The specified module must exist in the UniBook, otherwise an error message will be displayed.  
+   
+   2. Test Case: `add o/group n/Study Group m/cs1231s dt/2022-04-15 13:00 dt/2022-05-01 15:00`  
+      Expected: The UniBook adds this group with the specified meeting times to the module.
+   
+3. Add a student to a module and a group within that module.
+   1. Prerequisites: The specified module and group must exist in the UniBook, otherwise an error message will be displayed.  
+
+   2. Test Case: `add o/student n/Bobby Junior p/90127384 e/bobby@nus.edu.sg m/CS1231S g/Study Group`  
+      Expected: The UniBook adds this student with the specified module and group to the UniBook.
+
+4. Add a professor to a module.
+   1. Prerequisites: The specified module and group must exist in the UniBook, otherwise an error message will be displayed.
+
+   2. Test Case: `add o/professor n/Aaron Chuck p/98374813 e/aaron@nus.edu.sg of/COM2 01-03 m/CS1231S`  
+      Expected: The UniBook adds this professor with the specified module to the UniBook.
+
+5. Add a key event to an existing module.
+   1. Prerequisites: The specified module must exist in the UniBook, otherwise an error message will be displayed. 
+
+   2. Test Case: `add o/event m/CS1231S ke/4 dt/2022-04-28 23:59`  
+      Expected: The UniBook adds this key event to the specified module in the UniBook.
+
+6. Add a meeting time to an existing group of a module.
+   1. Prerequisites: The specified module and group must exist in the UniBook, otherwise an error message will be displayed.
+
+   2. Test Case: `add o/meeting m/CS1231S g/Study Group dt/2022-05-10 10:00`  
+      Expected: The UniBook adds this meeting time to the specified group of the module in the UniBook.
+
 ### Listing all entries
 1. List all entries in currently active view.
     1. Test Case: `list`<br>
