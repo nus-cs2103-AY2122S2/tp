@@ -1586,7 +1586,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Sample data is loaded in TAPA.
 
-   2. Test case: `add i/A0000000R m/CS2100 n/Test`<br>
+   2. Test case: `add i/A0000000Z m/CS2100 n/Test`<br>
       Expected: No student is added as there is already another student in TAPA who has the same student ID. Error message will be displayed to the user.
 
    3. Test case: `add m/CS2100 n/Test`, `add i/AXXXXXXXR m/CS2100`, `add i/AXXXXXXXR n/Test`<br>
@@ -1753,7 +1753,55 @@ testers are expected to do more *exploratory* testing.
 
    7. Test case: `find`<br>
       Expected: Find command not executed. Error details shown in the status message.
-   
+
+### Assigning task(s) to students
+
+1. Assigning task(s) to students by their student ID
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. The student associated with the student ID ("A0000000Z") has a task (Task A) assigned to him/her.
+
+   2. Test case: `assign`, `assign i/A1111111Z`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task name).
+
+   3. Test case: `assign i/A!@#$%^&R tn/Task A`, `assign i/A1111111Z tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID or task name.
+
+   4. Test case: `assign i/AXXXXXXXR tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
+
+   5. Test case: `assign i/A0000000Z tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as the task (Task A) has already been assigned to the student associated with the student ID ("A0000000Z").
+
+   6. Test case: `assign i/A0000000Z tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the student associated with the student ID ("A0000000Z").
+
+2. Assigning task(s) to students by their module code
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. The students associated with the student ID ("A0000000Z") and ("A1111111Z") has a task (Task A) assigned to them.
+      3. The student associated with the student ID ("A5555555Z") has the same module code (CS2100) as the student associated with the student ID ("A0000000Z").
+
+   2. Test case: `assign`, `assign m/CS2100`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
+
+   3. Test case: `assign m/CS@@@@ tn/Task A`, `assign m/CS2100 tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for module code or task name.
+
+   4. Test case: `assign m/LAM1201 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this module code in TAPA.
+
+   5. Test case: `assign m/CS2101 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, all the students with the module code (CS2101) already has the specified task (Task A) assigned to them.
+
+   6. Test case: `assign m/CS2100 tn/Task A`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task A) being assigned to the student associated with the student ID ("A5555555Z"). A message will be displayed to the user, informing that the task is only assigned to **some** of the students in the module (CS2100).
+
+   7. Test case: `assign m/CS2100 tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the students associated with the module code (CS2100).
+
 ### Checking all the tasks that a student has
 
 1. Checking all the tasks that a student has
@@ -1810,7 +1858,7 @@ testers are expected to do more *exploratory* testing.
       2. The student associated with the student ID ("A0000000Z") has an incomplete task assigned to him/her, and the task is the first and only one on his/her task list. 
       3. The student associated with the student ID ("A1111111Z") has a complete task assigned to him/her, and the task is the first and only one on his/her task list.
 
-   2. Test case: `ununmark`, `unmark i/A0000000Z`, `unmark idx/1`<br>
+   2. Test case: `unmark`, `unmark i/A0000000Z`, `unmark idx/1`<br>
       Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task index).
 
    3. Test case: `unmark i/A!@#$%^&R idx/1`, `unmark i/A0000000Z idx/0`, `unmark i/A0000000Z idx/-1`<br>
@@ -1824,76 +1872,10 @@ testers are expected to do more *exploratory* testing.
 
    5. Test case: `unmark i/A1111111Z idx/1`<br>
       Expected:  The list of students in TAPA will be updated, with the first task belonging to the student associated with the student ID ("A1111111Z") marked as incomplete.
-
-### Archiving details
-
-1. Saving a copy of the details currently saved in TAPA into a separate file
-
-   1. Prerequisites: Sample data is loaded in TAPA.
-
-   2. Test Case: `archive`<br>
-      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
-
-2. Saving a copy of the details currently saved in TAPA into a separate file
-
-   1. Prerequisites:
-      1. Sample data is loaded in TAPA.
-      2. Remove the data directory's (`/data`) read and write permissions.
-
-   2. Test case: `archive`<br>
-      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
-
-### Assigning task(s) to students
-
-1. Assigning task(s) to students by their student ID
-
-   1. Prerequisites:
-      1. Sample data is loaded in TAPA.
-      2. The student associated with the student ID ("A0000000Z") has a task (Task A) assigned to him/her.
-
-   2. Test case: `assign`, `assign i/A1111111Z`, `assign tn/Task A`<br>
-      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task name).
-
-   3. Test case: `assign i/A!@#$%^&R tn/Task A`, `assign i/A1111111Z tn/@@@@`<br>
-      Expected: An error message will be displayed to the user, due to invalid format for student ID or task name.
-
-   4. Test case: `assign i/AXXXXXXXR tn/Task A`<br>
-      Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
-
-   5. Test case: `assign i/A0000000Z tn/Task A`<br>
-      Expected: An error message will be displayed to the user, as the task (Task A) has already been assigned to the student associated with the student ID ("A0000000Z").
-
-   6. Test case: `assign i/A0000000Z tn/Task B`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the student associated with the student ID ("A0000000Z").
-
-2. Assigning task(s) to students by their module code
-
-   1. Prerequisites:
-      1. Sample data is loaded in TAPA.
-      2. The students associated with the student ID ("A0000000Z") and ("A1111111Z") has a task (Task A) assigned to them.
-      3. The student associated with the student ID ("A5555555Z") has the same module code (CS2100) as the student associated with the student ID ("A0000000Z").
-
-   2. Test case: `assign`, `assign m/CS2100`, `assign tn/Task A`<br>
-      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
-
-   3. Test case: `assign m/CS@@@@ tn/Task A`, `assign m/CS2100 tn/@@@@`<br>
-      Expected: An error message will be displayed to the user, due to invalid format for module code or task name.
-
-   4. Test case: `assign m/LAM1201 tn/Task A`<br>
-      Expected: An error message will be displayed to the user, as there are no students associated with this module code in TAPA.
-
-   5. Test case: `assign m/CS2101 tn/Task A`<br>
-      Expected: An error message will be displayed to the user, all the students with the module code (CS2101) already has the specified task (Task A) assigned to them.
-
-   6. Test case: `assign m/CS2100 tn/Task A`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task A) being assigned to the student associated with the student ID ("A5555555Z"). A message will be displayed to the user, informing that the task is only assigned to **some** of the students in the module (CS2100).
-
-   7. Test case: `assign m/CS2100 tn/Task B`<br>
-      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the students associated with the module code (CS2100).
-
+   
 ### Viewing the completion status of a particular task
 
-1. Viewing the completion status of a particular task
+1. Viewing the completion status of a particular task among students in a particular module
 
    1. Prerequisites: 
       1. Sample data is loaded in TAPA. 
@@ -1938,7 +1920,25 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `manual`<br>
       Expected: All possible commands are listed out.
-   
+
+### Archiving details
+
+1. Saving a copy of the details currently saved in TAPA into a separate file
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+
+   2. Test Case: `archive`<br>
+      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
+
+2. Saving a copy of the details currently saved in TAPA into a separate file
+
+   1. Prerequisites:
+      1. Sample data is loaded in TAPA.
+      2. Remove the data directory's (`/data`) read and write permissions.
+
+   2. Test case: `archive`<br>
+      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
+
 ### Saving data
 
 1. Dealing with corrupted entries
