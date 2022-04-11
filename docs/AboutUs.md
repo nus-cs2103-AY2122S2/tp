@@ -22,6 +22,8 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/ro4k9.png" width="200px">
 
 [[github](https://github.com/ro4k9)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/ro4k9.html)]
+
 
 * Role: Developer - Employer Feature
 * Responsibilities: Documentation
