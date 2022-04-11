@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.history.InputHistory;
+import seedu.address.history.InputHistoryManager;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,8 +23,38 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
+    private final InputHistory inputHistory = new InputHistoryManager();
+
     @FXML
     private TextField commandTextField;
+
+    // Define the up key event filter and its behaviour.
+    private final EventHandler<KeyEvent> upFilter = keyEvent -> {
+        if (keyEvent.getCode() != KeyCode.UP || !inputHistory.canGetPrevInput()) {
+            return;
+        }
+
+        // gets the last user input, then fills the text field with it
+        String prevUserInput = inputHistory.getPreviousUserInput();
+        commandTextField.setText(prevUserInput);
+
+        // consumes the up keypress event
+        keyEvent.consume();
+    };
+
+    // Define the down key event filter and its behaviour.
+    private final EventHandler<KeyEvent> downFilter = keyEvent -> {
+        if (keyEvent.getCode() != KeyCode.DOWN || !inputHistory.canGetNextInput()) {
+            return;
+        }
+
+        // gets the last user input, then fills the text field with it
+        String nextUserInput = inputHistory.getNextUserInput();
+        commandTextField.setText(nextUserInput);
+
+        // consumes the up keypress event
+        keyEvent.consume();
+    };
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -29,6 +64,9 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, upFilter);
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, downFilter);
     }
 
     /**
@@ -37,6 +75,8 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
+        inputHistory.storeInput(commandText);
+
         if (commandText.equals("")) {
             return;
         }

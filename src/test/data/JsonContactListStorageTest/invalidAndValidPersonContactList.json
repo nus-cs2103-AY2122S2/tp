@@ -1,0 +1,13 @@
+{
+  "persons": [ {
+    "name": "Valid Person",
+    "studentNumber": "A0225771A",
+    "email": "hans@example.com",
+    "mod": "CS2030S"
+  }, {
+    "name": "Person With Invalid Student Number Field",
+    "studentNumber": "A948asdf2424",
+    "email": "hans@example.com",
+    "mod": "CS2030S"
+  } ]
+}

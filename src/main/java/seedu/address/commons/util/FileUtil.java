@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 
 /**
  * Writes and reads files
@@ -78,6 +79,15 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Adds new line to the file.
+     * @param file The file to add new line to.
+     * @throws IOException if the file does not exist.
+     */
+    public static void addNewLineToFile(Path file) throws IOException {
+        Files.write(file, Collections.singleton(""));
     }
 
 }

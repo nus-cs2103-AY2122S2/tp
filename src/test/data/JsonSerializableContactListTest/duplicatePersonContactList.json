@@ -1,0 +1,16 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "studentNumber": "A0123456M",
+    "email": "alice@example.com",
+    "group": "T01",
+    "mod": "CS2100",
+    "tagged": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "studentNumber": "A0123456M",
+    "email": "pauline@example.com",
+    "group": "T01",
+    "mod": "CS2103T"
+  } ]
+}

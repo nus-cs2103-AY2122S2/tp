@@ -1,0 +1,21 @@
+@startuml
+!include ../style.puml
+
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":TAilorParser" as tp LOGIC_COLOR
+Participant ":XYZCommandParser" as xcp LOGIC_COLOR
+Participant "command:XYZCommand" as xc LOGIC_COLOR
+
+[-> logic : execute
+activate logic
+logic -> tp ++: parseCommand(commandText)
+create xcp
+tp -> xcp
+tp -> xcp ++: parse(arguments)
+create xc
+xcp -> xc ++
+xc --> xcp --:command
+xcp --> tp --: command
+tp --> logic --: command
+
+@enduml

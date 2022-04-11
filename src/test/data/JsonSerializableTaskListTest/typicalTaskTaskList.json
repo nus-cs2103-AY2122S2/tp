@@ -1,0 +1,10 @@
+{
+  "_comment": "Task List save file which contains the same Task values as in TypicalTasks#getTypicalTasktList()",
+  "tasks" : [ {
+    "description" : "Do homework",
+    "deadline" : "2022-03-21T21:24"
+  }, {
+    "description" : "Check assignment submissions",
+    "deadline" : "1234-05-06T07:08"
+  } ]
+}

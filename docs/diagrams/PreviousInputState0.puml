@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial InputHistory
+
+package previousInputs {
+    class Input0 as " " #FFFFFF
+    class Input1 as "__input1:String__"
+    class Input2 as "__input2:String__"
+    class Input3 as "__input3:String__"
+}
+
+package CommandBox{
+}
+
+Input0 -[hidden]right-> Input1
+Input1 -[hidden]right-> Input2
+Input2 -[hidden]right-> Input3
+hide Input1
+hide Input2
+hide Input3
+
+class Pointer as "indexPointer" #FFFFFF
+Pointer -up-> Input0
+@enduml

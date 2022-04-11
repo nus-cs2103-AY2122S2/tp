@@ -1,0 +1,53 @@
+{
+  "_comment": "Contact List save file which contains the same Person values as in TypicalPersons#getTypicalContactList()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "studentNumber": "A0246813G",
+    "email" : "alice@example.com",
+    "group" : "T01",
+    "mod" : "CS2100",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "studentNumber": "A0123456L",
+    "email" : "johnd@example.com",
+    "group" : "T01",
+    "mod" : "CS2040S",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "studentNumber": "A1234567M",
+    "email" : "heinz@example.com",
+    "group" : "T01",
+    "mod" : "MA1101R",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "studentNumber": "A1357902K",
+    "email" : "cornelia@example.com",
+    "group" : "T01",
+    "mod" : "MA1521",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "studentNumber": "A1234123A",
+    "email" : "werner@example.com",
+    "group" : "T01",
+    "mod" : "ACC1701X",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "studentNumber": "A5678567C",
+    "email" : "lydia@example.com",
+    "group" : "T01",
+    "mod" : "FIN2704X",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "studentNumber": "A7890789X",
+    "email" : "anna@example.com",
+    "group" : "T01",
+    "mod" : "CS3244",
+    "tagged" : [ ]
+  } ]
+}

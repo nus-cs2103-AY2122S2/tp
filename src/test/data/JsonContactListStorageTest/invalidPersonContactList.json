@@ -1,0 +1,9 @@
+{
+  "persons": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "studentNumber": "A0225771A",
+    "email": "hans@example.com",
+    "group" : "T01",
+    "mod": "CS2030S"
+  } ]
+}

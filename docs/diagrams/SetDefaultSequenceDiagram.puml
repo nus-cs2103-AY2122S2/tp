@@ -1,0 +1,114 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SetDefaultGroupCommand" as SetDefaultGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":StorageManager" as sm STORAGE_COLOR
+end box
+
+activate LogicManager
+[-> SetDefaultGroupCommand : execute()
+activate SetDefaultGroupCommand
+
+SetDefaultGroupCommand -> Model : doesModExistInList("CS2103T")
+activate Model
+
+Model --> SetDefaultGroupCommand
+deactivate Model
+
+alt module exists
+    SetDefaultGroupCommand -> Model : getMod("CS2103T")
+    activate Model
+
+    Model --> SetDefaultGroupCommand : matchingMod
+    deactivate Model
+
+    alt default group exists for Mod
+        SetDefaultGroupCommand -[#blue]> Model: retrievePrevDefault()
+        activate Model
+
+        Model --[#blue]> SetDefaultGroupCommand : prevDefault
+        deactivate Model
+
+        alt requested default is different from prevDefault
+            SetDefaultGroupCommand -[#green]> Model : setDefaultGroup()
+            activate Model
+
+            Model --[#green]> SetDefaultGroupCommand
+            deactivate Model
+
+            create CommandResult
+            SetDefaultGroupCommand -[#green]> CommandResult
+            activate CommandResult
+
+            CommandResult --[#green]> SetDefaultGroupCommand :updatedGroupResult
+            deactivate CommandResult
+
+            SetDefaultGroupCommand --[#green]> LogicManager : updatedGroupResult
+
+            [<[#green]--LogicManager :updatedGroupResult
+
+        else the values are the same
+
+            create CommandResult
+            SetDefaultGroupCommand -[#013220]> CommandResult
+            activate CommandResult
+
+            CommandResult --[#013220]> SetDefaultGroupCommand :noChangeResult
+            deactivate CommandResult
+
+            SetDefaultGroupCommand --[#013220]> LogicManager : noChangeResult
+
+            [<[#013220]--LogicManager : noChangeResult
+        end
+    end
+
+    else mod does not exist
+        SetDefaultGroupCommand -[#blue]> Model : addMod(CS2103T)
+        activate Model
+
+        Model --[#blue]> SetDefaultGroupCommand
+        deactivate Model
+
+        SetDefaultGroupCommand -[#blue]> Model: setDefaultGroup()
+        activate Model
+
+        Model --[#blue]> SetDefaultGroupCommand
+        deactivate Model
+end
+
+create CommandResult
+SetDefaultGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SetDefaultGroupCommand : successfulResult
+deactivate CommandResult
+
+SetDefaultGroupCommand --> LogicManager : successfulResult
+deactivate SetDefaultGroupCommand
+
+LogicManager -> Model :getModuleList()
+activate Model
+
+Model --> LogicManager : ModuleList
+deactivate Model
+
+LogicManager -> sm: saveModuleList(ModuleList)
+activate sm
+
+sm --> LogicManager
+deactivate sm
+
+[<--LogicManager : successfulResult
+deactivate LogicManager
+@enduml

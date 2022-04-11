@@ -5,19 +5,29 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyTaskList" as ReadOnlyTaskList
+Class "<<interface>>\nReadOnlyContactList" as ReadOnlyContactList
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+
+Class ContactList
 Class ModelManager
 Class UserPrefs
+Class VersionedContents
+
+Class PriorityTaskList
+Class Task
+Class UniqueModuleList
+Class Description
+Class Deadline
 
 Class UniquePersonList
 Class Person
-Class Address
+Class Mod
+Class Group
 Class Email
 Class Name
-Class Phone
+Class StudentNumber
 Class Tag
 
 }
@@ -25,26 +35,48 @@ Class Tag
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up..|> Model
+Model .down.> ReadOnlyUserPrefs
+Model .down.> ReadOnlyContactList
+Model .down.> ReadOnlyTaskList
+Model .down..> UniqueModuleList
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager -down-> "1" ContactList
+ModelManager -down-> "1" UserPrefs
+ModelManager -down-> "1" PriorityTaskList
+ModelManager -down-> "1" VersionedContents
+ModelManager -down-> "1" UniqueModuleList
 
-AddressBook *--> "1" UniquePersonList
+VersionedContents .right.> PriorityTaskList
+VersionedContents .right.> UniqueModuleList
+VersionedContents .left.> ContactList
+
+UserPrefs .up..|> ReadOnlyUserPrefs
+
+UniqueModuleList -down-> "*" Mod
+
+PriorityTaskList .up..|> ReadOnlyTaskList
+PriorityTaskList -down-> "~* all" Task
+Task *--> Description
+Task *--> Deadline
+
+ReadOnlyContactList -[hidden]right-> ReadOnlyTaskList
+ReadOnlyContactList -[hidden]left-> ReadOnlyUserPrefs
+
+ContactList .up..|> ReadOnlyContactList
+ContactList *-down-> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
+Person *--> StudentNumber
 Person *--> Email
-Person *--> Address
+Person *--> Mod
+Person *--> Group
 Person *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]right-> StudentNumber
+Name -[hidden]right-> Email
+StudentNumber -[hidden]right-> Mod
+Mod -[hidden]right-> Group
 
 ModelManager -->"~* filtered" Person
 @enduml

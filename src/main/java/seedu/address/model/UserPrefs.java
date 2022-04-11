@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.StringBuilderUtil;
 
 /**
  * Represents User's preferences.
@@ -14,7 +15,9 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path contactListFilePath = Paths.get("data" , "contactlist.json");
+    private Path taskListFilePath = Paths.get("data", "tasklist.json");
+    private Path moduleListFilePath = Paths.get("data", "modulelist.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +38,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setContactListFilePath(newUserPrefs.getContactListFilePath());
+        setTaskListFilePath(newUserPrefs.getTaskListFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +51,26 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getContactListFilePath() {
+        return contactListFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public Path getModuleListFilePath() {
+        return moduleListFilePath;
+    }
+
+    public void setContactListFilePath(Path contactListFilePath) {
+        requireNonNull(contactListFilePath);
+        this.contactListFilePath = contactListFilePath;
+    }
+
+    public Path getTaskListFilePath() {
+        return taskListFilePath;
+    }
+
+    public void setTaskListFilePath(Path taskListFilePath) {
+        requireNonNull(taskListFilePath);
+        this.taskListFilePath = taskListFilePath;
     }
 
     @Override
@@ -68,20 +85,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && contactListFilePath.equals(o.contactListFilePath)
+                && taskListFilePath.equals(o.taskListFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, contactListFilePath);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        return sb.toString();
+        StringBuilderUtil stringBuilderUtil = StringBuilderUtil.getInstance();
+        stringBuilderUtil.appendAll("Gui Settings : ", guiSettings,
+                "\nLocal contactlist file location : ", contactListFilePath,
+                "\nLocal tasklist file location : ", taskListFilePath,
+                "\nLocal modulelist file location : ", moduleListFilePath);
+        return stringBuilderUtil.getFormattedOutput();
     }
 
 }

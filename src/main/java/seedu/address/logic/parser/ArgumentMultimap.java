@@ -57,4 +57,17 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Checks whether the argument map is empty.
+     * @return The boolean value specifying whether the argument map is empty or not.
+     */
+    public boolean isEmpty() {
+        for (List<String> l : argMultimap.values()) {
+            if (l.size() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

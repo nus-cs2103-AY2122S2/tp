@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object logicManager
+object tailorParser
+object helpCommand
+object addCommand
+object commandResult
+
+logicManager "1" ---> "1" tailorParser
+
+
+
+@enduml

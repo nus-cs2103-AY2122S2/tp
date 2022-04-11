@@ -1,0 +1,11 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+VersionedContents -down-> "1...*" Content
+Content -down-> "1" PriorityTaskList
+Content -down-> "1" ContactList
+Content -down-> "1" UniqueModuleList
+@enduml

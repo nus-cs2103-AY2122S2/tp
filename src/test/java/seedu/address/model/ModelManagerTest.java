@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalTasks.ASSIGNMENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,8 +17,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.person.UniqueModuleList;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.tasks.PriorityTaskList;
+import seedu.address.testutil.ContactListBuilder;
+import seedu.address.testutil.ContentBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +31,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ContactList(), new ContactList(modelManager.getContactList()));
     }
 
     @Test
@@ -37,14 +42,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setContactListFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setContactListFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +66,27 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setContactListFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setContactListFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setContactListFilePath_validPath_setsContactListFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setContactListFilePath(path);
+        assertEquals(path, modelManager.getContactListFilePath());
+    }
+
+    @Test
+    public void setTaskListFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTaskListFilePath(null));
+    }
+
+    @Test
+    public void setTaskListFilePath_validPath_setsContactListFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setContactListFilePath(path);
+        assertEquals(path, modelManager.getContactListFilePath());
     }
 
     @Test
@@ -78,12 +95,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInContactList_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInContactList_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -93,15 +110,89 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
+    //=========== VersionedContent tests ==============================================================
+
+    @Test
+    public void undoContents() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitContent();
+        modelManager.undoContents();
+
+        assertEquals(modelManager.getCurrentContent(), new Content(new ContactList(), new PriorityTaskList(),
+                new UniqueModuleList()));
+    }
+
+    @Test
+    public void redoContents() {
+        modelManager.addPerson(ALICE);
+        modelManager.commitContent();
+        modelManager.undoContents();
+        modelManager.redoContents();
+
+        ContactList contactListWithAlice = new ContactListBuilder().withPerson(ALICE).build();
+        assertEquals(modelManager.getCurrentContent(), new Content(contactListWithAlice, new PriorityTaskList(),
+                new UniqueModuleList()));
+    }
+
+    @Test
+    public void getVersionedContents() {
+        Content initialContents = new ContentBuilder().build();
+        assertEquals(modelManager.getVersionedContents(), new VersionedContents(initialContents));
+    }
+
+    @Test
+    public void getCurrentContent() {
+        assertEquals(modelManager.getCurrentContent(), new Content(new ContactList(), new PriorityTaskList(),
+                new UniqueModuleList()));
+    }
+
+    @Test
+    public void commitContent() {
+        VersionedContents initVersionedContents = new VersionedContents(modelManager.getVersionedContents());
+        modelManager.addPerson(ALICE);
+        modelManager.commitContent();
+        VersionedContents newVersionedContents = new VersionedContents(modelManager.getVersionedContents());
+
+        assertNotEquals(initVersionedContents, newVersionedContents);
+        Content newContent = newVersionedContents.getCurrentContent();
+        initVersionedContents.addContentVersion(newContent);
+        assertEquals(initVersionedContents, newVersionedContents);
+    }
+
+    @Test
+    public void canUndo() {
+        assertFalse(modelManager.canUndo());
+
+        modelManager.addPerson(ALICE);
+        modelManager.commitContent();
+        assertTrue(modelManager.canUndo());
+    }
+
+    @Test
+    public void canRedo() {
+        assertFalse(modelManager.canRedo());
+
+        modelManager.addPerson(ALICE);
+        modelManager.commitContent();
+        assertFalse(modelManager.canRedo());
+
+        modelManager.undoContents();
+        assertTrue(modelManager.canRedo());
+    }
+
+
+    //=========== Other tests ================================================================================
+
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ContactList contactList = new ContactListBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        ContactList differentContactList = new ContactList();
         UserPrefs userPrefs = new UserPrefs();
+        PriorityTaskList taskList = new PriorityTaskList();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(contactList, userPrefs, taskList);
+        ModelManager modelManagerCopy = new ModelManager(contactList, userPrefs, taskList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +204,26 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different contactList -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentContactList, userPrefs, taskList)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(contactList, userPrefs, taskList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setContactListFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(contactList, differentUserPrefs, taskList)));
+
+        // different task lists -> returns false
+        PriorityTaskList diffTaskList = new PriorityTaskList();
+        diffTaskList.add(ASSIGNMENT);
+        assertFalse(modelManager.equals(new ModelManager(contactList, userPrefs, diffTaskList)));
     }
+
 }

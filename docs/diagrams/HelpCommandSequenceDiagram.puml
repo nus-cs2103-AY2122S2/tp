@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TailorParser" as TailorParser LOGIC_COLOR
+participant "h:HelpCommand" as hc LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("help add")
+activate LogicManager
+
+LogicManager -> TailorParser : parseCommand("help add")
+activate TailorParser
+
+create hc
+TailorParser -> hc : new helpCommand(args)
+activate hc
+
+hc --> TailorParser : h
+deactivate hc
+
+TailorParser --> LogicManager : h
+deactivate TailorParser
+
+LogicManager -> hc : execute()
+activate hc
+
+alt commandWordArg is empty
+    create CommandResult
+     hc -> CommandResult
+     activate CommandResult
+
+     CommandResult --> hc :result
+     deactivate CommandResult
+
+     [<-- hc : result
+
+else CommandWordArg is not empty
+    group switch through command words
+
+        create CommandResult
+        hc -->  CommandResult : new CommandResult(XYZCommand.MESSAGE_USAGE)
+        activate CommandResult
+
+        CommandResult --> hc :result
+        deactivate CommandResult
+
+        [<-- hc : result
+
+    end
+end
+
+deactivate hc
+@enduml

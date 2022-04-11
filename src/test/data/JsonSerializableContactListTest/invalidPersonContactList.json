@@ -1,0 +1,8 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "studentNumber": "A0225771A",
+    "email": "invalid@email!3e",
+    "mod": "CS2103T"
+  } ]
+}

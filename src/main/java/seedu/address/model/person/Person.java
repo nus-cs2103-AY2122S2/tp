@@ -7,32 +7,35 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.StringBuilderUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in the class group.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final StudentNumber studentNumber;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private Group group;
+    private final Mod mod;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, StudentNumber studentNumber, Email email, Mod mod, Group group, Set<Tag> tags) {
+        requireAllNonNull(name, studentNumber, email, mod, group, tags);
         this.name = name;
-        this.phone = phone;
+        this.studentNumber = studentNumber;
         this.email = email;
-        this.address = address;
+        this.mod = mod;
+        this.group = group;
         this.tags.addAll(tags);
     }
 
@@ -40,16 +43,20 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public StudentNumber getStudentNumber() {
+        return studentNumber;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Mod getMod() {
+        return mod;
+    }
+
+    public Group getGroup() {
+        return group;
     }
 
     /**
@@ -61,16 +68,42 @@ public class Person {
     }
 
     /**
+     * Sets the group allocation for the {@code Person}.
+     * @param groupTitle the String with the desired group title.
+     */
+    public void setGroup(String groupTitle) {
+        this.group = new Group(groupTitle);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        boolean isSameStudentNumber = otherPerson.getStudentNumber().equals(getStudentNumber());
+        boolean isSameEmail = otherPerson.getEmail().equals(getEmail());
+
+        return isSameEmail || isSameStudentNumber;
+    }
+
+    /**
+     * Checks if the current person is identical to person, p - while ignoring any tags.
+     * @param p the person being compared to.
+     * @return the boolean value, true if persons are identical.
+     */
+    public boolean isSamePersonAgnosticToTags(Person p) {
+        return p.getStudentNumber().equals(this.getStudentNumber())
+                && p.getEmail().equals(this.getEmail())
+                && p.getGroup().equals(this.getGroup())
+                && p.getMod().equals(this.getMod());
     }
 
     /**
@@ -89,35 +122,33 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getStudentNumber().equals(getStudentNumber())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getGroup().equals(getGroup())
+                && otherPerson.getMod().equals(getMod())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, studentNumber, email, mod, group, tags);
     }
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+        final StringBuilderUtil stringBuilderUtil = StringBuilderUtil.getInstance();
+        stringBuilderUtil.appendAll(getName(), "; StudentNumber: ", getStudentNumber(),
+                "; Email: ", getEmail(),
+                "; Group: ", getGroup(),
+                "; Mod: ", getMod());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            stringBuilderUtil.append("; Tags: ");
+            tags.forEach(stringBuilderUtil::append);
         }
-        return builder.toString();
+        return stringBuilderUtil.getFormattedOutput();
     }
 
 }

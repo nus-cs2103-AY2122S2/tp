@@ -4,14 +4,16 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
+import seedu.address.commons.util.StringBuilderUtil;
+
 /**
  * A Serializable class that contains the GUI settings.
  * Guarantees: immutable.
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 600;
-    private static final double DEFAULT_WIDTH = 740;
+    private static final double DEFAULT_HEIGHT = 640;
+    private static final double DEFAULT_WIDTH = 1000;
 
     private final double windowWidth;
     private final double windowHeight;
@@ -70,10 +72,10 @@ public class GuiSettings implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Width : " + windowWidth + "\n");
-        sb.append("Height : " + windowHeight + "\n");
-        sb.append("Position : " + windowCoordinates);
-        return sb.toString();
+        StringBuilderUtil stringBuilderUtil = StringBuilderUtil.getInstance();
+        stringBuilderUtil.appendAll("Width : ", windowWidth, "\n",
+                "Height : ", windowHeight, "\n",
+                "Position : ", windowCoordinates);
+        return stringBuilderUtil.getFormattedOutput();
     }
 }

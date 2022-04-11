@@ -1,0 +1,90 @@
+@startuml
+ !include style.puml
+
+ box Logic LOGIC_COLOR_T1
+ participant "m:MailXCommand" as MailXCommand LOGIC_COLOR
+ participant ":MailXDescriptor" as MailXDescriptor LOGIC_COLOR
+ participant ":MailUtil" as MailUtil LOGIC_COLOR
+ participant ":CommandResult" as CommandResult LOGIC_COLOR
+ end box
+
+ box Model MODEL_COLOR_T1
+ participant ":Model" as Model MODEL_COLOR
+ end box
+
+
+ create MailXCommand
+ [-> MailXCommand : execute(mail-x g/T12)
+ activate MailXCommand
+
+ MailXCommand -> MailXCommand : createEmailList()
+ activate MailXCommand #Brown
+
+ MailXCommand -> Model : getFilteredPersonList()
+ activate Model
+
+ Model --> MailXCommand : lastShownList
+ deactivate Model
+
+MailXCommand -> MailXDescriptor : getName().orElse
+activate MailXDescriptor
+
+MailXDescriptor --> MailXCommand : name
+deactivate MailXDescriptor
+
+MailXCommand -> MailXCommand : handleNameAddition()
+activate MailXCommand #LightPink
+deactivate MailXCommand
+
+MailXCommand -> MailXDescriptor : getEmail().orElse
+activate MailXDescriptor
+
+MailXDescriptor --> MailXCommand : email
+deactivate MailXDescriptor
+
+MailXCommand -> MailXCommand : handleEmailAddition()
+activate MailXCommand #LightPink
+deactivate MailXCommand
+
+MailXCommand -> MailXDescriptor : getMod().orElse
+activate MailXDescriptor
+
+MailXDescriptor --> MailXCommand : mod
+deactivate MailXDescriptor
+
+MailXCommand -> MailXCommand : handleModAddition()
+activate MailXCommand #LightPink
+deactivate MailXCommand
+
+MailXCommand -> MailXDescriptor : getGroup().orElse
+activate MailXDescriptor
+
+MailXDescriptor --> MailXCommand : group
+deactivate MailXDescriptor
+
+MailXCommand -> MailXCommand : handleGroupAddition()
+activate MailXCommand #LightPink
+deactivate MailXCommand
+
+MailXCommand --> MailXCommand : emailListToReturn
+deactivate MailXCommand
+
+MailXCommand -> MailUtil : launchMail(emailListToReturn)
+ activate MailUtil
+
+ MailUtil ->] : desktop.mail(mailto)
+
+ MailUtil --> MailXCommand
+ deactivate MailUtil
+
+ create CommandResult
+ MailXCommand -> CommandResult
+ activate CommandResult
+
+ CommandResult --> MailXCommand :result
+ deactivate CommandResult
+
+ [<-- MailXCommand : result
+ deactivate MailXCommand
+
+ @enduml
