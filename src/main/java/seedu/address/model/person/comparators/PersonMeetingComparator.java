@@ -29,7 +29,8 @@ public class PersonMeetingComparator extends PersonFlagComparator implements Com
         } else {
             return 0;
         }
-  
+    }
+
     @Override
     public boolean equals(Object other) {
         return other instanceof PersonMeetingComparator;
