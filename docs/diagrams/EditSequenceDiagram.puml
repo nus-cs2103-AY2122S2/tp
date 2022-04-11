@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniteParser" as UniteParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 n/Bob")
+activate LogicManager
+
+LogicManager -> UniteParser : parseCommand("edit 1 n/Bob")
+activate UniteParser
+
+create EditCommandParser
+UniteParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> UniteParser
+deactivate EditCommandParser
+
+UniteParser -> EditCommandParser : parse("1 n/Bob")
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand: EditCommand(p)
+activate EditCommand
+
+EditCommand --> EditCommandParser: e
+deactivate EditCommand
+
+EditCommandParser --> UniteParser: e
+deactivate EditCommandParser
+EditCommandParser -[hidden]-> UniteParser
+destroy EditCommandParser
+
+UniteParser --> LogicManager:e
+deactivate UniteParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+create Person
+EditCommand -> Person : Person(...editedArgs)
+activate Person
+
+Person --> EditCommand: p
+deactivate Person
+
+EditCommand -> Model : setPerson()
+activate Model
+
+Model --> EditCommand :
+deactivate Model
+
+EditCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> EditCommand :
+deactivate Model
+
+EditCommand -> Model : showProfile()
+activate Model
+
+Model --> EditCommand :
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager: result
+deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

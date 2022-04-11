@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniteParser" as UniteParser LOGIC_COLOR
+participant ":SwitchThemeCommandParser" as SwitchThemeCommandParser LOGIC_COLOR
+participant "t:LightTheme" as LightTheme LOGIC_COLOR
+participant "s:SwitchThemeCommand" as SwitchThemeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "t:Theme" as Theme MODEL_COLOR
+end box
+
+[-> LogicManager : execute("theme light")
+activate LogicManager
+
+LogicManager -> UniteParser : parseCommand("theme light")
+activate UniteParser
+
+create SwitchThemeCommandParser
+UniteParser -> SwitchThemeCommandParser
+activate SwitchThemeCommandParser
+
+SwitchThemeCommandParser --> UniteParser
+deactivate SwitchThemeCommandParser
+
+UniteParser -> SwitchThemeCommandParser : parse("light")
+activate SwitchThemeCommandParser
+
+create LightTheme
+SwitchThemeCommandParser -> LightTheme
+activate LightTheme
+
+LightTheme --> SwitchThemeCommandParser : t
+deactivate LightTheme
+LightTheme -[hidden]-> SwitchThemeCommandParser
+destroy LightTheme
+
+create SwitchThemeCommand
+SwitchThemeCommandParser --> SwitchThemeCommand
+activate SwitchThemeCommand
+
+SwitchThemeCommand --> SwitchThemeCommandParser: s
+deactivate SwitchThemeCommand
+
+SwitchThemeCommandParser --> UniteParser: s
+deactivate SwitchThemeCommandParser
+SwitchThemeCommandParser -[hidden]-> UniteParser
+destroy SwitchThemeCommandParser
+
+UniteParser --> LogicManager: s
+
+LogicManager -> SwitchThemeCommand : execute()
+activate SwitchThemeCommand
+
+create Theme
+SwitchThemeCommand -> Theme: LightTheme
+activate Theme
+
+Theme --> SwitchThemeCommand: t
+deactivate Theme
+
+SwitchThemeCommand -> Model : switchTheme(t)
+activate Model
+
+Model -> SwitchThemeCommand
+deactivate Model
+
+SwitchThemeCommand -> LogicManager
+deactivate SwitchThemeCommand
+SwitchThemeCommandParser -[hidden]-> UniteParser
+destroy SwitchThemeCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

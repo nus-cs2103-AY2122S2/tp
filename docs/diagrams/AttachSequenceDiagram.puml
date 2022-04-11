@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniteParser" as UniteParser LOGIC_COLOR
+participant ":AttachTagCommandParser" as AttachTagCommandParser LOGIC_COLOR
+participant "att:AttachTagCommand" as AttachTagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("attach t/family i/1")
+activate LogicManager
+
+LogicManager -> UniteParser : parseCommand("attach t/family i/1")
+activate UniteParser
+
+create AttachTagCommandParser
+UniteParser -> AttachTagCommandParser
+activate AttachTagCommandParser
+
+AttachTagCommandParser --> UniteParser
+deactivate AttachTagCommandParser
+
+UniteParser -> AttachTagCommandParser : parse("t/family i/1")
+activate AttachTagCommandParser
+
+create AttachTagCommand
+AttachTagCommandParser -> AttachTagCommand
+activate AttachTagCommand
+
+AttachTagCommand --> AttachTagCommandParser : att
+deactivate AttachTagCommand
+
+AttachTagCommandParser --> UniteParser : att
+deactivate AttachTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AttachTagCommandParser -[hidden]-> UniteParser
+destroy AttachTagCommandParser
+
+UniteParser --> LogicManager : att
+deactivate UniteParser
+
+LogicManager -> AttachTagCommand : execute()
+activate AttachTagCommand
+
+create Person
+AttachTagCommand -> Person : Person(...editedTag)
+activate Person
+
+Person --> AttachTagCommand: p
+deactivate Person
+
+AttachTagCommand -> Model : setPerson()
+activate Model
+
+Model --> AttachTagCommand :
+deactivate Model
+
+AttachTagCommand -> Model : showProfile()
+activate Model
+
+Model --> AttachTagCommand :
+deactivate Model
+
+create CommandResult
+AttachTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AttachTagCommand
+deactivate CommandResult
+
+AttachTagCommand --> LogicManager: result
+deactivate AttachTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

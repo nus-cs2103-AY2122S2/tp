@@ -1,0 +1,22 @@
+@startuml
+
+start
+:User type in edit command;
+:Checks if input index is valid;
+if () then ([Yes, valid index])
+    : Do duplication person check;
+    if() then ([Not duplicated person])
+        :Add this Person with
+        edited field into UNite;
+        :       Show edit
+        success message;
+    else([Duplicated Person])
+        :Show error message;
+    endif
+else ([No, invalid index])
+  :Show error message;
+endif
+
+stop
+
+@enduml

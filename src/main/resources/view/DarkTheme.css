@@ -326,6 +326,19 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-prompt-text-fill: white
+}
+
+#searchTextField {
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-color: #ffffff ;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: #C5C5C5;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -349,4 +362,88 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.profile_text {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-fill: white
+}
+
+.profile_information_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.scroll-pane-general {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane-general .viewport {
+    -fx-background-color: #383838;
+}
+
+.general-display-content {
+     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.tag-list-heading {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#tagsInPane {
+    -fx-hgap: 15;
+    -fx-vgap: 7;
+}
+
+#tagsInPane .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 15;
+}
+
+.tag-list-tag {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 15;
+}
+
+.tag-remark {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+}
+
+.tag-list-count {
+    -fx-padding: 0 2 0 2;
+    -fx-border-radius: 2;
+    -fx-background-color: white;
+    -fx-background-radius: 2;
+    -fx-border-color: white;
+}
+
+#personInTagCount {
+    -fx-text-fill: #3e7b91;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+
+#grabResult {
+    -fx-text-fill: white;
+    -fx-faint-focus-color: white;
+}
+
+#grabResult .content {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
 }

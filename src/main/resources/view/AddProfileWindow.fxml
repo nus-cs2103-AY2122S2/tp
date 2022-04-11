@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Add Profile" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@AddProfileWindowDark.css" />
+            </stylesheets>
+            <HBox alignment="CENTER" prefHeight="722.0" prefWidth="442.0">
+                <AnchorPane prefHeight="546.0" prefWidth="450.0" styleClass="background">
+                    <TextField fx:id="nameInput" layoutX="114.0" layoutY="152.0" prefHeight="37.0" prefWidth="230.0"
+                               promptText="Enter name..."/>
+                    <TextField fx:id="phoneNumberInput" layoutX="114.0" layoutY="203.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter phone number..."/>
+                    <TextField fx:id="emailInput" layoutX="114.0" layoutY="254.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter email..."/>
+                    <TextField fx:id="addressInput" layoutX="114.0" layoutY="307.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter address..."/>
+                    <TextField fx:id="tagInput" layoutX="114.0" layoutY="363.0" prefHeight="37.0" prefWidth="230.0"
+                               promptText="Enter tag (seperated by ', ')"/>
+                    <TextField fx:id="courseInput" layoutX="114.0" layoutY="414.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter course (optional)"/>
+                    <TextField fx:id="matricCardInput" layoutX="114.0" layoutY="466.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter matric card (optional)"/>
+                    <TextField fx:id="telegramInput" layoutX="114.0" layoutY="515.0" prefHeight="37.0"
+                               prefWidth="230.0" promptText="Enter telegram (optional)"/>
+                    <StackPane fx:id="resultDisplayPlaceholder" layoutX="25.0" layoutY="618.0" prefHeight="139.0"
+                               prefWidth="392.0"/>
+                    <Button layoutX="117.0" layoutY="579.0" mnemonicParsing="false" onAction="#handleAddProfile"
+                            text="Save"/>
+                    <Button layoutX="235.0" layoutY="579.0" mnemonicParsing="false" onAction="#handleClose"
+                            text="Cancel"/>
+                    <Circle fill="WHITE" layoutX="229.0" layoutY="75.0" radius="53.0" stroke="BLACK"
+                            strokeType="INSIDE" strokeWidth="0.0"/>
+                    <Circle fill="#6b88a4" layoutX="229.0" layoutY="89.0" radius="32.0" stroke="BLACK"
+                            strokeType="INSIDE" strokeWidth="0.0"/>
+                    <Circle fill="#cad0d7" layoutX="229.0" layoutY="49.0" radius="20.0" stroke="BLACK"
+                            strokeType="INSIDE" strokeWidth="0.0"/>
+                </AnchorPane>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>
