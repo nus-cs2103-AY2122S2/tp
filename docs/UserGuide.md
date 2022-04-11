@@ -37,8 +37,8 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. How to navigate the User Guide
@@ -70,13 +70,13 @@ Additional formatting guidelines:
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 
-1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
 
-2. To check your java version:
-    1. For Mac users, open up Terminal and type in `java --version`.
-    2. For Windows users, open up Command Prompt and type in `java --version`.
+2. To check your java version:<br>
+&nbsp&nbsp&nbsp&nbsp 1. For Mac users, open up Terminal and type in `java --version`.<br>
+&nbsp&nbsp&nbsp&nbsp 2. For Windows users, open up Command Prompt and type in `java --version`.<br>
 
-3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
 
 4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 
@@ -90,12 +90,12 @@ Additional formatting guidelines:
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 
-1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.<br>
 
 2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-
+ 
 </div>
-6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
@@ -180,7 +180,7 @@ In addition, the list of pre-defined constants are also provided for `Faculty`, 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-1. You are able to add optional tags with no restrictions using the `t/` prefix.
+1. You are able to add optional tags with no restrictions using the `t/` prefix.<br>
 
 2. Additions can be reversed with the `undo` feature.
 
@@ -219,9 +219,9 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 
-1. Tracey shows the entire edited database after the edit command is applied.
+1. Tracey shows the entire edited database after the edit command is applied.<br>
 
-2. After every edit command, the student at the specified index will be shifted to the bottom of the list.
+2. After every edit command, the student at the specified index will be shifted to the bottom of the list.<br>
 
 3. If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
@@ -231,7 +231,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 
 :bulb: **Tip:**<br>
 
-* Edits can be reversed with the `undo` feature.
+1. Edits can be reversed with the `undo` feature.
 
 </div>
 
@@ -255,11 +255,11 @@ Examples of usage:
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
+1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.<br>
 
-2. You can use `find` to get his/her `INDEX` and then apply `delete`.
+2. You can use `find` to get his/her `INDEX` and then apply `delete`.<br>
 
-3. This can save you time scrolling down an entire list to get his/her `INDEX`!
+3. This can save you time scrolling down an entire list to get his/her `INDEX`!<br>
 
 4. Deletions can be reversed with the `undo` feature.
 
@@ -287,13 +287,13 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 
-1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.<br>
 
-2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.<br>
 
-    1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
+&nbsp&nbsp&nbsp&nbsp 1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
 
-    2. Using an `undo` command will not restore the student's index back to 1.
+&nbsp&nbsp&nbsp&nbsp 2. Using an `undo` command will not restore the student's index back to 1.
 
 </div>
 
@@ -320,10 +320,10 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br> 
 
-1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.<br>
 
 2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.<br>
-e.g.If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
+&nbsp&nbsp&nbsp&nbsp 1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
 
 3. Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
 
@@ -400,7 +400,7 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 
-1. There is also a `Show Email` button on the GUI which you can click to open the same window.
+1. There is also a `Show Email` button on the GUI which you can click to open the same window.<br>
 
 2. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
 
@@ -460,7 +460,7 @@ Examples of usage:
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
 
-1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatible with Tracey.<br>
 2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
 
 </div>
@@ -468,10 +468,10 @@ Examples of usage:
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-You can rename the archived file in the file path manually for easier reference.
+1. You can rename the archived file in the file path manually for easier reference.<br>
 
-1. Features for naming the archived file using the CLI will be available in later releases.
-2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+&nbsp&nbsp&nbsp&nbsp 1. Features for naming the archived file using the CLI will be available in later releases.<br>
+3. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 
 </div>
 
