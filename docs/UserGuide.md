@@ -3,8 +3,6 @@ layout: page
 title: User Guide
 ---
 
-Tracey
-
 Tracey is a **desktop app for managing health statuses of NUS Hall Residents, optimized for use via a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
@@ -181,7 +179,6 @@ In addition, the list of pre-defined constants are also provided for `Faculty`, 
 :bulb: **Tip:**<br>
 
 1. You are able to add optional tags with no restrictions using the `t/` prefix.<br>
-
 2. Additions can be reversed with the `undo` feature.
 
 </div>
@@ -507,8 +504,7 @@ Format:`clear`
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
 
-1. Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
-
+1. Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.<br>
 2. This feature cannot be reversed using `undo`.
 
 </div>
