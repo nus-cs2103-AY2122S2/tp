@@ -176,6 +176,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add customer feature
 
+
 #### Overview
 The Add Customer feature is used to add customer profiles into TrackBeau. `Name`, `Phone`, `Address`, `Email` and 
 `RegistrationDate` fields are compulsory.
@@ -188,7 +189,7 @@ The add customer feature is implemented via `AddCustomerCommand` which is create
 4.  If the `Customer` to be added is unique and does not exist in TrackBeau, it will be added. If not, a `CommandException`
     is thrown
 
-The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
+The following activity diagram summarizes what happens when the user executes the add customer command (`addc`):
 
 ![Add Customer Sequence Diagram](images/AddCustomerSequenceDiagram.png)
 
