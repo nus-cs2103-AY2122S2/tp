@@ -146,8 +146,19 @@ public class ViewCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ViewCommand // instanceof handles nulls
-                && predicatePerson.equals(((ViewCommand) other).predicatePerson)); // state check
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        if (!(predicatePerson == null)) {
+            return predicatePerson.equals(((ViewCommand) other).predicatePerson);
+        }
+
+        return predicateSchedule.equals(((ViewCommand) other).predicateSchedule);
     }
 }

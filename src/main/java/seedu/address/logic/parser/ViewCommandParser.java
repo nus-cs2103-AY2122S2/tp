@@ -114,7 +114,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
             boolean isViewDate = arePrefixesPresent(argMultimap, PREFIX_DATE)
                     && !arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE);
-
             System.out.println("isViewAll: " + isViewAll);
             System.out.println("isViewDate: " + isViewDate);
             // view all schedules
