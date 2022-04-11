@@ -27,6 +27,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
+        assert nameKeywords.length > 0 : "Keywords for find command cannot be empty";
+
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 

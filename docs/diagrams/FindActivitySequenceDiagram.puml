@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindActivityCommandParser" as FindActivityCommandParser LOGIC_COLOR
+participant "p:ActivityContainsKeywordsPredicate" as ActivityContainsKeywordPredicate LOGIC_COLOR
+participant "f:FindActivityCommand" as FindActivityCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findactivity Basketball Dance")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findactivity Basketball Dance")
+activate AddressBookParser
+
+create FindActivityCommandParser
+AddressBookParser -> FindActivityCommandParser
+activate FindActivityCommandParser
+
+FindActivityCommandParser --> AddressBookParser
+deactivate FindActivityCommandParser
+
+AddressBookParser -> FindActivityCommandParser : parse("Basketball Dance")
+activate FindActivityCommandParser
+
+create ActivityContainsKeywordPredicate
+FindActivityCommandParser -> ActivityContainsKeywordPredicate
+activate ActivityContainsKeywordPredicate
+
+ActivityContainsKeywordPredicate --> FindActivityCommandParser : p
+deactivate ActivityContainsKeywordPredicate
+
+create FindActivityCommand
+FindActivityCommandParser -> FindActivityCommand
+activate FindActivityCommand
+
+FindActivityCommand --> FindActivityCommandParser : f
+deactivate FindActivityCommand
+
+FindActivityCommandParser --> AddressBookParser : f
+deactivate FindActivityCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindActivityCommandParser -[hidden]-> AddressBookParser
+destroy FindActivityCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindActivityCommand : execute()
+activate FindActivityCommand
+
+FindActivityCommand -> Model : updateFilteredPersonList(p)
+activate Model
+
+Model --> FindActivityCommand
+deactivate Model
+
+create CommandResult
+FindActivityCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindActivityCommand
+deactivate CommandResult
+
+FindActivityCommand --> LogicManager : result
+deactivate FindActivityCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

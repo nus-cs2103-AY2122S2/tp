@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindStatusCommandParser" as FindStatusCommandParser LOGIC_COLOR
+participant "p:StatusContainsKeywordsPredicate" as StatusContainsKeywordPredicate LOGIC_COLOR
+participant "f:FindStatusCommand" as FindStatusCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findstatus Positive")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findstatus Positive")
+activate AddressBookParser
+
+create FindStatusCommandParser
+AddressBookParser -> FindStatusCommandParser
+activate FindStatusCommandParser
+
+FindStatusCommandParser --> AddressBookParser
+deactivate FindStatusCommandParser
+
+AddressBookParser -> FindStatusCommandParser : parse("Positive")
+activate FindStatusCommandParser
+
+create StatusContainsKeywordPredicate
+FindStatusCommandParser -> StatusContainsKeywordPredicate
+activate StatusContainsKeywordPredicate
+
+StatusContainsKeywordPredicate --> FindStatusCommandParser : p
+deactivate StatusContainsKeywordPredicate
+
+create FindStatusCommand
+FindStatusCommandParser -> FindStatusCommand
+activate FindStatusCommand
+
+FindStatusCommand --> FindStatusCommandParser : f
+deactivate FindStatusCommand
+
+FindStatusCommandParser --> AddressBookParser : f
+deactivate FindStatusCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindStatusCommandParser -[hidden]-> AddressBookParser
+destroy FindStatusCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindStatusCommand : execute()
+activate FindStatusCommand
+
+FindStatusCommand -> Model : updateFilteredPersonList(p)
+activate Model
+
+Model --> FindStatusCommand
+deactivate Model
+
+create CommandResult
+FindStatusCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindStatusCommand
+deactivate CommandResult
+
+FindStatusCommand --> LogicManager : result
+deactivate FindStatusCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

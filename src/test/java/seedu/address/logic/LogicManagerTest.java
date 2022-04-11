@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CLASSCODE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -59,7 +61,8 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + " Only " + model.getFilteredPersonList().size() + " person(s) shown in the list.");
     }
 
     @Test
@@ -80,8 +83,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+                + ADDRESS_DESC_AMY + STATUS_DESC_AMY + CLASSCODE_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).withActivities().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

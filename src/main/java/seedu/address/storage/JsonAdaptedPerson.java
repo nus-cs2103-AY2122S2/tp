@@ -10,13 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-
+import seedu.address.model.person.Status;
 /**
  * Jackson-friendly version of {@link Person}.
  */
@@ -28,7 +29,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String status;
+    private final String classCode;
+    private final List<JsonAdaptedActivity> activity = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +39,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("status") String status,
+            @JsonProperty("classCode") String classCode,
+            @JsonProperty("activity") List<JsonAdaptedActivity> activity) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.status = status;
+        this.classCode = classCode;
+        if (activity != null) {
+            this.activity.addAll(activity);
         }
     }
 
@@ -54,8 +61,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        status = source.getStatus().value;
+        classCode = source.getClassCode().value;
+        activity.addAll(source.getActivities().stream()
+                .map(JsonAdaptedActivity::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +74,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Activity> personActivities = new ArrayList<>();
+        for (JsonAdaptedActivity activity : activity) {
+            personActivities.add(activity.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +111,25 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        if (!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        final Status modelStatus = new Status(status);
+
+        if (classCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClassCode.class.getSimpleName()));
+        }
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
+        final ClassCode modelClassCode = new ClassCode(classCode);
+
+        final Set<Activity> modelActivity = new HashSet<>(personActivities);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelClassCode, modelActivity);
     }
 
 }

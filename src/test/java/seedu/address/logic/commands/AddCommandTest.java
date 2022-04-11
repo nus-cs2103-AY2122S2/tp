@@ -4,12 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CLOSE_CONTACT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_POSITIVE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +25,14 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -48,6 +56,35 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_positiveStatusPerson_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Person validPerson = new PersonBuilder().withStatus(VALID_STATUS_POSITIVE).withClassCode("4A").build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS, validPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.addPerson(validPerson);
+
+        ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
+        List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+                .filter(student -> (student.hasSameClassCode(validPerson)
+                        || student.hasSameActivity(validPerson))
+                        && !student.isSamePerson(validPerson)
+                        && !student.isPositive())
+                .collect(Collectors.toList());
+
+        for (Person classmate : filteredByClassCodeAndActivityList) {
+            Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_CLOSE_CONTACT).build();
+            expectedModel.setPerson(classmate, editedClassmate);
+        }
+
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

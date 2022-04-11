@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,7 +40,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label status;
+    @FXML
+    private Label classCode;
+    @FXML
+    private FlowPane activities;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,9 +57,21 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        status.setText(person.getStatus().value);
+        if (person.getStatus().value.equals(Status.POSITIVE)) {
+            status.setStyle("-fx-text-fill: #FF0000 !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: #FF0000 !important; -fx-border-width: 4; -fx-border-radius: 7");
+        } else if (person.getStatus().value.equals(Status.NEGATIVE)) {
+            status.setStyle("-fx-text-fill: #00FF00 !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: #00FF00 !important; -fx-border-width: 4; -fx-border-radius: 7");
+        } else if (person.getStatus().value.equals(Status.CLOSE_CONTACT)) {
+            status.setStyle("-fx-text-fill: orange !important; -fx-label-padding: 20; "
+                    + "-fx-border-color: orange !important; -fx-border-width: 4; -fx-border-radius: 7");
+        }
+        classCode.setText(person.getClassCode().value);
+        person.getActivities().stream()
+                .sorted(Comparator.comparing(activity -> activity.activityName))
+                .forEach(activity -> activities.getChildren().add(new Label(activity.activityName)));
     }
 
     @Override

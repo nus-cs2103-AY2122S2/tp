@@ -2,14 +2,37 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+
+
+| Quick Links                                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------|
+| [Introduction](#introduction)                                                                                   |
+| [Acknowledgements](#acknowledgements)                                                                           |
+| [Setting up, getting started](#setting-up-getting-started)                                                      |
+| [Design](#design)                                                                                               |   
+| [Architecture](#architecture)                                                                                   |
+| [Implementation](#implementation)                                                                               |
+| [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops) |
+| [Appendix: Requirements](#appendix-requirements)                                                                |
+| [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)                          |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Introduction**
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration,
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface.
+Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
+
+This is a Developer Guide written to help developers get a deeper understanding of how UDT is implemented and the reasons this project is done a certain way.
+It explains the internal structure and how components in the architecture work together to allow users to command UDT.
+Our team would like to welcome any form improvements or adaptations to our application via Github Pull Requests or Issues.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,7 +44,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -36,7 +59,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +92,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +109,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -102,7 +125,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -114,7 +137,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -126,7 +149,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="block" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -135,7 +158,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -152,9 +175,534 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented, updated
+or any new features that we have in mind.
 
-### \[Proposed\] Undo/redo feature
+- Implemented
+  - [Status Feature](#implemented-status-feature)
+  - [Find By Status Feature](#implemented-find-by-status-feature)
+  - [Class Code Feature](#implemented-class-code-feature)
+  - [Find By Class Code Feature](#implemented-find-by-class-code-feature)
+  - [Activity Feature](#implemented-activity-feature)
+  - [Find By Activity Feature](#implemented-find-by-activity-feature)
+- Updated
+  - [Help Command](#updated-help-command)
+  - [Adding a Person Feature](#updated-adding-a-person-feature)
+  - [Editing a Person Feature](#updated-editing-a-person-feature)
+  - [User Interface](#updated-user-interface)
+  - [Storage](#updated-storage)
+- Enhancements
+  - [Batch Update Feature](#enhancement-batch-update)
+- Proposed
+  - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
+  - [Undo/redo Feature](#proposed-undoredo-feature)
+  - [User Interface](#proposed-update-user-interface)
+
+### \[Implemented\] Status Feature
+
+#### Implementation
+
+The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate file within the `Person` Package.
+
+The `Status` attribute of each `Person` will take either `"Positive"`, `"Negative"` or `"Close Contact"`.
+- `"Positive"` denotes that the `Person` is labelled as COVID positive.
+- `"Negative"` denotes that the `Person` is labelled as COVID negative.
+- `"Close Contact"` denotes that the `Person` is labelled as having close contact to another `Person` who is COVID positive.
+
+The `Status` class is facilitated by using `execute()` command in the `EditCommand` and `AddCommand` classes.
+
+#### Design considerations:
+
+**Aspect: Abstracting `Status` attribute**
+
+* **Alternative 1 (current choice):** Abstracted class.
+  * Pros:
+    * Higher Level of abstraction
+    * Changes can be made easily from this class
+  * Cons:
+    * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
+    * Difficulty navigating through folders to find specific files
+
+* **Alternative 2:** Attribute placed within `Person` class.
+  * Pros:
+    * Single file where changes can be made
+  * Cons:
+    * Lesser level of abstraction, changes made have to be constantly changed throughout the file
+
+### \[Implemented\] Find By Status Feature
+
+#### Implementation
+
+The implemented find by status mechanism is facilitated by `findstatus` command. It extends `UDT` with a Find By Status, allowing users to find persons by their current COVID-19 statuses.
+
+Classes added for this feature:
+* `StatusContainsKeywordsPredicate`
+* `FindStatusCommand`
+* `FindStatusCommandParser`
+
+Given below is an example usage scenario and how the find by status mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
+Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
+Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
+Step 4. The filtered list of persons is displayed to the user.
+
+The following sequence diagram shows how the `findstatus` operation works:
+
+![FindStatusSequenceDiagram](images/FindStatusSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+### \[Implemented\] ClassCode Feature
+
+#### Implementation
+
+The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
+* Group students by using `ClassCode` and used as an identifier for contact-tracing.
+
+The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
+
+Classes changed for this feature:
+- `AddCommand`
+- `EditCommand`
+- `AddCommandParser`
+- `EditCommandParser`
+
+#### Design considerations:
+**Aspect: Creating a new `Person` in the contact list:**
+
+* **Alternative 1 (current choice):** Each Person is created with an association to a classcode
+    * Pros:
+        * Adds an additional layer of filtering of Persons in the school.
+        * Differentiate a student from another with Classcode instead of Activity.
+        * Easy to implement.
+    * Cons:
+        * Difficult to scope the naming convention of the classcode.
+        * Different commands and logic files will be affected from the introduction of a new attribute.
+        * Need to change default data set with new attribute.
+    
+* **Alternative 2:** Each Person is added without a classcode
+    * Pros:
+        * Prone to less error.
+    * Cons:
+        * Makes it difficult to filter Students for future feature implementations.
+
+#### Limitations and proposed solutions
+
+Currently, `ClassCode` attribute only allows a strict naming convention  [number from 1 - 6][Letters from A-Z].
+* Examples: 6A, 4B, 2H
+
+**Solution**: Keep to the restriction of the naming convention.
+
+### \[Implemented\] Find By ClassCode Feature
+
+#### Implementation
+
+The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
+
+Classes added for this feature:
+* `ClassCodeContainsKeywordsPredicate`
+* `FindClassCodeCommand`
+* `FindClassCodeCommandParser`
+
+Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
+
+Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
+
+Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
+
+Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findclasscode` operation works:
+
+![FindClassCodeSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+### \[Implemented\] Activity Feature
+
+#### Implementation
+
+The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
+
+The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting their different activities
+* Each `Person` can hold multiple `Activity` attributes.
+
+#### Design considerations:
+
+**Aspect: Abstracting `activity` attribute**
+
+* **Alternative 1 (current choice):** Abstracted class.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily from this class
+        * Ease of accommodating how `activity` attribute can be implemented and added in to the `Person` class as a `Set`
+    * Cons:
+        * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
+        * Difficulty navigating through folders to find specific files
+
+* **Alternative 2:** Attribute placed within `Person` class.
+    * Pros:
+        * Single file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, changes made have to be constantly changed throughout the file
+
+### \[Implemented\] Find By Activity Feature
+
+#### Implementation
+
+The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
+
+Classes added for this feature:
+* `ActivityContainsKeywordsPredicate`
+* `FindActivityCommand`
+* `FindActivityCommandParser`
+
+Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
+Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
+Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findactivity` operation works:
+
+![FindActivitySequenceDiagram](images/FindActivitySequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindActivityCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+**Aspect: `findactivity` with multiple inputs**
+
+* **Alternative 1 (current choice):** Student participating in **ANY** of the input activities will be returned.
+  * Pros:
+    * Applicable to use case. `findactivity` with 2 inputs returns a list of students who are in either of those
+activities. Allows user to check across multiple activities instead of only that few students participating in both activities
+    * More practical for usecase
+  * Cons:
+    * Less specific
+    * Returns a larger list as compared to alternative 2
+* **Alternative 2:** Student participating in **ALL** the input activities will be returned
+  * Pros:
+    * More specific, allowing for a more detailed search
+    * List is smaller and easier to browse through
+  * Cons:
+    * Only students who are participating in all the input activities will be returned, possibly only a handful
+of students which makes it slightly impractical to use
+
+### \[Updated\] Help Command
+
+#### Updates
+
+`Help` Command now displays a list a command summary within the **Text Output Box**, along with an external window containing a link to
+UDT's User Guide page. Previous version only provides a link to the User Guide page. Implementation was changed to help facilitate ease of use
+when **Users** require help without having the need to go to the User Guide page.
+
+|![HelpMethodActivityDiagram](images/developer-guide/HelpMethodActivityDiagram.png)|
+|:--:|
+|*Help Method - Activity Diagram*|
+
+Diagram above shows the execution paths for the `help` command.
+
+|![HelpSequenceDiagram](images/developer-guide/HelpSequenceDiagram.png)|
+|:--:|
+|*Help Method - Sequence Diagram*|
+
+As seen in the sequence diagram for the `help` method above, `executeCommand("help")` is first called,
+which then calls the `execute()` method from the `LogicManager` Class. `AddressBookParser` then parses the
+command provided, calling upon the `HelpCommand` object, instantiating a `CommandResult` Object.
+
+The `MainWindow` then checks the boolean value returned by the method `isShowing()`, calling the `show()`
+method if the Help Window is not showing and focusing it otherwise.
+
+### \[Updated\] Adding a Person Feature
+
+#### Updates
+
+`AddCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+  * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Positive`).
+* `ClassCode`
+  * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4A`).
+* `Activity`
+  * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
+  * A student can have ANY number of activities, including zero (optional).
+
+The `add` feature was originally implemented in **AB3** with only a select few attributes such as `Name`, `Email`, `Phone number` etc.
+To properly, address the main issue that our app aims to solve, we have added and updated specific attributes such as `Status`, `ClassCode`
+and `Activities`, which will be further elaborate on further into the Developer Guide.
+
+To accommodate these new changes, updates were made to the `CLISyntax` class as well, for the new prefixes of the new attributes.
+
+|![AddMethodActivityDiagram](images/developer-guide/AddMethodActivityDiagram.png)|
+|:--:|
+|*Add Method - Activity Diagram*|
+
+As seen in the figure above, when the `add` command is used, the parser checks if the command provided is valid, by checking
+the prefixes as well as the details provided - a _ParseException_ is thrown for invalid commands. Following a valid command,
+a check is then performed to see if this `Person` has already been added, throwing a command exception if so. Otherwise,
+the `Person` will be created with the details provided, inserted into the `AddressBook` and returns a success message
+to the **user**. The **_Batch Update_** Feature is also implemented within the Add Command and checks for any `Person` that is
+being added with a **_Positive_** `Status`.
+
+|![AddMethodClassDiagram](images/developer-guide/AddClassDiagram.png)|
+|:--:|
+|*Add Method - Class Diagram*|
+
+The `AddCommand` class extends from the Abstract `Command` class and its Class Diagram is as shown above. Within `AddCommand`,
+there is an additional method `batchUpdateNegativeToPositive` that checks for any COVID-19 _Positive_ students being added into
+the addressbook. If so, other students within the same `Activity` and `ClassCode` will have their `Status` updated to _Close-Contact_.
+
+
+### \[Updated\] Editing a Person Feature
+
+#### Updates
+
+`EditCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+    * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Negative`).
+* `ClassCode`
+    * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
+* `Activity`
+    * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
+    * When editing a student's activities, the user has to list out all activities even if the activities
+have already been added.
+
+### \[Updated\] User Interface
+
+#### Updates
+
+The User Interface is updated to display the newly added attributes:
+* `Status`
+* `ClassCode`
+* `Activity`
+    * The list of activities will be displayed horizontally under the name where each
+acitivity is contained in a blue box.
+
+
+### \[Updated\] Storage
+
+#### Updates
+
+The flow of saving and loading the data storage is updated to accommodate the addtion of
+`Status`, `ClassCode`, and `Activity`.
+
+### \[Enhancement\] Batch Update
+
+#### Enhancements
+
+The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` 
+of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
+
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, 
+and `DeleteCommand` class.
+
+Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
+
+#### Design considerations:
+
+**Aspect: Updating a Person's COVID-19 Status**
+
+* **Alternative 1 (current choice):** Update other Students' Status related to the recent.
+    * Pros:
+        * Update other students' COVID-19 Status.
+        * Better tracking of student's COVID-19 status in a classroom or activity.
+    * Cons:
+        * Difficult to implement.
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Only update filtered Person's status.
+    * Pros:
+        * Single update where changes can be made.
+    * Cons:
+        * Does not compliment our application's purpose of tracking COVID-19 cases efficiently.
+
+**Aspect: Adding a new Person with a `Status` of `Positive` or `Negative`**
+
+* **Alternative 1 (current choice):** Check **ALL** students in the same class as the new Person entry.
+    * Pros:
+        * Efficiently update all the students' status information with the same logic from `findclasscode` where
+        similar filtering process is used.
+    * Cons:
+        * Perform more checks which may slow down the application.
+* **Alternative 2:** Only add the new student in without checking the status of other students.
+    * Pros:
+        * Does not perform an extra layer of checks which may improve the speed of the application.
+    * Cons:
+        * Would pose as a potential feature flaw for `AddPerson` in the context of UDT. Since the priority is to ensure
+        that the `Status` of each student is update efficiently.
+
+**Aspect: Deleting an existing Person with a `Status` of `Positive` or `Negative`**
+
+* **Alternative 1 (current choice):** Check **ALL** students in the same class as the deleted Person.
+    * Pros:
+        * Efficiently update all the students' status information with the same logic from `findclasscode` and
+          `findactivity` where similar filtering process is used.
+    * Cons:
+        * Perform more checks which may slow down the application.
+* **Alternative 2:** Only delete the existing student without updating the status of other students.
+    * Pros:
+        * Does not perform an extra layer of checks which may improve the speed of the application.
+    * Cons:
+        * Would pose as a potential feature flaw for `DeletePerson` in the context of UDT. Since the priority is to ensure
+          that the `Status` of each student is update efficiently.
+
+
+
+#### Implementation
+
+* **EditCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+    * If true, a filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being edited would be created.
+    * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+  * Conversely, `batchUpdatePositiveToNegative()` under `execute()` in `EditCommand` checks if a student's `Status` changes from `Positive` -> `Negative`.
+    * If true, a filtered `List` of students with the same `ClassCode` or `Activity` who are not the current student edited would be created.
+    * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+      * If the `List` is empty, edit A's status to `Negative`
+      * Else, do nothing.
+
+* **AddCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `AddCommand` checks for the `Status` of the student added,
+    * If the student to be added is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being added would be created.
+      * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+    * If the student to be added is `Negative` or `Close-Contact`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being added would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, edit the added student's status to `Close-Contact`.
+
+* **DeleteCommand**:
+  * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
+    * If the student to be deleted is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being deleted would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, do nothing.
+
+### \[Proposed Enhancement\] Implementing CSV Compatibility
+The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
+from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
+that can be found in the `Person` Class.
+
+The proposed CSV support mechanism is facilitated by `AddressBook`. It performs read/write on a target Excel file,
+stored internally as an `addressBookContactList`. Additionally, it supports the following operations:
+
+* `AddressBook#readCSV()` — Reads the target Excel file and streams the information into a `Person` list.
+* `VersionedAddressBook#writeCSV()` — Writes `Person` information to a target Excel file.
+
+These operations are exposed in the `Model` interface as `Model#readCSV()` and `Model#writeCSV()` respectively.
+
+#### Design considerations:
+
+**Aspect: How reading of CSV executes:**
+
+* **Alternative 1 (current choice):** Automatically attempt to read from a target CSV file.
+    * Pros: Automated process of importing contacts.
+    * Cons: May have performance issues due to constant execution read operation.
+
+* **Alternative 2:** Individual command to execute read by
+  itself.
+    * Pros: Will use less memory (e.g. create another UI component to a user to input the CSV file).
+    * Cons: More components to implement (e.g. an Upload file component on JavaFX).
+
+_{more aspects and alternatives to be added}_
+
+Given below is an example usage scenario and how read mechanism behaves at each step.
+
+1. The user launches the application for the first time. The Addressbook will be initialized with the initial
+address book state, and the `addressBookContactList` initialized as an empty list.
+2. The AddressBook then attempts to execute `Model#readCSV()`, reading the target CSV file that the administrator
+has _uploaded into the same directory_ as the file.
+3. The User Interface will prompt the administrator that the information from the CSV file is being processed and it
+will require time to complete the import process.
+4. `addressBookContactList` is populated by `Model#readCSV()` and changes the state of the User Interface.
+5. Administrator can interact with the Addressbook, with all the relevant contacts being updated on the list.
+
+Given below is an example usage scenario and how write mechanism behaves at each step.
+_To be Continued_
+
+#### Limitations:
+
+* Data accepted is scoped to the `Person` model. Other information deemed important
+will be omitted from the read process.
+* File size will affect the performance of the application.
+
+### \[Proposed\] Undo/redo Feature
 
 #### Proposed Implementation
 
@@ -180,7 +728,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="block" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
@@ -188,7 +736,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="block" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -197,13 +745,13 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="block" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -224,20 +772,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+#### Proposed Enhancement:
 
-### \[Proposed\] Data archiving
+### \[Proposed Update\] User Interface
 
-_{Explain here how the data archiving feature will be implemented}_
+The purpose of updating the user interface is to create a more user-friendly and seamless application.
 
+#### Design considerations:
+
+* Create a light themed display.
+* The display of a person card, along with its attributes, could be enhanced.
+
+### \[Testing\] JUnit Tests
+
+#### JUnit tests
+
+Proper JUnit tests have been added as a means to check if the features listed above are correctly implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,42 +815,68 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+  * COVID-19 Cases in Schools
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Has access to details of students
+* School admins
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Manage contacts faster than a typical mouse/GUI driven app
+* To enable the school’s COVID-19 management task force to identify and implement the correct measures for students who are positive/close-contact
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                       | So that I can…​                                                        |
+|----------|--------------------------------------------|------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions             | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new student                  |                                                                        |
+| `* * *`  | user                                       | delete a student                   | remove entries that I no longer need                                   |
+| `* *`    | user                                       | find a student by name             | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by status           | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a student by class            | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | update a student's Covid-19 status | make the necessary changes to the student's status as required         |
+| `* *`    | user                                       | edit a student's details           | update the details of a student's particulars                          |
+| `*`      | user with many persons in the address book | sort persons by name               | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UltimateDivocTracker` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add a person
+2.  UltimateDivocTracker adds a person to the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person already exists.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  UltimateDivocTracker shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  UltimateDivocTracker deletes the person
 
     Use case ends.
 
@@ -304,19 +888,111 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+
+**Use case: Finding a person by name**
+
+**MSS**
+
+1.  User requests to find a person by name
+2.  UltimateDivocTracker shows the person's information
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given name is invalid (cannot be found).
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+
+**Use case: Finding persons by status**
+
+**MSS**
+
+1.  User requests to find persons by status
+2.  UltimateDivocTracker shows the list of persons with said status
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given status is invalid.
+
+    * 1a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
+**Use case: Finding persons by class**
+
+**MSS**
+
+1.  User requests to find persons by class
+2.  UltimateDivocTracker shows the list of persons with said class
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given class is invalid.
+
+    * 1a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+
+**Use case: Updating a person's status**
+
+**MSS**
+
+1.  User requests person's information
+2.  UltimateDivocTracker shows the person's information
+3.  User requests to update a person's status
+4.  UltimateDivocTracker updates the person's status
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The person cannot be found.
+
+  * 2a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
+
+* 3a. The given status is invalid.
+
+  * 3a1. UltimateDivocTracker shows an error message.
+
+  Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Administrative requirements: there should be at least 1 DIVOCTracker admin to monitor data entries.
+5. Performance requirements: the display of students' information should be done within 2 seconds.
+6. Quality requirements: the system should be usable by a novice who has never administered COVID-19 statuses.
+7. Notes about project scope:
+   1. DIVOCtracker is not required to handle user login and permissions.
+   2. The central idea of the product is to provide a tracking tool for teachers/administrators to track COVID-19 in schools.
 
 ### Glossary
 
@@ -329,7 +1005,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="block" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -366,12 +1042,27 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+2. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person to the list
+
+    1. Prerequisites: None
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/5A s/NEGATIVE`<br>
+       Expected: Student John Doe is added to the list. Details of the added contact shown in the status message.
+
+    1. Test case: `add 0`<br>
+       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `add ?!@`, `add p/1231923`, `...` (Missing details)<br>
+       Expected: Similar to previous.
+
 1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
