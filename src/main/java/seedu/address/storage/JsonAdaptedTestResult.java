@@ -11,6 +11,8 @@ import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
 import seedu.address.model.testresult.TestResult;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Jackson-friendly version of {@link TestResult}.
  */
@@ -41,7 +43,7 @@ class JsonAdaptedTestResult {
      */
     public JsonAdaptedTestResult(TestResult source) {
         patientNric = source.getPatientNric().value;
-        testDate = source.getTestDate().toString();
+        testDate = source.getTestDate().date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         medicalTest = source.getMedicalTest().value;
         result = source.getResult().value;
     }

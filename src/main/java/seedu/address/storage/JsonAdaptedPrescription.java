@@ -10,6 +10,8 @@ import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionDate;
 
+import java.time.format.DateTimeFormatter;
+
 public class JsonAdaptedPrescription {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Prescription's %s field is missing!";
@@ -37,7 +39,7 @@ public class JsonAdaptedPrescription {
     public JsonAdaptedPrescription(Prescription source) {
         nric = source.getPrescriptionTarget().value;
         drugName = source.getDrugName().drugName;
-        date = source.getPrescriptionDate().toDefaultString();
+        date = source.getPrescriptionDate().date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         instruction = source.getInstruction().value;
     }
 
