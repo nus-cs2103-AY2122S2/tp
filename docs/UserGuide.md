@@ -120,21 +120,21 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`listp`](#listing-all-persons--listp): Lists all persons.
   - [`liste`](#listing-all-events--liste): Lists all events.
 - **Sorting entries**
-  - [`sortc`](#sorting-companies-by-name--sortc): Sorts companies by name.
-  - [`sortp`](#sorting-persons-by-name--sortp): Sorts persons by name.
-  - [`sorte`](#sorting-events-by-date--sorte): Sorts events by date.
+  - [`sortc`](#sorting-companies-by-name-sortc): Sorts companies by name.
+  - [`sortp`](#sorting-people-by-name-sortp): Sorts persons by name.
+  - [`sorte`](#sorting-events-by-date-sorte): Sorts events by date.
 - **Editing entries**
   - [`editc`](#editing-a-company--editc): Edits a company.
   - [`editp`](#editing-a-person--editp): Edits a person.
   - [`edite`](#editing-an-event--edite): Edits an event.
 - **Archiving entries**
-  - [`archive`](#archiving-an-entry--archive): Archives an entry.
-  - [`archive_all`](#archiving-entries-in-display--archive_all): Archives all entries in the display.
-  - [`unarchive`](#unarchiving-an-entry--unarchive): Unarchives an entry.
-  - [`unarchive_all`](#unarchiving-entries-in-display--unarchive_all): Unarchives all entries in the display.
+  - [`archive`](#archiving-an-entry-archive): Archives an entry.
+  - [`archive_all`](#archiving-all-entries-in-display-archiveall): Archives all entries in the display.
+  - [`unarchive`](#unarchiving-an-entry-unarchive): Unarchives an entry.
+  - [`unarchive_all`](#unarchiving-all-entries-in-display-unarchiveall): Unarchives all entries in the display.
 - **Deleting entries**
   - [`delete`](#deleting-an-entry--delete): Deletes an entry. 
-  - [`delete-all`](#deleting-entries-in-display--delete_all): Deletes all entries.
+  - [`delete-all`](#deleting-all-entries-in-display--deleteall): Deletes all entries.
   - [`clear`](#clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
   - [`findc`](#locating-companies-findc): Finds a company.
