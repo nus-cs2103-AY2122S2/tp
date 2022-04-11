@@ -1130,8 +1130,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to summarise all students to get how the hall is doing with covid
-2.  Tracey shows a pop-up window of pie charts representing the covid situation in each hall block
+1.  User requests to summarise all students to get how the hall is doing with covid.
+2.  Tracey shows a pop-up window of pie charts representing the covid situation in each hall block.
 
     Use case ends.
 
@@ -1140,6 +1140,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There is no data in database for Tracey to form a helpful response.
 
   Use case ends.
+
+### Use case: UC11 - Resizing the result window display in the GUI of the application
+
+**MSS**
+
+1.  User requests to resize the result display window.
+2.  Tracey will resize the result display window in the GUI according to the option supplied by the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User keys in invalid resizing option.
+
+  Use case ends.
+
+### Use case: UC12 - Saving the working database file for archival purposes
+
+**MSS**
+
+1.  User requests save the current working database file.
+2.  Tracey will save the current working database file at a specified file path.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The working database file is not present.
+  * 1a1. There is no file to copy from.
+
+  Use case ends.
+
+* 1b. There is already an archived file with the same specified name
+  * 1b1. This archived file is replaced with a new archived file.
+
+  Use case ends.
+
+### Use case: UC13 - Exiting from the Tracey application
+
+**MSS**
+
+1.  User requests to exit from the application.
+2.  Tracey will close the application.
+
+    Use case ends.
+
+### Use case: UC14 - Undoing a previous command
+
+**MSS**
+
+1.  User requests to undo the previous command that was made.
+2.  Tracey will undo the previous command and restore any previous changes.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The previous command used cannot be undone.
+    * 1a1. Tracey will display a message which states that there are no previous changes to be undone.
+
+  Use case ends.
+
+### Use case: UC14 - Redoing a undo command
+
+**MSS**
+
+1.  User requests to redo an undo command that was made on another previous command.
+2.  Tracey will revert any changes made by the undo command on another previous command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not use the undo command before using the redo command.
+    * 1a1. Tracey will display a message which states that there are no previous changes to be reverted.
+
+  Use case ends.
+
+### Use case: UC15 - Getting the email of students
+
+**MSS**
+
+1.  User requests to get the email of the students.
+2.  Tracey will copy all the email of the students to the user's clipboard. 
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1156,9 +1242,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Product is not required to handle printing of reports
 12. Product should respond within 10 seconds.
 
-
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -1169,7 +1252,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NUS Hall**: Hall of residence in the National University of Singapore
 * **Resident Fellow**: Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
 * **Hall leaders**: Student leaders in NUS halls
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1218,9 +1300,107 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files when the application is close.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. prerequisites: Multiple persons in the list. The Tracey application is not open. There is a file named `addressbook.json` in ROOT/data, if it is not present, simply launch the Tracey application, input `list` (which will create the `addressbook.json` file) and close the application.
+    
+    2. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Launch the Tracey application. Ensure that the changes are saved before launching.<br>
+       Expected: There is no contacts rendered in the list.
 
+    3. Other test cases to try: Instead of changing the contact's attributes that require uniqueness, you can change other different attributes to the wrong format, such as putting a special character for the `Name` attribute.
 
-1. _{ more test cases …​ }_
+2. Dealing with missing/corrupted data files when the application is open.
+
+    1. prerequisites: Multiple persons in the list. The Tracey application is open. There is a file named `addressbook.json` in ROOT/data, if it is not present, input `list` (which will create the `addressbook.json` file).   
+
+    2. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
+       Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
+
+### Editing a person
+
+1. Editing a person while all person are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. 
+
+    2. Test case: `edit 1 n/Poppy doopy`<br>
+       Expected: First contact `name` is changed to Poppy doopy. This contact is placed at the bottom of the list, index of all other contacts is incremented by one. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.  
+    
+    3. Test case: `edit -1 n/Poppy doopy`<br>
+       Expected: No person's details is edited. Error details is shown in the status message. Status bar remains the same.
+
+    4. Test case: Use the same value for the edited field, that is if contact at 2nd index has `Phone` of 123456, test using `edit 2 p/123456`<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
+
+    5. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
+
+    6. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
+
+### Archiving the database
+
+1. Saving the working copy of the Tracey database
+
+    1. Prerequisites: Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. 
+
+    2. Test case: `archive`<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+    
+2. Manually inspecting the archived file of a working database file
+
+    1. Prerequisites: Successful use of `archive` on a working database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
+
+    2. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
+       Expected: The contents of both files is exactly the same.
+
+3. Saving a corrupted copy of the Tracey database
+
+    1. Prerequisites: Multiple persons in the list. Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. The Tracey application is open.
+
+    2. Test case: Open the `addressbook.json` file in ROOT/data and amend the first contact's `Name` to include a special character. Input the `archive` command.<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+
+4. Manually inspecting the archived file of a working database file
+
+   1. Prerequisites: Successful use of `archive` on a corrupted database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
+
+   2. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
+      Expected: The contents of `addressbook.json` is of the previous working state while the archived file is of the same content as the corrupted database file.
+
+5. Attempting to archive a non-existent Tracey database
+
+   1. Prerequisites: Ensure that there is no file named `addressbook.json` inside the directory ROOT/data.
+    
+   2. Test case: `archive`<br>
+      Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+
+6. Inputting extra parameters 
+
+    1. Prerequisites: None
+
+    2. Test case: `archive x`(where x = any value)<br>
+       Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+
+### Resizing the result display window
+
+1. Using the command line to resize
+
+   1. Prerequisites: The result display window is in its default size (option 1)
+   
+   2. Test case: `resize x`(where x = 1, 2 or 3)<br>
+      Expected: The result display window will be resized according to `x` where the value of `x` is the multiplier to the default size. The result display window will remain the same size if the window size is already at `x`. used Timestamp in the status bar is updated.
+    
+   3. Test case: `resize x`(where x = any value other than 1, 2 or 3)<br>
+      Expected: The result display window will not be resized. Error details shown in the status message. Status bar remains the same.
+
+2. Using the button in the GUI to resize
+
+   1. Prerequisites: The result display window is in its default size (option 1) 
+
+   2. Test case: Click on the `Resize Display` button once<br>
+      Expected: The size of the resize window display will be doubled with respects to the default size.
+
+   3. Test case: Click on the `Resize Display` button once again<br>
+      Expected: The size of the resize window display will be tripled with respects to the default size.
+   
+   4. Test case: Click on the `Resize Display` button once again<br>
+      Expected: The size of the resize window display will return to the default size.
