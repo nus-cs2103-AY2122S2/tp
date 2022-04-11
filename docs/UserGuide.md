@@ -152,6 +152,10 @@ deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
 
+| Parameter | Representation                             | Constraints |
+|-----------|--------------------------------------------|-------------|
+| `INDEX`   | The number in front of the student contact | sdsd        |
+
 Example: 
 
 * `delete 1`
