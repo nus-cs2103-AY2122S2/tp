@@ -38,21 +38,21 @@ Given below are my contributions to the project.
       * Morph UniquePersonList to UniqueShowList.
       * Modified ReadOnlyUserPrefs to fit Trackermon.
       * Morphed DuplicatedPersonException and ShowNotFoundException.
-    * Issues:[[\#54]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/54)
-    * PRs:[[\#60]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60)
+    * Issues: [[\#54]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/54)
+    * PRs: [[\#60]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60)
   * Morph and implement Remark feature into the Comment feature for Trackermon
     * Details: Morph Remark to Comment Class.
-    * PRs:[[\#133]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/133)
+    * PRs: [[\#133]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/133)
 
 * **Project management**:
   * Managed issues relating to Model's components, etc. 
   * Perform testing on windows and macOS to test for bugs across different operating system.
   * Tested for bugs and fixed bugs related to components.
-    * Rating Bug: [[/#261]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/261)
-    * Tag Bug: [[/#264]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/264)
-    * Add Error Message Bug: [[/#262]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/262)
-    * Suggest Bug: [[/#260]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/260)
-    * Comment Bug: [[/#305]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/305)
+    * Rating Bug: [[\#261]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/261)
+    * Tag Bug: [[\#264]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/264)
+    * Add Error Message Bug: [[\#262]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/262)
+    * Suggest Bug: [[\#260]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/260)
+    * Comment Bug: [[\#305]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/305)
 * **Documentation**:
   * User Guide: 
     * Added documentation for features `suggest` [[\#194]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194).
