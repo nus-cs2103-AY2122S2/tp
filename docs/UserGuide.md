@@ -39,28 +39,8 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
-1. [Navigating the User Guide](#how-to-navigate-the-user-guide)
-2. [Quick Start](#quick-start)
-3. [Features](#features)
-    1. <a href='#viewing-help'>Help</a>
-    2. <a href='#adding-a-contact'>Adding a contact</a>
-    3. <a href='#editing-an-existing-contact'>Editing an existing contact</a>
-    4. <a href='#deleting-a-contact'>Deleting a contact</a>
-    5. <a href='#undoing-an-action'>Undoing an action</a>
-    6. <a href='#redoing-an-action'>Redoing an action</a>
-    7. <a href='#finding-a-contact'>Finding a contact</a>
-    8. <a href='#filtering-contacts'>Filtering contacts</a>
-    9. <a href='#listing-the-records'>Listing the records</a>
-    10. <a href='#copying-emails'>Copying Emails</a>
-    11. <a href='#summarising-the-records'>Summarising the records</a>
-    12. <a href='#archiving-tracey'>Archiving Tracey</a>
-    13. <a href='#3.13. Resizing the result display window'>Resizing result display window</a>
-    14. <a href='#clearing-all-records'>Clearing all records</a>
-    15. <a href='#exiting-tracey'>Exiting Tracey</a>
-    16. <a href='#saving'>Saving</a>
-4. <a href='#faq'>FAQ</a>
-5. <a href='#command-summary'>Command Summary</a>
-6. <a href='#glossary'>Glossary</a>
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. How to navigate the User Guide
@@ -558,7 +538,7 @@ there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### 4. FAQ
+## 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -591,7 +571,7 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 5. Command Summary
+## 5. Command Summary
 
 *Table 5: Command Summary.*
 
@@ -618,7 +598,7 @@ there are changes to Tracey.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### 6. Glossary
+## 6. Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
