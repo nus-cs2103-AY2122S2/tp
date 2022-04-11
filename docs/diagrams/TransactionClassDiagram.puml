@@ -2,19 +2,18 @@
 hide empty members
 
 class Transaction {
-    - TransactionFields : final HashMap<Prefix, TransactionField>
-    - TransactionId : int
+    - fields : final HashMap<Prefix, TransactionField>
+    - personId : int
 
-    + hasTransactionField(Prefix) : boolean
-    + addTransactionFields(TransactionField...) : Transaction
-    + removeTransactionFields(TransactionField...) : Transaction
-    + setTransactionFields(Collection<TransactionField>) : Transaction
-    + getTransactionFields() : List<TransactionField>
+    + addField(TransactionField) : Transaction
+    + removeField(Prefix) : Transaction
+    + setField(TransactionField) : Transaction
+    + getFields() : List<TransactionField>
+    + isValid() : boolean
     + getTransactionField(Prefix) : Optional<TransactionField>
-    + hasTag(Tag) : boolean
-    + addTags(Tag...) : Transaction
-    + removeTags(Tag...) : Transaction
-    + setTags(Tag...) : Transaction
+    + setStatusTo(Class<? extends Command>) : Transaction
+    + isPaid() : boolean
+    + hasIdentifier(long) : boolean
 }
 
 class Transaction {
@@ -45,5 +44,6 @@ DueDate --|> TransactionField
 Note --|> TransactionField
 Status --|> TransactionField
 
+Transaction .right.> Person
 
 @enduml
