@@ -24,11 +24,6 @@ Below are the current and upcoming features of the UDT
 * Editing student’s personal details
 * Exiting the program
 
-**Upcoming Features**:
-* Importing students from csv files
-* Automated contacting of Next-of-Kin for Close-Contact students
-
-
 ## Miscellaneous
 
 * Refer to our Ultimate Divoc Tracker (UDT) website here: **[Ultimate Divoc Tracker](https://ay2122s2-cs2103t-t12-1.github.io/tp/)**.

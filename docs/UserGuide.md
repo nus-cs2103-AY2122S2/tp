@@ -53,7 +53,7 @@ A glossary is included at the end to clarify any technical or vague terms used.
     1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
     2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
 2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
+3. Copy the file to the folder you want to use as the home folder for your Ultimate Divoc Tracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
     - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
     1. Navigate to the folder containing the **udt.jar** file.
@@ -63,8 +63,8 @@ A glossary is included at the end to clarify any technical or vague terms used.
 
 <div markdown="block" class="alert alert-info">
 
-> :information_source: **Installation notes:**
-> - Application save data will be stored in the same folder containing the **ultimatedivoctracker.jar** application.
+> :information_source: **Installation notes:**  
+> - Application save data will be stored in the same folder containing the **udt.jar** application.  
 > - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
