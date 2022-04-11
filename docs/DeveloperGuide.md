@@ -149,8 +149,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, interview schedule data and user preference data in json format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `InterviewScheduleStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -485,11 +485,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | find a candidate in the system                          | access details of the candidate without having to go through the entire list.      |
 | `* * *`  | user     | list all candidates in the system                       | monitor the application pool.                                                      |
 | `* *`    | user     | sort candidates in the system                           | view the candidates in a more organised manner based on a certain attribute field. |
+| `* *`    | user     | clear all candidates in the system                      | start from a fresh list of candidates.                                             |
 | `* * *`  | user     | view scheduled interviews within a specific time period | keep track of the upcoming interview schedule.                                     |
 | `* * *`  | user     | schedule TA candidates for interviews                   | keep track of the interview schedule.                                              |
 | `* * *`  | user     | retrieve the scheduled interview details of a candidate | work around my schedule for the interview.                                         |
 | `* * *`  | user     | re-schedule an interview                                | fit this interview into the candidate's schedule or even mine.                     |
-| `* * *`  | user     | unschedule a candidate with an interview                | revert the scheduling of the specific candidate.                                   |
+| `* * *`  | user     | delete an interview                                     | revert the scheduling of the specific candidate.                                   |
+| `* *`    | user     | clear all interviews in my schedule                     | remove all upcoming interviews conveniently.                                       |
 | `* * *`  | user     | update the remark for a candidate in the system         | keep a note of important details relating to the candidate.                        |
 | `* * *`  | new user | view all available commands                             | get familiarised with the system.                                                  |
 
@@ -600,19 +602,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty
+* 2a. The candidate list is empty
 
   Use case ends.
 
 * 3a. The given index is invalid
     * 3a1. TAlent Assistant™ displays an error message
 
-  Use case resumes at step 2.
+  Use case resumes at step 3.
 
-* 3b. The given date and/or time format is invalid
+
+* 3b. The given date and/or time format is invalid or in the past
     * 3b1. TAlent Assistant™ displays an error message
 
-  Use case resumes at step 2.
+  Use case resumes at step 3.
+<hr>
+
+**Use case: Reschedule an interview in the system**
+
+**MSS**
+
+1.  User requests to view interview schedule
+2.  TAlent Assistant™ displays the list of interviews in the schedule
+3.  User requests to reschedule a specific interview to a particular date and time
+4.  TAlent Assistant™ reschedules the interview to the new date and time
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The interview schedule is empty
+
+  Use case ends.
+* 3a. The given (interview) index is invalid
+  * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+
+* 3b. The given date and/or time format is invalid or in the past
+  * 3b1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+<hr>
+
+**Use case: Delete an interview in the system**
+
+**MSS**
+
+1.  User requests to view interview schedule
+2.  TAlent Assistant™ displays the list of interviews in the schedule
+3.  User requests to delete a specific interview
+4.  TAlent Assistant™ removes the interview from the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The interview schedule is empty
+
+  Use case ends.
+* 3a. The given (interview) index is invalid
+
+  * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+
 <hr>
 
 **Use case: Find candidates in the system**
@@ -751,6 +805,27 @@ Preconditions: Candidate has an interview scheduled.
 
 <hr>
 
+**Use case: Clear all candidates in the system**
+
+**MSS**
+
+1.  User requests to clear all candidates
+2.  TAlent Assistant™ clears all candidates
+
+Use case ends.
+
+<hr>
+
+**Use case: Clear all interviews in the system**
+
+**MSS**
+
+1.  User requests to clear all interviews
+2.  TAlent Assistant™ clears all interviews in the schedule
+
+Use case ends.
+
+<hr>
 ### Non-Functional Requirements
 
 1. TAlent Assistant™ should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -856,6 +931,44 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Scheduling an interview
+
+1. Adding an interview into the system
+
+    1. Prerequisite: List all candidates using the `list` command. Multiple candidates in the list.
+    2. Test case: `schedule add 1 at/03-08-2022` <br>
+       Expected: 1st parameter is incorrect. It should be `candidate/1` with a forward slash `/`.
+
+    3. Test case: `schedule add candidate/1`<br>
+       Expected: The `DATE_TIME` of an `Interview` should be present in the ` schedule add` command.  Error details shown in the status message.
+
+    4. Test case: `schedule add candidate/1 at/03/08/2022`<br>
+       Expected: The `DATE_TIME` of an interview must be in the format `dd-MM-yyyy`. Error details shown in the status message.
+
+    5. Test case: `schedule add candidate/1 at/20-02-2000`<br>
+       Expected: The `DATE_TIME` of an interview must not be in the past. Error details shown in the status message.
+
+    6. Test case: `schedule add candidate/1 at/03-08-2022`<br>
+       Expected: Interview is successfully added to the schedule. Details of interview shown in the status message.<br>
+       Note: The candidate must be available on the given `DATE_TIME`.
+    
+### Deleting an interview
+
+1. Deleting an existing interview in the system
+    
+    1. Prerequisite: View all interviews using the `view all` command. Multiple interviews in the schedule.
+    2. Test case: `schedule add 1 at/03-08-2022` <br>
+       Expected: 1st parameter is incorrect. It should be `candidate/1` with a forward slash `/`. All prefixes and its value are tied with a forward slash `/`.
+
+    3. Test case: `schedule delete 1`<br>
+       Expected: First interview is deleted from the list. Details of deleted interview shown in the status message.
+
+    4. Test case: `schedule delete 0`<br>
+       Expected: No interview is deleted. Error details shown in the status message.
+   
+    5. Other incorrect delete commands to try: `schedule delete`, `schedule delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+    
 ### Viewing the interview schedule
 
 1. Viewing the interview schedule for a specific time period
