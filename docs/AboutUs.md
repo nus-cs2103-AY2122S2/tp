@@ -5,7 +5,19 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
+You can reach us at the email `shafik@u.nus.edu`
+
 ## Project team
+
+### Vishwanth
+
+<img src="images/vishwanth2210.png" width="200px">
+
+[[github](http://github.com/vishwanth2210)]
+[[portfolio](team/vishwanth2210.md)]
+
+* Role: Developer + Team Lead
+* Responsibilities: Dev Ops + Threading
 
 ### Kuan Jian Rong
 
@@ -14,7 +26,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/kuanjr)]
 [[portfolio](team/kuanjr.md)]
 
-* Role: Developer + Team Lead
+* Role: Developer + Deliverables and Deadlines
 
 ### Mohd Shafik
 
@@ -24,7 +36,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/ad-nap.md)]
 
 * Role: Developer + Scheduling and Tracking
-* Responsibilities: UI
+* Responsibilities: Code
 
 ### Jack Ng
 
@@ -35,16 +47,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer + Integration
 * Responsibilities: Data
-
-### Vishwanth
-
-<img src="images/vishwanth2210.png" width="200px">
-
-[[github](http://github.com/vishwanth2210)]
-[[portfolio](team/vishwanth2210.md)]
-
-* Role: Developer + Deliverables and Deadlines
-* Responsibilities: Dev Ops + Threading
 
 ### Wee Heng
 
