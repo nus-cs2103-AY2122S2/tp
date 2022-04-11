@@ -39,6 +39,7 @@ This image is specific to MacOS, note that the `exit`,`minimize` and ` expand` w
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -117,7 +118,7 @@ Note that social media cannot be added to pre-installed emergency contacts.
 > `add John Doe sm/telegram, @johndoe23`<br>
 > `add 2 sm/telegram, @johndoe23`
 
-
+<div style="page-break-after: always;"></div>
 
 ## 2. Searching persons by keywords: `[find]`
 
@@ -140,7 +141,7 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 > `a` does the same as above.<br>
 > `find alex yeoh` will return both `Alex` and `Alex Yeoh` (if both contacts exist), with `Alex Yeoh` displayed at the top.
 
-
+<div style="page-break-after: always;"></div>
 
 ## 3. Viewing details of a person
 
@@ -253,6 +254,8 @@ Note that tags of pre-installed emergency contacts cannot be deleted.
 
 > `delete kaaviya t/friend` <br>
 > `delete 1 t/colleague`
+
+<div style="page-break-after: always;"></div>
 
 ### 6.3 Deleting social media from a Person
 
@@ -370,7 +373,7 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# Manage Global Tags
+# Managing Global Tags
 
 Global tags helps you organise relevant contacts and meetings together.
 <!-- Need to explain how this might be useful for the user -->
