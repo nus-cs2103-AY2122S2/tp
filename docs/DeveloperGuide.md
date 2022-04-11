@@ -239,7 +239,7 @@ The following activity diagram summarizes what happens when a user executes a `E
 #### What is the feature about?
 
 This feature implements a tagging system attached to the Candidate's profile in our Application. This way, our user can
-easily see which candidates are `scheduled`, `not scheduled`, or `completed`. This will help enhance user experience when using our application.
+easily see which candidates are `Scheduled`, `Not Scheduled`, or `Completed`. This will help enhance user experience when using our application.
 
 #### How is the feature implemented?
 
@@ -252,7 +252,7 @@ If an interview date is deleted prematurely, the `InterviewStatus` of the `Candi
 
 #### Why is the feature implemented as such?
 We designed this tagging system is such a way that when a user is first added into the system, the user's `ApplicationStatus`
-will be set to default of `not scheduled`. This will help the user to minimise the amount of commands to type when adding in a Candidate.
+will be set to default of `Not Scheduled`. This will help the user to minimise the amount of commands to type when adding in a Candidate.
 
 In the initial planning phase of the project, we intended for the `InterviewStatus` to be `triggered` by many factors, such as `ApplicationStatus`,
 the current date and time, etc.
