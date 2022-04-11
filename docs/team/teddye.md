@@ -30,5 +30,6 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `edit`, `delete` and `theme` [\#165](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/165)
     * Did cosmetic tweaks to existing documentation of features `clear`: [\#165](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/165)
+
   * Developer Guide:
     * Added documentation for the feature `theme`.
