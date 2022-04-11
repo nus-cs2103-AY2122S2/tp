@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -28,6 +30,8 @@ public class SeniorityContainsKeywordsPredicate extends ContainsKeywordsPredicat
      */
     @Override
     public boolean test(Candidate candidate) {
+        requireNonNull(candidate);
+
         return keywords.stream().anyMatch(keyword ->
                 candidate.getSeniority().toSearchString().toLowerCase().contains(keyword.toLowerCase()));
     }

@@ -22,7 +22,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a ViewCommand object for execution.
+     * and returns a {@code ViewCommand} object for execution.
+     * @param args contains the user input to be parsed
+     * @return new {@code ViewCommand} object with correct predicate
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewCommand parse(String args) throws ParseException {
@@ -47,9 +49,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             logger.info("Time period parsed - month");
             return new ViewCommand(new ThisMonthWithinTimePeriodPredicate(now));
         case "all":
-        default:
             logger.info("Time period parsed - all time");
             return new ViewCommand(new AllWithinTimePeriodPredicate(now));
+        default:
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
     }
 

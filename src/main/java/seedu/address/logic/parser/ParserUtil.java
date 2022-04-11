@@ -46,9 +46,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * Parses {@code timePeriod} to return only a valid time period keyword as a string. Leading and trailing
+     * whitespaces will be trimmed. If {@code timePeriod} is not valid, exception is thrown.
+     * @return a valid time period key word with no leading and trailing whitespaces
+     * @throws ParseException if the specified time period is invalid (not a correct keyword)
      */
     public static String parseTimePeriod(String timePeriod) throws ParseException {
         String trimmedTimePeriod = timePeriod.trim().toLowerCase();

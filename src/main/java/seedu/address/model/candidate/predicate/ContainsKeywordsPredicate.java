@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -13,11 +15,15 @@ public abstract class ContainsKeywordsPredicate implements Predicate<Candidate> 
     protected final List<String> keywords;
 
     public ContainsKeywordsPredicate(List<String> keywords) {
+        requireNonNull(keywords);
+
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Candidate candidate) {
+        requireNonNull(candidate);
+
         return keywords.stream()
                 .anyMatch(keyword -> candidate.toString().toLowerCase().contains(keyword.toLowerCase()));
     }

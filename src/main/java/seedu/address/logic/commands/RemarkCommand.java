@@ -14,7 +14,7 @@ import seedu.address.model.candidate.Remark;
 import seedu.address.model.interview.Interview;
 
 /**
- * Changes the remark of an existing candidate in the address book.
+ * Updates the remark of an existing candidate in the system.
  */
 public class RemarkCommand extends Command {
 

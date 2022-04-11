@@ -42,7 +42,8 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
 
     /**
      * Reorders the contents of the interview list with the earliest upcoming
-     * interview first followed by later interviews.
+     * interview first followed by later interviews, by creating a copy of the original interview list.
+     * {@code candidates} must not contain duplicate interview objects.
      */
     public void sortInterviews() {
         List<Interview> interviewsCopy = new ArrayList<Interview>(this.getInterviewList());

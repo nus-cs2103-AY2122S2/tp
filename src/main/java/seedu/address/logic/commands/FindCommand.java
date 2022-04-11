@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.candidate.predicate.ContainsKeywordsPredicate;
 
 /**
- * Finds and lists all candidates in TAlent Assistant™ whose description (in one of all of the fields)
+ * Finds and lists all candidates in TAlent Assistant™ whose description (in the specified field)
  * contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
@@ -33,6 +33,8 @@ public class FindCommand extends Command {
     private final ContainsKeywordsPredicate predicate;
 
     public FindCommand(ContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+
         this.predicate = predicate;
     }
 

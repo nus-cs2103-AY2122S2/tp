@@ -253,14 +253,23 @@ public class ModelManager implements Model {
         return null;
     }
 
-    //=========== Interview Schedule Accessors =============================================================
-
+    /**
+     * Accesses and returns the interview list stored in system.
+     * @return an unmodifiable view of the filtered interview list in proper sorted order (earliest to latest
+     * scheduled interviews).
+     */
     @Override
     public ObservableList<Interview> getFilteredInterviewSchedule() {
         interviewSchedule.sortInterviews();
         return filteredInterviewSchedule;
     }
 
+    /**
+     * Updates the interview list stored in system to filter by the given {@code predicate} and returns the
+     * filtered list.
+     * @param predicate contains the test method to check whether to keep an interview in the filtered list to return
+     * @return the interview list filtered by the predicate
+     */
     @Override
     public void updateFilteredInterviewSchedule(Predicate<Interview> predicate) {
         requireNonNull(predicate);
@@ -278,12 +287,25 @@ public class ModelManager implements Model {
         return filteredCandidates;
     }
 
+    /**
+     * Updates the candidate list stored in system to filter by the given {@code predicate} and returns the
+     * filtered list.
+     * @param predicate contains the test method to check whether to keep a candidate in the filtered list to return
+     * @return the candidate list filtered by the predicate
+     */
     @Override
     public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
         requireNonNull(predicate);
         filteredCandidates.setPredicate(predicate);
     }
 
+    /**
+     * Updates the candidate list stored in system by sorting using a {@code Comparator<Candidate>} and returns the
+     * sorted list.
+     * @param sortComparator contains the {@code sortComparator} object with details on what the sorting
+     *                       should be
+     * @return the candidate list sorted according tot the {@code sortComparator}
+     */
     @Override
     public void updateSortedCandidateList(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);

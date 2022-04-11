@@ -1,5 +1,7 @@
 package seedu.address.model.interview.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
@@ -13,7 +15,8 @@ public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicat
 
     /**
      * Creates a new {@link ThisMonthWithinTimePeriodPredicate} object with the
-     * {@link ThisMonthWithinTimePeriodPredicate#endDateTime} initialised.
+     * {@link ThisMonthWithinTimePeriodPredicate#endDateTime} and
+     * {@link ThisMonthWithinTimePeriodPredicate#currentDateTime} initialised.
      * @param currentDateTime contains the current date and time at the point this constructor is called.
      */
     public ThisMonthWithinTimePeriodPredicate(LocalDateTime currentDateTime) {
@@ -28,6 +31,8 @@ public class ThisMonthWithinTimePeriodPredicate extends WithinTimePeriodPredicat
      */
     @Override
     public boolean test(Interview interview) {
+        requireNonNull(interview);
+
         return interview.getInterviewDateTime().isBefore(endDateTime)
                 && interview.getInterviewDateTime().isAfter(currentDateTime);
     }
