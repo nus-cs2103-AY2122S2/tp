@@ -633,8 +633,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 1. User requests to list all clients.
 2. CinnamonBun displays a list of all clients.
-
-    Use case ends.
+   <br>Use case ends.
 
 #### Use case: Add a client
 
@@ -642,20 +641,16 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 1. User requests to add a new client with specified fields.
 2. CinnamonBun adds the client with the specified fields.
-
-    Use case ends.
+   <br>Use case ends.
 
 **Extension**
 
 * 1a. CinnamonBun detects that the specified fields do not satisfy requirements. 
   * 1a1. CinnamonBun displays error message.
-
     Use case ends.
-
 * 1b. CinnamonBun detects a duplicate client.
     * 1a1. CinnamonBun displays error message.
-
-    Use case ends.
+      <br>Use case ends.
 
 #### Use case: Edit a client's information
 
@@ -663,30 +658,22 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User specify which client to be edited
 2. User inputs the values to be edited
 3. CinnamonBun edits the value
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. No client index specified
     * 1a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 1.
-
+      <br>Use case resumes at step 1.
 * 2a. No fields are provided
     * 2a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-
+      <br>Use case resumes at step 2.
 * 2b. Some fields are inputted wrongly
     * 2b1. CinnamonBun shows the appropriate error message.
-
-      Use case resumes at step 2.
-
+      <br>Use case resumes at step 2.
 * 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
     * 2c1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
+      <br>Use case resumes at step 2.
 
 #### Use case: Append fields and tags to a client
 
@@ -695,20 +682,16 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User specify which client to be edited.
 2. User input the fields and tags to be appended.
 3. CinnamonBun appends the fields and tags to the client.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
-
+      <br>Use case ends.
 * 1b. CinnamonBun detects a duplicate client.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: Remove fields and tags from a client
 
@@ -717,15 +700,13 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User specify which client to be edited.
 2. User input the fields and tags to be removed.
 3. CinnamonBun removes the fields and tags from the client.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: Add remark to a client
 
@@ -734,8 +715,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User specify which client to be edited.
 2. User input the remark to be added.
 3. CinnamonBun adds the remark to the client.
-
-   Use case ends.
+   <br>Use case ends.
 
 #### Use case: Delete a client
 
@@ -745,20 +725,15 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 2.  CinnamonBun shows a list of clients.
 3.  User specify which client to be deleted.
 4.  CinnamonBun deletes the specified client.
-
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
-
+  <br>Use case ends.
 * 3a. The given index is invalid.
-
     * 3a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
+      <br>Use case resumes at step 2.
 
 #### Use case: Find a client
 
@@ -770,14 +745,10 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Extensions**
 
 * 1a. No keyword is specified.
-
     * 1a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-
+      <br>Use case resumes at step 2.
 * 2a. The list is empty.
-
-  Use case ends.
+  <br>Use case ends.
 
 #### Use case: Sort customer list
 
@@ -786,20 +757,16 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User inputs the fields the list is to be sorted on.
 2. CinnamonBun sorts the client list accordingly in order of the fields specified.
 3. The sorted list is displayed.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. User inputs no fields
   * 1a1. An error message is shown.
-
-    Use case resumes at step 1.
-
+    <br>Use case resumes at step 1.
 * 1b. User inputs non-existent/not supported fields
   * 1b1. An error message is shown
-
-     Use case resumes at step 1
+     <br>Use case resumes at step 1
 
 #### Use case: Undo modifications
 
@@ -808,19 +775,15 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1. User undos the latest modification made to the Clients' list in the CinnamonBun.
 2. The modifications have been undone.
 3. CinnamonBun shows the earlier client list without the modifications.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
   * 1a1. CinnamonBun shows an error message. <br>
-
-    Use case ends.
-  
+    <br>Use case ends.
 * 1b. The previous data cannot be read due to file reading issues/corruption
   * 1b1. CinnamonBun shows an error message. <br>
-  
-    Use case ends.
+    <br>Use case ends.
 
 #### Use case: Add membership to a client
 
@@ -829,20 +792,16 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 1.  User specifies which client to add membership to and what membership tier to assign to the client
 3.  CinnamonBun assigned the membership to the specified client
 4.  CinnamonBun displays the list of clients with updated membership
-
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 1a. The given index is invalid.
     * 1a1. CinnamonBun shows an error message.
-  
-      Use case ends.
-
+      <br>Use case ends.
 * 1b. The given membership tier is invalid.
     * 1b1. CinnamonBun shows an error message.
-
-      Use case ends.
+      <br>Use case ends.
     
 ### Non-functional requirements
 
