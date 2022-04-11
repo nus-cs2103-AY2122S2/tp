@@ -80,9 +80,12 @@ destroy TransactionBuilder
 AddTransactionCommand -> Model : addTransaction(nt)
 activate Model
 
+Model -[hidden]-> AddTransactionCommand
+Model -[hidden]-> AddTransactionCommand
 Model --> AddTransactionCommand
 deactivate Model
 
+AddTransactionCommand -[hidden]-> AddTransactionCommand
 create CommandResult
 AddTransactionCommand -> CommandResult
 activate CommandResult
