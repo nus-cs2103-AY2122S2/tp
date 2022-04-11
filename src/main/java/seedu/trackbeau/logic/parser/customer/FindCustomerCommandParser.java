@@ -76,7 +76,8 @@ public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
                 throw (ParseException) ie.getCause();
             }
         }
-        return new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr));
+        CustomerSearchContainsKeywordsPredicate customerSearch = new CustomerSearchContainsKeywordsPredicate(prefixArr);
+        return new FindCustomerCommand(customerSearch);
 
     }
 

@@ -267,14 +267,33 @@ The following activity diagram summarizes what happens when the user executes th
 ### Find customers feature
 
 #### Overview
-
+The find customer feature allows users to show customers whose data field matches keyword.
+Finding customer must have 1 or more of the data fields `Name`, `Phone`, `Address`, `Email`, `HairType`, `SkinType`,
+`RegistrationDate`, `BirthDate`, `StaffPreference`, `ServicePreference`, `Allergy`
 
 #### Implementation of feature
-
+The find customers feature is implemented via `FindCustomerCommand` and `CustomerSearchContainsKeywordsPredicate` which is created from `FindCustomerCommandParser`.
+1. `FindCustomerCommandParser` takes in the argument string and parses it into an `ArgumentMultimap` that contains all the different data fields mapped to their respective prefix.
+2. The information in the `ArgumentMultimap` is then used to create a `PrefixArr` that contains search data field by indexes.
+3. The information in the `PrefixArr` is then used to create a `CustomerSearchContainsKeywordsPredicate`
+5. The information in the `CustomerSearchContainsKeywordsPredicate` is then used to create a `FindCustomerCommand`
+7. If the input keyword in a specific data field matches a Customer's data field, the `FilteredList<Customer>` in model will then be updated to have the customer shown in TrackBeau.
 
 #### Design considerations
+* **Option 1:** Do not abstract the common parserUtil call and each data field must go through their own implementation method of parser in parserUtil independently.
+    * Pros: Straightforward to implement.
+    * Cons: Violates Don't Repeat Yourself (DRY) principle and results in huge chunk of repeated code and functionality.
+* **Option 2 (Current choice):** Abstract the common parserUtil call and iterate through a stored parse methods in a list.
+    * Pros: Makes use of the DRY principle which prevents duplication of codes.
+    * Cons: Nesting is used to prevent DRY.
 
+The following activity diagram summarizes what happens when the user executes the add customer command (`findc`):
 
+![Find Customer(s) Activity Diagram](images/FindCustomerActivityDiagram.png)
+
+The following sequence diagram shows the interactions within components when the user inputs `findc n/Alex Jane` command.
+
+![Find Customer(s) Sequence Diagram](images/FindCustomerSequenceDiagram.png)
 
 ### Add service feature
 
