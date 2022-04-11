@@ -27,6 +27,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
    * [Clearing all Customers and Orders: clear](#clear)
    * [Exiting the program : exit](#exit)
    * [Using Natural Dates](#natural-dates)
+   * [Resizing of application window](#resizing-window)
    * [Saving the data](#saving-data)
    * [Editing the data file](#editing-data)
 3. [FAQ](#faq)
@@ -62,7 +63,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
   * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+  :exclamation: Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -430,17 +431,20 @@ Example of natural dates in action:
 Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that
 you want the date to be the Monday or any natural date 10 weeks from now)
 
-### Saving the data <a name="saving-data"></a>
+### Resizing of application window <a name="resizing-window"/>
+The window size is fixed and expanding it will not resize the window.
 
+### Saving the data <a name="saving-data"></a>
 ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file <a name="editing-data"></a>
-
 ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
 </div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
