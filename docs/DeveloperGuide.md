@@ -795,11 +795,4 @@ testers are expected to do more *exploratory* testing.
     5. Test case: Grab with tag and index `grab n/INDEX t/VALID_TAGNAME`<br>
        Expected: Error message shown saying that you can have both INDEX and VALID_TAGNAME present.
     6. You can conduct the test cases above with other valid attributes.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    
