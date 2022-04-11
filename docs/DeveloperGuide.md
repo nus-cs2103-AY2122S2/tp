@@ -1122,8 +1122,6 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 ### Importing Trackermon data
 
 1. Prerequisites: Another valid copy of Trackermon data exists.
