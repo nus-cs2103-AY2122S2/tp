@@ -82,6 +82,7 @@ From TAssist's "Classes" tab, click the "Check Absentees" button to open a popup
 
 <img src="images/Ui_Check_Attendance.jpg" style="display:block;margin:0 auto;max-width:500px;">
 
+<div style="page-break-after: always;"></div>
 From TAssist's "Assessments" tab, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
 
 <img src="images/Ui_See_Attempts.jpg" style="display:block;margin:0 auto;max-width:500px;">
