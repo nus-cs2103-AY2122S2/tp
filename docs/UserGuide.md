@@ -359,6 +359,19 @@ You may have noticed that a handful of commands require `INDEX`, and that it is 
 to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
 life easier when using the features previously introduced.
 
+<div markdown="block" class="alert alert-secondary">
+
+**:information_source: Unusual Behaviour?**<br>
+
+You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing 
+some commands in this section. Generally, commands such as `find` and `filter` which trims the number of pets displayed
+will cause this behaviour. This is because any following commands like `sort` will execute based on the trimmed list. You
+will come across this behaviour [later](#sort-pets-sort) under the sort command, if you are following this user guide.
+
+If you want any following commands to execute on your whole pet list, then you will have to use the `list` command first!
+
+</div>
+
 ### Find pet details: `find`
 
 In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names,
@@ -427,7 +440,7 @@ Format: `sort SORT_BY`
 **:information_source: Unusual Behaviour?**<br>
 
 You may have noticed that your pet list only shows 2 pets (i.e. Woofie and Poofie) or less after executing the sort command, and
-Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *exisitng pet list* which in this case,
+Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *existing pet list* which in this case,
 may be the pet list after executing a `find woofie poofie` command. If you want to `sort` the whole pet list, you can
 execute the [`list`](#list-all-pets--list) command first before executing the `sort` command. This behaviour applies to
 pet list after `filter` command too!
@@ -487,7 +500,7 @@ Format: `undo`
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Note about undo**<br>
-* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` commands.
+* You will not be able to undo `clear`, `charge`, `exit`, `find`, `filter`, `help` and `list` commands.
 
 </div>
 
