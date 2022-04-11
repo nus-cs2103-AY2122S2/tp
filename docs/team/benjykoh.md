@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 
 * **New Feature**:
   * Added the ability to sort and display the students in TAPA. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
-    * What it does: Sorts the list of students by the number of incomplete tasks in **descending** order and displays the list in the new order.
+    * What it does: Sorts the list of students by the number of incomplete tasks in **descending** order and displays the list.
     * Justification: This features allows the TAs to easily view which students are lacking behind in terms of number of incomplete tasks.
     * Highlights: This feature was tricky to implement as the original implementation updated counters whenever a task is marked as done or undone. But, the counter resets everytime the application is rebooted. Thus, there was a need to ensure that the number of incomplete tasks would be counted everytime the `sort` command is run.
 
