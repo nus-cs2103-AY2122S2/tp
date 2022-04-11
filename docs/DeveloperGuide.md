@@ -19,7 +19,7 @@ Our team will like to welcome you by means of allowing you admire our work.
 
 ## **2. Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The code for Tracey is based on the [AddressBook-Level3(AB3)](https://se-education.org/addressbook-level3/) project created by SE-EDU.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -406,7 +406,7 @@ The `delete` command is as follows:
 There are three possible execution paths for the delete command
 
 1. User provides an invalid delete command input <br> This results in a parse exception
-2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
+2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a **CommandException**
 3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
 
 #### 5.4.3. Structure of Delete Command
@@ -561,7 +561,7 @@ The activity diagram below shows the possible execution paths for the `find` com
 
 There are two possible execution paths for this command.
 
-1. User inputs the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
+1. User inputs the `find` command with invalid or empty arguments. A **CommandException** will be thrown, and Tracey will
    display an error message that informs the contact details the user try to search is not found.
 
 2. User inputs the `find` command with valid arguments. Tracey returns a list of contact details that matches the
@@ -613,7 +613,7 @@ The activity diagram shows the possible execution paths for the `filter` command
 
 There are two possible execution paths for this command.
 
-1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+1. User inputs the `filter` command with invalid or empty arguments. A **ParseException** will be thrown, and Tracey will display an error message along with the correct input format to the user.
 2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
 
 #### 5.7.3. Structure of Filter Command
@@ -663,7 +663,7 @@ The activity diagram shows the possible execution paths for the `list` command.
 
 There are two possible execution paths for this command.
 1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
-2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
+2. User inputs `list` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the list input format is wrong.
 
 #### 5.8.3. Structure of List Command
 
@@ -869,8 +869,8 @@ Below are links for implementation of the classes and its methods:
 
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
-working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else
+Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a **CommandException** will be thrown, else the command then checks if the
+working database file to be archived is present. If it is not present, a **CommandException** will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a **CommandException** will be thrown, else
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
 #### 5.11.4. Structure of Archive Command
@@ -917,7 +917,7 @@ The class diagram above depicts the structure of `ResizeCommand`. As per any `Co
 
 ![ResizeFeatureActivityDiagram](images/ResizeFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a `ParseException` will be thrown, else the result
+Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a **ParseException** will be thrown, else the result
 display window in the GUI is resized according to the user's option. A success message is then displayed to the user.
 
 #### 5.12.4. Interactions between objects when Resize Command is executed
@@ -996,7 +996,7 @@ The activity diagram shows the possible execution paths for the `exit` command.
 
 There are three possible execution path for this command.
 
-1. User inputs the `exit` command with additional parameters <br> A ParseException is thrown
+1. User inputs the `exit` command with additional parameters <br> A **ParseException** is thrown
 2. User correctly inputs `exit` command but secondary windows are open <br> Secondary windows are hidden first before the application closes
 3. User correctly inputs `exit` command and no secondary windows are open <br> Application closes
 
@@ -1044,7 +1044,7 @@ The activity diagram shows the possible execution paths for the `import` command
 
 There are two possible execution paths for this command.
 
-1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+1. User inputs the `import` command with invalid or empty arguments. A **ParseException** will be thrown, and Tracey will display an error message along with the correct input format to the user.
 2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
 
 #### 5.15.3. Interactions between objects when the Import Command is executed

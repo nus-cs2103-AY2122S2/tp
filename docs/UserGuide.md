@@ -3,8 +3,6 @@ layout: page
 title: User Guide
 ---
 
-Tracey
-
 Tracey is a **desktop app for managing health statuses of NUS Hall Residents, optimized for use via a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
@@ -66,22 +64,20 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Quick Start
-1. Ensure you have Java 11 or above installed in your Computer.
-
+1. Ensure you have Java 11 or above installed in your Computer. <br>
 <div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
 
-**:information_source: Note:**<br>
+1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
 
-* If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
-    
-* To check your java version:
-  * For Mac users, open up Terminal and type in `java --version`.
-  * For Windows users, open up Command Prompt and type in `java --version`.
-  
-* If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+   1. To check your java version:<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
 
-* If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
-  
+   2. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
+
+   3. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+
 </div>
 
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
@@ -89,15 +85,13 @@ Additional formatting guidelines:
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
-
 <div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
 
-**:information_source: Note:**<br>
-  
-* If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-  
-* If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-  
+1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.<br>
+
+2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+ 
 </div>
 5. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -133,8 +127,8 @@ This is a sample screenshot of what you can expect from the `help` command.
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-* You can also use the `F1` key to open the pop-up window.
-  
+1. You can also use the `F1` key to open the pop-up window.
+
 </div>
 
 ### 3.2. Adding a contact
@@ -183,11 +177,10 @@ In addition, the list of pre-defined constants are also provided for `Faculty`, 
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
-  
-* You are able to add optional tags with no restrictions using the `t/` prefix.
-  
-* Additions can be reversed with the `undo` feature.
-  
+
+1. You are able to add optional tags with no restrictions using the `t/` prefix.<br>
+2. Additions can be reversed with the `undo` feature.
+
 </div>
 
 ### 3.3. Editing an existing contact
@@ -222,21 +215,21 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
-  
-* Tracey shows the entire edited database after the edit command is applied.
 
-* After every edit command, the student at the specified index will be shifted to the bottom of the list.
+1. Tracey shows the entire edited database after the edit command is applied.<br>
 
-* If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
+2. After every edit command, the student at the specified index will be shifted to the bottom of the list.<br>
+
+3. If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 </div>
 
 <div markdown="span" class="alert alert-primary">
-  
+
 :bulb: **Tip:**<br>
-  
-* Edits can be reversed with the `undo` feature.
-  
+
+1. Edits can be reversed with the `undo` feature.
+
 </div>
 
 ### 3.4. Deleting a contact
@@ -258,15 +251,15 @@ Examples of usage:
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
-  
-* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
-  
-* You can use `find` to get his/her `INDEX` and then apply `delete`.
 
-* This can save you time scrolling down an entire list to get his/her `INDEX`!
-  
-* Deletions can be reversed with the `undo` feature.
-  
+1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.<br>
+
+2. You can use `find` to get his/her `INDEX` and then apply `delete`.<br>
+
+3. This can save you time scrolling down an entire list to get his/her `INDEX`!<br>
+
+4. Deletions can be reversed with the `undo` feature.
+
 </div>
 
 ### 3.5. Undoing an action
@@ -285,20 +278,20 @@ Examples of usage:
 Scenario for undoing an edit command:
 ![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 7: Scenario of using an undo command following an edit command.*
 
-Figure *7* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+Figure *7* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3.
 The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
-  
-* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
-  
-* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
-  
-   * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
-  
-   * Using an `undo` command will not restore the student's index back to 1.
-  
+
+1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.<br>
+
+2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;2. Using an `undo` command will not restore the student's index back to 1.
+
 </div>
 
 ### 3.6. Redoing an action
@@ -323,15 +316,14 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br> 
-  
-* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
-  
-* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
-  
-  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
-  
-  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
-  
+
+1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.<br>
+
+2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
+
+3. Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
+
 </div>
 
 ### 3.7. Finding a contact
@@ -342,7 +334,7 @@ Format: `find NAME`
 * A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
 * The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
 * The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
-* Following the previous point, the input should contain the initial letters of the name. e.g. `jo` or`joh` for John. Conversely, if a user inputs `ohn` for John, this will not warrant the correct result. 
+* Following the previous point, the input should contain the initial letters of the name. e.g. `jo` or`joh` for John. Conversely, if a user inputs `ohn` for John, this will not warrant the correct result.
 
 Examples of usages:
 * `find John` returns `john` and `John Doe`.
@@ -379,9 +371,9 @@ As seen in *Figure 10*, using the `filter` command with "negative" as covid stat
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
-  
-* `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
-  
+
+1. `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+
 </div>
 
 ### 3.9. Listing the records
@@ -404,23 +396,31 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
-  
-* There is also a `Show Email` button on the GUI which you can click to open the same window.
-  
-* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
-  
+
+1. There is also a `Show Email` button on the GUI which you can click to open the same window.<br>
+
+2. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+
 </div>
 
 ### 3.11. Summarising the records
+The above figure illustrates the important interactions of `EditCommand` when the user successfully edit the `name` attribute of the student at index 1 to Poppy.
+
+When a user inputs an `EditCommand`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser`, `EditCommandParser` and `ParserUtil` to check the validity of the input index, prefixes and parameters. If the input is valid, a `EditPersonDescriptor` object is instantiated and this object is subsequently used as a parameter to instantiate an `EditCommand` object.
+The `EditCommand` object is then passed back to the `LogicManager` which will then invoked `EditCommand#execute()`. This execute method will call two other helper methods `EditCommand#editChecker()` and `Person#isDifferentPerson()`, which both are not shown in the sequence diagram and is used further validation.
+The main functions of these two methods are to check if the new values are duplicate of the corresponding fields to be edited and if the new values for fields that requires uniqueness already exists in the address book respectively.
+The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
+
+TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
+
 Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
-
 * You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
 * You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The results are a graphical analysis of the `Covid Status` of the individuals in each block (refer to *Figure 13a*). Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to *Figure 13b*).
+* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
 <img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
@@ -430,47 +430,45 @@ Example of usage:
 
 *Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 13a* and *Figure 13b*, when the user inputs the `Summarise` command, the results display charts of the student population categorised by `Covid Status`. These charts are separated into the students' `Block` and their `Faculty`.
+From *Figure 13a and 13b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
 * `ROOT`: The folder where the Tracey.jar is in.
 * `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
-  * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
+    * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
 * `ARCHIVED_FILE`: Archived file name named using your local PC's date and time in the format of DDMMYY_HHmmssSSS which is stored as a `json` file.
-  * The hour is abbreviated as HH, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
+    * The hour is abbreviated as HH, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
 Examples of usage:
 * Given the current date and time on your local PC in which the `archive` command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (HH:mm:ss:SSS in 24-hour notation).
-  * The archived file will be saved **in** `ROOT/data/archive/270322`.
-  * The archived file will be saved **as** `270322_152833123.json`. (`json` is the suffix (after the period) to indicate the file type)
-  * The file path will be `ROOT/data/archive/270322/270322_152833123.json`.
+    * The archived file will be saved **in** `ROOT/data/archive/270322`.
+    * The archived file will be saved **as** `270322_152833123.json`. (`json` is the suffix (after the period) to indicate the file type)
+    * The file path will be `ROOT/data/archive/270322/270322_152833123.json`.
 * To retrieve your archived file:
-  1. Open the folder in which your Tracey.jar is stored in.
-  2. Open the folder named `data`.
-  3. Open the folder named `archive`.
-  4. Open the folder named `270322`.
-  5. Your archived file is named `270322_152833123.json`.
+    1. Open the folder in which your Tracey.jar is stored in.
+    2. Open the folder named `data`.
+    3. Open the folder named `archive`.
+    4. Open the folder named `270322`.
+    5. Your archived file is named `270322_152833123.json`.
 
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
-  
-* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
 
-* Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
-  
+1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatible with Tracey.<br>
+2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
+
 </div>
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
-  
-* You can rename the archived file in the file path manually for easier reference.
-  
-   * Features for naming the archived file using the CLI will be available in later releases.
-  
-   * To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+
+1. You can rename the archived file in the file path manually for easier reference.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;1. Features for naming the archived file using the CLI will be available in later releases.<br>
+2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 
 </div>
 
@@ -486,15 +484,15 @@ Format: `resize SIZE`
 <div markdown="span" class="alert alert-info">
 
 :information_source: **Note:**<br>
-  
-* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
-  
+
+1. There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+
 </div><br>
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
 
-* This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+1. This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
 
 </div>
 
@@ -505,11 +503,10 @@ Format:`clear`
 
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
-  
-* Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
-  
-* This feature cannot be reversed using `undo`.
-  
+
+1. Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.<br>
+2. This feature cannot be reversed using `undo`.
+
 </div>
 
 ### 3.15. Exiting Tracey
@@ -615,3 +612,5 @@ there are changes to Tracey.
 | Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
 | Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                              |
 | JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                    |
+
+
