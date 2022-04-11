@@ -33,6 +33,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.testutil.CandidateBuilder;
 import seedu.address.testutil.EditCandidateDescriptorBuilder;
 
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */

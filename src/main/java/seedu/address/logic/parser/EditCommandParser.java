@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCandidateDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author domlimm
 /**
  * Parses input arguments and creates a new EditCommand object
  */

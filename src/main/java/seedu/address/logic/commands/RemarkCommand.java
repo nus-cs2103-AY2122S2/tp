@@ -80,6 +80,7 @@ public class RemarkCommand extends Command {
                 false, false, false, -1, true, index.getZeroBased());
     }
 
+    //@@author
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code candidateToEdit}.

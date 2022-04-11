@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.exceptions.CandidateNotFoundException;
 import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 
+//@@author
 /**
  * A list of candidates that enforces uniqueness between its elements and does not allow nulls.
  * A candidate is considered unique by comparing using {@code Candidate#isSameCandidate(Candidate)}. As such, adding
@@ -146,6 +147,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         return true;
     }
 
+    //@@author tiewweijian
     /**
      * Resets the interviewStatus of all candidates whose interview statuses are scheduled to not scheduled.
      */

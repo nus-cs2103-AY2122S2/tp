@@ -38,7 +38,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 import seedu.address.testutil.InterviewBuilder;
 
-
+//@@author lzan98
 public class AddScheduleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new InterviewSchedule(), new UserPrefs());
 
