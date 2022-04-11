@@ -8,6 +8,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -127,10 +128,13 @@ public class CommandTestUtil {
     public static final String SERVICEINDEX_SECOND = " " + PREFIX_SERVICEINDEX + "2";
     public static final String DATETIME_DESC1 = " " + PREFIX_STARTTIME + "10-10-2022 10:00";
     public static final String DATETIME_DESC2 = " " + PREFIX_STARTTIME + "20-10-2022 10:00";
+    public static final String FEEDBACK_DESC1 = " " + PREFIX_FEEDBACK + "Good";
+    public static final String FEEDBACK_DESC2 = " " + PREFIX_FEEDBACK + "Excellent";
 
     public static final String INVALID_CUSTOMERINDEX = " " + PREFIX_CUSTOMERINDEX + "-1";
     public static final String INVALID_SERVICEINDEX = " " + PREFIX_SERVICEINDEX + "-1";
     public static final String INVALID_DATETIME = " " + PREFIX_STARTTIME + "10-30-2022 10:00";
+    public static final String INVALID_FEEDBACK = " " + PREFIX_FEEDBACK + "G00d";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
