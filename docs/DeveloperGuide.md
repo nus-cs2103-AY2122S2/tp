@@ -685,6 +685,7 @@ testers are expected to do more *exploratory* testing.
 
    `buyeraddressbook.json`:
 
+    ```
     {
       "buyers" : [ {
         "name" : "Shi Hong",
@@ -709,11 +710,11 @@ testers are expected to do more *exploratory* testing.
         "propertyToBuy" : null
       }
     }
-
+    ``` 
 
    ```selleraddressbook.json```:
 
-
+    ```
     {
       "sellers" : [ {
         "name" : "chua",
@@ -739,7 +740,7 @@ testers are expected to do more *exploratory* testing.
         "propertyToSell" : null
       }
     }
-
+    ```
 
 
    1. Any of the following situation will cause the file to be broken and will start with empty buyer address book/ seller address book:
