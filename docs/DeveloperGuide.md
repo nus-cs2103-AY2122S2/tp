@@ -84,7 +84,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -813,7 +813,7 @@ The user wants to delete event(s) instead.
 7. The product is not required to handle the feature of finding past events based on the date and time.
 (i.e using a past date & time for the "find -e" command would be invalid)
 8. The product is not required to handle multiple whitespaces in between words for all data field inputs.
-(i.e "Alison Baker" will not be identified the same as "Alison   Baker")
+(i.e "Alison Baker" will not be identified the same as "Alison    Becker")
 9. The product is not required to handle the multiple events occurring at the same time.
 (i.e Multiple events sharing the same date and time would be recognized as separate unique events respectively)
 10. The product is not required to handle the visibility of long addresses in the person's contact card.
@@ -898,7 +898,7 @@ testers are expected to do more *exploratory* testing.
    3. Other incorrect event commands to try: `event name/lunch info/ d/2023-11-10 t/12:12`, `event name/lunch info/at HDL d/2019-11-10 t/12:12`, `event name/lunch info/at HDL d/2023-11-10 t/28:12`<br>
       Expected: Similar to previous.
 
-### Cancelling an event
+### Cancelling event
 
 1. Cancelling an event while all events are being shown
 
@@ -911,7 +911,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `cancelevent 0`<br>
        Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect cancelevent commands to try: `cancelevent`, `cancelevent x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect cancel event commands to try: `cancelevent`, `cancelevent x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Cancelling multiple events while all events are being shown
@@ -922,13 +922,13 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `cancelevent 1 2`<br>
        Expected: First and second events are deleted from the list. Details of the deleted events shown in the status message.
 
-    4. Test case: `cancelevent 1 0 2` , `delete 0 1 2`<br>
+    4. Test case: `cancelevent 1 0 2` , `cancelevent 0 1 2`<br>
        Expected: No events are deleted. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect cancelevent commands to try: `delete 1 1 2`, `delete 1 2 x` (where x is larger than the list size)<br>
+    5. Other incorrect cancel event commands to try: `cancelevent 1 1 2`, `cancelevent 1 2 x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-## Tagging information to an existing person
+### Tagging information to an existing person
 
 1. Tagging cca information to a person
 
@@ -987,7 +987,22 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect tag commands to try: `tag 1 m/`, `tag 1 m/ `
        Expected: Similar to previous.
 
+### Removing tags from an existing person
 
+1. Removing tags
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+       Person selected by the index has to contain tags that are exact matches to the input. 
+       
+    2. Test case: `removetag 1 m/cs2040s` (First person has a module tag "cs2040s")
+       Expected: First person's "cs2040s" module tag removed. Details of the updated tag information of the person is shown
+       in the status message.
+       
+    3. Test case: `removetag 1 m/cs3230` (First person does not have a module tag "cs3230")
+       Expected: No tags removed. Error details shown in the status message. Status bar remains the same.
+       
+    4. Other incorrect `removetag` commands to try: `removetag`, `removetag 1 edu/`, `removetag x edu/<any value>` (where x is larger than the list size)
+       Expected: Similar to previous.
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
