@@ -97,7 +97,7 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
 
 
     /**
-     * Replaces the contents of this list with {@code items}.
+     * Replaces the contents of this list with {@code replacement}.
      */
     public void setItems(UniqueList<T> replacement) {
         requireNonNull(replacement);

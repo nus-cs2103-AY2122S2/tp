@@ -65,6 +65,8 @@ The table below explains the symbols and syntax used throughout the user guide.
 | <div markdown="block" class="alert alert-primary">:bulb:</div>             | Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.         |                                               
 | <div markdown="block" class="alert alert-warning">:exclamation:</div>      | Text that appears in the caution box is important as unwanted consequences might arise if not followed. |
 
+<!-- @@author -->
+
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
 ![Annotated GUI](images/user-guide/annotated-gui-v3.png)
@@ -95,6 +97,8 @@ The table below explains the important technical terms to help you understand ho
 | Command Word   | The first word of the command determines the action that TrackBeau should perform.                                |
 | Prefix         | The characters right before each parameter which distinguishes one parameter from the other.                      |
 | Parameter      | The words right after the prefix. Each parameter is a value given to the command to perform the specified action. |
+
+<!-- @@author -->
 
 **Example**:
 * `addc n/NAME p/PHONE a/ADDRESS e/EMAIL`

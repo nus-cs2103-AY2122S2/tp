@@ -54,6 +54,7 @@ public class ServiceCard extends UiPart<Region> {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
         String priceString = formatter.format(service.getPrice().value);
         price.setText("Price: " + priceString);
+        // @@author
 
         int hours = service.getDuration().value / 60;
         int minutes = service.getDuration().value % 60;
