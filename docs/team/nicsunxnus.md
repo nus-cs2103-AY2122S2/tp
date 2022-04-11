@@ -36,6 +36,7 @@ meetings.
   - Authored edit feature including the diagrams and explanation: PRs [\#103](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/103/files) & [#106](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/106/files) + [reposense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=nicsunxnus&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=NicsunXnus&tabRepo=AY2122S2-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
   - Added Use Cases 8 to 11, PR [\#237](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/237/files)
   - Modified storage class diagram and added further UML diagrams to explain storage implementation, [\#237](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/237/files)
+  - Added test cases under Manual Testing, PRs [\#237](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/237/files) & [\#282](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/282/files)
 
 * **Contributions to the team-based tasks**:
   - Created the team repository
@@ -197,26 +198,135 @@ Use case ends.
 ...
 ## **Appendix: Instructions for manual testing**
 ...
-### Adding a meeting
+### 8.2 Adding a person
+
+1. Adding a person
+
+   1. Prerequisites: Have an empty contacts list. (_Note: The clear and back command may come in handy_)
+   
+   1. Test case for basic case: `add n/John Doe'<br>
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for all fields: `add n/Michael ph/62334555 l/Home e/michael@gmail.com l/Personal a/Big Mansion l/Home j/Jobs c/Company t/Happy t/Man`
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for some fields: `add n/Peter ph/63339888 l/Home e/peter@gmail.com l/Personal`
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for no fields: `add`
+      Expected: Invalid command format error message.
+      
+   1. Test case for one invalid prefix: `add name/Wayne`
+      Expected: Invalid command format error message.
+      
+   1. Test case for one invalid name input: `add n/1` 
+      Expected: Invalid name format error message.
+      
+   1. Test case for input without name: `add ph/999 a/Big Hotel`
+      Expected: Invalid command format error message.
+      
+   1. Test case for input with one invalid field input: `add n/Harry ph/Numbers`
+      Expected: Invalid phone format error message.
+      
+   1. Test case for inputs with multiple invalid field inputs: `add n/Harry ph/Numbers j/###`
+      Expected: Invalid phone format error message.
+      
+   1. Test case for duplicate contacts: `add n/David` then `back` and `add n/David`
+      Expected: Duplicate person error message.
+      
+   1. Test case for contacts with same name but different tags: `add n/Storm t/sunny` then `back` and `add n/Storm t/windy`
+      Expected: Both contacts successfully added.
+...
+### 8.3 Editing a person
+
+1. Editing a person
+
+   1. Prerequisites: Preferably an empty contacts list. Do `add n/Zachary Davidson` and stay at the Contact Details Page before starting the testing. The list of test cases have to be followed in order for the testing to work.
+   
+   1. Test case with one valid field input: `edit t/funny`
+      Expected: Contact information updated message is displayed.
+   
+   1. Test case with multiple valid field inputs: `edit ph/63339888 e/guy@people.com a/Average apartment t/not funny actually`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case for no fields: `edit`
+      Expected: Field error message is displayed.
+   
+   1. Test case with one invalid field input amongst valid inputs: `edit ph/90909999 e/ihateemails a/Pineapple`
+      Expected: Invalid email format error message is displated.
+      
+   1. Test case with one invalid field input and one valid field input: `edit ph/98889777 ph/no`
+      Expected: Invalid phone format error message is displayed.
+      
+   1. Test case with unnecessary additions to front of inputs: `edit 1 t/me`, `edit Zachary Davidson t/me`
+      Expected: Invalid command format message is displayed.
+      
+   1. Test case with valid name input: `edit n/Johnny`, `edit n/Johnny Number 1`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case with invalid name input: `edit n/R@dical`, `edit n/`
+      Expected: Invalid name format message is displayed.
+      
+   1. Test case with valid jobtitle input: `edit j/Job`, `edit j/Job Number 1`
+      
+   1. Test case with invalid jobtitle input: `edit j/Ch@f`, `edit j/Boss (CEO)`, `edit j/`
+      Expected: Invalid jobtitle format message is displayed.
+      
+   1. Test case with valid company input: `edit c/Good company`, `edit c/Company Number 1`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case with invalid company input: `edit c/`
+      Expected: Invalid company format message is displayed.
+   
+   1. Test case with valid label input: `edit ph/999 l/Police`, `edit e/email@gmail.com l/Email`, `edit a/address l/home`, `edit ph/999 l/9aS@1`
+      Expected: Contact information updated message is displayed.
+   
+   1. Test case with invalid label input: `edit l/onlyLabel`
+      Expected: Invalid command format message is displayed.
+      
+   1. Test case with invalid label input: `edit ph/67676767 l/`
+      Expected: Invalid label format message is displayed.
+...
+### 8.10 Back
+
+1. Going back to the Home Page from the Contact Details Page
+
+   1. Prerequisites: Have at least 1 contact and start at the home page.
+
+   1. Test case for view command: `view 1` then `back`
+      Expected: Home Page -> Contact Details Page -> Home Page.
+      
+   1. Test case for add command: `add n/Vivaldi` then `back`
+      Expected: Home Page -> Contact Details Page -> Home Page.
+      
+### 8.11 Adding a meeting
 
 1. Adding a meeting
    
    1. Prerequisites: Have an empty meeting list and 1 contact in the contacts list. The list of test cases have to be followed in order for the testing to work.
-   2. Test case: `meet with/1 for/Product Demo with Client in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: The added meeting is shown on the list of meetings at the side and a success message is displayed
-   3. Test case: `meet with/2 for/Product Demo with Client in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
-   4. Test case: `meet with/1 for/Product Demo with Client in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
-   5. Test case: `meet with/ for/Product Demo with Client in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+
+   2. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
+      Expected: The added meeting is shown on the list of meetings at the side and a success message is displayed.
+   
+   3. Test case: `meet with/2 for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
+   4. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
+   5. Test case: `meet with/ for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
    6. Test case: `meet with/1 for/ in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box
-   7. Test case: `meet with/1 for/Product Demo with Client in/ on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box
-   8. Test case: `meet with/1 for/Product Demo with Client in/Conference Room 5A on/` <br>
-      Expected: No meeting is added and an error message is shown in the status box
-   9. Test case: `meet with/1 for/Product Demo with Client in/Conference Room 5A on/2025-05-04 15:44`
-      Expected: No meeting is added and an error message is shown in the status box
-...
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
+   7. Test case: `meet with/1 for/Product Demo in/ on/05-04-2025 15:44` <br>
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
+   8. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/` <br>
+      Expected: No meeting is added and an error message is shown in the Result Display.
+   
+   9. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/2025-05-04 15:44`
+      Expected: No meeting is added and an error message is shown in the Result Display.
+
 ```
