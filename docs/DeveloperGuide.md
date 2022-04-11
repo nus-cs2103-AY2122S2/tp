@@ -870,6 +870,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix C: Instructions for manual testing**
 
@@ -960,8 +961,6 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -1101,8 +1100,6 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 ### Suggesting a show
 
