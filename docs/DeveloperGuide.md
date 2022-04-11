@@ -820,20 +820,73 @@ TA - Teaching Assistant
 
 **Extensions**
 
-* 2a. The list is empty
+* 2a. The candidate list is empty
 
   Use case ends.
 * 3a. The given index is invalid
 
     * 3a1. TAlent Assistant™ displays an error message
 
-  Use case resumes at step 2.
+  Use case resumes at step 3.
 
-* 3b. The given date and/or time format is invalid
+* 3b. The given date and/or time format is invalid or in the past
 
     * 3b1. TAlent Assistant™ displays an error message
 
-  Use case resumes at step 2.
+  Use case resumes at step 3.
+<hr>
+
+**Use case: Reschedule an interview in the system**
+
+**MSS**
+
+1.  User requests to view interview schedule
+2.  TAlent Assistant™ displays the list of interviews in the schedule
+3.  User requests to reschedule a specific interview to a particular date and time
+4.  TAlent Assistant™ reschedules the interview to the new date and time
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The interview schedule is empty
+
+  Use case ends.
+* 3a. The given (interview) index is invalid
+
+  * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+
+* 3b. The given date and/or time format is invalid or in the past
+
+  * 3b1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+<hr>
+
+**Use case: Delete an interview in the system**
+
+**MSS**
+
+1.  User requests to view interview schedule
+2.  TAlent Assistant™ displays the list of interviews in the schedule
+3.  User requests to delete a specific interview
+4.  TAlent Assistant™ removes the interview from the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The interview schedule is empty
+
+  Use case ends.
+* 3a. The given (interview) index is invalid
+
+  * 3a1. TAlent Assistant™ displays an error message
+
+  Use case resumes at step 3.
+
 <hr>
 
 **Use case: Find candidates in the system**
