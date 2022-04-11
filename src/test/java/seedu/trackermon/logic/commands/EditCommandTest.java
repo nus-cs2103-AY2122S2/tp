@@ -35,8 +35,11 @@ import seedu.trackermon.testutil.ShowBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
 
+    /**
+     * Tests the editing of all fields from an unfiltered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Show editedShow = new ShowBuilder().build();
@@ -51,6 +54,9 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the editing of some fields from an unfiltered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastShow = Index.fromOneBased(model.getFilteredShowList().size());
@@ -71,6 +77,9 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the editing of no fields from an unfiltered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SHOW, new EditShowDescriptor());
@@ -83,6 +92,9 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the editing of fields from a filtered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_filteredList_success() {
         showShowAtIndex(model, INDEX_FIRST_SHOW);
@@ -100,6 +112,9 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the editing of duplicate show from an unfiltered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_duplicateShowUnfilteredList_failure() {
         Show firstShow = model.getFilteredShowList().get(INDEX_FIRST_SHOW.getZeroBased());
@@ -109,6 +124,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
+    /**
+     * Tests the editing of duplicate show from a filtered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_duplicateShowFilteredList_failure() {
         showShowAtIndex(model, INDEX_FIRST_SHOW);
@@ -121,6 +139,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
+    /**
+     * Tests the editing of an invalid index from an unfiltered list from the execution of {@code EditCommand}.
+     */
     @Test
     public void execute_invalidShowIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredShowList().size() + 1);
@@ -131,7 +152,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Edits filtered list where index is larger than size of filtered list,
      * but smaller than size of show list
      */
     @Test
@@ -147,6 +168,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
+    /**
+     *  Tests if different types of EditCommand are the same from the execution of {@code CommandResult}.
+     */
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_SHOW, DESC_ALICE_IN_WONDERLAND);

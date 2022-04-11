@@ -16,7 +16,9 @@ import java.util.List;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Show;
 
-
+/**
+ * TypicalShows contains a number of possible Shows.
+ */
 public class TypicalShows {
     public static final Show ALICE_IN_WONDERLAND = new ShowBuilder().withName("Alice in WonderLand")
             .withStatus("completed").withTags("movie").withComment("bad").withRating("5").build();

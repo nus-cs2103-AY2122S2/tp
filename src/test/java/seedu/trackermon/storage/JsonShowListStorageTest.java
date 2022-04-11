@@ -18,12 +18,18 @@ import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ShowList;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code JsonShowListStorage}.
+ */
 public class JsonShowListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonShowListStorageTest");
 
     @TempDir
     public Path testFolder;
 
+    /**
+     * Tests the error thrown when {@code readShowList} reads a null {@code FilePath}.
+     */
     @Test
     public void readShowList_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readShowList(null));
@@ -39,26 +45,44 @@ public class JsonShowListStorageTest {
                 : null;
     }
 
+    /**
+     * Tests that a {@code ReadOnlyShowList} is not obtained after {@code ShowList} reads a non-existent file.
+     */
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readShowList("NonExistentFile.json").isPresent());
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a non-Json format data file.
+     */
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> readShowList("notJsonFormatShowList.json"));
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a data file with invalid Shows.
+     */
     @Test
     public void readShowList_invalidShowShowList_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readShowList("invalidShowShowList.json"));
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a data file with both valid and invalid Shows.
+     */
     @Test
-    public void readShowList_invalidAndValidPersonShowList_throwDataConversionException() {
+    public void readShowList_invalidAndValidShowShowList_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readShowList("invalidAndValidShowShowList.json"));
     }
 
+    /**
+     * Tests that no errors are thrown when providing {@code readShowList} and {@code saveShowList} valid inputs.
+     */
     @Test
     public void readAndSaveShowList_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempShowList.json");
@@ -85,6 +109,10 @@ public class JsonShowListStorageTest {
 
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveShowList}
+     * attempts to save a null {@code ShowList}.
+     */
     @Test
     public void saveShowList_nullShowList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveShowList(null, "SomeFile.json"));
@@ -102,6 +130,10 @@ public class JsonShowListStorageTest {
         }
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveShowList}
+     * attempts to save {@code ShowList} to a null file path.
+     */
     @Test
     public void saveShowList_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveShowList(new ShowList(), null));

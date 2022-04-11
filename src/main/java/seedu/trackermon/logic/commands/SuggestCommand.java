@@ -7,8 +7,8 @@ import java.util.Random;
 
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
+import seedu.trackermon.model.show.SameShowPredicate;
 import seedu.trackermon.model.show.Show;
-import seedu.trackermon.model.show.SuggestPredicate;
 
 /**
  * Returns a random Show from the displayed list.
@@ -23,6 +23,12 @@ public class SuggestCommand extends Command {
 
     public static final String MESSAGE_FAILURE_ONE_SHOW = "There is only one show in the list";
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -36,8 +42,8 @@ public class SuggestCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE_ONE_SHOW);
         }
         Show randomShow = getRandomShow(model);
-        SuggestPredicate suggestPredicate = new SuggestPredicate(randomShow);
-        model.updateFilteredShowList(suggestPredicate);
+        SameShowPredicate sameShowPredicate = new SameShowPredicate(randomShow);
+        model.updateFilteredShowList(sameShowPredicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

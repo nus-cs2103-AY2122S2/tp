@@ -16,9 +16,8 @@ public class Tag {
     public final String tagName;
 
     /**
-     * Constructs a {@code Tag}.
-     *
-     * @param tagName A valid tag name.
+     * Constructs a {@code Tag} with the provide {@code String}.
+     * @param tagName provided {@code String}.
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
@@ -40,6 +39,9 @@ public class Tag {
                 && tagName.equals(((Tag) other).tagName)); // state check
     }
 
+    /**
+     * Returns the hashcode of {@code Tag}
+     */
     @Override
     public int hashCode() {
         return tagName.hashCode();

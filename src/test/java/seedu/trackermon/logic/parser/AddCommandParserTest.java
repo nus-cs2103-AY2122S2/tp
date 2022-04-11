@@ -45,6 +45,9 @@ import seedu.trackermon.testutil.ShowBuilder;
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
+    /**
+     * Tests the parsing of all field present from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_allFieldsPresent_success() {
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withStatus(VALID_STATUS_COMPLETED)
@@ -71,6 +74,9 @@ public class AddCommandParserTest {
                 + TAG_DESC_YURI + TAG_DESC_HENTAI, new AddCommand(expectedShowMultipleTags));
     }
 
+    /**
+     * Tests the parsing of missing optional field from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_optionalFieldsMissing_success() {
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().withComment().withRating().build();
@@ -78,6 +84,9 @@ public class AddCommandParserTest {
                 new AddCommand(expectedShow));
     }
 
+    /**
+     * Tests the parsing of missing field from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -95,6 +104,9 @@ public class AddCommandParserTest {
                 expectedMessage);
     }
 
+    /**
+     * Tests the parsing of invalid fields from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_invalidValue_failure() {
         // invalid name

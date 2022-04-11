@@ -30,11 +30,17 @@ import seedu.trackermon.testutil.ShowBuilder;
  */
 public class AddCommandTest {
 
+    /**
+     * Tests the adding of a null from the execution of {@code AddCommand}.
+     */
     @Test
     public void constructor_nullShow_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
+    /**
+     * Tests the adding of a valid show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_showAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingShowAdded modelStub = new ModelStubAcceptingShowAdded();
@@ -46,6 +52,9 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validShow), modelStub.showsAdded);
     }
 
+    /**
+     * Tests the adding of a duplicate show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_duplicateShow_throwsCommandException() {
         Show validShow = new ShowBuilder().build();
@@ -55,6 +64,10 @@ public class AddCommandTest {
         assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
     }
 
+
+    /**
+     *  Tests if adding different types of shows are the same from the execution of {@code AddCommand}.
+     */
     @Test
     public void equals() {
         Show another = new ShowBuilder().withName("Another").build();
@@ -75,54 +88,82 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAnotherCommand.equals(null));
 
-        // different person -> returns false
+        // different show -> returns false
         assertFalse(addAnotherCommand.equals(addBlackCloverCommand));
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
+
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Path getShowListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setShowListFilePath(Path showListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void addShow(Show show) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setShowList(ReadOnlyShowList showList) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ReadOnlyShowList getShowList() {
             throw new AssertionError("This method should not be called.");
@@ -136,41 +177,65 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean hasShow(Show show) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void deleteShow(Show target) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setShow(Show target, Show editedShow) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ObservableList<Show> getFilteredShowList() {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void updateFilteredShowList(Predicate<Show> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ObservableList<Show> getSortedShowList() {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void updateSortedShowList(Comparator<Show> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void saveSortedShowList() {
             throw new AssertionError("This method should not be called.");
@@ -183,11 +248,17 @@ public class AddCommandTest {
     private class ModelStubWithShow extends ModelStub {
         private final Show show;
 
+        /**
+         * Initializes a ModelStubWithShow with the given show.
+         */
         ModelStubWithShow(Show show) {
             requireNonNull(show);
             this.show = show;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean hasShow(Show show) {
             requireNonNull(show);
@@ -201,23 +272,35 @@ public class AddCommandTest {
     private class ModelStubAcceptingShowAdded extends ModelStub {
         final ArrayList<Show> showsAdded = new ArrayList<>();
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public boolean hasShow(Show show) {
             requireNonNull(show);
             return showsAdded.stream().anyMatch(show::isSameShow);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void addShow(Show show) {
             requireNonNull(show);
             showsAdded.add(show);
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ReadOnlyShowList getShowList() {
             return new ShowList();
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public int getShowListSize() {
             return showsAdded.size();

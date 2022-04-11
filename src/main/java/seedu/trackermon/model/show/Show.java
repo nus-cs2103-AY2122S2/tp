@@ -9,6 +9,9 @@ import java.util.Set;
 
 import seedu.trackermon.model.tag.Tag;
 
+/***
+ * Represents a Show in Trackermon.
+ */
 public class Show {
 
     //Identity field
@@ -21,7 +24,12 @@ public class Show {
     private final Rating rating;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Show} with the provided {@code Name}, {@code Status}, {@code Set<Tag>},
+     * {@code Comment}, {@code Rating}
+     * @param name provided {@code Name}
+     * @param tags provided {@code Set<Tag>}
+     * @param comment provided {@code Comment}
+     * @param rating provided {@code Rating}
      */
     public Show(Name name, Status status, Set<Tag> tags, Comment comment, Rating rating) {
         requireAllNonNull(name, status, tags, comment, rating);
@@ -91,12 +99,18 @@ public class Show {
                             && otherShow.getRating().equals(getRating());
     }
 
+    /**
+     * Returns the hashcode of the {@code Show}.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, tags);
     }
 
+    /**
+     * Returns the {@code String} representation of the {@code Show}.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

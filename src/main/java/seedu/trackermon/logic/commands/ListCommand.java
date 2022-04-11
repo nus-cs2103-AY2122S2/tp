@@ -14,7 +14,11 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all shows";
 
-
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

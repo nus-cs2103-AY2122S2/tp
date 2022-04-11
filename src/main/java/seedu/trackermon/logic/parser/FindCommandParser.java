@@ -25,6 +25,10 @@ import seedu.trackermon.model.show.StatusContainsKeywordsPredicate;
 import seedu.trackermon.model.show.TagsContainsKeywordsPredicate;
 import seedu.trackermon.model.tag.Tag;
 
+// @@author Ardentsoul-reused
+// Reused from https://github.com/AY2021S2-CS2103T-T12-4/tp and
+// https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream
+// with minor modifications
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -33,7 +37,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args the {@code String} of arguments in the context of the FindCommand.
+     * @return returns a FindCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
@@ -92,7 +98,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             keywordsArr = getRatingKeywords(input);
             for (int i = 0; i < keywordsArr.length; i++) {
                 keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
-                if (!Rating.isValidScore(keywordsArr[i])) {
+                if (!Rating.isValidRating(keywordsArr[i])) {
                     throw new ParseException(String.format(MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
                 }
             }
@@ -111,11 +117,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
+    /**
+     * Transforms a String into a String array.
+     * @param args the string to be transformed into a String Array.
+     * @return a String array for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     public String[] getKeywords(String args) throws ParseException {
         String trimmedArgs = args.trim();
         return trimmedArgs.split("\\s+");
     }
 
+    /**
+     * Transforms a String into a String array.
+     * @param args the string to be transformed into a String Array.
+     * @return a String array for execution.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     public String[] getRatingKeywords(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -125,3 +143,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         return trimmedArgs.split("\\s+");
     }
 }
+// @@author

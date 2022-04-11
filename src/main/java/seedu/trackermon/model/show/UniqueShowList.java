@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import seedu.trackermon.model.show.exceptions.DuplicatedShowException;
 import seedu.trackermon.model.show.exceptions.ShowNotFoundException;
 
-
+/**
+ * Represents a list of unique shows.
+ */
 public class UniqueShowList implements Iterable<Show> {
 
     private final ObservableList<Show> internalList = FXCollections.observableArrayList();
@@ -70,6 +72,9 @@ public class UniqueShowList implements Iterable<Show> {
         }
     }
 
+    /**
+     * Replaces the internalList with the provide {@UniqueShowList}.
+     */
     public void setShows(UniqueShowList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -100,6 +105,11 @@ public class UniqueShowList implements Iterable<Show> {
         return internalList.iterator();
     }
 
+    /**
+     * Returns whether two objects are equal or share the same internalList.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -107,6 +117,9 @@ public class UniqueShowList implements Iterable<Show> {
                 && internalList.equals(((UniqueShowList) other).internalList));
     }
 
+    /**
+     * Returns the hashcode of {@code UniqueShowList}
+     */
     @Override
     public int hashCode() {
         return internalList.hashCode();
