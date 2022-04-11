@@ -24,7 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/yokester98)]
 [[portfolio](team/yokester98.md)]
 
-* Role: Code Quality
+* Role: Developer
 * Responsibilities: Add Command functionality
 
 ### Gerald Neo
@@ -33,7 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
-* Role: Documentation
+* Role: Developer
 * Responsibilities: List command functionality
 
 ### Ryan Walter Lee
