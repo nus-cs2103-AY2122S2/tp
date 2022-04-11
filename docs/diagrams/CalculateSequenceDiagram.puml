@@ -1,0 +1,92 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CalculateCommandParser" as CalculateCommandParser LOGIC_COLOR
+participant "totalCost:BigDecimal" as totalCost LOGIC_COLOR
+participant "cc:CalculateCommand" as CalculateCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("calculate 22/03/2022")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("calculate 22/03/2022")
+activate AddressBookParser
+
+create CalculateCommandParser
+AddressBookParser -> CalculateCommandParser
+activate CalculateCommandParser
+
+CalculateCommandParser --> AddressBookParser
+deactivate CalculateCommandParser
+
+AddressBookParser -> CalculateCommandParser : parse("22/03/2022")
+activate CalculateCommandParser
+
+create CalculateCommand
+CalculateCommandParser -> CalculateCommand
+activate CalculateCommand
+
+CalculateCommand --> CalculateCommandParser : cc
+deactivate CalculateCommand
+
+CalculateCommandParser --> AddressBookParser : cc
+deactivate CalculateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CalculateCommandParser -[hidden]-> AddressBookParser
+destroy CalculateCommandParser
+
+AddressBookParser --> LogicManager : cc
+deactivate AddressBookParser
+
+LogicManager -> CalculateCommand : execute()
+activate CalculateCommand
+
+CalculateCommand -> Model : getFiltereredClientList()
+activate Model
+
+
+Model --> CalculateCommand : lastshownlist
+deactivate Model
+
+Create totalCost
+CalculateCommand -> totalCost : BigDecimal()
+activate totalCost
+
+loop number of clients
+CalculateCommand -> totalCost : add cost of procedures on \nspecified date for each client
+
+end
+totalCost --> CalculateCommand : totalCost
+deactivate totalCost
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+totalCost -[hidden]-> CalculateCommand
+destroy totalCost
+
+
+
+create CommandResult
+CalculateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CalculateCommand :cr
+deactivate CommandResult
+
+CalculateCommand --> LogicManager : cr
+deactivate CalculateCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CalculateCommand -[hidden]-> LogicManager
+destroy CalculateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

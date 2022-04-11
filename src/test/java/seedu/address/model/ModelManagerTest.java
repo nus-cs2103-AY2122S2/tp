@@ -2,21 +2,29 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_CLIENT_PROCEDURES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalClients.ARTFRIEND;
+import static seedu.address.testutil.TypicalClients.BOSS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.procedure.Procedure;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.ProcedureBuilder;
 
 public class ModelManagerTest {
 
@@ -73,29 +81,45 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasClient_hasProcedure_updatesFilteredProcedureList() {
+        List<Procedure> procedureList = new ArrayList<Procedure>();
+        procedureList.add(new ProcedureBuilder().build());
+        Client client = new ClientBuilder().withProcedures(procedureList).build();
+        modelManager.addClient(client);
+        assertNotNull(modelManager.getFilteredClientList());
+
+        // Procedure list should be empty before update
+        assertEquals(modelManager.getFilteredProcedureList().size(), 0);
+
+        // Updates procedure list correctly
+        modelManager.updateFilteredProcedureList(client, PREDICATE_SHOW_CLIENT_PROCEDURES);
+        assertEquals(modelManager.getFilteredProcedureList().size(), 1);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasClient_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasClient(null));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasClient_clientNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasClient(ARTFRIEND));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void hasClient_clientInAddressBook_returnsTrue() {
+        modelManager.addClient(ARTFRIEND);
+        assertTrue(modelManager.hasClient(ARTFRIEND));
+    }
+
+    @Test
+    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withClient(ARTFRIEND).withClient(BOSS).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,12 +141,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        String[] keywords = ARTFRIEND.getName().fullName.split("\\s+");
+        modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

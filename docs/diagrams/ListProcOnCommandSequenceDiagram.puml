@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ListProcOnCommand" as ListProcOnCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant ":Client" as Client MODEL_COLOR
+end box
+
+-> ListProcOnCommand : execute(model)
+activate ListProcOnCommand
+ListProcOnCommand -> Model : getFilteredClientList()
+activate Model
+ListProcOnCommand <-- Model : lastShownList
+deactivate Model
+    loop for every Client in lastShownList
+        ListProcOnCommand -> Client : getProcsOnDate(targetDate)
+        activate Client
+        ListProcOnCommand <-- Client : clientProceduresOnDate
+        deactivate Client
+        'Hidden arrow to position the destroy marker below the end of the activation bar.
+        Client -[hidden]-> Model
+        destroy Client
+        ListProcOnCommand -> ListProcOnCommand : add(clientProceduresOnDate)
+        note right
+          The lower-level details of adding up
+          clientProceduresOnDate for each Client
+          has been abstracted to make the diagram clearer
+        end note
+    end
+<-- ListProcOnCommand : CommandResult
+deactivate ListProcOnCommand
+note right
+    The interaction with CommandResult class
+    has been omitted to make the diagram clearer
+end note
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListProcOnCommand -[hidden]-> Model
+destroy ListProcOnCommand
+@enduml

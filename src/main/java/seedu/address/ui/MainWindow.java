@@ -2,12 +2,18 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -16,6 +22,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Client;
+import seedu.address.model.procedure.Procedure;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ProcedureListPanel procedureListPanel;
+    private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +51,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private GridPane clientListGridPane;
+
+    @FXML
+    private StackPane clientListPanelPlaceholder;
+
+    @FXML
+    private StackPane procedureListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -107,11 +122,51 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets up the client column and procedure column of clientListGridPane.
+     */
+    void setUpColumnConstraints() {
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(50);
+        column1.setHgrow(Priority.ALWAYS);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(50);
+        column2.setHgrow(Priority.ALWAYS);
+
+        RowConstraints row = new RowConstraints();
+        row.setMaxHeight(Double.MAX_VALUE);
+        row.setVgrow(Priority.ALWAYS);
+        clientListGridPane.getColumnConstraints().addAll(column1, column2); // each get 50% of width
+        clientListGridPane.getRowConstraints().addAll(row);
+    }
+
+    /**
+     * Adds the placeholder panes into the grid pane,
+     */
+    void addPlaceholdersToGridPane() {
+        clientListGridPane.add(clientListPanelPlaceholder, 0, 0);
+        clientListGridPane.add(procedureListPanelPlaceholder, 1, 0);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    void fillInnerParts() throws CommandException, ParseException {
+        setUpColumnConstraints();
+        ObservableList<Client> clients = logic.getFilteredClientList();
+
+        clientListPanel = new ClientListPanel(clients);
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        if (clients.size() > 0) {
+            procedureListPanel = new ProcedureListPanel(
+                    FXCollections.observableArrayList(clients.get(0).getProcedures()));
+            logic.execute("listProc 1");
+        } else {
+            procedureListPanel = new ProcedureListPanel(FXCollections.observableArrayList());
+        }
+        procedureListPanelPlaceholder.getChildren().add(procedureListPanel.getRoot());
+
+        addPlaceholdersToGridPane();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +218,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ClientListPanel getClientListPanel() {
+        return clientListPanel;
     }
 
     /**
@@ -177,6 +232,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            ObservableList<Procedure> filteredProcedures = logic.getFilteredProcedureList();
+            procedureListPanel = new ProcedureListPanel(filteredProcedures);
+            procedureListPanelPlaceholder.getChildren().add(procedureListPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

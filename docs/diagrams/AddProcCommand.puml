@@ -1,0 +1,103 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddProcCommandParser" as AddProcCommandParser LOGIC_COLOR
+participant "d:AddProcCommand" as AddProcCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:Procedure" as Procedure MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":Client" as Client MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute('procedure')
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand('procedure')
+note left
+('procedure') is defined as
+"addProc 1 i/Install modem
+c/10.5 d/20/03/2022 11:30"
+end note
+activate AddressBookParser
+
+create AddProcCommandParser
+AddressBookParser -> AddProcCommandParser : parse(args)
+activate AddProcCommandParser
+note left
+(args) is defined as
+ i/Install modem
+ c/10.5
+ d/20/03/2022
+ 11:30
+end note
+
+
+
+create Procedure
+AddProcCommandParser -> Procedure
+activate Procedure
+Procedure --> AddProcCommandParser : p
+deactivate Procedure
+Procedure -[hidden]-> AddProcCommandParser
+destroy Procedure
+
+create AddProcCommand
+AddProcCommandParser -> AddProcCommand
+activate AddProcCommand
+AddProcCommand --> AddProcCommandParser : d
+deactivate AddProcCommand
+AddProcCommandParser --> AddressBookParser : d
+deactivate AddProcCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddProcCommand : execute()
+activate AddProcCommand
+
+AddProcCommand -> ModelManager : getFilteredClientList()
+activate ModelManager
+
+ModelManager --> AddProcCommand : lastShownList
+deactivate ModelManager
+
+AddProcCommand -> AddProcCommand : addClientProcedure(clientToEdit)
+activate AddProcCommand
+
+
+AddProcCommand -> Client : get(info)
+activate Client
+note left
+info represents
+Name, Phone, Email,
+Plans, Tags, Address
+and Procedures
+end note
+Client --> AddProcCommand : info
+deactivate Client
+Client -[hidden]--> AddProcCommand : info
+destroy Client
+
+AddProcCommand -> AddProcCommand : addProcedure(procedureList)
+activate AddProcCommand
+AddProcCommand --> AddProcCommand
+deactivate AddProcCommand
+AddProcCommand --> AddProcCommand
+deactivate AddProcCommand
+AddProcCommand -> ModelManager : setClient(clientToEdit, editedClient)
+
+
+activate ModelManager
+AddProcCommand -> ModelManager : updatedFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS)
+deactivate ModelManager
+AddProcCommand --> LogicManager
+deactivate AddProcCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml

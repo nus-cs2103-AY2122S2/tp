@@ -2,17 +2,24 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.datewithouttime.DateWithoutTime;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Plan;
+import seedu.address.model.procedure.Cost;
+import seedu.address.model.procedure.Date;
+import seedu.address.model.procedure.Information;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +40,27 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String trimmedInput = oneBasedIndexes.trim();
+        String[] listOfInputs = trimmedInput.split(" ");
+        List<Index> listofIndexes = new ArrayList<>();
+
+        for (String listOfInput : listOfInputs) {
+            if (!StringUtil.isNonZeroUnsignedInteger(listOfInput)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            listOfInput = listOfInput.trim();
+            listofIndexes.add(Index.fromOneBased(Integer.parseInt(listOfInput)));
+        }
+
+        return listofIndexes;
     }
 
     /**
@@ -81,6 +109,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String plan} into an {@code Plan}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code plan} is invalid.
+     */
+    public static Plan parsePlan(String plan) throws ParseException {
+        requireNonNull(plan);
+        String trimmedPlan = plan.trim();
+        if (!Plan.isValidPlan(trimmedPlan)) {
+            throw new ParseException(Plan.MESSAGE_CONSTRAINTS);
+        }
+        return new Plan(trimmedPlan);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -121,4 +164,66 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String information} into an {@code Information}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static Information parseInformation(String information) throws ParseException {
+        requireNonNull(information);
+        String trimmedInformation = information.trim();
+        if (!Information.isValidInformation(trimmedInformation)) {
+            throw new ParseException(Information.MESSAGE_CONSTRAINTS);
+        }
+        return new Information(information);
+    }
+
+    /**
+     * Parses a {@code String cost} into a {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        if (!Cost.isValidCost(trimmedCost)) {
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
+        }
+        return new Cost(cost);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(date);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static DateWithoutTime parseDateWithoutTime(String date)
+            throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!DateWithoutTime.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new DateWithoutTime(trimmedDate);
+    }
+
 }

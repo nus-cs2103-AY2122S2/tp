@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+
+participant "totalCost:BigDecimal" as totalCost LOGIC_COLOR
+participant "cc:CalculateCommand" as CalculateCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+LogicManager -> CalculateCommand : execute()
+activate CalculateCommand
+
+CalculateCommand -> Model : getFiltereredClientList()
+activate Model
+
+
+Model --> CalculateCommand : lastshownlist
+deactivate Model
+
+Create totalCost
+CalculateCommand -> totalCost : BigDecimal()
+activate totalCost
+
+loop number of clients
+CalculateCommand -> totalCost : add cost of procedures on \nspecified date for each client
+
+end
+totalCost --> CalculateCommand : totalCost
+deactivate totalCost
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+totalCost -[hidden]-> CalculateCommand
+destroy totalCost
+
+
+
+create CommandResult
+CalculateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CalculateCommand :cr
+deactivate CommandResult
+
+CalculateCommand --> LogicManager : cr
+deactivate CalculateCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CalculateCommand -[hidden]-> LogicManager
+destroy CalculateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

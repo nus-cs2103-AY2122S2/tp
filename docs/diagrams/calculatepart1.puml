@@ -1,0 +1,44 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CalculateCommandParser" as CalculateCommandParser LOGIC_COLOR
+participant "cc:CalculateCommand" as CalculateCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("calculate 22/03/2022")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("calculate 22/03/2022")
+activate AddressBookParser
+
+create CalculateCommandParser
+AddressBookParser -> CalculateCommandParser
+activate CalculateCommandParser
+
+CalculateCommandParser --> AddressBookParser
+deactivate CalculateCommandParser
+
+AddressBookParser -> CalculateCommandParser : parse("22/03/2022")
+activate CalculateCommandParser
+
+create CalculateCommand
+CalculateCommandParser -> CalculateCommand
+activate CalculateCommand
+
+CalculateCommand --> CalculateCommandParser : cc
+deactivate CalculateCommand
+
+CalculateCommandParser --> AddressBookParser : cc
+deactivate CalculateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CalculateCommandParser -[hidden]-> AddressBookParser
+destroy CalculateCommandParser
+
+AddressBookParser --> LogicManager : cc
+deactivate AddressBookParser
+
+@enduml

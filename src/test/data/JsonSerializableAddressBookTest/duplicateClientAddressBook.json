@@ -1,0 +1,16 @@
+{
+  "clients": [ {
+    "name": "ArtFriend",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "plan": "VALUE 50MBps",
+    "tagged": [ "friends" ]
+  }, {
+    "name": "ArtFriend",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "plan": "NORMAL 100MBps"
+  } ]
+}

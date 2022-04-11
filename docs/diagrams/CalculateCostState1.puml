@@ -1,0 +1,31 @@
+@startuml
+Object Miniso
+
+object MinisoProcedure1
+MinisoProcedure1 : info = "replace switches"
+MinisoProcedure1 : cost = "150"
+MinisoProcedure1 : date = "22/03/2022"
+object MinisoProcedure2
+MinisoProcedure2 : info = "replace modem"
+MinisoProcedure2 : cost = "130"
+MinisoProcedure2 : date = "22/03/2022"
+
+Miniso *-- MinisoProcedure1
+Miniso *-- MinisoProcedure2
+
+object Apple
+
+object AppleProcedure1
+AppleProcedure1 : info = "fix router"
+AppleProcedure1 : cost = "100.50"
+AppleProcedure1 : date = "22/03/2022"
+
+
+object AppleProcedure2
+AppleProcedure2 : info = "replace wires"
+AppleProcedure2 : cost = "50"
+AppleProcedure2 : date = "04/01/2022"
+
+Apple *-- AppleProcedure1
+Apple *-- AppleProcedure2
+@enduml

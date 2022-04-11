@@ -1,0 +1,109 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditProcCommandParser" as EditProcCommandParser LOGIC_COLOR
+participant "epc:EditProcCommand" as EditProcCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+create LogicManager
+-> LogicManager : execute(userInput)
+note left
+    userInput denotes
+    "editProc 1 1 c/30"
+end note
+
+activate LogicManager
+LogicManager -> AddressBookParser : parseCommand("editProc 1 1 ")
+activate AddressBookParser
+
+create EditProcCommandParser
+AddressBookParser -> EditProcCommandParser
+activate EditProcCommandParser
+EditProcCommandParser --> AddressBookParser
+deactivate EditProcCommandParser
+
+AddressBookParser -> EditProcCommandParser : parse("1 1 c/30")
+activate EditProcCommandParser
+
+
+note left
+    new Parser()
+    denotes new
+    EditProcCommandParser()
+end note
+
+
+create EditProcCommand
+EditProcCommandParser -> EditProcCommand
+
+activate EditProcCommand
+EditProcCommand --> EditProcCommandParser : epc
+deactivate EditProcCommand
+
+EditProcCommandParser --> AddressBookParser: epc
+deactivate EditProcCommandParser
+
+AddressBookParser --> LogicManager : epc
+deactivate AddressBookParser
+
+AddressBookParser -[hidden]-> LogicManager
+destroy EditProcCommandParser
+
+LogicManager -> EditProcCommand : execute(command)
+activate EditProcCommand
+
+EditProcCommand -> ModelManager : gFCL()
+activate ModelManager
+
+note left
+    gFCL() denotes the method:
+    getFilteredClientList()
+end note
+
+ModelManager --> EditProcCommand
+deactivate ModelManager
+
+EditProcCommand -> EditProcCommand : editClientProcedures(info)
+note left
+    info denotes the target Client,
+        and the updated Procedures.
+end note
+activate EditProcCommand
+
+EditProcCommand --> EditProcCommand
+deactivate EditProcCommand
+
+EditProcCommand -> ModelManager : setClient(targetClient, editedClient)
+note left
+    the info denotes the target,
+    and the editedClient info.
+end note
+
+activate ModelManager
+ModelManager --> EditProcCommand
+deactivate ModelManager
+
+create CommandResult
+EditProcCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditProcCommand : cr
+deactivate CommandResult
+
+EditProcCommand --> LogicManager: cr
+deactivate EditProcCommand
+
+EditProcCommand -[hidden]-> LogicManager
+destroy EditProcCommand
+
+<-- LogicManager
+deactivate LogicManager
+@enduml

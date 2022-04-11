@@ -1,0 +1,53 @@
+{
+  "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
+  "clients" : [ {
+    "name" : "Artfriend",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "plan": "EXPRESS 200MBps",
+    "tagged" : [ "art" ]
+  }, {
+    "name" : "Boss",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "plan": "EXPRESS 200MBps",
+    "tagged" : [ "clothes" ]
+  }, {
+    "name" : "Carl's Jr",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "plan" : "EXPRESS 200MBps",
+    "tagged" : [ ]
+  }, {
+    "name" : "Domino's",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "plan": "EXPRESS 200MBps",
+    "tagged" : [ "fastfood" ]
+  }, {
+    "name" : "Elle's",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "plan" : "EXPRESS 200MBps",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz Sewing",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "plan" : "EXPRESS 200MBps",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Electronics",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "plan" : "EXPRESS 200MBps",
+    "tagged" : [ ]
+  } ]
+}

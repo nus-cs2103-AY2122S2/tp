@@ -1,0 +1,98 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteProcCommandParser" as DeleteProcCommandParser LOGIC_COLOR
+participant "dpc:DeleteProcCommand" as DeleteProcCommand LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+create LogicManager
+-> LogicManager : execute("deleteProc 1 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteProc 1 1")
+activate AddressBookParser
+
+create DeleteProcCommandParser
+AddressBookParser -> DeleteProcCommandParser
+activate DeleteProcCommandParser
+DeleteProcCommandParser --> AddressBookParser
+deactivate DeleteProcCommandParser
+
+AddressBookParser -> DeleteProcCommandParser : parse("1 1")
+activate DeleteProcCommandParser
+create DeleteProcCommand
+DeleteProcCommandParser -> DeleteProcCommand
+activate DeleteProcCommand
+
+DeleteProcCommand --> DeleteProcCommandParser : dpc
+deactivate DeleteProcCommand
+
+DeleteProcCommandParser --> AddressBookParser : dpc
+deactivate DeleteProcCommandParser
+
+DeleteProcCommandParser -[hidden]-> AddressBookParser : dpc
+destroy DeleteProcCommandParser
+
+AddressBookParser --> LogicManager : dpc
+deactivate AddressBookParser
+
+LogicManager -> DeleteProcCommand : execute(command)
+activate DeleteProcCommand
+
+DeleteProcCommand -> ModelManager : gFCL()
+activate ModelManager
+
+note left
+    gFCL() denotes the method getFilteredClientList()
+end note
+
+ModelManager --> DeleteProcCommand
+deactivate ModelManager
+
+DeleteProcCommand -> DeleteProcCommand : deleteProcedureFromList(procInfo)
+note left
+    the procInfo denotes the
+    Client's Procedures and the
+    target Procedure index.
+end note
+activate DeleteProcCommand
+
+DeleteProcCommand --> DeleteProcCommand
+deactivate DeleteProcCommand
+
+
+DeleteProcCommand -> ModelManager : setClient(info)
+activate ModelManager
+
+note left
+    the info denotes the target,
+    and the editedClient info.
+end note
+
+ModelManager --> DeleteProcCommand
+deactivate ModelManager
+
+create CommandResult
+DeleteProcCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteProcCommand : cr
+deactivate CommandResult
+
+DeleteProcCommand --> LogicManager : cr
+deactivate DeleteProcCommand
+
+DeleteProcCommand -[hidden]-> LogicManager
+destroy DeleteProcCommand
+
+<-- LogicManager
+deactivate LogicManager
+@enduml
