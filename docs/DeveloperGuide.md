@@ -367,13 +367,13 @@ which is then used to construct and return `AddStudentCommand`.
 
       `ParseException` will be thrown if the constraints are violated
 
-<img src="images/AddStudentSequenceDiagram-0.png" width="550"/>
+![](images/AddStudentSequenceDiagram-0.png)
 
 Step 6. The `LogicManager` then executes the `AddStudentCommand` and the `Student` is added to the `Student Book` if another `Student` with the same name does not already exist.
 
-The following sequence diagram shows how the add student command works.
+The following sequence diagram shows how the add student command works.  
 
-<img src="images/AddStudentSequenceDiagram-1.png" width="550"/>
+![](images/AddStudentSequenceDiagram-1.png)
 
 #### Design Considerations
 
