@@ -140,7 +140,7 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`clear`](#clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
   - [`findc`](#locating-companies-findc): Finds a company.
-  - [`findp`](#locating-people-by-name-findp): Finds a person.
+  - [`findp`](#locating-people-findp): Finds a person.
   - [`finde`](#locating-events-finde): Finds an event. 
 
 There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit).
