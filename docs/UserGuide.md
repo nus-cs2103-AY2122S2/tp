@@ -28,7 +28,7 @@ traditional GUI apps.
 |   OS    | How to start TeachWhat!                                                                                   |
 |:-------:|-----------------------------------------------------------------------------------------------------------|
 | Windows | Double-click the TeachWhat! jar file.                                                                     |
-|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat!.jar` |
+|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar 'TeachWhat!.jar'` |
 
 * The GUI similar to the one shown below should appear in a few seconds. 
 Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
@@ -208,7 +208,8 @@ Adds a lesson to TeachWhat!
 
 <div markdown="span" class="alert alert-warning">:bulb:
 **Adding Recurring Lessons**: To specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! If it is a temporary lesson, simply leave it out.
-**Duration**: At least one of the optional prefixes `-m` or `-h` must be used to give the duration of the lesson.
+   
+**Duration**: At least one of the optional prefixes `-m` or `-h` must be used to specify the duration of the lesson.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -220,7 +221,7 @@ Adds a lesson to TeachWhat!
 - Address is limited to 100 characters.
 </div>
 
-Supported Types: Recurring `-r` and Temporary
+<div style="page-break-after: always;"></div>
 
 **Example**: `addlesson -r -n Biology group 1 -s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04 -d 27-02-2022 -t 18:00 -h 1 -m 50`
 
@@ -395,8 +396,6 @@ Newly executed commands would be added to the history as you use TeachWhat!.
 Closes TeachWhat! window.
   
 **Format**: `exit`
-
---------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
