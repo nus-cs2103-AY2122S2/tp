@@ -474,6 +474,8 @@ of shows.
 Step 5: `Model#updateFilteredShowList` will then be called and `Model` will be updated with the 
 selected show.
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 - **Alternative 1 (current choice):** Returns a random show from the currently displayed list.
