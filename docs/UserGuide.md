@@ -57,8 +57,8 @@ A glossary is included at the end to clarify any technical or vague terms used.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
     - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
       - Navigate to the folder containing the **udt.jar** file. 
-      - Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location. 
-      - Type "java -jar udt.jar" to launch UDT from the Command Prompt.
+      - Type `cmd` into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location. 
+      - Type `java -jar udt.jar` to launch UDT from the Command Prompt.
 5. Refer to the Features below for details of each command.
 
 <div markdown="block" class="alert alert-info">
