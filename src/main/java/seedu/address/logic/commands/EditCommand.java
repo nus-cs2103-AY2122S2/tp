@@ -97,7 +97,9 @@ public class EditCommand extends Command {
         // remove reminder for previous instance of Person
         ReminderPersons reminderPersons = ReminderPersons.getInstance();
         Reminder previousReminder = reminderPersons.remove(personToEdit);
-        reminderPersons.add(editedPerson, previousReminder);
+        if (previousReminder != null) {
+            reminderPersons.add(editedPerson, previousReminder);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
