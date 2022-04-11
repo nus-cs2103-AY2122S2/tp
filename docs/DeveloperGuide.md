@@ -558,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to view help
 2. HireLah shows a list of commands and its briefly description
-
+   <br/><br/>
 Use case ends.
 
 #### **Use case 05: Viewing detail help for a specific command**
@@ -567,10 +567,20 @@ Use case ends.
 1. User <u>open the list of commands and general description (UC4).</u>
 2. User chooses a specific command and view its detail description.
 3. HireLah displays the detail description of that command
-4. User chooses to close the box.
-5. HireLah closes the box.
-
+   <br/><br/>
 Use case ends.
+ 
+**Extensions**
+
+* 2a. The given command is not a valid command.
+* 2a1. HireLah informs user that HireLah don't have the command.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The new position name provided is the same as another position.
+* 3b1. HireLah informs user that the new position name is not valid.
+  <br/><br/>
+  Use case ends.
 
 #### **Use case 06: Filtering data**
 
@@ -591,6 +601,167 @@ Use case ends.
 * 1b1. HireLah informs user that the filter type given is invalid.
   <br/><br/>
   Use case ends.
+
+#### **Use case 07: Sorting data**
+
+**MSS**
+1. User requests to list data with sorting applied.
+2. HireLah refreshes the list of data to display with data that have been sorted.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No data of a given type in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 1b. The sort argument given is invalid.
+* 1b1. HireLah informs user that the sort argument given is invalid.
+  <br/><br/>
+  Use case ends.
+
+#### **Use case 08: Passing interview**
+
+**MSS**
+1. User requests to list interviews.
+2. HireLah shows a list of interviews.
+3. User choose to pass an interview based on the index from the visible list.
+4. HireLah refreshes the list of interviews to display the newly passed interview.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No interview data in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The given interview index is not a valid index in the list.
+* 3b1. HireLah informs user that the index is invalid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3c. The chosen interview is not at `Pending` status.
+* 3c1. HireLah informs user that only pending interview can be passed
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+#### **Use case 09: Failing interview**
+
+**MSS**
+1. User requests to list interviews.
+2. HireLah shows a list of interviews.
+3. User choose to fail an interview based on the index from the visible list.
+4. HireLah refreshes the list of interviews to display the newly failed interview.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No interview data in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The given interview index is not a valid index in the list.
+* 3b1. HireLah informs user that the index is invalid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3c. The chosen interview is not at `Pending` status.
+* 3c1. HireLah informs user that only pending interview can be passed
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+#### **Use case 10: Accepting interview**
+
+**MSS**
+1. User requests to list interviews.
+2. HireLah shows a list of interviews.
+3. User choose to accept an interview based on the index from the visible list.
+4. HireLah refreshes the list of interviews to display the newly accepted interview.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No interview data in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The given interview index is not a valid index in the list.
+* 3b1. HireLah informs user that the index is invalid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3c. The chosen interview is not at `Pass` status.
+* 3c1. HireLah informs user that only passed interview can be passed
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+
+#### **Use case 11: Rejecting interview**
+
+**MSS**
+1. User requests to list interviews.
+2. HireLah shows a list of interviews.
+3. User choose to reject an interview based on the index from the visible list.
+4. HireLah refreshes the list of interviews to display the newly rejected interview.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No interview data in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The given interview index is not a valid index in the list.
+* 3b1. HireLah informs user that the index is invalid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3c. The chosen interview is not at `Pass` status.
+* 3c1. HireLah informs user that only passed interview can be passed
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+
+#### **Use case 11: Exporting data**
+
+**MSS**
+1. User requests to list data with optional sort or filter argument.
+2. HireLah shows a list of data.
+3. User chooses to export the data.
+4. HireLah exports the current displayed data into a CSV file.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No data in HireLah.
+* 1a1. HireLah display an empty list.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 4b. User chooses to open the CSV file and open again.
+* 4b1. HireLah informs user that the user need to close the CSV before exporting.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+
+#### **Use case 12: Clearing data**
+
+**MSS**
+1. User requests to clear data.
+2. HireLah clear all data.
+   <br/><br/>
+   Use case ends.
 
 *{More to be added}*
 
