@@ -136,7 +136,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PetBook`, which `Pet` references. This allows `PetBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `PetBook`, which `Pet` references. This allows `PetBook` to only require one `Tag` object per unique tag, instead of each `Pet` needing their own `Tag` objects.<br>
+</div>
 
 <p align="center">
     <img src="images/BetterModelClassDiagram.png" width="700" />
@@ -183,7 +185,8 @@ they can be compared and sorted alphabetically.
 The following sequence diagram shows how the sort operation works:
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a new sort command:
