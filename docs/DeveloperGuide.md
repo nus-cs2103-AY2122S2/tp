@@ -772,7 +772,7 @@ window preferences when you close the program.
 1. Launching the app
    1. Refer to the [Quick Start](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start) section of the
    User Guide on setting up TeachWhat!.
-   2. Launch the program using the Terminal with this command `java -jar TeachWhat.jar`
+   2. Launch the program using the Terminal with this command `java -jar TeachWhat!.jar`
    3. Test Case: First launch\
    Expected: Sample data should populate the lists. A data folder along with config.json and preferences.json should be
    created in the current directory.
@@ -891,7 +891,7 @@ This command requires you to have at least one existing student.
 This command requires you to have at least one existing student and lesson.
 * If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
 user guide section to add a student.
-* If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
+* If there are no lessons, refer to the [`addlesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
   user guide section to add a lesson.
 
 1. Test case 1: Assigning `student` to `lesson` successfully

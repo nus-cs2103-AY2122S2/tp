@@ -17,16 +17,16 @@ traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `TeachWhat.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
+2. Download the latest `TeachWhat!.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your LessonBook.
 
 4. To start TeachWhat!
 
-|   OS    | How to start TeachWhat!                                                                                  |
-|:-------:|----------------------------------------------------------------------------------------------------------|
-| Windows | Double-click the TeachWhat! jar file.                                                                    |
-|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat.jar` |
+|   OS    | How to start TeachWhat!                                                                                   |
+|:-------:|-----------------------------------------------------------------------------------------------------------|
+| Windows | Double-click the TeachWhat! jar file.                                                                     |
+|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat!.jar` |
 
 5. The GUI similar to the below should appear in a few seconds. 
 Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
@@ -130,7 +130,7 @@ Adds a student to TeachWhat!
 
 **Command word**: `addstudent` / `as`
 
-**Format**: `addstudent <-n NAME> -p <PHONE_NO> [-e EMAIL] [-a ADDRESS] [-t TAG]` 
+**Format**: `addstudent -n <NAME> -p <PHONE_NO> [-e EMAIL] [-a ADDRESS] [-t TAG]` 
 
 **Example**: `addstudent -n James -p 999 -e jamesboyo@gmail.com -a 34 Lor 11 Geylang -t hardworking -t small`
 
@@ -409,22 +409,22 @@ An example of such an error would be conflicting lessons being found in the data
 
 ## Command summary
 
-| Action               | Format, Examples                                                                                                                                                                          |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**      | `addstudent <NAME>` e.g. `addstudent sammy boyo`                                                                                                                                          |
-| **Add lesson**       | `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>` |
-| **Delete Student**   | `rmstudent <STUDENT_ID>` e.g. `rmstudent 13`                                                                                                                                              |
-| **Delete lesson**    | `rmlesson <LESSON_ID>` e.g.`rmlesson 5`                                                                                                                                                   |
-| **Edit Student**     | `editstudent <STUDENT_ID> -n <NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>`                                                                                                       |
-| **Edit lesson**      | `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`  |
-| **Assign Student**   | `assign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`assign -s 5 -l 11`                                                                                                                           |
-| **Unassign Student** | `unassign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`unassign -s 5 -l 11`                                                                                                                       |
-| **List Students**    | `liststudents`                                                                                                                                                                            |
-| **List lesson**      | `listlessons`                                                                                                                                                                             |
-| **View Student**     | `student <STUDENT_ID>` e.g. `student 5`                                                                                                                                                   |
-| **View lesson**      | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
-| **Find Student**     | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
-| **Find Lesson**      | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
-| **Clearing all entries**      | `clear -f`                                                                                                                                                                                |
-| **Help**             | `help`                                                                                                                                                                                    |
-| **Exit**             | `exit`                                                                                                                                                                                    |
+| Action                   | Format, Examples                                                                                                                                                                          |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**          | `addstudent <NAME>` e.g. `addstudent sammy boyo`                                                                                                                                          |
+| **Add lesson**           | `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>` |
+| **Delete Student**       | `rmstudent <STUDENT_ID>` e.g. `rmstudent 13`                                                                                                                                              |
+| **Delete lesson**        | `rmlesson <LESSON_ID>` e.g.`rmlesson 5`                                                                                                                                                   |
+| **Edit Student**         | `editstudent <STUDENT_ID> -n <NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>`                                                                                                       |
+| **Edit lesson**          | `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`  |
+| **Assign Student**       | `assign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`assign -s 5 -l 11`                                                                                                                           |
+| **Unassign Student**     | `unassign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`unassign -s 5 -l 11`                                                                                                                       |
+| **List Students**        | `liststudents`                                                                                                                                                                            |
+| **List lesson**          | `listlessons`                                                                                                                                                                             |
+| **View Student**         | `student <STUDENT_ID>` e.g. `student 5`                                                                                                                                                   |
+| **View lesson**          | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
+| **Find Student**         | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
+| **Find Lesson**          | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
+| **Clearing all entries** | `clear -f`                                                                                                                                                                                |
+| **Help**                 | `help`                                                                                                                                                                                    |
+| **Exit**                 | `exit`                                                                                                                                                                                    |
