@@ -235,11 +235,11 @@ The class diagram above depicts the structure of `AddCommand`. As per any Comman
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-   - Scenario: Adding of the specified `Person` to the database is successful.
-   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
+    - Scenario: Adding of the specified `Person` to the database is successful.
+    - Message: "New person added: %1$s" where "%1$s" is the added person's details.
 2. `MESSAGE_DUPLICATE_PERSON`:
-   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
-   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
+    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 **Interaction of objects when Add Command is executed:**
 
@@ -435,39 +435,54 @@ Afterwards, the `execute()` method of this ClearCommand object is called, which 
 
 ### Find feature
 
-#### Current Implementation
+The find mechanism implements the following sequence for the method call execute("find").
+
+#### What is the find feature
+
+The find feature allows users to find a particular contact by its name in Tracey and retrieve their specific details.
+
+The `find` command is as follows:
+
+`find NAME`
+
+The user do not require to search the full name of the contact. However,  the query substring must match the person's
+starting from the first character.
+
+e.g. `find J`
+This will return any contact details starts with J in the Tracey.
+
+e.g. `find Ja`
+This will match `Jack` while `find ck` will not match.
 
 The activity diagram below illustrates the flow of a `find` command.
 
+The activity diagram shows the possible execution paths for the `find` command.
+
+**Path Execution of Find Feature Activity Diagram is shown below:**
 ![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
 
-#### Usage Scenario
+There are two possible execution paths for this command.
 
-Given below is an example usage scenario and how `find` react and act at each step.
+1. User input the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
+   display an error message that informs the contact details the user try to search is not found.
 
-**1**) The user launches the application for the first time.
+2. User input the `find` command with valid arguments. Tracey returns a list of contact details that matches the
+   input name from the existing database, and display the contact list to the user.
 
-**2**) The user inputs `find alex` in the CLI to sort all contacts by name. This calls `LogicManager::execute`
-to parse the given input.
+The sequence diagram below illustrates the execution of `find` command.
 
-**3**) `LogicManager` will notice that a find command is called and will call `FindCommandParser::parse`. From the given input,
-`FindCommandParser` will create the corresponding `NameContainsKeywordsPredicate` Predicate and return a `FindCommand`.
-
-**4**) After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that lists
-out the persons with the `NameContainsKeywordsPredicate`.
-
-**5**) Through a series of method invocations, a lists of persons that matches the input is generated with their personal details.
-
-The sequence diagram below illustrates the execution of `find alex`.
-
+**Sequence Diagram of Find Feature is shown below:**
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+The argument typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will
+then be parsed by the `parseCommand` function in the `AddressBookParser` object.
 
-#### Design Considerations
+A `FindCommandParser` object will then be created to parse this input, with its `parse` function. A
+NameContainsKeywordsPredicate object is then created, containing the name that the user has entered.
+This NameContainsKeywordsPredicate object is then used to create a FindCommand object.
 
-**Aspect: How `find` executes**
-
-{to be decided}
+Subsequently, the `parseCommand` method in `LogicManager` will continute to create a `CommandResult`, displaying
+a success message and a list of the students that match up the name.
 
 <br>
 
@@ -489,12 +504,19 @@ In addition, for attribute types that need to be unique for each `Person` e.g. `
 * `name`: John `Email`: john123@gmail.com (indexed 1)
 * `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
 
+
 The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
 
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
 ####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
+
+Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
+**Class Diagram of Edit Feature is shown below**
+![EditFeatureActivityDiagram](images/EditFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `EditCommand`. As per any `Command` class, `EditCommand` needs to extend the abstract class `Command`.
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
@@ -860,6 +882,7 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
+
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
@@ -911,6 +934,37 @@ The above figure illustrates the important interactions of `ResizeCommand` when 
 When a user inputs `resize 1`, `MainWindow#executeCommand()` will be invoked which in turn calls `LogicManager#execute()`. This will trigger a parsing process by `AddressBookParser` and `ResizeCommandParser` to check for valid command type and parameters.
 This will then create a `ResizeCommand` object which is then executed by the `LogicManager` via `ResizeCommand#execute()` which will then update the value needed to set the result display window size. This value is used by the `MainWindow#handleResizeResultDisplayWindow()`
 which sets the window in the GUI according to the user's desired option.
+
+--------------------------------------------------------------------------------------------------------------------
+
+###Potential Feature: Import 
+
+This section explains the potential import feature. 
+The import mechanism will implement the following sequence for the method call execute("import").
+
+#### What is the import feature
+
+The import feature allows users to import an Excel file that contains a list of student records into Tracey.
+
+The `import` command is as follows:
+
+`import FILE PATH`
+
+The activity diagram shows the possible execution paths for the `import` command.
+
+**Path Execution of Import Feature Activity Diagram is shown below:**
+![ImportFeatureActivityDiagram](images/ImportFeature.png)
+
+There are two possible execution paths for this command.
+
+1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+
+The sequence diagram below shows the interactions between objects during the execution of a `import` command.
+
+**Sequence Diagram of Import Feature is shown below:**
+![ImportFeatureSequenceDiagram](images/ImportSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1150,19 +1204,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User keys in the details of students to filter out.
 3. Tracey returns a list of students of the specified covid status, faculty and block.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. Tracey detects invalid or empty arguments in user input.
     * 2a1. Tracey displays a error message and shows the correct input format.
 
-        Use case ends.
+      Use case ends.
 
 * 2b. User only inputs details for one or two of the fields (covid status, faculty or block).
     * 2b1. Tracey returns a list of students of the specified details.
 
-        Use case ends.
+      Use case ends.
 
 ### Use case: UC10 - Summarise all students for some overview of covid situation
 
@@ -1292,20 +1346,49 @@ testers are expected to do more *exploratory* testing.
 1. Summarising all the students' data at that specific time using the `summarise` command.
    A separate window containing charts that categorises student by covid status and faculty or block will be shown if there are student data in Tracey.
 
-    a. Test case: `summarise` on a non-empty list of students <br>
-       Expected: Pie Chart Window will display at least one pie chart and one bar chart.
+   a. Test case: `summarise` on a non-empty list of students <br>
+   Expected: Pie Chart Window will display at least one pie chart and one bar chart.
 
-    b. Test case: `summarise` on an empty list of students <br>
-       Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
+   b. Test case: `summarise` on an empty list of students <br>
+   Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
 
-    c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
-       Expected: New Pie Chart Window will display containing updated data set due to a deletion.
+   c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
+   Expected: New Pie Chart Window will display containing updated data set due to a deletion.
 
-    d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
-       Expected: Existing Pie Chart Window will close along with the Main Window.
+   d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
+   Expected: Existing Pie Chart Window will close along with the Main Window.
 
     e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
        Expected: Error message indicating format of command is wrong.
+=========
+### Finding a person
+
+1. Finding a person by their full name
+
+     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
+
+    1. Test case: `find Andy`<br>
+       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
+
+    1. Test case: `find Carl`<br>
+       Expected: No person is found. Error details shown in the status message. 
+
+    1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
+       Expected: Similar to previous.
+
+1. Finding a person by using name's prefix 
+
+    1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
+
+    1. Test case: `find An`<br>
+       Expected: List details of `Andy` and `Anna`. Details of matched contacts shown in the status message.
+
+    1. Test case: `find dy`<br>
+       Expected: No person is found. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `find na`, `find ob` <br>
+       Expected: Similar to previous.
+>>>>>>>>> Temporary merge branch 2
 
 ### Saving data
 

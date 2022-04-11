@@ -48,8 +48,6 @@
                   <children>
                 <Button fx:id="emailButton" onAction="#handleEmailWindow" text="Show Email" StackPane.alignment="CENTER_RIGHT">
           </Button>
-                      <Button fx:id="importButton" onAction="#handleImport" text="Import" StackPane.alignment="CENTER_LEFT">
-                      </Button>
                      <Button fx:id="resizeButton" alignment="CENTER_RIGHT" onAction="#handleResize" text="Resize Display" textFill="#4b1010" StackPane.alignment="CENTER">
                         <StackPane.margin>
                            <Insets right="20.0" />
