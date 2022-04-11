@@ -64,6 +64,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Update table of content and command summary [#91](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/91).
     * Update product screenshots [#125](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/125).
+    * Proofread user guide, make final changes and pdf conversion adjustments [#213](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/213).
     
 
   * Developer Guide:

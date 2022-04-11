@@ -292,7 +292,7 @@ Examples:
 * `grab tele/` <br> Grabs the telegram id of everyone inside UNite.
 * `grab tele/ t/friends` <br> Grabs the telegram id of everyone tagged as "friends" inside UNite.
 
-  ![result for 'grab e/'](images/grab-email.png)
+<img src="images/grab-email.png" width="300"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -322,16 +322,16 @@ Format: `theme THEME`
 Examples:
 * `theme dark` changes UNite to dark theme, which is also the default theme.
 
-![dark theme](images/dark_theme.png)
+<img src="images/dark_theme.png" width="300"/>
 <div style="page-break-after: always;"></div>
 
 * `theme light` changes UNite to light theme.
 
-![light theme](images/light_theme.png)
+<img src="images/light_theme.png" width="300"/>
 
 <div style="page-break-after: always;"></div>
 
-### View detailed profile `profile`<a name="view-detailed-profile-cli"></a>
+### View detailed profile: `profile`<a name="view-detailed-profile-cli"></a>
 View detailed information about the specified person in the form of profile, displayed at
 the right-hand side of the screen.
 
@@ -388,8 +388,8 @@ enter the command in the command box and follow the instructions in the previous
 Shown below are the annotated screenshots of UNite for reference to UI components:
 
 
-<img src="images/UNite_annotated.png" width="250"/>  <img src="images/UNite_profile.png" width="250"/> <br>
-<img src="images/UNite_taglist.png" width="250"/>  <img src="images/UNite_grabresult.png" width="250"/>
+<img src="images/UNite_annotated.png" width="300"/>  <img src="images/UNite_profile.png" width="300"/> <br>
+<img src="images/UNite_taglist.png" width="300"/>  <img src="images/UNite_grabresult.png" width="300"/>
 
 
 <div style="page-break-after: always;"></div>
