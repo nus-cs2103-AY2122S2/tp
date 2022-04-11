@@ -449,9 +449,9 @@ Step 5: `UI` is then updated accordingly, displaying the patient's summary
 
 **Target user profile**:
 
-Our target users would be doctors who need to keep track of their patient's medical information, health status and appointments.
+Our target users are healthcare professionals who need to keep track of patient’s medical information and hospital records.
 
-**Value proposition**: MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s medical details and scheduling appointments. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' medical information, billing and appointments through a simple and easy-to-use platform.
+**Value proposition**: MedBook is a health monitoring system for healthcare professionals that simplifies tracking patient’s medical information and hospital records. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients’ emergency contacts, medical information, medical tests, consultations and prescriptions through a simple and easy-to-use platform.
 
 ### User stories
 
@@ -539,24 +539,4 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a patient
-
-1. Deleting a patient while all patients are being shown
-
-   1. Prerequisites: List all patients using the `view` command. Multiple patients in the list.
-   
-   2. Test case: `delete 1`<br>
-      Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   3. Test case: `delete 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-   
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+3. Attempt to a
