@@ -41,7 +41,7 @@ public class AddApplicantCommand extends AddCommand {
             + PREFIX_TAG + "Ex-Facebook";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in HireLah application";
     private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
     private static final String MESSAGE_DUPLICATE_PHONE = "The phone number is already used by %1$s";
 

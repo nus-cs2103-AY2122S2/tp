@@ -198,7 +198,7 @@ support the needs of HireLah.
 
 ### Position feature
 
-#### Proposed Implementation
+#### Implementation
 
 A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
 * `PositionName` —  refers to the name of the job opening. 
@@ -213,13 +213,22 @@ A position in HireLah is represented by `Position`. `Position` is implemented wi
   
 These classes are contained in the `position` package which belongs to the `model` package.
 
-Position is implemented this way as for HireLah, as we need to keep track of these informations, in order to aid recruiters
-in keeping track of crucial information in the hiring process.
+Position is implemented this way as for HireLah, as we need these informations, in order to aid recruiters
+in keeping track of crucial job-related information in the hiring process.
 
-`PositionOffers` is implemented in a way that disallow users from directly mutating the underlying value.
-It is implemented in this way, so that it accurately reflects the number of `Applicants` that have been offered a job at
-the position. It would defeat the purpose if `PositionOffers` can be set to any number, as it would no longer be able to accurately
-keep track of offers handed out.
+#### Design considerations:
+
+#### Aspect: Ensuring that number of applicants offered a job does not exceed the number of job openings
+* **Alternative 1 (current choice):** `PositionOffers` is implemented in a way that disallow users from directly mutating the underlying value.
+`PositionOffers` is only mutated through various commands listed under section **Tracking Interview Status**.
+    * Pros: Number of `PositionOffers` is guaranteed to tally with number of "passed interviews".
+    * Cons: Difficulty in implementing due to coupling with the `Interview` class. Actions that mutate `Interview` may cause changes to `PositionOffers`.
+        It will also be more difficult for users to correct the erroneous commands, as they cannot directly decrement or increment `PositionOffers`.
+      
+* **Alternative 2** Allowing users to manually set their own number of offers.
+    * Pros: Greater flexibility for users to update and keep track of the number of offers handed out.
+    * Cons: Users will have to exercise their own diligence in ensuring that number of offers handed out tallies with the number
+        of "passed interview".
 
 ### Tracking Interview Status
 
@@ -452,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | recruiter   | edit an interview                      | update the latest information of interviews                             |
 | `* * *` | recruiter   | delete an interview                    | remove entries that I no longer need                                    |
 | `* * *` | recruiter   | add a new position                     | keep track of all the applicants                                        |
-| `* * *` | recruiter   | edit a position                        | update the latest information of applicants                             |
+| `* * *` | recruiter   | edit a position                        | update the latest information of positions                              |
 | `* * *` | recruiter   | delete a position                      | remove entries that I no longer need                                    |
 | `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
 | `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
@@ -631,7 +640,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
    
-
+### Adding Data
+1. Adding an applicant to HireLah
+    1. Prerequisites: Ensure that cursor is on command box. Current applicant list does not contain any other applicants with the same name, phone number, or email, stated in Test Case #1.
+    2. Test case: `add -a n/Jonathan p/98564231 e/jonathan@example.com ag/23 a/73 Geylang Rd, S532948 g/M t/NUS Graduate`<br/>
+        Expected: New applicant is added to the bottom of the list. Details of the applicant shown in response box. GUI toggles to display applicant list.
+    3. Test case: `add -a n/Jonathan p/91234567 e/notjonathan@example.com ag/23 a/73 Geylang Rd, S532948 g/M t/NUS Graduate`<br/>
+        Expected: No applicant is added to the applicant list. Error message informs user that the applicant already exists.
+    4. Test case: `add -a n/NotJonathan p/98564231 e/notjonathan@example.com ag/23 a/73 Geylang Rd, S532948 g/M t/NUS Graduate`<br/>
+        Expected: No applicant is added to the applicant list. Error message informs user that phone number is in used by "Jonathan".
+    5. Test case: `add -a n/NotJonathan p/91234567 e/jonathan@example.com ag/23 a/73 Geylang Rd, S532948 g/M t/NUS Graduate`<br/>
+        Expected: No applicant is added to the applicant list. Error message informs user that email is in used by "Jonathan".
+1. Adding a position to HireLah
+    1. Prerequisites: Ensure that cursor is on command box. Current position list does not contain any other positions with the same position name stated in Test Case #1.
+    2. Test case: `add -p p/Junior Software Developer o/3 d/One of the highest compensation in the market. Work is remote. r/Golang r/Cloud Computing`<br/>
+        Expected: New position is added to the bottom of the list. Details of the position shown in response box. GUI toggles to display position list.
+    3. Test case: `add -p p/Junior Software Developer o/5 d/Not the same description. r/C++ r/Java`<br/>
+        Expected: No position is added to the position list. Error message informs user that position already exists.
+1. Adding an interview to HireLah
+    1. Prerequisites: Ensure that cursor is on command box. At least one applicant and position in the application. No interview scheduled for applicant and the particular position mentioned in all test cases below.
+    2. Test case: `add -i 1 p/1 d/2022-04-11 12:00`<br/>
+        Expected: New interview is added to the bottom of the list. Applicant's name, date of interview, position's name and interview status is shown in response. GUI toggles to display interview list.
+    3. Test case: `add -i 1 p/1 d/2022-04-12 12:00`<br/>
+        Expected: No interview is added to the interview list. Error message informs user that applicant already has an interview scheduled for that position.
+    4. Test case: `add -i 1 p/2 d/2022-04-11 12:30`<br/>
+        Expected: No interview is added to the interview list. Error message informs user that applicant has an existing scheduled interview that clashes in timing.
+    
 ### Deleting Data
 
 1. Deleting an applicant while all applicants are being shown

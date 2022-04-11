@@ -32,7 +32,7 @@ public class AddPositionCommand extends AddCommand {
             + PREFIX_REQUIREMENT + "Experience with SQL";
 
     public static final String MESSAGE_SUCCESS = "New position added: %1$s";
-    public static final String MESSAGE_DUPLICATE_POSITION = "This position already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_POSITION = "This position already exists in HireLah application";
 
     private final Position toAdd;
 
