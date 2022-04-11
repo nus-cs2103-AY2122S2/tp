@@ -1,11 +1,6 @@
 package seedu.address.testutil;
 
-import org.junit.jupiter.api.Test;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.prescription.DrugName;
-import seedu.address.model.prescription.Instruction;
-import seedu.address.model.prescription.Prescription;
-import seedu.address.model.prescription.PrescriptionDate;
 import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
 import seedu.address.model.testresult.TestDate;
