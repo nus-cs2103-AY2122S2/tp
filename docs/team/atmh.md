@@ -21,7 +21,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Highlights: This feature affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation was challenging as it required changes to existing commands.
     * Credits: https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
   <br><br>
-  * Revamp duplicate detection (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
+  * Revamp duplicate detection (PR [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
     * What it does: Prevents duplicate entries with the same name, phone and email when using add and edit commands.
     * Justification: This feature improves the product by helping users manage duplicates by preventing duplicated contacts with the same name, phone and email.
     * Highlights: This feature affects existing and future person attributes on how uniqueness is determined, and needs to be integrated with the existing commands. Duplicate detection is not trivial, detecting only exact string matches is not enough. It was meticulously implemented to behave closely to how these attributes are in the real world. For example, "John &#160;&#160;&#160; Doe" and "john doe" are likely to be the same person, even though there are differences in white spaces and capitalization. The implementation was tedious and challenging as it required changes in many of the existing classes.
