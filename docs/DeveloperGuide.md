@@ -196,7 +196,7 @@ or any new features that we have in mind.
   - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
   - [Undo/redo Feature](#proposed-undoredo-feature)
   - [User Interface](#proposed-update-user-interface)
-
+  
 ### \[Implemented\] Status Feature
 
 #### Implementation
@@ -439,6 +439,32 @@ of students which makes it slightly impractical to use
 * `Activity`
   * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
   * A student can have ANY number of activities, including zero (optional).
+
+The `add` feature was originally implemented in **AB3** with only a select few attributes such as `Name`, `Email`, `Phone number` etc.
+To properly, address the main issue that our app aims to solve, we have added and updated specific attributes such as `Status`, `ClassCode`
+and `Activities`, which will be further elaborate on further into the Developer Guide.
+
+To accommodate these new changes, updates were made to the `CLISyntax` class as well, for the new prefixes of the new attributes.
+
+|![AddMethodActivityDiagram](images/developer-guide/AddMethodActivityDiagram.png)|
+|:--:|
+|*Add Method - Activity Diagram*|
+
+As seen in the figure above, when the `add` command is used, the parser checks if the command provided is valid, by checking
+the prefixes as well as the details provided - a _ParseException_ is thrown for invalid commands. Following a valid command,
+a check is then performed to see if this `Person` has already been added, throwing a command exception if so. Otherwise,
+the `Person` will be created with the details provided, inserted into the `AddressBook` and returns a success message
+to the **user**. The **_Batch Update_** Feature is also implemented within the Add Command and checks for any `Person` that is
+being added with a **_Positive_** `Status`.
+
+|![AddMethodClassDiagram](images/developer-guide/AddClassDiagram.png)|
+|:--:|
+|*Add Method - Class Diagram*|
+
+The `AddCommand` class extends from the Abstract `Command` class and its Class Diagram is as shown above. Within `AddCommand`,
+there is an additional method `batchUpdateNegativeToPositive` that checks for any COVID-19 _Positive_ students being added into
+the addressbook. If so, other students within the same `Activity` and `ClassCode` will have their `Status` updated to _Close-Contact_.
+
 
 ### \[Updated\] Editing a Person Feature
 
