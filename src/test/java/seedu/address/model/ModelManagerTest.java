@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.TAssistBuilder;
+import seedu.address.testutil.TypicalAssessments;
 import seedu.address.testutil.TypicalClassGroups;
 import seedu.address.testutil.TypicalModules;
 
@@ -130,6 +131,27 @@ public class ModelManagerTest {
     @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+    }
+
+    @Test
+    public void getFilteredAssessmentsList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAssessmentList().remove(0));
+    }
+
+    @Test
+    public void hasModule_assessmentNotInTAssist_returnsFalse() {
+        assertFalse(modelManager.hasEntity(TypicalAssessments.CS2101_PARTICIPATION_WITH_ATTEMPT));
+    }
+
+    @Test
+    public void hasAssessment_moduleInTAssist_returnsTrue() {
+        modelManager.addEntity(TypicalAssessments.CS2101_PARTICIPATION_WITH_ATTEMPT);
+        assertTrue(modelManager.hasEntity(TypicalAssessments.CS2101_PARTICIPATION_WITH_ATTEMPT));
+    }
+
+    @Test
+    public void getFilteredAssessmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAssessmentList().remove(0));
     }
 
     @Test
