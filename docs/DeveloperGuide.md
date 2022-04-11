@@ -59,9 +59,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -98,7 +98,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-###### Delete Sequence Diagram
+###### Sequence Diagram: `delete`
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -123,7 +123,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the TAddressBook data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Student` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -133,29 +133,28 @@ The `Model` component,
 
 </div>
 
-#### Lab Component (Subcomponent of Model)
+#### Lab component (Subcomponent of Model)
 
 The `Lab` Component is a subcomponent of the `Model` component.
 
-* stores all Lab related data.
-* stores all `Lab` objects related to a `Student` object in `LabList`. (each `Student` object has its own copy of a `LabList`).
-* the `MasterLabList` stores all the labs added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any one time).
+* stores all lab-related data.
+* stores all `Lab` objects related to a `Student` object in a `LabList` (each `Student` object has its own copy of a `LabList`).
+* the `MasterLabList` stores all `Lab` objects added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any given time).
 
 
 ### Storage component
-
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both TAddressBook data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2122S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -163,7 +162,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## `labadd`: Add Lab Command Feature
+### `labadd`: Add Lab Command Feature
 The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. The add lab command takes in 1 argument `LAB_NUMBER`.
 
 The command format for add lab is `labadd l/LAB_NUMBER` where `LAB_NUMBER` should be an Integer between 0 and 20 inclusive.
@@ -218,90 +217,6 @@ The following **UML activity diagram** shows what happens when a user executes a
 
 <img src="images/AddLabCommandActivityDiagram.png" width="600" />
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Filter Feature
 
 #### Proposed Implementation
@@ -315,7 +230,82 @@ Given below is an example usage scenario and how the filter mechanism behaves at
 Step 1. The user executes `filter l/1 s/s` command.
 
 
+### \[Proposed\] Undo/redo feature
 
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current TAddressBook state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous TAddressBook state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone TAddressBook state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial TAddressBook state, and the `currentStatePointer` pointing to that single TAddressBook state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th student in the TAddressBook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the TAddressBook after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted TAddressBook state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified TAddressBook state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the TAddressBook state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous TAddressBook state, and restores the TAddressBook to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial TAddressBook state, then there are no previous TAddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the TAddressBook to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest TAddressBook state, then there are no undone TAddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the TAddressBook, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all TAddressBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire TAddressBook.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
+  * Cons: We must ensure that the implementation of each individual command is correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -344,9 +334,8 @@ CS2030S Teaching Assistants (TAs) who
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
-**Value proposition**: provides CS2030S TAs with a systematic way to keep track of students, including who he/she
-has graded and what grade was given for every lab.
-
+**Value proposition**: provides CS2030S TAs with a systematic way to keep track of students and their lab assignments,
+including who he/she has graded and what grade was given for every lab.
 
 ### User stories
 
@@ -364,30 +353,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA      | update status of a lab when a student has submitted it           | keep track of which labs students have submitted                                                            |
 | `* * *`  | TA      | update status of a lab and add marks to it when I have graded it | keep track of what labs I have graded and how I have graded them                                            |
 | `* * *`  | TA      | edit status and marks of a lab                                   | edit lab statuses and marks I changed or entered by mistake                                                 |
-| `* * *`  | TA      | remove a lab assignment from the TAddressBook                    | delete any labs that i've previously inputted by accident                                                   |
+| `* * *`  | TA      | remove a lab assignment from the TAddressBook                    | delete any labs that I've previously inputted by accident                                                   |
 | `* *`    | TA      | add students without filling in all attributes                   | keep track of students even if I do not know all their details                                              |
-
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TAddressBook (TAB)` and the **Actor** is the `Teaching Assistant (TA)`, unless otherwise specified)
+(For all use cases below, the **System** is the `TAddressBook (TAB)` and the **Actor** is the `CS2030S Teaching Assistant (TA)`, unless otherwise specified)
 
-**Use case UC1: Add a new lab to the list of labs**
+##### Use case UC1: Add a new lab to the list of labs
 
 **MSS**
 1. TA requests to add new lab with a given lab number.
 2. TAB adds a new lab to every student.
-3. TAB shows updated list of labs.
+3. TAB shows updated student list with the new lab added.
 4. TAB displays success message.
 
    Use case ends.
 
 **Extensions**
 * 1a. TAB detects that the student list is empty.
-    * 1a1. TAB displays warning message to user (that there are no students yet).
+    * 1a1. TAB displays warning message to user (that there are no students yet but students added subsequently will have the new lab).
 
-      Use case resumes from 4.
+      Use case ends.
   
 * 1b. TAB detects that an identical lab already exists.
     * 1b1. TAB displays error message (that lab already exists).
@@ -395,11 +382,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 1c. TAB detects that the lab number provided is not an integer between 0 and 20 inclusive.
-    * 1c1. TAB displays error message (that lab number is invalid).
+    * 1c1. TAB displays error message (that the lab number is invalid).
 
       Use case ends.
 
-**Use case UC2: Filter students by status of a specified lab**
+##### Use case UC2: Filter students by status of a specified lab
 
 **MSS**
 
@@ -411,16 +398,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. TA provides non-existent lab.
-    * 1a1. TAB shows error message.
+    * 1a1. TAB shows error message (that the lab does not exist).
 
-      Use case ends
+      Use case ends.
 
 * 1b. TA tries to filter an empty list.
     * 1b1. TAB shows error message.
 
       Use case ends.
 
-**Use case UC3: Mark student's lab as submitted**
+##### Use case UC3: Mark a student's lab as submitted
 
 **MSS**
 1. TA requests to change a student’s lab status to "Submitted".
@@ -436,21 +423,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 * 1b. TA provides non-existent lab.
-    * 1b1. TAB shows error message stating that the lab does not exist.
+    * 1b1. TAB shows error message stating that the lab number is invalid.
 
       Use case ends.
-* 1c. TA provides lab that is already "Submitted" or "Graded".
-    * 1c1. TAB shows error message stating that lab must be "Unsubmitted".
+* 1c. TA provides lab that is already "SUBMITTED" or "GRADED".
+    * 1c1. TAB shows error message stating that the command cannot be used due to the current lab status.
 
       Use case ends.
 
-**Use case UC4: Mark student's lab as graded**
+##### Use case UC4: Mark a student's lab as graded
 
 **MSS**
-1. TA requests to change a student’s lab status to "Graded" and specifies a grade.
+1. TA requests to change a student’s lab status to "Graded" and specifies a mark.
 2. TAB changes the student’s lab status from either "Unsubmitted" or "Submitted" to "Graded".
-3. TAB adds the specified grade to the student's lab.
-4. TAB displays updated lab status, grade and success message.
+3. TAB adds the specified mark to the student's lab.
+4. TAB displays updated lab status and success message.
 
    Use case ends.
 
@@ -461,24 +448,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 * 1b. TA provides non-existent lab.
-    * 1b1. TAB shows error message stating that the lab does not exist.
+    * 1b1. TAB shows error message stating that the lab number is invalid.
 
       Use case ends.
 * 1c. TA provides lab that is already "Graded".
-    * 1c1. TAB shows error message stating that lab is already "Graded".
+    * 1c1. TAB shows error message stating that the command cannot be used due to the current lab status.
 
       Use case ends.
-* 1d. TA provides an invalid grade (e.g. a negative number).
-    * 1d1. TAB shows error message stating that grade provided is invalid.
+* 1d. TA provides an invalid mark (e.g. a negative number).
+    * 1d1. TAB shows error message stating that valid range of the mark.
 
       Use case ends.
 
-**Use case UC5: Edit a student's lab**
+##### Use case UC5: Edit a student's lab
 
 **MSS**
-1. TA requests to edit a specified student lab's status and/or grade.
-2. TAB edits the specified student lab's status and/or grade.
-3. TAB displays updated lab status, grade and success message.
+1. TA requests to edit a specified student lab's status and/or mark.
+2. TAB edits the specified student lab's status and/or mark.
+3. TAB displays updated lab status (if lab status was edited) and success message.
 
    Use case ends.
 
@@ -489,19 +476,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 * 1b. TA provides non-existent lab.
-    * 1b1. TAB shows error message stating that the lab does not exist.
+    * 1b1. TAB shows error message stating that the lab number is invalid.
 
       Use case ends.
-* 1c. TA provides invalid status and grade combination e.g. providing a grade when the updated status is "Unsubmitted".
+* 1c. TA provides invalid status and grade combination e.g. providing a grade when the updated status is "UNSUBMITTED".
     * 1c1. TAB shows error message stating that the given combination is invalid.
 
       Use case ends.
 * 1d. TA provides an invalid grade (e.g. a negative number).
-    * 1d1. TAB shows error message stating that grade provided is invalid.
+    * 1d1. TAB shows error message stating that valid range of the mark.
 
       Use case ends.
 
-**Use case UC6: Remove a  lab from the list of labs**
+##### Use case UC6: Remove a lab from the list of labs
 
 **MSS**
 1. TA requests to remove a lab with a given lab number.
@@ -529,16 +516,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A TA with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be intuitive for both new users and experienced users.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Lab**: Refers to Lab assignments from the module CS2030S offered by The National University of Singapore.
-* **Lab Status**: Refers to possible statuses of Lab assignments.
-  * **UNSUBMITTED**: Status to indicate that the student has not submitted the Lab assignment.
-  * **SUBMITTED**: Status to indicate that the student has submitted the Lab assignment to his GitHub repository.
-  * **GRADED**: Status to indicate that the User (TA) has graded the student's Lab assignment.
+* **Lab**: Refers to lab assignments from the module CS2030S offered by the National University of Singapore.
+* **Lab Status**: Refers to possible statuses of lab assignments.
+  * **UNSUBMITTED**: Status to indicate that the student has not submitted the lab assignment.
+  * **SUBMITTED**: Status to indicate that the student has submitted the lab assignment to his/her GitHub repository.
+  * **GRADED**: Status to indicate that the User (TA) has graded the lab assignment.
 
 --------------------------------------------------------------------------------------------------------------------
 
