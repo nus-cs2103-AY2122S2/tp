@@ -22,7 +22,7 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the remark of the candidate identified "
             + "by the index number used in the displayed candidates list. "
-            + "Parameters: INDEX " + PREFIX_REMARK + "[REMARK]\n"
+            + "Parameters: INDEX " + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "Is a good candidate.\n"
             + "Note: The candidate index number must be a valid non zero positive integer. Candidate's existing "
             + "remark will be overwritten.\n";
