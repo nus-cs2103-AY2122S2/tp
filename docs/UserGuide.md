@@ -146,6 +146,10 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 **Format:** `view INDEX` or click the Contact/Meeting under the list.
 
+A Contact Detail card with the details of a contact will be shown to the user as shown below.
+
+<img src="view.png">
+
 **Examples:**
 
 > `view 2` </br>
@@ -327,6 +331,8 @@ The order of the keywords does not matter. e.g. `2040 CS` will match `CS 2040`.
 
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
 DURATION is in minutes and must be an integer between 1 and 10000 (inclusive).
+
+Note that meetings in the past are not editable.
 
 **Examples:**
 
