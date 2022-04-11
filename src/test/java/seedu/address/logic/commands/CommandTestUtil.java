@@ -131,8 +131,4 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPatientList().size());
     }
 
-    public static void showPrescriptionAtIndex(Model model, Index targetIndex) {
-        ass
-    }
-
 }
