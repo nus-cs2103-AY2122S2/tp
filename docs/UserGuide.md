@@ -22,10 +22,10 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Main](images/Main.png)
 
-Some features are able to be operated via mouse interaction. Features that allow mouse interactions are disabled by default. 
+Refer to the [Features (CLI)](#features-cli) below for details of each command.
 
+Some features are able to be operated via mouse interactions, most of these are disabled by default while some are not, refer to [Features (Mouse interaction)](#features-mouse-interaction) below for more details.
 
-Refer to the [Features](#features-cli) below for details of each command.
 
 <div style="page-break-after: always;"></div>
 
@@ -52,7 +52,7 @@ Below are the features that can be completed using command line interface (CLI).
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear` and `clear_emptytag`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -82,58 +82,56 @@ Peter with tags `classmates` and `friends`.
 * `add n/Aaron p/2345678 e/aaron@gmail.com` <br>
 This command will not get executed successfully, because of the missing required field `a/ADDRESS`.
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-info">
 
-### Input Validation Rules<a name="input-validation"></a>
+**Notes about Input Validation Rules**<a name="input-validation"></a>
 
-There are certain rules that users should follow for input to be considered valid. Please refer to the following.
- 
-#### NAME
-NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
+There are certain rules that users should follow for input to be considered valid (applies to all commands). Please refer to the following.
 
-* Valid Examples - `Alice Tan`, `Alice3tan`
-* Invalid Examples - `peter*`
+ * #### NAME
+    NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
+     * Valid Examples - `Alice Tan`, `Alice3tan`
+     * Invalid Examples - `peter*`
 
-#### EMAIL 
-Emails should be of the format local-part@domain and adhere to the following constraints: 
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
- end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+ * #### EMAIL 
+    Emails should be of the format `local-part@domain` and adhere to the following constraints:
+     1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters, and two or more special characters cannot appear consecutively.
+     2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by compulsory periods. The domain name must:
+         * end with a domain label at least 2 characters long
+         * have each domain label start and end with alphanumeric characters
+         * have each domain label consist of alphanumeric characters, separated only by hyphens, if any
+    * Valid Examples - `aliceTan@gmail.com`, `123@co.cn` 
+    * Invalid Examples - `peterjack@@example.com`, `peterjack@-`, `peterjack@gmail`
 
-* Valid Examples - `aliceTan@gmail.com`, `123@145` 
-* Invalid Examples - `peterjack@@example.com`, `peterjack@-`
+ * #### PHONE
+    Phone numbers should only contain numbers, and it should be at least 3 digits long
+     * Valid Examples - `12341234`, `123`
+     * Invalid Examples - `@123123`, `dasd123 123`
 
-#### PHONE
-Phone numbers should only contain numbers, and it should be at least 3 digits long
+ * #### ADDRESS
+    Addresses can take any values (including non-english characters), and it should not be blank
+     * Valid Examples - `Blk 456, Den Road, #01-355`, `-`
+     * Invalid Examples - ``
 
-* Valid Examples - `12341234`, `123`
-* Invalid Examples - `@123123`, `dasd123 123`
+ * #### TELEGRAM 
+     Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
+      * Valid Examples - `alice_test_1234`, `alice123`
+      * Invalid Examples - `_alice`, `@alice`
 
-#### ADDRESS
-Addresses can take any values, and it should not be blank
+ * #### COURSE
+     Course should only contain alphabet characters and spaces.
+      * Valid Examples - `Computer Science and Mathematics`, `Math`
+      * Invalid Examples - `123`, `Computer_Science`
 
-* Valid Examples - `Blk 456, Den Road, #01-355`, `-`
-* Invalid Examples - ``
+ * #### MATRIC CARD
+     Matric Card should only contain alphanumeric characters, and it should be one word
+      * Valid Examples - `A1231234E`
+      * Invalid Examples - `alice test`, `@A1231234E`
 
-#### TELEGRAM 
-Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
-
-* Valid Examples - `alice_test_1234`, `alice123`
-* Invalid Examples - `_alice`, `@`
-
-#### COURSE
-Course should only contain alphabet characters and spaces.
-
-* Valid Examples - `Computer Science and Mathematics`, `Math`
-* Invalid Examples - `123`, `@`
-
-#### MATRIC CARD
-Matric Card should only contain alphanumeric characters, and it should be one word
-
-* Valid Examples - `A1231234E`
-* Invalid Examples - `alice test`, `@`
+ * #### TAG
+     Tag should only contain alphanumeric characters, and it should be one word
+      * Valid Examples - `CS2100`
+      * Invalid Examples - `CS_2100`, `C S 2 1 0 0`
 
 </div>
 
@@ -166,14 +164,23 @@ Add a new tag to UNite.
 
 Format: `add_tag t/TAG_NAME`
 
+Examples:
+* `add_tag t/Students`<br> Adds a new tag called "Students" if it does not yet exist.
+* `add_tag t/Professors`<br> Adds a new tag called "Professors" if it does not yet exist.
+
 ### Delete a tag : `delete_tag`<a name="delete-a-tag"></a>
 
-Delete an existing tag from UNite
-* Deletes the tag at the specified `INDEX`.
+Delete an existing tag from UNite.
+
+Format: `delete_tag INDEX`
+
+* Deletes the tag at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed tag list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Format: `delete_tag INDEX`
+Examples:
+* `delete_tag 1`<br> Deletes the tag at index number 1 if there is any.
+* `delete_tag 10`<br> Deletes the tag at index number 10 if there is any.
 
 <div style="page-break-after: always;"></div>
 
@@ -188,24 +195,31 @@ Format: `list_tag`
 
 ### Attach tag to a profile: `attach`<a name="attach-tag-to-a-profile"></a>
 
-Add an existing tag to a profile
-
-* Attach to the person at the specified `PROFILE_INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Add an existing tag to a profile.
 
 Format: `attach t/TAG_NAME i/PROFILE_INDEX`
 
-### Detach a tag from a profile : `detach`<a name="detach-a-tag-from-a-profile"></a>
-
-Remove the tag from a profile’s tags
-
-* Remove from the person at the specified `PROFILE_INDEX`.
+* Attach the tag of `TAG_NAME` to the person at the specified `PROFILE_INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Examples:
+* `attach t/Students i/1`<br> Attaches the tag "Students" to the person at index 1, if both the tag and the person exist.
+* `attach t/Professors i/10`<br> Attaches the tag "Professors" to the person at index 10, if both the tag and the person exist.
+
+### Detach a tag from a profile : `detach`<a name="detach-a-tag-from-a-profile"></a>
+
+Remove the tag from a profile’s tags.
+
 Format: `detach t/TAG_NAME i/PROFILE_INDEX`
 
+* Remove the tag of `TAG_NAME` from the person at the specified `PROFILE_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `detach t/Students i/1`<br> Detaches the tag "Students" from the person at index 1, if the person exists and the person has a tag called "Students".
+* `detach t/Professors i/10`<br> Detaches the tag "Professors" from the person at index 10, if the person exists and the person has a tag called "Professors".
 
 ### Filter list by tag: `filter`<a name="filter-list-by-tag"></a>
 Filters the full contact list with an existing tag. List will not get updated if tag does not exist. To clear the
@@ -317,14 +331,13 @@ Format: `profile INDEX`
 * View the profile of a person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The `PersonListPanel` will focus on and scroll to the specified person.
 
 Examples:
 * `list` followed by `profile 2` displays the 2nd person's profile at the right-hand side.
+![result for 'profile 2'](images/profile.png)
 * `filter friends` followed by `profile 3` displays the 3rd person's profile in the filtered list generated
 by the `filter`command.
 * `find Betsy` followed by `profile 1` displays the 1st person's profile in the results of the `find` command.
-![result for 'profile 5'](images/profile.png)
 
 ### Clear all entries : `clear`<a name="clear-all-entries"></a>
 
@@ -361,81 +374,88 @@ _Details coming soon ..._
 
 ## Features (Mouse interaction)<a name="features-mouse-interaction"></a>
 
-By default, mouse interactions are disabled in UNite. However, users who are not familiar with using CLI can enable
+By default, features that allow mouse interactions are disabled in UNite unless otherwise stated. However, users who are not familiar with using CLI can enable
 it. Below are the features that are supported by mouse interactions.
 
-**Note:** Some features included in the CLI section cannot be done using mouse interaction. To execute those features,
-enter the command in the command box following the instructions in the previous section.
+**Note:** Some features included in the [Features (CLI)](#features-cli) section cannot be done using mouse interaction. To execute those features,
+enter the command in the command box and follow the instructions in the previous section.
 
-Below is an annotated screenshot of UNite for reference to UI components:
+Shown below are the annotated screenshots of UNite for reference to UI components:
 
 <img src="images/UNite_annotated.png" width="400"/>
+<img src="images/UNite_profile.png" width="400"/>
+<img src="images/UNite_taglist.png" width="400"/>
+<img src="images/UNite_grabresult.png" width="400"/>
 
 <div style="page-break-after: always;"></div>
 
 ### Enable mouse interaction : `enable_mouseUX`<a name="enable-mouse-interaction"></a>
-Enables mouse interaction in mouseUX. After enabling mouse interactions, 2 new buttons ("Add" and "New tag") will
+Enables mouse interaction in mouseUX. After enabling mouse interactions, 3 new buttons ("Add", "Tags" and "Theme") will
 appear on the menu bar as shown in the figure below.
 
 <img src="images/enableMouseUX_menuBar.png" width="250"/>
 
+Right-click operation is also enabled for both person list panel and tag list.
+
 Format: `enable_mouseUX`
 
 ### Disable mouse interaction : `disable_mouseUX`<a name="disable-mouse-interaction"></a>
-Disables mouse interaction in mouseUX. After disabling, buttons that help users access pop up windows will disappear.
-However, the below mouse interactions are still maintained:
-* Viewing a profile
-* Filtering contact list (by left clicking on the tag list)
+Disables mouse interaction in mouseUX. After disabling, buttons in menu bar that help users access pop up windows will disappear, right-click operation for both person list panel and tag list are disabled.
+The 2 mouse interactions below are still maintained (these 2 features are enabled by default and cannot be disabled):
+* View a profile by left-clicking on a person in person list panel.
+* Filter contact list by left-clicking on the tag list.
 
 Format: `disable_mouseUX`
 
 ### View detailed profile<a name="view-profile-click"></a>
-To view a profile, click on the person card in the list to view it.
+To view a profile, left-click on the person in the person list panel. As mentioned, this feature is enabled by default and cannot be disabled.
 
 <div style="page-break-after: always;"></div>
 
 ### Add a new profile<a name="add-a-new-person-click"></a>
 
-To add a new profile, click the `Add` button on the menu bar, and select `Add profile`. An **add profile pop up
+To add a new profile, click the `Add` button in menu bar, and select `Add Profile`. An **Add Profile pop-up
 window** will appear.
 
 <img src="images/addProfileNew_popup.png" width="400"/>
 
 In the window, simply enter all related information into the spaces provided, and click the
-`save` button to add a new profile. Click `cancel` to stop adding and close the pop up window.
+`Save` button to add a new profile. Click `Cancel` to stop adding and close the pop-up window.
 
 
-### Delete profile<a name="delete-profile"></a>
+### Delete person<a name="delete-person"></a>
 
-To delete a profile, right click on the profile and select `delete`.
+To delete a person, right-click on the profile and select `Delete`.
 
 <img src="images/deleteProfile_GUI.png" width="300"/>
 
 
 ### Add a new tag<a name="add-a-new-tag-click"></a>
 
-To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
-window** will appear.
+To add a new tag, click the `Tags` button on the menu bar, and select `Tags`. A **Tags pop-up window** will appear.
 
 <img src="images/tag_popup.png" width="600"/>
 
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
-the `Cancel` button to close the pop up window.
+the `Cancel` button to close the pop-up window.
 
 ### Delete tag<a name="delete-tag-click"></a>
-To delete a tag, open the tag pop up window as shown in the 'add tag' section above. Click the `Select` button to enable
+To delete a tag, open the tag pop-up window as explained in [Add a new tag](#add-a-new-tag-click). Click the `Select` button to enable
 selection. Select the tag(s) to delete, and click the `Delete` button to delete all the selected tags.
 
-Selected tags will appear in black, as shown in the figure below ("friends" and "professors" selected).
+Selected tags will appear in white, as shown in the figure below ("friends", "classmates" and "Professors" selected).
 
 <img src="images/selectedTag_GUI.png" width="300"/>
+
+Another approach to delete a tag one at a time is to right-click on a tag in tag list, and click on `Delete Tag` as shown below.
+
+<img src="images/selectedTag_taglist.png" width="300"/>
 
 <div style="page-break-after: always;"></div>
 
 ### Filter list by tag<a name="filter-list-by-tag-click"></a>
-To filter the list of person by tag directly, first display all the tags by input the command `list_tag`, then simply 
-click on the tag to filter the list.
+To filter the list of person by tag directly, first display all the tags by input the command `list_tag`, then simply left-click on the tag to filter the list. As mentioned, this feature is enabled by default and cannot be disabled.
 
 <img src="images/filter-through-click.png"/>
 
@@ -447,7 +467,9 @@ click on the tag to filter the list.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UNite home folder.<br>
 **Q**: How do I clear the "tag filter" after I typed the `filter` command?<br>
-**A**: Use `list` command to clear the filter.
+**A**: Use `list` command to clear the filter.<br>
+**Q**: How do I clear the general display if I just want it to be empty?<br>
+**A**: Unfortunately, this is not the intentioned and cannot be done explicitly. The only times general display can be empty are when you first launch the app and use commands that do not change the general display, and when you delete a person who is currently being displayed as profile.
 
   --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -457,24 +479,24 @@ click on the tag to filter the list.
 Action | Command format, Examples                                                                                                                                          | Mouse Interaction
 --------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------
 **add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | (Menu bar) `Add ` -> `Add Profile`
-**add_tag**| `add_tag t/TAG_NAME`                                                                                                                                              | (Menu bar) `Tags` -> `Tags`, enter tag name in text field and select `Add`.
+**add_tag**| `add_tag t/TAG_NAME`                                                                                                                                              | (Menu bar) `Tags` -> `Tags`, enter tag name in text field -> select `Add`
 **attach** | `attach t/TAGNAME i/PERSON_INDEX`                                                                                                                             | -
 **clear** | `clear`  <br/>                                                                                                                                                    | -
 **clear_emptytag** | `clear_emptytag`                                                                                                                                                  | -
-**delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                               | Right click on person card in person list panel, select `Delete`
-**delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                       | (Menu bar) `Tags` -> `Tags`; enable `Select`, select tags and click `Delete`. <br> Or, (Command box) `list_tag` -> right click on tag card to delete
+**delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                               | (Person list panel) right-click on a person -> select `Delete`
+**delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                       | (Menu bar) `Tags` -> `Tags`, enable `Select` -> select tags and choose `Delete` <br> Or, (Command box) type command `list_tag` -> (Tag list) right-click on a tag -> select `Delete Tag`
 **detach** | `detach t/TAGNAME i/PERSON_INDEX`                                                                                                                             | -
 **disable_mouseUX** | `disable_mouseUX`                                                                                                                                                 | -
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               | -
 **enable_mouseUX** | `enable_mouseUX`                                                                                                                                                  | -
 **exit** | `exit`                                                                                                                                                            | -
-**filter** | `filter TAGMAME`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
+**filter** | `filter TAGMAME`                                                                                                                                                | (Command box) type command `list_tag` -> (Tag list) left-click on a tag
 **find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
 **grab** | `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`<br> e.g., `grab e/ t/classmates`                                                                                         | -
 **help** | `help`                                                                                                                                                            | (Menu bar) `Help` -> `Help`
 **list** | `list`                                                                                                                                                            | -
-**list_tag** | `list_tag`                                                                                                                                                        | (Menu bar) `Tags` -> `Tags`. All tags are displayed in the 'Current tags' section.
-**profile** | `profile INDEX`<br> e.g., `profile 3`                                                                                                                             | (Person list panel) Click on person card
+**list_tag** | `list_tag`                                                                                                                                                        | (Menu bar) `Tags` -> `Tags`. All tags are displayed in the "Current tags" section.
+**profile** | `profile INDEX`<br> e.g., `profile 3`                                                                                                                             | (Person list panel) left-click on a person
 **remark_tag** | `remark_tag t/TAG_NAME r/REMARK`<br> e.g., `remark t/classmates r/My classmates for CS2103T` | -
 **theme** | `theme THEME`<br> e.g., `theme light`                                                                                                                             | -
 
