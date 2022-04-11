@@ -66,3 +66,4 @@ Given below are my contributions to the project.
   * PRs reviewed (with non-trivial review comments): [#92](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/92), [#100](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/100), [#153](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/153)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/93), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/226))
   * Reported bugs for other teams during PE-D (examples: [3](https://github.com/FYimu/ped/issues/3), [6](https://github.com/FYimu/ped/issues/6), [8](https://github.com/FYimu/ped/issues/8))
+  * Full list of PRs revied by me: [PRs](https://github.com/AY2122S2-CS2103-F09-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
