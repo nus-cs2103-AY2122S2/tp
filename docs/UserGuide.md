@@ -65,6 +65,8 @@ The table below explains the symbols and syntax used throughout the user guide.
 | <div markdown="block" class="alert alert-primary">:bulb:</div>             | Text that appears in the tip box are useful for enhancing your experience with using TrackBeau.         |                                               
 | <div markdown="block" class="alert alert-warning">:exclamation:</div>      | Text that appears in the caution box is important as unwanted consequences might arise if not followed. |
 
+<!-- @@author -->
+
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
 ![Annotated GUI](images/user-guide/annotated-gui-v3.png)
@@ -95,6 +97,8 @@ The table below explains the important technical terms to help you understand ho
 | Command Word   | The first word of the command determines the action that TrackBeau should perform.                                |
 | Prefix         | The characters right before each parameter which distinguishes one parameter from the other.                      |
 | Parameter      | The words right after the prefix. Each parameter is a value given to the command to perform the specified action. |
+
+<!-- @@author -->
 
 **Example**:
 * `addc n/NAME p/PHONE a/ADDRESS e/EMAIL`
@@ -147,11 +151,12 @@ As only indexes present in the displayed list are counted as valid `INDEX`.
 #### 4.1.1 Customer management command parameters
 The table below shows a list of command parameters that will be used for customer management.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Caution:**<br>
+**:information_source: Information:**
 * Service preference refers to services feedbacked by customers that they would enjoy. As this is feedback, the service could be in the current service list offered by the salon or it could yet to be offered as salons may choose to offer when there is sufficient demand.
-   
+* No 2 customers can have the same phone number or same email.
+
 </div>
 
 
@@ -160,7 +165,7 @@ The table below shows a list of command parameters that will be used for custome
 | `NAME`               | Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `PHONE_NUMBER`       | Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `ADDRESS`            | Address of the customer. Addresses can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `EMAIL`              | Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+| `EMAIL`              | {::nomarkdown} Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/}|
 | `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank if inputed. Else, it is an optional value.      |
 | `SERVICE_PREFERENCE` | The name of the services that the customer feedbacked that they would like to have. Services' name can be any values, and it should not be blank if inputed. Else, it is an optional value. Note that the service a customer prefers may not be present in the service list as the salon may not be offering the service yet.            |
 | `HAIR_TYPE`          | The hair type of the customer. Hair types can be any values, and it should not be blank if inputed. Else, it is an optional value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -174,7 +179,7 @@ The table below shows a list of command parameters that will be used for custome
 
 Adds a customer to the application.
 
-Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS rd/REGISTRATION_DATE [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
 
 <div markdown="block" class="alert alert-primary">
 
@@ -228,7 +233,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 **:exclamation: Caution:**<br>
 * When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.<br>
 * By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.
-* Note that 2 customers cannot have the same phone number or same email.
+
 
 </div>
 
@@ -245,22 +250,23 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 
 Finds customers whose parameters contain any of the given keywords.
 
-Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORD_TYPE MORE_KEYWORDS]`
 
 <div markdown="block" class="alert alert-warning">
    
 **:exclamation: Caution:**<br>
-* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`
-* For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
-* The search is case-insensitive. e.g, `John` will match `john`
-* Only full words will be matched e.g. `findc n/Alex Yeoh` will not match customers who are `Alex Tan`, even if they both are called `Alex`
+* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`.
+* The search is case-insensitive, i.e, `John` will match `john`.
+* Keywords will be matched, i.e, `findc n/Alex Yeoh` will match customers who have `Alex` or `Yeoh` in their names. `Alex Tan` and `Alice Yeoh` will be matched.
+* All customers match the specified keywords for the prefix will be returned, i.e, `findc n/Alex al/Nickel` will return all customers with `alex` in their name and all customers with `nickel` as an allergy.
 
 </div>
 
 Examples:
-* `findc n/John stp/Jason` returns customers who have `john` in their name and customers who like `Jason`
-* `findc al/Nickel` returns customer profiles with Nickel allergies
-* `findc h/Oily` returns customer profiles that has the hair type of oily
+* `findc n/John stp/Jason` returns all customers who have `john` in their name and all customers who have staff `Jason` as preference.
+* `findc n/John Alex` return all customers who have `john` and all customers who have `alex` in their name.
+* `findc al/Nickel` returns customer profiles with Nickel allergies.
+* `findc h/Oily` returns customer profiles that has the hair type of oily.
 
 #### 4.1.6 Deleting customer(s) : `deletec`
 
@@ -344,13 +350,20 @@ Find services whose parameters contain any of the given keywords.
 
 Format: `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
-* Keyword types available: name, price, duration
-* The search is case-insensitive. e.g, `Facial` will match `facial`.
-* Only the parameters is searched.
-* Only full words will be matched e.g. `Facial` will not match `Faial`.
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to services prefixes: `n/` `pr/` `d/`.
+* The search is case-insensitive, i.e, `Facial` will match `facial`.
+* All services match the specified keywords for the prefix will be returned, i.e, `finds n/Facial pr/30` will return all services with `facial` in their name and all services that cost `30`.
+* Keywords will be matched, i.e, `finds n/Facial Cut` will match services who have `Facial` or `Cut` in their names. `Facial Treatment` and `Hair Cut` will be matched.
+
+</div>
+
 
 Examples:
-* `finds n/Facial` returns `Organic Radiance Facial` and `Bio Ageless Facial`.
+* `finds n/Facial pr/30` returns all services who have `facial` in their name and all services that cost `30`.
+* `finds n/Facial Cut` return all services who have `facial` in their name and all services who have `cut` in their name.
 * `finds pr/100` returns service profiles at cost $100.
 * `finds d/90` returns services that lasts 90 minutes.
 
@@ -382,7 +395,7 @@ The table below shows a list of command parameters that will be used for booking
 
 | Parameter           | Description                                                                                                                                                                                          |
 |---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `NAME`              | Name of customer or service. Customer's name should only contain alphanumeric characters and spaces, and it should not be blank. Service's name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
 | `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
 | `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
 | `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
@@ -417,7 +430,7 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
-    <li>Feedback can only be given if the current date is after booking date.</li>
+    <li>Feedback can only be given if the current datetime is after the booking's appoint datetime.</li>
     <li>Editing booking date to be after current date will remove any feedback.</li>
 </ul>
 
@@ -425,10 +438,10 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 
 Examples:
 * `editb 1 sev/3 f/Excellent Customer Service` Edits the 1st booking's service to the service at Index 2 and edit its feedback to `Excellent Customer Service` .
-* `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
+* `editb 2 st/10-12-2022 10:30` Edits the booking time of the 2nd booking to be `10-12-2022 10:30`.
 
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
-![Editing a booking example](images/user-guide/edit-booking.png)
+![Editing a booking example](images/user-guide/edit-booking-v2.png)
 
 #### 4.3.5 Finding booking' profile by keyword: `findb`
 
@@ -436,15 +449,22 @@ Find bookings whose parameters contain any of the given keywords.
 
 Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
-* Keyword types available: customer index, service index, booking date time, feedback
-* The search is case-insensitive. e.g, `Excellent` will match `excellent`
-* Only the parameters is searched.
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to bookings prefixes: `n/` `st/` `f/`.
+* The search is case-insensitive, i.e, `Facial` will match `facial`.
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
+* All bookings match the specified keywords for the prefix will be returned, i.e, `findb st/05-05-2022 f/Good` will return all bookings on `05-05-2022` and all bookings that has a feedback of `Good`.
+* Using `n/` will search for booking whose customers and services names matches the keyword, i.e, `findb n/Alex Facial` will match booking whose customers and services who have `Alex` or `Facial` in their names.
+
+</div>
 
 Examples:
-* `findb n/alex` returns bookings where the customer name or service name match.
-* `findb f/Bad` returns `Bad service` and `Service was bad`.
-* `findb st/10-10-2022` returns bookings that are on `10-10-2022`.
+* `findb st/05-05-2022 f/Good` will return all bookings on `05-05-2022` and all bookings that has a feedback of `Good`.
+* `findb n/Alex Facial`  will match booking whose customers and services who have `Alex` or `Facial` in their names.
+* `findb st/05-05-2022` returns bookings on 05-05-2022.
+* `findb f/Good` returns bookings that have a `Good` feedback.
 
 Example Usage: `findb n/alex`
 ![Finding a booking example](images/user-guide/find-booking.png)
@@ -549,7 +569,7 @@ Examples:
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
-* The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
+* The indexes of bookings in schedule view is not meant for deleting or editing bookings. Using them will lead to unexpected behaviour.
 </div>
 
 
@@ -557,12 +577,12 @@ Examples:
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
 
-| Parameter | Description                                                            |
-|-----------|------------------------------------------------------------------------|
-| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be valid date. |
+| Parameter | Description                                                              |
+|-----------|--------------------------------------------------------------------------|
+| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be a valid date. |
 
 #### 4.5.2 Viewing schedule: `schedule`
-Display the schedule of the week containing selected date.
+Display the schedule of the week containing the selected date.
 
 Format: `schedule date/DATE`
 
@@ -573,12 +593,12 @@ Example Usage: `schedule date/10-10-2022`
 ![display schedule](images/user-guide/display_schedule.png)
 
 #### 4.5.3 Viewing next week schedule: `scheduleNext`
-Display the schedule for next week from the last selected date.
+Display the next week's schedule from the last selected date.
 
 Format: `scheduleNext`
 
 #### 4.5.4 Viewing previous week schedule: `schedulePreivous`
-Display the schedule for previous week from the last selected date.
+Display the previous week's schedule from the last selected date.
 
 Format: `schedulePrevious`
 
@@ -641,7 +661,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Add a service         | `adds n/SERVICE_NAME pr/PRICE d/DURATION`              | `adds n/Acne Facial Treatment pr/138 d/120` |
 | List all services     | `lists`                                                ||
 | Edit a service        | `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]` | `edits 2 n/Dark Eye Circle Treatment d/30`  |
-| Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           ||
+| Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           | `finds n/facial`|
 | Delete service(s)     | `deletes INDEX,[MORE INDEXES]`                         | `deletes 1,2,3`                             |
 
 ### 5.3 Booking
@@ -651,7 +671,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Add a booking         | `addb c/CUSTOMER_INDEX sev/SERVICE_INDEX st/BOOKING_DATE_TIME`                           | `addb c/1 sev/1 st/10-10-2022 10:30`         |
 | List all bookings     | `listb`                                                                                  ||
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
-| Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
+| Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             |`findb n/alex`|
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
 
 
@@ -659,23 +679,23 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 The charts plot up to 10 variables at most. For example, in plotStaff, the top 10 most popular staff will be plotted if there are for instance, 15 staff indicated by customers.
    
-| Action                                                                                        | Format                | Examples              |
-|-----------------------------------------------------------------------------------------------|-----------------------|-----------------------|
-| Plot all charts                                                                               | `plotAll`             | `plotAll`             |
-| Plot chart of popular staff (popular being customers indicated them as their preferred staff) | `plotStaff`           | `plotStaff`           |
-| Plot chart on popular services by customers (as indicated in their preferred services)        | `plotService`         | `plotService`         |
-| Plot chart on common allergies amongst customers                                              | `plotAllergy`         | `plotAllergy`         |
-| Plot chart on common skin type of customers                                                   | `plotSkin`            | `plotSkin`            |
-| Plot chart on common hair type of customers                                                   | `plotHair`            | `plotHair`            |
+| Action                                                                                        | Format                 | Examples               |
+|-----------------------------------------------------------------------------------------------|------------------------|------------------------|
+| Plot all charts                                                                               | `plotAll`              | `plotAll`              |
+| Plot chart of popular staff (popular being customers indicated them as their preferred staff) | `plotStaff`            | `plotStaff`            |
+| Plot chart on popular services by customers (as indicated in their preferred services)        | `plotService`          | `plotService`          |
+| Plot chart on common allergies amongst customers                                              | `plotAllergy`          | `plotAllergy`          |
+| Plot chart on common skin type of customers                                                   | `plotSkin`             | `plotSkin`             |
+| Plot chart on common hair type of customers                                                   | `plotHair`             | `plotHair`             |
 | Plot chart on customers gained per month in the current year                                  | `plotMonthlyCustomers` | `plotMonthlyCustomers` |   
 
 ### 5.5 Schedule
 
-| Action                                                              | Format               | Examples                   |
-|---------------------------------------------------------------------|----------------------|----------------------------|
-| Display the schedule of the week containing selected date.          | `schedule date/DATE` | `schedule date/10-10-2022` |
-| Display the schedule for next week from the last selected date.     | `scheduleNext`       | `scheduleNext`             |
-| Display the schedule for previous week from the last selected date. | `schedulePrevious`   | `schedulePrevious`         |
+| Action                                                            | Format               | Examples                   |
+|-------------------------------------------------------------------|----------------------|----------------------------|
+| Display the schedule of the week containing the selected date.    | `schedule date/DATE` | `schedule date/10-10-2022` |
+| Display the next week's schedule from the last selected date.     | `scheduleNext`       |                            |
+| Display the previous week's schedule from the last selected date. | `schedulePrevious`   |                            |
 
 ### 5.6 Miscellaneous
 

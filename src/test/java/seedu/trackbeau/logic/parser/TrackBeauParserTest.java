@@ -81,12 +81,12 @@ public class TrackBeauParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("alex", "yeoh");
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, keywords);
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
-            FindCustomerCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
+            FindCustomerCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr)), command);
     }
 

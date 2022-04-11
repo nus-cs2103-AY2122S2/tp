@@ -51,13 +51,23 @@ activate DeleteCustomerCommand
 DeleteCustomerCommand -> Model : getFilteredCustomerList()
 activate Model
 Model --> DeleteCustomerCommand
+deactivate Model
+
 DeleteCustomerCommand -> Model : getFilteredBookingList()
+activate Model
 Model --> DeleteCustomerCommand
+deactivate Model
+
 loop bookings of the customer (index 1) that is in the future
+
     DeleteCustomerCommand -> Model : deleteBooking(b)
+    activate Model
     Model --> DeleteCustomerCommand
+    deactivate Model
 end
+
 DeleteCustomerCommand -> Model : deleteCustomer(1)
+activate Model
 Model --> DeleteCustomerCommand
 deactivate Model
 

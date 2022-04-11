@@ -15,8 +15,11 @@ box CommandException STORAGE_COLOR_T1
 participant "e:CommandException" as CommandException STORAGE_COLOR
 end box
 
-[-> LogicManager : a
+[-> LogicManager : execute("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate LogicManager
+
+ref over LogicManager, AddCustomerCommand : creation of command
+
 
 LogicManager -> AddCustomerCommand : execute()
 activate AddCustomerCommand
@@ -30,8 +33,10 @@ alt customer to add is not unique
 AddCustomerCommand -> CommandException
 activate CommandException
 
-CommandException --> LogicManager : e
+CommandException --> AddCustomerCommand : e
 deactivate CommandException
+
+AddCustomerCommand --> LogicManager : e
 
 [<--LogicManager : e
 
