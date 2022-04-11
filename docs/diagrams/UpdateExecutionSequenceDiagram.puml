@@ -1,15 +1,16 @@
 @startuml
-!include style.puml
+!include Style.puml
+!include SequenceStyle.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":IBookParser" as IBookParser LOGIC_COLOR
-participant "u:UpdateCommand" as UpdateCommand LOGIC_COLOR
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant "u:UpdateCommand" as UpdateCommand<<Logic>>
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant "updatedProduct:Product" as Product MODEL_COLOR
+box Model MODEL_COLOR_LIGHT
+participant ":Model" as Model<<Model>>
+participant "updatedProduct:Product" as Product<<Model>>
 end box
 
 [-> LogicManager : execute(update)
