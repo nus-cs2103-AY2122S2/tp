@@ -239,10 +239,10 @@ and `Applicant` classes.
 
 #### Design considerations:
 
-Aspect: When an applicant is considered to be matched with a job:
+#### Aspect: When an applicant is considered to be matched with a job:
 
 * **Alternative 1 (current choice):** An applicant must accept a passed interview before the applicant is hired for that position.
-    * Pros: A more accurate modelling of real-world hiring processes, whereby an applicant may actually be accepted into multiple roles, and has to choose one role to accept.
+    * Pros: A more accurate modelling of real-world hiring processes, whereby an applicant may actually be accepted for multiple roles, and has to choose one role to accept.
     * Cons: Have to track number of position offers currently given out with respect to number of open positions, 
   preventing a scenario where multiple people accept the offer but there is a shortage of actual position openings. 
   More complex model which may be bug-prone.
@@ -250,9 +250,9 @@ Aspect: When an applicant is considered to be matched with a job:
 
 * **Alternative 2:** An applicant is considered to be hired after passing the interview.
     * Pros: A simplified way of matching, reduces complexity of interview and coupling between Interview and Positions.
-    * Cons: Does not model real-world interview processes accurately, since in reality applicants can have competing offers before choosing to accept one. 
+    * Cons: Does not model real-world interview processes accurately, forces applicant to accept the first job which they pass the interview for. 
 
-Aspect: Number of interviews per applicant allowed for each unique role
+#### Aspect: Number of interviews per applicant allowed for each unique role
 
 * **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
     * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
@@ -271,9 +271,15 @@ Aspect: Number of interviews per applicant allowed for each unique role
 
 Adding of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
 There are 3 levels to the parsing of the add command from user input.
-1. `AddressBookParser` identifies it as an `add` command.
+1. `HireLahParser` identifies it as an `add` command.
 2. `AddCommandParser` identifies the exact data type that is to be added, through the `flag` of the user input.
 3. `AddXYZCommandParser` identifies the fields to be added for the specific datatype, and creates and `AddXYZCommand`.
+
+The **sequence diagram** below shows how the parsing of `add -i` works. 
+Note that the lifeline for `AddCommandParser` and `AddInterviewCommandParser` should end at the destroy marker (X) but due to
+a limitation of PlantUML, the lifeline reaches the end of diagram. Logic for execution of `AddInterviewCommand` is omitted.
+
+![Add parser for interview](images/AddParser.png)
 
 #### Design considerations:
 
@@ -283,9 +289,9 @@ There are 3 levels to the parsing of the add command from user input.
     * Pros: User-friendly since users only have to remember a singular command.
     * Cons: Requires additional levels of parsers to be created.
 
-* **Alternative 2:** An individual command for each data type that can be added
+* **Alternative 2:** An individual command for each data type that can be added (eg. `addappl`, `addintvw`)
     * Pros: Fewer levels of parsers is required.
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Cons: We must ensure that the implementation of each individual command are correct. Many commands to remember for a new user.
 
 ### Deleting of Data
 
