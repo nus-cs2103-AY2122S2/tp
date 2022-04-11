@@ -11,11 +11,17 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 import seedu.address.testutil.TAssistBuilder;
 import seedu.address.testutil.TypicalAssessments;
 import seedu.address.testutil.TypicalClassGroups;
@@ -97,6 +103,26 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getStudentList() {
+        modelManager.addEntity(ALICE);
+        modelManager.addEntity(BENSON);
+        Predicate<Student> filter = (Student student) -> {
+            return student.equals(ALICE);
+        };
+        modelManager.updateFilteredStudentList(filter);
+
+        // Test filtered list
+        ObservableList<Student> filteredStudents = modelManager.getFilteredStudentList();
+        assertTrue(filteredStudents.contains(ALICE));
+        assertFalse(filteredStudents.contains(BENSON));
+
+        // Test unfiltered list
+        ObservableList<Student> unfilteredStudents = modelManager.getUnfilteredStudentList();
+        assertTrue(unfilteredStudents.contains(ALICE));
+        assertTrue(unfilteredStudents.contains(BENSON));
+    }
+
+    @Test
     public void hasClassGroup_classGroupNotInTAssist_returnsFalse() {
         assertFalse(modelManager.hasEntity(TypicalClassGroups.CS2101G09));
     }
@@ -113,6 +139,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getClassGroupList() {
+        ClassGroup classGroup1 = TypicalClassGroups.CS2101G09;
+        ClassGroup classGroup2 = TypicalClassGroups.CS2103TT13;
+        modelManager.addEntity(classGroup1);
+        modelManager.addEntity(classGroup2);
+        Predicate<ClassGroup> filter = (ClassGroup classGroup) -> {
+            return classGroup.equals(classGroup1);
+        };
+        modelManager.updateFilteredClassGroupList(filter);
+
+        // Test filtered list
+        ObservableList<ClassGroup> filteredClassGroups = modelManager.getFilteredClassGroupList();
+        assertTrue(filteredClassGroups.contains(classGroup1));
+        assertFalse(filteredClassGroups.contains(classGroup2));
+
+        // Test unfiltered list
+        ObservableList<ClassGroup> unfilteredClassGroups = modelManager.getUnfilteredClassGroupList();
+        assertTrue(unfilteredClassGroups.contains(classGroup1));
+        assertTrue(unfilteredClassGroups.contains(classGroup2));
+    }
+
+    @Test
     public void getFilteredModulesList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
     }
@@ -126,6 +174,28 @@ public class ModelManagerTest {
     public void hasModule_moduleInTAssist_returnsTrue() {
         modelManager.addEntity(TypicalModules.CS2101);
         assertTrue(modelManager.hasEntity(TypicalModules.CS2101));
+    }
+
+    @Test
+    public void getModuleList() {
+        TaModule module1 = TypicalModules.CS2101;
+        TaModule module2 = TypicalModules.CS2103T;
+        modelManager.addEntity(module1);
+        modelManager.addEntity(module2);
+        Predicate<TaModule> filter = (TaModule module) -> {
+            return module.equals(module1);
+        };
+        modelManager.updateFilteredModuleList(filter);
+
+        // Test filtered list
+        ObservableList<TaModule> filteredModules = modelManager.getFilteredModuleList();
+        assertTrue(filteredModules.contains(module1));
+        assertFalse(filteredModules.contains(module2));
+
+        // Test unfiltered list
+        ObservableList<TaModule> unfilteredModules = modelManager.getUnfilteredModuleList();
+        assertTrue(unfilteredModules.contains(module1));
+        assertTrue(unfilteredModules.contains(module2));
     }
 
     @Test
@@ -152,6 +222,28 @@ public class ModelManagerTest {
     @Test
     public void getFilteredAssessmentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAssessmentList().remove(0));
+    }
+
+    @Test
+    public void getAssessmentList() {
+        Assessment assessment1 = TypicalAssessments.CS2103T_NO_STUDENT_PARTICIPATION_NO_ATTEMPT;
+        Assessment assessment2 = TypicalAssessments.CS2040_LAB2_NO_ATTEMPT;
+        modelManager.addEntity(assessment1);
+        modelManager.addEntity(assessment2);
+        Predicate<Assessment> filter = (Assessment assessment) -> {
+            return assessment.equals(assessment1);
+        };
+        modelManager.updateFilteredAssessmentList(filter);
+
+        // Test filtered list
+        ObservableList<Assessment> filteredAssessments = modelManager.getFilteredAssessmentList();
+        assertTrue(filteredAssessments.contains(assessment1));
+        assertFalse(filteredAssessments.contains(assessment2));
+
+        // Test unfiltered list
+        ObservableList<Assessment> unfilteredAssessments = modelManager.getUnfilteredAssessmentList();
+        assertTrue(unfilteredAssessments.contains(assessment1));
+        assertTrue(unfilteredAssessments.contains(assessment2));
     }
 
     @Test
