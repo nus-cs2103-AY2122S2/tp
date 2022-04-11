@@ -1,12 +1,6 @@
 package manageezpz.logic.commands;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -16,6 +10,9 @@ import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,11 +41,13 @@ public class DeleteEmployeeCommandTest {
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs());
 
-        // Create persons Alex and Bob
-        Person personAlex = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withEmail(VALID_EMAIL_AMY).build();
-        Person personBob = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).build();
+        // Create persons Alex, Bernice and Charlotte
+        Person personAlex = new PersonBuilder().withName("Alex Yeoh").withPhone("87438807")
+                .withEmail("alexyeoh@example.com").build();
+        Person personBernice = new PersonBuilder().withName("Bernice Yu").withPhone("99272758")
+                .withEmail("berniceyu@example.com").build();
+        Person personCharlotte = new PersonBuilder().withName("Charlotte Oliveiro").withPhone("93210283")
+                .withEmail("charlotte@example.com").build();
 
         // Create tasks
         Task taskToDo = new TodoBuilder().withDescription("Review Monthly Finance KPI")
@@ -60,12 +59,24 @@ public class DeleteEmployeeCommandTest {
 
         // Tag tasks to Alex
         taskToDo.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
         taskDeadline.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
         taskEvent.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
+
+        // Tag tasks to Charlotte
+        taskToDo.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
+        taskDeadline.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
+        taskEvent.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
 
         // Add persons to the new address book
         model.addPerson(personAlex);
-        model.addPerson(personBob);
+        model.addPerson(personBernice);
+        model.addPerson(personCharlotte);
 
         // Add tasks to the new address book
         model.addTask(taskToDo);
@@ -81,6 +92,17 @@ public class DeleteEmployeeCommandTest {
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToDelete))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            expectedModel.untagEmployeeFromTask(task, personToDelete);
+        }
+
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteEmployeeCommand, model, expectedMessage, expectedModel);
@@ -106,6 +128,17 @@ public class DeleteEmployeeCommandTest {
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToDelete))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            expectedModel.untagEmployeeFromTask(task, personToDelete);
+        }
+
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

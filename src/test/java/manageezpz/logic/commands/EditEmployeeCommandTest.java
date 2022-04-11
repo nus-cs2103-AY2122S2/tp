@@ -9,24 +9,33 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static manageezpz.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_EDIT_PERSON_SUCCESS;
 import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_USAGE;
+import static manageezpz.logic.commands.EditEmployeeCommand.createEditedEmployee;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
-import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.index.Index;
-import manageezpz.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
+import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 import manageezpz.model.person.Person;
+import manageezpz.model.task.Task;
+import manageezpz.testutil.DeadlineBuilder;
 import manageezpz.testutil.EditEmployeeDescriptorBuilder;
+import manageezpz.testutil.EventBuilder;
 import manageezpz.testutil.PersonBuilder;
+import manageezpz.testutil.TodoBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -34,18 +43,86 @@ import manageezpz.testutil.PersonBuilder;
  */
 public class EditEmployeeCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new AddressBook(), new UserPrefs());
+
+        // Create persons Alex, Bernice and Charlotte
+        Person personAlex = new PersonBuilder().withName("Alex Yeoh").withPhone("87438807")
+                .withEmail("alexyeoh@example.com").build();
+        Person personBernice = new PersonBuilder().withName("Bernice Yu").withPhone("99272758")
+                .withEmail("berniceyu@example.com").build();
+        Person personCharlotte = new PersonBuilder().withName("Charlotte Oliveiro").withPhone("93210283")
+                .withEmail("charlotte@example.com").build();
+
+        // Create tasks
+        Task taskToDo = new TodoBuilder().withDescription("Review Monthly Finance KPI")
+                .build();
+        Task taskDeadline = new DeadlineBuilder().withDescription("Finish Client Proposal")
+                .withDate("2022-03-15").withTime("1800").build();
+        Task taskEvent = new EventBuilder().withDescription("Meeting with Client")
+                .withDate("2022-03-15").withStartTime("1300").withEndTime("1400").build();
+
+        // Tag tasks to Alex
+        taskToDo.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
+        taskDeadline.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
+        taskEvent.assignedTo(personAlex);
+        personAlex.increaseTaskCount();
+
+        // Tag tasks to Charlotte
+        taskToDo.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
+        taskDeadline.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
+        taskEvent.assignedTo(personCharlotte);
+        personCharlotte.increaseTaskCount();
+
+        // Add persons to the new address book
+        model.addPerson(personAlex);
+        model.addPerson(personBernice);
+        model.addPerson(personCharlotte);
+
+        // Add tasks to the new address book
+        model.addTask(taskToDo);
+        model.addTask(taskDeadline);
+        model.addTask(taskEvent);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
-        EditEmployeeCommand.EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(editedPerson).build();
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+
+        EditEmployeeCommand.EditEmployeeDescriptor descriptor =
+                new EditEmployeeDescriptorBuilder(new PersonBuilder().build()).build();
+        Person editedPerson = createEditedEmployee(personToEdit, descriptor);
+
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToEdit))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            List<Person> assignees = task.getAssignees();
+
+            for (Person assignee : assignees) {
+                if (assignee.equals(personToEdit)) {
+                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
+                }
+            }
+        }
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -53,33 +130,68 @@ public class EditEmployeeCommandTest {
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Person lastPersonToEdit = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        EditEmployeeCommand.EditEmployeeDescriptor descriptor =
+                new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        Person editedPerson = createEditedEmployee(lastPersonToEdit, descriptor);
 
-        EditEmployeeCommand.EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder()
-                .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPerson(lastPersonToEdit, editedPerson);
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(lastPersonToEdit))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            List<Person> assignees = task.getAssignees();
+
+            for (Person assignee : assignees) {
+                if (assignee.equals(lastPersonToEdit)) {
+                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
+                }
+            }
+        }
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Person editedPerson = createEditedEmployee(personToEdit, new EditEmployeeCommand.EditEmployeeDescriptor());
+
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST,
                 new EditEmployeeCommand.EditEmployeeDescriptor());
-
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToEdit))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            List<Person> assignees = task.getAssignees();
+
+            for (Person assignee : assignees) {
+                if (assignee.equals(personToEdit)) {
+                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
+                }
+            }
+        }
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -88,17 +200,36 @@ public class EditEmployeeCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Person personToEditInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
 
-        EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST,
-                new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        EditEmployeeCommand.EditEmployeeDescriptor descriptor =
+                new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        Person editedPerson = createEditedEmployee(personToEditInFilteredList, descriptor);
+
+        EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST);
-        expectedModel.setPerson(personInFilteredList, editedPerson);
+        expectedModel.setPerson(personToEditInFilteredList, editedPerson);
+
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToEditInFilteredList))
+                .collect(Collectors.toList());
+
+        for (Task task : affectedTaskList) {
+            List<Person> assignees = task.getAssignees();
+
+            for (Person assignee : assignees) {
+                if (assignee.equals(personToEditInFilteredList)) {
+                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
+                }
+            }
+        }
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
