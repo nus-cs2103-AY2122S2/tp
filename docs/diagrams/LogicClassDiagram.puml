@@ -5,42 +5,58 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
+Interface Logic <<Interface>>
+Class LogicManager
 
-Class AddressBookParser
-Class XYZCommand
+package Parser {
+Class TrackBeauParser
+Class XYZCommandParser
+Class CliSyntax
+Class ParserUtil
+Class ArgumentMultimap
+Class ArgumentTokenizer
+Interface Parser <<Interface>>
+Class Prefix
+}
+
+package Command {
 Class CommandResult
 Class "{abstract}\nCommand" as Command
+Class XYZCommand
+}
 
-
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
 }
 
 package Model{
 Class HiddenModel #FFFFFF
 }
 
-package Storage{
-}
-
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager .up.|> Logic
+LogicManager -->"1" TrackBeauParser
+TrackBeauParser .left.> XYZCommandParser: creates >
 
+XYZCommandParser ..> XYZCommand : creates >
+XYZCommandParser ..|> Parser
+XYZCommandParser ..> ArgumentMultimap
+XYZCommandParser ..> ArgumentTokenizer
+ArgumentTokenizer .left.> ArgumentMultimap
+XYZCommandParser ..> CliSyntax
+CliSyntax ..> Prefix
+XYZCommandParser ..> ParserUtil
+ParserUtil .down.> Prefix
+ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
 LogicManager --> Model
-LogicManager --> Storage
-Storage --[hidden] Model
-Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+note right of XYZCommand: XYZCommand = AddCustomerCommand, \nFindCustomerCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : produces >
+Command .up.> CommandResult
+CommandResult -[hidden]-> Parser
 @enduml

@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant ":ScheduleCommandParser" as ScheduleCommandParser LOGIC_COLOR
+participant "s:ScheduleCommand" as ScheduleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("schedule date/10-10-2022")
+activate LogicManager
+
+LogicManager -> TrackBeauParser : parseCommand("schedule date/10-10-2022")
+activate TrackBeauParser
+
+create ScheduleCommandParser
+TrackBeauParser -> ScheduleCommandParser
+activate ScheduleCommandParser
+
+ScheduleCommandParser --> TrackBeauParser
+deactivate ScheduleCommandParser
+
+TrackBeauParser -> ScheduleCommandParser : parse("date/10-10-2022")
+activate ScheduleCommandParser
+
+create ScheduleCommand
+ScheduleCommandParser -> ScheduleCommand
+activate ScheduleCommand
+
+ScheduleCommand --> ScheduleCommandParser : s
+deactivate ScheduleCommand
+
+ScheduleCommandParser --> TrackBeauParser : s
+deactivate ScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ScheduleCommandParser -[hidden]-> TrackBeauParser
+destroy ScheduleCommandParser
+
+TrackBeauParser --> LogicManager : s
+deactivate TrackBeauParser
+
+LogicManager -> ScheduleCommand : execute()
+activate ScheduleCommand
+
+ScheduleCommand -> Model : setSelectedDate(date)
+activate Model
+Model --> ScheduleCommand
+deactivate
+
+create CommandResult
+
+ScheduleCommand -> CommandResult
+activate CommandResult
+CommandResult --> ScheduleCommand
+deactivate CommandResult
+
+ScheduleCommand --> LogicManager : result
+deactivate ScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

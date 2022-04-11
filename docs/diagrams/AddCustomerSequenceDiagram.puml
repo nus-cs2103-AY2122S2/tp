@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+mainframe **sd** creation of command
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant ":AddCustomerCommandParser" as AddCustomerCommandParser LOGIC_COLOR
+participant "c:Customer" as Customer LOGIC_COLOR
+participant "a:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
+end box
+
+
+LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate LogicManager
+
+activate TrackBeauParser
+
+create AddCustomerCommandParser
+TrackBeauParser -> AddCustomerCommandParser
+activate AddCustomerCommandParser
+
+AddCustomerCommandParser --> TrackBeauParser
+deactivate AddCustomerCommandParser
+
+TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate AddCustomerCommandParser
+
+create Customer
+AddCustomerCommandParser -> Customer
+activate Customer
+
+create AddCustomerCommand
+Customer -> AddCustomerCommand
+activate AddCustomerCommand
+
+AddCustomerCommand --> Customer :
+deactivate AddCustomerCommand
+Customer --> AddCustomerCommandParser
+deactivate Customer
+
+AddCustomerCommandParser --> TrackBeauParser : a
+deactivate AddCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCustomerCommandParser -[hidden]-> TrackBeauParser
+destroy AddCustomerCommandParser
+
+TrackBeauParser --> LogicManager : a
+deactivate
+
+
+@enduml

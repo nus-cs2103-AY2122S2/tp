@@ -5,46 +5,41 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyTrackBeau" as ReadOnlyTrackBeau
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class TrackBeau
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
+Class UniqueList
+Class "<<interface>>\nUniqueListItem" as UniqueListItem
+Class Customer
+Class Service
+Class Booking
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+TrackBeau .up.|> ReadOnlyTrackBeau
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyTrackBeau
+ModelManager -left-> "1" TrackBeau
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+TrackBeau *--> "3 " UniqueList
+UniqueList -down-> "~* all " UniqueListItem
+Customer .up.|> UniqueListItem
+Service .up.|> UniqueListItem
+Booking .up.|> UniqueListItem
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+Customer -[hidden]right-> Service
+Service -[hidden]right-> Booking
+
+ModelManager -->"~* filtered" UniqueListItem
 @enduml

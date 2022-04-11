@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yong Kai Qi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/flairekq.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/flairekq)]
+[[portfolio](team/flairekq.md)]
 
-* Role: Project Advisor
+* Role: Team Lead, Developer
+* Responsibilities: Deliverables & deadlines, scheduling & tracking
 
-### Jane Doe
+### Wu HanHui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanhuiice.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/hanhuiice)]
+[[portfolio](team/hanhuiice.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data + Features
 
-### Jean Doe
+### Tan Ka Shing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kashing555.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kashing555)]
+[[portfolio](team/kashing555.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data + Features
 
-### James Doe
+### Isabel Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/isabelteo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/isabelteo)]
+[[portfolio](team/isabelteo.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Kong Jun Yin
+
+<img src="images/oheyesee.png" width="200px">
+
+[[github](https://github.com/OhEyeSee)]
+[[portfolio](team/oheyesee.md)]
+
+* Role: NIL
+* Responsibilities: NIL

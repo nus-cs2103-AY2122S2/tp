@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.chart.PieChart?>
+<fx:root resizable="false" title="Pie Chart" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <PieChart id="pieChartMain" fx:id="pieChart" stylesheets="@DarkTheme.css"></PieChart>
+        </Scene>
+    </scene>
+</fx:root>

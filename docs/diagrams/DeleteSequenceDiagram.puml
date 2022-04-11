@@ -3,9 +3,9 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
+participant ":DeleteCustomerCommandParser" as DeleteCustomerCommandParser LOGIC_COLOR
+participant "d:DeleteCustomerCommand" as DeleteCustomerCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +13,75 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("deletec 1,2")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> TrackBeauParser : parseCommand("deletec 1,2")
+activate TrackBeauParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteCustomerCommandParser
+TrackBeauParser -> DeleteCustomerCommandParser
+activate DeleteCustomerCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeleteCustomerCommandParser --> TrackBeauParser
+deactivate DeleteCustomerCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+TrackBeauParser -> DeleteCustomerCommandParser : parse("1,2")
+activate DeleteCustomerCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteCustomerCommand
+DeleteCustomerCommandParser -> DeleteCustomerCommand
+activate DeleteCustomerCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteCustomerCommand --> DeleteCustomerCommandParser : d
+deactivate DeleteCustomerCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeleteCustomerCommandParser --> TrackBeauParser : d
+deactivate DeleteCustomerCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeleteCustomerCommandParser -[hidden]-> TrackBeauParser
+destroy DeleteCustomerCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+TrackBeauParser --> LogicManager : d
+deactivate TrackBeauParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteCustomerCommand : execute()
+activate DeleteCustomerCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCustomerCommand -> Model : getFilteredCustomerList()
 activate Model
-
-Model --> DeleteCommand
+Model --> DeleteCustomerCommand
 deactivate Model
 
+DeleteCustomerCommand -> Model : getFilteredBookingList()
+activate Model
+Model --> DeleteCustomerCommand
+deactivate Model
+
+loop for all bookings of the customers \n(index 1 & 2) that is in the future
+
+    DeleteCustomerCommand -> Model : deleteBooking(b)
+    activate Model
+    Model --> DeleteCustomerCommand
+    deactivate Model
+end
+
+loop for all customers to delete (index 1 & 2)
+    DeleteCustomerCommand -> Model : deleteCustomer(c)
+    activate Model
+    Model --> DeleteCustomerCommand
+    deactivate Model
+end
+
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteCustomerCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteCustomerCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteCustomerCommand --> LogicManager : result
+deactivate DeleteCustomerCommand
 
 [<--LogicManager
 deactivate LogicManager

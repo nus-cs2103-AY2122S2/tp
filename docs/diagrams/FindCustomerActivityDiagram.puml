@@ -1,0 +1,35 @@
+@startuml
+:User executes the 'findc' command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid command format])
+    :Parses the command\nusing FindCustomerCommandParser;
+    if () then ([valid parameters])
+    else ([else])
+        :Shows an invalid\nparameters error message;
+        stop
+    endif
+    repeat
+        :Go to next data field;
+        repeat
+            :Go to next input keyword;
+            if () then ([keyword matches a customer's keyword in same data field])
+                :Add customer to the list of customers to be displayed;
+            else ([Else])
+            endif
+        repeat while () is ([Else])
+        ->[Input keywords in data field has been completely searched];
+    repeat while () is ([Else])
+    ->[Data field has been completely searched];
+    if () then ([Else])
+        :Switch to customers Tab;
+    else ([In customers Tab])
+    endif
+    :Displays filtered customers list;
+else ([Else])
+    :Shows an invalid command error message;
+endif
+stop
+@enduml

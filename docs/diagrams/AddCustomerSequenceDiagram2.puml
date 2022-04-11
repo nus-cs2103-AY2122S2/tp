@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "a:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box CommandException STORAGE_COLOR_T1
+participant "e:CommandException" as CommandException STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate LogicManager
+
+ref over LogicManager, AddCustomerCommand : creation of command
+
+
+LogicManager -> AddCustomerCommand : execute()
+activate AddCustomerCommand
+
+AddCustomerCommand -> Model : hasCustomer()
+activate Model
+Model --> AddCustomerCommand
+deactivate Model
+
+alt customer to add is not unique
+AddCustomerCommand -> CommandException
+activate CommandException
+
+CommandException --> AddCustomerCommand : e
+deactivate CommandException
+
+AddCustomerCommand --> LogicManager : e
+
+[<--LogicManager : e
+
+else customer is unique
+
+ AddCustomerCommand -> Model : addCustomer(c)
+    activate Model
+    Model --> AddCustomerCommand
+    deactivate Model
+    create CommandResult
+    AddCustomerCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> AddCustomerCommand
+    deactivate CommandResult
+
+    AddCustomerCommand --> LogicManager : result
+    deactivate AddCustomerCommand
+
+    [<--LogicManager : result
+
+deactivate LogicManager
+end
+
+
+@enduml
