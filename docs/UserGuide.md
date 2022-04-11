@@ -278,6 +278,7 @@ players with such names exist.
 * "OP" in the parameters `OPWEIGHT` and `OPHEIGHT` must be either `gte`, `lte`, `gt`, `lt`, `eq`. On the other hand,
 "WEIGHT" and "HEIGHT" must be integers. <br> e.g. `gte180`, `lt90` can be a potential `OPWEIGHT` or `OPHEIGHT`
 * Words in `NAMES_IN_PLAYERNAME` are case **insensitive** but words in `POSITIONS` are case **sensitive**.
+* `view P/` without specifying any field will display all players in lexicographical order by default.
 
 </div>
 
@@ -374,6 +375,7 @@ Other `PREFIX` **will not** be accepted.
 * The parameter `ORDER` must be specified only as `asc` or `desc` for ascending and
 descending respectively. Other `ORDER` **will not** be accepted.
 * Player names in alphabetical order will be used as a tiebreaker when sorting based on height or weight.
+* The default display of players by lexicographical order can be restored by using `view P/` command.
 
 </div>
 

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's name in MyGM.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -39,6 +39,10 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    @Override
+    public int compareTo(Name n) {
+        return this.fullName.compareTo(n.fullName);
+    }
 
     @Override
     public String toString() {
