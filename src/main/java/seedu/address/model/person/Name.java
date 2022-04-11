@@ -82,7 +82,7 @@ public class Name {
                 return false;
             }
 
-            name = names[index + 1];
+            name = names[index + i];
             keyword = keywords[i];
             if (!name.equalsIgnoreCase(keyword)) {
                 return false;
