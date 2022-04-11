@@ -21,9 +21,9 @@ Given below are my contributions to the project.
   1. CSS changes to 
      * Address bugs such as blue boxes populating the application. (Pull Requests: [\#130](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/130), 
         [\#120](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/120))
-     * Update scrollbar look.
-     * Change the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
-        * Change the color of the HelpWindow [\#123](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/123)
+     * Updated scrollbar look. [\#120](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/120)
+     * Changed the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
+     * Changed the color of the HelpWindow [\#123](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/123)
   2. Added natural date capability to enhance existing datetime capability. (Pull Requests: [\#141](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/141),
      [\#234](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234))
      * _What it does_: allows the user to make use of natural dates (i.e. Monday, Mon, Tues) to input as dates for the
@@ -42,7 +42,7 @@ Given below are my contributions to the project.
 
 * **Contributions to team based tasks**:
   * Set up Github team repository, team organisation, and Gradle for repository.
-  * Added a new logo for ReadyBakey.[\#110](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/110) 
+  * Added a new logo for ReadyBakey. [\#110](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/110) 
   * [UI draft](https://www.figma.com/file/g10mAn5vFDXQXABQPh9U9M/ReadyBakey-UI-mockup?node-id=0%3A1) image made with 
     Figma to plan out how the final product will look like.
   * Set up Github Projects to track User Stories completed and in progress.
