@@ -603,10 +603,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 
-1. Adding a new player into the team
+1. Adding a new player into MyGM
 
     1. Test case: `add P/ n/John Doe p/98765432 e/johnd@example.com h/180 j/23 w/80 t/PG t/SG`<br>
-       Expected: Player named "John" is added. Details of the added player shown in the status message. Timestamp in the status bar is updated.
+       Expected: Player named "John" is added. Details of the added player shown in the status message.
 
     1. Test case: `add P/John Doe p/98765432 e/johnd@example.com h/180 j/23 w/80 t/PG t/SG`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
