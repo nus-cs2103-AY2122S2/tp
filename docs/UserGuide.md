@@ -9,6 +9,7 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start<a name="quick-start"></a>
 
@@ -27,6 +28,7 @@ Some features are able to be operated via mouse interaction. Features that allow
 Refer to the [Features](#features-cli) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features (CLI)<a name="features-cli"></a>
 
@@ -68,62 +70,70 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [c/COURSE] [tele/TELEGRAM] [m/MATR
 
 Examples:
 * `add n/Peter p/12345678 e/peter@gmail.com a/1 Computing Drive t/classmates t/friends
-c/computer science tele/peterrocks m/A0123456X`
+c/computer science tele/peterrocks m/A0123456X` <br>
 This command will add a new person whose name is `Peter`, with phone number
 `12345678`, email address `peter@gmail.com` and telegram `peterrocks`. Peter's address is `1 Computing Drive`, he is
 taking `computer science` as his course, his matriculation card number is `A0123456X`. The user categorize
 Peter with tags `classmates` and `friends`.
-* `add n/Aaron p/2345678 e/aaron@gmail.com`
+* `add n/Aaron p/2345678 e/aaron@gmail.com` <br>
 This command will not get executed successfully, because of the missing required field `a/ADDRESS`.
 
->### Input Validation Rules<a name="input-validation"></a>
->
->There are certain rules that users should follow for input to be considered valid. Please refer to the following.
-> 
->####NAME
->NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
->
->* Valid Examples - `Alice Tan`, `Alice3tan`
->* Invalid Examples - `peter*`
->
->####EMAIL 
->Emails should be of the format local-part@domain and adhere to the following constraints: 
->1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
->2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
-> end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
->
->* Valid Examples - `aliceTan@gmail.com`, `123@145` 
->* Invalid Examples - `peterjack@@example.com`, `peterjack@-`
->
->####PHONE
->Phone numbers should only contain numbers, and it should be at least 3 digits long
->
->* Valid Examples - `12341234`, `123`
->* Invalid Examples - `@123123`, `dasd123 123`
->
->####ADDRESS
->Addresses can take any values, and it should not be blank
->
->* Valid Examples - `Blk 456, Den Road, #01-355`, `-`
->* Invalid Examples - ``
->
->####TELEGRAM 
->Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
->
->* Valid Examples - `alice_test_1234`, `alice123`
->* Invalid Examples - `_alice`, `@`
->
->####COURSE
->Course should only contain alphabet characters and spaces.
->
->* Valid Examples - `Computer Science and Mathematics`, `Math`
->* Invalid Examples - `123`, `@`
->
->####MATRIC CARD
->Matric Card should only contain alphanumeric characters, and it should be one word
->
->* Valid Examples - `A1231234E`
->* Invalid Examples - `alice test`, `@`
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">
+
+### Input Validation Rules<a name="input-validation"></a>
+
+There are certain rules that users should follow for input to be considered valid. Please refer to the following.
+ 
+#### NAME
+NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
+
+* Valid Examples - `Alice Tan`, `Alice3tan`
+* Invalid Examples - `peter*`
+
+#### EMAIL 
+Emails should be of the format local-part@domain and adhere to the following constraints: 
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
+ end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+* Valid Examples - `aliceTan@gmail.com`, `123@145` 
+* Invalid Examples - `peterjack@@example.com`, `peterjack@-`
+
+#### PHONE
+Phone numbers should only contain numbers, and it should be at least 3 digits long
+
+* Valid Examples - `12341234`, `123`
+* Invalid Examples - `@123123`, `dasd123 123`
+
+#### ADDRESS
+Addresses can take any values, and it should not be blank
+
+* Valid Examples - `Blk 456, Den Road, #01-355`, `-`
+* Invalid Examples - ``
+
+#### TELEGRAM 
+Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
+
+* Valid Examples - `alice_test_1234`, `alice123`
+* Invalid Examples - `_alice`, `@`
+
+#### COURSE
+Course should only contain alphabet characters and spaces.
+
+* Valid Examples - `Computer Science and Mathematics`, `Math`
+* Invalid Examples - `123`, `@`
+
+#### MATRIC CARD
+Matric Card should only contain alphanumeric characters, and it should be one word
+
+* Valid Examples - `A1231234E`
+* Invalid Examples - `alice test`, `@`
+
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ### Edit a person : `edit`<a name="edit-a-person"></a>
 
@@ -140,9 +150,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/CO
   specifying any tags after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 2 n/Betsy Crower t/tag1 t/tag1 t/tag1` Edits the name of the 2nd person to be `Betsy Crower` and creates only one tag `tag1`.
+* `edit 1 p/91234567 e/johndoe@example.com` <br> Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` <br> Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 n/Betsy Crower t/tag1 t/tag1 t/tag1` <br> Edits the name of the 2nd person to be `Betsy Crower` and creates only one tag `tag1`.
 
 ### Add a new tag : `add_tag`<a name="add-a-new-tag"></a>
 
@@ -159,6 +169,8 @@ Delete an existing tag from UNite
 
 Format: `delete_tag INDEX`
 
+<div style="page-break-after: always;"></div>
+
 ### List all tags : `list_tag`<a name="list-all-tags"></a>
 
 List out all tags current exist in UNite.
@@ -166,6 +178,7 @@ List out all tags current exist in UNite.
 ![list_tag](images/list_tag.png)
 
 Format: `list_tag`
+<div style="page-break-after: always;"></div>
 
 ### Attach tag to a profile: `attach`<a name="attach-tag-to-a-profile"></a>
 
@@ -228,27 +241,31 @@ Examples:
 
   ![result for 'find yu li'](images/find_yu_li.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Grab person's attribute : `grab`<a name="grab-person-attribute"></a>
 
 Grabs person's (single or multiple) attribute and display out, allow the user to copy directly.
 
-Format: `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`
+Format: `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAG]`
 
 * `INDEX` is optional. If an index is provided, it will grab the attribute of the person with this `INDEX`. If it
 is left blank, it will grab this attribute of all the persons in UNite.
 * The available `ATTRIBUTE_PREFIX` that you can grab are `n/` for name, `p/` for phone number, `e/` for email,
 `a/` for address, `c/` for course, `m/` for matric card, `tele/` for telegram.
-* `TAGS` are optional too. If no tags are provided, it will by default grab the attribute of the person
+* `TAG` are optional too. If no tags are provided, it will by default grab the attribute of the person
   with the `INDEX` or grab from all person if `INDEX` was not present.
-* When `TAGS` is provided, you cannot have `INDEX` present. You will grab the 
-attributes from all person with the `TAG`. 
+* When `TAG` is provided, you cannot have `INDEX` present. You will grab the 
+attributes from all person with the `TAG`. You can only provide 1 tag.
 
 Examples:
-* `grab e/1` grabs the email address of person with index 1.
-* `grab tele/` grabs the telegram id of everyone inside UNite.
-* `grab tele/ t/friends` grabs the telegram id of everyone tagged as "friends" inside UNite.
+* `grab e/1` <br> Grabs the email address of person with index 1.
+* `grab tele/` <br> Grabs the telegram id of everyone inside UNite.
+* `grab tele/ t/friends` <br> Grabs the telegram id of everyone tagged as "friends" inside UNite.
 
   ![result for 'grab e/'](images/grab-email.png)
+* 
+<div style="page-break-after: always;"></div>
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
 
@@ -265,6 +282,8 @@ Examples:
 * `filter friends` followed by `delete 1` deletes the 1st person in the filtered list generated by the `filter`command.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 ### Change the theme: `theme`<a name="change-the-theme"></a>
 Change the appearance of UNite to the specified theme, either `dark` or `light`.
 
@@ -279,6 +298,8 @@ Examples:
 * `theme light` changes UNite to light theme.
 
 ![light theme](images/light_theme.png)
+
+<div style="page-break-after: always;"></div>
 
 ### View detailed profile `profile`<a name="view-detailed-profile-cli"></a>
 View detailed information about the specified person in the form of profile, displayed at
@@ -318,7 +339,7 @@ All data in UNIte are saved in the hard disk automatically after any command tha
 
 ### Edit the data file<a name="edit-the-data-file"></a>
 
-Data in UNite are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data in UNite are saved as a JSON file `[JAR file location]/data/unite.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, UNite will discard all data and start with an empty data file at the next run.
@@ -329,14 +350,21 @@ If your changes to the data file makes its format invalid, UNite will discard al
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Features (Mouse interaction)<a name="features-mouse-interaction"></a>
-**_Implementations will be coming soon ..._**
 
 By default, mouse interactions are disabled in UNite. However, users who are not familiar with using CLI can enable
 it. Below are the features that are supported by mouse interactions.
 
 **Note:** Some features included in the CLI section cannot be done using mouse interaction. To execute those features,
 enter the command in the command box following the instructions in the previous section.
+
+Below is an annotated screenshot of UNite for reference to UI components:
+
+<img src="images/UNite_annotated.png" width="400"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Enable mouse interaction : `enable_mouseUX`<a name="enable-mouse-interaction"></a>
 Enables mouse interaction in mouseUX. After enabling mouse interactions, 2 new buttons ("Add" and "New tag") will
@@ -356,6 +384,8 @@ Format: `disable_mouseUX`
 
 ### View detailed profile<a name="view-profile-click"></a>
 To view a profile, click on the person card in the list to view it.
+
+<div style="page-break-after: always;"></div>
 
 ### Add a new profile<a name="add-a-new-person-click"></a>
 
@@ -380,7 +410,7 @@ To delete a profile, right click on the profile and select `delete`.
 To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
 window** will appear.
 
-<img src="images/tag_popup.png" width="400"/>
+<img src="images/tag_popup.png" width="600"/>
 
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
@@ -394,6 +424,7 @@ Selected tags will appear in black, as shown in the figure below ("friends" and 
 
 <img src="images/selectedTag_GUI.png" width="300"/>
 
+<div style="page-break-after: always;"></div>
 
 ### Filter list by tag<a name="filter-list-by-tag-click"></a>
 To filter the list of person by tag directly, first display all the tags by input the command `list_tag`, then simply 
@@ -402,6 +433,7 @@ click on the tag to filter the list.
 <img src="images/filter-through-click.png"/>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ<a name="faq"></a>
 
@@ -411,6 +443,7 @@ click on the tag to filter the list.
 **A**: Use `list` command to clear the filter.
 
   --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary<a name="command-summary"></a>
 
@@ -429,7 +462,7 @@ Action | Command format, Examples                                               
 **enable_mouseUX** | `enable_mouseUX`                                                                                                                                                  | -
 **exit** | `exit`                                                                                                                                                            | -
 **filter** | `filter TAGMAME`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
-**find** | `find [KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
+**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
 **grab** | `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`<br> e.g., `grab e/ t/classmates`                                                                                         | -
 **help** | `help`                                                                                                                                                            | (Menu bar) `Help` -> `Help`
 **list** | `list`                                                                                                                                                            | -

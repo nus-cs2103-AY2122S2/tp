@@ -1,9 +1,9 @@
 @startuml
 
 start
-:User executes filter command;
-:Checks if tag exists;
-if (Tag Exists) then (true)
+:User type in grab command;
+:Checks if number  of argument is correct;
+if () then ([Correct number of arguments])
   :Filter person list;
   :Show filter success message;
 else (false)

@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Sim SiLeng
@@ -46,4 +44,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/junjieteoh.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Checker of DG/UG, Tester, In charge of Person object,  

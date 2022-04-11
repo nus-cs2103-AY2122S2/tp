@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UniteParser" as UniteParser LOGIC_COLOR
 participant ":SwitchThemeCommandParser" as SwitchThemeCommandParser LOGIC_COLOR
 participant "t:LightTheme" as LightTheme LOGIC_COLOR
 participant "s:SwitchThemeCommand" as SwitchThemeCommand LOGIC_COLOR
@@ -14,17 +14,17 @@ end box
 [-> LogicManager : execute("theme light")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("theme light")
-activate AddressBookParser
+LogicManager -> UniteParser : parseCommand("theme light")
+activate UniteParser
 
 create SwitchThemeCommandParser
-AddressBookParser -> SwitchThemeCommandParser
+UniteParser -> SwitchThemeCommandParser
 activate SwitchThemeCommandParser
 
-SwitchThemeCommandParser --> AddressBookParser
+SwitchThemeCommandParser --> UniteParser
 deactivate SwitchThemeCommandParser
 
-AddressBookParser -> SwitchThemeCommandParser : parse("light")
+UniteParser -> SwitchThemeCommandParser : parse("light")
 activate SwitchThemeCommandParser
 
 create LightTheme
@@ -43,9 +43,9 @@ activate SwitchThemeCommand
 SwitchThemeCommand --> SwitchThemeCommandParser: s
 deactivate SwitchThemeCommand
 
-SwitchThemeCommandParser --> AddressBookParser: s
+SwitchThemeCommandParser --> UniteParser: s
 deactivate SwitchThemeCommandParser
-SwitchThemeCommandParser -[hidden]-> AddressBookParser
+SwitchThemeCommandParser -[hidden]-> UniteParser
 destroy SwitchThemeCommandParser
 
 LogicManager -> SwitchThemeCommand : execute()

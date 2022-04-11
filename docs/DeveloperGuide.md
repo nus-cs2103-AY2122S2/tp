@@ -6,16 +6,19 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -84,6 +89,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -93,7 +100,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `UniteParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,8 +117,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `UniteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniteParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -121,17 +130,18 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the UNite data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Unite`, which `Person` references. This allows `Unite` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -140,19 +150,72 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both UNite data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `UniteStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.unite.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Enhanced Person Object
+
+#### Rationale
+Person object needs to be enhanced to contain more relevant attributes to suit the target audiences.
+
+#### Implementation
+In the original add profile feature in the AB3 Address Book, all the `Person` objects are being stored in the `Unite`.
+
+Now in UNite, we are storying them in `Unite`.
+
+Within it, it contains two class, i) `UniquePersonList` that keep tracks of the `Person` in UNite, and
+ii) `UniqueTagList` that keep tracks of the `Tag` in UNite.
+
+In the original AB3 address book, eachj `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
+diagram of a class diagram of the profiles in the AB3 Address Book.
+
+![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
+
+In UNite, each `Person` object is being enhanced and modified in order to fits the needs of our target users
+(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class,
+this includes `Course` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
+
+![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
+
+Consider the following commands.
+
+`add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B tele/thisisteoh c/Computer Science`
+
+This is a sample of the `Person` object diagram.
+
+![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
+
+#### Design Consideration 
+Aspect: Implementation of `Telegram`, `Course` and `MatricCard` classes 
+- **Alternative 1 (current choice):** <br> 
+The `Telegram`, `Course` and `MatricCard` classes are implemented as individual classes that are associated with `Person`. This is similar to how the inbuilt AB3 classes (ie `Name`, `Email`, `Address` ...) are implemented.
+    - Pros: Easy to implement
+    - Cons: Whenever you want to add more attributes you have to add in more fields in `Person` object.
+- **Alternative 2:** <br>
+Abstract school related classes such as `Email`, `Course` and `MatricCard` such that these classes are associated with a new class (ie `SchoolInfo` class). Each Person object will just have to store one or many `SchoolInfo` object as its field.
+    - Pros: Allow more complicated interactions. For example, we can now allow each `Person` object to store multiple `SchoolInfo` objects (each with a different `Email`, `MatricCard` and `Course`). This can simulate scenarios of students going to another university for exchange (hence having different `SchoolInfo`).
+    - Cons: A huge refactoring is needed to change the internal structure of `Person` object. Not reccomended.
+
+We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
+
+<div style="page-break-after: always;"></div> 
+
+**Aspect: Optional `Telegram`, `Course` and `MatricCard` fields** <br>
+These fields are set as optional. When users choose not to key in these fields, it will be set to a default value of an empty String "". <br> 
+The regex of these three classes has been modified to accept the empty String "" as a valid input command, but internally any `Telegram`, `Course` and `MatricCard` with value of "" means that the field is left blank and unfilled. 
+
 
 ### Filter feature
 
@@ -172,7 +235,7 @@ Given below is an example usage scenario of filter command.
 
 Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `filter family`.
 
-Step 2. The command is passed from `logic.LogicManager`into `logic.parser.AddressBookParser` which creates a `FilterCommandParser` object.
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `FilterCommandParser` object.
 
 Step 3. The `FilterCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `FilterCommand` object
 if there is no parse exception. In the creation of a new `FilterCommand` object, the tag name is parsed out and a new
@@ -185,48 +248,94 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-
-
-####Design considerations
+#### Design considerations
 
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
 
+<div style="page-break-after: always;"></div>
+
+### Grab Command
+#### Rationale
+The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can efficiently compile the needed data.
+
+#### Implementation
+There are two class related to grab features, they are `GrabCommand` and `GrabCommandParser`. Note the following relationship:
+* `GrabCommand` is a class extending `Command` class. The Command object will then be executed. Read [here](#logic-component) to understand how `Command` works.
+* `GrabCommandParser` is a class extending the `Parser` class, it is used to parse the command entered by user.
+
+The activity diagram below summarizes what happens when a grab command is executed.
+In short, there are three possible "Valid input" for user can grab something.
+1. Provide one valid attribute (except `Tag`) with one index, grab this attribute from the `Person` with this index.
+2. Provide one attribute (except `Tag`) and one Tag, grab this attribute from every `Person` with this Tag.
+3. Provide one attribute (except `Tag`) with no index, grab this attribute from every `Person` in UNite.
+
+![GrabActivityDiagram](images/GrabActivityDiagram.png)
+
+Given below is an example usage scenario of grab command.
+
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `grab tele/1`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `GrabCommandParser` object.
+
+Step 3. The `GrabCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `GrabCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, the attribute is being grabbed from the correct `Person` and returned to user.
+
+![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Constraints on Input** <br>
+There are multiple constraints on the inputs allowed for this command. Here are our rationale why.
+
+- **Valid attributes include all attributes EXCEPT tag** <br>
+We decided to leave the grabbing of tag out because this function can already been done by another command (`list_tag`) in UNite. This command is way more powerful than the grab command in terms of tag manipulations.
+
+- **When tag exists, you cannot include index** <br>
+This constraint is put in placed to avoid unnecessary confusion for the users. By allowing users to key in index (when the tag is present), it may create confusion of whether this index refers to the index when all the `Person` are present in UNite, or the filtered list with this tag. <br>
+Hence, we avoided this potential confusion by imposing an additional constraint to this command.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GrabCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedUnite`. It extends `Unite` with an undo/redo history, stored internally as an `uniteStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedUnite#commit()` — Saves the current UNite state in its history.
+* `VersionedUnite#undo()` — Restores the previous UNite state from its history.
+* `VersionedUnite#redo()` — Restores a previously undone UNite state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitUnite()`, `Model#undoUnite()` and `Model#redoUnite()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedUnite` will be initialized with the initial UNite state, and the `currentStatePointer` pointing to that single UNite state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the UNite. The `delete` command calls `Model#commitUnite()`, causing the modified state of the UNite after the `delete 5` command executes to be saved in the `uniteStateList`, and the `currentStatePointer` is shifted to the newly inserted UNite state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitUnite()`, causing another modified UNite state to be saved into the `uniteStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitUnite()`, so the UNite state will not be saved into the `uniteStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoUnite()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous UNite state, and restores the UNite to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Unite state, then there are no previous Unite states to restore. The `undo` command uses `Model#canUndoUnite()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -239,17 +348,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoUnite()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the UNite to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `uniteStateList.size() - 1`, pointing to the latest UNite state, then there are no undone Unite states to restore. The `redo` command uses `Model#canRedoUnite()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the UNite, such as `list`, will usually not call `Model#commitUnite()`, `Model#undoUnite()` or `Model#redoUnite()`. Thus, the `uniteStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitUnite()`. Since the `currentStatePointer` is not pointing at the end of the `uniteStateList`, all UNite states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -272,7 +381,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] View detailed profile
+<div style="page-break-after: always;"></div>
+
+### View detailed profile
 In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
 limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
 height of a `PersonCard`, less person will be displayed of the same window size.
@@ -281,43 +392,12 @@ Therefore, in UNite, the main display window has been divided into two parts. On
 conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
 information about a person.
 
+<div style="page-break-after: always;"></div>
 
-### \[Proposed\] Enhanced Add Profile Feature
-
-In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
-
-Within it, it contains two class, i) `UniquePersonList` that keep tracks of the person in the addressbook, and
-ii) `UniqueTagList` that keep tracks of the `Tag` in the address book.
-
-In the original AB3 address book, each profile is modelled by one `Person` object, which
-consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
-diagram of a class diagram of the profiles in the AB3 Address Book.
-
-![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
-
-In UNite, the profiling of each `Person` object is being enhanced and modified in order to fits the needs of our target users
-(ie university professors, teaching assistants and students). More classes are added to be associated to the `Person` class,
-this includes `Major` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
-
-![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
-
-Consider the following commands.
-
-`add n/junjieteoh p/88888888 e/teohjj@comp.nus.edu.sg a/1234, Kong Ling Road t/friends m/A1234567B`
-
-This is a sample of the `Person` object diagram.
-
-![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
-
-
-### \[Proposed\] Theme choosing
+### Theme choosing
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
 that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
 dark theme, so that the application fits better to the vibrant energy of a university.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -345,6 +425,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: help university Students and TAs to manage multiple project or tutorial groups, and help school admins to manage module groups.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -352,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                   | add someone’s contact information        | update the address book or contact him/her if I need to|
+| `* * *`  | user                   | add someone’s contact information        | update UNite or contact him/her if I need to|
 | `* * *`  | user                   | delete someone’s contact information     |   clear and organize my contact list  if I need to |
 | `* * *`  | user                   | view a particular existing profile       | know his/her information such as name, year of study and faculty  |
 | `* * *`  | user                   | edit a profile                           | update the information if it is wrong or inaccurate|
@@ -368,6 +449,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 *{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -443,6 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -460,6 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Profile**: A page with more detailed information about a person
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -485,7 +571,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Deleting a person
 
@@ -501,7 +587,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-1. _{ more test cases …​ }_
+
 
 ### Deleting a tag
 1. Deleting a tag while all tags are being shown
@@ -516,8 +602,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete_tag`, `delete_tag x`, (where x is larger than the list size),`delete_tag abc`, `...`, (where abc is not integer) <br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+       
 
 ### Detach a tag from a profile
 1.  Detach a tag from a profile in index
@@ -533,7 +618,27 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect detach commands to try: `detach`, `detach t/TAGNAME i/x`, (where x is larger than the list size), `...`<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Filter contacts through tag
+1. Filter the full contact list using a tag
+    1. Prerequisites: Have an existing tag with some profiles attached to it
+    1. Test case: `filter TAGNAME`<br>
+       Expected: All contacts in displayed list are the ones attached to the given tag. If no profile is attached to the tag,
+       the displayed list will be empty.
+    1. Test case: `filter INVALID_TAGNAME`<br>
+        Expected: List is not filtered. Error details shown in result display area.
+
+### Grab attributes from Person 
+1. Filter the full contact list using a tag
+    1. Prerequisites: Have at least one Person in UNite. 
+    2. Test case: Grab all `grab n/`<br>
+       Expected: Names of everyone in UNite displayed.
+    3. Test case: Grab with valid index `grab n/1`<br>
+       Expected: Names of the first Person in UNite displayed. 
+    4. Test case: Grab with valid tag `grab n/ t/VALID_TAGNAME`<br>
+       Expected: Names of everyone in UNite which are tagged as "friends". If no such tags exist in Unite, an error message is shown in display area.
+    5. Test case: Grab with tag and index `grab n/INDEX t/VALID_TAGNAME`<br>
+       Expected: Error message shown saying that you can have both INDEX and VALID_TAGNAME present.
+    6. You can conduct the test cases above with other valid attributes.
 
 ### Saving data
 
