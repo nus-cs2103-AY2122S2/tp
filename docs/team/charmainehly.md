@@ -66,7 +66,7 @@ and corresponding interviews, as well as fixing UI component.
 * **Some contributions during discussions offline:**
   * Suggestions on fixing implementation of duplicate candidate checks for `edit` ([PR #241](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/241))
   * Suggestions on implementation to bring up the candidate's details to focus panel and utilising modulo to fix bug in generating colour for profile picture ([PR #297](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/297/files))
-  
+
 **Contributions beyond the project team:**
   * Directing others to previously addressed error [#92](https://github.com/nus-cs2103-AY2122S2/forum/issues/92)
   * Contribution to discussions [#244](https://github.com/nus-cs2103-AY2122S2/forum/issues/244) and [#257](https://github.com/nus-cs2103-AY2122S2/forum/issues/257)

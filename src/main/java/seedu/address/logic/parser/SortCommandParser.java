@@ -17,7 +17,9 @@ public class SortCommandParser implements Parser<SortCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns a SortCommand object for execution.
+     * and returns a {@code SortCommand} object for execution.
+     * @param args contains the user input to be parsed
+     * @return new {@code SortCommand} object with correct comparator for sorting
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
@@ -31,34 +33,37 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         String sortKey = argMultimap.getValue(PREFIX_SORTKEY).get().toLowerCase();
-        Comparator<Candidate> sortComparator;
+        Comparator<Candidate> sortComparator = findMatchingComparator(sortKey);
 
+        return new SortCommand(sortComparator, sortKey);
+    }
+
+    /**
+     * Returns the matching new {@code Comparator<Candidate>} object based on the field input by the user to be
+     * sorted by.
+     * @param sortKey provides the field specified in user input as a string
+     * @return new created matching {@code Comparator<Candidate>} object
+     * @throws ParseException if the user input for {@code sortKey} not conform the expected format
+     */
+    private Comparator<Candidate> findMatchingComparator(String sortKey)
+            throws ParseException {
         switch (sortKey) {
         case "appstatus":
-            sortComparator = Comparator.comparing(l -> l.getApplicationStatus().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getApplicationStatus().toString().toLowerCase());
         case "course":
-            sortComparator = Comparator.comparing(l -> l.getCourse().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getCourse().toString().toLowerCase());
         case "intstatus":
-            sortComparator = Comparator.comparing(l -> l.getInterviewStatus().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getInterviewStatus().toString().toLowerCase());
         case "name":
-            sortComparator = Comparator.comparing(l -> l.getName().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getName().toString().toLowerCase());
         case "seniority":
-            sortComparator = Comparator.comparing(l -> l.getSeniority().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getSeniority().toString().toLowerCase());
         case "studentid":
-            sortComparator = Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
-            break;
+            return Comparator.comparing(l -> l.getStudentId().toString().toLowerCase());
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.INVALID_ATTRIBUTE_FIELD));
         }
-
-        return new SortCommand(sortComparator, sortKey);
-
     }
 
     /**

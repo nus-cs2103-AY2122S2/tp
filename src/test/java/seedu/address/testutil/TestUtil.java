@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 
+//@@author
 /**
  * A utility class for test cases.
  */

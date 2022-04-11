@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,8 @@ public class AvailabilityContainsKeywordsPredicate extends ContainsKeywordsPredi
      */
     @Override
     public boolean test(Candidate candidate) {
+        requireNonNull(candidate);
+
         String availability = candidate.getAvailability().toString();
         int[] availArr = Arrays.stream(availability.split(",")).mapToInt((Integer::parseInt)).toArray();
         HashMap<String, Integer> availMap = new HashMap<>();

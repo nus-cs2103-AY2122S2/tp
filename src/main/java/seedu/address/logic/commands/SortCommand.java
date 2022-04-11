@@ -11,7 +11,7 @@ import seedu.address.model.candidate.Candidate;
 
 /**
  * Reorders all candidates in TAlent Assistant™ based on the sort key provided.
- * The sort key will point to a specific candidate field.
+ * The sort key should specify a certain candidate field.
  */
 public class SortCommand extends Command {
 
@@ -34,8 +34,8 @@ public class SortCommand extends Command {
     /**
      * Creates new SortCommand object.
      *
-     * @param sortComparator contains the Comparator for sorting the list of candidates
-     * @param sortKey contains the valid sort key for equality state check
+     * @param sortComparator contains the Comparator for sorting the list of candidates.
+     * @param sortKey contains the valid sort key for equality state check.
      */
     public SortCommand(Comparator<Candidate> sortComparator, String sortKey) {
         requireNonNull(sortComparator);

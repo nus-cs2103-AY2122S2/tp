@@ -32,6 +32,7 @@ import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
 
+//@@author domlimm
 /**
  * Edits the details of an existing candidate in the address book.
  */

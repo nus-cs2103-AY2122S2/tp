@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -27,6 +29,8 @@ public class PhoneContainsKeywordsPredicate extends ContainsKeywordsPredicate im
      */
     @Override
     public boolean test(Candidate candidate) {
+        requireNonNull(candidate);
+
         return keywords.stream()
                 .anyMatch(keyword -> candidate.getPhone().toString().toLowerCase().contains(keyword.toLowerCase()));
     }

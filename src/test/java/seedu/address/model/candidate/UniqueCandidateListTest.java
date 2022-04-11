@@ -19,6 +19,7 @@ import seedu.address.model.candidate.exceptions.CandidateNotFoundException;
 import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 import seedu.address.testutil.CandidateBuilder;
 
+//@@author
 public class UniqueCandidateListTest {
 
     private final UniqueCandidateList uniqueCandidateList = new UniqueCandidateList();

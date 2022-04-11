@@ -253,14 +253,21 @@ public class ModelManager implements Model {
         return null;
     }
 
-    //=========== Interview Schedule Accessors =============================================================
-
+    /**
+     * Accesses and returns the interview list stored in system.
+     * @return an unmodifiable view of the filtered interview list in proper sorted order (earliest to latest
+     * scheduled interviews).
+     */
     @Override
     public ObservableList<Interview> getFilteredInterviewSchedule() {
         interviewSchedule.sortInterviews();
         return filteredInterviewSchedule;
     }
 
+    /**
+     * Updates the interview list stored in system to filter by the given {@code predicate}.
+     * @param predicate contains the test method to check whether to keep an interview in the filtered list.
+     */
     @Override
     public void updateFilteredInterviewSchedule(Predicate<Interview> predicate) {
         requireNonNull(predicate);
@@ -278,12 +285,21 @@ public class ModelManager implements Model {
         return filteredCandidates;
     }
 
+    /**
+     * Updates the filter of the filtered candidate list to filter by the given {@code predicate}.
+     * @param predicate contains the test method to check whether to keep a candidate in the filtered list.
+     */
     @Override
     public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
         requireNonNull(predicate);
         filteredCandidates.setPredicate(predicate);
     }
 
+    /**
+     * Updates the sorting order of filtered candidate list in the system to sort by the given {@code sortComparator}.
+     * @param sortComparator contains the {@code sortComparator} object with details on what the sorting
+     *                       should be.
+     */
     @Override
     public void updateSortedCandidateList(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);
