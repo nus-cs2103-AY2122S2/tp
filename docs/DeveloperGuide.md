@@ -62,7 +62,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -100,7 +100,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -218,7 +218,7 @@ The predicate is implemented in this way since updating the filteredPersonList i
 
 **Aspect: How FindCommand executes:**
 
-![FindCommandSequece](images/FindSequenceDiagram.png)
+![FindCommandSequence](images/FindSequenceDiagram.png)
 
 ![ParseFindSequence](images/ParseFindSequenceDiagram.png)
 
@@ -230,7 +230,7 @@ The predicate is implemented in this way since updating the filteredPersonList i
 
 * **Alternative 2:** Using just one predicate to encompass all the fields
     * Pros: Code is cleaner and less redundant
-    * Cons: Implementation and testing might be harder as it is less modulariseds
+    * Cons: Implementation and testing might be harder as it is less modularised
     
 
 ### Adding the ability to export AddressBook to CSV and back
@@ -356,7 +356,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: Implementing Undo & redo for Packages:**
 
 * **Possible implementation:** `UndoRedoStorage` stores both `AddressBook` state and `InsurancePackagesSet` state.
-    * Pros: Easy to implement. Change existing `UndoRedoStorage` methods to accomodate both data by using a wrapper class to encapsulate both `AddressBook` state and `InsurancePackagesSet` state.
+    * Pros: Easy to implement. Change existing `UndoRedoStorage` methods to accommodate both data by using a wrapper class to encapsulate both `AddressBook` state and `InsurancePackagesSet` state.
     * Issues: `Undo` and `Redo` were able to work as intended for commands that alter `AddressBook` states such as `add`, `delete`, `edit` and `clear`.
              however, it is able to `Undo` and `Redo` commands for commands that alter `InsurancePackagesSet` states such as `addp`, `deletep` and `editp`
                 but at a certain point, the previous `InsurancePackagesSet` states stored in `UndoRedoStorage` becomes mutated which gives rise to erroneous behaviours when executing 'Undo' and 'Redo'.
@@ -385,7 +385,7 @@ A tech savvy insurance agent who:
 * has to manage a significant number of clients and their different profiles
 * prefers quick commands to locate his clients in his address book
 * has to meet up with clients to introduce new packages at different locations
-* is on the move often, prefers an app that can be used efficiently and relabily on the go
+* is on the move often, prefers an app that can be used efficiently and reliably on the go
 
 **Value proposition**:
 * Allow clients to be saved, ordered and filtered by different categories
@@ -708,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. User did not input the package description field (`/d`).
   
-    * 2a1. AddressBook shows an error message, saying that the command format is invalid.
+    * 2b1. AddressBook shows an error message, saying that the command format is invalid.
       
         Use case ends.
 
@@ -734,7 +734,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. User did not input the package description field (`/d`).
 
-    * 2a1. AddressBook shows an error message, saying that the command format is invalid.
+    * 2b1. AddressBook shows an error message, saying that the command format is invalid.
 
       Use case ends.
 
@@ -760,7 +760,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The given package is still in use by a person.
 
-    * 2a1. AddressBook shows an error message, saying that the package is in use.
+    * 2b1. AddressBook shows an error message, saying that the package is in use.
 
       Use case ends.
 
