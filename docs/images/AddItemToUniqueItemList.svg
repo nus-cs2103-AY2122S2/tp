@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="561.4583px" preserveAspectRatio="none" style="width:980px;height:561px;background:#FFFFFF;" version="1.1" viewBox="0 0 980 561" width="980.2083px" zoomAndPan="magnify"><defs/><g><rect fill="#FFD1D3" height="531.9397" rx="4.1667" ry="4.1667" style="stroke:#FFFFFF;stroke-width:1.0416666666666667;" width="915.625" x="53.125" y="11.4583"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="13.5417" font-weight="bold" lengthAdjust="spacing" textLength="42.7083" x="487.5" y="34.967">Model</text><rect fill="#FFFFFF" height="371.4091" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="135.4167" y="159.4889"/><rect fill="#FFFFFF" height="305.4606" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="334.375" y="210.8541"/><rect fill="#FFFFFF" height="157.9386" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="339.5833" y="336.5011"/><rect fill="#FFFFFF" height="80.5318" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="493.75" y="393.0745"/><rect fill="#FFFFFF" height="14.5833" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="650" y="444.4397"/><rect fill="#FFFFFF" height="14.5833" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="851.5625" y="262.2192"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="140.625" x2="140.625" y1="106.0404" y2="549.648"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="339.5833" x2="339.5833" y1="106.0404" y2="549.648"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="498.9583" x2="498.9583" y1="106.0404" y2="549.648"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="655.2083" x2="655.2083" y1="106.0404" y2="549.648"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="856.25" x2="856.25" y1="106.0404" y2="549.648"/><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="145.8333" x="67.7083" y="52.4068"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="110.4167" x="85.4167" y="84.2143">:ModelManager</text><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="152.0833" x="263.5417" y="52.4068"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="116.6667" x="281.25" y="84.2143">:ReversibleIBook</text><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="104.1667" x="446.875" y="52.4068"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="68.75" x="464.5833" y="84.2143">p:Product</text><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="145.8333" x="582.2917" y="52.4068"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="110.4167" x="600" y="84.2143">:UniqueItemList</text><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="194.7917" x="759.375" y="52.4068"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="159.375" x="777.0833" y="84.2143">:StateChangeRecorder</text><rect fill="#FFFFFF" height="371.4091" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="135.4167" y="159.4889"/><rect fill="#FFFFFF" height="305.4606" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="334.375" y="210.8541"/><rect fill="#FFFFFF" height="157.9386" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="339.5833" y="336.5011"/><rect fill="#FFFFFF" height="80.5318" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="493.75" y="393.0745"/><rect fill="#FFFFFF" height="14.5833" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="650" y="444.4397"/><rect fill="#FFFFFF" height="14.5833" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="851.5625" y="262.2192"/><polygon fill="#000000" points="122.9167,155.3223,133.3333,159.4889,122.9167,163.6556,127.0833,159.4889" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="10.4167" x2="129.1667" y1="159.4889" y2="159.4889"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="82.2917" x="31.7708" y="144.1325">addItem(p, i)</text><polygon fill="#000000" points="321.875,206.6874,332.2917,210.8541,321.875,215.0208,326.0417,210.8541" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="145.8333" x2="328.125" y1="210.8541" y2="210.8541"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="147.9167" x="166.1458" y="195.4976">reversibleAddItem(p, i)</text><polygon fill="#000000" points="839.0625,258.0526,849.4792,262.2192,839.0625,266.3859,843.2292,262.2192" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="344.7917" x2="845.3125" y1="262.2192" y2="262.2192"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="92.7083" x="551.8229" y="246.8628">recordAction()</text><polygon fill="#000000" points="356.25,272.6359,345.8333,276.8026,356.25,280.9692,352.0833,276.8026" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="350" x2="855.7292" y1="276.8026" y2="276.8026"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="344.7917" x2="393.75" y1="322.9594" y2="322.9594"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="393.75" x2="393.75" y1="322.9594" y2="336.5011"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="351.0417" x2="393.75" y1="336.5011" y2="336.5011"/><polygon fill="#000000" points="361.4583,332.3344,351.0417,336.5011,361.4583,340.6677,357.2917,336.5011" style="stroke:#000000;stroke-width:1.0416666666666667;"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="82.2917" x="367.7083" y="307.6029">addItem(p, i)</text><polygon fill="#000000" points="481.25,388.9079,491.6667,393.0745,481.25,397.2412,485.4167,393.0745" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="350" x2="487.5" y1="393.0745" y2="393.0745"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="65.625" x="389.0625" y="377.7181">addItem(i)</text><polygon fill="#000000" points="637.5,440.273,647.9167,444.4397,637.5,448.6064,641.6667,444.4397" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="504.1667" x2="643.75" y1="444.4397" y2="444.4397"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="36.4583" x="558.8542" y="429.0833">add(i)</text><polygon fill="#000000" points="515.625,454.8564,505.2083,459.023,515.625,463.1897,511.4583,459.023" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="509.375" x2="654.1667" y1="459.023" y2="459.023"/><polygon fill="#000000" points="361.4583,469.4397,351.0417,473.6064,361.4583,477.773,357.2917,473.6064" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="355.2083" x2="497.9167" y1="473.6064" y2="473.6064"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="350" x2="393.75" y1="493.398" y2="493.398"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="393.75" x2="393.75" y1="493.398" y2="506.9397"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="344.7917" x2="393.75" y1="506.9397" y2="506.9397"/><polygon fill="#000000" points="355.2083,502.773,344.7917,506.9397,355.2083,511.1064,351.0417,506.9397" style="stroke:#000000;stroke-width:1.0416666666666667;"/><polygon fill="#000000" points="157.2917,512.148,146.875,516.3147,157.2917,520.4814,153.125,516.3147" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="151.0417" x2="338.5417" y1="516.3147" y2="516.3147"/><polygon fill="#000000" points="21.875,526.7314,11.4583,530.898,21.875,535.0647,17.7083,530.898" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="15.625" x2="139.5833" y1="530.898" y2="530.898"/><!--MD5=[69a81998f77d04f706e4d66bb7d84800]
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+box Model MODEL_COLOR_LIGHT
+participant ":ModelManager" as ModelManager<<Model>>
+participant ":ReversibleIBook" as ReversibleIBook<<Model>>
+participant "p:Product" as Product<<Model>>
+participant ":UniqueItemList" as UniqueItemList<<Model>>
+participant ":StateChangeRecorder" as StateChangeRecorder<<Model>>
+end box
+
+[-> ModelManager : addItem(p, i)
+activate ModelManager
+
+ModelManager -> ReversibleIBook : reversibleAddItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> StateChangeRecorder : recordAction()
+activate StateChangeRecorder
+
+StateChangeRecorder - -> ReversibleIBook
+deactivate StateChangeRecorder
+
+ReversibleIBook -> ReversibleIBook : addItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> Product : addItem(i)
+activate Product
+
+Product -> UniqueItemList : add(i)
+activate UniqueItemList
+
+UniqueItemList - -> Product
+deactivate UniqueItemList
+
+Product - -> ReversibleIBook
+deactivate Product
+
+ReversibleIBook - -> ReversibleIBook
+deactivate ReversibleIBook
+
+ReversibleIBook - -> ModelManager
+deactivate ReversibleIBook
+
+[<- - ModelManager
+deactivate ModelManager
+
+
+@enduml
+
+@startuml
+
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #2196F3
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor transparent
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  transparent
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent    
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #9C27B0
+		LineColor #7D1F8D
+		BackGroundColor transparent
+	}
+	separator {
+		LineColor #cccccc
+		BackGroundColor transparent
+		FontColor #cccccc
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #cccccc
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #ff9800
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10 
+skinparam TitleFontColor	    #222
+skinparam TitleFontSize	    	20
+skinparam TitleBorderThickness 	0
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor $DANGER_DARK
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              transparent
+}
+
+skinparam legend {
+	BackgroundColor transparent
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor transparent
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #cccccc
+}
+
+
+skinparam participant {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor transparent
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor transparent
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor transparent
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam control {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam entity {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam boundary {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam agent {
+	BackgroundColor transparent
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor transparent
+	BorderColor #9C27B0
+	FontColor #9C27B0
+}
+
+
+skinparam artifact {
+	BackgroundColor transparent
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam interface {
+	BackgroundColor  transparent
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor transparent
+  	BorderColor #ff9800
+	FontColor #ff9800
+}
+
+
+skinparam node {
+	BackgroundColor transparent
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam class {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	FontColor #fff
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #cccccc
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+	BackgroundColor transparent
+  	BorderColor #2196F3
+	FontColor #2196F3
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor transparent
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor transparent
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #cccccc
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam card {
+	BackgroundColor transparent
+	BorderColor #9C27B0
+	FontColor #9C27B0
+}
+
+
+skinparam file {
+	BackgroundColor transparent
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+
+
+
+
+
+skinparam BackgroundColor #FFFFFFF
+
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
+
+
+    skinparam Class {
+        FontColor<<Hidden>> #FFFFFF
+        StereotypeFontColor<<Hidden>> #FFFFFF
+        BorderColor<<Hidden>> #FFFFFF
+    }
+    hide <<Hidden>> stereotype
+    skinparam Class {
+        FontColor<<Logic>> #3333C4
+        StereotypeFontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+    }
+    hide <<Logic>> stereotype
+    skinparam Class {
+        FontColor<<Ui>> #1D8900
+        StereotypeFontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+    }
+    hide <<Ui>> stereotype
+    skinparam Class {
+        FontColor<<Model>> #9D0012
+        StereotypeFontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+    }
+    hide <<Model>> stereotype
+    skinparam Class {
+        FontColor<<Storage>> #A38300
+        StereotypeFontColor<<Storage>> #A38300
+        BorderColor<<Storage>> #A38300
+    }
+    hide <<Storage>> stereotype
+skinparam Class {
+    FontName Arial
+    FontSize 15
+    StereotypeFontSize 13
+    BorderThickness 1.1
+}
+
+    skinparam Package {
+        FontColor<<Logic>> #3333C4
+        StereotypeFontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+    }
+    hide <<Logic>> stereotype
+    skinparam Package {
+        FontColor<<Ui>> #1D8900
+        StereotypeFontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+    }
+    hide <<Ui>> stereotype
+    skinparam Package {
+        FontColor<<Model>> #9D0012
+        StereotypeFontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+    }
+    hide <<Model>> stereotype
+    skinparam Package {
+        FontColor<<Store>> #A38300
+        StereotypeFontColor<<Store>> #A38300
+        BorderColor<<Store>> #A38300
+    }
+    hide <<Store>> stereotype
+skinparam Package {
+    Style Rectangle
+}
+
+SKINPARAM MINCLASSWIDTH 50
+SKINPARAM SHADOWING FALSE
+SKINPARAM DEFAULTTEXTALIGNMENT CENTER
+SKINPARAM TITLEFONTSIZE 25
+
+SKINPARAM TITLEFONTCOLOR<<LOGIC>> #3333C4
+SKINPARAM TITLEFONTCOLOR<<UI>>    #1D8900
+SKINPARAM TITLEFONTCOLOR<<MODEL>> #9D0012
+SKINPARAM TITLEFONTCOLOR<<STORE>> #A38300
+
+
+hide footbox
+hide members
+hide circle
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    BoxBorderColor #FFFFFF
+
+    GroupFontColor #DF7800
+    GroupBackgroundColor #FF980032
+    GroupBorderColor #FF9800
+    GroupBorderThickness 1.8
+    GroupHeaderFontColor #DF7800
+    GroupHeaderFontStyle bold
+
+    ReferenceFontColor #DF7800
+    ReferenceBackgroundColor #FF9C0532
+    ReferenceHeaderBackgroundColor #FF980032
+    ReferenceBorderColor #FF9800
+    ReferenceBorderThickness 1.8
+    ReferenceHeaderFontColor #DF7800
+    ReferenceHeaderFontStyle bold
+
+    LifelineBackgroundColor #FFFFFF
+    LifelineBorderColor #000000
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 10
+    BorderColor #000000
+}
+
+
+    skinparam Participant {
+        FontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+        BackgroundColor<<Logic>> #C8C8FA
+    }
+    skinparam Participant {
+        FontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+        BackgroundColor<<Ui>> #BDECB1
+    }
+    skinparam Participant {
+        FontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+        BackgroundColor<<Model>> #F97181
+    }
+    skinparam Participant {
+        FontColor<<Storage>> #A38300
+        BorderColor<<Storage>> #A38300
+        BackgroundColor<<Storage>> #FFE374
+    }
+
+box Model #FFD1D3
+participant ":ModelManager" as ModelManager<<Model>>
+participant ":ReversibleIBook" as ReversibleIBook<<Model>>
+participant "p:Product" as Product<<Model>>
+participant ":UniqueItemList" as UniqueItemList<<Model>>
+participant ":StateChangeRecorder" as StateChangeRecorder<<Model>>
+end box
+
+[-> ModelManager : addItem(p, i)
+activate ModelManager
+
+ModelManager -> ReversibleIBook : reversibleAddItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> StateChangeRecorder : recordAction()
+activate StateChangeRecorder
+
+StateChangeRecorder - -> ReversibleIBook
+deactivate StateChangeRecorder
+
+ReversibleIBook -> ReversibleIBook : addItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> Product : addItem(i)
+activate Product
+
+Product -> UniqueItemList : add(i)
+activate UniqueItemList
+
+UniqueItemList - -> Product
+deactivate UniqueItemList
+
+Product - -> ReversibleIBook
+deactivate Product
+
+ReversibleIBook - -> ReversibleIBook
+deactivate ReversibleIBook
+
+ReversibleIBook - -> ModelManager
+deactivate ReversibleIBook
+
+[<- - ModelManager
+deactivate ModelManager
+
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 00:16:42 SGT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: SG
+--></g></svg>

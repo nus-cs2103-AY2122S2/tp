@@ -82,7 +82,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" alt="Architecture diagram" width="260">
+<img src="images/ArchitectureDiagram.png" alt="Architecture diagram" width="285">
 
 The Architecture Diagram given above explains the high-level design of the app.
 
@@ -116,19 +116,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface.
 
-<img src="images/ComponentManagers.png" width="320" />
+<div style="page-break-after: always;"></div>
+
+Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" alt="Component Managers" width="320" />
 
 The sections below give more details about each component.
-
-### Ui component
-
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java)
-
-The diagram below shows a simplified view of the Ui component.
-
-![Structure of the UI Component](images/UiClassDiagram.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -138,7 +134,7 @@ The diagram below shows a simplified view of the Ui component.
 
 The diagram below shows a simplified view of the `Ui` component.
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" alt="Structure of the UI Component" width="480" />
 
 `XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc.
 
@@ -154,7 +150,7 @@ For example, `CommandBox` calls the method `executeCommand` in `MainWindow` when
 
 UI components that are related to the main display table are grouped under the `Table` package. The diagram below shows a simplified internal structure of `Table`.
 
-<img src="images/UiTableDiagram.png" alt="Structure of the Table Component" width="360">
+<img src="images/UiTableDiagram.png" alt="Structure of the Table Component" width="350">
 
 The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` objects that represent `Product`. Subsequently, each `ProductCard` may contain `ItemTable` which has multiple `ItemCard` objects to represent `Item`.
 
@@ -164,7 +160,7 @@ The `MainWindow` contains a `ProductTable` that holds multiple `ProductCard` obj
 
 UI components that are related to a popup window are grouped under the `Popup` package. The diagram below shows a simplified internal structure of `Popup`.
 
-<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="340">
+<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="320">
 
 `PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc. The `MainWindow` contains a `PopupHandler` that provides APIs for operations related to a popup window.
 
@@ -178,7 +174,7 @@ The abstract class `Popup` inherits `UiComponent` for navigability to `MainWindo
 
 UI components that are related to the `ControlBox` are grouped under the `Control` package. The diagram below shows a simplified internal structure of `Control`.
 
-<img src="images/UiControlDiagram.png" alt="Structure of the Control UI" width="300">
+<img src="images/UiControlDiagram.png" alt="Structure of the Control UI" width="280">
 
 The `ControlBox` is the box located just above the main display table. It holds the <img class="btn" align="center" src="images/ui-icons/add-product.png" alt="Add Product" height="25"/> button and `Filter` tags.
 
@@ -295,7 +291,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The diagram below shows a simplified internal structure of `Popup`.
 
-<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="340">
+<img src="images/UiPopupDiagram.png" alt="Structure of the Popup UI" width="300">
 
 `PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
@@ -369,6 +365,7 @@ The `commandResult` will then be sent to `ResultWindow` for display and `PopupYY
     1. Increases complexity for `MainWindow`.
     2. Less efficient, as more function calls are required.
 
+<div style="page-break-after: always;"></div>
 
 ### Product
 
@@ -395,6 +392,8 @@ The following sequence diagram shows how the `Update` command works:
   * Pros: Removes the need for listeners for UI to track product states.
   * Cons: The cost for updating a product may be huge.
 
+<div style="page-break-after: always;"></div>
+
 ### Product filters
 
 #### Implementation
@@ -406,6 +405,8 @@ Both the `ProductFilter` as well as the `AttributeFilter` has a `test()` method 
 Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
 
 <img src="images/ProductFilterClassDiagram.png" width="550" />
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below shows how the `FindCommand` object is created:
 
@@ -441,6 +442,8 @@ The updated filtered product list would then be displayed in the GUI.
     * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
     * Cons: More complicated to implement.
 
+<div style="page-break-after: always;"></div>
+
 ### Item
 
 #### Implementation
@@ -456,19 +459,19 @@ Listed below are the few behavioral requirements for `Item`, along with the clas
 
 The motivation for such implementation is due to the parsing of the `add-item` command when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
 
+<div style="page-break-after: always;"></div>
+
 ##### Adding an Item
 
-Given below is a sequence diagram to show how `add-item 1 e:2022-12-13 q:10` is handled:
+The sequence diagram below shows how `add-item 1 e:2022-12-13 q:10` is handled:
 
-![Sequence diagram for `add-item` command](images/AddItemSequenceDiagram.png)
+![Sequence diagram for `add-item` command](images/AddItemSequenceDiagram.svg)
 
-The details of `AddItemCommand#execute()` are omitted from the sequence diagram above, and are illustrated below:
-
-![Detailed sequence diagram for the command execution](images/AddItemToModelSequenceDiagram.png)
+<img src="images/AddItemToModelSequenceDiagram.svg" alt="Detailed sequence diagram for the command execution" width="450">
 
 The sequence diagram below shows how an `Item` is added to a `Product`'s `UniqueItemList`. This happens within `ModelManager` which implements the interface `Model` containing the method `Model#addItem(Product, Item)`.
 
-![Sequence diagram for `ModelManager#addItem` internal details](images/AddItemToUniqueItemList.png)
+<img src="images/AddItemToUniqueItemList.svg" alt="Sequence diagram for `ModelManager#addItem` internal details" width="650">
 
 ##### Updating and deleting an Item
 These two operations are similar to adding an `Item` as shown in the section above.
@@ -479,15 +482,13 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 * **Alternative 1:** Retrieve the respective `Product` within the parser.
     * Pros: Easy solution.
-    * Cons: Allows the parser to interact with model and logic, which also increases coupling.
+    * Cons: Allows the parser to interact with model and logic, and increases coupling.
 
       &nbsp;
 
 * **Alternative 2:** Create command object with each field as a parameter.
     * Pros: Easy solution.
-    * Cons:
-        * Complicates the `AddItemCommand` constructor and requires modification of constructor signature whenever there are updates to `Item` fields.
-        * If more commands that have the same issue are implemented, the amount of modification will increase.
+    * Cons: Complicates the `AddItemCommand` constructor and requires modification of constructor signature whenever there are updates to `Item` fields.
 
       &nbsp;
 
@@ -515,6 +516,8 @@ Step 1. The user launches the application for the first time. The `ReversibleIBo
 
 <img src="images/UndoRedoState0.png" width="500" />
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `delete 3` command to delete the 3rd product in the iBook. The `delete` command calls `Model#saveIBookChanges()` after its execution, causing changes made to iBook to be recorded as a `StateChange` and stored in the `stateChanges` list. The `currentStateChange` is now pointing to this most recent `StateChange`.
 
 <img src="images/UndoRedoState1.png" width="500" />
@@ -530,6 +533,7 @@ Step 3. The user executes `add n:Maggie​ p:2.00` to add a new product. This co
 </div>
 
 <br>
+<div style="page-break-after: always;"></div>
 
 Step 4. The user now decides that adding the product was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoIBook()`, which will get and execute the actions needed to revert this change. `currentStateChange` will then move once to the left, pointing to the most recent `stateChange` (with respect to the state of `IBook` after the `undo` command).
 
@@ -542,6 +546,7 @@ Step 4. The user now decides that adding the product was a mistake, and decides 
 </div>
 
 <br>
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the undo operation works:
 
@@ -559,6 +564,7 @@ The `redo` command does exactly the opposite  —  it calls `Model#redoIBook
 </div>
 
 <br>
+<div style="page-break-after: always;"></div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not make any changes to `IBook`, such as `list`, will not call `Model#saveIBookChanges()`. Thus, state change records in `StateChangeRecorder` remain unchanged.
 
@@ -569,6 +575,8 @@ Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges
 Reason: It does not make sense to redo the `add n:Maggie​ p:200` command. This is the convention that most modern desktop applications follow.
 
 <img src="images/UndoRedoState5.png" width="500" />
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -589,6 +597,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each method is correct.
 
 <hr/>
+
+<div style="page-break-after: always;"></div>
 
 ## **Link to guides**
 
