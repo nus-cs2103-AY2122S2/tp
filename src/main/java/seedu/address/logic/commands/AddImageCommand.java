@@ -95,6 +95,7 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         Person editedPerson = addImages(personToEdit, imagesToAdd);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setImagesToView(editedPerson.getImageDetailsList());
         resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), editedPerson));
 
         return new CommandResult(resultStringBuilder.toString(), VIEW_IMAGES);
