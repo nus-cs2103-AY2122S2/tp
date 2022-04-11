@@ -38,6 +38,7 @@ Given below are my contributions to the project.
 
 - **Contributions to the UG:**
     * General standardisation of format and language
+    * Heavily involved in the editing of the User Guide before Final Submission.
     * Heavily involved in the editing of the User Guide before Feature Freeze.
     * Worked with Isaac to edit the Model architecture in the User Guide (Procedure-specific).
     * Maintained `EditClient` Command
@@ -45,14 +46,18 @@ Given below are my contributions to the project.
     * Maintained `EditProcCommand` Command
 
 - **Contributions to the DG:**
+    * General standardisation of format and language
+    * Heavily involved in the editing of the User Guide before Final Submission.
     * Maintained `DeleteProcCommand` Command
     * Maintained `EditProcCommand` Command
 
 - **Contributions to team-based tasks**
-    * Created jar file for end of v1.3
+    * Created jar file for end of v1.3.
+    * Helped to tag final commit for v1.4.
     * Helped to wrap up and closed two milestones.
     * Consistently drafted agendas for meetings.
     * Collated, pinned, and maintained important links in the telegram group check.
 
 - **Review/mentoring contributions:**
   - [Pull Requests Reviewed by me](https://github.com/AY2122S2-CS2103T-W13-1/tp/pulls?q=is%3Apr+reviewed-by%3Ateominghuang)
+  - More tP comments by me can be found in the [dashboard](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html)
