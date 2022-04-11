@@ -3,14 +3,13 @@ layout: page
 title: User Guide
 ---
 
-# Tracey
+Tracey
 
 Tracey is a **desktop app for managing health statuses of NUS Hall Residents, optimized for use via a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-<details>
-  <summary>What are CLIs? What are GUIs?</summary>
+What are CLIs? What are GUIs?
 
 ##  Brief Introduction
 CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
@@ -31,8 +30,6 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 This [video](https://www.youtube.com/watch?v=wXzl7e9JGag) illustrates the power of using CLI over GUI in performing the same task. <br>
 (The video is produced by the developers of the FAST app, and has been approved for reuse.)
 
-</details>
-
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
 We hope you enjoy Tracey as much as we did when developing it!
@@ -49,9 +46,9 @@ There are a few symbols to take note of in our User Guide. Their purposes are st
 
 | Symbol  |                                                                            Purpose                                                                             |
 |:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|   :information_source:  |      <div markdown="span" class="alert alert-info"> Additional notes are parked here. They contain beneficial information in case you are confused.</div>      |
-|   ⚠️    |         <div markdown="span" class="alert alert-warning"> Warnings are parked here. They contain information that you **NEED** to take note of.</div>          |
-|   💡    | <div markdown="span" class="alert alert-primary"> Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.</div> |
+|   :information_source:  |                                Additional notes are parked here. They contain beneficial information in case you are confused.                                 |
+|   ⚠️    |            Warnings are parked here. They contain information that you **NEED** to take note of.             |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.|
 
 *Table 1: Symbols and their purposes.*
 
@@ -65,13 +62,11 @@ Additional formatting guidelines:
 
 *Table 2: Word formats and their purposes.*
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
 <div markdown="span" class="alert alert-info">
-
 :information_source: **Note:**<br>
 
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
@@ -92,7 +87,6 @@ Additional formatting guidelines:
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
 <div markdown="span" class="alert alert-info">
-
 :information_source: **Note:**<br>
   
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
@@ -115,7 +109,7 @@ Additional formatting guidelines:
 
 * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the <a href='#features'Features/> below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,10 +126,9 @@ This is a sample screenshot of what you can expect from the `help` command.
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You can also use the `F1` key to open the pop-up window.
+1. You can also use the `F1` key to open the pop-up window.
   
 </div>
 
@@ -166,8 +159,6 @@ Examples of usage:
 
 *Table 3: Incorrect usage of **pre-defined constants**. Refer to Table 4 for an exhaustive list of such constants.*
 
-
-
 | **Prefix** | **Meaning** |    **Pre-defined constants**                                                                          |                                                                                                                                                                                                                                                        Constraints                                                                                                                                                                                                                                                        |
 |:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 60 characters.                                                                                                                                                                                                                  |
@@ -186,12 +177,11 @@ As described in Table 4, these are the possible prefixes that can be used with T
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You are able to add optional tags with no restrictions using the `t/` prefix.
+1. You are able to add optional tags with no restrictions using the `t/` prefix.
   
-* Additions can be reversed with the `undo` feature.
+2. Additions can be reversed with the `undo` feature.
   
 </div>
 
@@ -226,14 +216,13 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 5: Screenshot of Tracey after applying the edit command.*
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* Tracey shows the entire edited database after the edit command is applied.
+1. Tracey shows the entire edited database after the edit command is applied.
   
-* After every edit command, the student at the specified index will be shifted to the bottom of the list.
+2. After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
-* If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
+3. If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 </div>
 
@@ -263,16 +252,15 @@ Examples of usage:
 * `delete 10` removes the 10th student on the list.
 
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:**<br>
   
-* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
+1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
   
-* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+2. You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
   
-* This can save you time scrolling down an entire list to get his/her `INDEX`!
+3. This can save you time scrolling down an entire list to get his/her `INDEX`!
   
-* Deletions can be reversed with the `undo` feature.
+4. Deletions can be reversed with the <a href='#undoing-an-action>`undo`</a> feature.
   
 </div>
 
@@ -296,16 +284,15 @@ Figure *7* depicts a scenario in which an `undo` command is used to restore any 
 The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
   
-* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
   
-  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+   a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
   
-  * Using an `undo` command will not restore the student's index back to 1
+   b. Using an `undo` command will not restore the student's index back to 1
   
 </div>
 
@@ -330,16 +317,15 @@ Following the scenario from *Figure 7*, *Figure 8* depicts the scenario in which
 to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br> 
   
-* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
   
-* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
   
-  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
   
-  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+  b. Using a `redo` command after using an `undo` command will not restore the student's index back to 1
   
 </div>
 
@@ -387,10 +373,9 @@ An example is shown below:
 As seen in *Figure 10*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+1. `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
   
 </div>
 
@@ -413,12 +398,11 @@ Format:`email`
 From *Figure 12*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 <div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
   
-  :information_source: **Note:**<br>
+1. There is also a `Show Email` button on the GUI which you can click to open the same window.
   
-* There is also a `Show Email` button on the GUI which you can click to open the same window.
-  
-* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+2. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
   
 </div>
 
@@ -465,25 +449,23 @@ Examples of usage:
   4. Open the folder named `270322`.
   5. Your archived file is named `270322_152833123.json`.
 
-<div markdown="span" class="alert alert-alert">
-  
+<div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
   
-* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
 
-* Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
+2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
   
 </div>
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You can rename the archived file in the file path manually for easier reference.
+1. You can rename the archived file in the file path manually for easier reference.
   
-  * Features for naming the archived file using the CLI will be available in later releases.
+  a. Features for naming the archived file using the CLI will be available in later releases.
   
-* To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+  b. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
   
 </div>
 
@@ -493,24 +475,22 @@ Resizes the result display window to 3 pre-set sizes.
 Format: `resize SIZE`
 * There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 14 for the comparison for the different result display window sizes.
+* Refer to Figure 14 for the comparison for the different result display window sizes.
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
-
-<div markdown="span" class="alert alert-primary">
-  
-:bulb: **Tip:**<br>
-  
-* This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
-  
-</div>
+![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+1. There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
   
+</div>
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**<br>
+
+1. This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+
 </div>
 
 ### 3.14. Clearing all records
@@ -519,12 +499,11 @@ Clear all the data inside Tracey.
 Format:`clear`
 
 <div markdown="span" class="alert alert-warning">
-  
 :warning: **Warning:**<br>
   
-* Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+1. Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
   
-* This feature cannot be reversed using `undo`.
+2. This feature cannot be reversed using `undo`.
   
 </div>
 
