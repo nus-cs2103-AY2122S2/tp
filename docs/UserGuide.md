@@ -3,49 +3,6 @@ layout: page
 title: User Guide
 ---
 
-<style>
-  /* Uncomment for PDF conversion*/
-  /* hr {
-    display: none
-  }
-  h1, h2, h3{
-    margin-top: 10px !important;
-  } */
-  .alert {
-    border: none;
-    border-left: solid 5px;
-    padding: 25px;
-    border-radius: 5px;
-    background-image: none;
-  }
-
-  .alert-primary {
-    color: #619620;
-    border-color: #82C92A;
-    background-color: #82C92A20;
-  }
-
-  .alert-warning {
-    color: #ED4242;
-    border-color: #ED4242;
-    background-color: #ED424220;
-  }
-
-  .alert-info {
-    color: #0B8CF5;
-    border-color: #6DB0F0;
-    background-color: #6DB0F020;
-  }
-
-  .feature {
-    padding: 30px 50px;
-    margin: 30px;
-    border-radius: 12px;
-    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
-  }
-
-</style>
-
 IBook is an inventory organizing system specially designed to manage products in a store.
 
 <h2>Target User</h2>
@@ -90,7 +47,7 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 
     An interface similar to the image below should appear in a few seconds.
 
-    ![Ui](images/Ui.png)
+    ![UI](images/Ui.png)
 
 5. Type the command in the command box and press enter to execute it.
 
@@ -159,7 +116,7 @@ Example tip.
 
 The application window is divided into a Command Box, Result Window as well as a Display Table that includes all the products.
 
-![Ui-2](images/Ui-2.png)
+![UI-2](images/Ui-2.png)
 
 
 The main mode of navigation in iBook is through the Command-line Interface (CLI).
@@ -330,7 +287,7 @@ Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Produ
 
 A pop-up window similar to the image shown next will appear.
 
-![Ui](images/popup-add-product.png)
+![UI](images/popup-add-product.png)
 
 You can now fill in the name and the price. Optionally, you can also fill in the category, description, discount rate and discount start.
 
@@ -375,7 +332,7 @@ Click <img align="center" src = "images/ui-icons/edit-color.png" alt="Edit" heig
 
 A pop-up window similar to the image shown next will appear
 
-![Ui](images/popup-update-product.png)
+![UI](images/popup-update-product.png)
 
 You can now change the details of the product.
 
@@ -407,7 +364,7 @@ Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete"
 
 A pop-up window similar to the image below will appear.
 
-![Ui](images/popup-delete-product.png)
+![UI](images/popup-delete-product.png)
 
 You can now delete the product by clicking the <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> button.
 
@@ -546,7 +503,7 @@ Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add I
 
 A pop-up window similar to the image below will appear.
 
-![Ui](images/popup-add-item.png)
+![UI](images/popup-add-item.png)
 
 You can now fill in the details for expiry date and quantity.
 
@@ -594,7 +551,7 @@ Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" hei
 
 A pop-up window similar to the image below will appear.
 
-![Ui](images/popup-modify-item.png)
+![UI](images/popup-modify-item.png)
 
 You can now modify the details for the item.
 
@@ -635,7 +592,7 @@ Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" hei
 
 A pop-up window similar to the image below will appear.
 
-![Ui](images/popup-modify-item.png)
+![UI](images/popup-modify-item.png)
 
 Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 

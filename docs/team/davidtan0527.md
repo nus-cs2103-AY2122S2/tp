@@ -7,7 +7,7 @@ title: Weiu Cheng's Project Portfolio Page
 
 IBook is a desktop application for managing incoming and outgoing products of a store. It focuses on managing expirable items and provides various features to help keeping track of them.
 
-IBook is designed to be simple, elegant, and intuitive to use. With the Command Line Interface (CLI), the user is able to have control over all the operations without moving their hands away from the keyboard. In addition to that, a Graphical User Interface (GUI)
+IBook is designed to be simple, elegant, and intuitive to use. With the Command Line Interface (CLI), the user can have control over all the operations without moving their hands away from the keyboard. Optionally, the user can interact with the application via the Graphical User Interface (GUI).
 
 #### Contributions
 

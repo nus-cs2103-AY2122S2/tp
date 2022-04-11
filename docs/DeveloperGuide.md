@@ -4,58 +4,19 @@ title: Developer Guide
 ---
 
 <style>
-   hr {
-      display: none
-   }
-
-   h1, h2, h3, h4, h5 {
-      margin-top: 10px !important;
-   }
-
-   p img {
-      display: block;
-      margin: 0 auto 30px;
-   }
-
-   .btn {
-      display: unset;
-      margin: 0;
-   }
-
-  .alert {
-      border: none;
-      border-left: solid 5px;
-      padding: 25px;
-      border-radius: 5px;
-      background-image: none;
-  }
-
-  .alert-primary {
-      color: #619620;
-      border-color: #82C92A;
-      background-color: #82C92A20;
-  }
-
-  .alert-warning {
-      color: #ED4242;
-      border-color: #ED4242;
-      background-color: #ED424220;
-  }
-
-  .alert-info {
-      color: #0B8CF5;
-      border-color: #6DB0F0;
-      background-color: #6DB0F020;
-  }
+    p img:not(.btn) {
+        display: block;
+        margin: 0 auto 30px;
+    }
 </style>
 
 <h2>Acknowledgements</h2>
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - a collection of simply beautiful open source icons.
+* Most of the images in UI are taken from [Feather](https://feathericons.com/) - a collection of simply beautiful open source icons.
 
-* The Ui design is inspired by [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+* The UI design is inspired by [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
 
 <h2>Setting up, getting started</h2>
 
@@ -132,13 +93,13 @@ The sections below give more details about each component.
 
 **API**: [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java).
 
-The diagram below shows a simplified view of the `Ui` component.
+The diagram below shows a simplified view of the `UI` component.
 
 <img src="images/UiClassDiagram.png" alt="Structure of the UI Component" width="480" />
 
 `XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc.
 
-The UI consists of a `UiManager` that implements the Facade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow.
+The UI consists of a `UiManager` that implements the Facade interface `UI`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow.
 
 By having `XXX_Ui` inherit from `UiComponent`, we allow nagivation from `XXX_Ui` to `MainWindow`. The navigation is helpful for some UI components that need to call methods in `UiManager`.
 
@@ -180,7 +141,7 @@ The `ControlBox` is the box located just above the main display table. It holds 
 
 The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represents each `AttributeFilter`.
 
-<h4>More about Ui</h4>
+<h4>More about UI</h4>
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in corresponding `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view) folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
@@ -745,6 +706,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC5: Find products
 
 **MSS**
@@ -785,6 +748,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC7: Add an item
 
 **MSS**
@@ -814,6 +779,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
     * 2c1. IBook automatically sets the quantity to 0.
 
       Use case resumes at step 3.
+
+<div style="page-break-after: always;"></div>
 
 #### UC8: Delete an item
 
@@ -863,6 +830,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC10: Find items
 
 **MSS**
@@ -902,6 +871,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
     * 1a1. IBook shows a cute image stating nothing found.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 #### UC12: Find expiring items
 
@@ -950,6 +921,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC14: Delete all products
 
 **MSS**
@@ -985,6 +958,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### UC16: Redo changes
 
 **MSS**
@@ -1017,6 +992,8 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 <hr/>
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1043,8 +1020,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file or running `java -jar ibook.jar`.<br>
        Expected: The most recent window size and location is retained.
-
-   3. _{ more test cases …​ }_
 
 ### Deleting product(s)
 
