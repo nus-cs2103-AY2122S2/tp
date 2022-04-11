@@ -316,7 +316,7 @@ All data in UNIte are saved in the hard disk automatically after any command tha
 
 ### Edit the data file<a name="edit-the-data-file"></a>
 
-Data in UNite are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data in UNite are saved as a JSON file `[JAR file location]/data/unite.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, UNite will discard all data and start with an empty data file at the next run.

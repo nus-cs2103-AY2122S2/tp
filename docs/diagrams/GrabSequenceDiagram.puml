@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniteParser" as UniteParser LOGIC_COLOR
+participant ":GrabCommandParser" as GrabCommandParser LOGIC_COLOR
+participant "g:GrabCommand" as GrabCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+participant "t:Telegram" as Telegram MODEL_COLOR
+end box
+
+[-> LogicManager : execute("grab tele/1")
+activate LogicManager
+
+LogicManager -> UniteParser : parseCommand("grab tele/1")
+activate UniteParser
+
+create GrabCommandParser
+UniteParser -> GrabCommandParser
+activate GrabCommandParser
+
+GrabCommandParser --> UniteParser
+deactivate GrabCommandParser
+
+UniteParser -> GrabCommandParser : parseCommand(" tele/1")
+activate GrabCommandParser
+
+create GrabCommand
+GrabCommandParser -> GrabCommand
+activate GrabCommand
+
+GrabCommand --> GrabCommandParser: g
+deactivate GrabCommand
+
+GrabCommandParser --> UniteParser: g
+deactivate GrabCommandParser
+GrabCommandParser -[hidden]-> UniteParser
+destroy GrabCommandParser
+
+UniteParser --> LogicManager:g
+deactivate UniteParser
+
+LogicManager -> GrabCommand : execute()
+activate GrabCommand
+
+GrabCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> GrabCommand :
+deactivate Model
+
+GrabCommand -> Person : get(1)
+activate Person
+
+Person --> GrabCommand : p
+deactivate Person
+
+GrabCommand -> Telegram : getTelegram()
+activate Telegram
+
+Telegram --> GrabCommand : t
+deactivate Telegram
+
+create CommandResult
+GrabCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GrabCommand
+deactivate CommandResult
+
+GrabCommand --> LogicManager: result
+deactivate GrabCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
