@@ -393,6 +393,7 @@ Alternatives considered:
 
 ### Appointment feature
 
+
 The `appt-b` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
 
 1. An index needs to be specified along with the necessary time field.
