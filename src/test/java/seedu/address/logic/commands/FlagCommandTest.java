@@ -21,7 +21,7 @@ import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code FlagCommand}.
  */
 public class FlagCommandTest {
 
