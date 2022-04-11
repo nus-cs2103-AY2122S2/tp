@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org),
+  as **part of the se-education.org** initiative.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -653,17 +655,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The contact list does not exist.
+* 1a. The contact list does not exist.
 
-   * 2a1. AddresSoc creates a new list.
+   * 1a1. AddresSoc creates a new list.
 
    Use case resumes at step 2.
 
-* 3a. The contact specified by the user is invalid.
+* 1a. The arguments specified by the user are invalid.
 
-   * 3a1. AddresSoc shows an error message.
+   * 1a1. AddresSoc shows an error message.
 
-     Use case resumes at step 2.
+     Use case resumes at step 1.
 
 
 **Use case: Delete a contact**
@@ -693,26 +695,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list meetings
-2.  AddresSoc shows a list of meetings
-3.  User requests to add a meeting in the list
-4.  AddresSoc adds the meeting
+1.  User requests to add a meeting to the meeting list
+2.  AddresSoc adds the meeting
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The arguments passed are invalid.
+* 1a. The arguments passed are invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 1a1. AddressBook shows an error message.
 
-      Use case resumes at 2.
+      Use case resumes at step 1.
 
-* 3b. The mandatory arguments are not passed.
+* 1b. The mandatory arguments are not passed.
 
-    * 3b1. AddressBook shows an error message.
+    * 1b1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: Delete a meeting**
 
@@ -746,10 +746,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User does not provide any search terms.
+* 1a. User does not provide any arguments as search terms.
   * 1a1. AddresSoc shows an error message.
     
-    Use case ends.
+    Use case resumes at step 1.
+    
+* 1b. User provides invalid arguments as search terms.
+  * 1b1. AddresSoc shows an error message.
+    
+    Use case resumes at step 1.
     
 
 
@@ -761,7 +766,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be easily maintainable and scalable (i.e. use of OOP and high cohesion) to implement new features in future.
-5.  Should have high testability by reducing use of Coupling.
+5.  Should have high testability by reducing use of coupling.
 6.  Should be well documented for users to understand how to use the product.
 7.  Should be well documented for developers to understand how to further improve the product.
 
