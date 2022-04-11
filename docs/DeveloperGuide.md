@@ -511,10 +511,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list candidates
-2.  TAlent Assistant™ shows all candidates
+1. User requests to list candidates
+2. TAlent Assistant™ shows all candidates
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -534,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User inputs details
 4.  TAlent Assistant™ adds the new candidate
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -554,7 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User selects candidate to edit and inputs the updated details
 4.  TAlent Assistant™ edit the specified candidate
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -616,6 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 3.
+
 <hr>
 
 **Use case: Reschedule an interview in the system**
@@ -627,7 +628,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to reschedule a specific interview to a particular date and time
 4.  TAlent Assistant™ reschedules the interview to the new date and time
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -643,6 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 3.
+
 <hr>
 
 **Use case: Delete an interview in the system**
@@ -654,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to delete a specific interview
 4.  TAlent Assistant™ removes the interview from the schedule
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -677,7 +679,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TAlent Assistant™ returns a list of candidates that contain one or more of the given keyword(s)
    in the specified attribute field
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -700,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to sort candidates by a specific attribute field
 2. TAlent Assistant™ returns a list of candidates sorted with regard to the specified attribute field
 
-  Use case ends.
+Use case ends.
 
 * 2b. The specified attribute field is invalid
     * 2b1. TAlent Assistant™ returns an error message
@@ -716,7 +718,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to view scheduled interviews within a specific time period
 2. TAlent Assistant™ returns a list of scheduled interviews within the specified time period, sorted from earliest to latest
 
-  Use case ends.
+Use case ends.
 
 * 2b. The specified time period is invalid
     * 2b1. TAlent Assistant™ returns an error message
@@ -732,12 +734,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to update the remark of a candidate in the system
 2. TAlent Assistant™ returns the candidate with the updated remark in the feedback panel
 
-  Use case ends.
+Use case ends.
 
 * 2b. The candidate specified is displayed in the focus panel
     * 2b1. TAlent Assistant™ updates the candidate's remark displayed
 
-  Use case resumes at step 1.
+    Use case resumes at step 1.
 
 <hr>
 
@@ -748,7 +750,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list available commands
 2.  TAlent Assistant™ returns list of available commands and example usages
 
-    Use case ends.
+Use case ends.
 
 <hr>
 
@@ -759,15 +761,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User wants to edit a candidate's application status
 2. TAlent Assistant™ will update the status of the candidate, and display it on the UI.
 
-   Use case ends.
+Use case ends.
 
 * 2a. The status entered by the user is invalid
     * 2a1. TAlent Assistant™ returns an error message
-      Use case ends.
+    
+  Use case ends.
 
 * 2b. The Candidate does not exist
     * 2b1. TAlent Assistant™ returns an error message
-      Use case ends.
+    
+  Use case ends.
 
 <hr>
 
@@ -780,12 +784,12 @@ Preconditions: Candidate has an interview scheduled.
 1. User wants to change the Interview Status of the Candidate to Completed.
 2. TAlent Assistant™ will update the Interview Status of the candidate once the interview slot is over.
 
-   Use case ends.
+Use case ends.
 
 * 2a. User deletes the interview slot before the interview starts
     * 2a1. TAlent Assistant™ will change the Interview Status of the Candidate to Not Scheduled.
-
-      Use case ends.
+      
+  Use case ends.
 
 <hr>
 
@@ -796,12 +800,12 @@ Preconditions: Candidate has an interview scheduled.
 1. User requests to see more information about the Candidate.
 2. TAlent Assistant™ will return all the information available for the Candidate selected.
 
-   Use case ends.
+Use case ends.
 
 * 2a. Candidate does not exist in the system.
     * 2a1. TAlent Assistant™ returns an error message
 
-      Use case ends.
+    Use case ends.
 
 <hr>
 
@@ -826,6 +830,7 @@ Use case ends.
 Use case ends.
 
 <hr>
+
 ### Non-Functional Requirements
 
 1. TAlent Assistant™ should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1038,7 +1043,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
        Use the `find` command to display a new filtered list with fewer candidates. Multiple candidates in the filtered list.
 
-     2. Test case: `sort s/name`<br>
+    2. Test case: `sort s/name`<br>
        Expected: Currently displayed candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed name. Number of candidates sorted is shown in the feedback panel.
 
 
@@ -1093,14 +1098,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data files 
    1. Prerequisites: Missing `data/talentassistant.json`.
+   
    2. Test case: Delete `data/talentassistant.json` and relaunch the application.</br>
-   Expected: Application will be populated with sample data.
+      Expected: Application will be populated with sample data.
 
 
 2. Dealing with corrupted data files
    1. Prerequisites: `data/talentassistant.json` is modified to contain invalid details.
+   
    2. Test case: Modify a `Candidate`'s phone number to start with any digit other than 6, 8 or 9 and launch the application.</br>
-   Expected: Application will start without any data.
+      Expected: Application will start without any data.
+   
    3. Test case: Modify a `Candidate`'s phone number to start with any digit other than 6, 8 or 9 while the application is running.</br>
-   Expected: Application continues to run smoothly.
+      Expected: Application continues to run smoothly.
 
