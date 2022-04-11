@@ -349,7 +349,7 @@ WIP
 ### Summary
 
 #### Design Consideration
-Alternative 1 (current choice): Use the existing `updateFilteredXXXList()` methods in the `Model`. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
+Alternative 1 (current choice): Use the existing `updateFilteredXXXList(NRIC_PREDICATE)` methods in the `Model`. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
 
 Pros:
 - Easy to implement
@@ -358,20 +358,20 @@ Pros:
 Cons:
 - Increased coupling. For example, originally, `AddXXXCommand`s look for the patient in the latest filtered list of patients to add new entities to. Since at the summary screen the list is in the filtered state, we cannot add to other patients apart from the one being viewed. `AddXXXCommand`s had to be modified as a result.
 
-Alternative 2: Having a dedicated model class `Summary`. A `Summary` object holds all needed information to be displayed. The `Summary` object is to be created by iterating over all existing unfiltered lists in `MedBook`.
+Alternative 2: Having a dedicated model class `Summary`. A `Summary` object holds all information to be displayed. The `Summary` object is to be created by iterating over all existing unfiltered lists in `MedBook` to retrieve required entities.
 
 Pros:
-- No coupling. Summary is not dependent on the state of other filtered lists
+- No coupling. Summary is not dependent on the state of the filtered lists
 
 Cons:
 - The logic to retrieve the needed entities is a bit of a duplicate
 - One would need to manage the construction and flow of the `Summary` object and parse it for display, so more tedious to implement
 
 #### Implementation
-The viewing summary mechanism is implemented by modifying the existing `ViewCommand` and reusing the existing `Model#updateFilteredXXXList()` operations.
+The viewing summary mechanism is implemented by modifying the existing `ViewCommand` and reusing the existing `Model#updateFilteredXXXList(NRIC_PREDICATE)` operations.
 
-The `ViewCommand` command is augmented with an additional `nric` parameter, which displays the summary screen if the `nric` parameter is specified. `ViewCommandParser` is augmented to parse the NRIC parameter the user enters.
-An additional operation `Model#updateSummary()` is implemented, which invokes the existing `Model#updateFilteredXXXList()` operations to update the state of the filtered lists in `Model`. The `UI` is then updated accordingly.
+`ViewCommand` is augmented with an additional `nric` parameter. `ViewCommandParser` is enhanced to conditionally parse the NRIC parameter the user enters.
+An additional operation `Model#updateSummary(nric)` is implemented. When `ViewCommand` calls `Model#updateSummary(nric)`, the method invokes the existing `Model#updateFilteredXXXList(NRIC_PREDICATE)` operations to update the state of the filtered lists in `Model`. The `UI` is then updated accordingly.
 
 The following sequence diagram shows how the summary feature works:
 
