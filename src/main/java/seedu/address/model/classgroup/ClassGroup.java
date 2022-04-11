@@ -24,6 +24,7 @@ import seedu.address.model.tamodule.TaModule;
 public class ClassGroup implements Entity {
     // Identity fields
     public static final int NUM_OF_WEEKS = 13;
+    public static final String MESSAGE_INVALID_NUM_OF_LESSONS = "The number of lessons is invalid!";
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
     private final TaModule taModule;
@@ -69,7 +70,7 @@ public class ClassGroup implements Entity {
      * Construct a {@code ClassGroup} by copying all the provided fields.
      */
     public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
-                       UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
+                      UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.taModule = taModule;
