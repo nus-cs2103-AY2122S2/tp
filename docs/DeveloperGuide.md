@@ -457,7 +457,6 @@ This command cannot be used in succession.
 
 The activity diagram shows the possible execution paths for the `undo` and `redo` command.
 
-**Path Execution of Undo and Redo Features Activity Diagram is shown below:**
 ![UndoRedoFeatureActivityDiagram](images/UndoRedoFeatureActivityDiagram.png)
 
 #### 5.5.5. Implementation
@@ -505,7 +504,6 @@ than attempting to perform the undo. Similarly, if `redo` is called as the first
 
 The following is a class diagram of the undo and redo features.
 
-**Class diagram of Undo/Redo features is shown below:**
 ![FilterFeatureClassDiagram](images/UndoRedoClassDiagram.png)
 
 The above class diagram shows the structure of the UndoCommand and RedoCommand and their associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in UndoCommand and RedoCommand; such as public static fields and getter/setter methods.
@@ -536,7 +534,7 @@ The following sequence diagram shows how the redo operation works:
 
 The find mechanism implements the following sequence for the method call execute("find").
 
-#### 5.6.1. What is the find feature
+#### 5.6.1. What is the Find feature
 
 The find feature allows users to find a particular contact by its name in Tracey and retrieve their specific details.
 
@@ -544,32 +542,35 @@ The `find` command is as follows:
 
 `find NAME`
 
-The user do not require to search the full name of the contact. However,  the query substring must match the person's
-starting from the first character.
+The user does not need to input the full name of the contact. However, the contact's name has to start with `NAME`.
 
 e.g. `find J`
-This will return any contact details starts with J in the Tracey.
+This will return any contacts' details whose names start with J in Tracey.
 
 e.g. `find Ja`
-This will match `Jack` while `find ck` will not match.
+This will return a contact with name 'Jack'.
 
+e.g. `find ck`
+This will not return a contact with name 'Jack'.
 
-The activity diagram shows the possible execution paths for the `find` command.
+#### 5.6.2. Path execution of Find Command
 
-**Path Execution of Find Feature Activity Diagram is shown below:**
+The activity diagram below shows the possible execution paths for the `find` command:
+
 ![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
 
 There are two possible execution paths for this command.
 
-1. User input the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
+1. User inputs the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
    display an error message that informs the contact details the user try to search is not found.
 
-2. User input the `find` command with valid arguments. Tracey returns a list of contact details that matches the
-   input name from the existing database, and display the contact list to the user.
+2. User inputs the `find` command with valid arguments. Tracey returns a list of contact details that matches the
+   input name from the existing database, and displays the contact list to the user.
 
-The sequence diagram below illustrates the execution of `find` command.
+#### 5.6.3. Interactions between objects when Find command is executed
 
-**Sequence Diagram of Find Feature is shown below:**
+The sequence diagram below illustrates the execution of `find` command:
+
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 The argument typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will
@@ -579,8 +580,8 @@ A `FindCommandParser` object will then be created to parse this input, with its 
 NameContainsKeywordsPredicate object is then created, containing the name that the user has entered.
 This NameContainsKeywordsPredicate object is then used to create a FindCommand object.
 
-Subsequently, the `parseCommand` method in `LogicManager` will continute to create a `CommandResult`, displaying
-a success message and a list of the students that match up the name.
+Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying
+a success message and a list of the students that match the name.
 
 <br>
 
@@ -608,7 +609,6 @@ This is still a valid input even though the filter criteria for block was not sp
 
 The activity diagram shows the possible execution paths for the `filter` command.
 
-**Path Execution of Filter Feature Activity Diagram is shown below:**
 ![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
 
 There are two possible execution paths for this command.
@@ -628,7 +628,6 @@ The above class diagram shows the structure of the FilterCommand and its associa
 
 The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
 
-**Sequence Diagram of Filter Feature is shown below:**
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
 The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object.
@@ -1041,7 +1040,6 @@ The `import` command is as follows:
 
 The activity diagram shows the possible execution paths for the `import` command.
 
-**Path Execution of Import Feature Activity Diagram is shown below:**
 ![ImportFeatureActivityDiagram](images/ImportFeature.png)
 
 There are two possible execution paths for this command.
@@ -1053,7 +1051,6 @@ There are two possible execution paths for this command.
 
 The sequence diagram below shows the interactions between objects during the execution of a `import` command.
 
-**Sequence Diagram of Import Feature is shown below:**
 ![ImportFeatureSequenceDiagram](images/ImportSequenceDiagram.png)
 
 
