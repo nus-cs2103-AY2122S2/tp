@@ -28,7 +28,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `undo` and `redo` [\#106](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/106)
     
   * Developer Guide:
-    * Added implementation details of the `undo` and `redo` feature [(PR #200)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200).
+    * Added implementation details of the `undo` and `redo` feature [(PR #218)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/218).
     
 
 * **Community**:
