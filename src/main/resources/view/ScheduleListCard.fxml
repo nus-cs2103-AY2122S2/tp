@@ -18,7 +18,7 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
-            <HBox spacing="5" alignment="CENTER_LEFT">
+            <HBox spacing="5" alignment="TOP_LEFT">
                 <padding>
                     <Insets top="5" right="5" bottom="5"/>
                 </padding>

@@ -16,11 +16,11 @@ public class DataAnalyzer {
     private static final List<Tag> POSITION_TAGS = List.of(new Tag("PG"), new Tag("SG"),
             new Tag("SF"), new Tag("PF"), new Tag("C"));
     private static final String MESSAGE_BALANCED_TEAM =
-            "Well done! Seems like the number of players\nin each position are balanced!";
+            "Well done! Seems like the number of players in each position are balanced! ";
     private static final String MESSAGE_UNBALANCED_TEAM =
-            "It seems like your club is short of %s players.\nConsider recruiting more of them.";
+            "It seems like your club is short of %s players. Consider recruiting more of them. ";
     private static final String MESSAGE_UNCLASSIFIED_PLAYERS =
-            "\nMeanwhile, you still have %d unclassified players.\n"
+            "Meanwhile, you still have %d unclassified players. "
             + "Please tag them by their position so that MyGM can have a better\nunderstanding of your club.";
 
     /**
@@ -52,12 +52,12 @@ public class DataAnalyzer {
             }
         }
 
-        int averagePlayers = positions.values().stream().reduce(0, (x, y) -> x + y);
+        double averagePlayers = positions.values().stream().reduce(0, (x, y) -> x + y) / ((double) 5);
 
         List<Tag> lackingPlayers = new ArrayList<Tag>();
 
         for (Tag tag : POSITION_TAGS) {
-            if (positions.get(tag) < averagePlayers - 1) {
+            if (positions.get(tag) < averagePlayers - 1 || positions.get(tag) < 2) {
                 lackingPlayers.add(tag);
             }
         }

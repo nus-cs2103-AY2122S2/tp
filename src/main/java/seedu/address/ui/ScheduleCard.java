@@ -36,7 +36,9 @@ public class ScheduleCard extends UiPart<Region> {
         this.schedule = schedule;
         id.setText(displayedIndex + ". ");
         name.setText(schedule.getScheduleName().toString());
+        name.setWrapText(true);
         description.setText(schedule.getScheduleDescription().toString());
+        description.setWrapText(true);
         Stream.of(schedule.getScheduleDateTime())
                 .forEach(dateTime -> dateTimes.getChildren().add(new Label(dateTime.toString())));
     }

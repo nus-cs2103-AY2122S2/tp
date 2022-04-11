@@ -27,12 +27,12 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
-            + ": Deletes a player from MyGM."
+            + ": Deletes a player from MyGM or lineup if lineup name is specified."
             + "\nParameters: "
-            + PREFIX_PLAYER + "NAME \n"
-            + "[" + PREFIX_LINEUP + "LINEUP NAME]"
+            + PREFIX_PLAYER + "NAME "
+            + "[" + PREFIX_LINEUP + "LINEUP NAME]\n"
             + "Example: "
-            + COMMAND_WORD
+            + COMMAND_WORD + " "
             + PREFIX_PLAYER + "John Doe ";
 
     public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             + "\nParameters: "
             + PREFIX_LINEUP + "LINEUP NAME \n"
             + "Example: "
-            + COMMAND_WORD
+            + COMMAND_WORD + " "
             + PREFIX_LINEUP + "Starting 5";
 
     public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
@@ -134,7 +134,6 @@ public class DeleteCommand extends Command {
                 Person toDelete = model.getPerson(this.player);
                 model.deletePerson(toDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, this.player));
-                // do I also need to delete person from lineup?
             }
         case PLAYER_LINEUP:
             if (!model.hasPersonName(this.player)) {

@@ -14,6 +14,8 @@ import java.time.format.ResolverStyle;
 public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "The format of date should be dd/MM/uuuu";
 
     private static final String DATE_TIME_FORMATTER = "[dd/MM/uuuu HHmm]";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter

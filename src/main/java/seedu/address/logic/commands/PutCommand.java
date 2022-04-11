@@ -22,7 +22,7 @@ public class PutCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Puts the specified player into a specified lineup.\n"
-            + "Parameters: " + PREFIX_PLAYER + "NAME"
+            + "Parameters: " + PREFIX_PLAYER + "NAME "
             + PREFIX_LINEUP + "LINEUP NAME" + "\n"
             + "Example: put P/Alex Chua L/starting five";
 

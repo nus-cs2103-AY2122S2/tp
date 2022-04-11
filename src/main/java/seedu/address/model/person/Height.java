@@ -8,9 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Height implements Comparable<Height> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Heights should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain numeric characters.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Heights should adhere to the following constraints:\n"
+            + "1. Height should only contain numeric characters.\n"
             + "2. Height should be between 1 and 300 (inclusive).\n"
             + "3. Height should be a whole number.\n";
     public static final String VALIDATION_REGEX = "^([1-9]|[1-9][0-9]|[1-2][0-9][0-9]|30[0-0])$";

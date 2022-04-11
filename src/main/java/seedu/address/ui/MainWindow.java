@@ -91,6 +91,16 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        this.primaryStage.setMinWidth(1000);
+        this.primaryStage.setMinHeight(850);
+        this.primaryStage.widthProperty().addListener((o, oldValue, newValue) -> {
+            if (newValue.intValue() < 1000.0) {
+                this.primaryStage.setResizable(false);
+                this.primaryStage.setWidth(1000);
+                this.primaryStage.setResizable(true);
+            }
+        });
     }
 
     public Stage getPrimaryStage() {

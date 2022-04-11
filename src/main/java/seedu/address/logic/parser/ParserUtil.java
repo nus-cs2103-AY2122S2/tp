@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -12,6 +13,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -149,13 +151,13 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static seedu.address.model.lineup.LineupName parseLineupName(String lineupName) throws ParseException {
+    public static LineupName parseLineupName(String lineupName) throws ParseException {
         requireNonNull(lineupName);
         String trimmedLineupName = lineupName.trim();
-        if (!seedu.address.model.lineup.LineupName.isValidLineupName(trimmedLineupName)) {
-            throw new ParseException(seedu.address.model.lineup.LineupName.MESSAGE_CONSTRAINTS);
+        if (!LineupName.isValidLineupName(trimmedLineupName)) {
+            throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.lineup.LineupName(trimmedLineupName);
+        return new LineupName(trimmedLineupName);
     }
 
     /**
@@ -220,6 +222,21 @@ public class ParserUtil {
 
         return new ScheduleDateTime(trimmedDateTime);
     }
+
+    /**
+     * Parses a {@code String scheduleDate} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDate} is invalid.
+     */
+    public static LocalDate parseScheduleDate(String scheduleDate) {
+        requireNonNull(scheduleDate);
+        String trimmedDateTime = scheduleDate.trim();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate date = LocalDate.parse(trimmedDateTime, dtf);
+        return date;
+    }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
