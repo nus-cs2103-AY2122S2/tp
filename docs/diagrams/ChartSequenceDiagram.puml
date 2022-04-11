@@ -26,6 +26,9 @@ PlotXYZCommand --> TrackBeauParser : c
 deactivate PlotXYZCommand
 
 TrackBeauParser --> LogicManager : c
+deactivate TrackBeauParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TrackBeauParser -[hidden]-> LogicManager
 destroy TrackBeauParser
 
 LogicManager -> PlotXYZCommand : execute()
