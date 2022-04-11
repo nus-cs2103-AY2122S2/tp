@@ -5,7 +5,6 @@ title: Dominic Lim's Project Portfolio Page
 
 ### Project: TAlent Assistant™
 
-#### Overview ####
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to NUS School of Computing professors for managing
 the interview scheduling process of candidates applying to be undergraduate Teaching Assistants (TA). It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI) built using JavaFX.
 
@@ -20,7 +19,7 @@ Given below are my contributions to the project.
     * E.g. Changing of styles i.e. `CSS`.
   * Ideated `HelpWindow`'s design layout.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=domlimm&breakdown=true)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=domlimm&breakdown=true) to view individual code contribution.
 
 * **Project management**:
   * Managed deadlines and deliverables for the team whenever/wherever necessary.

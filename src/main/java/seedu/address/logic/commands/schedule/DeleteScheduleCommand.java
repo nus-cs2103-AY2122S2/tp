@@ -12,8 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
 /**
- * Schedules a candidate identified using it's displayed index from the address book for an interview
- * on a specified time slot.
+ * Deletes an interview identified using it's displayed index from the interview schedule.
  */
 public class DeleteScheduleCommand extends ScheduleCommand {
 
@@ -31,8 +30,7 @@ public class DeleteScheduleCommand extends ScheduleCommand {
     private final Index targetIndex;
 
     /**
-     * Creates a AddScheduleCommand to schedule the candidate at specified index for an
-     * interview on {@code LocalDateTime}
+     * Creates a DeleteScheduleCommand to delete the interview at specified index.
      */
     public DeleteScheduleCommand(Index targetIndex) {
         this.targetIndex = targetIndex;

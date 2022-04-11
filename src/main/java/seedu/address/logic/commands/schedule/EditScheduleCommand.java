@@ -39,8 +39,7 @@ public class EditScheduleCommand extends ScheduleCommand {
     private final LocalDateTime newDateTime;
 
     /**
-     * Creates a AddScheduleCommand to schedule the candidate at specified index for an
-     * interview on {@code LocalDateTime}
+     * Creates a EditScheduleCommand to reschedule the interview at specified index to the newDateTime.
      */
     public EditScheduleCommand(Index index, LocalDateTime newDateTime) {
         requireNonNull(index);
@@ -93,8 +92,7 @@ public class EditScheduleCommand extends ScheduleCommand {
     }
 
     /**
-     * Creates and returns a {@code Candidate} with the details of {@code candidateToEdit}
-     * edited with {@code editCandidateDescriptor}.
+     * Creates and returns an interview with the new date and time.
      */
     private static Interview createEditedInterview(Interview interviewToEdit, LocalDateTime newDateTime) {
         assert interviewToEdit != null;
