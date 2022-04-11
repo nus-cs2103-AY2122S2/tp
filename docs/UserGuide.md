@@ -124,7 +124,7 @@ Features relating to the display of information within these panels are describe
 * e.g. The system contains `candidate A` with the following details:
   * `STUDENT_ID`: A0234567B
   * `EMAIL`: E0123456@u.nus.edu
-  * `PHONE`: 87438807 </br>
+  * `PHONE`: 87438807 <br>
 Adding or editing `candidate B` with any of these 3 fields as `candidate A` constitutes as a duplicate candidate. 
 </div>
 
