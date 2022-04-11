@@ -88,12 +88,13 @@ This command will not get executed successfully, because of the missing required
 
 There are certain rules that users should follow for input to be considered valid (applies to all commands). Please refer to the following.
 
- * #### NAME
+ * **NAME**<br>
     NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
      * Valid Examples - `Alice Tan`, `Alice3tan`
      * Invalid Examples - `peter*`
 
- * #### EMAIL 
+
+ * **EMAIL** <br> 
     Emails should be of the format `local-part@domain` and adhere to the following constraints:
      1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters, and two or more special characters cannot appear consecutively.
      2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by compulsory periods. The domain name must:
@@ -103,32 +104,38 @@ There are certain rules that users should follow for input to be considered vali
     * Valid Examples - `aliceTan@gmail.com`, `123@co.cn` 
     * Invalid Examples - `peterjack@@example.com`, `peterjack@-`, `peterjack@gmail`
 
- * #### PHONE
+
+ * **PHONE**<br>
     Phone numbers should only contain numbers, and it should be at least 3 digits long
      * Valid Examples - `12341234`, `123`
      * Invalid Examples - `@123123`, `dasd123 123`
 
- * #### ADDRESS
+
+ * **ADDRESS**<br>
     Addresses can take any values (including non-english characters), and it should not be blank
      * Valid Examples - `Blk 456, Den Road, #01-355`, `-`
      * Invalid Examples - ``
 
- * #### TELEGRAM 
+
+ * **TELEGRAM**<br> 
      Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
       * Valid Examples - `alice_test_1234`, `alice123`
       * Invalid Examples - `_alice`, `@alice`
 
- * #### COURSE
+
+ * **COURSE**<br>
      Course should only contain alphabet characters and spaces.
       * Valid Examples - `Computer Science and Mathematics`, `Math`
       * Invalid Examples - `123`, `Computer_Science`
 
- * #### MATRIC CARD
+
+ * **MATRIC CARD**<br>
      Matric Card should only contain alphanumeric characters, and it should be one word
       * Valid Examples - `A1231234E`
       * Invalid Examples - `alice test`, `@A1231234E`
 
- * #### TAG
+
+ * **TAG**<br>
      Tag should only contain alphanumeric characters, and it should be one word
       * Valid Examples - `CS2100`
       * Invalid Examples - `CS_2100`, `C S 2 1 0 0`
@@ -220,6 +227,8 @@ Format: `detach t/TAG_NAME i/PROFILE_INDEX`
 Examples:
 * `detach t/Students i/1`<br> Detaches the tag "Students" from the person at index 1, if the person exists and the person has a tag called "Students".
 * `detach t/Professors i/10`<br> Detaches the tag "Professors" from the person at index 10, if the person exists and the person has a tag called "Professors".
+
+<div style="page-break-after: always;"></div>
 
 ### Filter list by tag: `filter`<a name="filter-list-by-tag"></a>
 Filters the full contact list with an existing tag. List will not get updated if tag does not exist. To clear the
@@ -334,7 +343,7 @@ Format: `profile INDEX`
 
 Examples:
 * `list` followed by `profile 2` displays the 2nd person's profile at the right-hand side.
-![result for 'profile 2'](images/profile.png)
+<img src="images/profile.png" width="400"/>
 * `filter friends` followed by `profile 3` displays the 3rd person's profile in the filtered list generated
 by the `filter`command.
 * `find Betsy` followed by `profile 1` displays the 1st person's profile in the results of the `find` command.
@@ -365,10 +374,6 @@ Data in UNite are saved as a JSON file `[JAR file location]/data/unite.json`. Ad
 If your changes to the data file makes its format invalid, UNite will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archive data file `[coming soon]`<a name="archive-data-file"></a>
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -382,10 +387,10 @@ enter the command in the command box and follow the instructions in the previous
 
 Shown below are the annotated screenshots of UNite for reference to UI components:
 
-<img src="images/UNite_annotated.png" width="400"/>
-<img src="images/UNite_profile.png" width="400"/>
-<img src="images/UNite_taglist.png" width="400"/>
-<img src="images/UNite_grabresult.png" width="400"/>
+
+<img src="images/UNite_annotated.png" width="250"/>  <img src="images/UNite_profile.png" width="250"/> <br>
+<img src="images/UNite_taglist.png" width="250"/>  <img src="images/UNite_grabresult.png" width="250"/>
+
 
 <div style="page-break-after: always;"></div>
 
@@ -417,24 +422,25 @@ To view a profile, left-click on the person in the person list panel. As mention
 To add a new profile, click the `Add` button in menu bar, and select `Add Profile`. An **Add Profile pop-up
 window** will appear.
 
-<img src="images/addProfileNew_popup.png" width="400"/>
+<img src="images/addProfileNew_popup.png" width="250"/>
 
 In the window, simply enter all related information into the spaces provided, and click the
 `Save` button to add a new profile. Click `Cancel` to stop adding and close the pop-up window.
 
+<div style="page-break-after: always;"></div>
 
 ### Delete person<a name="delete-person"></a>
 
 To delete a person, right-click on the profile and select `Delete`.
 
-<img src="images/deleteProfile_GUI.png" width="300"/>
+<img src="images/deleteProfile_GUI.png" width="250"/>
 
 
 ### Add a new tag<a name="add-a-new-tag-click"></a>
 
 To add a new tag, click the `Tags` button on the menu bar, and select `Tags`. A **Tags pop-up window** will appear.
 
-<img src="images/tag_popup.png" width="600"/>
+<img src="images/tag_popup.png" width="300"/>
 
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
@@ -446,18 +452,18 @@ selection. Select the tag(s) to delete, and click the `Delete` button to delete 
 
 Selected tags will appear in white, as shown in the figure below ("friends", "classmates" and "Professors" selected).
 
-<img src="images/selectedTag_GUI.png" width="300"/>
+<img src="images/selectedTag_GUI.png" width="250"/>
 
 Another approach to delete a tag one at a time is to right-click on a tag in tag list, and click on `Delete Tag` as shown below.
 
-<img src="images/selectedTag_taglist.png" width="300"/>
+<img src="images/selectedTag_taglist.png" width="250"/>
 
 <div style="page-break-after: always;"></div>
 
 ### Filter list by tag<a name="filter-list-by-tag-click"></a>
 To filter the list of person by tag directly, first display all the tags by input the command `list_tag`, then simply left-click on the tag to filter the list. As mentioned, this feature is enabled by default and cannot be disabled.
 
-<img src="images/filter-through-click.png"/>
+<img src="images/filter-through-click.png" width="300"/>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
