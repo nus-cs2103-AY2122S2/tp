@@ -78,11 +78,11 @@ TAssist's user interface features a command input box, a command results box, an
 
 ![Ui](images/Ui.png)
 
-From the class group list, click the "Check Attendance" button to open a popup window. This popup  displays a list of lessons 1-13 and any students who were **absent** for a lesson.
+From TAssist's "Classes" tab, click the "Check Absentees" button to open a popup window. This popup  displays a list of lessons 1-13 and any students who were **absent** for a lesson.
 
 <img src="images/Ui_Check_Attendance.jpg" style="display:block;margin:0 auto;max-width:500px;">
 
-From the assessment list, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
+From TAssist's "Assessments" tab, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
 
 <img src="images/Ui_See_Attempts.jpg" style="display:block;margin:0 auto;max-width:500px;">
 
@@ -98,7 +98,7 @@ From the assessment list, click the "See Attempts" button to open a popup window
     <tr>
         <td>ACADEMIC_YEAR</td>
         <td><code>a/</code></td>
-        <td>It is represented by the year (last 2 digits) and a semester. Semester value ranges from <code>S1</code> to <code>S8</code>. The table under the <code>Add a module</code> feature shows the representation of each value.
+        <td>It represents the year (last 2 digits) and a semester. Semester value ranges from <code>S1</code> to <code>S8</code>. The table under the <code>Add a module</code> feature shows the representation of each value.
         </td>
     </tr>
     <tr>
@@ -250,7 +250,7 @@ Examples:
 
 #### List all modules: `list module`
 
-Use the list command to display your modules in TAssist's "Modules" tab.
+Use the list module command to display your modules in TAssist's "Modules" tab.
 
 Format: `list module`
 
@@ -473,7 +473,7 @@ Examples:
 
 #### Unmark attendance: `unmark`
 
-Use the unmark command to mark student(s) as "not present" during a specified lesson (identified by class group and week).
+Use the unmark command to mark student(s) as "absent" during a specified lesson (identified by class group and week).
 
 Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -784,32 +784,44 @@ Format: `exit`
 
 ## Command Shortcodes
 
-To save you time, TAssist supports shorthand commands for each entity. When entering commands, a shortcode (single letter) can be used in place of the full entity name.
+To save you time, TAssist supports shorthand commands for each entity. When entering commands, a shortcode (substring of original entity) can be used in place of the full entity name.
 
 * Example: `list a` is equivalent to `list assessment`
-* Example: `delete s 2` is equivalent to `delete student 2`
+* Example: `delete stu 2` is equivalent to `delete student 2`
 
 <table>
 <tbody>
     <tr>
         <th>Entity</th>
-        <th>Shorthand</th>
+        <th>Possible Shorthands</th>
     </tr>
     <tr>
         <td><code>module</code></td>
-        <td><code>m</code></td>
+        <td>
+            <code>m</code><br>
+            <code>mod</code>
+        </td>
     </tr>
     <tr>
         <td><code>assessment</code></td>
-        <td><code>a</code></td>
+        <td>
+            <code>a</code><br>
+            <code>assess</code>
+        </td>
     </tr>
     <tr>
         <td><code>class</code></td>
-        <td><code>c</code></td>
+        <td>
+            <code>c</code><br>
+            <code>cl</code>
+        </td>
     </tr>
     <tr>
         <td><code>student</code></td>
-        <td><code>s</code></td>
+        <td>
+            <code>s</code><br>
+            <code>stu</code>
+        </td>
     </tr>
 </tbody>
 </table>
