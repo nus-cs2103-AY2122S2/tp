@@ -14,7 +14,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone number should start with 6,8 or 9. It should be 8 digits long. Country code is optional.";
+            "Phone number should start with 6, 8 or 9. It should be 8 digits long. Country code is optional.";
     public static final String VALIDATION_REGEX = "^(?:\\+65)?[689][0-9]{7}$";
     public final String value;
 

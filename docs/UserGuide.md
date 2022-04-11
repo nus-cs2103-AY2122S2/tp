@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -30,7 +30,7 @@ process of using WoofAreYou step-by-step. By the end of this user guide, it is o
 Let's get started!
 
 <p align="center">
-  <img src="images/forUserGuide/Ui.png" alt="WoofForYou sample screenshot" />
+  <img src="images/forUserGuide/Ui.png" alt="WoofForYou sample screenshot" height="432"/>
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ Let's get started!
    can locate the data file easily in the same folder as step 3. Use double-clicking as a last resort (this may result
    in some difficulty locating the data file).
 
-   1. If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
+    1. If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
 
 5. WoofAreYou should appear in a few seconds.
 
@@ -135,7 +135,7 @@ Examples:
 * `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog` will show a screenshot as below.
 
 <p align="center">
-  <img src="images/forUserGuide/AddCommandSS.png" alt="After adding Woofie sample screenshot" />
+  <img src="images/forUserGuide/AddCommandSS.png" alt="After adding Woofie sample screenshot" width="500"/>
 </p>
 
 ### Edit a pet : `edit`
@@ -193,7 +193,7 @@ Examples:
 * On the other hand, `present 1 date/05-04-2022` indicates that Woofie is present for daycare on 5th April 2022, with no transport arrangements planned.
 
 <p align="center">
-  <img src="images/forUserGuide/AttendanceCommandSS.png" alt="After adding attendance sample screenshot" />
+  <img src="images/forUserGuide/AttendanceCommandSS.png" alt="After adding attendance sample screenshot" width="500"/>
 </p>
 
 <div markdown="block" class="alert alert-info">
@@ -302,7 +302,7 @@ Examples:
 * `diet 1 d/Only feed dry kibble` will store a dietary remark for Woofie indicating to "Only feed dry kibble" as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/DietCommandSS.png" alt="After adding diet sample screenshot" />
+  <img src="images/forUserGuide/DietCommandSS.png" alt="After adding diet sample screenshot" width="500"/>
 </p>
 
 ### Add / Clear pets' appointment details: `app` ###
@@ -412,7 +412,7 @@ you want a more refined search, you may consider keying in a longer and more spe
 </div>
 
 <p align="center">
-  <img src="images/forUserGuide/FindCommandSS.png" alt="After finding sample screenshot" />
+  <img src="images/forUserGuide/FindCommandSS.png" alt="After finding sample screenshot" width="500"/>
 </p>
 
 ### Sort pets: `sort`
@@ -461,7 +461,7 @@ Examples:
 * `sort name` will sort the pets alphabetically as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/SortCommandSS.png" alt="After sorting sample screenshot" />
+  <img src="images/forUserGuide/SortCommandSS.png" alt="After sorting sample screenshot" width="500"/>
 </p>
 
 * `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
@@ -492,7 +492,7 @@ Examples:
 * `filter byDate/08-04-2022` show pets present on 8 April 2022 as shown below.
 
 <p align="center">
-  <img src="images/forUserGuide/FilterCommandSS.png" alt="After filtering by date sample screenshot" />
+  <img src="images/forUserGuide/FilterCommandSS.png" alt="After filtering by date sample screenshot" width="500"/>
 </p>
 
 ### List all pets : `list`

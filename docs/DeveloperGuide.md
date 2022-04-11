@@ -175,7 +175,7 @@ and takes in a field that the user wishes to sort WoofAreYou by. The field is pa
 `SortCommandParser`.
 
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
-in the `Model` interface as Model#sortPetList().
+in the `Model` interface as `Model#sortPetList()`.
 
 Pet list can only be sorted by pet name, owner name, appointment dates, pick-up time or drop-off time. Each class implements the `Comparable` interface so that
 they can be compared and sorted alphabetically.
@@ -188,7 +188,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-* **Alternative 1 (current choice):** Currently the comparator classes for both owner name and pet name are generated
+* **Alternative 1 (current choice):** Currently the comparator classes for the sorting fields are generated
   within the `sortPetList` method in `UniquePetList`.
     * Pros: Easy to implement.
     * Cons: May be confusing to edit if there are more comparator classes in the future.
@@ -340,7 +340,7 @@ causing the modified state of WoofAreYou after the `delete 5` command executes t
   <img src="images/UndoState1.png" alt="UndoRedoState1" width="450"/>
 </p>
 
-Step 3. The user executes add n/David …  to add a new pet. The add command also calls `Model#addPet()`, which in turn calls `VersionedPetBook#commit()`
+Step 3. The user executes `add n/David …`  to add a new pet. The add command also calls `Model#addPet()`, which in turn calls `VersionedPetBook#commit()`
 causing another modified WoofAreYou state to be saved into the petBookStateList.
 
 <p align="center">
