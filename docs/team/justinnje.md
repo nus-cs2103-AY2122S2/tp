@@ -69,7 +69,8 @@ Given below are my contributions to the project.
         * Overall maintenance of User Guide [\#112](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/112/files) [\#169](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/169/files) [\#251](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/251/files) [\#255](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/255)
     * Developer Guide:
         * Added implementation for `editapplicant` [\#119](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/119) [\#127](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/127)
-        * Added User Stories [\#119](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/119) 
+        * Added User Stories [\#119](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/119)
+        * Added Manual Testing instructions for `editapplicant` and `editjob` [\#304](https://github.com/AY2122S2-CS2103T-W15-1/tp/pull/304/files)
 
 * **Contribution to team-based tasks**:
     * Code quality: Looks after code quality, ensures adherence to coding standards, etc
