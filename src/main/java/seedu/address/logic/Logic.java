@@ -7,11 +7,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+//import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyBuyerAddressBook;
 import seedu.address.model.ReadOnlySellerAddressBook;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.client.Client;
+//import seedu.address.model.client.Client;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -27,20 +27,20 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
-    /**
-     * Returns the AddressBook.
-     *
-     * @see seedu.address.model.Model#getAddressBook()
-     */
-    ReadOnlyAddressBook getAddressBook();
-
-    /** Returns an unmodifiable view of the filtered list of clients */
-    ObservableList<Client> getFilteredclientList();
-
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
+    // /**
+    //  * Returns the AddressBook.
+    //  *
+    //  * @see seedu.address.model.Model#getAddressBook()
+    //  */
+    // ReadOnlyAddressBook getAddressBook();
+    //
+    // /** Returns an unmodifiable view of the filtered list of clients */
+    // ObservableList<Client> getFilteredclientList();
+    //
+    // /**
+    //  * Returns the user prefs' address book file path.
+    //  */
+    // Path getAddressBookFilePath();
 
     /**
      * Returns the SellerAddressBook.

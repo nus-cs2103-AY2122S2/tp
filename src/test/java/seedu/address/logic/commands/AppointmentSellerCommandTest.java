@@ -19,12 +19,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
-import seedu.address.testutil.TypicalClients;
 import seedu.address.testutil.TypicalSellers;
 
 public class AppointmentSellerCommandTest {
 
-    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
             TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
 
 
@@ -38,7 +37,7 @@ public class AppointmentSellerCommandTest {
         String expectedMessage = String.format(AppointmentSellerCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
                 new SellerBuilder(testSeller).withAppointment(testAppointmentValidString).build());
 
-        ModelManager expectedModel = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller,
                 new SellerBuilder(testSeller).withAppointment(testAppointmentValidString).build());

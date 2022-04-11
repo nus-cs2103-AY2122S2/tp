@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUYERS;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class AppointmentSellerCommand extends Command {
         );
 
         model.setSeller(sellerToEdit, editedSeller);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        model.updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
 
         return new CommandResult(generateSuccessMessage(editedSeller));
     }

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.client.Client;
+//import seedu.address.model.client.Client;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -14,7 +14,7 @@ import seedu.address.model.seller.Seller;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
+    // Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
 
     Predicate<Seller> PREDICATE_SHOW_ALL_SELLERS = unused -> true;
 
@@ -40,23 +40,23 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
-    /**
-     * Replaces address book data with the data in {@code addressBook}.
-     */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    // /**
+    //  * Returns the user prefs' address book file path.
+    //  */
+    // Path getAddressBookFilePath();
+    //
+    // /**
+    //  * Sets the user prefs' address book file path.
+    //  */
+    // void setAddressBookFilePath(Path addressBookFilePath);
+    //
+    // /**
+    //  * Replaces address book data with the data in {@code addressBook}.
+    //  */
+    // void setAddressBook(ReadOnlyAddressBook addressBook);
+    //
+    // /** Returns the AddressBook */
+    // ReadOnlyAddressBook getAddressBook();
     //======================Address Book methods for seller=========================//
     /**
      * Returns the user prefs' seller address book file path.
@@ -99,39 +99,40 @@ public interface Model {
 
     void sortFilteredBuyerList(String comparedItem, String order);
 
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasClient(Client client);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deleteClient(Client target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addClient(Client client);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setClient(Client target, Client editedClient);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Client> getFilteredClientList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-
-    void updateFilteredClientList(Predicate<Client> predicate);
+    // /**
+    //  * Returns true if a person with the same identity as {@code person} exists in the address book.
+    //  */
+    // boolean hasClient(Client client);
+    //
+    // /**
+    //  * Deletes the given person.
+    //  * The person must exist in the address book.
+    //  */
+    // void deleteClient(Client target);
+    //
+    // /**
+    //  * Adds the given person.
+    //  * {@code person} must not already exist in the address book.
+    //  */
+    // void addClient(Client client);
+    //
+    // /**
+    //  * Replaces the given person {@code target} with {@code editedPerson}.
+    //  * {@code target} must exist in the address book.
+    //  * The person identity of {@code editedPerson} must not be the same as
+    //  another existing person in the address book.
+    //  */
+    // void setClient(Client target, Client editedClient);
+    //
+    // /** Returns an unmodifiable view of the filtered person list */
+    // ObservableList<Client> getFilteredClientList();
+    //
+    // /**
+    //  * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+    //  * @throws NullPointerException if {@code predicate} is null.
+    //  */
+    //
+    // void updateFilteredClientList(Predicate<Client> predicate);
 
     //========== For addbuyer============//
 

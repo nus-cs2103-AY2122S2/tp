@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class AddBuyerCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
     }
 
@@ -31,7 +30,7 @@ public class AddBuyerCommandIntegrationTest {
     public void execute_newBuyer_success() {
         Buyer validBuyer = new BuyerBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 new BuyerAddressBook());
         expectedModel.addBuyer(validBuyer);
 

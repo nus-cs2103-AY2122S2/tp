@@ -18,11 +18,10 @@ import seedu.address.model.SellerAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.testutil.TypicalBuyers;
-import seedu.address.testutil.TypicalClients;
 
 public class DeleteBuyerCommandTest {
 
-    private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
+    private Model model = new ModelManager(new UserPrefs(),
             new SellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
 
     @Test
@@ -32,7 +31,7 @@ public class DeleteBuyerCommandTest {
 
         String expectedMessage = String.format(DeleteBuyerCommand.MESSAGE_DELETE_CLIENT_SUCCESS, buyerToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        ModelManager expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 TypicalBuyers.getTypicalBuyerAddressBook());
         expectedModel.deleteBuyer(buyerToDelete);
 
@@ -56,7 +55,7 @@ public class DeleteBuyerCommandTest {
 
         String expectedMessage = String.format(DeleteBuyerCommand.MESSAGE_DELETE_CLIENT_SUCCESS, buyerToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
+        Model expectedModel = new ModelManager(new UserPrefs(), new SellerAddressBook(),
                 TypicalBuyers.getTypicalBuyerAddressBook());
         expectedModel.deleteBuyer(buyerToDelete);
         showNoBuyer(expectedModel);

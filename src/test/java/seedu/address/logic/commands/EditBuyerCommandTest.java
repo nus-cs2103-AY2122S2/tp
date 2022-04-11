@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
-import seedu.address.model.AddressBook;
+//import seedu.address.model.AddressBook;
 import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,7 +36,7 @@ import seedu.address.testutil.EditBuyerDescriptorBuilder;
  */
 public class EditBuyerCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new SellerAddressBook(),
+    private Model model = new ModelManager(new UserPrefs(), new SellerAddressBook(),
             getTypicalBuyerAddressBook());
 
     @Test
@@ -47,7 +47,7 @@ public class EditBuyerCommandTest {
 
         String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer);
         System.out.println(expectedMessage);
-        Model expectedModel = new ModelManager(new AddressBook() , new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(), new BuyerAddressBook(model.getBuyerAddressBook()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
@@ -68,7 +68,7 @@ public class EditBuyerCommandTest {
 
         String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer);
 
-        Model expectedModel = new ModelManager(new AddressBook() , new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(), new BuyerAddressBook(model.getBuyerAddressBook()));
         expectedModel.setBuyer(lastBuyer, editedBuyer);
 
@@ -82,7 +82,7 @@ public class EditBuyerCommandTest {
 
         String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer);
 
-        Model expectedModel = new ModelManager(new AddressBook() , new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(), new BuyerAddressBook(model.getBuyerAddressBook()));
 
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
@@ -99,7 +99,7 @@ public class EditBuyerCommandTest {
 
         String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer);
 
-        Model expectedModel = new ModelManager(new AddressBook() , new UserPrefs(),
+        Model expectedModel = new ModelManager(new UserPrefs(),
                 new SellerAddressBook(), new BuyerAddressBook(model.getBuyerAddressBook()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
 

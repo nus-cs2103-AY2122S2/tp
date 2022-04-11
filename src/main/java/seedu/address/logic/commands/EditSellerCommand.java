@@ -108,9 +108,6 @@ public class EditSellerCommand extends Command {
 
         assert sellerToEdit != null;
 
-        //Todo: add property
-        //PropertyToSell updatedPropertyToSell = editSellerDescriptor.getPropertyToSell()
-        //        .orElse(NullPropertyToSell.getNullPropertyToSell());
         if (editSellerDescriptor.isAnyPropertyFieldEdited()
                 && sellerToEdit.getPropertyToSell() instanceof NullPropertyToSell) {
             throw new CommandException(MESSAGE_NO_PROPERTY_YET);

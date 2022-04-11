@@ -8,8 +8,8 @@ class PropertyToBuy
 class PropertyToSell
 
 class PriceRange{
-int low
-int high
+int lower
+int upper
 }
 
 class Address {
@@ -21,7 +21,7 @@ Location location
 }
 
 enum HouseType {
-ANY,
+UNSPECIFIED,
 APARTMENT,
 BUNGALOW,
 CONDOMINIUM,

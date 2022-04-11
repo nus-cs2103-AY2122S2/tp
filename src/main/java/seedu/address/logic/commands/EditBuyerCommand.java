@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUYERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -93,7 +93,9 @@ public class EditBuyerCommand extends Command {
         }
 
         model.setBuyer(buyerToEdit, editedBuyer);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        //Todo: To be reviewed later
+        // model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        model.updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
         return new CommandResult(String.format(MESSAGE_EDIT_BUYER_SUCCESS, editedBuyer));
     }
 
@@ -106,9 +108,6 @@ public class EditBuyerCommand extends Command {
 
         assert buyerToEdit != null;
 
-        //Todo: add property
-        //PropertyToBuy updatedPropertyToBuy = editBuyerDescriptor.getPropertyToBuy()
-        //        .orElse(NullPropertyToBuy.getNullPropertyToBuy());
         if (editBuyerDescriptor.isAnyPropertyFieldEdited()
             && buyerToEdit.getPropertyToBuy() instanceof NullPropertyToBuy) {
             throw new CommandException(MESSAGE_NO_PROPERTY_YET);

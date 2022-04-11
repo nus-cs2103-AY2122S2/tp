@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.client.Client;
+//import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.seller.Seller;
 
 /**
@@ -21,36 +21,35 @@ import seedu.address.model.seller.Seller;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+
     private final SellerAddressBook sellerAddressBook;
     private final BuyerAddressBook buyerAddressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Client> filteredClients;
+    // private final FilteredList<Client> filteredClients;
     private final FilteredList<Seller> filteredSellers;
     private final FilteredList<Buyer> filteredBuyers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook,
-                        ReadOnlyUserPrefs userPrefs, ReadOnlySellerAddressBook sellerAddressBook,
+    public ModelManager(ReadOnlyUserPrefs userPrefs,
+                        ReadOnlySellerAddressBook sellerAddressBook,
                         ReadOnlyBuyerAddressBook buyerAddressBook) {
-        requireAllNonNull(addressBook, userPrefs, sellerAddressBook);
+        requireAllNonNull(userPrefs, sellerAddressBook);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+        logger.fine("Initializing with user prefs " + userPrefs
+                + ", buyer address book:" + buyerAddressBook
                 + " and seller address book: " + sellerAddressBook);
 
-        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.sellerAddressBook = new SellerAddressBook(sellerAddressBook);
         this.buyerAddressBook = new BuyerAddressBook(buyerAddressBook);
-        filteredClients = new FilteredList<>(this.addressBook.getclientList());
         filteredSellers = new FilteredList<>(this.sellerAddressBook.getSellerList());
         filteredBuyers = new FilteredList<>(this.buyerAddressBook.getBuyerList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new SellerAddressBook(), new BuyerAddressBook());
+        this(new UserPrefs(), new SellerAddressBook(), new BuyerAddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -77,16 +76,16 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
-    @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
+    // @Override
+    // public Path getAddressBookFilePath() {
+    //     return userPrefs.getAddressBookFilePath();
+    // }
+    //
+    // @Override
+    // public void setAddressBookFilePath(Path addressBookFilePath) {
+    //     requireNonNull(addressBookFilePath);
+    //     userPrefs.setAddressBookFilePath(addressBookFilePath);
+    // }
 
     @Override
     public Path getSellerAddressBookFilePath() {
@@ -110,41 +109,41 @@ public class ModelManager implements Model {
         userPrefs.setBuyerAddressBookFilePath(buyerAddressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasClient(Client client) {
-        requireNonNull(client);
-        return addressBook.hasclient(client);
-    }
-
-    @Override
-    public void deleteClient(Client target) {
-        addressBook.removeclient(target);
-    }
-
-    @Override
-    public void addClient(Client client) {
-        addressBook.addclient(client);
-        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-    }
-
-    @Override
-    public void setClient(Client target, Client editedClient) {
-        requireAllNonNull(target, editedClient);
-
-        addressBook.setclient(target, editedClient);
-    }
+    //  =========== AddressBook ================================================================================
+    //
+    // @Override
+    // public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    //     this.addressBook.resetData(addressBook);
+    // }
+    //
+    // @Override
+    // public ReadOnlyAddressBook getAddressBook() {
+    //     return addressBook;
+    // }
+    //
+    // @Override
+    // public boolean hasClient(Client client) {
+    //     requireNonNull(client);
+    //     return addressBook.hasclient(client);
+    // }
+    //
+    // @Override
+    // public void deleteClient(Client target) {
+    //     addressBook.removeclient(target);
+    // }
+    //
+    // @Override
+    // public void addClient(Client client) {
+    //     addressBook.addclient(client);
+    //     updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    // }
+    //
+    // @Override
+    // public void setClient(Client target, Client editedClient) {
+    //     requireAllNonNull(target, editedClient);
+    //
+    //     addressBook.setclient(target, editedClient);
+    //}
 
     //========== For addbuyer============//
     @Override
@@ -245,22 +244,22 @@ public class ModelManager implements Model {
         sellerAddressBook.sortSellers(comparator, order);
     }
 
-    //=========== Filtered client List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code client} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Client> getFilteredClientList() {
-        return filteredClients;
-    }
-
-    @Override
-    public void updateFilteredClientList(Predicate<Client> predicate) {
-        requireNonNull(predicate);
-        filteredClients.setPredicate(predicate);
-    }
+    //  =========== Filtered client List Accessors =============================================================
+    //
+    // /**
+    //  * Returns an unmodifiable view of the list of {@code client} backed by the internal list of
+    //  * {@code versionedAddressBook}
+    //  */
+    // @Override
+    // public ObservableList<Client> getFilteredClientList() {
+    //     return filteredClients;
+    // }
+    //
+    // @Override
+    // public void updateFilteredClientList(Predicate<Client> predicate) {
+    //     requireNonNull(predicate);
+    //     filteredClients.setPredicate(predicate);
+    // }
 
     @Override
     public boolean equals(Object obj) {
@@ -277,9 +276,12 @@ public class ModelManager implements Model {
         // state check
         // add buyer and seller later
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return buyerAddressBook.equals(other.buyerAddressBook)
+                && sellerAddressBook.equals(other.sellerAddressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients);
+                && filteredBuyers.equals(other.filteredBuyers)
+                && filteredSellers.equals(other.filteredSellers);
     }
+
 
 }
