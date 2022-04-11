@@ -320,10 +320,13 @@ Format: `back`
 Create a meeting by specifying the following information:
 - Agenda
 - Meeting place
-- Meeting date and time: in DD-MM-YYYY HH:mm format
+- Meeting date and time: in DD-MM-YYYY HH:mm format 
 - Attendees: in the form of index numbers of people on the displayed list
 
-_Note:_ All fields are compulsory.
+_Note:_
+- All fields are compulsory.
+- Meeting time must be in the future.
+- Reache will delete expired meetings upon reloading the application to avoid cluttering.
 
 Format: `meet for/<AGENDA> in/<MEETING PLACE> on/<MEETING DATE AND TIME> with/<ATTENDEE 1 INDEX> [<ATTENDEE 2 INDEX>]…`
 

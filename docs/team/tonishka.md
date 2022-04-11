@@ -26,7 +26,7 @@ fast typers.
     * Updated tests for `find` feature. [#125](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/125)
     * Formatted date time in `meetings` in a user-friendly manner. [#135](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/135)
     * Added check for expired meetings. [#139](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/139)
-    * Updated test for meetings. [#210](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/210), [#219](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/219)
+    * Updated test for meetings. [#210](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/210), [#219](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/219), [#240](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/240)
       <br><br>
 * **Contributions to UG**:
     * Added details about `find` command under the `Finding Contacts` section. [#77](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/77/files), [#84](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/84), [#158](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/158)
@@ -34,7 +34,11 @@ fast typers.
       <br><br>
 * **Contributions to DG**:
     * Added **6 Use Cases** [#22](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/22/files)
+    * Added two Class Diagrams for `Model` component to match new implementation [#235](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/235), [#267](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/267)
     * Added `find feature` under `Implementation` along with its design considerations, activity diagram and sequence diagram [#97](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/97), [#105](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/105)
+    * Added `meet feature` under `Implementation` along with its design considerations and sequence diagram [#262](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/262)
+    * Added `update feature` under `Implementation` along with its design considerations and sequence diagram [#262](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/262)
+    * Added instructions for manual testing for `find`, `update`, and `cancel` commands [#281](https://github.com/AY2122S2-CS2103T-W12-4/tp/pull/281)
       <br><br>
 * **Contributions to Team-based Tasks**:
     * Created demo videos for `v1.2` and `v1.3`

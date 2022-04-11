@@ -242,40 +242,47 @@ Below is an activity diagram summarising the possible paths leading to and durin
 We chose to use alternative 1 in our implementation because in manually using the application and assessing its performance, we found that manually saving after every edit did not make a meaningful difference to performance and would not affect user experience.
 
 ### 5.3 Delete fields feature
-The **delete fields** feature can be used to delete fields stored for the contacts. 
-This feature is also restricted to the Contact Details Page, 
-which can be accessed after the _add_ or _view_ commands. 
-It is mainly facilitated by the `ContactDetailsPageParser`, `DeleteFieldCommandParser` and `DeleteFieldCommand` classes.
+The **delete fields** feature can be used to delete fields stored for the 
+contacts. This feature is also restricted to the Contact Details Page, 
+which can be accessed after the _add_ or _view_ commands. It is mainly 
+facilitated by the `ContactDetailsPageParser`, `DeleteFieldCommandParser` 
+and `DeleteFieldCommand` classes.
 
 _Note:_ This feature is different from the **delete contacts** feature, 
 which is only accessible on the Home Page.
 
 #### 5.3.1 Design considerations:
-Since certain fields allow for multiple values to be stored, 
-the user needs to specify the label of the value (or the value itself for non-labelled fields) 
-they want to delete along with the field to be deleted for such fields.
+Since certain fields allow for multiple values to be stored, the user needs 
+to specify the label of the value (or the value itself for non-labelled 
+fields) they want to delete along with the field to be deleted for such 
+fields.
 
 **Aspect: What happens when the user does not specify a label or value:**
 
-* **Alternative 1 (current choice):** Delete all the values stored for this field immediately.
+* **Alternative 1 (current choice):** Delete all the values stored for this 
+  field immediately.
     * Pros:
       * Seems to be the most intuitive approach.
       * Easier to implement.
       * Faster to execute command.
     * Cons:
-      * User may have forgotten to mention the label or field, which could lead to unintended loss of data.
+      * User may have forgotten to mention the label or field, which could 
+        lead to unintended loss of data.
 
 
-* **Alternative 2 :** Confirm that the user wants to delete all values for this field
+* **Alternative 2 :** Confirm that the user wants to delete all values for 
+  this field
     * Pros:
       * Allows user to cancel the command if it was unintentional.
     * Cons:
       * Slower to execute command.
-      * Difficult to implement, since the current implementation does not store command history.
+      * Difficult to implement, since the current implementation does not 
+        store command history.
 
-We picked _alternative 1_ since the focus of our CLI app is on speed and efficiency. 
-Additionally, _alternative 2_ required a lot of changes to the existing implementation which would not be 
-very helpful for executing other commands.
+We picked _alternative 1_ since the focus of our CLI app is on speed and 
+efficiency. Additionally, _alternative 2_ required a lot of changes to the 
+existing implementation which would not be very helpful for executing other 
+commands.
 
 
 ### 5.4 Clear all data feature
@@ -394,98 +401,83 @@ c) they do not remember which field they want to search.
 ### 5.7 Meet Feature
 
 The `meet` feature allows the user to schedule meetings having an `Agenda`, a `Meeting Time`, a `Meeting Place`, and 
-`Meeting Attendees`. 
+`Meeting Attendees`. The `meet` command can only be issued from the `Home Page`. It is facilitated by such classes as
+`HomePageParser`, `MeetCommandParser`, and `MeetCommand`.
 
 Below is a sequence diagram summarising the mechanism of the `meet` feature:
 
 ![Meet Command Sequence Diagram](images/MeetCommandSequenceDiagram.png)
 
+#### 5.7.1 Design Considerations
+
+#### Aspect: Creation of multiple meetings at the same time
+* **Alternative 1 (Current Choice):** Multiple different meetings can be created at the same time
+  * Pros: 
+    * Gives the user greater flexibility in deciding their schedule. 
+    * When users have conflicting meetings, they should have the 
+    freedom to add both of them to Reache and decide later which one they want to attend. 
+    * It is also possible that some users may
+    attend more than one meeting simultaneously (such as when they are online). 
+  * Cons: Users may unknowingly add conflicting meetings.
+* **Alternative 2:** Only one meeting is allowed to be created at a given time
+  * Pros: Prevents the user from unknowingly adding conflicting meetings.
+  * Cons: 
+    * Affords the user less flexibility in deciding their schedule. 
+    * If a user wants to schedule multiple meetings but decide
+    later which ones they want to keep, they are unable to do so. The user will have to go through the additional step of cancelling 
+    the original meeting first before scheduling another at the same time.
+
+#### Aspect: Specifying the domain of meeting attendees
+* **Alternative 1 (Current Choice):** Only people whose have been added to Reache can be attendees in a meeting
+  * Pros: 
+    * Compels the user to be proactive in adding their contacts to Reache. 
+    * If the user enters a non-existent index they are alerted of the fact and can rectify the command by adding valid
+    attendees.
+  * Cons:
+    * User will have to add all attendees to Reache before they can schedule a meeting with them.
+* **Alternative 2:** Anyone can be an attendee, but those who have not been added will be listed as `Unknown Attendee`
+  * Pros: 
+    * The users can add attendees to meetings that do not yet exist in Reache.
+  * Cons:
+    * If the user makes a genuine mistake of specifying a non-existent index, Reache will not alert the user of their error and instead create
+    a meeting with an `Unknown Attendee`. This will lead to the wrong attendees being associated with a meeting.
+    
+#### Aspect: What happens when a meeting attendee is deleted 
+* **Alternative 1 (Current Choice):** The `Meetings` panel will show the attendee as `Unknown Attendee` in the meeting description 
+  * Pros: The user has a visual indication that they have deleted the contact information of a potentially relevant person.
+  * Cons: More challenging to implement than **Alternative 2**.
+* **Alternative 2:** The `Meetings` panel will not show any information about the attendee in the meeting description
+  * Pros: Easy to implement.
+  * Cons: Mislead the user about the number of attendees in the meeting. 
+
+#### Aspect: What happens to meetings once they are expired
+* **Alternative 1 (Current Choice):** Expired meetings are removed from the `Meetings` panel everytime the application is loaded
+  * Pros: 
+    * Prevents cluttering in the `Meetings` panel by removing meetings that are irrelevant.
+    * User does not have to go through the additional step of cancelling each expired meeting to prevent cluttering.
+  * Cons:
+    * Users will be unable to see the details of past meetings if they wish to do so.
+* **Alternative 2:** Expired meetings are not removed from the `Meetings` panel
+  * Pros: 
+    * Users can see details of their past meetings.
+  * Cons:
+    * Leads to cluttering in the `Meetings` panel.
+    * Meetings are shown to the user in a chronological order so that they can see their upcoming schedule. Not automatically removing expired meetings will
+      lead to loss of utility because the user has to scroll through countless expired meetings to find their upcoming schedule.
+
 ### 5.8 Update Feature
 
-The `update` feature allows the user to update the details of the meetings that they have scheduled.
+The `update` feature allows the user to update the details of the meetings that they have scheduled. The `update` command can only be issued from the `Home Page`. It is facilitated by such classes as
+`HomePageParser`, `UpdateCommandParser`, and `UpdateCommand`.
 
 Below is a sequence diagram summarising the mechanism of the `update` feature:
 
 ![Update Sequence Diagram](images/UpdateCommandSequenceDiagram.png)
 
+#### 5.8.1 Design Considerations
 
-### 5.9 \[Proposed\] Undo/redo feature
-
-#### 5.9.1 Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### 5.9.2 Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The important design decisions made for `update` command are the same as design decisions made for `meet` command above.
+Meetings updated using the `update` command are subject to the same constraints as if they were added directly using the `meet` command. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -950,9 +942,40 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case with invalid label input: `edit ph/67676767 l/`
       Expected: Invalid label format message is displayed.
-      
 
-### 8.4 Deleting a field
+### 8.4 Deleting fields
+1. Deleting only particular fields of a contact
+
+   1. Prerequisites: Have at least one contact stored with multiple phone 
+      numbers, tags, pronouns and the job title and view their details with
+      the `view <INDEX NO>` command. These test cases must be followed in 
+      order.
+
+   2. Test case: `del` <br>
+      Expected: No field is deleted. An error message is shown in the status
+      box.
+
+   3. Test case: `del ph` <br>
+      Expected: No field is deleted. An error message is shown in the status
+      box.
+
+   4. Test case: `del ph/ <LABEL OF FIRST PHONE NUMBER>` <br>
+      Expected: The first phone number is deleted while the rest are still 
+      displayed in the contact details.
+
+   5. Test case: `del t/` <br>
+      Expected: All the tags of the person displayed are deleted. <br>
+      Exception: If there is another contact with the same name as this
+      contact but without any tags, this command will result in an error
+      and no fields will be deleted.
+
+   6. Test case: `del pr/ j/` <br>
+      Expected: All the pronouns and the job title of the person displayed
+      are deleted.
+
+   7. Test case: `del j/` <br>
+      Expected: No field is deleted. An error message is shown in the status
+      box.
 
 ### 8.5 Deleting a person
 
@@ -960,16 +983,39 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `del 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `del 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `del`, `del x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### 8.6 Clearing contacts and/or meetings
+
+1. Clearing all data
+
+   1. Prerequisites: Have at least one contact and one meeting stored in the
+      application
+
+   2. Test case: `clear` <br>
+      Expected: A confirmation window appears.
+      1. Test case i: Close the confirmation window. <br>
+         Expected: No data gets deleted.
+      2. Test case ii: Click on the 'Yes' button to confirm data deletion. <br>
+         Expected: All data gets deleted from the application.
+
+1. Clearing all meetings
+
+   1. Prerequisites: Have at least one meeting stored in the application
+
+   2. Test case: `cancel-all` <br>
+      Expected: A confirmation window appears.
+      1. Test case i: Close the confirmation window. <br>
+         Expected: No meetings get deleted.
+      2. Test case ii: Click on the 'Yes' button to confirm meetings' deletion. <br>
+         Expected: All meetings get deleted from the application.
 
 ### 8.7 Finding
 
@@ -1058,3 +1104,32 @@ testers are expected to do more *exploratory* testing.
       </p>
    
       Expected: The application will discard all existing data and start without any stored contacts or meetings.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **9. Appendix: Effort**
+Below are some of the largest challenges we faced in the design and development of Reache.
+
+### 9.1 The Implementation of Meetings
+The implementation of `Meeting` was especially difficult due to its relationship with the `Person` class, and the challenges that presented particularly with regard to loading and storing data. We considered several implementations before arriving at the current one, as follows:
+
+**Implementation 1**: In `Meeting`, just store the names of attendees as `Strings`. This would have been easy to implement but if an attendee's name was edited, it would not be reflected in the `Meeting`.
+
+**Implementation 2**: Store `Meeting` attendees as a list of `Persons`. The issue this implementation presents is that when the list of `Persons` and the list of `Meetings` is stored and then loaded upon application launch, both lists would cause copies of the same `Person` to be constructed.
+
+**Implementation 3 (Our Implementation)**: When a `Person` is created, assign them a unique and permanent identifier. In `Meeting`, store the identifiers of each attendee. This implementation makes matching `Meeting` attendee to `Person` a simple matter of comparing identifiers.
+
+### 9.2 Navigation & UI
+To accommodate the large amount of information Reache can store about a contact, we had to make significant changes to the UI, including the creation of an additional page to allow for a more organised presentation of information.
+
+To accomplish this, we:
+* Created over 10 new UI parts and their respective FXML files. This allowed us to not only add a designated panel for meetings in the Home Page, but create an entirely new page for contact details.
+* Implemented a navigation system that allows the user to move between pages, and provides them access to different commands depending on the page they are viewing.
+* Created mechanisms to have the UI respond to changes the user made
+
+### 9.3 The Storing of New Types of Information
+AB3 allows a user to store a fairly limited amount of information for a `Person` and allows only one entry per type of information. In contrast, Reache allows for the storage of:
+* Entirely new types of information (job title, company, etc.). This required us to create new classes for each new type of information and integrate them into the `Model` component.
+* Optional information. The only required information about a `Person` is their name. To accommodate this, we needed to create checks and mechanisms that handle when information is not provided.
+* Variable amounts of information. A `Person` can have multiple phone numbers, email addresses, and physical addresses.
+* Labelled entries. A user can choose to label the information they provide. To support labelling, we created systems that check for duplicate labels and create default labels for the user if they choose not to provide one.
