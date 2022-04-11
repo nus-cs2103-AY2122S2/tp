@@ -415,6 +415,8 @@ Examples:
 - `add t/medical i/S1234567L bt/AB ht/175 cm`
 - `add t/medical i/S1234567L a/22 bt/O md/Paracetamol 500mg twice a day; Atarvastatin 20mg once a day ht/185 cm wt/70 kg il/Mild fever; High cholesterol su/Appendectomy fh/Has family history of high blood pressure ih/MMR; 6 in 1; Hepatitis B gd/Male et/Chinese`
 
+Below is the list of parameters that can be used with the `add t/medical` command.
+
 | Parameters | Description                                                          |
 | ---------- | :--------------------------------------------------------------------|
 | `i/`       | _Required_. The NRIC of the patient to add medical information to.   |
@@ -467,6 +469,17 @@ Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE [nt/NOTES
 Examples:
 
 - `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
+
+Below is the list of parameters that can be used with the `add t/consultation` command.
+
+| Parameters | Description                                                        |
+|------------|:-------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC of the patient to add medical information to. |
+| `dt/`      | _Required_. The date of the Consultation.                          |
+| `tm/`      | _Required_. The time of the Consultation.                          |
+| `dg/`      | _Required_. The Diagnosis of the Consultation.                     |
+| `fe/`      | _Required_. The Fee of the Consultation.                           |
+| `nt/`      | _Optional_. The Additional Notes of the Consultation.              |
 
 ### Viewing Past Consultations: `view t/consultation`
 
