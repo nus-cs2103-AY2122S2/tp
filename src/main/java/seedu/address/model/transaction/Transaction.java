@@ -80,7 +80,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Returns whether the person object is valid
+     * Returns whether the transaction object is valid
      */
     public boolean isValid() {
         if (!fields.containsKey(DueDate.PREFIX)) {

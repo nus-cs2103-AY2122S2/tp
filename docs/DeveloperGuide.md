@@ -211,6 +211,179 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
     * Pros: Code is much less coupled. Much easier to maintain.
     * Cons: A lot of work was required to decouple the existing `Person` implementation from AB-3.
 
+
+### Transaction 
+
+The `Transaction` class is used to represent a client's transaction. The abstract `TransactionField` class represents the transaction data.
+`Transaction` contains an immutable `HashMap<Prefix, TransactionField>` of transactionFields as well as identifier of the `Person`
+who owns the `Transaction`. This person identifier will be stored as a `long` inside the `Transaction` class. 
+
+![Transaction Class Diagram](images/TransactionClassDiagram.png)
+
+*Figure: Simplified class diagram of showing the association between Transaction and other related classes.*
+
+`Transaction` class has 6 commands: `AddTransaction`, `listTransaction`, `findTransaction`, `deleteTransaction`,
+`pay`, and `unpay`. All commands have similar implementation, user input will be parsed to
+return a `Command` object. `Model` will execute this object to do the desired behavior.
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
+Note that there is a dependencies from class `Transaction` to class `Person`. `Transaction` does not
+directly store the reference to the Owner (`Person`) of the `Transaction`, instead `Transaction`
+stores an identifier (`personIdentifier`) to identify the owner (`Person`) of the `Transaction`.
+
+</div>
+
+#### Design considerations
+
+The current implementation of `Transaction` class is similar to `Person` class. Every field/attribute of transaction needs to
+extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's
+fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field.
+
+Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, `Note`, and `Status`.
+
+**Aspect: Structure for storing fields**
+
+* **Alternative 1 (current implementation):** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
+  Everytime a user create a transaction, a new instance of transaction will be added to the list and a client
+  specified by its unique identifier (`personId`) will be referenced by this transaction. To list all the transactions
+  of a particular client, the `FilteredList` should be updated to only contain `Transaction`
+  with a reference to the client's id.
+    * Pros: Consistent design with the `Person` class.
+    * Cons: Have to handle cases when a user is updated/removed. The input specified by the users
+      corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes
+      before initializing the Transaction object thus harder to maintain a good design.
+
+* **Alternative 2:** Every `Person` object has a list of transactions which will be
+  initialized with an empty list. Each time a user add a transaction, the object will be
+  added into the specified `Person`'s Transaction List.
+    * Pros: Easier to implement compared to the other alternative.
+    * Cons: `Transaction` class would be coupled to the `Person` class. In addition, inconsistent design
+      in comparison to the `Person` class.
+
+### Add Transaction
+
+### Implementation
+
+The `Add Transaction` implementation is similar to adding a `Person` with 
+an extra step. When adding `Transaction`, user will have to specify 
+the owner of the `Transaction` using the index displayed.
+However, `Transaction` stores `personIdentifier` as the reference to the `Person` class. Hence there
+must be a mechanism to convert the index provided by the user to the correct
+`personIdentifier`.
+
+This issue is addressed by using the class `TransactionBuilder` that takes a `personIdentifier`
+and returns the desired `Transaction`. 
+
+![Add Transaction activity diagram](images/AddTransactionActivityDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Add Transaction command.*
+
+Given below is an example usage scenario and how `Add Transaction` behaves at each step:
+1. The user input `addTransaction 1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `AddTransactionParser`
+   if the input is valid.
+3. `AddTransactionParser` will return `AddTransactionCommand` which contains `TransactionBuilder`.
+    This `TransactionBuilder` will be used later by `AddTransactionCommand#execute` to 
+    generate the appropriate `Transaction`.
+4. `AddTransactionCommand` will then update the `Transaction List` by calling `Model#addTransaction`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+The above steps are illustrated by the AddTransaction Sequence Diagram below. In the given diagram,
+`addTransactionEx` represents `addTransaction 1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid `
+and `transaction` represents `1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid` for brevity. 
+
+![Add Transaction sequence diagram](images/AddTransactionSequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Add Transaction command.*
+
+
+#### Design considerations
+
+**Aspect: How add transaction executes**
+
+* **Alternative 1 (current choice):** Store `TransactionBuilder` to generate the `Transaction` later.
+    * Pros: No need to pass the `ModelManager` to the command parser, makes a better separation of concern.
+    * Cons: Harder to do unit tests on this implementation since it uses functinal interface.
+
+* **Alternative 2:** Pass the ModelManager to `AddTransactionCommandParser`.
+    * Pros: easier to implement.
+    * Cons: Not a good design as model should only resides inside `Command#execute`.
+    
+### Find Transaction
+
+### Implementation
+
+In `findTransaction` implementation, user will have to specify
+the `Person` using the index displayed.
+However, we have a similar issue as AddTransaction. To get all transactions 
+that the owner has, we need to convert the index to the correct `personIdentifier`.
+This `personIdentifier` will be used as the `TransactionPredicate` to filter the `Transaction
+List`.
+
+This issue is addressed by using the class `TransactionPredicateBuilder` that takes a `personIdentifier`
+and returns the desired `TransactionPredicate`.
+
+![Find Transaction activity diagram](images/FindTransactionActivityDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Find Transaction command.*
+
+Given below is an example usage scenario and how `Find Transaction` behaves at each step:
+1. The user input `findTransaction 1`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `FindTransactionCommandParser`
+   if the input is valid.
+3. `FindTransactionCommandParser` will return `FindTransactionCommand` which contains `TransactionPredicateBuilder`.
+   This will be used later by `FindTransactionCommand#execute` to
+   generate the appropriate `TransactionPredicate`.
+4. `AddTransactionCommand` will then update the `Transaction List` by calling `Model#updateFilteredTransactionList`
+   using `TransactionPredicate`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+![Find Transaction sequence diagram](images/FindTransactionSequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Find Transaction command.*
+
+#### Design considerations
+
+**Aspect: How find transaction executes**
+
+* **Alternative 1 (current choice):** Store `TransactionPredicateBuilder` to generate the `TransactionPredicate` later.
+    * Pros: No need to pass the `ModelManager` to the command parser, makes a better separation of concern.
+    * Cons: Harder to do unit tests on this implementation since it uses functinal interface.
+
+* **Alternative 2:** Pass the ModelManager to `FindTransactionCommandParser`.
+    * Pros: easier to implement.
+    * Cons: Not a good design as model should only resides inside `Command#execute`.
+
+### Pay 
+
+### Implementation
+
+This command will update the `Status` of the `Transaction` to `paid` using
+the specified `transaction index` by the user.
+
+![Pay activity diagram](images/PayDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Pay command.*
+
+Given below is an example usage scenario and how `Pay` behaves at each step:
+1. The user input `pay 1`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `PayCommandParser`
+   if the input is valid.
+3. `PayCommand` will return `PayCommand` which contains the index of the transaction.
+4. In `PayCommand#execute`, the `transactionToUpdate` will be replaced by `updatedTransaction` by calling
+    `Model#setTransaction`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+![Pay sequence diagram](images/PaySequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Pay command.*
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
+Although `listTransaction`, `deleteTransaction`, and `unpay` are not shown here,
+the implementation of these commands are very similar to the other transaction
+commands given.
+
+</div>
+
 ### Undo
 
 #### Implementation
@@ -366,40 +539,6 @@ a different tier is created with a different id. The CSS files (`Cinnamon.css` o
 * **Alternative 2:** Create a list of memberships and assign users a membership index.
   * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions.
   * Cons: Harder to implement.
-
-### Transaction functionality
-
-#### Implementation
-The Transaction Functionality will allow users to store a transaction and assign it to a client. 
-User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
-
-The current implementation of `Transaction` class is similar to `Person` class. Every field/attribute of transaction needs to 
-extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's 
-fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field. 
-
-Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and `Note`.
-
-#### Design considerations
-
-**Aspect: How it executes**
-
-* **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`. 
-    Everytime a user create a transaction, a new instance of transaction will be added to the list and a client 
-    specified by its unique identifier (`Email`) will be referenced by this transaction. To list all the transactions 
-    of a particular client, the `FilteredList` should be updated to only contain `Transaction`
-    with a reference to the client's id. 
-    * Pros: Consistent design with the `Person` class.
-    * Cons: Have to handle cases when a user is updated/removed. The input specified by the users 
-    corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes 
-    before initializing the Transaction object.
-
-
-* **Alternative 2 (current implementation):** Every `Person` object has a list of transactions which will be
-    initialized with an empty list. Each time a user add a transaction, the object will be 
-    added into the specified `Person`'s Transaction List.
-    * Pros: Easy to implement
-    * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
-    in comparison to the `Person` class.
 
 ### Sort functionality
 
@@ -609,6 +748,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `LOW`    | user    | store my client's birthday                                 | give them discounts on their birthday.                                  |
 | `LOW`    | user    | store my client's age                                      | know if I can sell them age restricted items.                           |
 | `HIGH`   | user    | add client transaction                                     | store the transaction history of my clients.                            |
+| `HIGH`   | user    | delete a transaction                                       | delete the transaction from the transaction list                        |
 | `MEDIUM` | user    | chain multiple commands                                    | execute multiple commands at once.                                      |
 | `LOW`    | user    | list all clients who are members.                          |                                                                         |
 | `LOW`    | user    | assign different tiers of memberships to my clients.       |                                                                         |
@@ -618,7 +758,10 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `MEDIUM` | user    | remove data fields and tags from clients                   | remove fields and tags from a client without editing the entire client. |
 | `HIGH`   | user    | be able to re-input my previous commands                   | execute similar commands without having to retype the whole command.    |
 | `HIGH`   | user    | switch between light and dark themes.                      |                                                                         |
-| `HIGH`   | user    | list a client's transactions                               | see all the transactions associated with a particular client.           |
+| `HIGH`   | user    | list all transactions                                      |                                                                         |
+| `HIGH`   | user    | find a client's transactions                               | see all the transactions associated with a particular client.           |
+| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be paid                         |
+| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be unpaid                       |
 | `MEDIUM` | user    | flag a transaction as paid or unpaid                       | know if a transaction has been paid.                                    |
 | `LOW`    | user    | click on a client to see the list of their transactions    | see a client's transactions without typing.                             |
 | `HIGH`   | user    | remove memberships from clients                            | remove a client from my rewards program.                                |
@@ -769,6 +912,98 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
   * 1b1. An error message is shown
      <br>Use case resumes at step 1
 
+#### Use case: Add a transaction
+
+**MSS**
+
+1. User specify which client to add the transaction to.
+2. User input the parameters of the transactions (Amount, Transaction Date,
+   Due Date, Note, and Status).
+3. CinnamonBun add the transaction to the transaction list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Delete a transaction
+
+**MSS**
+
+1. User specify which transaction to be deleted.
+2. CinnamonBun removes the transaction from the transaction list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: List all transactions
+
+**MSS**
+
+1. User specify the command keyword.
+2. CinnamonBun displays all transactions in the application.
+
+   Use case ends.
+
+#### Use case: Find transactions from a client
+
+**MSS**
+
+1. User specify which client's transactions be displayed. 
+2. CinnamonBun displays all transactions from the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Pay a transaction
+
+**MSS**
+
+1. User specify which transaction to be paid.
+2. CinnamonBun changes the status of the transaction to be paid.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Unpay a transaction
+
+**MSS**
+
+1. User specify which transaction to be unpaid.
+2. CinnamonBun changes the status of the transaction to be unpaid.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+
 #### Use case: Undo modifications
 
 **MSS**
@@ -911,6 +1146,74 @@ These instructions only provide a starting point for testers to work on; testers
       displayed based on their phone number in descending order.
    4. Test case: `sort l:)/ djewijw p/`<br>
       Expected: An error would be thrown as the fields specified do not exist.
+
+### Adding a Transaction
+
+* Adding a new transaction while all transactions are being shown
+    1. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2020-12-12 n/this is a note --paid` <br>
+       Expected: A new paid transaction with `Amount` 12 should appear at the bottom of the transaction list.
+    2. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2020-12-12 n/this is a note` <br>
+       Expected: A new unpaid transaction with `Amount` 12 should appear at the bottom of the transaction list.
+    3. Test case: `addTransaction 1 td/2020-11-11 dd/2020-12-12 n/this is a note` <br>
+       Expected: No new transaction is added as not all required fields are provided. Error message is shown.
+    4. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2002-12-12 n/this is a note` <br>
+       Expected: No new transaction is added as not the due date is before the transaction date. Error message is shown. 
+  
+### Deleting a Transaction
+
+* Deleting a transaction while all transactions are being shown
+    1. Test case: `deleteTransaction 1` <br>
+       Expected: The first transaction is deleted.
+    2. Test case: `deleteTransaction 0` <br>
+       Expected: No transaction is deleted as the provided index is invalid. Error message is shown.
+    3. Test case: `deleteTransaction x` where x is larger than the transaction list size <br>
+       Expected: No transaction is deleted as the provided index is invalid. Error message is shown.
+    4. Test case: `deleteTransaction` <br>
+       Expected: No transaction is deleted as the required field is not provided. Error message is shown.
+
+### List a Transaction
+
+* list all transactions
+    1. Test case: `listTransaction` <br>
+       Expected: All transactions will be listed.
+  1. Test case: `listTransaction abcd` <br>
+     Expected: All transactions will be listed.
+
+### Find Transactions
+
+* Find transactions while all clients are being shown
+    1. Test case: `findTransaction 1` <br>
+       Expected: All transactions from the first client are listed.
+    2. Test case: `findTransaction 0` <br>
+       Expected: No transaction is shown as the provided index is invalid. Error message is shown.
+    3. Test case: `findTransaction x` where x is larger than the client list size <br>
+       Expected: No transaction is listed as the provided index is invalid. Error message is shown.
+    4. Test case: `findTransaction` <br>
+       Expected: No transaction is listed as the required field is not provided. Error message is shown.
+    
+### Pay
+
+* Pay a transaction while all transactions are being shown
+    1. Test case: `pay 1` <br>
+       Expected: Status of the first transaction of the transaction list is changed to `paid`.
+    2. Test case: `pay 0` <br>
+       Expected: No transaction status is changed to `paid` as the provided index is invalid. Error message is shown.
+    3. Test case: `pay x` where x is larger than the transaction list size <br>
+       Expected: No transaction status is changed to `paid` as the provided index is invalid. Error message is shown.
+    4. Test case: `pay` <br>
+       Expected: No transaction status is changed to `paid` as the required field is not provided. Error message is shown.
+
+### Unpay
+
+* Unpay a transaction while all transactions are being shown
+    1. Test case: `unpay 1` <br>
+       Expected: Status of the first transaction of the transaction list is changed to `unpaid`.
+    2. Test case: `unpay 0` <br>
+       Expected: No transaction status is changed to `unpaid` as the provided index is invalid. Error message is shown.
+    3. Test case: `unpay x` where x is larger than the transaction list size <br>
+       Expected: No transaction status is changed to `unpaid` as the provided index is invalid. Error message is shown.
+    4. Test case: `unpay` <br>
+       Expected: No transaction status is changed to `unpaid` as the required field is not provided. Error message is shown.
 
 ### Undo data modifications
 

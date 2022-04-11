@@ -1,0 +1,98 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindTransactionCommandParser" as FindTransactionCommandParser LOGIC_COLOR
+participant "a:FindTransactionCommand" as FindTransactionCommand LOGIC_COLOR
+participant "tp:TransactionPredicateBuilder" as TransactionPredicateBuilder LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findTransaction 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findTransaction 1")
+activate AddressBookParser
+
+create FindTransactionCommandParser
+AddressBookParser -> FindTransactionCommandParser
+activate FindTransactionCommandParser
+
+FindTransactionCommandParser --> AddressBookParser
+deactivate FindTransactionCommandParser
+
+AddressBookParser -> FindTransactionCommandParser : parse(1)
+activate FindTransactionCommandParser
+
+create FindTransactionCommand
+FindTransactionCommandParser -> FindTransactionCommand
+activate FindTransactionCommand
+
+create TransactionPredicateBuilder
+FindTransactionCommand --> TransactionPredicateBuilder
+activate TransactionPredicateBuilder
+
+TransactionPredicateBuilder --> FindTransactionCommand : tp
+deactivate TransactionPredicateBuilder
+
+FindTransactionCommand --> FindTransactionCommandParser : a
+deactivate FindTransactionCommand
+
+FindTransactionCommandParser --> AddressBookParser : a
+deactivate FindTransactionCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindTransactionCommandParser -[hidden]-> AddressBookParser
+destroy FindTransactionCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> FindTransactionCommand : execute()
+activate FindTransactionCommand
+
+FindTransactionCommand -> Model : Get person's identifier at index 1.
+activate Model
+Model --> FindTransactionCommand : personId
+deactivate Model
+
+FindTransactionCommand -> TransactionPredicateBuilder : tp.createTransactionPredicate(personId)
+activate TransactionPredicateBuilder
+
+TransactionPredicateBuilder -[hidden]-> FindTransactionCommand
+TransactionPredicateBuilder --> FindTransactionCommand : predicate
+deactivate TransactionPredicateBuilder
+
+TransactionPredicateBuilder -[hidden]> FindTransactionCommand
+destroy TransactionPredicateBuilder
+
+FindTransactionCommand -> Model : updateFilteredTransaction(predicate)
+activate Model
+
+Model -[hidden]-> FindTransactionCommand
+Model -[hidden]-> FindTransactionCommand
+Model --> FindTransactionCommand
+deactivate Model
+
+FindTransactionCommand -[hidden]-> FindTransactionCommand
+create CommandResult
+FindTransactionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindTransactionCommand : result
+deactivate CommandResult
+
+FindTransactionCommand --> LogicManager : result
+deactivate FindTransactionCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindTransactionCommand -[hidden]-> AddressBookParser
+destroy FindTransactionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
