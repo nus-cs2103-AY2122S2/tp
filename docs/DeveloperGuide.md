@@ -175,7 +175,7 @@ TAlent Assistant™'s development team has decided to stick with AB3's naming co
 ### Add feature
 
 #### What is the feature about?
-The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes (Refer to the [Current Implementation](#current-implementation)).
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes.
 
 The enhancement works by adding additional prefixes i.e. `id/[StudentId]`, `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the attributes `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned.
 
