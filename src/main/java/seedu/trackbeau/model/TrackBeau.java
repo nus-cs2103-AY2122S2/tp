@@ -13,7 +13,6 @@ import seedu.trackbeau.model.uniquelist.UniqueList;
 
 /**
  * Wraps all data at the trackBeau level
- * Duplicates are not allowed (by .isSameCustomer or .isSameBooking or .isSameService comparison)
  */
 public class TrackBeau implements ReadOnlyTrackBeau {
 

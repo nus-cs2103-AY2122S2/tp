@@ -27,7 +27,10 @@ Given below are my contributions to the project.
   * User Guide:
     * Added sections 3, 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.2.6 and 6.
   * Developer Guide:
-    *
+    * Updated Design - UI component, Logic component, Model component, Storage component (with the exception of the sequence diagram for delete customer(s) command in Logic component) section.
+    * Added List customers, Add service, Edit service feature in the Implementation section.
+    * Updated user stories
+    * Restructured use cases and added UC01, UC03, UC05, UC07, UC08, UC09, UC10
 
 * **Team Task**:
   * Set up the GitHub team org and repo
