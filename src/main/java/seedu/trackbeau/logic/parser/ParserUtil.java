@@ -214,7 +214,8 @@ public class ParserUtil {
         try {
             LocalDate userInputDate = LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+            String errorMessage = "Date should follow dd-MM-yyyy, and it should not be blank";
+            throw new ParseException(errorMessage);
         }
 
         return trimmedDate;
