@@ -626,3 +626,15 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `labadd l/-1`<br>
    Expected: A error message will appear with the correct command format and constraints and no lab will be added.
+
+### Editing a Lab
+
+1. Assume we want to edit `Lab 1` of the person with `INDEX 1` and the current `LabStatus` is `UNSUBMITTED`.
+   1. Test case: `labedit 1 l/1 s/s`<br>
+   Expected: The status of `Lab 1` will change from `UNSUBMITTED` to `SUBMITTED`. The lab label will change from red to yellow.
+
+   2. Test case: `labedit 1 l/1 s/g`<br>
+   Expected: An error message will appear stating that the given combination is invalid.
+
+   3. Test case: `labedit 1 l/1 s/g m/10`<br>
+   Expected: The status of `Lab 1` will change from `UNSUBMITTED` to `GRADED`. The lab label will change from red to green.
