@@ -279,17 +279,10 @@ table {
     display: block;
   }
   /**
-  * Replaces the top navigation menu with the project name when printing
+  * Removes the top navigation menu when printing
   */
-  .site-header .wrapper {
-    display: none;
-  }
   .site-header {
-    text-align: center;
-  }
-  .site-header:before {
-    content: "TeachWhat!";
-    font-size: 32px;
+    display: none;
   }
 }
 
