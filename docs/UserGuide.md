@@ -42,7 +42,7 @@ To get started, click on any of the headers in the table of content to jump to t
   
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 For new users, it is highly recommended starting off from the `Quick Start` section to get HustleBook up and running.
-</div
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 

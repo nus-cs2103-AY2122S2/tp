@@ -391,42 +391,52 @@ The following activity diagram summarizes how to sort all clients.
 
 **[COMING SOON]**
 
-### \[Proposed\] Undo/redo feature
+### Undo Command
 
-#### Proposed Implementation
+**Background Information**
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Client's information is important for a Financial advisor. Therefore, any unintended or accidental changes to the client's information can cause unnecessary problems. For example, new users can accidentally execute `clear`, causing them to lose all their client information.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+To revert their actions, Financial advisors have to use multiple commands, e.g `add`, `edit` etc., together to get back to the original state. This can waste time and resources. Therefore, it is very beneficial to include a `undo` command to help users undo any unintended or accidental command executions and go back to a previous state.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+**Class Diagram (Only relevant methods are shown):**
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![UndoClassDiagram](images/UndoClassDiagram.png)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+The `HustleBookHistory` class facilitates the `undo` command. Throughout the entire programme, there will only be 1 instance of the `HustleBookHistory`, to ensure proper updating and saving of the history regardless of where it is executed. `HustleBookHistory` has a `historyList` and `currStatePointer` variables stored internally.
+
+These are the operations that aid in undoing the HustleBook to a previous state:
+* `HustleBookHistory#getInstance()` —  Gets the single instance of the `HustleBookHistory`.
+* `HustleBookHistory#update(ReadOnlyHustleBook)` —  Saves the current state of the HustleBook to `historyList`.
+* `HustleBookHistory#getPrevState()` —  Returns the previous state of the HustleBook and updates the `currStatePointer` to point to the previous state in the `historyList`.
+
+The `Model` interface has a `Model#undoHustleBook()` method which helps to undo the HustleBook to a previous state.
+
+**Usage Scenario**
+
+This is an example of how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `HustleBookHistory` will be initialized. Through the `update` command, the initial HustleBook state will be saved to the `historyList`, and the `currentStatePointer` will be updated to be pointing to that single HustleBook state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete Alex` command to delete the client named `Alex` in the HustleBook. The `delete` command calls `LogicManager#execute()`, where, after updating the HustleBook `storage`, the `HustleBookHistory#update()` command runs. This causes the modified state of the HustleBook after the `delete Alex` command executes to be saved in the `historyList`, and the `currStatePointer` is shifted to point to the newly inserted HustleBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `flag David` to flag this client `David`. The `flag` command also calls `LogicManager#execute()`, causing another modified HustleBook state to be saved into the `historyList`, with the `currStatePointer` updated.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not reach the `Storage` update section in `LogicManager#execute()` and call `HustleBookHistory#update()`. As a result, a new HustleBook state is not created. Hence, this HustleBook state will not be saved into the `historyList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that flagging the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHustleBook()`, which will shift the `currStatePointer` once to the left, pointing it to the previous address book state, and returns this HustleBook state. Through the use of `HustleBook#resetData()`, which reverts HustleBook back to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index 0, pointing to the initial HustleBook state, then there are no previous HustleBook states to restore. The `undo` command will display a message indicating that there are no commands left to undo instead of trying to get the previous state.
 
 </div>
 
@@ -438,19 +448,9 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `redo` command does the opposite — it calls `Model#redoHustleBook()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the HustleBook to that state.
 
 </div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -460,7 +460,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire HustleBook.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -469,7 +469,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
