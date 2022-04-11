@@ -42,7 +42,7 @@ public class AssessmentAttemptCard extends UiPart<Region> {
     public AssessmentAttemptCard(AssessmentAttempt attempt, int displayedIndex) {
         super(FXML);
         this.attempt = attempt;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         student.setText(attempt.getStudent().getName().fullName);
         grade.setText("Grade: " + attempt.getGrade().value);
     }
