@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+mainframe **sd** creation of command
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -9,10 +10,10 @@ participant "c:Customer" as Customer LOGIC_COLOR
 participant "a:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
-activate LogicManager
 
 LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+activate LogicManager
+
 activate TrackBeauParser
 
 create AddCustomerCommandParser
@@ -33,9 +34,10 @@ create AddCustomerCommand
 Customer -> AddCustomerCommand
 activate AddCustomerCommand
 
-AddCustomerCommand --> AddCustomerCommandParser :
-deactivate Customer
+AddCustomerCommand --> Customer :
 deactivate AddCustomerCommand
+Customer --> AddCustomerCommandParser
+deactivate Customer
 
 AddCustomerCommandParser --> TrackBeauParser : a
 deactivate AddCustomerCommandParser
@@ -44,6 +46,7 @@ AddCustomerCommandParser -[hidden]-> TrackBeauParser
 destroy AddCustomerCommandParser
 
 TrackBeauParser --> LogicManager : a
+deactivate
 
 
 @enduml

@@ -147,11 +147,11 @@ As only indexes present in the displayed list are counted as valid `INDEX`.
 #### 4.1.1 Customer management command parameters
 The table below shows a list of command parameters that will be used for customer management.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Caution:**<br>
+**:information_source: Information:**
 * Service preference refers to services feedbacked by customers that they would enjoy. As this is feedback, the service could be in the current service list offered by the salon or it could yet to be offered as salons may choose to offer when there is sufficient demand.
-   
+* No 2 customers can have the same phone number or same email.
 </div>
 
 
@@ -174,7 +174,7 @@ The table below shows a list of command parameters that will be used for custome
 
 Adds a customer to the application.
 
-Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS rd/REGISTRATION_DATE [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
 
 <div markdown="block" class="alert alert-primary">
 
@@ -228,7 +228,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 **:exclamation: Caution:**<br>
 * When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.<br>
 * By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.
-* Note that 2 customers cannot have the same phone number or same email.
+
 
 </div>
 
