@@ -1016,7 +1016,7 @@ which sets the window in the GUI according to the user's desired option.
 
 --------------------------------------------------------------------------------------------------------------------
 
-###Potential Feature: Import 
+### Potential Feature: Import 
 
 This section explains the potential import feature. 
 The import mechanism will implement the following sequence for the method call execute("import").
