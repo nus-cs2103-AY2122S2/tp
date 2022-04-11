@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes Unmark command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if (Command is Valid)
+    :ManageEZPZ unmarks the [Task], which changes the status back to not done;
+else ([else])
+endif
+stop
+@enduml

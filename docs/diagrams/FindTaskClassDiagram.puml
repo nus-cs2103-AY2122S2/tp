@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes findTask/findEmployee command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if (Attributes entered are Valid)
+    :ManageEZPZ finds [Tasks/Employees] that contains the stated attributes;
+else ([else])
+endif
+stop
+@enduml
