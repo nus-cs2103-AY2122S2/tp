@@ -327,8 +327,8 @@ Lists all existing positions by default. Automatically toggles view to the posit
 The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
 | FILTER_TYPE | FILTER_ARGUMENT                 | Description                                                     |
-|------------|---------------------------------|-----------------------------------------------------------------|
-| `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
+|-------------|---------------------------------|-----------------------------------------------------------------|
+| `name`      | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
 | `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
 The positions displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`.
@@ -423,7 +423,6 @@ Examples:
 * `export -p` will export all positions to the corresponding csv file.
 * `list -a f/name a/Betsy` then `export -a` will export csv all applicants named Betsy to the corresponding csv file.
 
-**Notice**: The location of export files may different for Mac user.
 ## Clearing Data : `clear`
 
 Clears all data in HireLah, including all `applicants`, `positions`, and `interviews`. 
