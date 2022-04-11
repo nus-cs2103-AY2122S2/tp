@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,11 +24,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-W16-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -39,9 +41,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -66,15 +70,19 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -83,10 +91,12 @@ The UI consists of a `MainWindow` that is made up of three tabs: `Contacts`, `Me
 ![Structure of the Contacts Tab](images/ContactsTab.png)
 
 Each tab has different components. `Meetings` has a similar structure as `Contacts` except that there are no `MeetingDetailPanel` and `MeetingDetailCard`. `Help` contains only a `MarkdownView`.
+<div style="page-break-after: always;"></div>
+
 
 All components and the `MainWindow` inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -95,9 +105,11 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -109,12 +121,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -124,8 +140,10 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -138,16 +156,22 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 Internally, the `Model` component also contains other classes that model the attributes of `Person` and `Meeting`, as shown:
 
+<!-- @@author cheehongw -->
+
 The `Person` class:
+
 <img src="images/PersonModel.png" width="450"> 
 
 
 The `Meeting` class:
+
 <img src="images/MeetingModel.png" width="450"> 
 
-
+<!-- @@author -->
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -155,10 +179,11 @@ The `Meeting` class:
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W16-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -167,13 +192,18 @@ The `Storage` component,
 * inherits from `AddressBookStorage`, `MeetingsBookStorage` and `UserPrefStorage`, which means it can be treated as any one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+-------------------------------------
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
+
+<!-- @@author cheehongw -->
 
 This section describes some noteworthy details on how certain features are implemented or any features that we have in mind.
 
@@ -190,6 +220,7 @@ This section describes some noteworthy details on how certain features are imple
 
 
 -------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Specifying targets by name or index
 
@@ -211,6 +242,7 @@ At this point, note that certain invalid indices are still considered valid name
 To prevent prematurely rejecting these strings as invalid indices, the validation for these input class will be deferred to command execution time, where the string is checked against the existing list of persons/meetings. If no person/meeting exists with the same name, then these set of inputs are treated as an invalid index and a `CommandException` is thrown accordingly.
 
 ----------------------
+<div style="page-break-after: always;"></div>
 
 ### Split-panel display
 ![Labeled UI components](images/Ui_labeled.png)
@@ -225,6 +257,8 @@ There are only a few situations that can update the observable:
 1. The user enters a `view INDEX` command through the command box.
 2. The user changes what they select on the `PersonListPanel` on the left.
 
+<div style="page-break-after: always;"></div>
+
 In the first case, the `view` command will retrieve the `Person` at the specified `INDEX` of the `ListView`, and then set this `Person` object as the new value for `SimpleObjectProperty<Person>`, and also update the `ResultDisplay` as well.
 
 In the second case, the `ListView` within `PersonListPanel` has an inbuilt [Selection API](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ListView.html#:~:text=ListView%20Selection%20/%20Focus%20APIs) provided by the javafx library itself. This exposes an observable which contains the currently selected item of the `ListView`. `PersonListPanel` listens for changes to this value, and updates the `SimpleObjectProperty<Person>` in `ModelManager` whenever the selector on the `ListView` changes. 
@@ -238,6 +272,7 @@ When the user clicks a contact in the list, the detailed information will be dis
 The `ContactDetailPanel` is responsible for informing the user through the corresponding `ResultDisplay` when the details have been shown successfully.
 
 --------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Clickable tags
 
@@ -250,6 +285,7 @@ This implementation helps the user to filter both contacts and meetings by tag e
 Since the effect of clicking a tag is global, each tag (displayed using a `Label`) will call the `clickTag` method in `MainWindow`. The `clickTag` method is then responsible for calling `Logic` to update the filtered list and updating both `ResultDisplay`s when filtering is done.
 
 -----------------
+<div style="page-break-after: always;"></div>
 
 <!-- @@author reignnz -->
 ### Dynamic Command Text Field
@@ -264,11 +300,14 @@ The above is assuming that the user inputs a string not included in the list of 
 ![Dynamic Command Diagram](images/DynamicInputFindDiagram.png)
 
 #### Alternatives considered
-* **Alternative 1 (current choice):** Continue to enable logging even during dynamic searching
+* **Alternative 1:** Continue to enable logging even during dynamic searching
     * Pros: No changes needed.
     * Cons: May have performance issues in terms of responsiveness.
 
 -------------------------------
+<div style="page-break-after: always;"></div>
+
+<!-- @@author -->
 
 ### Copy feature
 
@@ -301,7 +340,9 @@ Step 4. Finally the copy command is executed and the `ClipboardManager#copy` is 
 _{more aspects and alternatives to be added}_
 
 --------------------------------------------------
+<div style="page-break-after: always;"></div>
 
+<!-- @@author reignnz -->
 ### Adding Meetings 
 
 In our meetings tab, users can store information about meetings. Meetings consist of the following
@@ -331,14 +372,21 @@ Only when the `AddMeetingCommand#execute` method is executed, then the method `S
 to check if the start/time given by the user is in the past or not by comparing it with `LocalDateTime#now`. 
 If the start/time is in the past, a `CommandException` error will be thrown. 
 
+<div style="page-break-after: always;"></div>
+
+
 Below is a diagram of the sequence of actions that occur when the user inputs a start time in the past and a 
 start time not in the past:
+
 ![StartTimeUMLDiagram](images/StartTimeDiagram.png)
 
 <!-- @@author -->
 
 
 -------------------------------------------
+<div style="page-break-after: always;"></div>
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -357,6 +405,9 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
+
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
@@ -368,6 +419,9 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
+
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -386,6 +440,8 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
@@ -400,6 +456,8 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
@@ -408,7 +466,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire contact book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -419,6 +477,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -446,7 +505,10 @@ A university student who:
 
 **Value proposition**: organise contacts and meetings across various social media platforms so that they can be retrieved more conveniently when needed
 
+<div style="page-break-after: always;"></div>
+
 <!-- @@author -->
+
 
 ### User stories
 
@@ -490,7 +552,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | student who prefers multi-tasking                                       | resize the app window without limiting functionalities        |                                                                   |
 | `*`      | user                                                                    | export consolidated contacts to other users                   |                                                                   |
 
-*{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -498,7 +561,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Precondition - User has started up the uMessage application
 
-### Use case 1: Add a contact
+--------------------------------------------------
+
+#### Use case 1: Add a contact
 
 <!-- @@author zihaowrez -->
 **MSS**
@@ -515,8 +580,9 @@ Use case ends
     * 1a2. Use case resumes at step 1
       
 <!-- @@author zihaowrez -->
+-------------------------------------------------
 
-### Use case 2: Delete a contact
+#### Use case 2: Delete a contact
 
 <!-- @@author zihaowrez -->
 **MSS**
@@ -534,7 +600,10 @@ Use case ends
 
 <!-- @@author zihaowrez -->
 
-### Use case 3: Find Contact
+-------------------------------------------
+<div style="page-break-after: always;"></div>
+
+#### Use case 3: Find Contact
 
 <!-- @@author zihaowrez -->
 **MSS**
@@ -555,7 +624,10 @@ Use case ends
 
 <!-- @@author zihaowrez -->
 
-### Use case 4: Copies a contact
+----------------------------------------------
+<!-- @@author kavxya -->
+
+#### Use case 4: Copies a contact
 
 **MSS**
 1. User types in the command to copy a contact from the list
@@ -573,7 +645,12 @@ Use case resumes at step 1
 
 Use case resumes at step 1
 
-### Use case 5: View Contact
+-------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+<!-- @@author chriswengqi -->
+
+#### Use case 5: View Contact
 
 **MSS**
 1. User types command to view a specific contact from the contact list
@@ -586,7 +663,10 @@ Use case ends
     * 1a1. uMessage displays an error message
     * 1a2. Use case resumes at step 1
 
-### Use case 6 : Add a meeting
+--------------------------------------------------------------
+<!-- author @@reignnz -->
+
+#### Use case 6 : Add a meeting
 **MSS**
 1. User types in the command to add a person into the meetings book
 2. uMessage adds the meeting into the list of meetings and updates it to the user
@@ -598,7 +678,11 @@ Use case ends
     * 1a1. uMessage displays an error message
     * 1a2. Use case resumes at step 1
 
-### Use case 7: Delete a meeting
+-------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+
+#### Use case 7: Delete a meeting
 
 **MSS**
 1. User types in the command to delete a meeting from the list
@@ -611,7 +695,9 @@ Use case ends
     * 1a1. uMessage shows an error
     * 1a2. Use case resumes at step 1
 
-### Use case 8: Find a meeting
+-----------------------------------------------------
+
+#### Use case 8: Find a meeting
 **MSS**
 1. User types keyword(s) in the searchbar
 2. uMessage updates the meeting list to display matching meetings
@@ -626,7 +712,10 @@ Use case ends
     * 1b1. uMessage displays the full list
     * 1b2. Use case resumes at step 1
 
-### Use case 9: Edit a meeting
+----------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+#### Use case 9: Edit a meeting
 
 **MSS**
 1. User types in the command to edit a meeting from the list
@@ -638,6 +727,10 @@ Use case ends
 * 1a. User enters an invalid syntax/ a target index greater than size of the list / a non-existing target name
   * 1a1. uMessage shows an error
   * 1a2. Use case resumes at step 1
+
+----------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 
 ### Non-Functional Requirements
@@ -655,14 +748,17 @@ Constraints:
 1. User has to manually type out the command using the Command Line Interface instead of using a mouse
 2. uMessage is able to hold up to *{to be decided}* contacts before experiencing a drop in performance
 
-
+<!-- @@author chriswengqi -->
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Command Line Interface (CLI)**: A user interface whereby users interact with the program with lines of text.
 * **Graphical User Interface (GUI)**: A user interface that allows users to interact with the program with graphical components, like clickable menus.
+
+<!-- @@author -->
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -677,18 +773,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    2. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    3. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person
 
@@ -696,21 +792,22 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
+<!-- @@author cheehongw -->
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. To simulate a missing file, delete the `data` folder, or some of the `.json` files within it. This `data` folder is located in the same directory where the application jar is placed. 
+    
+    Upon launch, the application will generate a new `data` folder with initial application data.
 
-1. _{ more test cases …​ }_
+    2. To simulate a corrupted file, edit some of the text data found within the `.json` files. This application will determine if the corrupted json file is still parseable, and handle accordingly. If the data files are determined to be corrupted, the application will wipe the data files, causing it to start from a clean slate upon saving.
