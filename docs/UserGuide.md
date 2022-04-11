@@ -472,7 +472,7 @@ Notes:
 * If you try to delete a package that is used by at least one person, it will not be deleted.
 
 ------------------------------------------------------------------------------------
-#### Viewing Packages : `listp
+#### Viewing Packages : `listp`
 
 Opens a new window that shows the various insurance packages and their description.
 
