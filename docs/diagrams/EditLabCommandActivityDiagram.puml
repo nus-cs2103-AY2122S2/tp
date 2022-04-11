@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes labedit command;
+if () then ([valid command format])
+  if () then ([index out of bounds])
+    :Displays error message;
+  else ([else])
+    if () then ([valid combination of LabStatus and LabMark])
+      if () then ([LabMark is 'Unknown'])
+        :Creates new lab with given LabStatus;
+      else ([else])
+        :Creates new lab with LabStatus GRADED and given LabMark;
+      endif
+      if () then ([target lab exists and is different from new lab])
+        :Edits target lab to new lab;
+      else ([else])
+        :Displays error message;
+      endif
+    else ([else])
+      :Displays error message;
+    endif
+  endif
+ else ([invalid command format or parameters])
+    :Displays error message;
+ endif
+stop
+
+@enduml

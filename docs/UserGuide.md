@@ -205,7 +205,8 @@ Example:
 #### View student details : `view`
 View a student's details from the TAddressBook. This includes their personal information (i.e. email, GitHub username, etc.)
 as well as the status and/or marks achieved for their labs. A sample result is shown below.<br>
-![viewUi](images/viewUI.png)
+
+<img src="images/viewUI.png" width="420" />
 
 Format: `view INDEX`
 

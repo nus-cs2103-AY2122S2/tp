@@ -217,6 +217,7 @@ The following **UML activity diagram** shows what happens when a user executes a
 
 <img src="images/AddLabCommandActivityDiagram.png" width="600" />
 
+
 ### `filter`: Filter Students by Labs Feature
 
 The `filter` feature allows user to filter the list of students by their `Lab` and its `LabStatus`.
@@ -267,6 +268,79 @@ The following **UML sequence diagram** shows the interaction between the compone
 The following **UML activity diagram** shows what happens when a `filter` command is executed:
 
 <img src="images/FilterCommandActivityDiagram.png" width="850" />
+
+
+### `labedit`: Edit Lab Feature
+
+#### Implementation
+The `labedit` feature allows for editing of the `LabStatus` and/or `LabMark` of a specified `Lab` in the TAddressBook.<br>
+The format of this command is `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`, where:
+* `INDEX` corresponds to the index number of a student, according to the currently displayed student list
+* `LAB_NUMBER` corresponds to an existing lab in the TAddressBook
+* `LAB_STATUS` is either `u`/`s`/`g` (`UNSUBMITTED`/`SUBMITTED`/`GRADED`)
+* `LAB_MARK` is an integer from 0 to 100 inclusive
+* The parentheses indicate that at least one of `s/LAB_STATUS` and `m/LAB_MARK` must be provided
+
+The implementation of `labedit` is as follows:
+1. When `AddressBookParser#parseCommand` detects `labedit` as the command word, it creates a new `EditLabCommandParser` with the given arguments.
+2. `EditLabCommandParser` parses the parameters and throws a `ParseException` if any invalid values are encountered.
+3. `EditLabCommand#execute(Model)` will then execute with the current `Model` in the system.
+4. The `EditLabCommand` object checks if the given `INDEX` is out of bounds.
+5. The `EditLabCommand` object checks if the given combination of `LAB_STATUS` and `LAB_MARK` is valid.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The valid combinations are:
+* `LAB_STATUS` and no `LAB_MARK`
+* `LAB_MARK` and no `LAB_STATUS`
+* `LAB_MARK` and `LAB_STATUS` of `GRADED`
+</div>
+
+6. The `EditLabCommand` calls `LabList#setLab` of the student specified by the given `INDEX`, which edits the target `Lab` to the new `Lab`.
+
+The following sequence diagram shows the interactions between components during a `labedit` command, `labedit l/1 s/u`:
+
+<img src="images/EditLabCommandSequenceDiagram.png" width="850" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, the details of `LabList#setLab` have been intentionally omitted. They can be found in the sequence diagram below.
+</div>
+
+The following sequence diagram shows how `LabList#setLab` is implemented:
+
+<img src="images/LabListSetLabSequenceDiagram.png" width="550" />
+
+The detailed steps are as follows:
+1. `LabList#setLab` checks if the edited `Lab` is the same as the original `Lab`, and whether the target `Lab` exists in the `LabList`.
+2. `LabList#setLab` edits the target `Lab` to the new `Lab` with different `LabStatus` and/or `LabMark`.
+
+To summarize, the following activity diagram shows what happens when the user requests to edit a lab:
+
+<img src="images/EditLabCommandActivityDiagram.png" width="500" />
+
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current TAddressBook state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous TAddressBook state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone TAddressBook state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial TAddressBook state, and the `currentStatePointer` pointing to that single TAddressBook state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th student in the TAddressBook. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the TAddressBook after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted TAddressBook state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified TAddressBook state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -540,3 +614,15 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `labadd l/-1`<br>
    Expected: A error message will appear with the correct command format and constraints and no lab will be added.
+
+### Editing a Lab
+
+1. Assume we want to edit `Lab 1` of the person with `INDEX 1` and the current `LabStatus` is `UNSUBMITTED`.
+   1. Test case: `labedit 1 l/1 s/s`<br>
+   Expected: The status of `Lab 1` will change from `UNSUBMITTED` to `SUBMITTED`. The lab label will change from red to yellow.
+
+   2. Test case: `labedit 1 l/1 s/g`<br>
+   Expected: An error message will appear stating that the given combination is invalid.
+
+   3. Test case: `labedit 1 l/1 s/g m/10`<br>
+   Expected: The status of `Lab 1` will change from `UNSUBMITTED` to `GRADED`. The lab label will change from red to green.
