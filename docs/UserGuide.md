@@ -410,6 +410,14 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 </div>
 
 ### 3.11. Summarising the records
+The above figure illustrates the important interactions of `EditCommand` when the user successfully edit the `name` attribute of the student at index 1 to Poppy.
+
+When a user inputs an `EditCommand`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser`, `EditCommandParser` and `ParserUtil` to check the validity of the input index, prefixes and parameters. If the input is valid, a `EditPersonDescriptor` object is instantiated and this object is subsequently used as a parameter to instantiate an `EditCommand` object.
+The `EditCommand` object is then passed back to the `LogicManager` which will then invoked `EditCommand#execute()`. This execute method will call two other helper methods `EditCommand#editChecker()` and `Person#isDifferentPerson()`, which both are not shown in the sequence diagram and is used further validation.
+The main functions of these two methods are to check if the new values are duplicate of the corresponding fields to be edited and if the new values for fields that requires uniqueness already exists in the address book respectively.
+The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
+
+TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
 
 Summarise the statistics of the student records inside Tracey.
 
@@ -576,40 +584,3 @@ there are changes to Tracey.
 | 13. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
 | 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
 | 15. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
-
-
---------------------------------------------------------------------------------------------------------------------
-
-
-## 6. Glossary
-
-*Table 4: List of prefixes, fields, pre-defined constants and constraints.*
-
-| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
-|:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
-| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
-| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
-| `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
-| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
-| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
-| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
-| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
-| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
-
-*Table 6: Specific terminology used.*
-
-| Term                                | Meaning                                                                                                                                                                                                                                                                                             |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                    |
-| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                                                               |
-| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                    |
-| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                      |
-| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                   |
-| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                    |
-| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                       |
-| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                 |
-| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                 |
-| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                              |
-| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                                                    |

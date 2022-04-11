@@ -5,43 +5,47 @@ title: Kuo Chun Yuan's Project Portfolio Page
 
 ### Project: Tracey
 
-Tracey is a desktop app for managing health statuses of NUS students by administrative staffs, optimized for use via a CLI while still having the benefits of a GUI. It is written in Java, and has about 10 kLoC.
+Tracey is a desktop app for managing health statuses of NUS Hall Residents. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **Add entry**: Added the ability to edit an entry.
-    * What it does: allows the user to edit the details of a student.
-    * Justification: This feature is fundamental to the product because a user can edit the details of an existing student.
-    * Highlights: This enhancement increases the ease of editing entries. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to import an Excel file to the Tracey database.
+  * What it does: This allows the user to import an Excel file that contains the Covid information of students into Tracey database directly.
+  * Justification: This feature allows the user to quickly import multiple entries of student records from an Excel file. The user do not require to
+    add each entry one by one.
+  * Highlights: The user just need to specify the Excel's file path in the command line, the file type and data format will be checked. In other words,
+    the user do not to worry to import wrong type of files or incorrect formats of data entries.
 
-* **New Feature**: Added an edit command that allows the user to edit previous records by indicating the student index.
+* **New Feature**: Added an import button for the import feature
+  * What it does: This allows the user to import an Excel file by pressing the import button.
+  * Justification: This feature allows the user to use the import feature without typing the command. The user
+    can simply press the button, and choose the importing file from the file explorer window.
+  * Highlights: The button is implemented for both Window and Mac users, and it is automatically pop up the
+    file explorer for the user to choose the importing file.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=kevinkuo0320&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Updated the edit feature (Pull requests [\#9](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/9)
+  * Updated the find feature (Pull requests [\#69](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/69)
+  * Updated the size of response box for long text (Pull requests [\#73](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/73)
+  * Updated the find feature (Pull requests [\#69](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/69)
 
 * **Documentation**:
-    * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
+  * User Guide:
+    * Update documentation for the features `import` [\#177](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/177)
+    * Did cosmetic tweaks to existing documentation of features `edit`: [\#70](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/70)
+  * Developer Guide:
+    * Added implementation details of the `import` and `edit` feature.
+    * Updated Non-Functional Requirement [\#17](https://github.com/AY2122S2-CS2103T-T12-3/tp/issues/17)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
 
 * **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
+  * Integrated a third party library (Natty) to the project ([\#42]())
+  * Integrated a new Github plugin (CircleCI) to the team repo
 
 
 * _{you can add/remove categories in the list above}_

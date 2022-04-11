@@ -7,7 +7,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "a:FindCommand" as FindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "person:Person" as Person LOGIC_COLOR
+participant "person:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
 end box
 
 
@@ -15,17 +15,14 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add XYZ")
+[-> LogicManager : execute("find XYZ")
 activate LogicManager
-note RIGHT
-=XYZ = Alex
-end note
 
-LogicManager -> AddressBookParser : parseCommand("add XYZ")
+LogicManager -> AddressBookParser : parseCommand("find XYZ")
 activate AddressBookParser
 
 create FindCommandParser
-AddressBookParser -> FindCommandParser
+AddressBookParser -> FindCommandParser : FindCommandParser ("find XYZ")
 activate FindCommandParser
 
 FindCommandParser --> AddressBookParser
@@ -34,11 +31,11 @@ deactivate FindCommandParser
 AddressBookParser -> FindCommandParser : parse("XYZ")
 activate FindCommandParser
 
-create Person
-FindCommandParser --> Person
-activate Person
-Person --> FindCommandParser : person
-deactivate Person
+create NameContainsKeywordsPredicate
+FindCommandParser --> NameContainsKeywordsPredicate : NameContainsKeywordsPredicate ("XYZ")
+activate NameContainsKeywordsPredicate
+NameContainsKeywordsPredicate --> FindCommandParser : person
+deactivate NameContainsKeywordsPredicate
 
 create FindCommand
 FindCommandParser -> FindCommand : FindCommand(person)
