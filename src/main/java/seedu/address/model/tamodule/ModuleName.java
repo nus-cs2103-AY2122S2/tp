@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ModuleName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank";
+            "Module name should not be blank";
 
     /**
      * The first character of the Module Name must not be a whitespace,

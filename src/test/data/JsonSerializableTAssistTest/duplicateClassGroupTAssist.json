@@ -1,0 +1,102 @@
+{
+  "students" : [ ],
+  "modules" : [ {
+    "moduleName" : "Effective Communication",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "moduleStudentIds" : [ ]
+  } ],
+  "classGroups" : [ {
+    "classGroupId" : "G09",
+    "classGroupType" : "Sectional",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "classGroupStudentIds" : [ ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ ]
+    } ]
+  }, {
+    "classGroupId" : "G09",
+    "classGroupType" : "Sectional",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "classGroupStudentIds" : [ ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ ]
+    } ] } ],
+  "assessments" : [ ]
+}

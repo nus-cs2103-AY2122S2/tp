@@ -22,8 +22,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TAssist;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTAssistStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -38,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -60,9 +58,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         TAssistStorage tAssistStorage = new JsonTAssistStorage(userPrefs.getTAssistFilePath());
 
-        // TODO: remove AddressBookStorage from StorageManager
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(tAssistStorage, addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(tAssistStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -156,7 +152,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty TAssist.");
             initializedPrefs = new UserPrefs();
         }
 

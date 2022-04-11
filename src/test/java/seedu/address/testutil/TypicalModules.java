@@ -10,12 +10,12 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class TypicalModules {
     public static final int TOTAL_MODULES = 6;
-    public static final TaModule CS2101 = getModule(0);
-    public static final TaModule CS2103T = getModule(1);
-    public static final TaModule CS2030 = getModule(2);
-    public static final TaModule CS2040 = getModule(3);
-    public static final TaModule CS2105 = getModule(4);
-    public static final TaModule CS2103T_WITH_STUDENT = getModule(5);
+    public static final int CS2101 = 0;
+    public static final int CS2103T = 1;
+    public static final int CS2030 = 2;
+    public static final int CS2040 = 3;
+    public static final int CS2105 = 4;
+    public static final int CS2103T_WITH_STUDENT = 5;
 
     private TypicalModules() {} // prevents instantiation
 

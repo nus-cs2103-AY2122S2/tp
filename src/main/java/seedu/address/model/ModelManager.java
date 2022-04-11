@@ -25,7 +25,7 @@ import seedu.address.model.tamodule.TaModule;
 import seedu.address.model.tamodule.exceptions.ModuleNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the TAssist data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

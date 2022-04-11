@@ -17,6 +17,10 @@ public class TypicalStudents {
     public static final Student ELLE = getStudent(4);
     public static final Student FIONA = getStudent(5);
 
+    //Manual Add
+    public static final Student HOON = getStudent(6);
+    public static final Student IDA = getStudent(7);
+
     private TypicalStudents() {} // prevents instantiation
 
     public static List<Student> getTypicalStudents() {
@@ -51,6 +55,13 @@ public class TypicalStudents {
             return new StudentBuilder().withName("Fiona Kunz")
                     .withStudentId("E0458690").withEmail("lydia@example.com")
                     .withTelegram("FIONA_LA").build();
+        case 6:
+            return new StudentBuilder().withName("Hoon Meier")
+                    .withStudentId("E0458691").withEmail("hoon@example.com")
+                    .withTelegram("HoonHoon").build();
+        case 7:
+            return new StudentBuilder().withName("Ida Mueller")
+                    .withStudentId("E0458692").withEmail("ida@example.com").build();
         default:
             return new StudentBuilder().build();
         }

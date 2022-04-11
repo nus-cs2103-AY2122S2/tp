@@ -55,7 +55,7 @@ public class StudentTest {
         // different type -> returns false
         assertFalse(FIONA.equals(5));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(FIONA.equals(BENSON));
 
         // different student ID -> returns false
