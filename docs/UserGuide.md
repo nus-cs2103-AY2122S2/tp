@@ -74,7 +74,7 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Overview
 
 **HackNet** is a small desktop application, and contains simple components working together to form a powerful product.
@@ -120,9 +120,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 
 * Team and skill names for team and skill field can only be consisted of alphanumeric characters, spaces, and some special characters including `-`, `#`, and `+`. The names cannot start or end with spaces and such spaces will be automatically ignored.
 
-* HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.
-
 </div>
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -139,6 +138,8 @@ of the topic.
 
 ![help add message](images/helpAdd.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Contact Management
 
 This section contains commands that can help you manage the details of your contacts within **HackNet**.
@@ -152,7 +153,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.<br>
 * Teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Refer to the examples below.
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
-* A person can have any number of teams or skills(including 0)<br>
+* A person can have any number of teams or skills (including 0)<br>
 
 <div markdown="block" class="alert alert-info">
 
@@ -184,17 +185,17 @@ Format: `edit INDEX [o/OPTION] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] 
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: `[o/OPTION]F`:**<br>
+**:information_source: `[o/OPTION]`:**<br>
 
 * `o/` declares the option parameters for `edit`.
 * When `r` is used as an option, reset mode is activated and the `Team` and `Skill` fields of the contact is overwritten by the arguments in `t/` and `s/`.
-* Without `o/r`, the `Team` and `Skill` fields of the contact specified in the command after `t/` and `s/` are appended to the contact's existing teams and skills.
+* Without `o/r`, the `Team` and `Skill` arguments specified in the command by `t/` and `s/` are appended to the contact's existing teams and skills.
 </div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 o/r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
-* `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
+* `edit 2 t/HackNet s/` Appends the team `HackNet` to the 2nd person and keep the current skills.
 * `edit 1 s/C_90, C_2, C_11` will result in the 1st person in the list having skill `C` with proficiency `90` as it is the highest value.
 
 #### Batch edit
@@ -213,7 +214,7 @@ Format: `edit INDEX… [o/OPTION] [t/TEAM…] [s/SKILLNAME_SKILLPROFICENCY…]`
 
 Examples:
 * `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
-* `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
+* `edit 1 2 3 o/r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The existing teams are cleared as well.
 
 ### Deleting a person: `delete`
 
@@ -234,6 +235,8 @@ Examples:
 Clears all existing contacts from HackNet.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ## Team Forming
 
@@ -292,7 +295,7 @@ Format: `sort SKILL`
 * This command only accepts <b><u>ONE</u></b> skill as the sorting criteria.
 
 Examples:
-* `sort Python` shows persons with `Python` as a skill in descending order of proficiency
+* `sort Python` shows persons with `Python` as a skill in descending order of proficiency, from brighter to darker shades of green.
 
 ### Mark/unmark contact as potential teammates: `team/unteam`
 
@@ -314,9 +317,7 @@ Examples:
 
 ### Filter for past teammates: `filterteam`
 
-Shows a list of past teammates that have been tagged with /t in HackNet.
-E.g. `edit INDEX [t/TEAM]` command or `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]` command.
-Potential teammates marked using the `team` command will **NOT** be shown using the `filterteam` command.
+Shows a list of past teammates (contacts that have been tagged with /t) in HackNet. Note that this does not show contacts marked as potential teammates using the `team` command above.
 
 Format: `filterteam`
 
@@ -325,6 +326,8 @@ Format: `filterteam`
 Shows the list of all persons marked as potential teammates
 
 Format: `show`
+
+<div style="page-break-after: always;"></div>
 
 ## Utility
 
@@ -388,6 +391,8 @@ Format: `↑`, `↓`
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ## Data
 
