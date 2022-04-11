@@ -19,6 +19,11 @@ import javafx.application.Application;
  * to be the entry point of the application, we avoid this issue.
  */
 public class Main {
+    /**
+     * The main method to start TeachWhat!
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         Application.launch(MainApp.class, args);
     }

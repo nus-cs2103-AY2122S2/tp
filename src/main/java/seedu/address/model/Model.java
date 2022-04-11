@@ -5,14 +5,19 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.student.Student;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +40,154 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' student book file path.
      */
-    Path getAddressBookFilePath();
+    Path getStudentBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' student book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setStudentBookFilePath(Path studentBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces student book data with the data in {@code studentBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setStudentBook(ReadOnlyStudentBook studentBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the StudentBook */
+    ReadOnlyStudentBook getStudentBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student book.
      */
-    boolean hasPerson(Person person);
+    boolean hasStudent(Student student);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given student.
+     * The student must exist in the student book.
      */
-    void deletePerson(Person target);
+    void deleteStudent(Student target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given student.
+     * {@code student} must not already exist in the student book.
      */
-    void addPerson(Person person);
+    void addStudent(Student student);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the student book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the
+     * student book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Student> getFilteredStudentList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredStudentList(Predicate<Student> predicate);
+
+    //=========== LessonBook =================================================================================
+    /**
+     * Replaces lesson book data with the data in {@code lessonBook}.
+     */
+    void setLessonBook(ReadOnlyLessonBook lessonBook);
+
+    /** Returns the LessonBook */
+    ReadOnlyLessonBook getLessonBook();
+
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    /**
+     * Returns true if a lesson that conflicts with {@code lesson} exists in the list of lessons.
+     */
+    boolean hasConflictingLesson(Lesson lesson);
+
+    /**
+     * Adds the given lesson.
+     * The lesson must not already exist in the lesson book.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Deletes the given lesson.
+     * The lesson must exist in the lesson book.
+     */
+    void deleteLesson(Lesson lesson);
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the lesson book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the
+     * lesson book.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+
+
+    /**
+     * Updates both filtered lesson and students list.
+     */
+    void updateAssignment(Student student, Lesson lesson);
+
+    /**
+     * Updates both filtered lesson and students list.
+     */
+    void updateUnassignment(Student student, Lesson lesson);
+
+    /**
+     * Sets the selected {@code Student} with the given {@code Student} for UI use.
+     * @param student The given {@code Student}.
+     */
+    void setSelectedStudent(Student student);
+
+    /** Returns the selected {@code Student} */
+    Student getSelectedStudent();
+
+    /**
+     * Sets the selected {@code Lesson} with the given {@code Lesson} for UI use.
+     * @param lesson The given {@code Lesson}.
+     */
+    void setSelectedLesson(Lesson lesson);
+
+    /** Returns the selected {@code Lesson} */
+    Lesson getSelectedLesson();
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredStudentList}
+     */
+    boolean checkStudentListIndex(Index studentId);
+
+    /**
+     * Checks if the {@code Index} provided is out of bounds of the {@code filteredLessonList}
+     */
+    boolean checkLessonListIndex(Index lessonId);
+
+    /**
+     * Checks if the provided {@code Lesson} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedLesson Lesson to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson);
+
+    /**
+     * Checks if the provided {@code Student} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedStudent Student to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent);
 }

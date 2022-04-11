@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package State {
+    object "__Student : David__" as Student
+    object "__Lesson: Sec 2 Math__" as Lesson
+    object "__EnrolledStudents: enrolledStudents__" as enrolledStudents {
+        List<Student> : enrolledStudents
+    }
+    object "__EnrolledLessons: enrolledLessons__" as enrolledLessons {
+        List<Lesson> : enrolledLessons
+    }
+}
+Student -[hidden]-> enrolledLessons
+Lesson -[hidden]-> enrolledStudents
+hide enrolledStudents
+hide enrolledLessons
+
+@end

@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.logic.commands.exceptions.NoInfoPanelTypeException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
+
 /**
  * Represents the result of a command execution.
  */
@@ -11,11 +15,19 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** The application should switch tab to selected tab. **/
+    private final ViewTab viewTab;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
     /** The application should exit. */
     private final boolean exit;
+
+    /** If InfoPanel of the UI should be updated **/
+    private final boolean updateInfoPanel;
+
+    private final InfoPanelTypes infoPanelType;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -24,6 +36,9 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.viewTab = ViewTab.NONE;
+        this.updateInfoPanel = false;
+        this.infoPanelType = null;
     }
 
     /**
@@ -34,8 +49,57 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and with the intention of updating the UI with a new {@code InfoPanel} and {@code ViewTab}
+     *
+     * @param feedbackToUser Feedback given to user from the command.
+     * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
+     * @param viewTab {@code viewTab} value representing the type of {@code ViewTab} that will be switched.
+     */
+    public CommandResult(String feedbackToUser, InfoPanelTypes infoPanelType, ViewTab viewTab) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.updateInfoPanel = true;
+        this.infoPanelType = infoPanelType;
+        this.viewTab = viewTab;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and with the intention of updating the UI with a new {@code InfoPanel}.
+     *
+     * @param feedbackToUser Feedback given to user from the command.
+     * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
+     */
+    public CommandResult(String feedbackToUser, InfoPanelTypes infoPanelType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.updateInfoPanel = true;
+        this.infoPanelType = infoPanelType;
+        this.viewTab = ViewTab.NONE;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, ViewTab viewTab) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.viewTab = viewTab;
+        this.updateInfoPanel = false;
+        this.infoPanelType = InfoPanelTypes.NONE;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public ViewTab toggleTo() {
+        return viewTab;
     }
 
     public boolean isShowHelp() {
@@ -44,6 +108,17 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isUpdateInfoPanel() {
+        return updateInfoPanel;
+    }
+
+    public InfoPanelTypes getInfoPanelType() {
+        if (updateInfoPanel) {
+            return infoPanelType;
+        }
+        throw new NoInfoPanelTypeException();
     }
 
     @Override

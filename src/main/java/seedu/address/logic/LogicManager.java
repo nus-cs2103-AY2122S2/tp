@@ -10,11 +10,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.inputhistory.InputHistoryResult;
+import seedu.address.logic.inputhistory.UserInputHistory;
+import seedu.address.logic.parser.TeachWhatParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyStudentBook;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.student.Student;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,7 +29,8 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final TeachWhatParser teachWhatParser;
+    private final UserInputHistory userInputHistory;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +38,8 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        teachWhatParser = new TeachWhatParser();
+        userInputHistory = new UserInputHistory();
     }
 
     @Override
@@ -42,11 +47,12 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = teachWhatParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveStudentBook(model.getStudentBook());
+            storage.saveLessonBook(model.getLessonBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,18 +61,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyStudentBook getStudentBook() {
+        return model.getStudentBook();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return model.getFilteredLessonList();
+    }
+
+    @Override
+    public Path getStudentBookFilePath() {
+        return model.getStudentBookFilePath();
     }
 
     @Override
@@ -77,5 +88,30 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Student getSelectedStudent() {
+        return model.getSelectedStudent();
+    }
+
+    @Override
+    public Lesson getSelectedLesson() {
+        return model.getSelectedLesson();
+    }
+
+    @Override
+    public void addNewUserInputToHistory(String userInput) {
+        userInputHistory.addToHistory(userInput);
+    }
+
+    @Override
+    public InputHistoryResult getPreviousInput() {
+        return userInputHistory.getPreviousInput();
+    }
+
+    @Override
+    public InputHistoryResult getNextInput() {
+        return userInputHistory.getNextInput();
     }
 }

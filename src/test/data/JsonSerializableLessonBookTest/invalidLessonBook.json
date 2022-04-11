@@ -1,0 +1,16 @@
+{
+  "_comment": "Lesson address is blank",
+  "lessons" : [ {
+    "lessonName" : "Sec 2 Biology Group Tuition",
+    "subject" : "Biology",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "19-12-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "15",
+      "startTime" : "18:00"
+    },
+    "isRecurring" : false,
+    "assignedStudents" : [ ],
+    "lessonAddress" : " "
+  } ]
+}

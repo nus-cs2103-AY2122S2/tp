@@ -1,0 +1,72 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
+participant ":ViewStudentInfoParser" as ViewStudentInfoParser LOGIC_COLOR
+participant ":ViewStudentInfoCommand" as ViewStudentInfoCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("student 1")
+activate LogicManager
+
+LogicManager -> TeachWhatParser : parseCommand("student 1")
+activate TeachWhatParser
+
+create ViewStudentInfoParser
+TeachWhatParser -> ViewStudentInfoParser
+activate ViewStudentInfoParser
+ViewStudentInfoParser --> TeachWhatParser
+deactivate ViewStudentInfoParser
+
+TeachWhatParser -> ViewStudentInfoParser : parse("1")
+activate ViewStudentInfoParser
+
+create ViewStudentInfoCommand
+ViewStudentInfoParser -> ViewStudentInfoCommand
+activate ViewStudentInfoCommand
+ViewStudentInfoCommand -> ViewStudentInfoParser
+deactivate ViewStudentInfoCommand
+
+ViewStudentInfoParser --> TeachWhatParser
+deactivate ViewStudentInfoParser
+ViewStudentInfoParser -[hidden]-> TeachWhatParser
+destroy ViewStudentInfoParser
+
+TeachWhatParser --> LogicManager
+deactivate TeachWhatParser
+
+LogicManager -> ViewStudentInfoCommand : execute()
+activate ViewStudentInfoCommand
+
+ViewStudentInfoCommand -> Model : getFilteredStudentList()
+activate Model
+Model --> ViewStudentInfoCommand : filteredStudents
+deactivate Model
+
+ViewStudentInfoCommand -> Model : setSelectedStudent(Student)
+activate Model
+deactivate Model
+
+create CommandResult
+ViewStudentInfoCommand -> CommandResult
+activate CommandResult
+CommandResult --> ViewStudentInfoCommand : result
+deactivate CommandResult
+
+ViewStudentInfoCommand --> LogicManager : result
+deactivate ViewStudentInfoCommand
+
+ViewStudentInfoCommand -[hidden]-> LogicManager
+destroy ViewStudentInfoCommand
+
+<-- LogicManager : result
+deactivate LogicManager
+
+@enduml

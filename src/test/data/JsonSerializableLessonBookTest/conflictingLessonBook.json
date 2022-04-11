@@ -1,0 +1,40 @@
+{
+  "_comment": "Sec 2 Biology Group Tuition clashes with Sec 3 History Group Tuition",
+  "lessons" : [ {
+    "lessonName" : "Sec 2 Biology Group Tuition",
+    "subject" : "Biology",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "19-12-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "15",
+      "startTime" : "18:00"
+    },
+    "isRecurring" : false,
+    "assignedStudents" : [ ],
+    "lessonAddress" : "Blk 11 Ang Mo Kio Street 74, #11-04"
+  }, {
+    "lessonName" : "Sec 2 Chemistry Group Tuition",
+    "subject" : "Chemistry",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "20-12-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "15",
+      "startTime" : "15:00"
+    },
+    "isRecurring" : true,
+    "assignedStudents" : [ ],
+    "lessonAddress" : "Blk 11 Ang Mo Kio Street 74, #11-04"
+  }, {
+    "lessonName" : "Sec 3 History Tuition",
+    "subject" : "History",
+    "dateTimeSlot" : {
+      "dateOfLesson" : "19-12-2022",
+      "durationHours" : "2",
+      "durationMinutes" : "15",
+      "startTime" : "18:00"
+    },
+    "isRecurring" : false,
+    "assignedStudents" : [ ],
+    "lessonAddress" : "Blk 11 Ang Mo Kio Street 74, #11-04"
+  } ]
+}
