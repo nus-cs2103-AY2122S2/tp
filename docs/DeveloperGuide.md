@@ -528,19 +528,19 @@ Actor: User
 4. REP set a Reminder for the client in the system.
 
 **Extensions:**
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
-* 3a. The given index is invalid
-  * 3a1. REP displays an error message
+* 3a. The given index is invalid.
+  * 3a1. REP displays an error message.
 
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. REP detects error in details
-  * 3b1. REP displays an error message
+* 3b. REP detects error in details.
+  * 3b1. REP displays an error message.
 
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 ### **Use Case: Edit a Reminder for a client**
 
@@ -555,19 +555,19 @@ Preconditions: The client to edit a Reminder for has an existing Reminder.
 4. REP updates the Reminder for the client in the system.
 
 **Extensions:**
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
-* 3a. The given index is invalid
-    * 3a1. REP displays an error message
+* 3a. The given index is invalid.
+    * 3a1. REP displays an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
-* 3b. REP detects error in details
-    * 3b1. REP displays an error message
+* 3b. REP detects error in details.
+    * 3b1. REP displays an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
 ### **Use Case: Delete a Reminder for a client**
 
@@ -582,19 +582,19 @@ Preconditions: The client to edit a Reminder for has an existing Reminder.
 4. REP removes the Reminder for the client in the system.
 
 **Extensions:**
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
-* 3a. The given index is invalid
-    * 3a1. REP displays an error message
+* 3a. The given index is invalid.
+    * 3a1. REP displays an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
-* 3b. REP detects error in details
-    * 3b1. REP displays an error message
+* 3b. REP detects error in details.
+    * 3b1. REP displays an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
 ### **Use Case: View Reminders for clients**
 
@@ -607,14 +607,14 @@ Actor: User
 4. REP shows a list of current Reminders set.
 
 **Extensions:**
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
-* 3a. REP detects error in details
-   * 3a1. REP displays an error message
+* 3a. REP detects error in details.
+   * 3a1. REP displays an error message.
 
-     Use case resumes at step 2
+     Use case resumes at step 2.
 
 ### **Use Case: Favourite**
 
