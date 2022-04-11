@@ -353,8 +353,8 @@ Below is the list of parameters that can be used with the `add t/contact` comman
 
 | Parameters | Description                                                |
 | ---------- | :--------------------------------------------------------- |
-| `i/`       | _Required_. The NRIC associated with the patient.          |
-| `n/`       | _Required_. The name associated with the contact.          |
+| `i/`       | _Required_. The NRIC of the patient to add the contact to. |
+| `n/`       | _Required_. The name of the contact.                       |
 | `p/`       | _Required_. The phone number of the contact.               |
 | `e/`       | _Required_. The email address of the contact.              |
 | `a/`       | _Required_. The address of the contact.                    |
@@ -412,6 +412,21 @@ Examples:
 
 - `add t/medical i/S1234567L bt/AB ht/175 cm`
 - `add t/medical i/S1234567L a/22 bt/O md/Paracetamol 500mg twice a day; Atarvastatin 20mg once a day ht/185 cm wt/70 kg il/Mild fever; High cholesterol su/Appendectomy fh/Has family history of high blood pressure ih/MMR; 6 in 1; Hepatitis B gd/Male et/Chinese`
+
+| Parameters | Description                                                          |
+| ---------- | :--------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC of the patient to add medical information to.   |
+| `a/`       | _Optional_. The age of the patient.                                  |
+| `bt/`      | _Optional_. The blood type of the patient.                           |
+| `md/`      | _Optional_. Details about the patient's medication.                  |
+| `ht/`      | _Optional_. The height of the patient.                               |
+| `wt/`      | _Optional_. The weight of the patient.                               |
+| `il/`      | _Optional_. Details about the patient's illnesses.                   |
+| `su/`      | _Optional_. Details about the patient's surgeries.                   |
+| `fh/`      | _Optional_. Details about the patient's family history.              |
+| `ih/`      | _Optional_. Details about the patient's immunization history.        |
+| `gd/`      | _Optional_. The gender of the patient.                               |
+| `et/`      | _Optional_. The ethnicity of the patient.                            |
 
 ### Viewing Medical Information: `view t/medical`
 
@@ -616,11 +631,11 @@ types `NIL` in any field.
 
 **Option 1:**
 By default, MedBook will always read `medbook.json` located in `[HOME_DIRECTORY of MedBook.jar]/data/`. Just move your
-data to `HOME_DIRECTORY of MedBook.jar/data/` in your new device if you wish to import them.
+data to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device if you wish to import them.
 
 **Option 2 (with encryption):**
 By default, MedBook will always encrypt your data to `password.enc` in `[HOME_DIRECTORY of MedBook.jar]/data/` for
-security reason. You can move `password.enc` to `HOME_DIRECTORY of MedBook.jar/data/` in your new device and MedBook
+security reason. You can move `password.enc` to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device and MedBook
 will ask for your password upon launching.
 
 </div>
@@ -628,7 +643,7 @@ will ask for your password upon launching.
 <div class="card">
 <div markdown="1">
 <h6 markdown="1">What happens if I forget my password?</h6>
-Due to security reason, there is no way to reset to password. To continue using the application you need to delete the 
+Due to security reason, there is no way to reset password. To continue using the application you need to delete the 
 encrypted data file (located at `[HOME_DIRECTORY of MedBook.jar]/data/password.enc`) or move it to another location. 
 MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
 </div>
