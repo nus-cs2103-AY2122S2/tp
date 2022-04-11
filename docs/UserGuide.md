@@ -182,9 +182,6 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
-Observe the behaviour when clicking on various fields:
-
-<img src="images/clickBehaviour.gif" >
 
 ## 6. Deleting: `delete`
 
@@ -240,10 +237,10 @@ The meetings in the future are listed first with ascending starting time, follow
 
 The header displays the size of the current meeting list in the brackets.
 
-Access the Meetings by clicking on the tab in the upper region of the application as shown below. 
+Access the Meetings by clicking on the tab in the upper region of the application to access the page that looks like as shown below. 
 Note that the hyperlinks in the details are clickable and will redirect the user to the preferred browser.
 
-<img src="images/meeting.gif">
+<img src="images/meeting.png">
 
 
 ## 1. Adding: `add`
