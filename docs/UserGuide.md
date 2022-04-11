@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -51,7 +51,7 @@ Let's get started!
    can locate the data file easily in the same folder as step 3. Use double-clicking as a last resort (this may result
    in some difficulty locating the data file).
 
-   1. If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
+    1. If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
 
 5. WoofAreYou should appear in a few seconds.
 
@@ -373,7 +373,7 @@ life easier when using the features previously introduced.
 
 **:information_source: Unusual Behaviour?**<br>
 
-You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing 
+You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing
 some commands in this section. Generally, commands such as `find` and `filter` which trims the number of pets displayed
 will cause this behaviour. This is because any following commands like `sort` will execute based on the trimmed list. You
 will come across this behaviour [later](#sort-pets-sort) under the sort command, if you are following this user guide.
@@ -511,7 +511,7 @@ Format: `undo`
 
 **:warning: Note about undo**<br>
 
-* You will not be able to undo `clear`, `exit`, `find`, `filter`, `help` and `list` commands.
+* You will not be able to undo `clear`, `exit`, `find`, `charge`, `filter`, `help` and `list` commands.
 
 
 </div>

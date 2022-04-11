@@ -30,7 +30,7 @@ deactivate PetBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoPetBook()
+UndoCommand -> Model : undo()
 activate Model
 
 Model -> VersionedPetBook : undo()

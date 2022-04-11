@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Hao Yu's Project Portfolio Page
 ---
 

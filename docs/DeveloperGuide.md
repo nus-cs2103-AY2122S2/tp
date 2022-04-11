@@ -175,7 +175,7 @@ and takes in a field that the user wishes to sort WoofAreYou by. The field is pa
 `SortCommandParser`.
 
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
-in the `Model` interface as Model#sortPetList().
+in the `Model` interface as `Model#sortPetList()`.
 
 Pet list can only be sorted by pet name, owner name, appointment dates, pick-up time or drop-off time. Each class implements the `Comparable` interface so that
 they can be compared and sorted alphabetically.
@@ -183,12 +183,15 @@ they can be compared and sorted alphabetically.
 The following sequence diagram shows how the sort operation works:
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram summarizes what happens when a user executes a new sort command:
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
 #### Design considerations:
 
-* **Alternative 1 (current choice):** Currently the comparator classes for both owner name and pet name are generated
+* **Alternative 1 (current choice):** Currently the comparator classes for the sorting fields are generated
   within the `sortPetList` method in `UniquePetList`.
     * Pros: Easy to implement.
     * Cons: May be confusing to edit if there are more comparator classes in the future.
@@ -314,52 +317,55 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Cleaner code. Better for future scalability.
     * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
 
-
 ### Undo feature
 
 #### Implementation
 
-The undo mechanism is facilitated by `VersionedPetBook`. It extends `PetBook` with an undo history, stored internally as an `petBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo mechanism is facilitated by VersionedPetBook. It extends PetBook with an undo history, stored internally as an petBookStateList and currentStatePointer. Additionally, it implements the following operations:
 
-* `VersionedPetBook#commit()` — Saves the current WoofAreYou state in its history.
-* `VersionedPetBook#undo()` — Restores the previous WoofAreYou state from its history.
+* `VersionedPetBook#commit()` — Saves the current WoofAreYou state in its history.
+* `VersionedPetBook#undo()` — Restores the previous WoofAreYou state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitPetBook()` and `Model#undoPetBook()` respectively.
+These operations are exposed in the Model interface as `Model#undo()`.
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedPetBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
+Step 1. The user launches the application for the first time. The VersionedPetBook will be initialized with the initial WoofAreYou state, and the currentStatePointer pointing to that single WoofAreYou state.
 
 <p align="center">
   <img src="images/UndoState0.png" alt="UndoRedoState0" width="450"/>
 </p>
 
-Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitPetBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `petBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
+Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The delete command calls `Model#deletePet()`, which in turn calls `VersionedPetBook#commit()`
+causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the petBookStateList, and the currentStatePointer is shifted to the newly inserted WoofAreYou state.
 
 <p align="center">
   <img src="images/UndoState1.png" alt="UndoRedoState1" width="450"/>
 </p>
 
-Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitPetBook()`, causing another modified WoofAreYou state to be saved into the `petBookStateList`.
+Step 3. The user executes `add n/David …`  to add a new pet. The add command also calls `Model#addPet()`, which in turn calls `VersionedPetBook#commit()`
+causing another modified WoofAreYou state to be saved into the petBookStateList.
 
 <p align="center">
   <img src="images/UndoState2.png" alt="UndoRedoState2" width="450"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitPetBook()`, so the WoofAreYou state will not be saved into the `petBookStateList`.
-
+<div markdown="span" class="alert alert-info">
+:information_source: Note: If a command fails its execution, it will not call 
+VersionedPetBook#commit(), so the WoofAreYou state will not be saved into the petBookStateList.
 </div>
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPetBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
+
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call `Model#undo()`, which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores WoofAreYou to that state.
 
 <p align="center">
   <img src="images/UndoState3.png" alt="UndoRedoState3" width="450"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. The `undo` command uses `Model#canUndoPetBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
+<div markdown="span" class="alert alert-info">
+:information_source: Note: If the currentStatePointer is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. If so, it will return an error to the user.
 </div>
+
 
 The following sequence diagram shows how the undo operation works:
 
@@ -367,21 +373,17 @@ The following sequence diagram shows how the undo operation works:
   <img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram" width="650"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: Note: The lifeline for UndoCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitPetBook()` or `Model#undoPetBook()` Thus, the `petBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command list. Commands that do not modify WoofAreYou, such as list, will usually not call `VersionedPetBook#commit()` or `Model#undo()`.
+Thus, the petBookStateList remains unchanged.
 
 <p align="center">
   <img src="images/UndoState4.png" alt="UndoRedoState4" width="450"/>
 </p>
 
-Step 6. The user executes `clear`, which calls `Model#commitPetBook()`. Since the `currentStatePointer` is not pointing at the end of the `petBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged.
-
-<p align="center">
-  <img src="images/UndoState5.png" alt="UndoRedoState5" width="450"/>
-</p>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -392,15 +394,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo executes:**
+Aspect: How undo executes:
 
-* **Alternative 1 (current choice):** Saves the entirety of WoofAreYou.
+* Alternative 1 (current choice): Saves the entirety of WoofAreYou.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
+* Alternative 2: Individual command knows how to undo/redo by itself.
+    * Pros: Will use less memory (e.g. for delete, just save the pet being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Attendance feature
@@ -449,7 +450,6 @@ In addition, the activity diagram below illustrates the workflow of attendance c
 * **Alternative 2:** All attendance entries in a single HashMap.
     * Pros: Lesser memory usage, easier to implement.
     * Cons: Nested data structure, lack of OOP and separation of concerns.
-    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -648,10 +648,10 @@ Use case ends.
     * 1c1. System shows an error message.
 
       Use case resumes at step 1.
-* 1d. User keyed in pick-up time that is after drop-off time. 
+* 1d. User keyed in pick-up time that is after drop-off time.
 
     * 1d1. System shows an error message.
-  
+
       Use case resumes at step 1.
 
 
