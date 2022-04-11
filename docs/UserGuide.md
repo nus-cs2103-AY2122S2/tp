@@ -8,27 +8,27 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 # Table of Contents
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-   * [Viewing help : help](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#viewing-help--help)
+   * [Viewing help : help](#help)
    * Person Commands
-     * [Adding a customer: addp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#adding-a-customer-addp)
-     * [Delete a customer: deletep](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#delete-a-customer-deletep)
-     * [Listing all customers: listp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-customers-listp)
-     * [Editing a customer's information : editp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-a-customers-information--editp)
-     * [Locating customers by specific attribute: findp](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#locating-customers-by-specific-attribute-findp)
+     * [Adding a customer: addp](#addp)
+     * [Delete a customer: deletep](#deletep)
+     * [Listing all customers: listp](#listp)
+     * [Editing a customer's information : editp](#editp)
+     * [Locating customers by specific attribute: findp](#findp)
    * Order Commands
-     * [Adding an order : addo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#adding-an-order--addo)
-     * [Delete an order: deleteo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#delete-an-order-deleteo)
-     * [Listing all orders: listo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-orders-listo)
-     * [Editing an order's information : edito](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-an-orders-information--edito)
-     * [Locating orders by specific attribute: findo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#locating-orders-by-specific-attribute-findo)
-     * [Mark orders as Complete: marko](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#mark-orders-as-complete-marko)
-     * [Unmark orders as incomplete: unmarko](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#unmark-orders-as-incomplete-unmarko)
-     * [Listing all incomplete orders: incompleteo](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#listing-all-incomplete-orders-incompleteo)
-   * [Clearing all Customers and Orders: clear](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#clearing-all-customers-and-orders-clear)
-   * [Exiting the program : exit](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#exiting-the-program--exit)
-   * [Using Natural Dates](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#using-natural-dates)
-   * [Saving the data](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#saving-the-data)
-   * [Editing the data file](https://github.com/declanleeler/tp/blob/master/docs/UserGuide.md#editing-the-data-file)
+     * [Adding an order : addo](#addo)
+     * [Delete an order: deleteo](#deleteo)
+     * [Listing all orders: listo](#listo)
+     * [Editing an order's information : edito](#edito)
+     * [Locating orders by specific attribute: findo](#findo)
+     * [Mark orders as Complete: marko](#marko)
+     * [Unmark orders as incomplete: unmarko](#unmarko)
+     * [Listing all incomplete orders: incompleteo](#incompleteo)
+   * [Clearing all Customers and Orders: clear](#clear)
+   * [Exiting the program : exit](#exit)
+   * [Using Natural Dates](#natural-dates)
+   * [Saving the data](#saving-data)
+   * [Editing the data file](#editing-data)
 3. [FAQ](#faq)
 4. [Command Summary](#command-summary)
 
@@ -98,7 +98,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
 </div>
 
-### Viewing help : `help`
+### Viewing help : `help` <a name="help"></a>
 
 Shows a message explaining how to access the help page.
 
@@ -106,7 +106,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a customer: `addp`
+### Adding a customer: `addp` <a name="addp"></a>
 
 Adds a customer to ReadyBakey’s contact list
 * A customer's name and phone number must not have appeared in ReadyBakey's customer list. If it is not unique, you 
@@ -135,7 +135,7 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 Examples:
 * `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
 
-### Delete a customer: `deletep`
+### Delete a customer: `deletep` <a name="deletep"></a>
 Removes a customer from ReadyBakey’s contact list 
 
 Format: `deletep INDEX`
@@ -147,7 +147,7 @@ Format: `deletep INDEX`
 Examples:
 * `deletep 2`
 
-### Listing all customers: `listp`
+### Listing all customers: `listp` <a name="listp"></a>
 Shows a list of all customers in ReadyBakey’s contact list
 
 Format: `listp`
@@ -155,7 +155,7 @@ Format: `listp`
 Examples:
 * `listp`
 
-### Editing a customer's information : `editp`
+### Editing a customer's information : `editp` <a name="editp"></a>
 
 Edits an existing customer in ReadyBakey's contact list.
 
@@ -187,7 +187,7 @@ Examples:
 *  `editp 1 p/83456789 e/declan@example.com` Edits the phone number and email address of the 1st customer to be `83456789` and `declan@example.com` respectively.
 *  `editp 2 n/Declan` Edits the name of the 2nd customer to be `Declan`.
 
-### Locating customers by specific attribute: `findp`
+### Locating customers by specific attribute: `findp` <a name="findp"></a>
 
 Finds customer(s) whose name(s) contain any of the given keywords.
 
@@ -212,7 +212,7 @@ Examples:
 * `findp a/serangoon` returns `Blk 1 Serangoon Street 5`
 * `findp r/Allergic` returns `Allergic to Tomatoes`<br>
 
-### Adding an order : `addo`
+### Adding an order : `addo` <a name="addo"></a>
 
 Adds an order to ReadyBakey’s order list.
 
@@ -232,11 +232,11 @@ Examples:
   * `addo p/98765432 r/Add Cheese d/1:Chocolate Cake d/5:Banana Cake c/25-12-2022 15:30 m/Delivery`
 * `m/COLLECTION_TYPE` only accepts [delivery OR pickup] (case-insensitive)
 
-### Delete an order: `deleteo`
+### Delete an order: `deleteo` <a name="deleteo"></a>
 
 Removes an order from ReadyBakey
 
-Format: `deleteo INDEX`
+Format: `deleteo INDEX` 
 
 * Deletes the order at the specified INDEX
 * The index refers to the index number shown in the displayed orders list.
@@ -245,7 +245,7 @@ Format: `deleteo INDEX`
 Examples:
 * `deleteo 2`
 
-### Listing all orders: `listo`
+### Listing all orders: `listo` <a name="listo"></a>
 
 Shows a list of all orders in ReadyBakey
 
@@ -254,7 +254,7 @@ Format: `listo`
 Examples:
 * `listo`
 
-### Editing an order's information : `edito`
+### Editing an order's information : `edito` <a name="edito"></a>
 
 Edits an existing customer in ReadyBakey's contact list.
 
@@ -290,7 +290,7 @@ Examples:
   * Collection type is changed to `Delivery`.
   * Detail remarks is also changed to `Two candles`
 
-### Locating orders by specific attribute: `findo`
+### Locating orders by specific attribute: `findo` <a name="findo"></a>
 
 Finds order(s) whose specific attribute contain any of the given keywords.
 
@@ -323,7 +323,7 @@ Examples:
 * `findo m/delivery` returns `Delivery`
 * `findo r/birthday` returns `Birthday` <br>
 
-### Mark orders as Complete: `marko`
+### Mark orders as Complete: `marko` <a name="marko"></a>
 
 Marks an order as complete in ReadyBakey
 
@@ -337,7 +337,7 @@ Format: `marko INDEX`
 Examples:
 * `marko 1`
 
-### Unmark orders as incomplete: `unmarko`
+### Unmark orders as incomplete: `unmarko` <a name="unmarko"></a>
 
 Unmarks an order as incomplete in ReadyBakey
 
@@ -351,7 +351,7 @@ Format: `unmarko INDEX`
 Examples:
 * `unmarko 1`
 
-### Listing all incomplete orders: `incompleteo`
+### Listing all incomplete orders: `incompleteo` <a name="incompleteo"></a>
 
 Shows a list of all incomplete orders in ReadyBakey before and during a given date and time
 
@@ -365,7 +365,7 @@ Examples:
 * `incompleteo 25-12-2022 15:30`
 * `incompleteo Monday 15:30`
 
-### Clearing all Customers and Orders: `clear`
+### Clearing all Customers and Orders: `clear` <a name="clear"></a>
 
 Removes all customers and orders stored in ReadyBakey
 
@@ -374,7 +374,7 @@ Format: `clear`
 Examples:
 * `clear`
 
-### Exiting the program : `exit`
+### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
 
@@ -383,7 +383,7 @@ Format: `exit`
 Examples:
 * `exit`
 
-### Using Natural Dates
+### Using Natural Dates <a name="natural-dates"></a>
 
 In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
 The closest upcoming date that corresponds to the natural date's day input will be used. The time in HH:MM must still be provided by the user, along with the natural date.
@@ -430,11 +430,11 @@ Example of natural dates in action:
 Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that
 you want the date to be the Monday or any natural date 10 weeks from now)
 
-### Saving the data
+### Saving the data <a name="saving-data"></a>
 
 ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the data file <a name="editing-data"></a>
 
 ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
 
