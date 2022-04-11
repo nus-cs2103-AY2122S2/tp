@@ -474,6 +474,8 @@ of shows.
 Step 5: `Model#updateFilteredShowList` will then be called and `Model` will be updated with the 
 selected show.
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 - **Alternative 1 (current choice):** Returns a random show from the currently displayed list.
@@ -509,6 +511,8 @@ selected show.
 * prefers desktop applications over other interfaces.
 * can type fast and prefers typing to mouse interactions.
 * wants to be able to maintain a local copy of their list of shows
+
+<div style="page-break-after: always;"></div>
 
 **Value proposition**:
 
@@ -573,8 +577,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-<div style="page-break-after: always;"></div>
-
 * 2b. User enters command with the wrong syntax.
 
     * 2b1. Trackermon shows an error message to the user.
@@ -611,6 +613,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC03 - List a show**
 
 **Preconditions: Trackermon application is started.**
@@ -623,8 +627,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Trackermon shows a list of shows.
 
     Use case ends.
-
-<div style="page-break-after: always;"></div>
 
 **Extensions**
 
@@ -653,6 +655,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC05 - Exit Trackermon**
 
 **Preconditions: Trackermon application is started.**
@@ -670,8 +674,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Edit a show**
 
@@ -698,6 +700,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC07 - Find a show**
 
@@ -742,6 +746,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC09 - Quickly import shows**
 
@@ -864,6 +870,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix C: Instructions for manual testing**
 
@@ -894,6 +901,8 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a show
 
@@ -929,6 +938,8 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a show
 
 1. Prerequisites: None, but if the list is empty, all edits will result in an error.
@@ -947,7 +958,7 @@ testers are expected to do more *exploratory* testing.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
       Expected: No show is edited. Error details shown in the result display.<br><br>
 6. Test case: Invalid edit name
-   1. Condition: Show named `Inception` exists in the show list that is not currently being edited.
+   1. Condition: Show named `Inception` exists in the show list that is not currently being edited. 
    2. Command: `edit <index of show to be edited> n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
 
@@ -996,7 +1007,7 @@ testers are expected to do more *exploratory* testing.
       2. Command: `find 86 shutter` <br>
          Expected: Looks through the name, status, rating and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
          E.g. `86` or `shutter` from name, status, rating, or tag fields will be matched (`OR` search).
-   
+
    4. Test case: Invalid command format
       1. Command: `find` <br>
          Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
@@ -1095,8 +1106,6 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 ### Suggesting a show
 
