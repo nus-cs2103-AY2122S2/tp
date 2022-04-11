@@ -14,13 +14,13 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 ## 1. Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your Computer.
 
 2. Download the latest `MyGM.jar` from [here](https://github.com/AY2122S2-CS2103-F09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for `MyGM.jar`. You should put it in an **empty folder** in which the app is **allowed to create files** (i.e. do not use a write-protected folder). Alternatively, You can copy it to your desktop.
 
-4. Double-click the file to start the app (**Mac user** are recommended to type `java -jar MyGM.jar` in the terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
+4. Double-click the file to start the app (**Mac users** are recommended to type `java -jar MyGM.jar` in the terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight differences in different OS).<br>
 The GUI is split into two parts: Players and Schedules respectively. Details of the GUI are shown below
 
 ![Ui_Players](images/UiPlayers.png) <br>
@@ -53,7 +53,7 @@ The GUI is split into two parts: Players and Schedules respectively. Details of 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. <br>e.g. in `add L/ n/LINEUP_NAME`, `LINEUP_NAME` is a parameter which can be used as `add L/ n/allstars`.
 * Items in square brackets are optional. <br> e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times. <br> e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Commands are case-sensitive. `Add` is considered as invalid commands, the correct command should be `add` which is in lower case.
+* Commands are case-sensitive. `Add` is considered as an invalid command, the correct command should be `add` which is in lower case.
 * Leading and trailing white spaces for parameters are trimmed. <br> e.g. `delete P/     John Doe` will be treated as `delete P/John Doe`
 * Parameters can be in any order. <br> e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
 * If a parameter is expected only once in the command, but you have specified it multiple times, only the last occurrence of the parameter will be taken. <br>e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -65,7 +65,7 @@ The GUI is split into two parts: Players and Schedules respectively. Details of 
 
 Views some insights about players in the club and upcoming schedules.
 
-* The right half of the application is used to display aggregated information of the club.
+* The right half of the application is used to display aggregated information about the club.
 * Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
 * Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
 
@@ -92,8 +92,8 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 :information_source: Notes about the `add` Command for player.
 
 * `NAME` must be **alphanumeric** and should not be blank.
-* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
-* The first character of every word in `NAME` are **recommended being capitalized**. For example:`John Doe` instead of `john doe`
+* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered different players.
+* The first character of every word in `NAME` is **recommended to be capitalized**. For example:`John Doe` instead of `john doe`
 * `NAME` must not exist in MyGM already.
 * `JERSEY_NUMBER` should be an integer between 0 and 99, inclusive of both 0 and 99.
 * `JERSEY_NUMBER` must not exist in MyGM already.
@@ -101,7 +101,7 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 * `HEIGHT` should be an integer between 1 and 300, inclusive of 1 and 300.
 * `PHONE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
 * `EMAIL_ADDRESS` should be of the format local-part@domain and adhere to the following constraints:
-    * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    * The local part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local part may not start or end with any special characters.
     * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
       The domain name must:
         - End with a domain label at least 2 characters long
@@ -128,10 +128,10 @@ Format: `add L/ n/LINEUP_NAME`
 
 :information_source: Notes about the `add` Command for lineup.
 
-* `LINEUP_NAME` must be in **alphanumeric** and should not be blank.
-* `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
+* `LINEUP_NAME` must be **alphanumeric** and should not be blank.
+* `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered different lineups.
 * The new `LINEUP_NAME` must not exist in MyGM already.
-* After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#26-viewing-playerschedulelineup-view) section.
+* After being created, empty lineups will not be displayed on the GUI. To find all the lineups you have created, you can leverage the `view L/` command. To know more about `view` related commands, please go to [view](#26-viewing-playerschedulelineup-view) section.
 
 </div>
 
@@ -153,12 +153,12 @@ Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * `DATETIME` must be in a dd/mm/yyyy HHmm format, where HHmm is in 24-hour clock. <br> e.g. `04/04/2024 1400`
 * `SCHEDULE_NAME` must be **alphanumeric** and should not be blank.
 * `DESCRIPTION` should not be blank.
-* Multiple schedules can be added to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
+* Multiple schedules can be added to the same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
 
 Examples:
-* `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
+* `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description `first game of national competition` that is held on `20/04/2024 2200`.
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
 
@@ -178,7 +178,7 @@ Format: `delete P/PLAYER [L/LINEUP]`
 
 * `PLAYER` is the player name to be specified and is **case-sensitive**.
 * `PLAYER` must exist in MyGM already.
-* If `L/LINEUP` is specified, deletes only the player from this lineup.
+* If `L/LINEUP` is specified, the player will only be deleted from this lineup.
 
 </div>
 
@@ -198,7 +198,7 @@ Format: `delete L/LINEUP`
 :information_source: Notes about the `delete` Command for lineup.
 
 * `LINEUP` is the lineup name to be specified and is **case-sensitive**.
-* This command **does not** delete the players that are in this lineup from MyGM. <br>e.g. If player `John Doe` and `Josh Doe` are in the lineup `Duo`, deleting the lineup `Duo` **does not** delete `John Doe` and `Josh Doe` from MyGM.
+* This command **does not** delete the players that are in this lineup from MyGM. <br>e.g. If players `John Doe` and `Josh Doe` are in the lineup `Duo`, deleting the lineup `Duo` **does not** delete `John Doe` and `Josh Doe` from MyGM.
 
 </div>
 
@@ -226,7 +226,7 @@ Example:
 * `view S/` followed by `delete S/2` deletes the 2nd schedule in the **displayed** schedule.
 * `view S/game` followed by `delete S/1` deletes the 1st schedule in the **displayed** schedule as a result of the `view S/game` command.
 
-### 2.5 Putting a player to a lineup: `put`
+### 2.5 Putting a player into a lineup: `put`
 
 Puts the specified player to a specified lineup.
 
@@ -250,7 +250,7 @@ Example:
 
 ### 2.6. Viewing player/schedule/lineup: `view`
 
-This function makes listing, searching filtering of player/ schedule/ lineup quick and easy.
+This function makes listing, searching and filtering of player/ schedule/ lineup quick and easy.
 You can specify criteria to list out the current player and schedule list.
 
 #### 2.6.1. View player
@@ -265,8 +265,8 @@ Format: `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/TAG]`
 
 * Parameters `NAMES_IN_PLAYERNAME` and `TAG` will only find players that contain
 the specific word that is specified. <br> e.g. `view P/John` will not display players with the name
-"Johnson" in their name. However, it will display players with name such as "John Cena", "Stockton John" if
-players with such name exists.
+"Johnson" in their name. However, it will display players with names such as "John Cena", "Stockton John" if
+players with such names exist.
 * "OP" in the parameters `OPWEIGHT` and `OPHEIGHT` must be either `gte`, `lte`, `gt`, `lt`, `eq`. On the other hand,
 "WEIGHT" and "HEIGHT" must be integers. <br> e.g. `gte180`, `lt90` can be a potential `OPWEIGHT` or `OPHEIGHT`
 * Words in `NAMES_IN_PLAYERNAME` are case **insensitive** but words in `POSITIONS` are case **sensitive**.
@@ -276,8 +276,8 @@ players with such name exists.
 Examples:
 * `view P/` Displays all the players
 * `view P/Kelvin Darent` Displays all the players that have `Kelvin` **or** `Darent` in their name
-* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than `180`cm **and** weight that is
-greater than or equals to `80`kg
+* `view P/ h/gt180 w/gte80` Displays all the players who have heights greater than `180`cm **and** weights
+greater than or equal to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
@@ -295,9 +295,9 @@ Format: `view L/[NAMES_IN_LINEUPNAME]`
 
 * Parameter `NAMES_IN_LINEUPNAME` will only find players that are in the lineup which contains the lineup name that
 matches the specific word that is specified. <br> e.g. `view L/super` will not display players in the lineup
-with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super"
+with the lineup name "superstars". However, it will display players in the lineup with the lineup name "super"
 or "super idol" provided that lineup with this lineup name exists and there are players in this lineup as well.
-* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed and all current lineups will allso be displayed
+* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed and all current lineups will also be displayed
 * Words in `NAMES_IN_LINEUPNAME` are case **insensitive**.
 * To view players that are **without** a lineup, the `N/` prefix must be specified.
 
@@ -324,29 +324,29 @@ Format: `view S/[NAMES_IN_SCHEDULENAME] [d/DATE]`
 * Parameter `DATE` must be in dd/mm/yyyy<br>e.g. 04/12/2022
 * Parameter `NAMES_IN_SCHEDULENAME` will only find schedules that contain
 the specific word that is specified. <br> e.g. `view S/training` will not only display schedules with the name
-"training" in the schedule name. However, it will display schedules with name such as "training", "always training" if
-schedules with such name exists.
+"training" in the schedule name. However, it will display schedules with names such as "training", "always training" if
+schedules with such names exist.
 * Words in the parameter `NAMES_IN_SCHEDULENAME` are case **insensitive**.
 * If no `NAMES_IN_SCHEDULENAME` is provided, the list of all active schedules which happen at future dates will be displayed.
-* To display all the schedules which also includes schedules that happened in the past (i.e. archived schedule), the prefix `a/` together with
+* To display all the schedules including the ones that happened in the past (i.e. archived schedule), the prefix `a/` together with
 `all` must be specified. <br>
 e.g `a/all`
 * To display all the schedules which are archived, the prefix `a/` together with `archive` must be specified.<br>
 e.g `a/archive`
-* The prefix `a/` can **only** follow with either `all` or `archive` is provided. Any other scenario, error message will be displayed.
-* To view all the schedules that has happened or is going to happen on a particular date, the `d/` prefix must be specified
+* The prefix `a/` can **only** follow with either `all` or `archive` is provided. In any other scenario, an error message will be displayed.
+* To view all the schedules that have happened or are going to happen on a particular date, the `d/` prefix must be specified
 together with a `date` that is in `dd/mm/yyyy`. The parameter `[NAMES_IN_SCHEDULENAME]` must be empty.
 <br> e.g `d/22/02/2023`
 
 </div>
 
 Examples:
-* `view S/` Displays all the schedules that are upcoming
+* `view S/` Displays all upcoming schedules
 * `view S/drills` Displays all the upcoming schedules that have the name of "drills"
 * `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" **or** "shooting"
-* `view S/ a/all` Displays the all schedules which includes upcoming and archived schedules
-* `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules
-* `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
+* `view S/ a/all` Displays all the schedules including both upcoming and archived schedules
+* `view S/ a/archive` Displays all the schedules including **only** the archived schedules
+* `view S/ d/22/02/2023` Displays all the schedules that fall on the date "22/02/2023"
 
 ![viewSchedule](images/viewSchedule.png)
 
@@ -365,7 +365,7 @@ Format: `sort PREFIX/ORDER`
 Other `PREFIX` **will not** be accepted.
 * The parameter `ORDER` must be specified only as `asc` or `desc` for ascending and
 descending respectively. Other `ORDER` **will not** be accepted.
-* Player names in alphabetical order will be used as tiebreaker when sorting based on height or weight.
+* Player names in alphabetical order will be used as a tiebreaker when sorting based on height or weight.
 
 </div>
 
@@ -393,10 +393,10 @@ Edit the details of an existing player in MyGM.
 
 :information_source: Notes about the `view` Command for lineup
 
-* If any fields are specified, it will change accordingly.
-* Player `PLAYER` must exist in MyGM.
+* If any fields are specified, they will change accordingly.
+* The player `PLAYER` must exist in MyGM.
 * Multiple fields can be changed at once.
-* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#231-add-a-player) Command section for players applies here as well.
+* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#231-add-a-player) Command section for players apply here as well.
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
 
 </div>
@@ -424,12 +424,12 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 :information_source: Notes about the `view` Command for lineup
 
 * The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
-* Restrictions for `NEW_LINEUP_NAME` in [add](#232-add-a-lineup) Command section for lineups applies here as well.
+* Restrictions for `NEW_LINEUP_NAME` in [add](#232-add-a-lineup) Command section for lineups apply here as well.
 
 </div>
 
 Example:
-* `edit L/Starting5 n/Worst5` will change name of the lineup `Starting5` to `Worst5`
+* `edit L/Starting5 n/Worst5` will change the name of the lineup `Starting5` to `Worst5`
 
 #### 2.8.3. Edit a schedule
 
@@ -441,16 +441,16 @@ Format: `edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]
 
 :information_source: Notes about the `edit` Command for schedule
 
-* If any fields are specified, it will be changed accordingly
+* If any fields are specified, they will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
-* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#233-add-a-schedule) Command section for schedules applies here as well.
-* Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
+* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#233-add-a-schedule) Command section for schedules apply here as well.
+* Multiple schedules can be edited to the same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
 
 Example:
-* `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
+* `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edit the first schedule.
 
 ### 2.9. Clearing all entries : `clear`
 
@@ -474,7 +474,7 @@ Format: `exit`
 
 ### 2.11. Changing the theme of the UI: `theme`
 
-Changes to either light mode or dark mode. MyGM is set to dark mode on start up by default.
+Changes to either light mode or dark mode. MyGM is set to dark mode on startup by default.
 
 Format: `theme T/THEME`
 
@@ -499,7 +499,7 @@ MyGM data is saved in the hard disk (in a default file) automatically after any 
 MyGM data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, MyGM will discard all data and start with an empty data file at the next run.
+If your changes to the data file make its format invalid, MyGM will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -509,8 +509,8 @@ If your changes to the data file makes its format invalid, MyGM will discard all
 **Q1:** How do I transfer my data to another Computer?
 **A1:** Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q2**: Why does the `delete` and `edit` command for players require case-sensitive full name?<br>
-**A2**: Considering that these commands has side effects on the existing player data and is irreversible, we have decided that case-sensitive full name for these commands is necessary. This is useful as it can serve as a reminder to the user which player he/she is editing or deleting. Furthermore, it may not necessarily slow down the user as generally, human beings tend to remember names easily as opposed to the index of the player in the application.
+**Q2**: Why does the `delete` and `edit` command for players require a case-sensitive full name?<br>
+**A2**: Considering that these commands have side effects on the existing player data and are irreversible, we have decided that a case-sensitive full name for these commands is necessary. This is useful as it can serve as a reminder to the user which player he/she is editing or deleting. Furthermore, it may not necessarily slow down the user as generally, human beings tend to remember names easily as opposed to the index of the player in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
