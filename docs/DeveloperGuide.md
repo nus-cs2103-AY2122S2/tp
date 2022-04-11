@@ -743,6 +743,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. TeachWhat! shows an error message.  
       Use case resumes at step 5.
 
+<div style="page-break-after: always;"></div>
+
 #### Delete a student
 
 **System:** TeachWhat!  
@@ -785,6 +787,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -814,6 +818,8 @@ window preferences when you close the program.
    left off.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a lesson / Viewing a lesson's details
 TeachWhat! allows you to store details of a lesson and view it back later on.
@@ -866,6 +872,8 @@ The list of lessons displayed is sorted by the next upcoming lesson date.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a student / Viewing a student's details
 TeachWhat! allows you to store details of a student and view it back later on.
 
@@ -888,6 +896,8 @@ TeachWhat! allows you to store details of a student and view it back later on.
 </div>
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a student
 
@@ -914,6 +924,8 @@ This command requires you to have at least one existing student.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Assigning a student
 
 This command requires you to have at least one existing student and lesson.
@@ -937,6 +949,8 @@ user guide section to add a student.
    3. Expected: An error message will be displayed saying that the student is already enrolled in the lesson.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Unassigning a student
 
@@ -962,6 +976,8 @@ This command requires you to have at least one existing student and lesson.
     3. Expected: An error message will be displayed saying that the student is **not** enrolled in the lesson.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -993,6 +1009,8 @@ To simulate this scenario, follow the steps below:
 4. Open the folder named **"data"**, and open the data-file named **"lessonbook.json"** using a text-editor of your choice.
 5. To simulate the file becoming corrupted, you may remove or add some items into the JSON file.
    - In this case, we can simply remove the opening square-bracket from the JSON file, rendering it unreadable, like so:
+
+<div style="page-break-after: always;"></div>
 
 ##### BEFORE
 ```
