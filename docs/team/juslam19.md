@@ -30,14 +30,15 @@ Given below are my contributions to the project.
          2. Added patient name to result display messages for `view t/TYPE i/NRIC` commands, for clarification to user. Pull request: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116)
          3. Ensured catching of errors to be caught and shown on result display, for clarification to user. Pull requests: [#225](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/225)
   2. Added increased functionality to the application
-      * Added scroll bar with incremental arrow buttons. Pull request: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116)
-      * Added styling that causes scroll bar buttons to respond visually to hover and presses.
+      * Added scroll bar and its styling. Pull request: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116)
+        * Added scroll bar with incremental arrow buttons. 
+        * Added styling that causes scroll bar buttons to respond visually to hover and presses.
   3. Contributed to standardising command behavior
      * Ensured `edit t/medical INDEX` command followed other types' `edit` command -- only valid if at least one optional field is filled out. Pull request: [#240](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/240)
   4. Added Dummy data when data file unavailable
-      * Added dummy consultation entries to populate MedBook when existing data file is not detected, indicating newly downloaded application or reset of existing MedBook application.
+      * Added dummy consultation entries to populate MedBook when existing data file is not detected, indicating newly downloaded application or reset of existing MedBook application. Pull request: [#259](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/259)
   5. Code Quality
-      * Wrote test cases to increase code coverage from XX% to XX%. Pull request: [WIP]()
+      * Wrote test cases to increase code coverage from 30.40% to 32.00%. Pull request: [#259](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/259)
 
 * **Contributions to the UG:**
   * Added patients' consultation section. Pull request: [#130](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/130)
