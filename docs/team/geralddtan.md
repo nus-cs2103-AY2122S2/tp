@@ -15,12 +15,8 @@ Given below are my contributions to the project.
 **Enhancements implemented**
 1. Implementation and testing of order class
   * Part of PR [#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83) and PR [#126](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/126)
-  * Implementation and testing for the overall order class containing its relevant components such as:
-    * Order Details 
-    * Order Deliver/Pickup Enum (Collection Type)
-    * Order Remark 
-    * Order Delivery Date & Time 
-    * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
+  * Implementation and testing for the overall order class containing its relevant components (Order Details, Order Collection Type, Order Remark, Order Delivery Date & Time)
+  * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
 2. Implementation and testing for order functionality 
    * Part of PR [#95](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/95)
    * Implemented and performed test for Delete Order, List Order
