@@ -22,7 +22,6 @@ public class Rating implements Comparable<Rating> {
      * @param rating {@code int}.
      */
     public Rating(int rating) {
-        requireNonNull(rating);
         checkArgument(isValidRating(rating), INVALID_RATING);
         this.rating = rating;
     }
@@ -55,7 +54,7 @@ public class Rating implements Comparable<Rating> {
     }
 
     /**
-     * Return {@String} representation of {@code Rating}.
+     * Return {@code String} representation of {@code Rating}.
      */
     @Override
     public String toString() {

@@ -28,7 +28,7 @@ public class Comment {
     }
 
     /**
-     * Return {@String} representation of {@code Comment}.
+     * Return {@code String} representation of {@code Comment}.
      */
     @Override
     public String toString() {
