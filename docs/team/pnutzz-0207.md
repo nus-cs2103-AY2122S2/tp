@@ -40,6 +40,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Review pull requests
+  * Organize issue tracker
   
 * **Enhancements to existing features**:
   * Added function that count number of persons attached to a tag to make it display in UI. [#104](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/104)
@@ -51,11 +52,4 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added test cases and user stories [#29](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/29)
     * Explained implementation of filter feature [#67](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/67)
-
-
-* **Community**:
-  * to be added soon
-
-
-* **Tools**:
-  * to be added soon
+  
