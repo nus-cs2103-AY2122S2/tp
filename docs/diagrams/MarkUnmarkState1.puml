@@ -3,7 +3,7 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "mark attend c/1 w/1 s/1,2"
+title After command "mark c/1 w/1 s/1,2"
 
 package State {
     class State1 as "__ta0:TAssist__"
