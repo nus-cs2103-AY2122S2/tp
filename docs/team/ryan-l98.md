@@ -97,6 +97,6 @@ to see the code contributions I have made.
 #### Review/mentoring contributions
 
 1. Suggested improvements in PR review [#57](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/57)
-2. Reviewed and merged [35 pull requests](https://github.com/AY2122S2-CS2103T-W11-3/tp/pulls?q=is%3Apr+reviewed-by%3Aryan-l98+)
+2. Reviewed and merged [42 pull requests](https://github.com/AY2122S2-CS2103T-W11-3/tp/pulls?q=is%3Apr+reviewed-by%3Aryan-l98+)
 
 --- 
