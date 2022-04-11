@@ -37,7 +37,6 @@ title: Developer Guide
 * Punnyhuimin - Reused natural date checker formula (DateChecker#naturalDateCheck()) from https://coderanch.
   com/t/385117/java/date-Monday
 * Punnyhuimin - Reused scroll bar CSS https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
