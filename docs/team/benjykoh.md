@@ -57,9 +57,8 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `manual`, `unmark`, `mark` [#39](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/39) and `sort`. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
-    * Updated documentation for the feature `assign`. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
+    * Updated documentation for the feature `assign`. [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102)
   * Developer Guide:
-    * Added and updated user stories [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93)
     * Added implementation details for commands: `manual`, `mark`,`unmark` [#106](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/106) and `sort `. [#215](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/215)
     * Updated implementation details for command: `assign`. [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231)
     * Added use cases: UC06, UC07, UC14, UC15. [#253](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/253)
