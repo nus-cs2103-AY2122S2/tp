@@ -35,8 +35,8 @@ Given below are my contributions to the project.
     * Updated sections of `edit` and `add` command on the use of commas to separate multiple values.
 
 * **Contributions to the DG**:
-    * Class diagram for EditCommand and Sequence diagram for `edit` command.
-    * Updated AB3 diagrams including 'delete' sequence diagram and `Model` component's class diagrams.
+    * [Added](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/178) Class diagram for EditCommand and Sequence diagram for `add` command.
+    * [Updated](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/175) AB3 diagrams including 'delete' sequence diagram and `Model` component's class diagrams.
 
 * **Contributions to the team-based tasks**:
     * Took demo screenshots of v1.2 features
