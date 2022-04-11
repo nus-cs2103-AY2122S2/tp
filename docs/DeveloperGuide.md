@@ -234,7 +234,7 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 
 **API** : [`StorageManager.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/StorageManager.java)
 
-![](images/StorageClassDiagram.png)
+<img src="images/StorageClassDiagram.png" width="600"/>
 
 The `Storage` component
 * saves lesson book data, student book data and user preference data in json format, and read them back into the 
@@ -252,6 +252,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 [return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -282,6 +284,8 @@ list.
 receives the user input through the `MainWindow#executeCommand()` method. 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 then sends the user input to `Logic` and retrieves the result.
+
+<div style="page-break-after: always;"></div>
 
 #### Step 2: `Logic` parses the user's input and returns the result
 
@@ -316,9 +320,11 @@ object, with the parameter `infoPanelType = InfoPanelTypes.STUDENT`.
 is an enumerator representing the different states of the InfoPanel. This is then returned to `LogicManager` which
 returns it back to `MainWindow`.
 
+<div style="page-break-after: always;"></div>
+
 #### Step 4: Updating the UI
 
-![](images/viewing-details/ViewStudentSequenceDiagram.png)
+<img src="images/viewing-details/ViewStudentSequenceDiagram.png" width="500"/>
 
 Once 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) 
@@ -335,7 +341,7 @@ is shown on the right side of the application.
 The execution of the command is complete and the result is shown in the image below, where the right side of the
 application is updated with the details of the selected `Student`.
 
-<img src="images/viewing-details/UiExample.png" width="550" />
+<img src="images/viewing-details/UiExample.png" width="500" />
 
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
