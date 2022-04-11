@@ -16,6 +16,18 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
+import seedu.address.model.medical.Age;
+import seedu.address.model.medical.BloodType;
+import seedu.address.model.medical.Ethnicity;
+import seedu.address.model.medical.FamilyHistory;
+import seedu.address.model.medical.Gender;
+import seedu.address.model.medical.Height;
+import seedu.address.model.medical.Illnesses;
+import seedu.address.model.medical.ImmunizationHistory;
+import seedu.address.model.medical.Medical;
+import seedu.address.model.medical.Medication;
+import seedu.address.model.medical.Surgeries;
+import seedu.address.model.medical.Weight;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
@@ -165,6 +177,42 @@ public class SampleDataUtil {
         };
     }
 
+    public static Medical[] getSampleMedicals() {
+        return new Medical[] {
+            new Medical(new Nric("S1234567L"), new Age("25"), new BloodType("O"),
+                    new Medication("Paracetamol 500mg twice a day; Atarvastatin 20mg once a day"),
+                    new Height("185 cm"), new Weight("70 cm"),
+                    new Illnesses("Mild fever"), new Surgeries("Appendectomy"),
+                    new FamilyHistory("Has family history of high blood pressure"),
+                    new ImmunizationHistory("MMR; 6 in 1; Hepatitis B"),
+                    new Gender("Male"), new Ethnicity("Chinese")),
+            new Medical(new Nric("S1234568L"), new Age("65"), new BloodType("AB"),
+                    new Medication("Lisinopril 10 mg once a day"),
+                    new Height("185 cm"), new Weight("70 cm"),
+                    new Illnesses("Mononucleosis"), new Surgeries("NIL"),
+                    new FamilyHistory("NIL"), new ImmunizationHistory("NIL"),
+                    new Gender("Male"), new Ethnicity("Chinese")),
+            new Medical(new Nric("S1234569L"), new Age("37"), new BloodType("O+"),
+                    new Medication("NIL"),
+                    new Height("165 cm"), new Weight("65 cm"),
+                    new Illnesses("Stomach Aches"), new Surgeries("NIL"),
+                    new FamilyHistory("Albinism"), new ImmunizationHistory("NIL"),
+                    new Gender("Non-binary"), new Ethnicity("Caucasian")),
+            new Medical(new Nric("S1234560L"), new Age("26"), new BloodType("B"),
+                    new Medication("Aripiprazole 2 mg once a day"),
+                    new Height("168 cm"), new Weight("70 cm"),
+                    new Illnesses("Mild fever"), new Surgeries("NIL"),
+                    new FamilyHistory("NIL"), new ImmunizationHistory("NIL"),
+                    new Gender("Female"), new Ethnicity("Pacific Islander")),
+            new Medical(new Nric("S1234562L"), new Age("16"), new BloodType("A"),
+                    new Medication("Paracetamol 250 mg twice a day"),
+                    new Height("170 cm"), new Weight("65 cm"),
+                    new Illnesses("Mild fever"), new Surgeries("NIL"),
+                    new FamilyHistory("NIL"), new ImmunizationHistory("NIL"),
+                    new Gender("Male"), new Ethnicity("Chinese"))
+        };
+    }
+
     public static TestResult[] getSampleTestResults() {
         return new TestResult[] {
             new TestResult(new Nric("S1234567L"), new TestDate("2020-03-01"), new MedicalTest("X-Ray Scan"),
@@ -209,6 +257,9 @@ public class SampleDataUtil {
         }
         for (Consultation sampleConsultation : getSampleConsultations()) {
             sampleMedBook.addConsultation(sampleConsultation);
+        }
+        for (Medical sampleMedical: getSampleMedicals()) {
+            sampleMedBook.addMedical(sampleMedical);
         }
         return sampleMedBook;
     }
