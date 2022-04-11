@@ -308,7 +308,7 @@ The undo/redo mechanism is facilitated by `StackUndoRedo`. The implemented undo/
 - The Undo stack serves to store a "history" of the actions they have performed.
 - The Redo stack is a collection of their actions that lead up to initial condition at which they started performing the undo.
 
-They central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, the undo stack is populated by pushing a user's action in the application to the undo stack. 
+The central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, the undo stack is populated by pushing a user's action in the application to the undo stack. 
 
 Then, when the user performs an undo, the action is firstly popped from undo stack and used to do the operation, and then we store an action onto the redo stack.
 
