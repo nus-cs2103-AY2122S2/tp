@@ -13,18 +13,21 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
+**:information_source: Notes about the command format and terminology:**<br>
+
+* The usage of the term `CLIENT` in this guide is general, and represents each Client entity: Buyer, Seller.
+
+* Inputs in `UPPER_CASE` are inputs to be supplied by the user.<br>
+  e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
+
+* Items in square brackets are optional inputs.<br>
+  e.g In `n/NAME [t/TAG]`, the user can input `n/Chok Hoe t/funny` or simply `n/Chok Hoe`.
+
+</div>  
 
 ### Architecture
 
@@ -121,19 +124,19 @@ How the parsing works:
 
 The `Model` component,
 
-<div markdown="span" class="alert alert-info">:information_source: Note that the usage of the term `CLIENT` is abstract, and represents each Client entity: Buyer, Seller
-</div>  
+<div markdown="span" class="alert alert-info">:information_source: Recall: the usage of the term `CLIENT` in this guide is general, and represents each Client entity: Buyer & Seller.
+</div> 
 
 * stores the address book data i.e., all `CLIENT` objects (which are contained in a `UniqueCLIENTList` object).
-* stores the currently 'selected' `CLIENT` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the currently 'selected' `CLIENT` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<CLIENT>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when data in the list changes.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 Let's take a look at the internal structure of the `CLIENT` entity:
 
 <img src="images/ClientClassDiagram.png" width="450" />
 
-* all abstract `CLIENT` objects (Buyer or Seller) have a name and phone number.
+* all `CLIENT` objects (Buyer or Seller) have a name and phone number.
 * `Buyer` has `PropertyToBuy` while `Seller` has `PropertyToSell`.
 
 Now, what PropertyToBuy and PropertyToSell classes encapsulate:
@@ -141,8 +144,8 @@ Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 <img src="images/PropertyClassDiagram.png" width="450" />
 
 
-<div markdown="span" class="alert alert-info">:information_source: Note that We have decided to separate these 2 fields and NOT make them inherit an abstract `Property` class.
- This is because sellers know the exact property (and address of the property) that they are selling.
+<div markdown="span" class="alert alert-info">:information_source: Note that we have decided to treat these 2 property classes differently and NOT make them inherit an abstract `Property` class.
+ This is because sellers know the exact property (and address of the property) that they are selling. One is more general while one is more specific.
  We can hence extend the code base more flexibly in the future if we remove some fields from PropertyToBuy or add more fields to PropertyToSell.
 </div>  
 
@@ -174,25 +177,28 @@ This section describes some noteworthy details on how certain features are imple
 
 We are currently implementing a Match feature. In implements the following operation:
 
-* `match` —  Matches a Buyer to a List of Seller.
+* `match` —  Matches a Buyer to a List of Sellers.
 
-Format: `match buyer_index`
+Format: `match BUYER_INDEX`
 * The fields are:
-    * `buyer_index` - index of the Buyer that the user is trying to match with Sellers.
+    * `BUYER_INDEX` - index of the Buyer that the user is trying to match with Sellers.
     
 Example: `match 2`
     
 Result:
-* The list of sellers that match the buyer's demands are displayed in the UI.
+* The list of sellers that match the buyer's demands will be displayed in the UI.
 
 #### How match is going to be implemented
 
 * The match command will match a Buyer with Sellers whose `PropertyToSell` matches the demands of the `PropertyToBuy` of the buyer.
 
-* How does match filter the sellers (How does `PropertyToBuy` match with `PropertyToSell`:
+* How match filters the sellers (How `PropertyToBuy` matches with `PropertyToSell`:
 
     -  If there exists a **price** where a buyer is willing to buy and seller is willing to sell for in their respective `buyRange` and `sellRange`, **AND**
-    - Their House are equal (i.e, the Location and HouseType of the house matches)
+    - Their `House` are equal (i.e, the `Location` and `HouseType` of the house matches)
+        * The `Location` (case-insensitive) should be equal.
+        * The `HouseType` of the properties are equal, OR
+        * The buyer's `HouseType` is `UNSPECIFIED`, which means he is okay with any house type.
 
 * An example:
     - buyer's `PropertyToBuy`(after `edit-b` or `add-b`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
@@ -214,16 +220,15 @@ Result:
     
 #### Why match should be implemented
 
-* Our AgentSee application helps housing agents to keep track of their clients in an efficient manner.
-
+* Our AgentSee application helps housing agents to keep track of their clients efficiently.
 * Since there are so many buyers and sellers to keep track of, it would be useful for agents to automate the matching of buyers to sellers.
 * The match feature will help agents filter and find a matching property that a buyer wants to buy and a seller wants to sell, which is of great convenience for agents to liase buyers with sellers.
 * What buyers look for when buying a Property is its `Location`, `HouseType`, and they have a `PriceRange` they are willing to pay for. Therefore, we are implementing `match` such that these conditions are met.
 
-#### \[Proposed\]  Alternatives considered
+#### Matching to other fields
 
-* We can match buyers with other less strict conditions as well.
-* For example, we can match buyers and sellers with only match:
+* We can match buyers with other less strict conditions as well, in case a buyer just wants to take into account a specific criteria.
+* For example, we can match buyers and sellers with matching:
     - HouseTypes only (example: `COLONIA`, Since buyers may be looking only for a specific HouseType, regardless of Location)
     - Location only (example: `Toa Payoh`, Since some buyers may like to buy a Property at a specific area, regardless of other conditions)
     - PriceRange only (Since buyers may just be looking for properties in their buy range)
@@ -235,7 +240,7 @@ Result:
 * An additional feature that could be implemented in the future.
 
 ### Add Buyer feature
-The `add-b` command mechanism uses a similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
+The `add-b` command mechanism uses similar interactions as shown in the [Logic Component](#logic-component). Mainly, it can be broken down into these steps:
 
 **Step 1:**
 
@@ -399,87 +404,8 @@ It alters the internal list completely, so that the app 'saves' users last sorti
 **Cons:**
 Some people might not want the sorted result to be saved.
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Clear buyer list/Clear seller list
+### \[Proposed\] Clear buyer/seller list
 
 #### Proposed Implementation
 

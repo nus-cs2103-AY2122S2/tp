@@ -428,7 +428,7 @@ Function: Edit an existing seller's information in the displayed seller list.
 :bulb: **Caution:** This action **cannot be undone**! Be careful when changing your seller's information.
 </div>
 
-Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​[h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
+Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]… ​[h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
 * Edit the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * At least one of the optional inputs must be provided.
