@@ -167,6 +167,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Enhanced Person Object
 
+#### Rationale
+Person object needs to be enhanced to contain more relevant attributes to suit the target audiences.
+
+#### Implementation
 In the original add profile feature in the AB3 Address Book, all the `Person` objects are being stored in the `Unite`.
 
 Now in UNite, we are storying them in `Unite`.
@@ -193,7 +197,19 @@ This is a sample of the `Person` object diagram.
 
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
-<div style="page-break-after: always;"></div>
+#### Design Consideration 
+- **Alternative 1 (current choice):** <br> 
+The `Telegram`, `Course` and `MatricCard` classes are implemented as individual classes that are associated with `Person`. This is similar to how the inbuilt AB3 classes (ie `Name`, `Email`, `Address` ...) are implemented.
+    - Pros: Easy to implement
+    - Cons: Whenever you want to add more attributes you have to add in more fields in `Person` object.
+- **Alternative 2:** <br>
+Abstract school related classes such as `Email`, `Course` and `MatricCard` such that these classes are associated with a new class (ie `SchoolInfo` class). Each Person object will just have to store one or many `SchoolInfo` object as its field.
+    - Pros: Allow more complicated interactions. For example, we can now allow each `Person` object to store multiple `SchoolInfo` objects (each with a different `Email`, `MatricCard` and `Course`). This can simulate scenarios of students going to another university for exchange (hence having different `SchoolInfo`).
+    - Cons: A huge refactoring is needed to change the internal structure of `Person` object. Not reccomended.
+
+We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
+
+<div style="page-break-after: always;"></div> 
 
 ### Filter feature
 
@@ -233,8 +249,10 @@ The filter feature was implemented in such a way that it aligns with the format 
 <div style="page-break-after: always;"></div>
 
 ### Grab Command
-The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can copy the displayed data.
+#### Rationale
+The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can efficiently compile the needed data.
 
+#### Implementation
 There are two class related to grab features, they are `GrabCommand` and `GrabCommandParser`. Note the following relationship:
 * `GrabCommand` is a class extending `Command` class. The Command object will then be executed. Read [here](#logic-component) to understand how `Command` works.
 * `GrabCommandParser` is a class extending the `Parser` class, it is used to parse the command entered by user.
@@ -259,6 +277,18 @@ if there is no parse exception.
 Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, the attribute is being grabbed from the correct `Person` and returned to user.
 
 ![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Constraints on Input** <br>
+There are multiple constraints on the inputs allowed for this command. Here are our rationale why.
+
+- **Valid attributes include all attributes EXCEPT tag** <br>
+We decided to leave the grabbing of tag out because this function can already been done by another command (`list_tag`) in UNite. This command is way more powerful than the grab command in terms of tag manipulations.
+
+- **When tag exists, you cannot include index** <br>
+This constraints is put in placed to avoid uneccessary confusion for the users. By allowing users to key in index (when the tag is present), it may create confusion of whether this index refers to the index when all the `Person` are present in UNite, or the filtered list with this tag. <br>
+Hence, we avoided this potential confusion by imposing an additional constraint to this command.
+
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GrabCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
