@@ -22,7 +22,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Adding a client: `add`](#adding-a-client-add)
   - [Editing a client: `edit`](#editing-a-client-edit)
   - [Deleting a client: `delete`](#deleting-a-client-delete)
-  - [Favourite a client: `favourite`](#favourite-a-client-favourite)
+  - [Favourite a client: `favourite`](#favourite-or-unfavourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
   - [Finding clients by keyword: `find`](#finding-clients-by-keyword-find)
   - [Sorting clients: `sort`](#sorting-clients-sort)
@@ -213,7 +213,7 @@ Examples:
 **Note**:
 - Images associated with the client are not deleted and remains in the OS file system.
 
-### Favourite/Unfavourite a client: `favourite`
+### Favourite or Unfavourite a client: `favourite`
 
  Favourites the specified client in the RealEstatePro represented by a star as shown below.
 

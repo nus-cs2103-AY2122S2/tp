@@ -245,7 +245,7 @@ Step 5: The set of `UserImage` is then converted into an `ArrayList` and the fir
 ## Statistics feature/Window
 <img src="images/user-guide/Stats.png" height="400px">
 
-The `stats` opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
+The `stats` command opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
 This allows the user to be able to visualize his/her client's data to make better business decisions. (exp. Expand the user's influence in the most popular region for any potential sellers/buyers to contact him/her)
 
@@ -320,7 +320,7 @@ Manage Persons faster that a typical mouse/GUI driven app.
 | High | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
 | High | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
 | High | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High | User | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High | User | Favourite/Unfavourite a client                                                                                                                                                     | Separate clients based on whose information I frequent the most (favourited) and those that are not |
 | High | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
 | High | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
 | High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
@@ -550,7 +550,7 @@ Given below are instructions to test the app manually.
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) Expected: Similar to previous.
 
-## Favouriting a client
+## Favouriting/Unfavouriting a client
 
 1. Favouriting a client while all clients are being shown
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
