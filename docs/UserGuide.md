@@ -21,7 +21,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4/internbuddy.jar).
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4.0/internbuddy.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
