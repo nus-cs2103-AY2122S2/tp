@@ -630,18 +630,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing specific entries
 1. List people of a specific type.<br>
+
     1. Prerequisites: Currently on `People` view.
+
     2. Test case: `list type/professors`<br>
         Expected: All professors are listed.
+
     3. Test case: `list type/students`<br>
         Expected: All students are listed.
     
-2. List a module with a specific module code.<br>
+3. List a module with a specific module code.<br>
     1. Prerequisites: Currently on `Modules` view.
     2. Test case: `list m/CS2103`<br>
         Expected: The module with code `CS2103` is listed, if it exists.
        
-3. List group(s) with a specific meeting date.<br>
+4. List group(s) with a specific meeting date.<br>
    1. Prerequisites: Currently on `Groups` view.
    2. Test case: `list mt/2022-05-04`<br>
        Expected: Groups with meetings on `2022/05/04` are listed.
