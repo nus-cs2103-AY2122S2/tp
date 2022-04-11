@@ -271,7 +271,7 @@ Examples:
 * `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than `180`cm **and** weight that is
 greater than or equals to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
-is lesser than `213`cm **and** weight equals to 100kg **and** plays the position of `SG` or `SF`
+is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
 * ![viewPlayer](images/viewPlayer.png)
 
