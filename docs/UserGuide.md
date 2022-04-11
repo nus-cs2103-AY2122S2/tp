@@ -101,10 +101,10 @@ The table below explains the important technical terms to help you understand ho
 <!-- @@author -->
 
 **Example**:
-* `addc n/NAME p/PHONE a/ADDRESS e/EMAIL`
+* `addc n/NAME p/PHONE a/ADDRESS e/EMAIL rd/REGISTRATION_DATE`
 * Command Word: `addc`
-* Prefixes: `n/`, `p/`, `a/`, `e/`
-* Parameters: `NAME`, `PHONE`, `ADDRESS`, `EMAIL`
+* Prefixes: `n/`, `p/`, `a/`, `e/`, `rd/`
+* Parameters: `NAME`, `PHONE`, `ADDRESS`, `EMAIL`, `REGISTRATION_DATE`
 
 The commands in TrackBeau follows these rules:
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
