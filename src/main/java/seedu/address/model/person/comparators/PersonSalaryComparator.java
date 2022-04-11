@@ -18,4 +18,9 @@ public class PersonSalaryComparator extends PersonFlagComparator implements Comp
             return flagCompare;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof PersonSalaryComparator;
+    }
 }

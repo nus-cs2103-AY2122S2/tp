@@ -14,7 +14,7 @@ import seedu.address.model.person.comparators.PersonSalaryComparator;
 
 public class SortCommandParser implements Parser<SortCommand> {
 
-    enum SortArg {
+    public enum SortArg {
         MEETING,
         NAME,
         PREV,
