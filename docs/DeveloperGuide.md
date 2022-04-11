@@ -138,7 +138,7 @@ The diagram below shows a simplified view of the `Ui` component.
 
 `XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc.
 
-The UI consists of a `UiManager` that implements the Facade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow. 
+The UI consists of a `UiManager` that implements the Facade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow.
 
 By having `XXX_Ui` inherit from `UiComponent`, we allow nagivation from `XXX_Ui` to `MainWindow`. The navigation is helpful for some UI components that need to call methods in `UiManager`.
 
@@ -305,7 +305,7 @@ The API provided by `PopupHandler` are:
 
 The `showPopupXXX()` method in `PopupHandler` will make sure that at most one popup is showing at a time. This is to prevent overcrowding the user's screen.
 
-Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups. 
+Every popup is inherited from the `Popup` abstract class which contains the implementation of the common methods required in all popups.
 
 The methods in `Popup` are:
 * `show()` — Shows the popup window.
@@ -324,7 +324,7 @@ The following sequence diagram shows how a `Popup` is displayed once a button is
 
 `PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
-As seen from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly. 
+As seen from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly.
 
 This is to reduce coupling between the UI components by removing the dependency on `PopupHandler` to open a popup. Also, it avoids the issue of passing `PopupHandler` into a deeply nested UI component.
 
@@ -353,7 +353,7 @@ The `commandResult` will then be sent to `ResultWindow` for display and `PopupYY
 
 * **Alternative 2:** Create popup in UI components that require it.
   * Pros: Easy solution to reduce coupling.
-  * Cons: 
+  * Cons:
     1. Difficult to manage popups and to check whether the popups are currently showing.
     2. Two of the same popups can be opened at the same time.
 
@@ -361,7 +361,7 @@ The `commandResult` will then be sent to `ResultWindow` for display and `PopupYY
 
 * **Alternative 3 (current choice):** Create `PopupHandler` in `MainWindow` and provide method for all UI components to open a `Popup`.
   * Pros: Centralized control for popup and reduces coupling.
-  * Cons: 
+  * Cons:
     1. Increases complexity for `MainWindow`.
     2. Less efficient, as more function calls are required.
 
@@ -424,7 +424,7 @@ The updated filtered product list would then be displayed in the GUI.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` have the capability to do partial matching so the query given does not have to exactly match the actual product.  
+:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` have the capability to do partial matching so the query given does not have to exactly match the actual product.
 
 </div>
 
@@ -676,7 +676,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 2. IBook adds the product.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. Required fields are all present but are invalid.
@@ -728,7 +728,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 1. User requests to list products ([UC1](#uc1-listing-products)).
 2. User requests to update a product in the list specified by the index.
 3. IBook updates the product.
-   
+
    Use case ends.
 
 **Extensions**
@@ -794,7 +794,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 3. IBook adds the item to the product.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 2a. Required fields are all present but are invalid.
@@ -846,7 +846,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 1. User requests to list products ([UC1](#uc1-listing-products)).
 2. User requests to update an item in the list specified by the index.
 3. IBook updates the product.
-   
+
    Use case ends.
 
 **Extensions**
@@ -974,7 +974,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 1. User requests to undo the most recent command that made changes to iBook.
 2. IBook revert the most recent changes.
-   
+
    Use case ends.
 
 **Extensions**
@@ -991,7 +991,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 1. User requests to redo the most recent undone command that made changes to iBook.
 2. IBook restore the most recent undone changes.
-   
+
    Use case ends.
 
 **Extensions**
@@ -1144,18 +1144,18 @@ testers are expected to do more *exploratory* testing.
 ### Undo/redo changes
 
 1. Undo changes
-   
+
     **Prerequisites: There are existing products in the list. At least one command that makes changes to iBook (e.g. `add/update/delete`) have been performed.**
 
     1. Test case: `undo`<br>
-       Expected: The most recent change made to iBook is reverted. 
+       Expected: The most recent change made to iBook is reverted.
 
     2. Test case: `add n:new_product p:3.00` then `undo` <br>
        Expected: The `new_product` just added will be deleted.
 
     3. Test case: `undo haha`<br>
        Expected: Any additional input after the keyword `undo` will be ignored, as if this is a normal `undo` command.
-       
+
 2. Redo changes
 
     **Prerequisites: A `undo` command has just been successfully executed.**
@@ -1174,8 +1174,8 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    **Prerequisites: iBook is not currently running.**
-      
+
    1. Locate the data file of iBook at `[JAR file location]/data/ibook.json`.
-    
+
    2. Delete the file or replace the data in it with random garbage values. <br>
       Expected: The following launch of iBook will have no data.

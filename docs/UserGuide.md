@@ -36,14 +36,14 @@ title: User Guide
     border-color: #6DB0F0;
     background-color: #6DB0F020;
   }
-  
+
   .feature {
     padding: 30px 50px;
     margin: 30px;
     border-radius: 12px;
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
   }
-  
+
 </style>
 
 IBook is an inventory organizing system specially designed to manage products in a store.
@@ -52,10 +52,10 @@ IBook is an inventory organizing system specially designed to manage products in
 
 IBook's target users are small-scale grocery storekeepers who are having issues with product organization and keeping track of expiring items.
 
-We aim to help these storekeepers by 
+We aim to help these storekeepers by
 
 1. Simplifying the process of inventory organization.
-2. Minimizing groceries wastage due to unnoticed expiring of items. 
+2. Minimizing groceries wastage due to unnoticed expiring of items.
 
 <h2>Structure of This Document</h2>
 
@@ -87,13 +87,13 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 4. Type `java -jar ibook.jar` in a terminal in the same directory as the file to start it. Alternatively, double-click the file to start the app.
 
     If you are using macOS, please look at [FAQ](#5-faq) before proceeding.
-   
+
     An interface similar to the image below should appear in a few seconds.
-   
+
     ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press enter to execute it.
-  
+
     Some example commands you can try:
 
    * **`list`** : Lists all products.
@@ -116,7 +116,7 @@ Please read through this section before proceeding further to avoid getting conf
 
 #### 2.1 Text Style
 
-Text that appears in `this` style are special terms or commands related to iBook. 
+Text that appears in `this` style are special terms or commands related to iBook.
 
 #### 2.2 Special Boxes
 
@@ -162,7 +162,7 @@ The application window is divided into a Command Box, Result Window as well as a
 ![Ui-2](images/Ui-2.png)
 
 
-The main mode of navigation in iBook is through the Command-line Interface (CLI). 
+The main mode of navigation in iBook is through the Command-line Interface (CLI).
 
 You can type in commands into the command box and press enter on your keyboard to execute them.
 
@@ -185,14 +185,14 @@ Each command will be described in the following format.
       <tr>
         <td>Compulsory Fields</td>
         <td>
-          <code class="language-plaintext highlighter-rouge">XXX</code>, 
+          <code class="language-plaintext highlighter-rouge">XXX</code>,
           <code class="language-plaintext highlighter-rouge">YYY</code>
         </td>
       </tr>
       <tr>
         <td>Optional Fields</td>
         <td>
-          <code class="language-plaintext highlighter-rouge">AAA</code>, 
+          <code class="language-plaintext highlighter-rouge">AAA</code>,
           <code class="language-plaintext highlighter-rouge">BBB</code>
         </td>
       </tr>
@@ -237,13 +237,13 @@ As most of the commands revolve around products and items. We advise you to take
 
 * **Inputs separated by a vertical bar (`|`) inside brackets denote that either one of them can be provided, *but not both*.**<br><br>
   e.g. if the command specifies `[p:PRICE | sp:START_PRICE ep:END_PRICE]`, then an empty input, `p:2.00`, and `sp:1.00 ep:5.00` are all acceptable. However, `p:2.00 sp:1.00 ep:5.00` is not accepted.
-  
+
 * **Inputs of a command can be in any order.**<br><br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
 * **Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.**<br><br>
   e.g. the command `exit 123` will be interpreted as `exit`.
-  
+
 * **If two inputs of the same tag are given, the latter will be taken.**<br><br>
   e.g. the command `add n:Maggie Curry n:Maggie Chicken p:3.00 p:3.50` will add a product with the name `Maggie Chicken` and with a price of `3.50`.
 
@@ -288,7 +288,7 @@ Shows the list of all products in iBook.
 
 Format: `list`
 
-| Compulsory Fields | | 
+| Compulsory Fields | |
 | Optional Fields   | |
 
 * All products will be listed on the main table.
@@ -308,7 +308,7 @@ Adds a new product to iBook.
 
 Format: `add n:NAME p:PRICE [c:CATEGORY] [d:DESCRIPTION] [dr:DISCOUNT_RATE] [ds:DISCOUNT_START]`
 
-| Compulsory Fields | `NAME`, `PRICE`                                              | 
+| Compulsory Fields | `NAME`, `PRICE`                                              |
 | Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
 
 * Only a single product would be added at a time.
@@ -324,7 +324,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-<h5>GUI Alternative</h5> 
+<h5>GUI Alternative</h5>
 
 Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button above the table to add a new product.
 
@@ -332,7 +332,7 @@ A pop-up window similar to the image shown next will appear.
 
 ![Ui](images/popup-add-product.png)
 
-You can now fill in the name and the price. Optionally, you can also fill in the category, description, discount rate and discount start. 
+You can now fill in the name and the price. Optionally, you can also fill in the category, description, discount rate and discount start.
 
 <div markdown="block" class="alert alert-info">
 
@@ -340,8 +340,8 @@ You can now fill in the name and the price. Optionally, you can also fill in the
 
 </div>
 
-After filling in the required fields, click 
-<img align="center" src = "images/ui-icons/add-icon.png" alt="Add" height = "25"/> to add a new product. 
+After filling in the required fields, click
+<img align="center" src = "images/ui-icons/add-icon.png" alt="Add" height = "25"/> to add a new product.
 
 <div style="page-break-after: always;"></div>
 
@@ -353,10 +353,10 @@ Format: `update INDEX [TAG:NEW_VALUE ...]`
 
 Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE] [d:DESCRIPTION] [dr:DISCOUNT_RATE] [ds:DISCOUNT_START]`
 
-| Compulsory Fields | `INDEX`, Must provide at least one of the optional fields                      | 
+| Compulsory Fields | `INDEX`, Must provide at least one of the optional fields                      |
 | Optional Fields   | `NAME`, `CATEGORY`, `PRICE`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START`  |
 
-* The index refers to the index of a product as shown in the table. 
+* The index refers to the index of a product as shown in the table.
 * The index must be **a positive integer** (1, 2, 3, …).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the new values.
@@ -379,7 +379,7 @@ A pop-up window similar to the image shown next will appear
 
 You can now change the details of the product.
 
-After finishing updating the details, click 
+After finishing updating the details, click
 <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the product.
 
 <div style="page-break-after: always;"></div>
@@ -390,7 +390,7 @@ Deletes the product at a specified `INDEX`.
 
 Format: `delete INDEX`
 
-| Compulsory Fields | `INDEX` | 
+| Compulsory Fields | `INDEX` |
 | Optional Fields   |         |
 
 * The index refers to the index of a product as shown in the table.
@@ -399,13 +399,13 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd product in the iBook.
 
-<h5>GUI Alternative</h5> 
+<h5>GUI Alternative</h5>
 
 ![Product Card](images/product-card.png)
 
 Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete" height = "25"/> on the right side of any product to delete the product.
 
-A pop-up window similar to the image below will appear. 
+A pop-up window similar to the image below will appear.
 
 ![Ui](images/popup-delete-product.png)
 
@@ -421,7 +421,7 @@ Format: `find [TAG:VALUE ...]`
 
 Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE | sp:START_PRICE ep:END_PRICE] [d:DESCRIPTION]`
 
-| Compulsory Fields |  Must provide at least one of the optional fields                          | 
+| Compulsory Fields |  Must provide at least one of the optional fields                          |
 | Optional Fields   | `NAME`, `CATEGORY`, `PRICE` or (`START_PRICE` `END_PRICE`), `DESCRIPTION` |
 
 * For the name, category and description fields, the value provided can be a partial match of the exact product.
@@ -461,12 +461,12 @@ Lists products that are out of stock.
 
 Format: `out-of-stock`
 
-| Compulsory Fields | | 
+| Compulsory Fields | |
 | Optional Fields   | |
 
 * A product is considered out of stock if it does not have an item
 
-<h5>GUI Alternative</h5> 
+<h5>GUI Alternative</h5>
 
 On the menu bar, select `Actions` > `Find Out of Stock products`.
 
@@ -544,7 +544,7 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button beside the product to add a new item.
 
-A pop-up window similar to the image below will appear. 
+A pop-up window similar to the image below will appear.
 
 ![Ui](images/popup-add-item.png)
 
@@ -592,7 +592,7 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
 
-A pop-up window similar to the image below will appear. 
+A pop-up window similar to the image below will appear.
 
 ![Ui](images/popup-modify-item.png)
 
@@ -633,7 +633,7 @@ Examples:
 
 Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item.
 
-A pop-up window similar to the image below will appear. 
+A pop-up window similar to the image below will appear.
 
 ![Ui](images/popup-modify-item.png)
 
@@ -647,12 +647,12 @@ Finds expired items.
 
 Format: `expired`
 
-| Compulsory Fields | | 
+| Compulsory Fields | |
 | Optional Fields   | |
 
 * Products that do not contain expired items will not be shown.
 
-<h5>GUI Alternative</h5> 
+<h5>GUI Alternative</h5>
 
 On the menu bar, select `Actions` > `Find expired`.
 
@@ -668,7 +668,7 @@ Lists items that are expiring within a certain number of days.
 
 Format: `remind NUMBER_OF_DAYS`
 
-| Compulsory Fields | `NUMBER_OF_DAYS` | 
+| Compulsory Fields | `NUMBER_OF_DAYS` |
 | Optional Fields   |                  |
 
 * `NUMBER_OF_DAYS` **must be a non-negative integer** (0, 1, 2, 3, …).
@@ -692,7 +692,7 @@ Clears all data in iBook.
 
 Format: `clear`
 
-| Compulsory Fields |  | 
+| Compulsory Fields |  |
 | Optional Fields   |  |
 
 * This command will clear all the data in iBook
@@ -720,7 +720,7 @@ Undoes the most recent changes made to iBook.
 
 Format: `undo`
 
-| Compulsory Fields |  | 
+| Compulsory Fields |  |
 | Optional Fields   |  |
 
 <div markdown="block" class="alert alert-info">
@@ -741,7 +741,7 @@ Redoes the most recently undone changes made to iBook.
 
 Format: `redo`
 
-| Compulsory Fields |  | 
+| Compulsory Fields |  |
 | Optional Fields   |  |
 
 <div markdown="block" class="alert alert-primary">
@@ -758,7 +758,7 @@ Exits iBook.
 
 Format: `exit`
 
-| Compulsory Fields |  | 
+| Compulsory Fields |  |
 | Optional Fields   |  |
 
 <div markdown="block" class="alert alert-info">
@@ -785,7 +785,7 @@ iBook's data are saved in the hard disk automatically after any command that cha
 
 ### 4.2 Editing the data file
 
-iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json` and `[JAR file location]/preferences.json`. 
+iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json` and `[JAR file location]/preferences.json`.
 
 * `[JAR file location]/data/ibook.json` stores data related to `product` and `item`.
 * `[JAR file location]/preferences.json` stores data related to the position and the size of the iBook.
@@ -806,7 +806,7 @@ If your changes to the data file make it invalid, iBook will discard all data an
 **A**: You might be having an issue with untrusted developers, please type `java -jar ibook.jar` in a terminal to start the application.
 
 **Q**: Why can't I find the data and preferences file when I open the application in macOS?<br>
-**A**: This is a bug related to the macOS default `JavaLauncher`. The issue will occur when you use double-click to start iBook. To fix this problem, please type `java -jar ibook.jar` in a terminal to start the application. 
+**A**: This is a bug related to the macOS default `JavaLauncher`. The issue will occur when you use double-click to start iBook. To fix this problem, please type `java -jar ibook.jar` in a terminal to start the application.
 
 **Q**: Can I use iBook with full-screen mode in macOS?<br>
 **A**: Unfortunately, due to a limitation of the GUI library, iBook does not perform well with full-screen mode in macOS. Nevertheless, you can work around this issue by double-clicking on the title bar. IBook will then automatically resize to fill the screen.
