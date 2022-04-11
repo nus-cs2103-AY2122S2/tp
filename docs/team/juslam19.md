@@ -50,9 +50,9 @@ Given below are my contributions to the project.
 * **Contributions to Team-Based Tasks:**
   * Contributed to product concept brainstorming.
   * Contributed to brainstorming of user stories.
-  * Contributed to adapting of AB3 UG to the MedBook product (no traces of AB3 left).
+  * Contributed to adapting of AB3 UG to the MedBook product.
   * Contributed to the updating of AB3 DG sections (product scope, user stories, use cases, NFRs, etc.) to the MedBook product.
-  * Attended weekly meetings, implemented teammates' comments.
+  * Attended most meetings, implemented teammates' comments.
 
 * **Review/mentoring Contributions:**
   * Provide reviews and comments to PR made by teammates.
