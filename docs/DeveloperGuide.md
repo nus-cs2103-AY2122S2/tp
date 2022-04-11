@@ -606,6 +606,22 @@ Batch update depends on the `Model` and `Person` class and methods to implement 
         * Would pose as a potential feature flaw for `AddPerson` in the context of UDT. Since the priority is to ensure
         that the `Status` of each student is update efficiently.
 
+**Aspect: Deleting an existing Person with a `Status` of `Positive` or `Negative`**
+
+* **Alternative 1 (current choice):** Check **ALL** students in the same class as the deleted Person.
+    * Pros:
+        * Efficiently update all the students' status information with the same logic from `findclasscode` and
+          `findactivity` where similar filtering process is used.
+    * Cons:
+        * Perform more checks which may slow down the application.
+* **Alternative 2:** Only delete the existing student without updating the status of other students.
+    * Pros:
+        * Does not perform an extra layer of checks which may improve the speed of the application.
+    * Cons:
+        * Would pose as a potential feature flaw for `DeletePerson` in the context of UDT. Since the priority is to ensure
+          that the `Status` of each student is update efficiently.
+
+
 
 #### Implementation
 
