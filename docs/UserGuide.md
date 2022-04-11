@@ -118,8 +118,8 @@ Add a recipe by specifying its name, ingredients, and steps to prepare the dish.
 Usage: `add -n <name of recipe> -d <completion time of recipe in minutes (max: 525600 mins)> -ss <serving size of recipe (max: 1000 servings)> -i <ingredients of recipes separated by pipe> -s <steps separated by pipe> [-t tags associated with recipe]`
 
 <div markdown="block" class="alert alert-info">
-:information_source: Ingredients must be added in the format: Name Quantity [Quantifier] <br>
 :information_source: Ingredients, steps, and tags can be separated by pipe. <br>
+:heavy_exclamation_mark: Ingredients must be added in the format: Name Quantity [Quantifier] <br>
 :heavy_exclamation_mark: Ingredient names should only contain letters. <br>
 :heavy_exclamation_mark: It is compulsory to specify the quantity of each ingredient that is to be added to the recipe. <br>
 :heavy_exclamation_mark: Tags should not contain any special characters. 
