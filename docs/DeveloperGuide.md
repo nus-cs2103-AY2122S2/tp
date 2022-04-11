@@ -927,9 +927,9 @@ testers are expected to do more *exploratory* testing.
       2. Test case ii: Click on the 'Yes' button to confirm data deletion. <br>
          Expected: All data gets deleted from the application.
 
-1. Clearing all meetings
+2. Clearing all meetings
 
-  1. Prerequisites: Have at least one meeting stored in the application
+  1. Prerequisites: Have at least one meeting stored in the application.
 
   2. Test case: `cancel-all` <br>
      Expected: A confirmation window appears.
@@ -940,9 +940,25 @@ testers are expected to do more *exploratory* testing.
 
 ### 8.7 Finding
 
-### 8.8 List
+### 8.8 Listing all contacts
+
+1. Listing all contacts
+    1. Prerequisites: Issue a successful find command, as detailed [above](#87-finding).
+       
+    2. Test case: `list` <br>
+        Expected: The contact list displays all contacts.
+    3. Test case: `list asdf` <br>
+        Expected: No change occurs and no error is displayed.
 
 ### 8.9 View
+
+1. Viewing a contact
+    1. Prerequisites:Have at least one contact stored in the application.
+       
+    2. Test case: `view 1` <br>
+       Expected: You are navigated to the Contact Details Page for the contact at index 1.
+    3. Test case: Return to the Home Page by entering `back`. Then, enter `view <x>`, where `<x>` is greater than the largest index in the contact list. <br>
+       Expected: You are not navigated to the Contact Details Page and an error message is shown in the Result Display.
 
 ### 8.10 Back
 
