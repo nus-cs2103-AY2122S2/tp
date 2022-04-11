@@ -60,7 +60,7 @@ only packages that existing people in ClientConnect have.
 
 
 * Items in square brackets are **optional**.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/important` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/important` or as `n/John Doe`.
 
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -85,9 +85,6 @@ only packages that existing people in ClientConnect have.
 * The priority level of a tag is indicated along with the tag name when you input the `TAG` parameter in commands. To indicate the priority level, simply follow the tag name by typing ` :p[1/2/3/4]` after the tag name.
 * For example, `owes money` would create a tag with tag name "owes money", and no priority level.
 * However, `owes money :p3` would create a tag with tag name "owes money", and priority level 3.
-
-
-**Notes about the insurance packages:**<br>
 
 ### **General commands**
 
@@ -127,7 +124,7 @@ After adding:
 Notes:
 * Any tags are optional.
 * Email domain must contain only **one period** and minimally ends with 2 letters: 
-  e.g jackson5@example.com is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
+  e.g. jackson5@example.com is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
 * For the insurance package indicated in the `i/` field, if an existing package with the same name does not 
   exist, a new one will be automatically created for you.
 
@@ -180,7 +177,7 @@ Fields:
 * `t/`: tags
 
 Notes:
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The fields described above can be searched
 * It is possible to search for multiple fields, and the order of the fields does not matter.
@@ -353,7 +350,7 @@ After adding:
 Notes:
 * Adds tag to the person at the specified `INDEX`.
 * Only one tag can be added at a time.
-* Duplicate tags (same tagname and priority level) cannot be added
+* Duplicate tags (same tag name and priority level) cannot be added
 
 ------------------------------------------------------------------------------------
 #### Editing a tag of a person: `editTag`
@@ -376,7 +373,7 @@ Notes:
 * Edits person at the specified `INDEX`.
 * Edits person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be edited at a time.
-* The edited tag cannot have a duplicate tag (same tagname and priority level) in the existing tag list.
+* The edited tag cannot have a duplicate tag (same tag name and priority level) in the existing tag list.
 
 ------------------------------------------------------------------------------------
 #### Deleting a tag of a person: `deleteTag`
