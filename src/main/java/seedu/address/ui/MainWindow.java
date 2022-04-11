@@ -193,9 +193,11 @@ public class MainWindow extends UiPart<Stage> {
         if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
             focusListPanelPlaceholder.getChildren().remove(0);
         }
+
         Candidate candidate = logic.getFilteredCandidateList().get(commandResult.getIndexFocus());
         Interview interview = null;
-        for (Interview i: logic.getFilteredInterviewSchedule()) {
+
+        for (Interview i: logic.getInterviewSchedule().getInterviewList()) {
             if (i.getCandidate().isSameCandidate(candidate)) {
                 interview = i;
                 break;
