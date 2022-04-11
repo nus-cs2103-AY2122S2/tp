@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes Search command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user enters invalid input])
+    :Error message to user signifying issue ;
+else ([else])
+    if () then ([no applicant contains the attribute and prefix specified])
+    :Display to user no applicant found;
+    else ([else])
+    :Display to user applicant(s) that match the attribute;
+endif
+endif
+
+stop
+@enduml

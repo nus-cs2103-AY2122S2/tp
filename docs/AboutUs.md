@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Zhang Zhikai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zzhikai.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zzhikai)]
+[[portfolio](team/zzhikai.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Code quality + Integration
 
-### Johnny Doe
+### Goel Akshit
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/goel-a.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/goel-a)]
+[[portfolio](team/goel-a.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality + Deliverables & Deadlines
 
-### James Doe
+### Ryan Cheung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ryancheungjf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RyanCheungJF)]
+[[portfolio](team/ryancheungjf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation + Scheduling
+
+### Chen Kai Yi
+
+<img src="images/kaiyichen.png" width="200px">
+
+[[github](https://github.com/kaiyichen)]
+[[portfolio](team/kaiyichen.md)]
+
+* Role: Developer
+* Responsibilities: Documentation + Deliverables and deadlines
+
+### Ryan Tan Li En
+
+<img src="images/ryantanlien.png" width="200px">
+
+[[github](http://github.com/ryantanlien)]
+[[portfolio](team/ryantanlien.md)]
+
+* Role: Developer
+* Responsibilities: Testing + Integration
