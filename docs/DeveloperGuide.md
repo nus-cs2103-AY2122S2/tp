@@ -25,7 +25,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -74,7 +74,7 @@ Several user commands also involve the display and creation of `XYZWindows` (`ma
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -102,13 +102,12 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/developer-guide/RealEstateProModel.png" width="800px" height="800px">
 
 
 The `Model` component,
-
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
 * stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes.
@@ -116,18 +115,12 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/developer-guide/RealEstateProStorage.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -170,7 +163,7 @@ The `help` command and selecting help from the dropdown opens the `helpwindow`.
 
 The contents of `helpPanePlaceHolder` is then replaced according to which tab
 that the user has selected to view more details about a specific feature or general features
-of Realestatepro
+of RealEstatePro
 
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
@@ -506,7 +499,42 @@ Given below are instructions to test the app manually.
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
 
-## Favoriting a client
+## Favouriting a client
+
+1. Favouriting a client while all clients are being shown
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    2. Test case: `favourite 1`<br>Expected: First client is favourited, thus a 🌟 shows for the client. The result display will show that the first client is successfully favourited.
+    3. Test case: `favourite 0`<br>Expected: No client is favourited. Error details shown in the result display. List remains the same.
+    4. Other incorrect favourite commands to try: `favourite`, `favourite x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+2. Unfavouriting a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. Make sure there is at least 1 client that has already been favourited.
+   2. Test case: `favourite 3` where the 3rd client in the listing has been favourited. <br>Expected: Third client is unfavourited, thus removing the 🌟. The result display will show that the third client is successfully unfavourited.
+
+## Opening Favourites window
+
+1. Open Favourites window by command
+   1. Test case: `fw`<br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
+
+
+2. Open Favourites window by UI
+   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Favourites`. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
+
+
+3. Open Favourites window by key
+   1. Test case: Press on `F3` key on your device. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
+
+## Opening Statistics window
+
+1. Open Statistics window by command
+   1. Test case: `stats`<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
+
+
+2. Open Statistics window by UI
+   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Stats`.<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
+
+
+3. Open Statistics window by key
+   1. Test case: Press on `F2` key on your device. <br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
 ## Finding a client
 
@@ -553,6 +581,6 @@ Challenges faced were the following:
 We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work.
 
 ## Achievements
-RealEstatePro has been developed to become a fully functioning app that is fully capable fo fufilling the needs of a real estate agent in organising clients and is capable of
+RealEstatePro has been developed to become a fully functioning app that is capable of fulfilling the needs of a real estate agent in organising clients and is capable of
 managing the different types of information that a real estate agent will need about a client.
-RealEstatePro also boasts a range of tools that would improve the efficiency of the real estate agent by providing tools such as reminders and matching of clients which makes it easier identify trends and fulfill the needs of clients.
+RealEstatePro also boasts a range of tools that would improve the efficiency of the real estate agent by providing tools such as reminders and matching of clients which makes it easier to identify trends and fulfill the needs of clients.
