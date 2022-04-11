@@ -139,6 +139,7 @@ The `Model` component,
 * stores the TAlent Assistant™'s data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
 * stores the currently 'selected' `Candidate` objects (e.g., results of a `find` or `sort` query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Candidate>` that can be 'observed' e.g. the UI can be bounded to this list so that the UI automatically updates when the data in the list change.
 * stores Candidates' `Interview` objects (which are contained in a `UniqueInterviewList` object).
+* stores the currently 'selected' `Interview` objects as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Interview>` that can be 'observed' e.g. the UI can be bounded to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -210,7 +211,7 @@ The following activity diagram summarizes what happens when a user executes an `
 #### What is the feature about?
 
 This feature implements a tagging system attached to the Candidate's profile in our Application. This way, our user can
-easily see which candidates are `accepted`, `rejected`, or `pending`. This will help enhance user experience when using our application.
+easily see which candidates are `Accepted`, `Rejected`, or `Pending`. This will help enhance user experience when using our application.
 
 #### How is the feature implemented?
 
@@ -327,7 +328,7 @@ by the user, and execute the `ContainsKeywordsPredicate` test against it. An alt
 `ATTRIBUTE_FIELDS`. Though this is easily implementable by checking the validity of each of the `ATTRIBUTE_FIELD` parsed in,
 it is not very relevant for the nature of the application's use. Given as all the fields hold extremely different values,
 the user is unlikely to be searching for the same set of keywords across multiple fields. Instead, following the behaviour
-of other commands, the `FindCommandParser` will take in the last `/f` prefix.
+of other commands, the `FindCommandParser` will take in the last `f/` prefix.
 
 #### UML Diagrams
 **Activity Diagram**<br>
