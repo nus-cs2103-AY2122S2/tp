@@ -915,7 +915,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 **Extensions**
 
 * 1a. Number of days is invalid.
-		
+
     * 1a1. IBook show an error message.
 
       Use case ends.
