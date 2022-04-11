@@ -48,7 +48,7 @@ the interview scheduling process of candidates applying to be undergraduate Teac
   * **Project management**:
     * Managed GitHub issues/deadlines whenever/wherever necessary.
     * Managed release of v1.3.trial on GitHub.
-    * Authored 47 PRs and reviewed 75 PRs.
+    * Authored 37 PRs and reviewed 75 PRs.
 
 * #### Review/mentoring contributions:
   * **PR reviews/discussion threads involving non-trivial comments/suggestions**:
