@@ -9,7 +9,7 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
