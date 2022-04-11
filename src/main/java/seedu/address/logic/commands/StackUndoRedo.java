@@ -29,6 +29,7 @@ public class StackUndoRedo {
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
     public void push(Command command) {
+
         if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
             redoStack.clear();
         }
