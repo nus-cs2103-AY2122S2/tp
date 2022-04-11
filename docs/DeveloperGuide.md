@@ -2,8 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +36,7 @@ Find out more on the structure and architecture of **Tracey** in this section.
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
@@ -118,7 +119,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -145,7 +149,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -251,9 +257,13 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
 
-:information_source: **Note** Replace `NEW_PERSON_TAGS` in the sequence diagram with the tags stated in the notes shown in the sequence diagram.
+:information_source: **Note**<br>
+
+* The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* Replace `NEW_PERSON_TAGS` in the sequence diagram with the tags stated in the notes shown in the sequence diagram.
+
 </div>
 
 When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
@@ -300,7 +310,7 @@ Following this, `LogicManager` will call the `execute()` method of the `DeleteCo
 
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
 
-#### What is the sumamrise feature
+#### What is the summarise feature
 
 The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
 Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
@@ -327,7 +337,9 @@ The above class diagram shows the structure of the Summarise Command and its ass
 
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -348,7 +360,7 @@ of covid cases in that hall. Then, `filterByBlock` method is then called on the 
 At the same time, `summariseFaculty` will stored the highest number of covid cases amongst the faculties in `highestPositiveByFaculty`.
 
 Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
-A pop up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+A pop-up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
 
 
 ### Pie Chart Window feature
@@ -534,14 +546,14 @@ The command `edit 2 e/john123@gmail.com` still works and the new `Email` value f
 
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-####**Path Execution of Edit Feature Activity Diagram is shown below:**
+#### **Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-
-####**Class Diagram of Edit Feature is shown below**
+  
+#### **Class Diagram of Edit Feature is shown below**
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
 
@@ -560,11 +572,14 @@ Additionally, there are a few final static messages to be displayed to the user 
 4. `MESSAGE_SAME_INPUT`:
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
+  
+#### **Sequence Diagram of Edit Feature is shown below:**
 
-####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `EditCommand` should end at the destroy marker (X) but due to limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -833,7 +848,9 @@ Step 4. The user then decides that the initial delete was not a mistake, and dec
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo. Similarly, if `redo` is called as the first command or in succession, `personsOriginal` will be null. The `redo` command uses `Model#checkOriginal()` to check if this is the case and will also throw an error if so.
 
 </div>
@@ -853,7 +870,9 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -861,7 +880,9 @@ The following sequence diagram shows how the redo operation works:
 
 ![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -905,25 +926,27 @@ subdirectories will be saved as `ROOT/data/DATE` and the archived file path is `
 The address book file will then be copied over to this dummy file at the archived file path using `Files#copy()`.
 
 Below are links for implementation of the classes and its methods:
-* [`FileUtil`](../src/main/java/seedu/address/commons/util/FileUtil.java)
-* [`ArchiveCommand`](../src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
+* [`FileUtil`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/commons/util/FileUtil.java)
+* [`ArchiveCommand`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-####**Class Diagram of Archive Feature is shown below:**
+#### **Class Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-####**Path Execution of Archive Feature Activity Diagram is shown below:**
+#### **Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
-####**Sequence Diagram of Archive Feature is shown below:**
+#### **Sequence Diagram of Archive Feature is shown below:**
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -946,23 +969,25 @@ The `resize` command is as follows:
 
 This feature provides the user with three different resizing options to choose from, which are `1`, `2` and `3` with each number being a multiplier of the default result display window size (1 being the default size).
 
-**Class Diagram of Resize Feature is shown below:**
+#### **Class Diagram of Resize Feature is shown below:**
 ![ResizeFeatureClassDiagram](images/ResizeCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ResizeCommand`. As per any `Command` class, `ResizeCommand` needs to extend the abstract class `Command`.
 
-**Path Execution of Resize Feature Activity Diagram is shown below:**
+#### **Path Execution of Resize Feature Activity Diagram is shown below:**
 ![ResizeFeatureActivityDiagram](images/ResizeFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a `ParseException` will be thrown, else the result
 display window in the GUI is resized according to the user's option. A success message is then displayed to the user.
 
-**Sequence Diagram of Resize Feature is shown below:**
+#### **Sequence Diagram of Resize Feature is shown below:**
 ![ResizeFeatureSequenceDiagram](images/ResizeFeatureSequenceDiagram.png)
 
 The above figure illustrates the important interactions of `ResizeCommand` when the user successfully resizes the result display window.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ResizeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `ResizeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -1226,8 +1251,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to summarise all students to get how the hall is doing with covid
-2.  Tracey shows a pop-up window of pie charts representing the covid situation in each hall block
+1.  User requests to summarise all students to get how the hall is doing with covid.
+2.  Tracey shows a pop-up window of pie charts representing the covid situation in each hall block.
 
     Use case ends.
 
@@ -1236,6 +1261,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There is no data in database for Tracey to form a helpful response.
 
   Use case ends.
+
+### Use case: UC11 - Resizing the result window display in the GUI of the application
+
+**MSS**
+
+1.  User requests to resize the result display window.
+2.  Tracey will resize the result display window in the GUI according to the option supplied by the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User keys in invalid resizing option.
+
+  Use case ends.
+
+### Use case: UC12 - Saving the working database file for archival purposes
+
+**MSS**
+
+1.  User requests save the current working database file.
+2.  Tracey will save the current working database file at a specified file path.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The working database file is not present.
+  * 1a1. There is no file to copy from.
+
+  Use case ends.
+
+* 1b. There is already an archived file with the same specified name
+  * 1b1. This archived file is replaced with a new archived file.
+
+  Use case ends.
+
+### Use case: UC13 - Exiting from the Tracey application
+
+**MSS**
+
+1.  User requests to exit from the application.
+2.  Tracey will close the application.
+
+    Use case ends.
+
+### Use case: UC14 - Undoing a previous command
+
+**MSS**
+
+1.  User requests to undo the previous command that was made.
+2.  Tracey will undo the previous command and restore any previous changes.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The previous command used cannot be undone.
+    * 1a1. Tracey will display a message which states that there are no previous changes to be undone.
+
+  Use case ends.
+
+### Use case: UC15 - Redoing a undo command
+
+**MSS**
+
+1.  User requests to redo an undo command that was made on another previous command.
+2.  Tracey will revert any changes made by the undo command on another previous command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not use the undo command before using the redo command.
+    * 1a1. Tracey will display a message which states that there are no previous changes to be reverted.
+
+  Use case ends.
+
+### Use case: UC16 - Getting the email of students
+
+**MSS**
+
+1.  User requests to get the email of the students.
+2.  Tracey will copy all the email of the students to the user's clipboard. 
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1402,12 +1513,110 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files when the application is close.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. prerequisites: Multiple persons in the list. The Tracey application is not open. There is a file named `addressbook.json` in ROOT/data, if it is not present, simply launch the Tracey application, input `list` (which will create the `addressbook.json` file) and close the application.
+    
+    2. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Launch the Tracey application. Ensure that the changes are saved before launching.<br>
+       Expected: There is no contacts rendered in the list.
 
+    3. Other test cases to try: Instead of changing the contact's attributes that require uniqueness, you can change other different attributes to the wrong format, such as putting a special character for the `Name` attribute.
 
-1. _{ more test cases …​ }_
+2. Dealing with missing/corrupted data files when the application is open.
+
+    1. prerequisites: Multiple persons in the list. The Tracey application is open. There is a file named `addressbook.json` in ROOT/data, if it is not present, input `list` (which will create the `addressbook.json` file).   
+
+    2. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
+       Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
+
+### Editing a person
+
+1. Editing a person while all person are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. 
+
+    2. Test case: `edit 1 n/Poppy doopy`<br>
+       Expected: First contact `name` is changed to Poppy doopy. This contact is placed at the bottom of the list, index of all other contacts is incremented by one. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.  
+    
+    3. Test case: `edit -1 n/Poppy doopy`<br>
+       Expected: No person's details is edited. Error details is shown in the status message. Status bar remains the same.
+
+    4. Test case: Use the same value for the edited field, that is if contact at 2nd index has `Phone` of 123456, test using `edit 2 p/123456`<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
+
+    5. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
+
+    6. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
+
+### Archiving the database
+
+1. Saving the working copy of the Tracey database
+
+    1. Prerequisites: Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. 
+
+    2. Test case: `archive`<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+    
+2. Manually inspecting the archived file of a working database file
+
+    1. Prerequisites: Successful use of `archive` on a working database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
+
+    2. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
+       Expected: The contents of both files is exactly the same.
+
+3. Saving a corrupted copy of the Tracey database
+
+    1. Prerequisites: Multiple persons in the list. Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. The Tracey application is open.
+
+    2. Test case: Open the `addressbook.json` file in ROOT/data and amend the first contact's `Name` to include a special character. Input the `archive` command.<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+
+4. Manually inspecting the archived file of a working database file
+
+   1. Prerequisites: Successful use of `archive` on a corrupted database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
+
+   2. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
+      Expected: The contents of `addressbook.json` is of the previous working state while the archived file is of the same content as the corrupted database file.
+
+5. Attempting to archive a non-existent Tracey database
+
+   1. Prerequisites: Ensure that there is no file named `addressbook.json` inside the directory ROOT/data.
+    
+   2. Test case: `archive`<br>
+      Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+
+6. Inputting extra parameters 
+
+    1. Prerequisites: None
+
+    2. Test case: `archive x`(where x = any value)<br>
+       Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+
+### Resizing the result display window
+
+1. Using the command line to resize
+
+   1. Prerequisites: The result display window is in its default size (option 1)
+   
+   2. Test case: `resize x`(where x = 1, 2 or 3)<br>
+      Expected: The result display window will be resized according to `x` where the value of `x` is the multiplier to the default size. The result display window will remain the same size if the window size is already at `x`. used Timestamp in the status bar is updated.
+    
+   3. Test case: `resize x`(where x = any value other than 1, 2 or 3)<br>
+      Expected: The result display window will not be resized. Error details shown in the status message. Status bar remains the same.
+
+2. Using the button in the GUI to resize
+
+   1. Prerequisites: The result display window is in its default size (option 1) 
+
+   2. Test case: Click on the `Resize Display` button once<br>
+      Expected: The size of the resize window display will be doubled with respects to the default size.
+
+   3. Test case: Click on the `Resize Display` button once again<br>
+      Expected: The size of the resize window display will be tripled with respects to the default size.
+   
+   4. Test case: Click on the `Resize Display` button once again<br>
+      Expected: The size of the resize window display will return to the default size.
 
 ## **Appendix: Effort**
 
