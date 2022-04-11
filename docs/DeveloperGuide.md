@@ -617,21 +617,21 @@ If a tutor has many students, it may be difficult to keep track of all of the st
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                           | So that I can…​                                              |
-|----------|--------------------|--------------------------------------------------------|--------------------------------------------------------------|
-| `* * *`  | user               | add my student's information                           | keep track of their information                              |
-| `* * *`  | user               | edit my student's information.                         | keep their information up-to-date                            |
-| `* * *`  | user               | delete students and their details                      | reduce clutter of old students and keep their privacy intact |
-| `* * *`  | user               | add lessons to the list                                | keep track of lesson schedule                                |
-| `* * *`  | user               | edit lessons                                           | keep my schedule up-to-date                                  |
-| `* * *`  | user               | delete lessons                                         | clear old lessons                                            |
-| `* * *`  | user               | assign students to the lesson                          | track which students are attending the lesson                |
-| `* * *`  | user               | specify the type of lesson when creating one           | know if a lesson is permanent or a temporary lesson          |
-| `* *`    | a new user         | clear and reset my entire list of lessons and students | add actual data after testing the program out                |
-| `* *`    | a new user         | access the help page                                   | to learn how to use the application                          |
-| `* *`    | a experienced user | use shorter command words                              | type and execute commands faster                             |
-| `* *`    | a experienced user | access my previous commands                            | easily amend or refer to them                                |
-| `*`      | a new user         | have a hyperlink on the help page to the user guide    | easily access the user guide page                            |
+| Priority | As a …​            | I want to …​                                           | So that I can…​                                                 |
+|----------|--------------------|--------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | user               | add my student's information                           | keep track of their information                                 |
+| `* * *`  | user               | edit my student's information.                         | keep their information up-to-date                               |
+| `* * *`  | user               | delete students and their details                      | reduce clutter of old students and keep their privacy intact    |
+| `* * *`  | user               | add lessons to the list                                | keep track of lesson schedule                                   |
+| `* * *`  | user               | edit lessons                                           | keep my schedule up-to-date                                     |
+| `* * *`  | user               | delete lessons                                         | clear old lessons                                               |
+| `* * *`  | user               | assign students to the lesson                          | track which students are attending the lesson                   |
+| `* * *`  | user               | specify the type of lesson when creating one           | know if a lesson is permanent or a temporary lesson             |
+| `* *`    | a new user         | clear and reset my entire list of lessons and students | add actual data after testing the program out                   |
+| `* *`    | a new user         | refer to commands in the help page                     | learn how to use the application without opening the user guide |
+| `* *`    | a experienced user | use shorter command words                              | type and execute commands faster                                |
+| `* *`    | a experienced user | access my previous commands                            | easily amend or refer to them                                   |
+| `*`      | a new user         | have a hyperlink on the help page to the user guide    | easily access the user guide page                               |
 
 
 [return to top ↑](#table-of-contents)
