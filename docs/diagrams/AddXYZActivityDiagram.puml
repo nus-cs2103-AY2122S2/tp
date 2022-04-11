@@ -10,21 +10,18 @@ if () then ([valid user input provided])
   if () then ([all valid parameter provided])
      if () then ([XYZ object exists in XYZ List])
         : Throw CommandException;
-     stop
      else ([XYZ object is new])
         : Calls Model to add the given XYZ object;
         : Model interacts with AddressBook and add the XYZ object to XYZ list;
         : Display success message;
-     stop
      endif
   else ([invalid])
    : Throw CommandException;
    : Display invalid parameter error message;
-   stop
   endif
 else ([invalid])
   :Throw parse exception;
   :Display invalid command error message;
-  stop
 endif
+stop
 @enduml

@@ -19,8 +19,8 @@ Given below are my contributions to the project.
 * **Code contributed**: I personally coded around 5k LoC(lines of code) which can be found in [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=albertsutz).
 This includes:
 1. Documentation
-2. Feature code (around 1.9k LoC)
-3. And Unit Tests (around 2.8k LoC)
+2. Feature code (around >= 1.9k LoC)
+3. And Unit Tests (around >= 2.8k LoC)
 
 With every feature that I have implemented, I made sure to include the proper test to improve future extendability.
 
@@ -32,6 +32,7 @@ With every feature that I have implemented, I made sure to include the proper te
   * List Person Command 
     * A feature to list all people in InternBuddy.
   * Add better colour coding to archived and tags to enhance InternBuddy UI
+  * Make sure that all `Label` text wraps around and is not truncated.
 * **New Command Features Implemented**:
   * Create Event Class
     * Event class has multiple additional attributes, in particular Date, Time, and Location. Thus, I contributed to code these additional 3 attributes.
@@ -48,6 +49,12 @@ With every feature that I have implemented, I made sure to include the proper te
     * A feature to list all events in InternBuddy.
   * List Company Command 
     * A feature to list all companies in InternBuddy.
+  * Add Event Command
+    * As I have created the Event Command, I also contributed to the AddEventCommand to let users add Events.
+  * Comprehensive Automated Tests:
+    * `AddCompanyCommand`, `AddEventCommand`, `AddCompanyCommandParser`, `AddEventCommandParser`
+    * `FindCompanyCommand`, `FindEventCommand`, `FindEventCommandParser`, `FindCompanyCommandParser`
+    * `EditCompanyCommand`, `EditEventCommand`, `EditEventCommandParser`, `EditCompanyCommandParser`
 * **Team-based Tasks Contributions and Project Management**:
   * Put forward the idea of creating an app that manage internship applications
   * Update GitHub Repository ReadMe contents
@@ -87,3 +94,12 @@ With every feature that I have implemented, I made sure to include the proper te
 * **Community**
   * Contributed to submitting issues to other team which can be found [here](https://github.com/albertsutz/ped)
     Notice that the issues submitted often contains multiple bugs in 1 issue.
+* **Effort**
+  * The new features that I have implemented took a lot of effort and are essential to the application. This is because my implementation deals with
+    basic commands that can make or break the application. With each command come careful planning and comprehensive manual testing to make sure that
+    the code does not break. Furthermore, as most of my implementation deals with new `Entry` type (`Event` and `Company`), they are not easily copy-pasted
+    from any sources. 
+  * These testing are made exactly to make sure that the tests were accurate and covered a lot of the functions. In particular, 
+    from this testing, there were some medium level bugs found which would be detrimental to the application.
+  * The added `Predicate`, in particular `CompanyContainsKeywordsPredicate`, `EventContainsKeywordsPredicate`, and `PersonContainsKeywordsPredicate`
+    bundles multiple `Predicate` together. The design also make sure that all `find` commands are extendable when the `Entry`'s attribute are changed.

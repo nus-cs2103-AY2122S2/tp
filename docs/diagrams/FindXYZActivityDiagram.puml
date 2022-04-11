@@ -12,15 +12,13 @@ if () then ([valid user input provided])
      : Model interacts with AddressBook and filter the XYZ list;
      : Model display only the XYZ list;
      : Display success message;
-  stop
   else ([invalid])
    : Throw CommandException;
    : Display invalid parameter error message;
-   stop
   endif
 else ([invalid])
   :Throw parse exception;
   :Display invalid command error message;
-  stop
 endif
+stop
 @enduml

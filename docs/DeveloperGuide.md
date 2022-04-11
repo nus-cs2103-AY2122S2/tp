@@ -166,7 +166,7 @@ object must match an existing `Company` object in the `AddressBook`.
 is given below. It has a `Tag` list in the `AddressBook`, which `Entry` references. This allows `AddressBook` to only 
 require one `Tag` object per unique tag, instead of each `Entry` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" />
 
 </div>
 
@@ -336,7 +336,7 @@ The main idea for the sort feature for InternBuddy is that entries can be sorted
 
 The `sort` command functions similarly to its `list` counterpart in terms of display. Both the commands will display the entries accordingly depending on the entry type specified for the command. The difference is that the `sort` command will sort the entries according to the importance of the entry.
 
-Due to its similar nature to the `list` command, the `sort` command extends the `list` command to minimize re-implmenting the same behaviour twice. This is also done to further enforce DRY. The `sort` command also has a `SearchType` parameter. The `SearchType` parameter is optional. The `sort` command takes in an additional `Ordering` parameter as well. The `Ordering` parameter is optional. the `Ordering` parameter allows the user to specify whether the entries should be sorted in ascending or descending order.
+Due to its similar nature to the `list` command, the `sort` command extends the `list` command to minimize re-implementing the same behaviour twice. This is also done to further enforce DRY. The `sort` command also has a `SearchType` parameter. The `SearchType` parameter is optional. The `sort` command takes in an additional `Ordering` parameter as well. The `Ordering` parameter is optional. the `Ordering` parameter allows the user to specify whether the entries should be sorted in ascending or descending order.
 
 Since `sort` is a newly implemented feature, a new parser `SortCommandParser`. Similar to its `list` counterpart, `SortCommandParser` will handle the creation of the 3 kinds of sort commands. Similar to above, the `SortCommandParser` will also handle the parsing of the `SearchType` and `Ordering` parameters. Now the `parse()` method can return any of the 3 sort commands.
 
@@ -369,6 +369,10 @@ can be tricky to implement.
 The command designs for each type of entries must be similar to make sure that the code is united and coherent. In particular, 
 although the implementation of `addc`, `addp`, and `adde` commands are similar, it is necessary to divide them out to their own classes.
 
+While the design of each `add` command is inspired from AB3, there are quite some changes to the implementation as `Event`, `Company`,
+and `Person` have different attributes. In particular, there are now 3 `UniqueEntryList` for each `Entry`. This is to make sure that the three different `Entry`
+does not mix with each other when displaying in `UI`.
+
 
 #### Common Implementation
 Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
@@ -378,9 +382,9 @@ The Activity Diagram below summarizes what happens when the user enters the add 
 
 
 For the `addXYZ` command:
-1. The user executes `addXYZ` followed by `XYZ` parameters (along with their tags).
+1. The user executes `addXYZ` followed by `XYZ` parameters (along with their tags). You can look at our UG to see the parameters.
 2. This command is parsed by `AddXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
-3. Otherwise, an `XYZ` object is created and `AddXYZCommand` object will be created.
+3. Otherwise, an `XYZ` object is created and `AddXYZCommand` object will be created accordingly.
 4. Next, `AddXYZCommand` will check whether the added `XYZ` object exists in the address book by using `Model#hasEntry()`.
    if the added `XYZ` object is a duplicate, then `CommandException` will be thrown. 
 5. Otherwise, the created `AddXYZCommand` object will call `Model#addXYZ()` to add `XYZ` object to the model.
@@ -426,6 +430,13 @@ more attributes when judging whether two events are the same entry.
 This feature allows the user to display selected `Entry` in the address book. It is facilitated by `ModelManager`. This acts as a way for user to 
 filter the entries by their attributes.
 
+While the design of each `find` command is inspired from AB3, there are quite some changes to the implementation as `Event`, `Company`,
+and `Person` have different attributes. As mentioned, there are now 3 `UniqueEntryList` for each `Entry`. Each command will look at different
+`UniqueEntryList` accordingly.
+
+To understand how each `find` commands work in depth. Look at `CompanyContainsKeywordsPredicate`, `PersonContainsKeywordsPredicate`, and `EventContainsKeywordsPredicate` classes
+which are the main logic when filtering each `Entry`.
+
 The Activity Diagram below summarizes what happens when the user enters the add command
 <img src="images/FindXYZActivityDiagram.png" />
 
@@ -433,9 +444,9 @@ The Activity Diagram below summarizes what happens when the user enters the add 
 Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
 
 For the `findXYZ` command:
-1. The user executes `findXYZ` followed by `XYZ` parameters (along with their tags).
+1. The user executes `findXYZ` followed by `XYZ` parameters (along with their tags). You can look at the parameters in our UG.
 2. This command is parsed by `FindXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
-3. Otherwise, `XYZContainsKeywordsPredicate` object will be created. Notice that `XYZContainsKeywordsPredicate` is the class responsible to test
+3. Otherwise, `XYZContainsKeywordsPredicate` object will be created. Note that `XYZContainsKeywordsPredicate` is the class responsible to test
    whether a particular `XYZ` object fits the queried entry. With this predicate, `FindXYZCommand` object will be created.
 4. Next, `FindXYZCommand` will call `Model#showXYZList(predicate)`.
    1. The model will update the displayed list to be the `XYZ` list and choose only the `XYZ` objects that suits the query
@@ -447,6 +458,12 @@ Here is the Sequence Diagram for the implementation to understand it better.
 
 In the diagram, `FindXYZexample` is just a placeholder for user input. You can look at the UG for sample user input for different
 find commands.
+
+
+### Editing Feature
+
+The design and implementation of `edit` commands are similar to `find` commands and their sequence diagrams differ minimally.
+For developers, you can trace through the code similarly with the `find` commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
