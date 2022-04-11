@@ -10,7 +10,7 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 Given below are my contributions to the project.
 
 * **New Feature**: Popup window
-  * What it does: Allows users to interact with GUI interface for trivial commands (Add/Update/Delete) for (Product/Item).
+  * What it does: Allow users to interact with GUI interface for trivial commands (Add/Update/Delete) for (Product/Item).
   * Justification: Users do not have to remember the syntax for trivial commands.
 
 * **New Feature**: Discount Feature
