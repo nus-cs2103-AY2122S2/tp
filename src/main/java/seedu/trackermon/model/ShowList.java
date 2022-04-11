@@ -86,7 +86,6 @@ public class ShowList implements ReadOnlyShowList {
     @Override
     public String toString() {
         return shows.asUnmodifiableObservableList().size() + " shows";
-        // TODO: refine later
     }
 
     @Override

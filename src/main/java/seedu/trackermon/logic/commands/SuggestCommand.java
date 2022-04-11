@@ -7,8 +7,8 @@ import java.util.Random;
 
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
+import seedu.trackermon.model.show.SameShowPredicate;
 import seedu.trackermon.model.show.Show;
-import seedu.trackermon.model.show.SuggestPredicate;
 
 /**
  * Returns a random Show from the displayed list.
@@ -42,8 +42,8 @@ public class SuggestCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE_ONE_SHOW);
         }
         Show randomShow = getRandomShow(model);
-        SuggestPredicate suggestPredicate = new SuggestPredicate(randomShow);
-        model.updateFilteredShowList(suggestPredicate);
+        SameShowPredicate sameShowPredicate = new SameShowPredicate(randomShow);
+        model.updateFilteredShowList(sameShowPredicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

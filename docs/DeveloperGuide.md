@@ -420,8 +420,8 @@ Returns a single show from the current displayed list of shows
 
 #### Implementation
 
-After executing the suggest command, it would create a SuggestCommand object.
-Then, LogicManager will execute the given SuggestCommand. Upon execution of the SuggestCommand's execute method,
+After executing the `suggest` command, it would create a `SuggestCommand` object.
+Then, `LogicManager` will execute the given `SuggestCommand`. Upon execution of the `SuggestCommand`'s execute method,
 it will obtain the currently displayed list of shows via the model's `getFilteredShowList()`method.
 
 In the event that the list is empty, this would cause an error message which informs users that
