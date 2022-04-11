@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path hireLahFilePath = Paths.get("data\\HireLah.json");
+    private Path hireLahFilePath = Paths.get("data" + File.separator + "HireLah.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
