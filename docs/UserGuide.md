@@ -8,13 +8,15 @@
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `uMessage.jar` from
+2. Download the latest `uMessage.jar` from
 
-1. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
+3. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+<img src="images/startup.png">
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * Type any keywords, and uMessage will live search the list.
@@ -29,7 +31,7 @@
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,7 +182,9 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
+Observe the behaviour when clicking on various fields:
 
+<img src="images/clickBehaviour.gif" >
 
 ## 6. Deleting: `delete`
 
