@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User inputs delete command;
+
+If () then ([Command has additional inputs ||\n Command not in proper format ])
+    :Throws ParseException;
+
+    else ([Else])
+
+
+    If () then ([Index provided is invalid])
+    :Throws CommandException;
+
+    else ([Else])
+        :Delete Student from AddressBook;
+        :Returns Message to user indicating Success;
+        :ResultDisplay prints result to user;
+        endif
+    endif
+stop
+
+@enduml

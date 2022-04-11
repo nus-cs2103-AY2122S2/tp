@@ -9,10 +9,10 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-<details>
-  <summary>What are CLIs? What are GUIs?</summary>
-
 ##  Brief Introduction
+
+What are CLIs? What are GUIs?
+
 CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
 
 GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
@@ -31,7 +31,6 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 This [video](https://www.youtube.com/watch?v=wXzl7e9JGag) illustrates the power of using CLI over GUI in performing the same task. <br>
 (The video is produced by the developers of the FAST app, and has been approved for reuse.)
 
-</details>
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
@@ -183,7 +182,7 @@ Examples of usage:
 *Table 4: Table showing list of possible prefixes and the Pre-defined constants.*
 
 As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
-In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
+In addition, the list of pre-defined constants are also provided for `Faculty`, `Covid Status`, and `Block`.
 
 <div markdown="span" class="alert alert-primary">
   
@@ -382,7 +381,7 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 10: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 10: Example result of filter command.*
 
 As seen in *Figure 10*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
@@ -495,7 +494,7 @@ Format: `resize SIZE`
 * The default result display window size is option 1.
 * Refer to figure 14 for the comparison for the different result display window sizes.
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
+![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*
 
 <div markdown="span" class="alert alert-primary">
   
@@ -558,7 +557,7 @@ there are changes to Tracey.
 
 4. **Q**: Where can I find the `INDEX` of a student? <br>
    **A**: They can be found in the numbers located beside each individual student. <br>
-   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 6: Screenshot of index location.*
 
 5. **Q**: The `delete` feature only allow me to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.

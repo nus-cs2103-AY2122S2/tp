@@ -35,7 +35,7 @@ public class ImportWindow extends UiPart<Stage> {
 
     /**
      * Shows the import window.
-     * @throws IllegalStateException
+     * @throws IllegalStateException When the window is shown when not called
      * <ul>
      *     <li>
      *         if this method is called on a thread other than the JavaFX Application Thread.

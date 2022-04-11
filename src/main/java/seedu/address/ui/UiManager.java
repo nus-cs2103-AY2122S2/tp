@@ -50,10 +50,25 @@ public class UiManager implements Ui {
         }
     }
 
+    /**
+     * Obtains the image object from the specific path directory.
+     *
+     * @param imagePath the location where the image can be found
+     * @return An Image object from the imagePath
+     */
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
+    /**
+     * Shows an alert dialog on {@code owner} with the given parameters.
+     * This method only returns after the user has closed the alert dialog.
+     *
+     * @param type the type of alert to be shown
+     * @param title Name of this alert dialog to be set
+     * @param headerText heading of the alert dialog to be set
+     * @param contentText content of this alert dialog
+     */
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
@@ -61,6 +76,12 @@ public class UiManager implements Ui {
     /**
      * Shows an alert dialog on {@code owner} with the given parameters.
      * This method only returns after the user has closed the alert dialog.
+     *
+     * @param owner The creator of the alert dialog
+     * @param type the type of alert to be shown
+     * @param title Name of this alert dialog to be set
+     * @param headerText heading of the alert dialog to be set
+     * @param contentText content of this alert dialog
      */
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
