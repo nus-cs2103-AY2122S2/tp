@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.meetingcommands.EditMeetingCommand;
 import seedu.address.logic.commands.meetingcommands.EditMeetingCommand.EditMeetingDescriptor;
-import seedu.address.logic.commands.meetingcommands.MeetingTarget;
+import seedu.address.logic.parser.MeetingTarget;
 import seedu.address.logic.parser.meetingcommands.EditMeetingCommandParser;
 import seedu.address.model.meeting.Duration;
 import seedu.address.model.meeting.Link;

@@ -18,6 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.MeetingTarget;
 import seedu.address.model.Model;
 import seedu.address.model.meeting.Duration;
 import seedu.address.model.meeting.Link;

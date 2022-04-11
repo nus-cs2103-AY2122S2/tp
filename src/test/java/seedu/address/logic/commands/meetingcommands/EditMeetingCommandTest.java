@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.meetingcommands.EditMeetingCommand.EditMeetingDescriptor;
+import seedu.address.logic.parser.MeetingTarget;
 import seedu.address.model.AddressBook;
 import seedu.address.model.MeetingsBook;
 import seedu.address.model.Model;

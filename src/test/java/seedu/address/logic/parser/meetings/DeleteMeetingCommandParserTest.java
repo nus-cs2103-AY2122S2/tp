@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.meetingcommands.DeleteMeetingCommand;
-import seedu.address.logic.commands.meetingcommands.MeetingTarget;
+import seedu.address.logic.parser.MeetingTarget;
 import seedu.address.logic.parser.meetingcommands.DeleteMeetingCommandParser;
 
 /**
