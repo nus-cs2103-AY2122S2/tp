@@ -26,6 +26,7 @@ PlotXYZCommand --> TrackBeauParser : c
 deactivate PlotXYZCommand
 
 TrackBeauParser --> LogicManager : c
+destroy TrackBeauParser
 
 LogicManager -> PlotXYZCommand : execute()
 activate PlotXYZCommand
@@ -34,13 +35,20 @@ create CommandResult
 PlotXYZCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> LogicManager : result
+CommandResult --> PlotXYZCommand : result
+deactivate CommandResult
+PlotXYZCommand --> LogicManager : result
+deactivate PlotXYZCommand
+
 LogicManager --> MainWindow : result
+deactivate LogicManager
 
 MainWindow -> CommandResult : isPlotXYZChart()
-CommandResult --> MainWindow
+activate CommandResult
 
-alt isPlotXYZChart
+CommandResult --> MainWindow
+deactivate CommandResult
+opt isPlotXYZChart
     MainWindow -[LOGIC_COLOR]> MainWindow : PlotXYZChart()
     activate MainWindow LOGIC_COLOR
     MainWindow --[LOGIC_COLOR]> MainWindow
@@ -48,5 +56,6 @@ alt isPlotXYZChart
 end
 
 [<--MainWindow : result
+deactivate MainWindow
 
 @enduml
