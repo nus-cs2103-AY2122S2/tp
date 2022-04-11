@@ -58,5 +58,5 @@ Given below are my contributions to the project.
 
 ### Review/mentoring contributions
 * Made multiple good suggestions when reviewing pull requests such as [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978)
-* Debated with [james](https://github.com/jamesyeap) about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a list to hold all the command words for every command because we decided to not implement user specified keybinds.
-* Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
+* Debated with [james](https://github.com/jamesyeap) during a weekly meeting about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a list to hold all the command words for every command because we decided to not implement user specified keybinds.
+* Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73) and provided suggestions to fix them.
