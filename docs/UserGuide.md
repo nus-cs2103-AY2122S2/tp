@@ -666,6 +666,7 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 |---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                                                |
 | **Exit**                        | `exit`                                                                                                                                                                |
+| **Clear**                       | `clear-all`                                                                                                                                                           |
 | **Match property**              | `match INDEX` <br> e.g., `match 1`                                                                                                                                    |
 | **List Buyers**                 | `list-b`                                                                                                                                                              |
 | **Add Buyer**                   | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`                                                                                      |
