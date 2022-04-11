@@ -26,10 +26,10 @@ Given below are my contributions to the project.
   
 
 * **Code contributed**:
-  * Contributed over [1700+ Loc](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=SethCKL&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+  * Contributed over [1800+ LoC]((https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=SethCKL&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18))
   
 * **Project management**:
-  * Reviewed 28 PRs.
+  * Reviewed 29 PRs.
   
 * **Documentation**:
   * User Guide:
@@ -37,6 +37,8 @@ Given below are my contributions to the project.
     * Edited language and grammar to improve clarity and readability.
     * Formatted structure to improve organisation of information.
   * Developer Guide:
+    * Explanation for the implementation of Applicant
+    * Added user stories
     * Glossary of terms to improve common understanding.
     * Proof read to ensure language consistency.
   
