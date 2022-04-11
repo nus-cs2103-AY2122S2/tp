@@ -590,7 +590,6 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Role**: The type of job that the candidate is interviewing for (e.g Backend-engineer, L3 SWE)
 * **Recruiter**: A Human Resource professional that manages applicants, interviews and positions in the application
 * **Applicant**: A candidate looking for a job.
 * **Interview**: A scheduled meeting time for an Applicant to try for a Position.
