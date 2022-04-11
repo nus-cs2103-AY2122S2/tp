@@ -52,6 +52,7 @@ public class DeletePackageCommand extends Command {
 
         if (canDelete) {
             model.deleteInsurancePackage(packageToDelete);
+            assert !model.hasInsurancePackage(packageToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PACKAGE_SUCCESS, packageName));
         } else {
             return new CommandResult(MESSAGE_PACKAGE_IN_USE);

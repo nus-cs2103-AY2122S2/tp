@@ -140,7 +140,7 @@ Notes:
 * Email domain must contain only **one period** and minimally ends with 2 letters: 
   e.g jackson5@example.com is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
 * For the insurance package indicated in the `i/` field, if an existing package with the same name does not 
-  exist, a new one will be automatically created.
+  exist, a new one will be automatically created for you.
 
 ------------------------------------------------------------------------------------
 ### Adding a tag to a person: `addTag`
@@ -312,6 +312,9 @@ After `addp i/Classic Package d/Classic coverages for your needs`:
 
 ![result2 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage2UG.png)
 
+Notes:
+* The description `d/` parameter is compulsory, but you can leave the description blank, and add it in the future.
+  
 ------------------------------------------------------------------------------------
 ### Editing an insurance package: `editp`
 Edits an existing insurance package in ClientConnect
@@ -350,10 +353,10 @@ After `deletep i/Golden Package`:
 
 ![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
 
-Note: 
+Notes: 
 * If the packages window was open before a package is deleted, you will have to close and reopen the window 
 to view the change.
-* If a package to be deleted is used by at least one person, it will not be deleted.
+* If you try to delete a package that is used by at least one person, it will not be deleted.
 
 ------------------------------------------------------------------------------------
 ### Importing ClientConnect CSV data: `import`

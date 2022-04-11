@@ -18,6 +18,7 @@ public class AddPackageCommandParser implements Parser<AddPackageCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPackageCommand parse(String args) throws ParseException {
+        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_INSURANCE_PACKAGE, PREFIX_PACKAGE_DESC);
 

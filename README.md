@@ -1,4 +1,4 @@
-# ClientConnect [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# ClientConnect [![CI Status](https://github.com/AY2122S2-CS2103-W17-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-W17-3/tp/actions)
 
 ---
 
@@ -20,7 +20,8 @@ ClientConnect is a simple desktop application that stores all your clients' info
 
 Manage your clients with ease!
 
-Just using the keyboard, you can add clients by including details such as their name, address, etc.
+Just using the keyboard, you can add clients by including details such as their name, address, etc. 
+You can also store your insurance packages and their corresponding details in the application! 
 
 Other functionalities, such as editing or deleting existing contacts, or finding contacts by keyworsds, are also available.
 
