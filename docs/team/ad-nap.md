@@ -34,22 +34,27 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ad-nap&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
+    * Managed releases `v1.1` - `v1.4` (total of 5 milestones) on GitHub.
+    * Refactored all references to AddressBook to HustleBook in Developer Guide.
+    * Maintained the issue tracker and adhere to it.
+    * Managed project meetings and meeting documents.
 
 * **Enhancements to existing features**:
     * Modified `add` and `edit` command to handle the new fields to allow users to add the relevant fields to track their clients better.
     * Handled `previous date met` and `info` fields to have default values when not specified when adding clients into HustleBook.
     * Changed the case-sensitivity of `Name` to case-insensitive for a more practical determination of duplicate clients in HustleBook.
     * Prevent the ability to schedule meetings if that meeting date and time clashes with current meetings.
-    * Wrote additional test cases to increase coverage.
+    * Wrote additional test cases to increase coverage.([\#272](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/272), [\#233](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/233), [\#68](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/68))
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `meet` and `flag` [\#118](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/118)
+        * Added documentation for the features `meet` and `flag`: [\#118](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/118)
         * Added documentation for the new fields `previous date met`, `info` and `scheduled meeting`: [\#70](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/70)
+        * Reformat documentation for better navigability and readability: [\#243](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/243) and [\#259](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/259)
     * Developer Guide:
-        * Added implementation details of the new `info` and `prev date met` fields. [96\#](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/96)
-        * Added implementation details of the `meet` feature. [\#tbc]()
+        * Added implementation details of the new `info` and `prev date met` fields: [96\#](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/96) and [\#263](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/263)
+        * Added implementation details of the `meet` feature: [\#245](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/245)
+        * Reformat documentation for better navigability and readibility: [\#245](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/245)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#50](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/50), [\#64](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/64), [\#65](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/65)
