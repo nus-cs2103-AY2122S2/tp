@@ -454,7 +454,6 @@ Examples of usage:
 :warning: **Warning:**<br>
   
 1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
-<br>
 2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
   
 </div>
@@ -462,8 +461,9 @@ Examples of usage:
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-You can rename the archived file in the file path manually for easier reference.
-1. Features for naming the archived file using the CLI will be available in later releases.
+You can rename the archived file in the file path manually for easier reference. 
+
+1. Features for naming the archived file using the CLI will be available in later releases. <br>
 2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
   
 </div>
