@@ -43,7 +43,7 @@ the interview scheduling process of candidates applying to be undergraduate Teac
   * **Testing and de-bugging:**
     * Contribution to identified bugs in v1.3b found [here](https://github.com/AY2122S2-CS2103-F11-2/tp/issues/240)
     * Fixed bug related to invalid user input for interview DATE_TIME ([\#365](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/365))
-    * Fixed bug where user encounters a conflicting interview error when rescheduling the same candidate
+    * Fixed bug preventing users from rescheduling the same candidate
       ([\#384](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/384))
   * **Project management**:
     * Managed GitHub issues/deadlines whenever/wherever necessary.
