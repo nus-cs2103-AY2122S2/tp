@@ -21,7 +21,7 @@ application.
 
 ## **Acknowledgements**
 
-* Code reused from [tutorial](https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html) for implementing `Remark`
+* ##### Code reused from [tutorial](https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html) for implementing `Remark`
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -853,7 +853,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -862,6 +862,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
    
+### Adding a person
+
+1. Adding a person
+   1. Test case: add `add n/Bob p/87654321 e/bob@u.nus.edu a/123, Clementi Ave 16, #01-321` <br> Expected: A person with corresponding the details will be added to the contact list, and a success message shown.
+   2. Test case: `add` <br> Expected: The GUI window for `add` pop-ups and is shown.
 
 ### Deleting a person
 
@@ -885,16 +890,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: Delete `addressbook.json` and `archivedAddressBook.json`<br/>
 
-   1. Test case: Restart ModuleMateFinder
-        Expected: The app will create new populated files.    
+   1. Restart ModuleMateFinder 
+      <br> Expected: The app will create new data files populated with sample data.    
    
 
 2. Dealing with corrupted data files.
     1. Test case: Change module field of a contact to invalid value: `ABC1000ABCD`<br>
     Expected: The contact is not saved. Error message is shown in the status bar.
 
-   1. Test case: Restart ModuleMateFinder
-       Expected: The app will display empty ModuleMateFinder.    
+    2. Restart ModuleMateFinder
+       <br> Expected: The app will display empty ModuleMateFinder.    
 
       
 ## **Appendix: Effort**
