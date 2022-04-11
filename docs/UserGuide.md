@@ -42,6 +42,8 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Glossary](#glossary)
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -56,6 +58,8 @@ Some example commands you can try:
     - `clear` : Deletes all client information.
     - `exit` : Exits the app.
 6. Refer to the Features below for details of each command.
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -86,6 +90,8 @@ Some example commands you can try:
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the property and preference format:**<br>
@@ -111,7 +117,7 @@ Some example commands you can try:
 
 </div>
 
-
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
@@ -128,6 +134,8 @@ Format: `help`
 1. Link to the full user guide.
 2. Buttons to access the different help sections.
 3. Help contents.
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all clients : `list`
 
@@ -150,6 +158,8 @@ All clients will be deleted! Use with caution.
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ## Client Management
 
@@ -227,6 +237,8 @@ Format: `favourite INDEX`
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
+<div style="page-break-after: always;"></div>
+
 ### Open Favourites window: `fw`
 
 Opens a new window that displays the compacted list of clients that have been favourited.
@@ -242,6 +254,8 @@ Format:  `fw`
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding clients by keyword: `find`
 
@@ -277,6 +291,8 @@ Examples:
 - `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
     ![images/user-guide/findRobinJohan.png](images/user-guide/findRobinJohan.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting clients: `sort`
 
@@ -349,8 +365,11 @@ Format `upload INDEX [i/FilePath:description]`
 
 Opens a new window that displays the images associated to a client.
 
+<img src="images/user-guide/viewImageWindow.png" height="400px">
+
 Format `viewimage INDEX`
 
+<div style="page-break-after: always;"></div>
 
 ### Setting a Reminder for a client: `remind`
 <img src="images/user-guide/successfulRemindCommand.png" height="400px">
@@ -411,6 +430,8 @@ Format: `stats`
 
 <img src="images/user-guide/Stats.png" height="400px">
 
+<div style="page-break-after: always;"></div>
+
 ## Future Features **[Coming soon]**
 1. More types of sizes and increased details such as floor size, landed properties.
 2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
@@ -432,7 +453,7 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 If your changes to the data file makes its format invalid, RealEstatePro will discard all data and start with an empty data file at the next run.
 </div>
 
-# FAQ
+<div style="page-break-after: always;"></div>
 
 # Command Summary
 

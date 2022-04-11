@@ -51,6 +51,9 @@ public class HelpTable extends UiPart<Region> {
         helpTable.getItems().add(new CommandFormat("stats", "stats"));
         helpTable.getItems().add(new CommandFormat("rm", "rm"));
 
+        //@@author {howardwhw2}-reused
+        //Reused from https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping
+        // with minor modifications
         //warps text in format column automatically
         formatColumn.setCellFactory(tc -> {
             TableCell<CommandFormat, String> cell = new TableCell<>();
