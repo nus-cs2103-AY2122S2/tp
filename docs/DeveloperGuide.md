@@ -842,7 +842,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
       Expected: The function is case-insensitive. `Alex Yeoh` and `Bernice Yu` showed on the screen.
    4. Test Case: `find all`<br>
       Expected: List of clients showed does not change. Error message displayed.
-   5. Other incorrect add commands to try: `find`, `find all`, `find john`<br>
+   5. Other incorrect add commands to try: `find`, `find john`<br>
       Expected: Similar to previous.
 
 ## Sorting clients

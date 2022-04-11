@@ -41,7 +41,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94), [\#96](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/96), [\#102](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/102) [\#108](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/108)
-  * Reported bugs: [\#105](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/105)
+  * Reported bugs: [\#105](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/105), [\#213](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/213)
 
 * **Tools**:
   * Introduced Diagrams.net as the team's tool for diagrams.
