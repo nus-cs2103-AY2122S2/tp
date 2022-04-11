@@ -469,7 +469,8 @@ Examples of usage:
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
 
-You can rename the archived file in the file path manually for easier reference. <br>
+You can rename the archived file in the file path manually for easier reference. 
+
 1. Features for naming the archived file using the CLI will be available in later releases. <br>
 2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
   
