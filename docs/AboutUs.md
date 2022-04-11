@@ -23,7 +23,7 @@ I am an eager Y2 computer science undergraduate with the desire to learn and imp
 
 <img src="images/theprevailingone.png" width="200px">
 
-[[github](http://github.com/theprevailingone)] [[portfolio](./team/theprevailingone.md)]
+[[github](http://github.com/theprevailingone)] [[linkedin](https://www.linkedin.com/in/edwardalvin/)] [[portfolio](./team/theprevailingone.md)]
 
 * Role: Developer
 * Responsibilities: TBD
