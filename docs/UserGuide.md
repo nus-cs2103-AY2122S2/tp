@@ -27,7 +27,6 @@ Some features are able to be operated via mouse interaction. Features that allow
 
 Refer to the [Features](#features-cli) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Features (CLI)<a name="features-cli"></a>
@@ -57,6 +56,8 @@ Below are the features that can be completed using command line interface (CLI).
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Add a new person: `add`<a name="add-a-new-person"></a>
 
@@ -153,6 +154,8 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` <br> Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` <br> Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 2 n/Betsy Crower t/tag1 t/tag1 t/tag1` <br> Edits the name of the 2nd person to be `Betsy Crower` and creates only one tag `tag1`.
+
+<div style="page-break-after: always;"></div>
 
 ### Add a new tag : `add_tag`<a name="add-a-new-tag"></a>
 
@@ -264,7 +267,7 @@ Examples:
 * `grab tele/ t/friends` <br> Grabs the telegram id of everyone tagged as "friends" inside UNite.
 
   ![result for 'grab e/'](images/grab-email.png)
-* 
+
 <div style="page-break-after: always;"></div>
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
@@ -294,6 +297,7 @@ Examples:
 * `theme dark` changes UNite to dark theme, which is also the default theme.
 
 ![dark theme](images/dark_theme.png)
+<div style="page-break-after: always;"></div>
 
 * `theme light` changes UNite to light theme.
 
