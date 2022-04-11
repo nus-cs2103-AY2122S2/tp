@@ -8,8 +8,12 @@ abstract class "{abstract}\nCommand" {
 }
 
 interface Model <<interface>> {
-    + addPerson(Person)
-    + hasPerson(Person) : boolean
+    /' Fields '/
+    +PREDICATE_SHOW_ALL_PERSONS : Predicate
+
+    /' Methods '/
+    + updateFilteredPersonList(Predicate)
+    + getFilteredPersonList() : ObservableList
 }
 
 class ModelManager implements Model{
@@ -52,7 +56,24 @@ class SummariseCommand {
     + {static} getHighestPositiveByFaculty() : int
 }
 
+class MainWindow {
+    /' Methods '/
+    - handleSummarise()
+}
+
+class PieChartWindow {
+     /' Methods '/
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + execute()
+     + show()
+ }
+
 ModelManager <-- SummariseCommand
 "{abstract}\nCommand" <|-- SummariseCommand
 SummariseCommand --> Person
+MainWindow --> SummariseCommand
+MainWindow *-- PieChartWindow
+
 @enduml

@@ -51,11 +51,15 @@ Given below are my contributions to the project.
         * Edited the sequence diagram for Add feature [\#89]() 
         * Add Activity diagram for Add feature [\#89]()
         * Added class diagrams for Add and Clear Feature [\#268]()
+        * Added implementation details for Email Feature [\#265]()
+        * Added Class, Activity, Sequence diagrams for Email Feature [\#265]() 
+        * Added Class, Activity, Sequence diagrams for Help Feature [\#276]()
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235]()
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3](), [4](), [5](), [6](), [7](), [8](), [9](), [10](), [11]())
-    
+
+
 * **Tools**:
     * Integrated a third party library (Natty) to the project ([\#42]())
     * Integrated a new Github plugin (CircleCI) to the team repo

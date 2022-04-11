@@ -13,8 +13,9 @@ Tracey can get your student health status management tasks done faster than trad
   <summary>What are CLIs? What are GUIs?</summary>
 
 ##  Brief Introduction
-1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
-2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
+CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
+
+GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
 
 Note that the main difference between GUI and CLI is the method of interaction.
 
@@ -42,15 +43,15 @@ We hope you enjoy Tracey as much as we did when developing it!
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## How to navigate the User Guide
+## 1. How to navigate the User Guide
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
-| Symbol  |                                                 Purpose                                                 |
-|:-------:|:-------------------------------------------------------------------------------------------------------:|
-|   📓    |     Additional notes are parked here. They contain beneficial information in case you are confused.     |
-|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.          |
-|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.  |
+| Symbol  |                                                                            Purpose                                                                             |
+|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|   :information_source:  |      <div markdown="span" class="alert alert-info"> Additional notes are parked here. They contain beneficial information in case you are confused.</div>      |
+|   ⚠️    |         <div markdown="span" class="alert alert-warning"> Warnings are parked here. They contain information that you **NEED** to take note of.</div>          |
+|   💡    | <div markdown="span" class="alert alert-primary"> Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.</div> |
 
 *Table 1: Symbols and their purposes.*
 
@@ -66,23 +67,37 @@ Additional formatting guidelines:
 
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick Start
+
+## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
- 📓`Note:`
+ <div markdown="span" class="alert alert-info">:information_source: **Note:**
+
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+  
    2. To check your java version:
       1. For Mac users, open up Terminal and type in `java --version`.
       2. For Windows users, open up Command Prompt and type in `java --version`.
+  
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+  
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+  
+</div>
+
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
-   Note how the app contains some sample data. <br>
-   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
-   📓`Note:`
+   Note how the app contains some sample data: <br>
+   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
+<div markdown="span" class="alert alert-info">
+  
+  :information_source: **Note:**<br>
+  
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+  
    2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+  
+</div>
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -90,7 +105,7 @@ Additional formatting guidelines:
 
 * **`summarise`** : Summarises all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
 
-* **`add`**`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` : Adds a contact named `John Doe` to the Tracey.
+* **`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader`** : Adds a student named `John Doe` to Tracey.
 
 * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -102,49 +117,27 @@ Additional formatting guidelines:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-### Viewing help
+## 3. Features
+### 3.1. Viewing help
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
 It includes a summary to briefly explain all the commands.
-
 The pop-up window also offers a button for easy access to the User Guide via the user's default browser.
+
+Format: `help`
 
 This is a sample screenshot of what you can expect from the `help` command.
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
-Format: `help`
+<div markdown="span" class="alert alert-primary">
+  
+:bulb: **Tip:**<br>
+  
+* You can also use the `F1` key to open the pop-up window.
+  
+</div>
 
-### Importing Excel sheet
-Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
-
-Format: `import FILE PATH`
-
-💡`Tips`:
-* The file path is relative to the root directory.
-
-Examples of usage:
-* `import C:\Users\Documents\tp.xlsx`
-* `import C:\Users\Documents\Desktop\tp\students.xlsx`
-
-Format: import button
-* Adds a list of students with Relevant Details such as Covid status into Tracey.
-* Relevant details required are mentioned in Table 4 below.
-* In the Excel sheet, the first column has to be the names of students followed by the Relevant Details.
-* Tracey will then store all students from the Excel file into her!
-
-Sample Excel file:
-![Format_Sample](images/Excelformat.png) *Figure 3: Screenshot of Excel file.*
-
-How to identify import button:
-![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
-
-⚠️`Warning:`
-* The excel file must contain only one sheet named "Sheet1".
-* The column of the table must be capital and starts with Column A.
-* The data in the table needs to be ensured no space behind
-
-### Adding a contact
+### 3.3. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -177,7 +170,7 @@ Examples of usage:
 |:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 60 characters.                                                                                                                                                                                                                  |
 | `p/`  | Phone Number         | None                                                                                                  |                                                                                                                                                                                                                                        Can only be numbers at least 3 digits long.                                                                                                                                                                                                                                        |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  |                                                                                                                                                                                                                                                     Cannot be blank.                                                                                                                                                                                                                                                      |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` |                                                                                                                                                                                                                          Can only be one of the pre-defined constants, and is case-insensitive.                                                                                                                                                                                                                           |
 | `mc/` | Matriculation Number | None                                                                                                  |                                                                                                                                                                                                                          Can only start with an "A", followed by 7 digits, ending with a letter.                                                                                                                                                                                                                          |
@@ -190,11 +183,17 @@ Examples of usage:
 As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
-💡`Tips`:
+<div markdown="span" class="alert alert-primary">
+  
+:bulb: **Tip:**<br>
+  
 * You are able to add optional tags with no restrictions using the `t/` prefix.
+  
 * Additions can be reversed with the `undo` feature.
+  
+</div>
 
-### Editing an existing contact
+### 3.4. Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
@@ -224,14 +223,27 @@ Original list:
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">
+  
+:information_source: **Note:**<br>
+  
 * Tracey shows the entire edited database after the edit command is applied.
+  
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
-💡`Tip`:
-* Edits can be reversed with the `undo` feature.
+* If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
-### Deleting a contact
+</div>
+
+<div markdown="span" class="alert alert-primary">
+  
+:bulb: **Tip:**<br>
+  
+* Edits can be reversed with the `undo` feature.
+  
+</div>
+
+### 3.5. Deleting a contact
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
@@ -248,50 +260,108 @@ Examples of usage:
 * `delete 2` removes the 2nd student on the list.
 * `delete 10` removes the 10th student on the list.
 
-💡`Tips:`
-* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
-* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
-* This can save you time scrolling down an entire list to get his/her `INDEX`!
-* Deletions can be reversed with the `undo` feature.
+<div markdown="span" class="alert alert-primary">
 
-### Undoing an action
+:bulb: **Tip:**<br>
+  
+* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
+  
+* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+  
+* This can save you time scrolling down an entire list to get his/her `INDEX`!
+  
+* Deletions can be reversed with the `undo` feature.
+  
+</div>
+
+### 3.6. Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
 * Undoes only the last executed add, edit or delete command.
-* You can only use the undo command after executing an add, edit, or delete command.
+* You can only use the `undo` command after executing an add, edit, or delete command.
 * Cannot be used in succession to undo previously executed commands besides the last executed one.
 
-### Redoing an action
-Reverses an executed undo command.
+Examples of usage:
+* Using `undo` after an `add` command will remove the recently added student.
+* Using `undo` after an `edit` command will restore the details of the student back to his/her previous state.
+* Using `undo` after a `delete` command will add the recently deleted student.
+
+Scenario for undoing an edit command:
+![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 8: Scenario of using an undo command following an edit command.*
+
+Figure *8* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
+
+<div markdown="span" class="alert alert-info">
+  
+:information_source: **Note:**<br>
+  
+* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+  
+* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+  
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  
+  * Using an `undo` command will not restore the student's index back to 1
+  
+</div>
+
+### 3.7. Redoing an action
+
+Reverse an executed undo command.
 
 Format: `redo`
 * Reverses only the last executed `undo` command.
 * You can only use the `redo` command after executing an `undo` command.
 * Cannot be used in succession to reverse previously executed `undo` commands besides the last executed one.
 
-### Finding a contact
-Find a particular contact in Tracey and retrieve their specific details.
+Examples of usage:
+* Using `redo` after using `undo` on an `add` command will counteract the effect of undoing an `add` command and the overall result adds a student into Tracey.
+* Using `redo` after using `undo` on a `delete` command will counteract the effect of undoing a `delete` command and the overall result deletes the student from Tracey.
+* Using `redo` after using `undo` on an `edit` command will counteract the effect of undoing an `edit` command and the overall result edits the details of the student in Tracey.
+
+Scenario for redoing after undoing an edit command:
+![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
+
+Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
+to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
+
+<div markdown="span" class="alert alert-info">
+  
+:information_source: **Note:**<br> 
+  
+* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+  
+* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+  
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  
+  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+  
+</div>
+
+### 3.8. Finding a contact
+Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
-* A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
 * The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
+* Following the previous point, the input should contain the initial letters of the name. e.g. `jo` or`joh` for John. Conversely, if a user inputs `ohn` for John, this will not warrant the correct result. 
 
 Examples of usages:
-
 * `find John` returns `john` and `John Doe`.
 * `find alex david` returns `Alex Yeoh` and`David Li`.
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 8: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 10: Screenshot of result of the find command.*
 
-As seen in the *Figure 8*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### Filtering contacts
+### 3.9. Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
@@ -310,107 +380,163 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 9: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 11: Example result of `filter` command.*
 
-As seen in *Figure 9*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 11*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">
+  
+:information_source: **Note:**<br>
+  
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+  
+</div>
 
-### Listing the records
+### 3.10. Listing the records
 List all students, displaying all their data stored in Tracey.
 
 Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
 
-### Copying emails
-Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+### 3.11. Copying emails
+Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
 
-📓`Note:`
-There is also a `Show Email` button on the GUI which you can click to open the same window.
+![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
 
-![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
+From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
-From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+<div markdown="span" class="alert alert-info">
+  
+  :information_source: **Note:**<br>
+  
+* There is also a `Show Email` button on the GUI which you can click to open the same window.
+  
+* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+  
+</div>
 
-### Summarising the records
-Summarises the statistics of the student records inside Tracey.
+### 3.12. Summarising the records
+
+Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
-* You can get an overview of the students in Tracey if you want to get an idea of the location where Covid is more prevalent.
-* You can see which faculty has the highest number of Covid cases.
+* You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
+* You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
+<img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
-From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+*Figure 14a: Example pie charts of Tracey in response to the `summarise` command.* 
 
-### Archiving Tracey
-Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-* `[ROOT]`: The folder where the Tracey.jar is in.
-* `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
+<img src ='images/SummariseExample2.png' alt='SummariseExample2' width="400"/> 
+
+*Figure 14b: Example bar chart of Tracey in response to the `summarise` command.*
+
+From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+
+### 3.13. Archiving Tracey
+Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
+* `ROOT`: The folder where the Tracey.jar is in.
+* `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
   * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
-* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
-  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
+* `ARCHIVED_FILE`: Archived file name named using your local PC's date and time in the format of DDMMYY_HHmmssSSS which is stored as a `json` file.
+  * The hour is abbreviated as HH, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
-Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (hh:mm:ss:SSS in 24-hour notation).
-* The archived file will be saved **in** `[ROOT]/data/archive/270322123`.
-* The archived file will be saved **as** `270322_152833`.
-* The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
+Examples of usage:
+* Given the current date and time on your local PC in which the `archive` command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (HH:mm:ss:SSS in 24-hour notation).
+  * The archived file will be saved **in** `ROOT/data/archive/270322`.
+  * The archived file will be saved **as** `270322_152833123.json`. (`json` is the suffix (after the period) to indicate the file type)
+  * The file path will be `ROOT/data/archive/270322/270322_152833123.json`.
+* To retrieve your archived file:
+  1. Open the folder in which your Tracey.jar is stored in.
+  2. Open the folder named `data`.
+  3. Open the folder named `archive`.
+  4. Open the folder named `270322`.
+  5. Your archived file is named `270322_152833123.json`.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-alert">
+  
+:warning: **Warning:**<br>
+  
+* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+  
+</div>
+
+<div markdown="span" class="alert alert-primary">
+  
+:bulb: **Tip:**<br>
+  
 * You can rename the archived file in the file path manually for easier reference.
-  * Features for naming of the archived file via the CLI will be available in later releases.
-* To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+  
+  * Features for naming the archived file using the CLI will be available in later releases.
+  
+* To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+  
+</div>
 
-### Resizing the result display window
+### 3.14. Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
-* There are 3 options for `SIZE` which are 1, 2 and 3.
+* There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 13 for the comparison for the different result display window sizes.
+* Refer to figure 15 for the comparison for the different result display window sizes.
 
-💡`Tips:`
+![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
+
+<div markdown="span" class="alert alert-primary">
+  
+:bulb: **Tip:**<br>
+  
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+  
+</div>
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">
+  
+:information_source: **Note:**<br>
+  
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+  
+</div>
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
-
-### Clearing all records
+### 3.15. Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
 
-⚠️`Warning:`
+<div markdown="span" class="alert alert-warning">
+  
+:warning: **Warning:**<br>
+  
 * Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+  
 * This feature cannot be reversed using `undo`.
+  
+</div>
 
-### Exiting Tracey
+### 3.16. Exiting Tracey
 Close the application.
 
 Format: `exit`
 * Closes the application.
 
-### Saving
+### 3.17. Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### FAQ
+### 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -443,34 +569,33 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Command Summary
+### 5. Command Summary
 
 *Table 5: Command Summary.*
 
 | No. | Command     | Description                                                                               | Example                                                                                                                                |
 |-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | 1.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
-| 2.  | `import`    | Add a list of students from an Excel file into Tracey                                     | -                                                                                                                                      |
-| 3.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
-| 4.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
-| 5.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
-| 6.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
-| 7.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
-| 8.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
-| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
-| 10. | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
-| 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
-| 12. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
-| 13. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
-| 14. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
-| 15. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
-| 16. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
+| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
+| 3.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
+| 4.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 5.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
+| 6.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
+| 7.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
+| 8.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
+| 9.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
+| 10. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 11. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 12. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 13. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
+| 15. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Glossary
+### 6. Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
@@ -478,7 +603,7 @@ there are changes to Tracey.
 |:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
 | `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
 | `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
