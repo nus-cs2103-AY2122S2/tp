@@ -152,8 +152,8 @@ A Contact Detail card with the details of a contact will be shown to the user as
 
 **Examples:**
 
-> `view 2` </br>
->  clicking on the second contact does the same as above.
+> `view 1` </br>
+>  clicking on the first contact does the same as above.
 
 
 
