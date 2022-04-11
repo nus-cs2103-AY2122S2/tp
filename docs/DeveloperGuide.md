@@ -273,10 +273,10 @@ _{more aspects and alternatives to be added}_
 #### Design
 
 The main idea of the archive feature for InternBuddy is that archived entries will not show up when searching for entries
-with the `find` or `list` commands unless the user specifies that they specifically want to search for archived entries.
+with the `find` or `list` or `sort` commands unless the user specifies that they specifically want to search for archived entries.
 In this way, they function similarly to hidden files in many file managers.
 
-To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. For flexibility,
+To handle this, the `list`, `find` and `sort` commands needed an extra parameter indicating the search type. For flexibility,
 there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
 not to explicitly pass a search type; in this case, the default behavior would be `UNARCHIVED_ONLY`.
 
@@ -290,8 +290,55 @@ To deal with the actual archiving, each `Entry` object was given an `isArchived`
 was archived or not. Predicates to check the value of the `isArchived` attribute of each entry could then be applied to the
 filtered lists to filter out archived entries (or filter only archived entries).
 
-Finally, the `archive` command aws designed to take only the index as the parameter. It would archive the entry specified
+Finally, the `archive` command was designed to take only the index as the parameter. It would archive the entry specified
 by the index that was in the currently displayed list. The `unarchive` command has a similar design.
+
+#### Implementation
+
+For the `archive` command:
+1. The user executes `archive 3`.
+2. This command is parsed to check if the given index is valid. If not, a `ParseException` is thrown.
+3. Otherwise, the created `ArchiveCommand` object will execute `Model#archiveEntry(index, true)`.
+4. The model will then retrieve the object from the currently displayed filtered list based on the `index` given and pass
+this along with the boolean argument to`ReadOnlyAddressBook#setArchiveEvent()` (or `setArchiveCompany()` or `setArchivePerson()`) depending on
+the value of `currentlyDisplayedListType`
+5. The address book will then call `setArchiveEntry(object, true)` in the respective `UniqueEntryList`.
+6. Finally, the `UniqueEntryList` will search for the passed object and if it exists (which it should unless a bug occurs),
+it will call the `setArchived(true)` of the Entry.
+7. Finally, the command calls `Model#updateCurrentlyDisplayedList(PREDICATE_SHOW_UNARCHIVED_ONLY)` to change the currently
+displayed list to show all its unarchived entries. Note that in order to get the update to work properly,
+`Model#updateCurrentlyDisplayedList(PREDICATE_ALL) must be called first.
+8. The `CommandResult` of the `archive` command is returned.
+
+A similar process is performed with the `unarchive` command, but `Entry#setArchived()` is ultimately passed `false` instead of `true`.
+
+For one of the list commands, here is a sample process:
+1. The user executes `listc`
+2. The `ListCommandParser` object is creates with the appropriate `ListType` passed as a parameter to the constructor.
+3. The `ListCommandParser` parses the command to see if the search type parameter is valid. If there is none, or if the
+passed search type parameter is `unarchived`, `archived`, or `all`, the execution proceeds to 3). Otherwise, a
+`ParseException` is thrown.
+4. The `ListCommandParser` then creates the appropriate `ListCommand` object based on the `ListType` attribute. The
+`ListCommand` object is created with a `SearchType` passed as the parameter.
+5. When the `ListCommand` object is executed, it switches the displayed list to the proper one and applies the appropriate
+predicate on it depending on the search type.
+6. The `CommandResult` of the `find` command is returned.
+
+### Sort Feature
+
+#### Design
+
+The main idea for the sort feature for InternBuddy is that entries can be sorted by the importance of the entry. In InternBuddy, the importance of a company or a person is based on the lexicographical order of the company or person's name. As for event, the importance of an event is based on the date of the event. The sort feature is capable of ordering the entries in ascending or descending order.
+
+The `sort` command functions similarly to its `list` counterpart in terms of display. Both the commands will display the entries accordingly depending on the entry type specified for the command. The difference is that the `sort` command will sort the entries according to the importance of the entry.
+
+Due to its similar nature to the `list` command, the `sort` command extends the `list` command to minimize re-implmenting the same behaviour twice. This is also done to further enforce DRY. The `sort` command also has a `SearchType` parameter. The `SearchType` parameter is optional. The `sort` command takes in an additional `Ordering` parameter as well. The `Ordering` parameter is optional. the `Ordering` parameter allows the user to specify whether the entries should be sorted in ascending or descending order.
+
+Since `sort` is a newly implemented feature, a new parser `SortCommandParser`. Similar to its `list` counterpart, `SortCommandParser` will handle the creation of the 3 kinds of sort commands. Similar to above, the `SortCommandParser` will also handle the parsing of the `SearchType` and `Ordering` parameters. Now the `parse()` method can return any of the 3 sort commands.
+
+To handle the actual sorting, the `SortCommand` will call `Model#sortPersonListByName`/ `Model#sortCompanyListByName`/ `Model#sortEventListByDate` to sort the entries. Each respective call of sort methods in the model calls the same respective method in addressbook.
+
+Please take note that the `SortCommand` does not just sort the displayed list (`FilteredList`), it also sorts the actual stored list (`UniqueEntryList`). This is to ensure that the order of the list persists even after the user has sorted the list (i.e. calling a `find` or `list` command).
 
 #### Implementation
 
