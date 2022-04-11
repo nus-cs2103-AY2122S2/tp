@@ -14,32 +14,41 @@ Given below are my contributions to the project.
 
 **Enhancements implemented**
 1. Implementation and testing of order class
-   * Implementation and testing for the overall order class containing its relevant components such as:
-     * Order Details 
-     * Order Deliver/Pickup Enum (Collection Type)
-     * Order Remark 
-     * Order Delivery Date & Time 
-     * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
+  * Part of PR [#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83) and PR [#126](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/126)
+  * Implementation and testing for the overall order class containing its relevant components such as:
+    * Order Details 
+    * Order Deliver/Pickup Enum (Collection Type)
+    * Order Remark 
+    * Order Delivery Date & Time 
+    * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
 2. Implementation and testing for order functionality 
-   * Implemented and performed test for Delete Order, List Order 
+   * Part of PR [#95](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/95)
+   * Implemented and performed test for Delete Order, List Order
    * Justification: It is necessary to be able to list out and delete orders 
 3. Implementation and testing of additional functionality for find order
+   * Part of PR [#160](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/160) and PR [#175](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/175)
    * Implemented and performed test for Find Order with the attributes order details, collectionType and remarks. 
    * Justification: It is a vital component of our application for a baker to search for their orders through different attributes
 4. Implementation of additional attributes for Person Class
+   * Part of PR [#91](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/91) and PR [#126](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/126)
    * Implemented and performed test for the Remark attribute in the Person Class, refactored Add Command to Add Person Command
 
 **Contributions to the UG**
-1. Added feature guides for listo, addp, marko, unmarko, findo, addo
-2. Added Table of Contents & FAQ
-3. Fix formatting errors and minor mistakes
+1. Added/edited feature guides for listo, addp, findo, addo, clear, marko, unmarko
+   * Part of PR [#162](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/162) and PR [#170](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/170) and PR [#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50)
+3. Added Table of Contents & FAQ
+   * Part of PR [#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50)
+4. Fix formatting errors and minor mistakes
 
 **Contributions to the DG**
 1. Added in non-functional requirements 
+   * Part of PR [#64](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/67)
 2. Add user story and use case for marko, unmarko, clear
+   * Part of PR [#68](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/68) 
 3. Add in AddOrderCommandSequenceDiagram and its design considerations
-4. Edit ModelComponentClassDiagram
-5. Add Table of Contents
+   * Part of PR [#136](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/136)
+4. Edit ModelComponentClassDiagram and add Table of Contents
+   * Part of PR [#244](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/244) 
 
 **Contributions to team-based tasks**
 1. Contributed in team discussion for overall product direction
