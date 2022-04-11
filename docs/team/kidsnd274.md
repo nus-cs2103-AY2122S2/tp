@@ -18,18 +18,14 @@ for a list of commits I've contributed.
 [Click here](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=Kidsnd274&tabRepo=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 to see the code I've contributed.
 
-<div style="page-break-after: always;"></div>
-
 ### New features implemented
 1. Implemented an InfoPanel that can view Lesson or Student details.
    (Pull request [#63](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/63))
    - What it does: Allows the user to view more detailed information about a Lesson or Student.
-   - Justification: In the previous product AB3, people's details are small enough to fit in a card. As more fields are
-   added to both Lessons and Students, having a dedicated section in the UI to view more detailed information is
-   needed.
-   - Reorganized the bottom half of the UI with two sections, split using a slider
+   - Justification: As more fields are added to both Lessons and Students, having a dedicated section in the UI to view 
+   more detailed information is needed.
+   - Reorganized the bottom half of the UI with two sections, split using a slider.
    - Designed new InfoPanel for both Lesson and Student
-   - Wrote code that allowed a Lesson or Student to be passed to the UI to display their information.
 2. Added `lesson` and `student` view commands to view the details of a Lesson or Student in the InfoPanel.
    (Pull request [#62](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/62))
    - This is an extension of the InfoPanel feature
@@ -38,13 +34,10 @@ to see the code I've contributed.
 3. Implemented a user input history function (Pull request 
 [#150](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/150))
    - What it does: Allows users to view previously entered commands using the arrow keys
-   - <kbd>↑</kbd> key to go back in history and
-   - <kbd>↓</kbd> key to go forward in history
    - Justification: Since CLIs have command history as a basic feature, adding it to TeachWhat not only improves user
    experience but is also fitting as we are trying to target CLI users.
    - Highlights: Retyping an entire command can be troublesome, especially when executing something similar. This
    enhancement would allow someone to easily refer to and edit their previously entered command.
-   - Can store multiple previous commands.
 
 <div style="page-break-after: always;"></div>
 
@@ -73,8 +66,6 @@ to see the code I've contributed.
 [#266](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/266))
    - First launch and saving window preferences
    - Adding lesson and student details
-
-<div style="page-break-after: always;"></div>
 
 ### Contributions to the User Guide
 1. Updated user stories (Pull request [#49](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/49))
