@@ -7,11 +7,11 @@ start
 if () then ([valid command provided])
   :Create Pay Command;
   :Execute Pay Command;
-  if () then ([valid index provided])
+  if () then ([valid transaction index provided])
   : update the specified transaction;
   : Display Success message;
   stop
-  else ([invalid index])
+  else ([invalid transaction index])
    : Throw Exception;
    : Display Invalid Index message;
    stop
