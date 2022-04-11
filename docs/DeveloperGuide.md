@@ -397,8 +397,7 @@ Aspect: How undo executes:
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* Alternative 2: Individual command knows how to undo/redo by
-  itself.
+* Alternative 2: Individual command knows how to undo/redo by itself.
     * Pros: Will use less memory (e.g. for delete, just save the pet being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
