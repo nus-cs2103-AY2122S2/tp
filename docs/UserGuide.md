@@ -134,7 +134,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>EMAIL</td>
         <td><code>e/</code></td>
-        <td>It represents the email of the students.
+        <td>It represents the email of the student.
         </td>
     </tr>
     <tr>
@@ -170,7 +170,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>MODULE_NAME</td>
         <td><code>n/</code></td>
-        <td>It represents the name of the module, , similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>Software Engineering Project</code>.
+        <td>It represents the name of the module, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>Software Engineering Project</code>.
         </td>
     </tr>
     <tr>
@@ -257,6 +257,10 @@ Format: `list module`
 
 #### Delete a module: `delete module`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is destructive.
+</div>
+
 You can always delete a module from TAssist. Deleting the module will also delete associated class group(s) and assessment(s).
 
 Format: `delete module INDEX`
@@ -297,6 +301,10 @@ Examples:
 
 
 #### Delete an assessment: `delete assessment`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is destructive.
+</div>
 
 Delete any assessment from TAssist by specifying its index.
 
@@ -340,6 +348,10 @@ Examples:
 
 
 #### Delete a class group: `delete class`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is destructive.
+</div>
 
 Use the delete class command to remove a specified class group from TAssist.
 
@@ -400,6 +412,10 @@ Examples:
 
 
 #### Delete a student: `delete student`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is destructive.
+</div>
 
 Delete a specified student from TAssist as well as the student's attempt(s) in any assessment(s).
 
