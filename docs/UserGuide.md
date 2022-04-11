@@ -17,7 +17,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 1. Ensure you have Java `11` or above installed in your Computer.
    * If you don't have it installed, you can follow [Oracle's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
    for your operating system.
-   * Also ensure that you have selecte Java `11` as your default Java version.
+   * Also ensure that you have selected Java `11` as your default Java version.
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
