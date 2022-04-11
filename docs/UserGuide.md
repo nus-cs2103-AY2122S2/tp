@@ -73,7 +73,7 @@ Adds a new friend to _Amigos_.
 * Note that friend names should only contain alphanumeric characters and spaces
 * Note that there can be no duplicate friends having the same name (case-insensitive).
 * Note that names have to be exactly matched (in a case-insensitive manner) to be considered as duplicates. For example,
-  John Doe and John &nbsp; Doe are considered as different friends.
+  John Doe and John &nbsp; Doe (with the extra space) are considered as different friends.
 
 **Examples**:
 
