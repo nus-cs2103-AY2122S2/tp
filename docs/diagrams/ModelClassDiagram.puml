@@ -25,6 +25,8 @@ Class PrevDateMet
 Class Salary
 Class ScheduledMeeting
 Class Tag
+Class MeetingDate
+Class MeetingTime
 
 }
 
@@ -54,6 +56,8 @@ Person *--> Info
 Person *--> PrevDateMet
 Person *--> Salary
 Person *--> ScheduledMeeting
+ScheduledMeeting --> MeetingTime
+ScheduledMeeting --> MeetingDate
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
