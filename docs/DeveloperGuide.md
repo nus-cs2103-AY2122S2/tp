@@ -927,7 +927,7 @@ testers are expected to do more *exploratory* testing.
       2. Test case ii: Click on the 'Yes' button to confirm data deletion. <br>
          Expected: All data gets deleted from the application.
 
-2. Clearing all meetings
+1. Clearing all meetings
 
   1. Prerequisites: Have at least one meeting stored in the application.
 
@@ -950,7 +950,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `list asdf` <br>
         Expected: No change occurs and no error is displayed.
 
-### 8.9 View
+### 8.9 Viewing a contact
 
 1. Viewing a contact
     1. Prerequisites:Have at least one contact stored in the application.
