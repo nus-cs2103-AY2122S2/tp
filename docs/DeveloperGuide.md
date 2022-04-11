@@ -628,5 +628,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete John`, `...` (where the prefix is missing)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
