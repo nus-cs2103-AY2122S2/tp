@@ -2,14 +2,47 @@
 layout: page
 title: Developer Guide
 ---
+
+## **Introduction**
+
+Teaching Assistant Contact Helper (TACH) is a desktop application for Computer Science (CS) Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students. The
+application is highly optimised for users who can type fast as it is based on the Command Line Interface (CLI). Thus,
+the main interaction with TACH will be done through user text-based commands.
+
+This developer’s guide assumes its readers to have a basic understanding of programming.
+
+The purpose of this Developer Guide is to help readers understand the design and implementation of TACH, so that
+any reader who is interested can become a contributor to this project as well.
+
+--------------------------------------------------------------------------------------------------------------------
+## **Acknowledgements**
+
+- This project is based on the AddressBook-Level3(AB3) project created by the [SE-EDU initiative](https://se-education.org). <br>
+- Libraries used: 
+  - [JavaFX](https://openjfx.io/)
+  - [Jackson](https://github.com/FasterXML/jackson)
+  - [JUnit5](https://github.com/junit-team/junit5)
+  - [Markdown-javafx-renderer](https://github.com/JPro-one/markdown-javafx-renderer)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Navigation
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Following are a few syntaxes to take note of before proceeding with the rest of the developer guide:
+
+| Syntax                                                                  | Description                                                   |
+|-------------------------------------------------------------------------|---------------------------------------------------------------|
+| `Markdown`                                                              | Denotes file path, distinct classes, their usage or examples. |
+| <div markdown="span" class="alert alert-info">:information_source: Note | Important information to take note of.                        |
+| Words in `UPPER_CASE`                                                   | Parameters to be supplied by the user.                        |
+| parameter end with `…`                                                  | This parameter can be added multiple times.                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,12 +56,12 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png"/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -36,7 +69,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,24 +102,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -95,7 +128,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -113,20 +146,22 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Go back to **[Table of Contents](#table-of-contents)**
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `TutorialGroup` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `TutorialGroup` object per unique tutorial group, instead of each `Student` needing their own `TutorialGroup` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -135,7 +170,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W15-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -148,96 +183,241 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+Go back to **[Table of Contents](#table-of-contents)**
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
+* [Telegram and GitHub attribute implementations](#telegram-and-github-attribute-implementations)
+    * [How it works](#how-it-works)
+    * [Why it works](#why-it-works)
+    * [Design considerations regarding how empty GitHub and Telegram should be stored](#design-considerations-regarding-how-empty-github-and-telegram-should-be-stored)
+* [`addtg` feature](#addtg-feature)
+    * [How `addtg` command is parsed and executed](#how-addtg-command-is-parsed-and-executed)
+    * [Example usage scenario and how the `addtg` mechanism behaves](#example-usage-scenario-and-how-the-addtg-mechanism-behaves)
+* [`deletetg` feature](#deletetg-feature)
+    * [How `deletetg` command is parsed and executed](#how-deletetg-command-is-parsed-and-executed)
+    * [A few interesting details regarding how `deletetg` command works](#a-few-interesting-details-regarding-how-deletetg-command-works)
+* [`findtg` feature](#findtg-feature)
+    * [How `findtg` command is parsed and executed](#how-findtg-command-is-parsed-and-executed)
+    * [Example usage scenario and how the `findtg` mechanism behaves](#example-usage-scenario-and-how-the-findtg-mechanism-behaves)
+
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Telegram and GitHub attribute implementations
 
-#### Proposed Implementation
+The diagram below shows that a `Student` may or may not have a `Telegram` and a `Github`.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+<img src="images/ModelClassDiagram.png" width="450" />
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Students with empty
+`GitHub` and `Telegram` are stored using `GitHub` and `Telegram` instantiated with empty strings as shown below.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+<img src="images/StudentWithEmptyTelegramAndGitHub.png" width="900" />
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### How it works
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Below is a sequence diagram for `addStudentCommand`. The command was implemented such that all inputs have to be parsed by the respective methods of `ParserUtil`.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<img src="images/AddStudentSequenceDiagram.png" width="900" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+>**Note:** parseGitHub and parseTelegram methods now accommodate null as inputs.<br/>
+> Here is a snippet for parseGitHub. parseTelegram has a similar format as well.
+> ```
+> public static GitHub parseGitHub(String gitHub) throws ParseException {
+>     if (gitHub == null) {
+>         return new GitHub(null);
+>     }
+>     String trimmedGitHub = gitHub.trim();
+>     if (!GitHub.isValidGitHub(trimmedGitHub)) {
+>         throw new ParseException(GitHub.MESSAGE_CONSTRAINTS);
+>     }
+>     return new GitHub(trimmedGitHub);
+> }
+> ```
 
-![UndoRedoState1](images/UndoRedoState1.png)
+GitHub and Telegram objects instantiated with null inputs have a value of ""
+Here is a snippet for the constructor of Telegram. GitHub also have a similar format.
+```
+public Telegram(String telegram) {
+    if (telegram == null) { //if telegram is empty it will exist as an empty string
+        value = "";
+    } else {
+        checkArgument(isValidTelegram(telegram), MESSAGE_CONSTRAINTS);
+        value = telegram;
+    }
+}
+```
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+This means that an empty `GitHub` object will have a "" value and a `GitHub` object with a value of "" means that it is an empty `GitHub` object. The same logic applies to `Telegram` objects as well.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+#### Why it works
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+As shown in the previous sequence diagram, `ParserUtil` parses all the inputs for the add command. Thus, an empty string (i.e. "") will be parsed though the method isValidXX, where XX is an attribute i.e. isValidName. All empty string will throw an error in any of parse methods in `ParserUtil`. Thus, an empty string will never be able to be accepted through the user input. Therefore, an empty string was used as a means to identify and instantiate attributes that can be empty (e.g. GitHub and Telegram).
 
-</div>
+#### Design considerations regarding how empty GitHub and Telegram should be stored
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+* Alternative 1: Stored as null
+  * Pros: Easy to implement
+  * Cons: NullPointerException can occur if `.toString()`of null is called
 
-![UndoRedoState3](images/UndoRedoState3.png)
+* Alternative 2: Stored as a reserved valid string e.g. "null"
+  * Pros: Avoid NullPointerExceptions
+  * Cons: Possibility of a student whose telegram or github be the string "null".
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+* Alternative 3 (Current Choice): Stored as an invalid string i.e. ""
+  * Pros: Avoid NullPointerExceptions
+  * Cons: We must ensure that the conversion from Object to Json and vice-versa must be correct.
 
-</div>
+### `addtg` feature
 
-The following sequence diagram shows how the undo operation works:
+The `addtg` command adds tutorial group(s) to a student
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+The *add tutorial group(s) to a student* mechanism is facilitated by the `LogicManager` and the `AddressBookParser`. It is implemented by adding the parser class `AddTutorialGroupParser` and the command class `AddTutorialGroupCommand`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+```
+command format: addtg INDEX tg/TUTORIAL_GROUP...
+```
+#### How `addtg` command is parsed and executed
 
-</div>
+Assuming the command is valid and execution is successful,
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+1. `LogicManager` is called to execute the command, using the `AddressBookParser` class to parse the
+   command.
+2. `AddressBookParser` sees that the command has the valid starting command word `addtg` and creates a
+   new `AddTutorialGroupParser` that parses the command.
+3. `AddTutorialGroupParser` confirms the command is valid and returns a `AddTutorialGroupCommand` to
+   be executed by the `LogicManager`
+4. `LogicManager` executes `AddTutorialGroupCommand`, which gets the relevant information from the
+   `Model` component, getting the filtered student list and acquiring the student at the specified `Index`.
+5. `AddTutorialGroupCommand` creates a new `Student` combining the existing and newly specified `TUTORIAL_GROUP(s)` and returns the relevant `CommandResult` to `LogicManager`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+Rationale:
+- A new `Student` is created with the new combined information instead of adding the new tutorial group(s) to the existing `Student` because a `Student` object is immutable.
+- An `Index` based on the current list shown is used to specify which `Student` will be updated. An alternative would be to use the name of the student instead of an index. However, an index makes it easier and faster for users to key in the command as it is way shorter (length) as compared to a student's name.
+  - Hence, to increase efficiency of TACH, we have chosen `index` to be our indicator.
 
-</div>
+#### Example usage scenario and how the `addtg` mechanism behaves
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+When the user executes `addtg 2 tg/CS2103T W15-3 tg/CS2101 G08` command to add a tutorial group to the 2nd student listed in the address book.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The following sequence diagram shows how the `addtg` operation works:
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+<img src="images/AddTutorialGroupSequenceDiagram.png" width="900" />
 
-![UndoRedoState5](images/UndoRedoState5.png)
+The following diagram shows a brief overview of the AddTutorialGroupDescriptor created shown in the `addtg` sequence diagram above
 
-The following activity diagram summarizes what happens when a user executes a new command:
+<img src="images/AddTutorialGroupDescriptorDiagram.png" width="500" />
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+Go back to **[Table of Contents](#table-of-contents)**
 
-#### Design considerations:
+### `deletetg` feature
 
-**Aspect: How undo & redo executes:**
+The `deletetg` command deletes a tutorial group from a student.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+The *deleting a tutorial group from student* mechanism is facilitated by the `LogicManger` and the
+`AddressBookParser`. It is implemented by adding the parser class `DeleteTutorialGroupParser` and the
+command class `DeleteTutorialGroupCommand`.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+```
+command format: deletetg INDEX tg/TUTORIAL_GROUP
+```
 
-_{more aspects and alternatives to be added}_
+#### How `deletetg` command is parsed and executed
 
-### \[Proposed\] Data archiving
+Assuming the command is valid and execution is successful,
 
-_{Explain here how the data archiving feature will be implemented}_
+1. `LogicManager` is called to execute the command, using the `AddressBookParser` class to parse the
+command.
+2. `AddressBookParser` sees that the command has the valid starting command word `deletetg` and creates a
+new `DeleteTutorialGroupParser` that parses the command.
+3. `DeleteTutorialGroupParser` confirms the command is valid and returns a `DeleteTutorialGroupCommand` to
+be executed by the `LogicManager`
+4. `LogicManager` executes `DeleteTutorialGroupCommand`, which gets the relevant information from the
+`Model` component, getting the filtered student list and acquiring the student at the specified `Index`.
+5. `DeleteTutorialGroupCommand` deletes the specified `TUTORIAL_GROUP` of the student and returns the relevant `CommandResult` to `LogicManager`
 
+Sequence Diagram:
+
+<img src="images/DeleteTutorialGroupSequenceDiagram.png" width="900" />
+
+<br>
+
+This feature was implemented to follow this sequence to keep it consistent with the rest of the `Command`s
+and `Parser`s.
+
+#### A few interesting details regarding how `deletetg` command works
+
+- The command takes in an `Index` instead of a student's name because we felt that it was much easier to
+type in a number than the entirety of someone's name. It is also distinct and much less vague.
+
+
+- Only one tutorial group can be deleted at a time. If a student has some tutorial groups but not all
+tutorial groups to be deleted, what should the command do? Making it such that only one tutorial group can
+be deleted at a time prevents ambiguity in contrast to if several tutorial groups can be deleted at a time.
+
+
+- If the tutorial group to be deleted is the only one that the student has, the command will not work. A
+student must have at least one tutorial group. If this were not the case, it could result in some serious
+buggy behaviours regarding other commands involving tutorial groups.
+
+
+- The tutorial group must be typed exactly, but is case-insensitive. <br> An alternative would be to
+indicate an `Index` instead of the exact tutorial group, but that would mean we would either have to
+display an overall index of all the modules, or display an index of all the modules for each student.
+Either way it would make the UI more complex and cluttered. <br> This is why we decided to make it such
+that it must be typed exactly, but is case-insensitive, since two tutorial groups should be the same if
+only their cases are different.
+
+### `findtg` feature
+
+The `findtg` command will list all students in a particular tutorial group.
+
+The *find a tutorial group* mechanism is facilitated by the `LogicManger` and the
+`AddressBookParser`. It is implemented by adding the parser class `FindTutorialGroupParser`, the
+command class `FindTutorialGroupCommand` and the model class `TutorialGroupKeywordsPredicate`.
+
+```
+command format: findtg TUTORIAL_GROUP
+```
+
+#### How `findtg` command is parsed and executed
+
+Assuming the command is valid and execution is successful,
+
+1. `LogicManager` is called to execute the command, using the `AddressBookParser` class to parse the
+   command.
+2. `AddressBookParser` sees that the command has the valid starting command word `findtg` and creates a
+   new `FindTutorialGroupParser` that parses the command.
+3. `FindTutorialGroupParser` confirms the command is valid and returns a `FindTutorialGroupCommand` to
+   be executed by the `LogicManager`
+4. `FindTutorialGroupCommand` passes the specified `TUTORIAL_GROUP` name to `TutorialGroupKeywordsPredicate` to 
+filter out all students with the specified `TUTORIAL_GROUP` name
+5. `LogicManager` executes `FindTutorialGroupCommand`, which gets the relevant information from the
+   `Model` component, getting the filtered student list.
+6. `FindTutorialGroupCommand` filter out all students in the specified `TUTORIAL_GROUP` and returns the relevant 
+`CommandResult` to `LogicManager`
+
+#### Example usage scenario and how the *findtg* mechanism behaves
+
+When the user executes `findtg CS2100 T05` command to find a tutorial group.
+
+The following sequence diagram shows how the `findtg` operation works:
+
+<img src="images/FindTutorialGroupSequenceDiagram.png" width="900" />
+
+There are a few interesting details as to how the command works:
+
+- The tutorial group must be typed exactly, but is case-insensitive. Since it is more convenience for user to type and
+  two tutorial groups should be the same if only their cases are different.
+
+- If there are no matching tutorial group found in the students, the command will return an empty student list
+
+- `findtg` do not support find partial keyword to prevent ambiguity and TAs usually teach a single module with multiple
+tutorial group. This operation is provided for users to sort students by their specified tutorial group
+
+Go back to **[Table of Contents](#table-of-contents)**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,71 +437,291 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a Computer Science (CS) Teaching Assistant (TA) in NUS
+* is teaching multiple Computer Science modules/tutorial groups
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: TACH helps CS Teaching Assistants teaching multiple tutorial groups to manage
+their students in an organized manner. Our sorting feature will allow TAs to view, categorize
+and get information of all their students at one glance.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                               | I want to …​                                                                       | So that I can …​                                                               |
+|----------|------------------------------------------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | CS TA                                    | add a student                                                                         | keep track of them and their contacts                                             |
+| `* * *`  | CS TA                                    | add a tutorial group to a student                                                     | identify which tutorial groups a student is taking                                |
+| `* * *`  | CS TA                                    | delete a student                                                                      | make sure I have the correct student in the list                                  |
+| `* * *`  | CS TA                                    | delete a tutorial group from a student                                                | make sure a student has the correct tutorial groups                               |
+| `* * *`  | CS TA                                    | delete a tutorial group from all students                                             | remove non-existing tutorial groups at the end of a semester easily               |
+| `* * *`  | CS TA                                    | find students by name                                                                 | contact the appropriate student                                                   |
+| `* * *`  | Forgetful CS TA                          | find students by parts of their names                                                 | contact the appropriate student even if I don't remember their full names         |
+| `* * *`  | CS TA using the application              | see all the students' contact information that I stored                               |                                                                                   |
+| `* * *`  | CS TA with small desktop screen          | see all the students' contact information that I stored                               |                                                                                   |
+| `* * *`  | CS TA                                    | get my students' private contact details like their email, Telegram and GitHub easily | save time from the convenience of having all the contact details in one place     |
+| `* * *`  | CS TA who is experienced in CLI programs | type everything in one command at one go                                              | manage things in the application more quickly                                     |
+| `* * *`  | CS TA new to the application             | be able to find a user guide for the application                                      | refer to it when needed                                                           |
+| `* * *`  | CS TA using the application              | be able to exit the application                                                       |                                                                                   |
+| `* * *`  | CS TA                                    | be able to edit the details of the student I added                                    | correct my mistakes or add information without having to add a new Student        |
+| `* * `   | CS TA                                    | sort my students by tutorial groups                                                   | find the appropriate students for my tutorial groups easily                       |
+| `* * `   | CS TA                                    | sort my students by name                                                              | easily find someone if I forgot part of their name                                |
+| `* * `   | CS TA                                    | find students by a tutorial group                                                     | see which students are in that tutorial group                                     |
+| `* * `   | CS TA                                    | undo my mistakes                                                                      |                                                                                   |
+| `* *`    | CS TA                                    | redo my mistakes                                                                      |                                                                                   |
+| `* *`    | CS TA                                    | store zoom link and venue of tutorial session                                         | find them easily when it is time for tutorial                                     |
+| `* *`    | CS TA that finished a semester           | clear my student contact list                                                         | easily start afresh for the next semester                                         |
+| `* *`    | Forgetful TA                             | store timing of the tutorial session                                                  | find them easily when I lose track of time                                        |
+| `* *`    | CS TA                                    | keep track of the assignments submitted by students                                   | mark accordingly                                                                  |
+| `* `     | CS TA                                    | send group messages to a specific group of students                                   | make announcements effectively                                                    |
+| `* `     | CS TA                                    | see the announcements that I have sent to the students in a tutorial group            |                                                                                   |
+| `* `     | Busy TA                                  | set an alarm before the tutorial starts                                               | be on time for tutorial session                                                   |
 
-*{More to be added}*
+
+Go back to **[Table of Contents](#table-of-contents)**
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Teaching Assistant Contact Helper (TACH)` and the **Actor** is the `Teaching Assistant (TA)`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. TA adds a new student to the contact list by giving their name, their email and their tutorial group
+2. Student successfully added to the list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The command has an invalid name, email and/or tutorial group.
+  * 1a1. TACH prompts the TA to type in the valid parameters.
+  Step 1a1 is repeated until the data entered is correct.
+
+    Use case resumes from step 2.
+
+
+* 1b. The command does not have a name, email and/or tutorial group.
+    * 1b1.  TACH prompts the TA to add in the valid parameters.
+    Step 1b1 is repeated until the data entered is correct.
+
+      Use case resumes from step 2.
+<br><br>
+
+**Use case: UC02 - Add a tutorial group to a student**
+
+**MSS:**
+
+1. TA adds a new tutorial group to a student by giving the relevant tutorial group.
+2. The new tutorial group is successfully added to the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command has an invalid tutorial group.
+  * 1a1. TACH prompts the TA to type in a valid tutorial group.
+  Step 1a1 is repeated until a valid tutorial group is entered.
+
+    Use case resumes from step 2.
+
+* 1b. The command has an invalid student or a student that does not exist in the contact list.
+  * 1b1. TACH prompts the TA to type in a valid student.
+  Step 1b1 is repeated until a valid student is entered.
+
+    Use case resumes from step 2.
+<br><br>
+
+**Use case: UC03 - Delete a student**
+
+**MSS:**
+
+1.  TA requests to view all students.
+2.  TACH shows a list of students.
+3.  TA requests to delete a specific student in the list by their index on the list.
+4.  TACH deletes the student from the tutorial group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student list is empty. There are no students that can be deleted.
 
   Use case ends.
 
+* 1b. TA chooses instead to find students from a specific tutorial group.
+
+  Use case resumes at step 2.
+
 * 3a. The given index is invalid.
+  * 3a1. TACH prompts the TA to type in a valid index.
+  Step 3a1 is repeated until a valid index is entered.
 
-    * 3a1. AddressBook shows an error message.
+  Use case resumes at step 4.
+<br><br>
 
-      Use case resumes at step 2.
+**Use case: UC04 - Delete a tutorial group from a student**
 
-*{More to be added}*
+**MSS:**
+
+1. TA requests to delete a tutorial group from a student.
+2. The tutorial group is successfully deleted from the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The tutorial group requested is an invalid tutorial group or the student is not under that tutorial group.
+  * 1a1. TACH prompts the TA to type a valid tutorial group.
+  Step 1a1 is repeated until a valid tutorial group is entered.
+  
+* 1b. The tutorial group requested to be deleted is the only tutorial group the student has.
+  * 1b1. TACH notifies the TA that the tutorial group cannot be deleted.
+
+    Use case ends.
+<br><br>
+
+**Use case: UC05 - Find students from a tutorial group**
+
+**MSS:**
+
+1. TA requests to find a tutorial group.
+2. TACH list out all the students from the tutorial group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The tutorial group entered is not found in any student.
+    * 1a1. TACH prompts that there is 0 student in the list.
+
+  Use case ends.
+<br><br>
+
+**Use case: UC06 - Clearing all students**
+
+**MSS:**
+
+1. TA chooses to clear all students from their contact list.
+2. TACH completely clears its list.
+
+    Use case ends.
+<br><br>
+
+**Use case: UC07 - Delete a tutorial group from all students**
+
+**MSS:**
+
+Similar to UC04 except that it applies to all students under that tutorial group instead.
+
+**Extensions**
+
+* 1a. The tutorial group requested is an invalid tutorial group.
+  * 1a1. TACH prompts the TA to type a valid tutorial group.
+Step 1a1 is repeated until a valid tutorial group is entered.
+
+* 1b. The tutorial group requested to be deleted is the only tutorial group the student has.
+  * 1b1. TACH deletes the tutorial group from the student.
+  * 1b2. The student with no tutorial groups remaining afterwards will be deleted. 
+Steps 1b1 - 1b2 are repeated until the requested tutorial group is removed from all the students under it.
+<br><br>
+
+**Use case: UC08 - Get user guide**
+
+**MSS:**
+
+1. TA requests for the user guide.
+2. TACH provides the link to the user guide.
+
+   Use case ends.
+<br><br>
+
+**Use case: UC09 - Exit TACH**
+
+**MSS:**
+
+1. TA requests to exit TACH.
+2. TACH closes.
+
+   Use case ends.
+<br><br>
+
+**Use case: UC10 - See list of all students**
+
+**MSS:**
+
+1. TA request to see list of all students in TACH.
+2. TACH displays the list of all students that are stored.
+
+   Use case ends.
+<br><br>
+
+**Use case: UC11 - Find a student**
+
+**MSS:**
+
+1. TA requests to find a student.
+2. TACH list out all the students that was requested. 
+
+   Use case ends.
+<br><br>
+
+**Use case: UC12 - Edit a student**
+
+**MSS:**
+
+1. TA requests to edit information of a specific student in the list by their index on the list.
+2. TACH updates the student specified by the index with the information provided by TA
+
+    Use case ends.
+
+**Extensions**
+* 1a. The given index is invalid.
+    * 1a1. TACH prompts the TA to type in a valid index.
+      Step 1a1 is repeated until a valid index is entered.
+
+* 1b. The email/telegram/github/name, that is provided, is invalid.
+    * 1b1. TACH prompts the TA to type in a valid attribute for the attribute that is invalid.
+      Step 1b1 is repeated until the provided attributes are valid.
+
+* 1c. The tutorial group ,if provided, is empty or invalid
+    * 1c1. TACH prompts the TA to type in a non-empty and valid tutorial group.
+      Step 1c1 is repeated until the tutorial group is valid and non-empty.
+  Use case resumes at step 2.
+  <br><br>
+
+Go back to **[Table of Contents](#table-of-contents)**
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to `1000` persons without a noticeable sluggishness in performance for typical usage.
+3. The system should respond within two seconds.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. The user interface should be easy to understand for beginner users.
+6. The commands should feel intuitive and easy to pick up and remember to a beginner user.
+7. The source code should be open source.
+8. The product is free and ready-to-use as soon as one downloads it.
+9. The product should work offline, without an Internet connection.
 
 ### Glossary
 
+* **Tutorial Group**: Tutorial Group is synonymous with "(Tutorial) Class", we use the term Tutorial Group in our code
+and documentation to prevent it from being confused with "Java Classes".
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **API**: An application programming interface (API) is the medium by which different software interact
+* **Interface**: An abstract type that is used to specify a behavior of certain tutorial groups
+* **System admin commands**: Terminal commands such as `pwd`, `ls`, `tar`
+* **Open source**: Open source code is publicly accessible to everyone to read, modify and distribute
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -349,29 +749,74 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Deleting a student
 
-### Deleting a person
+1. Deleting a student while all students are being shown
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a tutorial group
 
-### Saving data
+1. Finding students from a particular tutorial group while all students are being shown
+   1. Prerequisites: Multiple students are added to a tutorial group eg:`CS2103T W15`.
 
-1. Dealing with missing/corrupted data files
+   2. Test case: `findtg CS2103T W15`<br>
+      Expected: all students added to the tutorial group `CS2103T W15` are listed out. Number of students listed out are shown in the status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   3. Test case: `findtg CS2103T`<br>
+      Expected: No student listed. Since user only input module code without tutorial group details. All invalid entry of tutorial group or no matching tutorial group will result in no student listed.
 
-1. _{ more test cases …​ }_
+### Dealing with corrupted data files
+
+* Troubleshooting with corrupted files:
+   1. Prerequisite: Corrupted data file.
+       * To simulate a corrupted data file:
+         * Open the data folder in the folder where TACH is in. Edit addressbook.json and change one of the fields to an invalid one 
+         e.g. Add a `!` at the end of Irfan's email.
+           i.e. change from
+             > "name" : "Irfan Ibrahim",
+             <br>"telegram" : "@irfan201",
+             <br>"email" : "irfan@hotmail.com",
+             <br>"gitHub" : "",
+             <br>"inTutorialGroups" : [ "CS2106 T01" ]
+
+            to
+            > "name" : "Irfan Ibrahim",
+            <br>"telegram" : "@irfan201",
+            <br>"email" : "irfan@hotmail.com!",
+            <br>"gitHub" : "",
+            <br>"inTutorialGroups" : [ "CS2106 T01" ]
+      
+            > **NOTE:** If there is no data file, open TACH and enter the command `list`. The data file should appear in the folder where TACH is in.
+   2. Test case: Corrupted data file 
+   <br>Open the data folder in the folder where TACH is in. Edit all the data such that it meets the requirement stated here.[Input Requirements](https://ay2122s2-cs2103t-w15-3.github.io/tp/UserGuide.html#input-requirements) 
+   <br> Expected: TACH will now load the data file and not an empty one.
+      * Example: To resolve the issue in step i, change Irfan's email from an invalid one (`irfan@hotmail.com!`) 
+      to a valid one (`irfan@hotmail.com`) by removing the `!` at the end. i.e.
+         <br>change from :
+          > "name" : "Irfan Ibrahim",
+          <br>"telegram" : "@irfan201",
+          <br>"email" : "irfan@hotmail.com!",
+          <br>"gitHub" : "",
+          <br>"inTutorialGroups" : [ "CS2106 T01" ]
+   
+         to
+         > "name" : "Irfan Ibrahim",
+         <br>"telegram" : "@irfan201",
+         <br>"email" : "irfan@hotmail.com",
+         <br>"gitHub" : "",
+         <br>"inTutorialGroups" : [ "CS2106 T01" ]
+
+Go back to **[Table of Contents](#table-of-contents)**
+
+
+

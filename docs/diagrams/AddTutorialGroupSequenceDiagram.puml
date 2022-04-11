@@ -1,0 +1,87 @@
+@startuml
+!include Style.puml
+
+box addtg LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTutorialGroupParser" as AddTutorialGroupParser LOGIC_COLOR
+participant ":AddTutorialGroupDescriptor" as AddTutorialGroupDescriptor LOGIC_COLOR
+participant ":AddTutorialGroupCommand" as AddTutorialGroupCommand LOGIC_COLOR
+participant ":Student" as Student LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+ -> LogicManager : execute("addtg 2 tg/CS2103T W15-3 tg/CS2101 G08")
+activate LogicManager
+LogicManager -> AddressBookParser : parseCommand("addtg 2 tg/CS2103T W15-3 tg/CS2101 G08")
+activate AddressBookParser
+
+create AddTutorialGroupParser
+AddressBookParser -> AddTutorialGroupParser
+activate AddTutorialGroupParser
+AddTutorialGroupParser --> AddressBookParser
+deactivate AddTutorialGroupParser
+
+AddressBookParser -> AddTutorialGroupParser : parse("2 tg/CS2103T W15-3 tg/CS2101 G08")
+activate AddTutorialGroupParser
+
+create AddTutorialGroupDescriptor
+AddTutorialGroupParser -> AddTutorialGroupDescriptor : new AddTutorialGroupDescriptor()
+activate AddTutorialGroupDescriptor
+
+AddTutorialGroupDescriptor --> AddTutorialGroupParser
+deactivate AddTutorialGroupDescriptor
+
+AddTutorialGroupParser -> AddTutorialGroupDescriptor : setTutorialGroups()
+activate AddTutorialGroupDescriptor
+
+AddTutorialGroupDescriptor --> AddTutorialGroupParser
+deactivate AddTutorialGroupDescriptor
+
+create AddTutorialGroupCommand
+AddTutorialGroupParser -> AddTutorialGroupCommand : new AddTutorialGroupCommand(index, addTutorialGroupDescriptor)
+activate AddTutorialGroupCommand
+
+AddTutorialGroupCommand --> AddTutorialGroupParser
+deactivate AddTutorialGroupCommand
+
+AddTutorialGroupParser --> AddressBookParser
+deactivate AddTutorialGroupParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> AddTutorialGroupCommand : execute()
+activate AddTutorialGroupCommand
+
+create Student
+AddTutorialGroupCommand -> Student : new Student(n, t, e, g, tg)
+activate Student
+
+Student --> AddTutorialGroupCommand
+deactivate Student
+
+AddTutorialGroupCommand -> Model : setStudent(studentToEdit, updatedStudent)
+activate Model
+Model --> AddTutorialGroupCommand
+deactivate Model
+
+AddTutorialGroupCommand -> Model : getFilteredStudentList()
+activate Model
+Model --> AddTutorialGroupCommand
+deactivate Model
+
+create CommandResult
+AddTutorialGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTutorialGroupCommand
+deactivate CommandResult
+
+AddTutorialGroupCommand --> LogicManager
+deactivate AddTutorialGroupCommand
+@enduml

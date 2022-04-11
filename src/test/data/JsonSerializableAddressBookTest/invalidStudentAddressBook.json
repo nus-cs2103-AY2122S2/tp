@@ -1,0 +1,9 @@
+{
+  "students": [ {
+    "name": "Hans Muster",
+    "telegram": "@HansMuster",
+    "email": "invalid@email!3e",
+    "gitHub": "hansMuster",
+    "tutorialGroup": [ "CS2103 W13-2" ]
+  } ]
+}

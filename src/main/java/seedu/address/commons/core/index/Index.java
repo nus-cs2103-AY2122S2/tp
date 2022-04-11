@@ -9,6 +9,9 @@ package seedu.address.commons.core.index;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
+    public static final String MESSAGE_CONSTRAINT = "Index is not a non-zero unsigned integer that is less than or"
+        + " equal to 2,147,483,647.";
+
     private int zeroBasedIndex;
 
     /**

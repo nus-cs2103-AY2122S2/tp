@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object "__:Student__" as student
+object "__:GitHub__" as gitHub
+object "__:Telegram__" as telegram
+object "__:Name__" as name
+object "__:Tutorial Group__" as tg
+object "__:Email__" as email
+
+gitHub : value = ""
+telegram : value = ""
+name : fullName = "john smith"
+tg : tutorialGroupName = "CS2103 WT13-2"
+email : value = example@u.nus.edu
+
+student --> tg
+student --> name
+student --> gitHub
+student --> telegram
+student --> email
+@enduml

@@ -1,0 +1,13 @@
+{
+  "students": [ {
+    "name": "Valid Person",
+    "telegram": "9482424",
+    "email": "hans@u.nus.edu",
+    "gitHub": "4th street"
+  }, {
+    "name": "Person With Invalid Phone Field",
+    "telegram": "948asdf2424!",
+    "email": "hans@u.nus.edu",
+    "gitHub": "person-wtih-invalid-field"
+  } ]
+}

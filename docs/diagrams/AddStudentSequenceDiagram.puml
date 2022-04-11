@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box add LOGIC_COLOR_T1
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "s:Student" as Student LOGIC_COLOR
+participant ":AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+end box
+
+-> AddStudentCommandParser : parse("n/john smith e/johnsmith@gmail.com t/john1 tg/CS2106 T04")
+activate AddStudentCommandParser
+
+AddStudentCommandParser -> ParserUtil : parseName("john smith")
+activate ParserUtil
+
+ParserUtil --> AddStudentCommandParser : n
+deactivate ParserUtil
+
+AddStudentCommandParser -> ParserUtil : parseEmail("johnsmith@gmail.com")
+activate ParserUtil
+
+ParserUtil --> AddStudentCommandParser : e
+deactivate ParserUtil
+
+AddStudentCommandParser -> ParserUtil : parseTelegram("john1")
+activate ParserUtil
+
+ParserUtil --> AddStudentCommandParser : t
+deactivate ParserUtil
+
+AddStudentCommandParser -> ParserUtil : parseGitHub(null)
+activate ParserUtil
+
+ParserUtil --> AddStudentCommandParser : g
+deactivate ParserUtil
+
+AddStudentCommandParser -> ParserUtil : parseTutorialGroup("CS2106 T04")
+activate ParserUtil
+
+ParserUtil --> AddStudentCommandParser : tg
+deactivate ParserUtil
+
+create Student
+AddStudentCommandParser -> Student : new Student(n, e, t, g, tg)
+activate Student
+
+Student --> AddStudentCommandParser : s
+deactivate Student
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : new AddStudentCommand(s)
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser
+deactivate AddStudentCommand
+
+[<--AddStudentCommandParser
+deactivate AddStudentCommandParser
+destroy AddStudentCommandParser
+@enduml

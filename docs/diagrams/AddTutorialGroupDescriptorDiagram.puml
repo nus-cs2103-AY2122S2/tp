@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/object-diagram'
+
+object "__:AddTutorialGroupDescriptor__" as addTutorialGroupDescriptor
+object "__:TutorialGroup__" as tutorialGroup_1
+object "__:TutorialGroup__" as tutorialGroup_2
+
+tutorialGroup_1 : tutorialGroupName = "CS2103T W15-3"
+tutorialGroup_2 : tutorialGroupName = "CS2101 G08"
+
+addTutorialGroupDescriptor --> tutorialGroup_1
+addTutorialGroupDescriptor --> tutorialGroup_2
+@enduml

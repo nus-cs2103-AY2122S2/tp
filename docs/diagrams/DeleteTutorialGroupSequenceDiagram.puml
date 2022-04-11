@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteTutorialGroupParser" as DeleteTutorialGroupParser LOGIC_COLOR
+participant "d:DeleteTutorialGroupCommand" as DeleteTutorialGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager: execute("deletetg 2 tg/CS2100 T01")]
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deletetg 2 tg/CS2100 T01")
+activate AddressBookParser
+
+create DeleteTutorialGroupParser
+AddressBookParser -> DeleteTutorialGroupParser
+activate DeleteTutorialGroupParser
+
+DeleteTutorialGroupParser --> AddressBookParser
+deactivate DeleteTutorialGroupParser
+
+AddressBookParser -> DeleteTutorialGroupParser : parse("2 tg/CS2100 T01")
+activate DeleteTutorialGroupParser
+
+create DeleteTutorialGroupCommand
+DeleteTutorialGroupParser -> DeleteTutorialGroupCommand
+activate DeleteTutorialGroupCommand
+
+DeleteTutorialGroupCommand --> DeleteTutorialGroupParser : d
+deactivate DeleteTutorialGroupCommand
+
+DeleteTutorialGroupParser --> AddressBookParser : d
+deactivate DeleteTutorialGroupParser
+DeleteTutorialGroupParser -[hidden]-> AddressBookParser
+destroy DeleteTutorialGroupParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteTutorialGroupCommand : execute()
+activate DeleteTutorialGroupCommand
+
+DeleteTutorialGroupCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> DeleteTutorialGroupCommand
+deactivate Model
+
+DeleteTutorialGroupCommand -> Model : setStudent()
+activate Model
+
+Model --> DeleteTutorialGroupCommand
+deactivate Model
+
+create CommandResult
+DeleteTutorialGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteTutorialGroupCommand
+deactivate CommandResult
+
+DeleteTutorialGroupCommand --> LogicManager : result
+deactivate DeleteTutorialGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

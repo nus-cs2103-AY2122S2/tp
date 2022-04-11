@@ -1,0 +1,15 @@
+{
+  "students": [ {
+    "name" : "Alice Pauline",
+    "telegram": "@APauline",
+    "email" : "alice@u.nus.edu",
+    "gitHub": "alice10",
+    "tutorialGroup": [ "CS2103 W13-2" ]
+  }, {
+    "name": "Alice Pauline",
+    "telegram": "@APauline",
+    "email": "alice@u.nus.edu",
+    "gitHub": "alice10",
+    "tutorialGroup": [ "CS2103 W13-2" ]
+  } ]
+}

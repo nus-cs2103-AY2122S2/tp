@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindTutorialGroupParser" as FindTutorialGroupParser LOGIC_COLOR
+participant ":FindTutorialGroupCommand" as FindTutorialGroupCommand LOGIC_COLOR
+participant ":TutorialGroupKeywordsPredicate" as TutorialGroupKeywordsPredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager: execute("findtg CS2100 T05")]
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findtg CS2100 T05"")
+activate AddressBookParser
+
+create FindTutorialGroupParser
+AddressBookParser -> FindTutorialGroupParser
+activate FindTutorialGroupParser
+
+FindTutorialGroupParser --> AddressBookParser
+deactivate FindTutorialGroupParser
+
+AddressBookParser -> FindTutorialGroupParser : parse("CS2100 T05")
+activate FindTutorialGroupParser
+
+create FindTutorialGroupCommand
+FindTutorialGroupParser -> FindTutorialGroupCommand :
+activate FindTutorialGroupCommand
+
+create TutorialGroupKeywordsPredicate
+FindTutorialGroupCommand -> TutorialGroupKeywordsPredicate : CS2100 T05
+activate TutorialGroupKeywordsPredicate
+
+TutorialGroupKeywordsPredicate --> FindTutorialGroupCommand :
+deactivate TutorialGroupKeywordsPredicate
+
+FindTutorialGroupCommand --> FindTutorialGroupParser :
+deactivate FindTutorialGroupCommand
+
+FindTutorialGroupParser --> AddressBookParser :
+deactivate FindTutorialGroupParser
+FindTutorialGroupParser -[hidden]-> AddressBookParser
+destroy FindTutorialGroupParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> FindTutorialGroupCommand : execute()
+activate FindTutorialGroupCommand
+
+FindTutorialGroupCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> FindTutorialGroupCommand
+deactivate Model
+
+
+
+create CommandResult
+FindTutorialGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindTutorialGroupCommand
+deactivate CommandResult
+
+FindTutorialGroupCommand --> LogicManager : result
+deactivate FindTutorialGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

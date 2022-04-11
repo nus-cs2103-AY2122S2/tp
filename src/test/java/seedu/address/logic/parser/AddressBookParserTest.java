@@ -4,40 +4,51 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_GROUP_DESC_CS2101_G08;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_CS2101_G08;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTutorialGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTutorialGroupCommand;
+import seedu.address.logic.commands.DeleteTutorialGroupsFromStudentsCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTutorialGroupCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.TutorialGroupKeywordsPredicate;
+import seedu.address.testutil.AddTutorialGroupDescriptorBuilder;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_addStudent() throws Exception {
+        Student student = new StudentBuilder().build();
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddStudentCommand(student));
+        assertEquals(new AddStudentCommand(student), command);
     }
 
     @Test
@@ -49,17 +60,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test
@@ -77,6 +88,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findTutorialGroup() throws Exception {
+        String keyword = "CS2101 G08";
+        FindTutorialGroupCommand command = (FindTutorialGroupCommand) parser.parseCommand(
+                FindTutorialGroupCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new FindTutorialGroupCommand(new TutorialGroupKeywordsPredicate(keyword)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -86,6 +105,32 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addTutorialGroup() throws Exception {
+        AddTutorialGroupCommand.AddTutorialGroupDescriptor desc =
+                AddTutorialGroupDescriptorBuilder.VALID_TUTORIAL_GROUP_DESCRIPTOR_AMY;
+        assertTrue(new AddTutorialGroupCommand(INDEX_FIRST_STUDENT, desc) instanceof AddTutorialGroupCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteTutorialGroupsFromStudents() throws Exception {
+        DeleteTutorialGroupsFromStudentsCommand command = (DeleteTutorialGroupsFromStudentsCommand) parser
+                .parseCommand(DeleteTutorialGroupsFromStudentsCommand.COMMAND_WORD
+                        + " " + TUTORIAL_GROUP_DESC_CS2101_G08);
+        Set<TutorialGroup> tutGroups = new HashSet<>(Arrays.asList(new TutorialGroup(VALID_TUTORIAL_GROUP_CS2101_G08)));
+        assertEquals(new DeleteTutorialGroupsFromStudentsCommand(tutGroups), command);
+    }
+
+    @Test
+    public void parseCommand_deleteTutorialGroup() throws Exception {
+        Student student = new StudentBuilder().build();
+        DeleteTutorialGroupCommand command = (DeleteTutorialGroupCommand) parser.parseCommand(
+                DeleteTutorialGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased()
+                + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_CS2101_G08);
+        assertEquals(new DeleteTutorialGroupCommand(
+                INDEX_FIRST_STUDENT, new TutorialGroup(VALID_TUTORIAL_GROUP_CS2101_G08)), command);
     }
 
     @Test

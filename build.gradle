@@ -14,6 +14,7 @@ targetCompatibility = JavaVersion.VERSION_11
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven {url "https://sandec.jfrog.io/artifactory/repo"}
 }
 
 checkstyle {
@@ -23,6 +24,10 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+}
+
+run {
+    enableAssertions = true
 }
 
 task coverage(type: JacocoReport) {
@@ -43,6 +48,9 @@ task coverage(type: JacocoReport) {
 dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
+
+    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    compile "com.sandec:mdfx:0.2.4"
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'

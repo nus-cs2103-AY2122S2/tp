@@ -1,0 +1,46 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "telegram": "@APauline",
+    "email" : "alice@u.nus.edu",
+    "gitHub": "",
+    "tutorialGroup": [ "CS2103 W13-2" ]
+  }, {
+    "name" : "Benson Meier",
+    "telegram": "",
+    "email" : "johnd@u.nus.edu",
+    "gitHub": "bensonguy",
+    "tutorialGroup": [ "CS2106 T02", "CS2103 W13-2" ]
+  }, {
+    "name" : "Carl Kurz Meier",
+    "telegram": "@CarlJr",
+    "email" : "heinz@u.nus.edu",
+    "gitHub": "JrCarl",
+    "tutorialGroup": [ "CS2106 T02" ]
+  }, {
+    "name" : "Daniel Carl Meier",
+    "telegram": "@DanieltheName",
+    "email" : "cornelia@u.nus.edu",
+    "gitHub": "Dan-iel",
+    "tutorialGroup": [ "CS2103 W13-2" ]
+  }, {
+    "name" : "Elle Meyer",
+    "telegram": "@Elle20",
+    "email" : "werner@u.nus.edu",
+    "gitHub": "ELLE",
+    "tutorialGroup": [ "CS2106 T02", "CS2103 W13-2", "CS2101 G08" ]
+  }, {
+    "name" : "Fiona Kunz",
+    "telegram": "@Fiona14",
+    "email" : "lydia@u.nus.edu",
+    "gitHub": "Fiona-14",
+    "tutorialGroup": [ "CS2106 T02", "CS2103T W15-3"]
+  }, {
+    "name" : "George Fiona Kun",
+    "telegram": "@George11",
+    "email" : "anna@u.nus.edu",
+    "gitHub": "George-Not-Bush",
+    "tutorialGroup": [ "CS2106 T02" ]
+  } ]
+}
