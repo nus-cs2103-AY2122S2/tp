@@ -1,0 +1,34 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+class Skill{
+skillName : String
+skillProficiency : int
+isSameSkill(skill : Skill) : boolean
+}
+class "<<Interface>>\nPredicate" {
+    <color:white>test(Person)</color>
+}
+class PersonContainsSkillPredicate
+class FilterSkillCommand{
+    <color:white>execute(Model model)
+}
+class FilterSkillCommandParser{
+    <color:white>parse(String args)
+}
+
+show "FilterSkillCommand" members
+show "FilterSkillCommandParser" members
+show "<<Interface>>\nPredicate" members
+
+"<<Interface>>\nPredicate" ..> PersonContainsSkillPredicate
+FilterSkillCommandParser --> "1    " FilterSkillCommand
+FilterSkillCommandParser --> Skill
+PersonContainsSkillPredicate --> "1 " Skill
+FilterSkillCommand  --> "1 " PersonContainsSkillPredicate
+
+@enduml

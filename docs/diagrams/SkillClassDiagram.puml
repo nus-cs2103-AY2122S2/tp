@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+class Person {
+<color:white>email
+<color:white>githubUsername
+<color:white>phone
+<color:white>team
+}
+
+class Skill {
+<color:white>skillName : String
+<color:white>skillProficiency : int
+<color:white>isSameSkill(skill : Skill) : boolean
+}
+
+class SkillSet {
+<color:white>hasSkill(skill : Skill) : boolean
+<color:white>addAll(SkillSet : SkillSet)
+<color:white>add(skill : Skill)
+<color:white>getSkillProficiency(skill : Skill) : int
+}
+
+show "Person" members
+show "Skill" members
+show "SkillSet" members
+
+Person "1" -- "1" SkillSet : > have
+SkillSet "1" *-- "0..*"Skill : > contains
+
+@enduml

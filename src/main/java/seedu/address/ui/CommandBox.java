@@ -3,10 +3,12 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.UserInputHistory;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -17,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final UserInputHistory userInputHistory;
 
     @FXML
     private TextField commandTextField;
@@ -29,6 +32,8 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, this::handleUpAndDownArrowKeysPressed);
+        this.userInputHistory = new UserInputHistory();
     }
 
     /**
@@ -40,12 +45,33 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
+        this.userInputHistory.add(commandText);
         try {
-            commandExecutor.execute(commandText);
             commandTextField.setText("");
+            commandExecutor.execute(commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Handles the up and down arrow keys pressed event.
+     */
+    @FXML
+    private void handleUpAndDownArrowKeysPressed (KeyEvent event) {
+        if (event.getCode().isArrowKey()) {
+            switch (event.getCode()) {
+            case UP:
+                this.userInputHistory.up();
+                commandTextField.setText(this.userInputHistory.get());
+                break;
+            case DOWN:
+                this.userInputHistory.down();
+                commandTextField.setText(this.userInputHistory.get());
+                break;
+            default:
+                break;
+            }
         }
     }
 

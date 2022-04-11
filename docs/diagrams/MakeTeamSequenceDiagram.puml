@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":MakeTeamCommand" as MakeTeamCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> MakeTeamCommand : execute(model)
+activate MakeTeamCommand
+
+alt TeamAction.ADD
+    MakeTeamCommand -> MakeTeamCommand: createNewTeamPerson(true)
+    activate MakeTeamCommand
+    create Person
+    MakeTeamCommand -> Person
+    activate Person
+    Person --> MakeTeamCommand: updatedPerson
+    deactivate Person
+    deactivate MakeTeamCommand
+else TeamAction.REMOVE
+    MakeTeamCommand -> MakeTeamCommand: createNewTeamPerson(false)
+    activate MakeTeamCommand
+    create Person
+    MakeTeamCommand -> Person
+    activate Person
+    Person --> MakeTeamCommand: updatedPerson
+    deactivate Person
+    deactivate MakeTeamCommand
+end
+
+MakeTeamCommand -> Model: setPerson(updatedPerson)
+activate Model
+Model --> MakeTeamCommand
+deactivate Model
+
+[<--MakeTeamCommand: CommandResult
+deactivate MakeTeamCommand
+@enduml

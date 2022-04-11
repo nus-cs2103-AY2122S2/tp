@@ -3,12 +3,13 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "username": "alice-123",
+    "teams": [ "friends" ],
+    "skillSet" : [ "C_50" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "username": "alice-123"
   } ]
 }

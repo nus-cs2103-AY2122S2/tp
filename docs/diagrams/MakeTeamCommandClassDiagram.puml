@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+class MakeTeamCommand
+class MakeTeamCommandParser
+class "<<enumeration>>\nTeamAction" {
+    <color:white>ADD</color>
+    <color:white>REMOVE</color>
+}
+show "<<enumeration>>\nTeamAction" members
+
+MakeTeamCommandParser ..> MakeTeamCommand
+MakeTeamCommandParser --> "<<enumeration>>\nTeamAction"
+MakeTeamCommand -right-> "<<enumeration>>\nTeamAction"
+@enduml

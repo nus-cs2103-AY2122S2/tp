@@ -31,6 +31,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
@@ -39,7 +40,8 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        String errorMessage = "Error: Operation would result in persons with same Phone.";
+        assertCommandFailure(new AddCommand(personInList), model, errorMessage);
     }
 
 }

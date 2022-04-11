@@ -1,0 +1,44 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+package core{
+    class Index LOGIC_COLOR_T2
+}
+
+package Logic{
+    class EditCommandParser {
+        +<color:white>parse(String userInput): EditCommand
+    }
+    class EditPersonDescriptor{
+        -<color:white>Name name;
+        -<color:white>Phone phone;
+        -<color:white> Email email;
+        -<color:white> GithubUsername username;
+        -<color:white> Set<Team> teams;
+        -<color:white> SkillSet skillSet;
+    }
+    class EditCommand{
+        -<color:white>isResetMode:boolean
+        +<color:white>execute(Model model):CommandResult
+        -<color:white>executeSingleEdit(Model model):CommandResult
+        -<color:white>executeBatchEdit(Model model):CommandResult
+    }
+}
+
+EditCommandParser .down.> EditCommand
+EditCommandParser .down.> Index
+EditCommandParser .down.> EditPersonDescriptor
+EditCommand -->  "1" EditPersonDescriptor
+EditCommand -down-> "1.. indices" Index
+
+EditPersonDescriptor .[hidden].> Index
+
+show EditCommandParser members
+show EditPersonDescriptor members
+show EditCommand members
+
+@enduml

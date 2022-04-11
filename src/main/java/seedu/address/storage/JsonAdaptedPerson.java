@@ -10,12 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
+import seedu.address.model.team.Team;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -27,22 +29,30 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String username;
+    private final boolean isPotentialTeammate;
+    private final List<JsonAdaptedTeam> teamSet = new ArrayList<>();
+    private final List<JsonAdaptedSkill> skillSet = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("username") String username,
+            @JsonProperty("isPotentialTeammate") boolean isPotentialTeammate,
+            @JsonProperty("teams") List<JsonAdaptedTeam> teamSet,
+            @JsonProperty("skillSet") List<JsonAdaptedSkill> skillSet) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.username = username;
+        this.isPotentialTeammate = isPotentialTeammate;
+        if (teamSet != null) {
+            this.teamSet.addAll(teamSet);
+        }
+        if (skillSet != null) {
+            this.skillSet.addAll(skillSet);
         }
     }
 
@@ -53,9 +63,13 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        username = source.getGithubUsername().value;
+        isPotentialTeammate = source.isPotentialTeammate();
+        teamSet.addAll(source.getTeams().stream()
+                .map(JsonAdaptedTeam::new)
+                .collect(Collectors.toList()));
+        skillSet.addAll(source.getSkillSet().getSkillSetInStream()
+                .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +79,15 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Team> personTeams = new ArrayList<>();
+        final List<Skill> personSkillSet = new ArrayList<>();
+
+        for (JsonAdaptedTeam team : teamSet) {
+            personTeams.add(team.toModelType());
+        }
+
+        for (JsonAdaptedSkill skill : skillSet) {
+            personSkillSet.add(skill.toModelType());
         }
 
         if (name == null) {
@@ -94,16 +114,20 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (username == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GithubUsername.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!GithubUsername.isValidUsername(username)) {
+            throw new IllegalValueException(GithubUsername.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final GithubUsername modelGithubUsername = new GithubUsername(username);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Team> modelTeams = new HashSet<>(personTeams);
+        final Set<Skill> modelSkillInSet = new HashSet<>(personSkillSet);
+        final SkillSet modelSkill = new SkillSet(modelSkillInSet);
+        return new Person(modelName, modelPhone, modelEmail, modelGithubUsername,
+                modelTeams, modelSkill, isPotentialTeammate);
     }
 
 }

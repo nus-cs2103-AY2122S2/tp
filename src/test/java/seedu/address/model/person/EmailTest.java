@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -21,6 +22,12 @@ public class EmailTest {
 
     @Test
     public void isValidEmail() {
+        //email with 150 characters.
+        String longEmail = "Tom-Alex_Doe_lee_Dr_steven_yeoh_Amos1234PeterJack_1190PeterJack_1190"
+                + "PeterJack_1190PeterJack_1190PeterJack_1190PeterJack_1190PeterJack_1190@example.com";
+
+        assertEquals(150, longEmail.length());
+
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
 
@@ -51,6 +58,8 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("a")); // lesser than min number of characters
+        assertFalse(Email.isValidEmail(longEmail + "a")); //151 characters (more than max number of characters)
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
@@ -64,5 +73,7 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail(longEmail)); //150 characters (max number of characters)
+
     }
 }

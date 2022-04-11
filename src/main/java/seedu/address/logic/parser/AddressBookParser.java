@@ -12,9 +12,16 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterPastTeamCommand;
+import seedu.address.logic.commands.FilterSkillCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MakeTeamCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ShowCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -59,6 +66,24 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FilterSkillCommand.COMMAND_WORD:
+            return new FilterSkillCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case FilterPastTeamCommand.COMMAND_WORD:
+            return new FilterPastTeamCommand();
+
+        case MakeTeamCommand.COMMAND_WORD_ADD:
+            return new MakeTeamCommandParser(MakeTeamCommand.TeamAction.ADD).parse(arguments);
+
+        case MakeTeamCommand.COMMAND_WORD_REMOVE:
+            return new MakeTeamCommandParser(MakeTeamCommand.TeamAction.REMOVE).parse(arguments);
+
+        case ShowCommand.COMMAND_WORD:
+            return new ShowCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -66,7 +91,13 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

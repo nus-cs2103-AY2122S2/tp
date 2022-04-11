@@ -57,4 +57,13 @@ class JsonSerializableAddressBook {
         return addressBook;
     }
 
+    @Override
+    public String toString() {
+        String addressBookStr = "";
+        for (JsonAdaptedPerson person : persons) {
+            addressBookStr += person.toString();
+        }
+        return addressBookStr;
+    }
+
 }

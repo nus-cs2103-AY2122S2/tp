@@ -36,6 +36,18 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    public String getDuplicateField(Person toCheck) {
+        requireNonNull(toCheck);
+        return (String) internalList.stream().filter(person ->
+            person.isSamePerson(toCheck)).findFirst().map(duplicate -> {
+                if (duplicate == null) {
+                    return duplicate;
+                } else {
+                    return duplicate.getDuplicateValue(toCheck);
+                }
+            }).get();
+    }
+
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
@@ -43,7 +55,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePersonException(getDuplicateField(toAdd));
         }
         internalList.add(toAdd);
     }
@@ -62,7 +74,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePersonException(getDuplicateField(editedPerson));
         }
 
         internalList.set(index, editedPerson);
@@ -77,6 +89,21 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Removes the person with same username or email or phone number from the list.
+     * The person may exist in the list.
+     * Returns true if successfully removed person
+     */
+    public boolean safeRemove(Person toRemove) {
+        for (Person p : internalList) {
+            if (p.isSamePerson(toRemove)) {
+                internalList.remove(p);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setPersons(UniquePersonList replacement) {

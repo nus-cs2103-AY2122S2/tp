@@ -2,11 +2,16 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.address.MainApp;
+import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,17 +34,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox personCard;
+    @FXML
     private Label name;
     @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Hyperlink githubUsername;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane teams;
+    @FXML
+    private FlowPane skillSet;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,14 +56,42 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        if (person.isPotentialTeammate()) {
+            // Add highlight class to potential teammates
+            personCard.getStyleClass().add("highlight");
+        }
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        GithubUsername username = person.getGithubUsername();
+        githubUsername.setText(username.getGithubHandle());
+        HostServices hs = MainApp.getHS();
+        githubUsername.setOnAction(e -> {
+            hs.showDocument(username.getGithubProfileLink());
+        });
+
+        teams.getStyleClass().add("teamSet");
+        person.getTeams().stream()
+            .sorted(Comparator.comparing(team -> team.teamName))
+            .forEach(team -> teams.getChildren().add(new Label(team.teamName)));
+
+        person.getSkillSet().getSkillSetInStream()
+            .sorted(Comparator.comparing(skill -> skill.skillName))
+            .forEach(skill -> {
+                Label skillLabel = new Label(skill.skillName);
+                if (skill.skillProficiency > 80) {
+                    skillLabel.setStyle("-fx-background-color: #00ff00");
+                } else if (skill.skillProficiency > 50) {
+                    skillLabel.setStyle("-fx-background-color: #33cc33");
+                } else if (skill.skillProficiency > 20) {
+                    skillLabel.setStyle("-fx-background-color: #248f24");
+                } else {
+                    skillLabel.setStyle("-fx-background-color: #006622");
+                }
+                skillSet.getChildren().add(skillLabel);
+            });
     }
 
     @Override
@@ -72,6 +109,6 @@ public class PersonCard extends UiPart<Region> {
         // state check
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+            && person.equals(card.person);
     }
 }

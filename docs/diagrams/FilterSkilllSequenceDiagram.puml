@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":FilterSkillCommandParser" as FilterSkillCommandParser LOGIC_COLOR
+participant "command:FilterSkillCommand" as FilterSkillCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "predicate:PersonContainsSkillPredicate" as PersonContainsSkillPredicate MODEL_COLOR
+participant "skill:Skill" as Skill MODEL_COLOR
+participant "skillSet:SkillSet" as SkillSet MODEL_COLOR
+end box
+
+[-> FilterSkillCommandParser : parse("java")
+activate FilterSkillCommandParser
+
+create Skill
+FilterSkillCommandParser -> Skill : new Skill("java")
+activate Skill
+Skill --> FilterSkillCommandParser : skill
+deactivate Skill
+
+create SkillSet
+FilterSkillCommandParser -> SkillSet : new SkillSet(skill)
+activate SkillSet
+SkillSet --> FilterSkillCommandParser : skillSet
+deactivate SkillSet
+
+create PersonContainsSkillPredicate
+FilterSkillCommandParser -> PersonContainsSkillPredicate : new PersonContainsSkillPredicate(skillSet)
+activate PersonContainsSkillPredicate
+PersonContainsSkillPredicate --> FilterSkillCommandParser : predicate
+deactivate PersonContainsSkillPredicate
+
+create FilterSkillCommand
+FilterSkillCommandParser -> FilterSkillCommand : new FilterSkillCommand(predicate)
+activate FilterSkillCommand
+
+FilterSkillCommand --> FilterSkillCommandParser : command
+deactivate FilterSkillCommand
+
+[<--FilterSkillCommandParser : command
+deactivate FilterSkillCommandParser
+destroy FilterSkillCommandParser
+
+@enduml
