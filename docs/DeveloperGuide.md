@@ -300,13 +300,14 @@ The above is assuming that the user inputs a string not included in the list of 
 ![Dynamic Command Diagram](images/DynamicInputFindDiagram.png)
 
 #### Alternatives considered
-* **Alternative 1 (current choice):** Continue to enable logging even during dynamic searching
+* **Alternative 1:** Continue to enable logging even during dynamic searching
     * Pros: No changes needed.
     * Cons: May have performance issues in terms of responsiveness.
 
 -------------------------------
 <div style="page-break-after: always;"></div>
 
+<!-- @@author -->
 
 ### Copy feature
 
@@ -341,7 +342,7 @@ _{more aspects and alternatives to be added}_
 --------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-
+<!-- @@author reignnz -->
 ### Adding Meetings 
 
 In our meetings tab, users can store information about meetings. Meetings consist of the following
@@ -465,7 +466,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire contact book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -624,6 +625,7 @@ Use case ends
 <!-- @@author zihaowrez -->
 
 ----------------------------------------------
+<!-- @@author kavxya -->
 
 #### Use case 4: Copies a contact
 
@@ -646,6 +648,7 @@ Use case resumes at step 1
 -------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+<!-- @@author chriswengqi -->
 
 #### Use case 5: View Contact
 
@@ -661,6 +664,7 @@ Use case ends
     * 1a2. Use case resumes at step 1
 
 --------------------------------------------------------------
+<!-- author @@reignnz -->
 
 #### Use case 6 : Add a meeting
 **MSS**
@@ -728,6 +732,7 @@ Use case ends
 
 <div style="page-break-after: always;"></div>
 
+
 ### Non-Functional Requirements
 
 Technical:
@@ -743,7 +748,7 @@ Constraints:
 1. User has to manually type out the command using the Command Line Interface instead of using a mouse
 2. uMessage is able to hold up to *{to be decided}* contacts before experiencing a drop in performance
 
-
+<!-- @@author chriswengqi -->
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -751,6 +756,7 @@ Constraints:
 * **Command Line Interface (CLI)**: A user interface whereby users interact with the program with lines of text.
 * **Graphical User Interface (GUI)**: A user interface that allows users to interact with the program with graphical components, like clickable menus.
 
+<!-- @@author -->
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -795,7 +801,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-
+<!-- @@author cheehongw -->
 ### Saving data
 
 1. Dealing with missing/corrupted data files
