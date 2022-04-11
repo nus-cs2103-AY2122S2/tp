@@ -138,6 +138,12 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
         </td>
     </tr>
     <tr>
+        <td>GRADE</td>
+        <td><code>g/</code></td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
         <td>INDEX</td>
         <td>No prefix</td>
         <td>It represents the index of the students/modules/class groups/assessments shown when <code>list student</code>/<code>list module</code>/<code>list class</code>/<code>list assessment</code> is run.
@@ -147,12 +153,6 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
         <td>KEYWORD</td>
         <td>No prefix</td>
         <td>It represents the string to match when returning search results.
-        </td>
-    </tr>
-    <tr>
-        <td>GRADE</td>
-        <td><code>g/</code></td>
-        <td>It represents the numerical grade given to a student's assignment attempt.
         </td>
     </tr>
     <tr>
