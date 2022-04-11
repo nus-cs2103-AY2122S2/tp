@@ -415,14 +415,14 @@ There are 2 levels to the parsing of the add command from user input.
 
 **Target user profile**:
 
-* has a need to manage a significant number of applicants to technology companies
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of applicants to technology companies
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**:
-* manage contacts faster than a typical mouse/GUI driven app
+* Manage contacts faster than a typical mouse/GUI driven app
 * One command and the email will be sent to all recipient
 * Stores all correspondence with the candidate for easy access and viewing
 * End to end seamless administration for talent management
@@ -436,12 +436,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ------ |-------------|----------------------------------------|-------------------------------------------------------------------------|
 | `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them                |
 | `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                        |
+| `* * *` | recruiter   | edit an applicant                      | update the latest information of applicants                             |
 | `* * *` | recruiter   | delete an applicant                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | add a new interview                    | keep track of all the interviews                                        |
+| `* * *` | recruiter   | edit an interview                      | update the latest information of interviews                             |
+| `* * *` | recruiter   | delete an interview                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | add a new position                     | keep track of all the applicants                                        |
+| `* * *` | recruiter   | edit a position                        | update the latest information of applicants                             |
+| `* * *` | recruiter   | delete a position                      | remove entries that I no longer need                                    |
 | `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
 | `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
 | `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                   |
-| `* *`  | recruiter   | filter the displayed data              | find the information I am looking for easily                            |
-| `*`    | expert user | access previous commands I made        | send multiple similar commands without having to type the whole command |
+| `* *`  | recruiter   | filter the displayed data               | find the information I am looking for easily                            |
+| `* *`  | recruiter   | pass an interview that was successful   | proceed to offer the applicant the position                             |
+| `* *`  | recruiter   | fail an interview that was unsuccessful | proceed to end the hiring process for the applicant                     |
+| `* *`  | recruiter   | mark an interview as accepted by the applicant | update that the applicant has accepted the offer                 |
+| `* *`  | recruiter   | mark an interview as rejected by the applicant | update that the applicant has rejected the offer                 |
+| `* *`  | recruiter   | export the data in the application      | share the information with other recruiters                             |
+| `*`    | expert user | access previous commands I made         | send multiple similar commands without having to type the whole command |
 
 
 ### Use cases
@@ -579,6 +591,10 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Role**: The type of job that the candidate is interviewing for (e.g Backend-engineer, L3 SWE)
+* **Recruiter**: A Human Resource professional that manages applicants, interviews and positions in the application
+* **Applicant**: A candidate looking for a job.
+* **Interview**: A scheduled meeting time for an Applicant to try for a Position.
+* **Position**: A job opportunity for candidates.
 
 --------------------------------------------------------------------------------------------------------------------
 
