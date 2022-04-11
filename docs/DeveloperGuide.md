@@ -239,7 +239,7 @@ The following activity diagram summarizes what happens when a user executes a `E
 #### What is the feature about?
 
 This feature implements a tagging system attached to the Candidate's profile in our Application. This way, our user can
-easily see which candidates are `scheuled`, `not scheduled`, or `completed`. This will help enhance user experience when using our application.
+easily see which candidates are `scheduled`, `not scheduled`, or `completed`. This will help enhance user experience when using our application.
 
 #### How is the feature implemented?
 
