@@ -1,24 +1,19 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.AssignCommand.MESSAGE_SUCCESS;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeleteTaskCommand.INVALID_TASK_INDEX;
 import static seedu.address.logic.commands.DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS;
 import static seedu.address.logic.commands.DeleteTaskCommand.MESSAGE_MODULE_CODE_NOT_FOUND;
 import static seedu.address.logic.commands.DeleteTaskCommand.MESSAGE_PERSON_NOT_FOUND;
-import static seedu.address.logic.commands.DeleteTaskCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.DeleteTaskCommand.MESSAGE_TASK_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ANDY;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTaskIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalTaskIndexes.INDEX_SECOND_TASK;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,9 +39,7 @@ public class DeleteTaskCommandTest {
     private final Task taskAlice = ALICE.getTaskList().getTaskList().get(0);
     private final Task taskToDelete = new Task("Cry");
 
-    private final Index numOfTasksAlice =  Index.fromOneBased(ALICE.getTaskList().getNumberOfTasks());
     private final Index invalidTaskIndexAlice = Index.fromOneBased(ALICE.getTaskList().getNumberOfTasks() +1);
-
 
     @Test
     public void equals_sameObjectByStudentIdAndIndex_success() {
@@ -93,7 +86,7 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void constructor_nullStudentIdByStudentIdAndIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand((StudentId) null, INDEX_FIRST_TASK));
+        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(null, INDEX_FIRST_TASK));
     }
 
     @Test
@@ -103,7 +96,7 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void constructor_nullModuleCodeByModuleCodeAndTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand((ModuleCode) null, taskAlice));
+        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(null, taskAlice));
     }
 
     @Test
