@@ -209,7 +209,7 @@ public class ParserUtil {
     public static String parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT);
         try {
             LocalDate userInputDate = LocalDate.parse(trimmedDate, formatter);
