@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalClassGroups.CS2101G09;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
@@ -18,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.TAssistBuilder;
+import seedu.address.testutil.TypicalClassGroups;
+import seedu.address.testutil.TypicalModules;
 
 public class ModelManagerTest {
 
@@ -95,14 +96,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasClassGroup_studentNotInTAssist_returnsFalse() {
-        assertFalse(modelManager.hasEntity(CS2101G09));
+    public void hasClassGroup_classGroupNotInTAssist_returnsFalse() {
+        assertFalse(modelManager.hasEntity(TypicalClassGroups.CS2101G09));
     }
 
     @Test
     public void hasClassGroup_classGroupInTAssist_returnsTrue() {
-        modelManager.addEntity(CS2101G09);
-        assertTrue(modelManager.hasEntity(CS2101G09));
+        modelManager.addEntity(TypicalClassGroups.CS2101G09);
+        assertTrue(modelManager.hasEntity(TypicalClassGroups.CS2101G09));
     }
 
     @Test
@@ -117,13 +118,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasModule_moduleNotInTAssist_returnsFalse() {
-        assertFalse(modelManager.hasEntity(CS2101G09));
+        assertFalse(modelManager.hasEntity(TypicalModules.CS2101));
     }
 
     @Test
     public void hasModule_moduleInTAssist_returnsTrue() {
-        modelManager.addEntity(CS2101G09);
-        assertTrue(modelManager.hasEntity(CS2101G09));
+        modelManager.addEntity(TypicalModules.CS2101);
+        assertTrue(modelManager.hasEntity(TypicalModules.CS2101));
     }
 
     @Test
