@@ -120,22 +120,6 @@ public class HustleBookParserTest {
     }
 
     @Test
-    public void parseCommand_sort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
-                + " meeting", lastCommand) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
-                + " name", lastCommand) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
-                + " prev", lastCommand) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
-                + " salary", lastCommand) instanceof SortCommand);
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(SortCommand.COMMAND_WORD, lastCommand));
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(SortCommand.COMMAND_WORD + " 3", lastCommand));
-    }
-
-    @Test
     public void parseCommand_redo() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, lastCommand) instanceof RedoCommand);
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 3", lastCommand) instanceof RedoCommand);
