@@ -43,7 +43,7 @@ Let's get started!
     2. For Windows users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-windows)
     3. For Linux Users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-linux)
 
-2. Download the latest `WoofAreYou.jar` [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.3.trial).
+2. Download the latest `WoofAreYou.jar` [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.4).
 
 3. Copy `WoofAreYou.jar` to the folder you want to use as the _home folder_ for WoofAreYou.
 
@@ -88,7 +88,7 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Woofie`.
 
 * Items in square brackets are optional.<br>
-  e.g. `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Sheppard` or as `n/Woofie`.
+  e.g. `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Shepherd` or as `n/Woofie`.
 
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `NAME_OF_PET [KEYWORD]…​` can be used as `Woofie`, `Woofie Poofie`, `Woofie Poofie Zoofie` etc.
@@ -98,7 +98,7 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `p/91234567 p/81234567`, only `p/81234567` will be taken.
 
 * However, for the breed parameter, users will only be able to key in one breed.
   e.g. if you specify `t/Golden t/Retriever`, an error message will be shown.
@@ -126,7 +126,7 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]`
 * Each particular entered must strictly correspond to its legal prefix. e.g: `p/Address` is considered as invalid.
 * Phone number **must only contain numbers**.
 * `NAME_OF_PET` (pet name) and `OWNER_NAME` (owner name) **must only contain alphabets or spaces**.
-* `PHONE_NUMBER` (phone number) should be a valid Singapore phone number. It should start with **6,8** and should be
+* `PHONE_NUMBER` (phone number) should be a valid Singapore phone number. It should start with **6,8 or 9** and should be
   **8 digits** long.
     * You can include an optional country code in front of the phone number. `p/+6581234567` There should be no spaces
       between `+65` and the corresponding phone number.
@@ -153,14 +153,14 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 
 * When editing `[t/BREED]`, the existing breed of the pet will be removed.
 * As there is only one breed for each pet, you may only edit *that* breed.
-* Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
-  by "German Sheppard" instead.
+* Following from the previous e.g., if you key in `edit 1 t/German Shepherd`, Woofie's "Bulldog" breed will be replaced
+  by "German Shepherd" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and
-  the breed of Woofie from 'Bulldog' to 'German Sheppard'.
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Shepherd` will change the owner's name from
+  'Alice Tan' to 'Pauline Tan' and the breed of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
 
@@ -218,6 +218,16 @@ Format: `absent INDEX date/dd-MM-yyyy`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date **must follow the specified format**.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: About `absent` command:**<br>
+
+This command is designed to enable you to mark the attendance of pets for **any** date. If you have forgotten to mark
+the attendance a few weeks back, you may do so. If you wish to mark the attendance of a pet for future dates because
+the pet has a regular schedule, you may do so as well.
+
+</div>
 
 Examples:
 * `absent 1 date/09-04-2022` indicates that the first pet in the current list is absent for daycare on 9th April 2022.
@@ -305,7 +315,7 @@ to note down the relevant details of such appointments, such as the date, time a
 **:information_source: Notes about this feature:**<br>
 
 * You can only note down one appointment per pet at any point in time.
-* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointments.
+* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointment.
 
 </div>
 
@@ -358,6 +368,19 @@ This can serve as a visual cue for you if you need a reminder for the pet's appo
 You may have noticed that a handful of commands require `INDEX`, and that it is troublesome to scroll through WoofAreYou
 to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
 life easier when using the features previously introduced.
+
+<div markdown="block" class="alert alert-secondary">
+
+**:information_source: Unusual Behaviour?**<br>
+
+You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing 
+some commands in this section. Generally, commands such as `find` and `filter` which trims the number of pets displayed
+will cause this behaviour. This is because any following commands like `sort` will execute based on the trimmed list. You
+will come across this behaviour [later](#sort-pets-sort) under the sort command, if you are following this user guide.
+
+If you want any following commands to execute on your whole pet list, then you will have to use the `list` command first!
+
+</div>
 
 ### Find pet details: `find`
 
@@ -427,7 +450,7 @@ Format: `sort SORT_BY`
 **:information_source: Unusual Behaviour?**<br>
 
 You may have noticed that your pet list only shows 2 pets (i.e. Woofie and Poofie) or less after executing the sort command, and
-Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *exisitng pet list* which in this case,
+Zoofie is nowhere to be seen! This is because, `sort` only performs the action on your *existing pet list* which in this case,
 may be the pet list after executing a `find woofie poofie` command. If you want to `sort` the whole pet list, you can
 execute the [`list`](#list-all-pets--list) command first before executing the `sort` command. This behaviour applies to
 pet list after `filter` command too!
@@ -487,7 +510,9 @@ Format: `undo`
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Note about undo**<br>
+
 * You will not be able to undo `clear`, `exit`, `find`, `filter`, `help` and `list` commands.
+
 
 </div>
 
@@ -533,14 +558,14 @@ wish to deal with the nitty-gritty details of each feature.
 |---------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **Add**       | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]`                | `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`                                         | Adds Woofie into pet list along with its information                                                                  |
 | **Edit**      | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/BREED]` | `edit 1 p/98247076 t/bulldog`                                                                                         | Edits phone number and tag of pet at index 1                                                                          |
-| **Present**   | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm`                                  | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                                                         | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
+| **Present**   | `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`                                | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                                                         | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
 | **Absent**    | `absent INDEX date/dd-MM-yyyy`                                                     | `absent 1 date/22-03-2022`                                                                                            | Indicates that pet at index 1 was absent on 22 March 2022                                                             |
 | **Charge**    | `charge INDEX m/MM-yyyy c/number1[.number2]`                                       | `charge 1 m/03-2022 c/200.50`                                                                                         | Computes charge for pet 1 in the month of March on 2022, where each day's stay costs `200.50`                         |
 | **Delete**    | `delete id`                                                                        | `delete 1`                                                                                                            | Deletes pet at index 1 from the pet list                                                                              |
 | **Clear**     | `clear`                                                                            | `clear`                                                                                                               | Clears all pets in pet list                                                                                           |
 | **Exit**      | `exit`                                                                             | `exit`                                                                                                                | Exits WoofAreYou                                                                                                      |
 | **Diet**      | `diet INDEX d/DIET`                                                                | `diet 1 d/Only feed dry kibble`                                                                                       | Adds a diet remark "Only feed dry kibble" to pet at index 1                                                           |
-| **App**       | `app INDEX date/dd-MM-yyyy HH:mm at/LOCATION`                                      | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                                                                      | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
+| **App**       | `app INDEX dt/dd-MM-yyyy HH:mm at/LOCATION`                                        | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                                                                      | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
 | **App clear** | `app INDEX clear`                                                                  | `app 1 clear`                                                                                                         | Clears the current appointment of pet at index 1                                                                      |
 | **Find**      | `find NAME_OF_PET [KEYWORDS]...`                                                   | `find Woofie`                                                                                                         | Finds all pets with similar name as "Woofie"                                                                          |
 | **Sort**      | `sort SORT_BY`                                                                     | `sort name`<br>`sort owner`<br>`sort app`<br>`sort pick up`<br>`sort drop off`                                        | Sorts pet list                                                                                                        |
