@@ -84,7 +84,7 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 
 3. Copy the file to the folder you want to use as the home folder for iBook.
 
-4. Double-click the file to start the app. Alternatively, try typing `java -jar ibook.jar` in a terminal in the same directory as the file to start it.
+4. Type `java -jar ibook.jar` in a terminal in the same directory as the file to start it. Alternatively, double-click the file to start the app.
 
     If you are using macOS, please look at [FAQ](#5-faq) before proceeding.
    
@@ -110,11 +110,15 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 
 ## 2. Reading the document
 
-This section will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
+This section will introduce you to the different symbols and syntax that are used throughout this guide.
 
 Please read through this section before proceeding further to avoid getting confused.
 
-#### 2.1 Special Boxes
+#### 2.1 Text Style
+
+Text that appears in `this` style are special terms or commands related to iBook. 
+
+#### 2.2 Special Boxes
 
 **Additional Information**
 
@@ -151,24 +155,24 @@ Example tip.
 
 <div style="page-break-after: always;"></div>
 
-#### 2.2 Sections of the Application Window
+#### 2.3 Sections of the Application Window
 
 The application window is divided into a Command Box, Result Window as well as a Display Table that includes all the products.
 
 ![Ui-2](images/Ui-2.png)
 
 
-The main mode of navigation in iBook is through the Command Line Interface (CLI). 
+The main mode of navigation in iBook is through the Command-line Interface (CLI). 
 
-You can enter commands into the command box and press enter to execute them.
+You can type in commands into the command box and press enter on your keyboard to execute them.
 
 Alternatively, you can interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button.
 
-Either way, the result window will display the results of executing the command. The display table will also update accordingly based on the executed command.
+Either way, the result window will display the results of executing the command. The display table will update accordingly based on the executed command.
 
 <div style="page-break-after: always;"></div>
 
-#### 2.3 Feature Format
+#### 2.4 Feature Format
 
 Each command will be described in the following format.
 
@@ -208,18 +212,18 @@ Each command will be described in the following format.
 
 Although iBook is a CLI based application, we do provide a GUI alternative for some of the commonly used commands.
 
-If a command has a GUI alternative, the subheading GUI alternative will also be included in the command section.
+If a command has a GUI alternative, the subheading GUI alternative will be included in the same section.
 
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Product and Item:**
 
-As most of the commands revolve around `Product` and `Item`. We advise you to take a look at the [Glossary](#6-glossary) section for our definition of `Product` and `Item` before proceeding.
+As most of the commands revolve around products and items. We advise you to take a look at the [Glossary](#6-glossary) section for our definition of products and items before proceeding.
 </div>
 
 <div style="page-break-after: always;"></div>
 
-#### 2.4 Command Format
+#### 2.5 Command Format
 
 
 * **Words in `UPPER_CASE` are additional user inputs supplied to a command.**<br><br>
@@ -252,7 +256,7 @@ e.g. To provide a product name of `Nescafe: special edition`, you should type `n
 
 <div style="page-break-after: always;"></div>
 
-#### 2.5 Command inputs
+#### 2.6 Command inputs
 
 | Input            | Description                                                                                  |
 |:-----------------|:---------------------------------------------------------------------------------------------|
@@ -643,7 +647,7 @@ Format: `expired`
 | Compulsory Fields | | 
 | Optional Fields   | |
 
-* Products that do not contain expired item will not be shown.
+* Products that do not contain expired items will not be shown.
 
 <h5>GUI Alternative</h5> 
 
@@ -796,7 +800,10 @@ If your changes to the data file make it invalid, iBook will discard all data an
 ## 5. FAQ
 
 **Q**: Why can't I open iBook with a double-click on macOS?<br>
-**A**: You might have an issue with untrusted developers, right-click on the app and select `Open`.
+**A**: You might be having an issue with untrusted developers, please type `java -jar ibook.jar` in a terminal to start the application.
+
+**Q**: Why can't I find the data and preferences file when I open the application in macOS?<br>
+**A**: This is a bug related to the macOS default `JavaLauncher`. The issue will occur when you use double-click to start iBook. To fix this problem, please type `java -jar ibook.jar` in a terminal to start the application. 
 
 **Q**: Can I use iBook with full-screen mode in macOS?<br>
 **A**: Unfortunately, due to a limitation of the GUI library, iBook does not perform well with full-screen mode in macOS. Nevertheless, you can work around this issue by double-clicking on the title bar. IBook will then automatically resize to fill the screen.
