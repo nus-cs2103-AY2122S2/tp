@@ -6,7 +6,7 @@ title: AgentSee
 [![CI Status](https://github.com/AY2122S2-CS2103T-T11-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-2/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2122S2-CS2103T-T11-2/tp/branch/master)
 
-![Ui](images/UI.png)
+![Ui](images/Ui.png)
 
 **AgentSee is a desktop app for property agents to manage clients.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
