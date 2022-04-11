@@ -21,23 +21,23 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Highlights: This feature affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation was challenging as it required changes to existing commands.
     * Credits: https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
   <br><br>
-  * Revamp duplicate detection (PR [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
+  * Duplicate detection feature (PR [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
     * What it does: Prevents duplicate entries with the same name, phone and email when using add and edit commands.
     * Justification: This feature improves the product by helping users manage duplicates by preventing duplicated contacts with the same name, phone and email.
     * Highlights: This feature affects existing and future person attributes on how uniqueness is determined, and needs to be integrated with the existing commands. Duplicate detection is not trivial, detecting only exact string matches is not enough. It was meticulously implemented to behave closely to how these attributes are in the real world. For example, "John &#160;&#160;&#160; Doe" and "john doe" are likely to be the same person, even though there are differences in white spaces and capitalization. The implementation was tedious and challenging as it required changes in many of the existing classes.
   <br><br>
   * Case insensitivity for all person attributes (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
-    * Related to duplicate detection.
+    * Related to duplicate detection feature.
   <br><br>
   * Trim extra spaces between words (PR [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238))
-    * Related to duplicate detection.
+    * Related to duplicate detection feature.
   <br><br>
-  * Memo attribute (PR [\#50](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/50), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#111](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/111), [\#121](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/121))
+  * Memo feature (PR [\#50](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/50), [\#53](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/53), [\#63](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/63), [\#111](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/111), [\#121](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/121))
     * What it does: Allows the user to store miscellaneous information about a person.
     * Justification: This feature improves the product by giving users an optional data field to store any information pertaining to a contact. 
     * Highlights: This feature was integrated into existing add and edit commands, adhering to OOP principles such as DRY and Single Responsibility Principle. The UI also needed to be updated to be seamless, such that if memo is empty, the memo row in the UI must not appear. A limit was also imposed to protect from unnecessarily long inputs.
   <br><br>
-  * ContactedDate attribute (PR [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133))
+  * ContactedDate feature (PR [\#133](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/133))
     * What it does: Allows the user to keep track of the last time that they contacted a person.
     * Justification: This feature improves the product by giving users an optional data field to store the last contacted date of a contact.
     * Highlights: This feature was integrated into existing add and edit commands, adhering to OOP principles such as DRY and Single Responsibility Principle. It was tricky to protect from edge cases. Proper date validation was required to ensure that the date given is a valid date following the dd-mm-yyyy format and is not a future date. Moreover, the date validation needs to properly handle leap dates and non-existent dates such as 30th February.
