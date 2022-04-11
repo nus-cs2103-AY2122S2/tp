@@ -20,7 +20,7 @@ As a school librarian of a large library, you may already have your own desktop 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use LibTask and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask. It is also structured in a way to let you easily navigate to relevant sections.
 
-Take note of following symbols that are used in this document:
+Take note of the following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                   |
 |----------------------|-------------------------------------------------------------------------------|
@@ -94,8 +94,7 @@ to doing this tutorial.
    `patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`: Adds a patron named `Alice` into
    LibTask's patron list.
 
-   `patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`: Adds a patron named
-   `Bob Miller` into LibTask's patron list.
+   `patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu`: Adds a patron named `Bob Miller` into LibTask's patron list.
 
    `patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu`: Adds a patron named `Harper Lee` into
    LibTask's patron list.
@@ -108,11 +107,10 @@ to doing this tutorial.
    `book add n/Harry Potter i/97888-69183-157 a/J.K.Rowling t/Thriller t/Magic`: Adds a book titled `Harry Potter` 
       into LibTask's book list.
 
-   `book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`: Adds a book title 
+   `book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller`: Adds a book title 
       `To Kill a Mockingbird` into LibTask's book list.
 
-   `book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Thriller t/Mystery t/Crime`: Adds a book titled 
-     `The Da Vinci Code` into LibTask's book list.
+   `book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Crime`: Adds a book titled `The Da Vinci Code` into LibTask's book list.
 
 <div style="page-break-after: always;"></div>
 
@@ -184,7 +182,7 @@ Method B:
 
 3. Enter command `book request 1 1` in the Command box. `Bob Miller` has now requested for `The Da Vinci Code`. You can confirm this by viewing the book's status in the book list.
 
-Subsequently, when Harper Lee returns "The Da Vinci Code", find the book by entering `book find n/The Da Vinci Code` (which would result in it being displayed first) followed by `return b/1` (more about the `return` command [here](#337-returning-a-book--return)). `The Da Vinci Code` is hence returned and the `Result box` would remind you to notify Bob Miller that the book is now available.
+Subsequently, when Harper Lee returns "The Da Vinci Code", you can find the book by entering `book find n/The Da Vinci Code` (which would result in it being displayed first) followed by `return b/1` (more about the `return` command [here](#337-returning-a-book--return)). `The Da Vinci Code` is hence returned and the `Result box` would remind you to notify Bob Miller that the book is now available.
 
 **Congratulations! You have completed our tutorial!** You can now head over to our [Features](#3-features) section to learn more about our commands in greater detail.
 
