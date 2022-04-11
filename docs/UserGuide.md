@@ -118,6 +118,8 @@ same email as `Example@u.nus.edu` as in the real-word, emails are usually not ca
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
 
+* Adds a student contact with the following attributes to the student contact list.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Tip:**<br>
@@ -125,6 +127,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
 A student contact can have any number of tags (including 0). Same tags (case-sensitive) can only be added to a particular student contact once.
 
 </div>
+
+| Parameter        | Representation                        | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|------------------|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`           | Name of the student contact           | Should only contain alphanumeric characters and should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `PHONE_NUMBER`   | Phone number of the student contact   | Should only contain numbers and should be at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `EMAIL`          | Email of the student contact          | Emails should be of the format local-part@domain and adhere to the following constraints: <br><br> 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br> 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br>     - end with a domain label at least 2 characters long <br>     - have each domain label start and end with alphanumeric characters <br>     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any |
+| `ACADEMIC_MAJOR` | Academic Major of the student contact | Should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `TAG`            | Tag(s) of the student contact         | One word and only contain alphanumeric characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 Example: 
 
@@ -143,6 +153,12 @@ The `INDEX` **must be a positive unsigned integer** not exceeding the total numb
 deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
+
+* Deletes the student contact at that `INDEX` from the student contact list.
+
+| Parameter | Representation                             | Constraints                                                                                        |
+|-----------|--------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `INDEX`   | The number in front of the student contact | Must be positive unsigned integer and must not exceed the size of the current student contact list |
 
 Example: 
 
@@ -186,6 +202,12 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 
 Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`, `t/`
 
+Prefix | Representation   | Constraints of keywords                                                                                                                                        |
+--------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+`n/` | `NAME`           | Follow the restrictions of the `NAME` attribute                                                                                                                |
+`a/` | `ACADEMIC_MAJOR` | Follow the restrictions of the `ACADEMIC_MAJOR` attribute                                                                                                      |
+`t/` | `TAG`            | Follow the restrictions of the `TAG` attribute (however `t/` can be followed by more than one word tag for multiple seach of tags unlike in the `add` command) |
+
 #### Attributes that does not support multiple findings
 
 * The attributes that **does not support multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
@@ -193,6 +215,11 @@ Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`,
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`).
 
 Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
+
+| Prefix | Representation | Constrains of keywords                                  |
+|--------|----------------|---------------------------------------------------------|
+| `e/`   | `EMAIL`        | Follow the restrictions of the `EMAIL` attribute        |
+| `p/`   | `PHONE_NUMBER` | Follow the restrictions of the `PHONE_NUMBER` attribute |
 
 Example:
 
@@ -231,6 +258,13 @@ same group as `Nus` and `nus`
 
 Format: `addgroup g/GROUP_NAME`
 
+* Adds a group with the name `GROUP_NAME` to the group list.
+
+| Parameter    | Representation                | Constraints                                                   |
+|--------------|-------------------------------|---------------------------------------------------------------|
+| `GROUP_NAME` | Name of the group to be added | Should not be blank and should not have preceding whitespaces |
+
+
 Example: 
 
 * `addgroup g/CS2103-W16-3`
@@ -252,6 +286,12 @@ After adding the group CS2103-W16-3:
 Deletes a group from ArchDuke. The group must **already exist** in ArchDuke.
 
 Format: `delgroup g/GROUP_NAME`
+
+* Deletes the group with the name `GROUP_NAME` from the group list.
+
+| Parameter    | Representation                  | Constraints                                                   |
+|--------------|---------------------------------|---------------------------------------------------------------|
+| `GROUP_NAME` | Name of the group to be deleted | Should not be blank and should not have preceding whitespaces |
 
 Example: 
 
@@ -300,6 +340,11 @@ Format: `deassign INDEX g/GROUP_NAME`
 
 * Deassigns the student at index `INDEX` from the group called `GROUP_NAME`
 
+| Parameter    | Representation                             | Constraints                                                                                        |
+|--------------|--------------------------------------------|----------------------------------------------------------------------------------------------------|
+| `INDEX`      | The number in front of the student contact | Must be positive unsigned integer and must not exceed the size of the current student contact list |
+| `GROUP_NAME` | Name of the group to be deassiged          | Should not be blank and should not have preceding whitespaces                                      |
+
 Example:
 
 * `deassign 1 g/NUS Fintech Society`
@@ -316,6 +361,10 @@ The group **must already exist** in ArchDuke.
 Format: `viewcontact g/GROUP_NAME`
 
 * Views all student contacts in the group called `GROUP_NAME`
+
+| Parameter    | Representation                 | Constraints                                                                                        |
+|--------------|--------------------------------|----------------------------------------------------------------------------------------------------|
+| `GROUP_NAME` | Name of the group to be viewed | Should not be blank and should not have preceding whitespaces                                      |
 
 Example:
 
@@ -370,6 +419,11 @@ Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 * Adds the task called `TASK_NAME` to the group called `GROUP_NAME`
 
+| Parameter    | Representation                   | Constraints                                                                                                             |
+|--------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `TASK_NAME`  | Name of the task to be added     | Should not be blank and should not have preceding whitespaces. Also follows the `TASK_NAME` above-mentioned limitations |
+| `GROUP_NAME` | Name of the group to be added to | Should not be blank and should not have preceding whitespaces                                                           |
+
 Example:
 
 * `addtask task/v1.2 user guide g/NUS Fintech Society`
@@ -395,6 +449,11 @@ Format: `deltask task/TASK_NAME g/GROUP_NAME`
 
 * Deletes the task called `TASK_NAME` from the group called `GROUP_NAME`
 
+| Parameter    | Representation                       | Constraints                                                                                                             |
+|--------------|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `TASK_NAME`  | Name of the task to be deleted       | Should not be blank and should not have preceding whitespaces. Also follows the `TASK_NAME` above-mentioned limitations |
+| `GROUP_NAME` | Name of the group to be deleted from | Should not be blank and should not have preceding whitespaces                                                           |
+
 Example: 
 
 * `deltask task/v1.2 user guide g/NUS Fintech Society`
@@ -411,6 +470,10 @@ The group must **already exist** in ArchDuke.
 Format: `viewtask g/GROUP_NAME`
 
 * Views all tasks in the group called `GROUP_NAME`
+
+| Parameter    | Representation                 | Constraints                                                                                        |
+|--------------|--------------------------------|----------------------------------------------------------------------------------------------------|
+| `GROUP_NAME` | Name of the group to be viewed | Should not be blank and should not have preceding whitespaces                                      |
 
 Example:
 
