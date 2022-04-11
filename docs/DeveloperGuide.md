@@ -239,7 +239,20 @@ and `Applicant` classes.
 
 #### Design considerations:
 
-Aspect: Number of interviews per applicant allowed for each unique role
+#### Aspect: When an applicant is considered to be matched with a job:
+
+* **Alternative 1 (current choice):** An applicant must accept a passed interview before the applicant is hired for that position.
+    * Pros: A more accurate modelling of real-world hiring processes, whereby an applicant may actually be accepted for multiple roles, and has to choose one role to accept.
+    * Cons: Have to track number of position offers currently given out with respect to number of open positions, 
+  preventing a scenario where multiple people accept the offer but there is a shortage of actual position openings. 
+  More complex model which may be bug-prone.
+
+
+* **Alternative 2:** An applicant is considered to be hired after passing the interview.
+    * Pros: A simplified way of matching, reduces complexity of interview and coupling between Interview and Positions.
+    * Cons: Does not model real-world interview processes accurately, forces applicant to accept the first job which they pass the interview for. 
+
+#### Aspect: Number of interviews per applicant allowed for each unique role
 
 * **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
     * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
@@ -258,9 +271,15 @@ Aspect: Number of interviews per applicant allowed for each unique role
 
 Adding of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
 There are 3 levels to the parsing of the add command from user input.
-1. `AddressBookParser` identifies it as an `add` command.
+1. `HireLahParser` identifies it as an `add` command.
 2. `AddCommandParser` identifies the exact data type that is to be added, through the `flag` of the user input.
 3. `AddXYZCommandParser` identifies the fields to be added for the specific datatype, and creates and `AddXYZCommand`.
+
+The **sequence diagram** below shows how the parsing of `add -i` works. 
+Note that the lifeline for `AddCommandParser` and `AddInterviewCommandParser` should end at the destroy marker (X) but due to
+a limitation of PlantUML, the lifeline reaches the end of diagram. Logic for execution of `AddInterviewCommand` is omitted.
+
+![Add parser for interview](images/AddParser.png)
 
 #### Design considerations:
 
@@ -270,9 +289,9 @@ There are 3 levels to the parsing of the add command from user input.
     * Pros: User-friendly since users only have to remember a singular command.
     * Cons: Requires additional levels of parsers to be created.
 
-* **Alternative 2:** An individual command for each data type that can be added
+* **Alternative 2:** An individual command for each data type that can be added (eg. `addappl`, `addintvw`)
     * Pros: Fewer levels of parsers is required.
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Cons: We must ensure that the implementation of each individual command are correct. Many commands to remember for a new user.
 
 ### Deleting of Data
 
@@ -338,6 +357,9 @@ To support different sorting for different data types, each type of data sort is
 For example, for applicants, we will sort by their name, hence, there is a ApplicantNameComparator in the Model component 
 under applicant. The comparator implements Java's Comparator<Applicant> interface.
 
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `list -a s/asc` command.
+
+<img src="images/SortSequenceDiagram.png">
 
 #### Design considerations:
 
@@ -356,7 +378,35 @@ under applicant. The comparator implements Java's Comparator<Applicant> interfac
     * Cons: 
       * Increased the complexity of the relevant code, as we need to double passing, which make it more bug-prone.
       * `UI` won't able to display the new filtered lists, and need to connect again to `UI` components.
-    
+
+### Exporting of Data
+
+#### Implementation
+
+Exporting of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
+There are 2 levels to the parsing of the add command from user input.
+1. `AddressBookParser` identifies it as an `export` command.
+2. `ExportCsvCommandParser` identifies the exact data type that need to be exported, through the `flag` of the user input
+, and returns the respective `ExportXYZCsvCommand`.
+
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `export -p` command.
+
+<img src="images/ExportSequenceDiagram.png">
+
+#### Design considerations:
+
+#### Aspect: What export format should be used:
+
+* **Alternative 1 (current choice):** Export to CSV file
+    * Pros: 
+      * Versatile since CSV file can be used by non-technical user.
+      * Suitable for manipulating `Applicant`, `Interview` and `Position` data.
+    * Cons: Requires additional method to transform `Model` into CSV output
+
+* **Alternative 2:** Export to individual Json file 
+    * Pros: Able to reuse code as Json already implemented by `Storage`
+    * Cons: Not versatile as required non-user to have knowledge about Json. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -375,14 +425,14 @@ under applicant. The comparator implements Java's Comparator<Applicant> interfac
 
 **Target user profile**:
 
-* has a need to manage a significant number of applicants to technology companies
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of applicants to technology companies
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**:
-* manage contacts faster than a typical mouse/GUI driven app
+* Manage contacts faster than a typical mouse/GUI driven app
 * One command and the email will be sent to all recipient
 * Stores all correspondence with the candidate for easy access and viewing
 * End to end seamless administration for talent management
@@ -396,12 +446,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ------ |-------------|----------------------------------------|-------------------------------------------------------------------------|
 | `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them                |
 | `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                        |
+| `* * *` | recruiter   | edit an applicant                      | update the latest information of applicants                             |
 | `* * *` | recruiter   | delete an applicant                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | add a new interview                    | keep track of all the interviews                                        |
+| `* * *` | recruiter   | edit an interview                      | update the latest information of interviews                             |
+| `* * *` | recruiter   | delete an interview                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | add a new position                     | keep track of all the applicants                                        |
+| `* * *` | recruiter   | edit a position                        | update the latest information of applicants                             |
+| `* * *` | recruiter   | delete a position                      | remove entries that I no longer need                                    |
 | `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
 | `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
 | `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                   |
-| `* *`  | recruiter   | filter the displayed data              | find the information I am looking for easily                            |
-| `*`    | expert user | access previous commands I made        | send multiple similar commands without having to type the whole command |
+| `* *`  | recruiter   | filter the displayed data               | find the information I am looking for easily                            |
+| `* *`  | recruiter   | pass an interview that was successful   | proceed to offer the applicant the position                             |
+| `* *`  | recruiter   | fail an interview that was unsuccessful | proceed to end the hiring process for the applicant                     |
+| `* *`  | recruiter   | mark an interview as accepted by the applicant | update that the applicant has accepted the offer                 |
+| `* *`  | recruiter   | mark an interview as rejected by the applicant | update that the applicant has rejected the offer                 |
+| `* *`  | recruiter   | export the data in the application      | share the information with other recruiters                             |
+| `*`    | expert user | access previous commands I made         | send multiple similar commands without having to type the whole command |
 
 
 ### Use cases
@@ -487,15 +549,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to view help
 2. HireLah shows a list of commands and its briefly description
-3. User chooses to close the help box
-4. HireLah closes the help box
 
 Use case ends.
 
 #### **Use case 05: Viewing detail help for a specific command**
 
 **MSS**
-1. User <u>open the list of commands and general description (UC4).<u>
+1. User <u>open the list of commands and general description (UC4).</u>
 2. User chooses a specific command and view its detail description.
 3. HireLah displays the detail description of that command
 4. User chooses to close the box.
@@ -540,7 +600,10 @@ Use case ends.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Role**: The type of job that the candidate is interviewing for (e.g Backend-engineer, L3 SWE)
+* **Recruiter**: A Human Resource professional that manages applicants, interviews and positions in the application
+* **Applicant**: A candidate looking for a job.
+* **Interview**: A scheduled meeting time for an Applicant to try for a Position.
+* **Position**: A job opportunity for candidates.
 
 --------------------------------------------------------------------------------------------------------------------
 

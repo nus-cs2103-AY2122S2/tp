@@ -106,8 +106,9 @@ Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
 * An applicant can only have interviews if they are **at least 1 hour (60 minutes) apart**. For example, 
   an applicant can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
   but not at `2022-01-01 13:50`.
-* A candidate can only have **at most one interview for each unique position** in the position list.
+* An applicant can only have **at most one interview for each unique position** in the position list.
 * An interview cannot be created for a Position that has no openings.
+* An interview cannot be created for an Applicant that has already been hired. 
 * The `APPLICANT_INDEX` refers to the index number shown in the last displayed Applicant
   list.
 * The `POSITION_INDEX` refers to the index number shown in the last displayed Position
@@ -236,7 +237,7 @@ Deletes an existing interview in HireLah.
 
 Format: `delete -i INTERVIEW_INDEX`
 * Deletes the Interview at the specified `INTERVIEW_INDEX`.
-* Offer for Position handed out via the interview will also be removed.
+* Offer for Positions handed out via the interview will also be removed.
 * The index refers to the index number shown in the displayed Interview list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -326,8 +327,8 @@ Lists all existing positions by default. Automatically toggles view to the posit
 The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
 | FILTER_TYPE | FILTER_ARGUMENT                 | Description                                                     |
-|------------|---------------------------------|-----------------------------------------------------------------|
-| `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
+|-------------|---------------------------------|-----------------------------------------------------------------|
+| `name`      | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
 | `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
 The positions displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`.
@@ -346,6 +347,7 @@ Format: `pass INTERVIEW_INDEX`
 * Passes the Interview at the specified `INTERVIEW_INDEX`.
 * The `INTERVIEW_INDEX` refers to the index number shown in the last displayed interview list.
 * Interview must have status `Pending` before it can be passed.
+* The Applicant in the Interview must not be hired already, else the Interview cannot be passed.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Additional details:
@@ -358,7 +360,7 @@ Example: `pass 1`
 
 ## Failing Interviews : `fail`
 
-Fails an existing interview in Hirelah.
+Fails an existing interview in HireLah.
 
 Format: `fail INTERVIEW_INDEX`
 
@@ -371,7 +373,7 @@ Example: `fail 1`
 
 ## Accepting Interviews : `accept`
 
-Accepts an existing `passed` interview in Hirelah. This command accepts the `passed` interview,
+Accepts an existing `passed` interview in HireLah. This command accepts the `passed` interview,
 meaning that the candidate has accepted the job.
 
 Format: `accept INTERVIEW_INDEX`
@@ -379,6 +381,7 @@ Format: `accept INTERVIEW_INDEX`
 * Accepts the Interview at the specified `INTERVIEW_INDEX`.
 * The `INTERVIEW_INDEX` refers to the index number shown in the last displayed interview list.
 * Interview must have status `Passed` before it can be accepted.
+* The Applicant in the Interview must not be hired already, else the Interview cannot be accepted.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Additional details:
@@ -390,7 +393,7 @@ Example: `accept 1`
 
 ## Rejecting Interviews : `reject`
 
-Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
+Rejects an existing interview in HireLah. This command rejects the `passed` interview,
 meaning that the candidate has rejected the job.
 
 Format: `reject INTERVIEW_INDEX`

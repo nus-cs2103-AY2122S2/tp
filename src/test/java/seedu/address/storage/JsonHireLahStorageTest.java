@@ -1,4 +1,3 @@
-/*
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplicants.ALICE;
 import static seedu.address.testutil.TypicalApplicants.HOON;
 import static seedu.address.testutil.TypicalApplicants.IDA;
-import static seedu.address.testutil.TypicalApplicants.getTypicalHireLah;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -20,19 +19,19 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.HireLah;
 import seedu.address.model.ReadOnlyHireLah;
 
-public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+public class JsonHireLahStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonHireLahStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+    public void readHireLah_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readHireLah(null));
     }
 
     private java.util.Optional<ReadOnlyHireLah> readHireLah(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readHireLah(addToTestDataPathIfNotNull(filePath));
+        return new JsonHireLahStorage(Paths.get(filePath)).readHireLah(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -52,20 +51,20 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
+    public void readHireLah_invalidApplicantHireLah_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readHireLah("invalidApplicantHireLah.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
+    public void readHireLah_invalidAndValidApplicantHireLah_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readHireLah("invalidAndValidApplicantHireLah.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveHireLah_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         HireLah original = getTypicalHireLah();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+        JsonHireLahStorage jsonAddressBookStorage = new JsonHireLahStorage(filePath);
 
         // Save in new file and read back
         jsonAddressBookStorage.saveHireLah(original, filePath);
@@ -88,17 +87,17 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveHireLah_nullHireLah_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveHireLah(null, "SomeFile.json"));
     }
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-/*
+
     private void saveHireLah(ReadOnlyHireLah addressBook, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
+            new JsonHireLahStorage(Paths.get(filePath))
                     .saveHireLah(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
@@ -106,8 +105,8 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveHireLah_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveHireLah(new HireLah(), null));
     }
 }
-*/
+
