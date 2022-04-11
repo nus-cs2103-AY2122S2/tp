@@ -71,13 +71,16 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new Title("CS2103 Meeting"), new Link("https://www.zoom.sg"),
+            new Meeting(new Title("CS2103 Meeting"),
+                    new Link("https://nus-sg.zoom.us/j/92307270969?pwd=VVMvNWFPWFpyVHRIcXR0VkJlNkg0dz09"),
                     new StartTime("2022-3-14 1700"),
                     new Duration(120), getTagSet("friends")),
-            new Meeting(new Title("CS2106 Project Presentation"), new Link("https://www.zoom.sg"),
+            new Meeting(new Title("CS2106 Project Presentation"), 
+                    new Link("https://nus-sg.zoom.us/j/667710858"),
                     new StartTime("2022-4-10 1700"),
                     new Duration(120), getTagSet("friends")),
-            new Meeting(new Title("CS2102 Demonstration"), new Link("https://www.google.com"),
+            new Meeting(new Title("CS2102 Demonstration"), 
+                    new Link("https://nus-sg.zoom.us/j/263410858?pwd=HYURIBjjfjehJHGUfujkhgjuikjhjkjsle9438"),
                     new StartTime("2022-3-29 0900"),
                     new Duration(60), getTagSet("friends")),
         };
