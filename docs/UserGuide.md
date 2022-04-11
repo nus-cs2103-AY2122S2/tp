@@ -267,6 +267,7 @@ Note that social media of pre-installed emergency contacts cannot be deleted.
 **Examples:**
 > `delete kaaviya sm/Telegram, @uNivUS`<br>
 > `delete 1 sm/Telegram, @uNivUS`
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -276,13 +277,12 @@ The meetings in the future are listed first with ascending starting time, follow
 
 There cannot be duplicated meetings. Two meetings are the same if both have the same title (case-sensitive) and same start time.
 
-<div style="page-break-after: always;"></div>
-
 Access the Meetings by clicking on the tab in the upper region of the application to access the page that looks like as shown below. 
 Note that the hyperlinks in the details are clickable and will redirect the user to the preferred browser.
 
 <img src="images/meeting.png">
 
+<div style="page-break-after: always;"></div>
 
 ## 1. Adding: `add`
 
@@ -366,6 +366,7 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 
 **Example:**
 > `delete 1 t/urgent`
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -417,6 +418,8 @@ Exits the program.
 
 uMessage's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ## 6. Editing the data file
 
 uMessage's data are saved as two JSON files: `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/meetingsbook.json`. Advanced users are welcome to update data directly by editing those data files.
@@ -457,6 +460,8 @@ If your changes to the data file makes its format invalid, the data will be disc
 | edit    | edit details of a meeting                  | `edit INDEX [n/TITLE] [l/LINK] [s/START TIME] [d/DURATION] [t/TAG]…`                    |
 | delete  | delete a meeting                           | `delete TITLE` or `delete INDEX`                                                        |
 | delete  | delete a tag from a meeting                | `delete TITLE t/TAG` `delete INDEX t/TAG`                                               |
+
+<div style="page-break-after: always;"></div>
 
 ## Universal
 
