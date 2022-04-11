@@ -817,6 +817,20 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Finding contacts
+
+Prerequisites: List all contacts using the `listc` command. Multiple contacts in the list.
+
+1. Test case: `findc n/alex t/friends` <br>
+Expected: Contacts named `alex` with a tag called `friends` will be displayed. The number of contacts with the name
+   `alex` and the tag `friends` is shown in the status message.
+
+2. Test case: `findc p/12345678`  <br>
+Expected: No contacts are searched. Error details shown in status message.
+
+Other incorrect `findc` commands to try: `findc th/john_01`, `findc alex`
+Expected: Similar to previous.
+
 ### Adding a meeting
 
 Prerequisites: Default list of meetings are loaded into the application.
@@ -832,6 +846,19 @@ meeting. Details of added meeting and meeting it clashes with is shown in status
 Expected: No meeting is added due to duplicate meeting with meeting added in previous test case. Error details shown in the status message.
 
 Other incorrect `addm` commands to try: `addm n/Dinner with Family d/24-05-2022`, `addm n/2103 Exam d/23-04-2022 st/1500 et/1400`, `addm`
+
+### Editing a meeting
+
+Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
+
+1. Test case: `editm 1 d/30-04-2022 st/1630 et/1730` <br>
+   Expected: The first meeting in the list is edited. Details of the edited meeting is shown in the status message.
+
+2. Test case: `editm 0 d/30-04-2022` <br>
+   Expected: No meeting is edited. Error details shown in the status message.
+
+Other incorrect `editm` commands to try: `editm d/10-04-2022`, `editm 2`
+Expected: Similar to previous.
 
 ### Deleting a meeting
 
@@ -865,7 +892,38 @@ Expected: No change to the lists. Error details are shown in the status message.
 
 4. Test case: `redo` without any prior `undo` command <br>
 Expected: No change to the lists. Error details are shown in the status message.
+
+### Archiving a meeting
+
+1. Archiving a meeting while all meetings are being shown
+
+    1. Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
+
+    2. Test case: `archive 1`<br>
+       Expected: First meeting is archived from the list. Details of the archived contact shown in the status message. 
+
+    3. Test case: `archive 0`<br>
+       Expected: No meeting is archived. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect archive commands to try: `archive`, `archive x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Unarchiving a meeting
+
+1. Unarchiving a meeting while all archived meetings are being shown
+
+    1. Prerequisites: List all archived meetings using the `archivelist` command. Multiple meetings in the list.
+
+    1. Test case: `unarchive 1`<br>
+       Expected: First meeting is archived from the list. Details of the archived contact shown in the status message.
+
+    1. Test case: `unarchive 0`<br>
+       Expected: No meeting is archived. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect archive commands to try: `unarchive`, `unarchive x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
    
+### 
 ### Saving data
 
 1. Generating a save file when there is no saved data found.
