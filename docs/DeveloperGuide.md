@@ -758,6 +758,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
    2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
    3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
 
+<div style="page-break-after: always;"></div>
+
 ## Setting reminders
 
 1. Setting a Reminder for a client who has not had a Reminder
@@ -783,6 +785,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
    3. Test case: `remind 3 asd`
       Expected: The Reminder of this client is not removed. Error details shown in the result display. List remains the same.
    4. Other incorrect Remind commands to try: `remind 3 reminder/meet client for home viewing`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+
+<div style="page-break-after: always;"></div>
 
 ## Opening Reminders window
 
