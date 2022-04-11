@@ -354,14 +354,17 @@ Step 4. `SortComandParser#parse` then returns a `SortCommand` containing `Person
 Step 5.  `LogicManager#execute` executes the `SortCommand` which calls `model#sortPersonListBy` and sorts the
 `UniquePersonList` using FXCollections.sort and `PersonNameComparator`.
 
-
-The following sequence diagram shows how the `sort` command works:
-
-**[COMING SOON]**
-
 The following activity diagram summarizes how to sort all clients.
 
-**[COMING SOON]**
+![Sort Activity Diagram](images/SortActivityDiagram.png)
+
+The following sequence diagram shows how the `sort` command works when executing a command such as `sort name`:
+
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
+
+To further understand the implementation of sort, a logic sequence diagram is provided below. This highlights the use of `Comparators` in `sort`
+
+![Sort Logic Sequence Diagram](images/SortLogicSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "s:SortCommand" as SortCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort name")
+activate LogicManager
+
+LogicManager -> HustleBookParser : parseCommand("sort name", lastCommand)
+activate HustleBookParser
+
+create SortCommandParser
+HustleBookParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> HustleBookParser
+deactivate SortCommandParser
+
+HustleBookParser -> SortCommandParser : parse("sort name")
+activate SortCommandParser
+
+SortCommandParser -> SortCommandParser : parseComparatorForSort("name")
+activate SortCommandParser
+
+SortCommandParser -> Model : new PersonNameComparator()
+activate Model
+
+Model --> SortCommandParser : sortComparator
+deactivate Model 
+
+SortCommandParser --> SortCommandParser : sortComparator
+deactivate SortCommandParser
+
+create SortCommand
+SortCommandParser -> SortCommand : new SortCommand(sortComparator)
+activate SortCommand
+
+SortCommand --> SortCommandParser : s
+deactivate SortCommand
+
+SortCommandParser --> HustleBookParser : s
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> HustleBookParser
+destroy SortCommandParser
+
+HustleBookParser --> LogicManager : s
+deactivate HustleBookParser
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+SortCommand -> Model : sortPersonListBy(s)
+activate Model
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : result
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
