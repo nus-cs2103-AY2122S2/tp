@@ -58,6 +58,9 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Items with `…`​ after them can be used zero or more times.<br>
   e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `clear`, `help` and `exit`) will be ignored.<br>
+  e.g. if the command specified is `list 123`, it will be interpreted as `list`.
+
 * If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
   e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
 
@@ -124,6 +127,8 @@ Example:
     - Phone Number: 12345678
     - Email: alisson111@example.com
     - Address: VVD street, block 123, #01-01
+
+<div style="page-break-after: always;"></div>
 
 | Before | After |
   :---:|:---:
@@ -501,6 +506,8 @@ NUSocials data are saved as a JSON file `[JAR file location]/data/addressbook.js
 **:exclamation: Caution:**
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 

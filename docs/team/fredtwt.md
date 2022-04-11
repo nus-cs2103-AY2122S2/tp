@@ -52,6 +52,6 @@ Given below are my contributions to the project.
       * Added user stories for the features `add`, `tag`, `event`, `cancelevent`.
       * Added use cases for the features `add`, `tag`, `event`, `cancelevent`.
       * Modified the `ModelClassDiagram` and `StorageClassDiagram`.
-      * Added `TagSequenceDiagram`.
+      * Added `TagSequenceDiagram`, `CancelEventSequenceDiagram`, `EventSequenceDiagram`.
       * Added the implementation design details for `tag`, `event`, `cancelevent`.
-      * Contributed to the NFRs.
+      * Contributed to the NFRs and glossary.
