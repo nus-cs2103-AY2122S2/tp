@@ -446,13 +446,9 @@ Actor: User
 3. REP shows the filtered list of clients. 
 
 **Extensions:**
-* 1a. User request does not specify an attribute. 
+* 1a. User request has wrong details. 
   * 1a1. REP displays an error message.
   
-    Use case ends.
-* 1b. User request does not specify any keywords.
-  * 2b1. REP displays an error message.
-
     Use case ends.
 
 ### **Use Case: Match clients**
