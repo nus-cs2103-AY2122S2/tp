@@ -857,3 +857,42 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+
+## **Appendix: Effort**
+
+If the effort required to create AddressBook3 is 100, we think that the effort to create ModuleMateFinder is **_at least 125_**.
+
+Our group has put in significant effort to change the model of AB3 in order to fit the requirements of ModuleMateFinder. Furthermore, we have implemented several features that goes well with our product.  
+To attest to that minimal amount effort, we have over 300 test cases, and added over 7.5k LOC.
+
+### Notable Changes
+
+- **Archives**
+  - To ensure that users could keep their contacts list organised, we added the ability to archive their contacts.
+  - As such, we had to figure the best way to change the underlying architecture of `Model` and `Storage` in order to accommodate two `AddressBook`.
+
+- **Undo/Redo**
+  - We allowed undoing and redoing commands in case users change their minds or make mistakes.
+  - We had to account for the state of both `AddressBook` and `ArchiveBook`.
+
+- **Copy**
+  - As there are a lot of details being stored in ModuleMateFinder, we decided to provide a way for users to retrieve information easily from their contacts by having a `copy` command.
+  - This allows users to retrieve, for example, a contact's email to their clipboard and use it to send an email to them.
+  - We implemented different formats to allow different uses of copying, such as csv for excel.
+- **Sort**
+  - We give users the ability to sort their contacts rather than simply remaining disorganised. This has multiple benefits to the user, especially when it comes to finding ModuleMates.
+  - For example, users can choose to sort by any parameter such as `Name` or `Status` as well as choose ordering. This allows them to effectively go through their contacts list.
+- **Filter**
+  - Rather than allowing users to use `find` to find common modules between their contacts, we decided to implement a new command, `filter`.
+  - The two commands have different use cases that we did not want to mix up, so this required the addition of a new `Predicate`.
+  - With respect to AB3, the `find` command could not find users by `Tag`, so this is a much needed enhancement for ModuleMateFinder.
+- **Updated GUI**
+  - In AB3, the GUI is very bare and plain. We altered the base UI to have a different, more relatable theme.
+  - Instead of using only text to represent certain fields, we decided to use visual representations as well, such as diagrams for `status`.
+  - Furthermore, we also added new windows in order to help unfamiliar users with the different commands, while ensuring that it stays optimised for fast typists.
+  - Hence, we had to research and design on the best ways to optimise GUI for fast typists.
+- **Test Cases**
+  - Many of the test cases would not have worked with ModuleMateFinder. We had to modify many of the unit tests in order to accommodate for this.
+  - We also had to add more test cases, especially for commands prone to bugs such as `Copy`.
