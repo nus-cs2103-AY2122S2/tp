@@ -25,7 +25,7 @@ Given below are my contributions to the project.
   - Highlights:
     - This feature takes advantage of the fact that the `LabList` of all students are aligned with the `MasterLabList` as they are sorted by increasing lab number, as we only need to find the index of the Lab we want to delete in the `MasterLabList` and we can then just remove the Lab at that index in all the students' `LabList` without doing another search.
 
-- **Code contributed:** 
+- **Code contributed:**
   - Code contributed can be found at this [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=bryans17&tabRepo=AY2122S2-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false).
 - **Project management:**
   - Managed release of v1.2 and v1.3 and issue tracker.

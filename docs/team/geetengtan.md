@@ -7,7 +7,7 @@ Below are my contributions to the project:
 
 - **New Feature:** Filter Students by labs [#70](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/70) & [#94](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/94)
     - What it does:
-      - Filters the student list by their `labNumber` and `labStatus`. `StudentHasLabPredicate` is utilised to filter 
+      - Filters the student list by their `labNumber` and `labStatus`. `StudentHasLabPredicate` is utilised to filter
         the `filteredStudentList`.
     - Justification:
       - The TAddressBook might have large amounts of students and the TA will want a more concise list of students
@@ -18,11 +18,11 @@ Below are my contributions to the project:
 
 - **New Feature:** View Student Details [#90](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/90)
   - What it does:
-    - Previews a student's details in another pop up window. Hidden details such as `labMark` are shown here. 
+    - Previews a student's details in another pop up window. Hidden details such as `labMark` are shown here.
   - Justification:
     - TA might want to examine a student's lab performance.
   - Highlights:
-    - This feature is UI intensive. The css and fxml of the `ViewWindow` also made use of the `LabLabel` to create a 
+    - This feature is UI intensive. The css and fxml of the `ViewWindow` also made use of the `LabLabel` to create a
       better looking list of labs in the `ViewWindow` with dynamic colours.
 
 - **Code Contributed**:
@@ -41,6 +41,6 @@ Below are my contributions to the project:
     - Added implementation details for `FilterCommand`
 
 - **Community**
-  - Reviewed PRs of other group members. [#67](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/67), [#71](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/71) 
+  - Reviewed PRs of other group members. [#67](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/67), [#71](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/71)
   - Improved code of other group members to fit functionalities. [#87](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/87)
   - Reported 8 bugs for another group in [PE-D](https://github.com/geetengtan/ped/issues)
