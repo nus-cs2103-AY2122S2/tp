@@ -4,22 +4,21 @@ start
 :System pushes command into StackUndoRedo;
 
 
-if () then (Command is not Undoable)
+if () then ([command shows add or edit window])
     :Command will not be
-    added into undoStack;
-else (Command is Undoable)
-    if () then (is UndoCommand or RedoCommand)
-        :Command pushed into
-        undoStack/redoStack;
-    else (is not UndoCommand or RedoCommand)
-        if () then (is the previous command UndoCommand)
-            :Clear redoStack;
-            :Command pushed into
-                  undoStack;
-        else (is the previous command not UndoCommand)
-            :Command pushed into
-                  undoStack;
-        endif
+    added to undoStack;
+else ([else])
+    if () then ([else])
+        :Clear redoStack;
+    else ([is UndoCommand or RedoCommand])
+
+    endif
+
+    if () then ([is not redoable])
+        :Command will not be
+        added to undoStack;
+    else ([else])
+        :Command push into undoStack;
     endif
 endif
 stop

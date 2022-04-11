@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import java.util.Stack;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * @@author zhixianggg reused
@@ -9,6 +12,7 @@ import java.util.Stack;
  */
 
 public class StackUndoRedo {
+    private static final Logger logger = LogsCenter.getLogger(StackUndoRedo.class);
     private Stack<RedoableCommand> undoStack;
     private Stack<RedoableCommand> redoStack;
 
@@ -26,35 +30,15 @@ public class StackUndoRedo {
      */
     public void push(Command command) {
 
-        if (isNotRedoableCommand(command)) {
-            return;
-        }
-
-        if (isNotUndoRedoCommand(command)) {
+        if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
             redoStack.clear();
         }
 
-        undoStack.add((RedoableCommand) command);
-    }
-
-    /**
-     * Returns true if the command is not redoable or undoable.
-     */
-    public boolean isNotRedoableCommand(Command command) {
         if (!(command instanceof RedoableCommand)) {
-            return true;
+            return;
         }
-        return false;
-    }
 
-    /**
-     * Returns true if the command is either an undo command or a redo command.
-     */
-    public boolean isNotUndoRedoCommand(Command command) {
-        if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
-            return true;
-        }
-        return false;
+        undoStack.add((RedoableCommand) command);
     }
 
     /**
@@ -63,15 +47,17 @@ public class StackUndoRedo {
     public RedoableCommand popUndo() {
         RedoableCommand toUndo = undoStack.pop();
         redoStack.push(toUndo);
+        logger.info(this.toString());
         return toUndo;
     }
 
     /**
-     * Pops and returns the next {@code RedoableCommand} to be redone in the stack.
+     * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
     public RedoableCommand popRedo() {
         RedoableCommand toRedo = redoStack.pop();
         undoStack.push(toRedo);
+        logger.info(this.toString());
         return toRedo;
     }
 
@@ -106,5 +92,19 @@ public class StackUndoRedo {
         // state check
         return undoStack.equals(stack.undoStack)
                 && redoStack.equals(stack.redoStack);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Undo Stack: \n");
+        for (RedoableCommand command : undoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
+        }
+        s.append("\nRedo Stack: \n");
+        for (RedoableCommand command : redoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
+        }
+        return s.toString();
     }
 }

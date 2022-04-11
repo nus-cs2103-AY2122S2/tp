@@ -10,6 +10,8 @@ class Command {
   + setData(): void
 }
 
+
+skinparam classAttributeIconSize 0
 class RedoableCommand
  {
    - previousAddressBook: ReadOnlyAddressBook
