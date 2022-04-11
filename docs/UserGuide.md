@@ -450,19 +450,19 @@ Function: Find sellers whose selected **field** contain any of the given keyword
 
 Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
 
-* The **fields**` are:
+* The **fields** are:
   * name `n/`
   * phone `p/`
   * location `l/`
   * tags `t/`
   * house type `h/`
-* The search is **case-insensitive**. E.g `find-s n/hans` will match buyers with `Hans` and `HanS` in their name.
+* The search is **case-insensitive**. E.g `find-s n/hans` will match sellers with `Hans` and `HanS` in their name.
 * The **order** of the keywords does not matter. e.g. `find-bs n/Hans Bo` is equivalent to `find-s n/Bo Hans`.
 * All partial words will be matched e.g. `Han` keyword will match `Hans` and `Han`.
 * However, if the keyword is larger than the item itself, it will not match e.g. `Hans` keyword will not match `Han` in name
 * Sellers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* * find-b/s will shorten the current list to the filtered list. To show the full list again, type the corresponding list command i.e. list-b/s
+
 
 Examples:
 * `find-s n/John` displays seller whose names are `john` and `John Doe`.
@@ -658,6 +658,7 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 |---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                                                |
 | **Exit**                        | `exit`                                                                                                                                                                |
+| **Clear**                       | `clear-all`                                                                                                                                                           |
 | **Match property**              | `match INDEX` <br> e.g., `match 1`                                                                                                                                    |
 | **List Buyers**                 | `list-b`                                                                                                                                                              |
 | **Add Buyer**                   | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`                                                                                      |
