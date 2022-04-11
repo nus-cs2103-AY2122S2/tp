@@ -40,6 +40,7 @@ Given below are my contributions to the project.
         * Created class diagrams of new Predicate created and FindCommand execution.
         * Created sequence diagrams for FindCommand to demonstrate the execution of the improved implementation.
         * Added more descriptions on the implementation of the improved FindCommand, including the new Predicate classes created.
+        * Added MSS for `find` to highlight the various scenarios possible.
 
 * **Community**:
     * Provided reviews for teammates PRs. (Pull request [#35](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/35))
