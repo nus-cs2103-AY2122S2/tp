@@ -74,4 +74,4 @@ Given below are my contributions to the project.
 
 ### Community:
   * Report bugs and implementation suggestions for other teams through [#PED](https://github.com/9teMare/ped/issues).
-  
+
