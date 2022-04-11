@@ -27,7 +27,7 @@ traditional GUI apps.
 
 |   OS    | How to start TeachWhat!                                                                                   |
 |:-------:|-----------------------------------------------------------------------------------------------------------|
-| Windows | Double-click the TeachWhat! jar file.                                                                     |
+| Windows | Double-click the TeachWhat jar file.                                                                     |
 |   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat.jar` |
 
 * The GUI similar to the one shown below should appear in a few seconds. 
