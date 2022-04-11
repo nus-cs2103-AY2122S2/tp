@@ -232,13 +232,9 @@ Example:
 * `view S/` followed by `delete S/2` deletes the 2nd schedule in the **displayed** schedule.
 * `view S/game` followed by `delete S/1` deletes the 1st schedule in the **displayed** schedule as a result of the `view S/game` command.
 
-<<<<<<< HEAD
 ![delete_schedule](images/deleteschedule.png)
 
-### 2.5 Putting a player to a lineup: `put`
-=======
 ### 2.5 Putting a player into a lineup: `put`
->>>>>>> 0f4919f5bd1253efc394456e20bd3f8918a80652
 
 Puts the specified player to a specified lineup.
 
