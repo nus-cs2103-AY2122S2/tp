@@ -873,12 +873,12 @@ testers are expected to do more *exploratory* testing.
       order.
 
    2. Test case: `del` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+      Expected: No field is deleted. An error message is shown in the Result
+      Display.
 
    3. Test case: `del ph` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+      Expected: No field is deleted. An error message is shown in the Result
+      Display.
 
    4. Test case: `del ph/ <LABEL OF FIRST PHONE NUMBER>` <br>
       Expected: The first phone number is deleted while the rest are still 
@@ -895,8 +895,8 @@ testers are expected to do more *exploratory* testing.
       are deleted.
 
    7. Test case: `del j/` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+      Expected: No field is deleted. An error message is shown in the Result
+      Display.
 
 ### 8.5 Deleting a person
 
@@ -956,25 +956,25 @@ testers are expected to do more *exploratory* testing.
       Expected: The added meeting is shown on the list of meetings at the side and a success message is displayed.
    
    3. Test case: `meet with/2 for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    4. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    5. Test case: `meet with/ for/Product Demo in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    6. Test case: `meet with/1 for/ in/Conference Room 5A on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    7. Test case: `meet with/1 for/Product Demo in/ on/05-04-2025 15:44` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    8. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/` <br>
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
    
    9. Test case: `meet with/1 for/Product Demo in/Conference Room 5A on/2025-05-04 15:44`
-      Expected: No meeting is added and an error message is shown in the status box.
+      Expected: No meeting is added and an error message is shown in the Result Display.
 
 ### 8.12 Updating a meeting
 
