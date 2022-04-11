@@ -311,7 +311,7 @@ Find events in _Amigos_ whose properties match the given search criteria.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
-  * `DATE_START` and `DATE_END` set the inclusive start and end range to filter events by respectively
+  * `DATE_START` and `DATE_END` set the inclusive starting and ending date range to filter events by respectively
   * The date is interpreted intelligently where possible, similar to `DATE_TIME` in `addevent`
   * It is acceptable to provide only the `DATE_START` or `DATE_END`, if desired.
 * At least one of the optional fields must be provided
