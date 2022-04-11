@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -17,6 +18,7 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -84,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `UniteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniteParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -133,6 +141,7 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -150,6 +159,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.unite.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -183,6 +193,8 @@ This is a sample of the `Person` object diagram.
 
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Filter feature
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
@@ -214,9 +226,11 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-####Design considerations
+#### Design considerations
 
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
+
+<div style="page-break-after: always;"></div>
 
 ### Grab Command
 The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can copy the displayed data.
@@ -248,6 +262,8 @@ Step 4. During the execution of grab command, a `CommandException` is thrown if 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GrabCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -329,6 +345,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+<div style="page-break-after: always;"></div>
+
 ### View detailed profile
 In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
 limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
@@ -337,6 +355,8 @@ height of a `PersonCard`, less person will be displayed of the same window size.
 Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
 conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
 information about a person.
+
+<div style="page-break-after: always;"></div>
 
 ### Theme choosing
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
@@ -369,6 +389,7 @@ dark theme, so that the application fits better to the vibrant energy of a unive
 
 **Value proposition**: help university Students and TAs to manage multiple project or tutorial groups, and help school admins to manage module groups.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -392,6 +413,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 *{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -467,6 +490,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -484,6 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Profile**: A page with more detailed information about a person
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
