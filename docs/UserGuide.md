@@ -457,7 +457,7 @@ Format: `out-of-stock`
 | Compulsory Fields | | 
 | Optional Fields   | |
 
-* A product is considered out of stock if it does not have an item
+* A product is considered out of stock if it does not have an item.
 
 <h5>GUI Alternative</h5> 
 
@@ -694,8 +694,8 @@ Format: `clear`
 
 :information_source: The difference between `clear` and `delete-all` :
 
-* `clear` will delete all the `products/item` including those which are not showing.
-* `delete-all` will only delete `products/item` that is shown in the table.
+* `clear` will delete all the `products/items` including those which are not showing.
+* `delete-all` will only delete `products/items` that are shown in the table.
 
 </div>
 
@@ -745,7 +745,7 @@ Format: `redo`
 
 <div style="page-break-after: always;"></div>
 
-#### 3.3.2 Exiting the program : `exit`
+#### 3.3.4 Exiting the program : `exit`
 
 Exits iBook.
 
