@@ -162,14 +162,17 @@ The `Storage` component,
 
 #### Design Consideration
 1. Current Design: Having different storage for buyers and sellers
-   Pros: Easier to implement as issues on one side will not affect issues on another. Moreover, when one json file is corrupted, the other json file can still be used.
 
-Cons: There will be lots of repetitive code.
+
+- Pros: Easier to implement as issues on one side will not affect issues on another. Moreover, when one json file is corrupted, the other json file can still be used.
+
+- Cons: There will be lots of repetitive code.
 
 2. Alternative: Use addressbook.json to contain both buyer and seller list
-   Pros: Less repetitive code
+   
+- Pros: Less repetitive code
 
-Cons: Another layer will be added in the json file, harder to debug and more prone to error.
+- Cons: Another layer will be added in the json file, harder to debug and more prone to error.
 
 ### Common classes
 
