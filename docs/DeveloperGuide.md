@@ -467,12 +467,12 @@ The following sequence diagram shows,
 The following sequence diagram shows how `AddLessonCommand`
 - sets the newly added lesson as the selected lesson in the UI through `Model`
 
-![Add Lesson Sequence Diagram 3](images/AddLessonSequenceDiagram_3.png)
+<img src="images/AddLessonSequenceDiagram_3.png" width="450"/>
 
 The following sequence diagram shows how `AddLessonCommand`
 - updates the UI to show a list of conflicting lessons by updating the filtered lesson list through `Model` using an instance of `ConflictingLessonsPredicate`
 
-![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
+<img src="images/AddLessonSequenceDiagram_4.png" width="650"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -566,6 +566,8 @@ Given below is a class diagram of `TableView<CommandCard>`.
 **Design considerations**  
 The `CommandCard` class became a nested class because there were no other features that would be implemented that need to use it. Only the `HelpWindow` requires it,
 thus, it was made as a nested class.
+
+<div style="page-break-after: always;"></div>
 
 ### Command Shortcuts
 
