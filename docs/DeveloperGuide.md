@@ -966,7 +966,7 @@ To simulate this scenario, follow the steps below:
 5. To simulate the file becoming corrupted, you may remove or add some items into the JSON file.
    - In this case, we can simply remove the opening square-bracket from the JSON file, rendering it unreadable, like so:
 
-##### BEFORE
+##### Before change
 ```
 {
   "lessons" : [ {                                   // <---------- to remove [
@@ -987,7 +987,7 @@ To simulate this scenario, follow the steps below:
 }
 ```
 
-##### AFTER
+##### After change
 ```
 {
   "lessons" : {                                   // <---------- removed [
