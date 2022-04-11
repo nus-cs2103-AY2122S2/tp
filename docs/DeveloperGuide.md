@@ -235,11 +235,11 @@ The class diagram above depicts the structure of `AddCommand`. As per any Comman
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-   - Scenario: Adding of the specified `Person` to the database is successful.
-   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
+    - Scenario: Adding of the specified `Person` to the database is successful.
+    - Message: "New person added: %1$s" where "%1$s" is the added person's details.
 2. `MESSAGE_DUPLICATE_PERSON`:
-   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
-   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
+    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 **Interaction of objects when Add Command is executed:**
 
@@ -503,6 +503,7 @@ In addition, for attribute types that need to be unique for each `Person` e.g. `
 <br>e.g. Given the two following `Person` objects in Tracey:
 * `name`: John `Email`: john123@gmail.com (indexed 1)
 * `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
+
 
 The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
 
@@ -881,6 +882,7 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
+
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
@@ -1246,9 +1248,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Product is not required to handle printing of reports
 12. Product should respond within 10 seconds.
 
-
-*{More to be added}*
-
 ### Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
@@ -1330,34 +1329,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Finding a person
-
-1. Finding a person by their full name
-
-     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
-
-    1. Test case: `find Andy`<br>
-       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
-
-    1. Test case: `find Carl`<br>
-       Expected: No person is found. Error details shown in the status message. 
-
-    1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
-       Expected: Similar to previous.
-
-1. Finding a person by using name's prefix 
-
-    1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
-
-    1. Test case: `find An`<br>
-       Expected: List details of `Andy` and `Anna`. Details of matched contacts shown in the status message.
-
-    1. Test case: `find dy`<br>
-       Expected: No person is found. Error details shown in the status message.
-
-    1. Other incorrect delete commands to try: `find na`, `find ob` <br>
-       Expected: Similar to previous.
-       
 ### Listing the data
 
 1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
@@ -1387,8 +1358,37 @@ testers are expected to do more *exploratory* testing.
    d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
    Expected: Existing Pie Chart Window will close along with the Main Window.
 
-   e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
-   Expected: Error message indicating format of command is wrong.
+    e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
+       Expected: Error message indicating format of command is wrong.
+=========
+### Finding a person
+
+1. Finding a person by their full name
+
+     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
+
+    1. Test case: `find Andy`<br>
+       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
+
+    1. Test case: `find Carl`<br>
+       Expected: No person is found. Error details shown in the status message. 
+
+    1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
+       Expected: Similar to previous.
+
+1. Finding a person by using name's prefix 
+
+    1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
+
+    1. Test case: `find An`<br>
+       Expected: List details of `Andy` and `Anna`. Details of matched contacts shown in the status message.
+
+    1. Test case: `find dy`<br>
+       Expected: No person is found. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `find na`, `find ob` <br>
+       Expected: Similar to previous.
+>>>>>>>>> Temporary merge branch 2
 
 ### Saving data
 
