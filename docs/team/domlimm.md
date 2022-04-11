@@ -51,7 +51,7 @@ Given below are my contributions to the project.
   * Maintaining team's Gradle build file by updating `shadowJar` naming and enabling assertions.
 
 * **Review/Mentoring contributions**:
-  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 47; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 135; (caa 11/04/22)
+  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 47; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 136; (caa 11/04/22)
 
 * **Community**:
   * Non-trivial PRs reviewed
