@@ -120,15 +120,6 @@ public class Person {
     }
 
     /**
-     * Marks the task at {@code index} from the list of tasks as not complete.
-     *
-     * @param index the index of the task to be marked not complete.
-     */
-    public void markTaskAsNotComplete(int index) {
-        taskList.markTaskAsNotComplete(index);
-    }
-
-    /**
      * Checks if the {@code task} is already present in the list of tasks.
      *
      * @param task the task name to be checked.
