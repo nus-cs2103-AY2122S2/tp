@@ -36,7 +36,7 @@ public class TypicalApplicants {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAge("23").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAge("23").withGender("M").withAddress("wall street").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAge("24").withAddress("10th street").withGender("M")
             .withTags("friends").build();
