@@ -146,7 +146,7 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the [glossary](#6-glossary).
+* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the [glossary](#6-glossary)).
 * If any values for faculty, Covid status and block is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error. You will have to input the details for the keyword again.
 * If you added duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
   i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`.
@@ -196,7 +196,7 @@ Format: `edit INDEX n/NAME ...`
 * To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
-* Refer to Table 4 in the [glossary](#6-glossary)</a> for the correct format and pre-defined constants to be used for each input field.
+* Refer to Table 4 in the [glossary](#6-glossary) for the correct format and pre-defined constants to be used for each input field.
 * Existing information of the student will be replaced with the newly inputted values.
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
