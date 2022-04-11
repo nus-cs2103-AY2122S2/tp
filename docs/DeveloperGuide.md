@@ -17,6 +17,17 @@ This is a brownfield project that bases from the Project template [AddressBook L
     - [storage Component](#storage-component)
     - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Property](#property)
+  - [Preference](#preference)
+  - [UserType](#usertype)
+  - [Favourite/Unfavourite feature and Favourites window](#favouriteunfavourite-feature-and-favourites-window)
+  - [Match feature and Window](#match-feature-and-window)
+  - [Help feature and Window](#help-feature-and-window)
+  - [Remind Feature](#remind-feature)
+  - [Upload Image Feature](#upload-image-feature)
+  - [Statistics feature and Window](#statistics-feature-and-window)
+  - [Sorting Feature](#sorting-feature)
+  - [Feature `find` enhanced](#feature-find-enhanced)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Glossary](#appendix-glossary)
 - [Appendix: Requirements](#appendix-requirements)
@@ -35,6 +46,8 @@ Get started by following these instructions from our [guide](https://ay2122s2-cs
 # Design
 
 Take a look at our design which is mostly based off [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/DeveloperGuide.html#design).
+
+<div style="page-break-after: always;"></div>
 
 ## Architecture
 
@@ -76,6 +89,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI Component
 
@@ -122,6 +137,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -141,7 +158,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/developer-guide/RealEstateProStorage.png" width="550" />
+<img src="images/developer-guide/RealEstateProStorage.png"/>
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -155,45 +172,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 # Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
-
-## Favourite/Unfavourite feature and Favourites window
-
-The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
-
-Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
-
-Step 1. The user starts the application with pre-loaded data of `Person`.
-
-Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
-
-<aside>
-💡 Note: 
-If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
-</aside>
-
-Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
-
-<aside>
-💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
-</aside>
-
-## Match feature/Window
-The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
-The left column shows the sellers, while the right column shows the buyers.
-
-Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
-
-A property matches with a preference if
-- they have the same `region`, and
-- they have the same `size`, and
-- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
-
-## Help Feature and Window
-The `help` command and selecting help from the dropdown opens the `helpwindow`.
-
-The contents of `helpPanePlaceHolder` is then replaced according to which tab
-that the user has selected to view more details about a specific feature or general features
-of RealEstatePro
 
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
@@ -220,6 +198,47 @@ The `UserType` represents an attribute that is added to a `Person` & can represe
 
 Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be edited _directly_ via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa if the Person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `Person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `Person` are being edited, e.g. phone number, address, the `UserType` of that `Person` being edited will remain the same.
 
+## Favourite/Unfavourite feature and Favourites window
+
+The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
+
+Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
+
+Step 1. The user starts the application with pre-loaded data of `Person`.
+
+Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
+
+<aside>
+💡 Note: 
+If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
+</aside>
+
+Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
+
+<aside>
+💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
+</aside>
+
+## Match feature and Window
+The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
+The left column shows the sellers, while the right column shows the buyers.
+
+Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
+
+A property matches with a preference if
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
+
+<div style="page-break-after: always;"></div>
+
+## Help feature and Window
+The `help` command and selecting help from the dropdown opens the `helpwindow`.
+
+The contents of `helpPanePlaceHolder` is then replaced according to which tab
+that the user has selected to view more details about a specific feature or general features
+of RealEstatePro
+
 ## Remind feature
 The remind feature is implemented by storing a static list of Persons the user wants to be reminded of.
 
@@ -241,7 +260,7 @@ Step 3: The user will be prompted with the Reminder window, containing the `Pers
 Step 4: The user can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the user of any reminders.
 
 
-## Upload Image
+## Upload Image Feature
 The upload image feature is implemented by storing a set of `UserImage` containing
 a `FilePath` to an image file and an optional `description` of the image. A `LinkedHashSet` is utilized
 to retain order based on the order of insertion.
@@ -254,23 +273,19 @@ There are two commands that are associated with this feature, namely `upload` an
 Below is an example usage scenario and the behaviour of the program:
 
 Step 1: User calls the `upload` command.
-`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add
-the image with, the `filepath` to the file (the validity of the file is checked) and
-the `description` if provided.
+`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add the image with, the `filepath` to the file (the validity of the file is checked) and the `description` if provided.
 
-Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the
-file `FilePath` provided is an image before adding it to the
-`Person`.
+Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the file `FilePath` provided is an image before adding it to the set of `UserImage` in `Person`.
 
-Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parses to get the `index` of the `Person` to
-view all the `UserImage` of the `Person`.
+Step 3: User enters the `viewimage` command that `ViewImageCommandParser` parses to get the `index` of the `Person` to view all the `UserImage` of the `Person`.
 
-Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
-The `viewImageWindow` is then launched after it retrieves the set from `model` using `logic`
+Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`. The `viewImageWindow` is then launched after it retrieves the set from `Model` using `Logic`
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
-## Statistics feature/Window
+<div style="page-break-after: always;"></div>
+
+## Statistics feature and Window
 <img src="images/user-guide/Stats.png" height="400px">
 
 The `stats` command opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
@@ -282,7 +297,9 @@ This allows the user to be able to visualize his/her client's data to make bette
 * Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
 * Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
-## Sorting
+<div style="page-break-after: always;"></div>
+
+## Sorting Feature
 
 The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`. Whenever the data in the list containing all `Person` objects is changed, the `FilteredList<Person>` is notified first and will filter the data. Whenever the data in the `FilteredList<Person>` changes, the `SortedList<Person>` is notified and will sort the filtered data. This allows the *sort* feature to be used in conjunction with the *find* feature, i.e., it is possible to *sort* the results found by the *find* feature.
 
@@ -299,6 +316,8 @@ Step 2. The user executes `find name john`, causing the `FilteredList<Person>` t
 Step 3. The user executes `sort phone` to sort the clients according to their phone number. The `sort` command calls `Model#updateSortedPersonList()`. This in turn calls `FilteredList#setComparator()` which causes the `FilteredList<Person>` to sort the data it contains.
 
 Step 4. The user executes `list` to list all clients, which causes the `FilteredList<Person>` to now contain all clients. The `SortedList<Person>` is automatically notified and sorts the new data in the `FilteredList<Person>`. Similarly, other commands that cause the data in the `FilteredList<Person>` to change, such as `add`, `delete`,`edit`,`favourite`, will cause the `SortedList<Person>` to automatically update itself.
+
+<div style="page-break-after: always;"></div>
 
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
@@ -328,6 +347,8 @@ This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps
 We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
 
+<div style="page-break-after: always;"></div>
+
 # Appendix: Glossary
 - **Users**: Real estate agents.
 - **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
@@ -351,6 +372,7 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 - Organize clients to be able to easily find their information when needed
 - Buy and sell properties with greater efficiency
 
+<div style="page-break-after: always;"></div>
 
 ## User stories
 
@@ -708,6 +730,8 @@ Actor: User
 
      Use case resumes at step 2.
 
+<div style="page-break-after: always;"></div>
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
@@ -715,6 +739,8 @@ Actor: User
 3. No lag of more than one second when executing commands
 4. Should be able to hold up to 1000 Persons without a noticeable sluggishness in performance for typical usage.
 5. The application will not be able to prevent any data privacy violated by other programs.
+
+<div style="page-break-after: always;"></div>
 
 # Appendix: Instructions for manual testing
 
@@ -865,6 +891,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
    3. Test case: `viewimage`<br>
    Expected: Error message is displayed and no window pops up.
 
+<div style="page-break-after: always;"></div>
+
 ## Setting reminders
 
 1. Setting a Reminder for a client who has not had a Reminder
@@ -891,6 +919,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
       Expected: The Reminder of this client is not removed. Error details shown in the result display. List remains the same.
    4. Other incorrect Remind commands to try: `remind 3 reminder/meet client for home viewing`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
 
+<div style="page-break-after: always;"></div>
+
 ## Opening Reminders window
 
 1. Open Reminders window by command
@@ -902,6 +932,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 3. Open Reminders window by key
    1. Test case: Press on the `F4` key on your device.
       Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+
+<div style="page-break-after: always;"></div>
 
 # Appendix: Effort
 
