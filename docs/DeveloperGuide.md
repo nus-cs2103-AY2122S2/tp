@@ -953,7 +953,7 @@ testers are expected to do more *exploratory* testing.
 ### 8.9 Viewing a contact
 
 1. Viewing a contact
-    1. Prerequisites:Have at least one contact stored in the application.
+    1. Prerequisites: Have at least one contact stored in the application.
        
     2. Test case: `view 1` <br>
        Expected: You are navigated to the Contact Details Page for the contact at index 1.
