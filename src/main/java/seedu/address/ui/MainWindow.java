@@ -1,10 +1,6 @@
 package seedu.address.ui;
 
-import java.io.File;
-import java.util.List;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
