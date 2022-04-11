@@ -88,7 +88,7 @@ public class ShowDetailsCard extends UiPart<Region> {
         assert show != null;
 
         this.show = show;
-        name.setText(show.getName().fullName);
+        name.setText(show.getName().name);
 
         String statusString = show.getStatus().toString();
         String statusMessage = "Status: " + statusString.substring(0, 1).toUpperCase()

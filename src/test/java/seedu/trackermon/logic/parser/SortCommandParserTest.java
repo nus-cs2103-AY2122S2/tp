@@ -23,6 +23,9 @@ public class SortCommandParserTest {
     private static final String SPACE = " ";
     private final SortCommandParser parser = new SortCommandParser();
 
+    /**
+     * Tests the parsing of invalid fields from the execution of {@code SortCommandParser}.
+     */
     @Test
     public void parse_wrongArg_throwsParseException() {
         //checking for asc or dsc
@@ -30,6 +33,9 @@ public class SortCommandParserTest {
                 String.format(Messages.MESSAGE_INVALID_INPUT, Messages.MESSAGE_INVALID_ORDER));
     }
 
+    /**
+     * Tests the parsing of invalid sorting order fields from the execution of {@code SortCommandParser}.
+     */
     @Test
     public void parse_wrongSO_throwsParseException() {
         //checking for number of full name for so
@@ -38,6 +44,9 @@ public class SortCommandParserTest {
                 String.format(Messages.MESSAGE_INVALID_INPUT, SortCommandParser.MESSAGE_INVALID_SO));
     }
 
+    /**
+     * Tests the parsing of no input fields from the execution of {@code SortCommandParser}.
+     */
     @Test
     public void parse_noArgs_returnsSortCommand() {
 
@@ -46,6 +55,9 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, COMMAND_WORD, expectedSortCommand);
     }
 
+    /**
+     * Tests the parsing of one fields from the execution of {@code SortCommandParser}.
+     */
     @Test
     public void parse_oneArgs_returnsSortCommand() {
 

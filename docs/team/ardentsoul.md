@@ -35,7 +35,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `find` and `help` [\#85](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/85).
-    * Added a command summary table [\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134/files).
+    * Added a command summary table [\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134).
     * Did initial structural overhaul and improvement to existing documentation [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166).
       * Added Introduction
       * Added User guide navigation

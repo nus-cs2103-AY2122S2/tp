@@ -9,8 +9,14 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code Config}.
+ */
 public class ConfigTest {
 
+    /**
+     * Tests the string of a default {@code Config} object.
+     */
     @Test
     public void toString_defaultObject_stringReturned() {
         String defaultConfigAsString = "Current log level : INFO\n"
@@ -19,6 +25,9 @@ public class ConfigTest {
         assertEquals(defaultConfigAsString, new Config().toString());
     }
 
+    /**
+     * Tests the equals method of {@code Config}.
+     */
     @Test
     public void equalsMethod() {
         Config defaultConfig = new Config();
@@ -26,6 +35,9 @@ public class ConfigTest {
         assertTrue(defaultConfig.equals(defaultConfig));
     }
 
+    /**
+     * Tests the hash method of {@code Config}.
+     */
     @Test
     public void hashMethod() {
         Config defaultConfig = new Config();
@@ -34,6 +46,9 @@ public class ConfigTest {
                 defaultConfig.getUserPrefsFilePath()));
     }
 
+    /**
+     * Tests getting userPrefsFilePath of a default {@code Config} object.
+     */
     @Test
     public void getUserPrefsFilePath_fromEditor_success() {
         Config defaultConfig = new Config();

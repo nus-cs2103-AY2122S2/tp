@@ -33,9 +33,12 @@ import seedu.trackermon.model.show.TagsContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalShowList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalShowList(), new UserPrefs());
 
+    /**
+     *  Tests if different types of FindCommand are the same from the execution of {@code CommandResult}.
+     */
     @Test
     public void equals() {
         ShowContainsKeywordsPredicate firstPredicate =
@@ -63,6 +66,9 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    /**
+     * Tests the finding of zero keywords from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_zeroKeywords_noShowFound() {
         String expectedMessage = String.format(MESSAGE_SHOWS_LISTED_OVERVIEW, 0);
@@ -73,6 +79,9 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredShowList());
     }
 
+    /**
+     * Tests the finding of multiple keywords from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_multipleKeywords_multipleShowsFound() {
         String expectedMessage = String.format(MESSAGE_SHOWS_LISTED_OVERVIEW, 3);
@@ -83,6 +92,9 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(GONE, FRIENDS, HIMYM), model.getFilteredShowList());
     }
 
+    /**
+     * Tests the finding of name field for a precise search from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_nameField_preciseSearch() {
         String input = "Alice in Wonderland";
@@ -99,6 +111,9 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE_IN_WONDERLAND), model.getFilteredShowList());
     }
 
+    /**
+     * Tests the finding of status field for a precise search from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_statusField_preciseSearch() {
         String expectedMessage = String.format(MESSAGE_SHOWS_LISTED_OVERVIEW, 1);
@@ -109,6 +124,9 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE_IN_WONDERLAND), model.getFilteredShowList());
     }
 
+    /**
+     * Tests the finding of tag field for a precise search from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_tagField_preciseSearch() {
         List<String> input = Arrays.asList("Horror", "friends");
@@ -124,6 +142,9 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(FRIENDS, HIMYM), model.getFilteredShowList());
     }
 
+    /**
+     * Tests the finding of rate field for a precise search from the execution of {@code FindCommand}.
+     */
     @Test
     public void execute_rateField_preciseSearch() {
         String expectedMessage = String.format(MESSAGE_SHOWS_LISTED_OVERVIEW, 1);
@@ -141,16 +162,8 @@ public class FindCommandTest {
         return new ShowContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
-    private NameContainsKeywordsPredicate preparePredicateName(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
-
     private StatusContainsKeywordsPredicate preparePredicateStatus(String userInput) {
         return new StatusContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
-
-    private TagsContainsKeywordsPredicate preparePredicateTags(String userInput) {
-        return new TagsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     private RatingContainsKeywordsPredicate preparePredicateRating(String userInput) {

@@ -27,6 +27,12 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with all specified fields.
+     *
+     * @param feedbackToUser the feedback message to be returned to the user.
+     * @param isShowHelp whether the command is to display the help window.
+     * @param isExit whether the command is to exit the application.
+     * @param isImport whether the command is the import command.
+     * @param indexAffected the index being affected by the different commands.
      */
     public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport,
                          int indexAffected) {
@@ -40,6 +46,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
      * {@code isExit}, {@code isImport}, and other fields set to their default value.
+     * @param feedbackToUser the feedback message to be returned to the user.
+     * @param isShowHelp whether the command is to display the help window.
+     * @param isExit whether the command is to exit the application.
+     * @param isImport whether the command is the import command.
      */
     public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
         this(feedbackToUser, isShowHelp, isExit, isImport, DEFAULT_INDEX);
@@ -48,6 +58,9 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
      * {@code isExit}, and other fields set to their default value.
+     * @param feedbackToUser the feedback message to be returned to the user.
+     * @param isShowHelp whether the command is to display the help window.
+     * @param isExit whether the command is to exit the application.
      */
     public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
         this(feedbackToUser, isShowHelp, isExit, false);
@@ -56,6 +69,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code indexAffected},
      * and other fields set to their default value.
+     * @param feedbackToUser the feedback message to be returned to the user.
+     * @param indexAffected the index being affected by the different commands.
      */
     public CommandResult(String feedbackToUser, int indexAffected) {
         this(feedbackToUser, false, false, false, indexAffected);
@@ -64,6 +79,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
+     * @param feedbackToUser the feedback message to be returned to the user.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);

@@ -15,6 +15,9 @@ import seedu.trackermon.model.UserPrefs;
  */
 public class ClearCommandTest {
 
+    /**
+     * Tests the clearing of an empty show list from the execution of {@code ClearCommand}.
+     */
     @Test
     public void execute_emptyShowList_success() {
         Model model = new ModelManager();
@@ -23,6 +26,10 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+
+    /**
+     * Tests the clearing of a non-empty show list from the execution of {@code ClearCommand}.
+     */
     @Test
     public void execute_nonEmptyShowList_success() {
         Model model = new ModelManager(getTypicalShowList(), new UserPrefs());

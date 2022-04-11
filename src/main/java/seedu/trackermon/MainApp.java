@@ -47,6 +47,10 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    /**
+     * Initialize the application data and information.
+     * @throws Exception if there is an error being thrown by the application.
+     */
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing Trackermon ]===========================");
@@ -170,12 +174,19 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    /**
+     * Executes the method during the startup of the application.
+     * @param primaryStage the stage provided to display the UI.
+     */
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting ShowList " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
+    /**
+     * Executes the method during the shutting down of the application.
+     */
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Trackermon ] =============================");

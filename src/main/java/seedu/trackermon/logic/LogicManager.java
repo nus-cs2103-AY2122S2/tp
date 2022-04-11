@@ -19,8 +19,6 @@ import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.storage.Storage;
 
-
-
 /**
  * The main LogicManager of the app.
  */
@@ -35,6 +33,8 @@ public class LogicManager implements Logic {
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * @param model the {@code Model}.
+     * @param storage the {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -42,6 +42,13 @@ public class LogicManager implements Logic {
         parser = new TrackermonParser();
     }
 
+    /**
+     * Executes the user input.
+     * @param commandText The command as entered by the user.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an error reading or saving the file.
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
