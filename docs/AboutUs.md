@@ -41,7 +41,8 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/chanyijuan.png" width="200px">
 
 [[github](http://github.com/chanyijuan)]
-
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/chanyijuan.html)]
+* 
 * Role: Developer - List Features
 * Responsibilities: Deliverables and deadlines.
 
