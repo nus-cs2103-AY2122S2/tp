@@ -8,9 +8,10 @@ package Logic {
 
 Class AddressBookParser
 Class XYZCommand
+Class "{abstract}\nXYZCommand" as XYZAbstractCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
-
+Class XYZTYPECommand
 
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
@@ -29,16 +30,21 @@ HiddenOutside ..> Logic
 LogicManager .right.|> Logic
 LogicManager -right->"1" AddressBookParser
 AddressBookParser ..> XYZCommand : creates >
+AddressBookParser ..> XYZTYPECommand : creates >
 
-XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+XYZAbstractCommand -up-|> Command
+XYZCommand -left-|> Command
+LogicManager ..> Command : executes >
+XYZTYPECommand -up-|> XYZAbstractCommand
 
 LogicManager --> Model
 LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+note right of XYZAbstractCommand: e.g. AddCommand, \nFindCommand
+note right of XYZCommand: e.g. HelpCommand, \nExitCommand
+note right of XYZTYPECommand: e.g. AddPersonCommand, \n FindTaskCommand
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult

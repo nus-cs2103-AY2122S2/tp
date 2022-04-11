@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Writes and reads files
@@ -70,6 +71,17 @@ public class FileUtil {
      */
     public static String readFromFile(Path file) throws IOException {
         return new String(Files.readAllBytes(file), CHARSET);
+    }
+
+    /**
+     * Reads all lines from a file.
+     *
+     * @param file Input file
+     * @return A list of lines from the file
+     * @throws IOException Error occurred while reading.
+     */
+    public static List<String> readFromFileLines(Path file) throws IOException {
+        return Files.readAllLines(file);
     }
 
     /**

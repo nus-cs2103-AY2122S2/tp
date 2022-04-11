@@ -5,55 +5,47 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0544350@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Brigitte Puteri Santoso
 
-<img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/brigittesantoso.png" width="200px">
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/brigittesantoso)]
+[[portfolio](team/brigittesantoso.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Job and Stage fields, Interview features and Types
 
-### Jean Doe
+### Ryan Chang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rcjj98.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rcjj98)]
+[[portfolio](team/rcjj98.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Export and edit feature.
+
+### Emmanuel Mok
+
+<img src="images/eman-kom.png" width="200px">
+
+[[github](http://github.com/eman-kom)]
+[[portfolio](team/eman-kom.md)]
+
+* Role: Developer
+* Responsibilities: Find and Import Feature
+
+### Imraj Singh Sandhu
+
+<img src="images/imrajsinghsandhu.png" width="200px">
+
+[[github](http://github.com/imrajsinghsandhu)]
+[[portfolio](team/imrajsinghsandhu.md)]
+
+* Role: Developer
+* Responsibilities: Task feature

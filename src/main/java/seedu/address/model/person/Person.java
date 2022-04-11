@@ -2,15 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents an applicant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -22,18 +17,20 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Job job;
+    private final Stage stage;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Job job, Stage stage) {
+        requireAllNonNull(name, phone, email, address, job, stage);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.job = job;
+        this.stage = stage;
     }
 
     public Name getName() {
@@ -52,17 +49,16 @@ public class Person {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Job getJob() {
+        return job;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both applicants have the same name.
+     * This defines a weaker notion of equality between two applicants.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -70,12 +66,12 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getName().equals(getName()));
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both applicants have the same identity and data fields.
+     * This defines a stronger notion of equality between two applicants.
      */
     @Override
     public boolean equals(Object other) {
@@ -92,13 +88,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getJob().equals(getJob())
+                && otherPerson.getStage().equals(getStage());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, job, stage);
     }
 
     @Override
@@ -110,13 +107,12 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Job: ")
+                .append(getJob())
+                .append("; Stage: ")
+                .append(getStage());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
         return builder.toString();
     }
 

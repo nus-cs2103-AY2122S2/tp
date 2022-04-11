@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="HRConnect" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,13 +47,32 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <StackPane minWidth="350" prefWidth="350" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
+            <children>
+              <TabPane fx:id="tabs" minWidth="350" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+              <Tab fx:id="personsTab" text="Applicants">
+                <content>
+                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                </content>
+              </Tab>
+                <Tab fx:id="interviewsTab" text="Interviews">
+                  <content>
+                    <StackPane fx:id="interviewListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                  </content>
+                </Tab>
+                <Tab fx:id="tasksTab" text="Tasks">
+                  <content>
+                    <StackPane fx:id="taskListPanelPlaceHolder" VBox.vgrow="ALWAYS" />
+                  </content>
+                </Tab>
+              </tabs>
+              </TabPane>
+            </children>
+        </StackPane>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

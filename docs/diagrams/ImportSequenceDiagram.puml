@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ImportCommandParser" as ImportCommandParser LOGIC_COLOR
+participant "i:ImportCommand" as ImportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> ImportCommandParser : parse("../mydata.csv")
+activate ImportCommandParser
+
+ImportCommandParser -> ImportCommandParser : checkFilePath("../mydata.csv")
+activate ImportCommandParser
+ImportCommandParser --> ImportCommandParser
+deactivate ImportCommandParser
+
+ImportCommandParser -> ImportCommandParser : readCsv("../mydata.csv")
+activate ImportCommandParser
+
+ref over ImportCommandParser
+perform necessary checks
+end ref
+
+ImportCommandParser --> ImportCommandParser
+deactivate ImportCommandParser
+
+create ImportCommand
+ImportCommandParser -> ImportCommand
+activate ImportCommand
+
+ImportCommand --> ImportCommandParser : i
+deactivate ImportCommand
+
+[<-- ImportCommandParser : i
+deactivate ImportCommandParser
+
+[<-[hidden]- ImportCommandParser : e
+destroy ImportCommandParser
+
+[-> ImportCommand : execute()
+activate ImportCommand
+
+loop until end of persons list
+ImportCommand -> Model : hasPerson(person)
+activate Model
+Model --> ImportCommand
+deactivate Model
+end
+
+loop until end of persons list
+ImportCommand -> Model : addPerson(person)
+activate Model
+Model --> ImportCommand
+deactivate Model
+end
+
+
+create CommandResult
+ImportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ImportCommand
+deactivate CommandResult
+
+[<-- ImportCommand : result
+deactivate ImportCommand
+
+@enduml
+
+

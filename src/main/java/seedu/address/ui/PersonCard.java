@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -39,7 +36,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label job;
+    @FXML
+    private Label stage;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,9 +51,28 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        job.setText(person.getJob().jobTitle);
+        stage.setText(person.getStage().value);
+        editStageStyle(stage, person);
+    }
+
+    /**
+     * Edit style of stage
+     *
+     * @param label stage label
+     * @param person applicant
+     */
+    public void editStageStyle(Label label, Person person) {
+        if (person.getStage().value.equals("INPROGRESS")) {
+            stage.setStyle("-fx-text-fill: white; -fx-background-color: #d2691e; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+        } else if (person.getStage().value.equals("ACCEPTED")) {
+            stage.setStyle("-fx-text-fill: white; -fx-background-color: #228b22; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+        } else if (person.getStage().value.equals("REJECTED")) {
+            stage.setStyle("-fx-text-fill: white; -fx-background-color: #b22222; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+        }
     }
 
     @Override

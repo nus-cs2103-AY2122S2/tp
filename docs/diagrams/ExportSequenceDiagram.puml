@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ExportCommandParser" as ExportCommandParser LOGIC_COLOR
+participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box File Operations STORAGE_COLOR_T1
+participant ":PrintWriter" as PrintWriter MODEL_COLOR
+end box
+
+[-> ExportCommandParser : parse("../mydata.csv")
+activate ExportCommandParser
+
+
+ExportCommandParser -> ExportCommandParser : checkFilePath("../mydata.csv")
+activate ExportCommandParser
+
+ExportCommandParser --> ExportCommandParser
+deactivate ExportCommandParser
+
+create ExportCommand
+ExportCommandParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> ExportCommandParser : e
+deactivate ExportCommand
+
+[<-- ExportCommandParser : e
+deactivate ExportCommandParser
+
+[<-[hidden]- ExportCommandParser
+destroy ExportCommandParser
+
+[-> ExportCommand : execute()
+activate ExportCommand
+
+create PrintWriter
+ExportCommand -> PrintWriter
+activate PrintWriter
+PrintWriter --> ExportCommand
+deactivate PrintWriter
+
+ExportCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> ExportCommand : filteredPersonsList
+deactivate Model
+
+loop until end of filteredPersonsList
+ExportCommand -> PrintWriter : printf(person)
+activate PrintWriter
+PrintWriter --> ExportCommand
+deactivate PrintWriter
+end loop
+
+create CommandResult
+ExportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ExportCommand
+deactivate CommandResult
+
+[<-- ExportCommand : result
+deactivate ExportCommand
+@enduml
+
+

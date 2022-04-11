@@ -5,7 +5,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeletePersonCommandParser" as DeletePersonCommandParser LOGIC_COLOR
+participant "d:DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete [p] 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete [p] 1")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -26,15 +27,23 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("[p] 1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeletePersonCommandParser
+DeleteCommandParser -> DeletePersonCommandParser
+activate DeletePersonCommandParser
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+create DeletePersonCommand
+DeletePersonCommandParser -> DeletePersonCommand : parse("1")
+activate DeletePersonCommand
+
+
+DeletePersonCommand -> DeletePersonCommandParser : d
+deactivate DeletePersonCommand
+
+DeletePersonCommandParser --> DeleteCommandParser : d
+deactivate DeletePersonCommandParser
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -45,24 +54,24 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeletePersonCommand : execute(model)
+activate DeletePersonCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeletePersonCommand -> Model : deletePerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeletePersonCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeletePersonCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeletePersonCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeletePersonCommand --> LogicManager : result
+deactivate DeletePersonCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+mainframe **sd** perform necessary checks
+
+box Logic LOGIC_COLOR_T1
+participant ":ImportCommandParser" as ImportCommandParser LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR
+end box
+
+activate ImportCommandParser
+
+
+loop until last entry is parsed
+ImportCommandParser -> ImportCommandParser : getFields(entry)
+activate ImportCommandParser
+ImportCommandParser --> ImportCommandParser
+deactivate ImportCommandParser
+
+ImportCommandParser -> ImportCommandParser : createPerson(entry)
+activate ImportCommandParser
+
+create Person
+ImportCommandParser -> Person
+activate Person
+Person --> ImportCommandParser
+deactivate Person
+
+
+
+
+
+
+ImportCommandParser --> ImportCommandParser
+deactivate ImportCommandParser
+
+ImportCommandParser -> ImportCommandParser : updatePersons(person)
+activate ImportCommandParser
+ImportCommandParser --> ImportCommandParser
+deactivate ImportCommandParser
+
+end
+
+@enduml

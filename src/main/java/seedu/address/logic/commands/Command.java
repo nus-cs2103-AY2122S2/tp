@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Type;
 import seedu.address.model.Model;
 
 /**
@@ -17,4 +18,7 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    public Type getType() {
+        return null;
+    }
 }

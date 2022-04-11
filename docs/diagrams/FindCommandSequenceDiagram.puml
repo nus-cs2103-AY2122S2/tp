@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":FindTaskCommandParser" as FindTaskCommandParser LOGIC_COLOR
+participant "t:FindTaskCommand" as FindTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TaskContainsKeywordsPredicate" as TaskContainsKeywordsPredicate MODEL_COLOR
+end box
+
+[-> FindCommandParser : parse("[t] g/i/update")
+activate FindCommandParser
+
+FindCommandParser -> FindCommandParser : checkValidGroups(["i/update"])
+activate FindCommandParser
+FindCommandParser --> FindCommandParser
+deactivate FindCommandParser
+
+create FindTaskCommandParser
+FindCommandParser -> FindTaskCommandParser
+activate FindTaskCommandParser
+FindTaskCommandParser --> FindCommandParser
+deactivate FindTaskCommandParser
+
+FindCommandParser -> FindTaskCommandParser : parse(["i/update"])
+activate FindTaskCommandParser
+
+FindTaskCommandParser -> FindCommandParser : checkInvalidInformation(["i/update"])
+FindCommandParser --> FindTaskCommandParser
+
+create TaskContainsKeywordsPredicate
+FindTaskCommandParser -> TaskContainsKeywordsPredicate
+activate TaskContainsKeywordsPredicate
+TaskContainsKeywordsPredicate --> FindTaskCommandParser
+deactivate TaskContainsKeywordsPredicate
+
+create FindTaskCommand
+FindTaskCommandParser -> FindTaskCommand
+activate FindTaskCommand
+FindTaskCommand --> FindTaskCommandParser : t
+deactivate FindTaskCommand
+
+FindTaskCommandParser --> FindCommandParser : t
+deactivate FindTaskCommandParser
+[<-[hidden]- FindTaskCommandParser
+destroy FindTaskCommandParser
+
+[<-- FindCommandParser : t
+deactivate FindCommandParser
+
+[<-[hidden]- FindCommandParser
+destroy FindCommandParser
+
+[-> FindTaskCommand : execute()
+activate FindTaskCommand
+
+FindTaskCommand -> Model : updateFilteredTaskList()
+activate Model
+Model --> FindTaskCommand
+deactivate Model
+
+create CommandResult
+FindTaskCommand -> CommandResult
+activate CommandResult
+CommandResult --> FindTaskCommand
+deactivate CommandResult
+
+[<-- FindTaskCommand : result
+deactivate FindTaskCommand
+
+@enduml
