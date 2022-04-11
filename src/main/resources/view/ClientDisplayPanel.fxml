@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true">
+    <VBox fx:id="clientDisplayCard" prefHeight="180" prefWidth="360" VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER">
+            <ImageView fx:id="imageView" fitHeight="70" fitWidth="70">
+                <Image url="@/images/profile.png"/>
+            </ImageView>
+            <Label fx:id="name" styleClass="heading" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="10.0" bottom="5.0"/>
+                </padding>
+            </Label>
+            <Label fx:id="lastContacted" styleClass="clientSubtitle" VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <Label styleClass="clientSubheading" text="PHONE"/>
+        <Label fx:id="phone" styleClass="clientDetail" VBox.vgrow="ALWAYS"/>
+
+        <Label styleClass="clientSubheading" text="ADDRESS"/>
+        <Label fx:id="address" styleClass="clientDetail" VBox.vgrow="ALWAYS"/>
+
+        <Label styleClass="clientSubheading" text="EMAIL"/>
+        <Label fx:id="email" styleClass="clientDetail" VBox.vgrow="ALWAYS"/>
+
+        <Label styleClass="clientSubheading" text="BIRTHDAY"/>
+        <Label fx:id="birthday" styleClass="clientDetail" VBox.vgrow="ALWAYS"/>
+
+        <Label styleClass="clientSubheading" text="NOTE"/>
+        <Label fx:id="note" styleClass="clientDetail" VBox.vgrow="ALWAYS"/>
+
+        <Label fx:id="preferencesHeader" styleClass="clientSubheading" text="PREFERENCES">
+            <padding>
+                <Insets top="5" bottom="5"/>
+            </padding>
+        </Label>
+        <StackPane fx:id="preferencesContainer" VBox.vgrow="ALWAYS">
+            <ListView fx:id="preferences" VBox.vgrow="ALWAYS"/>
+        </StackPane>
+
+        <Label styleClass="clientSubheading" text="POLICIES">
+            <padding>
+                <Insets top="15" bottom="5"/>
+            </padding>
+        </Label>
+        <StackPane VBox.vgrow="ALWAYS">
+            <ListView fx:id="policyListView" minHeight="1000" VBox.vgrow="ALWAYS"/>
+        </StackPane>
+    </VBox>
+</ScrollPane>

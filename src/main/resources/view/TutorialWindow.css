@@ -1,0 +1,19 @@
+#nextButton, #tutorialMessage {
+    -fx-text-fill: white;
+}
+
+#nextButton {
+    -fx-background-color: dimgray;
+}
+
+#nextButton:hover {
+    -fx-background-color: gray;
+}
+
+#nextButton:armed {
+    -fx-background-color: darkgray;
+}
+
+#tutorialMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}

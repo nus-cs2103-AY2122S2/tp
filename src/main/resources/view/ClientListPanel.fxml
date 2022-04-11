@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox>
+    <Label fx:id="clientCount" styleClass="client-list-count" />
+    <Region HBox.hgrow="ALWAYS"/>
+    <Label fx:id="sortMethod" styleClass="client-list-sort" />
+    <padding>
+      <Insets left="10" bottom="8" right="25" />
+    </padding>
+  </HBox>
+  <ListView fx:id="clientListView" VBox.vgrow="ALWAYS" />
+</VBox>

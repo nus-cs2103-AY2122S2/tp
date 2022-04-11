@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +24,12 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Client> filteredClients;
+    private final FilteredList<Meeting> filteredMeetings;
+    private final SortedList<Client> sortedClients;
+    private boolean isShowAllMeetings = false;
+    private Client displayedClient;
+    private boolean isSorted = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +41,10 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredClients.setPredicate(PREDICATE_SHOW_ALL_CLIENTS);
+        filteredMeetings = new FilteredList<>(this.addressBook.getMeetingList());
+        sortedClients = new SortedList<>(this.addressBook.getClientList());
     }
 
     public ModelManager() {
@@ -88,44 +99,150 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return addressBook.hasClient(client);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasNoClients() {
+        return filteredClients.isEmpty() && filteredClients.getPredicate().equals(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteClient(Client target) {
+        addressBook.removeClient(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addClient(Client client) {
+        addressBook.addClient(client);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setClient(Client target, Client editedClient) {
+        requireAllNonNull(target, editedClient);
+
+        addressBook.setClient(target, editedClient);
+    }
+
+    @Override
+    public boolean isOverlapping(Meeting meeting) {
+        requireNonNull(meeting);
+        return addressBook.isOverlapping(meeting);
+    }
+
+    @Override
+    public boolean isOverlappingExcept(Meeting meeting, Meeting exceptedMeeting) {
+        requireAllNonNull(meeting, exceptedMeeting);
+        return addressBook.isOverlappingExcept(meeting, exceptedMeeting);
+    }
+
+    @Override
+    public void addMeeting(Meeting meeting) {
+        addressBook.addMeeting(meeting);
+        updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS, isShowAllMeetings);
+    }
+
+    @Override
+    public boolean isShowAllMeetings() {
+        return isShowAllMeetings;
+    }
+
+    @Override
+    public void deleteMeeting(Meeting target) {
+        addressBook.removeMeeting(target);
+    }
+
+    @Override
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        addressBook.setMeeting(target, editedMeeting);
+    }
+
+    @Override
+    public void sortMeetings() {
+        addressBook.sortMeetings();
+    }
+
+
+    @Override
+    public void closeMeeting(Meeting target) {
+        requireNonNull(target);
+
+        Client client = target.getClient();
+        Meeting closedMeeting = target.closeMeeting();
+        Client updatedClient = closedMeeting.getClient();
+        assert updatedClient.isSameClient(client);
+
+        setClient(client, updatedClient);
+        updateDisplayedClient(updatedClient);
+        addressBook.setMeeting(target, closedMeeting);
+    }
+
+    @Override
+    public Client getDisplayedClient() {
+        return displayedClient;
+    }
+
+    @Override
+    public void updateDisplayedClient(Client client) {
+        displayedClient = client;
+    }
+
+    @Override
+    public boolean isSorted() {
+        return isSorted;
+    }
+
+    @Override
+    public void setIsSorted(boolean isSorted) {
+        this.isSorted = isSorted;
+    }
+
+    //=========== Filtered Client List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Client> getFilteredClientList() {
+        return filteredClients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public ObservableList<Client> getClientList() {
+        return isSorted ? sortedClients : filteredClients;
+    }
+
+    @Override
+    public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredClients.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedClientList(Comparator<Client> comparator) {
+        requireNonNull(comparator);
+        sortedClients.setComparator(comparator);
+    }
+
+    //=========== Filtered Meeting List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Meeting}.
+     */
+    @Override
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return filteredMeetings;
+    }
+
+    @Override
+    public void updateFilteredMeetingList(Predicate<Meeting> predicate, boolean isShowAll) {
+        requireNonNull(predicate);
+        this.isShowAllMeetings = isShowAll;
+        filteredMeetings.setPredicate(predicate);
     }
 
     @Override
@@ -144,7 +261,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredClients.equals(other.filteredClients)
+                && sortedClients.equals(other.sortedClients);
     }
 
 }

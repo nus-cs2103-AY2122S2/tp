@@ -1,5 +1,5 @@
 @startuml
-!include ../style.puml
+!include ../ab3/style.puml
 
 Package "Short\n->" {
 Class A LOGIC_COLOR_T1

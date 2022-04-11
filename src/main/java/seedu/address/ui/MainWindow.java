@@ -12,10 +12,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Client;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,9 +33,12 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ClientListPanel clientListPanel;
+    private MeetingListPanel meetingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TutorialWindow tutorialWindow;
+    private ClientDisplay clientDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +47,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane clientListPanelPlaceholder;
+
+    @FXML
+    private StackPane meetingListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        tutorialWindow = new TutorialWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -110,11 +119,18 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        clientListPanel = new ClientListPanel(logic.getClientList());
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList(), logic.isShowAllMeetings());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        if (logic.getClientList().size() == 0) {
+            resultDisplay.setFeedbackToUser("Add client by using the add command!");
+            tutorialWindow.show();
+        }
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -147,6 +163,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the tutorial window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleTutorial() {
+        if (!tutorialWindow.isShowing()) {
+            tutorialWindow.show();
+        } else {
+            tutorialWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,11 +188,74 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        tutorialWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * List meetings.
+     */
+    private void showMeetings() {
+        meetingListPanelPlaceholder.getChildren().clear();
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList(), logic.isShowAllMeetings());
+        meetingListPanelPlaceholder.getChildren().add(meetingListPanel.getRoot());
+
+        if (logic.getFilteredMeetingList().size() == 0) {
+            if (logic.getAddressBook().getMeetingList().size() == 0) {
+                resultDisplay.setFeedbackToUser("No meetings found.\n"
+                        + "Add meetings by using the `addMeeting` command!");
+            } else {
+                resultDisplay.setFeedbackToUser("No upcoming meetings found.\n"
+                        + "View all meetings (including past meetings) by using the `meetings all/` command!\n"
+                        + "Add meetings by using the `addMeeting` command!\n");
+            }
+        }
+    }
+
+    /**
+     * List clients.
+     */
+    private void showClients() {
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        if (logic.getClientList().size() == 0) {
+            resultDisplay.setFeedbackToUser("Add client by using the add command!");
+        }
+    }
+
+    /**
+     * Display client.
+     */
+    private void showClientByIndex(Index index) {
+        clientDisplay = new ClientDisplay(logic.getClientList().get(index.getZeroBased()));
+        meetingListPanelPlaceholder.getChildren().clear();
+        meetingListPanelPlaceholder.getChildren().add(clientDisplay.getRoot());
+    }
+
+    /**
+     * Display client.
+     */
+    private void showClient(Client client) {
+        clientDisplay = new ClientDisplay(client);
+        meetingListPanelPlaceholder.getChildren().clear();
+        meetingListPanelPlaceholder.getChildren().add(clientDisplay.getRoot());
+    }
+
+    /**
+     * Hide client.
+     */
+    private void hideClient() {
+        meetingListPanelPlaceholder.getChildren().clear();
+    }
+
+
+    /**
+     * Display sorted clients.
+     */
+    private void updateClients() {
+        clientListPanelPlaceholder.getChildren().clear();
+        clientListPanel = new ClientListPanel(logic.getClientList());
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
     }
 
     /**
@@ -178,12 +269,45 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            clientListPanel.setClientCount();
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
+            if (commandResult.isShowTutorial()) {
+                handleTutorial();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowMeetings()) {
+                showMeetings();
+            }
+
+            if (commandResult.isShowClients()) {
+                showClients();
+            }
+
+            if (commandResult.isSortClients()) {
+                updateClients();
+                clientListPanel.setSortCriteria(commandResult.getSortCriteria());
+            }
+
+            if (commandResult.isShowClient()) {
+                showClientByIndex(commandResult.getIndexToShow());
+            }
+
+            if (commandResult.isUpdateClient()
+                    && logic.getDisplayedClient().equals(commandResult.getClientToUpdate())) {
+                showClient(commandResult.getClientToUpdate());
+            }
+
+            if (commandResult.isDeleteClient() && logic.getDisplayedClient()
+                    .equals(commandResult.getClientToDelete())) {
+                hideClient();
             }
 
             return commandResult;

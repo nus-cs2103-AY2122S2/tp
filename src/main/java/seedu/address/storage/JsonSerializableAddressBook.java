@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +20,22 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
+    public static final String MESSAGE_OVERLAPPING_MEETINGS = "Meeting list contains overlapping meetings.";
+    public static final String MESSAGE_INVALID_MEETING_DATETIME =
+            "Meeting list contains meeting with invalid datetime.";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedClient> clients = new ArrayList<>();
+    private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given clients and meetings.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
+                                       @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
+        this.clients.addAll(clients);
+        this.meetings.addAll(meetings);
     }
 
     /**
@@ -37,7 +44,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        meetings.addAll(source.getMeetingList().stream().map(JsonAdaptedMeeting::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,13 +55,26 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedClient jsonAdaptedClient : clients) {
+            Client client = jsonAdaptedClient.toModelType();
+            if (addressBook.hasClient(client)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
-            addressBook.addPerson(person);
+            addressBook.addClient(client);
         }
+
+        for (JsonAdaptedMeeting jsonAdaptedMeeting: meetings) {
+            Meeting meeting = jsonAdaptedMeeting.toModelType();
+            if (addressBook.isOverlapping(meeting)) {
+                throw new IllegalValueException(MESSAGE_OVERLAPPING_MEETINGS);
+            }
+            if (!Meeting.isValidMeeting(meeting.getStartDateTime(), meeting.getEndDateTime())) {
+                throw new IllegalValueException(MESSAGE_INVALID_MEETING_DATETIME);
+            }
+
+            addressBook.addMeeting(meeting);
+        }
+
         return addressBook;
     }
 

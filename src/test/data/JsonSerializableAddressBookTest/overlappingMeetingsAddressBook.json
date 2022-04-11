@@ -1,0 +1,90 @@
+{
+  "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
+  "clients" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "birthday": "21-03-2001",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "birthday": "21-03-2001",
+    "lastContacted": "21-03-1999 21:03",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "birthday": "21-03-1999",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "birthday": "21-03-1999",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "birthday": "21-03-2001",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "birthday": "21-03-2001",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "birthday": "21-03-1999",
+    "lastContacted": "21-03-2022 21:03",
+    "tagged" : [ ]
+  } ],
+  "meetings" : [
+    {
+      "startDateTime":  "2022-01-01T12:06:52.783166",
+      "endDateTime":  "2022-01-02T12:06:52.783295",
+      "client": {
+        "name" : "Alice Pauline",
+        "phone" : "94351253",
+        "email" : "alice@example.com",
+        "address" : "123, Jurong West Ave 6, #08-111",
+        "birthday": "21-03-2001",
+        "lastContacted": "21-03-2022 21:03",
+        "tagged" : [ "friends" ]
+      },
+      "label": "Lunch"
+    },
+    {
+      "startDateTime":  "2022-01-01T12:07:01.722322",
+      "endDateTime":  "2022-01-02T12:07:01.722430",
+      "client": {
+        "name" : "Benson Meier",
+        "phone" : "98765432",
+        "email" : "johnd@example.com",
+        "address" : "311, Clementi Ave 2, #02-25",
+        "birthday": "21-03-1999",
+        "lastContacted": "21-03-2022 21:03",
+        "tagged" : [ "owesMoney", "friends" ]
+      },
+      "label": ""
+    }
+  ]
+}

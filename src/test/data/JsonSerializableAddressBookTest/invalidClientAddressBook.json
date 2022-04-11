@@ -1,0 +1,34 @@
+{
+  "clients": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street"
+  } ],
+  "meetings" : [
+    {
+      "startDateTime":  "2022-01-01T12:06:52.783166",
+      "endDateTime":  "2022-01-02T12:06:52.783295",
+      "client": {
+        "name" : "Alice Pauline",
+        "phone" : "94351253",
+        "email" : "alice@example.com",
+        "address" : "123, Jurong West Ave 6, #08-111",
+        "tagged" : [ "friends" ]
+      },
+      "label": "Lunch"
+    },
+    {
+      "startDateTime":  "2022-01-03T12:07:01.722322",
+      "endDateTime":  "2022-01-04T12:07:01.722430",
+      "client": {
+        "name" : "Benson Meier",
+        "phone" : "98765432",
+        "email" : "johnd@example.com",
+        "address" : "311, Clementi Ave 2, #02-25",
+        "tagged" : [ "owesMoney", "friends" ]
+      },
+      "label": ""
+    }
+  ]
+}

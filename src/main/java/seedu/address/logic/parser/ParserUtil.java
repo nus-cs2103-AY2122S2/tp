@@ -2,18 +2,20 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Birthday;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.LastContacted;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Note;
+import seedu.address.model.client.Phone;
+import seedu.address.model.meeting.Meeting;
+import seedu.address.model.policy.Premium;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +23,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String DEFAULT_DATE = "01-01-0001";
+    public static final String DEFAULT_DATETIME = "01-01-0001 00:00";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -72,12 +76,54 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
+        if (address == null) {
+            return new Address();
+        }
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Birthday parseBirthday(String date) throws ParseException {
+        if (date == null) {
+            return new Birthday();
+        }
+        String trimmedBirthday = date.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        if (!Birthday.isPastBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_FUTURE_DATE);
+        }
+        return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code LastContacted}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static LastContacted parseLastContacted(String dateTime) throws ParseException {
+        if (dateTime == null) {
+            return new LastContacted();
+        }
+        String trimmedLastContacted = dateTime.trim();
+        if (!LastContacted.isValidLastContacted(trimmedLastContacted)) {
+            throw new ParseException(LastContacted.MESSAGE_CONSTRAINTS);
+        }
+        if (!LastContacted.isPastLastContacted(trimmedLastContacted)) {
+            throw new ParseException(LastContacted.MESSAGE_FUTURE_DATETIME);
+        }
+        return new LastContacted(trimmedLastContacted);
     }
 
     /**
@@ -87,7 +133,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        if (email == null) {
+            return new Email();
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
@@ -96,29 +144,46 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String input} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static LocalDateTime parseDateTime(String stringDateTime) throws ParseException {
+        requireNonNull(stringDateTime);
+        String trimmedStringDateTime = stringDateTime.trim();
+
+        if (!Meeting.isValidDate(trimmedStringDateTime)) {
+            throw new ParseException(Meeting.DATETIME_MESSAGE_CONSTRAINTS);
+        } else if (!Meeting.isValidDateRange(trimmedStringDateTime)) {
+            throw new ParseException(Meeting.DATETIME_MESSAGE_BAD_RANGE);
         }
-        return new Tag(trimmedTag);
+
+        return LocalDateTime.parse(trimmedStringDateTime, Meeting.DATETIME_FORMATTER);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String premium} into a {@code Premium}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code premium} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Premium parsePremium(String premium) throws ParseException {
+        requireNonNull(premium);
+        String trimmedPremium = premium.trim();
+        if (!Premium.isValidPremium(trimmedPremium)) {
+            throw new ParseException(Premium.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Premium(trimmedPremium);
+    }
+
+    /**
+     * Parses a {@code String note} into a {@code Note}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Note parseNote(String note) {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        return new Note(trimmedNote);
     }
 }

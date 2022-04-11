@@ -1,5 +1,5 @@
 @startuml
-!include ../style.puml
+!include ../ab3/style.puml
 
 package "Rule Of Thumb"{
     Class C UI_COLOR_T3

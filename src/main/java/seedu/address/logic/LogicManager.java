@@ -14,7 +14,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.storage.Storage;
 
 /**
@@ -60,8 +61,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Client> getFilteredClientList() {
+        return model.getFilteredClientList();
+    }
+
+    @Override
+    public ObservableList<Client> getClientList() {
+        return model.getClientList();
+    }
+
+    @Override
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return model.getFilteredMeetingList();
     }
 
     @Override
@@ -75,7 +86,27 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Client getDisplayedClient() {
+        return model.getDisplayedClient();
+    }
+
+    @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public boolean isShowAllMeetings() {
+        return model.isShowAllMeetings();
+    }
+
+    @Override
+    public boolean isSorted() {
+        return model.isSorted();
+    }
+
+    @Override
+    public void setIsSorted(boolean isSorted) {
+        model.setIsSorted(isSorted);
     }
 }

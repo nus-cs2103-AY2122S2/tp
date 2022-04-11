@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<HBox spacing="10" alignment="CENTER_LEFT" styleClass="preferences" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets left="10" />
+    </padding>
+    <Label fx:id="key" styleClass="keyLabel" />
+    <Label fx:id="value" styleClass="valueLabel" />
+</HBox>
