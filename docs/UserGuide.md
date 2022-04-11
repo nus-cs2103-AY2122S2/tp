@@ -53,7 +53,7 @@ If you can type fast, TAddressBook can get your lab management tasks done faster
     - [Find students](#locating-students-by-name--find)
     - [Delete students](#deleting-a-student--delete)
     - [Clear students](#clearing-all-entries--clear)
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
+    - [Filter students by labs](#filter-by-status-of-individual-labs--filter)
     - [View student details](#view-student-details--view)
 
 - [Manage labs](#lab-related-features)
