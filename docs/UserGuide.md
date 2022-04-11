@@ -11,7 +11,7 @@ title: uMessage User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.3.1)
+2. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.4)
 
 3. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
 
@@ -39,6 +39,7 @@ This image is specific to MacOS, note that the `exit`,`minimize` and ` expand` w
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -117,7 +118,7 @@ Note that social media cannot be added to pre-installed emergency contacts.
 > `add John Doe sm/telegram, @johndoe23`<br>
 > `add 2 sm/telegram, @johndoe23`
 
-
+<div style="page-break-after: always;"></div>
 
 ## 2. Searching persons by keywords: `[find]`
 
@@ -140,7 +141,7 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 > `a` does the same as above.<br>
 > `find alex yeoh` will return both `Alex` and `Alex Yeoh` (if both contacts exist), with `Alex Yeoh` displayed at the top.
 
-
+<div style="page-break-after: always;"></div>
 
 ## 3. Viewing details of a person
 
@@ -254,6 +255,8 @@ Note that tags of pre-installed emergency contacts cannot be deleted.
 > `delete kaaviya t/friend` <br>
 > `delete 1 t/colleague`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.3 Deleting social media from a Person
 
 **Format:** `delete NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}`
@@ -292,7 +295,7 @@ Note that the hyperlinks in the details are clickable and will redirect the user
 
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.<br>
 DURATION is in minutes and must be an integer between 1 and 10000.<br>
-The meeting link must start with _https://_ or _http://_for it to be valid.
+The meeting link must start with _https://_ or _http://_ for it to be valid.
 
 **Examples:**
 
@@ -370,7 +373,7 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# Manage Global Tags
+# Managing Global Tags
 
 Global tags helps you organise relevant contacts and meetings together.
 <!-- Need to explain how this might be useful for the user -->
