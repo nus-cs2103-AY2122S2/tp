@@ -44,8 +44,8 @@ Given below are my contributions to the project.
       * Added documentation for the Person's attributes input rules. (Pull request [#191](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/191))
       
     * Developer Guide:
-      * Added implementation details of enhanced Person object. (Pull request [#64](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/64))
-      * Added implementation details of Grab Command. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205))
+      * Added implementation details of enhanced Person object. (Pull request [#64](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/64), [#208](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/208))
+      * Added implementation details of Grab Command. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205), [#208](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/208))
       * Added some test cases for manual testing. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205))
       * Refactor all the plant uml files in DG update from addressbook to Unite. (Pull request [#205](https://github.com/AY2122S2-CS2103T-W12-2/tp/pull/205)) 
 * **Community**:
