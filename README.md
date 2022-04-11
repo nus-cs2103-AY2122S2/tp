@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2122S2-CS2103T-T11-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-2/tp/actions)
 
-![Ui](docs/images/UI.png)
+![Ui](docs/images/Ui.png)
 
 * This is **an ongoing project for CS2103T-T11-2 team**.<br>
   Example usages:

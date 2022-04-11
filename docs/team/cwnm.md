@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **New Feature**: List buyer, seller command
     * An enhancement to list command, can list each list seperately
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=cwnm&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=phua%20jun&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=cwnm&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
     * `findBuyerCommand` class
     * `findSellerCommand` class
     * `findSellerCommandParser` class
@@ -28,6 +28,7 @@ Given below are my contributions to the project.
     * Addition of list-b, list-s and the corresponding classes
     * Addition of intial seller class and initial AddSeller methods
     * Addition of intial version of edit-b 
+    * Mirroring of SellerBuilder to BuyerBuilder
     * Refractoring of the project from "Person" to "Client", including classes, files, variables and methods
     * Fixed FXML bugs that caused the JAR application to start with Nullpointerexception
     * Associated test cases for the classes
@@ -43,7 +44,9 @@ Given below are my contributions to the project.
         * Added documentation for the features `clear-b` and `clear-s` and `clear-all`
         * Added documentation for the features `list-b` and `list-s`
     * Developer Guide:
-        * Added implementation details of the `find-b` and `find-s` feature.
+        * Added implementation for the features `find-b` and `find-s`
+        * Added implementation for the features `clear-b` and `clear-s` and `clear-all`
+        * Added implementation for the features `list-b` and `list-s`
 
 * **Contributions to team tasks**:
     * Set up weekly meeting times accounting for our individual schedules
