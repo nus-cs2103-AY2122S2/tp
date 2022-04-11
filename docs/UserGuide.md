@@ -19,7 +19,7 @@ traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `TeachWhat!.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
+2. Download the latest `TeachWhat.jar` from [here](https://github.com/AY2122S2-CS2103T-W11-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your LessonBook.
 
@@ -28,7 +28,7 @@ traditional GUI apps.
 |   OS    | How to start TeachWhat!                                                                                   |
 |:-------:|-----------------------------------------------------------------------------------------------------------|
 | Windows | Double-click the TeachWhat! jar file.                                                                     |
-|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar 'TeachWhat!.jar'` |
+|   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat.jar` |
 
 * The GUI similar to the one shown below should appear in a few seconds. 
 Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
