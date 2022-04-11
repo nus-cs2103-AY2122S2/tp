@@ -1,0 +1,49 @@
+@startuml
+hide empty members
+
+class Transaction {
+    - TransactionFields : final HashMap<Prefix, TransactionField>
+    - TransactionId : int
+
+    + hasTransactionField(Prefix) : boolean
+    + addTransactionFields(TransactionField...) : Transaction
+    + removeTransactionFields(TransactionField...) : Transaction
+    + setTransactionFields(Collection<TransactionField>) : Transaction
+    + getTransactionFields() : List<TransactionField>
+    + getTransactionField(Prefix) : Optional<TransactionField>
+    + hasTag(Tag) : boolean
+    + addTags(Tag...) : Transaction
+    + removeTags(Tag...) : Transaction
+    + setTags(Tag...) : Transaction
+}
+
+class Transaction {
+
+}
+
+abstract class TransactionField {
+    + prefix : Prefix
+
+    + getValue() : String
+}
+
+class Amount
+class TransactionDate
+class DueDate
+class Note
+class Status
+
+Transaction o--> "1" Amount
+Transaction o--> "1" TransactionDate
+Transaction o--> "0..1" DueDate
+Transaction o--> "0..1" Note
+Transaction o--> "1" Status
+
+Amount --|> TransactionField
+TransactionDate --|> TransactionField
+DueDate --|> TransactionField
+Note --|> TransactionField
+Status --|> TransactionField
+
+
+@enduml

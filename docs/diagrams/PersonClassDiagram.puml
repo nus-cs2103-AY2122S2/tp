@@ -17,7 +17,7 @@ class Person {
     + setTags(Tag...) : Person
 }
 
-class Field {
+abstract class Field {
     + prefix : Prefix
 
     + getValue() : String
