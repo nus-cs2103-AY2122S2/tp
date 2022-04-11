@@ -45,7 +45,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "EDITED PERSON:%n%1$s";
     public static final String MESSAGE_NOT_EDITED_OR_INVALID = "At least one field to edit must be provided."
-            + "The find command does not accept tags.";
+            + "The edit command does not accept tags.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
