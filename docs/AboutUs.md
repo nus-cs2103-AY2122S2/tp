@@ -50,9 +50,11 @@ I'm always looking for ways to improve my skills and widen my knowledge.
 <img src="images/mradhyaf.png" width="200px">
 
 [[github](https://github.com/mradhyaf)]
-[[linkedin](https://www.linkedin.com/in/mradhyaf/)]
 [[portofolio](./team/mradhyaf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: User Interface
+
+I am a software engineer with a passion for free software—software that respects user's freedom. I am currently a
+second-year computer science undergraduate interested in UI/UX Design.
 
