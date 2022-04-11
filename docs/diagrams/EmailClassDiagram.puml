@@ -1,0 +1,51 @@
+@startuml
+ skinparam backgroundColor #ffffff
+ skinparam classAttributeIconSize 0
+ hide circle
+
+ abstract class "{abstract}\nCommand" {
+     + {abstract} execute(Model) : CommandResult
+ }
+
+ interface Model <<interface>> {
+ }
+
+ class ModelManager implements Model{
+     -addressBook : AddressBook
+     +setAddressBook(new AddressBook())
+ }
+
+ class EmailCommand {
+     /' Fields '/
+
+     /' Methods '/
+     + execute(Model) : CommandResult
+ }
+
+ class MainWindow {
+
+    + handleEmailWindow()
+    + createEmailWindow()
+ }
+
+ class EmailWindow {
+    /' Fields '/
+    - emailStringForCopy: String
+    - copyButton: Button
+    - emailList: Label
+
+     /' Methods '/
+     + parseEmailFromList(ObservableList<Person>) : String
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + focus()
+     + copyEmail() : void
+ }
+
+MainWindow *-- EmailWindow
+EmailCommand <-- MainWindow
+ModelManager <-- EmailCommand
+"{abstract}\nCommand" <|-- EmailCommand
+
+ @enduml
