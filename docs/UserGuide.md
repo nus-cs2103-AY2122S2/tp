@@ -2,17 +2,10 @@
 layout: page
 title: User Guide
 ---
+AgentSee is a **desktop application for property agents to manage clients.** It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+It is easy to use, and free!
 
-AgentSee is a **desktop application for property agents to manage clients.** It is:
-
-* optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-  - So if you can type fast, AgentSee can get your client management tasks done faster than traditional GUI apps!
-  
-* Easy to use! The User Guide and the application is very easy to navigate!
-
-* ~~Cheap~~ FREE!
-
-* Table of Contents
+  * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
