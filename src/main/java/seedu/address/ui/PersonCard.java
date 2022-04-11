@@ -35,11 +35,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label age;
+    @FXML
+    private Label height;
+    @FXML
+    private Label jerseyNumber;
+    @FXML
+    private Label weight;
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane lineupNames;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,12 +57,22 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        name.setWrapText(true);
+        phone.setText("Phone: " + person.getPhone().value);
+        phone.setWrapText(true);
+        phone.setMaxWidth(150.0);
+        email.setText("Email: " + person.getEmail().value);
+        email.setWrapText(true);
+        email.setMaxWidth(250.0);
+        height.setText("Height: " + person.getHeight().toString()); // height.setText(person.getHeight().value);
+        jerseyNumber.setText("Jersey Number: " + person.getJerseyNumber().toString());
+        // jerseyNumber.setText(person.getJerseyNumber().value);
+        weight.setText("Weight: " + person.getWeight().toString()); // weight.setText(person.getWeight().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getLineupNames().stream()
+                .forEach(lineupName -> lineupNames.getChildren().add(new Label(lineupName.lineupName)));
     }
 
     @Override

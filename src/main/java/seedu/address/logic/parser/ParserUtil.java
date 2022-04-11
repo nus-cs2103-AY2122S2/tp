@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,11 +13,18 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.JerseyNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
+import seedu.address.model.schedule.ScheduleDateTime;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +32,15 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Parses a player.
+     */
+    public static Name parsePlayer(String targetPlayerName) throws ParseException {
+        requireNonNull(targetPlayerName);
+        String trimmedName = targetPlayerName.trim();
+        return new Name(trimmedName);
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -66,21 +86,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +98,66 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight(height)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
+    }
+
+    /**
+     * Parses a {@code String weight} into an {@code Weight}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static Weight parseWeight(String weight) throws ParseException {
+        requireNonNull(weight);
+        String trimmedWeight = weight.trim();
+        if (!Weight.isValidWeight(weight)) {
+            throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+        }
+        return new Weight(trimmedWeight);
+    }
+
+    /**
+     * Parses a {@code String jerseyNumber} into an {@code JerseyNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static JerseyNumber parseJerseyNumber(String jerseyNumber) throws ParseException {
+        requireNonNull(jerseyNumber);
+        String trimmedJerseyNumber = jerseyNumber.trim();
+        if (!JerseyNumber.isValidJerseyNumber(trimmedJerseyNumber)) {
+            throw new ParseException(JerseyNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new JerseyNumber(trimmedJerseyNumber);
+    }
+
+    /**
+     * Parses a {@code String LineupName} into an {@code LineupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static LineupName parseLineupName(String lineupName) throws ParseException {
+        requireNonNull(lineupName);
+        String trimmedLineupName = lineupName.trim();
+        if (!LineupName.isValidLineupName(trimmedLineupName)) {
+            throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
+        }
+        return new LineupName(trimmedLineupName);
     }
 
     /**
@@ -109,6 +174,69 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
+
+    // Parse Schedule related attributes
+    /**
+     * Parses a {@code String scheduleName} into a {@code ScheduleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleName} is invalid.
+     */
+    public static ScheduleName parseScheduleName(String scheduleName) throws ParseException {
+        requireNonNull(scheduleName);
+        String trimmedName = scheduleName.trim();
+        if (!ScheduleName.isValidScheduleName(trimmedName)) {
+            throw new ParseException(ScheduleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ScheduleName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String scheduleDescription} into a {@code ScheduleDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDescription} is invalid.
+     */
+    public static ScheduleDescription parseScheduleDescription(String scheduleDescription) throws ParseException {
+        requireNonNull(scheduleDescription);
+        String trimmedDescription = scheduleDescription.trim();
+        if (!ScheduleDescription.isValidScheduleDescription(trimmedDescription)) {
+            throw new ParseException(ScheduleDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new ScheduleDescription(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String scheduleDateTime} into a {@code ScheduleDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDateTime} is invalid.
+     */
+    public static ScheduleDateTime parseScheduleDateTime(String scheduleDateTime) throws ParseException {
+        requireNonNull(scheduleDateTime);
+        String trimmedDateTime = scheduleDateTime.trim();
+        try {
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT)
+                    .parse(trimmedDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
+        }
+
+        return new ScheduleDateTime(trimmedDateTime);
+    }
+
+    /**
+     * Parses a {@code String scheduleDate} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code scheduleDate} is invalid.
+     */
+    public static LocalDate parseScheduleDate(String scheduleDate) {
+        requireNonNull(scheduleDate);
+        String trimmedDateTime = scheduleDate.trim();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        LocalDate date = LocalDate.parse(trimmedDateTime, dtf);
+        return date;
+    }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.

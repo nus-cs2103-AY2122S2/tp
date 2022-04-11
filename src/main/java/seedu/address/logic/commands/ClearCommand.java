@@ -11,9 +11,14 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "MyGM has been cleared!";
 
-
+    /**
+     * Executes the ClearCommand and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

@@ -1,0 +1,98 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PutCommandParser" as PutCommandParser LOGIC_COLOR
+participant "p:PutCommand" as PutCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "lineupName:LineupName" as LineupName MODEL_COLOR
+participant "name:Name" as Name MODEL_COLOR
+end box
+
+[-> LogicManager : execute("put P/NAME L/LINEUP_NAME")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("put P/NAME L/LINEUP_NAME")
+activate AddressBookParser
+
+create PutCommandParser
+AddressBookParser -> PutCommandParser
+activate PutCommandParser
+
+PutCommandParser --> AddressBookParser
+deactivate PutCommandParser
+
+AddressBookParser -> PutCommandParser : parse("P/NAME L/LINEUP_NAME")
+activate PutCommandParser
+
+create Name
+PutCommandParser -> Name : Name("NAME")
+activate Name
+
+Name --> PutCommandParser : name
+deactivate Name
+
+create LineupName
+PutCommandParser -> LineupName : LineupName("LINEUP_NAME")
+activate LineupName
+
+LineupName --> PutCommandParser : lineupName
+deactivate LineupName
+
+create PutCommand
+PutCommandParser -> PutCommand : PutCommand(name, lineupName)
+activate PutCommand
+
+PutCommand --> PutCommandParser : p
+deactivate PutCommand
+
+PutCommandParser --> AddressBookParser : p
+deactivate PutCommandParser
+
+PutCommandParser -[hidden]-> AddressBookParser
+destroy PutCommandParser
+
+AddressBookParser --> LogicManager : p
+deactivate AddressBookParser
+
+LogicManager -> PutCommand : execute()
+activate PutCommand
+
+PutCommand -> Model : getPerson(name)
+activate Model
+
+Model --> PutCommand : person
+deactivate Model
+
+PutCommand -> Model : getLineup(lineupName)
+activate Model
+
+Model --> PutCommand : lineup
+deactivate Model
+
+PutCommand -> Model : putPersonIntoLineup(person, lineup)
+activate Model
+
+
+Model --> PutCommand
+deactivate Model
+
+create CommandResult
+PutCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PutCommand :result
+deactivate CommandResult
+
+PutCommand --> LogicManager : result
+deactivate PutCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

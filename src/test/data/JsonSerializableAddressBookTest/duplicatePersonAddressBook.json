@@ -3,12 +3,18 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "height": "190",
+    "jerseyNumber": "19",
+    "tagged": [ "SG" ],
+    "weight": "91"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
-  } ]
+    "height": "190",
+    "jerseyNumber": "19",
+    "weight": "91"
+  } ],
+  "lineups" : [ ],
+  "schedules" : [ ]
 }

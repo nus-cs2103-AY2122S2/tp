@@ -3,11 +3,17 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -23,10 +29,13 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * @see Person#isSamePerson(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
+    private static final int MAXIMUM_CAPACITY = 100;
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final PersonComparator comparator = new PersonComparator();
+    private Comparator<Person> personComparator = null;
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -34,6 +43,32 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Sort the internal list for display.
+     * Called when there is a change in person inside the list except for deleting.
+     */
+    private void sort() {
+        this.internalList.sort(comparator);
+    }
+
+    /**
+     * Sorts the internal list by a personComparator
+     */
+    public void sortByCriteria(Comparator<Person> personComparator) {
+        this.personComparator = personComparator;
+        FXCollections.sort(internalList, personComparator);
+    }
+
+    /**
+     * Return true if some person with {@code targetName}.
+     * @param targetName to check existence.
+     * @return true if the name exists.
+     */
+    public boolean containsName(Name targetName) {
+        requireNonNull(targetName);
+        return internalList.stream().anyMatch(person -> person.isMatchName(targetName));
     }
 
     /**
@@ -46,6 +81,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Refreshes the observable list so that update can be reflected in GUI.
+     */
+    public void refresh() {
+        List<Person> playersCopy = new ArrayList<>(internalList);
+        internalList.setAll(playersCopy);
+        sort();
+        if (personComparator != null) {
+            sortByCriteria(personComparator);
+        }
     }
 
     /**
@@ -66,6 +113,47 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+    }
+
+    /**
+     * Returns the person with {@code targetName};
+     */
+    public Person getPerson(Name targetName) {
+        requireNonNull(targetName);
+        return internalList.stream()
+                .filter(person -> person.isMatchName(targetName))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    /**
+     * Removes all player in the target lineup
+     *
+     * @param lineup The lineup to be cleared
+     */
+    public void removeAllPlayerFromLineup(Lineup lineup) {
+        requireNonNull(lineup);
+        for (Person person : this.internalList) {
+            if (person.isInLineup(lineup)) {
+                person.removeFromLineup(lineup);
+                //System.out.printf("%s has been removed from lineup %s\n", person.getName(), lineup.getLineupName());
+            }
+        }
+    }
+
+    /**
+     * Returns true if the person's jersey number is already taken.
+     */
+    public boolean containsJerseyNumber(JerseyNumber jerseyNumber) {
+        requireNonNull(jerseyNumber);
+        return internalList.stream()
+                .anyMatch(person -> person.isSameJerseyNumber(jerseyNumber));
+    }
+
+    /**
+     * Returns true if MyGM has reached maximum capacity.
+     */
+    public boolean isFull() {
+        return internalList.size() == MAXIMUM_CAPACITY;
     }
 
     /**
@@ -95,6 +183,18 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Returns a string representation of a list of available Jersey Number.
+     * @return a string of available Jersey Number.
+     */
+    public String getAvailableJerseyNumber() {
+        Stream<Integer> stream = IntStream.range(0, MAXIMUM_CAPACITY).boxed();
+        List<Integer> ls = stream
+                .filter(x -> !this.containsJerseyNumber(new JerseyNumber((x).toString())))
+                .collect(Collectors.toList());
+        return ls.toString();
     }
 
     /**

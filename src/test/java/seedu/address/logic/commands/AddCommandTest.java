@@ -2,13 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,16 +19,61 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ScheduleBuilder;
 
 public class AddCommandTest {
+    private static final Person VALID_PERSON = new PersonBuilder().withName("Joel")
+            .withEmail("joel@example.com").withPhone("1267912")
+            .withHeight("221").withJerseyNumber("83").withWeight("120")
+            .withTags("C").build();
+    private static final Person INVALID_PERSON = new PersonBuilder().withName("Alice Pauline").build();
+    private static final Person INVALID_PERSON_2 = new PersonBuilder()
+            .withName("Daniel Lee").withJerseyNumber("2").build();
+    private static final Lineup VALID_LINEUP = new Lineup(new seedu.address.model.lineup.LineupName("Dummy"));
+    private static final Lineup VALID_LINEUP_2 = new LineupBuilder().build();
+    private Model model = new ModelManager();
+    private Model expectedModel = new ModelManager();
+
+    @Test
+    public void execute_addLineup_success() throws CommandException {
+        expectedModel.addLineup(VALID_LINEUP_2);
+        CommandResult commandResult = new AddCommand(VALID_LINEUP_2).execute(model);
+        assertEquals(commandResult.getFeedbackToUser(),
+                String.format(AddCommand.MESSAGE_ADD_LINEUP_SUCCESS, VALID_LINEUP_2));
+    }
+
+    @Test
+    public void getExecute_invalidAddLineup_duplicateLineup() {
+        Command command = new AddCommand(VALID_LINEUP);
+        try {
+            command.execute(model);
+        } catch (CommandException e) {
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_LINEUP_NAME, e.getMessage());
+        }
+    }
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand((Person) null));
+    }
+
+    @Test
+    public void constructor_nullLineup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddCommand((Lineup) null));
+    }
+
+    @Test
+    public void constructor_nullSchedule_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddCommand((Schedule) null));
     }
 
     @Test
@@ -37,8 +83,35 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_PERSON_SUCCESS, validPerson),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    /*
+    @Test
+    public void execute_lineupAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingLineupAdded modelStub = new ModelStubAcceptingLineupAdded();
+        Lineup validLineup = new LineupBuilder().build();
+
+        CommandResult commandResult = new AddCommand(validLineup).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_LINEUP_SUCCESS, validLineup),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validLineup), modelStub.lineupsAdded);
+    }
+    */
+
+    @Test
+    public void execute_scheduleAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
+
+        CommandResult commandResult = new AddCommand(validSchedule).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_SCHEDULE_SUCCESS, validSchedule),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validSchedule), modelStub.schedulesAdded);
     }
 
     @Test
@@ -51,35 +124,110 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePersonJerseyNumber_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person duplicateJerseyNumberPerson = new PersonBuilder(validPerson).withName("Lebron James").build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        AddCommand addCommand = new AddCommand(duplicateJerseyNumberPerson);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_JERSEY_NUMBER, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personCapacityFull_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person extraPerson1 = new PersonBuilder(validPerson).withName("Extraaa1").build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        ModelStubWithPerson stub = (ModelStubWithPerson) modelStub;
+        stub.cheatIncrement();
+        AddCommand addCommand = new AddCommand(extraPerson1);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_FULL_CAPACITY_REACHED, () -> addCommand.execute(modelStub));
+    }
+
+    /*
+    @Test
+    public void execute_duplicateLineup_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+    */
+
+    @Test
+    public void execute_duplicateSchedule_throwsCommandException() {
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
+        AddCommand addCommand = new AddCommand(validSchedule);
+        ModelStub modelStub = new ModelStubWithSchedule(validSchedule);
+
+        assertThrows(CommandException.class,
+                AddCommand.MESSAGE_DUPLICATE_SCHEDULE, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_notDuplicateSchedule_success() throws Exception {
+        ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
+        Schedule validSchedule = new ScheduleBuilder().withDateTime("01/10/2030 2020").build();
+        Schedule anotherSchedule = new ScheduleBuilder(validSchedule)
+                .withDateTime("01/10/2030 2020").withScheduleDescription("Serious").build();
+        new AddCommand(validSchedule).execute(modelStub);
+        CommandResult commandResult = new AddCommand(anotherSchedule).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_ADD_SCHEDULE_SUCCESS, anotherSchedule),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validSchedule, anotherSchedule), modelStub.schedulesAdded);
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
+        Schedule training = new ScheduleBuilder().withScheduleName("free throw shooting").build();
+        Schedule competition = new ScheduleBuilder().withScheduleName("three point contest").build();
+        AddCommand addTrainingCommand = new AddCommand(training);
+        AddCommand addCompetitionCommand = new AddCommand(competition);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
+        assertEquals(addCompetitionCommand, addCompetitionCommand);
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addTrainingCopy = new AddCommand(training);
+        assertEquals(addAliceCommand, addAliceCommandCopy);
+        assertEquals(addTrainingCommand, addTrainingCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
+        assertNotEquals(1, addCompetitionCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
+        assertNotEquals(null, addCompetitionCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
+        assertNotEquals(addTrainingCopy, addCompetitionCommand);
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Lineup> getLineups() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -105,12 +253,12 @@ public class AddCommandTest {
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("this method should not be called.");
         }
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("addPerson should not be called.");
         }
 
         @Override
@@ -120,17 +268,18 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("getAddressBook should not be called.");
         }
 
+        // Person level op
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("hasPerson should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError("deletePerson should not be called.");
         }
 
         @Override
@@ -139,25 +288,162 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPersonName(Name targetName) {
+            throw new AssertionError("hasPersonName should not be called.");
+        }
+
+        @Override
+        public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
+            throw new AssertionError("hasLineupName should not be called.");
+        }
+
+        @Override
+        public void addLineup(Lineup toAdd) {
+            throw new AssertionError("addLineup should not be called.");
+        }
+
+        @Override
+        public void deleteLineup(Lineup lineup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void putPersonIntoLineup(Person player, Lineup lineup) {
+            throw new AssertionError("putPersonIntoLineup should not be called.");
+        }
+
+        @Override
+        public void setLineup(Lineup target, Lineup editedLineup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonFromLineup(Person player, Lineup lineup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isPersonInLineup(Person person, Lineup lineup) {
+            throw new AssertionError("isPersonInLineup method should not be called.");
+        }
+
+        @Override
+        public boolean hasJerseyNumber(Person person) {
+            throw new AssertionError("hasJerseyNumber should not be called.");
+        }
+
+        @Override
+        public String getAvailableJerseyNumber() {
+            throw new AssertionError("getAvailableJerseyNumber should not be called.");
+        }
+
+        @Override
+        public boolean isFull() {
+            throw new AssertionError("isFull should not be called.");
+        }
+
+        @Override
+        public Person getPerson(Name targetName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lineup getLineup(seedu.address.model.lineup.LineupName targetName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void refresh() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            throw new AssertionError("hasSchedule should not be called.");
+        }
+
+        @Override
+        public void deleteSchedule(Schedule target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            throw new AssertionError("addSchedule should not be called.");
+        }
+
+        @Override
+        public void setSchedule(Schedule target, Schedule editedSchedule) {
+            throw new AssertionError("setSchedule should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<Schedule> getScheduleList() {
+            return null;
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            //throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonsInMyGM(Comparator<Person> personComparator) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains person.
      */
     private class ModelStubWithPerson extends ModelStub {
+        private static final int CAPACITY = 2;
         private final Person person;
+        private int size = 0;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            this.size++;
+        }
+
+        public void cheatIncrement() {
+            this.size++;
+        }
+
+        @Override
+        public boolean isFull() {
+            return this.size == CAPACITY;
+        }
+
+        @Override
+        public String getAvailableJerseyNumber() {
+            return "%1$s";
+        }
+
+        @Override
+        public boolean hasJerseyNumber(Person person) {
+            return this.person.getJerseyNumber().equals(person.getJerseyNumber());
         }
 
         @Override
@@ -171,7 +457,7 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Person> personsAdded = new ArrayList<>(2);
 
         @Override
         public boolean hasPerson(Person person) {
@@ -180,9 +466,83 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isFull() {
+            return this.personsAdded.size() == 2;
+        }
+
+        @Override
+        public boolean hasJerseyNumber(Person person) {
+            return personsAdded.stream().anyMatch(player -> player.getJerseyNumber().equals(person.getJerseyNumber()));
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+    /*
+    private class ModelStubAcceptingLineupAdded extends ModelStub {
+        final ArrayList<Lineup> lineupsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasLineupName(Lineup lineup) {
+            requireNonNull(lineup);
+            return lineupsAdded.stream().anyMatch(lineup::isSameLineup);
+        }
+
+        @Override
+        public void addLineup(Lineup lineup) {
+            requireNonNull(lineup);
+            lineupsAdded.add(lineup);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+    */
+
+    /**
+     * A Model stub that contains a single schedule.
+     */
+    private class ModelStubWithSchedule extends ModelStub {
+        private final Schedule schedule;
+
+        ModelStubWithSchedule(Schedule schedule) {
+            requireNonNull(schedule);
+            this.schedule = schedule;
+        }
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            requireNonNull(schedule);
+            return this.schedule.equals(schedule);
+        }
+    }
+
+    /**
+     * A Model stub that always accept the schedule being added.
+     */
+    private class ModelStubAcceptingScheduleAdded extends ModelStub {
+        final ArrayList<Schedule> schedulesAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            requireNonNull(schedule);
+            return schedulesAdded.stream().anyMatch(s -> s.equals(schedule));
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            requireNonNull(schedule);
+            schedulesAdded.add(schedule);
         }
 
         @Override

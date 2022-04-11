@@ -18,12 +18,35 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * The theme should change to dark mode.
+     */
+    private final boolean toDark;
+
+    /**
+     * The theme should change to light mode.
+     */
+    private final boolean toLight;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.toDark = false;
+        this.toLight = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toDark, boolean toLight) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.toDark = toDark;
+        this.toLight = toLight;
     }
 
     /**
@@ -44,6 +67,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isToDark() {
+        return toDark;
+    }
+
+    public boolean isToLight() {
+        return toLight;
     }
 
     @Override
