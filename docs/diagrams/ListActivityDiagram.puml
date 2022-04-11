@@ -12,7 +12,7 @@ else ([else])
     :Find students enrolled in the class group;
     :Display the filtered list;
     else ([filter by TA module])
-    :Find students or class groups under the module;
+    :Find students/class groups/assessments in the module;
     :Display the filtered list;
     endif
 endif

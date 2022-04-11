@@ -5,14 +5,18 @@ title: Jia Xin's Project Portfolio Page
 
 ### Project: TAssist
 
-**TAssist** is a desktop app for Teaching Assistants to manage their students across different modules and keep track of students’ activities/participation in class. It is optimized for use via Command Line Interface (CLI). The user interacts with it using a CLI, and it has a GUI (Graphical User Interface) created with JavaFX. It is written in Java, and has about 11 kLoC.
+**TAssist** is a desktop app for Teaching Assistants to manage their students across different modules and keep track of students’ activities/participation in class. It is optimized for use via Command Line Interface (CLI). The user interacts with it using a CLI, and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 11 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to manage class groups, lessons and student attendances.
+* **New Feature**: Added the model for class groups, lessons and student attendances.
   * What it does: Allows the TA to manage the class groups, lessons as well as the students enrolled in the class groups.
   * Justification: This feature improves the product significantly because a TA needs to manage the class groups he/she is teaching as well as the weekly lessons and student attendances and the app should provide a convenient way to represent them.
-  * Highlights: This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as changes were made to accomodate the model classes and methods needed for each version iteration (e.g. added `Lesson` and `StudentAttendance` in v1.3).
+  * Highlights: This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as changes were made to accommodate the model classes and methods needed for each version iteration (e.g. added `Lesson` and `StudentAttendance` in v1.3).
+
+* **New Feature**: Added the storage for class groups and assessments.
+  * What it does: Allows the class groups, assessments as well as the students' attempts to be stored.
+  * Justification: This feature improves the product significantly because data can be stored and retrieved whenever the TA runs the app.
 
 * **New Feature**: Added parsing for the mark and unmark commands.
   * What it does: Allows the TA to execute the mark and unmark commands by parsing the input.
@@ -25,8 +29,8 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects v1.3 commands (e.g. `mark`, `unmark`). It required an in-depth analysis of design alternatives. The implementation too was challenging as various inputs need to be handled with the appropriate error messages.
 
 * **New Feature**:
-  * Wrote tests for the `ClassGroup`, `Lesson` and `StudentAttendance` components.
-  * Wrote tests for `JsonAdaptedClassGroup` as well as the `DeleteCommand` and `DeleteCommandParser`.
+  * Wrote tests for the `ClassGroup`, `Lesson` and `StudentAttendance` components as well as their relative storage classes `JsonAdaptedClassGroup`, `JsonAdaptedLesson` and `JsonAdaptedStudentAttendance`.
+  * Wrote tests for the `DeleteCommand` and `DeleteCommandParser`.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jxt00&breakdown=true)
 
@@ -43,6 +47,7 @@ Given below are my contributions to the project.
   * Maintaining the issue tracker
     * Added and assigned issues. [\#10](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/10), [\#28](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/28), [\#43](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/43), [\#46](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/46), [\#153](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/153), [\#219](https://github.com/AY2122S2-CS2103T-T13-2/tp/issues/219)
   * Updating user/developer docs that are not specific to a feature
-    * Adapted model component and diagrams to TAssist in the developer guide. [\#110](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/110), [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
+    * Adapted Model component and diagrams to TAssist in the developer guide. [\#110](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/110), [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
+    * Added instructions for testing the features `add`, `list`, `find`, `delete`, `enrol`, `disenrol`, `mark`, `unmark` and `grade`. [\#230](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/230) 
     * Updated command summary table in the user guide. [\#112](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/112)
     * Added command parameter table to the user guide. [\#141](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/141)

@@ -1,0 +1,10 @@
+@startuml
+start
+:User executes enrol command;
+
+if () then ([class group and student(s) exists])
+    :Enrol student(s) into class group;
+else ([else])
+endif
+stop
+@enduml

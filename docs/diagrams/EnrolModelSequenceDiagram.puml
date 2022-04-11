@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+
+title Enrol Student
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TAssist" as TAssist MODEL_COLOR
+participant ":UniqueClassGroupList" as UniqueClassGroupList MODEL_COLOR
+participant ":UniqueModuleList" as UniqueModuleList MODEL_COLOR
+end box
+
+[->ModelManager : setEntity(OLD_CLASS_GROUP, NEW_CLASS_GROUP)
+activate ModelManager
+
+ModelManager -> TAssist : setClassGroup(OLD_CLASS_GROUP, NEW_CLASS_GROUP)
+activate TAssist
+
+TAssist -> UniqueClassGroupList : setClassGroup(OLD_CLASS_GROUP, NEW_CLASS_GROUP)
+activate UniqueClassGroupList
+
+UniqueClassGroupList --> TAssist
+deactivate UniqueClassGroupList
+
+TAssist --> ModelManager
+deactivate TAssist
+
+[<--ModelManager
+deactivate ModelManager
+
+[->ModelManager : setEntity(OLD_MODULE, NEW_MODULE)
+activate ModelManager
+
+ModelManager -> TAssist : setModule(OLD_MODULE, NEW_MODULE)
+activate TAssist
+
+TAssist -> UniqueModuleList : setModule(OLD_MODULE, NEW_MODULE)
+activate UniqueModuleList
+
+UniqueModuleList --> TAssist
+deactivate UniqueModuleList
+
+TAssist --> ModelManager
+deactivate TAssist
+
+[<--ModelManager
+deactivate ModelManager
+
+@enduml
