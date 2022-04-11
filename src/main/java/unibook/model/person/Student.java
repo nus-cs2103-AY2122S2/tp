@@ -149,7 +149,6 @@ public class Student extends Person {
                 return g;
             }
         }
-        // TODO EDIT GROUP NOT FOUND EXCEPTION MSG
         throw new GroupNotFoundException();
     }
 

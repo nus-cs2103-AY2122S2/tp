@@ -66,7 +66,6 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPerson(int idx, Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
-        // TODO PROBLEM ABOUT FIRST PERSON HERE and changed here a lot
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
@@ -219,7 +218,6 @@ public class UniquePersonList implements Iterable<Person> {
 
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getPhone().equals(phone)) {
-                System.out.println("get phone" + i);
                 return i;
             }
         }
@@ -249,7 +247,6 @@ public class UniquePersonList implements Iterable<Person> {
 
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getEmail().equals(email)) {
-                System.out.println("get email" + i);
                 return i;
             }
         }

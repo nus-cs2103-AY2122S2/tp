@@ -72,11 +72,6 @@ public class UniBookParserTest {
         modSet.add(module);
         descriptor.setModules(modSet);
         EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor, moduleCode);
-        System.out.println(PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        System.out.println(EditCommand.COMMAND_WORD
-            + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
-            + " o/person "
-            + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
             + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased()
             + " o/person "

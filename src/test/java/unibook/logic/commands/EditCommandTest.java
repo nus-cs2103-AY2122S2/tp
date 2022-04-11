@@ -21,7 +21,7 @@ import unibook.testutil.typicalclasses.TypicalIndexes;
 import unibook.testutil.typicalclasses.TypicalUniBook;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.TODO
+ * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 

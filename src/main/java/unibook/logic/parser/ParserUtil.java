@@ -275,7 +275,6 @@ public class ParserUtil {
      */
     public static List<Object> parseMeetingTime(String meetingTime) throws ParseException {
         requireNonNull(meetingTime);
-        System.out.println(meetingTime);
         String trimmedTag = meetingTime.trim();
         List<Object> list = new ArrayList<>();
         String[] arr = meetingTime.split(" ");
@@ -292,7 +291,6 @@ public class ParserUtil {
         LocalDateTime ldt = parseDateTime(actualMeetingTime);
         list.add(idxOfMeetingTime);
         list.add(ldt);
-        System.out.println(list);
         return list;
     }
 
@@ -332,7 +330,6 @@ public class ParserUtil {
         try {
             return LocalDate.parse(trimmedDate, formatter);
         } catch (Exception e) {
-            System.out.println(e);
             throw new ParseException("Date format accepts the following:\n"
                 + "yyyy-MM-dd");
         }

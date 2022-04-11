@@ -255,7 +255,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(index, editModuleDescriptor);
 
         } else {
-            System.out.println(argMultimap.getValue(PREFIX_OPTION).get());
             throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);
         }
     }
