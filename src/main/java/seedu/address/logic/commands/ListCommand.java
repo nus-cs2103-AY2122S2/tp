@@ -69,6 +69,13 @@ public class ListCommand extends Command {
         this.filterEntityIndex = filterEntityIndex;
     }
 
+    //@@author Gernene
+    /**
+     * Executes the list command.
+     *
+     * @param model ModelManager.
+     * @return Command result.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -92,6 +99,7 @@ public class ListCommand extends Command {
         return new CommandResult(result, entityType);
     }
 
+    //@@author Gernene
     /**
      * Updates filtered student list in ModelManager.
      *
@@ -121,6 +129,7 @@ public class ListCommand extends Command {
         return result;
     }
 
+    //@@author Gernene
     /**
      * Updates filtered class group list in ModelManager.
      *
@@ -146,6 +155,7 @@ public class ListCommand extends Command {
         return result;
     }
 
+    //@@author Gernene
     /**
      * Updates filtered module list in ModelManager.
      *
@@ -158,6 +168,7 @@ public class ListCommand extends Command {
         return result;
     }
 
+    //@author Gernene
     /**
      * Updates filtered assessment list in ModelManager.
      *
@@ -183,6 +194,7 @@ public class ListCommand extends Command {
         return result;
     }
 
+    //@@author Gernene
     /**
      * Filters all students enroled in the ClassGroup specified by filterEntityIndex.
      *
@@ -191,7 +203,8 @@ public class ListCommand extends Command {
      */
     private Predicate<Student> filterStudentsByClassGroup(Model model) {
         ObservableList<ClassGroup> classGroups = model.getUnfilteredClassGroupList();
-        ClassGroup classGroup = classGroups.get(filterEntityIndex.get().getZeroBased());
+        int classGroupIndex = filterEntityIndex.get().getZeroBased();
+        ClassGroup classGroup = classGroups.get(classGroupIndex);
         return (Student student) -> {
             if (classGroup.hasStudent(student)) {
                 return true;
@@ -200,6 +213,7 @@ public class ListCommand extends Command {
         };
     }
 
+    //@@author Gernene
     /**
      * Filters all students enroled in the TaModule specified by filterEntityIndex.
      *
@@ -208,7 +222,8 @@ public class ListCommand extends Command {
      */
     private Predicate<Student> filterStudentsByModule(Model model) {
         ObservableList<TaModule> modules = model.getUnfilteredModuleList();
-        TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
+        int moduleIndex = filterEntityIndex.get().getZeroBased();
+        TaModule module = modules.get(moduleIndex);
         return (Student student) -> {
             if (module.hasStudent(student)) {
                 return true;
@@ -217,6 +232,7 @@ public class ListCommand extends Command {
         };
     }
 
+    //@@author Gernene
     /**
      * Filters all class groups that belong to the TaModule specified by filterEntityIndex.
      *
@@ -225,7 +241,8 @@ public class ListCommand extends Command {
      */
     private Predicate<ClassGroup> filterClassGroupsByModule(Model model) {
         ObservableList<TaModule> modules = model.getUnfilteredModuleList();
-        TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
+        int moduleIndex = filterEntityIndex.get().getZeroBased();
+        TaModule module = modules.get(moduleIndex);
         return (ClassGroup classGroup) -> {
             if (module.equals(classGroup.getModule())) {
                 return true;
@@ -234,6 +251,7 @@ public class ListCommand extends Command {
         };
     }
 
+    //@@author Gernene
     /**
      * Filters all assessments that belong to the TaModule specified by filterEntityIndex.
      *
@@ -242,7 +260,8 @@ public class ListCommand extends Command {
      */
     private Predicate<Assessment> filterAssessmentsByModule(Model model) {
         ObservableList<TaModule> modules = model.getUnfilteredModuleList();
-        TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
+        int moduleIndex = filterEntityIndex.get().getZeroBased();
+        TaModule module = modules.get(moduleIndex);
         return (Assessment assessment) -> {
             if (module.equals(assessment.getModule())) {
                 return true;
