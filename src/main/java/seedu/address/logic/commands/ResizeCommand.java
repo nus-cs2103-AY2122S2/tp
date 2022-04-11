@@ -13,9 +13,9 @@ public class ResizeCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_RESIZE = "Result display window resized.";
     public static final int RESIZE_WINDOW_MULTIPLIER = 100;
-    private static Double resultWindowDisplaySize;
+    private static double resultWindowDisplaySize;
 
-    public ResizeCommand(Double displaySize) {
+    public ResizeCommand(double displaySize) {
         this.resultWindowDisplaySize = displaySize;
     }
 
@@ -24,13 +24,13 @@ public class ResizeCommand extends Command {
         return new CommandResult(MESSAGE_RESIZE, false, false, false, false, true);
     }
 
-    public static Double getResultWindowDisplaySize() {
+    public static double getResultWindowDisplaySize() {
         return resultWindowDisplaySize;
     }
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResizeCommand // instanceof handles nulls
-                && resultWindowDisplaySize.equals(((ResizeCommand) other).resultWindowDisplaySize)); // state check
+                && resultWindowDisplaySize == (((ResizeCommand) other).resultWindowDisplaySize)); // state check
     }
 }

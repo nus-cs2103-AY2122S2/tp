@@ -13,7 +13,6 @@ interface Model <<interface>> {
 
     /' Methods '/
     + updateFilteredPersonList(Predicate)
-    + getFilteredPersonList() : ObservableList
 }
 
 class ModelManager implements Model{

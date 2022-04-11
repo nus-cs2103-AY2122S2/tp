@@ -4,16 +4,17 @@ skinparam classAttributeIconSize 0
 hide circle
 
 abstract class "{abstract}\nCommand" {
-    + {abstract} execute(model : Model) : CommandResult
+    + {abstract} execute(Model) : CommandResult
 }
 
 interface Model <<interface>> {
-    + addPerson(Person person) : void
-    + hasPerson(Person person) : boolean
+    + addPerson(Person)
+    + hasPerson(Person) : boolean
 }
 
 class ModelManager implements Model{
     -addressBook : AddressBook
+    +addPerson()
 }
 
 class Person {
@@ -29,7 +30,7 @@ class Person {
      -tags : HashSet<Tag>
 
     /' Methods '/
-    + equals(other : Object) : boolean
+    + equals(Object) : boolean
     + hashCode() : int
     + toString() : String
 }
@@ -39,8 +40,8 @@ class AddCommand {
     - toAdd : Person
 
     /' Methods '/
-    + execute(model : Model) : CommandResult
-    + equals(other : Object) : boolean
+    + execute(Model) : CommandResult
+    + equals(Object) : boolean
 }
 
 ModelManager <-- AddCommand

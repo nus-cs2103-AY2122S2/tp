@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User input list command;
+
+if () then ([User inputted additional\nparameters besides just "exit"])
+    : Tracey throws ParseException;
+
+    else ([Else])
+        if () then ([PieChartWindow open ||\n HelpWindow open ||\n EmailWindowOpen]\n)
+            : Hide windows that are open;
+
+        else ([Else])
+        endif
+
+        :Application closes;
+endif
+stop
+
+@enduml
