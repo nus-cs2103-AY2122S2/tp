@@ -7,7 +7,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Introduction**
+## **1. Introduction**
 Tracey is a desktop app for University housing committee (Hall Masters) to manage their students and premises.
 Tracey is optimized for those that work well with Command Line Interface (CLI). She is equipped with Graphical User Interface (GUI) for an effective user experience.
 
@@ -17,19 +17,19 @@ Our team will like to welcome you by means of allowing you admire our work.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **2. Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **3. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **4. Design**
 
 Find out more on the structure and architecture of **Tracey** in this section.
 
@@ -39,7 +39,7 @@ Find out more on the structure and architecture of **Tracey** in this section.
 
 </div>
 
-### Architecture
+### 4.1. Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -80,7 +80,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 4.2. UI component
 
 The structure of the UI component will be explained here.
 
@@ -99,7 +99,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### 4.3. Logic component
 
 The structure of the Logic component will be explained here.
 
@@ -133,7 +133,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 4.4. Model component
 
 The structure of the Model component will be explained here.
 
@@ -158,7 +158,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### 4.5. Storage component
 
 The structure of the Storage component will be explained here.
 
@@ -171,54 +171,57 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 4.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **5. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Tracking feature
+Currently, **Tracey** helps with 15 different types of commands:
+1. `help user`
+2. `add student`
+3. `edit student data`
+4. `delete student`
+5. `undo command`
+6. `redo command`
+7. `find student`
+8. `filter statuses`
+9. `list all data`
+10. `copy email addresses`
+11. `summarise all data`
+12. `archive data`
+13. `resize display window`
+14. `clear all data`
+15. `exit application`
 
-#### Current Implementation
-Currently, **Tracey** helps with 9 different types of command:
-1. `add student`
-2. `edit student data`
-3. `delete student`
-4. `find student`
-5. `filter statuses`
-6. `summarise all data`
-7. `help user`
-8. `list all data`
-9. `clear all data`
-
-This 9 features allow users of **Tracey** to be able to manage the covid situation in the hall.
-All 9 features extends from the `abstract` `Command` class.  <br>
+These 15 features enables of **Tracey** to manage the covid situation in the hall.
+All 15 features extends from the `abstract` `Command` class.  <br>
 
 The table below summarises the 15 different tracking commands:
 
 | Command                        | Command Word | Purpose                                                               |
 |--------------------------------|--------------|-----------------------------------------------------------------------|
+| `help user`                    | `help`       | Provide a how-to-use on this app.                                     |
 | `add student`                  | `add`        | Adds a new student profile.                                           |
 | `edit student data`            | `edit`       | Edits an existing student.                                            |
 | `delete student`               | `delete`     | Delete an existing student.                                           |
-| `find student`                 | `find`       | Find an existing student.                                             |
-| `filter statuses`              | `filter`     | Filter out a list of students by covid status.                        |
-| `summarise all data`           | `summarise`  | Make pie charts out of the data.                                      |
-| `help user`                    | `help`       | Provide a how-to-use on this app.                                     |
-| `list all data`                | `list`       | List out all students in Tracey.                                      |
-| `clear all data`               | `clear`      | Empty the database.                                                   |
-| `show email`                   | `email`      | Open email window to copy list of emails.                             |
-| `resize result display window` | `resize`     | Resize the result display window based on options with pre-set sizes. |
-| `archive database`             | `archive`    | Saves a copy of the working database for archival purposes.           |
 | `undo command`                 | `undo`       | Undoes the previous command.                                          |
 | `redo command`                 | `redo`       | Redoes the previous command that was undone.                          |
-| `import excel file`            | `import`      | Import data from an exisitng excel file.                              |
+| `find student`                 | `find`       | Find an existing student.                                             |
+| `filter statuses`              | `filter`     | Filter out a list of students by covid status.                        |
+| `list all data`                | `list`       | List out all students in Tracey.                                      |
+| `show email`                   | `email`      | Open email window to copy list of emails.                             |
+| `summarise all data`           | `summarise`  | Make pie charts out of the data.                                      |
+| `archive database`             | `archive`    | Saves a copy of the working database for archival purposes.           |
+| `resize result display window` | `resize`     | Resize the result display window based on options with pre-set sizes. |
+| `clear all data`               | `clear`      | Empty the database.                                                   |
+| `exit application`             | `exit`       | Exits the application.                                                |
 
-### Add feature
+### 5.2. Add feature
 
 The add mechanism implements the following sequence and interactions for the method call execute("add NEW_PERSON_TAGS") on a LogicManager object where NEW_PERSON_TAGS refers to the tags of a person to be added.
 
@@ -306,11 +309,11 @@ When a user inputs a delete command, the `execute()` method of `LogicManager` wi
 
 Following this, `LogicManager` will call the `execute()` method of the `DeleteCommand` object. In this method, `getFilteredPersonList()` of the `ModelManager` class is called. Then `deletePerson(Person)` method of the `Model` class will be called, deleting the student from the database.  Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Delete Command.
 
-### Summarise feature
+### 5.10. Summarise feature
 
 The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
 
-#### What is the summarise feature
+#### 5.10.1. What is the summarise feature
 
 The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
 Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
@@ -413,11 +416,11 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
     * Pros: No modifications to the `SummariseCommand` class.
     * Cons: Dependent on the feedback message, need to implement complicated methods to parse the message, parsing methods need to be modified if the format of the feedback message is changed.
 
-### Help feature
+### 5.1. Help feature
 
 The help mechanism implements the following sequence for the method call execute("help").
 
-#### What is the help feature
+#### 5.1.2. What is the help feature
 
 The help feature opens up a separate window that contains a simple user guide for the user to adhere to. The window contains a list of commands that Tracey provides, their formats and examples.
 
