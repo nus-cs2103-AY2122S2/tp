@@ -13,15 +13,15 @@ The purpose of this User Guide is to assist you in learning and using InternBudd
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-If you feel InternBuddy is the solution to your problem and you're interested in using it, try it out now! If this is your first time using InternBuddy, you can get started right away by following the steps below.
+If you're interested in using InternBuddy but don't know where to begin, this section will give you a step-by-step walkthrough to get you started!
 1. Ensure you have Java `11` or above installed in your Computer.
    * If you don't have it installed, you can follow [Oracle's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
    for your operating system.
-   * Please make sure that you select Java `11` as your default Java version.
+   * Also ensure that you have selecte Java `11` as your default Java version.
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.3.1/internbuddy.jar).
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4/internbuddy.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
@@ -35,32 +35,40 @@ If you feel InternBuddy is the solution to your problem and you're interested in
 
    * **`addc`**`n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the currently displayed list.
 
-   * **`clear`** : Deletes all entries.
+   * **`delete_all`** : Deletes all entries in the currently displayed list.
 
    * **`exit`** : Exits the app.
 
 6. If this is your first time reading our user guide, you can refer to our [Guide Walkthrough](#guide-walkthrough) section to learn how to navigate the guide, and eventually the app.
 
-----
-## Guide Walkthrough
-If you're new, welcome to **InternBuddy**! We're trying to make this guide as easy to read as possible. We hope this section will help you read the guide and get started with InternBuddy.
+--------------------------------------------------------------------------------------------------------------------
+## Overview of Internbuddy
 
-### Overview of InternBuddy
-InternBuddy is designed specifically for students who are searching for internships. With InternBuddy, there is no need for you to juggle between multiple apps just to manage your multiple internship applications. With efficiency as its focus, InternBuddy values your **Time** and **Experience**. Let InterBuddy help you to manage your application details so you can focus acing your assessments and interviews!
+InternBuddy is designed specifically for students who are searching for internships. With InternBuddy, there is no need
+for you to juggle between multiple apps just to manage your multiple internship applications. This app values your
+**Time** and **Experience** by placing efficiency as one of its core principles. Let InternBuddy help you manage your 
+internship application details so you can focus on acing your assessments and interviews!
+
+This section will go into detail as to how the app works.
+
 ### Structure of InternBuddy
-With internships and job seeking as our main focus, we are going over 3 main entries of InternBuddy:
-- **Company**: A company will represent a  company that you are applying for, or will be applying for.
-- **Person**: A person will represent a contact person. In can be used for general purpose of storing a contact person with a company related to it. The contact person may have a specific role such as the HR of a company.
-- **Event**: An event will represent an event of a company. An event can be an online assessment, an interview, a job fair, etc.
 
-And with that, InternBuddy stores 3 lists for 3 different types of entries:
-- **[Companies](#company-list)**
-- **[Persons](#person-list)**
-- **[Events](#event-list)**
+Because internships and job seeking is InternBuddy's main focus, the app supports 3 kinds of entries:
+- **Company**: Represents a company that you are applying for, or will be applying for.
+- **Person**: Represents a contact person of a company. The contact person may have a specific role such as being an HR recruiter.
+- **Event**: Represents an event of a company. An event can be an online assessment, an interview, a job fair, etc.
 
-The app will only display one of these lists at any time, as shown in the screenshot below. Each of these 3 different types have different attributes attached to them. Let's dive in to understand what each type can store.
+With that, InternBuddy stores 3 entry lists, one for each entry type:
+- **[Company List](#company-list)**
+- **[Person List](#person-list)**
+- **[Event List](#event-list)**
+
+The app will only display one of these lists at any time, as shown in the screenshots of each of these lists.
+
+Each of these 3 entry types have different attributes attached to them. Let's dive in to understand what attributes each
+entry type can store.
 
 #### Company List
 ![Company List](images/UserGuide/Ui-2.png)
@@ -126,7 +134,10 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`findp`](#locating-people-by-name-findp): Finds a person.
   - [`finde`](#locating-events-finde): Finds an event. 
 
-There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit). You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to read the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first to have a smoother experience reading our [Features](#features) section :smile:.
+There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit).
+You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
+read the [User Guide Icons](#icons) and [Command Formats](#command-formats) section first to have a smoother
+experience reading our [Features](#features) section :smile:.
 
 #### Dialog Box
 For those of you not familiar with what a dialog box is, a dialog box is a box that shows when you execute a command. It is a box that contains a message. The message is basically a feedback from InternBuddy to you. InternBuddy will show you a dialog box when you execute a command.
@@ -139,12 +150,18 @@ Otherwise, if the command is **valid**, a **success message** will be shown and 
 
 ![successful command](images/SuccessfulCommandExample.png)
 
-### User Guide Icons
+--------------------------------------------------------------------------------------------------------------------
+## Features Walkthrough
+This section will help you navigate and understand the [Features](#features) section of the guide.
+This way, you can easily use it to answer any question you have regarding the app's features.
 
-| Icon               | Meaning                                                       |
-|--------------------|---------------------------------------------------------------|
-|:information_source:| This icon indicates important information to be taken note of |
-|:bulb:               | This icon indicates useful tips for the users                |
+### Icons
+
+| Icon                 | Meaning                                                                                           |
+|----------------------|---------------------------------------------------------------------------------------------------|
+| :information_source: | This icon indicates important information to be taken note of                                     |
+| :bulb:               | This icon indicates useful tips for the users                                                     |
+| :exclamation:        | This icon indicates caution for an action the user can take that can have dangerous consequences. |
 
 ### Command Formats
 With a simple command standards, we tried to make the commands as intuitive as possible. To make sure that you can read the commands without any confusion, here are the formats we use in the guide.
@@ -223,7 +240,7 @@ Format:
 addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​
 ```
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
 
@@ -240,7 +257,7 @@ Format:
 adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 ```
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 `DATE` must be in the format:
 * YYYY-MM-DD
 * "today" (which will get the `DATE` for today)
@@ -253,7 +270,7 @@ E.g. 2022-10-20 and 13:30, or "today 10" and 12:45.
 the keyword "today" for DATE is case-insensitive.
 </div>
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
 
@@ -326,7 +343,7 @@ Format:
 editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 ```
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 If the name of the Company is edited, all Events and Persons referring to the Company will also
 update the company name they have stored.
 </div>
@@ -348,7 +365,7 @@ Format:
 editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​
 ```
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
 
@@ -365,12 +382,12 @@ Format:
 edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…
 ```
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 `DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM.
 E.g. 2022-10-20 and 13:30.
 </div>
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
 
@@ -425,7 +442,7 @@ Examples:
 
 Finds events with given details of the event by name, company, start date, end date, time, location and tag
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 START DATE and END DATE will find events from the START DATE to the END DATE **inclusively**.
 </div>
 
@@ -502,7 +519,7 @@ archive INDEX
 Examples:
 * `archive 1` hides the 1st entry from the list of entries.
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 display all unarchived entries first to get the INDEX of the entry you want to archive.
 </div>
 
@@ -525,7 +542,7 @@ unarchive INDEX
 Examples:
 * `unarchive 1` shows the 1st entry in the list of entries.
 
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 display all archived entries first to get the INDEX of the entry you want to unarchive.
 </div>
 
