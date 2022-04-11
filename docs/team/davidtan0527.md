@@ -48,4 +48,4 @@ Given below are my contributions to the project.
 
 **Community**:
   * PRs reviewed (with non-trivial review comments): [#69](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/69), [#108](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/108), [#135](https://github.com/AY2122S2-CS2103T-T09-4/tp/pull/135)
-  * Reported bug founds and provided suggestions for another group's project: [PE-D repository](https://github.com/DavidTan0527/ped)
+  * Reported bugs found and provided suggestions for another group's project: [PE-D repository](https://github.com/DavidTan0527/ped)
