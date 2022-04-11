@@ -555,7 +555,7 @@ If you decide to make changes to the data file, HustleBook will not check the va
 | Action     | Format, Examples                                                                                                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/3400`     |
-| **List**   | `list`                                                                                                                                                                                      |
+| **List**   | `list [flag | unflag]` <br> e.g., `list flag`                                                                                                                                                                                     |
 | **Clear**  | `clear`                                                                                                                                                                                     |
 | **Sort**   | `sort [meeting|name|prev|salary]` <br> e.g., `sort name`                                                                                                                                    |
 | **Undo**   | `undo`                                                                                                                                                                                      |
