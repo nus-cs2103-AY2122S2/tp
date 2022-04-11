@@ -35,7 +35,7 @@ public class JsonAdaptedSchedule {
     public JsonAdaptedSchedule(Schedule source) {
         this.name = source.getScheduleName().scheduleName;
         this.description = source.getScheduleDescription().description;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         this.dateTime = source.getScheduleDateTime().getScheduleDateTime().format(formatter);
     }
 

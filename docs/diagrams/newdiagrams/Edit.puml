@@ -2,7 +2,7 @@
 !include Style.puml
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":EdotCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 end box
 
@@ -11,10 +11,10 @@ participant ":Model" as Model LOGIC_COLOR_T4
 participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
 end box
 
-[-> LogicManager : execute(delete)
+[-> LogicManager : execute(edit)
 activate LogicManager
 
-LogicManager -> EditCommandParser : parseCommand(add)
+LogicManager -> EditCommandParser : parseCommand(edit)
 activate EditCommandParser
 
 create EditCommand
