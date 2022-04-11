@@ -87,17 +87,6 @@ Given below are my contributions to the project.
   * Sequence diagrams
     * Add Transaction Sequence Diagram
       ![ activity diagram](../images/AddTransactionSequenceDiagram.png)
-    * Find Transaction Sequence Diagram
-      ![ activity diagram](../images/PaySequenceDiagram.png)
-    * Pay Sequence Diagram
-      ![ activity diagram](../images/FindTransactionSequenceDiagram.png)
-  * Activity diagrams
-    * Add Transaction Activity Diagram
-      ![ activity diagram](../images/AddTransactionActivityDiagram.png)
-    * Find Transaction Activity Diagram
-      ![ activity diagram](../images/PayDiagram.png)
-    * Pay Activity Diagram
-      ![ activity diagram](../images/FindTransactionActivityDiagram.png)
   * Class diagrams
     * Transaction Class Diagram
       ![ activity diagram](../images/TransactionClassDiagram.png)
