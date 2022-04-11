@@ -44,7 +44,6 @@ AddCustomerCommandParser -[hidden]-> TrackBeauParser
 destroy AddCustomerCommandParser
 
 TrackBeauParser --> LogicManager : a
-destroy TrackBeauParser
 
 
 @enduml
