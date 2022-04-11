@@ -280,7 +280,7 @@ The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAl
 has been enhanced based on the initial implementation of the `find` command in `AddressBook`.
 
 The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
-user to separate multiple keywords. and `f/` which allows the user to specify which field the
+user to separate multiple keywords and `f/` which allows the user to specify which field the
 `find` command should search for keywords under.
 
 #### How is the feature implemented?
@@ -926,6 +926,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a candidate
 
 1. Editing a candidate while all candidates are being shown
+
    1. Prerequisites: System contains only two candidates, candidate 1 is: `id/A0654321B  n/Jane Doe p/81234657 e/E0654321@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
       and candidate 2 is: `id/A0123456B  n/Peter Parker p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
    
@@ -941,28 +942,27 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `edit 1 id/A0123456B n/Jane Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`<br>
       Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `edit` command will be validated by the system.
 
-### Deleting a candidate (WIP)
+### Deleting a candidate 
 
 1. Deleting a candidate while all candidates are being shown
 
     1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+        Expected: First candidate is deleted from the list. Details of the deleted candidate shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
-
+    
 ### Scheduling an interview
 
 1. Adding an interview into the system
 
     1. Prerequisite: List all candidates using the `list` command. Multiple candidates in the list.
+   
     2. Test case: `schedule add 1 at/03-08-2022` <br>
        Expected: 1st parameter is incorrect. It should be `candidate/1` with a forward slash `/`.
 
@@ -984,6 +984,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting an existing interview in the system
     
     1. Prerequisite: View all interviews using the `view all` command. Multiple interviews in the schedule.
+   
     2. Test case: `schedule add 1 at/03-08-2022` <br>
        Expected: 1st parameter is incorrect. It should be `candidate/1` with a forward slash `/`. All prefixes and its value are tied with a forward slash `/`.
 
