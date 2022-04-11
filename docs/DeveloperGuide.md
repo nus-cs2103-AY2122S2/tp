@@ -338,15 +338,13 @@ of the specific "John" they wish to perform their actions on. If the user gives 
 The following diagram illustrates the logic of the command being run. 
 ![CommandSimilarNames](images/CommandSimilarNames.png)
 
-As you can see, the first command results in the `EditCommand` being saved as `lastCommand`. The user is informed that there are
+From the diagram, after the first command is executed, the user is informed that there are
 multiple clients with name `John` and is prompted to input an index. After inputting "1", the function `setIndex` of `EditCommand` is called to
 specify the client to edit. The `EditCommand` is then executed normally.
 
-This gives convenience to our users as they would not have to type the full name of the client they want to perform an action on. The addition of `lastCommand`
-also means that the user does not have to type in the command multiple times.
-This is possible due the `lastCommand` variable that we added to store the last command that the user requested. This will be useful to us
-when we are asking the user to perform an action with multiple inputs.
-
+This gives convenience to our users as they would not have to type the full name of the client they want to perform an action on. 
+Also, when asking the user for multiple inputs, we need a way to keep track of what the user requested beforehand, so they would not need to type it again. 
+The addition of `lastCommand` means that the user does not have to type in the command multiple times.
 
 #### Design considerations:
 
