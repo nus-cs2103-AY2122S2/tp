@@ -9,16 +9,16 @@ NUSocials is a desktop address book application for university students who like
 
 Given below are my contributions to the project.
 
-* **Feature Enhancement**: Added the ability to delete multiple contacts. [#34](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34)
+* **Feature Enhancement**: Added the ability to delete multiple contacts. [(#34)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34)
   * What it does: allows the user to delete multiple contacts in a single command.
   * Justification: This feature improves the product as a user can efficiently delete many contacts at once instead of inputting a delete command for each contact that he or she wants to delete.
   * Highlights: This enhancement affects the existing UI layout. It required an in-depth analysis of how the contacts would be displayed during the deletion process.
 
-* **New Feature**: Added the ability to remove tags from existing contacts. [#52](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/52)
+* **New Feature**: Added the ability to remove tags from existing contacts. [(#52)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/52)
   * What it does: allows the user to remove tags from an existing contact.
   * Justification: This feature improves the product significantly because it allows the user to simply remove a tag, otherwise users have to recreate another contact.
 
-* Updated the UI to fit requirements for new features [#70](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/70)
+* Updated the UI to fit requirements for new features [(#70)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/70)
   * Added a split-pane to fit 2 panels. (contacts panel and events panel)
   * Designed the events panel.
 
@@ -40,22 +40,22 @@ Given below are my contributions to the project.
     * Contributed to the NFRs
 
 * **Test Case Implementation**:
-  * DeleteCommand [#34](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34) [#41](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/41)
-  * DeleteCommandParser [#34](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34)
-  * TagCommand [#41](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/41)
-  * TagCommandParser [#156](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/156)
-  * RemoveTagCommand [#52](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/52)
-  * RemoveTagCommandParser [#156](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/156)
-  * JsonAdaptedName [#159](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/159)
-  * EditCommand (fixed bugs) [#170](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/170)
+  * DeleteCommand [(#34, ](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34) [#41)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/41)
+  * DeleteCommandParser [(#34)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/34)
+  * TagCommand [(#41)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/41)
+  * TagCommandParser [(#156)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/156)
+  * RemoveTagCommand [(#52)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/52)
+  * RemoveTagCommandParser [(#156)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/156)
+  * JsonAdaptedName [(#159)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/159)
+  * EditCommand (fixed bugs) [(#170)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/170)
 
 * **Review/mentoring contributions**:
   * Supported a teammate with the steps to implement `showevents`
-  * Suggested fixes for a few test cases in `EditCommand` [#92](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/92)
+  * Suggested fixes for a few test cases in `EditCommand` [(#92)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/92)
 
 * **Tools**:
   * Integrated Codecov into team repo
-  * Change the header to NUSocials [#5](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/55)
+  * Change the header to NUSocials [(#5)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/55)
   * Update the links to the Java-CI and CodeCov status-banners
   * Update the link to the project’s GitHub repository
-  * Update site-wide settings [#18](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/18)
+  * Update site-wide settings [(#18)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/18)
