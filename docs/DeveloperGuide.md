@@ -429,10 +429,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                  | find a person by name                        | locate details of persons without having to go through the entire list |
 | `* * *`  | organised student     | sort my contacts                             | properly track my contacts                                             |
 | `* *`    | inexperienced user    | have an easy way to use complicated commands | use the commands easily                                                |
-| `* *`    | organised student     | archive graduated students                   | separate current and past students                                     |
-| `* *`    | user                  | hide private contact details                 | minimize chance of someone else seeing them by accident                |
-| ` * `    | competitive student   | see the CAP of other students                | see my own standing                                                    |
-| ` * `    | student               | keep future modules in a wishlist            | show my friends the modules I want to take in the future               |
+| `* *`    | careless student      | undo my actions                              | fix accidental mistakes                                                |
+| `* *`    | student               | filter students by modules                   | so I can find group mates                                              |                          
+| `* *`    | organised student     | archive graduated students                   | separate current and past students                                     |                         
+| `* *`    | technical student     | copy data                                    | so I can transfer information to my other applications                 |                       
 
 ### Use cases
 
@@ -567,7 +567,10 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
 
    Use case ends.
    <br/><br/>
-
+   **Extensions**
+- 2a. The provided format is invalid.
+  - 2a1. ModuleMateFinder displays an error message.
+    Use case ends.
 
 **Use case: UC08 - Clearing all entries**
 
@@ -714,6 +717,10 @@ Use case ends.
   Use case ends.
 - 3a. No fields are specified.
     - 3a1. ModuleMateFinder displays an error message.
+  
+      Use case resumes at step 2.
+- 3b. The order is invalid.
+    - 3b1. ModuleMateFinder displays an error message.
 
       Use case resumes at step 2.
       <br/><br/>
@@ -721,7 +728,7 @@ Use case ends.
 **Use case: UC16 - Switching between books**
 
 **MSS**
-1. User types `switch` or presses `F10`.
+1. User requests to switch addressbook.
 2. ModuleMateFinder switches to the other book.  
    Use case ends.
 
@@ -767,9 +774,34 @@ Use case ends.
 - 3a. User is the default book.
     - 3a1. ModuleMateFinder displays an error message.  
       Use case resumes at step 2.
-    
 
-**Use case: UC19 - Exiting the application**
+**Use case: UC19 - Undoing a contact**
+
+**MSS**
+1. User requests to undo.
+2. ModuleMateFinder undoes the last action.  
+
+Use case ends.
+
+**Extensions**
+- 1a. There is no command to undo.  
+  - 3a1. ModuleMateFinder displays an error message.  
+    Use case ends.
+
+
+**Use case: UC20 - Redoing a contact**
+1. User requests to redo.
+2. ModuleMateFinder redoes the last action.
+
+Use case ends.
+
+**Extensions**
+- 1a. There is no command to redo.
+    - 3a1. ModuleMateFinder displays an error message.  
+      Use case ends.
+
+
+**Use case: UC21 - Exiting the application**
 
 **MSS**
 
@@ -800,7 +832,6 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Contact/Person**: A classmate whose information is kept in the address book. 
 * **Module**: A course that is held at NUS with specific module codes e.g. CS3230
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Favourite**: To mark a person favourably
 * **Blacklist**: To mark a person unfavourably
 * **Fast Typist**: A person who can type at speeds greater or equal to 70 words per minute.
@@ -830,8 +861,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   
 
 ### Deleting a person
 
@@ -847,19 +877,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Delete `addressbook.json` and `archivedAddressBook.json`<br/>
 
-1. _{ more test cases …​ }_
+   1. Test case: Restart ModuleMateFinder
+        Expected: The app will create new populated files.    
+   
 
+2. Dealing with corrupted data files.
+    1. Test case: Change module field of a contact to invalid value: `ABC1000ABCD`<br>
+    Expected: The contact is not saved. Error message is shown in the status bar.
 
+   1. Test case: Restart ModuleMateFinder
+       Expected: The app will display empty ModuleMateFinder.    
 
+      
 ## **Appendix: Effort**
 
 If the effort required to create AddressBook3 is 100, we think that the effort to create ModuleMateFinder is **_at least 125_**.
@@ -896,3 +933,4 @@ To attest to that minimal amount effort, we have over 300 test cases, and added 
 - **Test Cases**
   - Many of the test cases would not have worked with ModuleMateFinder. We had to modify many of the unit tests in order to accommodate for this.
   - We also had to add more test cases, especially for commands prone to bugs such as `Copy`.
+
