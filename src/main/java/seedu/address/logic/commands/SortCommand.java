@@ -34,8 +34,8 @@ public class SortCommand extends Command {
     /**
      * Creates new SortCommand object.
      *
-     * @param sortComparator contains the Comparator for sorting the list of candidates
-     * @param sortKey contains the valid sort key for equality state check
+     * @param sortComparator contains the Comparator for sorting the list of candidates.
+     * @param sortKey contains the valid sort key for equality state check.
      */
     public SortCommand(Comparator<Candidate> sortComparator, String sortKey) {
         requireNonNull(sortComparator);

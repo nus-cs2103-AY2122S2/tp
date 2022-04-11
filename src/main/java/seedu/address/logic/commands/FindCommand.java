@@ -32,6 +32,11 @@ public class FindCommand extends Command {
 
     private final ContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates new FindCommand object.
+     *
+     * @param predicate contains the predicate for filtering the candidate list.
+     */
     public FindCommand(ContainsKeywordsPredicate predicate) {
         requireNonNull(predicate);
 

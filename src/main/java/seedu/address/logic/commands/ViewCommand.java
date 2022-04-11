@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
     /**
      * Creates new ViewCommand object.
      *
-     * @param predicate contains the predicate for filtering the interview list
+     * @param predicate contains the predicate for filtering the interview list.
      */
     public ViewCommand(WithinTimePeriodPredicate predicate) {
         requireNonNull(predicate);

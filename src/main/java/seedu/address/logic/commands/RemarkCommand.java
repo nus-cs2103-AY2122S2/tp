@@ -34,8 +34,10 @@ public class RemarkCommand extends Command {
     private final Remark remark;
 
     /**
-     * @param index of the candidate in the filtered candidate list to edit the remark
-     * @param remark of the candidate to be updated to
+     * Creates new RemarkCommand object.
+     *
+     * @param index of the candidate in the filtered candidate list to edit the remark.
+     * @param remark of the candidate to be updated to.
      */
     public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
