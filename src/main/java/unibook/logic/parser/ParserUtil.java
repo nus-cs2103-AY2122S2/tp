@@ -280,12 +280,10 @@ public class ParserUtil {
         List<Object> list = new ArrayList<>();
         String[] arr = meetingTime.split(" ");
 
-        //TODO create the parse exception to validate meetingTime to
         if (arr.length != 3) {
             throw new ParseException(MESSAGE_WRONG_MT_FORMAT);
         }
 
-        // TODO parse the index and the meeting time of the input
 
         int idxOfMeetingTime = Integer.parseInt(meetingTime.substring(0 , 1));
         String actualMeetingTime = meetingTime.substring(2);

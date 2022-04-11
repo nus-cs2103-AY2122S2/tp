@@ -41,7 +41,8 @@ public class Office {
      * Returns true if a given string is a valid office.
      */
     public static boolean isValidOffice(String test) {
-        return test.length() > 0 && test.length() <= NAME_MAX_LENGTH;
+        String trimmedTest = test.trim();
+        return trimmedTest.length() > 0 && trimmedTest.length() <= NAME_MAX_LENGTH;
     }
 
     @Override

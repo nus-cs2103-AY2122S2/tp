@@ -79,10 +79,7 @@ public class ModuleCard extends UiPart<Region> {
 
         //collect all tabs in list of tabs for easy management
         allTabContents = new ArrayList<>();
-        allTabContents.add(professors);
-        allTabContents.add(students);
-        allTabContents.add(groups);
-        allTabContents.add(keyEvents);
+        setUpAllTabContents();
 
         //set up all the vbox lists, make them all invisible in the ui at the start
         setUpVBoxLists();
@@ -92,6 +89,14 @@ public class ModuleCard extends UiPart<Region> {
 
         //set up mouse click handlers for each tab
         setUpTabMouseClickHandlers();
+    }
+
+    private void setUpAllTabContents() {
+        //collect all tabs in list of tabs for easy management
+        allTabContents.add(professors);
+        allTabContents.add(students);
+        allTabContents.add(groups);
+        allTabContents.add(keyEvents);
     }
 
     /**
@@ -133,13 +138,10 @@ public class ModuleCard extends UiPart<Region> {
      */
     private void setUpProfessorHeaderClickHandler() {
         professorsTab.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                    logger.info(String.format("Professors tab clicked. Professors of module %s now showing.",
-                        module.getModuleCode()));
-                    changeTab(ModuleCardTab.PROFESSORS);
-                }
+            e -> {
+                logger.info(String.format("Professors tab clicked. Professors of module %s now showing.",
+                    module.getModuleCode()));
+                changeTab(ModuleCardTab.PROFESSORS);
             });
     }
 
@@ -148,13 +150,10 @@ public class ModuleCard extends UiPart<Region> {
      */
     private void setUpStudentsHeaderClickHandler() {
         studentsTab.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    logger.info(String.format("Students tab clicked. Students of module %s now showing.",
-                        module.getModuleCode()));
-                    changeTab(ModuleCardTab.STUDENTS);
-                }
+            event -> {
+                logger.info(String.format("Students tab clicked. Students of module %s now showing.",
+                    module.getModuleCode()));
+                changeTab(ModuleCardTab.STUDENTS);
             });
     }
 
@@ -163,13 +162,10 @@ public class ModuleCard extends UiPart<Region> {
      */
     private void setUpGroupsHeaderClickHandler() {
         groupsTab.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    logger.info(
-                        String.format("Groups tab clicked. Groups of module %s now showing.", module.getModuleCode()));
-                    changeTab(ModuleCardTab.GROUPS);
-                }
+            event -> {
+                logger.info(
+                    String.format("Groups tab clicked. Groups of module %s now showing.", module.getModuleCode()));
+                changeTab(ModuleCardTab.GROUPS);
             });
     }
 
@@ -178,13 +174,10 @@ public class ModuleCard extends UiPart<Region> {
      */
     private void setUpModuleKeyEventsHeaderClickHandler() {
         keyEventsTab.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    logger.info(String.format("Key events tab clicked. Key events of module %s now showing.",
-                        module.getModuleCode()));
-                    changeTab(ModuleCardTab.KEY_EVENTS);
-                }
+            event -> {
+                logger.info(String.format("Key events tab clicked. Key events of module %s now showing.",
+                    module.getModuleCode()));
+                changeTab(ModuleCardTab.KEY_EVENTS);
             });
     }
 
@@ -310,7 +303,7 @@ public class ModuleCard extends UiPart<Region> {
             && module.equals(card.module);
     }
 
-    //Tracks which field of Module is visible at a time
+    //Enum which represents which tab of the ModuleCard is visible at a time
     public enum ModuleCardTab {
         STUDENTS, PROFESSORS, GROUPS, KEY_EVENTS, NONE;
     }

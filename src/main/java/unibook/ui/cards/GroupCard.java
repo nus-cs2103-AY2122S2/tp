@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.logging.Logger;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -68,25 +67,27 @@ public class GroupCard extends UiPart<Region> {
         groupName.setText(group.getGroupName());
 
         setUpVBoxLists();
-
         setUpListChangeListeners();
+        setUpMouseClickEventHandler(singleGroupFlag);
+        setExpandedGroupCardVisibility();
+    }
 
+    /**
+     * Sets up the mouseclick handler that expands the group card pane when the group card is clicked.
+     * If only one group card being shown, this is not necessary, as the group card by default will be shown in full.
+     *
+     * @param singleGroupFlag indicates if only 1 group(card) being shown in the list this group card is in.
+     */
+    private void setUpMouseClickEventHandler(boolean singleGroupFlag) {
         if (!singleGroupFlag) {
             groupPane.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent e) {
-                        logger.info("Group card clicked. Mouse Event fired.");
-                        additionalDetailsVisible = !additionalDetailsVisible;
-                        moreGroupDetails.setVisible(additionalDetailsVisible);
-                        moreGroupDetails.setManaged(additionalDetailsVisible);
-                    }
+                e -> {
+                    logger.info("Group card clicked. Mouse Event fired.");
+                    additionalDetailsVisible = !additionalDetailsVisible;
+                    setExpandedGroupCardVisibility();
                 });
             additionalDetailsVisible = false;
         }
-
-        moreGroupDetails.setVisible(additionalDetailsVisible);
-        moreGroupDetails.setManaged(additionalDetailsVisible);
     }
 
     /**
@@ -123,6 +124,15 @@ public class GroupCard extends UiPart<Region> {
             new StudentCard(member, i + 1).getRoot());
         CustomPaneListFiller.fillPaneFromList(meetingTimesList, group.getMeetingTimes(), (meetingTime, i) ->
             createLabelFromMeetingTime(meetingTime, i + 1));
+    }
+
+    /**
+     * Sets the visibility of the expanded section of group card (containing all the details of a group) to be
+     * the value of {@code additionalDetailsVisible}.
+     */
+    private void setExpandedGroupCardVisibility() {
+        moreGroupDetails.setVisible(additionalDetailsVisible);
+        moreGroupDetails.setManaged(additionalDetailsVisible);
     }
 
 

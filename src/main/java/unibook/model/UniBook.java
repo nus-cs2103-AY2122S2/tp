@@ -412,7 +412,6 @@ public class UniBook implements ReadOnlyUniBook {
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons" + "||"
             + modules.asUnmodifiableObservableList().size() + " modules";
-        // TODO: refine later
     }
 
     @Override

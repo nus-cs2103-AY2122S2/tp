@@ -575,13 +575,17 @@ UniBook data are saved in the hard disk automatically after any command that cha
 
 ## Editing the data file
 
-UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.  
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, UniBook will discard all data and start with an empty data file at the next run.
 </div>
 
-## Archiving data files `[coming in v2.0]`
+The data file format can be made invalid if:
+* A duplicate field is added that UniBook does not allow duplicates of. Example: Duplicate group code in the list of group codes of a `Student`.
+* Illegal values are entered into fields. 
+  * Illegal meaning they violate one or more constraints defined here: [link](#entities)
 
 --------------------------------------------------------------------------------------------------------------------
 

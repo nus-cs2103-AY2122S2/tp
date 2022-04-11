@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.model.module.Module;
 import unibook.model.module.exceptions.DuplicateMeetingTimeException;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.PersonNotFoundException;
 import unibook.testutil.builders.GroupBuilder;
 import unibook.testutil.builders.ModuleBuilder;
 import unibook.testutil.builders.StudentBuilder;
-import unibook.model.module.Module;
 
 public class GroupTest {
     @Test
@@ -84,7 +84,7 @@ public class GroupTest {
     @Test
     public void remove_memberDoesNotExist_throwsPersonNotFoundException() {
         assertThrows(PersonNotFoundException.class, () -> new GroupBuilder().build()
-                .removeMember(new StudentBuilder().withName("ghost").build()));
+            .removeMember(new StudentBuilder().withName("ghost").build()));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class GroupTest {
         ObservableList<LocalDateTime> meetingTimes = FXCollections.observableArrayList();
         meetingTimes.add(meetingTime);
         assertThrows(DuplicateMeetingTimeException.class, () -> new GroupBuilder().withMeetingTimes(meetingTimes)
-                .build().addMeetingTime(meetingTime));
+            .build().addMeetingTime(meetingTime));
     }
 
     @Test
@@ -182,5 +182,4 @@ public class GroupTest {
         //same group name and module
         assertTrue(group.sameGroupNameAndModule(module1.getModuleCode().toString(), "A"));
     }
-
 }

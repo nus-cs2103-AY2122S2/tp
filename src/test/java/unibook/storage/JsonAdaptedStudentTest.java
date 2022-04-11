@@ -1,6 +1,8 @@
 package unibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MODULE_DOES_NOT_EXIST_MESSAGE;
+import static unibook.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,21 +11,23 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import unibook.commons.exceptions.IllegalValueException;
+import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedGroupCode;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedModuleCode;
+import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedStudent;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedTag;
 import unibook.testutil.Assert;
+import unibook.testutil.builders.GroupBuilder;
 import unibook.testutil.typicalclasses.TypicalStudents;
 import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
@@ -47,7 +51,7 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent person =
             new JsonAdaptedStudent(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, VALID_MODULES, VALID_GROUPS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -57,7 +61,7 @@ public class JsonAdaptedStudentTest {
             VALID_MODULES, VALID_GROUPS);
         String expectedMessage =
             String.format(JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -66,7 +70,7 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent person =
             new JsonAdaptedStudent(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_TAGS, VALID_MODULES, VALID_GROUPS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -76,7 +80,7 @@ public class JsonAdaptedStudentTest {
             VALID_MODULES, VALID_GROUPS);
         String expectedMessage =
             String.format(JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -85,7 +89,7 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent person =
             new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_TAGS, VALID_MODULES, VALID_GROUPS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -95,7 +99,7 @@ public class JsonAdaptedStudentTest {
             VALID_MODULES, VALID_GROUPS);
         String expectedMessage =
             String.format(JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, expectedMessage, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -105,10 +109,32 @@ public class JsonAdaptedStudentTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedStudent person =
             new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidTags, VALID_MODULES, VALID_GROUPS);
-        Assert.assertThrows(IllegalValueException.class, () -> person.toModelType(
+        assertThrows(IllegalValueException.class, () -> person.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
-    //TODO invalid modules test
+    @Test
+    public void toModelType_duplicateGroups_throwsIllegalValueException() {
+        Set<JsonAdaptedGroupCode> duplicateGroups = new HashSet<>();
+        //add 2 identical group codes
+        duplicateGroups.add(new JsonAdaptedGroupCode(new JsonAdaptedModuleCode("CS2103"), "T12"));
+        duplicateGroups.add(new JsonAdaptedGroupCode(new JsonAdaptedModuleCode("CS2103"), "T12"));
 
+        JsonAdaptedStudent person =
+            new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, VALID_MODULES, duplicateGroups);
+
+        assertThrows(IllegalValueException.class, () -> person.toModelType(TypicalUniBook.getTypicalUniBook()));
+    }
+
+    @Test
+    public void toModelType_nonExistentModule_throwsIllegalValueException() {
+        JsonAdaptedModuleCode nonExistentModule = new JsonAdaptedModuleCode("XXXX");
+        Set<JsonAdaptedModuleCode> modules = new HashSet<>();
+        modules.add(nonExistentModule);
+        JsonAdaptedStudent student =
+            new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, modules, VALID_GROUPS);
+        Assert.assertThrows(IllegalValueException.class,
+            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()),
+            () -> student.toModelType(TypicalUniBook.getTypicalUniBook()));
+    }
 }
