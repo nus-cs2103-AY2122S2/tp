@@ -97,11 +97,11 @@ public class UniquePersonList implements Iterable<Person> {
                 if (i == 0) { // first attribute type in the list
                     message.append(nonUniqueAttributeTypes.get(0));
                 } else if (i + 1 == nonUniqueAttributeTypes.size()) { // last attribute type in the list
-                    message.append("and ");
+                    message.append(" and ");
                     message.append(nonUniqueAttributeTypes.get(i));
                 } else { // neither first nor last
                     message.append(", ");
-                    message.append(nonUniqueAttributeTypes.get(i) + " ");
+                    message.append(nonUniqueAttributeTypes.get(i));
                 }
             }
         }
