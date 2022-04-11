@@ -1708,7 +1708,7 @@ testers are expected to do more *exploratory* testing.
     b. Test case: `archive x`(where x = any value)<br>
        Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
 
-### 7.3.15. Resizing the result display window
+#### 7.3.15. Resizing the result display window
 
 1. Using the command line to resize
 
