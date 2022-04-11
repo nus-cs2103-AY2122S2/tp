@@ -385,15 +385,16 @@ Updates the details of a player, lineup or schedule.
 
 #### 2.8.1 Edit a player
 
-Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
+Format: `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-Edit the details of a existing player in MyGM.
+Edit the details of an existing player in MyGM.
 
 :information_source: Notes about the `view` Command for lineup
 
 * If any fields are specified, it will change accordingly.
+* Player `PLAYER` must exist in MyGM.
 * Multiple fields can be changed at once.
 * Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#221-add-a-player) Command section for players applies here as well.
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
@@ -423,17 +424,18 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 :information_source: Notes about the `view` Command for lineup
 
 * The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
+* Restrictions for `NEW_LINEUP_NAME` in [add](#221-add-a-lineup) Command section for lineups applies here as well.
 
 </div>
 
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup `Starting5` to `Worst5`
 
-#### 2.8.3. To edit a schedule
+#### 2.8.3. Edit a schedule
 
 Edit the details of the i-th schedule
 
-Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
+Format: `edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -442,6 +444,7 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 * If any fields are specified, it will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
+* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#221-add-a-schedule) Command section for schedules applies here as well.
 * Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
@@ -516,11 +519,11 @@ If your changes to the data file makes its format invalid, MyGM will discard all
 | Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                               |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` |
-| **Delete** | `delete P/PLAYER`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/ i/INDEX`<br>e.g. `delete S/INDEX`                                                                                                                                                                                                                                |
+| **Delete** | `delete P/PLAYER [L/LINEUP]`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/INDEX_SCHEDULE`<br>e.g. `delete S/2`                                                                                                                                                                                                                   |
 | **View**   | `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/TAG]`<br>e.g. `view P/Kelvin Darent`<br>`view L/[NAMES_IN_LINEUPNAME]`<br>e.g. `view L/starting`<br>`view S/[NAMES_IN_SCHEDULENAME] [d/DATE]`<br>e.g. `view S/drills`                                                                                                                                               |
 | **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      
 | **Sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/asc`                                                                                                                                                                                                                                                                                                                                     |
-| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/SCHEDULE NAME] [r/DESCRIPTION] [d/DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                                       |
+| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER] [t/TAG]…​`<br> e.g. `edit P/James Soften p/8888888`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                 |
 | **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                    
 | **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                        |
 | **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                         |
