@@ -224,7 +224,9 @@ public class SampleDataUtil {
             new TestResult(new Nric("S1234568L"), new TestDate("2022-12-01"), new MedicalTest("CT Scan"),
                     new Result("Stroke")),
             new TestResult(new Nric("S1234569L"), new TestDate("2021-06-09"), new MedicalTest("Blood Pressure"),
-                    new Result("Systolic: 154; Diastolic: 99"))
+                    new Result("Systolic: 154; Diastolic: 99")),
+            new TestResult(new Nric("S1234560L"), new TestDate("2022-07-11"), new MedicalTest("MRI"),
+                    new Result("Extensive tissue loss in the right cerebral hemisphere"))
         };
     }
 
