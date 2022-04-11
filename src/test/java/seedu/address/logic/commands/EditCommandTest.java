@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPatients.getTypicalMedBook;
@@ -83,7 +83,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
 
         Patient patientInFilteredList = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Patient editedPatient = new PatientBuilder(patientInFilteredList).withName(VALID_NAME_BOB).build();
@@ -109,7 +109,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
         Patient patientInList = model.getMedBook().getPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
@@ -134,7 +134,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMedBook().getPatientList().size());
@@ -159,9 +159,6 @@ public class EditCommandTest {
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
-
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPatients.getTypicalMedBook;
 
@@ -33,7 +33,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ViewCommand(null), model, ViewCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
