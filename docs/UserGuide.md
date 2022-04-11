@@ -22,12 +22,12 @@ _Amigos_ is a desktop application to help tech-savvy university students manage 
 
 ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. Here are some starters:
+5. Type the command in the command box and press Enter to execute it. Here are some starters:
 
   * **`listfriends`** : Lists all friends.
   * **`listevents`** : Lists all events.
   * **`showinsights`** : Lists insights about friends in the app.
-
+  
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ Adds a new friend to _Amigos_.
 * Note that friend names should only contain alphanumeric characters and spaces
 * Note that there can be no duplicate friends having the same name (case-insensitive).
 * Note that names have to be exactly matched (in a case-insensitive manner) to be considered as duplicates. For example,
-  `John Doe` and `John  Doe` (with the extra space) are considered as different friends.
+  John Doe and John &nbsp; Doe are considered as different friends.
 
 **Examples**:
 
