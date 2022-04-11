@@ -50,7 +50,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/e0543517.png" width="200px">
 
 [[github](http://github.com/e0543517)]
-[[portfolio](team/e0543517.md)]
+[[portfolio](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/e0543517.html)]
 
-* Role: Scheduler and Tracker
+* Role: Developer - Applicant Features
 * Responsibilities: UI and Parser
