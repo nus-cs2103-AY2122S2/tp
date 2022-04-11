@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* InternBuddy is a brown-field project which is forked from [Address Book 3](https://github.com/nus-cs2103-AY2122S2/tp), a software development project (around 6 KLoC) which provide a baseline for InternBuddy.
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,7 +77,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntryListPanel`, 
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which 
 captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -86,6 +87,9 @@ is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-W14-3/tp
 
 The `UI` has 3 different `ListPanel` components: `PersonList`, `CompanyList`, and `EventList`. Only one of these lists
 are shown at a time in the display.
+
+Notice as the application only shows one list at one time, `EntryListPanel` acts as a placeholder to contain
+`PersonListPanel`, `CompanyListPanel`, or `EventListPanel`.
 
 The `UI` component,
 
@@ -126,7 +130,7 @@ How the parsing works:
 placeholder for the specific command name e.g., `DeleteCommandParser`) which uses the other classes shown above to parse
  the user command and create a `XYZCommand` object (e.g., `DeleteCommand`) which the `AddressBookParser` returns back as 
 a `Command` object.
-* All `XYZCommandParser` classes (e.g., `DeleteCommandParser`, `ListCommandParser`, ...) inherit from the `Parser` interface
+* All `XYZCommandParser` classes (e.g., `DeleteCommandParser`, `ListPersonCommandParser`, ...) inherit from the `Parser` interface
 so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -210,7 +214,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `addc n/David …​` to add a new person. The `addc` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -241,11 +245,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listc`. Commands that do not modify the address book, such as `listc`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `addc n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -273,10 +277,10 @@ _{more aspects and alternatives to be added}_
 #### Design
 
 The main idea of the archive feature for InternBuddy is that archived entries will not show up when searching for entries
-with the `find` or `list` commands unless the user specifies that they specifically want to search for archived entries.
+with the `find` or `list` or `sort` commands unless the user specifies that they specifically want to search for archived entries.
 In this way, they function similarly to hidden files in many file managers.
 
-To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. For flexibility,
+To handle this, the `list`, `find` and `sort` commands needed an extra parameter indicating the search type. For flexibility,
 there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
 not to explicitly pass a search type; in this case, the default behavior would be `UNARCHIVED_ONLY`.
 
@@ -290,7 +294,7 @@ To deal with the actual archiving, each `Entry` object was given an `isArchived`
 was archived or not. Predicates to check the value of the `isArchived` attribute of each entry could then be applied to the
 filtered lists to filter out archived entries (or filter only archived entries).
 
-Finally, the `archive` command aws designed to take only the index as the parameter. It would archive the entry specified
+Finally, the `archive` command was designed to take only the index as the parameter. It would archive the entry specified
 by the index that was in the currently displayed list. The `unarchive` command has a similar design.
 
 #### Implementation
@@ -324,6 +328,126 @@ passed search type parameter is `unarchived`, `archived`, or `all`, the executio
 predicate on it depending on the search type.
 6. The `CommandResult` of the `find` command is returned.
 
+### Sort Feature
+
+#### Design
+
+The main idea for the sort feature for InternBuddy is that entries can be sorted by the importance of the entry. In InternBuddy, the importance of a company or a person is based on the lexicographical order of the company or person's name. As for event, the importance of an event is based on the date of the event. The sort feature is capable of ordering the entries in ascending or descending order.
+
+The `sort` command functions similarly to its `list` counterpart in terms of display. Both the commands will display the entries accordingly depending on the entry type specified for the command. The difference is that the `sort` command will sort the entries according to the importance of the entry.
+
+Due to its similar nature to the `list` command, the `sort` command extends the `list` command to minimize re-implmenting the same behaviour twice. This is also done to further enforce DRY. The `sort` command also has a `SearchType` parameter. The `SearchType` parameter is optional. The `sort` command takes in an additional `Ordering` parameter as well. The `Ordering` parameter is optional. the `Ordering` parameter allows the user to specify whether the entries should be sorted in ascending or descending order.
+
+Since `sort` is a newly implemented feature, a new parser `SortCommandParser`. Similar to its `list` counterpart, `SortCommandParser` will handle the creation of the 3 kinds of sort commands. Similar to above, the `SortCommandParser` will also handle the parsing of the `SearchType` and `Ordering` parameters. Now the `parse()` method can return any of the 3 sort commands.
+
+To handle the actual sorting, the `SortCommand` will call `Model#sortPersonListByName`/ `Model#sortCompanyListByName`/ `Model#sortEventListByDate` to sort the entries. Each respective call of sort methods in the model calls the same respective method in addressbook.
+
+Please take note that the `SortCommand` does not just sort the displayed list (`FilteredList`), it also sorts the actual stored list (`UniqueEntryList`). This is to ensure that the order of the list persists even after the user has sorted the list (i.e. calling a `find` or `list` command).
+
+#### Implementation
+
+For the `sortXYZ` command: (where `XYZ` is `person`, `company`, or `event`)
+1. The user executes `sortXYZ o/descending`.
+2. This command is parsed to check if the given optional parameters are there and valid (`o/ORDERING` and `s/SEARCH_TYPE`). If not, a `ParseException` is thrown. In this case, the `Ordering` parameter is set to `DESCENDING` (since `o/descending` is specified, otherwise set to `ASCENDING`) and the `SearchType` parameter is set to `UNARCHIVED` (default value of the optional parameter).
+3. Otherwise, the created `SortXYZCommand` object will execute `Model#sortPersonListByName`/ `Model#sortCompanyListByName`/ `Model#sortEventListByDate` depending on `XYZ`.  These methods take 2 parameters: the first is the `Predicate` and the second is the `Ordering`. `Predicate` is generated by the command through the `SearchType` parameter.
+4. The model will then call the respective sort method in the address book (i.e. `AddressBook#sortPersonListByName`/ `AddressBook#sortCompanyListByName`/ `AddressBook#sortEventListByDate`). These methods in address book requires 1 parameter, which is the `Comparator<? super XYZ>` object to be used for sorting. The Comparator needed is already predefined in the model.
+5. The address book will then call `sort(Comparator<? super XYZ>)` in the respective `UniqueEntryList`.
+6. Finally, the `UniqueEntryList` will sort the entries according to the `Comparator` object passed in.
+7. Finally, moving to the model again, the `Model#showXYZList(predicate)` method is called to display the list. The `predicate` is generated by the command through the `SearchType` parameter.
+8. The `CommandResult` of the `sortXYZ` command is returned.
+
+A similar process is performed with the `unarchive` command, but `Entry#setArchived()` is ultimately passed `false` instead of `true`.
+
+### Adding Feature
+
+#### Design
+
+Adding an Entry whether it is Company, Person, or Event is essential for InternBuddy. In particular, it is one of the 
+most important features to make InternBuddy working. However, notice that each entry has different attributes which
+can be tricky to implement.
+
+The command designs for each type of entries must be similar to make sure that the code is united and coherent. In particular, 
+although the implementation of `addc`, `addp`, and `adde` commands are similar, it is necessary to divide them out to their own classes.
+
+
+#### Common Implementation
+Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
+
+The Activity Diagram below summarizes what happens when the user enters the add command
+<img src="images/AddXYZActivityDiagram.png" />
+
+
+For the `addXYZ` command:
+1. The user executes `addXYZ` followed by `XYZ` parameters (along with their tags).
+2. This command is parsed by `AddXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
+3. Otherwise, an `XYZ` object is created and `AddXYZCommand` object will be created.
+4. Next, `AddXYZCommand` will check whether the added `XYZ` object exists in the address book by using `Model#hasEntry()`.
+   if the added `XYZ` object is a duplicate, then `CommandException` will be thrown. 
+5. Otherwise, the created `AddXYZCommand` object will call `Model#addXYZ()` to add `XYZ` object to the model.
+   1. Next, the model will call `AddressBook#addXYZ()`
+   2. Note that in the address book, there is a `UniqueEntryList<XYZ>` which hold all the companies in the address book.
+      The added `XYZ` object will be added to the list in this function.
+   3. Finally, the model will call `updateFilteredXYZList()` to set the display list to be the `XYZ` list.
+6. The `CommandResult` of the `XYZ` command is returned.
+
+Here is the Sequence Diagram for the implementation to understand it better. The Sequence Diagram will be a simplified version
+of the actual implementation to show the important sections.
+![AddXYZSequenceDiagram](images/AddXYZSequenceDiagram.png)
+
+In the diagram, `addXYZexample` is just a placeholder for user input. You can look at the UG for sample user input for different
+add commands.
+
+#### Specific Implementation
+
+1. When adding a company, InternBuddy has to make sure that no other company of the same name has been added. This is to
+prevent users from adding multiple redundant duplicates of companies, which is also one of our design decision to improve
+user experience.
+   1. `check(xyz)` in the diagram will contain `hasCompany(xyz)`
+
+![AddCompanySequenceDiagram1](images/AddCompanySequenceDiagram1.png)
+
+2. When adding a person, InternBuddy has to make sure that no other person of the same name has been added. This is to
+prevent users from adding multiple redundant duplicates of companies, which is also one of our design decision to improve
+user experience.
+   1. `check(xyz)` in the diagram will contain `hasPerson(xyz)` and `hasCompany(xyz.getCompanyName)`
+
+![AddPersonSequenceDiagram1](images/AddPersonSequenceDiagram1.png)
+
+3. Finally, when adding an event, InternBuddy has to make sure that no other event has the same combination of (name, companyName, date, and time).
+This is because we notice that multiple events with the same name should be valid as event's names are more general. Therefore, we consider
+more attributes when judging whether two events are the same entry.
+   1. `check(xyz)` in the diagram will contain `hasEvent(xyz)` and `hasEvent(xyz.getCompanyName)`
+   
+![AddEventSequenceDiagram1](images/AddEventSequenceDiagram1.png)
+
+### Finding Feature
+
+#### Design
+This feature allows the user to display selected `Entry` in the address book. It is facilitated by `ModelManager`. This acts as a way for user to 
+filter the entries by their attributes.
+
+The Activity Diagram below summarizes what happens when the user enters the add command
+<img src="images/FindXYZActivityDiagram.png" />
+
+#### Common Implementation
+Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
+
+For the `findXYZ` command:
+1. The user executes `findXYZ` followed by `XYZ` parameters (along with their tags).
+2. This command is parsed by `FindXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
+3. Otherwise, `XYZContainsKeywordsPredicate` object will be created. Notice that `XYZContainsKeywordsPredicate` is the class responsible to test
+   whether a particular `XYZ` object fits the queried entry. With this predicate, `FindXYZCommand` object will be created.
+4. Next, `FindXYZCommand` will call `Model#showXYZList(predicate)`.
+   1. The model will update the displayed list to be the `XYZ` list and choose only the `XYZ` objects that suits the query
+      using `XYZContainsKeywordsPredicat#test()'.
+6. The `CommandResult` of the `XYZ` command is returned.
+
+Here is the Sequence Diagram for the implementation to understand it better.
+![FindXYZSequenceDiagram](images/FindXYZSequenceDiagram.png)
+
+In the diagram, `FindXYZexample` is just a placeholder for user input. You can look at the UG for sample user input for different
+find commands.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -342,68 +466,73 @@ predicate on it depending on the search type.
 
 **Target user profile**:
 
-* university student who is looking for internships / full time jobs
-* has a need to manage a significant number of companies, their events, and their contact people during job seeking
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* University student who is looking for internships / full time jobs
+  * Preferrably university student from School of Computing
+* Has a need to manage a significant number of companies, their events, and their contact people during job seeking
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage companies, their events, and their contact people faster than a typical mouse/GUI driven app
+**Value proposition**: manage companies, their events, and their contact people faster than a typical mouse/GUI driven app.
+Furthermore, `InternBuddy` allows users to effectively combine multiple managing application into one.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                    | I want to …​                                                 | So that I can…​                                                                                                    |
-|----------|------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                                             |
-| `* * *`  | user                                                       | add companies                                                |                                                                                                                    |
-| `* * *`  | user                                                       | add events related to a company                              | keep track of all of a company’s events                                                                            |
-| `* * *`  | user                                                       | add contact people relared to a company                      | easily look up their contact details                                                                               |
-| `* * *`  | user                                                       | delete companies                                             | remove companies that I am no longer considering                                                                   |
-| `* * *`  | user                                                       | delete events                                                | remove events that have passed or been canceled                                                                    |
-| `* * *`  | user                                                       | delete contact people                                        | remove people who are no longer related to companies I'm looking at                                                |
-| `* * *`  | user                                                       | view the list of companies                                   |                                                                                                                    |
-| `* * *`  | user                                                       | view the list of events                                      |                                                                                                                    |
-| `* * *`  | user                                                       | view the list of contact people                              |                                                                                                                    |
-| `* * *`  | user                                                       | save my list                                                 | maintain my list across different sessions                                                                         |
-| `* * *`  | user considering many companies                            | find companies by name                                       | locate details of companies without having to go through the whole list                                            |
-| `* * *`  | user keeping track of many events                          | find events by name                                          | locate details of events without having to go through the whole list                                               |
-| `* * *`  | user keeping track of many contact people                  | find contact people by name                                  | locate their details without having to go through the whole list                                                   |
-| `* * *`  | user keeping track of events from many different companies | find events related to a certain company                     | locate details of eventts from a certain company without having to go through the whole list                       |
-| `* * *`  | user                                                       | edit the details of a company                                | keep the company details accurate and up to date                                                                   |
-| `* * *`  | user                                                       | edit the details of an event                                 | keep the event details accurate and up to date                                                                     |
-| `* * *`  | user                                                       | edit the details of a contact person                         | keep their details accurate and up to date                                                                         |
-| `* * *`  | user                                                       | receive feedback on whether my command was successful or not | rectify the error in the command if any occurred                                                                   |
-| `* *`    | user                                                       | add tags to an entry                                         |                                                                                                                    |
-| `* *`    | user                                                       | edit tags of an entry                                        |                                                                                                                    |
-| `* *`    | user                                                       | delete tags from an entry                                    |                                                                                                                    |
-| `* *`    | user keeping track of many entries                         | find entries by tags                                         | locate that entry without having to go through the whole list                                                      |
-| `* *`    | user                                                       | archive companies                                            | ignore companies I am no longer focusing on but can still view their details if necessary                          |
-| `* *`    | user                                                       | archive events                                               | ignore events that have passed or been canceled but can still view their details if necessary                      |
+| Priority | As a …​                                                    | I want to …​                                                 | So that I can…​                                                                                                     |
+|----------|------------------------------------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                                              |
+| `* * *`  | user                                                       | add companies                                                | keep track of all of my companies                                                                                   |
+| `* * *`  | user                                                       | add events related to a company                              | keep track of all of a company’s events                                                                             |
+| `* * *`  | user                                                       | add contact people relared to a company                      | easily look up their contact details                                                                                |
+| `* * *`  | user                                                       | delete companies                                             | remove companies that I am no longer considering                                                                    |
+| `* * *`  | user                                                       | delete events                                                | remove events that have passed or been canceled                                                                     |
+| `* * *`  | user                                                       | delete contact people                                        | remove people who are no longer related to companies I'm looking at                                                 |
+| `* * *`  | user                                                       | view the list of companies                                   |                                                                                                                     |
+| `* * *`  | user                                                       | view the list of events                                      |                                                                                                                     |
+| `* * *`  | user                                                       | view the list of contact people                              |                                                                                                                     |
+| `* * *`  | user                                                       | save my list                                                 | maintain my list across different sessions                                                                          |
+| `* * *`  | user considering many companies                            | find companies by name                                       | locate details of companies without having to go through the whole list                                             |
+| `* * *`  | user keeping track of many events                          | find events by name                                          | locate details of events without having to go through the whole list                                                |
+| `* * *`  | user keeping track of many contact people                  | find contact people by name                                  | locate their details without having to go through the whole list                                                    |
+| `* * *`  | user keeping track of events from many different companies | find events related to a certain company                     | locate details of eventts from a certain company without having to go through the whole list                        |
+| `* * *`  | user                                                       | edit the details of a company                                | keep the company details accurate and up to date                                                                    |
+| `* * *`  | user                                                       | edit the details of an event                                 | keep the event details accurate and up to date                                                                      |
+| `* * *`  | user                                                       | edit the details of a contact person                         | keep their details accurate and up to date                                                                          |
+| `* * *`  | user                                                       | receive feedback on whether my command was successful or not | rectify the error in the command if any occurred                                                                    |
+| `* *`    | user                                                       | add tags to an entry                                         |                                                                                                                     |
+| `* *`    | user                                                       | edit tags of an entry                                        |                                                                                                                     |
+| `* *`    | user                                                       | delete tags from an entry                                    |                                                                                                                     |
+| `* *`    | user keeping track of many entries                         | find entries by tags                                         | locate that entry without having to go through the whole list                                                       |
+| `* *`    | user                                                       | archive companies                                            | ignore companies I am no longer focusing on but can still view their details if necessary                           |
+| `* *`    | user                                                       | archive events                                               | ignore events that have passed or been canceled but can still view their details if necessary                       |
 | `* *`    | user                                                       | archive contact people                                       | ignore contact people no longer connected to a company I’m looking at but can still view their details if necessary |
-| `* *`    | user                                                       | view all events in a certain time frame                      | see all the events within that time frame without going through the whole list                                     |
-| `* *`    | user                                                       | view all upcoming events within a certain time frame         | see all important events that will be coming up soon                                                               |
-| `* *`    | user keeping track of many events                          | sort events by date                                          | locate an event easily and view their chronological order                                                          |
-| `* *`    | user keeping track of many contact people                  | sort persons by name                                         | locate a person easily                                                                                             |
-| `* *`    | user considering many companies                            | sort companies by name                                       | locate a company easily                                                                                            |
-| `* *`    | new user                                                   | go through a guided tutorial of the app                      | quickly learn how to use the app                                                                                   |
-| `* *`    | user                                                       | undo the previous command                                    | undo any mistakes I make                                                                                           |
-| `* *`    | user                                                       | redo the previously undone command                           | redo a command I accidentally undid                                                                                |
-| `* *`    | user keeping track of many events                          | delete all past events                                       | avoid having to delete them one by one                                                                             |
-| `* *`    | user keeping track of many events                          | archive all past events                                      | avoid having to archive them one by one                                                                            |
-| `*`      | user                                                       | choose to save or not save the changes made                  | avoid having changes I don't want get saved to the file                                                            |
-| `*`      | forgetful user                                             | receive reminders for events happening soon                  | remember them                                                                                                      |
-| `*`      | user with multiple computers                               | download the list of contacts                                | send the list to other computers                                                                                   |
-| `*`      | user with multiple computers                               | import the list of contacts                                  | maintain my list between different computers                                                                       |
-| `*`      | applicant                                                  | send emails directly                                         | send applications without having to open a web browser                                                             |
-| `*`      | applicant                                                  | store my resume, cover letter & academic transcript          | easily retrieve them when sending an email                                                                         |
-| `*`      | calendar user                                              | download my events in ics format                             | import them into my calendar apps                                                                                  |
-| `*`      | LinkedIn user                                              | add contact information from a LinkedIn url                  | easily add LinkedIn contact information to an entry                                                                |
-| `*`      | expert user                                                | remap the commands                                           | use commands I am more comfortable with                                                                            |
-| `*`      | expert user                                                | add key bindings/shortcuts                                   | use shortcuts I am comfortable with for efficient usage                                                            |
-| `*`      | expert user                                                | add simple scripts                                           | I can automate common tasks                                                                                        |
+| `* *`    | user                                                       | view all events in a certain time frame                      | see all the events within that time frame without going through the whole list                                      |
+| `* *`    | user                                                       | view all upcoming events within a certain time frame         | see all important events that will be coming up soon                                                                |
+| `* *`    | user keeping track of many events                          | sort events by date                                          | locate an event easily and view their chronological order                                                           |
+| `* *`    | user keeping track of many contact people                  | sort persons by name                                         | locate a person easily                                                                                              |
+| `* *`    | user considering many companies                            | sort companies by name                                       | locate a company easily                                                                                             |
+| `* *`    | new user                                                   | go through a guided tutorial of the app                      | quickly learn how to use the app                                                                                    |
+| `* *`    | user                                                       | undo the previous command                                    | undo any mistakes I make                                                                                            |
+| `* *`    | user                                                       | redo the previously undone command                           | redo a command I accidentally undid                                                                                 |
+| `* *`    | user keeping track of many events                          | delete all past events                                       | avoid having to delete them one by one                                                                              |
+| `* *`    | user keeping track of many events                          | archive all past events                                      | avoid having to archive them one by one                                                                             |
+| `* *`    | user                                                       | find companies by all its attributes                         | locate details of companies without having to go through the whole list                                             |
+| `* *`    | user                                                       | find events by all its attributes                            | locate details of events without having to go through the whole list                                                |
+| `* *`    | user                                                       | find people by all its attributes                            | locate details of people without having to go through the whole list                                                |
+| `*`      | user                                                       | choose to save or not save the changes made                  | avoid having changes I don't want get saved to the file                                                             |
+| `*`      | forgetful user                                             | receive reminders for events happening soon                  | remember them                                                                                                       |
+| `*`      | user with multiple computers                               | download the list of contacts                                | send the list to other computers                                                                                    |
+| `*`      | user with multiple computers                               | import the list of contacts                                  | maintain my list between different computers                                                                        |
+| `*`      | applicant                                                  | send emails directly                                         | send applications without having to open a web browser                                                              |
+| `*`      | applicant                                                  | store my resume, cover letter & academic transcript          | easily retrieve them when sending an email                                                                          |
+| `*`      | calendar user                                              | download my events in ics format                             | import them into my calendar apps                                                                                   |
+| `*`      | LinkedIn user                                              | add contact information from a LinkedIn url                  | easily add LinkedIn contact information to an entry                                                                 |
+| `*`      | expert user                                                | remap the commands                                           | use commands I am more comfortable with                                                                             |
+| `*`      | expert user                                                | add key bindings/shortcuts                                   | use shortcuts I am comfortable with for efficient usage                                                             |
+| `*`      | expert user                                                | add simple scripts                                           | I can automate common tasks                                                                                         |
 
 *{More to be added}*
 
@@ -685,8 +814,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Entries and their details should be displayed in an intuitive, easy-to-understand manner.
 5. The majority of the interactions the user makes with the app should be through the keyboard.
 6. Should not use more than 300 MB of RAM memory while in operation.
-
-*{More to be added}*
+7. The commands should be intuitive from its name
 
 ### Glossary
 
@@ -723,8 +851,14 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Listing entries
+### Listing Entries
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** Entry can be either a person, company, or events. In particular, each type of entry has different type of attributes.
+    1. Company : Name, Phone, Email, Address, Tags
+    2. Person : Name, Phone, Email, CompanyName, Tags
+    3. Event : Name, CompanyName, Date, Time, Location, Tags
 
+</div>
 1. Listing persons
    1. Test case: `listp`<br>
       Expected: All unarchived persons are listed. Status message displays "Listed all unarchived persons".
@@ -737,7 +871,7 @@ testers are expected to do more *exploratory* testing.
 2. Listing companies or events
    1. Same as previous, but use `listc` or `liste` instead of `listp`, respectively.
 
-### Deleting an entry
+### Deleting an Entry
 
 1. Deleting a person while all persons are being shown
    1. Prerequisites: List all persons using the `listp` command. Multiple persons in the list.
@@ -750,11 +884,19 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a company or event while all companies/events are being shown, respectively
 
-   1. Similar procedure for testing deleting a person, but use `listc` or `liste` beforehand instead of `listp`.
+   1. Similar procedure for testing deleting a person, but use `listc` before deleting companies or `liste` before deleting events instead of `listp`.
    2. Note: when deleting companies, it is expected that all persons/events with a company name that refers to the deleted
       company will also be deleted
 
-### Adding an entry
+### Adding an Entry
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** Entry can be either a person, company, or events. In particular, each type of entry has different type of attributes.
+    1. Company : Name, Phone, Email, Address, Tags
+    2. Person : Name, Phone, Email, CompanyName, Tags
+    3. Event : Name, CompanyName, Date, Time, Location, Tags
+
+</div>
+
 1. Adding a person
    1. Test case: `addp n/N c/C e/example@example.com p/12345678 t/hr` (where `N` is a name not already used by another
    person and `C` is a name of an existing company in the address book) <br>
@@ -763,16 +905,17 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `addp`<br>
       Expected: No person is added. Error details shown in the status message.
    3. Any `addp` command which is missing a parameter besides `t/`
-      Expected: Similar to previous.
+      Expected: Similar to test 2.
    4. Any `addp` command where the name parameter is a name of an existing person in the address book
       Expected: No person is added. Status message should say something to the effect of "Person already exists".
    5. Any `addp` command where the company parameter is a name of a company that doesn't exist
       Expected: No person is added. Status message should say something to the effect of "Company name does not refer
       to an existing company".
+
 2. Adding a company/event
    1. Similar to adding a person, but use the `addc` and `adde` commands instead. See User Guide for more details.
 
-### Archive
+### Archiving an Entry
 
 1. Archiving an unarchived person
     1. Prerequisites: List all unarchived persons using the `listp` command. Multiple persons in the list.
@@ -812,16 +955,102 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `unarchive_all`<br>
        Expected: Empty list is displayed. Status message says something to the effect of "unarchived all entries"
 
-7. Unarchiving/archiving persons or companies
+7. Unarchiving/archiving companies or events
    1. Follow similar procedure to the above, but use `listc` or `liste` beforehand instead of `listp`.
 
-### Finding entries
+### Finding Entries
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** Entry can be either a person, company, or events. In particular, each type of entry has different type of attributes.
+    1. Company : Name, Phone, Email, Address, Tags
+    2. Person : Name, Phone, Email, CompanyName, Tags
+    3. Event : Name, CompanyName, Date, Time, Location, Tags
 
-[TODO]
+</div>
+
+1. Finding a person
+    1. Finding person by one name
+       Test case: `findp n/N` (where `N` is a name of an existing person) <br>
+       Expected: All Person with the name containing `N` is shown in the persons list with the details given. 
+       Details of how many people listed are also shown in the
+       status message. 
+    2. Finding person by non name parameter
+       Similar to test case 1, but with different parameter tags. Look at UG for more information.
+    3. Finding person by multiple name
+       Test case: `findp n/N1 N2` (where `N1` and `N2` is names of existing persons <br>
+       Expected: All Person with the name containing `N1` OR `N2` is shown in the persons list with the details given.
+       Details of how many people listed are also shown in the
+       status message.
+    4. Finding person by no parameters
+       Test case: `findp`<br>
+       Expected: No person is listed. Error details shown in the status message.
+    5. Finding person with invalid parameter
+       Any `findp` command which is missing a parameter besides `t/`
+       Expected: Similar to test 4.
+    6. Finding non existent person
+       Any `findp` command where the parameter is of a not any existing person in the address book
+       Expected: No person is listed. Status message should show a successful command message with no person listed.
+
+2. Finding a company/event
+    1. Similar to finding a person, but use the `findc` and `findp` commands instead. See User Guide for more details.
+
+### Editing an Entry
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** Entry can be either a person, company, or events. In particular, each type of entry has different type of attributes.
+    1. Company : Name, Phone, Email, Address, Tags
+    2. Person : Name, Phone, Email, CompanyName, Tags
+    3. Event : Name, CompanyName, Date, Time, Location, Tags
+
+</div>
+
+1. Editing a person
+    <div markdown="span" class="alert alert-info">
+        :information_source: **Note:** 
+        You need to make sure that the displayed list is the person list before editing person as the edit command relies on using indexes.
+    </div>
+    1. Editing a person's name
+       Test case: `editp 1 n/N` (where 1 is the index of the person to edit and `N` is the new name) <br>
+       Expected: The person's with index 1 will be changed to `N`.
+       Details of how the person edited is also shown in the status message.
+    2. Editing a person by non name parameter
+       Similar to test case 1, but with different parameter tags. Look at UG for more information.
+    3. Editing person without index
+       Test case: `editp n/N1`  <br>
+       Expected: An error message will show index information that you need to follow. No person will be edited.
+    4. Editing person by no parameters
+       Test case: `editp`<br>
+       Expected: No person is edited. Error details shown in the status message.
+    5. Editing person with invalid parameter
+       Any `findp` command which is missing a parameter besides `t/`
+       Expected: Similar to test 4.
+    6. Editing non existent person
+       Any `findp X n/N` command where X is invalid index (below 1 or above the number of people listed)
+       Expected: No person is edited. Status message will be an error message
+
+3. Editing a company/event
+    1. Similar to finding a company, but use the `editc` and `editp` commands instead. See User Guide for more details.
 
 ### Sorting entries
 
-[TODO]
+1. Sorting companies
+   1. Test case: `sortc`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in ascending order".
+
+   2. Test case: `sortc o/ascending`<br>
+      Expected: Same as previous.
+
+   3. Test case: `sortc o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in descending order".
+
+   4. Test case: `sortc o/X` (where X is anything besides `ascending` or `descending`)<br>
+      Expected: No change. Error details shown in status message.
+
+   5. Test case: `sortc s/archived`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently archived displayed. Status message displays "Sorted all companies archived in ascending order".
+
+   6. Test case: `sortc s/all o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies displayed. Status message displays "Sorted all companies in descending order".
+2. Sorting persons or events
+   1. Follow similar procedure to the above, but use sortp or sorte beforehand instead of sortc.
 
 ### Saving data
 
@@ -842,10 +1071,11 @@ testers are expected to do more *exploratory* testing.
 
 **Difficulty Level**: Medium
 
-**Effort Required**: Around or slightly below the effort level required for AB3
+**Effort Required**: Around the effort level required for AB3
 
 **Challenges Faced**:
 * implementing the commands to work for all 3 types of entries
+* implementing the commands to work with different attributes of different entries.
 * extending and refactoring existing architecture to work for all 3 types of entries
 * maintaining OOP design and keeping dependencies and code reuse to a minimum
 * adding multiple new features that didn't have an existing framework in AB3 originally, such as Archive and Sorting
@@ -859,4 +1089,6 @@ testers are expected to do more *exploratory* testing.
  to handle each type of entry
 * added many Quality-of-Life commands to improve use, such as a command to delete all entries in a list and being able
   to find entries by attributes other than the name
+* upgrading all the commands to more intuitive command
+* updating the UI with better colour design to make the application prettier.
 * did all of the above while keeping the project OOP, clean, and extendable
