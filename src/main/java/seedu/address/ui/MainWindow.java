@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CompanyListPanel companyListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane entryListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -107,11 +109,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window for the first initialization
+     * Always starts with Person first.
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +126,30 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Change the view to show the Person list.
+     */
+    void fillPerson() {
+        entryListPanelPlaceholder.getChildren().clear();
+        entryListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show the Company list.
+     */
+    void fillCompany() {
+        entryListPanelPlaceholder.getChildren().clear();
+        entryListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
+    }
+
+    /**
+     * Change the view to show the Event list.
+     */
+    void fillEvent() {
+        entryListPanelPlaceholder.getChildren().clear();
+        entryListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
     /**
@@ -167,6 +196,14 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public CompanyListPanel getCompanyListPanel() {
+        return companyListPanel;
+    }
+
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -177,6 +214,18 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowPerson()) {
+                fillPerson();
+            }
+
+            if (commandResult.isShowCompany()) {
+                fillCompany();
+            }
+
+            if (commandResult.isShowEvent()) {
+                fillEvent();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

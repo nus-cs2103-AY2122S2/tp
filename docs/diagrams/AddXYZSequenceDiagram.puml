@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddXYZParser" as AddXYZParser LOGIC_COLOR
+participant "a:AddXYZCommand" as AddXYZCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "xyz:XYZ" as XYZ MODEL_COLOR
+end box
+
+[-> LogicManager : execute(addXYZexample)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(addXYZexample)
+activate AddressBookParser
+
+create AddXYZParser
+AddressBookParser -> AddXYZParser
+activate AddXYZParser
+
+AddXYZParser --> AddressBookParser
+deactivate AddXYZParser
+
+AddressBookParser -> AddXYZParser : parse(addXYZexample)
+activate AddXYZParser
+
+create XYZ
+AddXYZParser -> XYZ
+activate XYZ
+
+XYZ --> AddXYZParser : xyz
+deactivate XYZ
+create AddXYZCommand
+AddXYZParser -> AddXYZCommand : xyz
+activate AddXYZCommand
+
+AddXYZCommand --> AddXYZParser : a
+deactivate AddXYZCommand
+
+AddXYZParser --> AddressBookParser : a
+deactivate AddXYZParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddXYZParser -[hidden]-> AddressBookParser
+destroy AddXYZParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddXYZCommand : execute()
+activate AddXYZCommand
+
+AddXYZCommand -> Model : hasXYZ(xyz)
+activate Model
+Model --> AddXYZCommand : boolean
+deactivate Model
+
+AddXYZCommand -> Model : addXYZ(xyz)
+activate Model
+
+Model -[hidden]-> AddXYZCommand
+Model -[hidden]-> AddXYZCommand
+Model --> AddXYZCommand
+deactivate Model
+
+AddXYZCommand -[hidden]-> AddXYZCommand
+create CommandResult
+AddXYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddXYZCommand : result
+deactivate CommandResult
+
+AddXYZCommand --> LogicManager : result
+deactivate AddXYZCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddXYZCommand -[hidden]-> AddressBookParser
+destroy AddXYZCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
