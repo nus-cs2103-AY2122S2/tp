@@ -647,7 +647,7 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 * 1a. CinnamonBun detects that the specified fields do not satisfy requirements. 
   * 1a1. CinnamonBun displays error message.
-    Use case ends.
+    <br>Use case ends.
 * 1b. CinnamonBun detects a duplicate client.
     * 1a1. CinnamonBun displays error message.
       <br>Use case ends.
@@ -739,8 +739,9 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 **MSS**
 
-1.  User requests to find clients with the specified keyword(s)
-2.  CinnamonBun shows a list of clients with an attribute containing at least one keyword
+1. User requests to find clients with the specified keyword(s)
+2. CinnamonBun shows a list of clients with an attribute containing at least one keyword
+   <br> Use case ends.
 
 **Extensions**
 
@@ -779,10 +780,10 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
-  * 1a1. CinnamonBun shows an error message. <br>
+  * 1a1. CinnamonBun shows an error message.
     <br>Use case ends.
 * 1b. The previous data cannot be read due to file reading issues/corruption
-  * 1b1. CinnamonBun shows an error message. <br>
+  * 1b1. CinnamonBun shows an error message.
     <br>Use case ends.
 
 #### Use case: Add membership to a client
