@@ -1,0 +1,957 @@
+{
+  "students" : [ {
+    "studentId" : "E0123457",
+    "name" : "Alice Pauline",
+    "email" : "alice@example.com",
+    "telegram" : "alicehandle"
+  }, {
+    "studentId" : "E0123458",
+    "name" : "Benson Meier",
+    "email" : "benson@example.com",
+    "telegram" : "bensonhandle"
+  }, {
+    "studentId" : "E0123459",
+    "name" : "Carl Kurz",
+    "email" : "carl@example.com",
+    "telegram" : null
+  }, {
+    "studentId" : "E0234568",
+    "name" : "Daniel Meier",
+    "email" : "cornelia@example.com",
+    "telegram" : null
+  }, {
+    "studentId" : "E0345689",
+    "name" : "Elle Meyer",
+    "email" : "werner@example.com",
+    "telegram" : "elleeeeeee"
+  }, {
+    "studentId" : "E0458690",
+    "name" : "Fiona Kunz",
+    "email" : "lydia@example.com",
+    "telegram" : "FIONA_LA"
+  } ],
+  "modules" : [ {
+    "moduleName" : "Effective Communication",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "moduleStudentIds" : [ "E0123458" ]
+  }, {
+    "moduleName" : "Software Engineering",
+    "moduleCode" : "CS2103T",
+    "academicYear" : "21S1",
+    "moduleStudentIds" : [ ]
+  }, {
+    "moduleName" : "Programming Methodology II",
+    "moduleCode" : "CS2030",
+    "academicYear" : "20S2",
+    "moduleStudentIds" : [ "E0123457", "E0345689", "E0458690" ]
+  }, {
+    "moduleName" : "Data Structures and Algorithms",
+    "moduleCode" : "CS2040",
+    "academicYear" : "20S2",
+    "moduleStudentIds" : [ "E0123457" ]
+  }, {
+    "moduleName" : "Introduction to Computer Networks",
+    "moduleCode" : "CS2105",
+    "academicYear" : "22S1",
+    "moduleStudentIds" : [ "E0123459", "E0234568" ]
+  }, {
+    "moduleName" : "Software Engineering",
+    "moduleCode" : "CS2103T",
+    "academicYear" : "21S2",
+    "moduleStudentIds" : [ "E0123457", "E0123458", "E0123459", "E0234568", "E0345689", "E0458690" ]
+  } ],
+  "classGroups" : [ {
+    "classGroupId" : "G09",
+    "classGroupType" : "Sectional",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "classGroupStudentIds" : [ "E0123458" ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "true"
+      } ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      } ]
+    } ]
+  }, {
+    "classGroupId" : "G10",
+    "classGroupType" : "Sectional",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "classGroupStudentIds" : [ ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ ]
+    } ]
+  }, {
+    "classGroupId" : "B10A",
+    "classGroupType" : "Lab",
+    "moduleCode" : "CS2040",
+    "academicYear" : "20S2",
+    "classGroupStudentIds" : [ "E0123457" ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "true"
+      } ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      } ]
+    } ]
+  }, {
+    "classGroupId" : "T05",
+    "classGroupType" : "Tutorial",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "classGroupStudentIds" : [ "E0123459", "E0234568" ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "true"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      } ]
+    } ]
+  }, {
+    "classGroupId" : "R08",
+    "classGroupType" : "Recitation",
+    "moduleCode" : "CS2030",
+    "academicYear" : "20S2",
+    "classGroupStudentIds" : [ "E0123457", "E0345689", "E0458690" ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "true"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    } ]
+  }, {
+    "classGroupId" : "T13",
+    "classGroupType" : "Tutorial",
+    "moduleCode" : "CS2103T",
+    "academicYear" : "21S2",
+    "classGroupStudentIds" : [ "E0123457", "E0123458", "E0123459", "E0234568", "E0345689", "E0458690" ],
+    "lessons" : [ {
+      "weekId" : "1",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "2",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "3",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "4",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "5",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "6",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "7",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "8",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "9",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "10",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "11",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "12",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    }, {
+      "weekId" : "13",
+      "studentAttendanceList" : [ {
+        "studentId" : "E0123457",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123458",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0123459",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0234568",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0345689",
+        "isPresent" : "false"
+      }, {
+        "studentId" : "E0458690",
+        "isPresent" : "false"
+      } ]
+    } ]
+  } ],
+  "assessments" : [ {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "simpleName" : "part",
+    "attempts" : [ {
+      "studentId" : "E0123458",
+      "grade" : "1"
+    } ]
+  }, {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2103T",
+    "academicYear" : "21S1",
+    "simpleName" : "part",
+    "attempts" : [ ]
+  }, {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2103T",
+    "academicYear" : "21S2",
+    "simpleName" : "part",
+    "attempts" : [ ]
+  }, {
+    "assessmentName" : "Lab 1",
+    "moduleCode" : "CS2030",
+    "academicYear" : "20S2",
+    "simpleName" : "lab1",
+    "attempts" : [ {
+      "studentId" : "E0123457",
+      "grade" : "2"
+    }, {
+      "studentId" : "E0458690",
+      "grade" : "2"
+    }, {
+      "studentId" : "E0345689",
+      "grade" : "2"
+    } ]
+  }, {
+    "assessmentName" : "Lab 2",
+    "moduleCode" : "CS2030",
+    "academicYear" : "20S2",
+    "simpleName" : "lab2",
+    "attempts" : [ {
+      "studentId" : "E0123457",
+      "grade" : "2"
+    }, {
+      "studentId" : "E0458690",
+      "grade" : "3"
+    } ]
+  }, {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2040",
+    "academicYear" : "20S2",
+    "simpleName" : "ClassParticipation",
+    "attempts" : [ {
+      "studentId" : "E0123457",
+      "grade" : "1"
+    } ]
+  }, {
+    "assessmentName" : "Lab 1",
+    "moduleCode" : "CS2040",
+    "academicYear" : "20S2",
+    "simpleName" : "Lab1",
+    "attempts" : [ {
+      "studentId" : "E0123457",
+      "grade" : "1"
+    } ]
+  }, {
+    "assessmentName" : "Lab 2",
+    "moduleCode" : "CS2040",
+    "academicYear" : "20S2",
+    "simpleName" : "Lab2",
+    "attempts" : [ ]
+  }, {
+    "assessmentName" : "Lab 1",
+    "moduleCode" : "CS2105",
+    "academicYear" : "22S1",
+    "simpleName" : "Lab1",
+    "attempts" : [ {
+      "studentId" : "E0123459",
+      "grade" : "3"
+    }, {
+      "studentId" : "E0234568",
+      "grade" : "3"
+    } ]
+  }, {
+    "assessmentName" : "Lab 2",
+    "moduleCode" : "CS2105",
+    "academicYear" : "22S1",
+    "simpleName" : "Lab2",
+    "attempts" : [ {
+      "studentId" : "E0123459",
+      "grade" : "3"
+    }, {
+      "studentId" : "E0234568",
+      "grade" : "3"
+    } ]
+  }, {
+    "assessmentName" : "Lab 3",
+    "moduleCode" : "CS2105",
+    "academicYear" : "22S1",
+    "simpleName" : "Lab3",
+    "attempts" : [ {
+      "studentId" : "E0123459",
+      "grade" : "3"
+    }, {
+      "studentId" : "E0234568",
+      "grade" : "3"
+    } ]
+  } ]
+}

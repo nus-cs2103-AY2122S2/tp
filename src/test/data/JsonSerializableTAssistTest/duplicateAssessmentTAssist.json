@@ -1,0 +1,23 @@
+{
+  "students" : [ ],
+  "modules" : [ {
+    "moduleName" : "Effective Communication",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "moduleStudentIds" : [ ]
+  } ],
+  "classGroups" : [ ],
+  "assessments" : [ {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "simpleName" : "part",
+    "attempts" : [ ]
+  }, {
+    "assessmentName" : "Class Participation",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S1",
+    "simpleName" : "parta",
+    "attempts" : [ ]
+  }  ]
+}

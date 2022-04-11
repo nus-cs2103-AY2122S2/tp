@@ -9,11 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
@@ -28,14 +25,12 @@ import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.entity.EntityType;
-import seedu.address.model.person.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
@@ -130,21 +125,6 @@ public class ParserUtil {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
         return Optional.of(new Telegram(trimmedTelegram));
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     //@@author EvaderFati
@@ -334,33 +314,6 @@ public class ParserUtil {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
         return Optional.of(new Grade(trimmedGrade));
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
     }
 
     /**

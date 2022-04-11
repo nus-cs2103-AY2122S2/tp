@@ -137,10 +137,10 @@ public class Assessment implements Entity {
         }
 
         return otherAssessment != null
-                && (otherAssessment.getAssessmentName().equals(getAssessmentName())
+                && ((otherAssessment.getAssessmentName().equals(getAssessmentName())
                 && otherAssessment.getModule().isSameModule(getModule()))
                 || (otherAssessment.getSimpleName().equals(getSimpleName())
-                && otherAssessment.getModule().isSameModule(getModule()));
+                && otherAssessment.getModule().isSameModule(getModule())));
     }
 
     @Override

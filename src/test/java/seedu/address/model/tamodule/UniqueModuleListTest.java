@@ -41,7 +41,7 @@ public class UniqueModuleListTest {
     @Test
     public void contains_moduleWithSameIdentityFieldsInList_returnsTrue() {
         uniqueModuleList.add(CS2103T);
-        TaModule editedModule = new ModuleBuilder(CS2103T).withModuleCode("CS2103T").withAcademicYear("21S1")
+        TaModule editedModule = new ModuleBuilder().withModuleCode("CS2103T").withAcademicYear("21S1")
                 .build();
         assertTrue(uniqueModuleList.contains(editedModule));
     }
