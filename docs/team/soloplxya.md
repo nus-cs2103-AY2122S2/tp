@@ -42,7 +42,7 @@ Given below are my contributions to the project:
     * Credits: This enhancement is extended from the RemarkCommand tutorial that was done at the start of
       the tP iteration.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=soloplxya&breakdown=true)
-* **Project management**: 
+* **Project management**:
   * Helped maintain the team repository by **enabling assertions** in the `build.gradle` file.
   [PR #90](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/90)
   * Helped to rename the code package name from "seedu.adress" to "woofareyou".
@@ -63,7 +63,7 @@ Given below are my contributions to the project:
       [PR #158](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/158)
     * Spotting documentation errors in the code that needed to be corrected:
       [PR #74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74)
-  * Reported bugs for peers that were accepted during the PE dry-run: 
+  * Reported bugs for peers that were accepted during the PE dry-run:
     * Invalid Email Format [Issue #134](https://github.com/AY2122S2-CS2103T-W14-3/tp/issues/134)
     * Grammatical errors [Issue #127](https://github.com/AY2122S2-CS2103T-W14-3/tp/issues/127)
 

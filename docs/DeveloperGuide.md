@@ -323,7 +323,7 @@ The undo mechanism is facilitated by VersionedPetBook. It extends PetBook with a
 * `VersionedPetBook#commit()` — Saves the current WoofAreYou state in its history.
 * `VersionedPetBook#undo()` — Restores the previous WoofAreYou state from its history.
 
-These operations are exposed in the Model interface as Model#undo().
+These operations are exposed in the Model interface as `Model#undo()`.
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
@@ -333,25 +333,25 @@ Step 1. The user launches the application for the first time. The VersionedPetBo
   <img src="images/UndoState0.png" alt="UndoRedoState0" width="450"/>
 </p>
 
-Step 2. The user executes delete 5 command to delete the 5th pet in WoofAreYou. The delete command calls Model#deletePet(), which in turn calls VersionedPetBook#commit()
-causing the modified state of WoofAreYou after the delete 5 command executes to be saved in the petBookStateList, and the currentStatePointer is shifted to the newly inserted WoofAreYou state.
+Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The delete command calls `Model#deletePet()`, which in turn calls `VersionedPetBook#commit()`
+causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the petBookStateList, and the currentStatePointer is shifted to the newly inserted WoofAreYou state.
 
 <p align="center">
   <img src="images/UndoState1.png" alt="UndoRedoState1" width="450"/>
 </p>
 
-Step 3. The user executes add n/David …  to add a new pet. The add command also calls Model#addPet(), which in turn calls VersionedPetBook#commit()
+Step 3. The user executes add n/David …  to add a new pet. The add command also calls `Model#addPet()`, which in turn calls `VersionedPetBook#commit()`
 causing another modified WoofAreYou state to be saved into the petBookStateList.
 
 <p align="center">
   <img src="images/UndoState2.png" alt="UndoRedoState2" width="450"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: Note: If a command fails its execution, it will not call VersionedPetBook#commit(), so the WoofAreYou state will not be saved into the petBookStateList.
+<div markdown="span" class="alert alert-info">:information_source: Note: If a command fails its execution, it will not call `VersionedPetBook#commit()`, so the WoofAreYou state will not be saved into the petBookStateList.
 
 </div>
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call Model#undo(), which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call `Model#undo()`, which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
 <p align="center">
   <img src="images/UndoState3.png" alt="UndoRedoState3" width="450"/>
@@ -371,7 +371,7 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-Step 5. The user then decides to execute the command list. Commands that do not modify WoofAreYou, such as list, will usually not call VersionedPetBook#commit() or Model#undo(). 
+Step 5. The user then decides to execute the command list. Commands that do not modify WoofAreYou, such as list, will usually not call `VersionedPetBook#commit()` or `Model#undo()`.
 Thus, the petBookStateList remains unchanged.
 
 <p align="center">
@@ -447,7 +447,6 @@ In addition, the activity diagram below illustrates the workflow of attendance c
 * **Alternative 2:** All attendance entries in a single HashMap.
     * Pros: Lesser memory usage, easier to implement.
     * Cons: Nested data structure, lack of OOP and separation of concerns.
-    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -646,10 +645,10 @@ Use case ends.
     * 1c1. System shows an error message.
 
       Use case resumes at step 1.
-* 1d. User keyed in pick-up time that is after drop-off time. 
+* 1d. User keyed in pick-up time that is after drop-off time.
 
     * 1d1. System shows an error message.
-  
+
       Use case resumes at step 1.
 
 

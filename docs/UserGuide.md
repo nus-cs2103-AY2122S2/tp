@@ -373,7 +373,7 @@ life easier when using the features previously introduced.
 
 **:information_source: Unusual Behaviour?**<br>
 
-You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing 
+You may notice that your pet list shows fewer number of  pets than what you have in your whole pet list after executing
 some commands in this section. Generally, commands such as `find` and `filter` which trims the number of pets displayed
 will cause this behaviour. This is because any following commands like `sort` will execute based on the trimmed list. You
 will come across this behaviour [later](#sort-pets-sort) under the sort command, if you are following this user guide.
