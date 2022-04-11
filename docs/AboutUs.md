@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/chuashihong.md)]
 
 * Role: Developer
-* Responsibilities: Testing, UI
+* Responsibilities: Testing, UI, Backend and Frontend.
 
 ### Ho Qi Yuan, Janald
 

@@ -669,8 +669,9 @@ Use case ends
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Real estate agent**: Agent who is the medium that manages clients, and is the target persona for our product.
-* **Client**: Seller who is looking to sell their property.
+* **Client**: `Buyers` who is looking to buy their property and `Sellers` who is looking to sell their property.
 * **Address**: Address of the Property that Sellers are trying to sell.
+* **Property**: The property that the buyer is looking to buy/ seller is looking to sell.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -698,12 +699,85 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+    
+   example JSON format of the `buyeraddressbook.json`  and `selleraddressbook`:
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   ```buyeraddressbook.json```:
+    
+    ```
+    {
+      "buyers" : [ {
+        "name" : "Shi Hong",
+        "phone" : "12345678",
+        "appointment" : "2022-03-31-17-00",
+        "tagged" : [ "smart" ],
+        "propertyToBuy" : {
+          "house" : {
+            "houseType" : "Bungalow",
+            "location" : "Clementi"
+          },
+          "priceRange" : {
+            "lower" : "500000",
+            "upper" : "600000"
+          }
+        }
+      }, {
+        "name" : "Jun Hong",
+        "phone" : "87654321",
+        "appointment" : "",
+        "tagged" : [ ],
+        "propertyToBuy" : null
+      }
+    }
+    ```
 
-1. _{ more test cases …​ }_
+   ```selleraddressbook.json```:
+
+    ```
+    {
+      "sellers" : [ {
+        "name" : "chua",
+        "phone" : "1234",
+        "appointment" : "",
+        "tagged" : [ "tag1", "tag2" ],
+        "propertyToSell" : {
+          "house" : {
+            "houseType" : "Bungalow",
+            "location" : "Queens Town"
+          },
+          "priceRange" : {
+            "lower" : "24",
+            "upper" : "48"
+          },
+          "address" : "Utown"
+        }
+      }, {
+        "name" : "Ben Leong",
+        "phone" : "87654321",
+        "appointment" : "",
+        "tagged" : [ "friendly" ],
+        "propertyToSell" : null
+      }
+    }
+    ```
+
+
+   1. Any of the following situation will cause the file to be broken and will start with empty buyer address book/ seller address book:
+   - The `"sellers"`/`"buyers"` tag is spelled wrongly
+   - The bracket `{` and `}`is not closed well
+   - the `"name"` /`phone `/ `appointment` is `null`
+   - The format of the `name` is incorrect, i.e. chua@hong, pikaso_lim...
+   - The format of the `phone` is incorrect, i.e. not a number format, less than 3 digits
+   - The format of the appointment is incorrect, i.e. not in the correct form yyyy-MM-dd-HH-mm (This will not let the app start correctly)
+   - The `"tagged"` field is not covered with `[` and `]`
+   - The `"propertyToBuy"`/`"propertyToSell"` format is wrong,correct format should be either `null` or JSON format as shown above.
+     - If `"houseType"` is put `null` (It is considered as corrupted file and the app would not start).
+     - `"priceRange"`:
+     
+     `"lower"` is more than `"upper"` value, i.e. `"lower"` > `"upper"`
+    
+
