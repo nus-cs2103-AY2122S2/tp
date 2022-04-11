@@ -320,7 +320,7 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
 1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.<br>
 
 2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.<br>
-&nbsp&nbsp&nbsp&nbsp 1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
 
 3. Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
 
@@ -467,7 +467,7 @@ Examples of usage:
 
 1. You can rename the archived file in the file path manually for easier reference.<br>
 
-&nbsp&nbsp&nbsp&nbsp 1. Features for naming the archived file using the CLI will be available in later releases.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. Features for naming the archived file using the CLI will be available in later releases.<br>
 2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 
 </div>
