@@ -74,7 +74,7 @@ Given below are my contributions to the project.
         * [Removed all unused files and commented out codes](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/323/files)
         * [Bug fix](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/84)
         * [Add House Class, HouseType <Enum>, Location, and PriceRange](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/87)
-        * And many more [here](https://github.com/AY2122S2-CS2103T-T11-2/tp/pulls?q=is%3Apr+author%3A%40me)
+        * And many more [here](https://github.com/AY2122S2-CS2103T-T11-2/tp/pulls?page=1&q=is%3Apr+author%3Achuashihong)
     * Pull Request reviewed: All PR reviewed can be found [here](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues?q=reviewed-by%3Achuashihong+)
         * One of them with non-trivial review comments: [\#72](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/72), 
       where I give some commands on the code and potential typo and give approval
