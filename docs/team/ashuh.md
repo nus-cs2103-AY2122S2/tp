@@ -5,7 +5,7 @@ title: Bryan Zheng's Project Portfolio Page
 
 ### Project: RealEstatePro
 
-RealEstatePro is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 
