@@ -1,7 +1,6 @@
-## Ryan Tan Gee Teng
+## Ryan Tan Gee Teng's Project Portfolio Page
 
 ### Project: TAddressBook
-_to be added soon_
 
 Below are my contributions to the project:
 
