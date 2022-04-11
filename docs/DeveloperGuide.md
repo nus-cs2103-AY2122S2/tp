@@ -167,7 +167,8 @@ The `Storage` component,
 Cons: There will be lots of repetitive code.
 
 2. Alternative: Use addressbook.json to contain both buyer and seller list
-   Pros: Less repetitive code
+   
+Pros: Less repetitive code
 
 Cons: Another layer will be added in the json file, harder to debug and more prone to error.
 
