@@ -28,6 +28,7 @@ title: Developer Guide
     - [Design Consideration](#design-consideration-3)
     - [Implementation](#implementation-4)
     - [Usage](#usage-2)
+      <div style="page-break-after: always;"></div>
   - [Find](#find)
     - [Design Consideration](#design-consideration-4)
     - [Implementation](#implementation-5)
@@ -62,6 +63,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -91,15 +94,17 @@ The rest of the App consists of four components.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Authentication`**](#authentication-component): Authenticate the App with a user password.
+* [**`Encryption`**](#encryption-component): Encrypts and decrypt user generated data.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`. We also assume the user has authenticated to the application.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the six main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -108,6 +113,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 <img src="images/ComponentManagers.png" width="300" />
 
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -125,6 +132,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `XYZ` object (e.g. Patient, Contact, Prescription, etc.) residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -155,6 +164,8 @@ How the parsing works:
 * When called upon to parse a user command, the `MedBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MedBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, `AddContactParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -174,6 +185,7 @@ The `Model` component,
 
 [//]: # (</div>)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -189,21 +201,53 @@ The `Storage` component,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** `XYZ` is a placeholder for the specific type of information e.g., Patient, Contact, Prescription, etc. Among them, JsonAdaptedPatient and JsonAdaptedContact contain JsonAdaptedTag.
 </div>
 
+<div style="page-break-after: always;"></div>
+
+### Authentication component
+
+**API** : [`Authentication.java`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/authentication/Authentication.java)
+
+<img src="images/AuthenticationClassDiagram.png" width="200" />
+
+The `Authentication` component,
+
+- Lorem
+  - lorema iadp
+
+<div style="page-break-after: always;"></div>
+
+### Encryption component
+
+**API** : [`Encryption.java`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/encryption/Encryption.java)
+
+<img src="images/EncryptionClassDiagram.png" width="200" />
+
+The `Encryption` component,
+
+- encrypts data files and writes to `.enc` format.
+  - accepts file in any format for encryption, per the supplied `Path`.
+- decrypts data files from `.enc` format.
+  - writes to file in any format after decryption, per the supplied `Path`.
+- performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` utility class and the cipher algorithm.
+
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 The sections below give more details on how the following features are implemented.
-* Navigation of Command Input History
-* Add
-* View
-* Delete
-* Find
-* Summary
+* [**Navigation of Command Input History**](#navigation-of-command-input-history)
+* [**Add Feature**](#add-feature)
+* [**View Feature**](#view-feature)
+* [**Delete Feature**](#delete-feature)
+* [**Find Feature**](#find-feature)
+* [**Summary**](#summary)
 
 ### Navigation of Command Input History
 This navigation mechanism will save the successful executed command. It allows user to navigate through the 
@@ -242,8 +286,9 @@ The pointer in `CommandHistory` will point to the one before it and return the d
 
 Step 4: The command box will show the input previously and hence the user can modify from there.
 
+<div style="page-break-after: always;"></div>
 
-### Add
+### Add Feature
 The add mechanism is facilitated by `MedBook`. It allows users to create and store records belonging to a patient.
 These records include a `Patient`'s `Contact` details, `Medical` information, `Consultation` notes,`Prescription` and
 `TestResult`. For each of the records, there is a corresponding class to add the record into the `MedBook`. 
@@ -275,8 +320,9 @@ for a `Patient` and how the add mechanism behaves at each step:
 
 <img src="images/AddMedicalActivityDiagram.png" width="550" />
 
+<div style="page-break-after: always;"></div>
 
-### View
+### View Feature
 #### Design Consideration
 ##### Aspects: How view executes:
 * Alternative 1 (current choice): type in the type, along with the arguments that specify view boundaries
@@ -325,8 +371,9 @@ Model's `Model#updateFilteredXXXList` to update the `filteredXXXList` according 
 
 Step 5: `UI` is then updated accordingly, displaying in the Main Window the desired filtered list.
 
+<div style="page-break-after: always;"></div>
 
-### Delete
+### Delete Feature
 #### Design Considerations
 
 ##### Aspects: How delete executes:
@@ -358,11 +405,11 @@ Step 3: The user decide to delete the 2nd prescription of this patient, The user
 command. This command  will call `CommandManager#parseDeleteCommandType` to parse what is the current type, which is
 prescription. It will then delete the 2nd prescription from prescription model and save to storage.
 
+<div style="page-break-after: always;"></div>
 
-### Find
+### Find Feature
 The `Find` command is used to find the patient whose names contain any of the given keywords. 
 
-<!-- Joey -->
 #### Design Consideration
 WIP
 
@@ -383,9 +430,9 @@ WIP - Insert UML and activity diagram
 #### Usage
 WIP
 
-<!-- Si Binh -->
-### Summary
+<div style="page-break-after: always;"></div>
 
+### Summary
 #### Design Consideration
 Alternative 1 (current choice): Use the existing `updateFilteredXXXList(NRIC_PREDICATE)` methods in the `Model`. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
 
@@ -433,6 +480,9 @@ Step 4: `Model#updateSummary(nric)` is invoked as `ViewCommand` is executed, whi
 Step 5: `UI` is then updated accordingly, displaying the patient's summary
 
 ---
+
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -471,10 +521,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the System is the MedBook and the Actor is the user, unless specified otherwise)
-
-<!-- View a Patient’s Contact Information -->
-
-<!-- Create a Patient’s Contact Information -->
 
 Use Case: Delete a Patient’s Contact Information
 
@@ -515,6 +561,8 @@ _{More to be added}_
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -551,3 +599,37 @@ Prerequisites: A patient with NRIC `S1234567L` exists.
 
 4. Other invalid `add t/prescription` commands (e.g. missing parameters, adding to a patient that does not exist, invalid date, etc.).
    Expected: Similar to previous.
+
+
+### Saving data
+Prerequisites: Set up a password prior to testing.
+
+**Scenario 1:** Saving data upon exiting/closing the app
+1. Launch the app and login with a password.
+2. Type the command `exit` in the app.
+3. Expected: Upon exiting the app, `medbook.json` is saved in the `data` directory.
+
+**Scenario 2:** Missing/Corrupted `medbook.json` data files
+1. To simulate missing data file, delete `medbook.json` from the `data` directory before you launch the app.
+   1. Launch the app and login with a password.
+   2. Expected: Upon successful login, the app will launch with your **last saved** data.
+2. To simulate corrupted data file, edit `medbook.json` with a text editor (vim, nano or notepad) of your choice. Modify the file content such that the format or data is invalid.
+   1. Launch the app and login with a password.
+   2. Expected: Upon successful login, the app will launch with an **empty** data. The corrupted `medbook.json` will be overwritten upon exiting the app.
+
+**Scenario 3:** Missing `secret.enc` password file
+1. To simulate missing password file, delete `secret.enc` from the `data` directory before you launch the app.
+2. Launch the app.
+3. Expected: Shows a GUI prompting you to set up a new password. Upon setting up, the app will launch and read the data from `medbook.json``.
+
+**Scenario 4:** Missing `medbook.json` and `secret.enc` data files
+1. To simulate missing files, delete `medbook.json` and `secret.enc` from the `data` directory before you launch the app.
+    1. Launch the app.
+    2. Expected: Shows a GUI prompting you to set up a new password. Upon setting up, the app will launch with **new** sample data.
+
+### Authentication
+**Scenario 1:** Set up password for the first time
+1. To simulate setting up password for the first time, move `MedBook.jar` to a new directory.
+2. Launch the app.
+3. Expected: Shows a GUI prompting you to set up a new password.
+
