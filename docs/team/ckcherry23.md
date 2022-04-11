@@ -185,36 +185,36 @@ command:
 ### 8.4 Deleting fields
 1. Deleting only particular fields of a contact
 
-   1. Prerequisites: Have at least one contact stored with multiple phone 
-      numbers, tags, pronouns and the job title and view their details with
-      the `view <INDEX NO>` command. These test cases must be followed in 
-      order.
+  1. Prerequisites: Have at least one contact stored with multiple phone
+     numbers, tags, pronouns and the job title and view their details with
+     the `view <INDEX NO>` command. These test cases must be followed in
+     order.
 
-   2. Test case: `del` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+  2. Test case: `del` <br>
+     Expected: No field is deleted. An error message is shown in the Result
+     Display.
 
-   3. Test case: `del ph` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+  3. Test case: `del ph` <br>
+     Expected: No field is deleted. An error message is shown in the Result
+     Display.
 
-   4. Test case: `del ph/ <LABEL OF FIRST PHONE NUMBER>` <br>
-      Expected: The first phone number is deleted while the rest are still 
-      displayed in the contact details.
+  4. Test case: `del ph/ <LABEL OF FIRST PHONE NUMBER>` <br>
+     Expected: The first phone number is deleted while the rest are still
+     displayed in the contact details.
 
-   5. Test case: `del t/` <br>
-      Expected: All the tags of the person displayed are deleted. <br>
-      Exception: If there is another contact with the same name as this 
-      contact but without any tags, this command will result in an error
-      and no fields will be deleted.
+  5. Test case: `del t/` <br>
+     Expected: All the tags of the person displayed are deleted. <br>
+     Exception: If there is another contact with the same name as this
+     contact but without any tags, this command will result in an error
+     and no fields will be deleted.
 
-   6. Test case: `del pr/ j/` <br>
-      Expected: All the pronouns and the job title of the person displayed
-      are deleted.
+  6. Test case: `del pr/ j/` <br>
+     Expected: All the pronouns and the job title of the person displayed
+     are deleted.
 
-   7. Test case: `del j/` <br>
-      Expected: No field is deleted. An error message is shown in the status
-      box.
+  7. Test case: `del j/` <br>
+     Expected: No field is deleted. An error message is shown in the Result
+     Display.
 ```
 
 <br>
