@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedInterview.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInterviews.JR_PROJECT_MANAGER_INTERVIEW;
@@ -19,6 +20,11 @@ public class JsonAdaptedInterviewTest {
             new JsonAdaptedPosition(JR_PROJECT_MANAGER_INTERVIEW.getPosition());
     private static final String VALID_STATUS = JR_PROJECT_MANAGER_INTERVIEW.getStatus().toString();
 
+    @Test
+    public void toModelType_validInterview_returnsInterview() throws Exception {
+        JsonAdaptedInterview interview = new JsonAdaptedInterview(JR_PROJECT_MANAGER_INTERVIEW);
+        assertEquals(JR_PROJECT_MANAGER_INTERVIEW, interview.toModelType());
+    }
     @Test
     public void toModelType_nullApplicant_throwsIllegalValueException() {
         JsonAdaptedInterview interview =

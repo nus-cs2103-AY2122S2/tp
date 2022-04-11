@@ -45,14 +45,14 @@ public class JsonAdaptedPositionTest {
     @Test
     public void toModelType_invalidPositionName_throwsIllegalValueException() {
         String expectedMessage = PositionName.MESSAGE_CONSTRAINTS;
-        JsonAdaptedPosition short_position =
+        JsonAdaptedPosition shortPosition =
                 new JsonAdaptedPosition(INVALID_NAME, VALID_DESCRIPTION, VALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, short_position::toModelType);
-        JsonAdaptedPosition long_position =
+        assertThrows(IllegalValueException.class, expectedMessage, shortPosition::toModelType);
+        JsonAdaptedPosition longPosition =
                 new JsonAdaptedPosition(LONG_INVALID_NAME, VALID_DESCRIPTION, VALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, long_position::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, longPosition::toModelType);
     }
 
     @Test
@@ -67,14 +67,14 @@ public class JsonAdaptedPositionTest {
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         String expectedMessage = Description.MESSAGE_CONSTRAINTS;
-        JsonAdaptedPosition short_description =
+        JsonAdaptedPosition shortDescription =
                 new JsonAdaptedPosition(VALID_POSITION_NAME, INVALID_DESCRIPTION, VALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, short_description::toModelType);
-        JsonAdaptedPosition long_description =
+        assertThrows(IllegalValueException.class, expectedMessage, shortDescription::toModelType);
+        JsonAdaptedPosition longDescription =
                 new JsonAdaptedPosition(VALID_POSITION_NAME, LONG_INVALID_DESCRIPTION, VALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, long_description::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, longDescription::toModelType);
     }
 
     @Test
@@ -89,14 +89,14 @@ public class JsonAdaptedPositionTest {
     @Test
     public void toModelType_invalidPositionOpenings_throwsIllegalValueException() {
         String expectedMessage = PositionOpenings.MESSAGE_CONSTRAINTS;
-        JsonAdaptedPosition short_position_openings =
+        JsonAdaptedPosition shortPositionOpenings =
                 new JsonAdaptedPosition(VALID_POSITION_NAME, VALID_DESCRIPTION, INVALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, short_position_openings::toModelType);
-        JsonAdaptedPosition long_position_openings =
+        assertThrows(IllegalValueException.class, expectedMessage, shortPositionOpenings::toModelType);
+        JsonAdaptedPosition longPositionOpenings =
                 new JsonAdaptedPosition(VALID_POSITION_NAME, VALID_DESCRIPTION, LONG_INVALID_POSITION_OPENINGS,
                         VALID_REQUIREMENTS, VALID_POSITION_OFFERS);
-        assertThrows(IllegalValueException.class, expectedMessage, long_position_openings::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, longPositionOpenings::toModelType);
     }
 
     @Test
