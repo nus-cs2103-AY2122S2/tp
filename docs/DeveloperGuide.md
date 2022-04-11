@@ -17,6 +17,17 @@ This is a brownfield project that bases from the Project template [AddressBook L
     - [storage Component](#storage-component)
     - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Property](#property)
+  - [Preference](#preference)
+  - [UserType](#usertype)
+  - [Favourite/Unfavourite feature and Favourites window](#favouriteunfavourite-feature-and-favourites-window)
+  - [Match feature and Window](#match-feature-and-window)
+  - [Help feature and Window](#help-feature-and-window)
+  - [Remind Feature](#remind-feature)
+  - [Upload Image Feature](#upload-image-feature)
+  - [Statistics feature and Window](#statistics-feature-and-window)
+  - [Sorting Feature](#sorting-feature)
+  - [Feature `find` enhanced](#feature-find-enhanced)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Glossary](#appendix-glossary)
 - [Appendix: Requirements](#appendix-requirements)
@@ -154,45 +165,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## Favourite/Unfavourite feature and Favourites window
-
-The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
-
-Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
-
-Step 1. The user starts the application with pre-loaded data of `Person`.
-
-Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
-
-<aside>
-💡 Note: 
-If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
-</aside>
-
-Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
-
-<aside>
-💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
-</aside>
-
-## Match feature/Window
-The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
-The left column shows the sellers, while the right column shows the buyers.
-
-Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
-
-A property matches with a preference if
-- they have the same `region`, and
-- they have the same `size`, and
-- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
-
-## Help Feature and Window
-The `help` command and selecting help from the dropdown opens the `helpwindow`.
-
-The contents of `helpPanePlaceHolder` is then replaced according to which tab
-that the user has selected to view more details about a specific feature or general features
-of RealEstatePro
-
 ## Property
 The `Property` is a new attribute that can be added to a `Person` that represents a real estate property listing. A `Person` is able to hold multiple properties including none.
 
@@ -217,6 +189,45 @@ The latter two specifies the expected range of money the buyer would like to pay
 The `UserType` represents an attribute that is added to a `Person` & can represent the `Person` as a `buyer` or `seller`. A `Person` is only either a `buyer` or `seller` at a given time. They cannot be both or none. The `UserType` of a `Person` is derived from the presence of a `Property` or `Preference`. If the `Person` has a `Property`, then they are a `seller`, but if the Person has a `Preference`, then they are a `buyer`.
 
 Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be edited _directly_ via the `edit` command. A `Person` can be changed from a `buyer` to a `seller` & vice versa if the Person's property or preference is changed. This can be done with the command: `edit INDEX pr/PROPERTY_DETAILS` or `edit INDEX pf/PREFERENCE_DETAILS`. This means editing a `Person` to have a `Property` instead of a `Preference` will change them from a `buyer` (had a `Preference` initially) to a `seller` (now has a `Property`). In other cases where other attributes of a `Person` are being edited, e.g. phone number, address, the `UserType` of that `Person` being edited will remain the same.
+
+## Favourite/Unfavourite feature and Favourites window
+
+The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
+
+Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
+
+Step 1. The user starts the application with pre-loaded data of `Person`.
+
+Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
+
+<aside>
+💡 Note: 
+If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
+</aside>
+
+Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
+
+<aside>
+💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
+</aside>
+
+## Match feature and Window
+The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
+The left column shows the sellers, while the right column shows the buyers.
+
+Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
+
+A property matches with a preference if
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
+
+## Help feature and Window
+The `help` command and selecting help from the dropdown opens the `helpwindow`.
+
+The contents of `helpPanePlaceHolder` is then replaced according to which tab
+that the user has selected to view more details about a specific feature or general features
+of RealEstatePro
 
 ## Remind feature
 The remind feature is implemented by storing a static list of Persons the user wants to be reminded of.
@@ -262,7 +273,7 @@ Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPe
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
-## Statistics feature/Window
+## Statistics feature and Window
 <img src="images/user-guide/Stats.png" height="400px">
 
 The `stats` command opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
@@ -274,7 +285,7 @@ This allows the user to be able to visualize his/her client's data to make bette
 * Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
 * Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
-## Sorting
+## Sorting Feature
 
 The sorting feature allows the user to sort the list of `Person` displayed.
 
