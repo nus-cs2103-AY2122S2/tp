@@ -49,4 +49,5 @@ With every feature that I have implemented, I made sure to include the proper te
   * Created 15 Pull Requests
   * Helped reviewed 8 Pull Requests
   * Provided 16 non trivial comments (as seen [here](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html))
+  * Manage release for v1.4.0
 
