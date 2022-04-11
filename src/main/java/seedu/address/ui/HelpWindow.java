@@ -88,27 +88,24 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Example 2: filter b/c\n"
 
-            + "\n10. IMPORT excel files"
-            + NEWLINE_AND_INDENTATION
-            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx\n"
-
-            + "\n11. UNDO an executed add, edit or delete command."
+            + "\n10. UNDO an executed add, edit or delete command."
             + NEWLINE_AND_INDENTATION
             + "Format: undo\n"
 
-            + "\n12. REDO an executed undo command.."
+            + "\n11. REDO an executed undo command.."
             + NEWLINE_AND_INDENTATION
             + "Format: redo\n"
 
-            + "\n13. EMAIL addresses of the students in the list are collated."
+            + "\n12. EMAIL addresses of the students in the list are collated."
             + NEWLINE_AND_INDENTATION
             + "Format: email\n"
 
-            + "\n14. ARCHIVE the current database, saving the data in ROOT/data/archive/DIRECTORY/ARCHIVED_FILE."
+
+            + "\n13. ARCHIVE the current database, saving the data in ROOT/data/archive/DIRECTORY/ARCHIVED_FILE."
             + NEWLINE_AND_INDENTATION
             + "Format: archive\n"
 
-            + "\n15. RESIZE the display of the response box according to size 1, 2 or 3."
+            + "\n14. RESIZE the display of the response box according to size 1, 2 or 3."
             + NEWLINE_AND_INDENTATION
             + "Format: RESIZE SIZE"
             + NEWLINE_AND_INDENTATION
