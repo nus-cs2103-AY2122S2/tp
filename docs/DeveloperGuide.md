@@ -181,6 +181,11 @@ The left column shows the sellers, while the right column shows the buyers.
 
 Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
 
+A property matches with a preference if
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
+
 ## Help Feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
 
@@ -303,6 +308,14 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
 
+This function does an OR search based on words separated by spaces. If the attribute(s) as specified by the user input 
+of a `Person` contain(s) at least one of the keywords specified by the user input, this `Person` is returned.
+
+Attributes supported are: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`, 
+among which `all` looks for the keywords in all other attributes. 
+`property` and `preference` are converted into a string representation concatenating all their fields separating with spaces, and the string is then checked for keywords.
+For all other attributes, their original string representation is used. 
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
@@ -367,7 +380,7 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 ## Use cases
 System: RealEstatePro (REP)
 
-**Use case: Add a client**
+### **Use case: Add a client**
 
 Actor: User
 
@@ -382,7 +395,7 @@ Actor: User
 
      Use case resumes at step 1
 
-**Use Case: Edit a client**
+### **Use Case: Edit a client**
 
 Actor: User
 
@@ -408,7 +421,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: Delete a client**
+### **Use Case: Delete a client**
 
 Actor: User
 
@@ -427,7 +440,37 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Upload Image**
+### **Use Case: Find clients by keywords**
+
+Actor: User
+
+**MSS**
+1. User requests to find clients.
+2. REP filters the full list of clients for those that satisfy the condition.
+3. REP shows the filtered list of clients. 
+
+**Extensions:**
+* 1a. User request has wrong details. 
+  * 1a1. REP displays an error message.
+  
+    Use case ends.
+
+### **Use Case: Match clients**
+
+Actor: User
+
+**MSS**
+1. User requests to match clients.
+2. REP pops up MatchWindow.
+3. REP shows matching clients in MatchWindow.
+
+**Extensions:**
+* 2a. There are no matching clients. 
+  * 2a1. REP shows an empty MatchWindow.
+    
+    Use Case ends.
+
+### **Use Case: Upload Image**
 
 Actor: User
 
@@ -451,7 +494,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: View Image**
+### **Use Case: View Image**
 
 Actor: User
 
@@ -475,7 +518,7 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Set a Reminder for a client**
+### **Use Case: Set a Reminder for a client**
 
 Actor: User
 
@@ -499,7 +542,7 @@ Actor: User
 
     Use case resumes at step 2
 
-**Use Case: View Reminders for clients**
+### **Use Case: View Reminders for clients**
 
 Actor: User
 
@@ -617,11 +660,25 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 3. Open Statistics window by key
    1. Test case: Press on `F2` key on your device. <br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
-## Finding a client
+## Finding clients
+1. Finding clients by keywords
+   1. Prerequisites: None
+   2. Test Case: `find name Alex Yu`<br>
+      Expected: `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   3. Test Case: `find name alex yu`<br>
+      Expected: The function is case-insensitive. `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   4. Test Case: `find all`<br>
+      Expected: List of clients showed does not change. Error message displayed.
+   5. Other incorrect add commands to try: `find`, `find all`, `find john`<br>
+      Expected: Similar to previous.
 
 ## Sorting clients
 
 ## Matching clients
+1. Matching clients
+   1. Prerequisites: None. Ideally there are existing matches, otherwise the MatchWindow that pops up is empty. 
+   2. Test Case: `match`<br>
+      Expected: MatchWindow pops up, showing matching sellers on the left and buyers on the right.
 
 ## Uploading an Image
 
