@@ -12,8 +12,6 @@ It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-## Overview
-
 ## Summary of Contributions
 [Click here](https://github.com/AY2122S2-CS2103T-W11-3/tp/commits?author=nnmoq)
 
