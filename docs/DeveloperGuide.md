@@ -376,6 +376,13 @@ Given below is an example usage scenario and how `Pay` behaves at each step:
 ![Pay sequence diagram](images/PaySequenceDiagram.png)
 *Figure: Simplified sequence diagram showing the sequence of action of Pay command.*
 
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
+Although `listTransaction`, `deleteTransaction`, and `unpay` are not shown here,
+the implementation of these commands are very similar to the other transaction
+commands given.
+
+</div>
 
 ### Undo
 
@@ -1083,6 +1090,74 @@ These instructions only provide a starting point for testers to work on; testers
       displayed based on their phone number in descending order.
    4. Test case: `sort l:)/ djewijw p/`<br>
       Expected: An error would be thrown as the fields specified do not exist.
+
+### Adding a Transaction
+
+* Adding a new transaction while all transactions are being shown
+    1. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2020-12-12 n/this is a note --paid` <br>
+       Expected: A new paid transaction with `Amount` 12 should appear at the bottom of the transaction list.
+    2. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2020-12-12 n/this is a note` <br>
+       Expected: A new unpaid transaction with `Amount` 12 should appear at the bottom of the transaction list.
+    3. Test case: `addTransaction 1 td/2020-11-11 dd/2020-12-12 n/this is a note` <br>
+       Expected: No new transaction is added as not all required fields are provided. Error message is shown.
+    4. Test case: `addTransaction 1 a/12 td/2020-11-11 dd/2002-12-12 n/this is a note` <br>
+       Expected: No new transaction is added as not the due date is before the transaction date. Error message is shown. 
+  
+### Deleting a Transaction
+
+* Deleting a transaction while all transactions are being shown
+    1. Test case: `deleteTransaction 1` <br>
+       Expected: The first transaction is deleted.
+    2. Test case: `deleteTransaction 0` <br>
+       Expected: No transaction is deleted as the provided index is invalid. Error message is shown.
+    3. Test case: `deleteTransaction x` where x is larger than the transaction list size <br>
+       Expected: No transaction is deleted as the provided index is invalid. Error message is shown.
+    4. Test case: `deleteTransaction` <br>
+       Expected: No transaction is deleted as the required field is not provided. Error message is shown.
+
+### list a Transaction
+
+* list all transactions
+    1. Test case: `listTransaction` <br>
+       Expected: All transactions will be listed.
+  1. Test case: `listTransaction abcd` <br>
+     Expected: All transactions will be listed.
+
+### Find Transactions
+
+* Find transactions while all clients are being shown
+    1. Test case: `findTransaction 1` <br>
+       Expected: All transactions from the first client are listed.
+    2. Test case: `findTransaction 0` <br>
+       Expected: No transaction is shown as the provided index is invalid. Error message is shown.
+    3. Test case: `findTransaction x` where x is larger than the client list size <br>
+       Expected: No transaction is listed as the provided index is invalid. Error message is shown.
+    4. Test case: `findTransaction` <br>
+       Expected: No transaction is listed as the required field is not provided. Error message is shown.
+    
+### Pay
+
+* Pay a transaction while all transactions are being shown
+    1. Test case: `pay 1` <br>
+       Expected: Status of the first transaction of the transaction list is changed to `paid`.
+    2. Test case: `pay 0` <br>
+       Expected: No transaction status is changed to `paid` as the provided index is invalid. Error message is shown.
+    3. Test case: `pay x` where x is larger than the transaction list size <br>
+       Expected: No transaction status is changed to `paid` as the provided index is invalid. Error message is shown.
+    4. Test case: `pay` <br>
+       Expected: No transaction status is changed to `paid` as the required field is not provided. Error message is shown.
+
+### Unpay
+
+* Unpay a transaction while all transactions are being shown
+    1. Test case: `unpay 1` <br>
+       Expected: Status of the first transaction of the transaction list is changed to `unpaid`.
+    2. Test case: `unpay 0` <br>
+       Expected: No transaction status is changed to `unpaid` as the provided index is invalid. Error message is shown.
+    3. Test case: `unpay x` where x is larger than the transaction list size <br>
+       Expected: No transaction status is changed to `unpaid` as the provided index is invalid. Error message is shown.
+    4. Test case: `unpay` <br>
+       Expected: No transaction status is changed to `unpaid` as the required field is not provided. Error message is shown.
 
 ### Undo data modifications
 
