@@ -730,6 +730,8 @@ Actor: User
 
      Use case resumes at step 2.
 
+<div style="page-break-after: always;"></div>
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
