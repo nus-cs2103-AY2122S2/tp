@@ -27,12 +27,12 @@ public class JsonSerializableTAssistTest {
     private static final Path DUPLICATE_ASSESSMENT_FILE = TEST_DATA_FOLDER.resolve("duplicateAssessmentTAssist.json");
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalTAssistFile_success() throws Exception {
         JsonSerializableTAssist dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASSIST_FILE,
                 JsonSerializableTAssist.class).get();
         TAssist tAssistFromFile = dataFromFile.toModelType();
-        TAssist typicalPersonsTAssist = getTypicalTAssist();
-        assertEquals(tAssistFromFile, typicalPersonsTAssist);
+        TAssist typicalTAssist = getTypicalTAssist();
+        assertEquals(tAssistFromFile, typicalTAssist);
     }
 
     @Test
