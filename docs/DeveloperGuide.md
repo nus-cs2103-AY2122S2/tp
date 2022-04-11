@@ -171,7 +171,7 @@ The proposed add player functionality will create a new `Person` with the specif
 #### Proposed implementation
 The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the add lineup operation works:
 ![AddLineup](images/Add.png)
 
 #### Design Consideration
