@@ -27,6 +27,7 @@ Given below are my contributions to the project.
    * Justification
      * This makes typing faster, instead of typing `addstudent`, the user can simply use `as`.
    * (Pull requests [#145](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/145))
+<div style="page-break-after: always;"></div>
 * **Help Page**
    * What it does
      * Displays a table with the description, command word, command shortcut for each command.
