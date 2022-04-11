@@ -39,6 +39,8 @@ to see the code I've contributed.
    - Highlights: Retyping an entire command can be troublesome, especially when executing something similar. This
    enhancement would allow someone to easily refer to and edit their previously entered command.
 
+<div style="page-break-after: always;"></div>
+
 ### Enhancements to existing features
 1. Added improvements to the user interface
     - Made UI elements resizable according to the window size. 
