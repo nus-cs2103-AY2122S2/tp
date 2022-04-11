@@ -48,7 +48,6 @@ to see the code contributions I have made.
    * What it does:
      * Allows users to edit details of lessons.
 
-<div style="page-break-after: always;"></div>
 
 4. **Implement `Student` and `Lesson` tab (Pull request [#68)](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68)**
     
