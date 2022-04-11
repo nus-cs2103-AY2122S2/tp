@@ -1,9 +1,10 @@
 @startuml
 hide circle
-
+skinparam classAttributeIconSize 0
 
 Command <|-- RedoableCommand
-
+StackUndoRedo *--> "2" Stack
+RedoableCommand "*" <-left-  Stack
 class Command {
   # undoRedoStack: StackUndoRedo
   + execute(): CommandResult
@@ -11,7 +12,7 @@ class Command {
 }
 
 
-skinparam classAttributeIconSize 0
+
 class RedoableCommand
  {
    - previousAddressBook: ReadOnlyAddressBook
@@ -21,5 +22,18 @@ class RedoableCommand
    # undo(): void
    # redo(): void
    + execute(): CommandResult
+}
+
+class StackUndoRedo {
+    + push(): void
+    + popUndo(): RedoableCommand
+    + popRedo(): RedoableCommand
+}
+
+class Stack {
+}
+
+class Stack {
+
 }
 @enduml

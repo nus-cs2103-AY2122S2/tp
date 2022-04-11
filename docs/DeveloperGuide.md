@@ -357,7 +357,7 @@ Step 5. Commands that are not undoable are not added into the `undoStack`
 
 ![UndoRedo5](images/UndoRedo5.png)
 
-Step 6. The user executes clear.
+Step 6. The user executes clear. Due to not being an `UndoCommand` or `RedoCommand`, it causes the `redoStack` to be cleared.
 
 ![UndoRedo7](images/UndoRedo7.png)
 
