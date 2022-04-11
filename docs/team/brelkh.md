@@ -2,7 +2,6 @@
 layout: page
 title: Brandon Kheng's Project Portfolio Page
 ---
-
 ### Project: Teaching Assistant's Personal Assistant (TAPA)
 
 TAPA is a desktop contact management application used to manage students' contact and progress. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
@@ -56,7 +55,6 @@ Given below are my contributions to the project.
     * Maintain the issue tracker by assigning and labelling issues.
     * Provide timely updates to our TA.
     * Address and fix PE-D bugs.
-    * Edit and format the UG and DG to make them more readable and user-friendly.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
