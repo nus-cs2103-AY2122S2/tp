@@ -158,7 +158,17 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 1.1 Add Player
 #### Proposed implementation
+The proposed add player functionality will create a new `Person` with the specified attributes such as `Height`, `Weight`, `JerseyNumber` etc and store the `Person` inside `UniquePersonList`.
 #### Design Consideration
+**Aspect: How to navigate from `Person` to `Lineup` he belongs to:**
+
+* **Alternative 1 (current choice):** Store `LineupName` of `Lineup` as attributes of `Person`
+  * Pros: Easy to implement and navigate.
+  * Cons: Need to impose restrictions on `LineupName` such that `Lineup` cannot have duplicate names. Risk of multiple source of truth.
+
+* **Alternative 2:** Iterate through `UniqueLineupList` to find `Lineup` a `Person` is in
+  * Pros: Avoid multiple source of truth.
+  * Cons: Display of all `Person` in all `Lineup` can be time expensive when there are a large number of `Linenup` and `Person`.
 
 #### 1.2 Add lineup
 #### Proposed implementation
@@ -180,16 +190,17 @@ The following sequence diagram shows how the undo operation works:
 
 #### 1.3 Add schedule
 #### Proposed implementation
+The proposed add schedule functionality will create a new schedule and store it inside `UniqueScheduleList`.
 #### Design Consideration
 **Aspect: Are multiple schedules allowed on the same day:**
 
 * **Alternative 1 (current choice):** Allow multiple schedules on the same date.
   * Pros: Easy to implement. No need to check for duplicate of dates.
-  * Cons: NA
+  * Cons: Timetable clash can happen.
 
 * **Alternative 2:** Disallow multiple schedules on the same date.
-  * Pros: NA
-  * Cons: Some more implementations needed.
+  * Pros: Avoid timetable clash.
+  * Cons: Some more implementations needed. Lower flexibility as only one event is allowed for one day.
 
 ### 2. Delete feature
 
@@ -226,21 +237,36 @@ The proposed delete lineup functionality will delete an existing lineup from `Un
 
 #### 2.3 Delete player from lineup
 #### Proposed implementation
-After checking that both input player and lineup are valid, the lineup's name will be removed from player's `LineupName` list. Then the player will be removed from lineup's `Person` list.
+After checking that both input `Person` and `Lineup` are valid and the `Person` is in `Lineup`, the lineup's `LineupName` will be removed from `Person`. Then the player will be removed from lineup's `Person` list.
 
-#### Design Consideration
-**Aspect: NA**
 
 #### 2.4 Delete schedule
 #### Proposed implementation
+After checking that the input `index` is valid, the `Schedule` with the specified `index` will be removed from `UniqueScheduleList`.
 #### Design Consideration
+**Aspect: How to refer to a specific schedule:**
+* **Alternative 1 (current choice):** Use the index as in the display.
+  * Pros: Easy to use. Allow duplicate schedule names.
+  * Cons: Users will need to view the schedule they want to edit before starting to edit.
+* **Alternative 2:** Use the name of the schedule.
+  * Pros: Each schedule has unique reference.
+  * Cons: Duplicate schedule names will not be allowed.
+
 
 ### 3. Edit feature
 
 #### 3.1 Edit player
 #### Proposed implementation
+The proposed edit player functionality will update all specified attributes of the `Person`, such as `Weight`, `Height`, `JerseyNumber` etc.
+Meanwhile, the `Person` will be updated in `LineupPlayersList` of all the lineups this player belongs to.
 #### Design Consideration
-
+**Aspect: How does `edit` behave for tags:**
+* **Alternative 1 (current choice):** Remove all previous tags and add only specified tags to the player.
+  * Pros: Easy to implement.
+  * Cons: User needs to key in all tags in order to add/delete/change one tag.
+* **Alternative 2:** Differentiate prefixes for add tag and delete tag.
+  * Pros: Simpler to use for users.
+  * Cons: Difficult to implement.
 #### 3.2 Edit lineup
 #### Proposed implementation
 The proposed edit lineup functionality will update the name of a lineup.
@@ -259,7 +285,7 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
 
 #### 2.3 Edit schedule
 #### Proposed implementation
-#### Design Consideration
+The proposed edit schedule will update specified attributes such as `ScheduleName`, `ScheduleDescription` for `Schedule` at the specific `index`.
 
 ### 4. View feature
 
@@ -292,7 +318,9 @@ For future development (v1.3b), may consider to enter more flags so that user ca
 #### 4.2 View lineup
 ![view](images/View.png)
 #### Proposed implementation
-#### Design Consideration
+The proposed implementation of view lineup has two variants.\
+`view L/` displays all lineups and all players inside some lineups.\
+`view L/LINEUP` displays all players inside the specific `LINEUP`.
 
 #### 4.3 View schedule
 #### Proposed implementation
@@ -300,16 +328,16 @@ The proposed implementation of view schedule has three variants, which differ in
 
 Step 1. The user launches the application.
 
-Step 2a. The user wants to view active schedules happening at future dates.
+Step 2a. The user wants to view active schedules happening at future dates.\
 Step 3a. The user executes `view S/`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ACTIVE_SCHEDULES`.
 
-Step 2b. The user wants to view all historically added schedules.
+Step 2b. The user wants to view all historically added schedules.\
 Step 3b. The user executes `view S/ a/all`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ALL_SCHEDULES`.
 
-Step 2c. The user wants to view archived schedules only.
+Step 2c. The user wants to view archived schedules only.\
 Step 3c. The user executes `view S/ a/archive`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ARCHIVED_SCHEDULES`.
 
-step 2d. The user wants to view schedules on a specific date.
+step 2d. The user wants to view schedules on a specific date.\
 Step 3d. The user executes `view S/ d/2000-11-29`. The command will set the predicate for `FilteredList<Schedule>` to be a new `ScheduleOnThisDatePredicate`.
 
 The following sequence diagram shows how the find operation works:
@@ -328,12 +356,8 @@ __TO BE ADDED__
   * Cons: Difficult to implement.
 
 ### 5. Put feature
-Puts a `Person` into a `Lineup`
 #### Proposed implementation
-
-Stores the `LineupName` in `Person`
-
-Calls `AdressBook#addPersonToLineup(LineupName, Person)` -- Puts the player into the Lineup
+Puts a `Person` into a `Lineup`. Meanwhile the `LineupName` will be stored as an attribute of the `Person` in the list `lineups`.
 
 ![put](images/Put.png)
 
@@ -366,94 +390,7 @@ Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` b
 ### 6. Clear feature
 
 #### Proposed implementation
-#### Design Consideration
-
-### Below are to be removed
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+Purges all data by cleaning `addressbook.json`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -525,6 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
 | `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
 | `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
+| `*`      | user           | view expired schedules                                                                         | reflect on frequencies of past events                                                              |
 
 *{More to be added}*
 
@@ -620,9 +558,11 @@ Use case ends.
 ### Glossary
 
 * **Club**: A basketball club consisting of a number of players, who regularly trains and participates in competitions.
+* **Person**: Players of the basketball club.
 * **Lineup**: Players from part of a club that play together on the court, typically consisting of 5 players.
 * **Schedule**: Event of a team, including training and competitions.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
