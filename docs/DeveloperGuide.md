@@ -1046,7 +1046,7 @@ testers are expected to do more *exploratory* testing.
     1. To simulate a missing or corrupted file, navigate to the `data` folder and delete `addressbook.json` or modify some data to be invalid (such as changing an event's date to 31st February or making someone's phone number exceed 10 digits).
     1. Open the application, you will be greeted with an empty addressbook.
     1. To recover, simply edit the `addressbook.json` again and reverse the changes made.
-    1. **Caution:** Deleting the whole `addresbook.json` fixes the issue as well. However, all previous data will be lost, and a sample addressbook will be loaded.
+    1. **Caution:** Deleting the whole `addressbook.json` fixes the issue as well. However, all previous data will be lost, and a sample addressbook will be loaded.
 
 2. How to save
 
