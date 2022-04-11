@@ -106,6 +106,10 @@ Adds a student contact information to ArchDuke. `add` must be followed by the st
 `PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals (alphanumeric). 
 `TAG` is case-sensitive.
 
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]...`
+
+* Adds a student contact with the following attributes to the student contact list.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
@@ -115,10 +119,6 @@ is uniquely identified by his `PHONE_NUMER` and/or `EMAIL` with **no regards to 
 same email as `Example@u.nus.edu` as in the real-word, emails are usually not case-sensitive.
 
 </div>
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
-
-* Adds a student contact with the following attributes to the student contact list.
 
 <div markdown="block" class="alert alert-info">
 
@@ -149,7 +149,7 @@ Expected outcome:
 
 Deletes a student's contact information at the specified `INDEX` from ArchDuke.
 The `INDEX` refers to the index number shown in the **currently displayed** student contact list. 
-The `INDEX` **must be a positive unsigned integer** not exceeding the total number of student contacts. The deleted student contact would also be 
+The `INDEX` **must be a positive unsigned integer** not exceeding the total number of currently displayed student contacts. The deleted student contact would also be 
 deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
@@ -180,7 +180,7 @@ After deleting Alex Yeoh previously at index 1:
 
 ### Locating student contacts by attributes: `find`
 
-Locates all student contact in ArchDuke based on attributes that matches the given keywords. 
+Locates all student contacts in ArchDuke based on attributes that matches the given keywords. 
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
 * The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
@@ -246,6 +246,14 @@ Creates a group in ArchDuke. `addgroup` must be followed by `GROUP_NAME`, which 
 and it **should not be blank** and **should not have preceding whitespaces**. `GROUP_NAME` with preceding white spaces
 followed by words will be treated as if there is no preceding white spaces. E.g. <code>&nbsp;&nbsp;&nbsp;&nbsp;Group</code> is the same as `Group`.
 
+Format: `addgroup g/GROUP_NAME`
+
+* Adds a group with the name `GROUP_NAME` to the group list.
+
+| Parameter    | Representation                | Constraints                                                   |
+|--------------|-------------------------------|---------------------------------------------------------------|
+| `GROUP_NAME` | Name of the group to be added | Should not be blank and should not have preceding whitespaces |
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
@@ -255,15 +263,6 @@ is uniquely identified by a `GROUP_NAME` with **no regards to case sensitivity**
 same group as `Nus` and `nus`
 
 </div>
-
-Format: `addgroup g/GROUP_NAME`
-
-* Adds a group with the name `GROUP_NAME` to the group list.
-
-| Parameter    | Representation                | Constraints                                                   |
-|--------------|-------------------------------|---------------------------------------------------------------|
-| `GROUP_NAME` | Name of the group to be added | Should not be blank and should not have preceding whitespaces |
-
 
 Example: 
 
@@ -306,7 +305,7 @@ Expected outcome:
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
 in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
 The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive unsigned integer** 
-exceeding the total number of student contacts. The student contact **must have yet to be currently assigned** to the group. 
+not exceeding the total number of currently displayed student contacts. The student contact **must have yet to be currently assigned** to the group. 
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -333,8 +332,8 @@ After assigning:
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
 is in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
 The group must **already exist** in ArchDuke, and the index must be a **positive unsigned integer** not 
-exceeding the total number of student contacts. The student contact **must have 
-currently been assigned** to the group.  
+exceeding the total number of student contacts. The student contact **must be 
+currently assigned** to the group.  
 
 Format: `deassign INDEX g/GROUP_NAME`
 
@@ -383,10 +382,12 @@ Result of viewing student contacts in a group:
 ### Add a task in a group: `addtask`
 
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
-The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
+The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group.
 `TASK_NAME` can take any values **except for that stated below in the limitation box**,
 and it **should not be blank** and **should not have preceding whitespaces**. `TASK_NAME` with preceding white spaces
 followed by words will be treated as if there is no preceding white spaces. E.g. <code>&nbsp;&nbsp;&nbsp;&nbsp;Meeting</code> is the same as `Meeting`.
+
+Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 <div markdown="block" class="alert alert-info">
 
@@ -404,18 +405,16 @@ same task as `Meeting` and `meeting`.
 
 Due to the limitation of the command format, a task name cannot contain the string `g/` in the task if there are spaces before `g/`.
 
-Examples of invalid `TASK_NAME`
-* `create a group g/exco` is not possible as there is a space before `g/`.
-* `create a group g/ exco` is not possible as there are spaces before `g/`.
+Examples of valid `task/TASK_NAME` 
+* `task/Meeting/finalizing` is possible as there is no space before `g/`.
+* `task/Taskg/` is possible as there is no space before `g/`.
+* `task/g/task` is possible as there is no space before `g/`.
 
-Examples of valid `TASK_NAME` 
-* `create a groupg/ exco` is possible as there is no space before `g/`.
-* `taskg/` is possible as there is no space before `g/`.
-* `g/task` is possible as there is no space before `g/`.
+Examples of invalid `task/TASK_NAME`
+* `task/Create a group g/exco` is not possible as there is a space before `g/`.
+* `task/Create a group g/ exco` is not possible as there are spaces before `g/`.
 
 </div>
-
-Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
 * Adds the task called `TASK_NAME` to the group called `GROUP_NAME`
 

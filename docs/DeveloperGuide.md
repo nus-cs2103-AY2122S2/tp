@@ -17,20 +17,20 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-W16-3/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -63,7 +63,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -71,7 +71,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
-For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -82,7 +82,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -98,7 +98,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,7 +111,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -123,7 +124,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -132,7 +134,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W16-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -233,11 +235,11 @@ Given below is the example usage scenario and how the add group mechanism behave
 
 #### Parsing user input
 
-1. The user inputs the `addgroup` command and provide the `GROUP_NAME` of the group in which the user wants to add.
+1. The user inputs the `addgroup` command and provides the `GROUP_NAME` of the group in which the user wants to add.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddGroupCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `AddGroupCommandParser`.
 
-3. The `AddGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes. 
+3. The `AddGroupCommandParser` then parses the user input and checks whether all the input attributes are present by checking the presence of the prefixes. 
 It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
 `ParseException` would be thrown.
 
@@ -293,7 +295,7 @@ Given below is the example usage scenario and how the delete group mechanism beh
 
 1. The user inputs the `delgroup` command and provide the `GROUP_NAME` of the group in which the user wants to remove.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteGroupCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `DeleteGroupCommandParser`.
 
 3. The `DeleteGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
     It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
@@ -384,7 +386,7 @@ Given below is the example usage scenario and how add task mechanism behaves at 
 1. The user inputs the `addtask` command and provide the `TASK_NAME` and `GROUP_NAME` of the task and group
 in which the user wants to add.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddTaskCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `AddTaskCommandParser`.
 
 3. The `AddTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
    It also checks whether the command is in the correct format. In this case, the required prefix and attribute are `task/TASK_NAME` and `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
@@ -458,7 +460,7 @@ Given below is the example usage scenario and how view task mechanism behaves at
 1. The user inputs the `viewtask` command and provide the `GROUP_NAME` of the group
    in which the user wants to view tasks.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `ViewTaskCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `ViewTaskCommandParser`.
 
 3. The `ViewTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
    It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
@@ -516,7 +518,7 @@ Given below is the example usage scenario and how assign mechanism behaves at ea
 1. The user inputs the `assign` command and provide the `INDEX` of the student contact and `GROUP_NAME` of the group
 in which the users want to assign the student contact to.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `AssignCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `AssignCommandParser`.
 
 3. The `AassignCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
    It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
@@ -604,7 +606,7 @@ Given below is the example usage scenario and how the `find` mechanism behaves a
 
 1. The user inputs the `find` command and provide the input with the attribute of the student contact and its respective prefix (eg. `n/NAME` or `p/PHONE`) in which the user wants to find the contact.
 
-2. The `ArchDukeParser` then preliminary process the user input and creates a new `FindCommandParser`.
+2. The `ArchDukeParser` then does preliminary processing to the user input and creates a new `FindCommandParser`.
 
 3. The `FindCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
    It also checks whether the command is in the correct format and ensures that there are no multiples of prefixes. In this case, the required prefix and attribute can be any of the `Person`'s attribute, such as  `n/NAME` or `a/ACADEMIC MAJOR`. <br> <br> At this stage, if none of the prefixes are present or the input contains multiple prefixes,
@@ -779,7 +781,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | student who needs to work in a collaborative work                    | create a student group                                           | classify relevant students together in one place                                              | 
 | `* * *`  | student who wants to only keep groups that are presently relevant    | delete a student group                                           | clear the inactive groups out of my group list and not be distracted by outdated information  |
 | `* * *`  | student who works on a group project                                 | add other students to my group                                   | remember who are the students in my group                                                     |
-| `* * *`  | student                                                              | delete another student                                           | keep only relevant students in the group                                                      |
+| `* * *`  | student                                                              | delete another student in my group                               | keep only relevant students in the group                                                      |
 | `* * *`  | student who works in a collaborative group project                   | add a task to a group                                            | let students in the same group see what are the tasks that need to be completed               |
 | `* * *`  | student who works in a collaborative group project                   | delete a task from a group                                       | remove irrelevant tasks from a group and only keep tasks that are still relevant in the group |
 | `* * *`  | student who works in a group project with other members              | view who are the students in my group                            | know who my group members are                                                                 |
@@ -1094,6 +1096,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The add task command format is invalid.
+
+    * 1a1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
 
 * 1b. The group name is invalid.
 
@@ -1510,7 +1516,9 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
 1. Assigning a student contact while all student contacts are being shown.
 
    1. Prerequisites: List all student contacts using the `list` command. 
-   There exists a group with the name `NUS Fintech Society` (case-insensitive) in ArchDuke. The student contact has yet to exist in the group.
+     There exists a group with the name `NUS Fintech Society` (case-insensitive) in ArchDuke. 
+     There exists at least 3 students in the list. 
+     The third student contact has yet to exist in the group.
    
    2. Test case: `assign 3 g/NUS Fintech Society` <br>
       Expected: Third student contact is assigned to the group `NUS Fintech Society`. The student contact appeared in the group.
@@ -1519,12 +1527,12 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
    3. Test case: `assign 0 g/NUS Fintech Society` <br>
       Expected: No student contact is assigned to the group. Error details shown in the error message.
    
-   4. Other incorrect assign commands to try: `assign`, `assign x` (where x is larger than the student contact list size)<br>
+   4. Other incorrect assign commands to try: `assign`, `assign 1`, `assign x g/NUS Fintech Society` (where x is larger than the student contact list size)<br>
       Expected: Similar to previous.
 
 2. Assigning a student contact while all student contacts are being shown to a group that does not exist.
 
-   1. Prerequisites: List all student contacts using the `list` command. There exists no group with the group name `NUSSU`.
+   1. Prerequisites: List all student contacts using the `list` command. There exists at least 1 student in the list. There exists no group with the group name `NUSSU`.
    
    2. Test case: `assign 1 g/NUSSU` <br>
       Expected: No student contact is assigned to the group. Error details shown in the error message.
@@ -1535,9 +1543,10 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
 3. Assigning a student contact while all student contacts are being shown. The student contact already exists in the group.
 
    1. Prerequisites: List all student contacts using the `list` command. 
-   There exists the first student contact in the group `NUS Fintech Society`.
+     There exists at least 1 student in the list.
+     The first student contact has been assigned to the group `NUS Fintech Society`.
    
-   2. Test case: `assign 1 g/NUS Fintech Society` <br>
+   3. Test case: `assign 1 g/NUS Fintech Society` <br>
       Expected: No student contact is assigned to the group. Error details shown in the error message.
 
 4. Assigning a student contact while the student contact list is being filtered.
@@ -1550,12 +1559,13 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
 ### Deassigning a student to from group
 
 Command: `deassign` <br>
-More information on usage: [deassign command](UserGuide.html#deassign-a-student-to-a-group-deassign)
+More information on usage: [deassign command](UserGuide.html#deassign-a-student-from-a-group-deassign)
 
 1. Deassigning a student contact while all student contacts are being shown.
 
-   1. Prerequisites: List all student contacts using the `list` command. 
-   There exists the first student contact in the group `NUS Fintech Society`.
+   1. Prerequisites: List all student contacts using the `list` command.
+      There exists at least 1 student in the list.
+      The first student contact has been assigned to the group `NUS Fintech Society`.
    
    2. Test case: `deassign 1 g/NUS Fintech Society` <br>
       Expected: First student contact is deassigned from the group `NUS Fintech Society`. The student contact disappeared from the group.
@@ -1564,7 +1574,7 @@ More information on usage: [deassign command](UserGuide.html#deassign-a-student-
    3. Test case: `deassign 0 g/NUS Fintech Society` <br>
       Expected: No student contact is deassigned from the group. Error details shown in the error message.
    
-   4. Other incorrect deassign commands to try: `deassign`, `deassign x` (where x is larger than the student contact list size)<br>
+   4. Other incorrect deassign commands to try: `deassign`, `deassign 1`, `deassign x g/NUS Fintech Society` (where x is larger than the student contact list size)<br>
       Expected: Similar to previous.
    
 2. Deassigning a student contact while all student contacts are being shown. The target group does not exist in ArchDuke.
@@ -1577,8 +1587,9 @@ More information on usage: [deassign command](UserGuide.html#deassign-a-student-
 3. Deassigning a student contact while all student contacts are being shown. The target student contact has not been assigned to the group.
 
     1. Prerequisites: List all student contacts using the `list` command. 
-   The fourth student contact does not exist in the group `NUS Fintech Society`. 
-   The group `NUS Fintech Society` (case-insensitive) exists in ArchDuke.
+       There exists at least 4 students in the list.
+       The fourth student contact does not exist in the group `NUS Fintech Society`. 
+       The group `NUS Fintech Society` (case-insensitive) exists in ArchDuke.
    
     2. Test case: `deassign 4 g/NUS Fintech Society` <br>
         Expected: No student contact is deassigned from the group. Error details shown in the error message.
