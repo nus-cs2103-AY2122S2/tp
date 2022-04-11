@@ -11,14 +11,25 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to schedule and cancel meetings with clients through `meet` command.
-    * What it does: allows the user to schedule a meeting date and time with a client. Users can also cancel meetings with the client.
+    * What it does: Allows the user to schedule a meeting date and time with a client. Users can also cancel meetings with the client.
     * Justification: This feature improves the product significantly because the user has to schedule meetings with clients and more often than not, clients cancel meetings on them. 
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+    * Highlights: This enhancement is useful as other meeting details can be added through the `meet` command. As of now, it supports scheduling and cancelling meetings. Furthermore, there is also a prevention measure to ensure that no two meetings clash.
 
 * **New Feature**: Added `previous date met` field for clients.
+    * What it does: Allows the user to track the previous date they met up with their clients.
+    * Justification: This feature improves the product significantly because the user would benefit by keeping a close bond with their clients. This ensures that they do not neglect any of their clients.
+    * Highlights: This enhancement affects existing commands and commands to be added in the future as the `add` and `edit` command now has to support this new field. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands and considerations of default values.
+
 * **New Feature**: Added `info` field for clients.
+    * What it does: Allows the user to track clients' information. 
+    * Justification: This feature improves the product significantly because the user would need to keep track of their client's info such as their financial goals and interest. Since different client might have different types of information to track, all these can be tracked in `Info` field.
+    * Highlights: This enhancement affects existing commands and commands to be added in the future as the `add` and `edit` command now has to support this new field. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands and considerations of default values.
+
 * **New Feature**: Added `scheduled meeting` field for clients.
+  * What it does: Allows the user to keep track of meetings that they scheduled with their clients. 
+  * Justification: This feature improves the product significantly because the user can now keep track of their meetings with each client.
+  * Highlights: This enhancement goes together with the `meet` command to ensure that each client's meetings are tracked. 
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ad-nap&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
@@ -30,6 +41,7 @@ Given below are my contributions to the project.
     * Handled `previous date met` and `info` fields to have default values when not specified when adding clients into HustleBook.
     * Changed the case-sensitivity of `Name` to case-insensitive for a more practical determination of duplicate clients in HustleBook.
     * Prevent the ability to schedule meetings if that meeting date and time clashes with current meetings.
+    * Wrote additional test cases to increase coverage.
 
 * **Documentation**:
     * User Guide:
