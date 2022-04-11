@@ -15,13 +15,13 @@ Given below are my contributions to the project:
   * Highlights: This feature requires a deep understanding and analysis of the entire structure of the system, since there are dependency and relationship between `Person`, `Lineup` and other classes. The implementation was challenging because it requires entire update to the existing `DeleteCommand` in AddressBook.
 
 * **New Feature**: Added the ability to put players into existing lineups.
-  * What it does: This feature allows the user to put players into a lineup using `PutCommand`. 
+  * What it does: This feature allows the user to put players into a lineup using `PutCommand`.
   * Justification: This feature helps the user to put players into lineups, which fulfils the main function of lineups. This sets up a connection between players and lineups, making the whole application useful to manage players and lineups. This feature is one of the cornerstones of the whole project, since it ensures the core function of the application.
   * Highlights: This feature requires a deep understanding and analysis of the entire structure of the system, since there are dependency and relationship between `Person`, `Lineup` and other classes, which are all required to be considered during the actual implementation.
 
 * **New Feature**: Added the ability to edit an existing lineup.
   * What it does: This feature allows the user to change the name of an existing lineup using `EditCommand`.
-  * Justification: This feature helps the user to rename a lineup without affecting the players inside. It improves the flexability of our application, since now users can make changes to the lineup names after the lineup is created. 
+  * Justification: This feature helps the user to rename a lineup without affecting the players inside. It improves the flexability of our application, since now users can make changes to the lineup names after the lineup is created.
   * Highlights: This feature requires a deep understanding and analysis of the entire structure of the system, since `lineupName` is used as an identifier of each lineup, hence simply changing the name will not work and changes to other classes are also required. Moreover, this feature increases the customizability of the system.
 
 * **New Feature**: Added the ability to view aggregated data of the club.
@@ -46,11 +46,11 @@ Given below are my contributions to the project:
   * Updated `DeleteCommand` to function with `AddressBook` in v1.3 (Pull request [#84](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/84))
   * Removed redundant files and refactored related files (Pull request [#90](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/90))
   * Fixed the issue where GUI does not respond to certain commands (Pull request [#96](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/96), [#100](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/100))
-  
+
 * **Documentation**:
   * User Guide:
     * Added documentation for the `view` and `find` features [#21](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/21)
-  
+
   * Developer Guide:
     * Added target user profile and value proposition [#20](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/20)
     * Updated target user profile and value proposition in v1.3b [#113](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/113)

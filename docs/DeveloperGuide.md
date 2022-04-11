@@ -389,6 +389,24 @@ Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` b
 #### Proposed implementation
 Purges all data by cleaning `addressbook.json`.
 
+### 7. Theme feature
+
+### Proposed implementation
+Changes the theme of the UI between light and dark mode.
+The theme feature is implemented in the `ThemeCommand` class. The following is an example usage scenario.
+
+![Theme](images/ThemeSequenceDiagram.png)
+
+Step 1. The user executes theme to switch to a different theme.
+
+Step 2. The UI component then passes the target theme to the `LogicManager` class in `Logic` component.
+
+Step 3. The `Logic` component executes the command which set the boolean isToLight or isToDark to true given the input which is then passed back to the UI component.
+
+Step 4. The `UI` component loads the appropriate fxml file containing the target theme and is displayed back to the user.
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

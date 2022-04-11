@@ -92,7 +92,7 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 :information_source: Notes about the `add` Command for player.
 
 * `NAME` must be **alphanumeric** and should not be blank.
-* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players. 
+* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
 * The first character of every word in `NAME` are **recommended being capitalized**. For example:`John Doe` instead of `john doe`
 * `NAME` must not exist in MyGM already.
 * `JERSEY_NUMBER` should be an integer between 0 and 99, inclusive of both 0 and 99.
@@ -215,8 +215,8 @@ Format: `delete S/INDEX_SCHEDULE`
 
 :information_source: Notes about the `delete` Command for schedule.
 
-* Deletes the schedule at the specified `INDEX_SCHEDULE`. 
-* The index refers to the index number shown in the displayed schedule list. 
+* Deletes the schedule at the specified `INDEX_SCHEDULE`.
+* The index refers to the index number shown in the displayed schedule list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
@@ -521,10 +521,10 @@ If your changes to the data file makes its format invalid, MyGM will discard all
 | **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` |
 | **Delete** | `delete P/PLAYER [L/LINEUP]`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/INDEX_SCHEDULE`<br>e.g. `delete S/2`                                                                                                                                                                                                                   |
 | **View**   | `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/TAG]`<br>e.g. `view P/Kelvin Darent`<br>`view L/[NAMES_IN_LINEUPNAME]`<br>e.g. `view L/starting`<br>`view S/[NAMES_IN_SCHEDULENAME] [d/DATE]`<br>e.g. `view S/drills`                                                                                                                                               |
-| **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      
+| **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                                                  |
 | **Sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/asc`                                                                                                                                                                                                                                                                                                                                     |
 | **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER] [t/TAG]…​`<br> e.g. `edit P/James Soften p/8888888`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                 |
-| **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                    
+| **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                        |
 | **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                        |
 | **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                         |
 

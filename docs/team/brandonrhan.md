@@ -24,7 +24,7 @@ Given below are my contributions to the project.
   * Updated the error message for `AddCommand`, `DeleteCommand`, `ViewCommand` and `EditCommand`to display the correct error message.[#132](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/132)
   * Updated `PutCommand` to  resolve the bug of putting same player into a lineup.[#166](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/166)
   * Wrote additional tests for existing features and new features under the command and model packages.[#134](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/134) [#146](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/146)
-  * Corrects CI related issue.[#122](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/122) [#146](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/146) [#150](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/150) [#168](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/168) [#169](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/169) 
+  * Corrects CI related issue.[#122](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/122) [#146](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/146) [#150](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/150) [#168](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/168) [#169](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/169)
 
 * **Documentation**:
   * User Guide:
