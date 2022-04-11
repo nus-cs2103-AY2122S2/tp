@@ -389,6 +389,10 @@ There are 2 levels to the parsing of the add command from user input.
 2. `ExportCsvCommandParser` identifies the exact data type that need to be exported, through the `flag` of the user input
 , and returns the respective `ExportXYZCsvCommand`.
 
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `export -p` command.
+
+<img src="images/ExportSequenceDiagram.png">
+
 #### Design considerations:
 
 #### Aspect: What export format should be used:
