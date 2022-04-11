@@ -71,8 +71,8 @@ Additional formatting guidelines:
 1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
 
 2. To check your java version:<br>
-&nbsp&nbsp&nbsp&nbsp 1. For Mac users, open up Terminal and type in `java --version`.<br>
-&nbsp&nbsp&nbsp&nbsp 2. For Windows users, open up Command Prompt and type in `java --version`.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
 
 3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
 
@@ -288,9 +288,9 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
 
 2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.<br>
 
-&nbsp&nbsp&nbsp&nbsp 1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.<br>
 
-&nbsp&nbsp&nbsp&nbsp 2. Using an `undo` command will not restore the student's index back to 1.
+&nbsp;&nbsp;&nbsp;&nbsp;2. Using an `undo` command will not restore the student's index back to 1.
 
 </div>
 
@@ -468,7 +468,7 @@ Examples of usage:
 1. You can rename the archived file in the file path manually for easier reference.<br>
 
 &nbsp&nbsp&nbsp&nbsp 1. Features for naming the archived file using the CLI will be available in later releases.<br>
-3. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 
 </div>
 
