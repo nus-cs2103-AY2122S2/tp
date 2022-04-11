@@ -616,15 +616,15 @@ If a tutor has many students, it may be difficult to keep track of all of the st
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​    | I want to …​                                              | So that I can…​                                              |
-|---------|------------|-----------------------------------------------------------|--------------------------------------------------------------|
-| `* * *` | user       | add my student's information                              | keep track of their progress                                 |
-| `* * *` | user       | edit my student's information.                            | keep their information up-to-date                            |
-| `* * *` | user       | delete students and their details                         | reduce clutter of old students and keep their privacy intact |
-| `* * *` | user       | add lessons to the list and assign students to the lesson | have an overview of which students are attending the lesson  |
-| `* * *` | user       | edit lessons                                              | keep my schedule up-to-date                                  |
-| `* * *` | user       | delete lessons                                            | clear old lessons                                            |
-| `* *`   | a new user | clear and reset my entire list of lessons and students    | add actual data after testing the program out                |
-| `* *`   | user       | specify the type of lesson when creating one              | know if a lesson is permanent or a temporary lesson          |
+|----------|------------|-----------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | user       | add my student's information                              | keep track of their progress                                 |
+| `* * *`  | user       | edit my student's information.                            | keep their information up-to-date                            |
+| `* * *`  | user       | delete students and their details                         | reduce clutter of old students and keep their privacy intact |
+| `* * *`  | user       | add lessons to the list and assign students to the lesson | have an overview of which students are attending the lesson  |
+| `* * *`  | user       | edit lessons                                              | keep my schedule up-to-date                                  |
+| `* * *`  | user       | delete lessons                                            | clear old lessons                                            |
+| `* *`    | a new user | clear and reset my entire list of lessons and students    | add actual data after testing the program out                |
+| `* *`    | user       | specify the type of lesson when creating one              | know if a lesson is permanent or a temporary lesson          |
 
 [return to top ↑](#table-of-contents)
 
