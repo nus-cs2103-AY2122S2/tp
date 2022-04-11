@@ -265,10 +265,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Updates the interview list stored in system to filter by the given {@code predicate} and returns the
-     * filtered list.
-     * @param predicate contains the test method to check whether to keep an interview in the filtered list to return
-     * @return the interview list filtered by the predicate
+     * Updates the interview list stored in system to filter by the given {@code predicate}.
+     * @param predicate contains the test method to check whether to keep an interview in the filtered list.
      */
     @Override
     public void updateFilteredInterviewSchedule(Predicate<Interview> predicate) {
@@ -288,10 +286,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Updates the candidate list stored in system to filter by the given {@code predicate} and returns the
-     * filtered list.
-     * @param predicate contains the test method to check whether to keep a candidate in the filtered list to return
-     * @return the candidate list filtered by the predicate
+     * Updates the filter of the filtered candidate list to filter by the given {@code predicate}.
+     * @param predicate contains the test method to check whether to keep a candidate in the filtered list.
      */
     @Override
     public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
@@ -300,11 +296,9 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Updates the candidate list stored in system by sorting using a {@code Comparator<Candidate>} and returns the
-     * sorted list.
+     * Updates the sorting order of filtered candidate list in the system to sort by the given {@code sortComparator}.
      * @param sortComparator contains the {@code sortComparator} object with details on what the sorting
-     *                       should be
-     * @return the candidate list sorted according tot the {@code sortComparator}
+     *                       should be.
      */
     @Override
     public void updateSortedCandidateList(Comparator<Candidate> sortComparator) {

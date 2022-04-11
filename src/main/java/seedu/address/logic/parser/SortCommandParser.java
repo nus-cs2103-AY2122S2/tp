@@ -4,13 +4,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTKEY;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.predicate.ContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -41,10 +39,10 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Returns the matching new {@link Comparator<Candidate>} object based on the field input by the user to be
+     * Returns the matching new {@code Comparator<Candidate>} object based on the field input by the user to be
      * sorted by.
      * @param sortKey provides the field specified in user input as a string
-     * @return new created matching {@link Comparator<Candidate>} object
+     * @return new created matching {@code Comparator<Candidate>} object
      * @throws ParseException if the user input for {@code sortKey} not conform the expected format
      */
     private Comparator<Candidate> findMatchingComparator(String sortKey)

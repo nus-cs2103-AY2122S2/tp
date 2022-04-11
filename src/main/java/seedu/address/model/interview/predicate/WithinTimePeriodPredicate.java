@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
-import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 import seedu.address.model.interview.Interview;
 
 /**

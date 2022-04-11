@@ -149,8 +149,7 @@ public interface Model {
     ObservableList<Interview> getFilteredInterviewSchedule();
 
     /**
-     * Updates the interview list stored in system to filter by the given {@code predicate} and returns the
-     * filtered list.
+     * Updates the interview list stored in system to filter by the given {@code predicate}.
      */
     void updateFilteredInterviewSchedule(Predicate<Interview> predicate);
 
