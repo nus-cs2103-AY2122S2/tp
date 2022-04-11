@@ -1,0 +1,27 @@
+@startuml
+start
+: User enter add transaction command;
+
+: Parses command;
+
+if () then ([valid command provided])
+  :Create Transaction Builder;
+  :Create Add Transaction Command;
+  :Execute Add Transaction Command;
+  if () then ([valid parameter provided])
+  : Create new Transaction;
+  : add the transaction to transaction list;
+  : Display Success message;
+  stop
+  else ([false])
+   : Throw Exception;
+   : Display Invalid parameter message;
+   stop
+  endif
+else ([else])
+  :Throw Parse Exception;
+  :Display Invalid Command message;
+  stop
+
+endif
+@enduml
