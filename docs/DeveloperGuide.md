@@ -124,7 +124,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `XYZ` object (e.g. Patient, Contact, Prescription, etc.) residing in the `Model`.
 
 ### Logic component
 
@@ -198,11 +198,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 The sections below give more details on how the following features are implemented.
+* Navigation of Command Input History
 * Add
 * View
-* Safe Delete
+* Delete
 * Find
 * Summary
+
+### Navigation of Command Input History
+This navigation mechanism will save the successful executed command. It allows user to navigate through the 
+successful executed command input by pressing `↑` and `↓` key arrows.
+
+#### Design Consideration
+There are few data structure that can be used to implement this mechanism. We decide to use Array as our data
+structure because it has the following advantages:
+    
+* Easy to implement
+* Navigating and accessing the data is fast
+* adding data to array is fast
+
+#### Implementation
+This navigation of command input history is facilitated by `CommandHistory` which can be found in `seedu.address.commons.history`
+package. `CommandHistory` has an array and a pointer pointing to the current position of the input. Whenever the user execute 
+a valid command, the input will be saved and the pointer will be increased to point to latest position. The position of the pointer
+will be changed according to the pressing activity of the `↑` or `↓` key arrows by the user.
+
+The following sequence diagram shows how the mechanism works when the user enter a valid command:
+
+<img src="images/NavigationSequenceDiagram.png" />
+
+
+#### Usage
+
+Given below is an example usage scenario and how the navigation works:
+
+Step 1: The user launches the application, the `CommandHistory` will initialize an empty array.
+
+Step 2: The user decides to add a patient, so he enters a valid add command to add the patient, the `CommandHistory`
+saves the command input and the pointer will be pointed to end of array.
+
+Step 3: The user decides to add another patient by modifying from the previous command, he presses `↑` arrow key.
+The pointer in `CommandHistory` will point to the one before it and return the data.
+
+Step 4: The command box will show the input previously and hence the user can modify from there.
 
 
 ### Add
