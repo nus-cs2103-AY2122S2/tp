@@ -1480,15 +1480,15 @@ testers are expected to do more *exploratory* testing.
 ### Adding a person
 1. Adding a person into Tracey. After addition, the student contact will be displayed at the bottom of the displayed list
 
-   a. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Insert a student contact with the above details to the list and displayed on the GUI.
+   a. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br>   Expected: Insert a student contact with the above details to the list and displayed on the GUI.
 
-   b. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader` <br> Insert a student contact with the above details with the tags displayed.
+   b. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader` <br> Expected: Insert a student contact with the above details with the tags displayed.
 
-   c. Test case : `add n/John Doe n/Daniel Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Inserts a student contact with the second specified name parameter. 
+   c. Test case : `add n/John Doe n/Daniel Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Expected: Inserts a student contact with the second specified name parameter. 
 
-   d. Test case : Invalid Syntax <br> No student is added into Tracey. Error details shown in response message. Help message also displayed in response message for the user to try again to insert correctly. 
+   d. Test case : Invalid Syntax <br> Expected: No student is added into Tracey. Error details shown in response message. Help message also displayed in response message for the user to try again to insert correctly. 
 
-   e. Test case : Insert order with existing `MatriculationNumber`, `Phone` or `Email` <br> Error will message will be displayed stating that the duplicate unique field already exists in Tracey and thus stated student will not be added.
+   e. Test case : Insert order with existing `MatriculationNumber`, `Phone` or `Email` <br> Expected: Error will message will be displayed stating that the duplicate unique field already exists in Tracey and thus stated student will not be added.
    
 
 ### Deleting a person
@@ -1527,13 +1527,13 @@ testers are expected to do more *exploratory* testing.
 ### Help user
 1. Display a help window for user to access command format and examples.
 
-   a. Test case: Press F1 <br> Help window opens.
+   a. Test case: Press F1 <br> Expected: Help window opens.
 
-   b. Test case: `help` <br> Help window opens.
+   b. Test case: `help` <br> Expected:  Help window opens.
 
-   c. Test case: `help` with additional parameters after the `help` command<br> The response box will display an invalid command message.
+   c. Test case: `help` with additional parameters after the `help` command<br> Expected: The response box will display an invalid command message.
 
-   c. Test case: Click on file, followed by clicking on help <br> Help window opens.
+   c. Test case: Click on file, followed by clicking on help <br> Expected: Help window opens.
 
 ### Listing the data
 
@@ -1550,43 +1550,43 @@ testers are expected to do more *exploratory* testing.
 ### Clearing the data
 1. Clear the Tracey database.
 
-   a. Test case: `clear` <br> Tracey database is cleared. Empty list shown to user.
+   a. Test case: `clear` <br> Expected: Tracey database is cleared. Empty list shown to user.
 
-   b. Test case: `clear` with additional parameters after the `clear` command<br> The response box will display an invalid command message.
+   b. Test case: `clear` with additional parameters after the `clear` command<br> Expected: The response box will display an invalid command message.
 
 ### Exiting the application
 1. Exit the application using the `exit` command.
 
-   a. Test case: `exit` <br> The GUI window will be closed.
+   a. Test case: `exit` <br> Expected: The GUI window will be closed.
 
-   b. Test case: `exit` with additional parameters after the `exit` command <br> The response box will display an invalid command message.
+   b. Test case: `exit` with additional parameters after the `exit` command <br> Expected: The response box will display an invalid command message.
 
 ### Finding a person
 
 1. Finding a person by their full name
 
-     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
+   a. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
 
-    1. Test case: `find Andy`<br>
-       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
+   b. Test case: `find Andy`<br>
+          Expected: List details of `Andy`. Details of matched contacts shown in the status message.
 
-    1. Test case: `find Carl`<br>
-       Expected: No person is found. Error details shown in the status message. 
+   c. Test case: `find Carl`<br>
+             Expected: No person is found. Error details shown in the status message. 
+ 
+   d. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
+             Expected: Similar to previous.
 
-    1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
-       Expected: Similar to previous.
+2. Finding a person by using name's prefix 
 
-1. Finding a person by using name's prefix 
+   a.Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
 
-    1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
-
-    1. Test case: `find An`<br>
+   b. Test case: `find An`<br>
        Expected: List details of `Andy` and `Anna`. Details of matched contacts shown in the status message.
 
-    1. Test case: `find dy`<br>
+   c. Test case: `find dy`<br>
        Expected: No person is found. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `find na`, `find ob` <br>
+   d. Other incorrect delete commands to try: `find na`, `find ob` <br>
        Expected: Similar to previous.
 
 ### Saving data
