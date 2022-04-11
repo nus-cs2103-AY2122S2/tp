@@ -30,9 +30,6 @@ the interview scheduling process of candidates applying to be undergraduate Teac
   * `schedule clear`
     * Implemented the `ClearScheduleCommandParser` and `ClearScheduleCommand` to allow users to clear all interviews in the
     interview schedule.
-    * Enhanced the feature by updating candidates' interview statuses from `Scheduled` to `Not Scheduled` or `Completed`,
-    provided they have an existing interview in the schedule and dependent on the progress of the interview 
-    during execution of the command.
 
 * **Enhancement to existing features**:
   * Enhanced the `ClearCommand` to clear both candidates and interviews when command is executed.
@@ -43,14 +40,12 @@ the interview scheduling process of candidates applying to be undergraduate Teac
 * Added documentation for the new features `schedule add`, `schedule edit`, `schedule delete` and `schedule clear`.
 
 #### Contributions to the DG:
-* Added documentation for the section `Scheduling interviews`.
-* Implemented sequence diagrams for the section `Scheduling interviews`.
+* Added documentation and sequence diagrams for the section `Scheduling interviews`.
 * Updated documentation and class diagram for the section `Storage Component`
 * Added use cases for clear, `schedule add`, `schedule edit`, `schedule delete` and `schedule clear`.
 * Added manual testing documentation for `schedule add` and `schedule delete`.
 
 #### Contributions to team-based tasks:
-* **Code-base contributions:**
 * **Testing and de-bugging:**
   * Contribution to identified bugs in v1.3b found [here](https://github.com/AY2122S2-CS2103-F11-2/tp/issues/240)
   * Fixed bug related to invalid user input for interview DATE_TIME (#)
