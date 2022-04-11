@@ -230,6 +230,8 @@ A property matches with a preference if
 - they have the same `size`, and
 - the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
 
+<div style="page-break-after: always;"></div>
+
 ## Help feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
 
@@ -281,6 +283,8 @@ Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPe
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
+<div style="page-break-after: always;"></div>
+
 ## Statistics feature and Window
 <img src="images/user-guide/Stats.png" height="400px">
 
@@ -292,6 +296,8 @@ This allows the user to be able to visualize his/her client's data to make bette
 * Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
 * Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
 * Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+
+<div style="page-break-after: always;"></div>
 
 ## Sorting Feature
 
