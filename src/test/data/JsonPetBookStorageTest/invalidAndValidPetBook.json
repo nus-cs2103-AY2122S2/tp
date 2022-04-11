@@ -1,0 +1,17 @@
+{
+  "pets": [ {
+    "name": "Valid Pet",
+    "phone": "9482424",
+    "ownerName": "John Doe",
+    "address": "4th street",
+    "diet": "no dietary restrictions",
+    "appointment": "Feb-04-2022 12:30 PM at NUS Grooming centre"
+  }, {
+    "name": "Pet With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "ownerName": "John Doe",
+    "address": "4th street",
+    "diet": "vegetarian only",
+    "appointment": "Mar-04-2022 9:30 AM at NUS Vet Clinic"
+  } ]
+}

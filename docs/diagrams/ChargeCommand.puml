@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetBookParser" as PetBookParser LOGIC_COLOR
+participant ":ChargeCommandParser" as ChargeCommandParser LOGIC_COLOR
+participant "c:ChargeCommand" as ChargeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("charge 1 m/04-2022 c/200")
+activate LogicManager
+
+LogicManager -> PetBookParser : parseCommand("charge 1 m/04-2022 c/200")
+activate PetBookParser
+
+create ChargeCommandParser
+PetBookParser -> ChargeCommandParser
+activate ChargeCommandParser
+
+ChargeCommandParser --> PetBookParser
+deactivate ChargeCommandParser
+
+PetBookParser -> ChargeCommandParser : parse("1 m/04-2022 c/200")
+activate ChargeCommandParser
+
+create ChargeCommand
+ChargeCommandParser -> ChargeCommand
+activate ChargeCommand
+
+ChargeCommand --> ChargeCommandParser : c
+deactivate ChargeCommand
+
+ChargeCommandParser --> PetBookParser : c
+deactivate ChargeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ChargeCommandParser -[hidden]-> PetBookParser
+destroy ChargeCommandParser
+
+PetBookParser --> LogicManager : c
+deactivate PetBookParser
+
+LogicManager -> ChargeCommand : execute()
+activate ChargeCommand
+
+create CommandResult
+ChargeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ChargeCommand
+deactivate CommandResult
+
+ChargeCommand --> LogicManager : result
+deactivate ChargeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

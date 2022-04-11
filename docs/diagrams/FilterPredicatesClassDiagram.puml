@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Filter <<Rectangle>>{
+Class "<<interface>>\nPredicate" as Predicate
+
+Class "{abstract}\nFilterByContainsWordPredicate" as FilterByContainsWordPredicate
+
+Class AppointmentContainsFilterWordPredicate
+Class DateContainsFilterDatePredicate
+Class OwnerNameContainsFilterWordPredicate
+Class TagContainsFilterWordPredicate
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Predicate
+
+FilterByContainsWordPredicate .up.|> Predicate
+
+AppointmentContainsFilterWordPredicate -up-|> FilterByContainsWordPredicate
+DateContainsFilterDatePredicate -up-|> FilterByContainsWordPredicate
+OwnerNameContainsFilterWordPredicate -up-|> FilterByContainsWordPredicate
+TagContainsFilterWordPredicate -up-|> FilterByContainsWordPredicate
+@enduml

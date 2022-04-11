@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetBookParser" as PetBookParser LOGIC_COLOR
+participant "fp:FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter byTags/beagle")
+activate LogicManager
+
+LogicManager -> PetBookParser : parseCommand("filter byTags/beagle")
+activate PetBookParser
+
+PetBookParser -> FilterCommandParser: parse("filter byTags/beagle)
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser
+deactivate FilterCommand
+
+FilterCommandParser --> PetBookParser: f
+deactivate FilterCommandParser
+
+PetBookParser --> LogicManager: fp
+deactivate PetBookParser
+
+LogicManager -> FilterCommand: execute()
+activate FilterCommand
+
+FilterCommand -> Model: updateFilteredPetList()
+activate Model
+
+Model --> FilterCommand
+deactivate Model
+
+FilterCommand -> Model: getFilteredPetList()
+activate Model
+
+Model --> FilterCommand
+deactivate Model
+
+FilterCommand --> LogicManager: result
+deactivate FilterCommand
+FilterCommand -[hidden]-> LogicManager : result
+destroy FilterCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

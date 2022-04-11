@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Thia Su Mian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tsumian.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/tsumian)]
+[[portfolio](team/tsumian.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### S Dinesh Raj
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/dineshraj555.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dineshraj555)]
+[[portfolio](team/dineshraj555.md)]
 
 * Role: Developer
-* Responsibilities: UI
+
+
+### Teo Hao Yu
+
+<img src="images/tobihy.png" width="200px">
+
+[[github](http://github.com/tobihy)]
+[[portfolio](team/tobihy.md)]
+
+* Role: Developer
+
+
+### Shaine Goh Si Hui
+
+<img src="images/soloplxya.png" width="200px">
+
+[[github](http://github.com/soloplxya)]
+[[portfolio](team/soloplxya.md)]
+
+* Role: Developer
+* Responsibilities: Developer
+
+
+### Lin Hui Xin Tiffany
+
+<img src="images/tiffanylin21.png" width="200px">
+
+[[github](http://github.com/Tiffanylin21)]
+[[portfolio](team/tiffanylin21.md)]
+
+* Role: Developer
+* Responsibilities: Developer

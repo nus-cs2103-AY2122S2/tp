@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PetBookParser" as PetBookParser LOGIC_COLOR
+participant ":AppointmentCommandParser" as AppointmentCommandParser LOGIC_COLOR
+participant "a:AppointmentCommand" as AppointmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":PetBook" as PetBook MODEL_COLOR
+end box
+
+[-> LogicManager : execute("app 1 clear")
+activate LogicManager
+
+LogicManager -> PetBookParser : parseCommand("app 1 clear")
+activate PetBookParser
+
+create AppointmentCommandParser
+PetBookParser -> AppointmentCommandParser
+activate AppointmentCommandParser
+
+AppointmentCommandParser --> PetBookParser
+deactivate AppointmentCommandParser
+
+PetBookParser -> AppointmentCommandParser : parse("1 clear")
+activate AppointmentCommandParser
+
+create AppointmentCommand
+AppointmentCommandParser -> AppointmentCommand
+activate AppointmentCommand
+
+AppointmentCommand --> AppointmentCommandParser : a
+deactivate AppointmentCommand
+
+AppointmentCommandParser --> PetBookParser : a
+deactivate AppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppointmentCommandParser -[hidden]-> PetBookParser
+destroy AppointmentCommandParser
+
+PetBookParser --> LogicManager : a
+deactivate PetBookParser
+
+LogicManager -> AppointmentCommand : execute()
+activate AppointmentCommand
+
+AppointmentCommand -> Model : setPet()
+activate Model
+
+Model -> PetBook : setPet()
+activate PetBook
+
+PetBook --> Model :
+deactivate PetBook
+
+Model --> AppointmentCommand
+deactivate Model
+
+AppointmentCommand -> Model : updateFilteredPetList()
+activate Model
+
+Model --> AppointmentCommand :
+deactivate Model
+
+create CommandResult
+AppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AppointmentCommand
+deactivate CommandResult
+
+AppointmentCommand --> LogicManager : result
+deactivate AppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
