@@ -11,8 +11,8 @@ title: ReadyBakey Level-3
 **ReadyBakey is a desktop application for managing your contact details.** While it has a GUI, most of the user 
 interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using ReadyBakey, head over to the [_Quick Start_ section of the **User Guide**](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/docs/UserGuide.md#quick-start).
-* If you are interested about developing ReadyBakey, the [**Developer Guide**](https://github.com/AY2122S2-CS2103-F09-4/tp/blob/master/docs/DeveloperGuide.md) is a good place to start.
+* If you are interested in using ReadyBakey, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s2-cs2103-f09-4.github.io/tp/UserGuide.html#quick-start).
+* If you are interested about developing ReadyBakey, the [**Developer Guide**](https://ay2122s2-cs2103-f09-4.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
