@@ -446,6 +446,7 @@ Views some insights about players in the club and upcoming schedules.
 
 ### 2.9. Clearing all entries : `clear`
 
+
 Clears all data from MyGM.
 
 Format: `clear`
