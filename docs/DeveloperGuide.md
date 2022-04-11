@@ -1121,11 +1121,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | Hall leaders                               | get the name of students with covid     | check if their CCA members have Covid                                   |
 | `* `     | Residence Fellow                           | know covid status of students and staffs     | come up with hall policies                                   |
 
-### 7.1.3. Use cases
+#### 7.1.3. Use cases
 
 (For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: UC01 - Delete a student
+##### Use case: UC01 - Delete a student
 
 **MSS**
 
@@ -1148,7 +1148,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### Use case: UC02 - Search for a student
+##### Use case: UC02 - Search for a student
 
 **MSS**
 
@@ -1169,7 +1169,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC03 - Add a student into Tracey
+##### Use case: UC03 - Add a student into Tracey
 
 **MSS**
 
@@ -1207,7 +1207,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-#### Use case: UC04 - Edit information of a student
+##### Use case: UC04 - Edit information of a student
 
 **MSS**
 
@@ -1234,7 +1234,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-#### Use case: UC05 - Clear the system database
+##### Use case: UC05 - Clear the system database
 
 **MSS**
 
@@ -1245,7 +1245,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-#### Use case: UC06 - Summarize the system database for number of Covid patient
+##### Use case: UC06 - Summarize the system database for number of Covid patient
 
 **MSS**
 
@@ -1255,7 +1255,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-#### Use case: UC07 - List all students
+##### Use case: UC07 - List all students
 
 **MSS**
 
@@ -1271,7 +1271,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC08 - Request for help from Tracey
+##### Use case: UC08 - Request for help from Tracey
 
 **MSS**
 
@@ -1286,7 +1286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block
+##### Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block
 
 **MSS**
 
@@ -1308,7 +1308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC10 - Summarise all students for some overview of covid situation
+##### Use case: UC10 - Summarise all students for some overview of covid situation
 
 **MSS**
 
@@ -1323,7 +1323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC11 - Resizing the result window display in the GUI of the application
+##### Use case: UC11 - Resizing the result window display in the GUI of the application
 
 **MSS**
 
@@ -1338,7 +1338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC12 - Saving the working database file for archival purposes
+##### Use case: UC12 - Saving the working database file for archival purposes
 
 **MSS**
 
@@ -1359,7 +1359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC13 - Exiting from the Tracey application
+##### Use case: UC13 - Exiting from the Tracey application
 
 **MSS**
 
@@ -1368,7 +1368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### Use case: UC14 - Undoing a previous command
+##### Use case: UC14 - Undoing a previous command
 
 **MSS**
 
@@ -1384,7 +1384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC15 - Redoing a undo command
+##### Use case: UC15 - Redoing a undo command
 
 **MSS**
 
@@ -1400,7 +1400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC16 - Getting the email of students
+##### Use case: UC16 - Getting the email of students
 
 **MSS**
 
@@ -1409,7 +1409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### 7.1.4. Non-Functional Requirements
+#### 7.1.4. Non-Functional Requirements
 
 1.  Application is offered free.
 2.  Has storage function
@@ -1462,7 +1462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7.3. Appendix C: Instructions for manual testing
+### 7.3. Appendix C: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -1733,7 +1733,7 @@ testers are expected to do more *exploratory* testing.
    d. Test case: Click on the `Resize Display` button once again<br>
       Expected: The size of the resize window display will return to the default size.
 
-## 7.4. Appendix D: Effort
+### 7.4. Appendix D: Effort
 
 **Overview**
 

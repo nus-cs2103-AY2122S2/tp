@@ -9,8 +9,6 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-What are CLIs? What are GUIs?
-
 ##  Brief Introduction
 
 What are CLIs? What are GUIs?
@@ -68,19 +66,21 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Quick Start
-1. Ensure you have Java 11 or above installed in your Computer. <br>
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:**<br>
+1. Ensure you have Java 11 or above installed in your Computer.
 
-   1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
+    
+* To check your java version:
+  * For Mac users, open up Terminal and type in `java --version`.
+  * For Windows users, open up Command Prompt and type in `java --version`.
   
-   2. To check your java version:
-      1. For Mac users, open up Terminal and type in `java --version`.
-      2. For Windows users, open up Command Prompt and type in `java --version`.
-  
-   3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
-  
-   4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+* If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
+
+* If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
   
 </div>
 
@@ -89,15 +89,17 @@ Additional formatting guidelines:
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
+
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:**<br>
+
+**:information_source: Note:**<br>
   
-   1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+* If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
-   2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+* If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
 </div>
-6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
@@ -130,8 +132,8 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
-  
-1. You can also use the `F1` key to open the pop-up window.
+
+* You can also use the `F1` key to open the pop-up window.
   
 </div>
 
@@ -182,9 +184,9 @@ In addition, the list of pre-defined constants are also provided for `Faculty`, 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
   
-1. You are able to add optional tags with no restrictions using the `t/` prefix.
+* You are able to add optional tags with no restrictions using the `t/` prefix.
   
-2. Additions can be reversed with the `undo` feature.
+* Additions can be reversed with the `undo` feature.
   
 </div>
 
@@ -221,11 +223,11 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
   
-1. Tracey shows the entire edited database after the edit command is applied.
-  
-2. After every edit command, the student at the specified index will be shifted to the bottom of the list.
+* Tracey shows the entire edited database after the edit command is applied.
 
-3. If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
+* After every edit command, the student at the specified index will be shifted to the bottom of the list.
+
+* If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 </div>
 
@@ -257,13 +259,13 @@ Examples of usage:
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
   
-1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
+* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
   
-2. You can use `find` to get his/her `INDEX` and then apply `delete`.
+* You can use `find` to get his/her `INDEX` and then apply `delete`.
 
-3. This can save you time scrolling down an entire list to get his/her `INDEX`!
+* This can save you time scrolling down an entire list to get his/her `INDEX`!
   
-4. Deletions can be reversed with the `undo` feature.
+* Deletions can be reversed with the `undo` feature.
   
 </div>
 
@@ -289,13 +291,13 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
   
-1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
   
-2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
   
-   1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
+   * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
   
-   2. Using an `undo` command will not restore the student's index back to 1.
+   * Using an `undo` command will not restore the student's index back to 1.
   
 </div>
 
@@ -322,13 +324,13 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br> 
   
-1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
   
-2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
   
-  1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
   
-  2. Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
+  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
   
 </div>
 
@@ -378,7 +380,7 @@ As seen in *Figure 10*, using the `filter` command with "negative" as covid stat
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
   
-1. `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+* `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
   
 </div>
 
@@ -403,9 +405,9 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
   
-1. There is also a `Show Email` button on the GUI which you can click to open the same window.
+* There is also a `Show Email` button on the GUI which you can click to open the same window.
   
-2. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
   
 </div>
 
@@ -455,21 +457,21 @@ Examples of usage:
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
   
-1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
 
-2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
+* Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
   
 </div>
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**<br>
   
-1. You can rename the archived file in the file path manually for easier reference.
+* You can rename the archived file in the file path manually for easier reference.
   
-   1. Features for naming the archived file using the CLI will be available in later releases.
+   * Features for naming the archived file using the CLI will be available in later releases.
   
-   2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
-  
+   * To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+
 </div>
 
 ### 3.13. Resizing the result display window
@@ -485,14 +487,14 @@ Format: `resize SIZE`
 
 :information_source: **Note:**<br>
   
-1. There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
   
 </div><br>
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
 
-1. This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+* This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
 
 </div>
 
@@ -504,9 +506,9 @@ Format:`clear`
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
   
-1. Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+* Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
   
-2. This feature cannot be reversed using `undo`.
+* This feature cannot be reversed using `undo`.
   
 </div>
 
@@ -599,17 +601,17 @@ there are changes to Tracey.
 
 *Table 6: Specific terminology used.*
 
-| Term                                | Meaning                                                                                                                                                                                                                                                                                             |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                    |
-| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                                                               |
-| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                    |
-| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                      |
-| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                   |
-| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                    |
-| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                       |
-| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                 |
-| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                 |
-| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                              |
-| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                                                    |
+| Term                                | Meaning                                                                                                                                                                                                                                                             |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                    |
+| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                               |
+| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                    |
+| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                      |
+| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                   |
+| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                    |
+| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                       |
+| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                 |
+| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 4.                          |
+| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
+| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                              |
+| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                    |
