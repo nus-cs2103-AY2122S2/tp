@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+TAssist *-right-> "1" UniqueModuleList
+UniqueModuleList -right-> TaModule
+
+TaModule *--> ModuleName
+TaModule *--> ModuleCode
+TaModule *--> AcademicYear
+TaModule --> "~*" Student
+@enduml

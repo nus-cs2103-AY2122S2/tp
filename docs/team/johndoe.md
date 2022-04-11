@@ -3,9 +3,9 @@ layout: page
 title: John Doe's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: TAssist
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+**TAssist** is a desktop app for Teaching Assistants to manage their students across different modules and keep track of students’ activities/participation in class. It is optimized for use via Command Line Interface (CLI). The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about X kLoC.
 
 Given below are my contributions to the project.
 

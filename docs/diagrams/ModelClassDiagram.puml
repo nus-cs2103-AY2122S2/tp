@@ -5,46 +5,50 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyTAssist" as ReadOnlyTAssist
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class TAssist
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueStudentList
+Class Student
 
+Class UniqueModuleList
+Class TaModule
+
+Class UniqueClassGroupList
+Class ClassGroup
+
+Class UniqueAssessmentList
+Class Assessment
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+TAssist .up.|> ReadOnlyTAssist
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .right.> ReadOnlyTAssist
+ModelManager -right-> "1" TAssist
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+TAssist *--> "1" UniqueStudentList
+TAssist *--> "1" UniqueModuleList
+TAssist *--> "1" UniqueClassGroupList
+TAssist *--> "1" UniqueAssessmentList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+UniqueStudentList --> "~* all" Student
+UniqueModuleList --> "~* all" TaModule
+UniqueClassGroupList --> "~* all" ClassGroup
+UniqueAssessmentList --> "~* all" Assessment
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Student
+ModelManager -->"~* filtered" TaModule
+ModelManager -->"~* filtered" ClassGroup
+ModelManager -->"~* filtered" Assessment
 @enduml

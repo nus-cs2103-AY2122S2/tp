@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+title Grade Command
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TAssistParser" as TAssistParser LOGIC_COLOR
+participant ":GradeCommandParser" as GradeCommandParser LOGIC_COLOR
+participant "g:GradeCommand" as GradeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("grade a/1 s/1,2 g/1")
+activate LogicManager
+
+LogicManager -> TAssistParser : parseCommand("grade a/1 s/1,2 g/1")
+activate TAssistParser
+
+create GradeCommandParser
+TAssistParser -> GradeCommandParser
+activate GradeCommandParser
+
+GradeCommandParser --> TAssistParser
+deactivate GradeCommandParser
+
+TAssistParser -> GradeCommandParser : parse(["a/1", "s/1,2", "g/1"])
+activate GradeCommandParser
+
+create GradeCommand
+GradeCommandParser -> GradeCommand
+activate GradeCommand
+
+GradeCommand --> GradeCommandParser : g
+deactivate GradeCommand
+
+GradeCommandParser --> TAssistParser : g
+deactivate GradeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GradeCommandParser -[hidden]-> TAssistParser
+destroy GradeCommandParser
+
+TAssistParser --> LogicManager : g
+deactivate TAssistParser
+
+LogicManager -> GradeCommand : execute()
+activate GradeCommand
+
+ref over GradeCommand, ModelManager : Grade Assessment
+
+create CommandResult
+GradeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GradeCommand
+deactivate CommandResult
+
+GradeCommand --> LogicManager : result
+deactivate GradeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

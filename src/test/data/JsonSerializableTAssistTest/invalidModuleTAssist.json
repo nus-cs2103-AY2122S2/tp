@@ -1,0 +1,11 @@
+{
+  "students" : [ ],
+  "modules" : [ {
+    "moduleName" : "Effective Communication",
+    "moduleCode" : "CS2101",
+    "academicYear" : "21S9",
+    "moduleStudentIds" : [ ]
+  } ],
+  "classGroups" : [ ],
+  "assessments" : [ ]
+}

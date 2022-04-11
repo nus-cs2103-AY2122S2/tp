@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+TAssist *-right-> "1" UniqueAssessmentList
+UniqueAssessmentList -right-> Assessment
+
+Assessment *--> AssessmentName
+Assessment *--> "0..1" SimpleName
+Assessment --> TaModule
+Assessment *--> "~*" Attempt
+
+Attempt --> Student
+Attempt *--> Grade
+@enduml

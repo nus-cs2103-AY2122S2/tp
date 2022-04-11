@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title New state
+
+package State {
+    class State1 as "__ta0:TAssist__"
+    class ClassGroup1 as "__c1:ClassGroup__"
+}
+
+State1 *--> ClassGroup1
+@end

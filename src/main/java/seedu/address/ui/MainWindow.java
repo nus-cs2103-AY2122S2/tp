@@ -2,12 +2,15 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -31,7 +34,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ModuleListPanel moduleListPanel;
+    private ClassGroupListPanel classGroupListPanel;
+    private StudentListPanel studentListPanel;
+    private AssessmentListPanel assessmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +48,22 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
+
+    @FXML
+    private HBox listButtons;
+
+    @FXML
+    private Button moduleListButton;
+
+    @FXML
+    private Button classGroupListButton;
+
+    @FXML
+    private Button studentListButton;
+
+    @FXML
+    private Button assessmentListButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        this.primaryStage.setOnHidden(e -> Platform.exit());
     }
 
     public Stage getPrimaryStage() {
@@ -110,13 +132,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getTAssistFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -163,19 +185,129 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleAssessmentListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().add("active");
+        showAssessmentList();
+    }
+
+    @FXML
+    private void handleModuleListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
+        moduleListButton.getStyleClass().add("active");
+        showModuleList();
+    }
+
+    @FXML
+    private void handleClassGroupListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().add("active");
+        showClassGroupList();
+    }
+
+    @FXML
+    private void handleStudentListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().add("active");
+        showStudentList();
+    }
+
+    /**
+     * Displays module list in list panel.
+     */
+    @FXML
+    private void showModuleList() {
+        moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
+    }
+
+    /**
+     * Displays class group list in list panel.
+     */
+    @FXML
+    private void showClassGroupList() {
+        classGroupListPanel = new ClassGroupListPanel(logic.getFilteredClassGroupList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(classGroupListPanel.getRoot());
+    }
+
+    /**
+     * Displays person list in list panel.
+     */
+    @FXML
+    private void showStudentList() {
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+    }
+
+    /**
+     * Displays assessment list in list panel.
+     */
+    @FXML
+    private void showAssessmentList() {
+        assessmentListPanel = new AssessmentListPanel(logic.getFilteredAssessmentList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
+    }
+
+    public ModuleListPanel getModuleListPanel() {
+        return moduleListPanel;
+    }
+
+    public ClassGroupListPanel getClassGroupListPanel() {
+        return classGroupListPanel;
+    }
+
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
+    }
+
+    public AssessmentListPanel getAssessmentListPanel() {
+        return assessmentListPanel;
     }
 
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            commandResult.getEntityType().ifPresent(entityType -> {
+                switch (entityType) {
+                case STUDENT:
+                    handleStudentListButtonPress();
+                    break;
+                case TA_MODULE:
+                    handleModuleListButtonPress();
+                    break;
+                case CLASS_GROUP:
+                    handleClassGroupListButtonPress();
+                    break;
+                case ASSESSMENT:
+                    handleAssessmentListButtonPress();
+                    break;
+                default:
+                    break;
+                }
+            });
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {

@@ -2,12 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureFiltered;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureUnfiltered;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showEntityAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ENTITY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ENTITY;
+import static seedu.address.testutil.TypicalTAssist.getTypicalTAssist;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,76 +17,208 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
+import seedu.address.model.entity.exceptions.UnknownEntityException;
+import seedu.address.model.student.Student;
+import seedu.address.model.tamodule.TaModule;
 
+//@@author jxt00
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
+    private Model model = new ModelManager(getTypicalTAssist(), new UserPrefs());
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+    // fails occasionally
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void execute_validStudentIndexUnfilteredList_success() {
+        Student studentToDelete = model.getUnfilteredStudentList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.STUDENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, studentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        ModelManager expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(studentToDelete); // removeStudentFromAssessments UnsupportedOperationException
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.STUDENT);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_validModuleIndexUnfilteredList_success() {
+        TaModule moduleToDelete = model.getUnfilteredModuleList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.TA_MODULE);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(moduleToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.TA_MODULE);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validClassGroupIndexUnfilteredList_success() {
+        ClassGroup classGroupToDelete = model.getUnfilteredClassGroupList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.CLASS_GROUP);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, classGroupToDelete);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        ModelManager expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(classGroupToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.CLASS_GROUP);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validAssessmentIndexUnfilteredList_success() {
+        Assessment assessmentToDelete = model.getUnfilteredAssessmentList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.ASSESSMENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, assessmentToDelete);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        ModelManager expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(assessmentToDelete);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.ASSESSMENT);
+    }
+
+    @Test
+    public void execute_invalidStudentIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredStudentList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.STUDENT);
+
+        assertCommandFailureUnfiltered(
+                deleteCommand, model, EntityType.STUDENT, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidModuleIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredModuleList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.TA_MODULE);
+
+        assertCommandFailureUnfiltered(
+                deleteCommand, model, EntityType.TA_MODULE, Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidClassGroupIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredClassGroupList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.CLASS_GROUP);
+
+        assertCommandFailureUnfiltered(
+                deleteCommand, model, EntityType.CLASS_GROUP, Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidAssessmentIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredAssessmentList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.ASSESSMENT);
+
+        assertCommandFailureUnfiltered(
+                deleteCommand, model, EntityType.ASSESSMENT, Messages.MESSAGE_INVALID_ASSESSMENT_DISPLAYED_INDEX);
+    }
+
+    // No module will be deleted from a filtered list.
+    @Test
+    public void execute_validStudentIndexFilteredList_success() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.STUDENT);
+
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.STUDENT);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, studentToDelete);
+
+        Model expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(studentToDelete); // removeStudentFromAssessments UnsupportedOperationException
+        showNoEntity(expectedModel, EntityType.STUDENT);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.STUDENT);
+    }
+
+    @Test
+    public void execute_validClassGroupIndexFilteredList_success() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.CLASS_GROUP);
+
+        ClassGroup classGroupToDelete = model.getFilteredClassGroupList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.CLASS_GROUP);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, classGroupToDelete);
+
+        Model expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(classGroupToDelete);
+        showNoEntity(expectedModel, EntityType.CLASS_GROUP);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.CLASS_GROUP);
+    }
+
+    @Test
+    public void execute_validAssessmentIndexFilteredList_success() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.ASSESSMENT);
+
+        Assessment assessmentToDelete = model.getFilteredAssessmentList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.ASSESSMENT);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ENTITY_SUCCESS, assessmentToDelete);
+
+        Model expectedModel = new ModelManager(model.getTAssist(), new UserPrefs());
+        expectedModel.deleteEntity(assessmentToDelete);
+        showNoEntity(expectedModel, EntityType.ASSESSMENT);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, EntityType.ASSESSMENT);
+    }
+
+    @Test
+    public void execute_invalidStudentIndexFilteredList_throwsCommandException() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.STUDENT);
+
+        Index outOfBoundIndex = INDEX_SECOND_ENTITY;
+        // ensures that outOfBoundIndex is still in bounds of TAssist list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTAssist().getStudentList().size());
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.STUDENT);
+        assertCommandFailureFiltered(
+                deleteCommand, model, EntityType.STUDENT, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidClassGroupIndexFilteredList_throwsCommandException() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.CLASS_GROUP);
+
+        Index outOfBoundIndex = INDEX_SECOND_ENTITY;
+        // ensures that outOfBoundIndex is still in bounds of TAssist list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTAssist().getClassGroupList().size());
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.CLASS_GROUP);
+        assertCommandFailureFiltered(
+                deleteCommand, model, EntityType.CLASS_GROUP, Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidAssessmentIndexFilteredList_throwsCommandException() {
+        showEntityAtIndex(model, INDEX_FIRST_ENTITY, EntityType.ASSESSMENT);
+
+        Index outOfBoundIndex = INDEX_SECOND_ENTITY;
+        // ensures that outOfBoundIndex is still in bounds of TAssist list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTAssist().getAssessmentList().size());
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, EntityType.ASSESSMENT);
+        assertCommandFailureFiltered(
+                deleteCommand, model, EntityType.ASSESSMENT, Messages.MESSAGE_INVALID_ASSESSMENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.STUDENT);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_ENTITY, EntityType.STUDENT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_ENTITY, EntityType.STUDENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -94,16 +227,29 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to show no entity.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
+    private void showNoEntity(Model model, EntityType entity) {
+        switch(entity) {
+        case STUDENT:
+            model.updateFilteredStudentList(p -> false);
+            assertTrue(model.getFilteredStudentList().isEmpty());
+            break;
+        case CLASS_GROUP:
+            model.updateFilteredClassGroupList(p -> false);
+            assertTrue(model.getFilteredClassGroupList().isEmpty());
+            break;
+        case ASSESSMENT:
+            model.updateFilteredAssessmentList(p -> false);
+            assertTrue(model.getFilteredAssessmentList().isEmpty());
+            break;
+        default:
+            throw new UnknownEntityException();
+        }
     }
 }

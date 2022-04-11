@@ -1,0 +1,10 @@
+@startuml
+start
+:User executes grade command;
+
+if () then ([assessment exists and student exists])
+    :Add student attempt into assessment;
+else ([else])
+endif
+stop
+@enduml

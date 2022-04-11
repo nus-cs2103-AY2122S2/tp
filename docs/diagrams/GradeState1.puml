@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title New state
+
+package State {
+    class State1 as "__ta0:TAssist__"
+    class Student1 as "__s1:Student__"
+    class Student2 as "__s2:Student__"
+    class Module1 as "__m1:Module__"
+    class ClassGroup1 as "__c1:ClassGroup__"
+    class Assessment1 as "__a1:Assessment__"
+    class Attempt1 as "__:Attempt__"
+    class Attempt2 as "__:Attempt__"
+    class Grade1 as "__:Grade__"
+    class Grade2 as "__:Grade__"
+
+}
+
+State1 *--> Student1
+State1 *--> Student2
+State1 *--> Module1
+Module1 --> Student1
+Module1 --> Student2
+State1 *--> ClassGroup1
+State1 *--> Assessment1
+Module1 *--> ClassGroup1
+Module1 *--> Assessment1
+ClassGroup1 --> Student1
+ClassGroup1 --> Student2
+Assessment1 *--> Attempt1
+Assessment1 *--> Attempt2
+Attempt1 --> Student1
+Attempt1 *--> Grade1
+Attempt2 --> Student2
+Attempt2 *--> Grade2
+
+@end

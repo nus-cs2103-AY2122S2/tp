@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+TAssist *-right-> "1" UniqueStudentList
+UniqueStudentList -right-> Student
+
+Student *--> StudentId
+Student *--> Name
+Student *--> Email
+Student *--> "0..1" Telegram
+@enduml
