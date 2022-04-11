@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TAssistParser" as TAssistParser LOGIC_COLOR
+participant ":EnrolCommandParser" as EnrolCommandParser LOGIC_COLOR
+participant "e:EnrolCommand" as EnrolCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("enrol c/1 s/1")
+activate LogicManager
+
+LogicManager -> TAssistParser : parseCommand("enrol c/1 s/1")
+activate TAssistParser
+
+create EnrolCommandParser
+TAssistParser -> EnrolCommandParser
+activate EnrolCommandParser
+
+EnrolCommandParser --> TAssistParser
+deactivate EnrolCommandParser
+
+TAssistParser -> EnrolCommandParser : parse(["c/1","s/1"])
+activate EnrolCommandParser
+
+create EnrolCommand
+EnrolCommandParser -> EnrolCommand
+activate EnrolCommand
+
+EnrolCommand --> EnrolCommandParser :e
+deactivate EnrolCommand
+
+EnrolCommandParser --> TAssistParser
+deactivate EnrolCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EnrolCommandParser -[hidden]-> TAssistParser
+destroy EnrolCommandParser
+
+TAssistParser --> LogicManager
+deactivate TAssistParser
+
+LogicManager -> EnrolCommand : execute()
+activate EnrolCommand
+
+ref over EnrolCommand, ModelManager : Enrol Student
+
+create CommandResult
+EnrolCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EnrolCommand
+deactivate CommandResult
+
+EnrolCommand --> LogicManager
+deactivate EnrolCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -9,6 +9,9 @@ title: Wen Xuan's Project Portfolio Page
 
 Given below are my contributions to the project.
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=wxliong&breakdown=true)
+
+
 * **New Feature**: Added the model for student objects.
   * What it does: allows the TA to have the ability to manage students.
   * Justification: This feature improves the product significantly because a TA can interact with the student objects and the app should display the students accordingly.
@@ -37,20 +40,22 @@ Given below are my contributions to the project.
   * Wrote tests for `FindCommand` as well as the `EnrolCommand` and `DisenrolCommand`.
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=wxliong&breakdown=true)
-
-
 * **Documentation**:
   * User Guide:
     * Added documentation for `Academic Year` under `add module`. [\#81](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/81)
     * Added `add` command. [\#21](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/21)
+    * Fix errors [\#230](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/230)
   * Developer Guide:
     * Added implementation details of the `add` and `enrol` feature. [\#113](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/113)
     * Added use cases for Student. [\#35](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/35)
+    * Fix errors [\#230](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/230)
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#142](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/142), [\#126](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/126), [\#19](), [\#42]()
+  * PRs reviewed (with non-trivial review comments): [\#142](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/142), [\#126](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/126)
+
+
+* **Team Tasks**:
   * Bug tested with team lead to ensure product is ready for PE-D: [\#156](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/156), [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158), [\#163](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/163), [\#164](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/164)
   * Bug fixed with team lead to ensure product is ready for PE-D: [\#162](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/162), [\#165](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/165) 
   * Updated AB3 diagrams under `Design` to diagrams that is suitable for TAssist.

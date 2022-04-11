@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Our project is based on AB3.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,15 +69,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntityListPanel`*, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `*EntityListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
+`*EntityListPanel` and `*EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -190,7 +190,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" />
 
 The `Storage` component,
 * can save both TAssist data and user preference data in json format, and read them back into corresponding objects.
@@ -230,7 +230,7 @@ Step 2. The user executes `clear` command to remove all existing data in `TAssis
 ![AddState1](images/AddState1.png)
 
 Step 3. The user executes `add student` command to add a student to `TAssist`. The `add` command also calls `AddCommandParser#parse()`, which parses the input and returns the index and entity type.
-* An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
+* An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@u.nus.edu t/john_doe`
 
 ![AddState2](images/AddState2.png)
 
@@ -240,9 +240,9 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 The following sequence diagram shows how the add operation works:
 
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
-<img src="images/AddModelSequenceDiagram.png" width="250" />
+![AddSequenceDiagram](images/AddModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -256,6 +256,7 @@ The delete mechanism is facilitated by `TAssist`. Its functionality, usage and b
 
 * `DeleteCommandParser#parse()` — Parses the command arguments.
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
+* `ModelManager#deleteEntity()` — Deletes the specified entity.
 * `ModelManager#deleteEntity()` — Deletes the specified entity.
 
 However, when a `TaModule` object is deleted, its associated `ClassGroup` and `Assessment` object(s) are also deleted.
@@ -278,9 +279,9 @@ Step 3. The user executes `delete class 2` to delete the 2nd class group in the 
 The following sequence diagram shows how the delete operation works:
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
-<img src="images/DeleteModelSequenceDiagram.png" width="250" />
+![DeleteSequenceDiagram](images/DeleteModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -310,7 +311,7 @@ The following sequence diagram shows how the list operation works:
 
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -339,13 +340,27 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 ![EnrolState0](images/AddState0.png)
 
 Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
-* An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
+* An example of the `enrol` command: `enrol c/1 s/1`
 
 ![EnrolState0](images/EnrolState1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enrolled to a class group will automatically be linked to the module it belongs to.
-<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enrolled to the given class group.
+<br> 2. If a command fails its execution, it will still call `EnrolCommand#execute()`, and a `CommandException` will be thrown and only the valid student(s) will be enrolled to the given class group.
 </div>
+
+The following sequence diagram shows how the enrol operation works:
+
+![EnrolSequenceDiagram](images/EnrolSequenceDiagram.png)
+
+![EnrolModelSequenceDiagram](images/EnrolModelSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EnrolCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes an enrol command:
+
+![EnrolActivityDiagram](images/EnrolActivityDiagram.png)
 
 ### Grading Assessment Feature
 
@@ -361,19 +376,19 @@ The `Assessment` entity will be tied to a specific module. Hence, when a `TaModu
 
 Given below is an example usage scenario of how the grading mechanism behaves at each step.
 
-<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `ClassGroup` as well.
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `Module` as well.
 
 </div>
 
-Step 1. The user launches the application. The `TAssist` is already populated with data.
+Step 1. The user launches the application. The `TAssist` is already populated with the necessary data.
 
 ![GradeState0](images/GradeState0.png)
 
-Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
+Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students (`s1` and `s2` respectively) enrolled in the module with grade 1 in the `TAssist`. The `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
 
 ![GradeState1](images/GradeState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `GradeCommand#execute()`, instead a `CommandException` will be thrown and no assessments will be graded.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will still call `GradeCommand#execute()`, and both valid and invalid grading attempts will be printed out.
 </div>
 
 The following sequence diagram shows how the grade operation works:
@@ -381,7 +396,7 @@ The following sequence diagram shows how the grade operation works:
 ![GradeSequenceDiagram](images/GradeSequenceDiagram.png)
 ![GradeSequenceDiagram](images/GradeAssessmentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -428,9 +443,9 @@ Step 4. The user executes `mark c/1 w/1 s/1,2` to mark attendance for a lesson w
 The following sequence diagram shows how the mark operation works:
 
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
-<img src="images/MarkUnmarkModelSequenceDiagram.png" width="250" />
+![MarkUnmarkSequenceDiagram](images/MarkUnmarkModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -456,15 +471,15 @@ The following activity diagram summarizes what happens when a user executes a ma
 
 **Target user profile**:
 
-* TA in charge of tutorial groups
+* TA in charge of teaching NUS modules
 * Needs to manage a significant number of student contacts
-* Might be instructing multiple modules/tutorials
+* Might be instructing multiple modules/classes
 * Prefers desktop apps over other types
 * Types fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and track their progress.
+**Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and monitor their progress for all modules/classes taught by the TAs.
 
 ### TAssist User Stories
 
@@ -749,6 +764,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
                 <p class="c8"><span class="c0">***</span></p>
             </td>
         </tr>
+                <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">11</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">edit the attributes of the things I created</span></p>
+                <p class="c8"><span class="c0">List of things I should be able to edit:</span></p>
+                <ol class="c10 lst-kix_8pu3ok8lb4xj-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">student</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">class group</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">assessment</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">modify any attributes that I entered wrongly.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">**</span></p>
+            </td>
+        </tr>
     </tbody>
 </table>
 
@@ -943,7 +985,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 09: Grading assessments**
 
-**Preconditions: The student(s) are already enrolled in the module that the assesssment is associated with.**
+**Preconditions: The student(s) are already enrolled in the module that the assessment is associated with.**
 
 **MSS**
 
@@ -1002,19 +1044,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TA requests to filter students by a specific class group.
+* 1b. TA requests to filter students by a specific class group.
 
-  * 1a1. TAssist displays the details of students belonging to the specified class group.
+  * 1b1. TAssist displays the details of students belonging to the specified class group.
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1c. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1c1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1c2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1c1-1c2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1035,13 +1077,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1b. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1b1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1b2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1b1-1b2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1062,13 +1104,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1b. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1b1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1b2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1b1-1b2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1211,6 +1253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Assessment**: Various gradable component that the TA can add into the module. E.g. Class participation, Lab 1, Lab 2 Report
 * **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
 * **CLI**: Command line interface
 * **Entity**: A generic object used in TAssist, which can be an instance of Assessment, ClassGroup, Module, or Student
@@ -1222,7 +1265,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NUS**: The National University of Singapore
 * **Student**: A student in NUS
 * **TA**: A Teaching Assistant in NUS SoC
-* **TaModule**: Represents a Module. Named differently due to conflict with Java class.
+* **TaModule**: Represents a Module. Named differently due to conflict with Java class
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1252,27 +1295,142 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a student
+### Adding an entity
 
-1. Deleting a student while all students are being shown
+1. Adding an entity (module/student/class group/assessment).
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+  1. Test case: `add student id/E0123456 n/John Doe e/johnd@u.nus.edu`, `add module n/Software Engineering Project c/CS2103T a/21S1`, `add class id/T13 t/tutorial m/1`, `add assessment n/Test m/1`<br>
+     Expected: Details of the added entity shown in the status message.
 
-   1. Test case: `delete student 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+  1. Test case: `add ENTITY` where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Expected: No entity is added. Error details shown in the status message.
 
-   1. Test case: `delete student 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+  1. Other incorrect add commands to try: `add`, `add student id/E012345a n/John Doe e/johnd@u.nus.edu`, `...` (where `E012345a` is an invalid student ID)<br>
+     Expected: Similar to previous.
 
-   1. Other incorrect delete commands to try: `delete`, `delete student x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+  1. The above test cases can be repeated with the other entities (and their respective parameters) and also by using their shorthand forms.<br>
+     Examples: `add s id/E0123456 n/John Doe e/johnd@u.nus.edu`, `add m n/Software Engineering Project c/CS2103T a/21S1`, `add c id/T13 t/tutorial m/1`, `add a n/Test m/1`.
 
-1. _{ more test cases …​ }_
+### Listing and filtering entities
+
+1. Listing and filtering entities (module/student/class group/assessment).
+
+  1. Test case: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Filters may be used in the `list` command for students, class groups and assessments, e.g. `list student m/1`, `list class m/1`, `list assessment m/1`.<br>
+     Expected: Details of the listed entities shown in their respective GUI panels.
+
+  1. Test case: `list`<br>
+     Expected: No entity is listed. Error details shown in the status message.
+
+  1. Other incorrect add commands to try: `list student m/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the other entities and also by using their shorthand forms.<br>
+     Examples: `list s m/1`, `list m`, `list c`, `list a`.
+
+### Finding students
+
+1. Finding students by their name.
+
+  1. Test case: `find John`.<br>
+     Expected: Students whose name contains `John` is listed.
+
+  1. Test case: `find`<br>
+     Expected: No student is listed. Error details shown in the status message.
+
+### Deleting an entity
+
+1. Deleting an entity (module/student/class group/assessment) while all entities are being shown in their respective list.
+
+  1. Prerequisites: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Filters may be used in the `list` command for students, class groups and assessments as well, e.g. `list student m/1`.
+
+  1. Test case: `delete module 1`, `delete m 1`<br>
+     Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
+
+  1. Test case: `delete module 0`, `delete m 0`<br>
+     Expected: No module is deleted. Error details shown in the status message.
+
+  1. Other incorrect delete commands to try: `delete`, `delete module x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the other entities by replacing `module` with `student`/`class`/`assessment` and also by using their shorthand forms.<br>
+     Examples: `delete student 1`, `delete class 1`, `delete assessment 1`, `delete s 1`, `delete c 1`, `delete a 1`.
+
+### Enrolling and disenrolling students
+
+1. Enrolling and disenrolling students.
+
+  1. Test case: `enrol c/1 s/all`<br>
+     Expected: All students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
+
+  1. Test case: `enrol c/1 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
+
+  1. Test case: `enrol c/1 s/e0123456,e0234567`<br>
+     Expected: Students with ID `E0123456` and `E02345767` will be enrolled in the 1st class group shown in the GUI panel. Details of the students enrolled shown in the status message.
+
+  1. Test case: `enrol c/1`<br>
+     Expected: No student is enrolled. Error details shown in the status message.
+
+  1. Other incorrect mark commands to try: `enrol c/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the `disenrol` command by replacing `enrol` with `disenrol`.<br>
+
+### Taking student attendance
+
+1. Taking student attendance.
+
+  1. Prerequisites: Student(s) should already be enrolled in the class group.<br>
+
+  1. Test case: `mark c/1 w/3 s/all`<br>
+     Expected: All students enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3 s/e0123456,e0234567`<br>
+     Expected: Students with ID `E0123456` and `E02345767` enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3`<br>
+     Expected: No student attendance is marked. Error details shown in the status message.
+
+  1. Other incorrect mark commands to try: `mark c/x`, `mark c/1 w/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the `unmark` command by replacing `mark` with `unmark`.<br>
+
+### Grading student assessment
+
+1. Grading student assessment.
+
+  1. Prerequisites: Student(s) should already be enrolled in the class group and 1/more assessments belonging to the module has been created.<br>
+
+  1. Test case: `grade sn/lab1 m/1 s/all g/1`<br>
+     Expected: All students enrolled in the 1st module shown in the GUI panel will be assigned a grade of 1 for the assessment with a simple name of `lab1`. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students shown in the GUI panel will be assigned a grade of 1 for the 1st assessment. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1 s/e0123456,e0234567 g/1`<br>
+     Expected: Students with ID `E0123456` and `E02345767` enrolled in the module will be assigned a grade of 1 for the 1st assessment. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1`<br>
+     Expected: No student assessment is graded. Error details shown in the status message.
+
+  1. Other incorrect grade commands to try: `grade a/x`, `grade sn/lab1 m/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data file.
+2. Prerequisites: There are existing data in the data file.
+3. Test case: User changed data in data file. <br>
+    Expected: TAssist starts as usual. <br>
+    Actual: TAssist starts with no data. <br>
+    Solution: Undo the changes made in data file and change with the help of TAssist instead.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Sample data of TAssist will not be saved (i.e. no data file will be created) until user issues a valid command.
 
-1. _{ more test cases …​ }_
+</div>
