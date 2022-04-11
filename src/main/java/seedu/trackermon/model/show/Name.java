@@ -31,14 +31,15 @@ public class Name implements Comparable<Name> {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given {@code String} is a valid name.
+     * @param test provided {@code String}.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Return {@String} representation of {@code Name}.
+     * Return {@code String} representation of {@code Name}.
      */
     @Override
     public String toString() {

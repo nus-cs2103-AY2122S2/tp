@@ -34,7 +34,7 @@ public enum Status {
     }
 
     /**
-     * Returns the {@String} representation of {@code Status}.
+     * Returns the {@code String} representation of {@code Status}.
      */
     @Override
     public String toString() {
@@ -43,15 +43,8 @@ public enum Status {
 
     /**
      * Checks the status of the show.
-     * @return true if the show status is completed.
-     */
-    public Boolean isCompleted() {
-        return status.equals(COMPLETED);
-    }
-
-    /**
-     * Checks the status of the show.
-     * Returns true if a given string is a valid name.
+     * Returns true if provided {@code String} is a valid name.
+     * @param status provided {@code string}.
      */
     public static boolean isValidStatus(String status) {
         status = status.toUpperCase().trim();
@@ -61,12 +54,5 @@ public enum Status {
         }
         return status.equals(COMPLETED.name()) || status.equals(WATCHING.name())
             || status.equals(PLAN_TO_WATCH.name());
-    }
-
-    /**
-     * Compare this status with other.
-     */
-    public int compareStatus(Status other) {
-        return this.status.compareTo(other.status);
     }
 }

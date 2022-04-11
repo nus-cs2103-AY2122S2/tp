@@ -92,11 +92,12 @@ public class Show {
         }
 
         Show otherShow = (Show) other;
-        return otherShow.getName().equals(getName())
-                && otherShow.getTags().equals(getTags())
-                    && otherShow.getStatus().equals(getStatus())
-                        && otherShow.getComment().equals(getComment())
-                            && otherShow.getRating().equals(getRating());
+        boolean isSameName = otherShow.getName().equals(getName());
+        boolean isSameTags = otherShow.getTags().equals(getTags());
+        boolean isSameStatus = otherShow.getStatus().equals(getStatus());
+        boolean isSameComment = otherShow.getComment().equals(getComment());
+        boolean isSameRating = otherShow.getRating().equals(getRating());
+        return isSameName && isSameTags && isSameStatus && isSameComment && isSameRating;
     }
 
     /**
