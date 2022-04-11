@@ -29,28 +29,6 @@ activate HustleBookParser
 create EditCommand
 HustleBookParser --> EditCommand : EditCommand("John", "p/1234567")
 activate EditCommand
-'create EditCommandParser
-'HustleBookParser -> EditCommandParser
-'activate EditCommandParser
-
-'EditCommandParser --> HustleBookParser
-'deactivate EditCommandParser
-
-'HustleBookParser -> EditCommandParser : parse("John p/1234567")
-'activate EditCommandParser
-'
-'create EditCommand
-'EditCommandParser -> EditCommand
-'activate EditCommand
-'
-'EditCommand --> EditCommandParser : e
-'deactivate EditCommand
-'
-'EditCommandParser --> HustleBookParser : e
-'deactivate EditCommandParser
-''Hidden arrow to position the destroy marker below the end of the activation bar.
-'EditCommandParser -[hidden]-> HustleBookParser
-'destroy EditCommandParser
 
 EditCommand --> HustleBookParser : e = EditCommand("John, p/1234567")
 deactivate EditCommand
