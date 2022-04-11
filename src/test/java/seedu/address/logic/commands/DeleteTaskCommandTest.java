@@ -22,7 +22,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.*;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
@@ -39,7 +42,7 @@ public class DeleteTaskCommandTest {
     private final Task taskAlice = ALICE.getTaskList().getTaskList().get(0);
     private final Task taskToDelete = new Task("Cry");
 
-    private final Index invalidTaskIndexAlice = Index.fromOneBased(ALICE.getTaskList().getNumberOfTasks() +1);
+    private final Index invalidTaskIndexAlice = Index.fromOneBased(ALICE.getTaskList().getNumberOfTasks() + 1);
 
     @Test
     public void equals_sameObjectByStudentIdAndIndex_success() {
@@ -118,7 +121,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_InvalidIndex_throwsCommandException() {
+    public void execute_invalidIndex_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(studentIdAlice, invalidTaskIndexAlice);
@@ -128,7 +131,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_TaskNotFound_throwsCommandException() {
+    public void execute_taskNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(moduleCodeAlice, taskToDelete);
