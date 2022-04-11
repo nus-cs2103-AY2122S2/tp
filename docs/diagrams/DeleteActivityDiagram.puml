@@ -14,7 +14,7 @@ If () then ([Command has additional inputs ||\n Command not in proper format ])
     If () then ([Index provided is invalid])
     :Throws CommandException;
 
-    else ([Index provided is valid])
+    else ([Else])
         :Delete Student from AddressBook;
         :Returns Message to user indicating Success;
         :ResultDisplay prints result to user;
