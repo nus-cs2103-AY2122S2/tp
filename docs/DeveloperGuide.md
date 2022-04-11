@@ -955,6 +955,9 @@ testers are expected to do more *exploratory* testing.
       Expected: No show is edited. Error details shown in the result display.<br><br>
 6. Test case: Invalid edit name
    1. Condition: Show named `Inception` exists in the show list that is not currently being edited.
+
+<div style="page-break-after: always;"></div>
+
    2. Command: `edit <index of show to be edited> n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
 
@@ -1115,6 +1118,8 @@ testers are expected to do more *exploratory* testing.
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Importing Trackermon data
 
