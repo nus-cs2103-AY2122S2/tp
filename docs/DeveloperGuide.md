@@ -145,7 +145,7 @@ Step 2. Assuming there is a `Person` with the index number 1 that is not favouri
 
 <aside>
 💡 Note: 
-If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourite window anymore.
+If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
 </aside>
 
 Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
@@ -568,7 +568,7 @@ Given below are instructions to test the app manually.
 
 
 2. Open Favourites window by UI
-   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Favourites`. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Favourites`. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
 
 
 3. Open Favourites window by key
@@ -581,7 +581,7 @@ Given below are instructions to test the app manually.
 
 
 2. Open Statistics window by UI
-   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Stats`.<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Stats`.<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
 
 3. Open Statistics window by key

@@ -218,7 +218,7 @@ Examples:
  Favourites the specified client in the RealEstatePro represented by a star as shown below.
 
 💡 **Note**: 
- * If the client was favourited before, calling `favourite` command on this particular client will unfavourite him/her. This command will remove "🌟" from the client. <br/> Additionally, the client information will not show up on the Favourite window anymore.
+ * If the client was favourited before, calling `favourite` command on this particular client will unfavourite him/her. This command will remove "🌟" from the client. <br/> Additionally, the client information will not show up on the Favourites window anymore.
 
 The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
@@ -242,7 +242,12 @@ Format:  `fw`
 
 2) Under it, click on `Favourites`.
 
-3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
+3) The system will pop up the Favourites window.
+
+#### By Key: `F3`
+
+1) Press `F3`.
+2) The system will pop up the Favourites window.
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
 
@@ -411,6 +416,22 @@ Format: `rm`
 Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region namely { North, South, East, West, Central }.
 
 Format: `stats`
+
+#### By Ui:
+
+1) Navigate to the `File` menu and click on it.
+
+2) Under it, click on `Stats`.
+
+3) The system will pop up the Statistics window.
+
+#### By Key: `F2`
+
+1) Press `F2`.
+
+2) The system will pop up the Statistics window.
+
+
 
 <img src="images/user-guide/Stats.png" height="400px">
 
