@@ -192,7 +192,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `IBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `IBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
 
 <div style="page-break-after: always;"></div>
 
@@ -210,7 +210,7 @@ The `Model` component,
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the current `ProductFilter` which is applied to the _filtered_ list.
 * stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div style="page-break-after: always;"></div>
 
@@ -232,7 +232,7 @@ A more detailed representation of the `Product` class is shown below which inclu
 The `Storage` component,
 * can save both IBook data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `IBookStorage` and `UserPrefStorage`, which means it can be treated as either one when only one functionality is needed.
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -281,9 +281,9 @@ The following sequence diagram shows how a `Popup` is displayed once a button is
 
 ![Show Popup](images/ShowPopupSequenceDiagram.png)
 
-`XXX_Ui` represents UI components that have a button which will open a popup once clicked, e.g `ControlBox`, `ProductCard`, `ItemCard`, etc.
+`XXX_Ui` represents UI components that have a button which will open a popup once clicked, e.g. `ControlBox`, `ProductCard`, `ItemCard`, etc.
 
-`PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
+`PopupYYY` represents different types of `Popup`, e.g. `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
 As seen from the diagram, the components call `showPopupXXX(...)` in `MainWindow` instead of calling it from `PopupHandler` directly.
 
@@ -295,7 +295,7 @@ The sequence diagram below describes a successful execution of a command in popu
 
 ![Execute Popup](images/ExecutePopupSequenceDiagram.png)
 
-`PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
+`PopupYYY` represents different types of `Popup`, e.g. `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
 When a user clicks a button in `PopupYYY`, the associated command is generated from the inputs. The command is then passed to `MainWindow` for execution. This process is similar to how command is executed from `CommandBox`.
 
@@ -409,12 +409,12 @@ The updated filtered product list would then be displayed in the GUI.
 
 #### Implementation
 
-The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and `Quantity`, under `Product` with a one-to-many relationship, i.e. one `Product` can have multiple `Item` objects under it.
+The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and `Quantity`. `Product` has a one-to-many relationship with `Item`, i.e. one `Product` can have multiple `Item` objects under it.
 
 Listed below are the few behavioral requirements for `Item`, along with the classes/interfaces related to it.
 
-* A `Product` must not have two `Item` objects that are considered the same, this is enforced by `UniqueItemList`
-* An `Item` without a `Parent` is characterised using the `ItemDescriptor`
+* A `Product` must not have two `Item` objects that are considered the same, this is enforced by `UniqueItemList`.
+* An `Item` without a `Parent` is characterised using the `ItemDescriptor`.
 
 `ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
 
@@ -439,7 +439,7 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 #### Design considerations
 
-**Aspect: How to create `Item` and ensure it when the user executes `add-item` command:**
+**Aspect: How to create `Item` during the parsing of `add-item` command:**
 
 * **Alternative 1:** Retrieve the respective `Product` within the parser.
     * Pros: Easy solution.
@@ -768,17 +768,11 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
       Use case ends.
 
-* 2b. Not all required fields are present (e.g. Expiry Date).
+* 2b. Not all required fields are present (e.g. Expiry Date, Quantity).
 
     * 2b1. IBook shows an error message.
 
       Use case ends.
-
-* 2c. Optional fields like Quantity is missing.
-
-    * 2c1. IBook automatically sets the quantity to 0.
-
-      Use case resumes at step 3.
 
 <div style="page-break-after: always;"></div>
 
@@ -829,7 +823,13 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
     * 2b1. IBook shows an error message.
 
       Use case ends.
+      
+* 2c. The fields provided are invalid
+    
+    * 2c1. IBook shows an error message.
 
+     Use case ends.
+          
 <div style="page-break-after: always;"></div>
 
 #### UC10: Find items
@@ -1011,8 +1011,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the `.jar` file and copy into an empty folder.
 
-   2. Double-click the jar file. <br>
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. If double clicking doesn't work, type java -jar ibook.jar in a terminal in the same directory as the jar file<br>
+      Expected: Shows the GUI with a set of sample products. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1153,4 +1153,4 @@ testers are expected to do more *exploratory* testing.
    1. Locate the data file of iBook at `[JAR file location]/data/ibook.json`.
 
    2. Delete the file or replace the data in it with random garbage values. <br>
-      Expected: The following launch of iBook will have no data.
+      Expected: The following launch of iBook will load in sample products.
