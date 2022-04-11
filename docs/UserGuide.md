@@ -128,6 +128,8 @@ Example:
     - Email: alisson111@example.com
     - Address: VVD street, block 123, #01-01
 
+<div style="page-break-after: always;"></div>
+
 | Before | After |
   :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01'](images/screenshots/addAlissonBecker.png) |
@@ -504,6 +506,8 @@ NUSocials data are saved as a JSON file `[JAR file location]/data/addressbook.js
 **:exclamation: Caution:**
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
