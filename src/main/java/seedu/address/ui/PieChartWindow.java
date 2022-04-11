@@ -36,7 +36,7 @@ public class PieChartWindow extends UiPart<Stage> {
     /**
      * Creates a new PieChartWindow.
      *
-     * @param root Stage to use as the root of the PieChartWindow.
+     * @param root stage to use as the root of the PieChartWindow.
      */
     public PieChartWindow(Stage root) {
         super(FXML, root);
@@ -115,10 +115,10 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * A method to produce the pie chart that shows covid status breakdown.
+     * Produces the pie chart that shows covid status breakdown.
      *
-     * @param data Covid positive percentage for each faculty present in Tracey
-     * @param title Label of this particular pie chart
+     * @param data covid positive percentage for each faculty present in Tracey
+     * @param title label of this particular pie chart
      * @return A pie chart that shows covid status breakdown
      */
     private PieChart makePieChart(TreeMap<String, Integer> data, String title) {
@@ -139,11 +139,11 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets each pir chart sections to have a specific colour according to their Covid status.
+     * Sets each pie chart's section to have a specific colour according to their Covid status.
      * If it represents positive, it is set to red. If it represents negative, it is set to green.
      * If it represents HRN, it is set to yellowish-gold.
      *
-     * @param pieChartData The pie chart that will undergo colouring
+     * @param pieChartData the pie chart that will be coloured
      */
     private void setPieChartColor(ObservableList<PieChart.Data> pieChartData) {
         for (PieChart.Data data : pieChartData) {
@@ -175,7 +175,7 @@ public class PieChartWindow extends UiPart<Stage> {
     /**
      * Shows the pie chart window.
      *
-     * @throws IllegalStateException
+     * @throws IllegalStateException When the window is shown when not called
      * <ul>
      *     <li>
      *         if this method is called on a thread other than the JavaFX Application Thread.
