@@ -14,9 +14,9 @@ Given below are my contributions to the project.
 
 **Enhancements implemented**
 1. Implementation and testing of order class
-  * Part of PR [#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83) and PR [#126](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/126)
-  * Implementation and testing for the overall order class containing its relevant components (Order Details, Order Collection Type, Order Remark, Order Delivery Date & Time)
-  * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
+   * Part of PR [#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83) and PR [#126](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/126)
+   * Implementation and testing for the overall order class containing its relevant components (Order Details, Order Collection Type, Order Remark, Order Delivery Date & Time)
+   * Justification: The order class forms the basis of our application - a baker needs to key in their orders with its relevant details.
 2. Implementation and testing for order functionality 
    * Part of PR [#95](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/95)
    * Implemented and performed test for Delete Order, List Order
@@ -49,9 +49,7 @@ Given below are my contributions to the project.
 **Contributions to team-based tasks**
 1. Contributed in team discussion for overall product direction
 2. Maintained Issue Tracker
-3. Informal Demo of [V1.3 Demo Link](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
-4. Release Management for V1.3
-   1. Took Screenshots
+3. Release Management for [V1.3](https://docs.google.com/document/d/1tTXY-lm5M15URXhf_RbOpxJCVG8-GQD86Q2zDqTp1tM/edit)
 
 **Review/mentoring contributions**
 1. Helped with edit order command test when teammate had some issues ([Link Here](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/107))
