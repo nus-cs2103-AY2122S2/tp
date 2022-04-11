@@ -338,7 +338,7 @@ Format: `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 
 Examples:
 * `edits 1 pr/200` Edits the price of the 1st service to be `200`.
-* `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `60` respectively.
+* `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `30` respectively.
 
 Example Usage: `edits 1 pr/200`
 
