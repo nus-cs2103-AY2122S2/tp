@@ -1,0 +1,25 @@
+@startuml
+start
+: User enter pay command;
+
+: Parses command;
+
+if () then ([valid command provided])
+  :Create Pay Command;
+  :Execute Pay Command;
+  if () then ([valid index provided])
+  : update the specified transaction;
+  : Display Success message;
+  stop
+  else ([invalid index])
+   : Throw Exception;
+   : Display Invalid Index message;
+   stop
+  endif
+else ([invalid])
+  :Throw Parse Exception;
+  :Display Invalid Command message;
+  stop
+
+endif
+@enduml

@@ -13,12 +13,12 @@ if () then ([valid command provided])
   : add the transaction to transaction list;
   : Display Success message;
   stop
-  else ([false])
+  else ([invalid])
    : Throw Exception;
    : Display Invalid parameter message;
    stop
   endif
-else ([else])
+else ([invalid])
   :Throw Parse Exception;
   :Display Invalid Command message;
   stop
