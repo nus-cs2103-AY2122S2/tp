@@ -57,6 +57,7 @@ public class StorageManagerTest {
         MedBook original = getTypicalMedBook();
         storageManager.saveMedBook(original);
         ReadOnlyMedBook retrieved = storageManager.readMedBook().get();
+
         assertEquals(original, new MedBook(retrieved));
     }
 

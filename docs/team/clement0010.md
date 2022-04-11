@@ -41,7 +41,7 @@ Given below are my contributions to the project.
   * Code Quality
     * Wrote test cases to increase code coverage from XX% to XX%. Pull request: [WIP]()
 
-* **Documentation**: 
+* **Documentation**:
   * User Guide
     * Added patients' emergency contact section. Pull request: [#17](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/17)
     * Added quickstart and FAQ section. Pull request: [#139](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/139)
