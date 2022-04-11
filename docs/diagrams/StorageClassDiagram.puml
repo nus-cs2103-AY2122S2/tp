@@ -37,11 +37,11 @@ StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" BuyerAddressBookStorage
 StorageManager -up-> "1" SellerAddressBookStorage
 
-Storage -right-|> UserPrefsStorage
+Storage -up-|> UserPrefsStorage
 Storage -right-|> BuyerAddressBookStorage
 Storage -left-|> SellerAddressBookStorage
 
-JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonUserPrefsStorage .down.|> UserPrefsStorage
 JsonBuyerAddressBookStorage .up.|> BuyerAddressBookStorage
 JsonBuyerAddressBookStorage ..> JsonSerializableBuyerAddressBook
 JsonSerializableBuyerAddressBook --> "*" JsonAdaptedBuyer
