@@ -62,7 +62,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
   * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+:exclamation: Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
