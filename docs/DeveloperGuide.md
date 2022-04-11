@@ -14,15 +14,15 @@ title: Developer Guide
 * Plot Commands
   * [Pie Chart Code](https://docs.oracle.com/javafx/2/charts/pie-chart.htm)
   * [Bar Chart Code](https://docs.oracle.com/javafx/2/charts/line-chart.htm)
-  * [Bar Chart FXML Code](https://github.com/AY2021S1-CS2103T-T09-2/CalorieGraph.fxml)
+  * [Bar Chart FXML Code](https://github.com/AY2021S1-CS2103T-T09-2/tp/blob/master/src/main/resources/view/CalorieGraph.fxml)
 
 * Toggling Tabs
   * Ui for side tabs was reused from [this team's side tab](https://github.com/AY2122S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml) with minor modifications
   * Code behind logic for determining which tabs was clicked on was reused from [stackoverflow](https://stackoverflow.com/questions/49097747/javafx-determining-which-label-has-been-clicked) with minor modifications
 
 * User Guide
-  * Section 3.2.1 was reused from [this team's about section](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#3-about) 
-  * Section 3.2.3 was adapted from [this team's about section](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#3-about)
+  * Section 3.2.1 was reused from [this team's UG](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html) 
+  * Section 3.2.3 was adapted from [this team's UG](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html)
   * Section 3.2.4's table was reused from [this team's UG](https://ay2021s1-cs2103t-w13-3.github.io/tp/UserGuide.html) with minor modifications
     
 * Developer Guide
