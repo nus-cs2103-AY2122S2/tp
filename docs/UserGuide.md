@@ -407,8 +407,8 @@ Adds a patient's medical information to MedBook.
 
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
-- We recommend inputting blood type using ABO blood group system (eg. AB), height using centimeters (eg. 185 cm), weight
-  using kilograms (eg. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
+- We recommend inputting blood type using ABO blood group system (e.g. AB), height using centimeters (e.g. 185 cm), weight
+  using kilograms (e.g. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
 
 Examples:
 
@@ -561,13 +561,22 @@ Editing a prescription will overwrite the old data.
 
 Adds a test result taken by a patient in MedBook.
 
-Format: `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`
+Format: `add t/test i/NRIC td/DATE mt/MEDICAL_TEST r/RESULT`
 
 - DATE should be in the format of YYYY-MM-DD
 
 Examples:
 
-- `add t/test i/S1234567L td/2019-09-15 mt/CT Scan r/Brain Cancer`
+- `add t/test i/S1234567L td/2019-09-15 mt/X-Ray r/Broken wrist`
+
+Below is the list of parameters that can be used with the `add t/test` command.
+
+| Parameters | Description                                                          |
+|------------|:---------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC associated with the patient.                    |
+| `td/`      | _Required_. The date of the test was taken. (Format: YYYY-MM-DD)     |
+| `mt/`      | _Required_. The name of the medical test taken.                      |
+| `r/`       | _Required_. The results of the test taken.                           |
 
 ### Viewing Test Result: `view t/test`
 
