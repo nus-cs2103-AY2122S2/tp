@@ -67,6 +67,7 @@ If you're a student who can type fast, AddresSoC can get your contact and schedu
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Contact
 
@@ -151,7 +152,6 @@ Format: `findc [n/NAMES]... [t/TAGS]...`
 
 Examples:
 * `findc n/alex n/roy` returns the contacts with `alex` or `roy` in their names.
-  ![example](images/Find_Contact_example1.png) <br>
 * `findc t/friends t/family` returns the contacts matching the `friends` tag or the `family` tag or both .
   ![example](images/Find_Contact_example2.png) <br>
 * `findc n/alex t/friends` returns `Alex Yeoh` as the contact's name contains `alex` and the contact is tagged with `friends`.
@@ -167,9 +167,8 @@ Sort contacts in the displayed contact list according to name.
 
 Format: `sortc`
 
-* Sort contacts according to name.
+* Sort contacts according to name in ascending alphabetical order.
 
-![example](images/sort_contacts.png)
 
 
 ## Meeting
@@ -179,7 +178,7 @@ Format: `sortc`
 Shows you a list of all meetings in your meeting list.
 
 Format: `listm`
-
+<div style="page-break-after: always;"></div>
 ### Adding a meeting : `addm`
 
 Adds a meeting to your meeting list.
@@ -212,6 +211,7 @@ Examples:
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Duplicate meetings with the same name and date cannot be added into the app.
 </div>
+<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting : `deletem`
 
@@ -273,10 +273,10 @@ Format: `findm [d/DATES]... [n/NAMES]... [t/TAGS]...`
   **and** at least one of `TAGS` will be returned.
 
 Examples:
-* `findc n/event n/project` returns meetings titled `Event`, `event planning`, `Project Meeting`, etc.
-* `findc n/event d/18-06-2022 t/important` returns a meeting that occurs on `18-06-2022`, is named `event planning` 
+* `findm n/event n/project` returns meetings titled `Event`, `event planning`, `Project Meeting`, etc.
+* `findm n/event d/18-06-2022 t/important` returns a meeting that occurs on `18-06-2022`, is named `event planning` 
   **and** has a tag called `important`.
-* `findc n/event n/project d/01-06-2022` returns meetings that occur on `01-06-2022` and are named `event planning` or  `project`, etc.
+* `findm n/event n/project d/01-06-2022` returns meetings that occur on `01-06-2022` and are named `event planning` or  `project`, etc.
 
 ### Sorting meetings : `sortm`
 
@@ -299,6 +299,10 @@ Examples:
 
 ![example](images/reminder_example.png)
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** Reminder will not remind you of archived meetings.
+</div>
+
 
 ### Archive : `archive`
 
@@ -312,8 +316,6 @@ Format: `archive MEETING_INDEX`
 Examples:
 * `archive 2` archives 2nd meeting in the displayed meeting list
 * `archive 0` returns an error for invalid input as 0 is not a positive integer.
-
-![example](images/archive-example.png)
 
 
 ### Unarchive : `unarchive`
@@ -362,6 +364,10 @@ removes the added contact from your contact list.
 * `undo` after `findc t/family` will not revert the filtering of the contact list as
 `findc` does not change your contact list.
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** Only commands that alter the contact or meeting lists can be undone.
+</div>
+
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 If you would like to revert a `findc` command, you may use `listc` to return to the full contact list.
@@ -403,17 +409,16 @@ folder containing the `addressoc.jar` file to find a folder called `data`. Acces
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressSoC will discard all data and start with an empty data file the next time you run the app.
 </div>
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: When you install the app in the other computer, you may overwrite the empty data file it creates with the file that contains the data of your previous AddresSoc home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 Action | Format, Examples
 --------|------------------
