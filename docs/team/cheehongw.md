@@ -29,6 +29,7 @@ Given below are my contributions to the project.
 
   - Justification: This feature improves the product significantly because a user can conveniently filter for groups of people/meeting with just a click, which is a key feature of our product.
 
+<div style="page-break-after: always;"></div>
 
 * **New Feature:** Add `SocialMedia` to `Person` ([PR #77](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/77), [PR #131](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/131))
   - What it does: Allows `Person` instances to contain information about any number of social media handles. Users can add/delete/edit specific `SocialMedia` entries for each person easily.
@@ -63,13 +64,16 @@ Given below are my contributions to the project.
     * Add Product Scope: [PR #55](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/55)
     * Add Acknowledgements: [c724c4](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c724c4a82e6e68bea84e3ad1c087bc284d15a4bf)
     * Wrote implementation for `Target` class: [c8c5f74](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c8c5f7422268279d07b35ecc46ae9a733232f495)
-    * Wrote implementation for split-view panel: [d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6)
+    * Wrote implementation for split-view panel (credits to Wu Zihao for the sequence diagram): [d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6)
 
     * Update diagrams for `Model` component: [5e3f128](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/5e3f12877e18aaa6cc8b94ac73154da096528aba)
+
   * User Guide:
     * Add instructions on editing social media. [6833d5](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/6833d554602c4ea0725839985c5e5021449e46ad)
     * Add instructions on add and delete commands. [130fcfb](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/130fcfb411d526c43b41909772bc801b1e3043bf)
     * Fixed minor grammatical issues [bc8c99](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/bc8c99b7b2f63f1ebd23b621b89312b4b38997b1)
+
+<div style="page-break-after: always;"></div>
 
 * **Contributions to team-based tasks**:
   * Update site-wide settings: [PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44)
