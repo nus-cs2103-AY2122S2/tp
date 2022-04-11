@@ -5,7 +5,7 @@ title: User Guide
 
 ## Introduction
 
-TACH is a desktop app that helps Computer Science (CS) Teaching Assistants (TAs) (like you!)
+Teaching Assistant Contact Helper (TACH) is a desktop application that helps Computer Science (CS) Teaching Assistants (TAs) (like you!)
 from National University of Singapore (NUS), especially those that tutor
 multiple tutorial groups, by **managing their students in an organised manner**.
 
