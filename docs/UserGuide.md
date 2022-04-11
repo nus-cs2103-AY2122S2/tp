@@ -97,7 +97,9 @@ In order to improve your experience when using the app, we have included the fol
 
 ### Getting Started
 Follow this tutorial to get started with using MedBook:
-1. Open MedBook by double clicking `MedBook.jar` located in your MedBook home folder.
+1. Open MedBook through one of the following ways: 
+   * Double clicking `MedBook.jar` located in your MedBook home folder 
+   * In a command window, `cd` to your MedBook home folder and type `java -jar MedBook.jar`
 2. If this is your first time using MedBook, you will see a prompt window requesting you to set up a new password.
 3. Type in a password which fits the requirements and press `enter` to continue.
 
@@ -217,7 +219,7 @@ This section provides all the available commands to control patient's prescripti
 <div style="page-break-after: always;"></div>
 
 #### Test Result Specific Commands
-This section provides all the available commands to control patient's emergency contact.
+This section provides all the available commands to control patient's test results.
 
 | Commands                                         | Usage            |
 | :----------------------------------------------- | :--------------- |
@@ -452,7 +454,9 @@ Examples:
 
 - `view t/medical` followed by `edit 1 bt/B` updates the blood type of the first medical information entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a medical information will overwrite the old data.
+</div>
 
 ### Adding Consultation Information: `add t/consultation`
 
@@ -487,7 +491,9 @@ Examples:
 - `view t/consultation i/S1234567L` followed by `edit 1 dt/2019-08-10 tm/19-00` updates the date and time of the first
   consultation entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a consultation will overwrite the old data.
+</div>
 
 ### Adding Prescription: `add t/prescription`
 
@@ -501,6 +507,15 @@ Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
 Examples:
 
 - `add t/prescription i/S1234567L n/Amoxicillin dt/2021-09-15 s/2 tablets after meal everyday.`
+
+Below is the list of parameters that can be used with the `add t/prescription` command.
+
+| Parameters | Description                                                          |
+|------------|:---------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC associated with the patient.                    |
+| `n/`       | _Required_. The drug name given to the patient.                      |
+| `dt/`      | _Required_. The date of the given prescription. (Format: YYYY-MM-DD) |
+| `s/`       | _Required_. The instructions given to the patient.                   |
 
 ### Viewing Prescription: `view t/prescription`
 
@@ -525,7 +540,9 @@ Examples:
 - `view t/prescription i/S1234567L` followed by `edit 1 s/1 tablet everyday` updates the instruction of the first
   prescription entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a prescription will overwrite the old data.
+</div>
 
 ### Adding Test Result: `add t/test`
 
@@ -563,7 +580,9 @@ Examples:
   displayed on the screen.
 
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a test result will overwrite the old data.
+</div>
 
 ### Viewing Help: `help`
 
