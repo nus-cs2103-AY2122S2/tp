@@ -18,7 +18,7 @@ import seedu.address.model.position.PositionOpenings;
 import seedu.address.model.position.Requirement;
 
 public class JsonAdaptedPosition {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Interview's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Position's %s field is missing!";
 
     private final String positionName;
     private final String description;
@@ -68,12 +68,37 @@ public class JsonAdaptedPosition {
         for (JsonAdaptedRequirement requirement: requirements) {
             positionRequirements.add(requirement.toModelType());
         }
+        if (positionName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PositionName.class.getSimpleName()));
+        }
+        if (!PositionName.isValidPositionName(positionName)) {
+            throw new IllegalValueException(PositionName.MESSAGE_CONSTRAINTS);
+        }
         final PositionName modelPositionName = new PositionName(positionName);
 
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescriptionText(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
         final Description modelDescription = new Description(description);
 
+        if (positionOpening == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PositionOpenings.class.getSimpleName()));
+        }
+        if (!PositionOpenings.isValidNumber(positionOpening)) {
+            throw new IllegalValueException(PositionOpenings.MESSAGE_CONSTRAINTS);
+        }
         final PositionOpenings modelPositionOpenings = new PositionOpenings(positionOpening);
 
+        if (positionOffers == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PositionOffers.class.getSimpleName()));
+        }
         final PositionOffers modelPositionOffers = new PositionOffers(positionOffers);
 
         final Set<Requirement> modelRequirement = new HashSet<>(positionRequirements);
