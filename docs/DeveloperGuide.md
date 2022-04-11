@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-b 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -605,48 +605,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `AgentSee` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Delete a client**
+**Use case: Delete a seller**
 
 **MSS**
 
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  AddressBook deletes the client
+1. User requests to list sellers
+2. System shows a list of sellers
+3. User requests to delete a specific seller in the list
+4. System deletes the seller
 
-**Use case: Add a client**
-
-**MSS**
-
-1.  User types in client information
-2.  AddressBook adds the new client
-
-
-    Use case ends.
+Use case ends
 
 **Extensions**
 
-* 1a. The wrong format is used.
+* 3a. System detects an error in User input.
+  * 3a1. System shows an error message.
+    
+    Use case resumes from step 3.
+
+**Use case: Add a seller**
+
+**MSS**
+
+1.  User types in seller information
+2.  System adds the new seller
+
+Use case ends
+
+**Extensions**
+
+* 1a. System detects an error in User input.
 
   * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
-
-* 1b. A duplicate client is entered.
-
-    * 1b. System shows an error message.
-
-      Use case resumes at step 1.
+    Use case resumes from step 1.
 
 *{More to be added}*
 
-**Use case: Edit a client**
-
-*{More to be added}*
-
-**Use case: Delete a client**
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -674,8 +669,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Real estate agent**: Agent who is the medium that manages clients, and is the target persona for our product.
-* **Client**: Seller who is looking to sell their property.
+* **Client**: `Buyers` who is looking to buy their property and `Sellers` who is looking to sell their property.
 * **Address**: Address of the Property that Sellers are trying to sell.
+* **Property**: The property that the buyer is looking to buy/ seller is looking to sell.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -703,12 +699,85 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+    
+   example JSON format of the `buyeraddressbook.json`  and `selleraddressbook`:
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   ```buyeraddressbook.json```:
+    
+    ```
+    {
+      "buyers" : [ {
+        "name" : "Shi Hong",
+        "phone" : "12345678",
+        "appointment" : "2022-03-31-17-00",
+        "tagged" : [ "smart" ],
+        "propertyToBuy" : {
+          "house" : {
+            "houseType" : "Bungalow",
+            "location" : "Clementi"
+          },
+          "priceRange" : {
+            "lower" : "500000",
+            "upper" : "600000"
+          }
+        }
+      }, {
+        "name" : "Jun Hong",
+        "phone" : "87654321",
+        "appointment" : "",
+        "tagged" : [ ],
+        "propertyToBuy" : null
+      }
+    }
+    ```
 
-1. _{ more test cases …​ }_
+   ```selleraddressbook.json```:
+
+    ```
+    {
+      "sellers" : [ {
+        "name" : "chua",
+        "phone" : "1234",
+        "appointment" : "",
+        "tagged" : [ "tag1", "tag2" ],
+        "propertyToSell" : {
+          "house" : {
+            "houseType" : "Bungalow",
+            "location" : "Queens Town"
+          },
+          "priceRange" : {
+            "lower" : "24",
+            "upper" : "48"
+          },
+          "address" : "Utown"
+        }
+      }, {
+        "name" : "Ben Leong",
+        "phone" : "87654321",
+        "appointment" : "",
+        "tagged" : [ "friendly" ],
+        "propertyToSell" : null
+      }
+    }
+    ```
+
+
+   1. Any of the following situation will cause the file to be broken and will start with empty buyer address book/ seller address book:
+   - The `"sellers"`/`"buyers"` tag is spelled wrongly
+   - The bracket `{` and `}`is not closed well
+   - the `"name"` /`phone `/ `appointment` is `null`
+   - The format of the `name` is incorrect, i.e. chua@hong, pikaso_lim...
+   - The format of the `phone` is incorrect, i.e. not a number format, less than 3 digits
+   - The format of the appointment is incorrect, i.e. not in the correct form yyyy-MM-dd-HH-mm (This will not let the app start correctly)
+   - The `"tagged"` field is not covered with `[` and `]`
+   - The `"propertyToBuy"`/`"propertyToSell"` format is wrong,correct format should be either `null` or JSON format as shown above.
+     - If `"houseType"` is put `null` (It is considered as corrupted file and the app would not start).
+     - `"priceRange"`:
+     
+     `"lower"` is more than `"upper"` value, i.e. `"lower"` > `"upper"`
+    
+
