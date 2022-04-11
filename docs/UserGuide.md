@@ -322,7 +322,7 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 * Only the name is searched, and KEYWORD cannot be empty or contains only spaces.
 
-* Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
+* Only full words will be matched. e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 
 * Patrons matching at least one part of the keyword will be returned.
   e.g. keyword `Hans Bo` will return patrons with names `Hans Gruber`, `Bo Yang`
@@ -506,7 +506,7 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 * Exactly one of the optional parameters must be specified, and can only be specified once.
 
-* All books with a tag, or author, or book name that contains the substring of the given query will be displayed in the book list.
+* All books with a tag, or author, or book name that contains the substring of the given query will be displayed in the book list. e.g. `book find t/` will display all books with tags.
 
 </div>
 
