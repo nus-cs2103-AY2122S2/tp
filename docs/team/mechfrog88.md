@@ -28,7 +28,7 @@ Given below are my contributions to the project.
     * Uploaded interface's screenshot
   * Developer Guide:
     * Created the UML diagram for the UI component
-    * Gave a high level overview for the UI component 
+    * Gave a high level overview for the UI component
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#44](), [\#79](), [\#93](), [\#103](), [\#104](), [\#113](), [\#134](), [\#219](), [\#223](), [\#229](), [\#240]()

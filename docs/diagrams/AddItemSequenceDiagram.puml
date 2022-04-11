@@ -43,7 +43,7 @@ ItemDescriptor -[hidden]-> AddItemCommandParser
 create AddItemCommand
 AddItemCommandParser -> AddItemCommand : new("1", d)
 activate AddItemCommand
-AddItemCommand --> AddItemCommandParser : command
+AddItemCommand --> AddItemCommandParser
 deactivate AddItemCommand
 
 AddItemCommandParser --> IBookParser : command
