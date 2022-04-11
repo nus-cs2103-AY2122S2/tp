@@ -788,7 +788,7 @@ Action | Format, Examples
 **Find Appointment** | `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]` <br> e.g `findappt Meeting`
 **Help** | `help`
 **Export CSV** | `exportcsv`
-**Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importcsv n/2 p/3 e/5 a/6 t/4`
+**Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importcsv f/input.csv n/2 p/3 e/5 a/6 t/4`
 **Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch editperson p/87438806 by/phone =/87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
 **Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappt 6 l/360 && listappt`
