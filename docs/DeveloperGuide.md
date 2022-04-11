@@ -701,6 +701,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC07 - Find a show**
 
 **Preconditions: Trackermon application is started.**
@@ -744,6 +746,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC09 - Quickly import shows**
 
