@@ -85,7 +85,7 @@ This section describes each part of the graphical user interface in detail.
 | ----- | ------------------------------------------------------------------------------------------------------------ |
 | 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window are. |
 | 2     | **Command Input**. This is where you type the commands to be executed by the application.                    |
-| 3     | **Command Result**. This text box displays MedBook's response to the commands entered.                       |
+| 3     | **Command Result**. This text box displays MedBook's response to the command entered.                        |
 | 4     | **List of Patients**. This is the list of patients that are stored in the application.                       |
 | 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information.                                   |
 
@@ -129,7 +129,7 @@ Follow this tutorial to get started with using MedBook:
        <img src="images/HomeScreen.png" alt="Login Prompt Display" width="500">
        <figcaption class="figure-caption">Figure 3: Main Display</figcaption>
    </figure>
-6. You may refer the to command list below for the details of each available command.
+6. You may refer to the command list below for the details of each available command.
 
 ---
 
@@ -249,7 +249,7 @@ Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
 1. NRIC consists alphanumeric characters only.
-2. NRIC starts with either S, T, F, G, M character.
+2. NRIC starts with either S, T, F, G, or M character.
 3. NRIC consists 7 digits after the first character.
 4. NRIC ends with any character.
 
@@ -544,7 +544,7 @@ Format: `edit INDEX [td/TEST_DATE] [mt/MEDICAL_TEST] [r/TEST_RESULT]`
 
 Examples:
 
-- `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates the result field of the first test result entry
+- `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates the result of the first test result entry
   displayed on the screen.
 
 
@@ -600,9 +600,9 @@ Examples:
 <div markdown="block" class="alert alert-info">
 **:information_source: Info:**<br>
 
-Although `NIL` is an empty placeholder for the optional field `[NOTES]`, `find NIL` will still filter the records in
+Although `NIL` is an empty placeholder for the optional fields, `find NIL` will still filter the records in
 the current display to show those which contains the keyword `NIL` to accommodate for cases where the user intentionally
-types in `NIL` in any field.
+types `NIL` in any field.
 
 </div>
 
