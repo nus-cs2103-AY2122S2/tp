@@ -43,7 +43,7 @@ Let's get started!
     2. For Windows users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-windows)
     3. For Linux Users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-linux)
 
-2. Download the latest `WoofAreYou.jar` [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.3.trial).
+2. Download the latest `WoofAreYou.jar` [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.4).
 
 3. Copy `WoofAreYou.jar` to the folder you want to use as the _home folder_ for WoofAreYou.
 
