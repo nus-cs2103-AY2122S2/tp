@@ -436,6 +436,40 @@ Actor: User
 
      Use case resumes at step 2
 
+### **Use Case: Find clients by keywords**
+
+Actor: User
+
+**MSS**
+1. User requests to find clients.
+2. REP filters the full list of clients for those that satisfy the condition.
+3. REP shows the filtered list of clients. 
+
+**Extensions:**
+* 1a. User request does not specify an attribute. 
+  * 1a1. REP displays an error message.
+  
+    Use case ends.
+* 1b. User request does not specify any keywords.
+  * 2b1. REP displays an error message.
+
+    Use case ends.
+
+### **Use Case: Match clients**
+
+Actor: User
+
+**MSS**
+1. User requests to match clients.
+2. REP pops up MatchWindow.
+3. REP shows matching clients in MatchWindow.
+
+**Extensions:**
+* 2a. There are no matching clients. 
+  * 2a1. REP shows an empty MatchWindow.
+    
+    Use Case ends.
+
 ### **Use Case: Upload Image**
 
 Actor: User
@@ -484,7 +518,7 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Set a Reminder for a client**
+### **Use Case: Set a Reminder for a client**
 
 Actor: User
 
@@ -508,7 +542,7 @@ Actor: User
 
     Use case resumes at step 2
 
-**Use Case: View Reminders for clients**
+### **Use Case: View Reminders for clients**
 
 Actor: User
 

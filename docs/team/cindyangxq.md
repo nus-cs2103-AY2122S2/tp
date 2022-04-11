@@ -35,8 +35,8 @@ Given below are my contributions to the project.
     * Added implementation details of the `match` feature.
     * Added implementation details of the `Preference` attribute.
     * Added implementation details of the enhanced `find` feature.
-    * Added manual testing for the `match` feature.
-    * Added manual testing for the `find` feature. 
+    * Added use cases and manual testing for the `match` feature.
+    * Added use cases and manual testing for the `find` feature. 
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#50](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/50), [\#67](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/67), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94).
