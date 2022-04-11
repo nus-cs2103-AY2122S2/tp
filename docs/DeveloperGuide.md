@@ -69,9 +69,9 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1,2`.
 
-![Structure of the UI Component](images/ArchitectureSequenceDiagramV2.png)
+![Structure of the UI Component](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -113,9 +113,9 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g., to add a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1,2")` API call.
 
-![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletec 1,2` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -375,7 +375,9 @@ The schedule feature provides three commands to navigate to different week, `Sch
     * Cons: When booking data grow large, it might take longer to load the view.
 
 The following activity diagram summarizes what happens when the user executes the schedule command (`schedule`):
-    ![Schedule Activity Diagram](images/ScheduleActivityDiagram.png)
+
+![Schedule Activity Diagram](images/ScheduleActivityDiagram.png)
+
 The following sequence diagram shows the interactions within the `Logic` and `Model` components when the user inputs `schedule date/10-10-2022` command.
 
 ![Schedule Sequence Diagram](images/ScheduleSequenceDiagram.png)
@@ -540,6 +542,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
+
 #### Use case: UC05 - Find customers
 
 **MSS:**
@@ -585,6 +589,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 #### Use case: UC07 - List services
 

@@ -16,8 +16,8 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List bookings for the week containing date."
-            + "parameters: "
-            + PREFIX_DATE + "DATE "
+            + " Parameters: "
+            + PREFIX_DATE + "DATE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "10-10-2022";
 

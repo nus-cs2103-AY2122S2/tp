@@ -101,10 +101,10 @@ The table below explains the important technical terms to help you understand ho
 <!-- @@author -->
 
 **Example**:
-* `addc n/NAME p/PHONE a/ADDRESS e/EMAIL`
+* `addc n/NAME p/PHONE a/ADDRESS e/EMAIL rd/REGISTRATION_DATE`
 * Command Word: `addc`
-* Prefixes: `n/`, `p/`, `a/`, `e/`
-* Parameters: `NAME`, `PHONE`, `ADDRESS`, `EMAIL`
+* Prefixes: `n/`, `p/`, `a/`, `e/`, `rd/`
+* Parameters: `NAME`, `PHONE`, `ADDRESS`, `EMAIL`, `REGISTRATION_DATE`
 
 The commands in TrackBeau follows these rules:
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
@@ -338,7 +338,7 @@ Format: `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 
 Examples:
 * `edits 1 pr/200` Edits the price of the 1st service to be `200`.
-* `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `60` respectively.
+* `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `30` respectively.
 
 Example Usage: `edits 1 pr/200`
 
@@ -530,7 +530,7 @@ Examples:
 * `plotAllergy`
   
 #### 4.4.6 Plot chart on common skin type amongst customers: `plotSkin`
-   ![image](https://user-images.githubusercontent.com/83572953/160984794-e12943ee-863f-4d96-accb-f23271ed6e08.png)
+   ![plot skin chart](images/user-guide/plot-skin.png)
 
 Plots a pie chart on the most common allergies amongst customers. If there are most than 10 skin types in customer data, only the top 10 most skin types will be included in the piechart to let the chart be still meaningful.
 
