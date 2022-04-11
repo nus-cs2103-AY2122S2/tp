@@ -186,7 +186,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the entity at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s TAssist.
      */
     public static void showEntityAtIndex(Model model, Index targetIndex, EntityType entity) {
         switch (entity) {

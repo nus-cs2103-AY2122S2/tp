@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedAssessment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2030;
+import static seedu.address.testutil.TypicalModules.CS2105;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,8 +28,8 @@ public class JsonAdaptedAssessmentTest {
 
     private static final String VALID_ASSESSMENT_NAME = TypicalAssessments.LAB1;
     private static final String VALID_SIMPLE_NAME = TypicalAssessments.LAB1_SIMPLE_NAME;
-    private static final String VALID_MODULE_CODE = TypicalModules.CS2030.getModuleCode().toString();
-    private static final String VALID_ACAD_YEAR = TypicalModules.CS2030.getAcademicYear().toString();
+    private static final String VALID_MODULE_CODE = TypicalModules.getModule(CS2030).getModuleCode().toString();
+    private static final String VALID_ACAD_YEAR = TypicalModules.getModule(CS2030).getAcademicYear().toString();
 
     private static final List<TaModule> modules = new ArrayList<>(List.of(TypicalModules.getModule(2)));
     private static final List<Student> students = new ArrayList<>(List.of(TypicalStudents.getStudent(0),
@@ -77,7 +79,7 @@ public class JsonAdaptedAssessmentTest {
 
     @Test
     public void toModelType_nonExistentModule_throwsIllegalValueException() {
-        List<TaModule> modulesList = new ArrayList<>(Arrays.asList(TypicalModules.CS2105));
+        List<TaModule> modulesList = new ArrayList<>(Arrays.asList(TypicalModules.getModule(CS2105)));
         JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(
                 VALID_ASSESSMENT_NAME, VALID_MODULE_CODE, VALID_ACAD_YEAR, VALID_SIMPLE_NAME, attempts);
         assertThrows(IllegalValueException.class, () -> assessment.toModelType(modulesList, students));

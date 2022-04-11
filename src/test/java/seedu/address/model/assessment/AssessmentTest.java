@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.AssessmentBuilder;
 import seedu.address.testutil.TypicalAssessments;
+import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalStudents;
 
 public class AssessmentTest {
@@ -45,7 +46,7 @@ public class AssessmentTest {
 
         // different Module -> returns false
         editedAssessment = new AssessmentBuilder(CS2103T_NO_STUDENT_PARTICIPATION_NO_ATTEMPT)
-                .withTaModule(CS2101).build();
+                .withTaModule(TypicalModules.getModule(CS2101)).build();
         assertFalse(CS2103T_NO_STUDENT_PARTICIPATION_NO_ATTEMPT.isSameAssessment(editedAssessment));
     }
 
@@ -85,7 +86,7 @@ public class AssessmentTest {
 
         // different module -> returns false
         editedAssessment = new AssessmentBuilder(CS2103T_NO_STUDENT_PARTICIPATION_NO_ATTEMPT)
-                .withTaModule(CS2105).build();
+                .withTaModule(TypicalModules.getModule(CS2105)).build();
         assertFalse(CS2103T_NO_STUDENT_PARTICIPATION_NO_ATTEMPT.equals(editedAssessment));
 
         // different students -> returns false

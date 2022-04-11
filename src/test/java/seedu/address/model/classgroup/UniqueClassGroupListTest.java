@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.classgroup.exceptions.ClassGroupNotFoundException;
 import seedu.address.model.classgroup.exceptions.DuplicateClassGroupException;
 import seedu.address.testutil.ClassGroupBuilder;
+import seedu.address.testutil.TypicalModules;
 
 //@@author jxt00
 public class UniqueClassGroupListTest {
@@ -177,6 +178,7 @@ public class UniqueClassGroupListTest {
     public void findClassesOfModule() {
         uniqueClassGroupList.add(CS2101G09);
         uniqueClassGroupList.add(CS2040B10A);
-        assertTrue(uniqueClassGroupList.findClassesOfModule(CS2101).equals(new ArrayList<>(Arrays.asList(CS2101G09))));
+        assertTrue(uniqueClassGroupList.findClassesOfModule(TypicalModules.getModule(CS2101))
+                .equals(new ArrayList<>(Arrays.asList(CS2101G09))));
     }
 }

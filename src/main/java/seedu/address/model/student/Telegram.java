@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author wxliong
 /**
- * Represents a Person's Telegram handle in the address book.
+ * Represents a Student's Telegram handle in the TAssist.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram {

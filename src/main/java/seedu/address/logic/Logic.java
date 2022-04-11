@@ -48,7 +48,7 @@ public interface Logic {
     ObservableList<Assessment> getFilteredAssessmentList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' TAssist file path.
      */
     Path getTAssistFilePath();
 

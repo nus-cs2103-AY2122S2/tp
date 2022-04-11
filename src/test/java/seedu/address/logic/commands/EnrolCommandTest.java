@@ -141,7 +141,7 @@ public class EnrolCommandTest {
 
         assertEquals(expectedMessage, actualMessage);
         assertTrue(classGroup.hasStudent(enrolledExistingStudent));
-        //assertTrue(newModule.hasStudent(enrolledExistingStudent));
+        assertTrue(newModule.hasStudent(enrolledExistingStudent));
     }
 
     @Test

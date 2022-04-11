@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalModules.CS2103T_WITH_STUDENT;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ import seedu.address.model.tamodule.TaModule;
 public class AssessmentBuilder {
 
     public static final String DEFAULT_ASSESSMENT_NAME = "Class Participation";
-    public static final TaModule DEFAULT_MODULE = TypicalModules.CS2103T_WITH_STUDENT;
+    public static final TaModule DEFAULT_MODULE = TypicalModules.getModule(CS2103T_WITH_STUDENT);
 
     private AssessmentName assessmentName;
     private TaModule module;

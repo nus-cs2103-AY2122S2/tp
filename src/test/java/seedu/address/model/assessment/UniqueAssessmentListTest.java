@@ -18,6 +18,7 @@ import seedu.address.model.assessment.exceptions.AssessmentNotFoundException;
 import seedu.address.model.assessment.exceptions.DuplicateAssessmentException;
 import seedu.address.testutil.AssessmentBuilder;
 import seedu.address.testutil.TypicalAssessments;
+import seedu.address.testutil.TypicalModules;
 
 
 public class UniqueAssessmentListTest {
@@ -44,12 +45,14 @@ public class UniqueAssessmentListTest {
     public void contains_moduleWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAssessmentList.add(CS2103T_PARTICIPATION_NO_ATTEMPT);
         Assessment editedAssessment = new AssessmentBuilder()
-                .withAssessmentName(TypicalAssessments.PARTICIPATION).withTaModule(CS2103T_WITH_STUDENT)
+                .withAssessmentName(TypicalAssessments.PARTICIPATION)
+                .withTaModule(TypicalModules.getModule(CS2103T_WITH_STUDENT))
                 .build();
         assertTrue(uniqueAssessmentList.contains(editedAssessment));
 
         editedAssessment = new AssessmentBuilder()
-                .withSimpleName(TypicalAssessments.PARTICIPATION_SIMPLE_NAME).withTaModule(CS2103T_WITH_STUDENT)
+                .withSimpleName(TypicalAssessments.PARTICIPATION_SIMPLE_NAME)
+                .withTaModule(TypicalModules.getModule(CS2103T_WITH_STUDENT))
                 .build();
         assertTrue(uniqueAssessmentList.contains(editedAssessment));
     }
