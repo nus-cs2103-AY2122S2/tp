@@ -106,7 +106,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram_New.png" width="550"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -116,7 +116,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram_New.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
