@@ -47,5 +47,6 @@ Given below are my contributions to the project.
         * For example, I needed to use `list` command to change pages, which sometimes led me to discover bugs
         * For example, I needed to use `add` command to add entities to test `delete`, which also led me to discover bugs
     * Provided help to teammates whenever it seemed like they needed help with implementation through private message or meet up
-    * Links to PRs reviewed with non trivial comments: #46, #96
+    * PRs reviewed: 11
+    * Links to PRs reviewed with non trivial comments: [#46](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/46), [#96](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/96)
 * **Tools**:
