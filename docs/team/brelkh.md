@@ -2,7 +2,6 @@
 layout: page
 title: Brandon Kheng's Project Portfolio Page
 ---
-
 ### Project: Teaching Assistant's Personal Assistant (TAPA)
 
 TAPA is a desktop contact management application used to manage students' contact and progress. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
@@ -26,7 +25,7 @@ Given below are my contributions to the project.
 * **Confirm Clear Command (Extension)**:
   * What it does: After the user executes the clear command, TAPA requests for the user's confirmation before clearing all details stored in TAPA.
   * Justification: Due to the severity of accidentally clearing all details stored in TAPA, this confirmation feature acts as a safeguard to ensure the user knows the effect of the clear command and intends to clear TAPA.
-  * Highlights: This extension of the clear command requires the user to interact with TAPA to confirm their decision. Thus, unlike for most other commands, the UI component of TAPA had to be studied and then extended. Additional thought was required to figure out how to obtain confirmation from the user. In this implementation, the confirmation feature acts as a command to build upon the existing command components, and interacts with the UI component of TAPA to achieve its purpose. Furthermore, the `confirm` input should not be recognised as a command during normal operations. As such, `LogicManager` and `MainWindow` had to be extended to cater for these needs.
+  * Highlights: This extension of the clear command requires the user to interact with TAPA to confirm their decision. Thus, unlike for most other commands, the UI component of TAPA had to be studied and then extended. In this implementation, the confirmation feature interacts with the UI component of TAPA to achieve its purpose. Furthermore, the `confirm` input should not be recognised as a command during normal operations. As such, `LogicManager` and `MainWindow` had to be extended to cater for these needs.
   * Implementation: [#61](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/61)
 
 * **Edit Command (Extension)**:
@@ -40,14 +39,7 @@ Given below are my contributions to the project.
       * Edited `PersonCard` to highlight the most important information. ([#68](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/68))
       * Added text-wrapping to eliminate the need for side-scrolling. ([#63](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/63))
     * Wrote testcases for `clear`, `undo` and `history` features, as well as model components, to increase overall code coverage. ([#264](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/264) and [#271](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/271))
-
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the `edit`, `clear`, `undo` and `history` features. ([#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41) and [#141](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/141)).
-        * Improved user guide based on peer review comments received in CS2101. ([#130](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/130))
-    * Developer Guide:
-        * Added documentation for the `clear`, `undo` and `history` features. ([#110](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/110) and [#254](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254)).
-
+    
 * **Contribution to team-based tasks**:
   * Worked with the team to:
     * Ideate and design TAPA.
@@ -56,7 +48,6 @@ Given below are my contributions to the project.
     * Maintain the issue tracker by assigning and labelling issues.
     * Provide timely updates to our TA.
     * Address and fix PE-D bugs.
-    * Edit and format the UG and DG to make them more readable and user-friendly.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
@@ -66,3 +57,10 @@ Given below are my contributions to the project.
       * [#232](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/232) Update model component of DG
       * [#238](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/238) Add Assign Command and DeleteTask Command to DG
     * Reported a total of 10 bugs and suggestions for other teams in the class (reported [here](https://github.com/brelkh/ped/issues)).
+
+* **Documentation**:
+    * User Guide:
+        * Added documentation for the `edit`, `clear`, `undo` and `history` features. ([#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41) and [#141](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/141)).
+        * Improved user guide based on peer review comments received in CS2101. ([#130](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/130))
+    * Developer Guide:
+        * Added documentation for the `clear`, `undo` and `history` features. ([#110](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/110) and [#254](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254)).
