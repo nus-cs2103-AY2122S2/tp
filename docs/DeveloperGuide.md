@@ -340,7 +340,7 @@ The following activity diagram summarizes a high level view of what happens when
 
 #### What is the feature about?
 The `sort` mechanism utilises the existing command class model from `AddressBook`. It introduces new methods and modifies current
-implementation of existing methods in order to allow the user sort the displayed candidates list by a specific
+implementation of existing methods in order to allow the user to sort the displayed candidates list by a specific
 field.
 
 A new `s/` prefix is added in the `CliSyntax`, which is used to accurately parse in the `ATTRIBUTE_FIELD` that the user
@@ -350,7 +350,7 @@ would like to sort the displayed candidate list by. The implementation in `SortC
 #### How is the feature implemented?
 The parser for the `sort` command works similarly to all other commands implemented. In this case, as the user
 may potentially key in multiple valid `s/` prefix fields, we utilise the `ArgumentTokenizer` in order to parse
-in all the input, and only utilise the last `s/` prefix field.
+in all the inputs, and only utilise the last `s/` prefix field.
 
 The main logic for executing the `sort` command works within the `ModelManager` and `AddressBook` classes. When the
 sort command is executed, a valid Comparator is passed as an argument into the `updateSortedCandidateList()` method, which

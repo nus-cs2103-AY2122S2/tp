@@ -4,12 +4,11 @@ title: Charmaine Ho's Project Portfolio Page
 ---
 
 ### Project: TAlent Assistant™
-#### Overview 
+**Overview** 
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to NUS School of Computing professors for managing
 the interview scheduling process of candidates applying to be undergraduate Teaching Assistants (TA). It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI) built using JavaFX.
 
-### Summary of Contributions
-
+**Summary of Contributions**
 * **Code contributions:** Click on the following
 [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=week&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=charmainehly&tabRepo=AY2122S2-CS2103-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 to view the detailed breakdown.
