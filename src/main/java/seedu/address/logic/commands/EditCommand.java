@@ -102,9 +102,7 @@ public class EditCommand extends Command {
             tempList.setPredicate(predicate);
 
             if (tempList.size() > 1) {
-                lastShownList.setPredicate(predicate);
-                listSize = lastShownList.size();
-                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+                return getCommandResult(lastShownList, predicate);
             }
             targetIndex = model.getPersonListIndex(targetName);
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -113,7 +111,18 @@ public class EditCommand extends Command {
         } else {
             targetIndex = Index.fromOneBased(index);
         }
+        Person editedPerson = getEditedPerson(model, lastShownList, targetIndex);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
 
+    private CommandResult getCommandResult(FilteredList<Person> lastShownList, Predicate<Person> predicate) {
+        lastShownList.setPredicate(predicate);
+        listSize = lastShownList.size();
+        return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+    }
+
+    private Person getEditedPerson(Model model, FilteredList<Person> lastShownList,
+                                   Index targetIndex) throws CommandException {
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -123,7 +132,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return editedPerson;
     }
 
     public void setIndex(int index) throws ParseException {
