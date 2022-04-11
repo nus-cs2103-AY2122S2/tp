@@ -14,22 +14,25 @@ package "addAppointment(appt2) Before ShiftAppointmentToPosition()" {
         StartDateTime = "12-12-2022 13:00"
         Duration = 30
     }
+    note top: Index 0
     class Appointment1 as "  __appt1:Appointment__  " {
         StartDateTime = "12-12-2022 13:30"
         Duration = 60
     }
+    note top: Index 1
     class Appointment2 as "  __appt2:Appointment__  " #FFCCCC {
         StartDateTime = "10-11-2022 15:30"
         Duration = 10
     }
+    note top: Index 2
 }
 Appointment0 -[hidden]right-> Appointment1
 Appointment1 -[hidden]right-> Appointment2
 Appointment1 -[hidden]down-> DisjointAppointmentList
 
-DisjointAppointmentList -left-> Appointment0 : Index 0
-DisjointAppointmentList -up-> Appointment1 : Index 1
-DisjointAppointmentList -right-> Appointment2 : Index 2
+DisjointAppointmentList -left-> Appointment0
+DisjointAppointmentList -up-> Appointment1
+DisjointAppointmentList -right-> Appointment2
 note right on link: appt2 the only\n appointment \n is out of position.
 
 @end

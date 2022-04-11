@@ -44,6 +44,7 @@ deactivate Model
 Logic <-- Command
 deactivate Command
 [<-- Logic
+destroy Command
 deactivate Logic
 
 

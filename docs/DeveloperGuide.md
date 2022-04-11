@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org/).
@@ -23,6 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Application Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -37,6 +41,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 The ***Architecture Diagram*** above provides a high-level view of the Application design and structure.
 
 A quick overview of main components and how they interact with each other is provided below, while further details can be found in the subsequent sections.
+
+<div style="page-break-after: always;"></div>
 
 **Main components of the architecture**
 
@@ -70,11 +76,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -97,7 +107,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each of the types `Person`, `ScheduleItem` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 <div markdown="span" class="alert alert-info">
 
@@ -112,6 +122,8 @@ The `Card` component of the `UI` class diagram has been omitted from the overall
 The structure roughly follows the factory design pattern, with modifications in `ScheduleItemCardFactory` to handle the logic specific to the composition hidden by `ScheduleItemCard`. The factories for `TagCard` and `PersonCard` are implemented as anonymous lambda functions, so they are omitted from the class diagram.
 
 Each `{model}Card` depends on the corresponding `{model}` in the Model component for populating data onto the UI.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -131,6 +143,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
+<div style="page-break-after: always;"></div>
+
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPersonCommand`) which is executed by the `LogicManager`.
@@ -144,6 +158,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -151,6 +167,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -171,6 +189,8 @@ The `Model` component,
 
 The **high-level partial class diagram** above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
 
+<div style="page-break-after: always;"></div>
+
 The following table summarizes how different data entity objects are organized in `Model`.
 
 | Data Stored  | Entity        | Container Class           | Exposed Filtered List Getter   |
@@ -184,6 +204,8 @@ For each of the data entities, 'selected' objects (e.g., results of a search que
 <img src="images/ModelAddressBookClassDiagram.png" width="600" />
 
 The class diagram above illustrates how the `AddressBook` subcomponent is structured, including how `Tag` and `Person` are stored internally.
+
+<div style="page-break-after: always;"></div>
 
 <img src="images/ModelScheduleClassDiagram.png" width="600" />
 
@@ -199,9 +221,11 @@ The Schedule subcomponent is structured such that:
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
 * The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
 
-For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>` list, see the [implementation](#implementation) section.
+For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>`, see the [implementation](#implementation) section.
 
 Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -226,6 +250,8 @@ Within the `storage` package, there also exists a `CsvManager` class that is a h
 
 Classes used by multiple components are in the `seedu.contax.commons` package.
 
+<div style="page-break-after: always;"></div>
+
 ### Alternate Architectural View By Functionality
 
 Departing from the 4-component architectural view of the system, the App can also be logically partitioned into **3 distinct subsystems** based on **functionality**.
@@ -244,6 +270,8 @@ As such, detailed descriptions for the Address Book subsystem can be easily tran
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented. The section is organized by functionality.
@@ -260,6 +288,8 @@ Below is a partial class diagram of the Tag subsystem.
 
 ![Tag Subsystem](images/TagModelClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Defensive `AddressBook`
 
 As the `Tag` objects are moved to its own subsystem, there is a need to synchronise the `Tag` and `Person` subsystems which is done through cascading any changes made from `Tag` to `Person`. For example, if a `Tag` object is deleted, this tag should also be removed for all `Person` objects containing that tag. 
@@ -274,6 +304,8 @@ Below are the modified sequence diagrams of `AddressBook#setPersons()` and `Addr
 ![AddressBook SetPersons](images/AddressBookSetPersonsSequenceDiagram.png)
 
 ![AddressBook SetTags](images/AddressBookSetTagsSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Tag Feature - `edittag`
 
@@ -303,6 +335,8 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### The Schedule and Appointment Models
 
 This section describes the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. It starts from the lowest level, and slowly works its way upwards.
@@ -317,6 +351,8 @@ An overview of the structure is shown in the partial class diagram below. Note t
 
 ![Appointment Models](images/AppointmentModelClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### The `ScheduleItem` Class
 
 There are 2 classes that represent items in the schedule, namely
@@ -326,11 +362,11 @@ There are 2 classes that represent items in the schedule, namely
 
 Both `Appointment` and `AppointmentSlot` inherit from the `ScheduleItem` class. The classes are structured such that common scheduling-related logic are abstracted into the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
 
-![Appointment Models](images/ScheduleItemClassDiagram.png)
+![Parital Schedule Item Diagram](images/ScheduleItemClassDiagram.png)
 
 In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` objects through a **unified natural ordering**. This ordering is used by the lists containing these objects, including both `CompositeObservableList` and `DisjointAppointmentList`.
 
-The time-related methods of note implemented by `ScheduleItem` are:
+The scheduling-related methods of note implemented by `ScheduleItem` are:
 
 * Getters `getStartDateTime()` and `getEndDateTime()`
 * Comparator helper method `getComparableDateTime()`
@@ -339,9 +375,11 @@ The time-related methods of note implemented by `ScheduleItem` are:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`A2.getStartDateTime() < A1.getEndDateTime()`
+:information_source: Two `ScheduleItem` objects are said to be **overlapping** if <br>`S1.getStartDateTime() < S2.getEndDateTime()` or <br>`S2.getStartDateTime() < S1.getEndDateTime()`
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### The `DisjointAppointmentList` Class
 
@@ -374,6 +412,7 @@ In order to efficiently maintain chronological ordering upon list modification, 
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
 
+<div style="page-break-after: always;"></div>
 
 #### The `Schedule` Wrapper Class
 
@@ -391,21 +430,27 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 
 ![Appointment Add Sequence](images/AppointmentAddSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Defensive `Schedule`
 
 `Schedule` implements the `ReadOnlySchedule` interface, which exposes only getter methods of the `Schedule` class. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule`. This prevents unintended modifications to the list of `Appointment` objects by external classes, and restricts that all modifications to the `Schedule` must be made through `ModelManager`.
 
 ![Read Only Schedule](images/ReadOnlyScheduleClassDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Appointment Slot List
 
 The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since the list of `AppointmentSlot` objects for the `Schedule` are dependent on and change with the `Appointment` contained within it, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
-Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` are always consistent with the backing `Schedule`.
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically. This design creates a layer of abstraction that ensures the list of `AppointmentSlot` objects in `AppointmentSlotList` is always consistent with the backing `Schedule`.
 
 The `AppointmentSlotList` must be configured with some `TimeRange` using the `AppointmentSlotList#updateFilteredRange(TimeRange, int)` method for it to generate `AppointmentSlot` objects.
 
 ![Appointment Slot List](images/AppointmentSlotListObjectDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Appointment and AppointmentSlot List Composition
 
@@ -415,7 +460,7 @@ Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered 
 * be chronologically sorted
 * be chronologically disjoint
 
-This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list, ensuring that the 3 constraints listed above are satisfied.
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying lists, ensuring that the 3 constraints listed above are satisfied.
 
 Using the above instance, the resultant `CompositeObservableList` is shown in the object diagram below.
 
@@ -426,6 +471,8 @@ Using the above instance, the resultant `CompositeObservableList` is shown in th
 :rotating_light: &nbsp; If the backing lists are not sorted, then the result list will also not be sorted.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Appointments Filtering Feature - `apptbetween`
 
@@ -440,6 +487,8 @@ This allows code for filtering to be centralized, while allowing the lower level
 The sequence diagram below illustrates an example of both `Logic` and `UI` accessing the appointment filtering functionality.
 
 ![Appointment Filter](images/AppointmentFilterSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Schedule Serialization and Inflation
 
@@ -478,6 +527,9 @@ However, this implementation comes with the increased risk of desynchronization 
 
 The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
 The `Priority` enum values provide the display name of the priority levels, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
+
+<div style="page-break-after: always;"></div>
+
 ### Date Time Input Parsing
 
 The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
@@ -491,9 +543,13 @@ The organization of the time parser mirrors the date parser, and their purposes 
 * `TimeParser` / `DateParser`: Contains the actual parsing logic for determining the input format and the parsing logic to use
 * `TimeParserPatternProvider` / `DateParserPatternProvider`: Contains the Regex patterns required for parsing
 
-A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all classes and methods are static):
+<div style="page-break-after: always;"></div>
+
+A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all methods are static class-level members):
 
 ![Parser Flow](images/DateTimeParsingSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Result List Model Type Switching Feature
 
@@ -507,6 +563,8 @@ The approach taken is a "Focus" action that `Command` objects can request in the
 The returned `CommandResult` is then used by `MainWindow` to switch between different result lists, according to the model type being requested. This is done through the `MainWindow#changeListContentType()` method, which implements the actual UI manipulation.
 
 ![CommandResult Class Diagram](images/UiFocusSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### The Onboarding Guide
 
@@ -528,6 +586,8 @@ The `OnboardingStep` and `OnboardingStory` models are implemented to support the
 ##### The `OnboardingStep` Class
 The purpose of the OnboardingStep is to soley contain UI and logic updates for the OnboardingWindow and is therefore implemented with minimal functionalities, providing only getters and setters for initialization and processing.
 
+<div style="page-break-after: always;"></div>
+
 ##### The `OnboardingStory` Class
 The OnboardingStory serves as a simple container class for `OnboardingStep` objects, providing a basic subset of list functionalities.
 
@@ -536,6 +596,8 @@ The OnboardingStoryManager is a driver class for the OnboardingWindow containing
 
 The sequence diagram of a mouse click event interaction is as follows:
 ![OnboardingStepSequenceDiagram](images/OnboardingStepSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Processing of OnboardingSteps
 Upon the processing of an OnboardingStep, the OnboardingWindow propagates the instruction to the other UI components to update them accordingly. In cases that the OnboardingStep does not contain any instruction for a particular UI components, that component's update function will not be invoked and will therefore remain the same.
@@ -549,6 +611,8 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 
 ##### The `Overlay` Class
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
+
+<div style="page-break-after: always;"></div>
 
 ### Markdown-like Text Processing
 The `TextStyleHelper` class contains a text processor that processes common text stylings into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
@@ -570,9 +634,12 @@ It currently supports:
 
 This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generating a List of styled `Text` objects to add to the `ResultDisplay`.
 
+<div style="page-break-after: always;"></div>
+
 A partial sequence diagram showing the process of how the UI uses the text styler is as follows:
 ![MarkdownTextStylerDiagram](images/MarkdownTextStylerDiagram.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Import and Export CSV Features
 
@@ -589,6 +656,8 @@ In the event that any of the data fields read do not conform to the restrictions
 The `CSVManager` takes in a `IndexedCsvFile` object, opens the file and reads the lines. The logic that performs the parsing of data fields and creation of `Person` models is specified in the import command, and is passed as an anonymous function to CsvManager. The sequence diagram is as follows:
 
 ![ImportCsvSequenceDiagram](images/ImportCsvSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Export CSV
 
@@ -609,12 +678,16 @@ The sequence diagram is as follows:
 
 The exported file can be subsequently imported back into any other instance of ContaX, similar to the existing `.json` system of import/export.
 
+<div style="page-break-after: always;"></div>
+
 ### Enhanced Find Logic
 
 The previous implementation of the find function is limited to only searching the name field. The enhancement to the feature allows users to search for `Person` objects by more attributes, including by the `phone`, `email` and `address` fields.
 This is done by creating a helper `SearchType` model within the `model.util` package and abstracting the original `NameConstrainsKeywordsPredicate` to form `ConstrainsKeywordsPredicate` then create different inherit of three different types of predicate.
 The sequence diagram is as follows:
 ![Enhanced Find Logic](images/FindCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Mass Operation Features
 
@@ -629,7 +702,9 @@ The sequence diagram is as follows:
 
 #### Range Command
 
-This extension allows the user to perform a command on a range of persons based on their displayed index. During the conversion from user input to list of commands `from/INDEX to/INDEX` is used to generate the new commands that will be executed.
+This extension allows the user to perform a command on a range of persons based on their displayed index. During the conversion from user input to list of commands, `from/INDEX to/INDEX` is used to generate the new commands that will be executed.
+
+<div style="page-break-after: always;"></div>
 
 #### Batch Command
 
@@ -640,6 +715,8 @@ The sequence diagram is as follows:
 ![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)
 
 The multiple commands executed will return a `CommandResult` which contains a list of feedback messages of the results executed combined all together and returned as `feedbackToUser`
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Tag Finding Feature
 
@@ -656,6 +733,8 @@ The sequence diagrams below illustrates the proposed implementations to access t
 ![Tag Find](images/TagFindSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -687,6 +766,8 @@ The sequence diagrams below illustrates the proposed implementations to access t
 
 This section lists the user stories that were both implemented in the system and considered but dropped in favour of other user stories.
 
+<div style="page-break-after: always;"></div>
+
 #### Implemented User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -717,6 +798,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *  `  | seasoned user                              | enter commands that perform an action on multiple appointments in a single step     | efficiently manage my schedule                                         |
 | `* * *`  | seasoned user                              | batch multiple commands together                                                    | perform complex tasks in a single action                               |
 
+<div style="page-break-after: always;"></div>
 
 #### User Stories Not Implemented
 
@@ -746,6 +828,7 @@ The following user stories were considered but ultimately not implemented. Some 
 | `*    `  | seasoned user  | customise the names and format of text-based commands           | easily remember and use commands I need                            |
 | `*    `  | seasoned user  | add macros to chain multiple actions together as custom command | perform complex actions that I need in 1 command                   |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -761,8 +844,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **MSS**
 
 1. User requests to list persons.
-2. ContaX shows a list of persons.<br>&nbsp;
-    Use case ends.<br>&nbsp;
+2. ContaX shows a list of persons.<br><br>
+   Use case ends.<br>&nbsp;
 
 **UC2: Add Person**
 
@@ -771,8 +854,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 1. User requests to add a person.
 2. User enters details of the new person.
 3. ContaX adds the new person.
-4. ContaX shows that the person has been added successfully.<br>&nbsp;
-    Use case ends.<br>&nbsp;
+4. ContaX shows that the person has been added successfully.<br><br>
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -798,8 +881,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User requests to delete a person.
 4. User selects the person to delete.
 5. ContaX deletes the person.
-6. ContaX displays a message indicating that the person was successfully deleted.<br>&nbsp;
-    Use case ends.<br>&nbsp;
+6. ContaX displays a message indicating that the person was successfully deleted.<br><br>
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -827,8 +910,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User requests to edit person.
 4. User enters details to modify a specific person.
 5. ContaX updates the specified person.
-6. ContaX displays a message indicating that the person was successfully edited.<br>&nbsp;
-    Use case ends.<br>&nbsp;
+6. ContaX displays a message indicating that the person was successfully edited.<br><br>
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -866,7 +949,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to find persons.
 2. User enters details to find person by.
-3. ContaX shows a list of persons that matches the specified details.<br>&nbsp;
+3. ContaX shows a list of persons that matches the specified details.<br><br>
    Use case ends.<br>&nbsp;
 
 **Extensions**
@@ -883,6 +966,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 3a. ContaX has no persons to list.<br>&nbsp;
   * 3a1. Use case ends.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 #### Tag-Related Use Cases
 ![Tag Use Case](images/UseCaseDiagramTags.png)
 
@@ -891,7 +976,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 **MSS**
 
 1. User requests to list tags.
-2. ContaX shows a list of tags.<br>&nbsp;
+2. ContaX shows a list of tags.<br><br>
     Use case ends.<br>&nbsp;
 
 **UC7: Add Person Tag**
@@ -927,7 +1012,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User requests to edit tag.
 3. User enters details to edit tag.
 4. ContaX updates the specified tag.
-5. ContaX shows that the tag has been edited successfully.<br>&nbsp;
+5. ContaX shows that the tag has been edited successfully.<br><br>
    Use case ends.<br>&nbsp;
 
 **Extensions**
@@ -949,6 +1034,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
   * 4b1. Contax shows an error message indicating that the tag already exists in the system.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 **UC9: Delete Person Tag**
 
 **MSS**
@@ -957,7 +1044,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User requests to delete tag.
 3. User enters details to delete tag.
 4. ContaX deletes the specified tag.
-5. ContaX shows that the tag has been deleted successfully.<br>&nbsp;
+5. ContaX shows that the tag has been deleted successfully.<br><br>
    Use case ends.<br>&nbsp;
 
 **Extensions**
@@ -976,7 +1063,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to find persons by tag.
 2. User enters keyword to search by.
-3. ContaX shows a list of persons whose tags contain the specified keyword.<br>&nbsp;
+3. ContaX shows a list of persons whose tags contain the specified keyword.<br><br>
    Use case ends.<br>&nbsp;
 
 **Extensions**
@@ -992,6 +1079,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * 3a. ContaX has no persons to list.<br>&nbsp;
   * Use case ends.<br>&nbsp;
+
+<div style="page-break-after: always;"></div>
 
 #### Appointment-Related Use Cases
 ![Appointment Use Case](images/UseCaseDiagramAppointments.png)
@@ -1056,6 +1145,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 3a. ContaX cannot find the requested appointment to delete.
     * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
     * Use case resumes at step 2.<br>&nbsp;
+
+<div style="page-break-after: always;"></div>
 
 **UC14: Edit Appointment**
 
@@ -1131,6 +1222,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 1a1. ContaX shows an error message that the properties entered are invalid.<br>&nbsp;
     * Use Case ends.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 **UC17: Edit Appointment Priority**
 
 **MSS**
@@ -1164,6 +1257,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 4a1. ContaX shows an error message indicating that the supplied priority is invalid<br>&nbsp;
     * Use case resumes at step 2.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 #### Import/Export CSV UseCases
 
 ![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
@@ -1192,7 +1287,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 2a. Invalid CSV file selected
     * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
     * Use case ends.<br>&nbsp;
-    
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1213,11 +1309,16 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
-* **Schedule**: The part of ContaX that keeps track of Appointments.
+* **Schedule**: The part of ContaX that keeps track of Appointments
+* * **Contact** and **Person**: These 2 terms are used interchangably, and refer to a single record in the Address Book
+* **Appointment**: Refers to a single record in the Schedule
+* **Appointment Slot**: Refers to an empty time range in the Schedule
 * **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications
 * **Onboarding Guide**: The quick start guide to ContaX
 * **Disjoint Appointments**: Appointments are disjoint if the time periods they span do not overlap with each other, that is, one appointment starts after the other appointment ends
 * **Overlapping Appointments**: Appointments are overlapping if they are not disjoint
+* **Natural Ordering**: The order in which objects should be arranged
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1238,7 +1339,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1258,6 +1360,8 @@ testers are expected to do more *exploratory* testing.
 
   3. Test case: `listappt` <br>
      Expected: The selected tab should be changed to `Appointments` if the user was not at that tab.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -1284,6 +1388,8 @@ testers are expected to do more *exploratory* testing.
    
    3. Test case: Editing the entries but with invalid data <br>
       **Expected:** Upon opening of ContaX, the particular entry will be skipped.
+
+<div style="page-break-after: always;"></div>
 
 ### Importing Contacts from CSV Files
 
@@ -1334,15 +1440,45 @@ testers are expected to do more *exploratory* testing.
    3. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimensions will not go above `700x400`.
 
+### Sample Commands
+
+1. Launch the application and type any of the commands below into the input box. The table lists the expected action of the command.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** This section only lists a few standard commands with arguments. For more information on each of the commands, refer to the [user guide](https://ay2122s2-cs2103-w17-1.github.io/tp/UserGuide.html).
+
+</div>
+
+| **Command**                                                             | **Expected Action**                                            |
+|-------------------------------------------------------------------------|----------------------------------------------------------------|
+| `addperson n/Johnny p/12345678 e/abc@domain.com a/1 Burn Road t/friend` | Adds a new contact called Johnny                               |
+| `deleteperson 1`                                                        | Deletes the contact at index 1                                 |
+| `editperson 1 n/James Lee`                                              | Changes the name of the contact at index 1 to James Lee        |
+| `findperson James Jake`                                                 | Finds contacts whose name contains James or Jake               |
+| `addtag n/Clients`                                                      | Adds a new tag called Clients                                  |
+| `edittag 1 t/Blocked`                                                   | Edits the tag at index 1 to be named Blocked                   |
+| `deletetag 1`                                                           | Deletes the tag at index 1                                     |
+| `addappt n/Call Bob d/14-02-2022 t/11:00 l/60`                          | Adds an appointment named Call Bob                             |
+| `deleteappt 1`                                                          | Deletes the appointment at index 1                             |
+| `editappt 1 n/Call Boss`                                                | Changes the name of the appointment at index 1 to Call Boss    |
+| `apptbetween sd/21-10-2022`                                             | List all appointments from 21 october 2022                     |
+| `freebetween l/60`                                                      | Lists empty slots in the schedule that at at least 1 hour long |
+| `findappt Meeting`                                                      | Find appointments that contain the word Meeting in the name    |
+| `batch editperson p/87654321 by/phone =/12345678`                       | Edits all persons whose phone numbers are 12345678             |
+| `range editperson p/87654321 from/1 to/10`                              | Edits all persons from index 1 to 10                           |
+| `chain editappt 1 l/360 && listappt`                                    | Edits the appointment at index 1 and lists all appointments    |
+
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix 2: Effort**
 
-* Difficulty level
+* **Difficulty level**
    * We developed a lot of different features with varying levels of difficulty, depth and complexity.
    * As a whole, we felt the difficulty level of the project was Moderate.
    * As we choose to extend AB-3, we needed an extensive understanding of the system design. This was required in order to extend the system in a way that seamlessly integrates with the existing AB-3.
-* Challenges Faced
+* **Challenges Faced**
    * As every member worked on multiple issues and features, the following list are just some we picked out and is not exhaustive.
      * Working with the `csv` format without a library required writing a parser from scratch
      * Involved comparatively more UI work than AB-3, especially for onboarding components, which complicated testing.
@@ -1350,11 +1486,11 @@ testers are expected to do more *exploratory* testing.
      * Range and Chain commands were tough to test due to many possible test cases, requiring additional testing and fixing.
      * Appointments subsystem was built upon the existing AB-3 system, requiring heavy modification and many additions to achieve the intended end product.
      * In order to manage deadlines, we had to set workflows such as internal PR freeze deadlines and internal milestone closing deadlines.
-* Effort Required
+* **Effort Required**
   * Extensive modification to the current code base.
   * Extensive amount of tests written to cover as many scenarios as possible.
   * We had extensive weekly meeting early in order to ensure every developer knows what is required for the week.
-* Achievements
+* **Achievements**
   * Built a product that we feel fulfills our initial targets.
   * Achieved all `Must Have` User Stories.
   * Met all milestones and deadlines, including internally set deadlines.

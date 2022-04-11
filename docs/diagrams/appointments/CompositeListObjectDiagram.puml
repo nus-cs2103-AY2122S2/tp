@@ -13,30 +13,34 @@ class " __:CompositeObservableList__ " as CompositeObservableList {
 class "__slot1:AppointmentSlot__" as AppointmentSlot1 {
     period = ("12-12-2022 12:00", "12-12-2022 13:00")
 }
+note bottom: Index 0
 
 class "__slot2:AppointmentSlot__" as AppointmentSlot2 {
     period = ("12-12-2022 14:00", "12-12-2022 14:30")
 }
+note bottom: Index 2
 
 class "__appt1:Appointment__" as Appointment1 {
     StartDateTime = "12-12-2022 13:00"
     Duration = 60
 }
+note bottom: Index 1
 
 class "__appt2:Appointment__" as Appointment2 {
     StartDateTime = "12-12-2022 14:30"
     Duration = 60
 }
+note bottom: Index 3
 
 class "__:ModelManager__" as ModelManager {
 }
 
 ModelManager -down-> CompositeObservableList
 
-CompositeObservableList -down-> AppointmentSlot1 : Index 0
-CompositeObservableList -down-> Appointment1 : Index 1
-CompositeObservableList -down-> AppointmentSlot2 : Index 2
-CompositeObservableList -down-> Appointment2 : Index 3
+CompositeObservableList -down-> AppointmentSlot1
+CompositeObservableList -down-> Appointment1
+CompositeObservableList -down-> AppointmentSlot2
+CompositeObservableList -down-> Appointment2
 
 AppointmentSlot1 -[hidden]right-> Appointment1
 Appointment1 -[hidden]right-> AppointmentSlot2
