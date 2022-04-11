@@ -120,7 +120,7 @@ Format: `add L/ n/LINEUP_NAME`
 
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 * The new `LINEUP_NAME` must not exist in MyGM already.
-* After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#viewing-playerschedulelineup-view) section.
+* After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#25-viewing-playerschedulelineup-view) section.
 
 </div>
 
@@ -382,7 +382,7 @@ Edit the details of a existing player in MyGM.
 
 * If any fields are specified, it will change accordingly.
 * Multiple fields can be changed at once.
-* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add]() Command section for players applies here as well.
+* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#221-add-a-player) Command section for players applies here as well.
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
 
 </div>
