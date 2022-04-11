@@ -85,7 +85,7 @@ This section describes each part of the graphical user interface in detail.
 | ----- | ------------------------------------------------------------------------------------------------------------ |
 | 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window are. |
 | 2     | **Command Input**. This is where you type the commands to be executed by the application.                    |
-| 3     | **Command Result**. This text box displays MedBook's response to the commands entered.                       |
+| 3     | **Command Result**. This text box displays MedBook's response to the command entered.                        |
 | 4     | **List of Patients**. This is the list of patients that are stored in the application.                       |
 | 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information.                                   |
 
@@ -97,7 +97,9 @@ In order to improve your experience when using the app, we have included the fol
 
 ### Getting Started
 Follow this tutorial to get started with using MedBook:
-1. Open MedBook by double clicking `MedBook.jar` located in your MedBook home folder.
+1. Open MedBook through one of the following ways: 
+   * Double clicking `MedBook.jar` located in your MedBook home folder 
+   * In a command window, `cd` to your MedBook home folder and type `java -jar MedBook.jar`
 2. If this is your first time using MedBook, you will see a prompt window requesting you to set up a new password.
 3. Type in a password which fits the requirements and press `enter` to continue.
 
@@ -129,7 +131,7 @@ Follow this tutorial to get started with using MedBook:
        <img src="images/HomeScreen.png" alt="Login Prompt Display" width="500">
        <figcaption class="figure-caption">Figure 3: Main Display</figcaption>
    </figure>
-6. You may refer the to command list below for the details of each available command.
+6. You may refer to the command list below for the details of each available command.
 
 ---
 
@@ -217,7 +219,7 @@ This section provides all the available commands to control patient's prescripti
 <div style="page-break-after: always;"></div>
 
 #### Test Result Specific Commands
-This section provides all the available commands to control patient's emergency contact.
+This section provides all the available commands to control patient's test results.
 
 | Commands                                         | Usage            |
 | :----------------------------------------------- | :--------------- |
@@ -249,7 +251,7 @@ Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
 1. NRIC consists alphanumeric characters only.
-2. NRIC starts with either S, T, F, G, M character.
+2. NRIC starts with either S, T, F, G, or M character.
 3. NRIC consists 7 digits after the first character.
 4. NRIC ends with any character.
 
@@ -353,8 +355,8 @@ Below is the list of parameters that can be used with the `add t/contact` comman
 
 | Parameters | Description                                                |
 | ---------- | :--------------------------------------------------------- |
-| `i/`       | _Required_. The NRIC associated with the patient.          |
-| `n/`       | _Required_. The name associated with the contact.          |
+| `i/`       | _Required_. The NRIC of the patient to add the contact to. |
+| `n/`       | _Required_. The name of the contact.                       |
 | `p/`       | _Required_. The phone number of the contact.               |
 | `e/`       | _Required_. The email address of the contact.              |
 | `a/`       | _Required_. The address of the contact.                    |
@@ -413,6 +415,21 @@ Examples:
 - `add t/medical i/S1234567L bt/AB ht/175 cm`
 - `add t/medical i/S1234567L a/22 bt/O md/Paracetamol 500mg twice a day; Atarvastatin 20mg once a day ht/185 cm wt/70 kg il/Mild fever; High cholesterol su/Appendectomy fh/Has family history of high blood pressure ih/MMR; 6 in 1; Hepatitis B gd/Male et/Chinese`
 
+| Parameters | Description                                                          |
+| ---------- | :--------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC of the patient to add medical information to.   |
+| `a/`       | _Optional_. The age of the patient.                                  |
+| `bt/`      | _Optional_. The blood type of the patient.                           |
+| `md/`      | _Optional_. Details about the patient's medication.                  |
+| `ht/`      | _Optional_. The height of the patient.                               |
+| `wt/`      | _Optional_. The weight of the patient.                               |
+| `il/`      | _Optional_. Details about the patient's illnesses.                   |
+| `su/`      | _Optional_. Details about the patient's surgeries.                   |
+| `fh/`      | _Optional_. Details about the patient's family history.              |
+| `ih/`      | _Optional_. Details about the patient's immunization history.        |
+| `gd/`      | _Optional_. The gender of the patient.                               |
+| `et/`      | _Optional_. The ethnicity of the patient.                            |
+
 ### Viewing Medical Information: `view t/medical`
 
 Displays medical information of a patient from MedBook. If no NRIC is specified, MedBook will display all medical
@@ -437,7 +454,9 @@ Examples:
 
 - `view t/medical` followed by `edit 1 bt/B` updates the blood type of the first medical information entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a medical information will overwrite the old data.
+</div>
 
 ### Adding Consultation Information: `add t/consultation`
 
@@ -472,7 +491,9 @@ Examples:
 - `view t/consultation i/S1234567L` followed by `edit 1 dt/2019-08-10 tm/19-00` updates the date and time of the first
   consultation entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a consultation will overwrite the old data.
+</div>
 
 ### Adding Prescription: `add t/prescription`
 
@@ -486,6 +507,15 @@ Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
 Examples:
 
 - `add t/prescription i/S1234567L n/Amoxicillin dt/2021-09-15 s/2 tablets after meal everyday.`
+
+Below is the list of parameters that can be used with the `add t/prescription` command.
+
+| Parameters | Description                                                          |
+|------------|:---------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC associated with the patient.                    |
+| `n/`       | _Required_. The drug name given to the patient.                      |
+| `dt/`      | _Required_. The date of the given prescription. (Format: YYYY-MM-DD) |
+| `s/`       | _Required_. The instructions given to the patient.                   |
 
 ### Viewing Prescription: `view t/prescription`
 
@@ -510,7 +540,9 @@ Examples:
 - `view t/prescription i/S1234567L` followed by `edit 1 s/1 tablet everyday` updates the instruction of the first
   prescription entry displayed on the screen.
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a prescription will overwrite the old data.
+</div>
 
 ### Adding Test Result: `add t/test`
 
@@ -544,11 +576,13 @@ Format: `edit INDEX [td/TEST_DATE] [mt/MEDICAL_TEST] [r/TEST_RESULT]`
 
 Examples:
 
-- `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates the result field of the first test result entry
+- `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates the result of the first test result entry
   displayed on the screen.
 
 
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a test result will overwrite the old data.
+</div>
 
 ### Viewing Help: `help`
 
@@ -600,9 +634,9 @@ Examples:
 <div markdown="block" class="alert alert-info">
 **:information_source: Info:**<br>
 
-Although `NIL` is an empty placeholder for the optional field `[NOTES]`, `find NIL` will still filter the records in
+Although `NIL` is an empty placeholder for the optional fields, `find NIL` will still filter the records in
 the current display to show those which contains the keyword `NIL` to accommodate for cases where the user intentionally
-types in `NIL` in any field.
+types `NIL` in any field.
 
 </div>
 
@@ -616,11 +650,11 @@ types in `NIL` in any field.
 
 **Option 1:**
 By default, MedBook will always read `medbook.json` located in `[HOME_DIRECTORY of MedBook.jar]/data/`. Just move your
-data to `HOME_DIRECTORY of MedBook.jar/data/` in your new device if you wish to import them.
+data to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device if you wish to import them.
 
 **Option 2 (with encryption):**
 By default, MedBook will always encrypt your data to `password.enc` in `[HOME_DIRECTORY of MedBook.jar]/data/` for
-security reason. You can move `password.enc` to `HOME_DIRECTORY of MedBook.jar/data/` in your new device and MedBook
+security reason. You can move `password.enc` to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device and MedBook
 will ask for your password upon launching.
 
 </div>
@@ -628,7 +662,7 @@ will ask for your password upon launching.
 <div class="card">
 <div markdown="1">
 <h6 markdown="1">What happens if I forget my password?</h6>
-Due to security reason, there is no way to reset to password. To continue using the application you need to delete the 
+Due to security reason, there is no way to reset password. To continue using the application you need to delete the 
 encrypted data file (located at `[HOME_DIRECTORY of MedBook.jar]/data/password.enc`) or move it to another location. 
 MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
 </div>
