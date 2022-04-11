@@ -20,7 +20,7 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
     * [Team Forming](#team-forming)
       * [List all contacts: list](#listing-all-persons-list)
       * [Find person by name: find](#locating-persons-by-name-find)
-      * [Filter person by technical skills: filter](#filter-for-past-teammates-filterteam)
+      * [Filter person by technical skills: filter](#locating-persons-by-skills-filter)
       * [Sort person by technical skill: sort](#sorting-persons-by-skill-proficiency-sort)
       * [Add/remove person as potential teammate: team/unteam](#markunmark-contact-as-potential-teammates-teamunteam)
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
