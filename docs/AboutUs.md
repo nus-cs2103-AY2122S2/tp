@@ -24,6 +24,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/benjykoh.md)]
 
 * Role: Developer
+* Responsibilities: Documentation, Testing, Integration
 
 ### Jet Tan
 
