@@ -72,7 +72,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Updated UML diagrams ModelClassDiagram and BetterModelClassDiagram (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93), [\#109](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/109))
     * Added instructions for manual testing (PR [\#278](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/278))
     * Updated non-functional requirement and glossary (PR [\#291](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/291), [\#296](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/296))
-    * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165), [\#313](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/313))
+    * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165), [\#313](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/313), [\#326](https://github.com/AY2122S2-CS2103T-T17-4/tp/issues/326))
     <br><br>
     
 * **Contributions to team-based tasks**:
