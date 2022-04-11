@@ -68,9 +68,8 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code s} represents an integer.
-     * e.g. -1, 0, 1, 2, 3, ...
-     * Returns true for +1, +2, +3, for consistency
+     * Returns true if {@code s} represents an non-negative integer.
+     * e.g. 0, 1, 2, 3, ...
      * Returns false for any other non-null string input
      */
     public static boolean isNumber(String s) {
