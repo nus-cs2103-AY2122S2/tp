@@ -32,25 +32,25 @@ activate MeetCommandParser
 MeetCommandParser -> Model : new Name(userInputName)
 activate Model
 
-Model -> MeetCommandParser : name
+Model --> MeetCommandParser : name
 deactivate Model
 
 MeetCommandParser -> Model : new Meeting Date
 activate Model
 
-Model -> MeetCommandParser : date
+Model --> MeetCommandParser : date
 deactivate Model
 
 MeetCommandParser -> Model : new Meeting Time
 activate Model
 
-Model -> MeetCommandParser : time
+Model --> MeetCommandParser : time
 deactivate Model
 
 MeetCommandParser -> Model : new ScheduleMeeting(date, time)
 activate Model
 
-Model -> MeetCommandParser : meeting
+Model --> MeetCommandParser : meeting
 deactivate Model
 
 create MeetCommand
@@ -87,19 +87,19 @@ deactivate Model
 MeetCommand -> Model : new Person(editedInfo)
 activate Model
 
-Model -> MeetCommand : edited person
+Model --> MeetCommand : edited person
 deactivate Model
 
 MeetCommand -> Model : setPerson(person, editedInfo)
 activate Model
 
-Model -> MeetCommand
+Model --> MeetCommand
 deactivate Model
 
 MeetCommand -> Model : update filtered person list
 activate Model
 
-Model -> MeetCommand
+Model --> MeetCommand
 deactivate Model
 
 create CommandResult

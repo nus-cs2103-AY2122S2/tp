@@ -109,7 +109,6 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete John`.
-❗️ IMAGE NEEDS TO BE UPDATED 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
@@ -155,7 +154,6 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete John")` API call.
-❗️ IMAGE NEEDS TO BE UPDATED
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -172,7 +170,6 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-❗️ IMAGE NEEDS TO BE UPDATED
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -186,7 +183,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-❗️ IMAGE NEEDS TO BE UPDATED
+❗️ IMAGE NEEDS TO BE UPDATED (**Remove caution if image is sufficient**)
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -509,6 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | expert user             | archive old contacts                                                   | keep the contact list clean and free clutter                           |
 | `* *`    | new user                | add a meet up information to a client                                  | track when is the next meet up                                         |
 | `* *`    | new user                | get tips on existing features                                          | get the required info without referring to help section                |
+| `* *`    | new user                | save a client's salary information                                     | use this information to provide them better financial advice           |
 | `* *`    | expert user             | load up previous work before shutting                                  | be more efficient                                                      |
 | `* *`    | expert user             | filter important clients                                               | prioritise them                                                        |
 | `* *`    | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
@@ -516,6 +514,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | busy user               | be reminded if I haven't met a client in a long time                   | maintain contact with my clients                                       |
 | `* *`    | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
 | `* *`    | busy user               | identify conflicting names by index                                    | perform operations more accurately                                     |
+| `* *`    | inattentive user        | undo the commands                                                      | rectify my mistakes faster and easier                                  |
+| `* *`    | inattentive user        | redo the commands                                                      | recover from undo                                                      |
 | `*`      | new user                | Add social media data for clients                                      | access their social media details                                      |
 
 ### Use cases
