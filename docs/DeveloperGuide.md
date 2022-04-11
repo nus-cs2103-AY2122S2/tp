@@ -714,7 +714,7 @@ testers are expected to do more *exploratory* testing.
     }
     ``` 
 
-   `selleraddressbook.json`:
+    `selleraddressbook.json`:
 
     ```
     {
