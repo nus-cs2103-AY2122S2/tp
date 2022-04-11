@@ -1,5 +1,5 @@
 ---
-layout: page<p>
+layout: page
 title: Yang Xiquan's Project Portfolio Page
 ---
 
