@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindXYZParser" as FindXYZParser LOGIC_COLOR
+participant "a:FindXYZCommand" as FindXYZCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:XYZContainsKeywordsPredicate" as PREDICATE MODEL_COLOR
+end box
+
+[-> LogicManager : execute(findXYZexample)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(findXYZexample)
+activate AddressBookParser
+
+create FindXYZParser
+AddressBookParser -> FindXYZParser
+activate FindXYZParser
+
+FindXYZParser --> AddressBookParser
+deactivate FindXYZParser
+
+AddressBookParser -> FindXYZParser : parse(findXYZexample)
+activate FindXYZParser
+
+create PREDICATE
+FindXYZParser -> PREDICATE
+activate PREDICATE
+
+PREDICATE --> FindXYZParser : p
+deactivate PREDICATE
+create FindXYZCommand
+FindXYZParser -> FindXYZCommand : p
+activate FindXYZCommand
+
+FindXYZCommand --> FindXYZParser : a
+deactivate FindXYZCommand
+
+FindXYZParser --> AddressBookParser : a
+deactivate FindXYZParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindXYZParser -[hidden]-> AddressBookParser
+destroy FindXYZParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> FindXYZCommand : execute()
+activate FindXYZCommand
+
+FindXYZCommand -> Model : showXYZList(p)
+activate Model
+Model --> FindXYZCommand
+deactivate Model
+
+FindXYZCommand -[hidden]-> FindXYZCommand
+create CommandResult
+FindXYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindXYZCommand : result
+deactivate CommandResult
+
+FindXYZCommand --> LogicManager : result
+deactivate FindXYZCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindXYZCommand -[hidden]-> AddressBookParser
+destroy FindXYZCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
