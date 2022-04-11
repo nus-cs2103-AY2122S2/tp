@@ -11,6 +11,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "lineupName:LineupName" as LineupName MODEL_COLOR
+participant "newLineupName:LineupName" as NewLineupName MODEL_COLOR
 end box
 
 [-> LogicManager : execute("Edit L/LINEUP_NAME n/NEW_LINEUP_NAME")
@@ -29,8 +31,22 @@ deactivate EditCommandParser
 AddressBookParser -> EditCommandParser : parse("L/LINEUP_NAME n/NEW_LINEUP_NAME")
 activate EditCommandParser
 
+create LineupName
+EditCommandParser -> LineupName : LineupName("LINEUP_NAME")
+activate LineupName
+
+LineupName --> EditCommandParser : lineupName
+deactivate LineupName
+
+create NewLineupName
+EditCommandParser -> NewLineupName : LineupName("NEW_LINEUP_NAME")
+activate NewLineupName
+
+NewLineupName --> EditCommandParser : newLineupName
+deactivate NewLineupName
+
 create EditCommand
-EditCommandParser -> EditCommand
+EditCommandParser -> EditCommand : EditCommand(lineupName, newLineupName)
 activate EditCommand
 
 EditCommand --> EditCommandParser : e
@@ -48,13 +64,13 @@ deactivate AddressBookParser
 LogicManager -> EditCommand : execute()
 activate EditCommand
 
-EditCommand -> Model : getLineup(LINEUP_NAME)
+EditCommand -> Model : getLineup(lineupName)
 activate Model
 
 Model --> EditCommand : lineup
 deactivate Model
 
-EditCommand -> EditCommand : createEditedLineup(lineup, NEW_LINEUP_NAME)
+EditCommand -> EditCommand : createEditedLineup(lineup, newLineupName)
 activate EditCommand
 
 EditCommand --> EditCommand : newLineup

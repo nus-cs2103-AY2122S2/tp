@@ -11,6 +11,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "lineupName:LineupName" as LineupName MODEL_COLOR
+participant "name:Name" as Name MODEL_COLOR
 end box
 
 [-> LogicManager : execute("put P/NAME L/LINEUP_NAME")
@@ -29,8 +31,22 @@ deactivate PutCommandParser
 AddressBookParser -> PutCommandParser : parse("P/NAME L/LINEUP_NAME")
 activate PutCommandParser
 
+create Name
+PutCommandParser -> Name : Name("NAME")
+activate Name
+
+Name --> PutCommandParser : name
+deactivate Name
+
+create LineupName
+PutCommandParser -> LineupName : LineupName("LINEUP_NAME")
+activate LineupName
+
+LineupName --> PutCommandParser : lineupName
+deactivate LineupName
+
 create PutCommand
-PutCommandParser -> PutCommand
+PutCommandParser -> PutCommand : PutCommand(name, lineupName)
 activate PutCommand
 
 PutCommand --> PutCommandParser : p
@@ -48,13 +64,13 @@ deactivate AddressBookParser
 LogicManager -> PutCommand : execute()
 activate PutCommand
 
-PutCommand -> Model : getPerson(NAME)
+PutCommand -> Model : getPerson(name)
 activate Model
 
 Model --> PutCommand : person
 deactivate Model
 
-PutCommand -> Model : getLineup(LINEUP_NAME)
+PutCommand -> Model : getLineup(lineupName)
 activate Model
 
 Model --> PutCommand : lineup

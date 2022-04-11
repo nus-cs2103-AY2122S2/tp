@@ -11,6 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "lineupName : LineupName" as LineupName MODEL_COLOR
 participant "l:Lineup" as Lineup MODEL_COLOR
 end box
 
@@ -30,8 +31,15 @@ deactivate AddCommandParser
 AddressBookParser -> AddCommandParser : parse("L/ n/LINEUP_NAME")
 activate AddCommandParser
 
+create LineupName
+AddCommandParser -> LineupName : LineupName("LINEUP_NAME")
+activate LineupName
+
+LineupName --> AddCommandParser : lineupName
+deactivate LineupName
+
 create Lineup
-AddCommandParser -> Lineup : Lineup(LINEUP_NAME)
+AddCommandParser -> Lineup : Lineup(lineupName)
 activate Lineup
 
 Lineup --> AddCommandParser : l

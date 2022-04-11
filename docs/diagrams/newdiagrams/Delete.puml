@@ -11,6 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "lineupName:LineupName" as LineupName MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete L/LINEUP_NAME")
@@ -29,8 +30,15 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse("L/LINEUP_NAME")
 activate DeleteCommandParser
 
+create LineupName
+DeleteCommandParser -> LineupName : LineupName("LINEUP_NAME")
+activate LineupName
+
+LineupName --> DeleteCommandParser : lineupName
+deactivate LineupName
+
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand
+DeleteCommandParser -> DeleteCommand : DeleteCommand(lineupName)
 activate DeleteCommand
 
 DeleteCommand --> DeleteCommandParser : d
@@ -48,7 +56,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : getLineup(LINEUP_NAME)
+DeleteCommand -> Model : getLineup(lineupName)
 activate Model
 
 Model --> DeleteCommand : lineup
