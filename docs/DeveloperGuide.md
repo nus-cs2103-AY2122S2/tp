@@ -10,7 +10,7 @@ title: Developer Guide
 | [Introduction](#introduction)                                                                                   |
 | [Acknowledgements](#acknowledgements)                                                                           |
 | [Setting up, getting started](#setting-up-getting-started)                                                      |
-| [Design](#design)                                                                                               |
+| [Design](#design)                                                                                               |   
 | [Architecture](#architecture)                                                                                   |
 | [Implementation](#implementation)                                                                               |
 | [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops) |
@@ -565,13 +565,49 @@ The flow of saving and loading the data storage is updated to accommodate the ad
 
 #### Enhancements
 
-The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
+The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` 
+of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
 
-The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, and `DeleteCommand` class.
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, 
+and `DeleteCommand` class.
 
 Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
 
-How the batch update works:
+#### Design considerations:
+
+**Aspect: Updating a Person's COVID-19 Status**
+
+* **Alternative 1 (current choice):** Update other Students' Status related to the recent.
+    * Pros:
+        * Update other students' COVID-19 Status.
+        * Better tracking of student's COVID-19 status in a classroom or activity.
+    * Cons:
+        * Difficult to implement.
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Only update filtered Person's status.
+    * Pros:
+        * Single update where changes can be made.
+    * Cons:
+        * Does not compliment our application's purpose of tracking COVID-19 cases efficiently.
+
+**Aspect: Adding a new Person with a `Status` of `Positive` or `Negative`**
+
+* **Alternative 1 (current choice):** Check **ALL** students in the same class as the new Person entry.
+    * Pros:
+        * Efficiently update all the students' status information with the same logic from `findclasscode` where
+        similar filtering process is used.
+    * Cons:
+        * Perform more checks which may slow down the application.
+* **Alternative 2:** Only add the new student in without checking the status of other students.
+    * Pros:
+        * Does not perform an extra layer of checks which may improve the speed of the application.
+    * Cons:
+        * Would pose as a potential feature flaw for `AddPerson` in the context of UDT. Since the priority is to ensure
+        that the `Status` of each student is update efficiently.
+
+
+#### Implementation
 
 * **EditCommand**:
   * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
