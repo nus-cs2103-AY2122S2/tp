@@ -24,15 +24,13 @@ public class AppointmentSellerCommand extends Command {
             + "Parameters: INDEX " + PREFIX_APPOINTMENT
             + "TIME\n"
             + "Must include: INDEX time/ \n"
+            + "Ensure INDEX is positive integer & less than or equal to size of displayed seller list \n"
             + "The appointment time should be specified to minutes "
             + "with the format 'yyyy-MM-dd-HH-mm.'\n"
             + "Example:  " + COMMAND_WORD + " 1 "
             + "time/ 2022-05-04-14-00";
     public static final String MESSAGE_TIME_IN_PAST = "The time you entered is in the past\n"
             + "Please enter a time in the future";
-    public static final String MESSAGE_DUPLICATE_SELLER_TIME = "Same appointment time for seller %1$d"
-            + " and seller %2$d\n"
-            + "Please pick a different time for seller %3$d";
 
     private final Index index;
     private final Appointment appointment;
@@ -55,15 +53,6 @@ public class AppointmentSellerCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
-        }
-
-        for (int i = 0; i < lastShownList.size(); i++) {
-            Appointment otherAppointment = lastShownList.get(i).getAppointment();
-            if (this.appointment.equals(otherAppointment)) {
-                int oneBasedIndex = i + 1;
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_SELLER_TIME,
-                        oneBasedIndex, index.getOneBased(), index.getOneBased()));
-            }
         }
 
         Seller sellerToEdit = lastShownList.get(index.getZeroBased());
