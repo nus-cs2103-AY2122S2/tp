@@ -33,7 +33,7 @@ public class SuggestCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Show> currList = model.getFilteredShowList();
-        Integer sizeOfShowList = currList.size();
+        int sizeOfShowList = currList.size();
 
         if (sizeOfShowList <= 0) {
             throw new CommandException(MESSAGE_FAILURE_NO_SHOWS);
@@ -50,8 +50,8 @@ public class SuggestCommand extends Command {
     private static Show getRandomShow(Model model) {
         Random rn = new Random();
         List<Show> currList = model.getFilteredShowList();
-        Integer sizeOfShowList = currList.size();
-        Integer randomIndex = rn.nextInt(sizeOfShowList);
+        int sizeOfShowList = currList.size();
+        int randomIndex = rn.nextInt(sizeOfShowList);
         return currList.get(randomIndex);
     }
 }

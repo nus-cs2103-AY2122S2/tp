@@ -73,7 +73,7 @@ public class UniqueShowList implements Iterable<Show> {
     }
 
     /**
-     * Replaces the internalList with the provide {@UniqueShowList}.
+     * Replaces the internalList with the provide {@code UniqueShowList}.
      */
     public void setShows(UniqueShowList replacement) {
         requireNonNull(replacement);
