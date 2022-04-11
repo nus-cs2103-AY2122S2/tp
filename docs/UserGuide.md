@@ -17,7 +17,7 @@ It is easy to use, and free!
 3. Copy the .jar file to any folder which you wish to store the AgentSee application in. It is recommended that the folder is **empty** before copying in the .jar file.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear in a few seconds. Note that sample data will be automatically added when running the .jar file for the first time.<br>
-   ![Ui](images/UI.png)
+   ![Ui](images/Ui.png)
 
 5. Input a command in the command box and press Enter on your keyboard to execute it.
    - E.g. `add-b n/David p/62353535` 
