@@ -1,0 +1,22 @@
+@startuml
+
+start
+:User type in add command;
+:Checks if this Person is in UNite;
+if () then ([No])
+    : Do arguments
+      validity check;
+    if() then ([Valid input])
+        :Add this Person into UNite;
+        :       Show add
+        success message;
+    else([Invalid input])
+        :Show error message;
+    endif
+else ([Yes, duplicated])
+  :Show error message;
+endif
+
+stop
+
+@enduml

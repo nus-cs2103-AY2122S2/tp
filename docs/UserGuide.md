@@ -68,6 +68,9 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [c/COURSE] [tele/TELEGRAM] [m/MATR
 * The order of input does not matter.
 * `n/NAME p/PHONE e/EMAIL a/ADDRESS` are the 4 required information that must be present.
 * Can attach multiple tags to the person at the same time, each tag must follow the format `t/TAG`
+* Two `Person` are considered the same `Person` if 
+  * They have the same `Name` (case-insensitive).
+  * At least one of following fields: `Email`, `Phone`, `Address`, `MatricCard`) is the same (case-insensitive) between these two `Person`.
 
 Examples:
 * `add n/Peter p/12345678 e/peter@gmail.com a/1 Computing Drive t/classmates t/friends

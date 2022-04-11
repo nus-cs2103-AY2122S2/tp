@@ -225,6 +225,52 @@ The regex of these three classes has been modified to accept the empty String ""
 
 <div style="page-break-after: always;"></div> 
 
+### **Add Person feature**
+#### Rationale 
+The add command allows user to add a new `Person` into UNite.
+
+#### Implementation
+The add profile feature receives input from the users (with the relevant attributes) and create a `Person` object with these attributes and add it into UNite.
+* `AddCommand` extending class `Command` is implemented to let the system understand the command
+* `AddCommandParser`is implemented to parse the filter command entered by user.
+
+The activity diagram below summarizes what happens when an add command is executed.
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
+Given below is an example usage scenario of grab command.
+
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `add n/Alice p/87123456 e/alice@gmail.com a/12 Kent Ridge Road m/A1234123E c/Computer Science tele/thisisAlice`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `AddCommandParser` object.
+
+Step 3. The `AddCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `AddCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of add command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise a `CommandResult` containing the details of the new `Person` as a String is returned.
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Duplication check** <br>
+* **Alternative 1 (current choice):** <br> The check is done late in `AddCommand`. `Person` object created before the duplication check.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage since unnecessary objects may be created.
+
+* **Alternative 2:** <br> Early duplication check in `AddCommandParser`.
+  itself.
+    * Pros: Prevent unnecessary creation of Person object. 
+    * Cons: May need heavy refactoring. 
+
+**Aspect: Duplication criteria** <br>
+* **Alternative 1 (current choice):** <br> Two `Person` are considered the same `Person` if
+    * They have the same `Name` (case-insensitive).
+    * At least one of following fields: `Email`, `Phone`, `Address`, `MatricCard`) is the same (case-insensitive) between these two `Person`.
+    
+You can redefine your own criteria if you want to. Simply modify `Person#isSamePerson()` to define your own criteria.
+
+<div style="page-break-after: always;"></div>
+
 ### **Filter feature**
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
@@ -234,6 +280,10 @@ To implement the feature, the below classes are created:
 * `FilterCommandParser`is implemented to parse the filter command entered by user.
 * `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains
   the given tag
+
+The activity diagram below summarizes what happens when a filter command is executed.
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
 
@@ -252,9 +302,6 @@ if there is no parse exception. In the creation of a new `FilterCommand` object,
 Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
 Otherwise, the profile list is filtered using the predicate.
 
-The activity diagram below summarizes what happens when a filter command is executed.
-
-![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 #### Design considerations
 
@@ -288,7 +335,7 @@ Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteP
 Step 3. The `GrabCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `GrabCommand` object
 if there is no parse exception.
 
-Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, the attribute is being grabbed from the correct `Person` and returned to user.
+Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, Otherwise a `CommandResult` containing the String of the attribute being grabbed from the correct `Person` is returned to user.
 
 ![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
 
