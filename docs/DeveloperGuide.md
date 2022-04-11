@@ -940,6 +940,98 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
      Use case resumes at step 1
 
+#### Use case: Add a transaction
+
+**MSS**
+
+1. User specify which client to add the transaction to.
+2. User input the parameters of the transactions (Amount, Transaction Date,
+   Due Date, Note, and Status).
+3. CinnamonBun add the transaction to the transaction list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Delete a transaction
+
+**MSS**
+
+1. User specify which transaction to be deleted.
+2. CinnamonBun removes the transaction from the transaction list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: List all transactions
+
+**MSS**
+
+1. User specify the command keyword.
+2. CinnamonBun displays all transactions in the application.
+
+   Use case ends.
+
+#### Use case: Find transactions from a client
+
+**MSS**
+
+1. User specify which client's transactions be displayed. 
+2. CinnamonBun displays all transactions from the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Pay a transaction
+
+**MSS**
+
+1. User specify which transaction to be paid.
+2. CinnamonBun changes the status of the transaction to be paid.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+#### Use case: Unpay a transaction
+
+**MSS**
+
+1. User specify which transaction to be unpaid.
+2. CinnamonBun changes the status of the transaction to be unpaid.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified index does not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+
 #### Use case: Undo modifications
 
 **MSS**
@@ -1115,7 +1207,7 @@ These instructions only provide a starting point for testers to work on; testers
     4. Test case: `deleteTransaction` <br>
        Expected: No transaction is deleted as the required field is not provided. Error message is shown.
 
-### list a Transaction
+### List a Transaction
 
 * list all transactions
     1. Test case: `listTransaction` <br>
