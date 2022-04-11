@@ -217,6 +217,8 @@ Examples:
 * `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
 * `edit 1 2 3 o/r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The existing teams are cleared as well.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person: `delete`
 
 Deletes the specified person from HackNet.
