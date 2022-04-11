@@ -305,12 +305,12 @@ Editing through `EditWindow` is largely similar to the above.
 
 The undo/redo mechanism is facilitated by `StackUndoRedo`. The implemented undo/redo feature would be best described as two stacks of commands that the user has performed:
 
-- The Undo stack serves to store a "history" of the commands they have performed.
-- The Redo stack is a collection of their commands that lead up to initial condition at which they started performing the undo.
+- `undoStack` serves to store a "history" of the commands they have performed.
+- `redoStack` is a collection of their commands that lead up to initial condition at which they started performing the undo.
 
-The central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, the undo stack is populated by pushing a user's command in the application. 
+The central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, `undoStack` is populated by pushing a user's command in the application. 
 
-Then, when the user performs an undo, the command is firstly popped from undo stack and used to restore previous state, and then we store that command onto the redo stack.
+Then, when the user performs an undo, the command is firstly popped from `undoStack` and used to restore previous state, and then we store that command onto `redoStack`.
 
 `StackUndoRedo` contains 2 stacks, `undoStack` and `redoStack`. The `undoStack` and `redoStack` contain commands that are of type `RedoableCommand`. `RedoableCommand` extends Command and has the following attributes and methods.
 
