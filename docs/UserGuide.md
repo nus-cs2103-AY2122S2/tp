@@ -84,7 +84,9 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 
 3. Copy the file to the folder you want to use as the home folder for iBook.
 
-4. Double-click the file to start the app. If you encounter any [issues](#5-faq), try typing `java -jar ibook.jar` in a terminal in the same directory as the file to start it.
+4. Double-click the file to start the app. Alternatively, try typing `java -jar ibook.jar` in a terminal in the same directory as the file to start it.
+
+    If you are using macOS, please look at [FAQ](#5-faq) before proceeding.
    
     An interface similar to the image below should appear in a few seconds.
    
@@ -99,8 +101,6 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
    * **`add n:Maggie Mee c:noodles p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
    * **`delete 3`** : Deletes the 3rd product shown in the displayed product list.
-
-   * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -795,11 +795,15 @@ If your changes to the data file make it invalid, iBook will discard all data an
 
 ## 5. FAQ
 
+**Q**: Why can't I open iBook with a double-click on macOS?<br>
+**A**: You might have an issue with untrusted developers, right-click on the app and select `Open`.
+
+**Q**: Can I use iBook with full-screen mode in macOS?<br>
+**A**: Unfortunately, due to a limitation of the GUI library, iBook does not perform well with full-screen mode in macOS. Nevertheless, you can work around this issue by double-clicking on the title bar. IBook will then automatically resize to fill the screen.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
 
-**Q**: Why can't I open the application with a double-click on Mac?<br>
-**A**: You might have an issue with untrusted developers, right-click on the app and select `Open`.
 
 <hr/>
 
@@ -809,7 +813,7 @@ If your changes to the data file make it invalid, iBook will discard all data an
 
 | Term                              | Meanings                                                                              |
 |-----------------------------------|---------------------------------------------------------------------------------------|
-| **Mainstream OS**                | `Windows, Linux, Unix, MacOS`                                                         |
+| **Mainstream OS**                | `Windows, Linux, Unix, macOS`                                                         |
 | **Products**                      | `Goods that can be uniquely identified using name and category`                       |
 | **Items**                         | `Copies of products that have different expiry dates`                                 |
 | **Command-line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`        |
