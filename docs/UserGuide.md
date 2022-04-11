@@ -345,7 +345,7 @@ Displays the lessons whose names or subjects contain the any of the keywords pro
 
 ### Clearing all entries
 
-Clears and deletes all lessons and students from `TeachWhat!`.
+Clears and deletes all lessons and students from TeachWhat!
 
 **Format**: `clear -f`
 
