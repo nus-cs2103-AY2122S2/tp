@@ -223,8 +223,6 @@ public class DeleteCommand extends Command {
 
                 List<Group> lastShownGroupList = model.getShowingGroupList();
 
-                // list o/view v/groups
-
                 if (targetIndex.getZeroBased() >= lastShownGroupList.size()) {
                     throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                 }

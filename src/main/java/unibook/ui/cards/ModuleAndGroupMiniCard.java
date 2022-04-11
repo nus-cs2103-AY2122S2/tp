@@ -40,8 +40,9 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
 
     /**
      * A Card displaying module code and the group names of groups of that module.
-     * @param module to display.
-     * @param index index of this mini card.
+     *
+     * @param module     to display.
+     * @param index      index of this mini card.
      * @param mainWindow of the UI.
      */
     public ModuleAndGroupMiniCard(Module module, Integer index, MainWindow mainWindow) {
@@ -51,40 +52,54 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
         this.mainWindow = mainWindow;
         this.module = module;
         setUpModuleCodeLabel();
+        setUpGroupNameList();
+        setUpStyling(index);
+        setUpClickEventHandler();
+    }
 
+    /**
+     * Sets up the list of group names being shown of this module and group mini card.
+     * Sets up the listener for changes to the underlying list of groups of the module of this card.
+     */
+    private void setUpGroupNameList() {
         //common function to use in generating group name vboxes containing labels
         //vboxes are to ensure flowpane wraps the labels properly
-        Function<Group, VBox> f = new Function<>() {
-            @Override
-            public VBox apply(Group group) {
-                VBox vbox = new VBox();
-                Label label = new Label(group.getGroupName());
-                label.getStyleClass().add("mini-pane-group-name-label");
-                label.setWrapText(true);
-                label.setMaxWidth(80);
-                vbox.getChildren().add(label);
-                //handler to navigate to the specific module
-                label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        try {
-                            switchToModulePage();
-                            mainWindow.executeCommand("list o/group g/" + group.getGroupName());
-                        } catch (CommandException | ParseException e) {
-                            throw new ButtonActionException();
-                        }
+        Function<Group, VBox> f = group -> {
+            VBox vbox = new VBox();
+            Label label = new Label(group.getGroupName());
+            label.getStyleClass().add("mini-pane-group-name-label");
+            label.setWrapText(true);
+            label.setMaxWidth(80);
+            vbox.getChildren().add(label);
+            //handler to navigate to the specific module
+            label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        switchToModulePage();
+                        mainWindow.executeCommand("list o/group g/" + group.getGroupName());
+                    } catch (CommandException | ParseException e) {
+                        throw new ButtonActionException();
                     }
-                });
-                return vbox;
-            }
+                }
+            });
+            return vbox;
         };
 
         //fill in all the group codes
         fillPaneFromList(groupNameList, module.getGroups(), f);
-
         //set up list listener to update group name on event of underlying list change
         addBasicListChangeListener(groupNameList, module.getGroups(), f);
+    }
 
+    /**
+     * Set up the styling for the minipane.
+     * All minpanes have a common basic styling, and some additional styling depending on
+     * the parity of its position in its parent listing pane.
+     *
+     * @param index index of this mini pane in its parent listing pane.
+     */
+    private void setUpStyling(int index) {
         //basic commmon style class for all mini cards
         moduleAndGroupMiniPane.getStyleClass().add("mini-pane");
 
@@ -94,16 +109,18 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
         } else {
             moduleAndGroupMiniPane.getStyleClass().add("even-mini-pane");
         }
+    }
 
+    /**
+     * Sets up the handler function that is called when the mini pane is clicked.
+     */
+    private void setUpClickEventHandler() {
         moduleCode.addEventHandler(MouseEvent.MOUSE_CLICKED,
-            new EventHandler<>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        switchToModulePage();
-                    } catch (CommandException | ParseException e) {
-                        throw new ButtonActionException();
-                    }
+            event -> {
+                try {
+                    switchToModulePage();
+                } catch (CommandException | ParseException e) {
+                    throw new ButtonActionException();
                 }
             });
     }

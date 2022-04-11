@@ -15,6 +15,7 @@ import unibook.model.UniBook;
 import unibook.model.person.NameContainsKeywordsPredicate;
 import unibook.model.person.Person;
 import unibook.testutil.Assert;
+import unibook.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -70,6 +71,16 @@ public class CommandTestUtil {
     public static final Boolean MODULE_LIST_NOT_SHOWING = false;
     public static final Boolean GROUP_LIST_SHOWING = true;
     public static final Boolean GROUP_LIST_NOT_SHOWING = false;
+
+    public static final EditCommand.EditPersonDescriptor DESC_AMY;
+
+    static {
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_STUDENT_AMY)
+                .withPhone(VALID_PHONE_STUDENT_AMY).withEmail(VALID_EMAIL_STUDENT_AMY)
+                .withTags(VALID_TAG).build();
+    }
+
+
 
 
     /**

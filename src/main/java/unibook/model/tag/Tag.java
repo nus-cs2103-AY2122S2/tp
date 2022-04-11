@@ -11,7 +11,7 @@ import unibook.commons.util.AppUtil;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tags names should be alphanumeric and at most 20 characters long. Tags should also not contain spaces.";
+        "Tags names should be alphanumeric and at most 20 characters long. Tags should also not contain spaces.";
     public static final String VALIDATION_REGEX = "^[\\w]+$";
 
     public final String tagName;
