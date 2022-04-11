@@ -26,6 +26,7 @@ import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Flag;
@@ -141,5 +142,21 @@ public class HustleBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
             -> parser.parseCommand("unknownCommand", lastCommand));
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
+                + " meeting", lastCommand) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
+                + " name", lastCommand) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
+                + " prev", lastCommand) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD
+                + " salary", lastCommand) instanceof SortCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(SortCommand.COMMAND_WORD, lastCommand));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(SortCommand.COMMAND_WORD + " 3", lastCommand));
     }
 }

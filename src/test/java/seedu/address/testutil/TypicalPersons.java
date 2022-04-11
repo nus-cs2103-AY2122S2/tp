@@ -29,54 +29,71 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
             .withPhone("94351253")
+            .withFlag("true")
             .withTags("friends")
             .withPrevDateMet("2022-01-12")
             .withSalary("5300")
             .withInfo("Salary of $5300").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432").withFlag("false")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withFlag("true")
             .withTags("owesMoney", "friends")
             .withPrevDateMet("2022-01-05")
             .withSalary("4000")
             .withInfo("Salary of $4000")
             .withScheduledMeeting("2022-05-13", "1545").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
+            .withPhone("95352563")
+            .withEmail("heinz@example.com")
+            .withAddress("wall street")
+            .withFlag("true")
             .withPrevDateMet("2021-08-05")
             .withSalary("2500")
             .withInfo("Salary of $2500").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
+            .withPhone("87652533")
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
+            .withFlag("true")
+            .withTags("friends")
             .withPrevDateMet("2021-12-12")
             .withSalary("3500")
             .withInfo("Salary of $3500").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withEmail("werner@example.com")
+            .withAddress("michegan ave")
             .withPrevDateMet("2021-11-02")
             .withSalary("6200")
             .withInfo("Salary of $6200").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withEmail("lydia@example.com")
+            .withAddress("little tokyo")
             .withPrevDateMet("2022-03-12")
             .withSalary("3100")
             .withInfo("Salary of $3100").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
+            .withEmail("anna@example.com")
+            .withAddress("4th street")
             .withPrevDateMet("2021-04-25")
             .withSalary("4800")
             .withInfo("Salary of $4800").build();
-    public static final Person PETER = new PersonBuilder().withName("Peter Wilts").withPhone("96201021")
-            .withEmail("peter@example.com").withAddress("20th street")
+    public static final Person PETER = new PersonBuilder().withName("Peter Wilts")
+            .withPhone("96201021")
+            .withEmail("peter@example.com")
+            .withAddress("20th street")
             .withPrevDateMet("2021-02-28")
             .withSalary("4200")
             .withInfo("Risky investor")
             .withScheduledMeeting("2022-01-05", "1430")
             .build();
-    public static final Person WILL = new PersonBuilder().withName("Will T").withPhone("9622141")
-            .withEmail("will@example.com").withAddress("30th street")
+    public static final Person WILL = new PersonBuilder().withName("Will T")
+            .withPhone("9622141")
+            .withEmail("will@example.com")
+            .withAddress("30th street")
             .withPrevDateMet("2021-03-15")
             .withSalary("5100")
             .withScheduledMeeting("2022-01-05", "1630")
@@ -131,5 +148,13 @@ public class TypicalPersons {
 
     public static List<Person> getDuplicatePersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, BENSON_SMITH, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getFlaggedPersons() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL));
+    }
+
+    public static List<Person> getUnFlaggedPersons() {
+        return new ArrayList<>(Arrays.asList(ELLE, FIONA, GEORGE));
     }
 }

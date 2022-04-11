@@ -19,4 +19,8 @@ public class PersonFlagComparator implements Comparator<Person> {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof PersonFlagComparator;
+    }
 }
