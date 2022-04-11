@@ -152,6 +152,7 @@ The table below shows a list of command parameters that will be used for custome
 **:information_source: Information:**
 * Service preference refers to services feedbacked by customers that they would enjoy. As this is feedback, the service could be in the current service list offered by the salon or it could yet to be offered as salons may choose to offer when there is sufficient demand.
 * No 2 customers can have the same phone number or same email.
+
 </div>
 
 
@@ -160,7 +161,7 @@ The table below shows a list of command parameters that will be used for custome
 | `NAME`               | Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `PHONE_NUMBER`       | Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `ADDRESS`            | Address of the customer. Addresses can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `EMAIL`              | Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+| `EMAIL`              | {::nomarkdown} Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/}|
 | `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank if inputed. Else, it is an optional value.      |
 | `SERVICE_PREFERENCE` | The name of the services that the customer feedbacked that they would like to have. Services' name can be any values, and it should not be blank if inputed. Else, it is an optional value. Note that the service a customer prefers may not be present in the service list as the salon may not be offering the service yet.            |
 | `HAIR_TYPE`          | The hair type of the customer. Hair types can be any values, and it should not be blank if inputed. Else, it is an optional value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -355,6 +356,7 @@ Format: `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
+
 Examples:
 * `finds n/Facial pr/30` returns all services who have `facial` in their name and all services that cost `30`.
 * `finds n/Facial Cut` return all services who have `facial` in their name and all services who have `cut` in their name.
@@ -389,7 +391,7 @@ The table below shows a list of command parameters that will be used for booking
 
 | Parameter           | Description                                                                                                                                                                                          |
 |---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `NAME`              | Name of customer or service. Customer's name should only contain alphanumeric characters and spaces, and it should not be blank. Service's name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
 | `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
 | `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
 | `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
@@ -424,7 +426,7 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
-    <li>Feedback can only be given if the current date is after booking date.</li>
+    <li>Feedback can only be given if the current datetime is after the booking's appoint datetime.</li>
     <li>Editing booking date to be after current date will remove any feedback.</li>
 </ul>
 
@@ -432,10 +434,10 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 
 Examples:
 * `editb 1 sev/3 f/Excellent Customer Service` Edits the 1st booking's service to the service at Index 2 and edit its feedback to `Excellent Customer Service` .
-* `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
+* `editb 2 st/10-12-2022 10:30` Edits the booking time of the 2nd booking to be `10-12-2022 10:30`.
 
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
-![Editing a booking example](images/user-guide/edit-booking.png)
+![Editing a booking example](images/user-guide/edit-booking-v2.png)
 
 #### 4.3.5 Finding booking' profile by keyword: `findb`
 
@@ -655,7 +657,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Add a service         | `adds n/SERVICE_NAME pr/PRICE d/DURATION`              | `adds n/Acne Facial Treatment pr/138 d/120` |
 | List all services     | `lists`                                                ||
 | Edit a service        | `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]` | `edits 2 n/Dark Eye Circle Treatment d/30`  |
-| Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           ||
+| Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           | `finds n/facial`|
 | Delete service(s)     | `deletes INDEX,[MORE INDEXES]`                         | `deletes 1,2,3`                             |
 
 ### 5.3 Booking
@@ -665,7 +667,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Add a booking         | `addb c/CUSTOMER_INDEX sev/SERVICE_INDEX st/BOOKING_DATE_TIME`                           | `addb c/1 sev/1 st/10-10-2022 10:30`         |
 | List all bookings     | `listb`                                                                                  ||
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
-| Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
+| Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             |`findb n/alex`|
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
 
 
