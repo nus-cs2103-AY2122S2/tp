@@ -6,7 +6,7 @@ title: User Guide
 * Table of Contents
 {:toc}
 
-ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients’ in the midst of 
+ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients in the midst of 
 massive lists of clients that have various needs and priorities**. 
 
 Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps. 
@@ -80,19 +80,22 @@ only packages that existing people in ClientConnect have.
 
 **Notes about the tags:**<br>
 * Each tag has two components- a tag name, and a priority level.
-* There are 4 priority levels, with 1 being the highest and 4 being the lowest. However, a tag doesn't necessarily have to have a priority level.
+* There are 4 priority levels, with 1 being the highest and 4 being the lowest. However, a tag doesn't necessarily need to have a priority level.
 * The tag's colour depends on the priority level.
-* The priority level of a tag is indicated along with the tag name when you input the `TAG` parameter in commands. To indicate the priority level, simply follow the tag name by typing ` :p[1/2/3/4]` after the tag name
+* The priority level of a tag is indicated along with the tag name when you input the `TAG` parameter in commands. To indicate the priority level, simply follow the tag name by typing ` :p[1/2/3/4]` after the tag name.
 * For example, `owes money` would create a tag with tag name "owes money", and no priority level.
 * However, `owes money :p3` would create a tag with tag name "owes money", and priority level 3.
 
 
 **Notes about the insurance packages:**<br>
 
-### Viewing help : `help`
-![Help button image](images/helpButtonUG.png)
+### **General commands**
 
-Shows a message explaining how to access the ClientConnect help page
+#### Viewing help : `help`
+
+Shows a message explaining how to access the ClientConnect help page.
+
+![Help button image](images/helpButtonUG.png)
 
 Format: `help`
 
@@ -105,25 +108,11 @@ On clicking Help, you will see this as a result:
 ![Help window image](images/helpWindowUG.png)
 
 ------------------------------------------------------------------------------------
-### Viewing Packages : `listp`
-![Package button image](images/packageButtonUG.png)
+#### Adding a person: `add`
 
-Opens a new window that shows the various insurance packages and their description
+Adds a person, as well as any details, to ClientConnect.
 
-Click on the Package button to view a dropdown window displaying a "Package" button. Alternatively, you could type in `listp`.
-
-Format: `listp`
-
-On clicking Package or typing `listp`, you will see this as a result:
-
-![result1 after 'listp'](images/listInsurancePackage1UG.png)
-
-![result2 after 'listp'](images/listInsurancePackage2UG.png)
-
-------------------------------------------------------------------------------------
-### Adding a person: `add`
 ![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
-Adds a person, as well as any details, to ClientConnect
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
@@ -143,37 +132,20 @@ Notes:
   exist, a new one will be automatically created for you.
 
 ------------------------------------------------------------------------------------
-### Adding a tag to a person: `addTag`
-![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
-Adds a tag to the specified person in ClientConnect
+#### Listing all persons : `list`
 
-Format: `addTag INDEX TAG`
+Displays all your clients in ClientConnect.
 
-Examples:
-* `addTag 3 friend of the family`
-* `addTag 2 owes money :p2`
-
-After adding:
-
-![result after 'addTag 3 friend of the family'](images/afterAddTagUG.png)
-
-Notes:
-* Adds tag to the person at the specified `INDEX`.
-* Only one tag can be added at a time.
-* Duplicate tags (same tagname and priority level) cannot be added
-
-------------------------------------------------------------------------------------
-### Listing all persons : `list`
 ![result for 'list'](images/listAllClientsUG.png)
-Displays all your clients in ClientConnect
 
 Format: `list`
 
 ------------------------------------------------------------------------------------
-### Editing a person : `edit`
-![result before 'edit 1 p/123456'](images/beforeEditUG.png)
+#### Editing a person : `edit`
 
-Edits an existing client in ClientConnect, similar to adding a new client
+Edits an existing client in ClientConnect, similar to adding a new client.
+
+![result before 'edit 1 p/123456'](images/beforeEditUG.png)
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
@@ -191,30 +163,11 @@ Notes:
 * Existing values will be updated to the input values.
 
 ------------------------------------------------------------------------------------
-### Editing a tag of a person: `editTag`
-![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
-Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect
+#### Locating persons by field: `find`
 
-Format: `editTag INDEX TAG_NUMBER TAG`
+Finds clients whose field contains any of the given keywords.
 
-Examples:
-* `editTag 3 1 friend of the family`
-* `editTag 2 1 owes money :p3`
-
-After editTag:
-
-![result after 'editTag 2 1 owes money :p3'](images/afterEditTagUG.png)
-
-Notes:
-* Edits person at the specified `INDEX`.
-* Edits person's tag at the specified `TAG_NUMBER`.
-* Only one tag can be edited at a time.
-* The edited tag cannot have a duplicate tag (same tagname and priority level) in the existing tag list.
-
-------------------------------------------------------------------------------------
-### Locating persons by field: `find`
 ![result for 'find i/undecided'](images/findInsurancePackageUG.png)
-Finds clients whose field contains any of the given keywords
 
 Format: `find FIELD KEYWORD [MORE_KEYWORDS] [MORE_FIELD] [MORE_KEYWORDS]`
 
@@ -248,8 +201,8 @@ After a `find` command:
 ![result for 'find i/undecided n/david'](images/findUndecidedDavid.png)
 
 ------------------------------------------------------------------------------------
-### Deleting a person : `delete`
-Deletes an existing client from ClientConnect
+#### Deleting a person : `delete`
+Deletes an existing client from ClientConnect.
 
 Format: `delete INDEX`
 
@@ -270,109 +223,20 @@ After `delete 2`:
 ![result after 'delete 2'](images/afterDeleteUG.png)
 
 ------------------------------------------------------------------------------------
-### Deleting a tag of a person: `deleteTag`
-Deletes the specified tag of the specified person in ClientConnect
-
-Format: `deleteTag INDEX TAG_NUMBER`
-
-Examples:
-* `deleteTag 3 1`
-* `deleteTag 2 3`
-
-Before deleteTag command:
-
-![result before 'deleteTag 3 1'](images/beforeDeleteTagUG.png)
-
-After `deleteTag 3 1`:
-
-![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
-
-Notes:
-* Deletes person at the specified `INDEX`.
-* Deletes person's tag at the specified `TAG_NUMBER`.
-* Only one tag can be deleted at a time.
-
-------------------------------------------------------------------------------------
-### Adding an insurance package: `addp`
-Adds an insurance package to ClientConnect
-
-Format: `addp i/PACKAGE_NAME d/PACKAGE_DESC`
-
-Examples:
-* `addp i/Classic Package d/Classic coverages for your needs`
-
-Before addp:
-
-![result before 'addp i/Classic Package d/Classic coverages for your needs'](images/beforeAddInsurancePackage.png)
-
-After `addp i/Classic Package d/Classic coverages for your needs`:
-
-![result1 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
-
-
-![result2 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage2UG.png)
-
-Notes:
-* The description `d/` parameter is compulsory, but you can leave the description blank, and add it in the future.
-  
-------------------------------------------------------------------------------------
-### Editing an insurance package: `editp`
-Edits an existing insurance package in ClientConnect
-
-Format: `editp i/PACKAGE_NAME d/PACKAGE_DESC`
-
-Examples:
-* `editp i/Golden Package d/Lifetime insurance`
-
-Before editp:
-
-![result before 'editp i/Golden Package d/Lifetime insurance'](images/beforeEditInsurancePackageUG.png)
-
-After `editp i/Golden Package d/Lifetime insurance`:
-
-![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
-
-![result2 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage2UG.png)
-
-------------------------------------------------------------------------------------
-### Deleting an insurance package: `deletep`
-Deletes an existing insurance package in ClientConnect
-
-Format: `deletep i/PACKAGE_NAME`
-
-Examples:
-* `deletep i/Golden Package`
-
-Before deletep:
-
-![result before 'deletep i/Golden Package'](images/beforeDeleteInsurancePackageUG.png)
-
-After `deletep i/Golden Package`:
-
-![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
-
-![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
-
-Notes: 
-* If the packages window was open before a package is deleted, you will have to close and reopen the window 
-to view the change.
-* If you try to delete a package that is used by at least one person, it will not be deleted.
-
-------------------------------------------------------------------------------------
-### Importing ClientConnect CSV data: `import`
-Opens a window to choose a CSV file to load
+#### Importing ClientConnect CSV data: `import`
+Opens a window to choose a CSV file to load.
 
 Format: `import`
 
 ------------------------------------------------------------------------------------
-### Exporting ClientConnect data to CSV: `export`
-Opens a window to choose a CSV file to export to
+#### Exporting ClientConnect data to CSV: `export`
+Opens a window to choose a CSV file to export to.
 
 Format: `export`
 
 ------------------------------------------------------------------------------------
-### Undo previous command: `undo`
-Undoes previous command executed
+#### Undo previous command: `undo`
+Undoes previous command executed.
 
 Format: `undo`
 
@@ -389,8 +253,8 @@ Note:
 will not work for addp, deletep, editp and prioList commands.
 
 ------------------------------------------------------------------------------------
-### Redo previous command: `redo`
-Redoes undone command
+#### Redo previous command: `redo`
+Redoes undone command.
 
 Format: `redo`
 
@@ -407,17 +271,17 @@ Note:
 deleteTag, editTag commands.
 
 ------------------------------------------------------------------------------------
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
+
+Clears all entries from the address book.
 
 ![result after 'clear'](images/clearUG.png)
-
-Clears all entries from the address book
 
 Format: `clear`
 
 ------------------------------------------------------------------------------------
-### Clipping a client's information to clipboard : `clip`
-Copies a client's information onto the system's clipboard
+#### Clipping a client's information to clipboard : `clip`
+Copies a client's information onto the system's clipboard.
 
 Format: `clip n/NAME` or `clip INDEX`
 
@@ -438,7 +302,7 @@ Information copied using `clip 1`:
 ![info copied using 'clip 1'](images/afterClip1UG.png)
 
 ------------------------------------------------------------------------------------
-### Listing client list by priority level of their tags: `prioList`
+#### Listing client list by priority level of their tags: `prioList`
 In order of decreasing priority, priorities have the following color scheme:
 - Priority 1: Red
 - Priority 2: Orange
@@ -461,15 +325,173 @@ Note that:
 
 Format: `prioList`
 
-Examples:
-1. `clip n/John Doe`
-2. `clip 1`
-
 ------------------------------------------------------------------------------------
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 Exits the program
 
 Format: `exit`
+
+------------------------------------------------------------------------------------
+### **Tag-related commands**
+
+#### Adding a tag to a person: `addTag`
+
+Adds a tag to the specified person in ClientConnect.
+
+![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
+
+Format: `addTag INDEX TAG`
+
+Examples:
+* `addTag 3 friend of the family`
+* `addTag 2 owes money :p2`
+
+After adding:
+
+![result after 'addTag 3 friend of the family'](images/afterAddTagUG.png)
+
+Notes:
+* Adds tag to the person at the specified `INDEX`.
+* Only one tag can be added at a time.
+* Duplicate tags (same tagname and priority level) cannot be added
+
+------------------------------------------------------------------------------------
+#### Editing a tag of a person: `editTag`
+
+Edits the specified tag of the specified person in ClientConnect.
+
+![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
+
+Format: `editTag INDEX TAG_NUMBER TAG`
+
+Examples:
+* `editTag 3 1 friend of the family`
+* `editTag 2 1 owes money :p3`
+
+After editTag:
+
+![result after 'editTag 2 1 owes money :p3'](images/afterEditTagUG.png)
+
+Notes:
+* Edits person at the specified `INDEX`.
+* Edits person's tag at the specified `TAG_NUMBER`.
+* Only one tag can be edited at a time.
+* The edited tag cannot have a duplicate tag (same tagname and priority level) in the existing tag list.
+
+------------------------------------------------------------------------------------
+#### Deleting a tag of a person: `deleteTag`
+
+Deletes the specified tag of the specified person in ClientConnect.
+
+Format: `deleteTag INDEX TAG_NUMBER`
+
+Examples:
+* `deleteTag 3 1`
+* `deleteTag 2 3`
+
+Before deleteTag command:
+
+![result before 'deleteTag 3 1'](images/beforeDeleteTagUG.png)
+
+After `deleteTag 3 1`:
+
+![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
+
+Notes:
+* Deletes person at the specified `INDEX`.
+* Deletes person's tag at the specified `TAG_NUMBER`.
+* Only one tag can be deleted at a time.
+
+------------------------------------------------------------------------------------
+
+### **Package-related commands**
+
+#### Adding an insurance package: `addp`
+
+Adds an insurance package to ClientConnect.
+
+Format: `addp i/PACKAGE_NAME d/PACKAGE_DESC`
+
+Examples:
+* `addp i/Classic Package d/Classic coverages for your needs`
+
+Before addp:
+
+![result before 'addp i/Classic Package d/Classic coverages for your needs'](images/beforeAddInsurancePackage.png)
+
+After `addp i/Classic Package d/Classic coverages for your needs`:
+
+![result1 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
+
+
+![result2 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage2UG.png)
+
+Notes:
+* The description `d/` parameter is compulsory, but you can leave the description blank, and add it in the future.
+
+------------------------------------------------------------------------------------
+#### Editing an insurance package: `editp`
+
+Edits an existing insurance package in ClientConnect.
+
+Format: `editp i/PACKAGE_NAME d/PACKAGE_DESC`
+
+Examples:
+* `editp i/Golden Package d/Lifetime insurance`
+
+Before editp:
+
+![result before 'editp i/Golden Package d/Lifetime insurance'](images/beforeEditInsurancePackageUG.png)
+
+After `editp i/Golden Package d/Lifetime insurance`:
+
+![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
+
+![result2 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage2UG.png)
+
+------------------------------------------------------------------------------------
+#### Deleting an insurance package: `deletep`
+
+Deletes an existing insurance package in ClientConnect.
+
+Format: `deletep i/PACKAGE_NAME`
+
+Examples:
+* `deletep i/Golden Package`
+
+Before deletep:
+
+![result before 'deletep i/Golden Package'](images/beforeDeleteInsurancePackageUG.png)
+
+After `deletep i/Golden Package`:
+
+![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
+
+![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
+
+Notes:
+* If the packages window was open before a package is deleted, you will have to close and reopen the window
+  to view the change.
+* If you try to delete a package that is used by at least one person, it will not be deleted.
+
+------------------------------------------------------------------------------------
+#### Viewing Packages : `listp
+
+Opens a new window that shows the various insurance packages and their description.
+
+![Package button image](images/packageButtonUG.png)
+
+Click on the Package button to view a dropdown window displaying a "Package" button. Alternatively, you could type in `listp`.
+
+Format: `listp`
+
+On clicking Package or typing `listp`, you will see this as a result:
+
+![result1 after 'listp'](images/listInsurancePackage1UG.png)
+
+![result2 after 'listp'](images/listInsurancePackage2UG.png)
+
+------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -3,28 +3,8 @@ layout: page
 title: Developer Guide
 ---
 
-Table of Contents
-  * Acknowledgements
-  * Setting up, getting started
-  * Design
-    * Architecture
-    * UI Component
-    * Logic Component
-    * Model Component
-    * Storage Component
-    * Common classes
-  * Implementation
-  * Documentation, logging, testing, configuration, dev-ops
-  * Appendix: Requirements
-    * Product Scope
-    * User Stories
-    * Use Cases
-    * Non-Functional Requirements
-    * Glossary
-  * Appendix: Instructions for manual testing
-    * Launch and shutdown
-    * Deleting a person
-    * Saving data
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
