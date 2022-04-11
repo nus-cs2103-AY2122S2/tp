@@ -1533,7 +1533,7 @@ testers are expected to do more *exploratory* testing.
 
    c. Test case: `help` with additional parameters after the `help` command<br> Expected: The response box will display an invalid command message.
 
-   c. Test case: Click on file, followed by clicking on help <br> Expected: Help window opens.
+   d. Test case: Click on file, followed by clicking on help <br> Expected: Help window opens.
 
 ### Listing the data
 
