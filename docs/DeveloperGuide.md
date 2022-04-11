@@ -1092,8 +1092,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files 
+   1. Prerequisites: Missing `data/talentassistant.json`.
+   2. Test case: Delete `data/talentassistant.json` and relaunch the application.</br>
+   Expected: Application will be populated with sample data.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+   1. Prerequisites: `data/talentassistant.json` is modified to contain invalid details.
+   2. Test case: Modify a `Candidate`'s phone number to start with any digit other than 6, 8 or 9 and launch the application.</br>
+   Expected: Application will start without any data.
+   3. Test case: Modify a `Candidate`'s phone number to start with any digit other than 6, 8 or 9 while the application is running.</br>
+   Expected: Application continues to run smoothly.
+
