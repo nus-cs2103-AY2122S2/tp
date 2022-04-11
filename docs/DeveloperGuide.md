@@ -595,8 +595,6 @@ testers are expected to do more *exploratory* testing.
       Expected: The UniBook adds this module with the specified key events to the UniBook.<br>                      
 <br>
 <br>
-<br>
-  
 2. Add a group with meeting times to a module.<br>
 
    1. Prerequisites: The specified module must exist in the UniBook, otherwise an error message will be displayed.  
