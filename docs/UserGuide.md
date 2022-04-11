@@ -484,12 +484,14 @@ Removes the specified modules, module subgroup, student or professor profile fro
 Format: `delete o/module m/[MODULECODE]`
 * Deletes the module with the specified `MODULECODE`.
 * The module must already exist in the system.
+* Not case-sensitive.
 * For example, `delete o/module m/CS2103` removes the module with module code CS2103
 
 #### :bulb: Delete group by module code and group name
 Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
 * Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
+* Module is not case-sensitive, Group is case-sensitive.
 * For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### On People View:
@@ -504,6 +506,7 @@ Format: `delete [INDEX] p/ e/ t/[TAG] of/`
 * p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put `p/` and `e/`
 * At least 1 of {`p/`, `e/`, `t/[TAG]`, `of/`} must be entered, otherwise the `delete [INDEX]` command will be executed instead
 * Only 0 or 1 of each tag must be provided
+* `[TAG]` is not case-sensitive.
 
 ### On Module View:
 
