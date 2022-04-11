@@ -36,7 +36,7 @@ SortCommandParser -> Model : new PersonNameComparator()
 activate Model
 
 Model --> SortCommandParser : sortComparator
-deactivate Model 
+deactivate Model
 
 SortCommandParser --> SortCommandParser : sortComparator
 deactivate SortCommandParser
