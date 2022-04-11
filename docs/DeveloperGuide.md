@@ -313,7 +313,10 @@ We decided to go with **Alternative 1**, which ensures immutability and no side 
 
 ### **Filter feature**
 
+#### Rationale
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
+
+#### Implementation
 To implement the feature, the below classes are created:
 
 * `FilterCommand` extending class `Command` is implemented to let the system understand the command
