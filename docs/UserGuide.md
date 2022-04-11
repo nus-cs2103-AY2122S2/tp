@@ -261,7 +261,7 @@ Format: `remove_student INDEX tn/TUTORIAL_NAME` or `remove_student id/STUDENT_ID
 
 * `list_student` has to be called before `remove_student INDEX tn/TUTORIAL_NAME` as `INDEX` is relative to a student list.
 * Removes the student with the specified `INDEX` or `STUDENT_ID` from the class with specified `TUTORIAL_NAME`.
-* `INDEX` refers to the index number shown in the displayed list of student in the class.\
+* `INDEX` refers to the index number shown in the displayed list of student in the class.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `STUDENT_ID` refers to the student's unique NUSNET ID.
 * After this command is called, the tutorial name and student ID of the student will be deleted from the contact.
@@ -504,10 +504,6 @@ camNUS data is saved as a JSON file `[JAR file location]/data/addressbook.json`.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, camNUS will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
