@@ -75,9 +75,7 @@ public class MeetCommand extends Command {
             tempList.setPredicate(predicate);
 
             if (tempList.size() > 1) {
-                lastShownList.setPredicate(predicate);
-                listSize = lastShownList.size();
-                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+                return getCommandResult(lastShownList, predicate);
             }
 
             targetIndex = model.getPersonListIndex(targetName);
@@ -88,11 +86,25 @@ public class MeetCommand extends Command {
             targetIndex = Index.fromOneBased(index);
         }
 
+        Person personWithScheduleMeeting = getScheduledMeetingPerson(model, lastShownList, targetIndex);
+        return new CommandResult(String.format(MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS, personWithScheduleMeeting));
+    }
+
+    /**
+     * Schedules a meeting for the person at the targetIndex and returns them.
+     */
+    private Person getScheduledMeetingPerson(Model model, FilteredList<Person> lastShownList, Index targetIndex) {
         Person personToScheduleMeeting = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createMeetEditedPerson(personToScheduleMeeting, scheduledMeeting);
         model.setPerson(personToScheduleMeeting, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS, personToScheduleMeeting));
+        return personToScheduleMeeting;
+    }
+
+    private CommandResult getCommandResult(FilteredList<Person> lastShownList, Predicate<Person> predicate) {
+        lastShownList.setPredicate(predicate);
+        listSize = lastShownList.size();
+        return new CommandResult(MESSAGE_MULTIPLE_PERSON);
     }
 
     public void setIndex(int index) throws ParseException {

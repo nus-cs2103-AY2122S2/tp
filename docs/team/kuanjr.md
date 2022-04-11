@@ -28,6 +28,8 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=kuanjr&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=j4ck990&tabRepo=AY2122S2-CS2103T-W15-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~docs~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
+<div style="page-break-after: always;"></div>
+
 * **Project management**:
     * Managed releases `v1.2` - `v1.3` (2 releases) on GitHub
 

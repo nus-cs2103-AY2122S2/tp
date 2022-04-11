@@ -73,9 +73,7 @@ public class FlagCommand extends Command {
             tempList.setPredicate(predicate);
 
             if (tempList.size() > 1) {
-                lastShownList.setPredicate(predicate);
-                listSize = lastShownList.size();
-                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+                return getCommandResult(lastShownList, predicate);
             }
 
             targetIndex = model.getPersonListIndex(targetName);
@@ -86,13 +84,28 @@ public class FlagCommand extends Command {
             targetIndex = Index.fromOneBased(index);
         }
 
+        Person flaggedPerson = getFlaggedPerson(model, lastShownList, targetIndex);
+        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, flaggedPerson));
+    }
+
+    /**
+     * Flags the person at the targetIndex and returns them.
+     */
+    private Person getFlaggedPerson(Model model, FilteredList<Person> lastShownList,
+                                    Index targetIndex) throws CommandException {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
         }
         Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createFlagEditedPerson(personToFlag, flag);
         model.setPerson(personToFlag, editedPerson);
-        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, personToFlag));
+        return personToFlag;
+    }
+
+    private CommandResult getCommandResult(FilteredList<Person> lastShownList, Predicate<Person> predicate) {
+        lastShownList.setPredicate(predicate);
+        listSize = lastShownList.size();
+        return new CommandResult(MESSAGE_MULTIPLE_PERSON);
     }
 
     public void setIndex(int index) throws ParseException {

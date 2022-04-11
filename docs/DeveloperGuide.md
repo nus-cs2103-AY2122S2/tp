@@ -22,8 +22,12 @@ title: Developer Guide
       * [Previous Date Met](#previous-date-met)
       * [Information](#information)
       * [Salary](#salary)
-    * I2
-    * I3
+    * [Flagging Important Clients](#flagging-important-clients)
+    * [Commands using name](#edit-delete-flag-and-meet-command-using-name)
+    * [List Command](#list-command)
+    * [Sort Command](#sort-command)
+    * [Undo Command](#undo-command)
+    
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
     * [Product Scope](#product-scope)
@@ -482,11 +486,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 

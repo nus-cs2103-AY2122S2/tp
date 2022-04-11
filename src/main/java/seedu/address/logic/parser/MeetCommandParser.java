@@ -33,14 +33,7 @@ public class MeetCommandParser implements Parser<MeetCommand> {
         boolean isDatePresent = arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE);
         boolean isTimePresent = arePrefixesPresent(argMultimap, PREFIX_MEETING_TIME);
 
-        if (isClearPresent && (isDatePresent || isTimePresent)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
-        }
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME)
-                && !isClearPresent) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
-        }
+        checkInput(argMultimap, isClearPresent, isDatePresent, isTimePresent);
 
         Name name;
 
@@ -52,6 +45,17 @@ public class MeetCommandParser implements Parser<MeetCommand> {
 
         ScheduledMeeting newMeeting;
 
+        newMeeting = getScheduledMeeting(argMultimap, isClearPresent);
+
+        return new MeetCommand(name, newMeeting);
+    }
+
+    /**
+     * Creates the ScheduledMeeting object according to input.
+     */
+    private ScheduledMeeting getScheduledMeeting(ArgumentMultimap argMultimap, boolean isClearPresent)
+            throws ParseException {
+        ScheduledMeeting newMeeting;
         if (isClearPresent) {
             newMeeting = new ScheduledMeeting();
         } else {
@@ -59,8 +63,22 @@ public class MeetCommandParser implements Parser<MeetCommand> {
             MeetingTime time = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_MEETING_TIME).get());
             newMeeting = new ScheduledMeeting(date, time);
         }
+        return newMeeting;
+    }
 
-        return new MeetCommand(name, newMeeting);
+    /**
+     * Checks the input against the provided booleans to ensure that input is in the correct format.
+     */
+    private void checkInput(ArgumentMultimap argMultimap, boolean isClearPresent,
+                            boolean isDatePresent, boolean isTimePresent) throws ParseException {
+        if (isClearPresent && (isDatePresent || isTimePresent)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_MEETING_DATE, PREFIX_MEETING_TIME)
+                && !isClearPresent) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MeetCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

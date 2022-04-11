@@ -145,12 +145,22 @@ public class UniquePersonList implements Iterable<Person> {
      */
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
-                }
+            if (isPersonInList(persons, i)) {
+                return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Checks if the person at index i is in the list.
+     */
+    private boolean isPersonInList(List<Person> persons, int i) {
+        for (int j = i + 1; j < persons.size(); j++) {
+            if (persons.get(i).isSamePerson(persons.get(j))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
