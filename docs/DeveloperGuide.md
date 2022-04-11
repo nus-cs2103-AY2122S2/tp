@@ -913,7 +913,6 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `edit 1 id/A0123456B n/Jane Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`<br>
       Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `edit` command will be validated by the system.
 
-2. Editing a candidate
 ### Deleting a candidate (WIP)
 
 1. Deleting a candidate while all candidates are being shown
