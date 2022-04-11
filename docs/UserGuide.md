@@ -137,48 +137,6 @@ This is a sample screenshot of what you can expect from the `help` command.
   
 </div>
 
-### 3.2. Importing Excel sheet
-
-Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
-
-Format: `import FILE PATH`
-
-<div markdown="span" class="alert alert-primary">
-  
-:bulb: **Tip:**<br>
-  
-* The file path is relative to the root directory.
-
-</div>
-
-Examples of usage:
-* `import C:\Users\Documents\tp.xlsx`
-* `import C:\Users\Documents\Desktop\tp\students.xlsx`
-
-Format: import button
-* Adds a list of students with Relevant Details such as Covid status into Tracey.
-* Relevant details required are mentioned in Table 4 below.
-* In the Excel sheet, the first column has to be the names of students followed by the Relevant Details.
-* Tracey will then store all students from the Excel file into her!
-
-Sample Excel file:
-![Format_Sample](images/Excelformat.png) *Figure 3: Screenshot of Excel file.*
-
-How to identify import button:
-![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
-
-<div markdown="span" class="alert alert-warning">
-  
-:warning: **Warning:**<br>
-  
-* The excel file must contain only one sheet named "Sheet1".
-  
-* The column of the table must be capital and starts with Column A.
-  
-* The data in the table needs to be ensured no space behind
-  
-</div>
-
 ### 3.3. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
@@ -618,21 +576,20 @@ there are changes to Tracey.
 | No. | Command     | Description                                                                               | Example                                                                                                                                |
 |-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | 1.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
-| 2.  | `import`    | Add a list of students from an Excel file into Tracey                                     | -                                                                                                                                      |
-| 3.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
-| 4.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
-| 5.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
-| 6.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
-| 7.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
-| 8.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
-| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
-| 10. | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
-| 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
-| 12. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
-| 13. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
-| 14. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
-| 15. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
-| 16. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
+| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
+| 3.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
+| 4.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 5.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
+| 6.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
+| 7.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
+| 8.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
+| 9.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
+| 10. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 11. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 12. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 13. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
+| 15. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
 
 
 --------------------------------------------------------------------------------------------------------------------

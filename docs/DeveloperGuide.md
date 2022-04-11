@@ -280,7 +280,7 @@ There are three possible execution paths for this command.
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
 
-The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces. 
+The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
 
 **Sequence Diagram of Summarise Feature is shown below:**
 
@@ -318,7 +318,7 @@ The pie chart window mechanism implements the following sequence and interaction
 
 Pie Chart Window feature opens up a separate window that contains charts for the user to view.
 The window contains pie charts that summarises how each block is doing according to the types of covid statuses and a bar chart that
-summarises how many covid positive students each faculty has in the hall. 
+summarises how many covid positive students each faculty has in the hall.
 
 **Class Diagram of Pie Chart Window Feature is shown below:**
 
@@ -422,7 +422,7 @@ Additionally, there is a static final static message to be displayed to the user
 1. `MESSAGE_SUCCESS`
    - Scenario: Tracey database successfully cleared.
    - Message: "Tracey has been cleared!".
-   
+    
 **Interaction between objects when Clear Command is executed:**
 
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
@@ -483,23 +483,23 @@ The `edit` command is as follows:
 
 `edit [INDEX] [PREFIX/NEW_VALUE]...` where `[PREFIX/NEW_VALUE]...` indicates one or more new fields in which the user wishes to edit.
 
-The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work. 
+The original AB3 implementation of this feature allows editing fields without making any new changes on the `Person`. e.g. If a `Person` with `name` of  John (indexed 1) is already present in the address book, then the command `edit 1 n/John` will still work.
 In addition, for attribute types that need to be unique for each `Person` e.g. `Phone`, `Email` and `Matriculation Number`, the edited value for these unique attribute types still work even if it already exists in Tracey.
 <br>e.g. Given the two following `Person` objects in Tracey:
 * `name`: John `Email`: john123@gmail.com (indexed 1)
 * `name`: Johnny `Email` johnny123@gmail.com (indexed 2)
 
 The command `edit 2 e/john123@gmail.com` still works and the new `Email` value for Johnny would be updated to `john123@gmail.com` even though this email already exists in the address book for John and each student in Tracey must have an unique `Email`.
- 
+
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
 ####**Path Execution of Edit Feature Activity Diagram is shown below:**
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException** 
+Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-  
+
 ####**Class Diagram of Edit Feature is shown below**
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
@@ -519,7 +519,7 @@ Additionally, there are a few final static messages to be displayed to the user 
 4. `MESSAGE_SAME_INPUT`:
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
-  
+
 ####**Sequence Diagram of Edit Feature is shown below:**
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
@@ -570,7 +570,7 @@ There are two possible execution paths for this command.
 
 #### Structure of Filter feature
 
-The following is a class diagram of the filter feature. 
+The following is a class diagram of the filter feature.
 
 **Class diagram of Filter feature is shown below:**
 ![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
@@ -592,6 +592,46 @@ Subsequently, the `parseCommand` method in `LogicManager` will continue to creat
 
 The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
 The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
+
+### List Feature
+
+The list mechanism implements the following sequence for the method call execute("list").
+
+#### What is the list feature
+
+The list feature will display all students and their details on the main window.
+Each student's name, phone number, email, address, block letter, faculty, matriculation number, covid status and tags will be shown in the form of cards.
+
+The `list` command is as follows:
+
+`list`
+
+The user can choose when to execute the list command.
+
+The activity diagram shows the possible execution paths for the `list` command.
+
+**Path Execution of List Feature:**
+
+![ListFeatureActivityDiagram](images/ListFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
+2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
+
+**Structure of List Feature:**
+
+![ListFeatureClassDiagram](images/ListFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `ListCommand`. As per any Command class, ListCommand needs to extend the abstract class Command.
+
+**Interactions between objects when List Command is executed:**
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+When a user inputs a list command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ListCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method,
+the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window. A `CommandResult` object with user feedback is hence instantiated.
 
 ### Email Feature
 
@@ -672,7 +712,7 @@ In this section, the functionality of the undo and redo features, the expected e
 
 The undo feature allows users reverse an `add`, `edit`, or `delete` command.
 
-The redo feature allows users to reverse an `undo` command. 
+The redo feature allows users to reverse an `undo` command.
 
 #### Execution of undo feature
 
@@ -715,7 +755,7 @@ The restoreHistory() and restoreOriginal() operations are exposed in the `Model`
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`. 
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
@@ -790,7 +830,7 @@ In this section, the functionality of the `archive` feature, the expected execut
 
 This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
-This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date. 
+This command will save a copy of the working database at a file path which is dependent on the user's local computer's time and date.
 When the user uses this command, a folder named `archive` will be created if it is not yet created at the directory relative to the database file.
 Inside this `archive` folder will contain subdirectories named after the user's computer local date in `DDMMYY` format and inside these subdirectories will contain the archived files which is named after the user's computer
 local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used is to ensure that all archived files name are unique.
@@ -819,7 +859,7 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 ####**Path Execution of Archive Feature Activity Diagram is shown below:**
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
-Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the 
+Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
@@ -832,7 +872,7 @@ the archived file will be saved in its respective file path and a success messag
 The above figure illustrates the important interactions of `ArchiveCommand` when the user successfully archived the current working database file.
 
 When a user inputs `archive`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser` to check if there are any extra parameters. If the input is valid, the file path of
-the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the 
+the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
 ### Resizing result display window feature
@@ -1154,20 +1194,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Product is not required to handle printing of reports
 12. Product should respond within 10 seconds.
 
-
-*{More to be added}*
-
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Covid Status**: A student detail that indicates whether the student has Covid-19
-* **Health Risk Notice**: Household members living with individuals diagnosed with Covid-19 are issued with this notice
-* **Covid-19**: An infectious disease caused by the SARS-CoV-2 virus
-* **NUS Hall**: Hall of residence in the National University of Singapore
-* **Resident Fellow**: Full-time Academic or Executive & Professional Staff members appointed by the Dean of Students to live in a Hall of Residence
-* **Hall leaders**: Student leaders in NUS halls
+*Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
+| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
+|:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
+| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
+| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
+| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
+| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
+
+*Table 6: Specific terminology used.*
+
+| Term                           | Meaning                                                                                                                                                                                                                                                                                              |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                          | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                     |
+| Command Line Interface (CLI)   | A text-based user interface used to run applications.                                                                                                                                                                                                                                                |
+| Covid Status                   | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                     |
+| Faculty                        | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                       |
+| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                    |
+| Health Risk Notice (HRN)       | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                     |
+| JAR File                       | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                        |
+| Matriculation Number           | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                  |
+| Prefix                         | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
+| Pre-defined constant           | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                  |
+| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                               |
+| Mainstream OS                  | A Windows, Linux, Unix, OS-X operating system that computers run on.                                                                                                                                                                                                                                 |
+| Covid-19                       | An infectious disease caused by the SARS-CoV-2 virus.                                                                                                                                                                                                                                                |
+| NUS Hall                       | Hall of residence in the National University of Singapore.                                                                                                                                                                                                                                           |
+| Hall leaders                   | Student leaders in NUS halls.                                                                                                                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1213,6 +1274,38 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Listing the data
+
+1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
+   a. Test case: `list` <br>
+   Expected: All students are shown on the Main Window.
+
+   b. Test case: `list` on an empty list of students <br>
+   Expected: No students will be shown. Instead, it shows a list of no students.
+
+   c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
+   Expected: Error message indicating format of command is wrong.
+
+### Summarising the data
+
+1. Summarising all the students' data at that specific time using the `summarise` command.
+   A separate window containing charts that categorises student by covid status and faculty or block will be shown if there are student data in Tracey.
+
+    a. Test case: `summarise` on a non-empty list of students <br>
+       Expected: Pie Chart Window will display at least one pie chart and one bar chart.
+
+    b. Test case: `summarise` on an empty list of students <br>
+       Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
+
+    c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
+       Expected: New Pie Chart Window will display containing updated data set due to a deletion.
+
+    d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
+       Expected: Existing Pie Chart Window will close along with the Main Window.
+
+    e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
+       Expected: Error message indicating format of command is wrong.
 
 ### Saving data
 
