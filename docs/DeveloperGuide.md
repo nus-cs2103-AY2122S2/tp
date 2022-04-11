@@ -179,30 +179,36 @@ The add lab command is implemented as follows:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation on a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` by increasing `LAB_NUMBER`.
 </div>
 
+
 The sequence for parsing the input is similar to the one shown in [this sequence diagram](#delete-sequence-diagram) above.
 
-The following UML sequence diagrams shows the interaction between components during the execution of the `labadd` command:
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
-The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
-</div>
+The following **UML sequence diagram** shows the interaction between components during the execution of the `labadd` command:
 
-<img src="images/AddLabCommandSequenceDiagram.png" width="550" />
+<img src="images/AddLabCommandSequenceDiagram.png" width="850" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
+
+The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
 
 The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.
 
-The sequence diagram for the implementation of `LabList#add(Lab)` will be shown separately below. <br>
+The sequence diagram for the implementation of `LabList#add(Lab)` will be shown separately below.
+
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Instead of putting a reference frame in the above UML diagram for the sequence diagram of `LabList#add(Lab)`, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead, this short note will suffice.
 </div>
 
-The following UML sequence diagram shows how `add(Lab)` is implemented in `LabList`:
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
-</div>
+The following **UML sequence diagram** shows how `add(Lab)` is implemented in `LabList`:
+
 <img src="images/LabListAddSequenceDiagram.png" width="550" />
 
-The following UML activity diagram shows what happens when a user executes a `labadd` command:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
+</div>
 
-<img src="images/AddLabCommandActivityDiagram.png" width="550" />
+The following **UML activity diagram** shows what happens when a user executes a `labadd` command:
+
+<img src="images/AddLabCommandActivityDiagram.png" width="600" />
 
 ### \[Proposed\] Undo/redo feature
 
