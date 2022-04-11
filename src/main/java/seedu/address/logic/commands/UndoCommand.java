@@ -12,7 +12,7 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_USAGE_SUCCESS = "Undo success!";
-    public static final String MESSAGE_USAGE_FAILURE = "Unable to perform undo!";
+    public static final String MESSAGE_USAGE_FAILURE = "No more commands to undo!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -20,10 +20,14 @@ public class UndoCommand extends Command {
 
         if (!undoRedoStack.canUndo()) {
             throw new CommandException(MESSAGE_USAGE_FAILURE);
-        } else {
-            undoRedoStack.popUndo().undo(model);
-            return new CommandResult(MESSAGE_USAGE_SUCCESS);
         }
+
+        RedoableCommand command = undoRedoStack.popUndo();
+        if (command instanceof SwitchCommand) {
+            return new CommandResult(MESSAGE_USAGE_SUCCESS, false, false, false, false, false, true);
+        }
+        command.undo(model);
+        return new CommandResult(MESSAGE_USAGE_SUCCESS);
     }
 
     @Override
