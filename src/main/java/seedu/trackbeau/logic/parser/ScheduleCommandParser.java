@@ -14,7 +14,7 @@ import seedu.trackbeau.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ScheduleCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
-    public static final String MESSAGE_CONSTRAINT = "Date should follow dd-MM-yyyy.";
+    public static final String MESSAGE_CONSTRAINT = "Date should follow dd-MM-yyyy and it should not be blank.";
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleCommand
      * and returns a ScheduleCommand object for execution.
