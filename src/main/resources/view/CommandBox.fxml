@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
-</StackPane>
-
+<TextField fx:id="commandTextField" onAction="#handleCommandEntered"
+           xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+           stylesheets="@css/commandBox.css"
+           maxHeight="Infinity" promptText="Enter Command Here..."
+           styleClass="command" HBox.hgrow="ALWAYS" >
+    <VBox.margin>
+        <Insets left="40.0" right="40.0" top="40.0"/>
+    </VBox.margin>
+</TextField>

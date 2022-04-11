@@ -1,0 +1,104 @@
+/'
+ 'Commonly used styles and colors across diagrams.
+ 'Refer to https://plantuml-documentation.readthedocs.io/en/latest for a more
+ 'comprehensive list of skinparams.
+ '/
+
+!theme materia-outline
+
+'T1 through T4 are shades of the original color from lightest to darkest
+
+!define UI_COLOR #1D8900
+!define UI_COLOR_T1 #BDECB1
+!define UI_COLOR_T2 #3FC71B
+!define UI_COLOR_T3 #166800
+!define UI_COLOR_T4 #0E4100
+!define UI_COLOR_LIGHT #DDFCD1
+
+!define LOGIC_COLOR #3333C4
+!define LOGIC_COLOR_T1 #C8C8FA
+!define LOGIC_COLOR_T2 #6A6ADC
+!define LOGIC_COLOR_T3 #1616B0
+!define LOGIC_COLOR_T4 #101086
+!define LOGIC_COLOR_LIGHT #DEDEFF
+
+!define MODEL_COLOR #9D0012
+!define MODEL_COLOR_T1 #F97181
+!define MODEL_COLOR_T2 #E41F36
+!define MODEL_COLOR_T3 #7B000E
+!define MODEL_COLOR_T4 #51000A
+!define MODEL_COLOR_LIGHT #FFD1D3
+
+!define STORAGE_COLOR #A38300
+!define STORAGE_COLOR_T1 #FFE374
+!define STORAGE_COLOR_T2 #EDC520
+!define STORAGE_COLOR_T3 #806600
+!define STORAGE_COLOR_T4 #544400
+
+!define USER_COLOR #000000
+
+skinparam BackgroundColor #FFFFFFF
+
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
+!procedure classTitleOnly($stereotype, $color)
+    skinparam Class {
+        FontColor<<$stereotype>> $color
+        StereotypeFontColor<<$stereotype>> $color
+        BorderColor<<$stereotype>> $color
+    }
+    hide <<$stereotype>> stereotype
+!endprocedure
+
+!procedure packageTitleOnly($stereotype, $color)
+    skinparam Package {
+        FontColor<<$stereotype>> $color
+        StereotypeFontColor<<$stereotype>> $color
+        BorderColor<<$stereotype>> $color
+    }
+    hide <<$stereotype>> stereotype
+!endprocedure
+
+classTitleOnly(Hidden, "#FFFFFF")
+classTitleOnly(Logic, LOGIC_COLOR)
+classTitleOnly(Ui, UI_COLOR)
+classTitleOnly(Model, MODEL_COLOR)
+classTitleOnly(Storage, STORAGE_COLOR)
+skinparam Class {
+    FontName Arial
+    FontSize 15
+    StereotypeFontSize 13
+    BorderThickness 1.1
+}
+
+packageTitleOnly(Logic, LOGIC_COLOR)
+packageTitleOnly(Ui, UI_COLOR)
+packageTitleOnly(Model, MODEL_COLOR)
+packageTitleOnly(Store, STORAGE_COLOR)
+skinparam Package {
+    Style Rectangle
+}
+
+SKINPARAM MINCLASSWIDTH 50
+SKINPARAM SHADOWING FALSE
+SKINPARAM DEFAULTTEXTALIGNMENT CENTER
+SKINPARAM TITLEFONTSIZE 25
+
+SKINPARAM TITLEFONTCOLOR<<LOGIC>> LOGIC_COLOR
+SKINPARAM TITLEFONTCOLOR<<UI>>    UI_COLOR
+SKINPARAM TITLEFONTCOLOR<<MODEL>> MODEL_COLOR
+SKINPARAM TITLEFONTCOLOR<<STORE>> STORAGE_COLOR
+
+'Procedure to override colors and styles for class diagrams
+!procedure $OverrideTheme($theme_color)
+    skinparam TitleFontColor $theme_color
+    skinparam ArrowColor $theme_color
+!endprocedure
+
+hide footbox
+hide members
+hide circle

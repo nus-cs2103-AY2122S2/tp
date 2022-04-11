@@ -1,44 +1,53 @@
 @startuml
-!include style.puml
+!include Style.puml
+!include SequenceStyle.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant "u:UndoCommand" as UndoCommand<<Logic>>
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+box Model MODEL_COLOR_LIGHT
+participant ":Model" as Model<<Model>>
+participant ":ReversibleIBook" as ReversibleIBook<<Model>>
+participant ":StateChangeRecorder" as StateChangeRecorder<<Model>>
 end box
+
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> IBookParser : parseCommand(undo)
+activate IBookParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+IBookParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> IBookParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+IBookParser --> LogicManager : u
+deactivate IBookParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoIBook()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> ReversibleIBook : undo()
+activate ReversibleIBook
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+ReversibleIBook -> StateChangeRecorder :getCurrentReverseActionList()
+activate StateChangeRecorder
+
+StateChangeRecorder --> ReversibleIBook
+deactivate StateChangeRecorder
+
+ReversibleIBook -> ReversibleIBook :carries out reverse actions
+ReversibleIBook --> Model :
+deactivate ReversibleIBook
 
 Model --> UndoCommand
 deactivate Model

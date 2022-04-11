@@ -1,0 +1,31 @@
+.menu-bar {
+    -fx-background-color: #9F93Ed
+}
+
+.menu .label {
+    -fx-text-fill: white;
+}
+
+.menu:hover,
+.menu:showing {
+    -fx-background-color: #8373E7;
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.menu-item .label {
+    -fx-text-fill: black;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: black;
+}
+
+.menu-item:focused {
+    -fx-background: -fx-accent;
+    -fx-background-color: #E0E0E0;
+}

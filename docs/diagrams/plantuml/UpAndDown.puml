@@ -1,5 +1,5 @@
 @startuml
-!include ../style.puml
+!include ../Style.puml
 
 Class A LOGIC_COLOR_T3
 Class B LOGIC_COLOR_T3

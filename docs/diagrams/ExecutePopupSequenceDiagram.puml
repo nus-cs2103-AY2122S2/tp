@@ -1,0 +1,48 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+Actor User as User USER_COLOR
+
+Box UI UI_COLOR_LIGHT
+Participant ":PopupYYY" as PopupYYY <<UI>>
+Participant ":ResultWindow" as ResultWindow <<UI>>
+Participant ":MainWindow" as MainWindow <<UI>>
+End Box
+
+Box Logic LOGIC_COLOR_LIGHT
+Participant ":Logic" as Logic <<LOGIC>>
+End Box
+
+User -> PopupYYY : "Button Clicked"
+activate PopupYYY
+
+PopupYYY -> MainWindow : execute(commandText)
+activate MainWindow
+
+MainWindow -> Logic : execute(commandText)
+activate Logic
+
+Logic --> MainWindow : commandResult
+deactivate Logic
+
+
+MainWindow -> ResultWindow : setFeedbackToUser(feedback)
+activate ResultWindow
+
+ResultWindow --> MainWindow
+deactivate ResultWindow
+
+MainWindow -> PopupYYY : hidePopup()
+activate PopupYYY
+
+PopupYYY --> MainWindow
+deactivate PopupYYY
+
+MainWindow --> PopupYYY
+deactivate MainWindow
+
+PopupYYY --> User
+deactivate PopupYYY
+
+@enduml

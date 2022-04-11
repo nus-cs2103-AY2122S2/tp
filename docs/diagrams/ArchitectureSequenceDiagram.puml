@@ -1,29 +1,30 @@
 @startuml
-!include style.puml
+!include Style.puml
+!include SequenceStyle.puml
 
 Actor User as user USER_COLOR
-Participant ":UI" as ui UI_COLOR
-Participant ":Logic" as logic LOGIC_COLOR
-Participant ":Model" as model MODEL_COLOR
-Participant ":Storage" as storage STORAGE_COLOR
+Participant ":UI" as ui<<Ui>>
+Participant ":Logic" as logic<<Logic>>
+Participant ":Model" as model<<Model>>
+Participant ":Storage" as storage<<Storage>>
 
 user -[USER_COLOR]> ui : "delete 1"
-activate ui UI_COLOR
+activate ui UI_COLOR_T2
 
 ui -[UI_COLOR]> logic : execute("delete 1")
-activate logic LOGIC_COLOR
+activate logic LOGIC_COLOR_T2
 
-logic -[LOGIC_COLOR]> model : deletePerson(p)
-activate model MODEL_COLOR
+logic -[LOGIC_COLOR]> model : deleteProduct(p)
+activate model MODEL_COLOR_T2
 
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
-activate storage STORAGE_COLOR
+logic -[LOGIC_COLOR]> storage : saveIBook(iBook)
+activate storage STORAGE_COLOR_T2
 
 storage -[STORAGE_COLOR]> storage : Save to file
-activate storage STORAGE_COLOR_T1
+activate storage STORAGE_COLOR_T3
 storage --[STORAGE_COLOR]> storage
 deactivate storage
 

@@ -3,10 +3,52 @@
 ---
 
 @import
-  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+    "minima/skins/{{ site.minima.skin | default: 'classic' }}",
+    "minima/initialize";
 
 .icon {
-    height: 21px;
-    width: 21px
+        height: 21px;
+        width: 21px
+}
+
+/* Uncomment for PDF conversion*/
+// hr {
+//     display: none
+// }
+
+// h1, h2, h3{
+//     margin-top: 10px !important;
+// }
+
+.alert {
+    border: none;
+    border-left: solid 5px;
+    padding: 25px;
+    border-radius: 5px;
+    background-image: none;
+}
+
+.alert-primary {
+    color: #619620;
+    border-color: #82C92A;
+    background-color: #82C92A20;
+}
+
+.alert-secondary {
+    $color: #383d41;
+    color: $color;
+    border-color: $color;
+    background-color: lighten($color, 70%);
+}
+
+.alert-warning {
+    color: #ED4242;
+    border-color: #ED4242;
+    background-color: #ED424220;
+}
+
+.alert-info {
+    color: #0B8CF5;
+    border-color: #6DB0F0;
+    background-color: #6DB0F020;
 }

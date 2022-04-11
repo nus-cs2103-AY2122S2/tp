@@ -1,0 +1,10 @@
+{
+  "products": [ {
+    "name" : "Product with invalid price: negative price",
+    "category" : "Bread",
+    "description" : "Negative price",
+    "price" : "-3.99",
+    "discountRate": "25",
+    "discountStart": "1"
+  } ]
+}

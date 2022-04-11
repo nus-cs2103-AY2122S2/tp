@@ -1,0 +1,10 @@
+{
+  "products": [ {
+    "name" : "Kaya bread",
+    "category" : "Bread",
+    "description" : "Kaya on bread",
+    "price" : "-3.99",
+    "discountRate": "25",
+    "discountStart": "1"
+  } ]
+}

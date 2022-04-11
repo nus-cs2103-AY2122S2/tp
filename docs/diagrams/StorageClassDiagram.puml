@@ -1,43 +1,42 @@
 @startuml
-!include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
+!include Style.puml
 
-package Storage{
+$OverrideTheme(STORAGE_COLOR)
 
-package "UserPrefs Storage" #F4F6F6{
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonUserPrefsStorage
+package Storage as StoragePackage<<Store>> {
+
+    class "<<interface>>\nStorage" as Storage<<Storage>>
+    class StorageManager<<Storage>>
+
+    package "UserPrefsStorage" as UserPrefsStorage<<Store>> #F4F6F6{
+        class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage<<Storage>>
+        class JsonUserPrefsStorage<<Storage>>
+    }
+
+    package "IBookStorage" as IBookStorage<<Store>> #F4F6F6{
+        class "<<interface>>\nIBookStorage" as IBookStorage<<Storage>>
+        class JsonIBookStorage<<Storage>>
+        class JsonSerializableIBook<<Storage>>
+        class JsonAdaptedProduct<<Storage>>
+        class JsonAdaptedItem<<Storage>>
+    }
+
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
-
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
-}
-
-}
-
-Class HiddenOutside #FFFFFF
+class HiddenOutside<<Hidden>>
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" IBookStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> IBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonIBookStorage .up.|> IBookStorage
+JsonIBookStorage ..> JsonSerializableIBook
+JsonSerializableIBook --> "*" JsonAdaptedProduct
+JsonAdaptedProduct --> "*" JsonAdaptedItem
 
 @enduml

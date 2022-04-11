@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="843.75px" preserveAspectRatio="none" style="width:1155px;height:843px;background:#FFFFFF;" version="1.1" viewBox="0 0 1155 843" width="1155.2083px" zoomAndPan="magnify"><defs/><g><rect fill="#DEDEFF" height="814.1357" rx="4.1667" ry="4.1667" style="stroke:#FFFFFF;stroke-width:1.0416666666666667;" width="822.3958" x="53.125" y="11.4583"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="13.5417" font-weight="bold" lengthAdjust="spacing" textLength="37.5" x="443.4896" y="34.967">Logic</text><rect fill="#FFD1D3" height="814.1357" rx="4.1667" ry="4.1667" style="stroke:#FFFFFF;stroke-width:1.0416666666666667;" width="183.3333" x="960.9375" y="11.4583"/><text fill="#2196F3" font-family="&quot;Verdana&quot;" font-size="13.5417" font-weight="bold" lengthAdjust="spacing" textLength="42.7083" x="1029.1667" y="34.967">Model</text><rect fill="#FFFFFF" height="653.6051" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="132.2917" y="159.4889"/><rect fill="#FFFFFF" height="433.7463" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="295.3125" y="210.8541"/><rect fill="#FFFFFF" height="53.6336" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="541.1458" y="235.8541"/><rect fill="#FFFFFF" height="237.7991" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="541.1458" y="340.8529"/><rect fill="#FFFFFF" height="16.8518" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="768.75" y="510.435"/><rect fill="#FFFFFF" height="102.5452" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="768.75" y="695.9656"/><rect fill="#FFFFFF" height="53.6336" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="1047.3958" y="365.8529"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="137.5" x2="137.5" y1="106.0404" y2="831.8441"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="300" x2="300" y1="106.0404" y2="831.8441"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="546.3542" x2="546.3542" y1="261.6292" y2="831.8441"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="773.4375" x2="773.4375" y1="499.4283" y2="831.8441"/><line style="stroke:#000000;stroke-width:1.0416666666666667;stroke-dasharray:5.0,5.0;" x1="1052.6042" x2="1052.6042" y1="391.628" y2="831.8441"/><rect fill="#C8C8FA" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#3333C4;stroke-width:1.0416666666666667;" width="139.5833" x="67.7083" y="52.4068"/><text fill="#3333C4" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="104.1667" x="85.4167" y="84.2143">:LogicManager</text><rect fill="#C8C8FA" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#3333C4;stroke-width:1.0416666666666667;" width="123.9583" x="238.5417" y="52.4068"/><text fill="#3333C4" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="88.5417" x="256.25" y="84.2143">:IBookParser</text><rect fill="#FFFFFF" height="653.6051" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="132.2917" y="159.4889"/><rect fill="#FFFFFF" height="433.7463" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="295.3125" y="210.8541"/><rect fill="#FFFFFF" height="53.6336" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="541.1458" y="235.8541"/><rect fill="#FFFFFF" height="237.7991" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="541.1458" y="340.8529"/><rect fill="#FFFFFF" height="16.8518" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="768.75" y="510.435"/><rect fill="#FFFFFF" height="102.5452" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="768.75" y="695.9656"/><rect fill="#FFFFFF" height="53.6336" style="stroke:#000000;stroke-width:1.0416666666666667;" width="10.4167" x="1047.3958" y="365.8529"/><polygon fill="#000000" points="119.7917,155.3223,130.2083,159.4889,119.7917,163.6556,123.9583,159.4889" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="10.4167" x2="126.0417" y1="159.4889" y2="159.4889"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="59.375" x="41.6667" y="144.1325">execute()</text><polygon fill="#000000" points="282.8125,206.6874,293.2292,210.8541,282.8125,215.0208,286.9792,210.8541" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="142.7083" x2="289.0625" y1="210.8541" y2="210.8541"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="110.4167" x="163.8021" y="195.4976">parseCommand()</text><polygon fill="#000000" points="424.4792,221.2708,434.8958,225.4374,424.4792,229.6041,428.6458,225.4374" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="305.7292" x2="430.7292" y1="225.4374" y2="225.4374"/><rect fill="#C8C8FA" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#3333C4;stroke-width:1.0416666666666667;" width="218.75" x="436.9792" y="219.1874"/><text fill="#3333C4" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="183.3333" x="454.6875" y="250.9949">:AddItemCommandParser</text><polygon fill="#000000" points="317.1875,285.321,306.7708,289.4877,317.1875,293.6544,313.0208,289.4877" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="310.9375" x2="545.3125" y1="289.4877" y2="289.4877"/><polygon fill="#000000" points="528.6458,336.6862,539.0625,340.8529,528.6458,345.0195,532.8125,340.8529" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="305.7292" x2="534.8958" y1="340.8529" y2="340.8529"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="194.7917" x="326.0417" y="325.4964">parse("1 e:2022-12-13 q:10")</text><polygon fill="#000000" points="963.0208,351.2695,973.4375,355.4362,963.0208,359.6029,967.1875,355.4362" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="551.5625" x2="969.2708" y1="355.4362" y2="355.4362"/><rect fill="#F97181" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#9D0012;stroke-width:1.0416666666666667;" width="154.1667" x="975.5208" y="349.1862"/><text fill="#9D0012" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="118.75" x="993.2292" y="380.9937">d:ItemDescriptor</text><polygon fill="#000000" points="563.0208,415.3198,552.6042,419.4865,563.0208,423.6532,558.8542,419.4865" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="556.7708" x2="1051.5625" y1="419.4865" y2="419.4865"/><polygon fill="#000000" points="674.4792,495.8516,684.8958,500.0183,674.4792,504.185,678.6458,500.0183" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="551.5625" x2="680.7292" y1="500.0183" y2="500.0183"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="69.7917" x="584.375" y="484.6619">new("1", d)</text><rect fill="#C8C8FA" height="52.592" rx="4.1667" ry="4.1667" style="stroke:#3333C4;stroke-width:1.0416666666666667;" width="173.9583" x="686.9792" y="456.9865"/><text fill="#3333C4" font-family="&quot;Verdana&quot;" font-size="14.5833" lengthAdjust="spacing" textLength="138.5417" x="704.6875" y="488.7939">:AddItemCommand</text><polygon fill="#000000" points="563.0208,523.1201,552.6042,527.2868,563.0208,531.4535,558.8542,527.2868" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="556.7708" x2="772.9167" y1="527.2868" y2="527.2868"/><polygon fill="#000000" points="317.1875,574.4853,306.7708,578.6519,317.1875,582.8186,313.0208,578.6519" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="310.9375" x2="545.3125" y1="578.6519" y2="578.6519"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="64.5833" x="393.75" y="563.2955">command</text><line style="stroke:#000000;stroke-width:2.0833333333333335;" x1="536.9792" x2="555.7292" y1="583.8603" y2="602.6103"/><line style="stroke:#000000;stroke-width:2.0833333333333335;" x1="536.9792" x2="555.7292" y1="602.6103" y2="583.8603"/><polygon fill="#000000" points="154.1667,640.4338,143.75,644.6004,154.1667,648.7671,150,644.6004" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="147.9167" x2="299.4792" y1="644.6004" y2="644.6004"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="64.5833" x="189.3229" y="629.244">command</text><polygon fill="#000000" points="756.25,691.7989,766.6667,695.9656,756.25,700.1322,760.4167,695.9656" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;" x1="142.7083" x2="762.5" y1="695.9656" y2="695.9656"/><text fill="#222222" font-family="&quot;Verdana&quot;" font-size="13.5417" lengthAdjust="spacing" textLength="59.375" x="426.0417" y="680.6091">execute()</text><rect fill="#FF9C05" fill-opacity="0.19608" height="82.7535" rx="4.1667" ry="4.1667" style="stroke:#FF9800;stroke-width:1.0416666666666667;" width="469.7917" x="673.4375" y="704.2989"/><path d="M677.6042,704.2989 L760.9375,704.2989 L760.9375,732.4239 L750.5208,742.8406 L673.4375,742.8406 L673.4375,708.4656 A4.1667,4.1667 0 0 1 677.6042,704.2989 " fill="#FF9800" fill-opacity="0.19608" style="stroke:#FF9800;stroke-width:1.0416666666666667;"/><text fill="#DF7800" font-family="&quot;Verdana&quot;" font-size="13.5417" font-weight="bold" lengthAdjust="spacing" textLength="19.7917" x="697.3958" y="729.891">ref</text><text fill="#DF7800" font-family="&quot;Verdana&quot;" font-size="12.5" lengthAdjust="spacing" textLength="80.2083" x="868.2292" y="769.5089">Item Addition</text><polygon fill="#000000" points="154.1667,794.3441,143.75,798.5107,154.1667,802.6774,150,798.5107" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="147.9167" x2="772.9167" y1="798.5107" y2="798.5107"/><polygon fill="#000000" points="21.875,808.9274,11.4583,813.0941,21.875,817.2607,17.7083,813.0941" style="stroke:#000000;stroke-width:1.0416666666666667;"/><line style="stroke:#000000;stroke-width:1.1458333333333335;stroke-dasharray:2.0,2.0;" x1="15.625" x2="136.4583" y1="813.0941" y2="813.0941"/><!--MD5=[89bab0fe2dfff60533af46efc6aecaf7]
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+skinparam SequenceFontSize 30
+
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant ":AddItemCommandParser" as AddItemCommandParser<<Logic>>
+participant ":AddItemCommand" as AddItemCommand<<Logic>>
+end box
+
+box Model MODEL_COLOR_LIGHT
+participant "d:ItemDescriptor" as ItemDescriptor<<Model>>
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> IBookParser : parseCommand()
+activate IBookParser
+
+create AddItemCommandParser
+IBookParser -> AddItemCommandParser
+activate AddItemCommandParser
+
+AddItemCommandParser - -> IBookParser
+deactivate AddItemCommandParser
+
+IBookParser -> AddItemCommandParser : parse("1 e:2022-12-13 q:10")
+activate AddItemCommandParser
+
+create ItemDescriptor
+AddItemCommandParser -> ItemDescriptor
+activate ItemDescriptor
+
+ItemDescriptor - -> AddItemCommandParser
+deactivate ItemDescriptor
+ItemDescriptor -[hidden]-> AddItemCommandParser
+ItemDescriptor -[hidden]-> AddItemCommandParser
+
+create AddItemCommand
+AddItemCommandParser -> AddItemCommand : new("1", d)
+activate AddItemCommand
+AddItemCommand - -> AddItemCommandParser
+deactivate AddItemCommand
+
+AddItemCommandParser - -> IBookParser : command
+deactivate AddItemCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddItemCommandParser -[hidden]-> IBookParser
+destroy AddItemCommandParser
+
+IBookParser - -> LogicManager : command
+deactivate IBookParser
+
+LogicManager -> AddItemCommand : execute()
+activate AddItemCommand
+
+ref over AddItemCommand, ItemDescriptor : Item Addition
+
+AddItemCommand - -> LogicManager
+deactivate AddItemCommand
+
+[<- - LogicManager
+deactivate LogicManager
+
+@enduml
+
+@startuml
+
+
+
+
+skinparam backgroundColor transparent
+skinparam useBetaStyle false
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor transparent
+    FontColor #2196F3
+    HyperLinkColor #fd7e14
+    LineColor #1a78c2
+    LineThickness 1
+    Margin 10
+    Padding 6
+    Shadowing 0.0
+  }
+  node {
+   Padding 15
+   roundcorner 20
+   BackgroundColor transparent
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  groupHeader {
+    BackgroundColor #fff
+    FontColor #9C27B0
+    FontStyle bold
+  }
+  header {
+    LineThickness 0
+  }
+  referenceHeader {
+    BackgroundColor transparent
+    FontColor #222
+    FontStyle bold
+  }
+  separator {
+    BackgroundColor #222
+    FontColor transparent
+    FontStyle bold
+  }
+  title {
+	FontSize 20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor  transparent
+	FontColor #2196F3
+	BorderColor #fff
+  }
+  nwdiagDiagram {
+	network {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+		LineColor #2196F3
+		LineThickness 1.0
+		FontColor #1a78c2
+	}
+	server {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	}
+	arrow {
+		FontColor #1a78c2
+		LineColor #1a78c2
+	}
+	group {
+		BackGroundColor #fff
+		LineColor $LIGHT_DARK
+		LineThickness 2.0
+		Margin 5
+		Padding 5
+	}
+  }
+  ganttDiagram {
+	task {
+			FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+		LineColor #2196F3
+		Margin 10
+		Padding 6
+	}
+	note {
+		FontColor #9C27B0
+		LineColor #7D1F8D
+		BackGroundColor transparent
+	}
+	separator {
+		LineColor #cccccc
+		BackGroundColor transparent
+		FontColor #cccccc
+	}
+	milestone {
+		FontColor #9C27B0
+		FontSize 16
+		FontStyle italic
+		BackGroundColor #fff
+		LineColor #cccccc
+	}
+	timeline {
+		BackgroundColor #fff
+		FontColor #cccccc
+	}
+	closed {
+		BackgroundColor #CC7A00
+		FontColor #ff9800
+	}
+  }
+</style>
+skinparam defaultFontName       "Verdana"
+skinparam defaultFontSize       12
+skinparam dpi                   100
+skinparam shadowing             true
+skinparam roundcorner           8
+skinparam ParticipantPadding    40
+skinparam BoxPadding            40
+skinparam Padding               10
+skinparam TitleFontColor	    #222
+skinparam TitleFontSize	    	20
+skinparam TitleBorderThickness 	0
+skinparam ArrowColor            #666
+skinparam stereotype {
+    CBackgroundColor #fff
+    CBorderColor #cccccc
+    ABackgroundColor #70bf73
+    ABorderColor #3D8C40
+    IBackgroundColor #B7161C
+    IBorderColor $DANGER_DARK
+    EBackgroundColor #ffad33
+    EBorderColor #CC7A00
+    NBackgroundColor #b052c0
+    NBorderColor #7D1F8D
+}
+skinparam title {
+	FontColor	                 #2196F3
+	BorderColor	                 #cccccc
+	FontSize	    	         20
+	BorderRoundCorner            8
+	BorderThickness 	         1
+	BackgroundColor              transparent
+}
+
+skinparam legend {
+	BackgroundColor transparent
+	BorderColor #cccccc
+	FontColor #222
+}
+
+skinparam swimlane {
+	BorderColor #9C27B0
+	BorderThickness 2
+	TitleBackgroundColor  #fff-#fff
+	TitleFontColor #2196F3
+}
+
+
+skinparam activity {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BarColor #4CAF50
+	StartColor #9C27B0
+	EndColor #9C27B0
+	DiamondBackgroundColor transparent
+  	DiamondBorderColor #cccccc
+	DiamondFontColor #cccccc
+}
+
+
+skinparam participant {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	ParticipantBorderThickness 2
+}
+
+
+skinparam actor {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam arrow {
+	Thickness 3
+	Color #2196F3
+	FontColor #222
+}
+
+
+skinparam sequence {
+	BorderColor #2196F3
+	TitleFontColor #2196F3
+	BackgroundColor transparent
+	StartColor #2196F3
+	EndColor #2196F3
+	BoxBackgroundColor transparent
+	BoxBorderColor #666
+	BoxFontColor #222
+	DelayFontColor #222
+	LifeLineBorderColor #cccccc
+	LifeLineBorderThickness 2
+	LifeLineBackgroundColor transparent
+	GroupBorderColor #666
+	GroupFontColor #222
+	GroupHeaderFontColor #9C27B0
+	DividerBackgroundColor transparent
+    DividerBorderColor #666
+    DividerBorderThickness 2
+    DividerFontColor #222
+	ReferenceBackgroundColor transparent
+	ReferenceBorderColor #666
+	ReferenceFontColor #222
+	ReferenceHeaderFontColor #9C27B0
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam partition {
+	BorderColor #2196F3
+	FontColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam collections {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam control {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam entity {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam boundary {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam agent {
+	BackgroundColor transparent
+	BorderColor #999999
+	FontColor #333333
+}
+
+
+skinparam note {
+	BorderThickness 1
+	BackgroundColor transparent
+	BorderColor #9C27B0
+	FontColor #9C27B0
+}
+
+
+skinparam artifact {
+	BackgroundColor transparent
+	BorderColor #666
+	FontColor #666
+}
+
+
+skinparam component {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam interface {
+	BackgroundColor  transparent
+	BorderColor  #e51c23
+	FontColor #222
+}
+
+
+skinparam storage {
+	BackgroundColor transparent
+  	BorderColor #ff9800
+	FontColor #ff9800
+}
+
+
+skinparam node {
+	BackgroundColor transparent
+	BorderColor #222
+	FontColor #222
+}
+
+
+skinparam cloud {
+	BackgroundColor #F2FCFE-#eeeeee
+	BorderColor #F2FCFE
+	FontColor #222
+}
+
+
+skinparam database {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam class {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	FontColor #fff
+	HeaderBackgroundColor #2196F3-#1a78c2
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #222
+	AttributeFontSize 11
+}
+
+
+skinparam object {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	StereotypeFontColor #222
+	BorderThickness 1
+	AttributeFontColor #cccccc
+	AttributeFontSize 11
+}
+
+
+skinparam usecase {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam rectangle {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	BorderThickness 2
+	StereotypeFontColor #2196F3
+}
+
+
+skinparam package {
+	BackgroundColor transparent
+  	BorderColor #2196F3
+	FontColor #2196F3
+	BorderThickness 2
+}
+
+
+skinparam folder {
+	BackgroundColor transparent
+  	BorderColor #ff9800
+	FontColor #ff9800
+	BorderThickness 2
+}
+
+
+skinparam frame {
+	BackgroundColor transparent
+  	BorderColor #9C27B0
+	FontColor #9C27B0
+	BorderThickness 2
+}
+
+
+skinparam state {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+	StartColor #9C27B0
+	EndColor #9C27B0
+	AttributeFontColor #cccccc
+	AttributeFontSize 11
+}
+
+
+skinparam queue {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+skinparam card {
+	BackgroundColor transparent
+	BorderColor #9C27B0
+	FontColor #9C27B0
+}
+
+
+skinparam file {
+	BackgroundColor transparent
+	BorderColor #666
+	FontColor #666
+
+}
+
+
+skinparam stack {
+		FontColor #2196F3
+	BorderColor #2196F3
+	BackgroundColor transparent
+}
+
+
+
+
+
+
+
+skinparam BackgroundColor #FFFFFFF
+
+skinparam Arrow {
+    Color #000000
+    FontSize 13
+    Thickness 1.1
+}
+
+
+
+    skinparam Class {
+        FontColor<<Hidden>> #FFFFFF
+        StereotypeFontColor<<Hidden>> #FFFFFF
+        BorderColor<<Hidden>> #FFFFFF
+    }
+    hide <<Hidden>> stereotype
+    skinparam Class {
+        FontColor<<Logic>> #3333C4
+        StereotypeFontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+    }
+    hide <<Logic>> stereotype
+    skinparam Class {
+        FontColor<<Ui>> #1D8900
+        StereotypeFontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+    }
+    hide <<Ui>> stereotype
+    skinparam Class {
+        FontColor<<Model>> #9D0012
+        StereotypeFontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+    }
+    hide <<Model>> stereotype
+    skinparam Class {
+        FontColor<<Storage>> #A38300
+        StereotypeFontColor<<Storage>> #A38300
+        BorderColor<<Storage>> #A38300
+    }
+    hide <<Storage>> stereotype
+skinparam Class {
+    FontName Arial
+    FontSize 15
+    StereotypeFontSize 13
+    BorderThickness 1.1
+}
+
+    skinparam Package {
+        FontColor<<Logic>> #3333C4
+        StereotypeFontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+    }
+    hide <<Logic>> stereotype
+    skinparam Package {
+        FontColor<<Ui>> #1D8900
+        StereotypeFontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+    }
+    hide <<Ui>> stereotype
+    skinparam Package {
+        FontColor<<Model>> #9D0012
+        StereotypeFontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+    }
+    hide <<Model>> stereotype
+    skinparam Package {
+        FontColor<<Store>> #A38300
+        StereotypeFontColor<<Store>> #A38300
+        BorderColor<<Store>> #A38300
+    }
+    hide <<Store>> stereotype
+skinparam Package {
+    Style Rectangle
+}
+
+SKINPARAM MINCLASSWIDTH 50
+SKINPARAM SHADOWING FALSE
+SKINPARAM DEFAULTTEXTALIGNMENT CENTER
+SKINPARAM TITLEFONTSIZE 25
+
+SKINPARAM TITLEFONTCOLOR<<LOGIC>> #3333C4
+SKINPARAM TITLEFONTCOLOR<<UI>>    #1D8900
+SKINPARAM TITLEFONTCOLOR<<MODEL>> #9D0012
+SKINPARAM TITLEFONTCOLOR<<STORE>> #A38300
+
+
+hide footbox
+hide members
+hide circle
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    BoxBorderColor #FFFFFF
+
+    GroupFontColor #DF7800
+    GroupBackgroundColor #FF980032
+    GroupBorderColor #FF9800
+    GroupBorderThickness 1.8
+    GroupHeaderFontColor #DF7800
+    GroupHeaderFontStyle bold
+
+    ReferenceFontColor #DF7800
+    ReferenceBackgroundColor #FF9C0532
+    ReferenceHeaderBackgroundColor #FF980032
+    ReferenceBorderColor #FF9800
+    ReferenceBorderThickness 1.8
+    ReferenceHeaderFontColor #DF7800
+    ReferenceHeaderFontStyle bold
+
+    LifelineBackgroundColor #FFFFFF
+    LifelineBorderColor #000000
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 10
+    BorderColor #000000
+}
+
+
+    skinparam Participant {
+        FontColor<<Logic>> #3333C4
+        BorderColor<<Logic>> #3333C4
+        BackgroundColor<<Logic>> #C8C8FA
+    }
+    skinparam Participant {
+        FontColor<<Ui>> #1D8900
+        BorderColor<<Ui>> #1D8900
+        BackgroundColor<<Ui>> #BDECB1
+    }
+    skinparam Participant {
+        FontColor<<Model>> #9D0012
+        BorderColor<<Model>> #9D0012
+        BackgroundColor<<Model>> #F97181
+    }
+    skinparam Participant {
+        FontColor<<Storage>> #A38300
+        BorderColor<<Storage>> #A38300
+        BackgroundColor<<Storage>> #FFE374
+    }
+
+skinparam SequenceFontSize 30
+
+box Logic #DEDEFF
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant ":AddItemCommandParser" as AddItemCommandParser<<Logic>>
+participant ":AddItemCommand" as AddItemCommand<<Logic>>
+end box
+
+box Model #FFD1D3
+participant "d:ItemDescriptor" as ItemDescriptor<<Model>>
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> IBookParser : parseCommand()
+activate IBookParser
+
+create AddItemCommandParser
+IBookParser -> AddItemCommandParser
+activate AddItemCommandParser
+
+AddItemCommandParser - -> IBookParser
+deactivate AddItemCommandParser
+
+IBookParser -> AddItemCommandParser : parse("1 e:2022-12-13 q:10")
+activate AddItemCommandParser
+
+create ItemDescriptor
+AddItemCommandParser -> ItemDescriptor
+activate ItemDescriptor
+
+ItemDescriptor - -> AddItemCommandParser
+deactivate ItemDescriptor
+ItemDescriptor -[hidden]-> AddItemCommandParser
+ItemDescriptor -[hidden]-> AddItemCommandParser
+
+create AddItemCommand
+AddItemCommandParser -> AddItemCommand : new("1", d)
+activate AddItemCommand
+AddItemCommand - -> AddItemCommandParser
+deactivate AddItemCommand
+
+AddItemCommandParser - -> IBookParser : command
+deactivate AddItemCommandParser
+AddItemCommandParser -[hidden]-> IBookParser
+destroy AddItemCommandParser
+
+IBookParser - -> LogicManager : command
+deactivate IBookParser
+
+LogicManager -> AddItemCommand : execute()
+activate AddItemCommand
+
+ref over AddItemCommand, ItemDescriptor : Item Addition
+
+AddItemCommand - -> LogicManager
+deactivate AddItemCommand
+
+[<- - LogicManager
+deactivate LogicManager
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 00:16:42 SGT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: SG
+--></g></svg>

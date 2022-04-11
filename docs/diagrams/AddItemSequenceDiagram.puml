@@ -1,0 +1,69 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+skinparam SequenceFontSize 30
+
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant ":AddItemCommandParser" as AddItemCommandParser<<Logic>>
+participant ":AddItemCommand" as AddItemCommand<<Logic>>
+end box
+
+box Model MODEL_COLOR_LIGHT
+participant "d:ItemDescriptor" as ItemDescriptor<<Model>>
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> IBookParser : parseCommand()
+activate IBookParser
+
+create AddItemCommandParser
+IBookParser -> AddItemCommandParser
+activate AddItemCommandParser
+
+AddItemCommandParser --> IBookParser
+deactivate AddItemCommandParser
+
+IBookParser -> AddItemCommandParser : parse("1 e:2022-12-13 q:10")
+activate AddItemCommandParser
+
+create ItemDescriptor
+AddItemCommandParser -> ItemDescriptor
+activate ItemDescriptor
+
+ItemDescriptor --> AddItemCommandParser
+deactivate ItemDescriptor
+ItemDescriptor -[hidden]-> AddItemCommandParser
+ItemDescriptor -[hidden]-> AddItemCommandParser
+
+create AddItemCommand
+AddItemCommandParser -> AddItemCommand : new("1", d)
+activate AddItemCommand
+AddItemCommand --> AddItemCommandParser
+deactivate AddItemCommand
+
+AddItemCommandParser --> IBookParser : command
+deactivate AddItemCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddItemCommandParser -[hidden]-> IBookParser
+destroy AddItemCommandParser
+
+IBookParser --> LogicManager : command
+deactivate IBookParser
+
+LogicManager -> AddItemCommand : execute()
+activate AddItemCommand
+
+ref over AddItemCommand, ItemDescriptor : Item Addition
+
+AddItemCommand --> LogicManager
+deactivate AddItemCommand
+
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml

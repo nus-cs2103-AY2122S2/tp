@@ -1,0 +1,27 @@
+@startuml
+!include Style.puml
+
+$OverrideTheme(UI_COLOR)
+
+package UI <<Ui>> {
+    class "{abstract}\nUiComponent" as UiComponent<<Ui>>
+    class MainWindow<<Ui>>
+
+    package Popup <<Ui>> {
+        class "{abstract}\nPopup" as Popup<<Ui>>
+        class PopupHandler<<Ui>>
+        class PopupXXX<<Ui>>
+    }
+}
+
+MainWindow *--> "1" PopupHandler
+
+PopupHandler *-->  "1" PopupXXX
+
+PopupXXX -up-|> Popup
+
+Popup -up-|> UiComponent
+
+UiComponent -left-> MainWindow
+
+@enduml

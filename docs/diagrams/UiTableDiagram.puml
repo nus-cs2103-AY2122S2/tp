@@ -1,0 +1,29 @@
+@startuml
+!include Style.puml
+
+$OverrideTheme(UI_COLOR)
+
+package UI <<Ui>> {
+    class MainWindow <<Ui>>
+
+    package Table <<Ui>> {
+        class ProductCard <<Ui>>
+        class ProductTable <<Ui>>
+
+        package Item <<Ui>> {
+            class ItemCard <<Ui>>
+            class ItemTable <<Ui>>
+        }
+    }
+}
+
+MainWindow *--> "1" ProductTable
+
+ProductTable *-right-> "*" ProductCard
+
+ProductCard *--> "0..1" ItemTable
+
+ItemTable *-left-> "*" ItemCard
+
+
+@enduml

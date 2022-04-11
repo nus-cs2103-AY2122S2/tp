@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+box Model MODEL_COLOR_LIGHT
+participant ":ModelManager" as ModelManager<<Model>>
+participant ":ReversibleIBook" as ReversibleIBook<<Model>>
+participant "p:Product" as Product<<Model>>
+participant ":UniqueItemList" as UniqueItemList<<Model>>
+participant ":StateChangeRecorder" as StateChangeRecorder<<Model>>
+end box
+
+[-> ModelManager : addItem(p, i)
+activate ModelManager
+
+ModelManager -> ReversibleIBook : reversibleAddItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> StateChangeRecorder : recordAction()
+activate StateChangeRecorder
+
+StateChangeRecorder --> ReversibleIBook
+deactivate StateChangeRecorder
+
+ReversibleIBook -> ReversibleIBook : addItem(p, i)
+activate ReversibleIBook
+
+ReversibleIBook -> Product : addItem(i)
+activate Product
+
+Product -> UniqueItemList : add(i)
+activate UniqueItemList
+
+UniqueItemList --> Product
+deactivate UniqueItemList
+
+Product --> ReversibleIBook
+deactivate Product
+
+ReversibleIBook --> ReversibleIBook
+deactivate ReversibleIBook
+
+ReversibleIBook --> ModelManager
+deactivate ReversibleIBook
+
+[<-- ModelManager
+deactivate ModelManager
+
+
+@enduml

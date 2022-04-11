@@ -1,0 +1,54 @@
+@startuml
+!include Style.puml
+!include SequenceStyle.puml
+
+box Logic LOGIC_COLOR_LIGHT
+participant ":LogicManager" as LogicManager<<Logic>>
+participant ":IBookParser" as IBookParser<<Logic>>
+participant "u:UpdateCommand" as UpdateCommand<<Logic>>
+end box
+
+box Model MODEL_COLOR_LIGHT
+participant ":Model" as Model<<Model>>
+participant "p:Product" as Product<<Model>>
+end box
+
+[-> LogicManager : execute(update)
+activate LogicManager
+
+LogicManager -> IBookParser : parseCommand(update)
+activate IBookParser
+
+create UpdateCommand
+IBookParser -> UpdateCommand : execute()
+activate UpdateCommand
+
+UpdateCommand -> Model : getProduct(index)
+activate Model
+
+Model --> UpdateCommand
+deactivate Model
+
+create Product
+UpdateCommand -> Product
+activate Product
+
+Product --> UpdateCommand
+deactivate Product
+
+UpdateCommand -> Model : SetProduct(target, p)
+activate Model
+
+Model --> UpdateCommand
+deactivate Model
+
+UpdateCommand --> IBookParser : result
+deactivate UpdateCommand
+destroy UpdateCommand
+
+IBookParser --> LogicManager : u
+deactivate UpdateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@end
