@@ -46,4 +46,5 @@ class AddCommand {
 ModelManager <-- AddCommand
 "{abstract}\nCommand" <|-- AddCommand
 AddCommand --> Person
+
 @enduml

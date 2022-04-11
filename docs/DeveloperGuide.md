@@ -196,7 +196,7 @@ or any new features that we have in mind.
   - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
   - [Undo/redo Feature](#proposed-undoredo-feature)
   - [User Interface](#proposed-update-user-interface)
-  
+
 ### \[Implemented\] Status Feature
 
 #### Implementation
