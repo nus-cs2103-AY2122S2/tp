@@ -212,23 +212,39 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
     * Cons: A lot of work was required to decouple the existing `Person` implementation from AB-3.
 
 
-### Transaction functionality
+### Transaction 
 
-#### Implementation
-The Transaction Functionality will allow users to store a transaction and assign it to a client.
-User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
+The `Transaction` class is used to represent a client's transaction. The abstract `TransactionField` class represents the transaction data.
+`Transaction` contains an immutable `HashMap<Prefix, TransactionField>` of transactionFields as well as a reference to the `Person`
+who owns the `Transaction`. This person identifier will be stored as a `long` inside the `Transaction` class. 
+
+![Transaction Class Diagram](images/TransactionClassDiagram.png)
+
+*Figure: Simplified class diagram of showing the association between Transaction and other related classes.*
+
+`Transaction` class has 6 commands: `AddTransaction`, `listTransaction`, `findTransaction`, `deleteTransaction`,
+`pay`, and `unpay`. All commands have similar implementation, user input will be parsed to
+return a `Command` object. `Model` will execute this object to do the desired behavior.
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
+Note that there is a dependencies from class `Transaction` to class `Person`. `Transaction` does not
+directly store the reference to the Owner (`Person`) of the `Transaction`, instead `Transaction`
+stores an identifier (`personIdentifier`) to identify the owner (`Person`) of the `Transaction`.
+
+</div>
+
+#### Design considerations
 
 The current implementation of `Transaction` class is similar to `Person` class. Every field/attribute of transaction needs to
 extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's
 fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field.
 
-Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and `Note`.
+Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, `Note`, and `Status`.
 
-#### Design considerations
+**Aspect: Structure for storing fields**
 
-**Aspect: How it executes**
-
-* **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
+* **Alternative 1 (current implementation):** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
   Everytime a user create a transaction, a new instance of transaction will be added to the list and a client
   specified by its unique identifier (`Email`) will be referenced by this transaction. To list all the transactions
   of a particular client, the `FilteredList` should be updated to only contain `Transaction`
@@ -236,15 +252,130 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
     * Pros: Consistent design with the `Person` class.
     * Cons: Have to handle cases when a user is updated/removed. The input specified by the users
       corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes
-      before initializing the Transaction object.
+      before initializing the Transaction object thus harder to maintain a good design.
 
-
-* **Alternative 2 (current implementation):** Every `Person` object has a list of transactions which will be
+* **Alternative 2:** Every `Person` object has a list of transactions which will be
   initialized with an empty list. Each time a user add a transaction, the object will be
   added into the specified `Person`'s Transaction List.
-    * Pros: Easy to implement
-    * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
+    * Pros: Easier to implement compared to the other alternative.
+    * Cons: `Transaction` class would be coupled to the `Person` class. In addition, inconsistent design
       in comparison to the `Person` class.
+
+### Add Transaction
+
+### Implementation
+
+The `Add Transaction` implementation is similar to adding a `Person` with 
+an extra step. When adding `Transaction`, user will have to specify 
+the owner of the `Transaction` using the index displayed.
+However, `Transaction` stores `personIdentifier` as the reference to the `Person` class. Hence there
+must be a mechanism to convert the index provided by the user to the correct
+`personIdentifier`.
+
+This issue is addressed by using the class `TransactionBuilder` that takes a `personIdentifier`
+and returns the desired `Transaction`. 
+
+![Add Transaction activity diagram](images/AddTransactionActivityDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Add Transaction command.*
+
+Given below is an example usage scenario and how `Add Transaction` behaves at each step:
+1. The user input `addTransaction 1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `AddTransactionParser`
+   if the input is valid.
+3. `AddTransactionParser` will return `AddTransactionCommand` which contains `TransactionBuilder`.
+    This `TransactionBuilder` will be used later by `AddTransactionCommand#execute` to 
+    generate the appropriate `Transaction`.
+4. `AddTransactionCommand` will then update the `Transaction List` by calling `Model#addTransaction`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+The above steps are illustrated by the AddTransaction Sequence Diagram below. In the given diagram,
+`addTransactionEx` represents `addTransaction 1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid `
+and `transaction` represents `1 a/12.5 td/2020-11-11 dd/2020-12-12 n/This is a note --paid` for brevity. 
+
+![Add Transaction sequence diagram](images/AddTransactionSequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Add Transaction command.*
+
+
+#### Design considerations
+
+**Aspect: How add transaction executes**
+
+* **Alternative 1 (current choice):** Store `TransactionBuilder` to generate the `Transaction` later.
+    * Pros: No need to pass the `ModelManager` to the command parser, makes a better separation of concern.
+    * Cons: Harder to do unit tests on this implementation since it uses functinal interface.
+
+* **Alternative 2:** Pass the ModelManager to `AddTransactionCommandParser`.
+    * Pros: easier to implement.
+    * Cons: Not a good design as model should only resides inside `Command#execute`.
+    
+### Find Transaction
+
+### Implementation
+
+In `findTransaction` implementation, user will have to specify
+the `Person` using the index displayed.
+However, we have a similar issue as AddTransaction. To get all transactions 
+that the owner has, we need to convert the index to the correct `personIdentifier`.
+This `personIdentifier` will be used as the `TransactionPredicate` to filter the `Transaction
+List`.
+
+This issue is addressed by using the class `TransactionPredicateBuilder` that takes a `personIdentifier`
+and returns the desired `TransactionPredicate`.
+
+![Add Transaction activity diagram](images/FindTransactionActivityDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Find Transaction command.*
+
+Given below is an example usage scenario and how `Find Transaction` behaves at each step:
+1. The user input `findTransaction 1`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `FindTransactionCommandParser`
+   if the input is valid.
+3. `FindTransactionCommandParser` will return `FindTransactionCommand` which contains `TransactionPredicateBuilder`.
+   This will be used later by `FindTransactionCommand#execute` to
+   generate the appropriate `TransactionPredicate`.
+4. `AddTransactionCommand` will then update the `Transaction List` by calling `Model#updateFilteredTransactionList`
+   using `TransactionPredicate`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+![Add Transaction sequence diagram](images/FindTransactionSequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Find Transaction command.*
+
+#### Design considerations
+
+**Aspect: How find transaction executes**
+
+* **Alternative 1 (current choice):** Store `TransactionPredicateBuilder` to generate the `TransactionPredicate` later.
+    * Pros: No need to pass the `ModelManager` to the command parser, makes a better separation of concern.
+    * Cons: Harder to do unit tests on this implementation since it uses functinal interface.
+
+* **Alternative 2:** Pass the ModelManager to `FindTransactionCommandParser`.
+    * Pros: easier to implement.
+    * Cons: Not a good design as model should only resides inside `Command#execute`.
+
+### Pay 
+
+### Implementation
+
+This command will update the `Status` of the `Transaction` to `paid` using
+the specified `transaction index` by the user.
+
+![Pay activity diagram](images/PayDiagram.png)
+
+*Figure: Simplified activity diagram showing the sequence of action of Pay command.*
+
+Given below is an example usage scenario and how `Pay` behaves at each step:
+1. The user input `pay 1`.
+2. `LogicManager` execute the command which will be parsed using `AddressBookParser` and `PayCommandParser`
+   if the input is valid.
+3. `PayCommand` will return `PayCommand` which contains the index of the transaction.
+4. In `PayCommand#execute`, the `transactionToUpdate` will be replaced by `updatedTransaction` by calling
+    `Model#setTransaction`.
+5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
+
+![Pay sequence diagram](images/PaySequenceDiagram.png)
+*Figure: Simplified sequence diagram showing the sequence of action of Pay command.*
+
 
 ### Undo
 

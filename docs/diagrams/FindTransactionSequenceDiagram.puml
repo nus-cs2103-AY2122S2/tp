@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":FindTransactionParser" as FindTransactionParser LOGIC_COLOR
+participant ":FindTransactionCommandParser" as FindTransactionCommandParser LOGIC_COLOR
 participant "a:FindTransactionCommand" as FindTransactionCommand LOGIC_COLOR
 participant "tp:TransactionPredicateBuilder" as TransactionPredicateBuilder LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -20,18 +20,18 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("findTransaction 1")
 activate AddressBookParser
 
-create FindTransactionParser
-AddressBookParser -> FindTransactionParser
-activate FindTransactionParser
+create FindTransactionCommandParser
+AddressBookParser -> FindTransactionCommandParser
+activate FindTransactionCommandParser
 
-FindTransactionParser --> AddressBookParser
-deactivate FindTransactionParser
+FindTransactionCommandParser --> AddressBookParser
+deactivate FindTransactionCommandParser
 
-AddressBookParser -> FindTransactionParser : parse(1)
-activate FindTransactionParser
+AddressBookParser -> FindTransactionCommandParser : parse(1)
+activate FindTransactionCommandParser
 
 create FindTransactionCommand
-FindTransactionParser -> FindTransactionCommand
+FindTransactionCommandParser -> FindTransactionCommand
 activate FindTransactionCommand
 
 create TransactionPredicateBuilder
@@ -41,14 +41,14 @@ activate TransactionPredicateBuilder
 TransactionPredicateBuilder --> FindTransactionCommand : tp
 deactivate TransactionPredicateBuilder
 
-FindTransactionCommand --> FindTransactionParser : a
+FindTransactionCommand --> FindTransactionCommandParser : a
 deactivate FindTransactionCommand
 
-FindTransactionParser --> AddressBookParser : a
-deactivate FindTransactionParser
+FindTransactionCommandParser --> AddressBookParser : a
+deactivate FindTransactionCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindTransactionParser -[hidden]-> AddressBookParser
-destroy FindTransactionParser
+FindTransactionCommandParser -[hidden]-> AddressBookParser
+destroy FindTransactionCommandParser
 
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser

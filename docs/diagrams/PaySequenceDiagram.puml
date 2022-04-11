@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":PayParser" as PayParser LOGIC_COLOR
+participant ":PayCommandParser" as PayCommandParser LOGIC_COLOR
 participant "a:PayCommand" as PayCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -20,29 +20,29 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("pay 1")
 activate AddressBookParser
 
-create PayParser
-AddressBookParser -> PayParser
-activate PayParser
+create PayCommandParser
+AddressBookParser -> PayCommandParser
+activate PayCommandParser
 
-PayParser --> AddressBookParser
-deactivate PayParser
+PayCommandParser --> AddressBookParser
+deactivate PayCommandParser
 
-AddressBookParser -> PayParser : parse(1)
-activate PayParser
+AddressBookParser -> PayCommandParser : parse(1)
+activate PayCommandParser
 
 create PayCommand
-PayParser -> PayCommand
+PayCommandParser -> PayCommand
 activate PayCommand
 
 
-PayCommand --> PayParser : a
+PayCommand --> PayCommandParser : a
 deactivate PayCommand
 
-PayParser --> AddressBookParser : a
-deactivate PayParser
+PayCommandParser --> AddressBookParser : a
+deactivate PayCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-PayParser -[hidden]-> AddressBookParser
-destroy PayParser
+PayCommandParser -[hidden]-> AddressBookParser
+destroy PayCommandParser
 
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
