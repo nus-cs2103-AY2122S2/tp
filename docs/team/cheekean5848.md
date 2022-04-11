@@ -51,7 +51,7 @@ Given below are my contributions to the project.
     * Keep track of project deadline
     * Plan and schedule meeting time
     * Distribute task to team members
-    * Find all the bugs and fix them
+    * Did internal testing and identified bugs
 
 
 * **Community**:
