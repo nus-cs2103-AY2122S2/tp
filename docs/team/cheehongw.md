@@ -54,7 +54,7 @@ Given below are my contributions to the project.
 
   3. Make UI components scale dynamically to the window size ([PR #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
 
-  4. Wrote unit tests for `EditSocialMediaCommandParser` ([PR #260](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/260/commits/4c4e83e5611cdcf7ee6d420b34b97ebcff9a995f`)), `ParserUtil` ([PR #230](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/230/commits/96d04b380fb18ae80e76426e9f6c511b7594dc22))
+  4. Wrote unit tests for `EditSocialMediaCommandParser` ([PR #260](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/260/commits/4c4e83e5611cdcf7ee6d420b34b97ebcff9a995f)), `ParserUtil` ([PR #230](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/230/commits/96d04b380fb18ae80e76426e9f6c511b7594dc22))
 
 
 
@@ -85,7 +85,8 @@ Given below are my contributions to the project.
   * Carried out PDF conversion of Developer guide : ([#PR 263](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/263))
 
 * **Review/mentoring contributions**:
-  * PRs reviewed (with non-trivial review comments): ([PR #49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), [PR #78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [PR #107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896) [PR #262](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/262))
+  * PRs reviewed (with non-trivial review comments): ([PR #49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), 
+    [PR #78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [PR #107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896), [PR #262](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/262))
 
   * Reviewed [over 40 Pull Requests](https://github.com/AY2122S2-CS2103-W16-2/tp/pulls?q=reviewed-by%3Acheehongw) in the team.
 
@@ -94,4 +95,4 @@ Given below are my contributions to the project.
 * **Community**:
   * Reported a total of [10 issues](https://github.com/cheehongw/ped/issues) during the PE dry run.
   * Helped others on the forum with technical difficulties (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/39#issuecomment-1022044065), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/31#issuecomment-1020874495)) 
-  * [Shared information]((https://github.com/nus-cs2103-AY2122S2/forum/issues/59#issuecomment-1026096429)) about setting up unit tests in Visual Studio Code.
+  * [Shared information](https://github.com/nus-cs2103-AY2122S2/forum/issues/59#issuecomment-1026096429) about setting up unit tests in Visual Studio Code.
