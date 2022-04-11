@@ -61,7 +61,7 @@ public class AddMedicalCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New medical information added: %1$s";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exist in MedBook";
-    public static final String MESSAGE_DUPLICATE_MEDICAL = "Medical information for this patient already exist.";
+    public static final String MESSAGE_DUPLICATE_MEDICAL = "Medical information for this patient already exists.";
 
     // Identifier
     private final Nric patientNric;

@@ -48,7 +48,7 @@ deactivate AddressBookParser
 LogicManager -> ViewCommand : execute()
 activate ViewCommand
 
-ViewCommand -> Model : updateSummary()
+ViewCommand -> Model : updateSummary(nric)
 activate Model
 
 Model --> ViewCommand
