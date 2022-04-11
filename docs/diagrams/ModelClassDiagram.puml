@@ -69,7 +69,7 @@ Address -[hidden]right-> Email
 
 LibTask *--> "1" BookList
 BookList --> "~* " Book
-Book *--> "*" Patron : requested by >
+Book --> "*" Patron : requested by >
 Book *-up> "*" Author
 Book *-right> "1" BookName
 Book *-down> "1" Isbn

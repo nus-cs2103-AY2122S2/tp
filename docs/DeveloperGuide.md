@@ -51,7 +51,7 @@ The rest of the App consists of four components.
 Each of the four main components (also shown in the diagram above),
 
 * defines its API in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -109,7 +109,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `patron delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BookCommandParser` and `DeleteBookCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PatronCommandParser` and `DeletePatronCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -205,7 +205,7 @@ Aspect: How to store a list of patrons requesting for a book.
   * Cons: Overhead in converting `Patron` object to `JsonAdaptedPatron` and more storage space used.
 * Alternative 2: `JsonAdaptedBook` stores a list of String representing the name of the patrons. This is possible since patrons can be identified by their unique names.
   * Pros: Less overhead in converting `Patron` object to `JsonAdaptedPatron` and less storage space used.
-  * Cons: Slow program loading time. When the program loads up, for every name we need to search through the whole `UniquePatronList` for the specified `Patron` object before we can initialize a `Book` object that refers to the `Patron` as requester. Furthermore, this design is not flexible to changes if we need to patron names are no longer unique.
+  * Cons: Slow program loading time. When the program loads up, for every name we need to search through the whole `UniquePatronList` for the specified `Patron` object before we can initialize a `Book` object that refers to the `Patron` as requester. Furthermore, this design is not flexible to changes and will not work if patron names are no longer unique.
 
 <div style="page-break-after: always;"></div>
 
@@ -257,7 +257,7 @@ This feature allows users to return a borrowed book, or all books that were borr
 
 #### Implementation details
 
-The borrow feature is facilitated by `ReturnCommandParser`, `ReturnOneBookCommand`, and `ReturnAllBooksCommand`. `ReturnOneBookCommand` is the concrete `Command` class responsible for returning a single book, while `ReturnAllBooksCommand` is the concrete `Command` class responsible fo returning all books borrowed by a patron. The functionality of returning all books by a patron is exposed in Model interface as `Model#returnAllBorrowedBooks()`, while the functionality to return a single book is facilitated by `Model#setBook()`.
+The borrow feature is facilitated by `ReturnCommandParser`, `ReturnOneBookCommand`, and `ReturnAllBooksCommand`. `ReturnOneBookCommand` is the concrete `ReturnCommand` class responsible for returning a single book, while `ReturnAllBooksCommand` is the concrete `ReturnCommand` class responsible fo returning all books borrowed by a patron. The functionality of returning all books by a patron is exposed in Model interface as `Model#returnAllBorrowedBooks()`, while the functionality to return a single book is facilitated by `Model#setBook()`.
 
 Due to the high similarities in both return commands, only the implementation of `ReturnAllBooksCommand` will be discussed below.
 
@@ -467,7 +467,7 @@ The feature is also designed to make other features like `borrow` and `request` 
 
 <div style="page-break-after: always;"></div>
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo/redo state feature
 
 #### Proposed Implementation
 
@@ -528,7 +528,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitLibTask()`. Since the `currentStatePointer` is not pointing at the end of the `libTaskStateList`, all LibTask states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitLibTask()`. Since the `currentStatePointer` is not pointing at the end of the `libTaskStateList`, all LibTask states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `patron add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -570,7 +570,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Product scope
 
-LibTask aids librarians in managing statuses of books borrowed and along with their borrowers. Keeping track of book requests by patrons who are interested in the books when they become available. Organizing books and patrons into categories for effective querying and extraction of insightful data.
+LibTask aids NUS librarians in managing statuses of books borrowed and their borrowers. It also helps keep track of book requests and reminds the librarian to notify requesters when the requested book becomes available. However, LibTask's product scope does not include notifying the requesters since LibTask does not have access to the school's email API. LibTask also helps organize books and patrons into categories for effective querying and extraction of insightful data.
 
 **Target user profile**:
 
@@ -591,10 +591,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                      | I want to …​                                          | So that …​                                                                             |
 |----------|------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
 | `***`    | Librarian                    | add a patron                                          | I can keep track of books borrowed or requested by the patron                          |
-| `***`    | Librarian                    | delete a patron                                       | I do not get overwhelmed by data of graduated students or retired staff                |
+| `***`    | Librarian                    | delete a patron                                       | I do not get overwhelmed by data of graduated students that are no longer patrons      |
 | `***`    | librarian                    | list all patrons                                      | I can see all the existing patrons                                                     |
 | `***`    | Librarian                    | add a book                                            | I can keep track of details of the book                                                |
-| `***`    | Easily overwhelmed librarian | delete a book                                         | I do not get overwhelmed by information about books that no longer exist               |
+| `***`    | Easily overwhelmed librarian | delete a book                                         | I do not get overwhelmed by information about outdated books that no longer exist      |
 | `***`    | Librarian                    | list all books                                        | I can see all the existing books                                                       |
 | `***`    | Librarian                    | be able to view patron and book details through a GUI | I can easily recognize the existing patrons and books details                          |
 | `**`     | librarian                    | edit information about a patron                       | I have their latest contact when I need to contact them                                |
@@ -604,7 +604,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | Request handler              | filter books based on authors, titles and tags        | I can quickly navigate the book when a patron is requesting it                         |
 | `**`     | Librarian                    | classify books into categories                        | I can more easily provide book recommendations                                         |
 | `**`     | Librarian                    | store details about a book loan by a patron           | I can perform tasks such as sorting, searching or categorizing books and patrons later |
-| `**`     | Request handler              | take note of book requests from students              | I can easily notify the student when the book under request is returned                |
+| `**`     | Request handler              | take note of book requests from students              | I can be reminded to notify the student when the book under request is returned        |
 | `**`     | Librarian                    | find all the books related to a patron                | I can see all books related to a patron at one glance                                  |
 | `**`     | Librarian                    | update return and request status of books             | I can keep track of a book’s availability                                              |
 | `**`     | Efficient librarian          | refer to previous commands                            | I can save time from retyping past commands                                            |
@@ -617,7 +617,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LibTask` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Adding a patron to LibTask**
+**UC01: Add a patron**
 
 **MSS**
 
@@ -633,19 +633,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
 * 1b. The patron details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
-* 1c. The given name and details except phone number are duplicated.
+* 1c. The patron to be added is considered as a duplicate.
 
     * 1c1. LibTask shows an error message.
 
-  Use case resume from step 1.
+      Use case resume from step 1.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -654,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <div style="page-break-after: always;"></div>
 
 
-**UC02: List patron's on LibTask**
+**UC02: List all patrons**
 
 **MSS**
 
@@ -670,13 +670,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. LibTask shows an empty patron list.
 
-  Use case ends.
+      Use case ends.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-**UC03: Editing a patron on LibTask**
+**UC03: Edit a patron**
 
 **MSS**
 1. User <u>list all patrons (UC02)</u>.
@@ -693,27 +693,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 2.
 
 * 1b. The details are not provided or are invalid.
 
     * 1b1.  LibTask shows an error message.
 
-  Use case resume from step 1.
-
-* 1c. The index is valid but no details are provided.
-
-  * 1c1. LibTask shows an error message.
-
-  Use case resumes from step 1.
-
+      Use case resume from step 2.
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 
-**UC04: Find a patron on LibTask**
+**UC04: Find a patron**
 
 **MSS**
 
@@ -729,18 +722,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
 * 2a.  No patrons fulfil the search criteria.
 
     * 2a1. LibTask shows an empty list.
 
-  Use case ends.
+      Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-**UC05: Delete a patron from LibTask**
+**UC05: Delete a patron**
 
 **MSS**
 
@@ -758,24 +751,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 2.
 
 * 2b. The patron has a book borrowed.
 
     * 2b1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 2.
 
-* 2c. The patron has a book requested.
+* 3a. The patron has some books requested.
 
-    * 2c1. LibTask deletes the patron from the list of requesters
+    * 3a1. LibTask deletes the patron from the requesters of those books
 
-  Use case resumes from step 3.
+      Use case ends.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC06: Add book to LibTask**
+**UC06: Add a book**
 
 **MSS**
 
@@ -791,19 +784,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
 * 1b. The book details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-**UC07: List Books on LibTask**
+**UC07: List all books**
 
 **MSS**
 1. User requests to list all books.
@@ -818,13 +811,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. LibTask shows an empty book list.
 
-  Use case ends.
+      Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-**UC08: Edit a book on LibTask**
+**UC08: Edit a book**
 
 **MSS**
 
@@ -840,26 +833,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. LibTask shows an error message.
 
-   Use case resumes from step 1.
+      Use case resumes from step 1.
 
 * 1b. The new details are invalid.
 
     * 1b1. LibTask shows an error message.
 
-   Use case resumes from step 1.
-
-* 1c. The index is valid but no new details are entered.
-
-    * 1c1. LibTask shows an error message saying that at least ISBN, author or category must be provided.
-
-  Use case resumes from step 1.
+      Use case resumes from step 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC09: Find books on LibTask**
+**UC09: Find a book**
 
 **MSS**
-1. User requests to find books and provides either a tag, author or title.
+1. User requests to find book(s) and provides either a tag, author or title.
 
 2. LibTask shows the books that match the search.
 
@@ -867,27 +854,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 
-* 1a. The given search is invalid.
+* 1a. The given search input is invalid.
 
   * 1a1. LibTask shows an error message.
 
-  Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 1b. No books match the given query.
 
   * 1b1. LibTask shows an empty list.
 
-  Use case ends.
-
-* 1c. More than search parameter was provided.
-
-  * 1c1. Lib Task shows an error message.
-
-  Use case ends.
+    Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC10: Delete Book from LibTask**
+**UC10: Delete a book**
 
 **MSS**
 
@@ -901,20 +882,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
 
-    * 1a1. LibTask shows an error message.
+  * 1a1. LibTask shows an error message.
 
-   Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 1b. The book is being borrowed.
 
   * 1b1. LibTask shows an error message.
 
-   Use case resumes from step 1.
+    Use case resumes from step 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-**UC11: Borrow Book**
+**UC11: Borrow a book**
 
 **MSS**
 
@@ -930,27 +911,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given index of patron or book is invalid.
+* 3a. The given input is invalid.
 
     * 3a1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
-* 3b. The return date of the book is invalid.
-
-    * 3b1. LibTask shows an error message.
-
-  Use case resumes from step 3.
-
-* 3c. The book is already borrowed.
+* 3b. The book is already borrowed.
 
     * 3c1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC12: Return Book on LibTask**
+**UC12: Return a book**
 
 **MSS**
 
@@ -958,29 +933,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User requests to end a borrow relationship and provides index of the patron or index of the book in lists.
 
-3. LibTask removes the borrow relationship between the patron and the book.
+3. LibTask removes the borrow relationship between the patron and the relevant book(s).
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The given index of patron or book is invalid.
+* 2a. The given input is invalid.
 
     * 2a1. LibTask shows an error message.
 
-  Use case resumes from step 2.
+      Use case resumes from step 2.
 
-* 2b. The book is not borrowed by the patron.
+* 2b. The book is not borrowed.
 
     * 2b1. LibTask shows an error message.
 
-  Use case resumes from step 2.
+      Use case resumes from step 2.
 
 * 2c. The patron has not borrowed any books.
 
   * 2c1. LibTask shows an error message.
 
-  Use case resumes from step 2
+    Use case resumes from step 2
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1001,7 +976,7 @@ Extension
 
     * 1a1. LibTask shows an empty CommandBox.
 
-  Use case ends.
+      Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1022,13 +997,13 @@ Extension
 
   * 2a1. LibTask shows an error message.
 
-  Use case resumes from step 2.
+    Use case resumes from step 2.
 
 * 3a. There are no books related to the patron
 
   * 3a1. LibTask returns an empty book list.
 
-  Use case ends
+    Use case ends
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1043,7 +1018,7 @@ Extension
 
 3. LibTask shows the list of all patrons with overdue books.
 
-  Use case ends.
+   Use case ends.
 
 Extension
 
@@ -1051,11 +1026,11 @@ Extension
 
     * 2a1. LibTask shows an empty patron list.
 
-  Use case ends.
+      Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC16: Request Book**
+**UC16: Request a book**
 
 **MSS**
 1. User <u>lists all patrons (UC02)</u>.
@@ -1070,61 +1045,61 @@ Extension
 
 **Extensions**
 
-* 3a. The given index of patron or book is invalid.
+* 3a. The given input is invalid.
 
     * 3a1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
 * 3b. Patron has already requested for the book.
 
     * 3b1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
 * 3c. The book is already borrowed by the same user.
 
     * 3c1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
 * 3d. The book is available for borrowing.
 
     * 3d1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
-* 3e. The book already has 3 requesters.
+* 3e. The book already has maximum number of requesters.
 
     * 3e1. LibTask shows an error message.
 
-  Use case resumes from step 3.
+      Use case resumes from step 3.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC17: Asking for Help on LibTask**
+**UC17: Ask for Help on LibTask**
 
 **MSS**
-1. User requests to list all commands.
+1. User requests to for help.
 
-2. LibTask shows the list of all the commands.
+2. LibTask opens a new window containing the link to the user guide.
 
-Use case ends.
+   Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC18: Exiting LibTask**
+**UC18: Exit LibTask**
 
 **MSS**
 1. User requests to exit LibTask.
 
 2. LibTask closes.
 
-Use case ends.
+   Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-**UC19: Clear database of all Patron's and Book's**
+**UC19: Clear all patrons and books**
 
 **MSS**
 
@@ -1132,11 +1107,9 @@ Use case ends.
 
 2. LibTask clears the all patrons and books.
 
-Use case ends.
+   Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1144,7 +1117,7 @@ Use case ends.
 2. Should be able to hold up to 1000 patrons and books without a noticeable sluggishness in performance for typical usage.
 3. A user with average regular English text typing speed (i.e. not code, not system admin commands) should be able to 
    accomplish most of their tasks faster using commands than using a mouse.
-4. A novice with no coding background should be able to use the Lib Task.
+4. A novice with no coding background should be able to use the LibTask.
 5. The system should respond in 1 second.
 
 ### Glossary
@@ -1152,7 +1125,6 @@ Use case ends.
 | Term                            | Explanation                                                                                                                                                               |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Mainstream OS                   | Windows, Linux, macOS.                                                                                                                                                    |
-| Private contact detail          | A contact detail that is not meant to be shared with others.                                                                                                              |
 | Patron                          | A user of the library.                                                                                                                                                    |
 | ISBN                            | An International Standard Book Number used to identify a book. 10 or 13 digits in length.                                                                                 |
 | MSS                             | Main Success Scenario.                                                                                                                                                    |
@@ -1187,9 +1159,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty directory
 
-   2. Double-click the jar file 
+   2. Double-click the jar file. If this fails, navigate to the directory using command line run `java -jar libtask.jar`<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -1203,20 +1175,20 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a patron with all required parameters. Invalid patron id.
 
-   1. Test case: `patron add n/Alice s/A11111111 p/90123212 e/profA@u.nus.edu t/professor`<br>
+   1. Test case: `patron add n/Alice s/A11111111 p/90123212 e/studentA@u.nus.edu t/computing`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
 2. Adding a patron with missing required parameters.
 
-   1. Test case: `patron add n/Alice s/A1111111H p/90123212 t/professor`<br>
+   1. Test case: `patron add n/Alice s/A1111111H p/90123212 t/computing`<br>
       Expected: Patron list remain unchanged. Error details shown in the status message.
 
 3. Adding a patron with all required parameters. All provided parameters are valid.
 
-   1. Prerequisite: There does not exist any patron named Alice, or has id A1111111H, or email profA@u.nus.edu in LibTask.
+   1. Prerequisite: There does not exist any patron named Alice, or has id A1111111H, or email studentA@u.nus.edu in LibTask.
 
-   2. Test case: `patron add n/Alice s/A1111111H p/90123212 e/profA@u.nus.edu t/professor`<br>
-      Expected: Patron named `Alice` with id `A0123456H`, phone number `90123212` email `profA@u.nus.edu` and tag `professor` added to patron list. Details of added patron shown in status message.
+   2. Test case: `patron add n/Alice s/A1111111H p/90123212 e/studentA@u.nus.edu t/computing`<br>
+      Expected: Patron named `Alice` with id `A0123456H`, phone number `90123212` email `studentA@u.nus.edu` and tag `computing` added to patron list. Details of added patron shown in status message.
 
 ### Editing a patron
 
@@ -1419,7 +1391,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-LibTask is a result of tremendous effort put in by each of the team members. Since the beginning of the project, our team met up consistently for six to eight hours weekly to discuss ideas for improving LibTask, as well as reviewing and debugging one another's code to maintain LibTask's high quality code base. The section below outlines different aspects of challenges faced throughout the development of LibTask, justification of notable efforts put in, as well the achievements of LibTask that the development team is proud of.
+LibTask is a result of tremendous effort put in by each of the team members. Since the beginning of the project, our team met up consistently for six to eight hours weekly to discuss ideas for improving LibTask, as well as reviewing and debugging code to maintain LibTask's high quality code base. The section below outlines different aspects of challenges faced throughout the development of LibTask, justification of notable efforts put in, as well the achievements of LibTask that the development team is proud of.
 
 ### Extension of Model component and non-unique nature of `BookList`
 
