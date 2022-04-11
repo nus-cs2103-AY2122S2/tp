@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Our project is based on AB3.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1396,8 +1396,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data file
+2. Prerequisites: There are existing data in the data files
+3. Test case: User changed data in data file <br>
+    Expected: TAssist starts as usual <br>
+    Actual: TAssist starts with no data <br>
+    Solution: Undo the changes made in data file and change with the help of TAssist instead
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Sample data of TAssist will not be saved (i.e. no data file will be created) until user issues a valid command.
 
-1. _{ more test cases …​ }_
+</div>
