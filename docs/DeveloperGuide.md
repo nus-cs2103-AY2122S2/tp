@@ -303,28 +303,28 @@ Editing through `EditWindow` is largely similar to the above.
 
 #### Current Implementation
 
-The undo/redo mechanism is facilitated by `StackUndoRedo`. The implemented undo/redo feature would be best described as two stacks of actions that the user has performed:
+The undo/redo mechanism is facilitated by `StackUndoRedo`. The implemented undo/redo feature would be best described as two stacks of commands that the user has performed:
 
-- The Undo stack serves to store a "history" of the actions they have performed.
-- The Redo stack is a collection of their actions that lead up to initial condition at which they started performing the undo.
+- The Undo stack serves to store a "history" of the commands they have performed.
+- The Redo stack is a collection of their commands that lead up to initial condition at which they started performing the undo.
 
-The central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, the undo stack is populated by pushing a user's action in the application to the undo stack. 
+The central concept is to store a stack of commands that essentially functions as a history-list of the commands. Essentially, we leverage on the stack's data structure of the which is a linear data structure that is based on the principle of Last In First Out (LIFO). Based on the implementation described above, the undo stack is populated by pushing a user's command in the application. 
 
-Then, when the user performs an undo, the action is firstly popped from undo stack and used to do the operation, and then we store an action onto the redo stack.
+Then, when the user performs an undo, the command is firstly popped from undo stack and used to restore previous state, and then we store that command onto the redo stack.
 
 `StackUndoRedo` contains 2 stacks, `undoStack` and `redoStack`. The `undoStack` and `redoStack` contain commands that are of type `RedoableCommand`. `RedoableCommand` extends Command and has the following attributes and methods.
 
 ![UndoRedo0](images/UndoRedo0.png)
 
-When a `RedoableCommand` is being executed, the methods `saveAddressBookSnapshot(Model model)` will be called. This ensures that the states are stored.
+When a `RedoableCommand` is being executed, the methods `saveAddressBookSnapshot(Model model)` will be called. This ensures that the current states are stored within the command.
 
-After a command is executed, it will be added into the `StackUndoRedo`. This will be explained in the activity diagram below.
+After a command is executed, it will be added into the `StackUndoRedo`. The specific process is explained in the activity diagram below.
 
 ![UndoRedo1](images/UndoRedo1.png)
 
 Next, when undo is being performed, `undoStack` will remove the first command in its stack and add it to `redoStack`. It will then call `RedoableCommand` `undo()` of the command that is removed. The `undo()` method will then set the model to the previous snapshot of `saveAddressBookSnapshot`. 
 
-Likewise, when redo is being performed, `redoStack` will remove the first command in its stack and add it to `undoStack`. It will then call `RedoableCommand` `redo()` of the command that is removed. The `redo()` method will then set the model to the previous snapshots of `saveAddressBookSnapshot`.
+Likewise, when redo is being performed, `redoStack` will remove the first command in its stack and add it to `undoStack`. It will then call `RedoableCommand` `redo()` of the command that is removed. The `redo()` method will then execute the command again.
 
 Given below is an example of a usage scenario and how the undo/redo mechanism behaves at each step.
 
@@ -336,7 +336,7 @@ Step 2. The user executes delete command. The delete command will be pushed into
 
 ![UndoRedo3](images/UndoRedo3.png)
 
-Step 3. The user executes add to add a new module. 
+Step 3. The user executes add module command to add a new module. 
 
 ![UndoRedo4](images/UndoRedo4.png)
 
@@ -351,15 +351,15 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoRedo6](images/UndoRedo6.png)
 
-> <b>Note:</b> The redo command will call `StackUndoRedo` `popRedo()` and `RedoableCommand` `redo()`.
+> <b>Note:</b> The redo command will call `popRedo()` method in `StackUndoRedo`and `redo()` method in `RedoableCommand` .
 
-Step 5. Commands that are not undoable are not added into the `undoStack`
-
-![UndoRedo5](images/UndoRedo5.png)
-
-Step 6. The user executes clear. Due to not being an `UndoCommand` or `RedoCommand`, it causes the `redoStack` to be cleared.
+Step 5. The user executes clear. Due to not being an `UndoCommand` or `RedoCommand`, it causes the `redoStack` to be cleared.
 
 ![UndoRedo7](images/UndoRedo7.png)
+
+Step 6. User executes list command. Commands that are not undoable are not added into the `undoStack`.
+
+![UndoRedo5](images/UndoRedo7.png)
 
 #### Design considerations:
 
