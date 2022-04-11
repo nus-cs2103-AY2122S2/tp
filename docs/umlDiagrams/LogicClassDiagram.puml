@@ -1,0 +1,51 @@
+@startuml
+hide circle
+!define DARKBLUE2
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam classFontColor black
+skinparam noteFontColor black
+skinparam rectanglefontcolor white
+
+package Logic <<Rectangle>> {
+
+Class RecipeBookParser
+Class "*Command"
+Class CommandResult
+Class "{abstract}\nCommand" as Command
+
+
+Class "<<interface>>\nLogic" as Logic
+Class LogicManager
+}
+
+package Model <<Rectangle>>{
+}
+
+package Storage <<Rectangle>>{
+
+}
+
+Class OutsideClass #faf8de
+OutsideClass ..> Logic
+
+LogicManager .right.|> Logic
+LogicManager -right->"1" RecipeBookParser
+RecipeBookParser ..> "*Command" : creates >
+
+"*Command" -up-|> Command
+LogicManager .left.> Command : executes >
+
+LogicManager --> Model
+LogicManager --> Storage
+Storage --[hidden] Model
+Command .[hidden]up.> Storage
+Command .right.> Model
+note right of "*Command" LOGIC_COLOR_T1: ~*Command = AddCommand, \nFindCommand, DeleteCommand etc
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult : produces >
+@enduml

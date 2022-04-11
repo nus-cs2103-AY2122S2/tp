@@ -1,0 +1,71 @@
+@startuml
+!define DARKBLUE2
+!include style.puml
+skinparam arrowColor dark
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RecipeBookParser" as RecipeBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete -x 1")
+activate LogicManager
+
+LogicManager -> RecipeBookParser : parseCommand("delete -x 1")
+activate RecipeBookParser
+
+create DeleteCommandParser
+RecipeBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> RecipeBookParser
+deactivate DeleteCommandParser
+
+RecipeBookParser -> DeleteCommandParser : parse("1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> RecipeBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> RecipeBookParser
+destroy DeleteCommandParser
+
+RecipeBookParser --> LogicManager : d
+deactivate RecipeBookParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> Model : deleteRecipe(1)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,19 +1,35 @@
+@font-face {
+  font-family: Chivo;
+  src: url('fonts/Chivo-Regular.ttf');
+}
+
+.root {
+    -Recipe-tag-text: #FDFBE8;
+    -Recipe-listbox-bg: #FFEAC1;
+    -Scrollbar-bg: #FFD4A3;
+    -Recipe-description-gray: #947146;
+    -Recipe-ingredients-text: #514538;
+    -Recipe-description-light-green: #F3F0CF;
+    -Main-window-bg: white;
+}
+
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-font-family: 'Chivo', sans-serif;
+    -fx-text-fill: -Recipe-ingredients-text;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: -Recipe-listbox-bg;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color:  -Scrollbar-bg;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: -Recipe-listbox-bg;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color:-Recipe-tag-text;
 }

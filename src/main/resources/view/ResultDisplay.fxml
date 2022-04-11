@@ -1,9 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 
-<StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8"
-    xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
-</StackPane>
+<VBox fx:id="resultPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="creme-control-bg" minWidth="470" minHeight="492">
+    <stylesheets>
+        <URL value="@ResultDisplay.css"/>
+    </stylesheets>
+    <ScrollPane fx:id="scrollPane" VBox.vgrow="ALWAYS">
+        <VBox>
+            <Label fx:id="response" styleClass="heading"/>
+            <VBox fx:id="recipeFields">
+                <Label fx:id="recipeName" styleClass="heading"/>
+                <HBox>
+                    <children>
+                        <VBox>
+                            <Label styleClass="heading" text="Ingredients"/>
+                            <Label fx:id="ingredients" styleClass="chivo-italic"/>
+                        </VBox>
+                        <HBox fx:id="totalTimeAndServings" spacing="50">
+                            <children>
+                                <VBox alignment="TOP_CENTER" styleClass="time-and-serving-vbox">
+                                    <Label styleClass="sub-heading" text="TOTAL TIME"/>
+                                    <Label fx:id="completionTime" styleClass="time-and-serving-box"/>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" styleClass="time-and-serving-vbox">
+                                    <Label styleClass="sub-heading" text="SERVINGS"/>
+                                    <Label fx:id="servingSize" styleClass="time-and-serving-box"/>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <VBox>
+                    <Label styleClass="heading" text="Steps"/>
+                    <Label fx:id="steps" styleClass="chivo-italic"/>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

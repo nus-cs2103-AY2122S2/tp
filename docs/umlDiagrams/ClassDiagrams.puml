@@ -1,0 +1,103 @@
+@startuml
+HIDE CIRCLE
+!define DARKBLUE2
+!include style.puml
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classFontColor white
+skinparam classAttributeIconSize 0
+
+class RecipeBook {
+    +recipes: List<Recipe>
+}
+
+class Recipe {
+    -name: Name
+    -ingredients: List<Ingredient>
+    -servingSize: ServingSize
+    -steps: List<Step>
+    -tags: Set<Tag>
+    -initSearchSet(): void
+    +getName(): Name
+    +getCompletionTime(): CompletionTime
+    +getIngredients(): List<Ingredient>
+    +getServingSize(): ServingSize
+    +getSteps(): List<step>
+    +getTags(): Set<Tag>
+    +getSearchSet(): SearchSet
+    +isSameRecipe(): Boolean
+}
+
+class Name {
+    +fullname: String
+    {static} +isValidName(): Boolean
+}
+
+class Ingredient {
+    +ingredientName: String
+    +quantity: double
+    +quantifier: String
+    {static} +isValidIngredientName(): Boolean
+    {static} +isValidQuantity(): Boolean
+}
+
+class Steps {
+    +value: String
+    {static} +isValidSteps(): Boolean
+
+}
+
+class ServingSize {
+    +value: Integer
+    {static} +isValidServingSize(): Boolean
+}
+
+class CompletionTime {
+    +value: Integer
+    {static} +isValidCompletionTime(): Boolean
+}
+
+class Tag {
+    +tagName: String
+    {static} +isValidTagName(String): Boolean
+}
+
+class RecipeContainsKeywordPredicate {
+    -keywords: List<String>
+    +getKeywords(): List<String>
+}
+
+class SearchSet {
+    -searchValues: Set<String>
+    -stringRepresentation: StringBuilder
+    +getSearchValue: Set<String>
+    +add(String): void
+}
+class UniqueRecipeList {
+    -internalList: ObservableList<Recipe>
+    -internalUnmodifiableList: ObservableList<Recipe>
+    +add(Recipe): void
+    +remove(Recipe): void
+    +contains(Recipe): boolean
+    +setRecipe(Recipe, Recipe): void
+    +setRecipes(UniqueRecipeList): void
+    +setRecipes(List<Recipe>): void
+    +asUnmodifiableObservableList() : ObservableList<Recipe>
+}
+
+interface Iterable <<Interface>> {
+}
+
+
+RecipeBook<|-- Recipe
+Recipe <|-- Name
+Recipe <|-- Ingredient
+Recipe <|-- ServingSize
+Recipe <|--- Steps
+Recipe <|--- CompletionTime
+Recipe <|-- Tag
+Recipe <|-- SearchSet
+Recipe <|--- RecipeContainsKeywordPredicate
+Iterable <|.. UniqueRecipeList
+
+@enduml
+

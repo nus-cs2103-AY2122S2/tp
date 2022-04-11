@@ -103,7 +103,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
    ![ShowExecutionPoint](../images/tracing/ShowExecutionPoint.png)<br>
    `CommandResult commandResult = logic.execute(commandText);` is the line that you end up at (i.e., the place where we put the breakpoint).
 
-1. We are interested in the `logic.execute(commandText)` portion of that line so let’s _Step in_ into that method call:<br>
+1. We are interested in the `logic.execute(commandText)` servingSize of that line so let’s _Step in_ into that method call:<br>
     ![StepInto](../images/tracing/StepInto.png)
 
 1. We end up in `LogicManager#execute()` (not `Logic#execute` -- but this is expected because we know the `execute()` method in the `Logic` interface is actually implemented by the `LogicManager` class). Let’s take a look at the body of the method. Given below is the same code, with additional explanatory comments.

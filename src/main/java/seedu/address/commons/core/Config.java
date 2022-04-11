@@ -34,11 +34,12 @@ public class Config {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
         if (!(other instanceof Config)) { //this handles null as well.
             return false;
+        }
+
+        if (other == this) {
+            return true;
         }
 
         Config o = (Config) other;

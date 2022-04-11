@@ -1,0 +1,35 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!define DARKBLUE2
+!include style.puml
+hide circle
+
+Package " "<<Rectangle>>{
+    Class UI UI_COLOR
+    Class Logic LOGIC_COLOR
+    Class Storage STORAGE_COLOR
+    Class Model MODEL_COLOR
+    Class Main #LIGHTGREY
+    Class Commons LOGIC_COLOR_T1
+}
+
+Class "<$user>" as User MODEL_COLOR_T4
+Class "<$documents>" as File MODEL_COLOR_T3
+
+
+UI -[#lightgreen]> Logic
+UI -right[#lightgreen]-> Model
+Logic -[#lightblue]-> Storage
+Logic -down[#lightblue]-> Model
+Main -[#lightgrey]-> UI
+Main -[#lightgrey]-> Logic
+Main -[#lightgrey]-> Storage
+Main -up[#lightgrey]-> Model
+Main -down[hidden]-> Commons
+
+Storage -up[STORAGE_COLOR].> Model
+Storage .right[STORAGE_COLOR].>File
+User ..> UI
+@enduml

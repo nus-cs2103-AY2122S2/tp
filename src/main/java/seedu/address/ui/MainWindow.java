@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private RecipeListPanel recipeListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -39,16 +40,11 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane recipeListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    @FXML
-    private StackPane statusbarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -63,17 +59,11 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
@@ -110,14 +100,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        String welcomeMessage = "Welcome to McKitchen!\n\n"
+                + "To begin, you can use the \"help\" command to access the Command Summary in our User Guide.";
+
+        recipeListPanel = new RecipeListPanel(logic.getFilteredRecipeList());
+        recipeListPanelPlaceholder.getChildren().add(recipeListPanel.getRoot());
+        setRecipeChangeListener(recipeListPanel);
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.setFeedbackToUser(welcomeMessage);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -163,8 +155,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public RecipeListPanel getRecipeListPanel() {
+        return recipeListPanel;
     }
 
     /**
@@ -176,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -192,5 +184,27 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Attaches a listener to a given RecipeListPanel to call a function to update the result display
+     * whenever the selected recipe changes.
+     */
+    private void setRecipeChangeListener(RecipeListPanel recipeListPanel) {
+        recipeListPanel.selectedRecipeProperty().addListener((o, oldVal, newVal) -> {
+            if (newVal != null) {
+                updateResultDisplay(newVal);
+            }
+        });
+    }
+
+    /**
+     * Updates the result display to display the contents of a specified recipe.
+     *
+     * @param recipe the recipe to be displayed. Must not be null.
+     */
+    private void updateResultDisplay(Recipe recipe) {
+        assert recipe != null;
+        resultDisplay.setFeedbackToUser(new CommandResult(recipe));
     }
 }

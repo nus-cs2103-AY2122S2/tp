@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -31,11 +33,26 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInPreppedSentence = sentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code searchValue}.
+     *   Ignores case, but a full word/phrase match is required.
+     * @param recipeValues cannot be null
+     * @param searchValue cannot be null and cannot be empty
+     */
+    public static boolean recipeContainsIgnoreCase(String recipeValues, String searchValue) {
+        requireNonNull(recipeValues);
+        requireNonNull(searchValue);
+
+        String preppedSearchValue = searchValue.trim().toLowerCase();
+        checkArgument(!preppedSearchValue.isEmpty(), "Search value cannot be empty");
+
+        return recipeValues.contains(preppedSearchValue);
     }
 
     /**
@@ -49,11 +66,7 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code s} represents a non-zero unsigned integer
-     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} <br>
-     * Will return false for any other non-null string input
-     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
-     * @throws NullPointerException if {@code s} is null.
+     * @return true if the integer value of {@code s} is greater than 0.
      */
     public static boolean isNonZeroUnsignedInteger(String s) {
         requireNonNull(s);
@@ -64,5 +77,31 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * @return true if the double value of {@code s} is greater than 0.
+     */
+    public static boolean isNonZeroPositiveDouble(String s) {
+        requireNonNull(s);
+
+        try {
+            double value = Double.parseDouble(s);
+            return value > 0;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
+     * @return true if {@code s} contains any special characters
+     */
+    public static boolean isAlphaNumeric(String s) {
+        requireNonNull(s);
+
+        Pattern special = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher hasSpecial = special.matcher(s);
+
+        return !hasSpecial.find();
     }
 }

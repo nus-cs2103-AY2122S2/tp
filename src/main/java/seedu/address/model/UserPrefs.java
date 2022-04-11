@@ -12,9 +12,8 @@ import seedu.address.commons.core.GuiSettings;
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
-
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path recipeBookFilePath = Paths.get("data" , "recipebook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +34,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setRecipeBookFilePath(newUserPrefs.getRecipeBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,40 +46,41 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getRecipeBookFilePath() {
+        return recipeBookFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setRecipeBookFilePath(Path recipeBookFilePath) {
+        requireNonNull(recipeBookFilePath);
+        this.recipeBookFilePath = recipeBookFilePath;
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof UserPrefs)) { //this handles null as well.
+    public boolean equals(Object o) {
+
+        if (!(o instanceof UserPrefs)) {
             return false;
         }
 
-        UserPrefs o = (UserPrefs) other;
+        if (o == this) {
+            return true;
+        }
 
-        return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+        UserPrefs other = (UserPrefs) o;
+        return this.guiSettings.equals(other.guiSettings)
+                && this.recipeBookFilePath.equals(other.recipeBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, recipeBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("GUI Settings : \n").append(guiSettings);
+        sb.append("Local data file location : ").append(recipeBookFilePath);
         return sb.toString();
     }
 

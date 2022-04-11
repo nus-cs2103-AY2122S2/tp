@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -120,12 +121,19 @@ public class VersionTest {
         Version another;
 
         one = new Version(0, 0, 0, false);
+        another = new Version(0, 0, 0, true);
+        assertEquals(1, one.compareTo(another));
+
+        one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);
-        assertTrue(one.equals(another));
+        assertEquals(one, one);
+        assertEquals(one, another);
+        assertNotEquals(one, one.getMajor());
 
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
-        assertTrue(one.equals(another));
+        assertEquals(one, another);
+
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

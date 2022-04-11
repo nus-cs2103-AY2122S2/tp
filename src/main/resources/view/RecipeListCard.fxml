@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="card" maxWidth="200" minHeight="100" onMouseClicked="#copyName">
+    <VBox alignment="CENTER_LEFT" minHeight="105">
+        <padding>
+            <Insets top="5" right="5" bottom="5" left="15"/>
+        </padding>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+        <HBox spacing="10">
+            <Label fx:id="steps" styleClass="cell_small_label" text="\$steps"/>
+            <Label fx:id="completionTime" styleClass="cell_small_label" text="\$completionTime"/>
+        </HBox>
+        <FlowPane fx:id="tags" styleClass="cell_small_label"/>
+    </VBox>
+</HBox>

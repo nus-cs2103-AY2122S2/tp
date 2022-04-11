@@ -93,16 +93,17 @@ public class Version implements Comparable<Version> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object o) {
+        if (!(o instanceof Version)) {
             return false;
         }
-        if (!(obj instanceof Version)) {
-            return false;
-        }
-        final Version other = (Version) obj;
 
-        return compareTo(other) == 0;
+        if (this == o) {
+            return true;
+        }
+
+        Version other = (Version) o;
+        return this.compareTo(other) == 0;
     }
 
     @Override

@@ -1,0 +1,170 @@
+{
+  "_comment": "RecipeBook save file which contains the same Recipe values as in TypicalRecipe#getTypicalRecipeBook()",
+  "recipes" : [ {
+    "name" : "Aglio Olio",
+    "ingredients" : [ {
+      "ingredientName" : "Garlic",
+      "quantity" : "3.0",
+      "quantifier" : "Cloves"
+    }, {
+      "ingredientName" : "Spaghetti",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Olive Oil",
+      "quantity" : "500.0",
+      "quantifier" : "ml"
+    }, {
+      "ingredientName" : "Bacon",
+      "quantity" : "3.0",
+      "quantifier" : "slices"
+    } ],
+    "completionTime" : 5,
+    "servingSize" : 1,
+    "steps" : [ "Cook the pasta", "Saute the garlic", "Toss pasta in the sauce", "Toss bacon slices in pasta", "Taste and season" ],
+    "tags" : [ "Western", "Italian" ]
+  }, {
+    "name" : "Fried Rice",
+    "ingredients" : [ {
+      "ingredientName" : "Carrots",
+      "quantity" : "3.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Eggs",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "White Rice",
+      "quantity" : "4.0",
+      "quantifier" : "Cups"
+    } ],
+    "completionTime" : 30,
+    "servingSize" : 1,
+    "steps" : [ "Place carrots in saucepan and cover with water", "Heat wok" ],
+    "tags" : [ "Chinese", "Asian" ]
+  },  {
+    "name" : "Duck Rice",
+    "ingredients" : [ {
+      "ingredientName" : "Duck meat",
+      "quantity" : "1.0",
+      "quantifier" : "pound"
+    }, {
+      "ingredientName" : "Rice",
+      "quantity" : "4.0",
+      "quantifier" : "Cups"
+    }, {
+      "ingredientName" : "Eggs",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }  ],
+    "completionTime" : 30,
+    "servingSize" : 1,
+    "steps" : [ "Cook Duck", "Heat wok" ],
+    "tags" : ["Chinese", "Asian" ]
+  },  {
+    "name" : "Sushi",
+    "ingredients" : [ {
+      "ingredientName" : "Rice",
+      "quantity" : "4.0",
+      "quantifier" : "Cups"
+    }, {
+      "ingredientName" : "Seaweed",
+      "quantity" : "1.0",
+      "quantifier" : "large piece"
+    }, {
+      "ingredientName" : "Cucumber",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    } ],
+    "completionTime" : 10,
+    "servingSize" : 1,
+    "steps" : [ "Cook Rice", "Spread rice over nori", "Add cucumbers to the center of the rice",
+      "Gently lift the bottom of the mat up and over the sushi", "Press and shape the ingredients into a tube",
+      "Roll with pressure", "Slice the sushi roll" ],
+    "tags" : [ "Japanese", "Asian"]
+  },  {
+    "name" : "Beef Taco",
+    "ingredients" : [ {
+      "ingredientName" : "Lean Ground Beef",
+      "quantity" : "1.0",
+      "quantifier" : "pound"
+    }, {
+      "ingredientName" : "Ground cumin",
+      "quantity" : "1.0",
+      "quantifier" : "teaspoon"
+    }, {
+      "ingredientName" : "Tortilla",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    } ],
+    "completionTime" : 10,
+    "servingSize" : 1,
+    "steps" : [ "Heat up your tortillas", "Assemble the avocado and lettuce atop of tortilla" ],
+    "tags" : ["Mexican"]
+  },  {
+    "name" : "Shoyu Ramen",
+    "ingredients" : [ {
+      "ingredientName" : "Ramen Noodle",
+      "quantity" : "4.0",
+      "quantifier" : "oz"
+    }, {
+      "ingredientName" : "Chicken Broth",
+      "quantity" : "8.0",
+      "quantifier" : "Cups"
+    }, {
+      "ingredientName" : "Shiitake Mushrooms",
+      "quantity" : "16.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Eggs",
+      "quantity" : "2.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Chashu Pork",
+      "quantity" : "1.0",
+      "quantifier" : "pounds"
+    } ],
+    "completionTime" : 30,
+    "servingSize" : 1,
+    "steps" : [ "Get the soup", "Cook the noodles", "Cook the ingredients" ],
+    "tags" : [ "Japanese", "Asian" ]
+  },  {
+    "name" : "Fish and Chips",
+    "ingredients" : [ {
+      "ingredientName" : "Fish",
+      "quantity" : "1.0",
+      "quantifier" : "pound"
+    }, {
+      "ingredientName" : "Fries",
+      "quantity" : "5.0",
+      "quantifier" : "Cups"
+    } ],
+    "completionTime" : 30,
+    "servingSize" : 1,
+    "steps" : [ "Deep fry fish and fries" ],
+    "tags" : [ "Western"]
+  },  {
+    "name" : "Bolognese",
+    "ingredients" : [ {
+      "ingredientName" : "Garlic",
+      "quantity" : "3.0",
+      "quantifier" : "Cloves"
+    }, {
+      "ingredientName" : "Spaghetti",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Olive Oil",
+      "quantity" : "500.0",
+      "quantifier" : "ml"
+    }, {
+      "ingredientName" : "Bacon",
+      "quantity" : "3.0",
+      "quantifier" : "slices"
+    } ],
+    "completionTime" : 30,
+    "servingSize" : 1,
+    "steps" : [ "Cook the pasta", "Saute the garlic", "Toss pasta in the sauce", "Toss bacon slices in pasta", "Taste and season" ],
+    "tags" : [ "Western", "Italian"]
+  }  ]
+}

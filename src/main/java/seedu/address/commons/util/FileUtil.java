@@ -45,12 +45,7 @@ public class FileUtil {
      * Creates a file if it does not exist along with its missing parent directories.
      */
     public static void createFile(Path file) throws IOException {
-        if (Files.exists(file)) {
-            return;
-        }
-
         createParentDirsOfFile(file);
-
         Files.createFile(file);
     }
 

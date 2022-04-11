@@ -1,14 +1,15 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2122S2-CS2103T-T17-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T17-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T17-2/tp/branch/master/graph/badge.svg?token=XLO3ZFY12V)](https://codecov.io/gh/AY2122S2-CS2103T-T17-2/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+**McKitchen** (My-CLI-Kitchen) is a desktop application that can quickly store, edit, and search for recipes by running a single command, ideal for the fast typists, home cooks, and students who want a simple way to store or search for simple recipes to cook. The user interacts with it using a CLI-like interface, and it has a GUI created with JavaFX.
+
+# Site Map
+* [McKitchen Product Page](https://ay2122s2-cs2103t-t17-2.github.io/tp/)
+* [User Guide](https://ay2122s2-cs2103t-t17-2.github.io/tp/UserGuide.html)
+* [Developer Guide](https://ay2122s2-cs2103t-t17-2.github.io/tp/DeveloperGuide.html)
+* [About Us](https://ay2122s2-cs2103t-t17-2.github.io/tp/AboutUs.html)
+
+# Acknowledgements
+* This project was modified from `AddressBook Level-3` from [se-education.org](https://se-education.org/).

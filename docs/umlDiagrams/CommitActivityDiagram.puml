@@ -1,0 +1,17 @@
+@startuml
+!define DARKBLUE2
+!include style.puml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command \n commits \n RecipeBook]\n)
+    :Purge redundant states;
+    :Save RecipeBook to
+    RecipeBookStateList;
+else ([else])
+endif
+stop
+@enduml

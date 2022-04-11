@@ -1,0 +1,27 @@
+@startuml
+!define DARKBLUE2
+!include style.puml
+hide circle
+hide footbox
+hide members
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+RecipeBook *-right-> "1" UniqueRecipeList
+RecipeBook *-right-> "1" UniqueTagList
+UniqueTagList -[hidden]down- UniqueRecipeList
+UniqueTagList -[hidden]down- UniqueRecipeList
+
+UniqueTagList *-right-> "*" Tag
+UniqueRecipeList -right-> Recipe
+
+Recipe -up-> "*" Tag
+
+Recipe *--> Name
+Recipe *--> Ingredient
+Recipe *--> CompletionTime
+Recipe *--> ServingSize
+Recipe *--> Step
+Recipe *--> SearchSet
+@enduml

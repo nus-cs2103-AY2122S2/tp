@@ -2,41 +2,69 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.recipe.RecipeContainsKeywordPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all recipes in recipe book whose name, ingredient, or tag contains any of the argument keywords. <br>
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Searches all recipes whose name, ingredient(s), or tag(s) contain any of the specified "
+            + "keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
+            + "Parameters: KEYWORD [, MORE_KEYWORDS]... \n\n"
+            + "Example: " + COMMAND_WORD + " chicken cutlet, garlic, western";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    private final RecipeContainsKeywordPredicate recipePredicate;
 
-    private final NameContainsKeywordsPredicate predicate;
+    public FindCommand(RecipeContainsKeywordPredicate recipePredicate) {
+        this.recipePredicate = recipePredicate;
+    }
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public RecipeContainsKeywordPredicate getRecipePredicate() {
+        return recipePredicate;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+
+        model.updateFilteredRecipeList(recipePredicate);
+
+        if (model.getFilteredRecipeList().size() == 0) {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_FIND_RETURNS_NO_RECIPES_FOUND, recipePredicate.toString()));
+        } else {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_RECIPES_LISTED_OVERVIEW, model.getFilteredRecipeList().size())
+            );
+        }
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+    public boolean equals(Object o) {
+        // instanceof handles nulls
+        if (!(o instanceof FindCommand)) {
+            return false;
+        }
+
+        // short circuit if same object
+        if (this == o) {
+            return true;
+        }
+
+        FindCommand other = (FindCommand) o;
+        return recipePredicate.equals(other.recipePredicate); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getRecipePredicate());
     }
 }

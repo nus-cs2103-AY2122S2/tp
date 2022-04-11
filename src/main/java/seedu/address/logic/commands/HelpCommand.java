@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 
 /**
@@ -12,10 +14,11 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String HELP_MESSAGE = "Opened help window.";
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        requireNonNull(model);
+        return new CommandResult(HELP_MESSAGE, true, false);
     }
 }

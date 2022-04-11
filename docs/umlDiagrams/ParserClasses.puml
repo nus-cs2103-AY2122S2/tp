@@ -1,0 +1,42 @@
+@startuml
+!define DARKSTYLE2
+!include style.puml
+hide circle
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam classFontColor Black
+skinparam rectanglefontcolor white
+
+Class "{abstract}\nCommand" as Command
+Class "*Command"
+
+package "Parser classes" <<>Rectangle>>{
+Class "<<interface>>\nParser" as Parser
+Class RecipeBookParser
+Class "*CommandParser"
+Class CliSyntax
+Class ParserUtil
+Class ArgumentMultimap
+Class ArgumentTokenizer
+Class Prefix
+}
+
+Class OutsideClass  #faf8de {}
+OutsideClass ..> RecipeBookParser
+
+RecipeBookParser .down.> "*CommandParser": creates >
+
+"*CommandParser" ..> "*Command" : creates >
+RecipeBookParser ..> Command : returns >
+"*CommandParser" .up.|> Parser
+"*CommandParser" ..> ArgumentMultimap
+"*CommandParser" ..> ArgumentTokenizer
+ArgumentTokenizer .left.> ArgumentMultimap
+"*CommandParser" ..> CliSyntax
+CliSyntax ..> Prefix
+"*CommandParser" ..> ParserUtil
+ParserUtil .down.> Prefix
+ArgumentTokenizer .down.> Prefix
+"*Command" -up-|> Command
+@enduml

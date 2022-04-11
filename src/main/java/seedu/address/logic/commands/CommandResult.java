@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.recipe.Recipe;
+
+
 /**
  * Represents the result of a command execution.
  */
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final Recipe recipe;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -24,6 +28,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.recipe = null;
     }
 
     /**
@@ -32,6 +37,21 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code Recipe},
+     * and other fields set to their default value. Should only be called when a
+     * CommandResult needs to print a recipe to the result display.
+     *
+     * @param recipe the recipe to be stored in the CommandResult.
+     */
+    public CommandResult(Recipe recipe) {
+        requireNonNull(recipe);
+        this.recipe = recipe;
+        this.feedbackToUser = "";
+        this.exit = false;
+        this.showHelp = false;
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +64,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean hasRecipe() {
+        return this.recipe != null;
+    }
+
+    public Recipe getRecipe() {
+        return this.recipe;
     }
 
     @Override
@@ -67,5 +95,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
-
 }

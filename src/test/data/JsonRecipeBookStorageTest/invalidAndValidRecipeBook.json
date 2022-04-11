@@ -1,0 +1,51 @@
+{
+  "_comment": "Invalid Tags field",
+  "recipes" : [ {
+    "name" : "Valid Recipes",
+    "ingredients" : [ {
+      "ingredientName" : "Sugar",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Spice",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Everything nice",
+      "quantity" : "1",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Chemical X",
+      "quantity" : "500.0",
+      "quantifier" : "litres"
+    } ],
+    "completionTime" : 300,
+    "servingSize" : 3,
+    "steps" : [ "Pour Sugar", "Pour Spice", "Pour Everything nice", "Add Chemical X" ],
+    "tags" : [ "Powerpuff Girls", "Blossom", "Bubbles", "Buttercup" ]
+  }, {
+    "name" : "Invalid Recipe with an empty tag",
+    "ingredients" : [ {
+      "ingredientName" : "Sugar",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Spice",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Everything nice",
+      "quantity" : "1",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Chemical X",
+      "quantity" : "500.0",
+      "quantifier" : "litres"
+    } ],
+    "completionTime" : 300,
+    "servingSize" : 3,
+    "steps" : [ "Pour Sugar", "Pour Spice", "Pour Everything nice", "Add Chemical X" ],
+    "tags" : [ "Powerpuff Girls", "", "Mojo", "Jojo" ]
+
+  } ]
+}

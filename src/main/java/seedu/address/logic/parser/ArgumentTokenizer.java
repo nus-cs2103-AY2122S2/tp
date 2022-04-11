@@ -102,18 +102,22 @@ public class ArgumentTokenizer {
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             // Extract and store prefixes and their arguments
             Prefix argPrefix = prefixPositions.get(i).getPrefix();
-            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
-            argMultimap.put(argPrefix, argValue);
+            List<String> argValues = extractArgumentValue(argsString, prefixPositions.get(i),
+                    prefixPositions.get(i + 1));
+
+            for (String argValue: argValues) {
+                argMultimap.put(argPrefix, argValue);
+            }
         }
 
         return argMultimap;
     }
 
     /**
-     * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
+     * Returns the trimmed value(s) of the argument in the arguments string specified by {@code currentPrefixPosition}.
      * The end position of the value is determined by {@code nextPrefixPosition}.
      */
-    private static String extractArgumentValue(String argsString,
+    private static List<String> extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
@@ -121,7 +125,11 @@ public class ArgumentTokenizer {
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-        return value.trim();
+        List<String> multiValue =
+                Arrays.stream(value.split(RecipeBookSyntax.SEPARATOR_SYMBOL))
+                        .map(v -> v.trim()).collect(Collectors.toUnmodifiableList());
+
+        return multiValue;
     }
 
     /**
@@ -144,5 +152,4 @@ public class ArgumentTokenizer {
             return prefix;
         }
     }
-
 }

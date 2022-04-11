@@ -1,0 +1,93 @@
+@font-face {
+  font-family: Gopher Display;
+  src: url('fonts/GopherDisplay-Bold.ttf');
+}
+
+@font-face {
+  font-family: Chivo;
+  src: url('fonts/Chivo-Regular.ttf');
+}
+
+@font-face {
+  font-family: Chivo;
+  src: url('fonts/Chivo-Italic.ttf');
+}
+
+.root {
+    -Recipe-tag-text: #FDFBE8;
+    -Recipe-listbox-bg: #FFEAC1;
+    -Scrollbar-bg: #FFD4A3;
+    -Recipe-description-gray: #947146;
+    -Recipe-ingredients-text: #514538;
+    -Recipe-description-light-green: #F3F0CF;
+    -Main-window-bg: white;
+}
+
+.recipe-list-pane {
+     -fx-font-family: 'Gopher Display', sans-serif;
+     -fx-background-color: -Main-window-bg;
+     -fx-padding: 8;
+}
+
+.result-pane {
+     -fx-font-family: 'Gopher Display', sans-serif;
+     -fx-background-color: -Main-window-bg;
+     -fx-padding: 8 8 8 0;
+}
+
+.command-box-pane {
+     -fx-font-family: 'Chivo', sans-serif;
+     -fx-background-color: -Main-window-bg;
+     -fx-padding: 0 8 8 8;
+}
+
+.creme-control-bg {
+      -fx-inner-control-background: -Recipe-tag-text;
+      -fx-background-color: -Recipe-tag-text;
+      -fx-background-radius: 10;
+}
+
+.creme-control-bg .scroll-pane {
+    -fx-background-color: transparent;
+}
+.creme-control-bg .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.creme-control-bg .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+#commandTextField {
+     -fx-text-fill:  -Recipe-description-gray;
+     -fx-prompt-text-fill: -Recipe-description-gray;
+}
+
+/* adapted from https://stackoverflow.com/questions/13200439/ */
+.scroll-pane .corner,
+.list-view .corner
+{
+  -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-button,
+.scroll-bar .decrement-arrow
+{
+  visibility: hidden;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:horizontal
+{
+  -fx-background-color: transparent;
+}
+
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb
+{
+  -fx-background-color: -Scrollbar-bg;
+  -fx-background-radius: 2em;
+}
+

@@ -1,0 +1,27 @@
+{
+  "_comment": "Invalid Completion Time field",
+  "recipes" : [ {
+    "name" : "Aglio Olio",
+    "ingredients" : [ {
+      "ingredientName" : "Garlic",
+      "quantity" : "3.0",
+      "quantifier" : "Cloves"
+    }, {
+      "ingredientName" : "Spaghetti",
+      "quantity" : "1.0",
+      "quantifier" : ""
+    }, {
+      "ingredientName" : "Olive oil",
+      "quantity" : "500.0",
+      "quantifier" : "ml"
+    }, {
+      "ingredientName" : "Bacon",
+      "quantity" : "3.0",
+      "quantifier" : "slices"
+    } ],
+    "completionTime" : -5,
+    "servingSize" : 1,
+    "steps" : [ "Cook the pasta", "Donkey", "Toss pasta in the sauce", "Taste and season" ],
+    "tags" : [ "Western", "Italian" ]
+  } ]
+}

@@ -1,0 +1,42 @@
+.card {
+     -fx-background-color: -Recipe-listbox-bg;
+     -fx-background-radius: 5;
+}
+
+.list-cell:selected .card {
+     -fx-border-color: -Recipe-description-gray;
+     -fx-border-width: 2;
+     -fx-border-radius: 5;
+}
+
+.cell_big_label {
+    -fx-font-size: 19;
+    -fx-text-fill: -Recipe-ingredients-text;
+    -fx-padding: -1 0 4 0;
+}
+
+.cell_small_label {
+    -fx-font-family: 'Chivo', sans-serif;
+    -fx-text-fill: -Recipe-description-gray;
+    -fx-font-size: 14;
+}
+
+.list-cell {
+    -fx-background-color:  -Recipe-tag-text;
+    -fx-background-radius: 10;
+}
+
+#tags  {
+    -fx-vgap: 12;
+    -fx-hgap: 12;
+    -fx-padding: 9 0;
+}
+
+#tags .label {
+     -fx-text-fill: white;
+     -fx-background-color: -Recipe-description-gray;
+     -fx-background-radius: 4;
+     -fx-background-insets: -4;
+     -fx-padding: 0 3;
+}
+

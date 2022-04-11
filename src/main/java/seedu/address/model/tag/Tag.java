@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the recipe book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
+    // We would still be using this.
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
@@ -33,10 +33,17 @@ public class Tag {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+    public boolean equals(Object o) {
+        if (!(o instanceof Tag)) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        Tag other = (Tag) o;
+        return this.tagName.equals(other.tagName);
     }
 
     @Override

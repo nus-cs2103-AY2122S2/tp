@@ -1,0 +1,59 @@
+@startuml
+!define DARKBLUE2
+!include style.puml
+hide circle
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam rectanglefontcolor white
+
+Package Model <<Rectangle>>{
+Class "<<interface>>\nReadOnlyRecipeBook" as ReadOnlyRecipeBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class RecipeBook
+Class ModelManager
+Class UserPrefs
+
+Class UniqueRecipeList
+Class Recipe
+Class CompletionTime
+Class Name
+Class Ingredient
+Class Tag
+Class ServingSize
+Class Step
+Class SearchSet
+
+}
+
+Class OutsideClass #faf8de
+OutsideClass ..> Model
+
+RecipeBook .up.|> ReadOnlyRecipeBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyRecipeBook
+ModelManager -left-> "1" RecipeBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+RecipeBook *--> "1" UniqueRecipeList
+UniqueRecipeList --> "~* all" Recipe
+Recipe *--> Name
+Recipe *--> CompletionTime
+Recipe *--> Ingredient
+Recipe*--> ServingSize
+Recipe*--> Step
+Recipe*--> SearchSet
+Recipe *--> "*" Tag
+
+
+Name -[hidden]right-> Ingredient
+Ingredient -[hidden]right-> CompletionTime
+CompletionTime -[hidden]right-> ServingSize
+ServingSize -[hidden]right-> Step
+Step -[hidden]right->SearchSet
+ModelManager ---->"~* filtered" Recipe
+@enduml

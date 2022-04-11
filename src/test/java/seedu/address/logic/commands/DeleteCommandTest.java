@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showRecipeAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECIPE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECIPE;
+import static seedu.address.testutil.TypicalRecipes.AGLIO_OLIO;
+import static seedu.address.testutil.TypicalRecipes.getTypicalRecipeBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -16,94 +19,118 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.recipe.Name;
+import seedu.address.model.recipe.Recipe;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
- */
+* Contains integration tests (interaction with the Model) and unit tests for
+* {@code DeleteCommand}.
+*/
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRecipeBook(), new UserPrefs());
+
+    @BeforeEach
+    public void init() {
+        model = new ModelManager(getTypicalRecipeBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Recipe recipeToDelete = model.getFilteredRecipeList().get(INDEX_FIRST_RECIPE.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RECIPE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RECIPE_SUCCESS, recipeToDelete.getName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        ModelManager expectedModel = new ModelManager(model.getRecipeBook(), new UserPrefs());
+        expectedModel.deleteRecipe(recipeToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_validNameUnfilteredList_success() {
+        Index indexOfRecipe = Index.fromZeroBased(model.getFilteredRecipeList().indexOf(AGLIO_OLIO));
+        Recipe recipeToDelete = model.getFilteredRecipeList().get(indexOfRecipe.getZeroBased());
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        DeleteCommand deleteCommand = new DeleteCommand(recipeToDelete.getName());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RECIPE_SUCCESS, recipeToDelete.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getRecipeBook(), new UserPrefs());
+        expectedModel.deleteRecipe(recipeToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_invalidNameUnfilteredList_success() {
+        Name nameOfRecipeToDelete = new Name("fjsndksf");
+        DeleteCommand deleteCommand = new DeleteCommand(nameOfRecipeToDelete);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DELETE_RECIPE_NOT_EXIST);
     }
 
     @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRecipeList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RECIPE_INDEX);
+    }
+
+
+    @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showRecipeAtIndex(model, INDEX_FIRST_RECIPE);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Recipe recipeToDelete = model.getFilteredRecipeList().get(INDEX_FIRST_RECIPE.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RECIPE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RECIPE_SUCCESS, recipeToDelete.getName());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        Model expectedModel = new ModelManager(model.getRecipeBook(), new UserPrefs());
+        expectedModel.deleteRecipe(recipeToDelete);
+        showNoRecipe(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showRecipeAtIndex(model, INDEX_FIRST_RECIPE);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_RECIPE;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRecipeBook().getRecipeList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RECIPE_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_RECIPE);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_RECIPE);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(deleteFirstCommand.getToDeleteIndex());
+        DeleteCommand deleteNameCommand = new DeleteCommand(AGLIO_OLIO.getName());
+        DeleteCommand deleteNameCommandCopy = new DeleteCommand(deleteNameCommand.getToDeleteName());
 
-        // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
-
-        // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteFirstCommand.getToDeleteIndex());
+        assertNotEquals(deleteNameCommand, deleteNameCommand.getToDeleteName());
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
+        assertEquals(deleteNameCommand, deleteNameCommand);
+        assertEquals(deleteNameCommand, deleteNameCommandCopy);
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
+        assertNotEquals(deleteFirstCommand, deleteNameCommand);
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+    private void showNoRecipe(Model model) {
+        model.updateFilteredRecipeList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredRecipeList().isEmpty());
     }
 }
