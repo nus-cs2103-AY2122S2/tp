@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/alexteo98)][[portfolio](team/alexteo98.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Unit Testing and Code Coverage
 
 ### Lye Jia Yang
 
