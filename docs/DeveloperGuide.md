@@ -939,7 +939,34 @@ testers are expected to do more *exploratory* testing.
          Expected: All meetings get deleted from the application.
 
 ### 8.7 Finding
-
+1. Finding contacts using various fields
+   1. Prerequisites: More than one person in the contacts list. They should collectively meet the following criteria:
+      1. Only one person has `Barry` in their name
+      2. At least one person is tagged `Manager`
+      3. Only one person lives in `Barry Street` and he is not `Barry`
+      4. At least one person's job is `Engineer`
+      5. No one is named `Dakota`
+      6. No one is tagged `Friend`
+      
+   2. Test case: `find n/Barry` <br>
+      Expected: Person named `Barry` will appear in the search result. A message showing the one person matched is displayed.
+   3. Test case: `find t/Manager` <br>
+      Expected: People tagged `Manager` will appear in the search result. A message showing the number of people matched is displayed.
+   4. Test case: `find a/Pine Street`<br>
+      Expected: People who live in `Pine Street` will appear in the search result. A message showing the number of people matched is displayed.
+   5. Test case: `find j/engineer`
+      Expected: People who work as `engineer` will appear in the search result. A message showing the number of people matched is displayed.
+   6. Test case: `find n/Dakota` <br>
+      Expected: A message showing that no people were matched is displayed.
+   7. Test case: `find t/Friend` <br>
+      Expected: A message showing that no people were matched is displayed.
+   8. Test case: `find Barry` <br>
+      Expected: Person who lives in `Barry Street` and person who is named `Barry` will appear in the search result. A message showing the number of people matched is displayed.
+   9. Test case: `find`
+      Expected: No search results are shown and error message is displayed in the Result Display.
+   10. Test case: `find n/`
+       Expected: No search results are shown and error message is displayed in the Result Display.
+   
 ### 8.8 List
 
 ### 8.9 View
@@ -977,8 +1004,45 @@ testers are expected to do more *exploratory* testing.
       Expected: No meeting is added and an error message is shown in the status box.
 
 ### 8.12 Updating a meeting
+1. Updating a meeting
+
+   1. Prerequisites: Must have only one meeting added in the `Meetings` list
+   
+   2. Test case: `update 1 in/UTown` <br>
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed.
+
+   3. Test case: `update 1 for/Testing Feature` <br>
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed.
+
+   4. Test case: `update 1 on/22-08-2040 23:47`
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed. 
+   
+   5. Test case: `update 1 in/` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   6. Test case: `update 1 for/` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   7. Test case: `update 1 on/21-09-2021 12:30` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   8. Test case: `update 1` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   9. Test case: `update 2 in/UTown` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
 
 ### 8.13 Cancelling a meeting
+
+1. Canceling a meeting
+
+   1. Prerequisites: Must have only one meeting added in the `Meetings` list
+   
+   2. Test case: `cancel 2` <br>
+      Expected: No meeting is cancelled and an error message is shown in the Result Display.
+   
+   3. Test case: `cancel 1` <br>
+      Expected: The meeting is cancelled and disappears from the `Meetings` list.
 
 ### 8.14 Saving data
 
