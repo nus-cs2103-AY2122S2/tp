@@ -32,8 +32,10 @@ create List
 AddressBook  -> List :  new ArrayList<Candidate>(candidateList)
 activate List
 
-List  -> List : sort(sortComparator)
+List -> List : sort(sortComparator)
 activate List
+
+List --> List :
 deactivate List
 
 List --> AddressBook :
@@ -41,6 +43,8 @@ deactivate List
 
 AddressBook  -> AddressBook : setCandidates(candidatesCopy)
 activate AddressBook
+
+AddressBook --> AddressBook :
 deactivate AddressBook
 
 destroy List
