@@ -70,7 +70,7 @@ Step 1. Ensure you have Java 11 or above installed in your Computer. <br>
 
 1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
 
-   &nbsp;&nbsp;1. To check your java version:<br>
+   To check your java version:<br>
    &nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
    &nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
 
@@ -80,9 +80,9 @@ Step 1. Ensure you have Java 11 or above installed in your Computer. <br>
 
 </div>
 
-Step 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
-Step 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
-Step 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
+Step 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).<br>
+Step 3. Copy the file to the folder you want to use as the home folder for your Tracey application.<br>
+Step 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.<br>
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
 <div markdown="span" class="alert alert-info">
