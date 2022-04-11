@@ -9,8 +9,6 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-What are CLIs? What are GUIs?
-
 ##  Brief Introduction
 
 What are CLIs? What are GUIs?
@@ -411,33 +409,25 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 </div>
 
 ### 3.11. Summarising the records
-The above figure illustrates the important interactions of `EditCommand` when the user successfully edit the `name` attribute of the student at index 1 to Poppy.
-
-When a user inputs an `EditCommand`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser`, `EditCommandParser` and `ParserUtil` to check the validity of the input index, prefixes and parameters. If the input is valid, a `EditPersonDescriptor` object is instantiated and this object is subsequently used as a parameter to instantiate an `EditCommand` object.
-The `EditCommand` object is then passed back to the `LogicManager` which will then invoked `EditCommand#execute()`. This execute method will call two other helper methods `EditCommand#editChecker()` and `Person#isDifferentPerson()`, which both are not shown in the sequence diagram and is used further validation.
-The main functions of these two methods are to check if the new values are duplicate of the corresponding fields to be edited and if the new values for fields that requires uniqueness already exists in the address book respectively.
-The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
-
-TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
-
 Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
+
 * You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
 * You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+* `summarise` will summarise the records of everyone in Tracey. The results are a graphical analysis of the `Covid Status` of the individuals in each block (refer to *Figure 13a*). Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to *Figure 13b*).
 
 <img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
-*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.* 
+*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.*
 
 <img src ='images/SummariseExample2.png' alt='SummariseExample2' width="400"/> 
 
 *Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 13a and 13b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 13a* and *Figure 13b*, when the user inputs the `Summarise` command, the results display charts of the student population categorised by `Covid Status`. These charts are separated into the students' `Block` and their `Faculty`.
 
 ### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
@@ -478,7 +468,7 @@ Examples of usage:
    * Features for naming the archived file using the CLI will be available in later releases.
   
    * To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
-  
+
 </div>
 
 ### 3.13. Resizing the result display window
@@ -608,17 +598,17 @@ there are changes to Tracey.
 
 *Table 6: Specific terminology used.*
 
-| Term                                | Meaning                                                                                                                                                                                                                                                                                             |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                    |
-| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                                                               |
-| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                    |
-| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                      |
-| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                   |
-| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                    |
-| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                       |
-| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                 |
-| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                 |
-| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                              |
-| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                                                    |
+| Term                                | Meaning                                                                                                                                                                                                                                                             |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                    |
+| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                               |
+| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                    |
+| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                      |
+| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                   |
+| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                    |
+| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                       |
+| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                 |
+| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 4.                          |
+| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
+| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                              |
+| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                    |
