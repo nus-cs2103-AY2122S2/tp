@@ -17,7 +17,10 @@ ModelManager -> ReversibleIBook : reversibleAddItem(p, i)
 activate ReversibleIBook
 
 ReversibleIBook -> StateChangeRecorder : recordAction()
+activate StateChangeRecorder
+
 StateChangeRecorder --> ReversibleIBook
+deactivate StateChangeRecorder
 
 ReversibleIBook -> ReversibleIBook : addItem(p, i)
 activate ReversibleIBook
@@ -26,7 +29,10 @@ ReversibleIBook -> Product : addItem(i)
 activate Product
 
 Product -> UniqueItemList : add(i)
+activate UniqueItemList
+
 UniqueItemList --> Product
+deactivate UniqueItemList
 
 Product --> ReversibleIBook
 deactivate Product
