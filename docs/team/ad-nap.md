@@ -34,8 +34,8 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ad-nap&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
 * **Project management**:
-    * Managed releases `v1.1` - `v1.4` (total of 5 milestones) on GitHub.
-    * Refactored all references to AddressBook to HustleBook in Developer Guide.
+    * Manage project milestones (v1.1 to v1.4, 5 milestones) in GitHub.
+    * Maintain consistency of HustleBook references in Developer Guide and User Guide.
     * Maintained the issue tracker and adhere to it.
     * Managed project meetings and meeting documents.
 
