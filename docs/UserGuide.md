@@ -423,6 +423,7 @@ Examples:
 * `export -p` will export all positions to the corresponding csv file.
 * `list -a f/name a/Betsy` then `export -a` will export csv all applicants named Betsy to the corresponding csv file.
 
+**Notice**: The location of export files may different for Mac user.
 ## Clearing Data : `clear`
 
 Clears all data in HireLah, including all `applicants`, `positions`, and `interviews`. 

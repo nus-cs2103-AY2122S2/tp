@@ -29,10 +29,10 @@ import seedu.address.model.position.Position;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String EXPORT_CSV_FOLDER = "export_csv\\";
-    private static final String APPLICANT_CSV_FILE = EXPORT_CSV_FOLDER + "applicant.csv";
-    private static final String INTERVIEW_CSV_FILE = EXPORT_CSV_FOLDER + "interview.csv";
-    private static final String POSITION_CSV_FILE = EXPORT_CSV_FOLDER + "position.csv";
+    private static final String EXPORT_CSV_FOLDER = "export_csv";
+    private static final String APPLICANT_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "applicant.csv";
+    private static final String INTERVIEW_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "interview.csv";
+    private static final String POSITION_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "position.csv";
     private static final String APPLICANT_CSV_HEADER = "Name,Phone,Email,Age,Address,Gender,Hire status,Tags";
     private static final String INTERVIEW_CSV_HEADER = "Date,Interview Status,Name,Phone,Email,Age,Address,"
             + "Gender,Hire status,Tags,Position,Description,Number of openings,Number of offers,Requirements";
