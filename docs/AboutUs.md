@@ -54,5 +54,5 @@ I'm always looking for ways to improve my skills and widen my knowledge.
 [[portofolio](./team/mradhyaf.md)]
 
 * Role: Developer
-* Responsibilities: TBD
+* Responsibilities: UI
 
