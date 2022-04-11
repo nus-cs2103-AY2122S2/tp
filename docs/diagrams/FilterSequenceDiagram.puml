@@ -1,7 +1,11 @@
 @startuml
 !include style.puml
 
-box Logic LOGIC_COLOR_T1
+skinparam participantFontSize 25
+skinparam ArrowFontSize 30
+skinparam headerFontSize 30
+
+box LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":HireLahParser" as HireLahParser LOGIC_COLOR
 participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
@@ -9,9 +13,6 @@ participant ":ListApplicantCommandParser" as ListApplicantCommandParser LOGIC_CO
 participant "L:ListApplicantCommand" as ListApplicantCommand LOGIC_COLOR
 participant "P:ApplicantNamePredicate" as ApplicantNamePredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-end box
-
-box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 

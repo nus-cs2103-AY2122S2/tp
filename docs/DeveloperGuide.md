@@ -522,7 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br/><br/>
   Use case ends.
 
-**Use case 04: Viewing help**
+#### **Use case 04: Viewing help**
 
 **MSS**
 1. User requests to view help
@@ -530,7 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Use case ends.
 
-**Use case 05: Viewing detail help for a specific command**
+#### **Use case 05: Viewing detail help for a specific command**
 
 **MSS**
 1. User <u>open the list of commands and general description (UC4).</u>
@@ -540,8 +540,8 @@ Use case ends.
 5. HireLah closes the box.
 
 Use case ends.
-#### **Use case 06: Filtering data**
 
+#### **Use case 06: Filtering data**
 
 **MSS**
 1. User requests to list data with filter applied.
