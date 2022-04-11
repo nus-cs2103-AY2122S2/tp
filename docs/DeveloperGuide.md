@@ -40,7 +40,7 @@ may be working on.
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -183,7 +183,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
