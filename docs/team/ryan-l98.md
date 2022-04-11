@@ -23,7 +23,7 @@ to see the code contributions I have made.
 
 #### Features and enhancments implemented
 
-1. **Assign/Unassign command** 
+**Assign/Unassign command** 
 
    * Assign command pull request [#74](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/74)
    * Unassign command pull request [#135](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/135) 
@@ -32,7 +32,7 @@ to see the code contributions I have made.
      * Allows users to see a list of `enrolledStudents` in the details of a `lesson`
      * Allows users to see a list of `enrolledLessons` in the details of a `student`
 
-2. **Implement `RecurringLesson` model(Pull request [#82](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/82))**
+**Implement `RecurringLesson` model(Pull request [#82](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/82))**
 
    * What it does:
        * Extended from the `Lesson` model, `RecurringLesson` models lessons that happen weekly,
@@ -43,13 +43,14 @@ to see the code contributions I have made.
          and `lesson#isConflictingWithLesson()` to ensure that the correct date is retrieved and the correct date
          is used when compared with another `Lesson`.
 
-3. **Implement `editlesson` command (Pull request [#151](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/151))**
+**Implement `editlesson` command (Pull request [#151](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/151))**
 
    * What it does:
      * Allows users to edit details of lessons.
 
+<div style="page-break-after: always;"></div>
 
-4. **Implement `Student` and `Lesson` tab (Pull request [#68)](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68)**
+**Implement `Student` and `Lesson` tab (Pull request [#68)](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68)**
     
    * What it does:
      * splits the list of students and lessons into their respective tabs
@@ -59,7 +60,7 @@ to see the code contributions I have made.
      two panels for students and lessons, our team decided the GUI would look much better by splitting the two lists into
      tabs.
 
-5. **Implement `liststudents` and `listlessons` command (Pull request [#68)](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68)**
+**Implement `liststudents` and `listlessons` command (Pull request [#68)](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68)**
 
    * What it does:
      * Displays the list of students/lessons.
