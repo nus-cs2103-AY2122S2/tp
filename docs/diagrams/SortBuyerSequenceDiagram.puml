@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortBuyerCommandParser" as SortBuyerCommandParser LOGIC_COLOR
+participant ":SortBuyerCommand" as SortBuyerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":BuyerAddressBook" as BuyerAddressBook MODEL_COLOR
+participant ":UniqueBuyerList" as UniqueBuyerList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort-b by/time o/asc")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sort-b by/time o/asc")
+activate AddressBookParser
+
+create SortBuyerCommandParser
+AddressBookParser -> SortBuyerCommandParser
+activate SortBuyerCommandParser
+
+SortBuyerCommandParser --> AddressBookParser
+deactivate SortBuyerCommandParser
+
+AddressBookParser -> SortBuyerCommandParser : parse("by/time o/asc")
+activate SortBuyerCommandParser
+
+create SortBuyerCommand
+SortBuyerCommandParser -> SortBuyerCommand
+activate SortBuyerCommand
+
+SortBuyerCommand --> SortBuyerCommandParser
+deactivate SortBuyerCommand
+
+SortBuyerCommandParser --> AddressBookParser
+deactivate SortBuyerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortBuyerCommandParser -[hidden]-> AddressBookParser
+destroy SortBuyerCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> SortBuyerCommand : execute(model)
+activate SortBuyerCommand
+
+SortBuyerCommand -> Model : sortFilteredBuyerList(comparedItem, order)
+activate Model
+
+Model -> BuyerAddressBook : sortFilteredBuyerList(comparedItem, order)
+activate BuyerAddressBook
+
+BuyerAddressBook -> UniqueBuyerList : sortBuyers(comparedItem, order)
+activate UniqueBuyerList
+
+UniqueBuyerList --> BuyerAddressBook
+deactivate UniqueBuyerList
+
+BuyerAddressBook --> Model
+deactivate BuyerAddressBook
+
+Model --> SortBuyerCommand
+deactivate Model
+
+
+
+create CommandResult
+SortBuyerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortBuyerCommand
+deactivate CommandResult
+
+SortBuyerCommand --> LogicManager : result
+deactivate SortBuyerCommand
+
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

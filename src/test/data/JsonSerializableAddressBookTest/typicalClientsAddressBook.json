@@ -1,0 +1,67 @@
+{
+  "_comment": "AddressBook save file which contains the same client values as in Typicalclients#getTypicalAddressBook()",
+  "clients" : [ {
+    "name" : "Alice Pauline",
+    "description": "A desc",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "remark": "Alice remark",
+    "appointment": "",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "description": "B desc",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "remark": "Benson remark",
+    "appointment": "",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "description": "C desc",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "remark": "Carl remark",
+    "appointment": "",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "description": "D desc",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "remark": "Daniel remark",
+    "appointment": "",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "description": "E desc",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "remark": "Elle remark",
+    "appointment": "",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "description": "F desc",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "remark": "Fiona remark",
+    "appointment": "",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "description": "G desc",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "remark": "George remark",
+    "appointment": "",
+    "tagged" : [ ]
+  } ]
+}

@@ -7,8 +7,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+//import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerAddressBook;
+import seedu.address.model.ReadOnlySellerAddressBook;
+import seedu.address.model.buyer.Buyer;
+//import seedu.address.model.client.Client;
+import seedu.address.model.seller.Seller;
 
 /**
  * API of the Logic component
@@ -24,19 +28,34 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the SellerAddressBook.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getSellerAddressBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlySellerAddressBook getSellerAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of sellers */
+    ObservableList<Seller> getFilteredSellerList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' seller address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getSellerAddressBookFilePath();
+
+    /**
+     * Returns the BuyerAddressBook.
+     *
+     * @see seedu.address.model.Model#getBuyerAddressBook()
+     */
+    ReadOnlyBuyerAddressBook getBuyerAddressBook();
+
+    /** Returns an unmodifiable view of the filtered list of buyers */
+    ObservableList<Buyer> getFilteredBuyerList();
+
+    /**
+     * Returns the user prefs' buyers address book file path.
+     */
+    Path getBuyerAddressBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

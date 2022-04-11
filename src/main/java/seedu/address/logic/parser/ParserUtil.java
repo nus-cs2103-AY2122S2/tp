@@ -9,10 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Appointment;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.property.Address;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.PriceRange;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,7 +69,40 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String appointment} into an {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (trimmedAppointment.equals("reset")) {
+            return new Appointment("");
+        } else if (appointment.equals("") || !Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        } else {
+            return new Appointment(trimmedAppointment);
+        }
+    }
+
+    /**
+     * Parses a {@code String Location} into an {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String address} into a {@code address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
@@ -81,18 +117,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String priceRange} into an {@code PriceRange}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code appointment} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static PriceRange parsePriceRange(String priceRange) throws ParseException {
+        requireNonNull(priceRange);
+        String trimmedPriceRange = priceRange.trim();
+        if (!PriceRange.isValidPriceRange(trimmedPriceRange)) {
+            throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new PriceRange(trimmedPriceRange);
+    }
+
+    /**
+     * Parses a {@code String houseType} into an {@code HouseType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code houseType} is invalid.
+     */
+    public static HouseType parseHouseType(String houseType) throws ParseException {
+        requireNonNull(houseType);
+        String trimmedHouseType = houseType.trim();
+        if (!HouseType.isValidHouseType(trimmedHouseType)) {
+            throw new ParseException(HouseType.MESSAGE_CONSTRAINTS);
+        }
+        return HouseType.getHouseType(houseType);
     }
 
     /**
