@@ -142,8 +142,6 @@ The `Model` component,
     <img src="images/BetterModelClassDiagram.png" width="700" />
 </p>
 
-</div>
-
 
 ### Storage component
 
@@ -212,7 +210,7 @@ The proposed charge mechanism is facilitated by `ChargeCommand` class. It extend
 
 Given below is an example usage scenario and how the charge mechanism behaves at each step.
 
-The user executes command `charge 1 /m03-2022 c/200` to compute total amount chargeable to the pet at index 1 in March 2022 where each day costs $200. The `charge` command is parsed by `ChargeCommandParser` which then sends the pet index, month-year and daily charge to create a new `ChargeCommand` instance.
+The user executes command `charge 1 m/04-2022 c/200` to compute total amount chargeable to the pet at index 1 in April 2022 where each day costs $200. The `charge` command is parsed by `ChargeCommandParser` which then sends the pet index, month-year and daily charge to create a new `ChargeCommand` instance.
 
 The following sequence diagram shows how the charge operation works:
 
@@ -490,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | pet daycare owner | track when pets require pickup or drop-off                      | schedule the school bus for each day                               |
 | `* * *`  | pet daycare owner | track the different food preferences required by different pets | make sure the pets are served the right foods                      |
 | `* * *`  | pet daycare owner | track the attendance of pets                                    | charge pet owners the correct amount depending on pet's attendance |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                               | I have a consolidated information sheet                            |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                               | have a consolidated information sheet                              |
 | `* * *`  | pet daycare owner | retrieve the pets addresses                                     | inform the school bus driver correctly                             |
 | `* * *`  | pet daycare owner | find pets by their INDEX                                        | retrieve the pet information accordingly                           |
 | `* * *`  | pet daycare owner | delete pet's information from the system                        | information of pets that are in the system will be up to date      |
@@ -500,16 +498,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | pet daycare owner | order pets chronologically by there name                        | easily search for their name in the system                         |
 | `* *`    | pet daycare owner | order pets' appointments chronologically                        | know what is the next appointment I should take note of            |
 | `*`      | pet daycare owner | track the vet appointments of pets                              | make sure pets do not miss their medical appointments              |
-| `*`      | pet daycare owner | track the medicine that pets need to take                       | i can feed them medicine appropriately                             |
-| `*`      | pet daycare owner | change the attendance of pets anytime I want                    | I can allow for last minute scheduling                             |
-| `*`      | pet daycare owner | update pet's information                                        |                                                                    |
-| `*`      | pet daycare owner | update pet owner's information                                  |                                                                    |
+| `*`      | pet daycare owner | track the medicine that pets need to take                       | feed them medicine appropriately                                   |
+| `*`      | pet daycare owner | change the attendance of pets anytime I want                    | allow for last minute scheduling                                   |
+| `*`      | pet daycare owner | update pet's information                                        | keep pets' information up to date                                  |
+| `*`      | pet daycare owner | update pet owner's information                                  | keep pets' information up to date                                  |
 | `*`      | pet daycare owner | access the previous attendance of pets                          | update owners if they were to enquire                              |
 | `*`      | pet daycare owner | find the number of pets present in the daycare fo each day      | arrange the necessary manpower                                     |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `WoofAreYou` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `WoofAreYou` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a pet**
 
