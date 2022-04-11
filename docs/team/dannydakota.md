@@ -25,45 +25,41 @@ Given below are my contributions to the project.
     * Set up team project website.
 
 * **Enhancements to existing features**:
-    * Added new attribute for the student (Block).  [\#62]()
-    * Update existing commands to cater for new attributes. [\#44]()
-    * Initially updated HelpWindow by adding the list of possible commands, their respective formats and examples for the User to refer easily. [\#46]()
-    * Further updated the UI of the HelpWindow by constraining its size [\#226]()
-    * Wrote additional test cases for the Person package. Inclusive of test for the new Block, CovidStatus, Email, Matriculation Number and Faculty test cases. These test cases allows Faculty.java, MatriculationNumber.java, Block.java and CovidStatus.java to achieve >=80% method coverage and >=90% line coverage. [\#75]()
-    * Wrote additional test cases for CommandResultTest class to allow for 100% method coverage for CommandResult .[\#137]()
-    * Added the ability for the user to access the User Guide directly from the Help Window. [\#118]()
-    * Increased sample data size to provide a more comprehensive view of our features for testers. [\#131]()
+    * Added new attribute for the student (Block).  [\#62](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/62)
+    * Update existing commands to cater for new attributes. [\#44](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/44)
+    * Initially updated HelpWindow by adding the list of possible commands, their respective formats and examples for the User to refer easily. [\#46](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/46)
+    * Further updated the UI of the HelpWindow by constraining its size. [\#226](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/226)
+    * Wrote additional test cases for the Person package. Inclusive of test for the new Block, CovidStatus, Email, Matriculation Number and Faculty test cases. These test cases allows Faculty.java, MatriculationNumber.java, Block.java and CovidStatus.java to achieve >=80% method coverage and >=90% line coverage. [\#75](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/75)
+    * Wrote additional test cases for CommandResultTest class to allow for 100% method coverage for CommandResult.[\#137](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/137)
+    * Added the ability for the user to access the User Guide directly from the Help Window. [\#118](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/118)
+    * Increased sample data size to provide a more comprehensive view of our features for testers. [\#131](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/131)
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `help`, `email` [\#96]()
-        * Added comparison between CLI and GUI in application introduction [\#129]()
-        * Added a Navigation Guide for the User Guide [\#129]()
-        * Edited quickstart section to make it more comprehensive for users [\#129]()
-        * Edited the application information of Tracey [\#96]()
-        * Added screenshots for features `find`, `summarise` and a general application Ui screenshot. [\#115](), [\#129]()
+        * Added documentation for the features `help`, `email`. [\#96](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/96)
+        * Added comparison between CLI and GUI in application introduction. [\#129](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/129)
+        * Added a Navigation Guide for the User Guide. [\#129](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/129)
+        * Edited quickstart section to make it more comprehensive for users. [\#129](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/129)
+        * Edited the application information of Tracey. [\#96](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/96)
+        * Added screenshots for features `find`, `summarise` and a general application Ui screenshot. [\#115](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/115), [\#129](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/129)
         * Added tables for Correct and Incorrect usages in `add` and
-        * Fixed tables in GFMD for Command Summary, Glossary and List of Pre-defined constants. [\#115](), [\#143]()
-        * Update table and figure numbering [\#143]()
-        * Format User Guide to eliminate grammatical and spelling errors [\#143]()
+        * Fixed tables in GFMD for Command Summary, Glossary and List of Pre-defined constants. [\#115](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/115), [\#143](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/143)
+        * Update table and figure numbering. [\#143](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/143)
+        * Format User Guide to eliminate grammatical and spelling errors. [\#143](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/143)
     * Developer Guide:
-        * Added implementation details of the `Add` feature [\#89]()
-        * Edited the sequence diagram for Add feature [\#89]() 
-        * Add Activity diagram for Add feature [\#89]()
-        * Added class diagrams for Add and Clear Feature [\#268]()
-        * Added implementation details for Email Feature [\#265]()
-        * Added Class, Activity, Sequence diagrams for Email Feature [\#265]() 
-        * Added Class, Activity, Sequence diagrams for Help Feature [\#276]()
-        * Added Class, Activity, Sequence diagrams for Delete Feature [\#296]()
-        * Added Class, Activity, Sequence diagrams for Exit Feature [\#296]()
+        * Added implementation details of the `Add` feature. [\#89](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/89)
+        * Edited the sequence diagram for Add feature. [\#89](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/89) 
+        * Added Activity diagram for Add feature. [\#89](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/89)
+        * Added class diagrams for Add and Clear Feature. [\#268](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/268)
+        * Added implementation details for Email Feature. [\#265](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/265)
+        * Added Class, Activity, Sequence diagrams for Email Feature. [\#265](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/265) 
+        * Added Class, Activity, Sequence diagrams for Help Feature. [\#276](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/276)
+        * Added Class, Activity, Sequence diagrams for Delete Feature. [\#296](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/296)
+        * Added Class, Activity, Sequence diagrams for Exit Feature. [\#296](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/296)
+        * Added manual testing guidelines in the DG. [\#296](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/296])
+        * Developer Guide formatting. [\#308](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/308), 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235](), [\#273]()
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3](), [4](), [5](), [6](), [7](), [8](), [9](), [10](), [11]())
-
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * PRs reviewed (with non-trivial review comments): [\#33](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/33), [\#47](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/47), [\#50](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/50), [\#57](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/57), [\#74](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/74), [\#84](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/84), [\#112](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/112), [\#122](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/122), [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128), [\#235](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/235), [\#242](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/242), [\#273](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/273), [\#266](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/266), [\#273](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/273), [\#274](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/274), [\#275](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/273), [\#277](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/277), [\#299](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/299)
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/DannyDakota/ped/issues/1), [2](https://github.com/DannyDakota/ped/issues/2), [3](https://github.com/DannyDakota/ped/issues/3), [4](https://github.com/DannyDakota/ped/issues/4), [5](https://github.com/DannyDakota/ped/issues/5), [6](https://github.com/DannyDakota/ped/issues/6), [7](https://github.com/DannyDakota/ped/issues/7), [8](https://github.com/DannyDakota/ped/issues/8), [9](https://github.com/DannyDakota/ped/issues/9), [10](https://github.com/DannyDakota/ped/issues/10), [11](https://github.com/DannyDakota/ped/issues/11))
+    
