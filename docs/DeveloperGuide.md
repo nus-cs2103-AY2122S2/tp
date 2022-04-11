@@ -36,7 +36,7 @@ Refer to TAPA's [Quick Start Guide](https://ay2122s2-cs2103t-w09-4.github.io/tp/
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-4/tp/tree/master/docs/diagrams) folder.
 </div>
 
 ### Architecture
@@ -1961,5 +1961,3 @@ testers are expected to do more *exploratory* testing.
     2. Delete `addressbook.json`.
     3. Restart the application.
     Expected: A new data file will be created, and TAPA will populate it with sample data entries. This list of sample entries will be displayed to the user as well.
-
-*{More to be added}*

@@ -24,7 +24,6 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/benjykoh.md)]
 
 * Role: Developer
-* Responsibilities: Undecided
 
 ### Jet Tan
 
@@ -34,7 +33,6 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/medajet.md)]
 
 * Role: Developer
-* Responsibilities: Undecided
 
 ### Saravanan Anuja Harish
 
