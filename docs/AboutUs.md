@@ -15,6 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/brelkh.md)]
 
 * Role: Developer
+* Responsibilities: In charge of Model component
 
 ### Benjamin Koh Wei Jie
 
@@ -24,7 +25,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/benjykoh.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Testing, Integration
+* Responsibilities: Git expert
 
 ### Jet Tan
 
@@ -34,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/medajet.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Testing, Integration
+* Responsibilities: Testing
 
 ### Saravanan Anuja Harish
 
@@ -44,7 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/harish-coding.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Testing, Integration
+* Responsibilities: Documentation
 
 ### Terng Yan Long
 
@@ -54,4 +55,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/korochii.md)]
 
 * Roles: Team Lead, Developer
-* Responsibilities: Documentation, Testing, Integration
+* Responsibilities: Integration
