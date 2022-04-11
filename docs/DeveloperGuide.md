@@ -351,6 +351,9 @@ To support different sorting for different data types, each type of data sort is
 For example, for applicants, we will sort by their name, hence, there is a ApplicantNameComparator in the Model component 
 under applicant. The comparator implements Java's Comparator<Applicant> interface.
 
+The *Sequence Diagram* below illustrates the interactions within the classes for the execution of `list -a s/asc` command.
+
+<img src="images/SortSequenceDiagram.png">
 
 #### Design considerations:
 
@@ -369,7 +372,31 @@ under applicant. The comparator implements Java's Comparator<Applicant> interfac
     * Cons: 
       * Increased the complexity of the relevant code, as we need to double passing, which make it more bug-prone.
       * `UI` won't able to display the new filtered lists, and need to connect again to `UI` components.
-    
+
+### Exporting of Data
+
+#### Implementation
+
+Exporting of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
+There are 2 levels to the parsing of the add command from user input.
+1. `AddressBookParser` identifies it as an `export` command.
+2. `ExportCsvCommandParser` identifies the exact data type that need to be exported, through the `flag` of the user input
+, and returns the respective `ExportXYZCsvCommand`.
+
+#### Design considerations:
+
+#### Aspect: What export format should be used:
+
+* **Alternative 1 (current choice):** Export to CSV file
+    * Pros: 
+      * Versatile since CSV file can be used by non-technical user.
+      * Suitable for manipulating `Applicant`, `Interview` and `Position` data.
+    * Cons: Requires additional method to transform `Model` into CSV output
+
+* **Alternative 2:** Export to individual Json file 
+    * Pros: Able to reuse code as Json already implemented by `Storage`
+    * Cons: Not versatile as required non-user to have knowledge about Json. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -500,15 +527,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to view help
 2. HireLah shows a list of commands and its briefly description
-3. User chooses to close the help box
-4. HireLah closes the help box
 
 Use case ends.
 
 **Use case 05: Viewing detail help for a specific command**
 
 **MSS**
-1. User <u>open the list of commands and general description (UC4).<u>
+1. User <u>open the list of commands and general description (UC4).</u>
 2. User chooses a specific command and view its detail description.
 3. HireLah displays the detail description of that command
 4. User chooses to close the box.
