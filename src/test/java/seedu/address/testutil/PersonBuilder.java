@@ -53,7 +53,14 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         telegramHandle = personToCopy.getTelegramHandle();
         email = personToCopy.getEmail();
-        taskList = personToCopy.getTaskList();
+        taskList = new TaskList();
+        for (Task task : personToCopy.getTaskList().getTaskList()) {
+            Task copyOfTask = new Task(task.getTaskName());
+            if (task.isTaskComplete()) {
+                copyOfTask.markComplete();
+            }
+            taskList.addTask(copyOfTask);
+        }
     }
 
     /**

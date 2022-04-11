@@ -163,17 +163,18 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_deleteTaskByModuleCodeAndTask_success() {
-
+        
         // Creates new Person with same Module Code as Alice, but does was not assigned the task: Cry
         Person andy = new PersonBuilder(ANDY).build();
 
-        // Creates a copy of andy, which will be assigned the task: Cry
+        // Creates a copy of andy
         Person andyCopy = new PersonBuilder(ANDY).build();
 
         Person alice = new PersonBuilder(ALICE).build();
         alice.addTask(taskToDelete);
 
         Person expectedAliceCopy = new PersonBuilder(ALICE).build();
+        expectedAliceCopy.addTask(taskToDelete);
 
         AddressBook andyAndAmyAb = new AddressBookBuilder().withPerson(andy).withPerson(alice).build();
         AddressBook andyAndAmyAbCopy = new AddressBookBuilder().withPerson(andyCopy).withPerson(expectedAliceCopy)
@@ -181,13 +182,13 @@ public class DeleteTaskCommandTest {
 
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
-        model.deleteTaskForAllInModule(moduleCodeAlice, new Task("Cry"));
+        expectedModel.deleteTaskForAllInModule(moduleCodeAlice, new Task("Cry"));
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(moduleCodeAlice, taskToDelete);
 
         String expectedMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, moduleCodeAlice);
 
-        assertCommandSuccess(deleteTaskCommand, expectedModel, expectedMessage, model);
+        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
     }
 
 
