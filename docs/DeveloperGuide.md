@@ -324,6 +324,10 @@ passed search type parameter is `unarchived`, `archived`, or `all`, the executio
 predicate on it depending on the search type.
 6. The `CommandResult` of the `find` command is returned.
 
+A simplified sequence diagram of the archive command is shown below.
+
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
