@@ -34,6 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/medajet.md)]
 
 * Role: Developer
+* Responsibilities: Documentation, Testing, Integration
 
 ### Saravanan Anuja Harish
 
