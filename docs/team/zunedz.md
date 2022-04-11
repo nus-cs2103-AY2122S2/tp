@@ -68,7 +68,7 @@ Given below are my contributions to the project.
         * Added documentation for the `findTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
         * Added documentation for the `pay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
         * Added documentation for the `unpay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
-          
+           
     * Developer Guide:
         * Added implementation details for the `addTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250)
         * Added implementation details for the `deleteTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
