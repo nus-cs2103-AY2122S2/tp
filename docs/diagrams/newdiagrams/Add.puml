@@ -1,47 +1,77 @@
 @startuml
-!include Style.puml
+!include style.puml
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model
-participant ":Model" as Model LOGIC_COLOR_T4
-participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "l:Lineup" as Lineup MODEL_COLOR
 end box
 
-[-> LogicManager : execute(add)
+[-> LogicManager : execute("add L/ n/LINEUP_NAME")
 activate LogicManager
 
-LogicManager -> AddCommandParser : parseCommand(add)
+LogicManager -> AddressBookParser : parseCommand("add L/ n/LINEUP_NAME")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
 activate AddCommandParser
 
-create AddCommand
-AddCommandParser -> AddCommand
-activate AddCommand
-
-AddCommand --> AddCommandParser
-deactivate AddCommand
-
-AddCommandParser --> LogicManager : a
+AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-LogicManager -> AddCommand : execute(model)
+AddressBookParser -> AddCommandParser : parse("L/ n/LINEUP_NAME")
+activate AddCommandParser
+
+create Lineup
+AddCommandParser -> Lineup : Lineup(LINEUP_NAME)
+activate Lineup
+
+Lineup --> AddCommandParser : l
+deactivate Lineup
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(l)
 activate AddCommand
 
-AddCommand -> Model : addLineup()
+AddCommand --> AddCommandParser : a
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : a
+deactivate AddCommandParser
+
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addLineup(l)
 activate Model
-
-Model -> AddressBook : addLineup()
-activate AddressBook
-
-AddressBook --> Model
-deactivate AddressBook
 
 Model --> AddCommand
 deactivate Model
 
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand :result
+deactivate CommandResult
+
 AddCommand --> LogicManager : result
 deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml

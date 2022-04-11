@@ -1,47 +1,81 @@
 @startuml
-!include Style.puml
+!include style.puml
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EditressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model
-participant ":Model" as Model LOGIC_COLOR_T4
-participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(edit)
+[-> LogicManager : execute("Edit L/LINEUP_NAME n/NEW_LINEUP_NAME")
 activate LogicManager
 
-LogicManager -> EditCommandParser : parseCommand(edit)
+LogicManager -> AddressBookParser : parseCommand("Edit L/LINEUP_NAME n/NEW_LINEUP_NAME")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("L/LINEUP_NAME n/NEW_LINEUP_NAME")
 activate EditCommandParser
 
 create EditCommand
 EditCommandParser -> EditCommand
 activate EditCommand
 
-EditCommand --> EditCommandParser
+EditCommand --> EditCommandParser : e
 deactivate EditCommand
 
-EditCommandParser --> LogicManager : e
+EditCommandParser --> AddressBookParser : e
 deactivate EditCommandParser
 
-LogicManager -> EditCommand : execute(model)
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditCommand : execute()
 activate EditCommand
 
-EditCommand -> Model : editLineup()
+EditCommand -> Model : getLineup(LINEUP_NAME)
 activate Model
 
-Model -> AddressBook : editLineup()
-activate AddressBook
+Model --> EditCommand : lineup
+deactivate Model
 
-AddressBook --> Model
-deactivate AddressBook
+EditCommand -> EditCommand : createEditedLineup(lineup, NEW_LINEUP_NAME)
+activate EditCommand
+
+EditCommand --> EditCommand : newLineup
+deactivate EditCommand
+
+EditCommand -> Model : setLineup(lineup, newLineup)
+activate Model
 
 Model --> EditCommand
 deactivate Model
 
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand :result
+deactivate CommandResult
+
 EditCommand --> LogicManager : result
 deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml
