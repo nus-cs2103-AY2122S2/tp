@@ -37,12 +37,12 @@ Given below are my contributions to the project.
       * Morph AddressBook to ShowList.
       * Morph UniquePersonList to UniqueShowList.
       * Modified ReadOnlyUserPrefs to fit Trackermon.
-      * Morphed DuplicatedPersonException ShowNotFoundException.
+      * Morphed DuplicatedPersonException and ShowNotFoundException.
     * Issues:[[\#54]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/54)
     * PRs:[[\#60]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60)
   * Morph and implement Remark feature into the Comment feature for Trackermon
     * Details: Morph Remark to Comment Class.
-    * PRs:[[\#102]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102)
+    * PRs:[[\#133]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/133)
 
 * **Project management**:
   * Managed issues relating to Model's components, etc. 
@@ -52,14 +52,14 @@ Given below are my contributions to the project.
     * Tag Bug: [[/#264]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/264)
     * Add Error Message Bug: [[/#262]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/262)
     * Suggest Bug: [[/#260]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/260)
-    * Comment Bug: [[/#310]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/310)
+    * Comment Bug: [[/#305]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/305)
 * **Documentation**:
   * User Guide: 
     * Added documentation for features `suggest` [[\#194]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194).
   * Developer Guide:
-    * Updated ModelClassDiagram to fit Trackermon [[\#91]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/91).
+    * Updated ModelClassDiagram to fit Trackermon [[\#100]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/100).
     * Updated BetterModelClassDiagram to fit Trackermon [[#100]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/100).
-    * Added implementation details of the Status feature [[\#60]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60).
+    * Added implementation details of the Status feature [[\#183]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/183).
     * Added implementation details of the Suggest feature [[\#194]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194).
 
 * **Team**:
@@ -70,6 +70,6 @@ Given below are my contributions to the project.
   * PRs reviewed (with non-trival review comments): [[\#166]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166#discussion_r835801455),
   [[\#176]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/176#discussion_r835937502),
   [[\#108]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/108#discussion_r828101674)
-  * Contributed to issue discussion: [[\#63]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63), [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283), [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283)
+  * Contributed to issue discussion: [[\#63]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63), [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283)
   * Reported bugs and suggestions:  [[\#283]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/283), [[\#314]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/314)
 
