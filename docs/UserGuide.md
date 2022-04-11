@@ -11,14 +11,17 @@ title: uMessage User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
+2. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.3.1)
 
-1. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.3.1)
+3. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
 
-1. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. It has been annotated to show the key regions in the application. Note how the app contains some sample data.<br>
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+<img src="images/ContactsBreakdown.png">
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+This image is specific to MacOS, note that the `exit`,`minimize` and ` expand` will look different on a different OS.
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * Type any keywords, and uMessage will live search the list.
@@ -33,7 +36,7 @@ title: uMessage User Guide
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -143,10 +146,14 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 **Format:** `view INDEX` or click the Contact/Meeting under the list.
 
+A Contact Detail card with the details of a contact will be shown to the user as shown below.
+
+<img src="images/view.png">
+
 **Examples:**
 
-> `view 2` </br>
->  clicking on the second contact does the same as above.
+> `view 1` </br>
+>  clicking on the first contact does the same as above.
 
 
 
@@ -210,7 +217,6 @@ Note that clicking the email and telegram fields will trigger a unique response.
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
 
-
 ## 6. Deleting: `delete`
 
 ### 6.1 Deleting a person
@@ -267,6 +273,12 @@ The meetings in the future are listed first with ascending starting time, follow
 
 There cannot be duplicated meetings. Two meetings are the same if both have the same title (case-sensitive) and same start time.
 
+Access the Meetings by clicking on the tab in the upper region of the application to access the page that looks like as shown below. 
+Note that the hyperlinks in the details are clickable and will redirect the user to the preferred browser.
+
+<img src="images/meeting.png">
+
+
 ## 1. Adding: `add`
 
 ### 1.1 Adding a meeting
@@ -274,7 +286,8 @@ There cannot be duplicated meetings. Two meetings are the same if both have the 
 **Format:** `add n/TITLE l/LINK s/START_TIME d/DURATION [t/TAG]…`
 
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
-DURATION is in minutes and must be an integer between 1 and 10000.
+DURATION is in minutes and must be an integer between 1 and 10000.</br>
+The meeting link must start with _https://_ or _http://_for it to be valid.
 
 **Examples:**
 
@@ -313,13 +326,14 @@ The order of the keywords does not matter. e.g. `2040 CS` will match `CS 2040`.
 > `find cs` does the same as above.
 
 
-
 ## 3. Editing details of a meeting: `edit`
 
 **Format:** `edit INDEX [n/TITLE] [l/LINK] [s/START_TIME] [d/DURATION] [t/TAG]…`
 
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
 DURATION is in minutes and must be an integer between 1 and 10000 (inclusive).
+
+Note that meetings in the past are not editable.
 
 **Examples:**
 
