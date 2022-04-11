@@ -29,7 +29,7 @@ public class TypicalPatients {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends").build();
-    public static final Patient BENSON = new PatientBuilder().withNric("F3918974L").withName("Benson Meier")
+    public static final Patient BENSON = new PatientBuilder().withNric("G1234568L").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
@@ -71,7 +71,7 @@ public class TypicalPatients {
     private TypicalPatients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code MedBook} with all the typical persons.
      */
     public static MedBook getTypicalMedBook() {
         MedBook ab = new MedBook();

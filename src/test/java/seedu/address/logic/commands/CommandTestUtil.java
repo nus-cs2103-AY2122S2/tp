@@ -118,10 +118,10 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the patient at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPatientAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());
 
         Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
@@ -129,6 +129,10 @@ public class CommandTestUtil {
         model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPatientList().size());
+    }
+
+    public static void showPrescriptionAtIndex(Model model, Index targetIndex) {
+        ass
     }
 
 }

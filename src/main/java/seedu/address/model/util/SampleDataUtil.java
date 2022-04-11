@@ -31,6 +31,10 @@ import seedu.address.model.medical.Weight;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.prescription.DrugName;
+import seedu.address.model.prescription.Instruction;
+import seedu.address.model.prescription.Prescription;
+import seedu.address.model.prescription.PrescriptionDate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.testresult.MedicalTest;
 import seedu.address.model.testresult.Result;
@@ -249,6 +253,25 @@ public class SampleDataUtil {
         };
     }
 
+    public static Prescription[] getSamplePrescriptions() {
+        return new Prescription[] {
+            new Prescription(new Nric("S1234567L"), new DrugName("Acetaminophen"),
+                    new PrescriptionDate("2020-04-01"), new Instruction("2 tablets per day")),
+            new Prescription(new Nric("S1234567L"), new DrugName("Adderall"),
+                    new PrescriptionDate("2020-05-06"), new Instruction("1 tablet per day")),
+            new Prescription(new Nric("S1234568L"), new DrugName("Acetaminophen"),
+                    new PrescriptionDate("2020-03-01"), new Instruction("2 tablets per day")),
+            new Prescription(new Nric("S1234569L"), new DrugName("Amlodipine"),
+                    new PrescriptionDate("2020-02-15"), new Instruction("2 tablets after meal everyday")),
+            new Prescription(new Nric("S1234560L"), new DrugName("Acetaminophen"),
+                    new PrescriptionDate("2020-04-01"), new Instruction("2 tablets per day")),
+            new Prescription(new Nric("S1234561L"), new DrugName("Ativan"),
+                    new PrescriptionDate("2020-01-01"), new Instruction("2 tablets per day")),
+            new Prescription(new Nric("S1234562L"), new DrugName("Atorvastatin"),
+                    new PrescriptionDate("2020-04-01"), new Instruction("2 tablets per day")),
+        };
+    }
+
     public static ReadOnlyMedBook getSampleMedBook() {
         MedBook sampleMedBook = new MedBook();
         for (Patient samplePatient : getSamplePatients()) {
@@ -265,6 +288,9 @@ public class SampleDataUtil {
         }
         for (Medical sampleMedical: getSampleMedicals()) {
             sampleMedBook.addMedical(sampleMedical);
+        }
+        for (Prescription samplePrescription: getSamplePrescriptions()) {
+            sampleMedBook.addPrescription(samplePrescription);
         }
         return sampleMedBook;
     }
