@@ -55,8 +55,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ": Adds a lineup to MyGM."
             + "\nParameters: "
             + PREFIX_LINEUP + " "
-            + PREFIX_NAME + "LINEUP NAME"
-            + "[" + PREFIX_PLAYER + "PLAYER]...\n"
+            + PREFIX_NAME + "LINEUP NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LINEUP + " "
             + PREFIX_NAME + "Starting 5";
