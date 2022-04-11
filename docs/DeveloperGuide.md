@@ -485,44 +485,64 @@ _{more aspects and alternatives to be added}_
 
 We are currently implementing a clear buyer list and clear seller list function.
 #### Syntax:
-- `clearb` - clears the buyer list
-- `clears` - clears the seller list
+- `clear-b` - clears the buyer list
+- `clear-s` - clears the seller list
+- `clear-all` - clears both lists
 
 #### Result:
 - specified list is cleared without affecting the other list
 
 #### Implementation of clear buyer and clear seller
-The contents of buyerlist or sellerlist in `BuyerAddressBook.java` or `SellerAddressBook.java` is cleared.
+The contents of the buyer list and/or the seller list in `model` is cleared.
+This is done by setting a new `BuyerAddressBook` and/or `SellerAddressBook` in our model.
 
 #### Why is it implemented this way
-The content of the uncleared list can be kept as such without reloading a fresh new book as seen in the AB3 command `clear`.
+The user has more options to selectively clear specified books in contrast to AB3 where the old `clear` command clears the entire addressbook without discretion.
 
 #### Alternatives
-A copy of the uncleared list is kept, next the content of the whole addressbook can be cleared by `clear`, followed by loading of the uncleared content.
+A copy of the uncleared list is kept, next the content of the whole addressbook can be cleared by using `clear-all`, followed by loading of the uncleared content.
 
 ### Find buyer/Find seller
 
 #### Syntax:
-- `findb /KEYWORD [MORE_KEYWORDS]`
-- `finds D/KEYWORD [MORE_KEYWORDS]`
+- `find-b DELIMITER/KEYWORD [MORE_KEYWORDS]`
+- `find-s DELIMITER/KEYWORD [MORE_KEYWORDS]`
 
 Examples:
-- `findb junhong junheng`
-- `finds hdb 5room`
+- `find-b n/junhong junheng` searches for buyers with junhong or junheng in their name
+- `find-s h/hdb 5room` searches for sellers whose house types has HDB and 5 room in their name (i.e. 5 room HDB).
 
 #### Result:
-returns a filtered list of sellers of buyers
+returns a filtered list of sellers or buyers
 
 #### Implementation of find buyer and find seller
-The finds and findb command calls `updateFilteredSellerList` of `model` and filters the list based on the keywords. The commands then calls `getFilteredSellerList` 
-in order to return the filtered list of sellers.
+
+The `find-s` and `find-b` command first goes through parsing by `FindBuyerCommandParser` or `FindSellerCommandParser`, parsing the DELIMITER and keywords to create a predicate. For example, inputting `find-b l/Bishan` creates a `BuyerLocationContainsKeywordPredicate` predicate with KEYWORDS as parameters.
+
+Next, said predicate is passed into `FindBuyerCommand` or `FindSellerCommand`. This function would then call `updateFilteredSellerList` or `updateFilteredBuyerList` of `model` and filters the list based on the given predicate. The commands then calls `getFilteredSellerList` or `getFilteredBuyerList`
+in order to return the filtered list of sellers or buyers, whichever specified by the command.
 
 #### Why is it implemented this way
-Having a seperate buyer and seller list means we need to seperate the find command into find buyer and find seller in order to filter the desired list. Having seperate address books helps in this regard as the version of `getFilteredClientList` can be used.
+Having a seperate buyer and seller list means we need to seperate the find command into find buyer and find seller in order to filter the desired list. Having seperate address books helps in this regard as the version of `getFilteredBuyerList` or `getFilteredSellerList` can be used.
 
-### \[Proposed\] Data archiving
+### List buyer/List seller
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Syntax:
+- `list-b`
+- `list-s`
+
+Examples:
+- `list-b` lists all current buyers
+- `list-s` lists all current sellers
+- 
+#### Result:
+returns an unfiltered list of sellers or buyers
+
+#### Implementation of list buyer and list seller
+The `updateFilteredBuyerList` or `updateFilteredSellerList` of `model` is called, with parameters `PREDICATE_SHOW_ALL_BUYERS`. This will list the unfiltered buyer or seller list, whichever specified
+
+#### Why is it implemented this way
+Having a seperate buyer and seller list means we need to seperate the list command into list buyer and list seller in order to show the desired list. Having seperate address books helps in this regard as the version of `updateFilteredBuyerList` or `updateFilteredSellerList` can be used.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -556,26 +576,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new client               |                                                                        |
-| `* * *`  | user                                       | delete a client                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a client by name          | locate details of clients without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many clients in the address book | sort clients by name           | locate a client easily                                                 |
-| Priority | As a …​                             | I want to …​                                                                     | So that I can…​                         
-| `* * *` | housing agent with many clients     | view client details fast                                                         | can deal with customers easily when they contact me |
-| `* * *` | housing agent                       | add a new client quickly with a quick description                                | update my client list efficiently                   |
-| `* * *` | housing agent                       | see relevant information about my clients                                        | understand their needs                              |
-| `* * *` | housing agent                       | edit my client data                                                              | stay in touch with their changing needs             |
-| `* * *` | housing agent                       | delete a client when their house has been sold or after they have bought a house | not mix up information in the future                |
-| `* * *` | housing agent                       | access some of my favourite clients quickly                                      | always focus on them                                |
-| `* * *` | housing agent                       | "tag" my clients with custom text                                                | remember every client easily                        |
-| `* * *` | housing agent with too many clients | be able to find a client by name                                                 | locate them easily and quickly                      |
-| `* *`  | housing agent                       | have access to my search history                                                 | look up my recently contacted clients               |
-| `* *`  | new user                            | have a quick guide to start me off                                               | learn how to use the application                    |
-| `* *`  | housing agent                       | check my important deadlines                                                     | avoid missing important meetings with my clients    |
+| Priority | As a …​                                    | I want to …​                                                                     | So that I can…​                                                        |
+|----------|--------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                                           | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new client                                                                 |                                                                        |
+| `* * *`  | user                                       | delete a client                                                                  | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a client by name                                                            | locate details of clients without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details                                                     | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many clients in the address book | sort clients by name                                                             | locate a client easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                                     | So that I can…​                                                        |
+| `* * *`  | housing agent with many clients            | view client details fast                                                         | can deal with customers easily when they contact me                    |
+| `* * *`  | housing agent                              | add a new client quickly with a quick description                                | update my client list efficiently                                      |
+| `* * *`  | housing agent                              | see relevant information about my clients                                        | understand their needs                                                 |
+| `* * *`  | housing agent                              | edit my client data                                                              | stay in touch with their changing needs                                |
+| `* * *`  | housing agent                              | delete a client when their house has been sold or after they have bought a house | not mix up information in the future                                   |
+| `* * *`  | housing agent                              | access some of my favourite clients quickly                                      | always focus on them                                                   |
+| `* * *`  | housing agent                              | "tag" my clients with custom text                                                | remember every client easily                                           |
+| `* * *`  | housing agent with too many clients        | be able to find a client by name                                                 | locate them easily and quickly                                         |
+| `* *`    | housing agent                              | have access to my search history                                                 | look up my recently contacted clients                                  |
+| `* *`    | new user                                   | have a quick guide to start me off                                               | learn how to use the application                                       |
+| `* *`    | housing agent                              | check my important deadlines                                                     | avoid missing important meetings with my clients                       |
 
 
 *{More to be added}*
