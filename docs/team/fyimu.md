@@ -14,7 +14,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to add a new lineup to the system using `AddCommand`. Added lineups can be removed from the system by using the `DeleteCommand`.
     * Justification: This feature helps the user to create lineups to assign players to (in put command) and remove lineups that are no longer relevant. It helps users to regulate and classify players. This feature is one of the cornerstones of the whole project, and it makes the application more specifically tailored to the needs of target users by introducing `Lineup`.
     * Highlights: It required an in-depth analysis of design alternatives. A lot of consideration was given to the dependency relationship and navigability between `Person` and `Lineup`. The implementation too was challenging as it required changes to all existing commands such as `AddCommand` and `DeleteCommand`.
-    
+ 
 * **New Feature**: Added the ability to remove player from lineup.
   * What it does: Allows the user to remove an existing player from a specific lineup after the player being put into it.
   * Justification: This feature allows the user to adjust the lineups of each player where he deems necessary. It increases the flexibility of the application. By granting the opportunity to explore more possibilities of lineup combinations, this functionality further helps the user to manage a basketball team.
