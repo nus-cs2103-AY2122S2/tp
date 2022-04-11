@@ -5,16 +5,20 @@ title: Ezekiel Toh's Project Portfolio Page
 
 ### Project: d'Intérieur
 
-d'Intérieur is a desktop address book application, designed with interior designers in mind. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+d'Intérieur is a desktop app for interior designers to manage their contacts and projects. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 26 kLoC.
 
+Interior designers can use d'Intèrieur to improve contact management and take on the needs of an ever-growing client base, so that they can focus on what matters most - delivering quality service for clients.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added favourites feature
+  * What it does: allows the user to add, delete, and view images associated with each of their contacts.
+  * Justification: Interior designers frequently work with images. Their clients' preferences, project designs and
+    other details are often best represented through an image and not merely through words. Having these images
+    can greatly improve their productivity, organization and help with attention to detail.
+  * 
+
+* **New Feature**: Added images feature
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
