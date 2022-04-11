@@ -77,19 +77,18 @@ public class ArgumentMultimap {
         Set<Prefix> excludedPrefixes = Set.of(prefixes);
         Set<Prefix> allRemainingPrefixes = new HashSet<>(argMultimap.keySet());
         allRemainingPrefixes.removeAll(excludedPrefixes);
-        System.out.println(allRemainingPrefixes);
         return allRemainingPrefixes.size() == 1; //I have no idea why there is an extra item
     }
 
     /**
-     * Returns true if the prefix was used and placed in the argMultiMap
+     * Returns true if the all the {@code prefixes} were used and placed in the argMultiMap.
      */
     public boolean doesPrefixesExist(Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argMultimap.containsKey(prefix));
     }
 
     /**
-     * Returns true if at least one prefix was used and placed in the argMultiMap
+     * Returns true if at least one prefix was used and placed in the argMultiMap.
      */
     public boolean atLeastOnePrefix(Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argMultimap.containsKey(prefix));

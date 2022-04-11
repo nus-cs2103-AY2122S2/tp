@@ -3,7 +3,7 @@ package seedu.address.model.socialmedia;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class PlatformName {
-    //TODO provide actual platform name constraints
+
     public static final String MESSAGE_CONSTRAINTS = "PLATFORM NAME CONSTRAINTS!";
     private final String platformName;
 
@@ -26,7 +26,7 @@ public class PlatformName {
         }
 
         PlatformName other = (PlatformName) obj;
-        return other.platformName.equals(platformName);
+        return other.platformName.equalsIgnoreCase(platformName);
     }
 
     @Override

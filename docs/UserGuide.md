@@ -1,4 +1,7 @@
-# uMessage (v1.3) User Guide
+---
+layout: page
+title: uMessage User Guide
+---
 
 ***uMessage*** is a desktop app that helps university students manage contacts, academics and CCAs that communicate and hold meetings on various platforms. It is optimized for keyboard users.
 
@@ -7,6 +10,7 @@
 # Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
 
 1. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.3.1)
 
@@ -20,7 +24,7 @@
    * Type any keywords, and uMessage will live search the list.
 
    * **`add`**`n/Aaron` to the Address Book.
-   
+
    * **`edit`**`1 e/aaron@example.com`: Adds an email to Aaron.
 
    * **`delete`**`alex`: Deletes Alex if the person exists.
@@ -64,29 +68,46 @@
 --------------------------------------------------------------------------------------------------------------------
 # Managing Contacts
 
+<<<<<<< HEAD
 The contacts are listed alphabetically. The header displays the size of the current contact list in the brackets. <br>
 The contacts list is navigable using the arrow keys.
+=======
+The contacts are listed alphabetically. The contacts list is navigable using the arrow keys.
+
+There cannot be duplicated contacts. Two contacts are the same if both have the same name (case-sensitive).
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ## 1. Adding: `add`
 
 ### 1.1 Adding a person
 
-**Format:** `add n/NAME [p/PHONE] [e/EMAIL] [d/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`
+**Format:** `add n/NAME [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`
 
 **Examples:**
 
+<<<<<<< HEAD
 > `add n/John Doe p/91020111 e/JohnDoe@outlook.com d/Telegram, @johnnydoe t/friend`<br>
 > `add n/Betsy Crowe e/e0123456@gmail.com`<br>
+=======
+> `add n/John Doe p/91020111 e/JohnDoe@outlook.com sm/Telegram, @johnnydoe t/friend`</br>
+> `add n/Betsy Crowe e/e0123456@gmail.com`</br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 > `add n/Potter`
 
 ### 1.2 Adding new tag to a person
 
 **Format:** `add NAME t/NEWTAG` or `add INDEX t/NEWTAG`
 
+<<<<<<< HEAD
 NAME is case sensitive and must match the full name.<br>
 INDEX must be a positive integer. <br>
+=======
+INDEX will be matched if it is valid. </br>
+NAME is case sensitive and must match the full name. </br>
+INDEX must be a positive integer. </br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-Note that tags cannot be added to emergency contacts.
+Note that tags cannot be added to pre-installed emergency contacts.
 
 **Examples:**
 
@@ -95,23 +116,36 @@ Note that tags cannot be added to emergency contacts.
 
 ### 1.3 Adding new social media to a person
 
-**Format:** `add NAME d/{SOCIAL MEDIA PLATFORM}, {ID}` or `add INDEX d/{SOCIAL MEDIA PLATFORM}, {ID}`
+**Format:** `add INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `add NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}`
 
+<<<<<<< HEAD
 NAME is case sensitive and must match the full name.<br>
 INDEX must be a positive integer. <br>
+=======
+INDEX will be matched if it is valid. </br>
+NAME is case sensitive and must match the full name. </br>
+INDEX must be a positive integer. </br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-Note that social medias cannot be added to emergency contacts.
+Note that social media cannot be added to pre-installed emergency contacts.
 
 **Examples:**
 
+<<<<<<< HEAD
 > `add John Doe d/telegram, @johndoe23`<br>
 > `add 2 d/telegram, @johndoe23`
+=======
+> `add John Doe sm/telegram, @johndoe23`</br>
+> `add 2 sm/telegram, @johndoe23`
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 
 
 ## 2. Searching persons by keywords: `[find]`
 
 **Format:** `[find] KEYWORD [MORE_KEYWORDS]`
+
+Note that the command word is optional, i.e., uMessage searches for whatever entered by default, unless a command is detected.
 
 Results are listed according to how much they match the keywords. Names are matched first, then tags, then other fields.
 
@@ -143,15 +177,36 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 ## 4. Editing details of a person: `edit`
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`
+### 4.1 Editing a person
 
-Note that emergency contacts cannot be edited.
+**Format:** `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…` or `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`
+
+Note that pre-installed emergency contacts cannot be edited.
 
 **Examples:**
 
+<<<<<<< HEAD
 > `edit 1 n/Aaron d/Telegram, @aaron`<br>
+=======
+> `edit 1 n/Aaron sm/Telegram, @aaron`</br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 > `edit Alex n/Aaron p/52873618`
 
+### 4.2 Editing a person's social media
+
+Edits a social media found in a person's list of social media.
+
+**Format:**  `edit NAME i/SOCIAL_MEDIA_INDEX [f/] sm/NEW_DETAILS` or `edit INDEX i/SOCIAL_MEDIA_INDEX [f/] sm/NEW_DETAILS`
+
+NAME is case sensitive and must match the full name.
+INDEX refers to the index of the person you want to edit, and must be a positive integer.
+SOCIAL_MEDIA_INDEX refers to the index of the social media in the person's list of social media, and must be a positive integer.
+`f/` is an optional parameter, include it to edit the name of the social media instead of the social media description.
+
+**Examples:**
+
+> `edit 1 i/2 f/ sm/Telegram`
+> `edit Alex Yeoh i/1 sm/@alexxy`
 
 
 ## 5. Copying: `copy`
@@ -160,7 +215,7 @@ Note that emergency contacts cannot be edited.
 
 **Format:** `copy NAME`
 
-NAME is case sensitive and must match the full name. 
+NAME is case sensitive and must match the full name.
 
 **Examples:**
 
@@ -176,8 +231,11 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **Examples:**
 
-**Copying email:** Clicking the email will trigger the local Mail application to create a new email to the aforementioned address.
+**Copying Phone:** Clicking the phone, and the phone number will be copied.
 
+**For Email and Telegram:**
+
+**Copying email:** Clicking the email will trigger the local Mail application to create a new email to the aforementioned address. </br>
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
 
@@ -188,10 +246,16 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **Format:** `delete NAME` or `delete INDEX`
 
+<<<<<<< HEAD
 NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
+=======
+INDEX will be matched if it is valid. </br>
+NAME is case sensitive and must match the full name. </br>
+INDEX must be a positive integer. </br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-Note that emergency contacts cannot be deleted.
+Note that pre-installed emergency contacts cannot be deleted.
 
 
 **Examples:**
@@ -204,11 +268,16 @@ Note that emergency contacts cannot be deleted.
 
 **Format:** `delete NAME t/TAG` `delete INDEX t/TAG`
 
+<<<<<<< HEAD
 NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
+=======
+INDEX will be matched if it is valid. </br>
+NAME is case sensitive and must match the full name. </br>
+INDEX must be a positive integer. </br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-Note that tags of emergency contacts cannot be deleted.
-
+Note that tags of pre-installed emergency contacts cannot be deleted.
 
 **Examples:**
 
@@ -217,24 +286,39 @@ Note that tags of emergency contacts cannot be deleted.
 
 ### 6.3 Deleting social media from a Person
 
-**Format:** `delete NAME d/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX d/{SOCIAL MEDIA PLATFORM}, {ID}`
+**Format:** `delete NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}`
 
+<<<<<<< HEAD
 NAME is case sensitive and must match the full name.<br>
 INDEX must be a positive integer. <br>
+=======
+INDEX will be matched if it is valid. </br>
+NAME is case sensitive and must match the full name.</br>
+INDEX must be a positive integer. </br>
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-Note that social medias of emergency contacts cannot be deleted.
+Note that social media of pre-installed emergency contacts cannot be deleted.
 
 **Examples:**
+<<<<<<< HEAD
 > `delete kaaviya d/Telegram, @uNivUS`<br>
 > `delete 1 d/Telegram, @uNivUS`
+=======
+> `delete kaaviya sm/Telegram, @uNivUS`</br>
+> `delete 1 sm/Telegram, @uNivUS`
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 
 --------------------------------------------------------------------------------------------------------------------
 # Managing Meetings
 
+<<<<<<< HEAD
 The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.<br>
+=======
+The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
-The header displays the size of the current meeting list in the brackets.
+There cannot be duplicated meetings. Two meetings are the same if both have the same title (case-sensitive) and same start time.
 
 ## 1. Adding: `add`
 
@@ -247,8 +331,13 @@ DURATION is in minutes and must be an integer between 1 and 10000.
 
 **Examples:**
 
+<<<<<<< HEAD
 > `add n/CS2040 PE l/www.google.com s/2022-3-20 0900 d/120 t/Alex`<br>
 > `add n/CS2103 Tutorial l/www.google.com s/2022-3-20 1200 d/60`
+=======
+> `add n/CS2040 PE l/https://www.google.com s/2022-3-20 0900 d/120 t/Alex`</br>
+> `add n/CS2103 Tutorial l/https://www.google.com s/2022-3-20 1200 d/60`
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ### 1.2 Adding new tag to a meeting
 
@@ -259,7 +348,6 @@ INDEX must be a positive integer.
 **Examples:**
 
 > `add 1 t/urgent`
-
 
 
 ## 2. Searching meetings by keyword: `[find]`
@@ -288,8 +376,13 @@ The order of the keywords does not matter. e.g. `2040 CS` will match `CS 2040`.
 
 **Format:** `edit INDEX [n/TITLE] [l/LINK] [s/START_TIME] [d/DURATION] [t/TAG]…`
 
+<<<<<<< HEAD
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.<br>
 DURATION is in minutes and must be an integer between 1 and 10000.
+=======
+START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
+DURATION is in minutes and must be an integer between 1 and 10000 (inclusive).
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 **Examples:**
 
@@ -312,7 +405,7 @@ INDEX must be a positive integer.
 
 **Format:** `delete INDEX t/TAG`
 
-Deletes tag `TAG` from a person specified using `NAME` or `INDEX`.
+Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 
 **Example:**
 > `delete 1 t/urgent`
@@ -321,10 +414,15 @@ Deletes tag `TAG` from a person specified using `NAME` or `INDEX`.
 
 # Manage Global Tags
 
+<<<<<<< HEAD
 Global tags are tags that may or may not be associated with any contacts and/or meetings. <br>
 
 For example, adding a global tag will store that tag in the system. However, it will not be associated with any 
 contacts/meetings until it is explicitly added to them. 
+=======
+Global tags helps you organise relevant contacts and meetings together.
+<!-- Need to explain how this might be useful for the user -->
+>>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ## 1. Adding a global tag
 
@@ -339,6 +437,10 @@ contacts/meetings until it is explicitly added to them.
 
 **Example:**
 > `delete t/CS2100`
+
+## 3. Filter by tag
+
+**Format:** click on a tag in the tag panel. This filters both contacts and meetings with the tag.
 
 
 
@@ -378,32 +480,33 @@ If your changes to the data file makes its format invalid, the data will be disc
 --------------------------------------------------------------------------------------------------------------------
 # Summary of Commands
 
-## Contacts Tab
+## Managing Contacts
 
 | Command | Intention                           | Format                                                                                          |
 |---------|-------------------------------------|-------------------------------------------------------------------------------------------------|
-| add     | add a new person                    | `add n/NAME [p/PHONE] [e/EMAIL] [d/{SOCIAL MEDIA PLATFORM}, {ID}]... [t/TAG]`                   |
+| add     | add a new person                    | `add n/NAME [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]... [t/TAG]`                   |
 | add     | add a tag to an existing person     | `add NAME t/NEWTAG` or `add INDEX t/NEWTAG`                                                     |
-| add     | add a new social media to a person  | `add NAME d/{SOCIAL MEDIA PLATFORM}, {ID}` or `add INDEX d/{SOCIAL MEDIA PLATFORM}, {ID}`       |
-| find    | search for a person                 | `[find] KEYWORD [MORE_KEYWORDS]`                                                                |
+| add     | add a new social media to a person  | `add NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `add INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}`       |
+| [find]  | search for a person                 | `[find] KEYWORD [MORE_KEYWORDS]`                                                                |
 | view    | view the details of a person        | `view INDEX` or click the Contact/Meeting under the list.                                       |
-| edit    | edit details of a person            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`           |
+| edit    | edit details of a person            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`           |
+| edit    | edit a person's social media        | `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA f/ sm/{SOCIAL MEDIA PLATFORM}` or </br> `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA sm/{SOCIAL MEDIA ID}`          |
 | copy    | copy all details of a person        | `copy NAME`                                                                                     |
 | copy    | copy one detail of a person         | perform the `view` command and click on the relevant label values to copy                       |
 | delete  | delete a person                     | `delete NAME` or `delete INDEX`                                                                 |
 | delete  | delete a tag from a person          | `delete NAME t/TAG` `delete INDEX t/TAG`                                                        |
-| delete  | delete a social media from a person | `delete NAME d/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX d/{SOCIAL MEDIA PLATFORM}, {ID}` |
+| delete  | delete a social media from a person | `delete NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}` |
 
-## Meetings Tab
+## Managing Meetings
 
 | Command | Intention                                  | Format                                                                                         |
 |---------|--------------------------------------------|------------------------------------------------------------------------------------------------|
-| add     | add a new meeting                          | `add n/MEETING NAME l/LINK s/START TIME d/DURATION`                                            |
-| add     | add a tag to an existing meeting           | `add MEETING NAME t/NEWTAG` or `add INDEX t/NEWTAG`                                            |
+| add     | add a new meeting                          | `add n/TITLE l/LINK s/STARTTIME d/DURATION`                                            |
+| add     | add a tag to an existing meeting           | `add TITLE t/NEWTAG` or `add INDEX t/NEWTAG`                                            |
 | find    | search for a meeting                       | `[find] KEYWORD [MORE_KEYWORDS]`                                                               |
-| edit    | edit details of a meeting                  | `edit INDEX [n/MEETING NAME] [l/LINK] [s/START TIME] [d/DURATION] [t/TAG]…`                    |
-| delete  | delete a meeting                           | `delete MEETING NAME` or `delete INDEX`                                                        |
-| delete  | delete a tag from a meeting                | `delete MEETING NAME t/TAG` `delete INDEX t/TAG`                                               |
+| edit    | edit details of a meeting                  | `edit INDEX [n/TITLE] [l/LINK] [s/START TIME] [d/DURATION] [t/TAG]…`                    |
+| delete  | delete a meeting                           | `delete TITLE` or `delete INDEX`                                                        |
+| delete  | delete a tag from a meeting                | `delete TITLE t/TAG` `delete INDEX t/TAG`                                               |
 
 ## Universal
 
@@ -411,7 +514,7 @@ If your changes to the data file makes its format invalid, the data will be disc
 |---------|-------------------------------------------------|----------|
 | help    | display the `Help` tab                          | `help`   |
 | list    | displays all persons/meetings                   | `list`   |
-| clear   | deletes all non-emergency contacts and meetings | `clear`  | 
+| clear   | deletes all non-emergency contacts and meetings | `clear`  |
 | exit    | exits the program                               | `exit`   |
 
 ---------------------------------------------------------------------------------------------------------------------

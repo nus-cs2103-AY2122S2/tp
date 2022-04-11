@@ -40,6 +40,21 @@ public interface Logic {
      */
     CommandResult executeForMeetings(String commandText, CommandBox commandBox) throws CommandException, ParseException;
 
+    static String getClickTagFeedbackToContacts(Tag tag) {
+        return " persons with tag " + tag + " listed!";
+    }
+
+    static String getClickTagFeedbackToMeetings(Tag tag) {
+        return " meetings with tag " + tag + " listed!";
+    }
+
+    /**
+     * Returns the result of clicking the tag.
+     * @param tag The tag clicked.
+     * @return the result of clicking the tag.
+     */
+    CommandResult[] clickTag(Tag tag);
+
     /**
      * Returns the AddressBook.
      *

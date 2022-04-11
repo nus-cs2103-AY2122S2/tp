@@ -93,7 +93,7 @@ public class SampleDataUtil {
     public static Tag[] getSampleTags() {
         return new Tag[] {
             new Tag("neighbours"), new Tag("colleagues"), new Tag("friends"),
-            new Tag("EmergencyContacts"), new Tag("family")
+            new Tag("family")
         };
     }
 
@@ -107,7 +107,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a set of social medias containing the list of strings given.
+     * Returns a set of social media containing the list of strings given.
      */
     public static List<SocialMedia> getSocialMediaSet(String... strings) {
         return Arrays.stream(strings)

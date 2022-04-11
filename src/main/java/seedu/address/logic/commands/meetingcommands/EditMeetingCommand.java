@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -36,7 +34,7 @@ public class EditMeetingCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed meeting list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -50,19 +48,20 @@ public class EditMeetingCommand extends Command {
     public static final String MESSAGE_EDIT_MEETING_SUCCESS = "Edited Meeting: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists in the address book.";
+    public static final String MESSAGE_PAST_MEETING = "Cannot edit a meeting to start in the past";
 
-    private final Index index;
+    private final MeetingTarget meetingTarget;
     private final EditMeetingDescriptor editMeetingDescriptor;
 
     /**
-     * @param index of the person in the filtered meeting list to edit
+     * @param meetingTarget of the meeting in the filtered meeting list to edit
      * @param editMeetingDescriptor details to edit the meeting with
      */
-    public EditMeetingCommand(Index index, EditMeetingDescriptor editMeetingDescriptor) {
-        requireNonNull(index);
+    public EditMeetingCommand(MeetingTarget meetingTarget, EditMeetingDescriptor editMeetingDescriptor) {
+        requireNonNull(meetingTarget);
         requireNonNull(editMeetingDescriptor);
 
-        this.index = index;
+        this.meetingTarget = meetingTarget;
         this.editMeetingDescriptor = new EditMeetingDescriptor(editMeetingDescriptor);
     }
 
@@ -71,15 +70,22 @@ public class EditMeetingCommand extends Command {
         requireNonNull(model);
         List<Meeting> lastShownList = model.getSortedAndFilteredMeetingList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Meeting meetingToEdit = lastShownList.get(index.getZeroBased());
+        Meeting meetingToEdit = meetingTarget.targetMeeting(lastShownList);
         Meeting editedMeeting = EditMeetingDescriptor.createEditedMeeting(meetingToEdit, editMeetingDescriptor);
 
         if (!meetingToEdit.isSameMeeting(editedMeeting) && model.hasMeeting(editedMeeting)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
+        }
+
+
+        if (StartTime.isInThePast(editedMeeting.getStartTime())) {
+            throw new CommandException(MESSAGE_PAST_MEETING);
+        }
+
+        for (Tag tag: editedMeeting.getTags()) {
+            if (!model.hasTag(tag)) {
+                model.addTag(tag);
+            }
         }
 
         model.setMeeting(meetingToEdit, editedMeeting);
@@ -101,13 +107,13 @@ public class EditMeetingCommand extends Command {
 
         // state check
         EditMeetingCommand e = (EditMeetingCommand) other;
-        return index.equals(e.index)
+        return meetingTarget.equals(e.meetingTarget)
                 && editMeetingDescriptor.equals(e.editMeetingDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the meeting with. Each non-empty field value will replace the
+     * corresponding field value of the meeting.
      */
     public static class EditMeetingDescriptor {
         private Title title;
@@ -187,8 +193,8 @@ public class EditMeetingCommand extends Command {
         }
 
         /**
-         * Creates and returns a {@code Person} with the details of {@code personToEdit}
-         * edited with {@code editPersonDescriptor}.
+         * Creates and returns a {@code Meeting} with the details of {@code meetingToEdit}
+         * edited with {@code editMeetingDescriptor}.
          */
         public static Meeting createEditedMeeting(Meeting meetingToEdit, EditMeetingDescriptor editMeetingDescriptor) {
             assert meetingToEdit != null;

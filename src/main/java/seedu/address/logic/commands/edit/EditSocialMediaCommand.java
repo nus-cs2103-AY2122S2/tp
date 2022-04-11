@@ -8,13 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_MEDIA;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.delete.Target;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Target;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.socialmedia.PlatformDescription;
 import seedu.address.model.socialmedia.PlatformName;
@@ -23,13 +23,18 @@ import seedu.address.model.socialmedia.SocialMedia;
 public class EditSocialMediaCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_SOCIALS_SUCCESS = "Edited social media of %s: From %s to %s";
+    public static final String MESSAGE_SOCIALS_ALREADY_EXISTS = "Socials %s already exists in %s!";
+    public static final String EDIT_SOCIAL_MEDIA_COMMAND_PARAMS = "<PERSON_NAME or INDEX> "
+            + PREFIX_INDEX + "INDEX_NUM "
+            + PREFIX_SOCIAL_MEDIA + "UPDATED_VALUE "
+            + "[" + PREFIX_PLATFORM_NAME_FLAG + " ]\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the targeted social media of a given person. "
             + "The social media is specified by the index of list of socials of the given person.\n"
-            + "Parameters:"
-            + "PERSON_NAME/INDEX"
-            + PREFIX_INDEX + "INDEX_NUM"
-            + "[" + PREFIX_PLATFORM_NAME_FLAG + "]"
-            + PREFIX_SOCIAL_MEDIA + "UPDATED_VALUE";
+            + "Parameters: "
+            + EDIT_SOCIAL_MEDIA_COMMAND_PARAMS
+            + "Example: "
+            + COMMAND_WORD + " Alex Yeoh " + PREFIX_INDEX + "1 " + PREFIX_PLATFORM_NAME_FLAG
+            + " " + PREFIX_SOCIAL_MEDIA + "Telegram";
 
     private Target target;
     private Index index;
@@ -42,17 +47,9 @@ public class EditSocialMediaCommand extends EditCommand {
      * @param newDetails The new details of the socialMedia
      * @param editPlatformNameflag decides whether to edit the platform name or description
      */
-    public EditSocialMediaCommand(Object target, Index index, String newDetails, boolean editPlatformNameflag) {
-        assert target instanceof Name || target instanceof Index;
+    public EditSocialMediaCommand(Target target, Index index, String newDetails, boolean editPlatformNameflag) {
 
-        if (target instanceof Name) {
-            this.target = Target.of((Name) target, null);
-        } else if (target instanceof Index) {
-            this.target = Target.of((Index) target, null);
-        } else {
-            this.target = null;
-        }
-
+        this.target = target;
         this.index = index;
         this.newDetails = newDetails;
         this.editPlatformNameflag = editPlatformNameflag;
@@ -63,11 +60,16 @@ public class EditSocialMediaCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getSortedAndFilteredPersonList();
-        target.setTargetList(lastShownList);
 
-        Person targetPersonToEdit = target.targetPerson();
+        Person targetPersonToEdit = target.targetPerson(lastShownList);
         List<SocialMedia> socialsToEdit = new ArrayList<>(targetPersonToEdit.getSocialMedias());
+
+        if (index.getZeroBased() >= socialsToEdit.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SOCIAL_MEDIA_DISPLAYED_INDEX);
+        }
+
         SocialMedia socialMediaToEdit = socialsToEdit.get(index.getZeroBased());
+
         SocialMedia updatedSocialMedia;
 
         if (editPlatformNameflag) {
@@ -87,6 +89,20 @@ public class EditSocialMediaCommand extends EditCommand {
         model.updateSelectedPerson(updatedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_SOCIALS_SUCCESS,
                 updatedPerson.getName(), socialMediaToEdit, updatedSocialMedia));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof EditSocialMediaCommand) {
+            EditSocialMediaCommand other = (EditSocialMediaCommand) obj;
+
+            return this.editPlatformNameflag == other.editPlatformNameflag
+                && this.index.equals(other.index)
+                && this.newDetails.equals(other.newDetails)
+                && this.target.equals(other.target);
+        }
+
+        return false;
     }
 
 }

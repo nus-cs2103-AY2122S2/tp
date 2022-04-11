@@ -19,7 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.meeting.Meeting;
-import seedu.address.model.meeting.MeetingTimeSorter;
+import seedu.address.model.meeting.MeetingStartTimeSorter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -143,12 +143,14 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        sortFilteredPersonList(COMPARATOR_ALPHABETICAL_ORDER);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        sortFilteredPersonList(COMPARATOR_ALPHABETICAL_ORDER);
     }
 
     //=========== Meetings tab =================================================================================
@@ -323,7 +325,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Meeting> getUpcomingMeetingList() {
-        sortFilteredUpcomingMeetingList(new MeetingTimeSorter());
+        sortFilteredUpcomingMeetingList(new MeetingStartTimeSorter());
         return sortedAndFilteredUpcomingMeetings;
     }
 
