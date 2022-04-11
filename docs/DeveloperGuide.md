@@ -443,16 +443,18 @@ Returns a single show from the current displayed list of shows
 
 #### Implementation
 
-After executing the suggest command, Trackermon creates a `SuggestCommand` object.
+After executing the `suggest` command, Trackermon creates a `SuggestCommand` object.
 Then, `LogicManager` will execute the given `SuggestCommand`. Upon execution of the `SuggestCommand`'s execute method,
 it will obtain the currently displayed list of shows via the `Model#getFilteredShowList` method.
 
 In the event that the list is empty, an error message will inform users that
 there are no shows currently in the displayed show list. Similarly, if there is only one show 
 present in the list, it will inform the user that there is only one show in the currently displayed 
-show list.
+show list. 
 
-A random show is then selected from the list of displayed shows and displayed in the show list.
+A random show is then selected from the list of displayed shows and a `SameShowPredicate` is constructed using said show.
+
+The random show is then displayed in the show list using the `Model#updateFilteredShowList` and the `SameShowPredicate` as its parameter.
 
 Below is the example usage scenario and the step-by-step flow of the suggest command.
 
