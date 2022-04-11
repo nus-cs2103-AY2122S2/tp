@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Task;
 
 /**
  * Wraps all data at the address-book level
@@ -91,6 +92,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Check if the task is a valid task that conforms to description and deadline format.
+     *
+     * @param task a Task object.
+     * @return true if it is valid, false otherwise.
+     */
+    public boolean validTask(Task task) {
+        requireNonNull(task);
+        return task.isValidTask(task);
     }
 
     //// util methods

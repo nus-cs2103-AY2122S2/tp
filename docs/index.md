@@ -1,17 +1,20 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: NUScheduler
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2122S2-CS2103-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-F11-4/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103-F11-4/tp/branch/master/graph/badge.svg?token=G5ITTT4UTJ)](https://codecov.io/gh/AY2122S2-CS2103-F11-4/tp)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**NUScheduler is a desktop app for Year 1 Computing students to assist with more efficient management of tasks and contacts**,
+optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, NUScheduler can schedule your tasks faster than traditional GUI apps.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+
+* If you are interested in using NUScheduler, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing NUScheduler, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

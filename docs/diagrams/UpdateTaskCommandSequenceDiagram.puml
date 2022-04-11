@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UpdateTaskCommandParser" as UpdateTaskCommandParser LOGIC_COLOR
+participant "u:UpdateTaskCommand" as UpdateTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Tasklist MODEL_COLOR_T1
+participant "taskList:Tasklist" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("updt 1 d\demo")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("updt 1 d\demo")
+activate AddressBookParser
+
+create UpdateTaskCommandParser
+AddressBookParser -> UpdateTaskCommandParser
+activate UpdateTaskCommandParser
+
+create UpdateTaskCommand
+UpdateTaskCommandParser -> UpdateTaskCommand
+activate UpdateTaskCommand
+
+UpdateTaskCommand --> UpdateTaskCommandParser : u
+deactivate UpdateTaskCommand
+
+UpdateTaskCommandParser --> AddressBookParser : u
+deactivate UpdateTaskCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+UpdateTaskCommandParser -[hidden]-> AddressBookParser
+destroy UpdateTaskCommandParser
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> UpdateTaskCommand : execute(model)
+activate UpdateTaskCommand
+
+UpdateTaskCommand -> Model : updateTask(task, 1)
+activate Model
+
+Model --> UpdateTaskCommand
+deactivate Model
+
+create CommandResult
+UpdateTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UpdateTaskCommand
+deactivate CommandResult
+
+UpdateTaskCommand --> LogicManager : result
+deactivate UpdateTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

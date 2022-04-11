@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTask.getTypicalTaskList;
 
 import java.nio.file.Path;
 
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -26,7 +29,8 @@ public class StorageManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskListStorage taskListStorage = new JsonTaskListStorage(getTempFilePath("tasklist"));
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, taskListStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -65,4 +69,16 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
 
+    @Test
+    public void taskListReadSave() throws Exception {
+        TaskList original = getTypicalTaskList();
+        storageManager.saveTaskList(original);
+        ReadOnlyTaskList retrieved = storageManager.readTaskList().get();
+        assertEquals(original.getTaskList().toString(), new TaskList(retrieved).getTaskList().toString());
+    }
+
+    @Test
+    public void getTaskListFilePath() {
+        assertNotNull(storageManager.getTaskListFilePath());
+    }
 }

@@ -1,0 +1,18 @@
+@startuml
+start
+:User types in the
+update task command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Valid format and/or input])
+    :Corresponding task is
+    updated in the Tasklist;
+    :Prompt user that the task
+    has been successfully updated;
+else ([Invalid Format Used])
+    -Prompt user with the command's format
+endif
+stop
+@enduml

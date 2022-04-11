@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -36,6 +38,15 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_DESCRIPTION_SWIMMING = "Swimming Lesson";
+    public static final String VALID_DEADLINE_MARCH = "03/03/2023";
+
+    public static final String DESC_SWIMMING = " " + PREFIX_ADD_TASK_DESCRIPTION + VALID_DESCRIPTION_SWIMMING;
+    public static final String DEADLINE_SWIMMING = " " + PREFIX_ADD_TASK_DEADLINE + VALID_DEADLINE_MARCH;
+
+    public static final String INVALID_DEADLINE_YEAR = " " + PREFIX_ADD_TASK_DEADLINE + "2022"; // Wrong format
+    public static final String INVALID_DEADLINE_MONTH = " " + PREFIX_ADD_TASK_DEADLINE + "03/2022"; // Wrong format
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

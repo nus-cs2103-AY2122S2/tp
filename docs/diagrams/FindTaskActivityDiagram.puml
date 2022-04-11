@@ -1,0 +1,33 @@
+@startuml
+
+skinparam backgroundColor #F6E3D4
+skinparam classFontSize 12
+skinparam maxMessageSize 20
+skinparam wrapWidth 160
+skinparam activity {
+    StartColor Chocolate
+    BackGroundColor OldLace
+    BorderColor Black
+    ArrowColor Sienna
+    EndColor Chocolate
+}
+
+    start
+    :User type in the find task command;
+    'Since the beta syntax does not support placing the condition outside the
+    'diamond we place it as the true branch instead.
+    if () then ([Valid format and/or input])
+        -Retrieve matching tasks from TaskList;
+        if () then ([Contain one or more matching tasks])
+            -Prompt user with matching tasks in Tasklist
+        else ([else])
+            -Prompt user no matching tasks found
+        endif
+
+    else ([else])
+        -"Prompt user with the command's format"
+
+    endif
+    stop
+
+@enduml

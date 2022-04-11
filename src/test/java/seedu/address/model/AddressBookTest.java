@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -81,6 +82,32 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void isValidTask_validTask_returnsTrue() {
+        Task task = new Task("dummy", "01/01/2023");
+        assertTrue(addressBook.validTask(task));
+    }
+
+    @Test
+    public void isValidTask_taskInvalidDescription_returnsFalse() {
+        Task task = new Task("dummyt/", "01/01/2023");
+        Task task2 = new Task("dummyd/", "01/01/2023");
+        assertFalse(addressBook.validTask(task));
+        assertFalse(addressBook.validTask(task2));
+    }
+
+    @Test
+    public void isValidTask_taskInvalidDeadline_returnsFalse() {
+        Task task = new Task("dummy", "01/01/2022");
+        Task task2 = new Task("dummy", "30/02/2023");
+        Task task3 = new Task("dummy", "o1/01/2023");
+        Task task4 = new Task("dummy", "01/*1/2023");
+        assertFalse(addressBook.validTask(task));
+        assertFalse(addressBook.validTask(task2));
+        assertFalse(addressBook.validTask(task3));
+        assertFalse(addressBook.validTask(task4));
     }
 
     /**

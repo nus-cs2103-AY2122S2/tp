@@ -12,6 +12,8 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
+Class TaskList
+Class Task
 Class UniquePersonList
 Class Person
 Class Address
@@ -34,6 +36,9 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+
+AddressBook *--> "1" TaskList
+TaskList *--> "~* all" Task
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name

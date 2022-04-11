@@ -5,55 +5,41 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0544443@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Chen Yu An
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/putaojuice.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/putaojuice)]
+[[portfolio](team/putaojuice.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+### Low Weimin, Ian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/castryl.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/castryl)]
+[[portfolio](team/castryl.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
 
-### Jean Doe
+### Ivor Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ivorcmx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ivorcmx)]
+[[portfolio](team/ivorcmx.md)]
+* Role: Testing
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+### Tan Yu Meng
 
-### James Doe
+<img src="images/yumengtan.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/yumengtan)]
+[[portfolio](team/yumengtan.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Code Quality
