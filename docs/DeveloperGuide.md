@@ -286,15 +286,7 @@ This attribute can be added to through the use of the `s/` prefix. The `Salary` 
 * **Alternative 2:** Use the existing constructor with String as a parameter, passing in a predefined value as salary.
     * Pros: Through the use of an existing method, a developer needs to keep track of and update only one constructor for that object if any change is required.
     * Cons: If any change is required for the predefined value, a developer needs to search all usages of this method and update those using the predefined value to a new value. This can be time-consuming.
-
-***Diagrams to be added later***
-
-### Edit Command, Using name
-**To be added**
-
-### Delete Command, Using name
-**To be added**
-
+    
 ### Flagging important clients
 
 The feature is implemented to provide functionality and visual representation of important clients. 
@@ -302,18 +294,18 @@ Feature is needed for several user stories involving important clients. A new at
 Person class. Flag command is created to shorten the process of flagging a client, instead of needing to use the edit 
 command. 
 
+The following activity diagram summarizes how to flag a client.
+
+![Flag Client Activity Diagram](images/FlagClientActivityDiagram.png)
+
 Additionally, a new prefix, `f/`, can be used in the add and edit command to specify the flag status directly. 
 This prefix is optional and can be left out during the creation of a new client contact. 
 
 All new clients will adopt a default `unflagged` state when the flag status is not specified. 
 
-The following sequence diagram shows how the `flag`/`unflag` command works:
+The following sequence diagram shows interactions of each component when the `flag`/`unflag` command executes:
 
-**[COMING SOON]**
-
-The following activity diagram summarizes how to flag a client.
-
-**[COMING SOON]**
+![Flag Client Sequence Diagram](images/FlagClientSequenceDiagram.png)
 
 #### Design considerations:
 
@@ -326,6 +318,47 @@ The following activity diagram summarizes how to flag a client.
 * **Alternative 2:** Single `flag` command and use an `f/` prefix to set new flag.
     * Pros: Only one command for both scenarios and fewer tests needed.
     * Cons: Usage is not very intuitive to a user.
+
+### Edit, Delete, Flag, and Meet Command, Using name
+This feature is a more intuitive way for users to perform actions on their clients, as they can simply use the names of their clients
+to identify them, instead of using their index in the list. There are 2 scenarios that will occur when this feature is used.
+
+#### Scenario 1 (All names in HustleBook are unique, there no clients with similar names)
+
+The following sequence diagram shows how the logic of running `edit/delete/flag/meet NAME [ARGS]`.
+
+#### Scenario 2 (There are clients with similar names)
+Assume that the user has 3 clients, named `John Doe`, `John Smith` and `John Willams`.
+
+Running `edit/delete/flag/meet John [ARGS]` will first show a list of clients whose name contains `John`. In this case, 
+`John Doe`, `John Smith` and `John Williams` are displayed as a list to the user. The user is then asked to enter the index
+of the specific "John" they wish to perform their actions on. If the user gives a valid index (in this case `1, 2 or 3`), then the command is executed.
+
+
+The following diagram illustrates the logic of the command being run. 
+![CommandSimilarNames](images/CommandSimilarNames.png)
+
+From the diagram, after the first command is executed, the user is informed that there are
+multiple clients with name `John` and is prompted to input an index. After inputting "1", the function `setIndex` of `EditCommand` is called to
+specify the client to edit. The `EditCommand` is then executed normally.
+
+This gives convenience to our users as they would not have to type the full name of the client they want to perform an action on. 
+Also, when asking the user for multiple inputs, we need a way to keep track of what the user requested beforehand, so they would not need to type it again. 
+The addition of `lastCommand` means that the user does not have to type in the command multiple times.
+
+#### Design considerations:
+
+**Aspect: Typing out the full name of a client:**
+
+* **Alternative 1 (current choice):** User can run a command with only a partial name. If there are multiple users with that name, 
+    the user will be asked a second time to specify which client they are referring to.
+    * Pros: More convenient for user, user does not have to type out the full name of their client.
+    * Cons: Logic is more complicated and is more difficult to implement.
+
+* **Alternative 2:** User types out the full name of their client.
+    * Pros: Easier to implement.
+    * Cons: Inconveniences the user, especially for clients with very long names
+
 
 ### Sort Command
 
@@ -349,51 +382,64 @@ Step 4. `SortComandParser#parse` then returns a `SortCommand` containing `Person
 Step 5.  `LogicManager#execute` executes the `SortCommand` which calls `model#sortPersonListBy` and sorts the
 `UniquePersonList` using FXCollections.sort and `PersonNameComparator`.
 
-
-The following sequence diagram shows how the `sort` command works:
-
-**[COMING SOON]**
-
 The following activity diagram summarizes how to sort all clients.
 
-**[COMING SOON]**
+![Sort Activity Diagram](images/SortActivityDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+The following sequence diagram shows how the `sort` command works when executing a command such as `sort name`:
 
-#### Proposed Implementation
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+To further understand the implementation of sort, a logic sequence diagram is provided below. This highlights the use of `Comparators` in `sort`
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![Sort Logic Sequence Diagram](images/SortLogicSequenceDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+### Undo Command
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+**Background Information**
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Client's information is important for a Financial advisor. Therefore, any unintended or accidental changes to the client's information can cause unnecessary problems. For example, new users can accidentally execute `clear`, causing them to lose all their client information.
+
+To revert their actions, Financial advisors have to use multiple commands, e.g `add`, `edit` etc., together to get back to the original state. This can waste time and resources. Therefore, it is very beneficial to include a `undo` command to help users undo any unintended or accidental command executions and go back to a previous state.
+
+**Class Diagram (Only relevant methods are shown):**
+
+![UndoClassDiagram](images/UndoClassDiagram.png)
+
+The `HustleBookHistory` class facilitates the `undo` command. Throughout the entire programme, there will only be 1 instance of the `HustleBookHistory`, to ensure proper updating and saving of the history regardless of where it is executed. `HustleBookHistory` has a `historyList` and `currStatePointer` variables stored internally.
+
+These are the operations that aid in undoing the HustleBook to a previous state:
+* `HustleBookHistory#getInstance()` —  Gets the single instance of the `HustleBookHistory`.
+* `HustleBookHistory#update(ReadOnlyHustleBook)` —  Saves the current state of the HustleBook to `historyList`.
+* `HustleBookHistory#getPrevState()` —  Returns the previous state of the HustleBook and updates the `currStatePointer` to point to the previous state in the `historyList`.
+
+The `Model` interface has a `Model#undoHustleBook()` method which helps to undo the HustleBook to a previous state.
+
+**Usage Scenario**
+
+This is an example of how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `HustleBookHistory` will be initialized. Through the `update` command, the initial HustleBook state will be saved to the `historyList`, and the `currentStatePointer` will be updated to be pointing to that single HustleBook state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete Alex` command to delete the client named `Alex` in the HustleBook. The `delete` command calls `LogicManager#execute()`, where, after updating the HustleBook `storage`, the `HustleBookHistory#update()` command runs. This causes the modified state of the HustleBook after the `delete Alex` command executes to be saved in the `historyList`, and the `currStatePointer` is shifted to point to the newly inserted HustleBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `flag David` to flag this client `David`. The `flag` command also calls `LogicManager#execute()`, causing another modified HustleBook state to be saved into the `historyList`, with the `currStatePointer` updated.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not reach the `Storage` update section in `LogicManager#execute()` and call `HustleBookHistory#update()`. As a result, a new HustleBook state is not created. Hence, this HustleBook state will not be saved into the `historyList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that flagging the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHustleBook()`, which will shift the `currStatePointer` once to the left, pointing it to the previous address book state, and returns this HustleBook state. Through the use of `HustleBook#resetData()`, which reverts HustleBook back to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index 0, pointing to the initial HustleBook state, then there are no previous HustleBook states to restore. The `undo` command will display a message indicating that there are no commands left to undo instead of trying to get the previous state.
 
 </div>
 
@@ -405,19 +451,9 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `redo` command does the opposite — it calls `Model#redoHustleBook()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the HustleBook to that state.
 
 </div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -427,7 +463,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire HustleBook.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -436,26 +472,10 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
-### Edit/Delete Feature
-
-#### Implementation
-Initially, the edit and delete features of AddressBook only worked on one person in the list - the first one.
-We wanted to add a feature that allowed our users to specify the client they wished to perfom an action on, in the case
-of multiple clients with similar names.
-
-Firstly, we added a `lastCommand` variable to store the last command that the user requested. This will be useful to us
-when we are asking the user to perform an action with multiple inputs.
-
-When `edit` is first called, the `EditCommand` first makes a copy of the `FilteredPersonList`. Then a `Predicate` is
-set to filter the list of clients with matching names as the search term given. If that is the case, we will then show 
-the list of clients with similar names, and ask the user to input the index of the client they wish to edit. With that
-additional input, we can specify which client the user wants to edit based on the index given.
 
 
 

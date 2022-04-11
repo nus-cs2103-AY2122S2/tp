@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes Sort Command;
+if ()then([Invalid number of arguments])
+    : Inform user command format is invalid;
+else ([else])
+    if () then ([Unrecognized parameters provided])
+        : Inform user command format is invalid;
+    else ([else])
+        : Create new comparator based on input;
+        : Use comparator to sort UniquePersonList in HustleBook;
+    endif
+endif
+stop
+@enduml

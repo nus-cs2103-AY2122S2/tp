@@ -31,4 +31,9 @@ public class PersonPrevDateMetComparator extends PersonFlagComparator implements
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof PersonPrevDateMetComparator;
+    }
+
 }

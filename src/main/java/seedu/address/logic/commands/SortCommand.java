@@ -18,7 +18,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Clients are now sorted";
-    private final Comparator<Person> sortComparator;
+    public final Comparator<Person> sortComparator;
 
     public SortCommand(Comparator<Person> sortComparator) {
         this.sortComparator = sortComparator;
@@ -29,5 +29,12 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortPersonListBy(sortComparator);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand // instanceof handles nulls
+                && sortComparator.equals(((SortCommand) other).sortComparator)); // state check
     }
 }

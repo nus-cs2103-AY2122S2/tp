@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
 public class ListCommandParser implements Parser<ListCommand> {
 
     public static final Predicate<Person> PREDICATE_SHOW_FLAGGED_PERSONS = person -> person.getFlag().isFlagged;
+    public static final Predicate<Person> PREDICATE_SHOW_UNFLAGGED_PERSONS = person -> !person.getFlag().isFlagged;
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -38,7 +39,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         case "flag":
             return new ListCommand(PREDICATE_SHOW_FLAGGED_PERSONS);
         case "unflag":
-            return new ListCommand(PREDICATE_SHOW_FLAGGED_PERSONS.negate());
+            return new ListCommand(PREDICATE_SHOW_UNFLAGGED_PERSONS);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

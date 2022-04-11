@@ -43,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setSalary(person.getSalary());
         descriptor.setInfo(person.getInfo());
         descriptor.setPrevDateMet(person.getPrevDateMet());
+        descriptor.setFlag(person.getFlag());
     }
 
     /**

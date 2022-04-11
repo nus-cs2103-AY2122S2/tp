@@ -18,9 +18,9 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows updated list of all clients.\n"
             + "Optional Parameters: [flag|unflag]";
 
-    public static final String MESSAGE_SUCCESS = "Clients are now listed";
+    public static final String MESSAGE_SUCCESS = "Clients listed have been updated";
 
-    private final Predicate<Person> listFilterPredicate;
+    public final Predicate<Person> listFilterPredicate;
     public ListCommand(Predicate<Person> listFilterPredicate) {
         this.listFilterPredicate = listFilterPredicate;
     }
@@ -30,5 +30,12 @@ public class ListCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(listFilterPredicate);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListCommand // instanceof handles nulls
+                && listFilterPredicate.equals(((ListCommand) other).listFilterPredicate)); // state check
     }
 }
