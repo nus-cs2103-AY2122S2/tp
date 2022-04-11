@@ -16,20 +16,14 @@ the interview scheduling process of candidates applying to be undergraduate Teac
 
 * #### Enhancements implemented:
   * **New Features**:
-    * `schedule add`
-      * Implemented the `AddScheduleCommandParser` and `AddScheduleCommand` to allow users to schedule interviews with candidates
-      in TAlent Assistant™.
+    * `schedule add`, `schedule edit`, `schedule delete`, `schedule clear`
       * Created a new model `InterviewSchedule` (and interface `ReadOnlyInterviewSchedule`) to store
       `Interview` objects.
-    * `schedule edit`
-      * Implemented the `EditScheduleCommandParser` and `EditScheduleCommand` to allow users to edit the DATE_TIME of interviews using 
-      the index in the Interview Schedule.
-    * `schedule delete`
-      * Implemented the `DeleteScheduleCommandParser` and `DeleteScheduleCommand` to allow users to delete interviews using the index
-        in the Interview Schedule.
-    * `schedule clear`
-      * Implemented the `ClearScheduleCommandParser` and `ClearScheduleCommand` to allow users to clear all interviews in the
-      interview schedule.
+      * Justification: An important feature for the value proposition of our application. Modelled after 
+      `AB3`'s `add`, `edit`, `delete`, `clear` commands for consistency. Enhanced the `schedule clear` command
+      to update the candidate's interview status according to the state of the interview upon execution 
+      (i.e. `Not Scheduled` if interview is upcoming or in progress, `Completed` if the interview has expired and
+      user has not refreshed the application)
 
   * **Enhancement to existing features**:
     * Enhanced the `ClearCommand` to clear both candidates and interviews when command is executed.
