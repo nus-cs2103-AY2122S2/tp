@@ -3,16 +3,18 @@ layout: page
 title: User Guide
 ---
 
-# Tracey
+Tracey
 
 Tracey is a **desktop app for managing health statuses of NUS Hall Residents, optimized for use via a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-<details>
-  <summary>What are CLIs? What are GUIs?</summary>
+What are CLIs? What are GUIs?
 
 ##  Brief Introduction
+
+What are CLIs? What are GUIs?
+
 CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
 
 GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
@@ -31,15 +33,13 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 This [video](https://www.youtube.com/watch?v=wXzl7e9JGag) illustrates the power of using CLI over GUI in performing the same task. <br>
 (The video is produced by the developers of the FAST app, and has been approved for reuse.)
 
-</details>
-
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
 We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents
+* Table of Contents 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -49,9 +49,9 @@ There are a few symbols to take note of in our User Guide. Their purposes are st
 
 | Symbol  |                                                                            Purpose                                                                             |
 |:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|   :information_source:  |      <div markdown="span" class="alert alert-info"> Additional notes are parked here. They contain beneficial information in case you are confused.</div>      |
-|   ⚠️    |         <div markdown="span" class="alert alert-warning"> Warnings are parked here. They contain information that you **NEED** to take note of.</div>          |
-|   💡    | <div markdown="span" class="alert alert-primary"> Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.</div> |
+|   :information_source:  |                                Additional notes are parked here. They contain beneficial information in case you are confused.                                 |
+|   ⚠️    |            Warnings are parked here. They contain information that you **NEED** to take note of.             |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.|
 
 *Table 1: Symbols and their purposes.*
 
@@ -65,12 +65,12 @@ Additional formatting guidelines:
 
 *Table 2: Word formats and their purposes.*
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
- <div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
 
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
   
@@ -90,8 +90,7 @@ Additional formatting guidelines:
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
 <div markdown="span" class="alert alert-info">
-  
-  :information_source: **Note:**<br>
+:information_source: **Note:**<br>
   
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
@@ -113,7 +112,7 @@ Additional formatting guidelines:
 
 * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the <a href='#features'Features/> below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -130,56 +129,13 @@ This is a sample screenshot of what you can expect from the `help` command.
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You can also use the `F1` key to open the pop-up window.
+1. You can also use the `F1` key to open the pop-up window.
   
 </div>
 
-### 3.2. Importing Excel sheet
-
-Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
-
-Format: `import FILE PATH`
-
-<div markdown="span" class="alert alert-primary">
-  
-:bulb: **Tip:**<br>
-  
-* The file path is relative to the root directory.
-
-</div>
-
-Examples of usage:
-* `import C:\Users\Documents\tp.xlsx`
-* `import C:\Users\Documents\Desktop\tp\students.xlsx`
-
-Format: import button
-* Adds a list of students with Relevant Details such as Covid status into Tracey.
-* Relevant details required are mentioned in Table 4 below.
-* In the Excel sheet, the first column has to be the names of students followed by the Relevant Details.
-* Tracey will then store all students from the Excel file into her!
-
-Sample Excel file:
-![Format_Sample](images/Excelformat.png) *Figure 3: Screenshot of Excel file.*
-
-How to identify import button:
-![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
-
-<div markdown="span" class="alert alert-warning">
-  
-:warning: **Warning:**<br>
-  
-* The excel file must contain only one sheet named "Sheet1".
-  
-* The column of the table must be capital and starts with Column A.
-  
-* The data in the table needs to be ensured no space behind
-  
-</div>
-
-### 3.3. Adding a contact
+### 3.2. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -206,8 +162,6 @@ Examples of usage:
 
 *Table 3: Incorrect usage of **pre-defined constants**. Refer to Table 4 for an exhaustive list of such constants.*
 
-
-
 | **Prefix** | **Meaning** |    **Pre-defined constants**                                                                          |                                                                                                                                                                                                                                                        Constraints                                                                                                                                                                                                                                                        |
 |:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 60 characters.                                                                                                                                                                                                                  |
@@ -223,19 +177,18 @@ Examples of usage:
 *Table 4: Table showing list of possible prefixes and the Pre-defined constants.*
 
 As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
-In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
+In addition, the list of pre-defined constants are also provided for `Faculty`, `Covid Status`, and `Block`.
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You are able to add optional tags with no restrictions using the `t/` prefix.
+1. You are able to add optional tags with no restrictions using the `t/` prefix.
   
-* Additions can be reversed with the `undo` feature.
+2. Additions can be reversed with the `undo` feature.
   
 </div>
 
-### 3.4. Editing an existing contact
+### 3.3. Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
@@ -252,7 +205,7 @@ Format: `edit INDEX n/NAME ...`
   i.e. `edit 1 p/98090042 p/81812424` is the same as `edit 1 p/81812424`.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 3: Screenshot of index location.*
 
 Examples of usage:
 * `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
@@ -260,20 +213,19 @@ Examples of usage:
   and `johndoe@example.com` respectively.
 
 Original list:
-![Before_Edit](images/BeforeEdit.png) *Figure 6: Screenshot of Tracey before edit command is applied.*
+![Before_Edit](images/BeforeEdit.png) *Figure 4: Screenshot of Tracey before edit command is applied.*
 
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
-![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
+![After_Edit](images/AfterEdit.png) *Figure 5: Screenshot of Tracey after applying the edit command.*
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* Tracey shows the entire edited database after the edit command is applied.
+1. Tracey shows the entire edited database after the edit command is applied.
   
-* After every edit command, the student at the specified index will be shifted to the bottom of the list.
+2. After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
-* If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
+3. If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 </div>
 
@@ -285,7 +237,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
   
 </div>
 
-### 3.5. Deleting a contact
+### 3.4. Deleting a contact
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
@@ -296,27 +248,26 @@ Format: `delete INDEX`
 * You can only delete the contact information at an index where there is a student assigned to it.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 6: Screenshot of index location.*
 
 Examples of usage:
 * `delete 2` removes the 2nd student on the list.
 * `delete 10` removes the 10th student on the list.
 
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:**<br>
   
-* The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
+1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
   
-* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+2. You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
   
-* This can save you time scrolling down an entire list to get his/her `INDEX`!
+3. This can save you time scrolling down an entire list to get his/her `INDEX`!
   
-* Deletions can be reversed with the `undo` feature.
+4. Deletions can be reversed with the <a href='#undoing-an-action>`undo`</a> feature.
   
 </div>
 
-### 3.6. Undoing an action
+### 3.5. Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
@@ -330,26 +281,25 @@ Examples of usage:
 * Using `undo` after a `delete` command will add the recently deleted student.
 
 Scenario for undoing an edit command:
-![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 8: Scenario of using an undo command following an edit command.*
+![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 7: Scenario of using an undo command following an edit command.*
 
-Figure *8* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+Figure *7* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
 The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+1. After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
   
-* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
   
-  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+   a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
   
-  * Using an `undo` command will not restore the student's index back to 1
+   b. Using an `undo` command will not restore the student's index back to 1
   
 </div>
 
-### 3.7. Redoing an action
+### 3.6. Redoing an action
 
 Reverse an executed undo command.
 
@@ -364,26 +314,25 @@ Examples of usage:
 * Using `redo` after using `undo` on an `edit` command will counteract the effect of undoing an `edit` command and the overall result edits the details of the student in Tracey.
 
 Scenario for redoing after undoing an edit command:
-![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
+![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 8: Scenario of using a redo command after using an undo command following an edit command.*
 
-Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
+Following the scenario from *Figure 7*, *Figure 8* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
 to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br> 
   
-* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+1. After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
   
-* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
   
-  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
   
-  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+  b. Using a `redo` command after using an `undo` command will not restore the student's index back to 1
   
 </div>
 
-### 3.8. Finding a contact
+### 3.7. Finding a contact
 Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
@@ -399,11 +348,11 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 10: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 9: Screenshot of result of the find command.*
 
-As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 9*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### 3.9. Filtering contacts
+### 3.8. Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
@@ -422,47 +371,53 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 11: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 10: Example result of filter command.*
 
-As seen in *Figure 11*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 10*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+1. `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
   
 </div>
 
-### 3.10. Listing the records
+### 3.9. Listing the records
 List all students, displaying all their data stored in Tracey.
 
 Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 11: Screenshot of list command.*
 
-### 3.11. Copying emails
+### 3.10. Copying emails
 Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
 
-![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 12: Screenshot of Copy Email function.*
 
-From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 12*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 <div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
   
-  :information_source: **Note:**<br>
+1. There is also a `Show Email` button on the GUI which you can click to open the same window.
   
-* There is also a `Show Email` button on the GUI which you can click to open the same window.
-  
-* On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
+2. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails. This function definitely is faster than individually copy-pasting student emails.
   
 </div>
 
-### 3.12. Summarising the records
+### 3.11. Summarising the records
+The above figure illustrates the important interactions of `EditCommand` when the user successfully edit the `name` attribute of the student at index 1 to Poppy.
+
+When a user inputs an `EditCommand`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser`, `EditCommandParser` and `ParserUtil` to check the validity of the input index, prefixes and parameters. If the input is valid, a `EditPersonDescriptor` object is instantiated and this object is subsequently used as a parameter to instantiate an `EditCommand` object.
+The `EditCommand` object is then passed back to the `LogicManager` which will then invoked `EditCommand#execute()`. This execute method will call two other helper methods `EditCommand#editChecker()` and `Person#isDifferentPerson()`, which both are not shown in the sequence diagram and is used further validation.
+The main functions of these two methods are to check if the new values are duplicate of the corresponding fields to be edited and if the new values for fields that requires uniqueness already exists in the address book respectively.
+The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
+
+TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
 
 Summarise the statistics of the student records inside Tracey.
 
@@ -475,15 +430,15 @@ Example of usage:
 
 <img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
-*Figure 14a: Example pie charts of Tracey in response to the `summarise` command.* 
+*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.* 
 
 <img src ='images/SummariseExample2.png' alt='SummariseExample2' width="400"/> 
 
-*Figure 14b: Example bar chart of Tracey in response to the `summarise` command.*
+*Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 13aand 13b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
-### 3.13. Archiving Tracey
+### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
 * `ROOT`: The folder where the Tracey.jar is in.
 * `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
@@ -505,80 +460,77 @@ Examples of usage:
   4. Open the folder named `270322`.
   5. Your archived file is named `270322_152833123.json`.
 
-<div markdown="span" class="alert alert-alert">
-  
+<div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
   
-* Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+1. Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+
+2. Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
   
 </div>
 
 <div markdown="span" class="alert alert-primary">
-  
 :bulb: **Tip:**<br>
   
-* You can rename the archived file in the file path manually for easier reference.
+1. You can rename the archived file in the file path manually for easier reference.
   
-  * Features for naming the archived file using the CLI will be available in later releases.
+  a. Features for naming the archived file using the CLI will be available in later releases.
   
-* To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+  b. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
   
 </div>
 
-### 3.14. Resizing the result display window
+### 3.13. Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
 * There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 15 for the comparison for the different result display window sizes.
+* Refer to Figure 14 for the comparison for the different result display window sizes.
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
-
-<div markdown="span" class="alert alert-primary">
-  
-:bulb: **Tip:**<br>
-  
-* This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
-  
-</div>
+![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*
 
 <div markdown="span" class="alert alert-info">
-  
 :information_source: **Note:**<br>
   
-* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+1. There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
   
 </div>
+<div markdown="span" class="alert alert-primary">
 
-### 3.15. Clearing all records
+:bulb: **Tip:**<br>
+
+1. This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+
+</div>
+
+### 3.14. Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
 
 <div markdown="span" class="alert alert-warning">
-  
 :warning: **Warning:**<br>
   
-* Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+1. Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
   
-* This feature cannot be reversed using `undo`.
+2. This feature cannot be reversed using `undo`.
   
 </div>
 
-### 3.16. Exiting Tracey
+### 3.15. Exiting Tracey
 Close the application.
 
 Format: `exit`
 * Closes the application.
 
-### 3.17. Saving
+### 3.16. Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### 4. FAQ
+## 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -596,7 +548,7 @@ there are changes to Tracey.
 
 4. **Q**: Where can I find the `INDEX` of a student? <br>
    **A**: They can be found in the numbers located beside each individual student. <br>
-   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 6: Screenshot of index location.*
 
 5. **Q**: The `delete` feature only allow me to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
@@ -611,61 +563,24 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 5. Command Summary
+## 5. Command Summary
 
 *Table 5: Command Summary.*
 
 | No. | Command     | Description                                                                               | Example                                                                                                                                |
 |-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | 1.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
-| 2.  | `import`    | Add a list of students from an Excel file into Tracey                                     | -                                                                                                                                      |
-| 3.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
-| 4.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
-| 5.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
-| 6.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
-| 7.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
-| 8.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
-| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
-| 10. | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
-| 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
-| 12. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
-| 13. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
-| 14. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
-| 15. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
-| 16. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
-
-
---------------------------------------------------------------------------------------------------------------------
-
-
-### 6. Glossary
-
-*Table 4: List of prefixes, fields, pre-defined constants and constraints.*
-
-| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
-|:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
-| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
-| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
-| `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
-| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
-| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
-| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
-| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
-| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
-
-*Table 6: Specific terminology used.*
-
-| Term                           | Meaning                                                                                                                                                                                                                                                                                              |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Block                          | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                     |
-| Command Line Interface (CLI)   | A text-based user interface used to run applications.                                                                                                                                                                                                                                                |
-| Covid Status                   | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                     |
-| Faculty                        | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                       |
-| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                    |
-| Health Risk Notice (HRN)       | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                     |
-| JAR File                       | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                        |
-| Matriculation Number           | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                  |
-| Prefix                         | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant           | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                  |
-| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                               |
+| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
+| 3.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
+| 4.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 5.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
+| 6.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
+| 7.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
+| 8.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
+| 9.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
+| 10. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 11. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 12. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 13. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
+| 15. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |

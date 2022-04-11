@@ -54,9 +54,11 @@ Given below are my contributions to the project.
         * Added implementation details for Email Feature [\#265]()
         * Added Class, Activity, Sequence diagrams for Email Feature [\#265]() 
         * Added Class, Activity, Sequence diagrams for Help Feature [\#276]()
+        * Added Class, Activity, Sequence diagrams for Delete Feature [\#296]()
+        * Added Class, Activity, Sequence diagrams for Exit Feature [\#296]()
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235]()
+    * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235](), [\#273]()
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3](), [4](), [5](), [6](), [7](), [8](), [9](), [10](), [11]())
 
 

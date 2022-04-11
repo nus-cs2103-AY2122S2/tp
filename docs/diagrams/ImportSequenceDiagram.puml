@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ImportCommandParser" as ImportCommandParser LOGIC_COLOR
+participant "a:ImportCommand" as ImportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "person:FileConverter" as FileConverter LOGIC_COLOR
+end box
+
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("import C://User/Desktop/tp.xlsx")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("import C://User/Desktop/tp.xlsx")
+activate AddressBookParser
+
+create ImportCommandParser
+AddressBookParser -> ImportCommandParser : ImportCommandParser ("import C://User/Desktop/tp.xlsx")
+activate ImportCommandParser
+
+ImportCommandParser --> AddressBookParser
+deactivate ImportCommandParser
+
+AddressBookParser -> ImportCommandParser : parse("C://User/Desktop/tp.xlsx")
+activate ImportCommandParser
+
+create FileConverter
+ImportCommandParser --> FileConverter : FileConverter ("C://User/Desktop/tp.xlsx")
+activate FileConverter
+FileConverter --> ImportCommandParser : person
+deactivate FileConverter
+
+create ImportCommand
+ImportCommandParser -> ImportCommand : ImportCommand(person)
+activate ImportCommand
+
+ImportCommand --> ImportCommandParser : a
+deactivate ImportCommand
+
+ImportCommandParser --> AddressBookParser : a
+deactivate ImportCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ImportCommandParser -[hidden]-> AddressBookParser
+destroy ImportCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> ImportCommand : execute()
+activate ImportCommand
+
+ImportCommand -> Model : importPersonList()
+activate Model
+
+Model --> ImportCommand
+deactivate Model
+
+create CommandResult
+ImportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ImportCommand
+deactivate CommandResult
+
+ImportCommand --> LogicManager : result
+deactivate ImportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

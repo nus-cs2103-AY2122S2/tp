@@ -173,44 +173,104 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void getNonUniqueAttributeTypesMessage() {
+    public void getNonUniqueAttributeTypesMessage_testForPhoneAttributeOnly() {
         String nonUniquePhoneMessage = "Phone";
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add("Phone");
+        assertEquals(nonUniquePhoneMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+    }
+
+    @Test
+    public void getNonUniqueAttributeTypesMessage_testForEmailAttributeOnly() {
         String nonUniqueEmailMessage = "Email";
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Email");
+
+        assertEquals(nonUniqueEmailMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+    }
+
+    @Test
+    public void getNonUniqueAttributeTypesMessage_testForMatriculationNumberAttributeOnly() {
         String nonUniqueMatriculationNumberMessage = "Matriculation Number";
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Matriculation Number");
+
+        assertEquals(nonUniqueMatriculationNumberMessage,
+                uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+    }
+
+    @Test
+    public void getNonUniqueAttributeTypesMessage_testForAllUniqueAttributes() {
         String nonUniquePhoneAndEmailMessage = "Phone and Email";
         String nonUniquePhoneAndMatriculationNumberMessage = "Phone and Matriculation Number";
         String nonUniqueEmailAndMatriculationNumberMessage = "Email and Matriculation Number";
         String nonUniqueAllMessage = "Phone, Email and Matriculation Number";
         UniquePersonList uniquePersonList = new UniquePersonList();
         ArrayList<String> arrayList = new ArrayList<>();
-        // case 1: non-unique phone message
-        arrayList.add("Phone");
-        assertEquals(nonUniquePhoneMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
-        arrayList.clear();
-        arrayList.add("Email");
-        assertEquals(nonUniqueEmailMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
-        arrayList.clear();
-        arrayList.add("Matriculation Number");
-        assertEquals(nonUniqueMatriculationNumberMessage,
-                uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
-        arrayList.clear();
+
+        // test for Phone and Email
         arrayList.add("Phone");
         arrayList.add("Email");
+
         assertEquals(nonUniquePhoneAndEmailMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for Phone and Matriculation Number
         arrayList.clear();
         arrayList.add("Phone");
         arrayList.add("Matriculation Number");
+
         assertEquals(nonUniquePhoneAndMatriculationNumberMessage,
                 uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for Email and Matriculation Number
         arrayList.clear();
         arrayList.add("Email");
         arrayList.add("Matriculation Number");
+
         assertEquals(nonUniqueEmailAndMatriculationNumberMessage,
                 uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for all unique attributes
         arrayList.clear();
         arrayList.add("Phone");
         arrayList.add("Email");
         arrayList.add("Matriculation Number");
+
         assertEquals(nonUniqueAllMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+    }
+
+    @Test
+    public void getNonUniqueAttributeTypesMessage_testForSyntax() {
+        String placeHolderText = "text";
+        String expectedMessageForLengthOne = "text";
+        String expectedMessageForLengthTwo = "text and text";
+        String expectedMessageForLengthFive = "text, text, text, text and text";
+        String expectedMessageForLengthTen = "text, text, text, text, text, " + expectedMessageForLengthFive;
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        // test for length = 1
+        arrayList.add(placeHolderText);
+        assertEquals(expectedMessageForLengthOne, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for length = 2
+        arrayList.add(placeHolderText);
+        assertEquals(expectedMessageForLengthTwo, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for length = 5
+        for (int i = 0; i < 3; i++) {
+            arrayList.add(placeHolderText);
+        }
+        assertEquals(expectedMessageForLengthFive, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+
+        // test for length = 10
+        for (int i = 0; i < 5; i++) {
+            arrayList.add(placeHolderText);
+        }
+        assertEquals(expectedMessageForLengthTen, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
     }
 }
