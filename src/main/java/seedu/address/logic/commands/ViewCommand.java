@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WITHOUT_LINEUP;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -100,6 +101,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (predicatePerson != null) {
+            model.sortPersonsInMyGM(Comparator.comparing(Person::getName));
             model.updateFilteredPersonList(accumulatePredicate(predicatePerson));
         }
         if (predicateSchedule != null) {
