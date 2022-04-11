@@ -46,7 +46,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `summrise`, `import`, `clear`, `edit`, `find` (Pull requests [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150), [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128), [\#114](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/114))
-    * Reformatted user guide to have a better reading flow (Pull request [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128))
+    * Reformatted User Guide to have a better reading flow (Pull request [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128))
     * Added most of the diagrams for the different features and for the QnA (Pull requests [\#114](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/114), [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150), [\#240](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/240))
     * Added a collapsable section for the explanation of CLI. (Pull request [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150))
     * Edited the Question and Answer information of the user guide (Pull request [\#114](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/114))
