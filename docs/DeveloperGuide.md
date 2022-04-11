@@ -100,15 +100,15 @@ The `Views` Sub-Components consists of 3 distinct views:
 * `PeopleView`
   * Consists of the `PersonListPanel` class, which displays a list of filtered persons to the user in the form of multiple instances of `StudentCard` and `ProfessorCard`.
   * Also consists of multiple instances of `ModuleAndGroupMiniCard` which displays module codes and the group names of each group in each module to the user.
-* `ModuleView`
+* `ModulesView`
   * Consists of the `ModuleListPanel` class, which displays a list of filtered modules to the user in the form of instances of `ModuleCard`. 
     * Each `ModuleCard` displays information on a module such as: 
       * groups in the module in the form of instances of `GroupCard`
       * students in the module in the form of instances of `StudentCard`
       * professors in the module in the form of instances of `ProfessorCard`
       * key events of the module in the form of instances of `ModuleKeyEventCard`
-* `GroupView`
-  * Consists of the `GroupsView` class, which displays a list of filtered groups to the user in the form of instances of `GroupCard`.
+* `GroupsView`
+  * Consists of the `GroupListPanel` class, which displays a list of filtered groups to the user in the form of instances of `GroupCard`.
     * Each `GroupCard` displays information on a group such as:
       * members of the group in the form of instances of `StudentCard`
 
@@ -526,7 +526,7 @@ Actor: User
 
 **MSS**
 1. User wants to view more details fo a module or group from the module code or group code he sees on _people view_.
-2. User clicks with the mouse on the displayed module code / group name that he wants view more details of.
+2. User clicks with the mouse on the displayed module code or group name that he wants view more details of.
 3. UniBook changes to _modules view_/_groups view_ showing all the details of the module/group that the User wants to view.
 
 Use case ends.
@@ -759,7 +759,7 @@ testers are expected to do more *exploratory* testing.
       * Needed to write a substantial amount of storage classes to support the new model classes.
       * Had to account for the inheritance relationship between `Student` and `Professor` classes with `Person` class.
         * This required learning more advanced uses of the Jackson library so that this relationship could be expressed in the stored JSON.
-    * Determination of and enforcement of fields on entity classes.
+    * Determination of and enforcement of constraints on fields on entity classes.
       * Every field in all entities had to have its own set of constraints to ensure a consistent user experience.
         * e.g. a module code must be unique amongst all modules in UniBook.
       * Constraints had to be determined appropriately so that they would be intuitive, and match reality as closely as possible.
