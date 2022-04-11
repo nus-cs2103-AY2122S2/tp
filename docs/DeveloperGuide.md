@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Developer Guide
+title: TeachWhat! Developer Guide
 ---
 ## Table of Contents
 * [**Introduction**](#introduction)
@@ -15,17 +15,10 @@ title: Developer Guide
   * [Common classes](#common-classes)
 * [**Implementation**](#implementation)
   * [Viewing a Lesson or Student's details](#viewing-a-lesson-or-students-details)
-    * [Step 1: User input](#step-1-user-inputs-student-1-into-the-commandbox-and-hits-enter)
-    * [Step 2: Logic parses input](#step-2-logic-parses-the-users-input-and-returns-the-result)
-    * [Step 3: Executing the command](#step-3-executing-the-command)
-    * [Step 4: Updating the UI](#step-4-updating-the-ui)
   * [Add student](#add-student)
   * [Add temporary/recurring lesson](#add-temporaryrecurring-lesson)
     * [Determining if a lesson clashes with any existing lessons](#determining-if-a-lesson-clashes-with-any-existing-lessons)
   * [Assign student to lesson](#assign-student-to-lesson)
-    * [Step 1: User launches application and executes command](#step-1-the-user-launches-the-application-and-executes-the-following)
-    * [Step 2: User executes commands to find IDs](#step-2-the-user-executes-the-following-to-find-the-respective-ids-of-the-student-and-lesson)
-    * [Step 3: User executes assign command](#step-3-the-user-executes-the-command-assign--s-1--l-1-the-command-does-the-following)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix: Requirements**](#appendix-requirements)
   * [Product scope](#product-scope)
@@ -75,6 +68,8 @@ Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/m
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -98,12 +93,13 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `rms 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="450" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -112,11 +108,13 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="225" />
 
 The sections below give more details of each component.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 The **API** of this component is specified in `Ui.java`
@@ -172,6 +170,8 @@ Refer to [Viewing a Lesson or Student's details](#viewing-a-lesson-or-students-d
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -186,6 +186,8 @@ How the `Logic` component works:
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rms 1")` API call.
 
 ![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteStudentSequenceDiagram.png)
@@ -194,14 +196,17 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <img src="images/ParserClasses.png" width="600"/>
+
+<div style="page-break-after: always;"></div>
 
 How the parsing works:
 * When called upon to parse a user command, the `TeachWhatParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteStudentCommand`) which the `TeachWhatParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -223,11 +228,13 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`StorageManager.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/StorageManager.java)
 
-![](images/StorageClassDiagram.png)
+<img src="images/StorageClassDiagram.png" width="600"/>
 
 The `Storage` component
 * saves lesson book data, student book data and user preference data in json format, and read them back into the 
@@ -245,6 +252,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 [return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -275,6 +284,8 @@ list.
 receives the user input through the `MainWindow#executeCommand()` method. 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 then sends the user input to `Logic` and retrieves the result.
+
+<div style="page-break-after: always;"></div>
 
 #### Step 2: `Logic` parses the user's input and returns the result
 
@@ -309,9 +320,11 @@ object, with the parameter `infoPanelType = InfoPanelTypes.STUDENT`.
 is an enumerator representing the different states of the InfoPanel. This is then returned to `LogicManager` which
 returns it back to `MainWindow`.
 
+<div style="page-break-after: always;"></div>
+
 #### Step 4: Updating the UI
 
-![](images/viewing-details/ViewStudentSequenceDiagram.png)
+<img src="images/viewing-details/ViewStudentSequenceDiagram.png" width="500"/>
 
 Once 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) 
@@ -328,7 +341,7 @@ is shown on the right side of the application.
 The execution of the command is complete and the result is shown in the image below, where the right side of the
 application is updated with the details of the selected `Student`.
 
-<img src="images/viewing-details/UiExample.png" width="550" />
+<img src="images/viewing-details/UiExample.png" width="500" />
 
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
@@ -395,6 +408,8 @@ and improve user experience by improving typing speed as the user does not have 
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete student or lesson
 Deleting a `Student` or `Lesson` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the
 `TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
@@ -424,8 +439,10 @@ Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
 * Constraint
   * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
     `ParseException` will be thrown if the constraints are violated
+  
+<img src="images/DeleteLessonSequenceDiagram.png" width="600"/>
 
-![](images/DeleteLessonSequenceDiagram.png)
+<div style="page-break-after: always;"></div>
 
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
@@ -524,6 +541,7 @@ The following sequence diagram shows how the assign operation works.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Help feature
 
@@ -545,6 +563,8 @@ Given below is a class diagram of `TableView<CommandCard>`.
 **Design considerations**  
 The `CommandCard` class became a nested class because there were no other features that would be implemented that need to use it. Only the `HelpWindow` requires it,
 thus, it was made as a nested class.
+
+<div style="page-break-after: always;"></div>
 
 ### Command Shortcuts
 
@@ -575,6 +595,8 @@ If we had a feature that allows the user to create custom command words for each
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -603,6 +625,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | user       | specify the type of lesson when creating one              | know if a lesson is permanent or a temporary lesson          |
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -637,6 +661,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### Add a recurring lesson
 **System:** TeachWhat!  
 **Use case:** UC2 - Add a recurring lesson  
@@ -667,6 +693,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1e. User already has an existing lesson overlapping with the specified starting, ending time and date.
     * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
+
+<div style="page-break-after: always;"></div>
 
 #### Delete a lesson
 
@@ -715,6 +743,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. TeachWhat! shows an error message.  
       Use case resumes at step 5.
 
+<div style="page-break-after: always;"></div>
+
 #### Delete a student
 
 **System:** TeachWhat!  
@@ -757,6 +787,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -786,6 +818,8 @@ window preferences when you close the program.
    left off.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a lesson / Viewing a lesson's details
 TeachWhat! allows you to store details of a lesson and view it back later on.
@@ -822,6 +856,8 @@ TeachWhat! allows you to store details of a lesson and view it back later on.
    3. Assuming an existing recurring lesson has an index of 2, enter the command `lesson 2`.
    4. Expected: The details of that recurring lesson should be shown on the right. A recurring lesson is denoted by the
    green tag which is labelled `recurring`.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note that:**<br>
@@ -861,6 +897,8 @@ TeachWhat! allows you to store details of a student and view it back later on.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a student
 
 This command requires you to have at least one existing student.
@@ -886,6 +924,8 @@ This command requires you to have at least one existing student.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Assigning a student
 
 This command requires you to have at least one existing student and lesson.
@@ -909,6 +949,8 @@ user guide section to add a student.
    3. Expected: An error message will be displayed saying that the student is already enrolled in the lesson.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Unassigning a student
 
@@ -934,6 +976,8 @@ This command requires you to have at least one existing student and lesson.
     3. Expected: An error message will be displayed saying that the student is **not** enrolled in the lesson.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -966,6 +1010,8 @@ To simulate this scenario, follow the steps below:
 5. To simulate the file becoming corrupted, you may remove or add some items into the JSON file.
    - In this case, we can simply remove the opening square-bracket from the JSON file, rendering it unreadable, like so:
 
+<div style="page-break-after: always;"></div>
+
 ##### Before change
 ```
 {
@@ -982,7 +1028,6 @@ To simulate this scenario, follow the steps below:
     "assignedStudents" : [ ],
     "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
   }
-  
   // ......
 }
 ```
@@ -1003,7 +1048,6 @@ To simulate this scenario, follow the steps below:
     "assignedStudents" : [ ],
     "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
   }
-  
   // ......
 }
 ```
