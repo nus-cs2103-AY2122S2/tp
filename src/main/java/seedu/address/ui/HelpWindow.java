@@ -84,9 +84,9 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: filter f/FACULTY cs/COVID_STATUS b/BLOCK"
             + NEWLINE_AND_INDENTATION
-            + "Example 1: cs/positive"
+            + "Example 1: filter cs/positive"
             + NEWLINE_AND_INDENTATION
-            + "Example 2: b/c\n"
+            + "Example 2: filter b/c\n"
 
             + "\n10. IMPORT excel files"
             + NEWLINE_AND_INDENTATION
