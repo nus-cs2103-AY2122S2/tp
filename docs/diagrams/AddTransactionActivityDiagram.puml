@@ -5,22 +5,22 @@ start
 : Parses command;
 
 if () then ([valid command provided])
-  :Create Transaction Builder;
-  :Create Add Transaction Command;
-  :Execute Add Transaction Command;
+  :Create transaction builder;
+  :Create add transaction command;
+  :Execute add transaction Command;
   if () then ([valid parameter provided])
-  : Create new Transaction;
+  : Create new transaction;
   : add the transaction to transaction list;
-  : Display Success message;
+  : Display success message;
   stop
   else ([invalid])
-   : Throw Exception;
-   : Display Invalid parameter message;
+   : Throw exception;
+   : Display invalid parameter message;
    stop
   endif
 else ([invalid])
-  :Throw Parse Exception;
-  :Display Invalid Command message;
+  :Throw parse exception;
+  :Display invalid command message;
   stop
 
 endif

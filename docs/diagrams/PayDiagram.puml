@@ -5,20 +5,20 @@ start
 : Parses command;
 
 if () then ([valid command provided])
-  :Create Pay Command;
-  :Execute Pay Command;
+  :Create pay command;
+  :Execute pay command;
   if () then ([valid transaction index provided])
   : update the specified transaction;
-  : Display Success message;
+  : Display success message;
   stop
   else ([invalid transaction index])
-   : Throw Exception;
-   : Display Invalid Index message;
+   : Throw exception;
+   : Display invalid index message;
    stop
   endif
 else ([invalid])
-  :Throw Parse Exception;
-  :Display Invalid Command message;
+  :Throw parse exception;
+  :Display invalid command message;
   stop
 
 endif
