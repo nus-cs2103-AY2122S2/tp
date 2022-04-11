@@ -622,10 +622,10 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 
 1. Initial launch
     1. Download the jar file and copy into an empty folder
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file <br>Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 2. Saving window preferences
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-    2. Re-launch the app by double-clicking the jar file.Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file.<br>Expected: The most recent window size and location is retained.
 3. Shutting down
     1. First way you can do it is to click on the X button on the application.
     2. Another way is to click on ‘File’ menu item and click on ‘Exit’.
@@ -662,7 +662,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
     2. Test case: `delete 1`<br>Expected: First client is deleted from the list. Details of the deleted contact shown in the result display. Timestamp in the status bar is updated.
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) <br>Expected: Similar to previous.
 
 ## Favouriting/Unfavouriting a client
 
@@ -670,7 +670,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
     2. Test case: `favourite 1`<br>Expected: First client is favourited, thus a 🌟 shows for the client. The result display will show that the first client is successfully favourited.
     3. Test case: `favourite 0`<br>Expected: No client is favourited. Error details shown in the result display. List remains the same.
-    4. Other incorrect favourite commands to try: `favourite`, `favourite x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+    4. Other incorrect favourite commands to try: `favourite`, `favourite x`, `...` (where x is larger than the list size or smaller than 0)<br>Expected: Similar to previous.
 2. Unfavouriting a client while all clients are being shown
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. Make sure there is at least 1 client that has already been favourited.
    2. Test case: `favourite 3` where the 3rd client in the listing has been favourited. <br>Expected: Third client is unfavourited, thus removing the 🌟. The result display will show that the third client is successfully unfavourited.
@@ -744,7 +744,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
    Expected: an image is successfully associated to the first client with successful upload message.
    3. Test case: `upload 1 i/test.txt:Fail upload`<br>
    Expected: upload fails and error message is shown.
-   4. Other incorrect upload commands to try: `upload` `upload i/fail.png`, `...` Expected: Incorrect command format or invalid file error messages.
+   4. Other incorrect upload commands to try: `upload` `upload i/fail.png`, `...`<br>
+   Expected: Incorrect command format or invalid file error messages.
 
 ## Viewing an Image
 
@@ -753,8 +754,10 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
       1. There must be at least a client in the list.
       2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
       3. client must have at least one image associated with
-   2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
-   3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+   2. Test case: `viewimage 1`<br>
+   Expected: a new window pops up displaying the user's image and description.
+   3. Test case: `viewimage`<br>
+   Expected: Error message is displayed and no window pops up.
 
 ## Setting reminders
 
