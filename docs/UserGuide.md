@@ -491,7 +491,7 @@ Format: `delete o/module m/[MODULECODE]`
 Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
 * Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
-* Module is not case-sensitive, Group is case-sensitive.
+* Module code and Group is not case-sensitive.
 * For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### On People View:
@@ -531,6 +531,7 @@ Format: `delete [INDEX] stu/[INDEX]`
 #### :bulb: Delete a group from a module by index
 Format: `delete [INDEX] g/[GROUPNAME]`
 * same as the above command, but group name has to be specified to delete the group with that name
+* `GROUPNAME` is not case-sensitive. 
 
 #### :bulb: Delete a key event from a module by index
 Format: `delete [INDEX] ke/[INDEX]`
