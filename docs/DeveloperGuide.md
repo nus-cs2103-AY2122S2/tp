@@ -217,6 +217,7 @@ The following **UML activity diagram** shows what happens when a user executes a
 
 <img src="images/AddLabCommandActivityDiagram.png" width="600" />
 
+
 ### Filter Feature
 
 #### Proposed Implementation
@@ -228,6 +229,52 @@ determine if a `Student` has a specific `Lab` in its `LabList`.
 Given below is an example usage scenario and how the filter mechanism behaves at each step.
 
 Step 1. The user executes `filter l/1 s/s` command.
+
+
+### `labedit`: Edit Lab Feature
+
+#### Implementation
+The `labedit` feature allows for editing of the `LabStatus` and/or `LabMark` of a specified `Lab` in the TAddressBook.<br>
+The format of this command is `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`, where:
+* `INDEX` corresponds to the index number of a student, according to the currently displayed student list
+* `LAB_NUMBER` corresponds to an existing lab in the TAddressBook
+* `LAB_STATUS` is either `u`/`s`/`g` (`UNSUBMITTED`/`SUBMITTED`/`GRADED`)
+* `LAB_MARK` is an integer from 0 to 100 inclusive
+* The parentheses indicate that at least one of `s/LAB_STATUS` and `m/LAB_MARK` must be provided
+
+The implementation of `labedit` is as follows:
+1. When `AddressBookParser#parseCommand` detects `labedit` as the command word, it creates a new `EditLabCommandParser` with the given arguments.
+2. `EditLabCommandParser` parses the parameters and throws a `ParseException` if any invalid values are encountered.
+3. `EditLabCommand#execute(Model)` will then execute with the current `Model` in the system.
+4. The `EditLabCommand` object checks if the given `INDEX` is out of bounds.
+5. The `EditLabCommand` object checks if the given combination of `LAB_STATUS` and `LAB_MARK` is valid.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The valid combinations are:
+* `LAB_STATUS` and no `LAB_MARK`
+* `LAB_MARK` and no `LAB_STATUS`
+* `LAB_MARK` and `LAB_STATUS` of `GRADED`
+</div>
+
+6. The `EditLabCommand` calls `LabList#setLab` of the student specified by the given `INDEX`, which edits the target `Lab` to the new `Lab`.
+
+The following sequence diagram shows the interactions between components during the execution of the `labedit` command:
+
+<img src="images/EditLabCommandSequenceDiagram.png" width="850" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, the details of `LabList#setLab` have been intentionally omitted. They can be found in the sequence diagram below.
+</div>
+
+The following sequence diagram shows how `LabList#setLab` is implemented:
+
+<img src="images/LabListSetLabSequenceDiagram.png" width="550" />
+
+The detailed steps are as follows:
+1. `LabList#setLab` checks if the edited `Lab` is the same as the original `Lab`, and whether the target `Lab` exists in the `LabList`.
+2. `LabList#setLab` edits the target `Lab` to the new `Lab` with different `LabStatus` and/or `LabMark`.
+
+To summarize, the following activity diagram summarizes what happens when the user requests to edit a lab:
+
+<img src="images/EditLabCommandActivityDiagram.png" width="600" />
 
 
 ### \[Proposed\] Undo/redo feature
