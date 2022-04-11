@@ -43,7 +43,7 @@ public class CommandManager {
     public static final String MESSAGE_CONSTRAINTS = "Command type should be either contact, medical, "
             + "consultation, prescription or test";
 
-    private static CommandType viewCommandType = DEFAULT;
+    private static CommandType currentViewType = DEFAULT;
 
     private static String getFirstPrefixType(String text) {
         int index = text.indexOf(' ');
@@ -54,11 +54,11 @@ public class CommandManager {
         }
     }
 
-    public static void setViewCommandType(CommandType commandType) {
-        viewCommandType = commandType;
+    public static void setCurrentViewType(CommandType commandType) {
+        currentViewType = commandType;
     }
-    public static CommandType getViewCommandType() {
-        return viewCommandType;
+    public static CommandType getCurrentViewType() {
+        return currentViewType;
     }
 
     /**
@@ -97,19 +97,19 @@ public class CommandManager {
 
         switch(parsedCommandType) {
         case CONTACT:
-            viewCommandType = CONTACT;
+            currentViewType = CONTACT;
             return new AddContactCommandParser().parse(arguments);
         case MEDICAL:
-            viewCommandType = MEDICAL;
+            currentViewType = MEDICAL;
             return new AddMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            viewCommandType = CONSULTATION;
+            currentViewType = CONSULTATION;
             return new AddConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
-            viewCommandType = PRESCRIPTION;
+            currentViewType = PRESCRIPTION;
             return new AddPrescriptionCommandParser().parse(arguments);
         case TEST:
-            viewCommandType = TEST;
+            currentViewType = TEST;
             return new AddTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
@@ -129,19 +129,19 @@ public class CommandManager {
 
         switch(parsedCommandType) {
         case CONTACT:
-            viewCommandType = CONTACT;
+            currentViewType = CONTACT;
             return new ViewContactCommandParser().parse(arguments);
         case MEDICAL:
-            viewCommandType = MEDICAL;
+            currentViewType = MEDICAL;
             return new ViewMedicalCommandParser().parse(arguments);
         case CONSULTATION:
-            viewCommandType = CONSULTATION;
+            currentViewType = CONSULTATION;
             return new ViewConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
-            viewCommandType = PRESCRIPTION;
+            currentViewType = PRESCRIPTION;
             return new ViewPrescriptionCommandParser().parse(arguments);
         case TEST:
-            viewCommandType = TEST;
+            currentViewType = TEST;
             return new ViewTestResultCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_CONSTRAINTS);
@@ -156,7 +156,7 @@ public class CommandManager {
      */
     public static Command parseEditCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-        switch (viewCommandType) {
+        switch (currentViewType) {
         case CONTACT:
             return new EditContactCommandParser().parse(arguments);
         case MEDICAL:
@@ -180,7 +180,7 @@ public class CommandManager {
      */
     public static Command parseDeleteCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-        switch (viewCommandType) {
+        switch (currentViewType) {
         case CONTACT:
             return new DeleteContactCommandParser().parse(arguments);
         case MEDICAL:
@@ -204,7 +204,7 @@ public class CommandManager {
      */
     public static Command parseFindCommandType(String arguments) throws ParseException {
         requireNonNull(arguments);
-        switch (viewCommandType) {
+        switch (currentViewType) {
         case CONTACT:
             return new FindContactCommandParser().parse(arguments);
         case MEDICAL:

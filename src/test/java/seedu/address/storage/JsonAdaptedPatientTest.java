@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedPatient.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.BENSON;
 
@@ -37,14 +37,14 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
+        JsonAdaptedPatient person = new JsonAdaptedPatient(BENSON);
         assertEquals(BENSON, person.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(validNric, INVALID_NAME, validPhone, validEmail,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(validNric, INVALID_NAME, validPhone, validEmail,
                         validAddress, validTags);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -52,7 +52,7 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(validNric, null, validPhone, validEmail,
+        JsonAdaptedPatient person = new JsonAdaptedPatient(validNric, null, validPhone, validEmail,
                 validAddress, validTags);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -60,8 +60,8 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_invalidNric_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_NRIC, validName, validPhone, validEmail,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(INVALID_NRIC, validName, validPhone, validEmail,
                         validAddress, validTags);
         String expectedMessage = Nric.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -69,7 +69,7 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_nullNric_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(null, validName, validPhone, validEmail,
+        JsonAdaptedPatient person = new JsonAdaptedPatient(null, validName, validPhone, validEmail,
                 validAddress, validTags);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -77,8 +77,8 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(validNric, validName, INVALID_PHONE, validEmail,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(validNric, validName, INVALID_PHONE, validEmail,
                         validAddress, validTags);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -86,7 +86,7 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(validNric, validName, null, validEmail,
+        JsonAdaptedPatient person = new JsonAdaptedPatient(validNric, validName, null, validEmail,
                 validAddress, validTags);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -94,8 +94,8 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(validNric, validName, validPhone, INVALID_EMAIL,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(validNric, validName, validPhone, INVALID_EMAIL,
                         validAddress, validTags);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -103,7 +103,7 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(validNric, validName, validPhone, null,
+        JsonAdaptedPatient person = new JsonAdaptedPatient(validNric, validName, validPhone, null,
                 validAddress, validTags);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -111,8 +111,8 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(validNric, validName, validPhone, validEmail,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(validNric, validName, validPhone, validEmail,
                         INVALID_ADDRESS, validTags);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -120,7 +120,7 @@ public class JsonAdaptedPatientTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(validNric, validName, validPhone,
+        JsonAdaptedPatient person = new JsonAdaptedPatient(validNric, validName, validPhone,
                 validEmail, null, validTags);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -130,8 +130,8 @@ public class JsonAdaptedPatientTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(validTags);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(validNric, validName, validPhone, validEmail,
+        JsonAdaptedPatient person =
+                new JsonAdaptedPatient(validNric, validName, validPhone, validEmail,
                         validAddress, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
