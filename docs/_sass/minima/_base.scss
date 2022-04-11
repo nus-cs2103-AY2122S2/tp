@@ -279,9 +279,20 @@ table {
     display: block;
   }
   /**
-  * Gets rid of the top navigation menu when printing
+  * Replaces the top navigation menu with the project name when printing
   */
+  .site-header .wrapper {
+    display: none;
+  }
   .site-header {
+    text-align: left;
+  }
+  .site-header:before {
+    content: "TeachWhat!";
+    font-size: 32px;
+    text-align: left;
+  }
+  .site-header.header-inline .top-bar { // Removes the top bar
     display: none;
   }
 }
