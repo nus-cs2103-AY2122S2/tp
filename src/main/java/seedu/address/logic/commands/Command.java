@@ -16,6 +16,7 @@ public abstract class Command {
         exit(ExitCommand.MESSAGE_USAGE),
         find(FindCommand.MESSAGE_USAGE),
         flag(FlagCommand.MESSAGE_USAGE),
+        unflag(FlagCommand.MESSAGE_USAGE),
         help(HelpCommand.MESSAGE_USAGE),
         list(ListCommand.MESSAGE_USAGE),
         meet(MeetCommand.MESSAGE_USAGE),

@@ -30,7 +30,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String MESSAGE_SPACING = "\n\n";
 
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-w15-2.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + "\n\n"
+    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + MESSAGE_SPACING
             + AddCommand.MESSAGE_USAGE + MESSAGE_SPACING + ClearCommand.MESSAGE_USAGE + MESSAGE_SPACING
             + DeleteCommand.MESSAGE_USAGE + MESSAGE_SPACING + EditCommand.MESSAGE_USAGE + MESSAGE_SPACING
             + ExitCommand.MESSAGE_USAGE + MESSAGE_SPACING + FindCommand.MESSAGE_USAGE + MESSAGE_SPACING
