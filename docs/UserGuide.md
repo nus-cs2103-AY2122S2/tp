@@ -206,7 +206,7 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **For Email and Telegram:**
 
-**Copying email:** Clicking the email will trigger the local Mail application to create a new email to the aforementioned address. </br>
+**Copying email:** Clicking the email will trigger the local Mail application to create a new email to the aforementioned address. <br>
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
 
@@ -420,7 +420,7 @@ If your changes to the data file makes its format invalid, the data will be disc
 | [find]  | search for a person                 | `[find] KEYWORD [MORE_KEYWORDS]`                                                                |
 | view    | view the details of a person        | `view INDEX` or click the Contact/Meeting under the list.                                       |
 | edit    | edit details of a person            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [sm/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`           |
-| edit    | edit a person's social media        | `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA f/ sm/{SOCIAL MEDIA PLATFORM}` or </br> `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA sm/{SOCIAL MEDIA ID}`          |
+| edit    | edit a person's social media        | `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA f/ sm/{SOCIAL MEDIA PLATFORM}` or <br> `edit INDEX/NAME i/INDEX_SOCIAL_MEDIA sm/{SOCIAL MEDIA ID}`          |
 | copy    | copy all details of a person        | `copy NAME`                                                                                     |
 | copy    | copy one detail of a person         | perform the `view` command and click on the relevant label values to copy                       |
 | delete  | delete a person                     | `delete NAME` or `delete INDEX`                                                                 |
