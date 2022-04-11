@@ -19,7 +19,6 @@ deactivate Model
 
 FilterCommand -> Model : addOnFilteredStudentList(predicate)
 activate Model
-Model -> Model : setPredicate(newPredicate)
 Model --> FilterCommand
 deactivate Model
 

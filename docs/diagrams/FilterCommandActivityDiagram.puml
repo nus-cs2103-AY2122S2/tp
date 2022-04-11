@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes filter command with LAB_NUMBER and LAB_STATUS;
+:Dummy Lab created with the same LAB_NUMBER and LAB_STATUS;
+if () then ([Lab exists in Model])
+    :Create StudentHasLabPredicate using dummy Lab;
+    :Add on filter to studentList with StudentHasLabPredicate;
+else ([else])
+    :Displays error message;
+endif
+stop
+
+@enduml
