@@ -11,10 +11,10 @@ participant ":Model" as Model LOGIC_COLOR_T4
 participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
 end box
 
-[-> LogicManager : execute(delete)
+[-> LogicManager : execute(view)
 activate LogicManager
 
-LogicManager -> ViewCommandParser : parseCommand(add)
+LogicManager -> ViewCommandParser : parseCommand(view)
 activate ViewCommandParser
 
 create ViewCommand

@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class AddressBook
+Class ModelManager
+Class UserPrefs
+
+Class UniquePersonList
+Class Person
+Class Height
+Class Weight
+Class JerseyNumber
+Class Email
+Class Name
+Class Phone
+Class Tag
+
+Class UniqueLineupList
+Class Lineup
+Class LineupName
+Class LineupPlayerList
+
+Class UniqueScheduleList
+Class Schedule
+Class ScheduleName
+Class ScheduleDescription
+Class ScheduleDateTime
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+AddressBook *--> "1" UniquePersonList
+UniquePersonList --> "~* all" Person
+Person *--> Name
+Person *--> Phone
+Person *--> Email
+Person *--> Height
+Person *--> Weight
+Person *--> JerseyNumber
+Person *--> "0..5" Tag
+
+Name -[hidden]right-> Tag
+Phone -[hidden]right-> Email
+
+AddressBook *--> "1" UniqueScheduleList
+UniqueScheduleList --> "~* all" Schedule
+Schedule *--> ScheduleName
+Schedule *--> ScheduleDescription
+Schedule *--> ScheduleDateTime
+
+AddressBook *--> "1" UniqueLineupList
+UniqueLineupList --> "~* all" Lineup
+Lineup *--> LineupName
+Lineup *--> LineupPlayerList
+UniquePersonList -[hidden]right-> UniqueLineupList
+
+
+ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Schedule
+
+@enduml
