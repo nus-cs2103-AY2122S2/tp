@@ -30,7 +30,7 @@ alt customer to add is not unique
 AddCustomerCommand -> CommandException
 activate CommandException
 
-CommandException --> LogicManager
+CommandException --> LogicManager : e
 deactivate CommandException
 
 [<--LogicManager : e
