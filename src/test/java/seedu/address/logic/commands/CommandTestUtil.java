@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.ListType;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -253,6 +254,52 @@ public class CommandTestUtil {
         }
 
         return new CommandResult(String.format(msgSuccess, searchTypeString),
+                false, false, listType == ListType.PERSON, listType == ListType.COMPANY, listType == ListType.EVENT);
+    }
+
+    public static CommandResult getExpectedSortCommandResult(SearchType searchType, ListType listType, Ordering ordering) {
+        String searchTypeString = "";
+        String orderingString = "";
+        String msgSuccess = "";
+
+        switch (searchType) {
+        case UNARCHIVED_ONLY:
+            searchTypeString = " unarchived";
+            break;
+        case ARCHIVED_ONLY:
+            searchTypeString = " archived";
+            break;
+        case ALL:
+            searchTypeString = "";
+            break;
+        default:
+            // should not reach here
+        }
+
+        switch (ordering) {
+        case ASCENDING:
+            orderingString = " in ascending order";
+            break;
+        case DESCENDING:
+            orderingString = " in descending order";
+            break;
+        }
+
+        switch (listType) {
+        case PERSON:
+            msgSuccess = SortPersonCommand.MESSAGE_SUCCESS;
+            break;
+        case COMPANY:
+            msgSuccess = SortCompanyCommand.MESSAGE_SUCCESS;
+            break;
+        case EVENT:
+            msgSuccess = SortEventCommand.MESSAGE_SUCCESS;
+            break;
+        default:
+            // should not reach here
+        }
+
+        return new CommandResult(String.format(msgSuccess, searchTypeString + orderingString),
                 false, false, listType == ListType.PERSON, listType == ListType.COMPANY, listType == ListType.EVENT);
     }
 }
