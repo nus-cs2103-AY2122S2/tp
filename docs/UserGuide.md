@@ -113,7 +113,7 @@ Some example commands you can try:
 
 **:information_source: Notes about the image format:**<br>
 
-- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted. [exp. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pf/north,123 Street,1-room,$300000 i/Livingroom(blk123).jpg:Living room of Block 123 #01-01`]
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted. e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pf/north,1-room,$300000,$400000 i/Livingroom(blk123).jpg:Living room of Block 123 #01-01`]
 
 </div>
 
@@ -218,7 +218,7 @@ Format: `delete INDEX`
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd client in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+- `find name Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 **Note**:
 - Images associated with the client are not deleted and remains in the OS file system.
