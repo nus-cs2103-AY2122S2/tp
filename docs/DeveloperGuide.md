@@ -618,7 +618,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `view` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `view P/` command. Multiple persons in the list.
 
    1. Test case: `delete P/John`<br>
       Expected: Player named "John" is deleted.
