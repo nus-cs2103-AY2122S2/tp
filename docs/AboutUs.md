@@ -22,10 +22,10 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/sethckl.png" width="200px">
 
 [[github](http://github.com/SethCKL)]
-[[portfolio](team/SethCKL.md)]
+[[portfolio](team/sethckl.md)]
 
 * Role: Developer
-* Responsibilities: Documentation
+* Responsibilities: Project Management, Documentation, and in charge of `Applicant` component
 
 ### Le Nguyen Quang Dang Khoa
 
