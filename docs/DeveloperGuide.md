@@ -384,57 +384,64 @@ Actor: User
 1. User requests to add a client.
 2. REP adds the client to the system.
 
+    Use case ends.
+
 **Extensions:**
 
-* 1a. REP detects error in details
+* 1a. REP detects error in details.
    * 1a1. REP displays an error message.
 
-     Use case resumes at step 1
+     Use case resumes at step 1.
 
 ### **Use Case: Edit a client**
 
 Actor: User
 
 **MSS**
-1. User requests to list clients
-2. REP shows a list of clients
-3. User requests to edit a specific client
-4. REP edits the client in the system
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to edit a specific client.
+4. REP edits the client in the system.
+
+    Use case ends.
 
 **Extensions:**
 
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
-* 3a. The given index is invalid
-  * 3b1. REP displays an error message
+* 3a. The given index is invalid.
+  * 3b1. REP displays an error message.
 
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. REP detects error in details
-   * 3a1. REP displays an error message
+* 3b. REP detects error in details.
+   * 3a1. REP displays an error message.
 
-     Use case resumes at step 3
+     Use case resumes at step 3.
 
 ### **Use Case: Delete a client**
 
 Actor: User
 
 **MSS**
-1. User requests to list clients
-2. REP shows a list of clients
-3. User requests to delete a specific client
-4. REP deletes the client from the system
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to delete a specific client.
+4. REP deletes the client from the system.
+
+    Use case ends.
 
 **Extensions:**
-* 1a. The list is empty
-  Use case ends
+* 1a. The list is empty.
 
-* 3a. The given index is invalid
-   * 3a1. REP displays an error message
+  Use case ends.
 
-     Use case resumes at step 2
+* 3a. The given index is invalid.
+   * 3a1. REP displays an error message.
+
+     Use case resumes at step 2.
 
 ### **Use Case: Find clients by keywords**
 
@@ -443,7 +450,9 @@ Actor: User
 **MSS**
 1. User requests to find clients.
 2. REP filters the full list of clients for those that satisfy the condition.
-3. REP shows the filtered list of clients. 
+3. REP shows the filtered list of clients.
+
+    Use case ends.
 
 **Extensions:**
 * 1a. User request has wrong details. 
@@ -460,6 +469,8 @@ Actor: User
 2. REP pops up MatchWindow.
 3. REP shows matching clients in MatchWindow.
 
+    Use case ends.
+
 **Extensions:**
 * 2a. There are no matching clients. 
   * 2a1. REP shows an empty MatchWindow.
@@ -471,48 +482,54 @@ Actor: User
 Actor: User
 
 **MSS**
-1. User requests to list clients
-2. REP shows a list of clients
-3. User requests to upload image for a specific client
-4. REP associates image to the client
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to upload image for a specific client.
+4. REP associates image to the client.
+
+    Use case ends.
 
 **Extensions:**
-* 1a. The list is empty
-  Use case ends
+* 1a. The list is empty.
 
-* 3a. The given index is invalid
-   * 3a1. REP displays an error message
+  Use case ends.
 
-     Use case resumes at step 2
+* 3a. The given index is invalid.
+   * 3a1. REP displays an error message.
 
-* 3b. Image given is invalid
-   * 3b1. REP displays an error message
+     Use case resumes at step 2.
 
-     Use case resumes at step 3
+* 3b. Image given is invalid.
+   * 3b1. REP displays an error message.
+
+     Use case resumes at step 3.
 
 ### **Use Case: View Image**
 
 Actor: User
 
 **MSS**
-1. User requests to list clients
-2. REP shows a list of clients
-3. User requests to view images of a specific client
-4. REP displays images associated to the client
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to view images of a specific client.
+4. REP displays images associated to the client.
+
+    Use case ends.
 
 **Extensions:**
-* 1a. The list is empty
-  Use case ends
+* 1a. The list is empty.
 
-* 3a. The given index is invalid
-   * 3a1. REP displays an error message
+  Use case ends.
 
-     Use case resumes at step 2
+* 3a. The given index is invalid.
+   * 3a1. REP displays an error message.
 
-* 3b. Client has no images
-   * 3b1. REP displays an error message
+     Use case resumes at step 2.
 
-     Use case resumes at step 2
+* 3b. Client has no images.
+   * 3b1. REP displays an error message.
+
+     Use case resumes at step 2.
 
 ### **Use Case: Set a Reminder for a client**
 
@@ -524,19 +541,22 @@ Actor: User
 3. User requests to set a Reminder for a specific client.
 4. REP set a Reminder for the client in the system.
 
+    Use case ends.
+
 **Extensions:**
-* 1a. The list is empty
-  Use case ends
+* 1a. The list is empty.
 
-* 3a. The given index is invalid
-  * 3a1. REP displays an error message
+  Use case ends.
 
-    Use case resumes at step 2
+* 3a. The given index is invalid.
+  * 3a1. REP displays an error message.
 
-* 3b. REP detects error in details
-  * 3b1. REP displays an error message
+    Use case resumes at step 2.
 
-    Use case resumes at step 2
+* 3b. REP detects error in details.
+  * 3b1. REP displays an error message.
+
+    Use case resumes at step 2.
 
 ### **Use Case: View Reminders for clients**
 
@@ -548,37 +568,39 @@ Actor: User
 3. User requests to view Reminders for all clients.
 4. REP shows a list of current Reminders set.
 
+    Use case ends.
+
 **Extensions:**
-* 1a. The list is empty
-  Use case ends
+* 1a. The list is empty.
 
-* 3a. REP detects error in details
-   * 3a1. REP displays an error message
+  Use case ends.
 
-     Use case resumes at step 2
+* 3a. REP detects error in details.
+   * 3a1. REP displays an error message.
 
-**Use Case: Sort**
+     Use case resumes at step 2.
+
+### **Use Case: Sort clients**
 
 Actor: User
 
 **MSS**
-1. User requests to sort the list of clients
-2. REP displays clients in the requested order
+1. User requests to sort the list of clients.
+2. REP displays clients in the requested order.
 
-   Use case ends
+   Use case ends.
 
 **Extensions:**
-* 1a. The list is empty
+* 1a. The list is empty.
 
-  Use case ends
+  Use case ends.
 
+* 1b. REP detects an error in the entered command.
+   * 1b1. REP displays an error message.
+   * 1b2. User enters the sort command again.
+   * Steps 1b1-1b2 are repeated until the command entered is valid.
 
-* 1b. REP detects an error in the entered command
-   * 1b1. REP displays an error message
-   * 1b2. User enters the sort command again
-   * Steps 1b1-1b2 are repeated until the command entered is valid
-
-     Use case resumes at step 2
+     Use case resumes at step 2.
 
 ## Non-functional Requirements
 
