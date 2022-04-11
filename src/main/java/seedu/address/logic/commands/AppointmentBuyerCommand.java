@@ -24,6 +24,7 @@ public class AppointmentBuyerCommand extends Command {
             + "Parameters: INDEX " + PREFIX_APPOINTMENT
             + "TIME\n"
             + "Must include: INDEX time/ \n"
+            + "Ensure INDEX is positive integer & less than or equal to size of displayed buyer list \n"
             + "The appointment time should be specified to minutes "
             + "with the format 'yyyy-MM-dd-HH-mm.'\n"
             + "Example:  " + COMMAND_WORD + " 1 "
