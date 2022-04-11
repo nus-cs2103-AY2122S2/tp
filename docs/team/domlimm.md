@@ -30,7 +30,7 @@ Given below are my contributions to the project.
   * Drove team meetings.
 
 * **Enhancements to existing features**:
-  * Heavy refactors were consistently done to existing features throughout the entire development period of our program.
+  * Refactors consistently done throughout the development period of our program.
     * Refactored `model` of our application, specifically the entities. E.g. Introduced new entities.
       * Encompasses writing of the entity, test classes and integrated with application's `model`.
     * Improved existing `add` and `edit` commands with the introduction of new fields to our program based on project direction.
@@ -59,10 +59,7 @@ Given below are my contributions to the project.
     * Enabling assertions.
 
 * **Review/mentoring contributions**:
-  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm)
-    * Count: // To update
-  * [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm)
-    * Count: // To update
+  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 0; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 0
 
 * **Community**:
   * Non-trivial PRs reviewed
@@ -72,5 +69,3 @@ Given below are my contributions to the project.
   * Helped solve issues that classmates faced
     * Some e.g. [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/225), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/89), [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/123), [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/37), [5](https://github.com/nus-cs2103-AY2122S2/forum/issues/195).
   * Reported total of [11 issues](https://github.com/domlimm/ped/issues) during PE-D.
-
-* **Tools**:
