@@ -131,12 +131,12 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`edite`](#editing-an-event--edite): Edits an event.
 - **Archiving entries**
   - [`archive`](#archiving-an-entry-archive): Archives an entry.
-  - [`archive_all`](#archiving-all-entries-in-display-archiveall): Archives all entries in the display.
+  - [`archive_all`](#archiving-all-entries-in-display-archive_all): Archives all entries in the display.
   - [`unarchive`](#unarchiving-an-entry-unarchive): Unarchives an entry.
-  - [`unarchive_all`](#unarchiving-all-entries-in-display-unarchiveall): Unarchives all entries in the display.
+  - [`unarchive_all`](#unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
 - **Deleting entries**
   - [`delete`](#deleting-an-entry--delete): Deletes an entry. 
-  - [`delete-all`](#deleting-all-entries-in-display--deleteall): Deletes all entries.
+  - [`delete-all`](#deleting-all-entries-in-display--delete_all): Deletes all entries.
   - [`clear`](#clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
   - [`findc`](#locating-companies-findc): Finds a company.
@@ -216,7 +216,7 @@ An empty input or an input consisting only of spaces is invalid for every parame
 * `n/NAME` - Must only consist of letters or numbers
 * `c/COMPANY_NAME` - Must refer to the name of an existing Company in the app
 * `p/PHONE` - Must contain only numbers and be at least 3 digits long
-* `e/EMAIL` - Must be of the form `local-part@domain`
+* `e/EMAIL` - Must be of the form `local-part@domain`. The `domain` must contain at least one period.
 * `d/DATE`, `sd/START_DATE`, and `ed/END_DATE` - Must be of one of the following forms:
   * `YYYY-MM-DD` e.g. `2022-01-22` (It must still be a valid date)
   * `today` (InternBuddy will interpret this as today's date)
@@ -532,7 +532,7 @@ archive INDEX
 Examples:
 * `archive 1` archives the 1st entry in the currently displayed list.
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Use a list, find, or sort command to get all unarchived entries first. That way, you can get the INDEX of the entry
 you want to archive.
 </div>
@@ -556,8 +556,8 @@ unarchive INDEX
 Examples:
 * `unarchive 1` shows the 1st entry in the list of entries.
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Use a list, find, or sort command to get all archivede entries first. That way, you can get the INDEX of the entry
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use a list, find, or sort command to get all archived entries first. That way, you can get the INDEX of the entry
 you want to unarchive.
 </div>
 
