@@ -33,9 +33,9 @@ Given below are my contributions to the project.
   
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `sort` and `list` [\#119](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/119/files) and [\#166](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/166)
+        * Added documentation for the features `sort` and `list` [\#119](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/119/) and [\#166](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/166)
     * Developer Guide:
-        * Added implementation details of the `sort` and `list` feature.
+        * Added implementation details of the `sort` and `list` feature.[\#264](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/264)
 
 * **Community**:
     * Reported bugs and suggestions for other teams in the class ([PE-D](https://github.com/Decaxical/ped/issues))(exam: [1](), [2](), [3]())
