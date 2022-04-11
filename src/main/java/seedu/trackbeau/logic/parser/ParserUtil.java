@@ -3,6 +3,10 @@ package seedu.trackbeau.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.model.customer.Address.VALIDATION_REGEX;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -194,6 +198,26 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static String parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        try {
+            LocalDate userInputDate = LocalDate.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedDate;
     }
 
     /**

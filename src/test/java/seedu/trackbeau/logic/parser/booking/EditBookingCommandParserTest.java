@@ -1,19 +1,26 @@
 package seedu.trackbeau.logic.parser.booking;
 
+import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.CUSTOMERINDEX_FIRST;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.DATETIME_DESC1;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.FEEDBACK_DESC1;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_CUSTOMERINDEX;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_DATETIME;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_SERVICEINDEX;
+import static seedu.trackbeau.logic.commands.CommandTestUtil.SERVICEINDEX_FIRST;
+import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import org.junit.jupiter.api.Test;
-import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
+
+import seedu.trackbeau.logic.commands.booking.EditBookingCommand;
 import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.model.booking.BookingDateTime;
 
-import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.trackbeau.logic.commands.CommandTestUtil.*;
-import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
-
 public class EditBookingCommandParserTest {
-    private EditBookingCommandParser parser = new EditBookingCommandParser();
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBookingCommand.MESSAGE_USAGE);
 
-    public static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCustomerCommand.MESSAGE_USAGE);
+    private EditBookingCommandParser parser = new EditBookingCommandParser();
 
     @Test
     public void parse_invalidPreamble_failure() {
@@ -35,21 +42,21 @@ public class EditBookingCommandParserTest {
     @Test
     public void parse_invalidCustomerIndex_failure() {
         // invalid customer index
-        assertParseFailure(parser, "0 " + INVALID_CUSTOMERINDEX + SERVICEINDEX_FIRST + DATETIME_DESC1 + FEEDBACK_DESC1,
+        assertParseFailure(parser, "1 " + INVALID_CUSTOMERINDEX + SERVICEINDEX_FIRST + DATETIME_DESC1 + FEEDBACK_DESC1,
                 ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidServiceIndex_failure() {
         // invalid customer index
-        assertParseFailure(parser, "0 " + CUSTOMERINDEX_FIRST + INVALID_SERVICEINDEX + DATETIME_DESC1 + FEEDBACK_DESC1,
+        assertParseFailure(parser, "1 " + CUSTOMERINDEX_FIRST + INVALID_SERVICEINDEX + DATETIME_DESC1 + FEEDBACK_DESC1,
                 ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidDateTime_failure() {
         // invalid date time
-        assertParseFailure(parser, "0 " + CUSTOMERINDEX_FIRST + SERVICEINDEX_FIRST + INVALID_DATETIME,
+        assertParseFailure(parser, "1 " + CUSTOMERINDEX_FIRST + SERVICEINDEX_FIRST + INVALID_DATETIME,
                 BookingDateTime.MESSAGE_CONSTRAINTS);
     }
 }
