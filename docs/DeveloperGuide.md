@@ -449,37 +449,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-#### Use case: UC02 - Find customers
-
-**MSS:**
-
-1.  User requests to find customers by using keywords.
-2.  TrackBeau shows a list of customers with matching keywords.
-
-    Use case ends.
-
-**Extensions:**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
-
-#### Use case: UC03 - List customers
+#### Use case: UC02 - List customers
 
 **MSS:**
 
 1.  User requests to list the customers.
 2.  TrackBeau shows a list of customers.
-    
+
     Use case ends.
 
 **Extensions:**
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
-#### Use case: UC04 - Add a customer
+#### Use case: UC03 - Add a customer
 
 **MSS:**
 
@@ -507,8 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
-
-#### Use case: UC05 - Edit a customer
+#### Use case: UC04 - Edit a customer
 
 **MSS:**
 
@@ -540,6 +522,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2d1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
+
+#### Use case: UC05 - Find customers
+
+**MSS:**
+
+1.  User requests to find customers by using keywords.
+2.  TrackBeau shows a list of customers with matching keywords.
+
+    Use case ends.
+
+* 1a. The input format is wrong.
+    * 1a1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1b. The given parameters is invalid.
+    * 1b1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1c. The list is empty.
+
+  Use case ends.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 #### Use case: UC06 - Delete a customer
 
@@ -639,8 +646,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
+#### Use case: UC10 - Find services
 
-#### Use case: UC10 - Delete a service
+**MSS:**
+
+1.  User requests to find services by using keywords.
+2.  TrackBeau shows a list of services with matching keywords.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. The input format is wrong.
+    * 1a1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1b. The given parameters is invalid.
+    * 1b1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1c. The list is empty.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
+
+#### Use case: UC11 - Delete a service
 
 **MSS**
 
@@ -664,7 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 
-#### Use case: UC11 - List bookings
+#### Use case: UC12 - List bookings
 
 **MSS:**
 
@@ -677,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
-#### Use case: UC12 - Add a booking
+#### Use case: UC13 - Add a booking
 
 **MSS:**
 
@@ -700,30 +731,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
-
-
-#### Use case: UC13 - Delete a booking
-
-**MSS**
-
-1.  User requests to [list bookings UC11](#use-case-uc11---list-bookings)
-2.  User requests to delete a booking of a customer based on the booking index and the input format.
-3.  TrackBeau deletes the booking at the specified index.
-
-**Extensions**
-
-* 2a. The input format is wrong.
-    * 2a1. TrackBeau shows an error message.
-
-      Use case resumes at step 2.
-
-* 2b. The given parameters is invalid.
-    * 2b1. TrackBeau shows an error message.
-
-      Use case resumes at step 2.
-
-* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
-
 
 #### Use case: UC14 - Edit a booking
 
@@ -755,8 +762,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
+#### Use case: UC15 - Find bookings
 
-#### Use case: UC15 - Plot a chart
+**MSS:**
+
+1.  User requests to find bookings by using keywords.
+2.  TrackBeau shows a list of bookings with matching keywords.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. The input format is wrong.
+    * 1a1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1b. The given parameters is invalid.
+    * 1b1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 1c. The list is empty.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
+
+#### Use case: UC16 - Delete a booking
+
+**MSS**
+
+1.  User requests to [list bookings UC11](#use-case-uc11---list-bookings)
+2.  User requests to delete a booking of a customer based on the booking index and the input format.
+3.  TrackBeau deletes the booking at the specified index.
+
+**Extensions**
+
+* 2a. The input format is wrong.
+    * 2a1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The given parameters is invalid.
+    * 2b1. TrackBeau shows an error message.
+
+      Use case resumes at step 2.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
+
+#### Use case: UC17 - Plot a chart
 
 **MSS:**
 
@@ -775,7 +828,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 
-#### Use case: UC16 - Display a selected week's schedule
+#### Use case: UC18 - Display a selected week's schedule
 
 **MSS:**
 
@@ -795,7 +848,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 
-#### Use case: UC17 - Exit the application
+#### Use case: UC19 - Exit the application
 
 **MSS:**
 1.  User requests to exit the application.
