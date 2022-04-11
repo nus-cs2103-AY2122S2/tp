@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,12 +38,29 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MatchWindow matchWindow;
+    private FavouriteWindow favouriteWindow;
+    private ViewImageWindow viewImageWindow;
+    private StatisticsWindow statisticsWindow;
+    private int count = 0;
+    private ReminderWindow reminderWindow;
+    // timer to track & launch reminders
+    private Timer timer;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem statsMenuItem;
+
+    @FXML
+    private MenuItem favouriteMenuItem;
+
+    @FXML
+    private MenuItem reminderMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -66,6 +87,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        matchWindow = new MatchWindow(logic);
+        viewImageWindow = new ViewImageWindow(logic);
+        favouriteWindow = new FavouriteWindow(logic);
+        statisticsWindow = new StatisticsWindow(logic);
+        reminderWindow = new ReminderWindow(logic);
+        timer = new Timer();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +101,9 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(statsMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(favouriteMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(reminderMenuItem, KeyCombination.valueOf("F4"));
     }
 
     /**
@@ -147,6 +177,68 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the match window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMatch() {
+        if (!matchWindow.isShowing()) {
+            matchWindow.show();
+        } else {
+            matchWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the view image window or focuses on it if it's already opened after refreshing its contents.
+     */
+    @FXML
+    public void handleViewImage() {
+        viewImageWindow.setup();
+        if (!viewImageWindow.isShowing()) {
+            viewImageWindow.show();
+        } else {
+            viewImageWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the favourites window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleFavourites() {
+        if (!favouriteWindow.isShowing()) {
+            favouriteWindow.show();
+        } else {
+            favouriteWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the reminder window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminders() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
+    }
+
+    /**
+     * Fills data of pie chart and opens the statistics window.
+     */
+    @FXML
+    public void handleStatistics() {
+        statisticsWindow.fillPieChart();
+        if (!statisticsWindow.isShowing()) {
+            statisticsWindow.show();
+        } else {
+            statisticsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,11 +252,38 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        matchWindow.hide();
+        favouriteWindow.hide();
+        viewImageWindow.hide();
+        statisticsWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
+        closeReminders();
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    private void launchReminders() {
+        Timer newTimer = new Timer();
+        RemindersTask tasks = new RemindersTask();
+        // launch the Reminder window only when there are active reminders
+        if (!ReminderPersons.getInstance().isEmpty()) {
+            newTimer.scheduleAtFixedRate(tasks, 60_000, 60_000);
+            // cancel any previous instances of Timer
+            timer.cancel();
+            // set the newly created Timer
+            timer = newTimer;
+        // else cancel the recurring Reminder window
+        } else {
+            timer.cancel();
+            newTimer.cancel();
+        }
+    }
+
+    private void closeReminders() {
+        timer.cancel();
     }
 
     /**
@@ -182,8 +301,30 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowMatch()) {
+                handleMatch();
+            }
+
+
+            if (commandResult.isShowImage()) {
+                handleViewImage();
+            }
+
+            if (commandResult.isShowFavourites()) {
+                handleFavourites();
+            }
+
+            if (commandResult.isShowStatistics()) {
+                handleStatistics();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowReminders()) {
+                launchReminders();
+                handleReminders();
             }
 
             return commandResult;
@@ -191,6 +332,23 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    private class RemindersTask extends TimerTask {
+        @Override
+        public void run() {
+            Platform.runLater(() -> {
+                showReminders();
+            });
+        }
+
+        private void showReminders() {
+            if (!reminderWindow.isShowing()) {
+                reminderWindow.show();
+            } else {
+                reminderWindow.focus();
+            }
         }
     }
 }

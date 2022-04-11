@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PREFERENCE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -80,8 +82,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+                + ADDRESS_DESC_AMY + PREFERENCE_DESC_BOB;
+        Person expectedPerson = new PersonBuilder(AMY).withUserType(VALID_USERTYPE_BUYER).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -91,6 +93,12 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void execute_invalidGetPersonsBasedOnRegion() {
+        int totalPersons = logic.getPersonsBasedOnRegion("direction");
+        assertEquals(0, totalPersons);
     }
 
     /**

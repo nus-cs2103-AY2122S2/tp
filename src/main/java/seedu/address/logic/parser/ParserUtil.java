@@ -4,16 +4,25 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Preference;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Price;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
+import seedu.address.model.property.Size;
+import seedu.address.model.userimage.FilePath;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +105,196 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String region} into an {@code Region}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code region} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Region parseRegion(String region) throws ParseException {
+        requireNonNull(region);
+        String trimmedRegion = region.trim();
+        if (!Region.isValidRegion(trimmedRegion)) {
+            throw new ParseException(Region.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return Region.fromString(trimmedRegion);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String size} into an {@code Size}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code size} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Size parseSize(String size) throws ParseException {
+        requireNonNull(size);
+        String trimmedSize = size.trim();
+        if (!Size.isValidSize(trimmedSize)) {
+            throw new ParseException(Size.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return Size.fromString(trimmedSize);
     }
+
+    /**
+     * Parses a {@code String price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String property} into an {@code Property}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code property} is invalid.
+     */
+    public static Property parseProperty(String property) throws ParseException {
+        requireNonNull(property);
+        String trimmedProperty = property.trim();
+        String[] propertySplit = trimmedProperty.split(",");
+
+        if (propertySplit.length != 4) {
+            throw new ParseException(Property.MESSAGE_CONSTRAINTS);
+        }
+
+        Region region = parseRegion(propertySplit[0]);
+        Address address = parseAddress(propertySplit[1]);
+        Size size = parseSize(propertySplit[2]);
+        Price price = parsePrice(propertySplit[3]);
+        return new Property(region, address, size, price);
+    }
+
+    /**
+     * Parses {@code Collection<String> properties} into a {@code Set<Property>}.
+     */
+    public static Set<Property> parseProperties(Collection<String> properties) throws ParseException {
+        requireNonNull(properties);
+        Set<Property> propertySet = new HashSet<>();
+        for (String property : properties) {
+            propertySet.add(parseProperty(property));
+        }
+        return propertySet;
+    }
+
+    /**
+     * Parses a {@code String preference} into an {@code Preference}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code preference} is invalid.
+     */
+    public static Preference parsePreference(String preference) throws ParseException {
+        requireNonNull(preference);
+        String trimmedPreference = preference.trim();
+        String[] preferenceSplit = trimmedPreference.split(",");
+
+        if (preferenceSplit.length != 4) {
+            throw new ParseException(Preference.MESSAGE_CONSTRAINTS);
+        }
+
+        Region region = parseRegion(preferenceSplit[0]);
+        Size size = parseSize(preferenceSplit[1]);
+        Price lowPrice = parsePrice(preferenceSplit[2]);
+        Price highPrice = parsePrice(preferenceSplit[3]);
+
+        if (highPrice.compareTo(lowPrice) < 0) {
+            throw new ParseException(Preference.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Preference(region, size, lowPrice, highPrice);
+    }
+
+    /**
+     * Parses a {@code String userType} into a {@code UserType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userType} is invalid.
+     */
+    public static UserType parseUserType(String userType) throws ParseException {
+        requireNonNull(userType);
+        String trimmedUserType = userType.trim();
+        if (!UserType.isValidUserType(trimmedUserType)) {
+            throw new ParseException(UserType.MESSAGE_CONSTRAINTS);
+        }
+        return new UserType(trimmedUserType);
+    }
+
+    /**
+     * Parses a {@code Collection<String> userImage} into a {@code Set<UserImage>}.
+     */
+    public static Set<UserImage> parseUserImages(Collection<String> userImages) throws ParseException {
+        requireNonNull(userImages);
+        Set<UserImage> userImageSet = new LinkedHashSet<>();
+        for (String userImage : userImages) {
+            userImageSet.add(parseUserImage(userImage));
+        }
+        return userImageSet;
+    }
+
+    /**
+     * Parses a {@code String userImage} into a {@code UserImage}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userImage} is invalid.
+     */
+    public static UserImage parseUserImage(String userImage) throws ParseException {
+        String trimmedUserImage = userImage.trim();
+        String[] splitUserImage = trimmedUserImage.split(":");
+
+        FilePath filePath = parseFilePath(splitUserImage[0]);
+        if (!UserImage.isImage(filePath)) {
+            throw new ParseException(UserImage.MESSAGE_CONSTRAINTS);
+        }
+        String description = "";
+        if (splitUserImage.length == 2) {
+            description = parseDescription(splitUserImage[1]);
+        }
+        return new UserImage(filePath, description);
+    }
+
+    /**
+     * Parses a {@code String filePath} into a {@code FilePath}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
+    public static FilePath parseFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        if (!FilePath.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(FilePath.MESSAGE_CONSTRAINTS);
+        }
+        return new FilePath(trimmedFilePath);
+    }
+
+    /**
+     * Parses a {@code String Description} into a {@code description}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDescription(String description) {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return trimmedDescription;
+    }
+    /**
+     * Parses a {@code String reminder} into a {@code Reminder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reminder} is invalid.
+     */
+    public static Reminder parseReminder(String reminder) throws ParseException {
+        requireNonNull(reminder);
+        String trimmedReminder = reminder.trim();
+        if (!Reminder.isValidReminder(trimmedReminder)) {
+            throw new ParseException(Reminder.MESSAGE_CONSTRAINTS);
+        }
+        return new Reminder(trimmedReminder);
+    }
+
 }

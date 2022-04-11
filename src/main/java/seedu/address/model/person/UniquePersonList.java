@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Pair;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -97,12 +99,41 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void setFavouriteStatus(Person personToFavourite) {
+        requireNonNull(personToFavourite);
+        setPerson(personToFavourite, personToFavourite.toggleFavourite());
+    }
+
+    /**
+     * Returns a list of persons with matching properties and preferences.
+     */
+    public List<Pair<Person>> match() {
+        List<Pair<Person>> result = new ArrayList<>();
+        for (int i = 0; i < internalList.size(); i++) {
+            Person seller = internalList.get(i);
+            if (seller.getProperties().isEmpty()) {
+                continue;
+            }
+            for (int j = 0; j < internalList.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                Person buyer = internalList.get(j);
+                if (seller.matches(buyer)) {
+                    result.add(new Pair<>(seller, buyer));
+                }
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
+
 
     @Override
     public Iterator<Person> iterator() {

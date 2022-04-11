@@ -1,13 +1,16 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,10 +42,20 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label property;
+    @FXML
+    private Label preference;
+    @FXML
+    private Label favourite;
+    @FXML
+    private Label buyer;
+    @FXML
+    private Label seller;
+    @FXML
+    private Label reminder;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -52,9 +65,46 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // create the buyer/seller label, depending on the user's type
+        if (person.getUserType().isBuyer()) {
+            buyer.setText(person.getUserType().value);
+            seller.setVisible(false);
+            seller.setManaged(false);
+        } else {
+            seller.setText(person.getUserType().value);
+            buyer.setVisible(false);
+            buyer.setManaged(false);
+        }
+
+        if (!person.getFavourite().isUnfavourited()) {
+            favourite.setText(person.getFavourite().toString());
+        } else {
+            favourite.setManaged(false);
+        }
+
+        if (person.getProperties().isEmpty()) {
+            property.setManaged(false);
+        } else {
+            StringJoiner propertyJoiner = new StringJoiner("\n");
+            person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+            property.setText(propertyJoiner.toString());
+        }
+
+        if (person.getPreference().isPresent()) {
+            preference.setText(person.getPreference().get().toString());
+        } else {
+            preference.setManaged(false);
+        }
+
+        // set the Reminder associated with a Person
+        HashMap<Person, Reminder> reminderHashMap = ReminderPersons.getInstance().clone();
+        Reminder reminderForPerson = reminderHashMap.get(person);
+        if (reminderForPerson != null) {
+            reminder.setText(reminderForPerson.value);
+        } else {
+            reminder.setVisible(false);
+            reminder.setManaged(false);
+        }
     }
 
     @Override

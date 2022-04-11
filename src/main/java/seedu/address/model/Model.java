@@ -1,11 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Pair;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * The API of the Model component.
@@ -76,12 +81,36 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns list of matching properties and preferences. */
+    List<Pair<Person>> getMatchList();
+
+    /** Returns set of images associated with person */
+    Set<UserImage> getViewImageSet();
+
+    /** Updates the match list. */
+    void updateMatchList();
+
+    /** Updates the person to view associated images */
+    void updateViewPerson(Set<UserImage> userImages);
+
+    /**
+     * Toggles the Favourite status of the given person {@code personToFavourite}.
+     * {@code personToFavourite} must exist in the address book.
+     */
+    void setFavouriteStatus(Person personToFavourite);
+
+    /** Returns an unmodifiable view of the filtered and sorted person list */
+    ObservableList<Person> getFilteredAndSortedPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the sorter of the sorted person list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedPersonList(Comparator<Person> comparator);
 }

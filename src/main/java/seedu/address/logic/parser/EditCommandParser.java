@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,7 +35,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERIMAGE);
 
         Index index;
 
@@ -40,6 +44,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+        // check if input contains both property & preference
+        if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent() && argMultimap.getValue(PREFIX_PROPERTY).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserType.MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -55,7 +63,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
+            editPersonDescriptor.setPreference(ParserUtil.parsePreference(
+                    argMultimap.getValue(PREFIX_PREFERENCE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_USERIMAGE).isPresent()) {
+            editPersonDescriptor.setUserImages(ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE)));
+        }
+
+        parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
+                editPersonDescriptor::setProperties);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -65,18 +84,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> properties} into a {@code Set<Property>} if {@code properties} is non-empty.
+     * If {@code properties} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Property>} containing zero properties.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Property>> parsePropertiesForEdit(Collection<String> properties) throws ParseException {
+        assert properties != null;
 
-        if (tags.isEmpty()) {
+        if (properties.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> propertySet =
+                properties.size() == 1 && properties.contains("") ? Collections.emptySet() : properties;
+        return Optional.of(ParserUtil.parseProperties(propertySet));
     }
-
 }

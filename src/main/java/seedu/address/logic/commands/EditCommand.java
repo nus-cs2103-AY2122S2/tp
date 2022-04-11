@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,12 +22,20 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Preference;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
+import seedu.address.model.util.UserTypeUtil;
+import seedu.address.storage.ReminderPersons;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -41,7 +52,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PREFERENCE + "PREFERENCE]"
+            + "[" + PREFIX_PROPERTY + "PROPERTY]..."
+            + "[" + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -68,7 +81,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getFilteredAndSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -79,6 +92,13 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // remove reminder for previous instance of Person
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Reminder previousReminder = reminderPersons.remove(personToEdit);
+        if (previousReminder != null) {
+            reminderPersons.add(editedPerson, previousReminder);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -96,10 +116,73 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
+        Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        // set value of edited person's properties
+        Set<Property> updatedProperties = setProperties(personToEdit, editPersonDescriptor);
+        // set value of edited person's preference
+        Optional<Preference> updatedPreference = setPreference(personToEdit, editPersonDescriptor);
+        // set value of edited person's user type
+        UserType updatedUserType = setUserType(updatedProperties, updatedPreference);
+        Set<UserImage> updatedUserImages = editPersonDescriptor.getUserImages().orElse(personToEdit.getUserImages());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
+                updatedPreference, updatedUserType, updatedUserImages);
+    }
+
+    private static Set<Property> setProperties(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        // default value of edited person's properties
+        Set<Property> updatedProperties = personToEdit.getProperties();
+
+        // check if person to edit contains Properties
+        if (!personToEdit.getProperties().isEmpty()) {
+            // if edit command contains properties
+            if (editPersonDescriptor.getProperties().isPresent()) {
+                updatedProperties = editPersonDescriptor.getProperties().get();
+            // if edit command contains Preference
+            } else if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedProperties = new HashSet<>();
+            }
+        } else if (editPersonDescriptor.getProperties().isPresent()) {
+            updatedProperties = editPersonDescriptor.getProperties().get();
+        }
+
+        return updatedProperties;
+    }
+
+    private static Optional<Preference> setPreference(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        // default value of edited person's preference
+        Optional<Preference> updatedPreference = personToEdit.getPreference();
+
+        // check if person to edit contains Preference
+        if (personToEdit.getPreference().isPresent()) {
+            // if edit command contains Preference
+            if (editPersonDescriptor.getPreference().isPresent()) {
+                updatedPreference = editPersonDescriptor.getPreference();
+                // if edit command contains Properties
+            } else if (!editPersonDescriptor.getProperties().isEmpty()) {
+                updatedPreference = Optional.ofNullable(null);
+            }
+        } else if (editPersonDescriptor.getPreference().isPresent()) {
+            updatedPreference = editPersonDescriptor.getPreference();
+        }
+
+        return updatedPreference;
+    }
+
+    private static UserType setUserType(Set<Property> updatedProperties, Optional<Preference> updatedPreference) {
+        if (!updatedProperties.isEmpty()) {
+            return UserTypeUtil.createSeller();
+        } else {
+            return UserTypeUtil.createBuyer();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return index.toString() + editPersonDescriptor.toString();
     }
 
     @Override
@@ -128,28 +211,38 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Favourite favourite;
         private Address address;
-        private Set<Tag> tags;
+        private Preference preference;
+        private Set<Property> properties;
+        private UserType userType;
+        private Set<UserImage> userImages;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code userTypes} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setFavourite(toCopy.favourite);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setPreference(toCopy.preference);
+            setProperties(toCopy.properties);
+            setUserType(toCopy.userType);
+            setUserImages(toCopy.userImages);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, preference,
+                        userType, userImages);
         }
 
         public void setName(Name name) {
@@ -176,6 +269,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setFavourite(Favourite favourite) {
+            this.favourite = favourite;
+        }
+
+        public Optional<Favourite> getFavourite() {
+            return Optional.ofNullable(favourite);
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -184,21 +285,64 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setUserType(UserType userType) {
+            this.userType = userType;
+        }
+
+        public Optional<UserType> getUserType() {
+            return Optional.ofNullable(userType);
+        }
+
+        public void setUserImages(Set<UserImage> userImages) {
+            this.userImages = (userImages == null)
+                ? null
+                : new LinkedHashSet<UserImage>(userImages);
+        }
+
+        public Optional<Set<UserImage>> getUserImages() {
+            return Optional.ofNullable(userImages);
+        }
+
+        public Optional<Preference> getPreference() {
+            return Optional.ofNullable(preference);
+        }
+
+        public void setPreference(Preference preference) {
+            this.preference = preference;
+        }
+
+        public void clearPreference() {
+            this.preference = null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Sets {@code properties} to this object's {@code properties}.
+         * A defensive copy of {@code properties} is used internally.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void setProperties(Set<Property> properties) {
+            this.properties = (properties != null) ? new HashSet<>(properties) : null;
+        }
+
+        /**
+         * Returns an unmodifiable property set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code properties} is null.
+         */
+        public Optional<Set<Property>> getProperties() {
+            return (properties != null) ? Optional.of(Collections.unmodifiableSet(properties)) : Optional.empty();
+        }
+
+        /**
+         * Clears all of this object's {@code properties}.
+         */
+        public void clearProperties() {
+            this.properties = null; // alternatively, set properties to be an empty HashSet
+        }
+
+        @Override
+        public String toString() {
+            return name + "|" + phone + "|" + email + "|" + favourite + "|" + address + "|" + preference + "|"
+                    + properties + "|" + userType;
         }
 
         @Override
@@ -220,7 +364,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getPreference().equals(e.getPreference())
+                    && getProperties().equals(e.getProperties());
         }
     }
 }

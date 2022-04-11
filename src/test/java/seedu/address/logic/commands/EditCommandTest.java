@@ -6,13 +6,20 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PREFERENCE_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERTYPE_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +30,17 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Preference;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Price;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
+import seedu.address.model.property.Size;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -40,28 +57,30 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredAndSortedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        // Index indexLastPerson = Index.fromOneBased(model.getFilteredAndSortedPersonList().size());
+        Index indexSecondLastPerson = Index.fromOneBased(model.getFilteredAndSortedPersonList().size() - 1);
+        Person lastPerson = model.getFilteredAndSortedPersonList().get(indexSecondLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withUserType(VALID_USERTYPE_BUYER).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+                .withPhone(VALID_PHONE_BOB).withUserType(VALID_USERTYPE_BUYER).withPreference(VALID_PREFERENCE_ALICE)
+                .build();
+        EditCommand editCommand = new EditCommand(indexSecondLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
@@ -72,9 +91,9 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = model.getFilteredAndSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -85,22 +104,23 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personInFilteredList = model.getFilteredAndSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                        .withPreference(VALID_PREFERENCE_ALICE).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredAndSortedPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getFilteredAndSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -121,7 +141,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAndSortedPersonList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -143,6 +163,113 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editBuyerToSeller_success() {
+        // editing a buyer to be a seller (editing the buyer to have a property)
+        Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
+
+        Index indexFirstPerson = INDEX_FIRST_PERSON;
+
+        Person personInList = separateModel.getAddressBook().getPersonList().get(indexFirstPerson.getZeroBased());
+
+        Property property = new Property(Region.fromString("East"),
+                new Address("John street block 123 #01-01"), Size.fromString("2-room"), new Price("$200000"));
+
+        Person editedPerson = new Person(personInList.getName(), personInList.getPhone(), personInList.getEmail(),
+                new Favourite(true), personInList.getAddress(), new HashSet<>(Arrays.asList(property)),
+                Optional.empty(), new UserType("seller"), new HashSet<UserImage>());
+
+        EditCommand editCommand = new EditCommand(indexFirstPerson,
+                new EditPersonDescriptorBuilder()
+                        .withProperties("East,John street block 123 #01-01,2-room,$200000").build());
+
+        Model expectedModel = new ModelManager(new AddressBook(separateModel.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(separateModel.getFilteredAndSortedPersonList().get(0), editedPerson);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        assertCommandSuccess(editCommand, separateModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editSellerToBuyer_success() {
+        // editing a seller to be a buyer (editing the seller to have a preference)
+        Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
+
+        Index indexOfSeller = Index.fromOneBased(8);
+
+        Person personInList = separateModel.getAddressBook().getPersonList().get(indexOfSeller.getZeroBased());
+
+        Optional<Preference> preference = Optional.of(new Preference(
+                Region.fromString("East"), Size.fromString("2-room"),
+                new Price("$100000"), new Price("$200000")));
+
+        Person editedPerson = new Person(personInList.getName(), personInList.getPhone(), personInList.getEmail(),
+                personInList.getAddress(), new HashSet<Property>(), preference,
+                new UserType("buyer"), new HashSet<UserImage>());
+
+        EditCommand editCommand = new EditCommand(indexOfSeller,
+                new EditPersonDescriptorBuilder().withPreference("East,2-room,$100000,$200000").build());
+
+        Model expectedModel = new ModelManager(new AddressBook(separateModel.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(separateModel.getFilteredAndSortedPersonList().get(7), editedPerson);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        assertCommandSuccess(editCommand, separateModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editSellerProperty_success() {
+        // editing other details of the seller (editing the seller's phone number)
+        Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
+        Index indexOfSeller = Index.fromOneBased(8);
+
+        Person personInList = separateModel.getAddressBook().getPersonList().get(indexOfSeller.getZeroBased());
+
+        Property property = new Property(Region.fromString("East"),
+                new Address("John street block 123 #01-01"), Size.fromString("2-room"), new Price("$200000"));
+
+        Person editedPerson = new Person(personInList.getName(), personInList.getPhone(), personInList.getEmail(),
+                personInList.getAddress(), new HashSet<>(Arrays.asList(property)), Optional.empty(),
+                personInList.getUserType(), new HashSet<UserImage>());
+
+        EditCommand editCommand = new EditCommand(indexOfSeller, new EditPersonDescriptorBuilder()
+                .withProperties("East,John street block 123 #01-01,2-room,$200000").build());
+
+        Model expectedModel = new ModelManager(new AddressBook(separateModel.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(separateModel.getFilteredAndSortedPersonList().get(7), editedPerson);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        assertCommandSuccess(editCommand, separateModel, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editSellerOtherDetails_success() {
+        // editing other details of the seller (editing the seller's phone number)
+        Model separateModel = new ModelManager(getAddressBook(), new UserPrefs());
+        Index indexOfSeller = Index.fromOneBased(8);
+
+        Person personInList = separateModel.getAddressBook().getPersonList().get(indexOfSeller.getZeroBased());
+
+        Phone phone = new Phone("98765432");
+
+        Person editedPerson = new Person(personInList.getName(), phone, personInList.getEmail(),
+                personInList.getAddress(), personInList.getProperties(), personInList.getPreference(),
+                    personInList.getUserType(), new HashSet<UserImage>());
+
+        EditCommand editCommand = new EditCommand(indexOfSeller,
+                new EditPersonDescriptorBuilder().withPhone("98765432").build());
+
+        Model expectedModel = new ModelManager(new AddressBook(separateModel.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(separateModel.getFilteredAndSortedPersonList().get(7), editedPerson);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+
+        assertCommandSuccess(editCommand, separateModel, expectedMessage, expectedModel);
     }
 
     @Test

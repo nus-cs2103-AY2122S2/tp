@@ -1,12 +1,18 @@
 package seedu.address.logic;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Pair;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,6 +21,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Preference;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.Region;
+import seedu.address.model.userimage.UserImage;
+import seedu.address.storage.ReminderPersons;
 import seedu.address.storage.Storage;
 
 /**
@@ -61,7 +72,80 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+        return model.getFilteredAndSortedPersonList();
+    }
+
+    /**
+     * Iterate through the list of Persons and only add those that are favourited into
+     * favouritedList to be returned.
+     */
+    @Override
+    public ObservableList<Person> getFavouritedPersonList() {
+        //Resets to full list of Persons to prevent any logical error after `find` command
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ObservableList<Person> favouritedList = FXCollections.observableArrayList();
+        for (Person person : getFilteredPersonList()) {
+            if (person.getFavourite().getStatus()) {
+                favouritedList.add(person);
+            }
+        }
+        return favouritedList;
+    }
+
+    /**
+     * Iterate through the list of Persons and return number of persons in
+     * the region given
+     * @param strRegion is the region where buyers have their preference
+     *               for their potential property and sellers have their property in
+     */
+    @Override
+    public int getPersonsBasedOnRegion(String strRegion) {
+        int totalPersons = 0;
+        //Resets to full list of Persons to prevent any logical error after `find` command
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@flairekq
+        //Author provided code to help with arrow code issue: https://github.com/nus-cs2103-AY2122S2/forum/issues/233
+        if (!Region.isValidRegion(strRegion)) { //defensive code
+            return totalPersons;
+        }
+        Region region = Region.fromString(strRegion);
+        for (Person person : getFilteredPersonList()) {
+            Preference preference = person.getPreference().isPresent() ? person.getPreference().get() : null;
+            if (person.getUserType().isBuyer() && preference != null && preference.getRegion().equals(region)) {
+                totalPersons++;
+                continue;
+            }
+            //If usertype is seller
+            Set<Property> setOfPropertyValues = person.getProperties();
+            for (Property p : setOfPropertyValues) {
+                if (p.getRegion().equals(region)) {
+                    totalPersons++;
+                }
+            }
+        }
+        return totalPersons;
+        //@flairekq
+    }
+
+    @Override
+    public List<Pair<Person>> getMatchList() {
+        model.updateMatchList();
+        return model.getMatchList();
+    }
+
+    @Override
+    public ObservableList<Person> getReminderPersonList() {
+        // get HashSet of HashMap's keys
+        ObservableList<Person> reminderList = FXCollections.observableArrayList();
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Set<Person> keySetOfReminderPerson = reminderPersons.getKeySet();
+        reminderList.addAll(keySetOfReminderPerson);
+        return reminderList;
+    }
+
+    @Override
+    public Set<UserImage> getViewImageSet() {
+        return model.getViewImageSet();
     }
 
     @Override

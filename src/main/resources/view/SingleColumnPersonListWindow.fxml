@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.control.Label?>
+<Stage fx:id="stage" minHeight="600" minWidth="450" title="\$stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+            <VBox>
+                <children>
+                    <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+                        <children>
+                            <Label fx:id="reminderStatus" styleClass="reminder-status"/>
+                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        </children>
+                    </VBox>
+                </children>
+            </VBox>
+        </Scene>
+    </scene>
+</Stage>

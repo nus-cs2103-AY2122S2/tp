@@ -2,7 +2,9 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,10 +14,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Preference;
+import seedu.address.model.person.UserType;
+import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -27,22 +33,38 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final boolean favourite;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
+    private final JsonAdaptedPreference preference;
+    private final String userType;
+    private final List<JsonAdaptedUserImage> userImages = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
+            @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
+            @JsonProperty("preference") JsonAdaptedPreference preference,
+            @JsonProperty("userType") String userType,
+            @JsonProperty("userImage") List<JsonAdaptedUserImage> userImages) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.favourite = favourite;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.preference = preference;
+        this.userType = userType;
+
+        if (userImages != null) {
+            this.userImages.addAll(userImages);
+        }
+
+
+        if (properties != null) {
+            this.properties.addAll(properties);
         }
     }
 
@@ -53,9 +75,16 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        favourite = source.getFavourite().getStatus();
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        properties.addAll(source.getProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        preference = source.getPreference().isPresent()
+                ? new JsonAdaptedPreference(source.getPreference().get()) : null;
+        userType = source.getUserType().value;
+        userImages.addAll(source.getUserImages().stream()
+                .map(JsonAdaptedUserImage::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +94,23 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+
+        final Set<Property> modelProperties = new HashSet<>();
+        for (JsonAdaptedProperty property : properties) {
+            modelProperties.add(property.toModelType());
+        }
+
+        final Optional<Preference> modelPreference =
+                preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
+
+        final Set<UserImage> modelUserImages = new LinkedHashSet<>();
+        UserImage newImage;
+        for (JsonAdaptedUserImage userImage : userImages) {
+            newImage = userImage.toModelType();
+            if (newImage == null) {
+                continue;
+            }
+            modelUserImages.add(userImage.toModelType());
         }
 
         if (name == null) {
@@ -94,6 +137,9 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        final Favourite modelFavourite;
+        modelFavourite = new Favourite(favourite);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -102,8 +148,17 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (userType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UserType.class.getSimpleName()));
+        }
+        if (!UserType.isValidUserType(userType)) {
+            throw new IllegalValueException(UserType.MESSAGE_CONSTRAINTS);
+        }
+        final UserType modelUserType = new UserType(userType);
+
+        return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
+                modelPreference, modelUserType, modelUserImages);
     }
 
 }
