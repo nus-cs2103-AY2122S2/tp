@@ -219,6 +219,16 @@ Format: `absent INDEX date/dd-MM-yyyy`
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date **must follow the specified format**.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: About `absent` command:**<br>
+
+This command is designed to enable you to mark the attendance of pets for **any** date. If you have forgotten to mark
+the attendance a few weeks back, you may do so. If you wish to mark the attendance of a pet for future dates because
+the pet has a regular schedule, you may do so as well.
+
+</div>
+
 Examples:
 * `absent 1 date/09-04-2022` indicates that the first pet in the current list is absent for daycare on 9th April 2022.
 

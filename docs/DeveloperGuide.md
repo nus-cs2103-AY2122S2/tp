@@ -641,20 +641,25 @@ Use case ends.
 
     * 1b1. System shows an error message.
 
-      User case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1c. User keyed in a time format that is of invalid format.
 
     * 1c1. System shows an error message.
 
-      User case resumes at step 1.
+      Use case resumes at step 1.
+* 1d. User keyed in pick-up time that is after drop-off time. 
+
+    * 1d1. System shows an error message.
+  
+      Use case resumes at step 1.
 
 
 **Use case: Mark pet as absent**
 
 **MSS**
 
-1.  User keys in `INDEX`.
+1.  User keys in `INDEX` and date.
 2.  System shows success message in marking a pet as absent.
 
 Use case ends.
@@ -665,6 +670,12 @@ Use case ends.
 * 1a. User keyed in invalid `INDEX`.
 
     * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User keyed in a date format that is of invalid format.
+
+    * 1b1. System shows an error message.
 
       Use case resumes at step 1.
 
@@ -709,7 +720,7 @@ Use case ends.
 
     * 1b1. System shows an error message.
 
-      User case resumes at step 1.
+      Use case resumes at step 1.
 
 
 **Use case: Charge a pet**
@@ -734,7 +745,7 @@ Use case ends.
 
     * 1b1. System shows an error message.
 
-      User case resumes at step 1.
+      Use case resumes at step 1.
 
 **Use case: Undo**
 
