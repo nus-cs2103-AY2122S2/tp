@@ -344,7 +344,7 @@ Example Usage: `edits 1 pr/200`
 
 ![Editing a service example](images/user-guide/edit-service.png)
 
-#### 4.2.5 Finding service' profile by keyword: `finds`
+#### 4.2.5 Finding service's profile by keyword: `finds`
 
 Find services whose parameters contain any of the given keywords.
 
@@ -443,7 +443,7 @@ Examples:
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
 ![Editing a booking example](images/user-guide/edit-booking-v2.png)
 
-#### 4.3.5 Finding booking' profile by keyword: `findb`
+#### 4.3.5 Finding booking's profile by keyword: `findb`
 
 Find bookings whose parameters contain any of the given keywords.
 
