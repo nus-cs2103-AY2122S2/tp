@@ -12,6 +12,8 @@ title: Developer Guide
 
 * AddToClipboardCommand.java, lines 92-94, reused from https://stackoverflow.com/questions/6710350/copying-text-to-the-clipboard-using-java
 
+* ArgumentMultimap.java, lines 42-46, reused from author: rgettman https://stackoverflow.com/questions/28288546/how-to-copy-hashmap-not-shallow-copy-in-java 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
