@@ -74,7 +74,7 @@ Given below are my contributions to the project.
     * Updated design considerations for Find By Class Code, Find By Activity, and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
     * Updated implementation information for Status, Class Code, Activity and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
     * Added followed steps for Find By Class Code, Find By Activity, and Find By Status [\#96](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/96)
-    
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#32](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/32) [\#63](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/63) [\#105](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/105) [\#106](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/106) [\#164](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/164) [\#181](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/181)
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())

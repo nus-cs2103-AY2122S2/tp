@@ -24,7 +24,7 @@ title: Developer Guide
 optimized for use via interacting with the application through easy-to-use commands on a user-centric interface.
 Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
 
-This is a Developer Guide written to help developers get a deeper understanding of how UDT is implemented and the reasons this project is done a certain way. 
+This is a Developer Guide written to help developers get a deeper understanding of how UDT is implemented and the reasons this project is done a certain way.
 It explains the internal structure and how components in the architecture work together to allow users to command UDT.
 Our team would like to welcome any form improvements or adaptations to our application via Github Pull Requests or Issues.
 
@@ -196,7 +196,7 @@ or any new features that we have in mind.
   - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
   - [Undo/redo Feature](#proposed-undoredo-feature)
   - [User Interface](#proposed-update-user-interface)
-  
+
 ### \[Implemented\] Status Feature
 
 #### Implementation
@@ -216,17 +216,17 @@ The `Status` class is facilitated by using `execute()` command in the `EditComma
 **Aspect: Abstracting `Status` attribute**
 
 * **Alternative 1 (current choice):** Abstracted class.
-  * Pros: 
+  * Pros:
     * Higher Level of abstraction
     * Changes can be made easily from this class
-  * Cons: 
+  * Cons:
     * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
     * Difficulty navigating through folders to find specific files
 
 * **Alternative 2:** Attribute placed within `Person` class.
-  * Pros: 
+  * Pros:
     * Single file where changes can be made
-  * Cons: 
+  * Cons:
     * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
 ### \[Implemented\] Find By Status Feature
@@ -235,14 +235,14 @@ The `Status` class is facilitated by using `execute()` command in the `EditComma
 
 The implemented find by status mechanism is facilitated by `findstatus` command. It extends `UDT` with a Find By Status, allowing users to find persons by their current COVID-19 statuses.
 
-Classes added for this feature: 
+Classes added for this feature:
 * `StatusContainsKeywordsPredicate`
 * `FindStatusCommand`
 * `FindStatusCommandParser`
 
 Given below is an example usage scenario and how the find by status mechanism behaves at each step.
 
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
 Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
 Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
 Step 4. The filtered list of persons is displayed to the user.
@@ -291,14 +291,14 @@ The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denotin
 
 The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
 
-Classes added for this feature: 
+Classes added for this feature:
 * `ClassCodeContainsKeywordsPredicate`
 * `FindClassCodeCommand`
 * `FindClassCodeCommandParser`
 
 Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
 
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
 Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
 Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
 Step 4. The filtered list of perons is displayed to the user.
@@ -367,14 +367,14 @@ The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting
 
 The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
 
-Classes added for this feature: 
+Classes added for this feature:
 * `ActivityContainsKeywordsPredicate`
 * `FindActivityCommand`
 * `FindActivityCommandParser`
 
 Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
 
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
 Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
 Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
 Step 4. The filtered list of perons is displayed to the user.
@@ -440,6 +440,32 @@ of students which makes it slightly impractical to use
   * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
   * A student can have ANY number of activities, including zero (optional).
 
+The `add` feature was originally implemented in **AB3** with only a select few attributes such as `Name`, `Email`, `Phone number` etc.
+To properly, address the main issue that our app aims to solve, we have added and updated specific attributes such as `Status`, `ClassCode`
+and `Activities`, which will be further elaborate on further into the Developer Guide.
+
+To accommodate these new changes, updates were made to the `CLISyntax` class as well, for the new prefixes of the new attributes.
+
+|![AddMethodActivityDiagram](images/developer-guide/AddMethodActivityDiagram.png)|
+|:--:|
+|*Add Method - Activity Diagram*|
+
+As seen in the figure above, when the `add` command is used, the parser checks if the command provided is valid, by checking
+the prefixes as well as the details provided - a _ParseException_ is thrown for invalid commands. Following a valid command,
+a check is then performed to see if this `Person` has already been added, throwing a command exception if so. Otherwise,
+the `Person` will be created with the details provided, inserted into the `AddressBook` and returns a success message
+to the **user**. The **_Batch Update_** Feature is also implemented within the Add Command and checks for any `Person` that is
+being added with a **_Positive_** `Status`.
+
+|![AddMethodClassDiagram](images/developer-guide/AddClassDiagram.png)|
+|:--:|
+|*Add Method - Class Diagram*|
+
+The `AddCommand` class extends from the Abstract `Command` class and its Class Diagram is as shown above. Within `AddCommand`,
+there is an additional method `batchUpdateNegativeToPositive` that checks for any COVID-19 _Positive_ students being added into
+the addressbook. If so, other students within the same `Activity` and `ClassCode` will have their `Status` updated to _Close-Contact_.
+
+
 ### \[Updated\] Editing a Person Feature
 
 #### Updates
@@ -452,7 +478,7 @@ of students which makes it slightly impractical to use
     * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
 * `Activity`
     * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
-    * When editing a student's activities, the user has to list out all activities even if the activities 
+    * When editing a student's activities, the user has to list out all activities even if the activities
 have already been added.
 
 ### \[Updated\] User Interface
@@ -506,7 +532,7 @@ How the batch update works:
       * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
         * If the `List` is empty, edit A's status to `Negative`.
         * Else, edit the added student's status to `Close-Contact`.
-    
+
 * **DeleteCommand**:
   * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
     * If the student to be deleted is `Positive`,
@@ -645,8 +671,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### \[Proposed Update\] User Interface
 
-The purpose of updating the user interface is to create a more user-friendly and 
-seamless application.
+The purpose of updating the user interface is to create a more user-friendly and seamless application.
 
 #### Design considerations:
 
@@ -926,7 +951,5 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

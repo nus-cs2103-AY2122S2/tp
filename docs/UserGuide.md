@@ -1,13 +1,13 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, 
-optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
-Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration,
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface.
+Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
 
-School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, 
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most,
 the education of the students.
 
 Through this user guide, you will learn how to use UDT effectively and efficiently, to manage COVID-19 cases in your schools.
@@ -48,17 +48,17 @@ A glossary is included at the end to clarify any technical or vague terms used.
 ----------------
 # Quick start
 1. Ensure you have **Java 11** or above installed on your Computer.
-   - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
-   - To check which version of Java you have installed:
-     1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
-     2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
+    - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
+    - To check which version of Java you have installed:
+    1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
+    2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
 2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
-   - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
-     1. Navigate to the folder containing the udt.jar file.
-     2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
-     3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
+    - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
+    1. Navigate to the folder containing the **udt.jar** file.
+    2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
+    3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
 5. Refer to the Features below for details of each command.
 
 <div markdown="block" class="alert alert-info">
@@ -108,8 +108,8 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 
 <div markdown="block" class="alert alert-info">
 
-> :information_source: **Formatting notes:**  
-> - Words in `UPPER_CASE` are the user inputs to be supplied.  
+> :information_source: **Formatting notes:**
+> - Words in `UPPER_CASE` are the user inputs to be supplied.
 > - Items in square brackets `[]` are optional.
 
 </div>
@@ -117,9 +117,9 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
-  - `NAME` takes in alphabetical characters and have a character limit of 50  
-  - `ADDRESS` takes in any characters and have a character limit of 70 
-  - `ACTIVITY` takes in alphanumeric text and have a character limit of 50 
+  - `NAME` takes in alphabetical characters and have a character limit of 50
+  - `ADDRESS` takes in any characters and have a character limit of 70
+  - `ACTIVITY` takes in alphanumeric text and have a character limit of 50
   - `CLASS` takes in a number and alphabet pair
     - Eg. `4A`
   - `EMAIL` follows the standard email formatting
@@ -131,14 +131,18 @@ Adds a student to the tracking list
     - `STATUS` is case-sensitive and should strictly follow the texts stated above
 - Examples:
   - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 cc/5A s/Negative`
-  - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 cc/2B s/Positive act/choir`
+  - `add n/Candice N Utz p/98765432 e/candicenuts@example.com a/123, Sunrise Road, #01-25 s/Negative cc/4A act/Basketball act/Dance`
+
+|![add command](images/user-guide/add.png)|
+|:--:|
+|*Figure 3 - `add` Command*|
 
 <div markdown="block" class="alert alert-primary" role="alert">
 
-> :bulb: **Tips:**  
-> - Multiple activity tags can be added to a single student by using multiple `act/` prefixes  
->   - Eg. `act/choir act/dance`
-> - A student can also have no activity tags  
+> :bulb: **Tips:**
+> - Multiple activity tags can be added to a single student by using multiple `act/` prefixes
+> - Eg. `act/choir act/dance`
+> - A student can also have no activity tags
 > - User inputs can be in any order
 
 </div>
@@ -153,7 +157,7 @@ Adds a student to the tracking list
 Shows a list of all students in the application.
 - Format: `list`
   - Any user input after `list` is ignored
-    - `list 12345 john` is the same as `list`
+  - `list 12345 john` is the same as `list`
 
 <div markdown="block" class="alert alert-primary" role="alert">
 
@@ -163,7 +167,7 @@ Shows a list of all students in the application.
 
 |![list command](images/user-guide/list.png)|
 |:--:|
-|*Figure 3 - `list` Command*|
+|*Figure 4 - `list` Command*|
 
 ## Find student by name: `find`
 Find an existing student in the application by their name
@@ -183,7 +187,7 @@ Find an existing student in the application by their name
 
 |![find command](images/user-guide/find.png)|
 |:--:|
-|*Figure 4 - `find` Command*|
+|*Figure 5 - `find` Command*|
 
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
@@ -194,10 +198,10 @@ Find an existing student in the application by their Covid-19 Status
 - Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
   - `findstatus negative` finds all students that are labelled COVID negative
-  
+
 |![find status command](images/user-guide/findstatus.png)|
 |:--:|
-|*Figure 5 - `findstatus` Command*|
+|*Figure 6 - `findstatus` Command*|
 
 ## Find student by class: `findclasscode`
 Finds an existing student in the application by their class
@@ -209,7 +213,7 @@ Finds an existing student in the application by their class
 
 |![find classcode command](images/user-guide/findclasscode.png)|
 |:--:|
-|*Figure 6 - `findclasscode` Command*|
+|*Figure 7 - `findclasscode` Command*|
 
 ## Find student by activity: `findactivity`
 Finds an existing student in the application by the activities they are participating in
@@ -224,7 +228,7 @@ Finds an existing student in the application by the activities they are particip
 
 |![find activity command](images/user-guide/findactivity.png)|
 |:--:|
-|*Figure 7 - `findactivity` Command*|
+|*Figure 8 - `findactivity` Command*|
 
 ## Edit student details: `edit`
 Edits an existing student's details in the list Index provided and the parts that you want to edit
@@ -239,28 +243,28 @@ Edits an existing student's details in the list Index provided and the parts tha
 
 <div markdown="block" class="alert alert-primary" role="alert">
 
-> :bulb: **Tips:**  
-> - Filter the student list via __*find*__ commands to make finding the index easier  
+> :bulb: **Tips:**
+> - Filter the student list via __*find*__ commands to make finding the index easier
 > - Omitting parts of the student details from the command will leave them unedited
 > - To clear a student's activities use `edit INDEX act/`
-  
-> :information_source: **Notes:** 
+
+> :information_source: **Notes:**
 > - Capitalization of text will be reflected in the User Interface
 > - Editing `Activity` of a student will **replace** all activities with the newly added ones
->   - Eg. `edit 1 act/tennis` will replace the `Activity` of the 1st student in the list with _"tennis"_
+> - Eg. `edit 1 act/tennis` will replace the `Activity` of the 1st student in the list with _"tennis"_
 
 </div>
 
 |![edit command](images/user-guide/edit.png)|
 |:--:|
-|*Figure 8 - `edit` Command*|
+|*Figure 9 - `edit` Command*|
 
 ## Delete a student: `delete`
 Deletes the specified person from the application.
 - Format: `delete INDEX`
   - Deletes the student at the specified `INDEX`
   - `INDEX` denotes the list index of the student in the displayed list
-  - `INDEX` must be a _positive integer (1, 2, 3...)_ 
+  - `INDEX` must be a _positive integer (1, 2, 3...)_
 - Examples:
   - `list` followed by `delete 2` deletes the 2nd person in the student list
   - `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command
@@ -273,10 +277,10 @@ Deletes the specified person from the application.
 
 |![delete command](images/user-guide/delete.png)|
 |:--:|
-|*Figure 9 - `delete` Command*|
+|*Figure 10 - `delete` Command*|
 
 ### Automation of `Status`
-`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
+`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
 - UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
 
@@ -288,25 +292,25 @@ Deletes the specified person from the application.
 
 #### Limitations of automation
 - UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
-`Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
-changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
-in the *next iteration (v1.5)*.
+  `Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
+  changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
+  in the *next iteration (v1.5)*.
 - If student A recovers from COVID-19 (`Status` is changed from `Positive` to `Negative`), A's status will be `Negative` even though there are still `Positive` cases
-related to A. However, if a student related to A by `ClassCode` or `Activity` becomes COVID-19 positive after A recovers, A's status will be listed as `Close-Contact`
+  related to A. However, if a student related to A by `ClassCode` or `Activity` becomes COVID-19 positive after A recovers, A's status will be listed as `Close-Contact`
 
 ## Right-Click Help Menu
 
-|![RightClick](images/user-guide/rightclick.png)|
+|![RightClick](images/user-guide/rightclick.PNG)|
 |:--:|
-|*Figure 10 - Right-Click Help Menu*|
+|*Figure 11 - Right-Click Help Menu*|
 
 The following few features can be achieved through right-clicking the Command Line.
 Some features have keyboard shortcuts as well, so do read on to find out more.
 
-### Undo/Redo: 
-Undo or redo what you have been typing in the Command Line **BEFORE** it has been executed/entered, 
+### Undo/Redo:
+Undo or redo what you have been typing in the Command Line **BEFORE** it has been executed/entered,
 allowing you to make any edits as required.
-Refer to **_Figure 10_** above to see the menu.
+Refer to **_Figure 11_** above to see the menu.
 
 Using a Mouse:
 - Right-click on the Command Line to open the menu containing the `undo` and `redo` buttons
@@ -316,7 +320,7 @@ Using a Mouse:
 
 Using a Keyboard:
 - `ctrl+z` to undo
-- `ctrl+y` to red
+- `ctrl+y` to redo
 
 > :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
 
@@ -358,11 +362,11 @@ Highlights all the text that is currently in the Command Box
 Displays a list of commands to use and a link to our user guide. A `Copy URL` button is provided to copy the link.
 - Format: `help`
   - Any user input after `help` is ignored
-    - `help 12345 john` is the same as `help`
+  - `help 12345 john` is the same as `help`
 
 |![help command](images/user-guide/help.png)|
 |:--:|
-|*Figure 11 - `help` Command*|
+|*Figure 12 - `help` Command*|
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
@@ -387,7 +391,7 @@ UDT data is saved in the hard disk automatically after any command that changes 
 - Data is saved to the same location as the application executable
 
 ## Editing the data file
-UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
+UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 - Data is saved to the same location as the application executable
 
 <div markdown="block" class="alert alert-primary" role="alert">
@@ -405,17 +409,18 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 ----------------
 # FAQ
 
-Q: How do I transfer my data to another Computer?  
+Q: How do I transfer my data to another Computer?
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous _**UDT**_.
 
-Q: I edited my data file directly and now the application does not work properly!  
+Q: I edited my data file directly and now the application does not work properly!
 A: Delete the data folder to allow _**UDT**_ to create a new data file. Your previous data has unfortunately been lost to time.
 
-Q: Manual insertion of students takes time, is there a faster way to do it?  
+Q: Manual insertion of students takes time, is there a faster way to do it?
 A: We are working on a feature to allow importing of **.csv** files into _**UDT**_!
 
-Q: What if I key in the wrong command?  
+Q: What if I key in the wrong command?
 A: An error message colored in red will appear stating that you have typed an unknown command.
+
 ![invalid command](images/user-guide/invalidcommand.png)
 
 
@@ -437,12 +442,10 @@ A: An error message colored in red will appear stating that you have typed an un
 
 ----------------
 
-## Glossary  
-  
+## Glossary
+
 | Term      | Meaning                                 |
 |:---------:|:---------------------------------------:|
 | Parameter | Input supplied after the command        |
 | JSON      | A file type that UDT uses to store data |
 | csv       | A common file type used to store data   |
-  
-  

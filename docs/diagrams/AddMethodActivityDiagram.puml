@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User inputs Add Command with Parameters;
+
+    If () then ([Invalid Command - Missing required prefixes && \n Parameters of command are invalid])
+        :Throws //ParseException//;
+        :Exception thrown is displayed to **user**;
+
+    else ([Valid Command])
+
+        If () then ([Person already in system])
+        :Throws //CommandException//;
+        :Exception thrown is displayed to **user**;
+
+        else ([Person is unique])
+            :**Person** is created;
+            :**Person** is inserted into //addressbook//;
+            :Returns Message to **user** indicating Success;
+            ://ResultDisplay// prints result to **user**;
+        endif
+    endif
+stop
+
+@enduml
