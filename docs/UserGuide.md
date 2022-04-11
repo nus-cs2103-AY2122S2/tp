@@ -235,7 +235,7 @@ If you have any existing lessons that clash with the one that you're trying to a
 
 <div markdown="span" class="alert alert-warning">
 :bulb: **Tip:**<br>
-If you still want to add this lesson, use [`rmlesson`](#deleting a-lesson) to remove the list of conflicting lessons shown before proceeding to add the new lesson.
+If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
 </div>
 
 ---
