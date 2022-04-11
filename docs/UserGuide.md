@@ -2,17 +2,10 @@
 layout: page
 title: User Guide
 ---
+AgentSee is a **desktop application for property agents to manage clients.** It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+It is easy to use, and free!
 
-AgentSee is a **desktop application for property agents to manage clients.** It is:
-
-* optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-  - So if you can type fast, AgentSee can get your client management tasks done faster than traditional GUI apps!
-  
-* Easy to use! The User Guide and the application is very easy to navigate!
-
-* ~~Cheap~~ FREE!
-
-* Table of Contents
+  * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
@@ -435,7 +428,7 @@ Function: Edit an existing seller's information in the displayed seller list.
 :bulb: **Caution:** This action **cannot be undone**! Be careful when changing your seller's information.
 </div>
 
-Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​[h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
+Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]… ​[h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
 * Edit the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * At least one of the optional inputs must be provided.
