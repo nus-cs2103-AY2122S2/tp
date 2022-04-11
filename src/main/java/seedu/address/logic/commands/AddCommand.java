@@ -3,9 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,7 +15,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -24,17 +25,17 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_MODULE + "CS2040 "
+            + PREFIX_MODULE + "CS2103";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String SHOWING_ADD_WINDOW = "Opened add window instead";
 
     private final Person toAdd;
 
@@ -46,15 +47,45 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Creates an empty AddCommand. Used to open {@code AddWindow}
+     */
+    private AddCommand() {
+        toAdd = null;
+    }
+
+    /**
+     * Factory method for an empty AddCommand. Prevents unintended calls to empty constructor.
+     * @return an empty AddCommand
+     */
+    public static AddCommand addWindowHelper() {
+        return new AddCommand();
+    }
+
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
+
+        if (toAdd == null) {
+            return new CommandResult(SHOWING_ADD_WINDOW, false, true, false, false, false, false);
+        }
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+        // Note that although we disallow adding in archiveBook, we have to do this still
+        // As the moving of data between archiveBook and addressBook uses AddCommand
+        if (isArchiveBook()) {
+            model.addArchivedPerson(toAdd);
+        } else {
+            // Disallows adding if such a person already exists in the archives
+            if (model.hasArchivedPerson(toAdd)) {
+                throw new CommandException("This person is already in your archives");
+            }
+            model.addPerson(toAdd);
+        }
 
-        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "<<class>>\nAddCommand" as StaticAddCommand LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse("")
+activate AddCommandParser
+
+AddCommandParser -> StaticAddCommand : addWindowHelper()
+activate StaticAddCommand
+StaticAddCommand --> AddCommandParser :
+deactivate StaticAddCommand
+
+AddCommandParser --> AddressBookParser :
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

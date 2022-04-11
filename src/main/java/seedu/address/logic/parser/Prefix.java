@@ -2,12 +2,19 @@ package seedu.address.logic.parser;
 
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
- * E.g. 't/' in 'add James t/ friend'.
+ * E.g. 'm/' in 'add James m/CS2106'.
  */
 public class Prefix {
     private final String prefix;
+    private final String description;
 
-    public Prefix(String prefix) {
+    /**
+     * Constructs a Prefix.
+     * @param prefix the prefix string.
+     * @param desc the description of the prefix.
+     */
+    public Prefix(String prefix, String desc) {
+        this.description = desc;
         this.prefix = prefix;
     }
 
@@ -15,6 +22,11 @@ public class Prefix {
         return prefix;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
     public String toString() {
         return getPrefix();
     }
@@ -34,6 +46,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) obj;
-        return otherPrefix.getPrefix().equals(getPrefix());
+        return otherPrefix.getPrefix().equals(getPrefix())
+                && otherPrefix.getDescription().equals(getDescription());
     }
 }

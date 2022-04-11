@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.SortCommand.PersonComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,6 +41,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' archived address book file path.
+     */
+    Path getArchivedAddressBookFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -49,8 +55,13 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    void setArchiveBook(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the ArchiveBook */
+    ReadOnlyAddressBook getArchiveBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -75,6 +86,22 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Sort the person list with PersonComparator {@code comparator}.
+     */
+    void sortPerson(PersonComparator comparator);
+
+    boolean hasArchivedPerson(Person person);
+
+    void addArchivedPerson(Person person);
+
+    void switchAddressBook();
+
+    boolean isSwapped();
+
+    void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook,
+                               ReadOnlyAddressBook archiveBook);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

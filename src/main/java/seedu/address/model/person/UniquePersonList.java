@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.SortCommand.PersonComparator;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -66,6 +67,13 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+    }
+
+    /**
+     * Sort the list using the given comparator.
+     */
+    public void sort(PersonComparator comparator) {
+        internalList.sort(comparator);
     }
 
     /**

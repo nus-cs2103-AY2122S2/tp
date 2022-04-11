@@ -1,0 +1,25 @@
+@startuml
+start
+:Application start;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([else])
+else ([User types 'add' or opens AddWindow])
+    :AddWindow is opened;
+    :User inputs all fields;
+    :User submits the information;
+    while () is ([User input is invalid])
+        :Output invalid message;
+        :User submits new input;
+    endwhile ([User input is valid or pressed cancel])
+    if () then ([User pressed 'Cancel'])
+    else([else])
+        :Add new Person;
+        :Add Status to new Person;
+        :Add Module to new Person;
+    endif
+endif
+stop
+@enduml

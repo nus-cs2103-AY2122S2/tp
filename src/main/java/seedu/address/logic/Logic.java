@@ -39,6 +39,11 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' archived address book file path
+     */
+    Path getArchivedAddressBookFilePath();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
@@ -47,4 +52,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    void switchAddressBook() throws CommandException;
 }

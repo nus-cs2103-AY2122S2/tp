@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.SortCommand.PersonComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,24 +21,27 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final AddressBook archiveBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private boolean isSwapped;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
-
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyAddressBook archiveBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, archiveBook, userPrefs);
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.archiveBook = new AddressBook(archiveBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.isSwapped = false;
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -70,6 +74,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getArchivedAddressBookFilePath() {
+        return userPrefs.getArchivedAddressBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -77,14 +86,25 @@ public class ModelManager implements Model {
 
     //=========== AddressBook ================================================================================
 
+
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
+    public void setArchiveBook(ReadOnlyAddressBook addressBook) {
+        this.archiveBook.resetData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public ReadOnlyAddressBook getArchiveBook() {
+        return archiveBook;
     }
 
     @Override
@@ -95,11 +115,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        requireNonNull(person);
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -107,9 +129,49 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public void sortPerson(PersonComparator comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPerson(comparator);
+    }
+
+    @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archiveBook.hasPerson(person);
+    }
+
+    @Override
+    public void addArchivedPerson(Person person) {
+        requireNonNull(person);
+        archiveBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public boolean isSwapped() {
+        return isSwapped;
+    }
+
+    @Override
+    public void switchAddressBook() {
+        isSwapped = !isSwapped;
+        ReadOnlyAddressBook temp = new AddressBook(addressBook);
+        setAddressBook(archiveBook);
+        setArchiveBook(temp);
+    };
+
+    @Override
+    public void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook,
+                                      ReadOnlyAddressBook archiveBook) {
+        requireAllNonNull(isSwapped, addressBook, archiveBook);
+        this.isSwapped = isSwapped;
+        setAddressBook(addressBook);
+        setArchiveBook(archiveBook);
+    };
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -125,6 +187,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
         filteredPersons.setPredicate(predicate);
     }
 

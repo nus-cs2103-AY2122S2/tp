@@ -3,17 +3,17 @@
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: derive(#A3BCF9, 20%);
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: derive(#A3BCF9, 40%);
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: derive(#A3BCF9, 20%);
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #7796CB;
 }

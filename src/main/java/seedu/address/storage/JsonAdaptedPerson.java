@@ -10,17 +10,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Status;
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -28,7 +30,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String status;
+    private final String comment;
+    private final List<JsonAdaptedTag> module = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +40,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("status") String status,
+            @JsonProperty("module") List<JsonAdaptedTag> module, @JsonProperty("comment") String comment) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.status = status;
+        this.comment = comment;
+        if (module != null) {
+            this.module.addAll(module);
         }
     }
 
@@ -54,9 +62,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
+        status = source.getStatus().value;
+        module.addAll(source.getModules().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().value;
     }
 
     /**
@@ -65,9 +75,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Module> personModules = new ArrayList<>();
+        for (JsonAdaptedTag module : module) {
+            personModules.add(module.toModelType());
         }
 
         if (name == null) {
@@ -100,10 +110,21 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
+        }
+
+        final Address modelAddress = new Address(address);
+        final Set<Module> modelModules = new HashSet<>(personModules);
+        final Status modelStatus = new Status(status);
+        final Comment modelComment = new Comment(comment);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelStatus, modelModules, modelComment);
     }
 
 }

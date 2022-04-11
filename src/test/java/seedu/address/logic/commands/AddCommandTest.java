@@ -35,8 +35,8 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
+        Command command = new AddCommand(validPerson);
+        CommandResult commandResult = command.execute(modelStub);
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -47,7 +47,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addCommand.executeUndoableCommand(modelStub));
     }
 
     @Test
@@ -104,6 +105,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getArchivedAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -119,7 +125,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setArchiveBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getArchiveBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -130,6 +146,11 @@ public class AddCommandTest {
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPerson(SortCommand.PersonComparator comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,6 +168,33 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            return false; // because we did not set up any testing for archive yet
+        }
+
+        @Override
+        public void addArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSwapped() {
+            return false;
+        }
+
+        @Override
+        public void setSwappedAddressBook(boolean isSwapped,
+                                          ReadOnlyAddressBook addressBook, ReadOnlyAddressBook archiveBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -187,6 +235,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public ReadOnlyAddressBook getArchiveBook() {
             return new AddressBook();
         }
     }

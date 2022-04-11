@@ -7,33 +7,46 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.module.Module;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    // constants
+    public static final String BLACKLIST = "blacklist";
+    public static final String FAVOURITE = "favourite";
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Status status;
+    private final Comment comment;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Module> modules = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Status status,
+                  Set<Module> modules, Comment comment) {
+        requireAllNonNull(name, phone, email, address, modules, comment);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        // This is how to add a proper blacklist/favourite when editing the thing!
+        if (status.toString().equals(BLACKLIST) || status.toString().equals(FAVOURITE)) {
+            this.status = status;
+        } else {
+            this.status = new Status("");
+        }
         this.address = address;
-        this.tags.addAll(tags);
+        this.modules.addAll(modules);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -52,12 +65,20 @@ public class Person {
         return address;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(modules);
     }
 
     /**
@@ -92,13 +113,15 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getModules().equals(getModules())
+                && otherPerson.getStatus().equals(getStatus())
+                && otherPerson.getComment().equals(getComment());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, modules);
     }
 
     @Override
@@ -110,12 +133,16 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Status: ")
+                .append(getStatus())
+                .append("; Comment: ")
+                .append(getComment());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Module> modules = getModules();
+        if (!modules.isEmpty()) {
+            builder.append("; Modules: ");
+            modules.forEach(builder::append);
         }
         return builder.toString();
     }

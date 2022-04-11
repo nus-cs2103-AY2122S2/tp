@@ -17,14 +17,18 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final AddressBookStorage addressBookStorage;
+    private AddressBookStorage archivedAddressBookStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage},
+     * {@code archivedAddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, AddressBookStorage archivedAddressBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
+        this.archivedAddressBookStorage = archivedAddressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -61,6 +65,7 @@ public class StorageManager implements Storage {
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
+        System.out.println("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -73,6 +78,24 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    /**
+     * Function to get Archived AddressBook File Path
+     */
+    @Override
+    public Path getArchivedAddressBookFilePath() {
+        return archivedAddressBookStorage.getAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataConversionException, IOException {
+        return readAddressBook(archivedAddressBookStorage.getAddressBookFilePath());
+    }
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, archivedAddressBookStorage.getAddressBookFilePath());
     }
 
 }

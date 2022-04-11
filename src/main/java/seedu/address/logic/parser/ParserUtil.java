@@ -9,11 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FormatPersonUtil;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +99,74 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String module} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Status(trimmedStatus);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String module} into a {@code Module}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Module parseModule(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedModule = module.trim();
+        if (!Module.isValidModuleName(trimmedModule)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Module(trimmedModule);
+    }
+
+    /**
+     * Parses a {@code String format} into a {@code FormatPersonUtil}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code format} is invalid.
+     */
+    public static FormatPersonUtil parseFormat(String format) throws ParseException {
+        requireNonNull(format);
+        String trimmedFormat = format.trim();
+        if (!FormatPersonUtil.isValidFormat(trimmedFormat)) {
+            throw new ParseException(FormatPersonUtil.MESSAGE_CONSTRAINTS);
+        }
+        return new FormatPersonUtil(trimmedFormat);
+    }
+
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String moduleName : modules) {
+            moduleSet.add(parseModule(moduleName));
+        }
+        return moduleSet;
+    }
+
+    /**
+     * Parses a {@code String module} into a {@code Module}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code module} is invalid.
+     */
+    public static Comment parseComment(String comment) throws ParseException {
+        requireNonNull(comment);
+        String trimmedComment = comment.trim();
+        if (!Comment.isValidComment(trimmedComment)) {
+            return new Comment("");
+        }
+        return new Comment(trimmedComment);
     }
 }

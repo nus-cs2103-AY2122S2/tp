@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.SortCommand.PersonComparator;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -86,6 +87,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sort persons in the address book with given PersonComparator {@code comparator}.
+     */
+    public void sortPerson(PersonComparator comparator) {
+        persons.sort(comparator);
+    }
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -97,7 +104,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        StringBuilder sb = new StringBuilder();
+        ObservableList<Person> personList = persons.asUnmodifiableObservableList();
+        for (Person p : personList) {
+            sb.append(p.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+        //return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 

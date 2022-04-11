@@ -1,0 +1,42 @@
+#addContainer {
+    -fx-background-color: #7796CB;
+}
+
+#editContainer {
+    -fx-background-color: #7796CB;
+}
+
+.label {
+    -fx-background-color: derive(#A3BCF9, 20%);
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI";
+}
+
+#editMessageLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+#addMessageLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+#errorLabel {
+    -fx-background-color: #7796CB;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.text-field {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI";
+}
+
+.button {
+    -fx-font-size: 14;
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: derive(#A3BCF9, 20%);
+}

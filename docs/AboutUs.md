@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bryan Tan Jing Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fantablack.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/fantablack)]
+[[portfolio](team/fantablack.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Developer
 
-### Jane Doe
+### Benjamin Tay Keck Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/btaykb.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Btaykb)]
+[[portfolio](team/btaykb.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Code, Documentation
 
-### Johnny Doe
+### Julio Harjo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junlee1991.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/junlee1991)] 
+[[portfolio](team/junlee1991.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bakano98.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bakano98)]
+[[portfolio](team/bakano98.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: GUI, features enhancement
 
-### James Doe
+### Law Wei Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lawwm.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lawwm)]
+[[portfolio](team/lawwm.md)]
+
 
 * Role: Developer
 * Responsibilities: UI

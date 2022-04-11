@@ -29,6 +29,43 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Create list of prefix based on their position in input.
+     *
+     * @param argsString Arguments string to find prefixes in
+     * @param prefixes   Prefixes to find in the arguments string
+     * @return List of prefix in the arguments string
+     */
+    public static List<Prefix> getPrefixListInOrder(String argsString, Prefix... prefixes) {
+        return findAllPrefixPositions(argsString, prefixes)
+                .stream()
+                .sorted((prefix1, prefix2) -> Integer.compare(prefix1.getStartPosition(), prefix2.getStartPosition()))
+                .map(PrefixPosition::getPrefix)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getArgListInOrder(String argsString, Prefix... prefixes) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        positions.sort((prefix1, prefix2) -> Integer.compare(prefix1.getStartPosition(), prefix2.getStartPosition()));
+
+        // Insert a PrefixPosition to represent the preamble
+        PrefixPosition preambleMarker = new PrefixPosition(new Prefix("", ""), 0);
+        positions.add(0, preambleMarker);
+
+        // Add a dummy PrefixPosition to represent the end of the string
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix("", ""), argsString.length());
+        positions.add(endPositionMarker);
+
+        List<String> orderList = new ArrayList<>();
+        for (int i = 1; i < positions.size() - 1; i++) {
+            // Extract and store arguments
+            String argValue = extractArgumentValue(argsString, positions.get(i), positions.get(i + 1));
+            orderList.add(argValue);
+        }
+
+        return orderList;
+    }
+
+    /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
@@ -90,11 +127,11 @@ public class ArgumentTokenizer {
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 
         // Insert a PrefixPosition to represent the preamble
-        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
+        PrefixPosition preambleMarker = new PrefixPosition(new Prefix("", ""), 0);
         prefixPositions.add(0, preambleMarker);
 
         // Add a dummy PrefixPosition to represent the end of the string
-        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix("", ""), argsString.length());
         prefixPositions.add(endPositionMarker);
 
         // Map prefixes to their argument values (if any)

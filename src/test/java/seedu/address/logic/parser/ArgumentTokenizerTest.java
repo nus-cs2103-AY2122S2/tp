@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
 
-    private final Prefix unknownPrefix = new Prefix("--u");
-    private final Prefix pSlash = new Prefix("p/");
-    private final Prefix dashT = new Prefix("-t");
-    private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix unknownPrefix = new Prefix("--u", "");
+    private final Prefix pSlash = new Prefix("p/", "");
+    private final Prefix dashT = new Prefix("-t", "");
+    private final Prefix hatQ = new Prefix("^Q", "");
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
@@ -55,7 +55,7 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
-        String argsString = "  some random string /t tag with leading and trailing spaces ";
+        String argsString = "  some random string /t module with leading and trailing spaces ";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString);
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
@@ -138,13 +138,13 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void equalsMethod() {
-        Prefix aaa = new Prefix("aaa");
+        Prefix aaa = new Prefix("aaa", "");
 
         assertEquals(aaa, aaa);
-        assertEquals(aaa, new Prefix("aaa"));
+        assertEquals(aaa, new Prefix("aaa", ""));
 
         assertNotEquals(aaa, "aaa");
-        assertNotEquals(aaa, new Prefix("aab"));
+        assertNotEquals(aaa, new Prefix("aab", ""));
     }
 
 }

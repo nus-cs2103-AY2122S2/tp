@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Add Person" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/add-contact.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@AdditionalWindows.css" />
+            </stylesheets>
+
+            <HBox fx:id="addContainer" alignment="BOTTOM_RIGHT" prefHeight="500.0" prefWidth="546.0">
+                <children>
+               <VBox prefHeight="404.0" prefWidth="524.0">
+                  <children>
+                     <Label fx:id="addMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="540.0" text="Label" textAlignment="CENTER">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                        <padding>
+                           <Insets bottom="10.0" top="5.0" />
+                        </padding>
+                     </Label>
+                     <HBox>
+                        <children>
+                           <Label fx:id="nameLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="nameField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="John Doe" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="phoneLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="phoneField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="91234567" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="addressLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="addressField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="123, Woodlands Ave 16, #02-123" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="emailLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="emailField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="johndoe@example.com" />
+                        </children>
+                     </HBox>
+                     <HBox layoutX="10.0" layoutY="215.0">
+                        <children>
+                           <Label fx:id="commentLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="commentField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] Comment" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="statLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="statField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] favourite" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Label fx:id="modulesLabel" alignment="CENTER" prefHeight="44.0" prefWidth="75.0" text="Label">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="modulesField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] CS3230 CS1231S" />
+                        </children>
+                     </HBox>
+                     <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label" wrapText="true">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                     <Region prefHeight="57.0" prefWidth="524.0" />
+                     <HBox>
+                        <children>
+                                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" prefHeight="50.0" prefWidth="102.0" text="Cancel" />
+                           <Region prefHeight="7.0" prefWidth="325.0" />
+                           <Button fx:id="submitButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="50.0" prefWidth="104.0" text="Submit" />
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+                </children>
+                <opaqueInsets>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>

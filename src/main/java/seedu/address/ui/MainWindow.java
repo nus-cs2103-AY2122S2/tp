@@ -1,19 +1,24 @@
 package seedu.address.ui;
 
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.BookNames;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -23,6 +28,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    // This is also a Ui part in MainWindow.
+    protected static ResultDisplay resultDisplay;
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -32,14 +39,26 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AddWindow addWindow;
+    private EditWindow editWindow;
+
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem switchMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem addMenuItem;
+
+    @FXML
+    private MenuItem editMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -66,6 +85,10 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Pass the logic into AddWindow so we can use it to execute commands as well
+        addWindow = new AddWindow(logic);
+        editWindow = new EditWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +97,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(switchMenuItem, KeyCombination.valueOf("F10"));
     }
 
     /**
@@ -115,8 +139,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        Path defaultPath = logic.getAddressBookFilePath();
+        Path archivePath = logic.getArchivedAddressBookFilePath();
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), defaultPath, archivePath);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +172,30 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the add window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAdd() {
+        if (!addWindow.isShowing()) {
+            addWindow.show();
+        } else {
+            addWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the edit window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleEdit() {
+        if (!editWindow.isShowing()) {
+            editWindow.show();
+        } else {
+            editWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,7 +209,45 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        addWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * GUI alternative to activate a SwitchCommand.
+     */
+    @FXML
+    private void handleSwitchMenu() throws CommandException, ParseException {
+        logger.info("Switch Menu Item fired!!!");
+        executeCommand(SwitchCommand.COMMAND_WORD);
+    }
+    /**
+     * Function to perform operations involving logic object
+     */
+    private void handleSwitch() throws CommandException, ParseException {
+        logger.info("Handle Switch fired!");
+        logic.switchAddressBook();
+
+        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.updateBookPath());
+
+        boolean isDefaultNext = StatusBarFooter.isArchiveBook();
+        if (isDefaultNext) {
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_DEFAULT));
+        } else {
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_ARCHIVED));
+        }
+    }
+
+    /**
+     * Copy to the clipboard the selected person's information.
+     */
+    private void handleCopy(CommandResult result) {
+        logger.info("Copied to clipboard!");
+        String copiedText = result.getFeedbackToUser();
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(copiedText);
+        clipboard.setContent(content);
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -176,10 +263,28 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isCopyCommand()) {
+                resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
+                handleCopy(commandResult);
+            } else {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowAdd()) {
+                handleAdd();
+            }
+
+            if (commandResult.isShowEdit()) {
+                handleEdit();
+            }
+
+            if (commandResult.isSwitchCommand()) {
+                handleSwitch();
             }
 
             if (commandResult.isExit()) {
