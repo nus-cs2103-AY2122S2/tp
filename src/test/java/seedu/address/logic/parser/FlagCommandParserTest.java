@@ -29,7 +29,7 @@ public class FlagCommandParserTest {
     @Test
     public void parseFlag_invalidArgs_throwsParseException() {
         parser.setCommand("flag");
-        assertParseFailure(parser, "NotAPerson",
+        assertParseFailure(parser, "invalid!",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
     }
 
@@ -43,7 +43,7 @@ public class FlagCommandParserTest {
     @Test
     public void parseUnflag_invalidArgs_throwsParseException() {
         parser.setCommand("unflag");
-        assertParseFailure(parser, "NotAPerson",
+        assertParseFailure(parser, "invalid!",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
     }
 }

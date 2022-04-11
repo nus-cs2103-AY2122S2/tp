@@ -10,56 +10,28 @@ public class FlagTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Name(null));
+        assertThrows(NullPointerException.class, () -> new Flag(null));
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    public void constructor_invalidFlag_throwsIllegalArgumentException() {
+        String invalidFlag = "";
+        assertThrows(IllegalArgumentException.class, () -> new Flag(invalidFlag));
     }
 
     @Test
-    public void isValidName() {
+    public void isValidFlag() {
         // null name
-        assertThrows(NullPointerException.class, () -> Name.isValidName(null));
+        assertThrows(NullPointerException.class, () -> Flag.isValidFlag(null));
 
         // invalid name
-        assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
-        assertFalse(Name.isValidName("Peter  Jack")); // contains more than a single space
-        assertFalse(Name.isValidName("PeterJack ")); // contains space at the end
-        assertFalse(Name.isValidName(" PeterJack")); // contains space at the start
+        assertFalse(Flag.isValidFlag("")); // empty string
+        assertFalse(Flag.isValidFlag(" ")); // spaces only
+        assertFalse(Flag.isValidFlag("TRUE")); // capitalised characters
+        assertFalse(Flag.isValidFlag("FALSE")); // capitalised characters
 
         // valid name
-        assertTrue(Name.isValidName("Peter Jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("pEter Jack")); // unconventional name
-        assertTrue(Name.isValidName("12A Ab")); // unconventional name with numbers
-        assertTrue(Name.isValidName("Peter The 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
-    }
-
-    @Test
-    public void containsKeyword() {
-        Name testName = new Name("Jonathan Chen Xiao Ming");
-
-        assertFalse(testName.containsKeyword(""));
-        assertFalse(testName.containsKeyword("a"));
-        assertFalse(testName.containsKeyword("John"));
-        assertFalse(testName.containsKeyword("Che"));
-        assertFalse(testName.containsKeyword("Johnathan Che"));
-
-        assertTrue(testName.containsKeyword("Jonathan"));
-        assertTrue(testName.containsKeyword("jonathan"));
-        assertTrue(testName.containsKeyword("joNATHAN"));
-        assertTrue(testName.containsKeyword("JoNatHan"));
-
-        assertTrue(testName.containsKeyword("jonathan Chen"));
-        assertTrue(testName.containsKeyword("Chen Xiao Ming"));
-        assertTrue(testName.containsKeyword("xiao ming"));
+        assertTrue(Flag.isValidFlag("true")); // flag
+        assertTrue(Flag.isValidFlag("false")); // unflag
     }
 }
