@@ -263,7 +263,7 @@ Meanwhile, the `lineups` attribute of each person should also be updated if the 
     * Pros: Time efficient.
     * Cons: Troublesome to implement.
 
-#### 2.3 Edit schedule
+#### 3.3 Edit schedule
 #### Proposed implementation
 The proposed edit schedule will update specified attributes such as `ScheduleName`, `ScheduleDescription` for `Schedule` at the specific `index`.
 
@@ -293,7 +293,8 @@ Sequence Diagram:
 __TO BE ADDED__
 
 #### Design Consideration
-For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
+* **Alternative 1 (current choice)**: Optional prefix for user to specify view criteria.<br> Pros: More flexibility for user. <br> Cons: Harder to implement as there are more cases to handle.
+* **Alternative 2**: Compulsory flag <br> Pros: Easier to implement. <br> Cons: Lesser flexibility for user.
 
 #### 4.2 View lineup
 ![view](images/View.png)
@@ -319,10 +320,6 @@ Step 3c. The user executes `view S/ a/archive`.  The command will set the predic
 
 step 2d. The user wants to view schedules on a specific date.\
 Step 3d. The user executes `view S/ d/2000-11-29`. The command will set the predicate for `FilteredList<Schedule>` to be a new `ScheduleOnThisDatePredicate`.
-
-The following sequence diagram shows how the find operation works:
-Sequence Diagram:
-__TO BE ADDED__
 
 #### Design Consideration
 **Aspect: How to set the default display of schedule to active schedules only:**
@@ -360,19 +357,41 @@ Pros: Efficient and easy to find `Lineup` of `Person`
 
 Cons: Need to update both `Person` and `Lineup`
 
-**Alternative 2: Using `Lineup` Only
+**Alternative 2**: Using `Lineup` Only
 
 Pros: Only need to update `Lineup`
 
 Cons: Need to iterate through all `Lineup` to find out the `Lineup` a `Person` belongs to
 
+### 6. Sort feature
 
-### 6. Clear feature
+The sorting feature is facilitated by the ModelManager. It helps to pass the comparator from the `SortCommand` class to `AddressBook`.
+
+#### Proposed implementation
+`ModelManager#sortPersonsInMyGM(Comparator<X>)` where X can be `Height`, `Weight` or `JerseyNumber` is passed to `AddressBook` to sort the `ObservableList<Person>` inside `UniquePersonList` class. 
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application after having used it for a while.
+
+Step 2. The user wants to sort the existing players in descending order of height.
+
+Step 3. The user executes `sort h/desc`. The `sort` command will check if the inputs are valid, and then parsed (similar to previous examples) before creating a `Comparator<Height>`  instances. The `Comparator<Height>` will then be use to sort the `ObservableList<Person>` and the GUI will then display the players in descending order of height.
+
+#### Design Consideration
+* **Alternative 1 (current choice):** Allow user to have the freedom to specify sorting in ascending or descending order.
+    * Pros: Flexibility for the user.
+    * Cons: Harder to implement as another condition has to be considered and thus, creating a different comparator.
+
+* **Alternative 2:** Only allow sorting in ascending order
+    * Pros: Easy to implement and has shorter code.
+    * Cons: Lesser Flexibility for the user.
+
+### 7. Clear feature
 
 #### Proposed implementation
 Purges all data by cleaning `addressbook.json`.
 
-### 7. Theme feature
+### 8. Theme feature
 
 ### Proposed implementation
 Changes the theme of the UI between light and dark mode.
