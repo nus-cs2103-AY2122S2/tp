@@ -246,8 +246,9 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 * There **cannot** be any duplicate events with the same name and date.
 * The `DATE_TIME` must be given in the following format: `DD-MM-YYYY hhmm`
-* Individual fields are parsed intelligently where possible.
-* e.g. A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month. (`31-06-2020 1200` will be automatically adjusted to `30-06-2020 1200`)
+* Individual fields are parsed intelligently where possible. Here are two examples (not comprehensive):
+  * A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month. (`31-06-2020 1200` will be automatically adjusted to `30-06-2020 1200`)
+  * If the time is given as `2400`, the final date-time will automatically jump to the next day with time `0000`
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in _Amigos_.
 
 **Examples**:
@@ -310,9 +311,9 @@ Find events in _Amigos_ whose properties match the given search criteria.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
+  * `DATE_START` and `DATE_END` set the inclusive start and end range to filter events by respectively
   * The date is interpreted intelligently where possible, similar to `DATE_TIME` in `addevent`
   * It is acceptable to provide only the `DATE_START` or `DATE_END`, if desired.
-  * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
 * All events, including past ones, will be checked for matches.
@@ -325,7 +326,7 @@ Find events in _Amigos_ whose properties match the given search criteria.
 
 _Amigos_ aims to help you improve your relationships by providing the tools to reflect on your relationships.
 
-### Review insights of your friends: `showinsights`
+### Review insights of your friends: `showinsights` or `si`
 
 Shows insights about friends in _Amigos_. Switches GUI to the Insights tab.
 
