@@ -365,7 +365,7 @@ Format:
 editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 ```
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the name of a Company is edited, all Events and Persons referring to that Company will also
 update the company name they have stored.
 </div>
