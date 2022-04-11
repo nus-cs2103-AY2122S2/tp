@@ -382,7 +382,7 @@ c) they do not remember which field they want to search.
 * **Alternative 1 (Current Choice):** Search all fields for the keyword <br>
   - Pros:
     - This is the most intuitive approach. 
-    - For all above mentioned scenarios a-c, this alternative is will produce the most useful result.
+    - For all above mentioned scenarios a-c, this alternative will produce the most useful result.
   - Cons:
     - If there is a lot of data it will take more time to search all fields for every person.
     - Requires the most complex implementation among all alternatives. 
