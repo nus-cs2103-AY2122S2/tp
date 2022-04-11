@@ -65,13 +65,34 @@ Additional formatting guidelines:
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
+
+1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
+
+   1. To check your java version:<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
+
+   2. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
+
+   3. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+
+</div>
 
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**<br>
 
+1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.<br>
+
+2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+ 
+</div>
 5. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -88,24 +109,6 @@ Additional formatting guidelines:
 * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#3-features) below for details of each command.
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:**<br>
-
-1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
-
-    1. To check your java version:<br>
-       &nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
-       &nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
-
-    2. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
-
-    3. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
-
-2. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.<br>
-
-3. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
