@@ -129,6 +129,8 @@ public class ExpandedPersonCard extends UiPart<Region> {
         }
 
         // displaying upcoming events
+        upcomingEventsPanelPlaceholder.setStyle("-fx-background-radius:10;"
+                + " -fx-border-radius: 10px; -fx-border-color: #05d1e8;");
         upcomingEventsPanel = new EventListPanel(eventList);
 
         if (eventList.size() > 0) {
