@@ -1159,7 +1159,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty directory
+   1. Download the jar file and copy into an empty directory as `libtask.jar`
 
    2. Double-click the jar file. If this fails, navigate to the directory using command line run `java -jar libtask.jar`<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
