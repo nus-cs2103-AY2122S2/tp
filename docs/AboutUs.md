@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Wee Jun Hong
@@ -16,8 +14,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/whoisjunhong)]
 [[portfolio](team/whoisjunhong.md)]
 
-* Role: Developer
-* Responsibilities: Backend
+* Role: Software Developer
+* Responsibilities: Frontend, Backend
 
 ### Joshua Yap
 
@@ -26,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/e0544333)]
 [[portfolio](team/e0544333.md)]
 
-* Role: Developer
+* Role: Software Developer
 * Responsibilities: Backend
 
 ### Louis Davin Lie
@@ -36,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/louisdavinlie)]
 [[portfolio](team/louisdavinlie.md)]
 
-* Role: Developer
+* Role: Software Developer
 * Responsibilities: Backend
 
 ### Tan Yong Rui
@@ -46,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/fenway17)]
 [[portfolio](team/fenway17.md)]
 
-* Role: Developer
+* Role: Software Developer
 * Responsibilities: Backend
 
 ### Lye Zi Foong
@@ -56,5 +54,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lzf834)]
 [[portfolio](team/lzf834.md)]
 
-* Role: Developer
-* Responsibilities: Backend
+* Role: Software Developer
+* Responsibilities: Scrum Master, Backend
