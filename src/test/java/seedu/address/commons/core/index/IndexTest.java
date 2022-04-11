@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+//@@author
 public class IndexTest {
 
     @Test

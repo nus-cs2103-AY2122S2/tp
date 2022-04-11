@@ -110,21 +110,46 @@ public interface Model {
      */
     void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException;
 
+    /** Returns an unmodifiable view of the filtered candidate list */
+    ObservableList<Candidate> getFilteredCandidateList();
+
+    /**
+     * Updates the filter of the filtered candidate list to filter by the given {@code predicate}.
+     */
+    void updateFilteredCandidateList(Predicate<Candidate> predicate);
+
+    /**
+     * Updates the sorting order of filtered candidate list to sort by the given {@code sortComparator}.
+     */
+    void updateSortedCandidateList(Comparator<Candidate> sortComparator);
+
     /**
      * Checks if {@code editedCandidate} already has an interview when editing {@code availability}
      */
     boolean hasInterview(Candidate editedCandidate);
-
+    /**
+     * Returns true if the candidate to be interviewed already has an interview scheduled.
+     */
     boolean hasInterviewCandidate(Interview interview);
-
+    /**
+     * Returns true if the interview has a conflicting time slot with the interviews in the list.
+     */
     boolean hasConflictingInterview(Interview interview);
-
+    /**
+     * Deletes the interview for the specified candidate.
+     */
     void deleteInterviewForCandidate(Candidate target);
-
+    /**
+     * Deletes the interview.
+     */
     void deleteInterview(Interview interviewToDelete);
-
+    /**
+     * Adds the interview.
+     */
     void addInterview(Interview interview);
-
+    /**
+     * Sets the target interview to the editedInterview.
+     */
     void setInterview(Interview target, Interview editedInterview) throws CommandException;
 
     /**
@@ -132,26 +157,13 @@ public interface Model {
      */
     Interview getInterview(Candidate target);
 
-    //=========== Interview Schedule Accessors =============================================================
-
+    /** Returns an unmodifiable view of the filtered interview list */
     ObservableList<Interview> getFilteredInterviewSchedule();
 
+    /**
+     * Updates the interview list stored in system to filter by the given {@code predicate}.
+     */
     void updateFilteredInterviewSchedule(Predicate<Interview> predicate);
-
-    /** Returns an unmodifiable view of the filtered candidate list */
-    ObservableList<Candidate> getFilteredCandidateList();
-
-    /**
-     * Updates the filter of the filtered candidate list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredCandidateList(Predicate<Candidate> predicate);
-
-    /**
-     * Updates the sorting order of filtered candidate list to sort by the given {@code sortComparator}.
-     * @throws NullPointerException if {@code sortKey} is null.
-     */
-    void updateSortedCandidateList(Comparator<Candidate> sortComparator);
 
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 

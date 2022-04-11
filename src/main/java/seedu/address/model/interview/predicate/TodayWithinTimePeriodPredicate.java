@@ -1,5 +1,7 @@
 package seedu.address.model.interview.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
@@ -26,6 +28,8 @@ public class TodayWithinTimePeriodPredicate extends WithinTimePeriodPredicate im
      */
     @Override
     public boolean test(Interview interview) {
+        requireNonNull(interview);
+
         return interview.getInterviewDate().isEqual(endDateTime.toLocalDate());
     }
 

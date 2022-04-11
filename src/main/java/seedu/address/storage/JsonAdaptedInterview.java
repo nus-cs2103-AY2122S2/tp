@@ -39,7 +39,7 @@ class JsonAdaptedInterview {
     private final String interviewDateTime;
 
     /**
-     * Constructs a {@code JsonAdaptedInterview} with the given candidate details.
+     * Constructs a {@code JsonAdaptedInterview} with the given candidate and interviewDateTime details.
      */
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("studentID") String studentID, @JsonProperty("name") String name,
@@ -64,7 +64,7 @@ class JsonAdaptedInterview {
     }
 
     /**
-     * Converts a given {@code Candidate} into this class for Jackson use.
+     * Converts a given {@code Interview} into this class for Jackson use.
      */
     public JsonAdaptedInterview(Interview source) {
         studentID = source.getCandidate().getStudentId().studentId;
@@ -83,7 +83,7 @@ class JsonAdaptedInterview {
     /**
      * Converts this Jackson-friendly adapted interview object into the model's {@code Interview} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted candidate.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted candidate or interview.
      */
     public Interview toModelType() throws IllegalValueException {
         if (studentID == null) {
@@ -159,8 +159,7 @@ class JsonAdaptedInterview {
         if (interviewDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));
         }
-        //watch this
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
         final LocalDateTime modelInterviewDateTime = LocalDateTime.parse(interviewDateTime);
         return new Interview(candidate, modelInterviewDateTime);
     }

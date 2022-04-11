@@ -45,7 +45,7 @@ public class InterviewCard extends UiPart<Region> {
     private Label time;
 
     /**
-     * Creates a {@code InterviewCode} with the given {@code Interview} and index to display.
+     * Creates a {@code InterviewCard} with the given {@code Interview} and index to display.
      */
     public InterviewCard(Interview interview, int displayedIndex) {
         super(FXML);

@@ -34,7 +34,7 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
 
     /**
      * Replaces the contents of the interview list with {@code interviews}.
-     * {@code interviews} must not contain duplicate interviews.
+     * {@code interviews} must not contain interviews with duplicate candidates or conflicting time slots.
      */
     public void setInterviews(List<Interview> interviews) {
         this.interviews.setInterviews(interviews);
@@ -42,7 +42,8 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
 
     /**
      * Reorders the contents of the interview list with the earliest upcoming
-     * interview first followed by later interviews.
+     * interview first followed by later interviews, by creating a copy of the original interview list.
+     * {@code candidates} must not contain duplicate interview objects.
      */
     public void sortInterviews() {
         List<Interview> interviewsCopy = new ArrayList<Interview>(this.getInterviewList());
@@ -84,7 +85,9 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     public void addInterview(Interview interview) {
         interviews.add(interview);
     }
-
+    /**
+     * Sets the target interview to the new editedInterview.
+     */
     public void setInterview(Interview target, Interview editedInterview) throws CommandException {
         requireNonNull(editedInterview);
 
@@ -111,13 +114,15 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         return list;
     }
 
-
+    /**
+     * Updates the candidate of the target interview without checking for conflicting time slots.
+     */
     public void updateInterviewCandidate(Interview target, Interview editedInterview) {
         interviews.updateInterviewCandidate(target, editedInterview);
     }
 
     /**
-     * To remove the interview from the list.
+     * Removes the interview from the list.
      */
     public void removeInterview(Interview key) {
         interviews.remove(key);
@@ -128,7 +133,9 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         return interviews.asUnmodifiableObservableList().size() + " interviews";
         // TODO: refine later
     }
-
+    /**
+     * Returns an ObservableList of interviews.
+     */
     @Override
     public ObservableList<Interview> getInterviewList() {
         return interviews.asUnmodifiableObservableList();
@@ -146,6 +153,9 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
         return interviews.hashCode();
     }
 
+    /**
+     * Returns a list of candidates whose interviews have expired.
+     */
     public List<Candidate> getExpiredInterviewCandidates() {
         return interviews.getExpiredInterviewCandidates();
     }

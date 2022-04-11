@@ -24,7 +24,7 @@ import seedu.address.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteScheduleCommand}.
  */
 public class DeleteScheduleCommandTest {
 

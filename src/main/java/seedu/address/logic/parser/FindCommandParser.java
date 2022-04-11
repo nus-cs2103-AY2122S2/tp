@@ -30,7 +30,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * and returns a {@code FindCommand} object for execution.
+     * @param args contains the user input to be parsed
+     * @return new {@code FindCommand} object with correct predicate parameter
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
@@ -45,6 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> keywords = argMultimap.getAllValues(PREFIX_KEYWORD);
         Optional<String> field = argMultimap.getValue(PREFIX_FIELD);
+        ContainsKeywordsPredicate predicate;
         String fieldString;
 
         if (field.isEmpty()) {
@@ -53,50 +56,50 @@ public class FindCommandParser implements Parser<FindCommand> {
             fieldString = field.get().toLowerCase();
         }
 
-        ContainsKeywordsPredicate predicate;
+        predicate = findMatchingPredicate(fieldString, keywords);
 
+        return new FindCommand(predicate);
+    }
+
+    /**
+     * Returns the matching new {@link ContainsKeywordsPredicate} object based on the field input by the user.
+     * @param fieldString provides the field specified in user input as a string
+     * @param keywords provides the list of keywords to search for
+     * @return new created matching ContainsKeywordsPredicate subclass object
+     * @throws ParseException if the user input for {@code fieldString} not conform the expected format
+     */
+    private ContainsKeywordsPredicate findMatchingPredicate(String fieldString, List<String> keywords)
+            throws ParseException {
         switch (fieldString) {
         case "appstatus":
-            predicate = new ApplicationStatusContainsKeywordsPredicate(keywords);
-            break;
+            return new ApplicationStatusContainsKeywordsPredicate(keywords);
         case "avail":
-            predicate = new AvailabilityContainsKeywordsPredicate(keywords);
-            break;
+            return new AvailabilityContainsKeywordsPredicate(keywords);
         case "all":
         case "":
-            predicate = new CandidateContainsKeywordsPredicate(keywords);
-            break;
+            return new CandidateContainsKeywordsPredicate(keywords);
         case "course":
-            predicate = new CourseContainsKeywordsPredicate(keywords);
-            break;
+            return new CourseContainsKeywordsPredicate(keywords);
         case "email":
-            predicate = new EmailContainsKeywordsPredicate(keywords);
-            break;
+            return new EmailContainsKeywordsPredicate(keywords);
         case "intstatus":
-            predicate = new InterviewStatusContainsKeywordsPredicate(keywords);
-            break;
+            return new InterviewStatusContainsKeywordsPredicate(keywords);
         case "name":
-            predicate = new NameContainsKeywordsPredicate(keywords);
-            break;
+            return new NameContainsKeywordsPredicate(keywords);
         case "phone":
-            predicate = new PhoneContainsKeywordsPredicate(keywords);
-            break;
+            return new PhoneContainsKeywordsPredicate(keywords);
         case "remark":
-            predicate = new RemarkContainsKeywordsPredicate(keywords);
-            break;
+            return new RemarkContainsKeywordsPredicate(keywords);
         case "seniority":
-            predicate = new SeniorityContainsKeywordsPredicate(keywords);
-            break;
+            return new SeniorityContainsKeywordsPredicate(keywords);
         case "studentid":
-            predicate = new StudentIdContainsKeywordsPredicate(keywords);
-            break;
+            return new StudentIdContainsKeywordsPredicate(keywords);
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.INVALID_ATTRIBUTE_FIELD));
         }
-
-        return new FindCommand(predicate);
     }
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

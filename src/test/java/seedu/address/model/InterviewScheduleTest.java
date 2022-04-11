@@ -29,6 +29,7 @@ import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.testutil.InterviewBuilder;
 import seedu.address.testutil.InterviewScheduleBuilder;
 
+//@@author lzan98
 public class InterviewScheduleTest {
 
     private final InterviewSchedule interviewSchedule = new InterviewSchedule();

@@ -51,8 +51,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Reorders the contents of the candidate list by comparator on {@code sortKey}.
+     * Reorders the contents of the candidate list by comparator based on {@code sortComparator}
+     * by creating a copy of the original candidate list.
      * {@code candidates} must not contain duplicate candidates.
+     * @param sortComparator contains information on which candidate field to compare and sort by
      */
     public void sortCandidates(Comparator<Candidate> sortComparator) {
         requireNonNull(sortComparator);

@@ -459,7 +459,7 @@
     -fx-padding: 10 10 10 0;
 }
 
-// ************* candidate panel header css *************
+/* candidate panel header css */
 .candidate-panel-header {
     -fx-background-color: #3c3e3f;
 }
@@ -476,7 +476,7 @@
     -fx-font-family: "Segoe UI";
 }
 
-// ************* focus panel header css *************
+/*  focus panel (external elements excluding content) css */
 .focus-panel-header {
     -fx-background-color: #3c3e3f;
 }
@@ -505,7 +505,7 @@
     -fx-background-color: #3c3e3f;
 }
 
-// ************* interview panel css *************
+/* interview panel css */
 .interview-panel-header {
     -fx-background-color: #407BFF;
 }
@@ -532,5 +532,3 @@
 .list-cell:filled #interviewCard {
     -fx-border-color: #383838;;
 }
-
-

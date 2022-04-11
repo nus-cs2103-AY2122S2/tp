@@ -34,6 +34,10 @@ public class Seniority {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Formats the {@code seniority} with the appended 'COM' string as a prefix.
+     * @return the formatted seniority string appended to 'COM'
+     */
     public String toSearchString() {
         return COM_VALUE + seniority;
     }

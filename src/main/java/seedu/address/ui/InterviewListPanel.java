@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.interview.Interview;
 
 /**
- * Panel containing the list of interviews.
+ * Panel containing the list of interviews scheduled.
  */
 public class InterviewListPanel extends UiPart<Region> {
     private static final String FXML = "InterviewListPanel.fxml";

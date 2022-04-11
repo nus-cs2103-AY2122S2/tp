@@ -1,5 +1,7 @@
 package seedu.address.model.candidate.predicate;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +27,13 @@ public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicat
     /**
      * Tests if any part of {@code Candidate} matches any of the specified
      * {@link CandidateContainsKeywordsPredicate#keywords}.
-     * @param candidate object to retrieve the description.
+     * @param candidate object to retrieve the value for each field
      * @return true if a match is found, and false otherwise.
      */
     @Override
     public boolean test(Candidate candidate) {
+        requireNonNull(candidate);
+
         String availability = candidate.getAvailability().toString();
         int[] availArr = Arrays.stream(availability.split(",")).mapToInt((Integer::parseInt)).toArray();
         HashMap<String, Integer> availMap = new HashMap<>();

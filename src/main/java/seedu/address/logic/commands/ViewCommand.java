@@ -9,7 +9,8 @@ import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
 import seedu.address.model.interview.predicate.WithinTimePeriodPredicate;
 
 /**
- * Lists all candidates in the address book to the user.
+ * Lists all scheduled interviews in the interview list within the specified time period
+ * to the user.
  */
 public class ViewCommand extends Command {
 
@@ -23,7 +24,14 @@ public class ViewCommand extends Command {
 
     private final WithinTimePeriodPredicate predicate;
 
+    /**
+     * Creates new ViewCommand object.
+     *
+     * @param predicate contains the predicate for filtering the interview list.
+     */
     public ViewCommand(WithinTimePeriodPredicate predicate) {
+        requireNonNull(predicate);
+
         this.predicate = predicate;
     }
 

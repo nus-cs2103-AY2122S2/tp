@@ -17,13 +17,15 @@ import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 
+//@@author lzan98
 public class UniqueInterviewList implements Iterable<Interview> {
     private final ObservableList<Interview> internalList = FXCollections.observableArrayList();
     private final ObservableList<Interview> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent candidate as the given argument.
+     * Returns true if the interview list contains an interview with the same candidate as the
+     * interview in the given argument.
      */
     public boolean containsSameCandidate(Interview toCheck) {
         requireNonNull(toCheck);
@@ -31,15 +33,15 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Returns true if the list contains an equivalent candidate as the given argument.
+     * Returns true if the list contains an interview with a conflicting time slot as the given argument.
      */
     public boolean containsConflictingInterview(Interview toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isConflictingInterview);
     }
     /**
-     * Adds an interview to the list.
-     * The candidate must not already exist in the list.
+     * Adds an interview to the list. The interview candidate must not already have an interview in the list, nor
+     * should the list contain a conflicting interview.
      */
     public void add(Interview toAdd) {
         requireNonNull(toAdd);
@@ -52,9 +54,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.add(toAdd);
     }
     /**
-     * Replaces the interview {@code target} in the list with {@code editedInterview}.
-     * {@code target} must exist in the list.
-     * The interview {@code editedInterview} must not be in conflict with another interview for a different candidate.
+     * Replaces the target interview in the list with the editedInterview.
+     * The target interview must exist in the list.
+     * The editedInterview must not be in conflict with another interview for another candidate.
      */
     public void setInterview(Interview target, Interview editedInterview) throws CommandException {
         requireAllNonNull(target, editedInterview);
@@ -77,9 +79,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Replaces the interview {@code target} in the list with {@code editedInterview}, without checking for
-     * any conflicting interview as only the candidate field in the {@code editedInterview} is modified.
-     * {@code target} must exist in the schedule.
+     * Replaces the target interview in the list with the editedInterview, without checking for
+     * any conflicting interview, as only the candidate field in the {@code editedInterview} is modified.
+     * The target interview must exist in the schedule.
      */
     public void updateInterviewCandidate (Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
@@ -108,8 +110,8 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Replaces the contents of this list with {@code candidates}.
-     * {@code candidates} must not contain duplicate candidates.
+     * Replaces the contents of this list with the list of interviews.
+     * The provided list of interviews must not contain interviews with duplicate candidates or conflicting time slots.
      */
     public void setInterviews(List<Interview> interviews) {
         requireAllNonNull(interviews);
@@ -158,7 +160,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Returns true if {@code candidates} contains only unique candidates.
+     * Returns true if all interviews contains only unique candidates.
      */
     private boolean interviewsCandidatesAreUnique(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
@@ -171,7 +173,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         return true;
     }
     /**
-     * Returns true if {@code interviews} contains only non-conflicting interviews.
+     * Returns true if the list of interviews contains only non-conflicting interviews.
      */
     private boolean interviewsDateTimeAreNonConflicting(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
@@ -183,7 +185,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
         return true;
     }
-
+    /**
+     * Returns a list of candidates whose interviews have expired.
+     */
     public List<Candidate> getExpiredInterviewCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         LocalDateTime currentDateTime = LocalDateTime.now();

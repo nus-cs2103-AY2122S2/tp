@@ -12,6 +12,7 @@ import seedu.address.model.candidate.Phone;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 
+//@@author domlimm
 /**
  * A utility class to help with building EditCandidateDescriptor objects.
  */
@@ -95,6 +96,7 @@ public class EditCandidateDescriptorBuilder {
         return descriptor;
     }
 
+    //@@author tiewweijian
     /**
      * Sets the {@code ApplicationStatus} of the {@code EditCandidateDescriptor} that we are building.
      */
@@ -111,6 +113,7 @@ public class EditCandidateDescriptorBuilder {
         return this;
     }
 
+    //@@author domlimm
     /**
      * Sets the {@code Availability} of the {@code EditCandidateDescriptor} that we are building.
      */

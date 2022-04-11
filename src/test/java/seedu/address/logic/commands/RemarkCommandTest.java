@@ -26,6 +26,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Remark;
 import seedu.address.testutil.CandidateBuilder;
 
+//@@author
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
  */

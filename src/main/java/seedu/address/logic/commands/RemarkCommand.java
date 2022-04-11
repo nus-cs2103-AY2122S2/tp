@@ -14,7 +14,7 @@ import seedu.address.model.candidate.Remark;
 import seedu.address.model.interview.Interview;
 
 /**
- * Changes the remark of an existing candidate in the address book.
+ * Updates the remark of an existing candidate in the system.
  */
 public class RemarkCommand extends Command {
 
@@ -34,8 +34,10 @@ public class RemarkCommand extends Command {
     private final Remark remark;
 
     /**
-     * @param index of the candidate in the filtered candidate list to edit the remark
-     * @param remark of the candidate to be updated to
+     * Creates new RemarkCommand object.
+     *
+     * @param index of the candidate in the filtered candidate list to edit the remark.
+     * @param remark of the candidate to be updated to.
      */
     public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
@@ -80,6 +82,7 @@ public class RemarkCommand extends Command {
                 false, false, false, -1, true, index.getZeroBased());
     }
 
+    //@@author
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code candidateToEdit}.
