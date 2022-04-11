@@ -1307,43 +1307,41 @@ testers are expected to do more *exploratory* testing.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a person
+1. Adding a person into Tracey. After addition, the student contact will be displayed at the bottom of the displayed list
+
+   a. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Insert a student contact with the above details to the list and displayed on the GUI.
+
+   b. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader` <br> Insert a student contact with the above details with the tags displayed.
+
+   c. Test case : `add n/John Doe n/Daniel Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Inserts a student contact with the second specified name parameter. 
+
+   d. Test case : Invalid Syntax <br> No student is added into Tracey. Error details shown in response message. Help message also displayed in response message for the user to try again to insert correctly. 
+
+   e.Test case : Insert order with existing `MatriculationNumber`, `Phone` or `Email` <br> Error will message will be displayed stating that the duplicate unique field already exists in Tracey and thus stated student will not be added.
+   
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown <br>Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   a. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   b. Test case: `delete 0`<br>
+          Expected: No person is deleted. Error details shown in the status message.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Listing the data
-
-1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
-   a. Test case: `list` <br>
-   Expected: All students are shown on the Main Window.
-
-   b. Test case: `list` on an empty list of students <br>
-   Expected: No students will be shown. Instead, it shows a list of no students.
-
-   c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
-   Expected: Error message indicating format of command is wrong.
+   c. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+             Expected: Similar to previous.
 
 ### Summarising the data
 
@@ -1364,6 +1362,43 @@ testers are expected to do more *exploratory* testing.
 
     e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
        Expected: Error message indicating format of command is wrong.
+
+### Help user
+1. Display a help window for user to access command format and examples.
+
+   a. Test case: Press F1 <br> Help window opens.
+
+   b. Test case: `help` <br> Help window opens.
+
+   c. Test case: `help` with additional parameters after the `help` command<br> The response box will display an invalid command message.
+
+   c. Test case: Click on file, followed by clicking on help <br> Help window opens.
+
+### Listing the data
+
+1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
+   a. Test case: `list` <br>
+   Expected: All students are shown on the Main Window.
+
+   b. Test case: `list` on an empty list of students <br>
+   Expected: No students will be shown. Instead, it shows a list of no students.
+
+   c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
+   Expected: Error message indicating format of command is wrong.
+
+### Clearing the data
+1. Clear the Tracey database.
+
+   a. Test case: `clear` <br> Tracey database is cleared. Empty list shown to user.
+
+   b. Test case: `clear` with additional parameters after the `clear` command<br> The response box will display an invalid command message.
+
+### Exiting the application
+1. Exit the application using the `exit` command.
+
+   a. Test case: `exit` <br> The GUI window will be closed.
+
+   b. Test case: `exit` with additional parameters after the `exit` command <br> The response box will display an invalid command message.
 
 ### Saving data
 
