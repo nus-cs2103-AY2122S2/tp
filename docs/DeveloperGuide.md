@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -17,6 +18,7 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -84,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `UniteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniteParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -133,6 +141,7 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -150,6 +159,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.unite.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -157,6 +167,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Enhanced Person Object
 
+#### Rationale
+Person object needs to be enhanced to contain more relevant attributes to suit the target audiences.
+
+#### Implementation
 In the original add profile feature in the AB3 Address Book, all the `Person` objects are being stored in the `Unite`.
 
 Now in UNite, we are storying them in `Unite`.
@@ -182,6 +196,26 @@ Consider the following commands.
 This is a sample of the `Person` object diagram.
 
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
+
+#### Design Consideration 
+Aspect: Implementation of `Telegram`, `Course` and `MatricCard` classes 
+- **Alternative 1 (current choice):** <br> 
+The `Telegram`, `Course` and `MatricCard` classes are implemented as individual classes that are associated with `Person`. This is similar to how the inbuilt AB3 classes (ie `Name`, `Email`, `Address` ...) are implemented.
+    - Pros: Easy to implement
+    - Cons: Whenever you want to add more attributes you have to add in more fields in `Person` object.
+- **Alternative 2:** <br>
+Abstract school related classes such as `Email`, `Course` and `MatricCard` such that these classes are associated with a new class (ie `SchoolInfo` class). Each Person object will just have to store one or many `SchoolInfo` object as its field.
+    - Pros: Allow more complicated interactions. For example, we can now allow each `Person` object to store multiple `SchoolInfo` objects (each with a different `Email`, `MatricCard` and `Course`). This can simulate scenarios of students going to another university for exchange (hence having different `SchoolInfo`).
+    - Cons: A huge refactoring is needed to change the internal structure of `Person` object. Not reccomended.
+
+We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
+
+<div style="page-break-after: always;"></div> 
+
+**Aspect: Optional `Telegram`, `Course` and `MatricCard` fields** <br>
+These fields are set as optional. When users choose not to key in these fields, it will be set to a default value of an empty String "". <br> 
+The regex of these three classes has been modified to accept the empty String "" as a valid input command, but internally any `Telegram`, `Course` and `MatricCard` with value of "" means that the field is left blank and unfilled. 
+
 
 ### Filter feature
 
@@ -214,13 +248,17 @@ The activity diagram below summarizes what happens when a filter command is exec
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-####Design considerations
+#### Design considerations
 
 The filter feature was implemented in such a way that it aligns with the format of all other commands. This helps to enhance readability.
 
-### Grab Command
-The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can copy the displayed data.
+<div style="page-break-after: always;"></div>
 
+### Grab Command
+#### Rationale
+The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can efficiently compile the needed data.
+
+#### Implementation
 There are two class related to grab features, they are `GrabCommand` and `GrabCommandParser`. Note the following relationship:
 * `GrabCommand` is a class extending `Command` class. The Command object will then be executed. Read [here](#logic-component) to understand how `Command` works.
 * `GrabCommandParser` is a class extending the `Parser` class, it is used to parse the command entered by user.
@@ -246,8 +284,22 @@ Step 4. During the execution of grab command, a `CommandException` is thrown if 
 
 ![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
 
+#### Design Consideration
+**Aspect: Constraints on Input** <br>
+There are multiple constraints on the inputs allowed for this command. Here are our rationale why.
+
+- **Valid attributes include all attributes EXCEPT tag** <br>
+We decided to leave the grabbing of tag out because this function can already been done by another command (`list_tag`) in UNite. This command is way more powerful than the grab command in terms of tag manipulations.
+
+- **When tag exists, you cannot include index** <br>
+This constraint is put in placed to avoid unnecessary confusion for the users. By allowing users to key in index (when the tag is present), it may create confusion of whether this index refers to the index when all the `Person` are present in UNite, or the filtered list with this tag. <br>
+Hence, we avoided this potential confusion by imposing an additional constraint to this command.
+
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GrabCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -329,6 +381,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+<div style="page-break-after: always;"></div>
+
 ### View detailed profile
 In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
 limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
@@ -337,6 +391,8 @@ height of a `PersonCard`, less person will be displayed of the same window size.
 Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
 conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
 information about a person.
+
+<div style="page-break-after: always;"></div>
 
 ### Theme choosing
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
@@ -369,6 +425,7 @@ dark theme, so that the application fits better to the vibrant energy of a unive
 
 **Value proposition**: help university Students and TAs to manage multiple project or tutorial groups, and help school admins to manage module groups.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -392,6 +449,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 *{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -467,6 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -484,6 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Profile**: A page with more detailed information about a person
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -568,13 +630,13 @@ testers are expected to do more *exploratory* testing.
 ### Grab attributes from Person 
 1. Filter the full contact list using a tag
     1. Prerequisites: Have at least one Person in UNite. 
-    2. Test case: `grab n/`<br>
+    2. Test case: Grab all `grab n/`<br>
        Expected: Names of everyone in UNite displayed.
-    3. Test case: `grab n/1`<br>
+    3. Test case: Grab with valid index `grab n/1`<br>
        Expected: Names of the first Person in UNite displayed. 
-    4. Test case: `grab n/ t/VALID_TAGNAME`<br>
+    4. Test case: Grab with valid tag `grab n/ t/VALID_TAGNAME`<br>
        Expected: Names of everyone in UNite which are tagged as "friends". If no such tags exist in Unite, an error message is shown in display area.
-    5. Test case: `grab n/INDEX t/VALID_TAGNAME`<br>
+    5. Test case: Grab with tag and index `grab n/INDEX t/VALID_TAGNAME`<br>
        Expected: Error message shown saying that you can have both INDEX and VALID_TAGNAME present.
     6. You can conduct the test cases above with other valid attributes.
 
