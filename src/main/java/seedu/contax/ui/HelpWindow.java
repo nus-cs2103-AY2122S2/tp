@@ -22,7 +22,9 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
 
-
+/**
+ * Represents the help window.
+ */
 public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);

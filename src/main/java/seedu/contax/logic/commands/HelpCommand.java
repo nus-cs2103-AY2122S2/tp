@@ -3,7 +3,7 @@ package seedu.contax.logic.commands;
 import seedu.contax.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Formats full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
 

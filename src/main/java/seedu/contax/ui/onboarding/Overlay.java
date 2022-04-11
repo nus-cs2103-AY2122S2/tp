@@ -9,6 +9,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import seedu.contax.ui.UiPart;
 
+/**
+ * Represents the overlay in the onboarding window.
+ */
 public class Overlay extends UiPart<Region> {
 
     private static final String FXML = "onboarding/Overlay.fxml";

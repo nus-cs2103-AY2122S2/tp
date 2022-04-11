@@ -18,6 +18,9 @@ import seedu.contax.model.onboarding.OnboardingStep;
 import seedu.contax.model.onboarding.OnboardingStory;
 import seedu.contax.model.person.Person;
 
+/**
+ * Drives the onboarding process.
+ */
 public class OnboardingStoryManager {
 
     private static final String CLICK_CONTINUE = "\n\nClick anywhere to continue...";

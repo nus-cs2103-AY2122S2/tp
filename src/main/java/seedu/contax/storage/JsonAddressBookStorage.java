@@ -14,7 +14,7 @@ import seedu.contax.commons.util.JsonUtil;
 import seedu.contax.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * Allows accessing AddressBook data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 

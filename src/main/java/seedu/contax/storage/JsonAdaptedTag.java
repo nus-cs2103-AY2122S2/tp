@@ -8,7 +8,7 @@ import seedu.contax.model.tag.Name;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Defines a Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
 

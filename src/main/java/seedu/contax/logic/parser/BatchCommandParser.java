@@ -13,7 +13,9 @@ import seedu.contax.logic.commands.BatchCommand.BatchType;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.util.SearchType;
 
-
+/**
+ * Parses input arguments and creates a new BatchCommand object.
+ */
 public class BatchCommandParser implements Parser<BatchCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the BatchCommandParser

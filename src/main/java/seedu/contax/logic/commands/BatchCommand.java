@@ -23,7 +23,7 @@ import seedu.contax.model.util.SearchType;
 
 //@@author HanJiyao
 /**
- * Batch edits or deletes a person identified using base on string =/ provided.
+ * Edits or deletes a batch of persons identified using base on string =/ provided.
  */
 public class BatchCommand extends Command {
 

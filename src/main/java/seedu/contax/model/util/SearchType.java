@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 /**
  * Represents a Utility of search type.
- * Guarantees: immutable; is valid as declared in {@link #isValidType(String)} (String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidType(String)} (String)}.
  */
 public class SearchType {
 

@@ -12,7 +12,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * Represents a UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> implements RecyclableCard<Person> {
 

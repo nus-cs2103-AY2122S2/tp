@@ -12,7 +12,7 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new RangeCommandParser object
+ * Parses input arguments and creates a new RangeCommand object.
  */
 public class RangeCommandParser implements Parser<RangeCommand> {
     public static final String INDEX_FROM_LARGER_THAN_TO =

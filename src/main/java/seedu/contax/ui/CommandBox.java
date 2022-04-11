@@ -9,7 +9,7 @@ import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
 /**
- * The UI component that is responsible for receiving user command inputs.
+ * Represents the UI component that is responsible for receiving user command inputs.
  */
 public class CommandBox extends UiPart<Region> {
 

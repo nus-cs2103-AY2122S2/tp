@@ -3,7 +3,7 @@ package seedu.contax;
 import javafx.application.Application;
 
 /**
- * The main entry point to the application.
+ * Denotes the main entry point to the application.
  *
  * This is a workaround for the following error when MainApp is made the
  * entry point of the application:

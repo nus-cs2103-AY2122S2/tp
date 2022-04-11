@@ -17,7 +17,7 @@ import seedu.contax.model.appointment.StartDateTime;
 import seedu.contax.model.person.Person;
 
 /**
- * Jackson-friendly version of {@link Appointment}.
+ * Defines a Jackson-friendly version of {@link Appointment}.
  */
 class JsonAdaptedAppointment {
 

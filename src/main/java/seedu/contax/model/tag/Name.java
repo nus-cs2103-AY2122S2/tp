@@ -5,7 +5,7 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag's name in the address book.
- * Guarantees: Immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: Immutable; is valid as declared in {@link #isValidName(String)}.
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should only contain alphanumeric characters and "

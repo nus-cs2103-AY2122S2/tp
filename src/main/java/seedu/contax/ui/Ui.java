@@ -3,7 +3,7 @@ package seedu.contax.ui;
 import javafx.stage.Stage;
 
 /**
- * API of UI component
+ * Defines the API of the UI component.
  */
 public interface Ui {
 

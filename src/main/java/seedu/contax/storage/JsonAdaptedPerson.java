@@ -18,7 +18,7 @@ import seedu.contax.model.person.Phone;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Defines a Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
 

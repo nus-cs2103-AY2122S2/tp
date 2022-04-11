@@ -10,11 +10,8 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.appointment.NameContainsKeywordsPredicate;
 import seedu.contax.model.appointment.PersonNameContainsKeywordsPredicate;
 
-
-
-
 /**
- * Parses input arguments and creates a new FindAppointmentCommand  object
+ * Parses input arguments and creates a new FindAppointmentCommand object.
  */
 public class FindAppointmentCommandParser implements Parser<FindAppointmentCommand> {
 

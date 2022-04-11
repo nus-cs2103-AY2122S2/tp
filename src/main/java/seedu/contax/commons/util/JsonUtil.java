@@ -24,7 +24,7 @@ import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.DataConversionException;
 
 /**
- * Converts a Java object instance to JSON and vice versa
+ * Converts a Java object instance to JSON and vice versa.
  */
 public class JsonUtil {
 

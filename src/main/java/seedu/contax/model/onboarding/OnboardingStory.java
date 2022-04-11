@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * Represents an onboarding guide story, which is made up of a sequence of OnboardingSteps
+ * Represents an onboarding guide story, which is made up of a sequence of OnboardingSteps.
  */
 public class OnboardingStory {
 

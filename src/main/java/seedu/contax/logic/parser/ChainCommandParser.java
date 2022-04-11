@@ -9,6 +9,9 @@ import seedu.contax.logic.commands.ChainCommand;
 import seedu.contax.logic.commands.Command;
 import seedu.contax.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new ChainCommand object.
+ */
 public class ChainCommandParser implements Parser<ChainCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the multiple commands

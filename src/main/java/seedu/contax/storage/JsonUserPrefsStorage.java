@@ -10,7 +10,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.UserPrefs;
 
 /**
- * A class to access UserPrefs stored in the hard disk as a json file
+ * Allows accessing the UserPrefs stored in the hard disk as a json file.
  */
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 

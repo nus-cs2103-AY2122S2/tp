@@ -25,7 +25,7 @@ import seedu.contax.ui.appointment.ScheduleItemListPanel;
 import seedu.contax.ui.onboarding.OnboardingPrompt;
 
 /**
- * The Main Window. Provides the basic application layout containing
+ * Represents the Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {

@@ -8,7 +8,7 @@ import seedu.contax.model.Model;
 import seedu.contax.ui.onboarding.OnboardingCommandBox;
 
 /**
- * The model that is responsible for storing actions for the OnbordingWindow
+ * Stores actions for the OnboardingWindow.
  */
 public class OnboardingStep {
     private String displayMessage;

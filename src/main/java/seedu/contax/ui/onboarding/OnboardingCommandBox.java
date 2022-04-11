@@ -6,7 +6,7 @@ import javafx.scene.layout.Region;
 import seedu.contax.ui.UiPart;
 
 /**
- * The UI component that is responsible for receiving user command inputs.
+ * Represents the UI component that is responsible for receiving user command inputs.
  */
 public class OnboardingCommandBox extends UiPart<Region> {
 

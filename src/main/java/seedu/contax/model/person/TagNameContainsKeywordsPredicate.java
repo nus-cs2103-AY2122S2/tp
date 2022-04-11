@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 
 import seedu.contax.model.tag.Tag;
 
+/**
+ * Tests that an {@code Person}'s Tags matches any of the keywords given.
+ */
 public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
 
     private String keyword;

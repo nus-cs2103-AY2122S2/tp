@@ -8,7 +8,7 @@ import seedu.contax.commons.core.Config;
 import seedu.contax.commons.exceptions.DataConversionException;
 
 /**
- * A class for accessing the Config File.
+ * Contains functions for accessing the Config File.
  */
 public class ConfigUtil {
 
