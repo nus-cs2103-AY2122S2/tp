@@ -221,11 +221,53 @@ The table below summarises the 15 different tracking commands:
 | `clear all data`               | `clear`      | Empty the database.                                                   |
 | `exit application`             | `exit`       | Exits the application.                                                |
 
+### 5.1. Help feature
+
+The help mechanism implements the following sequence for the method call execute("help").
+
+#### 5.1.1. What is the Help feature
+
+The help feature opens up a separate window that contains a simple user guide for the user to adhere to. The window contains a list of commands that Tracey provides, their formats and examples.
+When the Help Window is open, the user can also choose to view the comprehensive user guide on the user's default browser by clicking on the `Open User Guide` button.
+
+The `help` command is as follows:
+
+* `help`
+
+The user can choose when to execute the `help` command.
+
+The activity diagram shows the possible execution paths for the `help` command.
+
+#### 5.1.2. Path Execution of Help Command
+
+![HelpActivityDiagram](images/HelpActivityDiagram.png)
+
+When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
+
+#### 5.1.3. Structure of Help Command
+
+![HelpClassDiagram](images/HelpClassDiagram.png)
+
+The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
+
+#### 5.1.4. Interaction between objects when Help Command is executed
+
+![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
+
+When a user inputs a `help` command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `HelpCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `HelpCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will determine if the `CommandResult` is a `HelpCommand` by calling the `isShowHelp()` method. Following this, the `handleHelp()` method is called.
+
+If the Help Window is showing, the `focus()` method of the HelpWindow is called. Else when the Help Window is not showing, the `show()` method of the HelpWindow is called. For both alternate paths, when the user clicks on the `Open User Guide` button, this will call the `openUG()` method of the HelpWindow object.
+
+
 ### 5.2. Add feature
 
 The add mechanism implements the following sequence and interactions for the method call execute("add NEW_PERSON_TAGS") on a LogicManager object where NEW_PERSON_TAGS refers to the tags of a person to be added.
 
-#### What is the add feature
+#### 5.2.1. What is the Add feature
 
 The add feature allows users to add a student contact to the Tracey database with the specified details. 
 
@@ -237,12 +279,14 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 These tags are compulsory: `Name`,`Block`, `Phone`, `Email`, `Address` `Faculty`, `MatriculationNumber` and `CovidStatus`
 
-#### Path Execution of Add Feature:
+#### 5.2.2. Path Execution of Add Command
+
 ![AddFeatureActivityDiagram](images/AddFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
-#### Structure of Add Feature:
+#### 5.2.3. Structure of Add Command
+
 ![AddClassDiagram](images/AddClassDiagram.png)
 
 The class diagram above depicts the structure of `AddCommand`. As per any Command class, AddCommand needs to extend the abstract class Command.
@@ -256,7 +300,7 @@ Additionally, there are a few final static messages to be displayed to the user 
    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
-#### Interaction of objects when Add Command is executed:
+#### 5.2.4. Interaction between objects when Add Command is executed
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
@@ -273,281 +317,11 @@ When a user inputs an add command, the `execute()` method of `LogicManager` will
 
 Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person does not exist, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Add Command.
 
-### Delete feature
-
-The delete mechanism implements the following sequence and interactions for the method call execute("delete INDEX") where INDEX refers to the index of the individual displayed in the result display.
-
-#### What is the delete feature
-
-The delete feature allows users to delete a student contact from the Tracey database.
-
-The `delete` command is as follows: 
-
-* `delete INDEX`
-
-#### Path Execution of Delete Feature:
-
-![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
-
-There are three possible execution paths for the delete command
-
-1. User provides an invalid delete command input <br> This results in a parse exception
-2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
-3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
-
-#### Structure of Delete Feature:
-
-![DeleteClassDiagram](images/DeleteClassDiagram.png)
-
-The class diagram above depicts the structure of `DeleteCommand`. As per any Command class, DeleteCommand needs to extend the abstract class Command.
-
-#### Interaction of objects when Delete Command is executed:
-
-![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
-
-When a user inputs a delete command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `DeleteCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `DeleteCommand` object is instantiated.
-
-Following this, `LogicManager` will call the `execute()` method of the `DeleteCommand` object. In this method, `getFilteredPersonList()` of the `ModelManager` class is called. Then `deletePerson(Person)` method of the `Model` class will be called, deleting the student from the database.  Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Delete Command.
-
-### 5.10. Summarise feature
-
-The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
-
-
-#### 5.10.1. What is the summarise feature
-
-The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
-Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
-Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
-
-This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
-their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
-
-#### Path Execution of Summarise Feature Activity Diagram is shown below:
-![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
-
-There are three possible execution paths for this command.
-1. User inputs `summarise` command with students' records stored in Tracey. After the Pie Chart Window opens, the user can scroll through the window to see the pie charts for each block followed by the bar chart categorised by faculty.
-2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
-3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
-
-#### Class Diagram of Summarise Feature is shown below:
-
-![SummariseClassDiagram](images/SummariseClassDiagram.png)
-
-The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
-
-#### Sequence Diagram of Summarise Feature is shown below:
-
-![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The sequence diagram below shows the interactions between objects during the execution of a `summarise` command.
-
-When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
-
-When a user inputs a summarise command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
-If the input is valid, an `SummariseCommand` object will be instantiated. If the input is invalid with additional parameters beside `summarise`, an exception will be thrown.
-
-Following the valid input, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
-the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the UI.
-After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate a message regarding total number
-of covid cases in that hall. Then, `filterByBlock` method is then called on the same list again to organise the students into separate lists according to their block.
-`filterByBlock` will call on its own `summariseBlock` method to generate statistics of covid statuses in each block of the hall. The statistics will be stored in `covidStatsByBlockDataList`.
-`filerByFaculty` is then called on the list once again to organise the students into separate lists according to their faculty.
-`summariseFaculty` method is then called to generate statistics of covid statuses in each faculty of students in the hall. The statistics will be stored in `positiveStatsByFacultyData`.
-At the same time, `summariseFaculty` will stored the highest number of covid cases amongst the faculties in `highestPositiveByFaculty`.
-
-Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
-A pop-up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
-
-
-### Pie Chart Window feature
-
-The pie chart window mechanism implements the following sequence and interactions for the method call execute("summarise").
-
-#### What is the Pie Chart Window feature
-
-Pie Chart Window feature opens up a separate window that contains charts for the user to view.
-The window contains pie charts that summarises how each block is doing according to the types of covid statuses and a bar chart that
-summarises how many covid positive students each faculty has in the hall.
-
-**Class Diagram of Pie Chart Window Feature is shown below:**
-
-![PieChartWindowClassDiagram](images/PieChartWindowClassDiagram.png)
-
-The above class diagram shows the structure of the Pie Chart Window and its associated classes and interfaces.
-The Pie Chart Window has dependencies on the UiPart class as it uses the method `UiPart#getRoot()` from it to make the window.
-
-**Sequence Diagram of Pie Chart Window Feature is shown below:**
-
-![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
-
-This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow`.
-When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will
-be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`,
-it will invoke `MainWindow#handleSummarise()` which first check whether the pie chart window is to be displayed by calling `SummariseCommand#shouldOpenPieChartWindow()`.
-If true and the window is already opened previously by the user, `MainWindow#handleSummarise()` will call `PieChartWindow#hide()` to close the window.
-Regardless, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` to create the pie chart and opens a new window.
-The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
-
-Below are links for implementation of the classes and its methods:
-* [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
-* [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
-* [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
-
-#### <ins>Why it is implemented that way<ins/>
-The data needed for the pie charts should be coupled with `SummariseCommand`, therefore it is necessary to implement this feature in such a way that the pie chart data is created upon invocation `SummariseCommand`. A `PieChartWindow` controller and FXML class is also needed to abstract the creation of the pie charts and opening a new window respectively. The `MainWindow` class is then modified accordingly.
-
-#### <ins>Alternatives considered<ins/>
-
-**Aspect: How data is passed to the pie charts:**
-
-* **Alternative 1 (current choice):** `SummariseCommand` will pass in necessary data into data structures (`TreeMap` in this case) upon invocation which then can be obtained using getter methods
-    * Pros: Easy to implement.
-    * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
-    * Other consideration(s): Use the Singleton design principle for the data structures.
-
-* **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
-    * Pros: No modifications to the `SummariseCommand` class.
-    * Cons: Dependent on the feedback message, need to implement complicated methods to parse the message, parsing methods need to be modified if the format of the feedback message is changed.
-
-### 5.1. Help feature
-
-The help mechanism implements the following sequence for the method call execute("help").
-
-#### 5.1.2. What is the help feature
-
-The help feature opens up a separate window that contains a simple user guide for the user to adhere to. The window contains a list of commands that Tracey provides, their formats and examples.
-When the Help Window is open, the user can also choose to view the comprehensive user guide on the user's default browser by clicking on the `Open User Guide` button.
-
-The `help` command is as follows:
-
-* `help`
-
-The user can choose when to execute the `help` command.
-
-The activity diagram shows the possible execution paths for the `help` command.
-
-#### Path Execution of Help Feature:
-
-![HelpActivityDiagram](images/HelpActivityDiagram.png)
-
-When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
-
-#### Structure of Help Feature:
-
-![HelpClassDiagram](images/HelpClassDiagram.png)
-
-The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
-
-#### Interaction of objects when Help Command is executed:
-
-![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
-
-When a user inputs a `help` command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `HelpCommand` object.
-
-Following this, the `LogicManager` will call the `execute()` method of the `HelpCommand` object. In this method, a `CommandResult` object will be instantiated.
-
-Back in the `MainWindow`'s `executeCommand()` method, it will determine if the `CommandResult` is a `HelpCommand` by calling the `isShowHelp()` method. Following this, the `handleHelp()` method is called.
-
-If the Help Window is showing, the `focus()` method of the HelpWindow is called. Else when the Help Window is not showing, the `show()` method of the HelpWindow is called. For both alternate paths, when the user clicks on the `Open User Guide` button, this will call the `openUG()` method of the HelpWindow object.
-
-### Clear feature
-
-The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
-
-The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
-user to replace the list of students with an empty one. Previous data are swiped away.
-
-#### Path Execution of Clear Feature:
-
-![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
-
-#### Structure of Clear Feature:
-
-![ClearClassDiagram](images/ClearClassDiagram.png)
-
-The class diagram above depicts the structure of `ClearCommand`. As per any Command class, ClearCommand needs to extend the abstract class Command.
-
-Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
-
-1. `MESSAGE_SUCCESS`
-   - Scenario: Tracey database successfully cleared.
-   - Message: "Tracey has been cleared!".
-
-#### Interaction between objects when Clear Command is executed:
-
-![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
-
-When a user inputs a clear command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, creating a new ClearCommand object.
-
-Afterwards, the `execute()` method of this ClearCommand object is called, which calls the Model's `setAddressBook(AddressBook)` feature, setting a new AddressBook object to clear the database.
-
-<br>
-
-### Find feature
-
-The find mechanism implements the following sequence for the method call execute("find").
-
-#### What is the find feature
-
-The find feature allows users to find a particular contact by its name in Tracey and retrieve their specific details.
-
-The `find` command is as follows:
-
-`find NAME`
-
-The user do not require to search the full name of the contact. However,  the query substring must match the person's
-starting from the first character.
-
-e.g. `find J`
-This will return any contact details starts with J in the Tracey.
-
-e.g. `find Ja`
-This will match `Jack` while `find ck` will not match.
-
-
-The activity diagram shows the possible execution paths for the `find` command.
-
-**Path Execution of Find Feature Activity Diagram is shown below:**
-![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
-
-There are two possible execution paths for this command.
-
-1. User input the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
-   display an error message that informs the contact details the user try to search is not found.
-
-2. User input the `find` command with valid arguments. Tracey returns a list of contact details that matches the
-   input name from the existing database, and display the contact list to the user.
-
-The sequence diagram below illustrates the execution of `find` command.
-
-**Sequence Diagram of Find Feature is shown below:**
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-The argument typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will
-then be parsed by the `parseCommand` function in the `AddressBookParser` object.
-
-A `FindCommandParser` object will then be created to parse this input, with its `parse` function. A
-NameContainsKeywordsPredicate object is then created, containing the name that the user has entered.
-This NameContainsKeywordsPredicate object is then used to create a FindCommand object.
-
-Subsequently, the `parseCommand` method in `LogicManager` will continute to create a `CommandResult`, displaying
-a success message and a list of the students that match up the name.
-
-<br>
-
-### Edit feature
+### 5.3. Edit feature
 
 In this section, the functionality of the `edit` feature, the expected execution path, the structure of the **EditCommand** class and the interactions between objects with the **EditCommand** object will be discussed.
 
-#### What is the edit feature
+#### 5.3.1. What is the Edit feature
 
 The edit feature allows the user to edit field values of exising student with new values.
 
@@ -565,14 +339,15 @@ The command `edit 2 e/john123@gmail.com` still works and the new `Email` value f
 
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-#### Path Execution of Edit Feature Activity Diagram is shown below:
+#### 5.3.2. Path Execution of Edit Command
+
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-  
-#### Class Diagram of Edit Feature is shown below
+
+#### 5.3.3. Structure of Edit Command
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
 
@@ -580,19 +355,19 @@ The class diagram above depicts the structure of `EditCommand`. As per any `Comm
 
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the **EditCommand**:
 1.`MESSAGE_EDIT_PERSON_SUCCESS`:
-  - Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
-  - Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
+- Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
+- Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
 2. `MESSAGE_NOT_EDITED`:
-  - Scenario: No attribute is specified for the `Person` to be edited.
-  - Message: "At least one field to edit must be provided."
+- Scenario: No attribute is specified for the `Person` to be edited.
+- Message: "At least one field to edit must be provided."
 3. `MESSAGE_DUPLICATE_PERSON`:
-  - Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
-  - Message: "This person already exists in the address book."
+- Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
+- Message: "This person already exists in the address book."
 4. `MESSAGE_SAME_INPUT`:
-  - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
-  - Message: "The edited value is the same as the current one."
-  
-#### Sequence Diagram of Edit Feature is shown below:
+- Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
+- Message: "The edited value is the same as the current one."
+
+#### 5.3.4. Interaction between objects when Edit Command is executed
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
@@ -611,202 +386,54 @@ The `ObservableList` in the `Model` class then updates the display of the contac
 
 TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
 
-### Filter feature
 
-In this section, the functionality of the filter feature, the expected execution path, the structure of the FilterCommand class, the structure of the FilterCommand class and the interactions between objects with the FilterCommand object will be discussed.
+### 5.4. Delete feature
 
-#### What is the filter feature
+The delete mechanism implements the following sequence and interactions for the method call execute("delete INDEX") where INDEX refers to the index of the individual displayed in the result display.
 
-The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block.
+#### 5.4.1. What is the Delete feature
 
-#### Path execution of filter feature
+The delete feature allows users to delete a student contact from the Tracey database.
 
-The `filter` command is as follows:
+The `delete` command is as follows: 
 
-* `filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
+* `delete INDEX`
 
-The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
+#### 5.4.2. Path Execution of Delete Command
 
-The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people.
+![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
 
-eg.
-`filter cs/positive f/soc` <br>
-This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC".
+There are three possible execution paths for the delete command
 
-The activity diagram shows the possible execution paths for the `filter` command.
+1. User provides an invalid delete command input <br> This results in a parse exception
+2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
+3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
 
-#### Path Execution of Filter Feature Activity Diagram is shown below:
-![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
+#### 5.4.3. Structure of Delete Command
 
-There are two possible execution paths for this command.
+![DeleteClassDiagram](images/DeleteClassDiagram.png)
 
-1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
-2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+The class diagram above depicts the structure of `DeleteCommand`. As per any Command class, DeleteCommand needs to extend the abstract class Command.
 
-#### Structure of Filter feature
+#### 5.4.4. Interaction between objects when Delete Command is executed
 
-The following is a class diagram of the filter feature.
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
-#### Class diagram of Filter feature is shown below:
-![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
+When a user inputs a delete command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `DeleteCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `DeleteCommand` object is instantiated.
 
-The above class diagram shows the structure of the FilterCommand and its associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in FilterCommand; such as public static fields and getter/setter methods.
+Following this, `LogicManager` will call the `execute()` method of the `DeleteCommand` object. In this method, `getFilteredPersonList()` of the `ModelManager` class is called. Then `deletePerson(Person)` method of the `Model` class will be called, deleting the student from the database.  Finally, it instantiates a new `CommandResult` object containing a string that indicates success of Delete Command.
 
-#### Interaction between objects when the Filter Command is executed
-
-The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
-
-#### Sequence Diagram of Filter Feature is shown below:
-![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
-
-The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object.
-
-A `FilterCommandParser` object will then be created to parse this input, with its `parse` function. A `FilterDescriptor` object is then created, containing the filter criteria that the user has entered. This `FilterDescriptor` object is then used to create a `FilterCommand` object.
-
-Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students.
-
-The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
-The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
-
-### List Feature
-
-The list mechanism implements the following sequence for the method call execute("list").
-
-#### What is the list feature
-
-The list feature will display all students and their details on the main window.
-Each student's name, phone number, email, address, block letter, faculty, matriculation number, covid status and tags will be shown in the form of cards.
-
-The `list` command is as follows:
-
-`list`
-
-The user can choose when to execute the list command.
-
-The activity diagram shows the possible execution paths for the `list` command.
-
-#### Path Execution of List Feature:
-
-![ListFeatureActivityDiagram](images/ListFeatureActivityDiagram.png)
-
-There are two possible execution paths for this command.
-1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
-2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
-
-#### Structure of List Feature:
-
-![ListFeatureClassDiagram](images/ListFeatureClassDiagram.png)
-
-The class diagram above depicts the structure of `ListCommand`. As per any Command class, ListCommand needs to extend the abstract class Command.
-
-#### Interactions between objects when List Command is executed:
-
-![ListSequenceDiagram](images/ListSequenceDiagram.png)
-
-When a user inputs a list command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ListCommand` object.
-
-Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method,
-the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window. A `CommandResult` object with user feedback is hence instantiated.
-
-### Email Feature
-
-The email mechanism implements the following sequence for the method call execute("email").
-
-#### What is the email feature
-
-The email feature opens up a separate window containing the emails of the students found in the current list displayed. The email feature allows a user to copy the email list to their clipboard to paste in their email platform of choice.
-
-The `email` command is as follows:
-
-* `email`
-
-The user can choose when to execute the email command.
-
-The activity diagram shows the possible execution paths for the `email` command.
-
-#### Path Execution of Email Feature:
-
-![EmailActivityDiagram](images/EmailActivityDiagram.png)
-
-There are two possible execution paths for this command.
-1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
-2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
-
-#### Structure of Email Feature:
-
-![EmailClassDiagram](images/EmailClassDiagram.png)
-
-The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
-
-#### Interactions between objects when Email Command is executed:
-
-![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
-
-When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object.
-
-Following this, the `LogicManager` will call the `execute()` method of the `EmailCommand` object. In this method, a `CommandResult` object will be instantiated.
-
-Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleEmailWindow()` method which will then instantiate an `EmailWindow` object.
-
-Afterwards, the `LogicManager` calls the `show()` method of `EmailWindow` and the `EmailWindow` will be shown to the user.
-
-### Exit Feature
-
-The exit mechanism implements the following sequence for the method call execute("exit").
-
-#### What is the exit feature
-
-The exit feature allows users to exit from Tracey after they finish with it.
-
-The `exit` command is as follows:
-
-* `exit`
-
-The user can choose when to exit the programme <br>
-
-The activity diagram shows the possible execution paths for the `exit` command.
-
-#### Path Execution of Exit Feature:
-
-![ExitActivityDiagram](images/ExitActivityDiagram.png)
-
-There are three possible execution path for this command.
-
-1. User inputs the `exit` command with additional parameters <br> A ParseException is thrown
-2. User correctly inputs `exit` command but secondary windows are open <br> Secondary windows are hidden first before the application closes
-3. User correctly inputs `exit` command and no secondary windows are open <br> Application closes
-
-The sequence diagram below shows the interactions between objects during the execution of a `exit` command.
-
-#### Structure of Exit Feature
-
-![ExitClassDiagram](images/ExitClassDiagram.png)
-
-The class diagram above depicts the structure of `ExitCommand`. As per any Command class, ExitCommand needs to extend the abstract class Command.
-
-#### Interaction between objects when Exit Command is executed:
-
-![ExitCommandSequenceDiagram](images/ExitCommandSequenceDiagram.png)
-
-When a user inputs an exit command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ExitCommand` object.
-
-Following this, the `LogicManager` will call the `execute()` method of the `ExitCommand` object. In this method, a `CommandResult` object will be instantiated.
-
-Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleExit()` method which will hide all windows and the primary stage.
-
-Subsequently, the application closes and the MainWindow is deleted.
-
-### Undo/Redo features
+### 5.5. Undo/Redo features
 
 In this section, the functionality of the undo and redo features, the expected execution path, the structure of the UndoCommand and RedoCommand class, and the interactions between objects with the UndoCommand and RedoCommand objects will be discussed.
 
-#### What are the undo and redo features
+#### 5.5.1. What are the Undo and Redo features
 
 The undo feature allows users reverse an `add`, `edit`, or `delete` command.
 
 The redo feature allows users to reverse an `undo` command.
 
-#### Execution of undo feature
+#### 5.5.2. Execution of Undo Command
 
 The `undo` command is as follows:
 
@@ -816,7 +443,7 @@ Calling this command undoes only the last executed add, edit or delete command, 
 
 This command cannot be used in succession to undo previously executed commands besides the last executed one.
 
-#### Execution of redo feature
+#### 5.5.3. Execution of Redo Command
 
 The `redo` command is as follows:
 
@@ -826,14 +453,13 @@ Calling this command reverses only the last executed undo command, and can only 
 
 This command cannot be used in succession.
 
-### Path execution of undo and redo features
+### 5.5.4. Path execution of Undo and Redo Commands
 
 The activity diagram shows the possible execution paths for the `undo` and `redo` command.
 
-**Path Execution of Undo and Redo Features Activity Diagram is shown below:**
 ![UndoRedoFeatureActivityDiagram](images/UndoRedoFeatureActivityDiagram.png)
 
-#### Implementation
+#### 5.5.5. Implementation
 
 The proposed undo/redo mechanism is facilitated by `AddressBook`. On top of the current state of the `UniquePersonList` of `Person` objects, it stores two additional states, the history and the "original" state. Additionally, it implements the following operations:
 
@@ -874,16 +500,15 @@ than attempting to perform the undo. Similarly, if `redo` is called as the first
 
 </div>
 
-#### Structure of Undo and Redo features
+#### 5.5.6. Structure of Undo and Redo Commands
 
 The following is a class diagram of the undo and redo features.
 
-**Class diagram of Undo/Redo features is shown below:**
 ![FilterFeatureClassDiagram](images/UndoRedoClassDiagram.png)
 
 The above class diagram shows the structure of the UndoCommand and RedoCommand and their associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in UndoCommand and RedoCommand; such as public static fields and getter/setter methods.
 
-#### Interaction between objects when the Undo and Redo Commands are executed
+#### 5.5.7. Interaction between objects when the Undo and Redo Commands are executed
 
 The following sequence diagram shows how the undo operation works:
 
@@ -905,26 +530,316 @@ The following sequence diagram shows how the redo operation works:
 
 </div>
 
-#### Design considerations:
+### 5.6. Find feature
 
-**Aspect: How undo & redo executes:**
+The find mechanism implements the following sequence for the method call execute("find").
 
-* **Alternative 1 (current choice):** Saves the entire list of persons in the address book.
+#### 5.6.1. What is the Find feature
+
+The find feature allows users to find a particular contact by its name in Tracey and retrieve their specific details.
+
+The `find` command is as follows:
+
+`find NAME`
+
+The user does not need to input the full name of the contact. However, the contact's name has to start with `NAME`.
+
+e.g. `find J`
+This will return any contacts' details whose names start with J in Tracey.
+
+e.g. `find Ja`
+This will return a contact with name 'Jack'.
+
+e.g. `find ck`
+This will not return a contact with name 'Jack'.
+
+#### 5.6.2. Path execution of Find Command
+
+The activity diagram below shows the possible execution paths for the `find` command:
+
+![FindFeatureActivityDiagram](images/FindFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+
+1. User inputs the `find` command with invalid or empty arguments. A CommandException will be thrown, and Tracey will
+   display an error message that informs the contact details the user try to search is not found.
+
+2. User inputs the `find` command with valid arguments. Tracey returns a list of contact details that matches the
+   input name from the existing database, and displays the contact list to the user.
+
+#### 5.6.3. Interactions between objects when Find command is executed
+
+The sequence diagram below illustrates the execution of `find` command:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+The argument typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will
+then be parsed by the `parseCommand` function in the `AddressBookParser` object.
+
+A `FindCommandParser` object will then be created to parse this input, with its `parse` function. A
+NameContainsKeywordsPredicate object is then created, containing the name that the user has entered.
+This NameContainsKeywordsPredicate object is then used to create a FindCommand object.
+
+Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying
+a success message and a list of the students that match the name.
+
+<br>
+
+### 5.7. Filter feature
+
+In this section, the functionality of the filter feature, the expected execution path, the structure of the FilterCommand class, the structure of the FilterCommand class and the interactions between objects with the FilterCommand object will be discussed.
+
+#### 5.7.1. What is the Filter feature
+
+The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block.
+
+#### 5.7.2. Path execution of Filter Command
+
+The `filter` command is as follows:
+
+* `filter cs/[COVID STATUS] f/[FACULTY] b/[BLOCK]`
+
+The user can choose whether to input filter criteria for some or all of the fields. However, at least one field must be specified. <br>
+
+The user can thus choose different combinations of filter criteria depending on the motive. For example, if a block head wants to cater to the covid-positive students in a certain block, the user can simply filter by both covid status and block to find out the details of this group of people.
+
+eg.
+`filter cs/positive f/soc` <br>
+This is still a valid input even though the filter criteria for block was not specified. The resultant list will contain students who are both covid-positive and from the faculty "SOC".
+
+The activity diagram shows the possible execution paths for the `filter` command.
+
+![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+
+1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+
+#### 5.7.3. Structure of Filter Command
+
+The following is a class diagram of the filter feature.
+
+![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
+
+The above class diagram shows the structure of the FilterCommand and its associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in FilterCommand; such as public static fields and getter/setter methods.
+
+#### 5.7.4. Interaction between objects when the Filter Command is executed
+
+The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object.
+
+A `FilterCommandParser` object will then be created to parse this input, with its `parse` function. A `FilterDescriptor` object is then created, containing the filter criteria that the user has entered. This `FilterDescriptor` object is then used to create a `FilterCommand` object.
+
+Subsequently, the `parseCommand` method in `LogicManager` will continue to create a `CommandResult`, displaying a success message and a list of the filtered students.
+
+The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
+The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
+
+
+### 5.8. List Feature
+
+The list mechanism implements the following sequence for the method call execute("list").
+
+#### 5.8.1. What is the List feature
+
+The list feature will display all students and their details on the main window.
+Each student's name, phone number, email, address, block letter, faculty, matriculation number, covid status and tags will be shown in the form of cards.
+
+The `list` command is as follows:
+
+`list`
+
+The user can choose when to execute the list command.
+
+The activity diagram shows the possible execution paths for the `list` command.
+
+#### 5.8.2. Path Execution of List Command
+
+![ListFeatureActivityDiagram](images/ListFeatureActivityDiagram.png)
+
+There are two possible execution paths for this command.
+1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
+2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
+
+#### 5.8.3. Structure of List Command
+
+![ListFeatureClassDiagram](images/ListFeatureClassDiagram.png)
+
+The class diagram above depicts the structure of `ListCommand`. As per any Command class, ListCommand needs to extend the abstract class Command.
+
+#### 5.8.4. Interactions between objects when List Command is executed
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+When a user inputs a list command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ListCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method,
+the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window. A `CommandResult` object with user feedback is hence instantiated.
+
+
+### 5.9. Email Feature
+
+The email mechanism implements the following sequence for the method call execute("email").
+
+#### 5.9.1. What is the Email feature
+
+The email feature opens up a separate window containing the emails of the students found in the current list displayed. The email feature allows a user to copy the email list to their clipboard to paste in their email platform of choice.
+
+The `email` command is as follows:
+
+* `email`
+
+The user can choose when to execute the email command.
+
+The activity diagram shows the possible execution paths for the `email` command.
+
+#### 5.9.2. Path Execution of Email Command
+
+![EmailActivityDiagram](images/EmailActivityDiagram.png)
+
+There are two possible execution paths for this command.
+1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
+2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
+
+#### 5.9.3. Structure of Email Command
+
+![EmailClassDiagram](images/EmailClassDiagram.png)
+
+The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
+
+#### 5.9.4. Interactions between objects when Email Command is executed
+
+![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
+
+When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `EmailCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleEmailWindow()` method which will then instantiate an `EmailWindow` object.
+
+Afterwards, the `LogicManager` calls the `show()` method of `EmailWindow` and the `EmailWindow` will be shown to the user.
+
+
+### 5.10. Summarise feature
+
+The summarise mechanism implements the following sequence and interactions for the method call execute("summarise").
+
+
+#### 5.10.1. What is the summarise feature
+
+The summarise feature allows users to visualise the statistics of students in the Hall by their covid status and their faculty/block.
+Firstly, Tracey will calculate how many positive cases are there in total. She will then calculate how many are positive, negative and on HRN in each block. She will then do the same with the students' faculties.
+Data on each block and faculties will be drawn as pie charts and bar chart on a separate window.
+
+This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
+their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
+
+#### 5.10.2. Path Execution of Summarise Command
+
+![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
+
+As seen in the above activity diagram, there are three possible execution paths for this command.
+1. User inputs `summarise` command with students' records stored in Tracey. After the Pie Chart Window opens, the user can scroll through the window to see the pie charts for each block followed by the bar chart categorised by faculty.
+2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
+3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
+
+#### 5.10.3. Structure of Summarise Command
+
+![SummariseClassDiagram](images/SummariseClassDiagram.png)
+
+The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
+
+#### 5.10.4. Interaction between objects when Summarise Command is executed
+
+![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The sequence diagram above shows the interactions between objects during the execution of a `summarise` command.
+
+When execute is called on the SummariseCommand object, there are multiple call back to self to anaylse and produce the result back to the Logic Manager.
+
+When a user inputs a summarise command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`.
+If the input is valid, an `SummariseCommand` object will be instantiated. If the input is invalid with additional parameters beside `summarise`, an exception will be thrown.
+
+Following the valid input, `Logic Manager` will call the `execute()` method of the `SummariseCommand` object. In this method,
+the `updatedFilteredPersonList` method and `getFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the UI.
+After getting the list of students, the `SummariseCommand` object will call its own `summariseAll` method to generate a message regarding total number
+of covid cases in that hall. Then, `filterByBlock` method is then called on the same list again to organise the students into separate lists according to their block.
+`filterByBlock` will call on its own `summariseBlock` method to generate statistics of covid statuses in each block of the hall. The statistics will be stored in `covidStatsByBlockDataList`.
+`filerByFaculty` is then called on the list once again to organise the students into separate lists according to their faculty.
+`summariseFaculty` method is then called to generate statistics of covid statuses in each faculty of students in the hall. The statistics will be stored in `positiveStatsByFacultyData`.
+At the same time, `summariseFaculty` will stored the highest number of covid cases amongst the faculties in `highestPositiveByFaculty`.
+
+Finally, it returns a new `CommandResult` object containing a string that indicates either failure or success of Summarise Command.
+A pop-up window with the pie charts aligned to the message response will be generated to aid in the visualisation of data.
+
+
+#### 5.10.5. Pie Chart Window feature
+
+The pie chart window mechanism implements the following sequence and interactions for the method call execute("summarise").
+
+##### 5.10.5.1. What is the Pie Chart Window feature
+
+Pie Chart Window feature opens up a separate window that contains charts for the user to view.
+The window contains pie charts that summarises how each block is doing according to the types of covid statuses and a bar chart that
+summarises how many covid positive students each faculty has in the hall.
+
+##### 5.10.5.2. Structure of Pie Chart Window Feature
+
+![PieChartWindowClassDiagram](images/PieChartWindowClassDiagram.png)
+
+The above class diagram shows the structure of the Pie Chart Window and its associated classes and interfaces.
+The Pie Chart Window has dependencies on the UiPart class as it uses the method `UiPart#getRoot()` from it to make the window.
+
+##### 5.10.5.3. Interactions between objects when Pie Chart Window Feature is used
+
+![PieChartWindowSequenceDiagram](images/PieChartWindowSequenceDiagram.png)
+
+This feature is implemented using a new class `PieChartWindow` and modifications to `SummariseCommand` and `MainWindow`.
+When the user inputs `SummariseCommand`, `SummariseCommand#summariseFaculty()` and `SummariseCommand#summariseBlock()` will
+be invoked and puts the necessary data into a `TreeMap` that is a static variable of `SummariseCommand`. In `MainWindow#executeCommand()`,
+it will invoke `MainWindow#handleSummarise()` which first check whether the pie chart window is to be displayed by calling `SummariseCommand#shouldOpenPieChartWindow()`.
+If true and the window is already opened previously by the user, `MainWindow#handleSummarise()` will call `PieChartWindow#hide()` to close the window.
+Regardless, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` to create the pie chart and opens a new window.
+The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
+
+Below are links for implementation of the classes and its methods:
+* [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
+* [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
+* [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
+
+#### 5.10.6. Why it is implemented that way
+
+The data needed for the pie charts should be coupled with `SummariseCommand`, therefore it is necessary to implement this feature in such a way that the pie chart data is created upon invocation `SummariseCommand`. A `PieChartWindow` controller and FXML class is also needed to abstract the creation of the pie charts and opening a new window respectively. The `MainWindow` class is then modified accordingly.
+
+#### 5.10.7. Alternatives considered
+
+**Aspect: How data is passed to the pie charts:**
+
+* **Alternative 1 (current choice):** `SummariseCommand` will pass in necessary data into data structures (`TreeMap` in this case) upon invocation which then can be obtained using getter methods
     * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+    * Cons: Dependent on the `SummariseCommand` class to pass in correct inputs.
+    * Other consideration(s): Use the Singleton design principle for the data structures.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Parse the feedback to user message from `SummariseCommand`
+    * Pros: No modifications to the `SummariseCommand` class.
+    * Cons: Dependent on the feedback message, need to implement complicated methods to parse the message, parsing methods need to be modified if the format of the feedback message is changed.
 
-_{more aspects and alternatives to be added}_
 
-### Data archiving feature
+### 5.11. Data archiving feature
 
 In this section, the functionality of the `archive` feature, the expected execution path, the structure of the **ArchiveCommand** class, the structure of the **ArchiveCommandParser** class and the interactions between objects with the **ArchiveCommand** object will be discussed.
 
-#### what is the archive feature
+#### 5.11.1. What is the Archive feature
 
 This feature allows the user to save a copy of the working database, which can be then used for archival purposes such as future reference or restore the database back to a working version.
 
@@ -936,7 +851,8 @@ local date and time in `DDMMYYHHmmssSSS` format. The reason this format is used 
 The `archive` command is as follows:
 * `archive`
 
-#### <ins>How the feature is implemented<ins/>
+#### 5.11.2. Implementation
+
 The archive command will save the archived file into a subdirectory of a directory relative to the address book file path.
 `ArchiveCommand#initArchiveFilePath()` will produce the archived file path using the directory path of the address book file as the base directory.
 e.g. If the address book file is saved in `ROOT/data`, then a directory called `archive` will be saved in `ROOT/data` and the
@@ -949,19 +865,22 @@ Below are links for implementation of the classes and its methods:
 * [`ArchiveCommand`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-#### Class Diagram of Archive Feature is shown below:
+#### 5.11.3. Path Execution of Archive Command
+
+![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
+
+Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
+working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else
+the archived file will be saved in its respective file path and a success message will be shown to the user.
+
+#### 5.11.4. Structure of Archive Command
+
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-#### Path Execution of Archive Feature Activity Diagram is shown below:
-![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
+#### 5.11.5. Interactions between objects when Archive Command is executed
 
-Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
-working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
-the archived file will be saved in its respective file path and a success message will be shown to the user.
-
-#### Sequence Diagram of Archive Feature is shown below:
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">
 
@@ -975,11 +894,11 @@ When a user inputs `archive`, `LogicManager#execute()` will be invoked and this 
 the working database file is obtained using `Model#getAddressBookFilePath()`. A dummy copy of the archived file is then created at its file path using `FileUtil#createIfMissing()`, after which the data from the
 working database file is copied over to this dummy file using `Files#copy()`. If the archived file is successfully created and copied, the user can then find this file at its file path.
 
-### Resizing result display window feature
+### 5.12. Resizing result display window feature
 
 In this section, the functionality of the `resize` feature, the expected execution path, the structure of the **ResizeCommand** class and the interactions between objects with the **ResizeCommand** object will be discussed.
 
-#### what is the resize feature
+#### 5.12.1. What is the Resize feature
 This feature allows the user to resize the result display window in the case they have a small application window size, and/or they want to have a better view at the result feedback text after keying in a command, which is especially true for the `SummariseCommand`
 which displays quite a long result feedback text.
 
@@ -988,18 +907,21 @@ The `resize` command is as follows:
 
 This feature provides the user with three different resizing options to choose from, which are `1`, `2` and `3` with each number being a multiplier of the default result display window size (1 being the default size).
 
-#### Class Diagram of Resize Feature is shown below:
+#### 5.12.2. Structure of Resize Command
+
 ![ResizeFeatureClassDiagram](images/ResizeCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ResizeCommand`. As per any `Command` class, `ResizeCommand` needs to extend the abstract class `Command`.
 
-#### Path Execution of Resize Feature Activity Diagram is shown below:
+#### 5.12.3. Path Execution of Resize Command
+
 ![ResizeFeatureActivityDiagram](images/ResizeFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a `ParseException` will be thrown, else the result
 display window in the GUI is resized according to the user's option. A success message is then displayed to the user.
 
-#### Sequence Diagram of Resize Feature is shown below:
+#### 5.12.4. Interactions between objects when Resize Command is executed
+
 ![ResizeFeatureSequenceDiagram](images/ResizeFeatureSequenceDiagram.png)
 
 The above figure illustrates the important interactions of `ResizeCommand` when the user successfully resizes the result display window.
@@ -1014,14 +936,99 @@ When a user inputs `resize 1`, `MainWindow#executeCommand()` will be invoked whi
 This will then create a `ResizeCommand` object which is then executed by the `LogicManager` via `ResizeCommand#execute()` which will then update the value needed to set the result display window size. This value is used by the `MainWindow#handleResizeResultDisplayWindow()`
 which sets the window in the GUI according to the user's desired option.
 
+### 5.13. Clear feature
+
+In this section, the functionality of the `clear` feature, the expected execution path, the structure of the **ClearCommand** class and the interactions between objects with the **ClearCommand** object will be discussed.
+
+#### 5.13.1. What is the Clear feature
+
+The clear mechanism implements the following sequence and interactions for the method call execute("clear") on a LogicManager object.
+
+The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
+user to replace the list of students with an empty one. Previous data are swiped away.
+
+#### 5.13.1. Path Execution of Clear Command
+
+![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
+
+#### 5.13.2. Structure of Clear Command
+
+![ClearClassDiagram](images/ClearClassDiagram.png)
+
+The class diagram above depicts the structure of `ClearCommand`. As per any Command class, ClearCommand needs to extend the abstract class Command.
+
+Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
+
+1. `MESSAGE_SUCCESS`
+   - Scenario: Tracey database successfully cleared.
+   - Message: "Tracey has been cleared!".
+
+#### 5.13.3. Interaction between objects when Clear Command is executed
+
+![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
+
+When a user inputs a clear command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, creating a new ClearCommand object.
+
+Afterwards, the `execute()` method of this ClearCommand object is called, which calls the Model's `setAddressBook(AddressBook)` feature, setting a new AddressBook object to clear the database.
+
+<br>
+
+
+### 5.14. Exit Feature
+
+The exit mechanism implements the following sequence for the method call execute("exit").
+
+#### 5.14.1. What is the Exit feature
+
+The exit feature allows users to exit from Tracey after they finish with it.
+
+The `exit` command is as follows:
+
+* `exit`
+
+The user can choose when to exit the programme <br>
+
+The activity diagram shows the possible execution paths for the `exit` command.
+
+#### 5.14.2. Path Execution of Exit Command:
+
+![ExitActivityDiagram](images/ExitActivityDiagram.png)
+
+There are three possible execution path for this command.
+
+1. User inputs the `exit` command with additional parameters <br> A ParseException is thrown
+2. User correctly inputs `exit` command but secondary windows are open <br> Secondary windows are hidden first before the application closes
+3. User correctly inputs `exit` command and no secondary windows are open <br> Application closes
+
+The sequence diagram below shows the interactions between objects during the execution of a `exit` command.
+
+#### 5.14.3. Structure of Exit Command
+
+![ExitClassDiagram](images/ExitClassDiagram.png)
+
+The class diagram above depicts the structure of `ExitCommand`. As per any Command class, ExitCommand needs to extend the abstract class Command.
+
+#### 5.14.4. Interaction between objects when Exit Command is executed:
+
+![ExitCommandSequenceDiagram](images/ExitCommandSequenceDiagram.png)
+
+When a user inputs an exit command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ExitCommand` object.
+
+Following this, the `LogicManager` will call the `execute()` method of the `ExitCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleExit()` method which will hide all windows and the primary stage.
+
+Subsequently, the application closes and the MainWindow is deleted.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-### Potential Feature: Import 
+### 5.15. Potential Feature: Import 
 
 This section explains the potential import feature. 
 The import mechanism will implement the following sequence for the method call execute("import").
 
-#### What is the import feature
+#### 5.15.1. What is the Import feature
 
 The import feature allows users to import an Excel file that contains a list of student records into Tracey.
 
@@ -1029,9 +1036,10 @@ The `import` command is as follows:
 
 `import FILE PATH`
 
+#### 5.15.2. Path execution of the Import Command
+
 The activity diagram shows the possible execution paths for the `import` command.
 
-**Path Execution of Import Feature Activity Diagram is shown below:**
 ![ImportFeatureActivityDiagram](images/ImportFeature.png)
 
 There are two possible execution paths for this command.
@@ -1039,15 +1047,16 @@ There are two possible execution paths for this command.
 1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
 2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
 
+#### 5.15.3. Interactions between objects when the Import Command is executed
+
 The sequence diagram below shows the interactions between objects during the execution of a `import` command.
 
-**Sequence Diagram of Import Feature is shown below:**
 ![ImportFeatureSequenceDiagram](images/ImportSequenceDiagram.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **6. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -1057,9 +1066,11 @@ The sequence diagram below shows the interactions between objects during the exe
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **7. Appendices**
 
-### Product scope
+### 7.1. Appendix A: Requirements
+
+#### 7.1.1. Product scope
 
 **Target user profile**:
 
@@ -1080,7 +1091,7 @@ faculties within NUS (no support for other schools).
 
 
 
-### User stories
+#### 7.1.2. User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -1110,11 +1121,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | Hall leaders                               | get the name of students with covid     | check if their CCA members have Covid                                   |
 | `* `     | Residence Fellow                           | know covid status of students and staffs     | come up with hall policies                                   |
 
-### Use cases
+### 7.1.3. Use cases
 
 (For all use cases below, the **System** is the `Tracey` and the **Actor** is the `user`, unless specified otherwise)
 
-### Use case: UC01 - Delete a student
+#### Use case: UC01 - Delete a student
 
 **MSS**
 
@@ -1137,7 +1148,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-### Use case: UC02 - Search for a student
+#### Use case: UC02 - Search for a student
 
 **MSS**
 
@@ -1158,7 +1169,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-### Use case: UC03 - Add a student into Tracey
+#### Use case: UC03 - Add a student into Tracey
 
 **MSS**
 
@@ -1196,7 +1207,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-### Use case: UC04 - Edit information of a student
+#### Use case: UC04 - Edit information of a student
 
 **MSS**
 
@@ -1223,7 +1234,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-### Use case: UC05 - Clear the system database
+#### Use case: UC05 - Clear the system database
 
 **MSS**
 
@@ -1234,7 +1245,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-### Use case: UC06 - Summarize the system database for number of Covid patient
+#### Use case: UC06 - Summarize the system database for number of Covid patient
 
 **MSS**
 
@@ -1244,7 +1255,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-### Use case: UC07 - List all students
+#### Use case: UC07 - List all students
 
 **MSS**
 
@@ -1260,7 +1271,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC08 - Request for help from Tracey
+#### Use case: UC08 - Request for help from Tracey
 
 **MSS**
 
@@ -1275,7 +1286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block
+#### Use case: UC09 - Filter a list of students of specified covid status, and/or faculty, and/or block
 
 **MSS**
 
@@ -1297,7 +1308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-### Use case: UC10 - Summarise all students for some overview of covid situation
+#### Use case: UC10 - Summarise all students for some overview of covid situation
 
 **MSS**
 
@@ -1312,7 +1323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC11 - Resizing the result window display in the GUI of the application
+#### Use case: UC11 - Resizing the result window display in the GUI of the application
 
 **MSS**
 
@@ -1327,7 +1338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC12 - Saving the working database file for archival purposes
+#### Use case: UC12 - Saving the working database file for archival purposes
 
 **MSS**
 
@@ -1348,7 +1359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC13 - Exiting from the Tracey application
+#### Use case: UC13 - Exiting from the Tracey application
 
 **MSS**
 
@@ -1357,7 +1368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Use case: UC14 - Undoing a previous command
+#### Use case: UC14 - Undoing a previous command
 
 **MSS**
 
@@ -1373,7 +1384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC15 - Redoing a undo command
+#### Use case: UC15 - Redoing a undo command
 
 **MSS**
 
@@ -1389,7 +1400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC16 - Getting the email of students
+#### Use case: UC16 - Getting the email of students
 
 **MSS**
 
@@ -1398,7 +1409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### Non-Functional Requirements
+### 7.1.4. Non-Functional Requirements
 
 1.  Application is offered free.
 2.  Has storage function
@@ -1413,9 +1424,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Product is not required to handle printing of reports
 12. Product should respond within 10 seconds.
 
-### Glossary
+### 7.2. Appendix B: Glossary
 
-*Table 4: List of prefixes, fields, pre-defined constants and constraints.*
+*Table 1: List of prefixes, fields, pre-defined constants and constraints.*
 
 | **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
 |:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
@@ -1429,7 +1440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
 | `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
 
-*Table 6: Specific terminology used.*
+*Table 2: Specific terminology used.*
 
 | Term                           | Meaning                                                                                                                                                                                                                                                                                              |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1451,7 +1462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7.3. Appendix C: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -1460,7 +1471,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### 7.3.1. Launch and shutdown
 
 1. Initial launch
 
@@ -1477,7 +1488,7 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
-### Adding a person
+#### 7.3.2. Adding a person
 1. Adding a person into Tracey. After addition, the student contact will be displayed at the bottom of the displayed list
 
    a. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br>   Expected: Insert a student contact with the above details to the list and displayed on the GUI.
@@ -1491,7 +1502,7 @@ testers are expected to do more *exploratory* testing.
    e. Test case : Insert order with existing `MatriculationNumber`, `Phone` or `Email` <br> Expected: Error will message will be displayed stating that the duplicate unique field already exists in Tracey and thus stated student will not be added.
    
 
-### Deleting a person
+#### 7.3.3. Deleting a person
 
 1. Deleting a person while all persons are being shown <br>Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1504,7 +1515,7 @@ testers are expected to do more *exploratory* testing.
    c. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Summarising the data
+#### 7.3.4. Summarising the data
 
 1. Summarising all the students' data at that specific time using the `summarise` command.
    A separate window containing charts that categorises student by covid status and faculty or block will be shown if there are student data in Tracey.
@@ -1524,7 +1535,7 @@ testers are expected to do more *exploratory* testing.
     e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
        Expected: Error message indicating format of command is wrong.
 
-### Help user
+#### 7.3.5. Help user
 1. Display a help window for user to access command format and examples.
 
    a. Test case: Press F1 <br> Expected: Help window opens.
@@ -1535,7 +1546,7 @@ testers are expected to do more *exploratory* testing.
 
    d. Test case: Click on file, followed by clicking on help <br> Expected: Help window opens.
 
-### Listing the data
+#### 7.3.6. Listing the data
 
 1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
    a. Test case: `list` <br>
@@ -1547,21 +1558,21 @@ testers are expected to do more *exploratory* testing.
    c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
       Expected: Error message indicating format of command is wrong.
 
-### Clearing the data
+#### 7.3.7. Clearing the data
 1. Clear the Tracey database.
 
    a. Test case: `clear` <br> Expected: Tracey database is cleared. Empty list shown to user.
 
    b. Test case: `clear` with additional parameters after the `clear` command<br> Expected: The response box will display an invalid command message.
 
-### Exiting the application
+#### 7.3.8. Exiting the application
 1. Exit the application using the `exit` command.
 
    a. Test case: `exit` <br> Expected: The GUI window will be closed.
 
    b. Test case: `exit` with additional parameters after the `exit` command <br> Expected: The response box will display an invalid command message.
 
-### Finding a person
+#### 7.3.9. Finding a person
 
 1. Finding a person by their full name
 
@@ -1589,7 +1600,7 @@ testers are expected to do more *exploratory* testing.
    d. Other incorrect delete commands to try: `find na`, `find ob` <br>
        Expected: Similar to previous.
 
-### Saving data
+#### 7.3.10. Saving data
 
 1. Dealing with missing/corrupted data files when the application is close.
 
@@ -1607,7 +1618,7 @@ testers are expected to do more *exploratory* testing.
     b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
        Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
 
-### Editing a person
+#### 7.3.11. Editing a person
 
 1. Editing a person while all person are being shown
 
@@ -1625,9 +1636,35 @@ testers are expected to do more *exploratory* testing.
     e. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
        Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
 
-    f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
+    f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts.<br>
 
-### Archiving the database
+#### 7.3.12. Undoing and redoing a command
+
+1. Undoing and redoing a command
+    a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+    b. Test case: `delete 1`, then `undo`, then `redo`<br>
+    Expected: The contact at index 1 will be deleted, then restored at index 1 after `undo` is entered. The contact will be deleted again after `redo` is entered.<br>
+    c. Test case: `edit 1 n/Poppy doopy`, then `undo`, then `redo`<br>
+    Expected: The name of the contact at index 1 will be changed to Poppy doopy and shifted to the bottom of the list, then back to the original name and at index 1 after `undo` is entered. The contact's name will be changed to Poppy Doopy again after `redo` is entered.<br>
+    d. Test case: `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE`, then `undo`, then `redo`<br>
+    Expected: A new contact will be added to the list, then removed again when `undo` is entered. The contact will be added again after `redo` is entered.<br>
+
+#### 7.3.13. Filtering by criteria
+
+2. Filtering by covid status, faculty and/or block
+    a. Prerequisites: List all persons using the `list command`. Multiple persons in the list.<br>
+    b. Test case: `filter f/soc`<br>
+    Expected: A list of all the contacts with faculty 'SOC' will be returned. If no such contacts exist, the list will be empty.<br>
+    c. Test case: `filter cs/positive`<br>
+    Expected: A list of all the contacts with covid status 'Positive' will be returned. If no such contacts exist, the list will be empty.<br>
+    d. Test case: `filter b/e`<br>
+    Expected: A list of all the contacts with block 'E' will be returned. If no such contacts exist, the list will be empty.<br>
+    e. Test case: `filter f/soc cs/negative`<br>
+    Expected: A list of all the contacts with faculty 'SOC' and covid status 'Negative' will be returned. If no such contacts exist, the list will be empty.<br>
+    f. Test case: `filter f/soc cs/positive b/a`<br>
+    Expected: A list of all the contacts with faculty 'SOC', covid status 'Positive' and block 'A' will be returned. If no such contacts exist, the list will be empty.<br>
+   
+#### 7.3.14. Archiving the database
 
 1. Saving the working copy of the Tracey database
 
@@ -1671,7 +1708,7 @@ testers are expected to do more *exploratory* testing.
     b. Test case: `archive x`(where x = any value)<br>
        Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
 
-### Resizing the result display window
+### 7.3.15. Resizing the result display window
 
 1. Using the command line to resize
 
@@ -1696,7 +1733,7 @@ testers are expected to do more *exploratory* testing.
    d. Test case: Click on the `Resize Display` button once again<br>
       Expected: The size of the resize window display will return to the default size.
 
-## **Appendix: Effort**
+## 7.4. Appendix D: Effort
 
 **Overview**
 
