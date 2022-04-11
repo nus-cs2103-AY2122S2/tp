@@ -12,7 +12,7 @@ import seedu.address.logic.commands.ShowEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 
-public class ShowEventsCommandParser {
+public class ShowEventsCommandParser implements Parser<ShowEventsCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ShowEventCommand
