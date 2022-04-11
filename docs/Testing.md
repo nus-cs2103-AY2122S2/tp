@@ -3,11 +3,6 @@ layout: page
 title: Testing guide
 ---
 
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Running tests
 
 There are two ways to run tests.

@@ -8,43 +8,76 @@ Package Model <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
 Class ModelManager
+Class AddressBook
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueCustomerList
+Class Customer
+Class AddressCustomer
+Class NameCustomer
+Class PhoneCustomer
 
+Class UniqueOrderList
+Class Order
+Class OrderStatus
+Class Integer
+Class LocalDateTime
+
+Class UniqueDriverList
+Class Driver
+Class NameDriver
+Class PhoneDriver
+Class DriverStatus
+
+Class UniqueDishList
+Class Dish
+Class NameDish
+Class PriceDish
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AddressBook ..up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+UserPrefs ..up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *-left-> "1" UniqueCustomerList
+UniqueCustomerList ---> " ~* all" Customer
+Customer *--> NameCustomer
+Customer *--> PhoneCustomer
+Customer *--> AddressCustomer
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *-left-> "1" UniqueOrderList
+UniqueOrderList --> "~* all" Order
+Order *---> Customer
+Order *---> Driver
+Order *---> Dish
+Order *---> LocalDateTime
+Order *---> Integer
+Order *---> OrderStatus
 
-ModelManager -->"~* filtered" Person
+AddressBook *-left-> "1" UniqueDriverList
+UniqueDriverList ---> "~* all" Driver
+Driver *--> NameDriver
+Driver *--> PhoneDriver
+Driver *--> DriverStatus
+
+AddressBook *-left-> "1" UniqueDishList
+UniqueDishList ---> "~* all" Dish
+Dish *--> NameDish
+Dish *--> PriceDish
+
+NameCustomer -[hidden]right-> PhoneCustomer
+PhoneCustomer -[hidden]right-> AddressCustomer
+ModelManager -left-> "~* filtered" Customer
+ModelManager -->"~* filtered" Driver
+ModelManager -->"~* filtered" Dish
+ModelManager -->"~* filtered" Order
 @enduml

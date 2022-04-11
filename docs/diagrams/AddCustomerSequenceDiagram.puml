@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCustomerCommandParser" as AddCustomerCommandParser LOGIC_COLOR
+participant "d:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addcustomer n/john p/12345678 a/nus")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addcustomer n/john p/12345678 a/nus")
+activate AddressBookParser
+
+create AddCustomerCommandParser
+AddressBookParser -> AddCustomerCommandParser
+activate AddCustomerCommandParser
+
+AddCustomerCommandParser --> AddressBookParser
+deactivate AddCustomerCommandParser
+
+AddressBookParser -> AddCustomerCommandParser : parse("n/john p/12345678 a/nus")
+activate AddCustomerCommandParser
+
+create AddCustomerCommand
+AddCustomerCommandParser -> AddCustomerCommand
+activate AddCustomerCommand
+
+AddCustomerCommand --> AddCustomerCommandParser : d
+deactivate AddCustomerCommand
+
+AddCustomerCommandParser --> AddressBookParser : d
+deactivate AddCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCustomerCommandParser -[hidden]-> AddressBookParser
+destroy AddCustomerCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddCustomerCommand : execute()
+activate AddCustomerCommand
+
+AddCustomerCommand -> Model : addCustomer(customer)
+activate Model
+
+Model --> AddCustomerCommand
+deactivate Model
+
+create CommandResult
+AddCustomerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCustomerCommand
+deactivate CommandResult
+
+AddCustomerCommand --> LogicManager : result
+deactivate AddCustomerCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

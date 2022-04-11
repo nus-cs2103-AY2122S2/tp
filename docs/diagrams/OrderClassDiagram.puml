@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Order o--> "1" Customer : ordered by >
+Order o--> "1" Driver : delivering by >
+Order o--> "1...*" Dish : includes >
+
+class Order {
+}
+
+class Customer {
+NameCustomer name
+PhoneCustomer phone
+AddressCustomer address
+}
+
+class Driver {
+NameDriver name
+PhoneDriver phone
+String status
+}
+
+class Dish {
+Name name
+}
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+box Ui LOGIC_COLOR_T1
+participant ":MainWindow" as MainWindow LOGIC_COLOR
+participant ":TabDisplay" as TabDisplay LOGIC_COLOR
+end box
+
+
+[-> MainWindow : execute("deletedish 1")
+activate MainWindow
+
+MainWindow -> TabDisplay : setFocus(DEFAULT_TAB_DISPLAY_FOCUS)
+activate TabDisplay
+
+TabDisplay --> MainWindow
+deactivate TabDisplay
+
+MainWindow -> TabDisplay : setFocus(DISH_TAB_DISPLAY_FOCUS)
+activate TabDisplay
+
+TabDisplay --> MainWindow
+deactivate TabDisplay
+
+[<--MainWindow
+deactivate MainWindow
+@enduml

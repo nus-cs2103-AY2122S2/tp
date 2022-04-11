@@ -6,15 +6,29 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.logic.commands.AddDishCommand;
+import seedu.address.logic.commands.AddDriverCommand;
+import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.DeleteCustomerCommand;
+import seedu.address.logic.commands.DeleteDishCommand;
+import seedu.address.logic.commands.DeleteDriverCommand;
+import seedu.address.logic.commands.EditCustomerCommand;
+import seedu.address.logic.commands.EditDishCommand;
+import seedu.address.logic.commands.EditDriverCommand;
+import seedu.address.logic.commands.EditOrderCommand;
+import seedu.address.logic.commands.EditOrderStatusCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrderCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListCustomerCommand;
+import seedu.address.logic.commands.ListDishCommand;
+import seedu.address.logic.commands.ListDriverCommand;
+import seedu.address.logic.commands.ListOrderCommand;
+import seedu.address.logic.commands.RevenueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -44,14 +58,23 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddCustomerCommand.COMMAND_WORD:
+            return new AddCustomerCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case AddDishCommand.COMMAND_WORD:
+            return new AddDishCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case EditCustomerCommand.COMMAND_WORD:
+            return new EditCustomerCommandParser().parse(arguments);
+
+        case EditDishCommand.COMMAND_WORD:
+            return new EditDishCommandParser().parse(arguments);
+
+        case DeleteCustomerCommand.COMMAND_WORD:
+            return new DeleteCustomerCommandParser().parse(arguments);
+
+        case DeleteDishCommand.COMMAND_WORD:
+            return new DeleteDishCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -59,14 +82,47 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListCustomerCommand.COMMAND_WORD:
+            return new ListCustomerCommand();
+
+        case ListDishCommand.COMMAND_WORD:
+            return new ListDishCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddOrderCommand.COMMAND_WORD:
+            return new AddOrderCommandParser().parse(arguments);
+
+        case EditOrderStatusCommand.COMMAND_WORD:
+            return new EditOrderStatusCommandParser().parse(arguments);
+
+        case EditOrderCommand.COMMAND_WORD:
+            return new EditOrderCommandParser().parse(arguments);
+
+        case FindOrderCommand.COMMAND_WORD:
+            return new FindOrderCommandParser().parse(arguments);
+
+        case ListOrderCommand.COMMAND_WORD:
+            return new ListOrderCommandParser().parse(arguments);
+
+        case AddDriverCommand.COMMAND_WORD:
+            return new AddDriverCommandParser().parse(arguments);
+
+        case DeleteDriverCommand.COMMAND_WORD:
+            return new DeleteDriverCommandParser().parse(arguments);
+
+        case ListDriverCommand.COMMAND_WORD:
+            return new ListDriverCommandParser().parse(arguments);
+
+        case EditDriverCommand.COMMAND_WORD:
+            return new EditDriverCommandParser().parse(arguments);
+
+        case RevenueCommand.COMMAND_WORD:
+            return new RevenueCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

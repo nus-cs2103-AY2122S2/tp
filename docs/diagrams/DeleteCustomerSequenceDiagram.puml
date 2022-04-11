@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCustomerCommandParser" as DeleteCustomerCommandParser LOGIC_COLOR
+participant "d:DeleteCustomerCommand" as DeleteCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletecustomer 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deletecustomer 3")
+activate AddressBookParser
+
+create DeleteCustomerCommandParser
+AddressBookParser -> DeleteCustomerCommandParser
+activate DeleteCustomerCommandParser
+
+DeleteCustomerCommandParser --> AddressBookParser
+deactivate DeleteCustomerCommandParser
+
+AddressBookParser -> DeleteCustomerCommandParser : parse("3")
+activate DeleteCustomerCommandParser
+
+create DeleteCustomerCommand
+DeleteCustomerCommandParser -> DeleteCustomerCommand
+activate DeleteCustomerCommand
+
+DeleteCustomerCommand --> DeleteCustomerCommandParser : d
+deactivate DeleteCustomerCommand
+
+DeleteCustomerCommandParser --> AddressBookParser : d
+deactivate DeleteCustomerCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCustomerCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCustomerCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCustomerCommand : execute()
+activate DeleteCustomerCommand
+
+DeleteCustomerCommand -> Model : deleteCustomer(3)
+activate Model
+
+Model --> DeleteCustomerCommand
+deactivate Model
+
+create CommandResult
+DeleteCustomerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCustomerCommand
+deactivate CommandResult
+
+DeleteCustomerCommand --> LogicManager : result
+deactivate DeleteCustomerCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

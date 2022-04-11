@@ -7,19 +7,25 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EditOrderCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.dish.Dish;
+import seedu.address.model.driver.Driver;
+import seedu.address.model.order.Order;
 import seedu.address.storage.Storage;
 
 /**
  * The main LogicManager of the app.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
@@ -43,7 +49,18 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+
+        if (command instanceof AddOrderCommand) {
+            AddOrderCommand inputCommand = (AddOrderCommand) command;
+            commandResult = inputCommand.execute(model,
+                    getFilteredCustomerList(), getFilteredDriverList(), getFilteredDishList());
+        } else if (command instanceof EditOrderCommand) {
+            EditOrderCommand editOrderCommand = (EditOrderCommand) command;
+            commandResult = editOrderCommand.execute(model,
+                    getFilteredCustomerList(), getFilteredDishList());
+        } else {
+            commandResult = command.execute(model);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -60,8 +77,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return model.getFilteredCustomerList();
+    }
+
+
+    @Override
+    public ObservableList<Driver> getFilteredDriverList() {
+        return model.getFilteredDriverList();
+    }
+    @Override
+    public ObservableList<Dish> getFilteredDishList() {
+        return model.getFilteredDishList();
+    }
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        return model.getFilteredOrderList();
     }
 
     @Override

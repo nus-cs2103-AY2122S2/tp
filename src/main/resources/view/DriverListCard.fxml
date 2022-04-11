@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <HBox alignment="CENTER_LEFT" minHeight="90" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20" />
+            </padding>
+            <HBox spacing="5" maxWidth="50" prefWidth="50" alignment="CENTER_LEFT">
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+            </HBox>
+            <VBox spacing="2" maxWidth="400" minWidth="130" prefWidth="250" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="10" left="50" bottom="10" right="20"/>        </padding>
+                <Label fx:id="DriverHeader" text="Name" styleClass="cell_header" />
+                <Label fx:id="name" text="\$first" styleClass="cell_small_label" />
+            </VBox>
+            <VBox spacing="2" maxWidth="400" minWidth="130" prefWidth="250" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="10" left="30" bottom="10" right="20"/>
+                </padding>
+                <Label fx:id="PhoneDriverHeader" text="Phone" styleClass="cell_header" />
+                <Label fx:id="phone" text="\$phone" styleClass="cell_small_label" />
+            </VBox>
+            <VBox spacing="2" maxWidth="400" minWidth="130" prefWidth="250" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="10" left="30" bottom="10" right="20"/>
+                </padding>
+                <Label fx:id="StatusHeader" text="Status" styleClass="cell_header" />
+                <Label fx:id="status" text="\$status" styleClass="cell_small_label" />
+            </VBox>
+        </HBox>
+    </GridPane>
+</HBox>

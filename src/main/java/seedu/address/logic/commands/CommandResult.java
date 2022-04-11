@@ -17,6 +17,15 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Command related to dish **/
+    private final boolean isDish;
+
+    /** Command related to driver **/
+    private final boolean isDriver;
+
+    /** Command related to order **/
+    private final boolean isOrder;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +33,22 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isDish = false;
+        this.isDriver = false;
+        this.isOrder = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields, for FoodOnWheels.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp,
+            boolean exit, boolean isDish, boolean isDriver, boolean isOrder) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.isDish = isDish;
+        this.isDriver = isDriver;
+        this.isOrder = isOrder;
     }
 
     /**
@@ -44,6 +69,18 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isDish() {
+        return isDish;
+    }
+
+    public boolean isDriver() {
+        return isDriver;
+    }
+
+    public boolean isOrder() {
+        return isOrder;
     }
 
     @Override

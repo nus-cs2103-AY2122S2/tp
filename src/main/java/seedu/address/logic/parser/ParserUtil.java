@@ -2,18 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.customer.AddressCustomer;
+import seedu.address.model.customer.NameCustomer;
+import seedu.address.model.customer.PhoneCustomer;
+import seedu.address.model.dish.NameDish;
+import seedu.address.model.dish.PriceDish;
+import seedu.address.model.driver.DriverStatus;
+import seedu.address.model.driver.NameDriver;
+import seedu.address.model.driver.PhoneDriver;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +20,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DRIVER_STATUS = "This driver status is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,89 +36,126 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code NameCustomer}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static NameCustomer parseNameCustomer(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!NameCustomer.isValidName(trimmedName)) {
+            throw new ParseException(NameCustomer.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new NameCustomer(trimmedName);
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String name} into a {@code NameDish}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static NameDish parseDishName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!NameDish.isValidName(trimmedName)) {
+            throw new ParseException(NameDish.MESSAGE_CONSTRAINTS);
+        }
+        return new NameDish(trimmedName);
+    }
+
+
+    /**
+     * Parses a {@code String name} into a {@code NameDriver}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static NameDriver parseNameDriver(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!NameDriver.isValidName(trimmedName)) {
+            throw new ParseException(NameDriver.MESSAGE_CONSTRAINTS);
+        }
+        return new NameDriver(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String phone} into a {@code PhoneCustomer}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static PhoneCustomer parsePhoneCustomer(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        if (!PhoneCustomer.isValidPhone(trimmedPhone)) {
+            throw new ParseException(PhoneCustomer.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new PhoneCustomer(trimmedPhone);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String phone} into a {@code PhoneDriver}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static PhoneDriver parsePhoneDriver(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!PhoneDriver.isValidPhone(trimmedPhone)) {
+            throw new ParseException(PhoneDriver.MESSAGE_CONSTRAINTS);
+        }
+        return new PhoneDriver(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code DriverStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static DriverStatus parseDriverStatus (String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        for (DriverStatus driverStatus : DriverStatus.values()) {
+            if (driverStatus.name().equalsIgnoreCase(trimmedStatus)) {
+                return DriverStatus.valueOf(trimmedStatus.toUpperCase());
+            }
+        }
+        throw new ParseException(MESSAGE_INVALID_DRIVER_STATUS);
+    }
+
+
+    /**
+     * Parses a {@code String address} into an {@code AddressCustomer}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static AddressCustomer parseAddressCustomer(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        if (!AddressCustomer.isValidAddress(trimmedAddress)) {
+            throw new ParseException(AddressCustomer.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new AddressCustomer(trimmedAddress);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String price} into a {@code PriceDish}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static PriceDish parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!PriceDish.isValidPrice(trimmedPrice)) {
+            throw new ParseException(PriceDish.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
+        return new PriceDish(trimmedPrice);
     }
 }
