@@ -59,7 +59,7 @@ Given below are my contributions to the project.
     * Improved the introduction paragraph of the User Guide and updated help command documentation [\#89](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/89).
     * Added tutorial section to User Guide and updated sample images [\#206](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/206)
   * Developer Guide:
-    * Added implementation details of the `favourite` and `images` feature [\#210](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/210)
+    * Added implementation details of the `favourite` and `images` feature [\#76](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/76) [\#210](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/210)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#68](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/68), [\#99](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/99), [\#93](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/93)
