@@ -60,4 +60,4 @@ Given below are my contributions to the project.
 
 - **Review/mentoring contributions:**
   - [Pull Requests Reviewed by me](https://github.com/AY2122S2-CS2103T-W13-1/tp/pulls?q=is%3Apr+reviewed-by%3Ateominghuang)
-  - More tP Comments by me can be found in the [tP dashboard](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html)
+  - More tP comments by me can be found in the [dashboard](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html)
