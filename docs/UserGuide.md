@@ -47,7 +47,16 @@ For new users, it is highly recommended starting off from the `Quick Start` sect
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
-Tired of how messy Excel sheets can get? HustleBook...
+
+Tired of how messy Excel sheets can get? Is your client consistently cancelling meetings on you where you have
+to manually find their name on your Excel sheet just to reschedule another meeting? 
+
+If this is relatable, then HustleBook is able to solve these issues. HustleBook is a desktop application 
+made for financial advisors to **manage their client details and meetings**.
+HustleBook is optimized for users who can type fast through the CLI to get their tasks done. 
+
+If you are interested, continue reading our [Quick Start](#quick-start) to learn how you can get started with HustleBook in under 
+10 minutes.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,7 +95,7 @@ Now that you have set up the HustleBook, lets take a look at what HustleBook off
 
 # All Features
 
-You can find basic, useful and advanced features below. If you are new to HustleBook,
+You can find basic, useful and miscellaneous features below. If you are new to HustleBook,
 we recommend to look through the [basic features](#basic-features) to start managing your clients
 and meetings.
 
@@ -152,7 +161,7 @@ Here you can find all the necessary features to manage your clients and meetings
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected **only once** in the command but if you specified it multiple times, **only the last occurrence** of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
@@ -169,14 +178,17 @@ Shows a message explaining how to access the help page.
 
 Format: `help [COMMAND]`
 
+:information_source: **Note:** 
 * Enter optional parameter `COMMAND` to view the usage for that command.
-![meet Help Message](images/meetHelpMessage.png)
 * Entering only the `help` will allow you to view message explaining how to access help page and the usage of all commands.
 
 Example:
-
 * `help`
 * `help meet`
+
+Outcome of `help meet`:
+
+![meet Help Message](images/meetHelpMessage.png)
 
 ## Managing your clients
 
@@ -186,6 +198,7 @@ Shows a list of clients in the HustleBook.
 
 Format: `list [flag|unflag]`
 
+:information_source: **Note:**
 * Optional Parameter allows you to view only flagged or only unflagged clients.
 * If the optional parameter is not provided, both flagged and unflagged clients will be displayed.
 
@@ -195,10 +208,7 @@ Adds a client to the HustleBook.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [i/INFO] [d/DATE] [f/FLAG] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client's meeting can be scheduled through meet command after adding the client into the HustleBook
-</div>
-
+:information_source: **Note:**
 * HustleBook does not allow duplicate clients to be stored.
   * Duplicate is found when two clients have the exact `NAME`.
   * Duplicate `NAME` are case-insensitive. `John` is a duplicate of `JoHn`. 
@@ -219,12 +229,21 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Low Risk Tolerance f/true`
 
+Outcome of `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`:
+
+![example Add Command](images/exampleAddCommand.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client's meeting can be scheduled through meet command after adding the client into the HustleBook
+</div>
+
 ### Editing a client : `edit`
 
 Edits an existing client in the HustleBook.
 
 Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] [d/DATE] [t/TAG]…​`
 
+:information_source: **Note:**
 * Edits the client with the specified `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -270,8 +289,9 @@ Deletes the specified client from the HustleBook.
 
 Format: `delete NAME`
 
+:information_source: **Note:**
 * Deletes the client with the specified `NAME`.
-  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * `NAME` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
@@ -298,6 +318,7 @@ Flag a client in the HustleBook to mark them as important.
 
 Format: `flag NAME`
 
+:information_source: **Note:**
 * Flags the client with the specified `NAME`.
   * `Name` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -328,6 +349,7 @@ Unflag a client in the HustleBook to unmark flagged clients.
 
 Format: `unflag NAME`
 
+:information_source: **Note:**
 * Unflags the client with the specified `NAME`.
   * `Name` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -359,7 +381,8 @@ The same command can be used to reschedule a meeting with the client.
 
 Format: `meet NAME d/DATE t/TIME`
 
-* `DATE` input must be in `YYYY-MM-DD` format
+:information_source: **Note:**
+* `DATE` input must be in `YYYY-MM-DD` format.
 * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
 * `TIME` input must be in 24-hr format of `HHmm`.
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
@@ -368,12 +391,17 @@ Format: `meet NAME d/DATE t/TIME`
 Example:
 * `meet John Doe d/2022-03-12 t/1430` Schedules a meeting with client named `John Doe` at 12 March 2022, 2:30pm.
 
+Outcome of `meet John Doe d/2022-03-12 t/1430`:
+
+![example Meet Command](images/exampleMeetCommandSchedule.png)
+
 ### Canceling a meeting: `meet`
 
 Cancels current meeting for the client with the specified `NAME`.
 
 Format: `meet NAME c/`
 
+:information_source: **Note:**
 * `c/` will clear the meeting with the `NAME`
   * If `c/WORDS` is input, eg. `meet John Doe c/abcdef`,HustleBook will still clear the meeting with the given `NAME`.
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
@@ -381,6 +409,10 @@ Format: `meet NAME c/`
 
 Example:
 * `meet John Doe c/` Cancels the meeting with client name `John Doe`.
+
+Outcome of `meet John Doe c/`:
+
+![example Meet Command](images/exampleMeetCommandCancel.png)
 
 ## Viewing your clients and meetings
 
@@ -391,6 +423,7 @@ It then sorts all clients in HustleBook based on the parameter provided.
 
 Format: `sort [meeting|name|prev|salary]`
 
+:information_source: **Note:**
 * `sort meeting` sorts clients by the date and time of the meeting. The earliest upcoming meeting will be displayed first.
 * `sort name` sorts clients by name in alphabetical order.
 * `sort prev` sorts clients by previous date met. The client you have not met for the longest will be displayed at the top.
@@ -403,6 +436,7 @@ Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD, [MORE_KEYWORDS]`
 
+:information_source: **Note:**
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Names of clients should be separated by commas
@@ -436,6 +470,7 @@ Undoes the previous commands executed.
 
 Format: `undo`
 
+:information_source: **Note:**
 When a command is undone successfully, a message `Undo Successful!` will be displayed as shown below.
 ![undo_success_message](images/undoSuccess.png)
 
