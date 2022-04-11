@@ -530,7 +530,7 @@ Examples:
 * `plotAllergy`
   
 #### 4.4.6 Plot chart on common skin type amongst customers: `plotSkin`
-   ![image](https://user-images.githubusercontent.com/83572953/160984794-e12943ee-863f-4d96-accb-f23271ed6e08.png)
+   ![plot skin chart](images/user-guide/plot-skin.png)
 
 Plots a pie chart on the most common allergies amongst customers. If there are most than 10 skin types in customer data, only the top 10 most skin types will be included in the piechart to let the chart be still meaningful.
 
