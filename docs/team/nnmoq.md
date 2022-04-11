@@ -37,21 +37,21 @@ Given below are my contributions to the project.
      * The user can simply click on the hyperlink to open it instead of copying it. This saves the user time.
    * (Pull requests [#158](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/158))  
 ### Contributions to the UG
-  * Created the initial format and draft of the user guide on our Team's shared google docs.
-  * Added the command shortcuts to user guide.
-  * Updated the user guide to use consistent wording.  
+ * Created the initial format and draft of the user guide on our Team's shared google docs.
+ * Added the command shortcuts to user guide.
+ * Updated the user guide to use consistent wording.  
 ### Contributions to the DG
-  * Added functionality and use-cases for `AddStudent` command.
-  * Added Sequence Diagram for `AddStudent` command.
-  * Updated Logic Component section
-  * Updated Architecture Sequence Diagram
-  * Added testcase examples for deleting a student
-  * Added Help feature and class diagram
-  * Added Command Shortcuts  
+ * Added functionality and use-cases for `AddStudent` command.
+ * Added Sequence Diagram for `AddStudent` command.
+ * Updated Logic Component section
+ * Updated Architecture Sequence Diagram
+ * Added testcase examples for deleting a student
+ * Added Help feature and class diagram
+ * Added Command Shortcuts  
 ### Contributions to team-based tasks
-  * Created and assigned tasks to milestones 1.3 and 1.4
-  * Created 1.3.1 release and uploaded its jar file  
+ * Created and assigned tasks to milestones 1.3 and 1.4
+ * Created 1.3.1 release and uploaded its jar file  
 ### Review/mentoring contributions
-  * Made multiple good suggestions when reviewing pull requests such as [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978)
-  * Debated with [james](https://github.com/jamesyeap) about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a list to hold all the command words for every command because we decided to not implement user specified keybinds.
-  * Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
+ * Made multiple good suggestions when reviewing pull requests such as [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978)
+ * Debated with [james](https://github.com/jamesyeap) about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a list to hold all the command words for every command because we decided to not implement user specified keybinds.
+ * Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
