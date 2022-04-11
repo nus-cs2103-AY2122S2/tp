@@ -17,6 +17,8 @@ Given below are my contributions to the project.
       * If no command is specified, this feature provides the user with a list of all the existing commands.
     * Justification: This feature allows users to understand how to use and find out more about existing commands.
     * Highlights: This feature was fairly easy to implement, however, it required constant updates whenever a new feature is added into our application.
+  
+  <div style="page-break-after: always;"></div>
 
 * **New Feature**:
   * Added the ability to sort and display the students in TAPA. [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134)
@@ -38,7 +40,7 @@ Given below are my contributions to the project.
   * Modified the `assign` feature to allow assigning tasks to all students whom are taking a particular module. [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102)
     * The `assign` feature was previously implemented [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/53) in v1.2. It was enhanced in v1.3 to allow users to assign tasks to students in the same module more easily.
   * Wrote additional tests for new and existing features to increase code coverage. ([#112](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/112), [#117](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/117), [#196](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/196), [#199](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/199))
-  * Morphed AB3 into TAPA by refactoring test cases. ([#210](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/210), [#222](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/222), [#226](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/222))
+  * Morphed AB3 into TAPA by refactoring test cases. ([#210](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/210), [#222](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/222), [#226](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/226))
 
 * **Contribution to team-based tasks**:
   * Shared effort in renaming the product to "TAPA".
