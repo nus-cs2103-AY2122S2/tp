@@ -53,6 +53,6 @@ Given below are my contributions to the project.
       * Added use cases for the features `add`, `tag`, `event`, `cancelevent`. [(#87)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/87)
       * Modified the `ModelClassDiagram` and `StorageClassDiagram`. [(#87)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/87)
       * Added `TagSequenceDiagram`, `CancelEventSequenceDiagram`, `EventSequenceDiagram`. [(#167)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/167)
-      * Added the implementation design details for `tag`, `event`, `cancelevent`. [(#67)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/67) [#88](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/88) [#90](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/90)
+      * Added the implementation design details for `tag`, `event`, `cancelevent`. [(#67, ](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/67) [#88, ](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/88) [#90)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/90)
       * Added manual testing instructions for `tag`, `event`, `cancelevent`. [(#171)](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/171)
       * Contributed to the NFRs and glossary.
