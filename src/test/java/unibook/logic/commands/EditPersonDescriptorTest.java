@@ -1,4 +1,3 @@
-//TODO
 //package unibook.logic.commands;
 //
 //import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +13,8 @@
 //    @Test
 //    public void equals() {
 //        // same values -> returns true
-//        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_ALEX);
-//        assertTrue(DESC_ALEX.equals(descriptorWithSameValues));
+//        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_);
+//        assertTrue(DESC_A.equals(descriptorWithSameValues));
 //
 //        // same object -> returns true
 //        assertTrue(DESC_ALEX.equals(DESC_ALEX));
