@@ -51,12 +51,12 @@ public class PopupAddProduct extends Popup {
     }
 
     private boolean isValid() {
-        if (name.getText().matches(VALIDATION_REGEX)
-            || category.getText().matches(VALIDATION_REGEX)
-            || price.getText().matches(VALIDATION_REGEX)
-            || discountRate.getText().matches(VALIDATION_REGEX)
-            || discountStart.getText().matches(VALIDATION_REGEX)
-            || description.getText().matches(VALIDATION_REGEX)) {
+        if (name.getText().matches(ILLEGAL_REGEX)
+            || category.getText().matches(ILLEGAL_REGEX)
+            || price.getText().matches(ILLEGAL_REGEX)
+            || discountRate.getText().matches(ILLEGAL_REGEX)
+            || discountStart.getText().matches(ILLEGAL_REGEX)
+            || description.getText().matches(ILLEGAL_REGEX)) {
             setFeedbackToUser(MESSAGE_CONSTRAINTS);
             return false;
         }

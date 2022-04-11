@@ -55,8 +55,8 @@ public class PopupAddItem extends Popup {
     }
 
     private boolean isValid() {
-        if (expiryDate.getText().matches(VALIDATION_REGEX)
-                || quantity.getText().matches(VALIDATION_REGEX)) {
+        if (expiryDate.getText().matches(ILLEGAL_REGEX)
+                || quantity.getText().matches(ILLEGAL_REGEX)) {
             setFeedbackToUser(MESSAGE_CONSTRAINTS);
             return false;
         }

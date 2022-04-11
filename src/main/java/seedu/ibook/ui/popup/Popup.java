@@ -14,7 +14,7 @@ import seedu.ibook.ui.UiComponent;
  */
 public abstract class Popup extends UiComponent<Stage> {
 
-    protected static final String VALIDATION_REGEX = ".*(?:[^\\\\]|^):.*";
+    protected static final String ILLEGAL_REGEX = ".*(?:[^\\\\]|^):.*";
 
     protected static final String MESSAGE_CONSTRAINTS = "The : character must be escaped with a backslash.";
 
