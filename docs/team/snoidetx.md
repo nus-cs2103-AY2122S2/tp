@@ -54,7 +54,6 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the `view` and `find` features [#21](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/21)
-    *
   
   * Developer Guide:
     * Added target user profile and value proposition [#20](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/20)
@@ -63,3 +62,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * Commented, reviewed and merged PRs.
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/159))
+  * Reported bugs for other teams during PE-D.
