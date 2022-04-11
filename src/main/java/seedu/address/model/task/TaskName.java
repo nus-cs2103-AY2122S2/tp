@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TaskName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Task can take any values, and it should not be blank";
+            "Task can take any values, and it should not be blank and should not have preceding whitespaces";
 
     /*
      * The first character of the task must not be a whitespace,

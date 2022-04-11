@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Group name can take any values, and it should not be blank and should not have preceeding whitespaces.";
+            "Group name can take any values, and it should not be blank and should not have preceding whitespaces.";
 
     /*
      * The first character of the address must not be a whitespace,
