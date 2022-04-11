@@ -18,6 +18,8 @@ for a list of commits I've contributed.
 [Click here](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=Kidsnd274&tabRepo=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 to see the code I've contributed.
 
+<div style="page-break-after: always;"></div>
+
 ### New features implemented
 1. Implemented an InfoPanel that can view Lesson or Student details.
    (Pull request [#63](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/63))
@@ -44,6 +46,8 @@ to see the code I've contributed.
    enhancement would allow someone to easily refer to and edit their previously entered command.
    - Can store multiple previous commands.
 
+<div style="page-break-after: always;"></div>
+
 ### Enhancements to existing features
 1. Added improvements to the user interface
     - Made UI elements resizable according to the window size. 
@@ -69,6 +73,8 @@ to see the code I've contributed.
 [#266](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/266))
    - First launch and saving window preferences
    - Adding lesson and student details
+
+<div style="page-break-after: always;"></div>
 
 ### Contributions to the User Guide
 1. Updated user stories (Pull request [#49](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/49))
