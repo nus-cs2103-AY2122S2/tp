@@ -610,6 +610,8 @@ Actor: User
 4. Should be able to hold up to 1000 Persons without a noticeable sluggishness in performance for typical usage.
 5. The application will not be able to prevent any data privacy violated by other programs.
 
+<div style="page-break-after: always;"></div>
+
 # Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
