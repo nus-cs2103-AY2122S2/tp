@@ -52,4 +52,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/dalin-prog.md)]
 
 * Role: Developer
-* Responsibilities: TBD
+* Responsibilities: Code
