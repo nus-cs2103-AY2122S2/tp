@@ -183,6 +183,7 @@ Format: `appt-b INDEX time/TIME`
 Examples:
 * `appt-b 1 time/2023-01-01-12-12` sets a new appointment for the 1st buyer on the displayed buyer list on 1st January 2023 and 12:12pm.
 * `appt-b 1 time/reset` deletes the existing appointment with the 1st buyer in the list.
+
 #### Matching a buyer!
 
 Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
@@ -420,6 +421,7 @@ Format: `appt-s INDEX time/TIME`
 Examples:
 * `appt-s 1 time/2023-01-01-12-12` sets a new appointment for the 1st seller on the displayed seller list on 1st January 2023 and 12:12pm.
 * `appt-s 1 time/reset` deletes the existing appointment with the 1st seller in the list.
+
 #### Editing a seller. `edit-s`
 
 Function: Edit an existing seller's information in the displayed seller list.
