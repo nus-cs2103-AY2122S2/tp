@@ -22,7 +22,11 @@ public class PassInterviewCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PASS_INTERVIEW_SUCCESS = "Passed Interview: %1$s";
-
+    public static final String MESSAGE_INTERVIEW_NOT_PENDING_STATUS = "Only pending interviews can be passed";
+    public static final String MESSAGE_INTERVIEW_CANNOT_BE_PASSED = "The interview cannot be passed, "
+            + "as the number of current offers will exceed the number of available positions";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so this interview "
+            + "cannot be passed";
     private final Index targetIndex;
 
     public PassInterviewCommand(Index targetIndex) {
@@ -37,20 +41,23 @@ public class PassInterviewCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
         }
-
         Interview interviewToPass = lastShownList.get(targetIndex.getZeroBased());
 
-        if (!model.isPassableInterview(interviewToPass)) {
-            throw new CommandException(Messages.MESSAGE_INTERVIEW_CANNOT_BE_PASSED);
+        if (!interviewToPass.isPendingStatus()) {
+            throw new CommandException(MESSAGE_INTERVIEW_NOT_PENDING_STATUS);
         }
 
-        // Should this be extracted out to a method
+        if (!interviewToPass.isPassableInterview()) {
+            throw new CommandException(MESSAGE_INTERVIEW_CANNOT_BE_PASSED);
+        }
+        if (interviewToPass.getApplicant().isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
+        }
+
         Position oldPosition = interviewToPass.getPosition();
         Position newPosition = interviewToPass.getPosition().extendOffer();
         Interview passedInterview = new Interview(interviewToPass.getApplicant(), interviewToPass.getDate(),
                 newPosition);
-
-        // Should I change the constructor (of interview) or leave as a method instead
         passedInterview.markAsPassed();
         model.setInterview(interviewToPass, passedInterview);
         model.updatePosition(oldPosition, newPosition);

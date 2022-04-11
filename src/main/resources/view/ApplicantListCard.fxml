@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.BorderPane?>
@@ -17,7 +16,7 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
       <BorderPane>
-      <left>
+      <center>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets bottom="10" left="15" right="5" top="10" />
@@ -29,31 +28,26 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
       </HBox>
       <FlowPane fx:id="tags" prefWidth="320"/>
-         <HBox alignment="CENTER_LEFT" spacing="20">
-            <children>
-               <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
-               <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
-            </children>
-         </HBox>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender"/>
+            <Label fx:id="age" styleClass="cell_small_label" text="\$age"/>
+        </HBox>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
     </VBox>
-      </left>
+      </center>
           <right>
               <VBox alignment="TOP_RIGHT" >
                   <padding>
-                      <Insets bottom="10" left="15" right="15" top="15" />
+                      <Insets bottom="10" left="5" right="15" top="15" />
                   </padding>
                   <Label fx:id="applicantstatus" styleClass="cell_small_label" text="\$status"/>
               </VBox>
           </right>
       </BorderPane>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
   </GridPane>
 </HBox>

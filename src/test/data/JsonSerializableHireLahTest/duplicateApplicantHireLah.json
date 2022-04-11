@@ -1,0 +1,23 @@
+{
+  "applicants": [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "gender" : "F",
+    "age" : "21",
+    "tagged" : [ "friends" ],
+    "hiredStatus" : "Available"
+  }, {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "gender" : "F",
+    "age" : "21",
+    "tagged" : [ "friends" ],
+    "hiredStatus" : "Available"
+  } ],
+  "interviews" : [ ],
+  "positions" : [ ]
+}

@@ -37,12 +37,13 @@ public class EditInterviewCommand extends EditCommand {
             + PREFIX_POSITION + "2";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field in Interview to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in HireLah.";
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited interview: %1$s";
-    public static final String MESSAGE_CONFLICTING_INTERVIEW = "This interview would cause a conflict of timings with"
-            + " a current interview in the address book. Interviews must be "
-            + "at least 1 hour apart for the same candidate.";
-    public static final String MESSAGE_APPLICANT_SAME_POSITION = "%1$s already has an interview for %2$s";
+    public static final String MESSAGE_NOT_PENDING = "Only interviews that are pending can be edited.";
+    public static final String MESSAGE_POSITION_NO_OPENING = "The position has no openings, so an interview cannot be"
+            + " scheduled.";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
+            + "be scheduled.";
+
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -74,7 +75,7 @@ public class EditInterviewCommand extends EditCommand {
         } else {
             List<Applicant> lastShownApplicantList = model.getFilteredApplicantList();
             if (updatedApplicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
             }
             updatedApplicant = lastShownApplicantList.get(updatedApplicantIndex.getZeroBased());
         }
@@ -108,6 +109,11 @@ public class EditInterviewCommand extends EditCommand {
         }
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
+
+        if (!interviewToEdit.getStatus().isPendingStatus()) {
+            throw new CommandException(MESSAGE_NOT_PENDING);
+        }
+
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor, model);
 
         boolean applicantEdited = !(interviewToEdit.getApplicant().equals(editedInterview.getApplicant()));
@@ -115,17 +121,22 @@ public class EditInterviewCommand extends EditCommand {
 
         if ((applicantEdited || positionEdited)
                 && model.isSameApplicantPosition(editedInterview.getApplicant(), editedInterview.getPosition())) {
-            throw new CommandException(String.format(MESSAGE_APPLICANT_SAME_POSITION,
+            throw new CommandException(String.format(Messages.MESSAGE_APPLICANT_SAME_POSITION,
                     editedInterview.getApplicant().getName().fullName,
                     editedInterview.getPosition().getPositionName().positionName));
+        } else if (applicantEdited && editedInterview.getApplicant().isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
+        } else if (positionEdited && !editedInterview.getPosition().canScheduleInterview()) {
+            throw new CommandException(MESSAGE_POSITION_NO_OPENING);
         }
 
-        if (model.hasConflictingInterview(editedInterview)) {
-            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        boolean dateEdited = !(interviewToEdit.getDate().equals(editedInterview.getDate()));
+        if (dateEdited && model.hasConflictingInterview(editedInterview)) {
+            throw new CommandException(Messages.MESSAGE_CONFLICTING_INTERVIEW);
         }
 
         if (!interviewToEdit.equals(editedInterview) && model.hasInterview(editedInterview)) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_INTERVIEW);
         }
 
         model.setInterview(interviewToEdit, editedInterview);

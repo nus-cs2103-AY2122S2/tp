@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
@@ -27,37 +29,39 @@ import seedu.address.model.position.Position;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String APPLICANT_CSV_FILE = "applicant.csv";
-    private static final String INTERVIEW_CSV_FILE = "interview.csv";
-    private static final String POSITION_CSV_FILE = "position.csv";
+    private static final String EXPORT_CSV_FOLDER = "export_csv";
+    private static final String APPLICANT_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "applicant.csv";
+    private static final String INTERVIEW_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "interview.csv";
+    private static final String POSITION_CSV_FILE = EXPORT_CSV_FOLDER + File.separator + "position.csv";
     private static final String APPLICANT_CSV_HEADER = "Name,Phone,Email,Age,Address,Gender,Hire status,Tags";
     private static final String INTERVIEW_CSV_HEADER = "Date,Interview Status,Name,Phone,Email,Age,Address,"
             + "Gender,Hire status,Tags,Position,Description,Number of openings,Number of offers,Requirements";
     private static final String POSITION_CSV_HEADER = "Position,Description,Number of openings,Number of offers"
             + "Requirements";
+    private static final String MESSAGE_CLOSE_CSV = "Please close the opened CSV before export";
 
-    private final AddressBook addressBook;
+    private final HireLah hireLah;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Interview> filteredInterviews;
     private final FilteredList<Position> filteredPositions;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given hireLah and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyHireLah addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.hireLah = new HireLah(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
-        filteredInterviews = new FilteredList<>(this.addressBook.getInterviewList());
-        filteredPositions = new FilteredList<>(this.addressBook.getPositionList());
+        filteredApplicants = new FilteredList<>(this.hireLah.getApplicantList());
+        filteredInterviews = new FilteredList<>(this.hireLah.getInterviewList());
+        filteredPositions = new FilteredList<>(this.hireLah.getPositionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HireLah(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -85,102 +89,85 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getHireLahFilePath() {
+        return userPrefs.getHireLahFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setHireLahFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setHireLahFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== HireLah ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setHireLah(ReadOnlyHireLah hireLah) {
+        this.hireLah.resetData(hireLah);
     }
 
     @Override
-    public boolean hasPerson(Applicant applicant) {
+    public ReadOnlyHireLah getHireLah() {
+        return hireLah;
+    }
+
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
-        return addressBook.hasApplicant(applicant);
+        return hireLah.hasApplicant(applicant);
     }
 
     @Override
     public Applicant getApplicantWithEmail(Email email) {
         requireNonNull(email);
-        return addressBook.getApplicantWithEmail(email);
+        return hireLah.getApplicantWithEmail(email);
     }
 
     @Override
     public Applicant getApplicantWithPhone(Phone phone) {
         requireNonNull(phone);
-        return addressBook.getApplicantWithPhone(phone);
+        return hireLah.getApplicantWithPhone(phone);
     }
 
     @Override
-    public void deletePerson(Applicant target) {
-        addressBook.removeApplicant(target);
+    public void deleteApplicant(Applicant target) {
+        hireLah.removeApplicant(target);
     }
 
     @Override
-    public void addPerson(Applicant applicant) {
-        addressBook.addApplicant(applicant);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addApplicant(Applicant applicant) {
+        hireLah.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
-        addressBook.setApplicant(target, editedApplicant);
+        hireLah.setApplicant(target, editedApplicant);
     }
 
     @Override
     public boolean hasInterview(Interview interview) {
         requireNonNull(interview);
-        return addressBook.hasInterview(interview);
+        return hireLah.hasInterview(interview);
     }
 
     @Override
     public boolean hasConflictingInterview(Interview interview) {
         requireAllNonNull(interview);
-        return addressBook.hasConflictingInterview(interview);
+        return hireLah.hasConflictingInterview(interview);
     }
 
-    @Override
-    public boolean isPassableInterview(Interview interview) {
-        requireAllNonNull(interview);
-        return addressBook.isPassableInterview(interview);
-    }
-
-    @Override
-    public boolean isAcceptableInterview(Interview interview) {
-        requireAllNonNull(interview);
-        return addressBook.isAcceptableInterview(interview);
-    }
-
-    @Override
-    public boolean isRejectableInterview(Interview interview) {
-        requireAllNonNull(interview);
-        return addressBook.isRejectableInterview(interview);
-    }
 
     @Override
     public void deleteInterview(Interview target) {
-        addressBook.removeInterview(target);
+        hireLah.removeInterview(target);
     }
 
     @Override
     public void addInterview(Interview interview) {
-        addressBook.addInterview(interview);
+        hireLah.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
@@ -189,44 +176,44 @@ public class ModelManager implements Model {
     public void setInterview(Interview target, Interview editedInterview) {
         requireAllNonNull(target, editedInterview);
 
-        addressBook.setInterview(target, editedInterview);
+        hireLah.setInterview(target, editedInterview);
     }
 
     @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
-        return addressBook.hasPosition(position);
+        return hireLah.hasPosition(position);
     }
 
     @Override
     public void addPosition(Position position) {
-        addressBook.addPosition(position);
+        hireLah.addPosition(position);
         updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
     }
 
     @Override
     public void deletePosition(Position target) {
-        addressBook.removePosition(target);
+        hireLah.removePosition(target);
     }
 
     @Override
     public void setPosition(Position target, Position editedPosition) {
         requireAllNonNull(target, editedPosition);
 
-        addressBook.setPosition(target, editedPosition);
+        hireLah.setPosition(target, editedPosition);
     }
 
     @Override
     public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
         requireAllNonNull(applicantToBeUpdated, newApplicant);
 
-        addressBook.updateApplicant(applicantToBeUpdated, newApplicant);
+        hireLah.updateApplicant(applicantToBeUpdated, newApplicant);
     }
 
     @Override
     public void updatePosition(Position positionToBeUpdated, Position newPosition) {
         requireAllNonNull(positionToBeUpdated, newPosition);
-        addressBook.updatePosition(positionToBeUpdated, newPosition);
+        hireLah.updatePosition(positionToBeUpdated, newPosition);
     }
 
     //=========== Filtered Applicant List Accessors =============================================================
@@ -249,27 +236,21 @@ public class ModelManager implements Model {
     @Override
     public void updateSortApplicantList(Comparator<Applicant> comparator) {
         requireNonNull(comparator);
-        addressBook.sortApplicant(comparator);
-        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        hireLah.sortApplicant(comparator);
+        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
     public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortApplicant(comparator);
+        hireLah.sortApplicant(comparator);
         filteredApplicants.setPredicate(predicate);
     }
 
     @Override
-    public void exportCsvApplicant() throws FileNotFoundException {
-        File csvOutputFile = new File(APPLICANT_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(APPLICANT_CSV_HEADER);
-            filteredApplicants.stream()
-                    .map(Applicant::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvApplicant() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(APPLICANT_CSV_FILE, APPLICANT_CSV_HEADER, filteredApplicants.stream()
+                .map(Applicant::convertToCsv));
     }
 
     //=========== Filtered Interview List Accessors =============================================================
@@ -292,42 +273,36 @@ public class ModelManager implements Model {
     @Override
     public void updateSortInterviewList(Comparator<Interview> comparator) {
         requireNonNull(comparator);
-        addressBook.sortInterview(comparator);
+        hireLah.sortInterview(comparator);
         filteredInterviews.setPredicate(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     @Override
     public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortInterview(comparator);
+        hireLah.sortInterview(comparator);
         filteredInterviews.setPredicate(predicate);
     }
 
     @Override
     public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
-        return addressBook.getApplicantsInterviews(applicant);
+        return hireLah.getApplicantsInterviews(applicant);
     }
 
     @Override
     public ArrayList<Interview> getPositionsInterviews(Position position) {
-        return addressBook.getPositionsInterview(position);
+        return hireLah.getPositionsInterview(position);
     }
 
     @Override
-    public void exportCsvInterview() throws FileNotFoundException {
-        File csvOutputFile = new File(INTERVIEW_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(INTERVIEW_CSV_HEADER);
-            filteredInterviews.stream()
-                    .map(Interview::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert (csvOutputFile.exists());
+    public void exportCsvInterview() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(INTERVIEW_CSV_FILE, INTERVIEW_CSV_HEADER, filteredInterviews.stream()
+                .map(Interview::convertToCsv));
     }
 
     @Override
     public boolean isSameApplicantPosition(Applicant applicant, Position position) {
-        return addressBook.isSameApplicantPosition(applicant, position);
+        return hireLah.isSameApplicantPosition(applicant, position);
     }
 
     //=========== Filtered Position List Accessors =============================================================
@@ -345,27 +320,21 @@ public class ModelManager implements Model {
     @Override
     public void updateSortPositionList(Comparator<Position> comparator) {
         requireNonNull(comparator);
-        addressBook.sortPosition(comparator);
+        hireLah.sortPosition(comparator);
         filteredPositions.setPredicate(PREDICATE_SHOW_ALL_POSITIONS);
     }
 
     @Override
     public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
         requireAllNonNull(predicate, comparator);
-        addressBook.sortPosition(comparator);
+        hireLah.sortPosition(comparator);
         filteredPositions.setPredicate(predicate);
     }
 
     @Override
-    public void exportCsvPosition() throws FileNotFoundException {
-        File csvOutputFile = new File(POSITION_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(POSITION_CSV_HEADER);
-            filteredPositions.stream()
-                    .map(Position::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvPosition() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(POSITION_CSV_FILE, POSITION_CSV_HEADER, filteredPositions.stream()
+                .map(Position::convertToCsv));
     }
 
     //=========== Utility methods =============================================================
@@ -383,8 +352,27 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return hireLah.equals(other.hireLah)
                 && userPrefs.equals(other.userPrefs)
-                && filteredApplicants.equals(other.filteredApplicants);
+                && filteredApplicants.equals(other.filteredApplicants)
+                && filteredPositions.equals(other.filteredPositions)
+                && filteredInterviews.equals(other.filteredInterviews);
+    }
+
+    private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream)
+            throws ExportCsvOpenException {
+        File csvOutputFile = new File(csvFile);
+        File directory = new File(EXPORT_CSV_FOLDER);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(csvHeader);
+            stringStream
+                    .forEach(pw::println);
+            assert (csvOutputFile.exists());
+        } catch (FileNotFoundException exception) {
+            throw new ExportCsvOpenException(MESSAGE_CLOSE_CSV);
+        }
     }
 }

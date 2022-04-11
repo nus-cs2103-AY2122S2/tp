@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.applicant;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showApplicantAtIndex;
+import static seedu.address.testutil.TypicalHireLah.getTypicalHireLah;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListApplicantCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalHireLah(), new UserPrefs());
+        expectedModel = new ModelManager(model.getHireLah(), new UserPrefs());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ListApplicantCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showApplicantAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListApplicantCommand(), model, String.format(ListApplicantCommand.MESSAGE_SUCCESS,
                 expectedModel.getFilteredApplicantList().size()), expectedModel);
     }

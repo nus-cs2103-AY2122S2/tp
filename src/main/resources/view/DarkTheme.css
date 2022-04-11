@@ -3,8 +3,8 @@
 }
 
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: #2B2B2B;
+    background-color: #2B2B2B; /* Used in the default.html file */
 }
 
 .label {
@@ -101,18 +101,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: #222222;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:filled {
+    -fx-border-color: #2B2B2B transparent #2B2B2B transparent;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: derive(#222222, 5%);
 }
 
 .list-cell:filled:selected #cardPane {
@@ -143,21 +140,20 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #2B2B2B;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: #2B2B2B;
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #2B2B2B;
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #222222;
     -fx-font-family: "sans-serif";
     -fx-font-size: 12pt;
     -fx-text-fill: white;
@@ -169,7 +165,9 @@
 
 .status-bar .label {
     -fx-font-family: "sans-serif";
-    -fx-text-fill: white;
+    -fx-text-fill: derive(#2B2B2B, 90%);
+    -fx-font-style: italic;
+    -fx-font-size: 11pt;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -195,7 +193,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#2B2B2B, 20%);
 }
 
 .context-menu .label {
@@ -203,11 +201,12 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2B2B2B;
+    -fx-spacing: 0;
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "sans-serif";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
@@ -293,6 +292,7 @@
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
+    -fx-spacing: 0;
 }
 
 .tab-pane {
@@ -300,21 +300,27 @@
     -fx-tab-min-height: 25px;
 }
 
-.tab-pane .tab {
-    -fx-background-color: derive(#1d1d1d, 10%);
-    -fx-background-radius: 8 8 0 0;
+.tab {
+    -fx-background-color: #2B2B2B;
     -fx-focus-color: transparent;
+    -fx-border-width: 0 1 0 1;
+    -fx-border-color: derive(#2B2B2B, 15%);
 }
 
-.tab-pane .tab:selected {
-    -fx-background-color: derive(#1d1d1d, 40%);
+.tab:selected {
+    -fx-background-color: derive(#2B2B2B, 15%);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #FAF85D ;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: -fx-focus-color;
 }
 
 .tab-label {
     -fx-font-size: 12pt;
     -fx-font-family: "sans-serif";
     -fx-text-fill: derive(#1d1d1d, 90%);
-    -fx-opacity: 0.9;
 }
 
 .tab:selected .tab-label {
@@ -322,11 +328,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #222222;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#2B2B2B, 20%);
     -fx-background-insets: 3;
 }
 
@@ -358,13 +364,12 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #222222;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "sans-serif";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -373,7 +378,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: #222222;
     -fx-background-radius: 0;
 }
 
@@ -429,4 +434,8 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
     -fx-font-size: 12;
+}
+
+#statusbarPlaceholder {
+    -fx-background-color: #2B2B2B;
 }

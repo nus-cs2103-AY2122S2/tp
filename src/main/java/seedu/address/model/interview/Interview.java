@@ -72,7 +72,7 @@ public class Interview {
      * Checks if the interview is for the specified applicant.
      */
     public boolean isInterviewForApplicant(Applicant a) {
-        return applicant.isSamePerson(a);
+        return applicant.isSameApplicant(a);
     }
 
     /**
@@ -97,7 +97,14 @@ public class Interview {
      * Checks if the given interview can be passed based on the number of offers given for its position.
      */
     public boolean isPassableInterview() {
-        return status.isPendingStatus() && this.position.canExtendOffer();
+        return this.position.canExtendOffer();
+    }
+
+    /**
+     * Checks if the given interview has Pending status
+     */
+    public boolean isPendingStatus() {
+        return status.isPendingStatus();
     }
 
     /**
@@ -111,7 +118,7 @@ public class Interview {
      * Checks if the current interview can be failed.
      */
     public boolean isFailableInterview() {
-        return status.isPendingStatus();
+        return isPendingStatus();
     }
 
     /**
@@ -151,8 +158,13 @@ public class Interview {
      */
     public void markAsRejected() {
         this.status.markAsRejected();
+    }
 
-        // decrement position count and offering
+    /**
+     * Checks whether an interview is passed.
+     */
+    public boolean isPassedStatus() {
+        return this.status.isPassedStatus();
     }
 
     /**

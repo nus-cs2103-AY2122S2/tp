@@ -19,7 +19,7 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
 public class AddInterviewCommand extends AddCommand {
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " -i: Adds an interview to the Hirelah application. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " -i: Adds an interview to the HireLah application. "
             + "Parameters: APPLICANT_INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_POSITION + "POSITION_INDEX" + "\n"
@@ -28,11 +28,10 @@ public class AddInterviewCommand extends AddCommand {
             + PREFIX_POSITION + "1";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book";
-    public static final String MESSAGE_CONFLICTING_INTERVIEW = "This interview would cause a conflict of timings with"
-            + " a current interview in the address book. Interviews must be "
-            + "at least 1 hour apart for the same candidate.";
-    public static final String MESSAGE_APPLICANT_SAME_POSITION = "%1$s already has an interview for %2$s";
+    public static final String MESSAGE_POSITION_NO_OPENING = "The position the applicant is interviewing for "
+            + "has no openings, so an interview cannot be scheduled.";
+    public static final String MESSAGE_APPLICANT_HAS_JOB = "The applicant already has a job, so an interview cannot "
+            + "be scheduled.";
 
     private final Index applicantIndex;
     private final LocalDateTime date;
@@ -54,11 +53,14 @@ public class AddInterviewCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Applicant> lastShownApplicantList = model.getFilteredApplicantList();
-        if (applicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
 
+        if (applicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
+        }
         Applicant applicantInInterview = lastShownApplicantList.get(applicantIndex.getZeroBased());
+        if (applicantInInterview.isHired()) {
+            throw new CommandException(MESSAGE_APPLICANT_HAS_JOB);
+        }
 
         List<Position> lastShownPositionList = model.getFilteredPositionList();
         if (positionIndex.getZeroBased() >= lastShownPositionList.size()) {
@@ -66,22 +68,19 @@ public class AddInterviewCommand extends AddCommand {
         }
 
         Position positionInInterview = lastShownPositionList.get(positionIndex.getZeroBased());
-
         if (model.isSameApplicantPosition(applicantInInterview, positionInInterview)) {
-            throw new CommandException(String.format(MESSAGE_APPLICANT_SAME_POSITION,
+            throw new CommandException(String.format(Messages.MESSAGE_APPLICANT_SAME_POSITION,
                     applicantInInterview.getName().fullName, positionInInterview.getPositionName().positionName));
         }
 
+        if (!positionInInterview.canScheduleInterview()) {
+            throw new CommandException(MESSAGE_POSITION_NO_OPENING);
+        }
+
         Interview interviewToAdd = new Interview(applicantInInterview, date, positionInInterview);
-
         if (model.hasConflictingInterview(interviewToAdd)) {
-            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+            throw new CommandException(Messages.MESSAGE_CONFLICTING_INTERVIEW);
         }
-
-        if (model.hasInterview(interviewToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
-        }
-
         model.addInterview(interviewToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, interviewToAdd), getCommandDataType());
     }

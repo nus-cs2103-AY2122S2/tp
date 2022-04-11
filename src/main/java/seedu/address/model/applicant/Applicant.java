@@ -101,6 +101,10 @@ public class Applicant {
         return hiredStatus;
     }
 
+    public boolean isHired() {
+        return hiredStatus.isHired();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -113,7 +117,7 @@ public class Applicant {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Applicant otherApplicant) {
+    public boolean isSameApplicant(Applicant otherApplicant) {
         if (otherApplicant == this) {
             return true;
         }

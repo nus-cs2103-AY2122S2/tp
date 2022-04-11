@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 /**
  * Deletes an applicant identified using it's displayed index from the address book,
@@ -29,7 +30,7 @@ public class DeleteApplicantCommand extends DeleteCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " -a 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
+    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted Applicant: %1$s";
 
     public static final String MESSAGE_DELETE_INTERVIEWS = "Deleted %d related interview(s)";
 
@@ -47,7 +48,7 @@ public class DeleteApplicantCommand extends DeleteCommand {
         List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -55,12 +56,19 @@ public class DeleteApplicantCommand extends DeleteCommand {
         ArrayList<Interview> interviewsToDelete = model.getApplicantsInterviews(applicantToDelete);
         for (Interview i : interviewsToDelete) {
             model.deleteInterview(i);
+
+            if (i.isPassedStatus()) {
+                Position oldPosition = i.getPosition();
+                Position newPosition = i.getPosition().rejectOffer();
+                model.updatePosition(oldPosition, newPosition);
+            }
+
             logger.log(Level.INFO, String.format("Deleted interview: %1$s", i));
         }
 
-        model.deletePerson(applicantToDelete);
+        model.deleteApplicant(applicantToDelete);
         return new CommandResult(
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete) + "\n"
+                String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete) + "\n"
                         + String.format(MESSAGE_DELETE_INTERVIEWS, interviewsToDelete.size()),
                 getCommandDataType());
     }

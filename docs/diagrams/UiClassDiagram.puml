@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam classFontSize 16
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
@@ -11,8 +12,12 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class ApplicantListPanel
+Class ApplicantCard
+Class PositionListPanel
+Class PositionCard
+Class InterviewListPanel
+Class InterviewCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,26 +37,36 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ApplicantListPanel
+MainWindow *-down-> "1" PositionListPanel
+MainWindow *-down-> "1" InterviewListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow ---> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+ApplicantListPanel -down-> "*" ApplicantCard
+PositionListPanel -down-> "*" PositionCard
+InterviewListPanel -down-> "*" InterviewCard
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay ---|> UiPart
+CommandBox ---|> UiPart
+ApplicantListPanel ---|> UiPart
+ApplicantCard ---|> UiPart
+PositionListPanel ---|> UiPart
+PositionCard ---|> UiPart
+InterviewListPanel ---|> UiPart
+InterviewCard ---|> UiPart
+StatusBarFooter ---|> UiPart
+HelpWindow -down--|> UiPart
 
-PersonCard ..> Model
+ApplicantCard ....> Model
+PositionCard ....> Model
+InterviewCard ....> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ApplicantListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

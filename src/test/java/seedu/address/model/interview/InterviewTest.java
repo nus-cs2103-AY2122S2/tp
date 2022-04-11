@@ -2,9 +2,8 @@ package seedu.address.model.interview;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalApplicants.ALICE;
 import static seedu.address.testutil.TypicalInterviews.QA_ENGINEER_INTERVIEW;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPositions.JR_SOFTWARE_ENGINEER;
 import static seedu.address.testutil.TypicalPositions.SR_FE_SOFTWARE_ENGINEER;
 
 import java.time.LocalDateTime;
@@ -37,11 +36,16 @@ public class InterviewTest {
         // different date -> returns false
         editedQaEngineer = new InterviewBuilder(QA_ENGINEER_INTERVIEW)
                 .withDate(LocalDateTime.of(2000, 01, 01, 12, 0)).build();
-        assertFalse(JR_SOFTWARE_ENGINEER.equals(editedQaEngineer));
+        assertFalse(QA_ENGINEER_INTERVIEW.equals(editedQaEngineer));
 
         // different position -> returns false
         editedQaEngineer = new InterviewBuilder(QA_ENGINEER_INTERVIEW).withPosition(SR_FE_SOFTWARE_ENGINEER)
                 .build();
-        assertFalse(JR_SOFTWARE_ENGINEER.equals(editedQaEngineer));
+        assertFalse(QA_ENGINEER_INTERVIEW.equals(editedQaEngineer));
+
+        // different status -> return false
+        Interview qaEngineerCopyPass = new InterviewBuilder(QA_ENGINEER_INTERVIEW).build();
+        qaEngineerCopyPass.markAsPassed();
+        assertFalse(qaEngineerCopyPass.equals(editedQaEngineer));
     }
 }

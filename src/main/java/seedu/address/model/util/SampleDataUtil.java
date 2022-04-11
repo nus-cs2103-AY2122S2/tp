@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.HireLah;
+import seedu.address.model.ReadOnlyHireLah;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
@@ -25,10 +25,10 @@ import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code HireLah} with sample data.
  */
 public class SampleDataUtil {
-    public static Applicant[] getSamplePersons() {
+    public static Applicant[] getSampleApplicants() {
         return new Applicant[]{
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Age("21"), new Address("Blk 30 Geylang Street 29, #06-40"), new Gender("M"),
@@ -56,25 +56,25 @@ public class SampleDataUtil {
         samplePos.increment();
         return new Position[]{
             new Position(new PositionName("Senior Software Developer"),
-                    new Description("The highest paying job in the company\nMore than 5 years experience"),
+                    new Description("The highest paying job in the company. More than 5 years experience."),
                     new PositionOpenings("3"), getRequirementSet("Java", "C++")),
-            new Position(new PositionName("Useless IT Intern"),
-                    new Description("Need to hire to fill the quota"),
+            new Position(new PositionName("IT Intern"),
+                    new Description("Work on internal tools. Must be willing to learn."),
                     new PositionOpenings("1"),
                     getRequirementSet("Source Academy", "C")),
             new Position(new PositionName("Janitor"),
                     new Description("Arguably the most important job"),
-                    new PositionOpenings("0"),
+                    new PositionOpenings("2"),
                     getRequirementSet("Sweep Floor", "Wipe Window", "Wash Toilet")),
             new Position(new PositionName("Admin Officer"),
                     new Description("Degree or Postgraduate holder with Major in Information Technology, "
-                            + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
+                            + "Computer Science, or other similar areas, and a cumulative GPA of 3.5 and above."),
                     new PositionOpenings("2"), samplePos, getRequirementSet("Hardworking", "Good with people"))
         };
     }
 
     public static Interview[] getSampleInterviews() {
-        Applicant[] samplePersons = getSamplePersons();
+        Applicant[] samplePersons = getSampleApplicants();
         Position[] samplePositions = getSamplePositions();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return new Interview[]{
@@ -93,9 +93,9 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Applicant sampleApplicant : getSamplePersons()) {
+    public static ReadOnlyHireLah getSampleHireLah() {
+        HireLah sampleAb = new HireLah();
+        for (Applicant sampleApplicant : getSampleApplicants()) {
             sampleAb.addApplicant(sampleApplicant);
         }
         for (Position samplePosition : getSamplePositions()) {
