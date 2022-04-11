@@ -440,7 +440,7 @@ Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
   * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
     `ParseException` will be thrown if the constraints are violated
   
-<img src="images/DeleteLessonSequenceDiagram.png" width="700"/>
+<img src="images/DeleteLessonSequenceDiagram.png" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -626,6 +626,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 #### Add a temporary lesson
@@ -659,6 +661,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
+
 #### Add a recurring lesson
 **System:** TeachWhat!  
 **Use case:** UC2 - Add a recurring lesson  
@@ -689,6 +693,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1e. User already has an existing lesson overlapping with the specified starting, ending time and date.
     * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
+
+<div style="page-break-after: always;"></div>
 
 #### Delete a lesson
 
