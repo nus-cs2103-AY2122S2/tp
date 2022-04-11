@@ -152,7 +152,6 @@ Format: `findc [n/NAMES]... [t/TAGS]...`
 
 Examples:
 * `findc n/alex n/roy` returns the contacts with `alex` or `roy` in their names.
-  ![example](images/Find_Contact_example1.png) <br>
 * `findc t/friends t/family` returns the contacts matching the `friends` tag or the `family` tag or both .
   ![example](images/Find_Contact_example2.png) <br>
 * `findc n/alex t/friends` returns `Alex Yeoh` as the contact's name contains `alex` and the contact is tagged with `friends`.
