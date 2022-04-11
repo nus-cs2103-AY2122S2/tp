@@ -97,7 +97,9 @@ In order to improve your experience when using the app, we have included the fol
 
 ### Getting Started
 Follow this tutorial to get started with using MedBook:
-1. Open MedBook by double clicking `MedBook.jar` located in your MedBook home folder.
+1. Open MedBook through one of the following ways: 
+   * Double clicking `MedBook.jar` located in your MedBook home folder 
+   * In a command window, `cd` to your MedBook home folder and type `java -jar MedBook.jar`
 2. If this is your first time using MedBook, you will see a prompt window requesting you to set up a new password.
 3. Type in a password which fits the requirements and press `enter` to continue.
 
