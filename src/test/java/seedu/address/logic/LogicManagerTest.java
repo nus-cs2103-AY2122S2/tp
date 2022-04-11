@@ -25,8 +25,8 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.applicant.AddApplicantCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.applicant.ListApplicantCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -49,10 +49,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonHireLahStorage HireLahStorage =
+        JsonHireLahStorage hireLahStorage =
                 new JsonHireLahStorage(temporaryFolder.resolve("hirelah.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(HireLahStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(hireLahStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -78,11 +78,11 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonHireLahStorage addressBookStorage =
+        JsonHireLahStorage hireLahStorage =
                 new JsonHireLahIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(hireLahStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
