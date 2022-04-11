@@ -1,51 +1,89 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.InternApplyMemory;
+import seedu.address.model.ReadOnlyInternApplyMemory;
+import seedu.address.model.application.Address;
+import seedu.address.model.application.Application;
+import seedu.address.model.application.Details;
+import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
+import seedu.address.model.application.JobTitle;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InternApplyMemory} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+    public static Application[] getSampleApplications() {
+        LocalDateTime today = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return new Application[] {
+            new Application(new Name("Shopee"),
+                    new JobTitle("Software Engineer Intern"),
+                    new Phone("87438807"),
+                    new Email("hr@shopee.sg"),
+                    new Address("5 Science Park Dr, #06-40"),
+                    new InterviewSlot(today.minusDays(7).format(formatter)),
+                    new Details("Applied 2 weeks ago, waiting for a response.\n"
+                            + "OMG! They replied! Will be interviewed this week!\n"
+                            + "Preparing for the interview with Alice and Bob.\n"
+                            + "Interview done, waiting for response...\n"
+                            + "I GOT IN~"),
+                    getTagSet("BasedInSingapore", "HIGH", "ACCEPTED")),
+            new Application(new Name("Grab Holdings Singapore"),
+                    new JobTitle("AI Engineer"),
+                    new Phone("99272758"),
+                    new Email("hr@grab.sg"),
+                    new Address("3 Media Cl, #07-18"),
+                    new InterviewSlot(today.plusDays(1).format(formatter)),
+                    new Details("Alice and Bob was interested in this company so they asked me to join in."
+                            + " Hopefully all goes well and I get accepted (The interview was really tough)..."),
+                    getTagSet("WithFriends", "MEDIUM", "INTERVIEWED")),
+            new Application(new Name("Microsoft"),
+                    new JobTitle("Software Engineer Intern"),
+                    new Phone("93210283"),
+                    new Email("hr@microsoft.com"),
+                    new Address("182 Cecil St, #13-01"),
+                    new InterviewSlot(today.plusDays(7).format(formatter)),
+                    new Details("Microsoft interview preparations:\n"
+                            + "1. Work on LeetCode\n"
+                            + "2. Look for tips on the internet\n"
+                            + "3. Make sure to dress smartly for the interview\n"
+                            + "4. Do your best!"),
+                    getTagSet("DreamJob", "HIGH", "APPLIED")),
+            new Application(new Name("Aftershock PC"),
+                    new JobTitle("Data Scientist"),
+                    new Phone("63458727"),
+                    new Email("corpsales@sg.aftershockpc.com"),
+                    new Address("994, Bendemeer Rd, #05-07"),
+                    new InterviewSlot(today.plusDays(8).format(formatter)),
+                    new Details(),
+                    getTagSet("PassionForPCBuilding", "PossibleOption", "MEDIUM", "NOT_APPLIED")),
+            new Application(new Name("Google Asia Pacific"),
+                    new JobTitle("ML Engineer"),
+                    new Phone("91031282"),
+                    new Email("hr@google.com"),
+                    new Address("70 Pasir Panjang Rd, #16-43"),
+                    new InterviewSlot(),
+                    new Details(),
+                    getTagSet("HotJob", "LOW", "REJECTED")),
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static ReadOnlyInternApplyMemory getSampleInternApplyMemory() {
+        InternApplyMemory sampleIam = new InternApplyMemory();
+        for (Application sampleApplication : getSampleApplications()) {
+            sampleIam.addApplication(sampleApplication);
         }
-        return sampleAb;
+        return sampleIam;
     }
 
     /**
@@ -56,5 +94,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <children>
+      <VBox alignment="CENTER_LEFT" minHeight="150" GridPane.columnIndex="0">
+        <padding>
+          <Insets bottom="5" left="15" right="5" top="5" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" spacing="5">
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        </HBox>
+        <HBox fx:id="tags" />
+        <Label fx:id="jobTitle" styleClass="cell_small_label" text="\$jobTitle" wrapText="true"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+        <Label fx:id="interviewSlot" styleClass="cell_small_label" text="\$interviewSlot" wrapText="true"/>
+      </VBox>
+      <ScrollPane fx:id="detailScroll" maxHeight="145.0" minWidth="400" maxWidth="400" styleClass="pane-with-border" hbarPolicy="NEVER">
+        <content>
+          <Label fx:id="detail" alignment="TOP_LEFT" styleClass="detail-label" minWidth="380" maxWidth="380" minHeight="145" wrapText="true"/>
+        </content>
+      </ScrollPane>
+    </children>
+  </GridPane>
+</HBox>

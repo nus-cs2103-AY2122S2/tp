@@ -1,19 +1,28 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.application.Address;
+import seedu.address.model.application.Details;
+import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
+import seedu.address.model.application.JobTitle;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.Phone;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -48,6 +57,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String jobTitle} into a {@code JobTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code jobTitle} is invalid.
+     */
+    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        String trimmedJobTitle = jobTitle.trim();
+        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
+            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new JobTitle(trimmedJobTitle);
     }
 
     /**
@@ -96,6 +120,43 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String interviewSlot} into an {@code Interview Slot}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewSlot} is invalid.
+     */
+    public static InterviewSlot parseInterviewSlot(String interviewSlot) throws ParseException {
+        requireNonNull(interviewSlot);
+        String trimmedInterviewSlot = interviewSlot.trim();
+
+        if (trimmedInterviewSlot.isEmpty()) {
+            return new InterviewSlot();
+        }
+
+        if (!InterviewSlot.isValidDateTime(trimmedInterviewSlot)) {
+            throw new ParseException(InterviewSlot.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewSlot(trimmedInterviewSlot);
+    }
+
+    /**
+     * Parses a {@code String details} into an {@code Details}.
+     * Leading and trailing whitespaces will be trimmed
+     * Processes all \n into newline
+     */
+    public static Details parseDetails(String details) {
+        requireNonNull(details);
+        String trimmedDetails = details.trim();
+
+        if (trimmedDetails.isEmpty()) {
+            return new Details();
+        } else {
+            String newLineDetails = details.replace("\\n", "\n");
+            return new Details(newLineDetails);
+        }
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -107,7 +168,49 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        if (Tag.isPriorityApplicationStatus(tag)) {
+            throw new ParseException(Tag.TAG_NAME_CONSTRAINTS);
+        }
+
+        return new Tag(trimmedTag, TagType.JOB_SCOPE);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code ApplicationStatusTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parseApplicationStatusTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim().toUpperCase();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!ApplicationStatusTagType.contains(trimmedTag)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_APPLICATION_STATUS_TAG));
+        }
+        return new Tag(trimmedTag, TagType.APPLICATION_STATUS);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code PriorityTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parsePriorityTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim().toUpperCase();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!PriorityTagType.contains(trimmedTag)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_PRIORITY_TAG));
+        }
+        return new Tag(trimmedTag, TagType.PRIORITY);
     }
 
     /**
@@ -115,10 +218,14 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        if (tags.equals(Collections.emptySet())) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+
     }
 }

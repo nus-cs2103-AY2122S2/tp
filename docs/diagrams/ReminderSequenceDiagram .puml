@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternApplyParser" as InternApplyParser LOGIC_COLOR
+participant "r:ReminderCommand" as ReminderCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("reminder")
+activate LogicManager
+
+LogicManager -> InternApplyParser : parseCommand("reminder")
+activate InternApplyParser
+
+create ReminderCommand
+InternApplyParser -> ReminderCommand
+activate ReminderCommand
+
+ReminderCommand --> InternApplyParser : r
+deactivate ReminderCommand
+
+InternApplyParser --> LogicManager : r
+deactivate InternApplyParser
+
+LogicManager -> ReminderCommand : execute()
+activate ReminderCommand
+
+ReminderCommand -> Model : updateUpcomingApplicationList(String)
+activate Model
+
+Model --> ReminderCommand
+deactivate Model
+
+create CommandResult
+ReminderCommand -> CommandResult : CommandResult(String, false, true, false)
+activate CommandResult
+
+CommandResult --> ReminderCommand
+deactivate CommandResult
+
+ReminderCommand --> LogicManager : result
+deactivate ReminderCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

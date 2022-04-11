@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package Find_Predicate <<Rectangle>>{
+Class "<<interface>>\nPredicate" as Predicate
+Class NameContainsKeywordsPredicate
+Class JobTitleContainsKeywordsPredicate
+Class TagContainsKeywordsPredicate
+}
+
+NameContainsKeywordsPredicate .u.|> Predicate
+JobTitleContainsKeywordsPredicate .u.|> Predicate
+TagContainsKeywordsPredicate .u.|> Predicate
+
+
+NameContainsKeywordsPredicate -[hidden]right- JobTitleContainsKeywordsPredicate
+JobTitleContainsKeywordsPredicate -[hidden]right- TagContainsKeywordsPredicate
+
+
+@enduml

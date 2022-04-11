@@ -1,18 +1,25 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Application> PREDICATE_SHOW_ALL_APPLICATIONS = unused -> true;
+
+    /** {@code Predicate} that returns true if the application's interview slot falls with a week of the local date on
+     * the local machine.
+     */
+    Predicate<Application> PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY = Application::isUpcomingInterview;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +42,79 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' InternApply's memory file path.
      */
-    Path getAddressBookFilePath();
+    Path getInternApplyMemoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' InternApply's memory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setInternApplyMemoryFilePath(Path internApplyMemoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces InternApply's memory data with the data in {@code internApplyMemory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setInternApplyMemory(ReadOnlyInternApplyMemory internApplyMemory);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the InternApplyMemory */
+    ReadOnlyInternApplyMemory getInternApplyMemory();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an application with the same identity as {@code application} exists in InternApply's memory.
      */
-    boolean hasPerson(Person person);
+    boolean hasApplication(Application application);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given application.
+     * The application must exist in InternApply's memory.
      */
-    void deletePerson(Person target);
+    void deleteApplication(Application target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given application.
+     * {@code application} must not already exist in InternApply's memory.
      */
-    void addPerson(Person person);
+    void addApplication(Application application);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given application {@code target} with {@code editedApplication}.
+     * {@code target} must exist in InternApply's memory.
+     * The application identity of {@code editedApplication} must not be the same as another existing application in
+     * the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setApplication(Application target, Application editedApplication);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered application list */
+    ObservableList<Application> getFilteredApplicationList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered application list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredApplicationList(Predicate<Application> predicate);
+
+    /**
+     * Updates the filter of the filtered application list to filter by the previous {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredApplicationList();
+
+    /** Returns an unmodifiable view of the upcoming application list
+     */
+    ObservableList<Application> getUpcomingApplicationList();
+
+    /**
+     * Updates the upcoming applications list using the given {@code predicate}
+     */
+    void updateUpcomingApplicationList(Predicate<Application> predicate);
+
+    /** Sorts the list of applications */
+    void sortApplications(Comparator<Application> c, String orderBy);
+
+    /** Returns a modifiable view of the list of summary boxes */
+    ObservableList<SummaryBox> getSummaryBoxList();
+
+    /** Updates the list of summary boxes */
+    void updateSummaryBoxList();
+
 }

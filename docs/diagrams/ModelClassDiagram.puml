@@ -5,46 +5,71 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyInternApplyMemory" as ReadOnlyInternApplyMemory
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class InternApplyMemory
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueApplicationList
+Class Application
 Class Address
+Class Details
 Class Email
+Class InterviewSlot
+Class JobTitle
 Class Name
 Class Phone
+
 Class Tag
+Class ApplicationStatusTag
+Class JobScopeTag
+Class PriorityTag
+
+Class SummaryList
+Class SummaryBox
+Class TagSummaryBox
+Class TotalApplicationsBox
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+InternApplyMemory .up.|> ReadOnlyInternApplyMemory
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyInternApplyMemory
+ModelManager -left-> "1" InternApplyMemory
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+InternApplyMemory *--> "1" UniqueApplicationList
+UniqueApplicationList -> "~* all" Application
+Application *--> Name
+Application *--> Phone
+Application *--> Email
+Application *--> Address
+Application *--> Details
+Application *--> InterviewSlot
+Application *--> JobTitle
+Application *--> "*" Tag
+
+Tag <|-- "0..1" ApplicationStatusTag
+Tag <|-- "*" JobScopeTag
+Tag <|-- "0..1" PriorityTag
+
+SummaryList --> "6" SummaryBox
+SummaryBox *--> "5" TagSummaryBox
+SummaryBox *--> "1" TotalApplicationsBox
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+ModelManager ---->"~* filtered" Application
+ModelManager ---->"~* upcoming" Application
+ModelManager -right>"1" SummaryList
 @enduml

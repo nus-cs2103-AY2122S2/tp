@@ -1,0 +1,99 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternApplyParser" as InternApplyParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditApplicationDescriptor" as EditApplicationDescriptor LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant "applicationToEdit:Application" as applicationToEdit LOGIC_COLOR
+participant "editedApplication:Application" as editedApplication LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 ast/APPLIED")
+activate LogicManager
+
+LogicManager -> InternApplyParser : parseCommand("edit 1 ast/APPLIED")
+activate InternApplyParser
+
+create EditCommandParser
+InternApplyParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> InternApplyParser
+deactivate EditCommandParser
+
+InternApplyParser -> EditCommandParser : parse("1 ast/APPLIED")
+activate EditCommandParser
+
+create EditApplicationDescriptor
+EditCommandParser -> EditApplicationDescriptor
+activate EditApplicationDescriptor
+
+EditApplicationDescriptor --> EditCommandParser : editApplicationDescriptor
+deactivate EditApplicationDescriptor
+
+create EditCommand
+EditCommandParser -> EditCommand : EditCommand(1, editApplicationDescriptor)
+activate EditCommand
+
+EditCommand --> EditCommandParser : e
+deactivate EditCommand
+
+EditCommandParser --> InternApplyParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> InternApplyParser
+destroy EditCommandParser
+
+InternApplyParser --> LogicManager : e
+deactivate InternApplyParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+create applicationToEdit
+EditCommand -> applicationToEdit
+activate applicationToEdit
+
+applicationToEdit --> EditCommand : applicationToEdit
+deactivate applicationToEdit
+
+EditCommand --> EditCommand : createEditedPerson(applicationToEdit, editApplicationDescriptor)
+activate EditCommand
+
+create editedApplication
+EditCommand --> editedApplication
+activate editedApplication
+
+editedApplication --> EditCommand : editedApplicationx
+deactivate editedApplication
+
+EditCommand --> EditCommand
+deactivate EditCommand
+
+EditCommand -> Model : setApplication(applicationToEdit, editApplicationDescriptor)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

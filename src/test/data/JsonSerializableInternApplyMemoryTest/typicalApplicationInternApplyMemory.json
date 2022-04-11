@@ -1,0 +1,67 @@
+{
+  "_comment": "InternApply save file which contains the same Application values as in TypicalApplications#getTypicalApplications()",
+  "persons" : [ {
+    "name" : "Grab",
+    "phone" : "94351253",
+    "email" : "hr@grab.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "interviewSlot" : "13-02-2022 16:00",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "Lazada",
+    "phone" : "98765432",
+    "email" : "lazada@sg.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "interviewSlot" : "13-03-2022 16:00",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ "owesMoney", "friends" ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "SEA Group",
+    "phone" : "95352563",
+    "email" : "sea@hr.com",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
+    "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "SEA Talk",
+    "phone" : "87652533",
+    "email" : "sea@hr.com",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
+    "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ "friends" ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "SEA Money",
+    "phone" : "9482224",
+    "email" : "sea@hr.com",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
+    "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "Cloud",
+    "phone" : "9482427",
+    "email" : "sea@hr.com",
+    "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
+    "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ ],
+    "jobTitle": "Intern"
+  }, {
+    "name" : "Marketplace",
+    "phone" : "9482442",
+    "email" : "sea@hr.com",
+    "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
+    "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
+    "tagged" : [ ],
+    "jobTitle": "Intern"
+  } ]
+}

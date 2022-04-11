@@ -3,38 +3,75 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SoC InternApply (SIA) is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SIA can get your internship application management tasks done faster than traditional GUI apps.
 
+With SoC InternApply, you can easily add an application, edit it later on if there are any changes needed, find the applications based on keywords and also sort them based on priority, interview date and much more! All while not having to worry about saving or storing your applications as this is done internally and automatically by SoC InternApply.
+
+Ultimately, with SoC InternApply, you can worry less about the administrative tasks and focus more on preparing for the interviews themselves!
+
+## Table of Contents
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+1. SIA (SoC InternApply)
+
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You can download it from [this website](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `internapply.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _root folder_ for your SIA (e.g. you can save it in your desktop or downloads folder). <br>
+   **Note:** There will be data (your internship applications) stored into this same folder, but it would not take up much space.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the jar file to start the app. The GUI similar to the diagram below should appear in a few seconds. Note how the app contains some sample data. Do note that for Linux OS, you may have to enable double-click to run JAR files first!<br><br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   ![Ui](images/MainWindowUi.png)
+
+5. Another reminder window should appear automatically similar to the below. Note that this window **would contain any upcoming interviews you have in a weeks time**.<br>
+   ![Ui](images/ReminderWindowUi.png)
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+    * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
 
-   * **`list`** : Lists all contacts.
+    * **`clear`** : Deletes all applications.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
 
-   * **`exit`** : Exits the app.
+    * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
 
-1. Refer to the [Features](#features) below for details of each command.
+    * **`list`** : List all applications — used after `find` command to show all application.
+    
+    * **`list`**`name desc` : Sort all applications base on company name in descending order.
+
+    * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
+
+    * **`help`** : Shows a message explaining how to access the help page.
+    
+    * **`exit`** : Exits the app.
+
+7. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: WARNING about modifying local files:**<br>
+We are not liable for any data loss, by the user when modifying data stored in the JSON save file.
+Edit at your own risk of losing data.
+
+
+</div>
+
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,137 +82,455 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Grab SG`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/Grab SG t/local` or as `n/Grab SG`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/local` or `t/local t/NUS` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `j/Software Engineer j/Data Scientist`, only `j/Data Scientist` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `reminder`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+**:information_source: Notes about duplicate applications:**<br>
+
+* Duplicate applications are not allowed.
+
+* Applications are considered duplicates if they have the same name, job title and optional tags.
+
+* Name, job title and optional tags are case-sensitive.
+  e.g. The name `Shopee` is considered different from `shopee`.
+
+* Ordering of optional tags do not matter.
+  e.g. `tag1`, `tag2`, `tag3` is considered the same as `tag3`, `tag1`, `tag2`.
+
+* Refer to Q4 in the [FAQ](#faq) for adding multiple applications to the same job.
+
 </div>
 
-### Viewing help : `help`
+[Go To TOC](#table-of-contents)
 
-Shows a message explaning how to access the help page.
+---
 
-![help message](images/helpMessage.png)
+### Adding an application: `add`
 
-Format: `help`
+Adds an application to SoC InternApply.
 
+**Format:** `add n/NAME_OF_COMPANY j/JOB_TITLE p/PHONE_NUMBER a/ADDRESS e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-### Adding a person: `add`
+#### Parameters: <br>
 
-Adds a person to the address book.
+  - NAME_OF_COMPANY:
+    - Name of company you're applying for.
+  - JOB_TITLE:
+    - Title of the job you are applying for.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+<div markdown="block" class="alert alert-info">
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+**Input Constraints** For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+  - PHONE_NUMBER:
+    - Phone number of the company your applying for.<br>
 
-### Listing all persons : `list`
+<div markdown="block" class="alert alert-info">
 
-Shows a list of all persons in the address book.
+**Input Constraints:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-Format: `list`
+</div>
 
-### Editing a person : `edit`
+  - ADDRESS:
+    - Address of the company your applying for.
+  
 
-Edits an existing person in the address book.
+  - EMAIL:
+    - Email of the company your applying for.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### Optional Parameters:
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  - TAG:
+    - Optional Tag that you can set to separate applications
+    - E.G. t/Application1, t/Application2 <br>
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+<div markdown="block" class="alert alert-info">
 
-### Locating persons by name: `find`
+**Input Constraints:** 
+1. Only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9. <br>
+E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed. <br>
+2. User input cannot be any of the inputs for `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` to avoid confusion
 
-Finds persons whose names contain any of the given keywords.
+</div>
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+  - PRIORITY_TAG:
+    - Tag indicating the urgency of the application:
+    - `HIGH`,`MEDIUM`,`LOW`
+    
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  - APPLICATION_STATUS_TAG:
+    - Tag indicating the status of the application:
+    - `NOT_APPLIED`,`APPLIED`,`INTERVIEWED`,`REJECTED`,`ACCEPTED`<br>
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+<div markdown="block" class="alert alert-info">
+    
+**Input Constraints:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
 
-### Deleting a person : `delete`
+</div>
 
-Deletes the specified person from the address book.
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about duplicate applications:**<br>
 
-Format: `delete INDEX`
+An application is considered duplicate if, it's `NAME_OF_COMPANY`, `JOB_TITLE` and `TAG` is identical
+</div>
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+**Example usages and expected outcomes:**
+* `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering `
+
+Feedback message:
+
+```
+New application added: Shopee; Job Title: Software Engineer Intern; 
+Phone: 87438807; Email: hr@shopee.sg; Address: 5 Science Park Dr, #06-40; 
+Interview Slot: Interview date is not set.; Details: To add details, use the edit command; 
+Tags: SoftwareEngineering
+```
+
+* `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED`
+
+Feedback message:
+```
+This application already exists in InternApply
+```
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Clearing all applications: `clear`
+
+Clears all applications from SoC InternApply.
+
+**Format:** `clear`
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Deleting an application: `delete`
+
+Deletes the specified application from SoC InternApply.
+
+**Format:** `delete INDEX`
+
+* Deletes the application at the specified `INDEX`.
+* The index refers to the index number shown in the displayed application list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The index inputted must not exceed 2147483647 and must be a natural number.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Example usages:**
+* `list` followed by `delete 2` deletes the 2nd application.
 
-### Clearing all entries : `clear`
+**Expected outcome:**
 
-Clears all entries from the address book.
+The previous 2nd application is removed from the storage and a new list of applications is shown.
 
-Format: `clear`
+[Go To TOC](#table-of-contents)
 
-### Exiting the program : `exit`
+---
+
+### Editing an application: `edit`
+
+Edits an existing application in SoC InternApply.
+
+**Format:** `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [d/DETAILS] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
+
+**CAUTION:** The `edit` command will overwrite your existing application data.
+<br>
+- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
+- At least one of the optional fields must be provided.
+- The index inputted must not exceed 2147483647 and must be a natural number.
+- Existing values will be updated to the input values.
+- You cannot edit an application to become a duplicate of another application. Any attempts will be prevented. Please refer to our Notes about duplicate applications
+
+#### Parameters:
+
+- NAME, JOB_TITLE, PHONE_NUMBER, EMAIL, ADDRESS
+  - For the above fields, all restraints from the add command is applicable.
+  - E.G. `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
+<div markdown="block" class="alert alert-info">
+  
+**Input Constraints:**
+* For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+* For `[p/PHONE_NUMBER]`a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+
+</div>
+  
+- INTERVIEW_DATE_TIME
+  - You can add an interview slot that includes both date and time by using `idt/INTERVIEW_DATE_TIME`
+  - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
+  - You can remove `INTERVIEW_DATE_TIME` by using `idt/` without specifying anything after it. <br>
+  
+- DETAILS
+  - You can add details to the application by using `d/DETAILS`
+  - You can enter new lines in the details input by using `\n`
+  - You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
+  - To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
+```
+This company requires a preliminary coding round. 
+I should practice more on HackerRank
+```
+
+- TAGS, PRIORITY_TAG, APPLICATION_STATUS_TAG
+  - You can change the priority or application status of an application by using `pt/High` or `ast/Applied`
+  - The tags are not case-sensitive
+  - Entering `pt/high` when the application priority tag is `high` is permitted but does not change anything
+
+**Example usages and expected outcomes:**
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
+- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
+
+
+#### Advanced Function
+
+Removing Tags from existing application.
+
+**CAUTION**: While it is possible to use these special Tags while editing other fields of an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
+
+**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
+
+- Removes the Tags from an existing application.
+- `[t/removetags]` will remove all Optional Tags from an application (i.e. Tags with the prefix `t/`).
+- `[t/removepriority]` will remove the Priority Tags from an application (i.e. Tags with the prefix `pt/`).
+- `[t/removestatus]` will remove the Application Status Tags from an application (i.e. Tags with the prefix `ast/`).
+- These special Tags are not case-sensitive (i.e. typing `t/ReMOveTagS` would also work). 
+- These special Tags cannot be used as a valid Optional Tag for your applications.
+- These special Tags can be used in any order, and you can either use 1 of them, a pair of them, or all 3 of them.
+- These special Tags takes precedence over all other Tag inputs. Refer to the Example usage below for reference.
+- You can still use these special Tags even if the respective Tags do not exist for the specified application. Nothing will happen in this case.
+- If removing any of the Tags from an application causes it to become a duplicate application the command will be invalid. Please refer to our Notes about duplicate applications
+
+**Example usages and expected outcomes**
+
+- `edit 1 t/removetags t/removepriority` Removes all the Optional Tags and the Priority Tag from the 1st application.
+- `edit 1 p/65258719 t/removestatus` Removes the Application Status Tag from the 1st application. Edits the phone number of the 1st application to be `65258719`
+- `edit 1 pt/HIGH t/removepriority` Special Tags takes precedence over all other Tag inputs. Removes the Priority Tag from the 1st application. Ignores the `pt/HIGH` input.
+- `edit 1 t/removestatus t/Singapore t/ExEmployee` Special Tags takes precedence over all other Tag inputs. Removes the Application Status Tag from the 1st application. Ignores the `t/Singapore t/ExEmployee` inputs.
+- `edit 1 t/removestatus` followed by `edit 1 t/removestatus` First removes the Application Status Tag from the 1st application. Then does nothing since there does not exist an Application Status Tag for the 1st application. 
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Exiting the program: `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Finding application(s): `find`
+
+Finds existing applications in SoC InternApply.
+
+**Format:** `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`
+- Finds the applications with the fields containing keywords given in the input (partial keywords accepted as well).
+- Keywords are case-insensitive.
+- Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
+- However, for `n/` and `j`, more than 1 word can be accepted per field i.e. `find n/aftershock pc` will display any application with the name `aftershock` or `pc`. 
+- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field (in the sequence of [n/NAME], [j/JOB_TITLE], [t/TAG]..., [pt/PRIORITY_TAG], [ast/APPLICATION_STATUS_TAG]) will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`, `find j/ML n/shopee` is also the same as `find n/shopee`
+
+**Example usages and expected outcomes:**
+- `find n/shopee` finds and displays all applications with "Shopee" in its name.
+- `find j/ML` finds and displays all applications with "ML" in its job title.
+- `find pt/HIGH` finds and displays all applications with "HIGH" in its priority tag.
+- `find ast/applied` finds and displays all applications with "applied" in its application status. (note that it is case-insensitive)
+- `find t/overseas` finds and displays all applications with "overseas" in its tags.
+- `find t/overseas t/USA` finds and displays all applications with "overseas" or "USA" in its tags.
+
+[Go To TOC](#table-of-contents)
+
+
+### Viewing help: `help`
+
+This command displays a message explaining how to access the help page.
+
+**Format:** `help`
+
+**Example usages:**
+
+`help`
+
+**Expected outcome:**
+
+A popup window showing a link to the help page, as shown below.
+![helpMessage](images/helpMessage.png)
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Listing all applications (with / without sorting): `list`
+
+#### List all applications (with sorting)
+
+Sorts the list of all applications in SoC InternApply based on the provided parameters.
+
+**Format:** `list [sorting paramter] [order by]`
+
+Sorting parameters:
+- `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
+- `interview` : Sort by interview date of applications starting with the latest earliest date.
+- `priority` : Sort by priority in the following ascending order - (NO_TAG), LOW, MEDIUM, HIGH.
+- `status` : Sort by status in the following ascending order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED, (NO_TAG).
+
+* If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
+
+Order by:
+- `asc` : Order by ascending.
+- `desc` : Order by descending (reverse order of ascending).
+
+Examples:
+* `list interview desc`
+* `list name desc`, running this will output:
+  <br>
+```
+Sorted applications by name order by desc.
+```
+
+<div markdown="block" class="alert alert-info">
+
+**💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.**<br>
+
+- `list status desc` — Valid, sorted by `status` in descending order
+- `list abc status asc` — Invalid
+- `list status asc name desc` — Valid, sorted by `status` in ascending order
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**💡 Upper case and lower case name are consider as same ranking.**
+
+i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order.<br>
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**⚠️ Applications are originally sorted in a chronological order base on create date and time.**
+
+Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.<br>
+
+</div>
+
+#### List all applications (without sorting)
+
+The `list` command also works without parameters. It will show the list in the last sorted order used by the user. This is used after using the `find` feature to list out all applications.
+
+Example:
+* `list`
+
+```
+Listed all application(s).
+```
+
+<div markdown="block" class="alert alert-info">
+
+**💡 `list` command without parameters only works if and only if you do not provide parameters.**<br>
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**❗ Sorting will not apply to newly added or newly edited applications.**
+
+Please re-run the `list` command with the respective parameters to sort as you like.<br>
+
+</div>
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Listing applications with upcoming interviews: `reminder`
+
+Shows a list of applications with upcoming interviews, falling within a week from now, in SoC InternApply.
+
+**Format:** `reminder`
+
+**Example usages:**
+
+`reminder`
+
+**Expected outcome:**
+
+A popup window showing a list of applications with upcoming interviews within a week from now, as shown below.
+![Ui](images/ReminderWindowUi.png)
+
+[Go To TOC](#table-of-contents)
+
+---
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SoC InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+[Go To TOC](#table-of-contents)
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+---
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+### Summary bar
 
-### Archiving data files `[coming in v2.0]`
+The summary bar is automatically updated on successful execution of any command. 
 
-_Details coming soon ..._
+Example summary bar (highlighted in red):
+![SummaryBarExample](images/SummaryBarUI.png)
+
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+**Q1**: How do I know where my internship applications data is stored?<br>
+**A**: Please locate where SoC InternApply is being stored on your computer. You will see a folder named `data` found in the root folder of the application (the folder containing SoC InternApply) Inside the `data` folder, you can find a data file named `internapplymemory.json`, which stores all the applications.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q2**: How do I transfer my data to another computer?<br>
+**A**: Refer to the 1st QnA to locate the data file. Install the app in the other computer. Copy the contents of the data file of SoC InternApply from your previous computer and paste it in the empty data file of SoC InternApply of the new computer. <br>
+
+**Q3**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
+**A**: Refer to the 1st QnA to locate the `data` folder. Delete any existing files in the `data` folder and run SoC InternApply again.
+
+**Q4**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
+**A**: <br>
+Option 1: Using edit, you can simply reuse the existing application with updated information. <br>
+Option 2: If you are looking to keep the existing application and it's information untouched, then we suggest including an additional "t/NthAttempt" to differentiate your new application and the existing application. This will not violate our duplication clause while also allowing you to keep information on your existing application.
+
+**Q5**: How many applications can SIA track?<br>
+**A**: 2147483647 applications can be tracked.
+
+**Q6**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
+**A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
+For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
+
+**Q7**: Why is the `idt/` not recognised by `add` command?<br>
+**A**: `idt/` is intentionally excluded from the `add` command. More often than not, students who apply for an internship do not receive an interview slot from the get go. Taking this into consideration, we decided that users need not include a valid `InterviewSlot` input just as a placeholder value to `add` new applications.
+
+**Q8**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
+**A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution.
+
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,10 +538,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+[**Add**](#adding-an-application-add) | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br><br>  e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
+[**Clear**](#clearing-all-applications-clear) | `clear`
+[**Delete**](#deleting-an-application-delete) | `delete INDEX`<br> <br> e.g., `delete 3`
+[**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g., `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`<br><br>`edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`<br><br>e.g., `edit 1 t/removetags t/removestatus`
+[**Exit**](#exiting-the-program-exit) | `exit`
+[**Find**](#finding-applications-find) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
+[**Help**](#viewing-help-help) | `help`
+[**List**](#listing-all-applications-with--without-sorting-list) | `list [sorting paramter] [order by]`
+[**Reminder**](#listing-applications-with-upcoming-interviews-reminder)| `reminder`
+
+[Go To TOC](#table-of-contents)

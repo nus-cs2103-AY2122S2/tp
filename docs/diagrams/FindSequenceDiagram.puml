@@ -1,0 +1,92 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternApplyParser" as InternApplyParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "e:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":p:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
+end  box
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find n/shopee")
+activate LogicManager
+LogicManager -> InternApplyParser : parseCommand("find n/shopee")
+activate InternApplyParser
+
+create FindCommandParser
+InternApplyParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser -->  InternApplyParser
+deactivate FindCommandParser
+
+InternApplyParser -> FindCommandParser : parse("n/shopee")
+activate FindCommandParser
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+
+' find command to predicate
+create NameContainsKeywordsPredicate
+FindCommand -> NameContainsKeywordsPredicate : "shopee"
+activate NameContainsKeywordsPredicate
+
+NameContainsKeywordsPredicate  --> FindCommand : p
+deactivate NameContainsKeywordsPredicate
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> NameContainsKeywordsPredicate
+destroy NameContainsKeywordsPredicate
+
+FindCommand  --> FindCommandParser : e
+deactivate FindCommand
+
+deactivate NameContainsKeywordsPredicate
+
+' find command parser to find command
+FindCommandParser --> InternApplyParser : e
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> InternApplyParser
+destroy FindCommandParser
+
+InternApplyParser --> LogicManager : e
+deactivate InternApplyParser
+FindCommandParser -[hidden]-> InternApplyParser
+destroy InternApplyParser
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredApplicationList(p)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+FindCommandParser -[hidden]-> Model
+destroy Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+FindCommandParser -[hidden]-> CommandResult
+destroy CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+FindCommandParser -[hidden]-> FindCommand
+destroy FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+FindCommandParser -[hidden]-> LogicManager
+destroy LogicManager
+@enduml
