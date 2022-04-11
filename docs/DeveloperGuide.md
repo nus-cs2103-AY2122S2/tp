@@ -633,13 +633,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 * 3a. The given (interview) index is invalid
-
   * 3a1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 3.
 
 * 3b. The given date and/or time format is invalid or in the past
-
   * 3b1. TAlent Assistant™ displays an error message
 
   Use case resumes at step 3.
