@@ -116,7 +116,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>CLASS_GROUP_ID</td>
         <td><code>id/</code></td>
-        <td>It represents the ID of the class group, similar to those used by NUSMods, e.g. <code>T13</code>.
+        <td>It represents the ID of the class group, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>T13</code>.
         </td>
     </tr>
     <tr>
@@ -158,7 +158,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>MODULE_CODE</td>
         <td><code>c/</code></td>
-        <td>It represents the code of the module, similar to those used by NUSMods, e.g. <code>CS2103T</code>.
+        <td>It represents the code of the module, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>CS2103T</code>.
         </td>
     </tr>
     <tr>
@@ -170,7 +170,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>MODULE_NAME</td>
         <td><code>n/</code></td>
-        <td>It represents the name of the module, , similar to those used by NUSMods, e.g. <code>Software Engineering Project</code>.
+        <td>It represents the name of the module, , similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>Software Engineering Project</code>.
         </td>
     </tr>
     <tr>
