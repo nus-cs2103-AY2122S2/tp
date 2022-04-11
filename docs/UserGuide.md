@@ -325,7 +325,9 @@ by the `filter`command.
 
 ### Clear all entries : `clear`<a name="clear-all-entries"></a>
 
-Clears all entries from UNite.
+Clears all entries from UNite. 
+* If extra spaces or characters are entered before or after the `clear` keyword, an error message will popup. This is
+to prevent users from accidentally emptying UNite.
 
 Format: `clear`
 

@@ -15,7 +15,7 @@ public class ClearEmptyTagCommand extends Command {
 
     public static final String COMMAND_WORD = "clear_emptytag";
 
-    public static final String MESSAGE_SUCCESS = "Cleared %d empty tags";
+    public static final String MESSAGE_SUCCESS = "Cleared %d empty tag(s)";
 
     @Override
     public CommandResult execute(Model model) {

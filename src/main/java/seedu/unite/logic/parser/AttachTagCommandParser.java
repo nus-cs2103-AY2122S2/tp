@@ -11,6 +11,9 @@ import seedu.unite.logic.commands.AttachTagCommand;
 import seedu.unite.logic.parser.exceptions.ParseException;
 import seedu.unite.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new AttachTagCommand object
+ */
 public class AttachTagCommandParser implements Parser<AttachTagCommand> {
 
     /**
