@@ -20,8 +20,10 @@ Given below are my contributions to the project.
     * Functionality: Allows user to sort and display their client list by the priority level of their tags.
     * Justification: Makes it easy for the user to view which clients should be prioritised.
     * `TagPriorityComparator` class to compare `Persons` and their tag priority level, for facilitation of this command.
-    * Method in `Model` to sort client list with a given comparator.
     * Testing for all relevant classes.
+  
+* **Enhancements to existing features**:
+    * Enhanced the current `ModelManager` with a method to sort its client list with a given comparator.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jetrz&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
@@ -37,7 +39,7 @@ Given below are my contributions to the project.
     * Improved overall styling.
   
 * **Project management**:
-  * Assigned & closed issues
+  * Assigned & closed [issues](https://github.com/AY2122S2-CS2103-W17-3/tp/issues?q=is%3Aissue+is%3Aclosed+assignee%3Ajetrz)
   * Reviewed and merged PRs ([\#32](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/32), [\#65](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/65))
   * Created and assigned tags
   * Submitted all assigned deliverables by given milestone deadlines
