@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 
 /**
@@ -48,7 +49,8 @@ public class Date {
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        return formattedDate;
     }
 
     @Override

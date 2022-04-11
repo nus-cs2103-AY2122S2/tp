@@ -6,6 +6,12 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.MedBook;
 import seedu.address.model.ReadOnlyMedBook;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.ConsultationDiagnosis;
+import seedu.address.model.consultation.ConsultationFee;
+import seedu.address.model.consultation.ConsultationNotes;
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Time;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
@@ -214,7 +220,34 @@ public class SampleDataUtil {
             new TestResult(new Nric("S1234568L"), new TestDate("2022-12-01"), new MedicalTest("CT Scan"),
                     new Result("Stroke")),
             new TestResult(new Nric("S1234569L"), new TestDate("2021-06-09"), new MedicalTest("Blood Pressure"),
-                    new Result("Systolic: 154; Diastolic: 99"))
+                    new Result("Systolic: 154; Diastolic: 99")),
+            new TestResult(new Nric("S1234560L"), new TestDate("2022-07-11"), new MedicalTest("MRI"),
+                    new Result("Extensive tissue loss in the right cerebral hemisphere"))
+        };
+    }
+
+    public static Consultation[] getSampleConsultations() {
+        return new Consultation[]{
+            new Consultation(new Nric("S1234567L"), new Date("2020-03-01"), new Time("19-00"),
+                    new ConsultationDiagnosis("Patient is suffering from Upper respiratory infection. "
+                            + "Is to have plenty of rest and take cough drops."),
+                    new ConsultationFee("56"), new ConsultationNotes("NIL")),
+            new Consultation(new Nric("S1234561L"), new Date("2020-04-12"), new Time("12-00"),
+                    new ConsultationDiagnosis("Patient has caught H1N1 flu. "
+                            + "Is to take antibiotics to completion."),
+                    new ConsultationFee("50.50"), new ConsultationNotes("NIL")),
+            new Consultation(new Nric("S1234568L"), new Date("2020-03-10"), new Time("10-00"),
+                    new ConsultationDiagnosis("Patient is suffering from Allergic reaction. "
+                            + "A shot of adrenaline has been prescribed, along with anti-allergic medication."),
+                    new ConsultationFee("46.50"), new ConsultationNotes("NIL")),
+            new Consultation(new Nric("S1234569L"), new Date("2020-08-21"), new Time("09-00"),
+                    new ConsultationDiagnosis("Patient is suffering from Upper respiratory infection. "
+                            + "Is to have plenty of rest and take cough drops."),
+                    new ConsultationFee("20"), new ConsultationNotes("NIL")),
+            new Consultation(new Nric("S1234562L"), new Date("2020-01-10"), new Time("13-00"),
+                    new ConsultationDiagnosis("Patient is suffering from Outer Ear Infection. "
+                            + "Is to have plenty of rest and apply ear antibiotics."),
+                    new ConsultationFee("96"), new ConsultationNotes("NIL")),
         };
     }
 
@@ -226,11 +259,14 @@ public class SampleDataUtil {
         for (Contact sampleContact : getSampleContacts()) {
             sampleMedBook.addContact(sampleContact);
         }
-        for (Medical sampleMedical: getSampleMedicals()) {
-            sampleMedBook.addMedical(sampleMedical);
-        }
         for (TestResult sampleTestResult : getSampleTestResults()) {
             sampleMedBook.addTestResult(sampleTestResult);
+        }
+        for (Consultation sampleConsultation : getSampleConsultations()) {
+            sampleMedBook.addConsultation(sampleConsultation);
+        }
+        for (Medical sampleMedical: getSampleMedicals()) {
+            sampleMedBook.addMedical(sampleMedical);
         }
         return sampleMedBook;
     }
