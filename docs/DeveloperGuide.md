@@ -288,10 +288,6 @@ Step 3. The user executes `view P/james`. The view command will check if the inp
 (similar to the other CRUD commands) before using these inputs to create conditional `Predicate<>` instances (eg. NameContainsKeywordsPredicate).
 The predicates are then combined and used to filter the `FilteredList<Person>`. The GUI will then display the player items in the filtered list.
 
-The following sequence diagram shows how the find operation works:
-Sequence Diagram:
-__TO BE ADDED__
-
 #### Design Consideration
 * **Alternative 1 (current choice)**: Optional prefix for user to specify view criteria.<br> Pros: More flexibility for user. <br> Cons: Harder to implement as there are more cases to handle.
 * **Alternative 2**: Compulsory flag <br> Pros: Easier to implement. <br> Cons: Lesser flexibility for user.
