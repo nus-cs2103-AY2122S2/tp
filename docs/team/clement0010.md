@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Patient's Emergency Contact
   * What it does: It allows the user to add emergency contacts to the patient.
   * Justification: This features extend the product functionality as a health monitoring system to store patients' emergency contacts. Medical professionals can contact patients' next-of-kin via their emergency contact list.
-  * Credits: The feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3). Some part of the codes were adpated and modified.
+  * Credits: The feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3). Some part of the codes were adapted and modified.
 
 * **New Feature**: Authentication and Encryption
   * What it does: It secures the product with a authentication system and encrypts data files with a user password. Medical professionals need to setup a password and authenticate to the product.
