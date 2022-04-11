@@ -19,8 +19,9 @@ title: Developer Guide
 * [Implementation](#implementation)
     * [Managing Meetings](#managing-meetings)
     * [Adding optional attributes](#adding-optional-attributes)
-      * [Previous Date Met and Information](#optional-attributes-previous-date-met-and-information)
-      * [Salary](#adding-optional-additional-attribute-salary)
+      * [Previous Date Met](#previous-date-met)
+      * [Information](#information)
+      * [Salary](#salary)
     * I2
     * I3
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -108,7 +109,6 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete John`.
-❗️ IMAGE NEEDS TO BE UPDATED 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
@@ -154,7 +154,6 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete John")` API call.
-❗️ IMAGE NEEDS TO BE UPDATED
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -171,7 +170,6 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-❗️ IMAGE NEEDS TO BE UPDATED
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -185,7 +183,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-❗️ IMAGE NEEDS TO BE UPDATED
+❗️ IMAGE NEEDS TO BE UPDATED (**Remove caution if image is sufficient**)
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -240,28 +238,37 @@ below. This also highlights the logic of checking for meeting clash before sched
 
 ## Adding optional attributes
 
-### Optional attributes: Previous date met and Information
+The following attributes are optional, hence, their prefix can be omitted when using `add` or `edit` command. 
+Clients added without the prefixes mentioned below will be assigned a with a predefined value. 
+This predefined value can be modified using the `edit` command.
 
-When handling clients, it would be beneficial to track the previous date met with the client, and additional information
-regarding the clients. Therefore, these two new attributes need to be added to the current Person class. The new prefix used
-are `d/` and `i/` for date previous met and additional info respectively.
+### Previous date met
 
-On top of that, modifications to add and edit command are needed to handle the two new attributes. Since both attributes
-are optional, `d/` and `i/` may be omitted when using the add command, a default value is given to each attribute. This
-decision was made to avoid the use of null values. For date attribute, the date of the client being added would be its
-default value, whereas "No further info" will be the default value for additional info attribute. 
+Financial advisors need to keep a close bond with their clients. This mean that they would need to meet up with their clients on a 
+regular basis. It would be beneficial for them to track when was the last time they met with a specific client.
 
-The following sequence diagram shows how adding a new person without any previous date met and additional info specified.
+To cater for this information to be stored, an optional attribute `PrevDateMet` has been implemented. A `PrevDateMet` stores the 
+date for each client in `YYYY-MM-DD` format. The `PrevDateMet` attribute uses a prefix `d/` when using the `add` or `edit` command.
 
-(WILL BE ADDED IN THE FUTURE)
+### Information
 
-The following activity diagram summarizes the different possible paths when adding a client to HustleBook.
+Financial advisors would need to keep track of client's information such as their risk tolerance level, their financial goals and 
+schemes they are currently on. 
 
-(WILL BE ADDED IN THE FUTURE)
+To cater for this information to be stored, an optional attribute `Info` has been implemented. A `Info` stores the information 
+about the client. The `Info` attribute uses a prefix `i/` when using the `add` or `edit` command.
+
+### Salary
+
+Clients handled by financial advisors are usually working adults, earning salary and are capable of paying for the services provided by the financial advisors. Moreover, using the client's salary information, financial advisors can better advise them on the plans and/or services to get. Therefore, it is very beneficial to track clients' salaries.
+
+To cater for this new information to be stored, a new optional attribute, `Salary` has been implemented. A `Salary` exists for each client to store their salary amount. 
+This attribute can be added to through the use of the `s/` prefix. The `Salary` attribute can be added to a client through the `add` command as well as modified through the `edit` command.
+
 
 #### Design considerations:
 
-**Aspect: Default value of optional data:**
+**Aspect: Handling default values of `PrevDateMet` and `Info`:**
 
 * **Alternative 1 (current choice):** Non-null values.
     * Pros: Less likely to face any errors as no null values are used.
@@ -270,22 +277,8 @@ The following activity diagram summarizes the different possible paths when addi
 * **Alternative 2:** Use null values are default values.
     * Pros: Easier and faster to implement.
     * Cons: Code wise is more prone to errors and more defensive approach have to be used when handling the new attributes.
-    
-### Adding optional additional attribute, Salary
 
-#### Implementation
-
-Clients handled by financial advisors are usually working adults, earning salary and are capable of paying for the services provided by the financial advisors. Moreover, using the client's salary information, financial advisors can better advise them on the plans and/or services to get. Therefore, it is very beneficial to track clients' salaries. 
-
-To cater for this new information to be stored, a new optional attribute, `Salary` has been implemented. A `Salary` exists for each client to store their salary amount.
-
-This attribute can be added to through the use of the `s/` prefix. The `Salary` attribute can be added to a client through the `add` command as well as modified through the `edit` command.
-* Since this is an optional attribute, the prefix can be omitted when using `add` or `edit` command. Clients added without this prefix will be assigned a `Salary` with a predefined value. This predefined value can be modified using the `edit` command.
-
-***Diagrams to be added later***
-
-#### Design Consideration
-**Aspect: How to handle contacts with no salary aspect:**
+**Aspect: Handling default values of `Salary`:**
 * **Alternative 1 (Current choice):** Use a new constructor with no parameters, taking predefined value as salary.
     * Pros: Future changes to the predefined value will only need simple and small changes in the constructor.
     * Cons: Now the object has an additional constructor method that needs to be kept track of and updated by the developer if any changes are required.
@@ -293,7 +286,7 @@ This attribute can be added to through the use of the `s/` prefix. The `Salary` 
 * **Alternative 2:** Use the existing constructor with String as a parameter, passing in a predefined value as salary.
     * Pros: Through the use of an existing method, a developer needs to keep track of and update only one constructor for that object if any change is required.
     * Cons: If any change is required for the predefined value, a developer needs to search all usages of this method and update those using the predefined value to a new value. This can be time-consuming.
-
+    
 ### Flagging important clients
 
 The feature is implemented to provide functionality and visual representation of important clients. 
@@ -533,6 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | expert user             | archive old contacts                                                   | keep the contact list clean and free clutter                           |
 | `* *`    | new user                | add a meet up information to a client                                  | track when is the next meet up                                         |
 | `* *`    | new user                | get tips on existing features                                          | get the required info without referring to help section                |
+| `* *`    | new user                | save a client's salary information                                     | use this information to provide them better financial advice           |
 | `* *`    | expert user             | load up previous work before shutting                                  | be more efficient                                                      |
 | `* *`    | expert user             | filter important clients                                               | prioritise them                                                        |
 | `* *`    | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
@@ -540,6 +534,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | busy user               | be reminded if I haven't met a client in a long time                   | maintain contact with my clients                                       |
 | `* *`    | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
 | `* *`    | busy user               | identify conflicting names by index                                    | perform operations more accurately                                     |
+| `* *`    | inattentive user        | undo the commands                                                      | rectify my mistakes faster and easier                                  |
+| `* *`    | inattentive user        | redo the commands                                                      | recover from undo                                                      |
 | `*`      | new user                | Add social media data for clients                                      | access their social media details                                      |
 
 ### Use cases
