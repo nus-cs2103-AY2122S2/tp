@@ -5,7 +5,7 @@ title: Haikal Yusuf's Project Portfolio Page
 
 ### Project: RealEstatePro
 
-RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
+RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be a breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 

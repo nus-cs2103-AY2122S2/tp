@@ -9,7 +9,7 @@ title: RealEstatePro
 ![Ui](images/Ui.png)
 
 **RealEstatePro is a desktop application for managing your client details for real estate agents.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
-With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
+With RealEstatePro managing your clients will be a breeze by using the various features such as reminders, client matching and many more!
 
 * If you are interested in using RealEstatePro, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing RealEstatePro, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
