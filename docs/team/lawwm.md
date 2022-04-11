@@ -2,12 +2,9 @@
 layout: page
 title: Wei Ming's Project Portfolio Page
 ---
-# Skeleton of the Project Portfolio Page for Wei Ming
-
 ### Project: ModuleMateFinder
 
 ModuleMateFinder is a desktop address-book-like application used to keep track of your friends' contacts, as well as the modules they are taking. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
-
 Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=lawwm&tabRepo=AY2122S2-CS2103T-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -17,8 +14,7 @@ Given below are my contributions to the project.
   - **What it does**: Allows the user to sort all `Person` by specified fields and specify ascending or descending order.
   - **Justification**: This feature improves the product significantly because a user can order persons based on what their needs. e.g. sort by status to track people by their status.
   - **Highlights**: This enhancement affects existing attributes of persons to be added in future. It required an in-depth analysis of design alternatives. It also required a design that made it easily extendable for fields of `Person` if more were to be added.
-  - **Credits**: Syntax inspired by SQL language. Implementation inspired by [SimpleDB](http://cs.bc.edu/~sciore/simpledb/).
-
+  - **Credits**: Syntax inspired by SQL language. 
 
 * **New Feature**: Added the ability to copy details based on specified fields. [#78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
   - **What it does**: Allows the user to copy information from an individual `Person` or all `Person`, and specify format.
@@ -40,8 +36,7 @@ Given below are my contributions to the project.
 
 * **Enhancement**: Refactor archive feature. [\#195](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195)
   - **What it does**: Refactor archive feature to ensure clearer separation between `Logic` and `Model`. Shifted archive command logic from `UI` back into `Logic` and `ArchiveCommand` 
-  - **Justification**: This reduces coupling and increases code quality. Previous implementation drifted slightly far from architecture with clear separation between `UI`, `Logic`, `Storage` and `Model` components.
-  It also made code easier to read and understand which made bug fixing easier.
+  - **Justification**: This reduces coupling and increases code quality. Previous implementation drifted from architecture without clear separation between `UI`, `Logic`, `Storage` and `Model` components.
 
 - **Bug Fix**: Fix bugs resulting from undo/redo and archive. [\#195](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195)
   - **What it does**: Fixed implementation of undo/redo to store `ArchiveBook` as well in order to account for archive.
@@ -50,28 +45,23 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   - User Guide:
-    - Added documentation for features `deletemodules` and `clearmodules` [(PR #17)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/17).
-    - Added documentation for the features `sort` [(PR #44)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44) and `copy` [(PR #78)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
+    - Added documentation for features `deletemodules` and `clearmodules` [\#17](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/17).
+    - Added documentation for the features `sort` [\#44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44) and `copy` [\#78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
     - Added documentation for `undo` to reflect commands that can be undone but were not included. [\#195](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195)
-    - Fixed broken links [(PR #105)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/105). 
+    - Fixed broken links [\#105](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/105). 
 
   - Developer Guide:
-    - Added implementation details of the `sort` feature [(PR #86)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/86).
-    - Added sort sequence diagram [(PR #86)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/86)
-    - Updated Model and Storage class diagram to reflect archived `AddressBook` [(PR #195)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195)
-    - Added terms in glossary. [(PR #44)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
-
+    - Added implementation details of the `sort` feature [\#86](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/86).
+    - Added sort sequence diagram [\#86](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/86) and terms in glossary.[\#44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
+    - Updated Model and Storage class diagram to reflect archived `AddressBook` [\#195](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195)
+    
 
 **Community**:
 - Reviewed all PRs done by WeiJie and Julio.
   - PRs reviewed for Julio (with non-trivial review comments): 
-    - [\#62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62) 
-    - [\#90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90) 
-    - [\#197](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/197) 
+    - [\#62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62), [\#90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90), [\#197](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/197) 
   - PRs reviewed for WeiJie (with non-trivial review comments): 
-    - [\#72](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72) 
-    - [\#81](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81)
-    - [\#124](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/124)
+    - [\#72](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/72), [\#81](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/81), [\#124](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/124)
 
 
 - Helping team members with bugs.
@@ -79,8 +69,7 @@ Given below are my contributions to the project.
     - [\#116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116) Commit `5bb54ed`
     
   - Helped WeiJie solve find source of failing tests.
-    - [#\124](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/124) Commit `7c11303`
-    - [#\135](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/135) Commit `45c9683`
+    - [\#124](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/124) Commit `7c11303`, [\#135](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/135) Commit `45c9683`
 
     
   
