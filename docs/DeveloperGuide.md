@@ -2,8 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,7 +227,7 @@ The add mechanism implements the following sequence and interactions for the met
 
 #### What is the add feature
 
-The add feature allows users to add a student contact to the Tracey database with the specified details.
+The add feature allows users to add a student contact to the Tracey database with the specified details. 
 
 The original AB3 implementation of the add feature only had a selected general few tags to be used (name, email, address, phone, email). To address our target users for this application, we added the tags block, faculty, matriculation number and covid status.
 
@@ -250,11 +250,11 @@ The class diagram above depicts the structure of `AddCommand`. As per any Comman
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-    - Scenario: Adding of the specified `Person` to the database is successful.
-    - Message: "New person added: %1$s" where "%1$s" is the added person's details.
+   - Scenario: Adding of the specified `Person` to the database is successful.
+   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
 2. `MESSAGE_DUPLICATE_PERSON`:
-    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
-    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
+   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 #### Interaction of objects when Add Command is executed:
 
@@ -281,7 +281,7 @@ The delete mechanism implements the following sequence and interactions for the 
 
 The delete feature allows users to delete a student contact from the Tracey database.
 
-The `delete` command is as follows:
+The `delete` command is as follows: 
 
 * `delete INDEX`
 
@@ -478,8 +478,8 @@ The class diagram above depicts the structure of `ClearCommand`. As per any Comm
 Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
 
 1. `MESSAGE_SUCCESS`
-    - Scenario: Tracey database successfully cleared.
-    - Message: "Tracey has been cleared!".
+   - Scenario: Tracey database successfully cleared.
+   - Message: "Tracey has been cleared!".
 
 #### Interaction between objects when Clear Command is executed:
 
@@ -571,7 +571,7 @@ In order to address these issues, we have enhanced the `EditCommand` to include 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
-
+  
 #### Class Diagram of Edit Feature is shown below
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
@@ -580,18 +580,18 @@ The class diagram above depicts the structure of `EditCommand`. As per any `Comm
 
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the **EditCommand**:
 1.`MESSAGE_EDIT_PERSON_SUCCESS`:
-- Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
-- Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
+  - Scenario: Editing of the attribute(s) of the specified `Person` in the database is successful.
+  - Message: "Edited Person: %1$s" where %1$s refers to the updated details of the `Person`.
 2. `MESSAGE_NOT_EDITED`:
-- Scenario: No attribute is specified for the `Person` to be edited.
-- Message: "At least one field to edit must be provided."
+  - Scenario: No attribute is specified for the `Person` to be edited.
+  - Message: "At least one field to edit must be provided."
 3. `MESSAGE_DUPLICATE_PERSON`:
-- Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
-- Message: "This person already exists in the address book."
+  - Scenario: New values used for attribute(s) that requires uniqueness e.g. `Phone` `Email` `Matriculation Number` already exists in the database.
+  - Message: "This person already exists in the address book."
 4. `MESSAGE_SAME_INPUT`:
-- Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
-- Message: "The edited value is the same as the current one."
-
+  - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
+  - Message: "The edited value is the same as the current one."
+  
 #### Sequence Diagram of Edit Feature is shown below:
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
@@ -958,7 +958,7 @@ The class diagram above depicts the structure of `ArchiveCommand`. As per any `C
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
-working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else
+working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
 #### Sequence Diagram of Archive Feature is shown below:
@@ -1016,9 +1016,9 @@ which sets the window in the GUI according to the user's desired option.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Potential Feature: Import
+### Potential Feature: Import 
 
-This section explains the potential import feature.
+This section explains the potential import feature. 
 The import mechanism will implement the following sequence for the method call execute("import").
 
 #### What is the import feature
@@ -1176,25 +1176,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a2. User provide the correct details in the correct format.
 
-      Use case ends.
+        Use case ends.
 
 * 1b. The student to be added already exists in the list by Tracey.
 
     * 1b1. Tracey inform user that the contact exists in her database.
 
-      Use case ends.
+        Use case ends.
 
 * 1c. User adds multiple students in one go.
 
     * 1c1. Tracey will list out a list of new students added with their info.
 
-      Use case ends.
+        Use case ends.
 
 * 1d. User uses wrong pre-defined constants for fields such as faculty or covid status.
 
     * 1d1. Tracey will provide a list of pre-defined constants for the user.
 
-      Use case ends.
+        Use case ends.
 
 ### Use case: UC04 - Edit information of a student
 
@@ -1213,7 +1213,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Tracey shows an empty list.
 
-      Use case ends.
+        Use case ends.
 
 * 2a. The given student name exists multiple places on the list.
 
@@ -1221,7 +1221,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a2. User will key in the correct format to edit the student's details.
 
-      Use case ends.
+        Use case ends.
 
 ### Use case: UC05 - Clear the system database
 
@@ -1339,12 +1339,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The working database file is not present.
-    * 1a1. There is no file to copy from.
+  * 1a1. There is no file to copy from.
 
   Use case ends.
 
 * 1b. There is already an archived file with the same specified name
-    * 1b1. This archived file is replaced with a new archived file.
+  * 1b1. This archived file is replaced with a new archived file.
 
   Use case ends.
 
@@ -1394,7 +1394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to get the email of the students.
-2.  Tracey will copy all the email of the students to the user's clipboard.
+2.  Tracey will copy all the email of the students to the user's clipboard. 
 
     Use case ends.
 
@@ -1484,45 +1484,45 @@ testers are expected to do more *exploratory* testing.
 
    b. Test case : `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader` <br> Insert a student contact with the above details with the tags displayed.
 
-   c. Test case : `add n/John Doe n/Daniel Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Inserts a student contact with the second specified name parameter.
+   c. Test case : `add n/John Doe n/Daniel Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE` <br> Inserts a student contact with the second specified name parameter. 
 
-   d. Test case : Invalid Syntax <br> No student is added into Tracey. Error details shown in response message. Help message also displayed in response message for the user to try again to insert correctly.
+   d. Test case : Invalid Syntax <br> No student is added into Tracey. Error details shown in response message. Help message also displayed in response message for the user to try again to insert correctly. 
 
    e. Test case : Insert order with existing `MatriculationNumber`, `Phone` or `Email` <br> Error will message will be displayed stating that the duplicate unique field already exists in Tracey and thus stated student will not be added.
-
+   
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown <br>Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    a. Test case: `delete 1`<br>
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    b. Test case: `delete 0`<br>
-   Expected: No person is deleted. Error details shown in the status message.
+      Expected: No person is deleted. Error details shown in the status message.
 
    c. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
+      Expected: Similar to previous.
 
 ### Summarising the data
 
 1. Summarising all the students' data at that specific time using the `summarise` command.
    A separate window containing charts that categorises student by covid status and faculty or block will be shown if there are student data in Tracey.
 
-   a. Test case: `summarise` on a non-empty list of students <br>
-   Expected: Pie Chart Window will display at least one pie chart and one bar chart.
+    a. Test case: `summarise` on a non-empty list of students <br>
+       Expected: Pie Chart Window will display at least one pie chart and one bar chart.
 
-   b. Test case: `summarise` on an empty list of students <br>
-   Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
+    b. Test case: `summarise` on an empty list of students <br>
+       Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
 
-   c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
-   Expected: New Pie Chart Window will display containing updated data set due to a deletion.
+    c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
+       Expected: New Pie Chart Window will display containing updated data set due to a deletion.
 
-   d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
-   Expected: Existing Pie Chart Window will close along with the Main Window.
+    d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
+       Expected: Existing Pie Chart Window will close along with the Main Window.
 
-   e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
-   Expected: Error message indicating format of command is wrong.
+    e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
+       Expected: Error message indicating format of command is wrong.
 
 ### Help user
 1. Display a help window for user to access command format and examples.
@@ -1539,13 +1539,13 @@ testers are expected to do more *exploratory* testing.
 
 1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student
    a. Test case: `list` <br>
-   Expected: All students are shown on the Main Window.
+      Expected: All students are shown on the Main Window.
 
    b. Test case: `list` on an empty list of students <br>
-   Expected: No students will be shown. Instead, it shows a list of no students.
+      Expected: No students will be shown. Instead, it shows a list of no students.
 
    c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
-   Expected: Error message indicating format of command is wrong.
+      Expected: Error message indicating format of command is wrong.
 
 ### Clearing the data
 1. Clear the Tracey database.
@@ -1565,18 +1565,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a person by their full name
 
-    1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command
+     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
 
     1. Test case: `find Andy`<br>
-       Expected: List details of `Andy`. Details of matched contacts shown in the status message.
+       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
 
     1. Test case: `find Carl`<br>
-       Expected: No person is found. Error details shown in the status message.
+       Expected: No person is found. Error details shown in the status message. 
 
     1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
        Expected: Similar to previous.
 
-1. Finding a person by using name's prefix
+1. Finding a person by using name's prefix 
 
     1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
 
@@ -1593,108 +1593,108 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files when the application is close.
 
-   a. prerequisites: Multiple persons in the list. The Tracey application is not open. There is a file named `addressbook.json` in ROOT/data, if it is not present, simply launch the Tracey application, input `list` (which will create the `addressbook.json` file) and close the application.
+    a. prerequisites: Multiple persons in the list. The Tracey application is not open. There is a file named `addressbook.json` in ROOT/data, if it is not present, simply launch the Tracey application, input `list` (which will create the `addressbook.json` file) and close the application.
+    
+    b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Launch the Tracey application. Ensure that the changes are saved before launching.<br>
+       Expected: There is no contacts rendered in the list.
 
-   b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Launch the Tracey application. Ensure that the changes are saved before launching.<br>
-   Expected: There is no contacts rendered in the list.
-
-   c. Other test cases to try: Instead of changing the contact's attributes that require uniqueness, you can change other different attributes to the wrong format, such as putting a special character for the `Name` attribute.
+    c. Other test cases to try: Instead of changing the contact's attributes that require uniqueness, you can change other different attributes to the wrong format, such as putting a special character for the `Name` attribute.
 
 2. Dealing with missing/corrupted data files when the application is open.
 
-   a. prerequisites: Multiple persons in the list. The Tracey application is open. There is a file named `addressbook.json` in ROOT/data, if it is not present, input `list` (which will create the `addressbook.json` file).
+    a. prerequisites: Multiple persons in the list. The Tracey application is open. There is a file named `addressbook.json` in ROOT/data, if it is not present, input `list` (which will create the `addressbook.json` file).   
 
-   b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
-   Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
+    b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
+       Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
 
 ### Editing a person
 
 1. Editing a person while all person are being shown
 
-   a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    a. Prerequisites: List all persons using the `list` command. Multiple persons in the list. 
 
-   b. Test case: `edit 1 n/Poppy doopy`<br>
-   Expected: First contact `name` is changed to Poppy doopy. This contact is placed at the bottom of the list, index of all other contacts is incremented by one. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+    b. Test case: `edit 1 n/Poppy doopy`<br>
+       Expected: First contact `name` is changed to Poppy doopy. This contact is placed at the bottom of the list, index of all other contacts is incremented by one. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.  
+    
+    c. Test case: `edit -1 n/Poppy doopy`<br>
+       Expected: No person's details is edited. Error details is shown in the status message. Status bar remains the same.
 
-   c. Test case: `edit -1 n/Poppy doopy`<br>
-   Expected: No person's details is edited. Error details is shown in the status message. Status bar remains the same.
+    d. Test case: Use the same value for the edited field, that is if contact at 2nd index has `Phone` of 123456, test using `edit 2 p/123456`<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
 
-   d. Test case: Use the same value for the edited field, that is if contact at 2nd index has `Phone` of 123456, test using `edit 2 p/123456`<br>
-   Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
+    e. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
+       Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
 
-   e. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
-   Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
-
-   f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
+    f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
 
 ### Archiving the database
 
 1. Saving the working copy of the Tracey database
 
-   a. Prerequisites: Ensure that there is a file named `addressbook.json` inside the directory ROOT/data.
+    a. Prerequisites: Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. 
 
-   b. Test case: `archive`<br>
-   Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
-
+    b. Test case: `archive`<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+    
 2. Manually inspecting the archived file of a working database file
 
-   a. Prerequisites: Successful use of `archive` on a working database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
+    a. Prerequisites: Successful use of `archive` on a working database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
 
-   b. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
-   Expected: The contents of both files is exactly the same.
+    b. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
+       Expected: The contents of both files is exactly the same.
 
 3. Saving a corrupted copy of the Tracey database
 
-   a. Prerequisites: Multiple persons in the list. Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. The Tracey application is open.
+    a. Prerequisites: Multiple persons in the list. Ensure that there is a file named `addressbook.json` inside the directory ROOT/data. The Tracey application is open.
 
-   b. Test case: Open the `addressbook.json` file in ROOT/data and amend the first contact's `Name` to include a special character. Input the `archive` command.<br>
-   Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
+    b. Test case: Open the `addressbook.json` file in ROOT/data and amend the first contact's `Name` to include a special character. Input the `archive` command.<br>
+       Expected: A folder named archive is created in the directory ROOT/data if it is already not there. A folder named after your local PC's date in the format of `DDMMYY` is created in this archive directory if it is not already there. An archived file named after your local PC's date and time in the format of `DDMMYY_HHmmssSSS.json` is found in the directory. Timestamp in the status bar is updated.
 
 4. Manually inspecting the archived file of a working database file
 
    a. Prerequisites: Successful use of `archive` on a corrupted database file and there is an archived file created in the specified directory. No further amendments made to `addressbook.json` or the recently archived file. Must use the `addressbook.json` file and its corresponding archived file for this test.
 
    b. Test case: Manually inspect the contents of both `addressbook.json` and the archived file named `DDMMYY_HHmmssSSS.json`.<br>
-   Expected: The contents of `addressbook.json` is of the previous working state while the archived file is of the same content as the corrupted database file.
+      Expected: The contents of `addressbook.json` is of the previous working state while the archived file is of the same content as the corrupted database file.
 
 5. Attempting to archive a non-existent Tracey database
 
    a. Prerequisites: Ensure that there is no file named `addressbook.json` inside the directory ROOT/data.
-
+    
    b. Test case: `archive`<br>
-   Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+      Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
 
-6. Inputting extra parameters
+6. Inputting extra parameters 
 
-   a. Prerequisites: None
+    a. Prerequisites: None
 
-   b. Test case: `archive x`(where x = any value)<br>
-   Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
+    b. Test case: `archive x`(where x = any value)<br>
+       Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
 
 ### Resizing the result display window
 
 1. Using the command line to resize
 
    a. Prerequisites: The result display window is in its default size (option 1)
-
+   
    b. Test case: `resize x`(where x = 1, 2 or 3)<br>
-   Expected: The result display window will be resized according to `x` where the value of `x` is the multiplier to the default size. The result display window will remain the same size if the window size is already at `x`. used Timestamp in the status bar is updated.
-
+      Expected: The result display window will be resized according to `x` where the value of `x` is the multiplier to the default size. The result display window will remain the same size if the window size is already at `x`. used Timestamp in the status bar is updated.
+    
    c. Test case: `resize x`(where x = any value other than 1, 2 or 3)<br>
-   Expected: The result display window will not be resized. Error details shown in the status message. Status bar remains the same.
+      Expected: The result display window will not be resized. Error details shown in the status message. Status bar remains the same.
 
 2. Using the button in the GUI to resize
 
-   a. Prerequisites: The result display window is in its default size (option 1)
+   a. Prerequisites: The result display window is in its default size (option 1) 
 
    b. Test case: Click on the `Resize Display` button once<br>
-   Expected: The size of the resize window display will be doubled with respects to the default size.
+      Expected: The size of the resize window display will be doubled with respects to the default size.
 
    c. Test case: Click on the `Resize Display` button once again<br>
-   Expected: The size of the resize window display will be tripled with respects to the default size.
-
+      Expected: The size of the resize window display will be tripled with respects to the default size.
+   
    d. Test case: Click on the `Resize Display` button once again<br>
-   Expected: The size of the resize window display will return to the default size.
+      Expected: The size of the resize window display will return to the default size.
 
 ## **Appendix: Effort**
 
@@ -1704,7 +1704,7 @@ Our team wanted to make an application that could help facilitate covid tracking
 
 **Challenges faced**
 
-**Designing of app** - Our first obstacle was to come up with the idea for Tracey. During the planning the app design, we encountered conflicts as we all had differing ideas of what features to include. We tried to incorporate all of our ideas, by deliberating and debating on how we could align our ideas, and eventually came up with a consensus on the design.
+**Designing of app** - Our first obstacle was to come up with the idea for Tracey. During the planning the app design, we encountered conflicts as we all had differing ideas of what features to include. We tried to incorporate all of our ideas, by deliberating and debating on how we could align our ideas, and eventually came up with a consensus on the design. 
 
 **Testing and debugging** - Much of our time was spent on coming up with appropriate test cases and debugging. The difficulty we had was figuring out how the skeletal design of the original AB3 works, but once we accomplished that, we were able to test and debug our code more smoothly and quickly.
 

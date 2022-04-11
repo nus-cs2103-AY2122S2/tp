@@ -28,7 +28,6 @@ import seedu.address.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String MESSAGE_SUCCESS = "wrong";
     private static HelpWindow helpWindow;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -166,16 +165,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Toggles display text place holder height to grow and shrink.
+     * Toggles display text place-holder height to grow and shrink.
      */
     @FXML
     public void handleResize() {
         double height = resultDisplayPlaceholder.getHeight();
+        logger.info("Resize Window button is clicked");
         if (height == resultDisplaySizeOne) {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeOne, resultDisplaySizeTwo));
             resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo);
         } else if (height == resultDisplaySizeTwo) {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeTwo, resultDisplaySizeThree));
             resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree);
         } else {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeThree, resultDisplaySizeOne));
             resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
         }
     }
@@ -189,6 +192,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!emailWindow.isShowing()) {
             createEmailWindow();
         } else {
+            logger.info("Reopening Email Window");
             emailWindow.hide();
             createEmailWindow();
         }
@@ -199,8 +203,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleResizeResultDisplayWindow() {
-        resultDisplayPlaceholder.setMinHeight(ResizeCommand.getResultWindowDisplaySize()
-                * ResizeCommand.RESIZE_WINDOW_MULTIPLIER);
+        double resultWindowSize = ResizeCommand.getResultWindowDisplaySize() * ResizeCommand.RESIZE_WINDOW_MULTIPLIER;
+        logger.info("Resizing result display window using CLI to " + resultWindowSize);
+        resultDisplayPlaceholder.setMinHeight(resultWindowSize);
     }
 
     /**

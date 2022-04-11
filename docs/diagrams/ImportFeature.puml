@@ -9,7 +9,7 @@ if () then ([File data follows correct format])
         :Returns Message to user indicating Import Success;
         :ResultDisplay prints result to user;
 
-else ([else])
+else ([Else])
     :CommandException;
 endif
 stop
