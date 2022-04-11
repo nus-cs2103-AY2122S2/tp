@@ -198,6 +198,7 @@ Examples:
 * `edit 2 t/HackNet s/` Appends the team `HackNet` to the 2nd person and keep the current skills.
 * `edit 1 s/C_90, C_2, C_11` will result in the 1st person in the list having skill `C` with proficiency `90` as it is the highest value.
 
+<div style="page-break-after: always;"></div>
 #### Batch edit
 
 Edits the details of multiple contacts in HackNet. 
@@ -235,8 +236,6 @@ Examples:
 Clears all existing contacts from HackNet.
 
 Format: `clear`
-
-<div style="page-break-after: always;"></div>
 
 ## Team Forming
 
@@ -327,8 +326,6 @@ Shows the list of all persons marked as potential teammates
 
 Format: `show`
 
-<div style="page-break-after: always;"></div>
-
 ## Utility
 
 This section contains some commands/shortcuts that can improve your work efficiency in using **HackNet**.
@@ -415,6 +412,8 @@ If your changes to the data file makes its format invalid, HackNet will discard 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
