@@ -10,7 +10,7 @@ title: Ultimate Divoc Tracker (UDT)
 
 **Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration,
 optimized for use via interacting with the application through easy-to-use commands on a user-centric interface.
-Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
+Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using UDT, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
