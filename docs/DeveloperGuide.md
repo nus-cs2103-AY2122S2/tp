@@ -158,7 +158,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W16-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/developer-guide/RealEstateProStorage.png" width="550" />
+<img src="images/developer-guide/RealEstateProStorage.png"/>
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
