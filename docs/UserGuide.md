@@ -461,10 +461,6 @@ Note that:
 
 Format: `prioList`
 
-Examples:
-1. `clip n/John Doe`
-2. `clip 1`
-
 ------------------------------------------------------------------------------------
 ### Exiting the program : `exit`
 Exits the program
