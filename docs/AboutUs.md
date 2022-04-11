@@ -15,7 +15,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](./team/albertsutz.md)]
 
 * Role: Developer
-* Responsibilities: TBD <br>
+* Responsibilities: In charge of Code Review and `find`, `edit` commands implementation, Testing
+<br>
 
 I am an eager Y2 computer science undergraduate with the desire to learn and improve myself in this field. I aim to delve deeper into the world of software engineering and cybersecurity which address and solve real world problems with the focus on privacy and data security.
 
@@ -38,7 +39,7 @@ Computer Science undergraduate passionate about software engineering and game de
 [[github](http://github.com/graphcalibur)]
 [[portfolio](team/graphcalibur.md)]
 
-* Role: Developer
+* Role: 
 * Responsibilities: TBD
 
 I'm a Year 2 Computer Science undergraduate science with a passion for technology, games, and cybersecurity.
