@@ -53,6 +53,8 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**: Make UI components scale dynamically to the window size ([PR #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
 
+* **Enhancements to existing features**: Wrote unit tests for `EditSocialMediaCommandParser` ([PR #260](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/260/commits/4c4e83e5611cdcf7ee6d420b34b97ebcff9a995f`)), `ParserUtil` ([PR #230](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/230/commits/96d04b380fb18ae80e76426e9f6c511b7594dc22))
+
 
 
 * **Project management**:
