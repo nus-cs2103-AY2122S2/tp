@@ -428,7 +428,7 @@ Example of usage:
 
 *Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 13a* and *Figure 13b*, when the user inputs the `Summarise` command, the results displayed charts of the student population categorised by `Covid Status`. These charts are separated into the students' `Block` and their `Faculty`.
+From *Figure 13a* and *Figure 13b*, when the user inputs the `Summarise` command, the results display charts of the student population categorised by `Covid Status`. These charts are separated into the students' `Block` and their `Faculty`.
 
 ### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
