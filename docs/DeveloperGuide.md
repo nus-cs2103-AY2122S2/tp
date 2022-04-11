@@ -171,9 +171,17 @@ e.g `labadd l/1`
 
 The add lab command is implemented as follows:
 1. When a `labadd` command is executed by the user, `AddLabCommandParser#parse(String)` will be invoked to parse the given command into a new `AddLabCommand` object with the given `LAB_NUMBER`. If the `LAB_NUMBER` is invalid, a `ParseException` will be thrown and displayed to the user.
+
+
 2. `AddCommand#execute(Model)` will then execute with the current `Model` object in the system.
+
+
 3. The `AddCommand` object will then check if the `Model` object already has the lab (in this case having a lab means that the `MasterLabList` has a `Lab` object with the same `LAB_NUMBER`), and if the `Model` already has the `Lab`, it will throw a new `CommandException`.
+
+
 4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, and if it is empty, the system will output a message to the user to notify the user that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
+
+
 5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation on a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` by increasing `LAB_NUMBER`.
@@ -186,11 +194,11 @@ The following **UML sequence diagram** shows the interaction between components 
 
 <img src="images/AddLabCommandSequenceDiagram.png" width="850" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br><br>
 
-The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
+The method `addLabToAll` in `UniqueStudentList` will call `LabList#add(Lab)`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.<br><br>
 
-The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.
+The implementation of `LabList#add(Lab)` was left out of the above sequence diagram as the diagram is meant to show the interaction between components at a higher level of abstraction.<br><br>
 
 The sequence diagram for the implementation of `LabList#add(Lab)` will be shown separately below.
 
