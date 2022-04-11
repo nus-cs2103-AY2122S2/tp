@@ -9,7 +9,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 1. [Quick Start](#quick-start)
 2. [Features](#features)
    * [Viewing help : help](#help)
-   * Person Commands
+   * Customer Commands
      * [Adding a customer: addp](#addp)
      * [Delete a customer: deletep](#deletep)
      * [Listing all customers: listp](#listp)
@@ -21,13 +21,12 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
      * [Listing all orders: listo](#listo)
      * [Editing an order's information : edito](#edito)
      * [Locating orders by specific attribute: findo](#findo)
-     * [Mark orders as Complete: marko](#marko)
-     * [Unmark orders as incomplete: unmarko](#unmarko)
+     * [Marks order as complete: marko](#marko)
+     * [Marks order as incomplete: unmarko](#unmarko)
      * [Listing all incomplete orders: incompleteo](#incompleteo)
    * [Clearing all Customers and Orders: clear](#clear)
    * [Exiting the program : exit](#exit)
    * [Using Natural Dates](#natural-dates)
-   * [Resizing of application window](#resizing-window)
    * [Saving the data](#saving-data)
    * [Editing the data file](#editing-data)
 3. [FAQ](#faq)
@@ -63,7 +62,7 @@ ReadyBakey is a **desktop app that manages orders and customer contact informati
 
   * **`exit`** : Exits the app.
 
-  :exclamation: Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -134,27 +133,30 @@ Format: `addp n/NAME p/PHONE e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
   * The tag prefix cannot be left empty E.g.`t/`, an error will be thrown to the user.
 
 Examples:
-* `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/friends t/owesMoney`
+* `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Allergic to Peanuts t/Member 
+  t/Regular` adds a new customer to ReadyBakey with the name John Doe, phone number 98765432, email johnd@example.
+  com, address 311, Clementi Ave 2, #02-25, with the remark that he is "Allergic to Peanuts". He also tagged as a 
+  Member and also a Regular. 
 
 ### Delete a customer: `deletep` <a name="deletep"></a>
 Removes a customer from ReadyBakey’s contact list 
 
 Format: `deletep INDEX`
 * Deletes the customer at the specified INDEX.
-* The index refers to the index number shown in the displayed customer list.
-* The index must be a positive integer 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the displayed customer list.
+* The `INDEX` must be a positive integer 1, 2, 3, …​
 * Only customers with no orders can be deleted.
 
 Examples:
-* `deletep 2`
+* `deletep 2` deletes the customer at index 2 from ReadyBakey. 
 
 ### Listing all customers: `listp` <a name="listp"></a>
-Shows a list of all customers in ReadyBakey’s contact list
+Shows a list of all customers in ReadyBakey.
 
 Format: `listp`
 
 Examples:
-* `listp`
+* `listp` lists all the customer in ReadyBakey.
 
 ### Editing a customer's information : `editp` <a name="editp"></a>
 
@@ -162,8 +164,9 @@ Edits an existing customer in ReadyBakey's contact list.
 
 Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…`
 
-* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. 
-* The index **must be a positive integer** 1, 2, 3, …​
+* Edits the customer at the specified `INDEX`. 
+* The `INDEX` refers to the index number shown in the displayed customer list. 
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Names must be between 2 and 50 characters long and must only contain alphanumeric characters and spaces.
@@ -181,7 +184,7 @@ Format: `editp INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [
 * The length of the `ADDRESS` must be between 6 and 70 characters
 * The length of the `REMARK` must be less than or equal to 70 characters
 * The length of a tag must be less than or equal to 70 characters.
-  * If the tag prefix is left empty E.g. `t/`, it will remove all tags that are currently associated to the person
+  * If the tag prefix is left empty E.g. `t/`, it will remove all tags that are currently associated to the customer
   * If any tags are provided, existing tags will be removed and replaced by the tags provided
 
 Examples:
@@ -206,32 +209,36 @@ Format: `findp [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
   e.g. `Gerald Tan` will return `Gerald Lim`, `Gerald Lee`
 
 Examples:
-* `findp n/Gerald` returns `gerald` and `Gerald Tan`
-* `findp n/alex david` returns `Alex Yeoh`, `David Li`
-* `findp p/90029382` returns `90029382`
-* `findp e/alex@abc.com` returns `alex@abc.com`
-* `findp a/serangoon` returns `Blk 1 Serangoon Street 5`
-* `findp r/Allergic` returns `Allergic to Tomatoes`<br>
+* `findp n/Gerald` returns customers with names containing `Gerald` such as `gerald` and `Gerald Tan`.
+* `findp n/alex david` returns customers with names containing `alex` or `david` such as `Alex Yeoh`, `David Li`.
+* `findp p/90029382` returns customers with the phone number `90029382`.
+* `findp e/alex@abc.com` returns customers with the email address `alex@abc.com`.
+* `findp a/serangoon` returns customers with addresses containing `serangoon` such as `Blk 1 Serangoon Street 5`.
+* `findp r/Allergic` returns customers with remarks containing `Allergic` such as `Allergic to Tomatoes`<br>
 
 ### Adding an order : `addo` <a name="addo"></a>
 
 Adds an order to ReadyBakey’s order list.
 
-Format: `addo p/PHONE d/DETAILS c/DELIVERYDATETIME m/COLLECTION_TYPE [r/REMARK]…`
+Format: `addo p/PHONE c/DELIVERYDATETIME m/COLLECTION_TYPE d/DETAILS… [r/REMARK]`
 
-Examples:
-* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese`
-* `p/PHONE` must be a phone number that is already stored in ReadyBakey's person list
+* `p/PHONE` must be a phone number that is already stored in ReadyBakey's customer list
 * `c/DELIVERYDATETIME` accepts dates in the past for record keeping purposes
   * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
   * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
     case-sensitive.
 * `d/DETAILS` accept values in the form [quantity]:[description]. It can also take in multiple details
-  * A single Order accepts a single detail and up to 5 maximum details.
+  * A single Order accepts at least 1 detail and a maximum of 5 details.
   * [quantity] is an integer that belongs to a range between 1 to 99.
   * [description] cannot exceed the maximum length of 30 characters.
-  * `addo p/98765432 r/Add Cheese d/1:Chocolate Cake d/5:Banana Cake c/25-12-2022 15:30 m/Delivery`
 * `m/COLLECTION_TYPE` only accepts [delivery OR pickup] (case-insensitive)
+* `[r/REMARK]` The length of the `REMARK` must be less than or equal to 70 characters.
+* `d/DETAIL` The length of `DETAIL` must be less than or equal to 70 characters.
+
+Examples:
+* `addo p/98765432 d/1: Jerry Favourite Cheese Cake c/25-12-2022 15:30 m/Delivery r/Add Cheese` adds an order with 
+  phone number 98765432, order details of 1: Jerry Favourite Cheese Cake, to be delivered on 25th December 2022 with 
+  a remark of "Add Cheese". 
 
 ### Delete an order: `deleteo` <a name="deleteo"></a>
 
@@ -239,12 +246,12 @@ Removes an order from ReadyBakey
 
 Format: `deleteo INDEX` 
 
-* Deletes the order at the specified INDEX
-* The index refers to the index number shown in the displayed orders list.
-* The index must be a positive integer 1, 2, 3, …​
+* Deletes the order at the specified `INDEX`
+* The `INDEX` refers to the index number shown in the displayed orders list.
+* The `INDEX` must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `deleteo 2`
+* `deleteo 2` deletes an order from the Order list with the index of 2.
 
 ### Listing all orders: `listo` <a name="listo"></a>
 
@@ -259,16 +266,24 @@ Examples:
 
 Edits an existing customer in ReadyBakey's contact list.
 
-Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS] [d/DETAILS]…`
+Format: `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [d/DETAIL]… [r/REMARK]`
 
-* Edits the order at the specified `INDEX`. The index refers to the index number shown in the displayed order list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
-* It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
-  case-sensitive.
-* It accepts dates in the past for record keeping purposes
+* Edits the order at the specified `INDEX`
+* The `INDEX` refers to the index number shown in the displayed orders list.
+* The `INDEX` must be a positive integer 1, 2, 3, …​
+* `[c/DELIVERYDATETIME]` accepts dates in the past for record keeping purposes
+  * It accepts datetimes in the form of `dd-mm-yyyy HH:mm`. e.g. `01-01-2022 10:30`.
+  * It can also accept natural dates with time. e.g. `Monday 10:30` or `Mon 10:30`. Natural dates are not
+    case-sensitive.
+* `[m/COLLECTION_TYPE]` only accepts [delivery OR pickup] (case-insensitive)
+* `[d/DETAILS]` accept values in the form [quantity]:[description]. It can also take in multiple details
+  * A single Order accepts at least 1 detail and a maximum of 5 details.
+  * [quantity] is an integer that belongs to a range between 1 to 99.
+  * [description] cannot exceed the maximum length of 30 characters.
+  * If the detail prefix is left empty E.g. `d/`, it will remove all details that are currently associated to the order
+  * If any details are provided, existing details will be removed and replaced by the details provided
+* `[r/REMARK]` The length of the `REMARK` must be less than or equal to 70 characters.
+  
 
 Examples:
 * `edito 1 d/1: black forest cake`
@@ -318,13 +333,13 @@ Format: `findo [ATTRIBUTE] KEYWORD [MORE_KEYWORDS]`
   e.g. `Banana Cake` will return `Banana Leaf`, `Strawberry Cake`
 
 Examples:
-* `findo n/Declan` returns `declan` and `Declan Lee`
-* `findo p/90029382` returns `90029382`
-* `findo d/cake` returns `Cake` and `Banana Cake`
-* `findo m/delivery` returns `Delivery`
-* `findo r/birthday` returns `Birthday` <br>
+* `findo n/Declan` returns orders with names containing `Declan` such as `declan` and `Declan Lee`.
+* `findo p/90029382` returns orders with the phone number `90029382`
+* `findo d/cake` returns orders with details containing `cake` such as `Cake` and `Banana Cake`.
+* `findo m/delivery` returns orders with the collection type `Delivery`
+* `findo r/birthday` returns order with remarks containing `birthday` such as `Birthday celebration` and `Birthday` <br>
 
-### Mark orders as Complete: `marko` <a name="marko"></a>
+### Mark orders as complete: `marko` <a name="marko"></a>
 
 Marks an order as complete in ReadyBakey
 
@@ -336,11 +351,11 @@ Format: `marko INDEX`
 * If a complete order is marked again, it will remain as marked and no error will be thrown.
 
 Examples:
-* `marko 1`
+* `marko 1` marks the first order as completed.
 
-### Unmark orders as incomplete: `unmarko` <a name="unmarko"></a>
+### Marks orders as incomplete: `unmarko` <a name="unmarko"></a>
 
-Unmarks an order as incomplete in ReadyBakey
+Marks an order as incomplete in ReadyBakey.
 
 Format: `unmarko INDEX`
 
@@ -350,7 +365,7 @@ Format: `unmarko INDEX`
 * If an incomplete order is unmarked again, it will remain as unmarked and no error will be thrown.
 
 Examples:
-* `unmarko 1`
+* `unmarko 1` marks the first order as incomplete.
 
 ### Listing all incomplete orders: `incompleteo` <a name="incompleteo"></a>
 
@@ -363,8 +378,10 @@ Format: `incompleteo DELIVERYDATETIME`
   case-sensitive.
 
 Examples:
-* `incompleteo 25-12-2022 15:30`
-* `incompleteo Monday 15:30`
+* `incompleteo 25-12-2022 15:30` returns all orders which are marked incomplete and are due before 25th December 2022 
+  at 3.30pm (inclusive) in the Orders List.
+* `incompleteo Monday 15:30` returns all orders which are marked incomplete and are due before the nearest Monday
+  at 3.30pm (inclusive) in the Orders List.
 
 ### Clearing all Customers and Orders: `clear` <a name="clear"></a>
 
@@ -373,7 +390,7 @@ Removes all customers and orders stored in ReadyBakey
 Format: `clear`
 
 Examples:
-* `clear`
+* `clear` clears all of the customers and orders stored in ReadyBakey.
 
 ### Exiting the program : `exit` <a name="exit"></a>
 
@@ -382,14 +399,14 @@ Exits the program.
 Format: `exit`
 
 Examples:
-* `exit`
+* `exit` closes the application in 3 seconds.
 
 ### Using Natural Dates <a name="natural-dates"></a>
 
 In order to provide a quicker method of referring to near dates, ReadyBakey allows users to use natural dates to refer to the directly upcoming days of the week.
 The closest upcoming date that corresponds to the natural date's day input will be used. The time in HH:MM must still be provided by the user, along with the natural date.
 
-This can be used in any command where dates are required, such as `incompleteo` and `addo`.
+This can be used in any command where dates are required, such as `incompleteo`, `edito`, and `addo`.
 
 Format: `Day HH:mm`
 
@@ -419,6 +436,10 @@ Example of natural date:
   2022` as the closest Thursday.
   * Reason: `08:30` has already passed the current time, hence ReadyBakey will look for a future date that is a
     Thursday instead.
+* If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 09:30` will return `14th April
+    2022` as the closest Thursday.
+  * Reason: `09:30` has already passed the current time, hence ReadyBakey will look for a future date that is a
+    Thursday instead.
 * If the current time is `7th April 2022 09:30`, which is a Thursday, inputting `Thurs 10:30` will return `7th April 2022` as the closest Thursday.
   * Reason: `10:30` has not passed the current time, hence ReadyBakey will look at the current day as the closest
     Thursday.
@@ -431,20 +452,17 @@ Example of natural dates in action:
 Natural Date and it will be shown in the Response Box after the command is executed. (i.e. You cannot specify that
 you want the date to be the Monday or any natural date 10 weeks from now)
 
-### Resizing of application window <a name="resizing-window"/>
-The window size is fixed and expanding it will not resize the window.
-
 ### Saving the data <a name="saving-data"></a>
+
 ReadyBakey data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file <a name="editing-data"></a>
+
 ReadyBakey data are saved as a JSON file `[JAR file location]/data/readybakey.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ReadyBakey will discard all data and start with an empty data file at the next run.
 </div>
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -469,7 +487,7 @@ If your changes to the data file makes its format invalid, ReadyBakey will disca
 | **listo**   | `listo`                                                                          | `listo`                                                                                                          |
 | **marko**   | `marko INDEX`                                                                    | `marko 1`                                                                                                        |
 | **unmarko** | `unmarko INDEX`                                                                  | `unmarko 1`                                                                                                      |
-| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARKS] [d/DETAILS]…​` | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
+| **edito**   | `edito INDEX [c/DELIVERYDATETIME] [m/COLLECTION_TYPE] [r/REMARK] [d/DETAIL]…​`   | `edito 1 r/Add Cheese d/1: Jerry Favourite Cheese Cake d/2: Chocolate Cake c/25-12-2022 15:30 m/Delivery`        |
 | **findo**   | `findo [ATTRIBUTE_PREFIX] KEYWORD [MORE_KEYWORDS]...`                            | `findo n/Gerald Declan`                                                                                          |
 | **clear**   | `clear`                                                                          | `clear`                                                                                                          |
 | **exit**    | `exit`                                                                           | `exit`                                                                                                           |
