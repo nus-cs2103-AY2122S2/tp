@@ -191,19 +191,21 @@ public class ModelManagerTest {
 
     @Test
     public void hasModule_moduleNotInTAssist_returnsFalse() {
-        assertFalse(modelManager.hasEntity(TypicalModules.CS2101));
+        TaModule module = TypicalModules.getModule(TypicalModules.CS2101);
+        assertFalse(modelManager.hasEntity(module));
     }
 
     @Test
     public void hasModule_moduleInTAssist_returnsTrue() {
-        modelManager.addEntity(TypicalModules.CS2101);
-        assertTrue(modelManager.hasEntity(TypicalModules.CS2101));
+        TaModule module = TypicalModules.getModule(TypicalModules.CS2101);
+        modelManager.addEntity(module);
+        assertTrue(modelManager.hasEntity(module));
     }
 
     @Test
     public void getModuleList() {
-        TaModule module1 = TypicalModules.CS2101;
-        TaModule module2 = TypicalModules.CS2103T;
+        TaModule module1 = TypicalModules.getModule(TypicalModules.CS2101);
+        TaModule module2 = TypicalModules.getModule(TypicalModules.CS2103T);
         modelManager.addEntity(module1);
         modelManager.addEntity(module2);
         Predicate<TaModule> filter = (TaModule module) -> {
@@ -224,7 +226,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteModule() {
-        TaModule module = TypicalModules.CS2101;
+        TaModule module = TypicalModules.getModule(TypicalModules.CS2101);
         modelManager.addEntity(module);
         assertTrue(modelManager.hasEntity(module));
         modelManager.deleteEntity(module);
