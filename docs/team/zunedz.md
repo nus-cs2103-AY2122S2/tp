@@ -54,6 +54,12 @@ Given below are my contributions to the project.
     * Implement the base feature of clickable person card. 
     * Refactor the whole `transaction` feature to follow the same patterns in `client` feature. 
 
+* **Contribution to team based tasks**:
+  * Contributed adding user stories
+  * Contributed creating weekly demos
+  * Adding and tracking issues
+
+
 * **Documentation**:
     * User Guide:
         * Added documentation for the `addTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
@@ -62,11 +68,29 @@ Given below are my contributions to the project.
         * Added documentation for the `findTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
         * Added documentation for the `pay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
         * Added documentation for the `unpay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
-    
+          
     * Developer Guide:
-        * Added implementation details of the `addTransaction` feature
+        * Added implementation details for the `addTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250)
+        * Added implementation details for the `deleteTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
+        * Added implementation details for the `listTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
+        * Added implementation details for the `findTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
+        * Added implementation details for the `pay` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
+        * Added implementation details for the `unpay` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
     
 * **Tests**:
   * Add test cases for various transaction features. [\#78](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/78),
     [\#138](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/138), 
     [\#144](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/144)
+
+
+* **Contribution to Developer Guide (extracts)**
+  * Sequence diagrams
+    ![ activity diagram](../images/AddTransactionSequenceDiagram.png)
+    ![ activity diagram](../images/PaySequenceDiagram.png)
+    ![ activity diagram](../images/FindTransactionSequenceDiagram.png)
+  * Activity diagrams
+    ![ activity diagram](../images/AddTransactionActivityDiagram.png)
+    ![ activity diagram](../images/PayDiagram.png)
+    ![ activity diagram](../images/FindTransactionActivityDiagram.png)
+  * Class diagrams
+    ![ activity diagram](../images/TransactionClassDiagram.png)
