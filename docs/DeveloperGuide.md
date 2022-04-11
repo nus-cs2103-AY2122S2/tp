@@ -376,7 +376,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
       Use case ends.
 
-**Use case: UC02 - View contact's portfolio**
+<ins>**Use case: UC02 - View contact's portfolio**</ins>
 
 **MSS**
 1. User <ins>adds a contact (UC01)</ins> with a specific GitHub username.
@@ -477,7 +477,6 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 9. HackNet must be free of charge and open sourced.
 10. HackNet must be able to run after downloading and not require installation.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -534,8 +533,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete the first line containing `{` in the data file `data/addressbook.json`.
+   2. Start the application and exit right after.
 
+    Expected: Data from data file is cleared and contains no entry.
 
 ## **Appendix: Effort**
 
