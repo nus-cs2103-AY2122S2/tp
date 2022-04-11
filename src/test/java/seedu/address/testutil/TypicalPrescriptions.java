@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalPatients.getTypicalPatients;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.MedBook;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 
 /**
@@ -30,6 +33,9 @@ public class TypicalPrescriptions {
      */
     public static MedBook getTypicalMedBook() {
         MedBook ab = new MedBook();
+        for (Patient patient : getTypicalPatients()) {
+            ab.addPatient(patient);
+        }
         for (Prescription prescription : getTypicalPrescription()) {
             ab.addPrescription(prescription);
         }
