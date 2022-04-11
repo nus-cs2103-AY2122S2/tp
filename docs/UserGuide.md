@@ -41,7 +41,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
    * **`exit`** : Exits the app.
 
-6. If this is your first time reading our user guide, you can refer to our [Guide Walkthrough](#guide-walkthrough) section to learn how to navigate the guide, and eventually the app.
+6. If this is your first time reading our user guide, you can refer to the [Overview](#overview-of-internbuddy) section
+to learn more about the app, or to the [Features Guide](#features-guide) section to better understand the [Features](#features)
+section of the app.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of InternBuddy
