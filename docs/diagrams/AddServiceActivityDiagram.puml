@@ -1,4 +1,5 @@
 @startuml
+start
 :User executes the 'adds' command;
 
 'Since the beta syntax does not support placing the condition outside the

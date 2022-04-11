@@ -10,7 +10,7 @@ if () then ([valid command format])
     if () then ([valid parameters])
         :Update the selected date store\nin model;
         :Filter the bookings list for the \nweek containing the new date;
-        :Display the week view of the \nfiltered bookings;
+        :Ui display the week view of \nthe filtered bookings;
     else ([else])
         :Shows an invalid \nparameters error message;
         stop
