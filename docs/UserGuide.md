@@ -83,6 +83,7 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 
 :information_source: Notes about the `add` Command for player.
 
+* `NAME` must be **alphanumeric** and should not be blank.
 * `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players. 
 * The first character of every word in `NAME` are **recommended being capitalized**. For example:`John Doe` instead of `john doe`
 * `NAME` must not exist in MyGM already.
@@ -99,12 +100,13 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
         - Have each domain label start and end with alphanumeric characters
         - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
+* If the same tag is specified twice, it will only be captured only once. <br> e.g. `t/PG t/PG t/PG` will be treated as `t/PG`.
 </div>
 
 Examples:
-* `add P/ n/Josh Doe j/9 w/70 h/190 p/98760000 e/joshd@example.com` Adds a player by the name of `Josh Doe`, with a jersey number of `9`, weight of `70`kg, height of `190`cm, handphone number of `98760000`, email of `joshd@example.com` to MyGM
-* `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of `John Doe`, with a jersey number of `3`, weight of `69`kg, height of `188`cm, handphone number of `98765432`, email of `johnd@example.com` with the position of `PG` to MyGM
-* `add P/ n/James Doe j/6 w/100 h/206 p/98761234 e/jamesd@example.com t/PG t/SF` Adds a player by the name of James Doe, with a jersey number of `6`, weight of `100`kg, height of `206`cm, handphone number of `98761234`, email of `jamesd@example.com` with the position of `PG` and `SF` to MyGM
+* `add P/ n/Josh Doe j/9 w/70 h/190 p/98760000 e/joshd@example.com` <br> Adds a player by the name of `Josh Doe`, with a jersey number of `9`, weight of `70`kg, height of `190`cm, handphone number of `98760000`, email of `joshd@example.com` to MyGM.
+* `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` <br> Adds a player by the name of `John Doe`, with a jersey number of `3`, weight of `69`kg, height of `188`cm, handphone number of `98765432`, email of `johnd@example.com` with the position of `PG` to MyGM.
+* `add P/ n/James Doe j/6 w/100 h/206 p/98761234 e/jamesd@example.com t/PG t/SF` <br> Adds a player by the name of James Doe, with a jersey number of `6`, weight of `100`kg, height of `206`cm, handphone number of `98761234`, email of `jamesd@example.com` with the position of `PG` and `SF` to MyGM.
 
 ![AddPlayer_SS](images/AddPlayer_SS.png)
 
@@ -116,15 +118,16 @@ Format: `add L/ n/LINEUP_NAME`
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Notes about the lineup added after the `add` Command.
+:information_source: Notes about the `add` Command for lineup.
 
+* `LINEUP_NAME` must be in **alphanumeric** and should not be blank.
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 * The new `LINEUP_NAME` must not exist in MyGM already.
 * After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#25-viewing-playerschedulelineup-view) section.
 
 </div>
 
-Examples:
+Example:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
 
 ![AddLineup_SS](images/AddLineup_SS.png)
@@ -139,7 +142,9 @@ Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 
 :information_source: Notes about the `add` Command for schedule.
 
-* `DATETIME` must be in a dd/mm/yyyy hhmm format, where hhmm is in 24-hour clock.
+* `DATETIME` must be in a dd/mm/yyyy HHmm format, where HHmm is in 24-hour clock. <br> e.g. `04/04/2024 1400`
+* `SCHEDULE_NAME` must be **alphanumeric** and should not be blank.
+* `DESCRIPTION` should not be blank.
 * Multiple schedules can be added to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
@@ -233,7 +238,7 @@ Format: `put P/PLAYER L/LINEUP`
 Example:
 * `put P/John Doe L/starting five` Puts `John Doe` into the lineup named `starting five`.
 
-* ![Put_SS](images/Put_SS.png)
+![Put_SS](images/Put_SS.png)
 
 ### 2.5. Viewing player/schedule/lineup: `view`
 
@@ -262,11 +267,11 @@ players with such name exists.
 
 Examples:
 * `view P/` Displays all the players
-* `view P/Kelvin Darent` Displays all the players that have "Kelvin" **or** "Darent" in their name
-* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is
-greater than or equals to 80kg
+* `view P/Kelvin Darent` Displays all the players that have `Kelvin` **or** `Darent` in their name
+* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than `180`cm **and** weight that is
+greater than or equals to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
-is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
+is lesser than `213`cm **and** weight equals to 100kg **and** plays the position of `SG` or `SF`
 
 * ![viewPlayer](images/viewPlayer.png)
 
