@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -19,22 +20,30 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final GitUsername gitUsername;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+
     /**
-     * Every field must be present and not null.
+     * Constructs a Person object using 5 fields: name, Phone, Email, Address, and any number of tags.
+     *
+     * @param name Name of Person.
+     * @param phone Phone Number of Person.
+     * @param email Email address of Person.
+     * @param gitUsername Github GitUsername of Person.
+     * @param tags Tags for Person.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, GitUsername gitUsername, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, gitUsername, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.gitUsername = gitUsername;
         this.tags.addAll(tags);
     }
+
 
     public Name getName() {
         return name;
@@ -48,8 +57,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public GitUsername getUsername() {
+        return this.gitUsername;
     }
 
     /**
@@ -61,7 +70,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons are the same object.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -70,7 +79,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.equals(this);
     }
 
     /**
@@ -88,17 +97,16 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
+        return otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getUsername().equals(getUsername())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, gitUsername, tags);
     }
 
     @Override
@@ -109,13 +117,13 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Github: ")
+                .append(getUsername());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            builder.append("; Tags: ")
+                    .append(tags.stream().<CharSequence>map(Tag::toString).collect(Collectors.joining(", ")));
         }
         return builder.toString();
     }

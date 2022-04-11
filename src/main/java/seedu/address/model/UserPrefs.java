@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path taskListFilePath = Paths.get("data", "tasklist.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,19 +39,31 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
+    /**
+     * Returns the GUI settings.
+     */
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
 
+    /**
+     * Sets the GUI setting with {@code guiSettings}.
+     */
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
     }
 
+    /**
+     * Returns the path of address book.
+     */
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
 
+    /**
+     * Sets the path of address book to {@code addressBookFilePath}.
+     */
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
@@ -84,4 +97,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+    /**
+     * Returns the path of task list.
+     */
+    public Path getTaskListFilePath() {
+        return taskListFilePath;
+    }
 }

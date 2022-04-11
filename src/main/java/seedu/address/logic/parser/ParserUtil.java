@@ -1,26 +1,34 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GitUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Link;
+import seedu.address.model.task.Task;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -65,20 +73,6 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -92,7 +86,46 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+
+        if (!Email.isValidLength(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses task name
+     *
+     * @param option String input for Git username
+     * @return The Task name.
+     */
+    public static String parseTaskName(Optional<String> option) throws ParseException {
+        requireNonNull(option);
+
+        String trimmedUsername = option.get().trim();
+        if (!Task.isValidLength(trimmedUsername)) {
+            throw new ParseException(Task.NAME_LENGTH_ERROR);
+        }
+
+        return trimmedUsername;
+    }
+
+    /**
+     * Parses Git username. Only allows AlphaNumeric and hyphens, as per GitHub's username formats.
+     * Spaces are not allowed.
+     *
+     * @param gitUsername String input for Git username
+     * @return GitUsername object created using user input
+     * @throws ParseException If gitUsername is not in alphanumeric format or has symbols other than hyphens.
+     */
+    public static GitUsername parseGitUsername(String gitUsername) throws ParseException {
+        requireNonNull(gitUsername);
+        String trimmedUsername = gitUsername.trim();
+        if (!GitUsername.isValidId(trimmedUsername)) {
+            throw new ParseException(GitUsername.MESSAGE_CONSTRAINTS);
+        }
+        return new GitUsername(trimmedUsername);
     }
 
     /**
@@ -120,5 +153,63 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@Code Optional<String> option} into a {@code Link}.
+     */
+    public static Link parseLink(Optional<String> option) throws ParseException {
+        requireNonNull(option);
+        if (option.isEmpty()) {
+            return new Link();
+        } else {
+            if (!Link.isValidLink(option.get())) {
+                throw new ParseException(Link.MESSAGE_CONSTRAINTS);
+            }
+            return new Link(option.get());
+        }
+    }
+
+    /**
+     * Parses {@Code Optional<String> option} into a {@code String[]}.
+     */
+    public static String[] parseRecurring(Optional<String> option) throws ParseException {
+        requireNonNull(option);
+        if (option.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
+        }
+
+        String arg = option.get();
+        String[] commands = arg.split(" ");
+
+        if (commands.length != 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
+        }
+
+        return commands;
+    }
+
+    /**
+     * Checks if the given prefixes are provided in the argMultimap
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Creates and returns the Path of the import file.
+     *
+     * @param option Optional containing the filepath
+     * @return The path of the file
+     * @throws ParseException if no filepath is provide
+     */
+    public static Path parsePath(Optional<String> option) throws ParseException {
+        requireNonNull(option);
+
+        if (option.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        }
+
+        return Path.of(option.get());
     }
 }

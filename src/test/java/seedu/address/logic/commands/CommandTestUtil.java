@@ -3,12 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GIT_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +23,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -32,8 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_USERNAME_AMY = "amy123";
+    public static final String VALID_USERNAME_BOB = "bob123";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -43,14 +50,20 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String USERNAME_DESC_AMY = " " + PREFIX_GIT_USERNAME + VALID_USERNAME_AMY;
+    public static final String USERNAME_DESC_BOB = " " + PREFIX_GIT_USERNAME + VALID_USERNAME_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_PHONE_SHORT = " " + PREFIX_PHONE + "99";
+    public static final String INVALID_PHONE_LONG = " " + PREFIX_PHONE + "99999999999999999";
+
+    public static final String INVALID_EMAIL_LONG = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA@gmail.com";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_EMAIL_DESC_LONG = " " + PREFIX_EMAIL + INVALID_EMAIL_LONG; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
@@ -60,13 +73,62 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    //------------------------ For task--------------------------------------------------------
+    public static final String VALID_NAME_TASKA = "Homework";
+    public static final String VALID_NAME_TASKB = "Brush my teeth";
+    public static final String VALID_LINK_TASKA = "https:google.com";
+    public static final String VALID_LINK_TASKB = "https:apple.com";
+    public static final String INVALID_LINK = "a";
+    public static final LocalDateTime VALID_DATETIME_TASKA =
+            LocalDateTime.of(2050, 12, 15, 21, 0);
+    public static final String VALID_DATETIME_TASKA_STRING = "15-12-2050 2100";
+    public static final String VALID_DATETIME_TASKA_PLUS_ONE_DAY = "16-12-2050 2100";
+    public static final LocalDateTime VALID_DATETIME_TASKB =
+            LocalDateTime.of(2050, 02, 05, 13, 0);
+    public static final String VALID_DATETIME_TASKB_STRING = "05-02-2050 1300";
+    public static final String VALID_TAG_TASKA = "Schoolwork";
+    public static final String VALID_TAG_TASKB = "Toilet";
+    public static final String VALID_TAG_CHORES = "Chores";
+    public static final String INVALID_TASK_NAME_SHORT = "A";
+    public static final String INVALID_TASK_NAME_LONG = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    public static final EditTaskCommand.EditTaskDescriptor TASK_A;
+    public static final EditTaskCommand.EditTaskDescriptor TASK_B;
+
+    public static final String NAME_DESC_TASKA = " " + PREFIX_TASKNAME + VALID_NAME_TASKA;
+    public static final String NAME_DESC_TASKB = " " + PREFIX_TASKNAME + VALID_NAME_TASKB;
+    public static final String DATETIME_DESC_TASKA = " " + PREFIX_DATETIME + "15-12-2050 2100";
+    public static final String DATETIME_DESC_TASKB = " " + PREFIX_DATETIME + "05-02-2050 1300";
+    public static final String TAG_DESC_TASKA = " " + PREFIX_TAG + VALID_TAG_TASKA;
+    public static final String TAG_DESC_TASKB = " " + PREFIX_TAG + VALID_TAG_TASKB;
+    public static final String WORDS_IN_DATETIME = " " + PREFIX_DATETIME + "";
+
+    public static final String INVALID_DATETIME_WORDS = PREFIX_DATETIME + "10-06-abcd 1500"; // Words instead of numbers
+    public static final String INVALID_DATETIME_FORMAT = PREFIX_DATETIME + "22/11/2050 1220"; // Wrong format
+    public static final String INVALID_DATETIME_DAY = PREFIX_DATETIME + "32-02-2050 1220"; // Wrong Day
+    public static final String INVALID_DATETIME_MONTH = PREFIX_DATETIME + "02-22-2050 1220"; // Wrong Month
+    public static final String INVALID_DATETIME_LEAPYEAR = PREFIX_DATETIME + "29-02-2021 1220"; // Wrong Leap year
+    public static final String INVALID_DATETIME_VALUE_NOTIME = "55-02-2021"; // Wrong Leap year
+
+    public static final String VALID_DATETIME_NOTIME_STRING = "13-12-2050";
+    public static final LocalDateTime VALID_DATETIME_NOTIME =
+            LocalDateTime.of(2050, 12, 13, 0, 0);
+    public static final String VALID_DATETIME_NOTIME_LATER_STRING = "30-12-2050";
+    public static final LocalDateTime VALID_DATETIME_NOTIME_LATER =
+            LocalDateTime.of(2050, 12, 30, 23, 59);
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withUsername(VALID_USERNAME_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withUsername(VALID_USERNAME_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        TASK_A = new EditTaskDescriptorBuilder().withTaskName(VALID_NAME_TASKA)
+                .withDateTime(VALID_DATETIME_TASKA).withTags(VALID_TAG_TASKA).build();
+        TASK_B = new EditTaskDescriptorBuilder().withTaskName(VALID_NAME_TASKB)
+                .withDateTime(VALID_DATETIME_TASKB).withTags(VALID_TAG_TASKB).build();
     }
 
     /**
@@ -123,6 +185,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s Task List.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String taskName = task.getName();
+        String[] arrTaskName = taskName.split(" ");
+        model.updateFilteredTaskList(new TaskNameContainsKeywordsPredicate(Arrays.asList(arrTaskName)));
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAssignedTasks.getTypicalAssignedTaskList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -13,10 +14,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TaskList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +30,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new TaskList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +39,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +62,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
@@ -74,6 +80,45 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_tasksUpdated_success() throws CommandException {
+        Person toDelete = model.getFilteredPersonList().get(0);
+
+        Model m = new ModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs(), new TaskList());
+
+
+        Task affectedTask = new TaskBuilder().build();
+        affectedTask.addPerson(toDelete);
+
+        m.addTask(affectedTask);
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        deleteCommand.execute(m);
+
+        assertFalse(affectedTask.containsPerson(toDelete));
+    }
+
+    @Test
+    public void execute_personInTask_isRemovedFromTask() {
+        Model mod = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalAssignedTaskList());
+        Model expectedMod = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalAssignedTaskList());
+        Person personToDelete = mod.getFilteredPersonList().get(0);
+
+        DeleteCommand deleteCommand =
+                new DeleteCommand(Index.fromZeroBased((0)));
+
+        assertTrue(mod.getFilteredTaskList().stream().anyMatch(task -> task.containsPerson(personToDelete)));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        expectedMod.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, mod, expectedMessage, expectedMod);
+
+        assertTrue(expectedMod.getFilteredTaskList().stream().allMatch(task -> !task.containsPerson(personToDelete)));
     }
 
     @Test

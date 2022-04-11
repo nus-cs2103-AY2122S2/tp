@@ -5,7 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.GitUsername;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -59,11 +62,55 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same attributes as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if gitUsername already exists in the address book.
+     *
+     * @param gitUsername Github gitUsername to be checked
+     * @return true/false whether gitUsername already exists.
+     */
+    public boolean hasUsername(GitUsername gitUsername) {
+        requireNonNull(gitUsername);
+        return persons.containsUsername(gitUsername);
+    }
+
+    /**
+     * Checks if AddressBook has an existing contact with this email.
+     *
+     * @param email Email to be checked.
+     * @return Whether email exists.
+     */
+    public boolean hasEmail(Email email) {
+        requireNonNull(email);
+        return persons.containsEmail(email);
+    }
+
+    /**
+     * Checks if AddressBook has an existing contact with this phone number.
+     *
+     * @param phone Phone number to be checked.
+     * @return Whether phone number exists.
+     */
+    public boolean hasPhone(Phone phone) {
+        requireNonNull(phone);
+        return persons.containsPhone(phone);
+    }
+
+    /**
+     * Checks if AddressBook has an existing contact with this GitUsername.
+     *
+     * @param gitUsername Git username to be checked.
+     * @return Whether git username exists.
+     */
+    public boolean hasGitUsername(GitUsername gitUsername) {
+        requireNonNull(gitUsername);
+        return persons.containsUsername(gitUsername);
     }
 
     /**
