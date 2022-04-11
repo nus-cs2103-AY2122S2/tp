@@ -21,7 +21,7 @@ Given below are my contributions to the project.
       1. Made modifications to the application to ensure better User Experience. Pull request: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116)
           * Implemented the wrapping of text in the app's respective elements, so text will not be truncated/ run off-screen.
           * Added ability for result display to grow in size as window size increased, to take advantage of screen real-estate.
-          * Returned the ability to resize the window after approved PR wrongly caused that.
+          * Returned ability to resize app after a PR removed that.
       2. Added functionality to messages shown in result display
          1. Standardised format of all types of messages in result display. Pull requests: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116), [#225](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/225), [#234](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/234)
              * For example: For the incorrect format of `add` command message, I ensure that for every type (patient, contact, consultation, medical, prescription, test) use the same format -- the same error message, followed by the proper format and parameter of the command, followed by an example of the command.
@@ -32,7 +32,7 @@ Given below are my contributions to the project.
   2. Added increased functionality to the application
       * Added scroll bar and its styling. Pull request: [#116](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/116)
         * Added scroll bar with incremental arrow buttons. 
-        * Added styling that causes scroll bar buttons to respond visually to hover and presses.
+        * Added scroll bar buttons' visual response to hover and press.
   3. Contributed to standardising command behavior
      * Ensured `edit t/medical INDEX` command followed other types' `edit` command -- only valid if at least one optional field is filled out. Pull request: [#240](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/240)
   4. Added Dummy data when data file unavailable
