@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.HOON;
 import static seedu.address.testutil.TypicalPatients.IDA;
-import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalMedBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,25 +63,25 @@ public class JsonMedBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        MedBook original = getTypicalAddressBook();
-        JsonMedBookStorage jsonAddressBookStorage = new JsonMedBookStorage(filePath);
+        MedBook original = getTypicalMedBook();
+        JsonMedBookStorage jsonMedBookStorage = new JsonMedBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveMedBook(original, filePath);
-        ReadOnlyMedBook readBack = jsonAddressBookStorage.readMedBook(filePath).get();
+        jsonMedBookStorage.saveMedBook(original, filePath);
+        ReadOnlyMedBook readBack = jsonMedBookStorage.readMedBook(filePath).get();
         assertEquals(original, new MedBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPatient(HOON);
         original.removePatient(ALICE);
-        jsonAddressBookStorage.saveMedBook(original, filePath);
-        readBack = jsonAddressBookStorage.readMedBook(filePath).get();
+        jsonMedBookStorage.saveMedBook(original, filePath);
+        readBack = jsonMedBookStorage.readMedBook(filePath).get();
         assertEquals(original, new MedBook(readBack));
 
         // Save and read without specifying file path
         original.addPatient(IDA);
-        jsonAddressBookStorage.saveMedBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readMedBook().get(); // file path not specified
+        jsonMedBookStorage.saveMedBook(original); // file path not specified
+        readBack = jsonMedBookStorage.readMedBook().get(); // file path not specified
         assertEquals(original, new MedBook(readBack));
 
     }
