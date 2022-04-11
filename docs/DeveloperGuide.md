@@ -512,6 +512,8 @@ selected show.
 * can type fast and prefers typing to mouse interactions.
 * wants to be able to maintain a local copy of their list of shows
 
+<div style="page-break-after: always;"></div>
+
 **Value proposition**:
 
 * Helps users keep track of all their shows in a single application.
