@@ -6,8 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.assessment.Assessment;
 
+//@@author Gernene
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Assessment}.
  */
 public class AssessmentCard extends UiPart<Region> {
 
@@ -35,7 +36,10 @@ public class AssessmentCard extends UiPart<Region> {
     private Label module;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code AssessmentCard} with the given {@code Assessment} and index to display.
+     * 
+     * @param assessment
+     * @param displayIndex
      */
     public AssessmentCard(Assessment assessment, int displayedIndex) {
         super(FXML);
@@ -48,6 +52,9 @@ public class AssessmentCard extends UiPart<Region> {
         attemptsWindow = new AssessmentAttemptsWindow(assessment.getAttempts());
     }
 
+    /**
+     * Opens the attempts popup when user selects the "See Attempts" button via GUI.
+     */
     @FXML
     private void handleAttempts() {
         if (!attemptsWindow.isShowing()) {

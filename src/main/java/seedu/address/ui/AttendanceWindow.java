@@ -10,8 +10,9 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 
+//@@author Gernene
 /**
- * Controller for a help page
+ * Controller for a attendance popup.
  */
 public class AttendanceWindow extends UiPart<Stage> {
 
@@ -22,9 +23,9 @@ public class AttendanceWindow extends UiPart<Stage> {
     private ListView<Lesson> lessonListView;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new AttendanceWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param lessonList A list of lessons to display.
      */
     public AttendanceWindow(ObservableList<Lesson> lessonList) {
         super(FXML, new Stage());
@@ -43,21 +44,21 @@ public class AttendanceWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the attendance window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the attendance window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the attendance window.
      */
     public void focus() {
         getRoot().requestFocus();

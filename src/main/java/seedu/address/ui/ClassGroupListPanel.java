@@ -10,8 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.classgroup.ClassGroup;
 
+//@author Gernene
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of class groups.
  */
 public class ClassGroupListPanel extends UiPart<Region> {
     private static final String FXML = "ClassGroupListPanel.fxml";
@@ -30,7 +31,7 @@ public class ClassGroupListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ClassGroup} using a {@code ClassGroupCard}.
      */
     class ClassGroupListViewCell extends ListCell<ClassGroup> {
         @Override

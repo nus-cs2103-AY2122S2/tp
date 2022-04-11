@@ -13,8 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Grade;
 import seedu.address.model.student.Student;
 
+//@@author Gernene
 /**
- * Controller for a help page
+ * Controller for an assessment attempts popup.
  */
 public class AssessmentAttemptsWindow extends UiPart<Stage> {
 
@@ -25,9 +26,9 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
     private ListView<AssessmentAttempt> attemptListView;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new popup to display assessment attempts.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param attempts Map of attempts to display.
      */
     public AssessmentAttemptsWindow(Map<Student, Grade> attempts) {
         super(FXML, new Stage());
@@ -50,21 +51,21 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the attempts window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the attempts window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the attempts window.
      */
     public void focus() {
         getRoot().requestFocus();
@@ -88,6 +89,9 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Class which represents an assessment attempt.
+     */
     class AssessmentAttempt {
         private Student student;
         private Grade grade;

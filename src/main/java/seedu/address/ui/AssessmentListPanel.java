@@ -10,8 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Assessment;
 
+//@@author Gernene
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of assessments.
  */
 public class AssessmentListPanel extends UiPart<Region> {
     private static final String FXML = "AssessmentListPanel.fxml";
@@ -30,7 +31,7 @@ public class AssessmentListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Assessment} using a {@code AssessmentCard}.
      */
     class AssessmentListViewCell extends ListCell<Assessment> {
         @Override

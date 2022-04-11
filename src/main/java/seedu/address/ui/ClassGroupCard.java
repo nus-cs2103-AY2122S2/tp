@@ -9,8 +9,9 @@ import javafx.scene.layout.Region;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.lesson.Lesson;
 
+//@@author Gernene
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code ClassGroup}.
  */
 public class ClassGroupCard extends UiPart<Region> {
 
@@ -44,7 +45,10 @@ public class ClassGroupCard extends UiPart<Region> {
     private Label academicYear;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ClassGroupCard} with the given {@code ClassGroup} and index to display.
+     * 
+     * @param classGroup {@code ClassGroup} to display info for.
+     * @param displayedIndex Index of the class group in the displayed list.
      */
     public ClassGroupCard(ClassGroup classGroup, int displayedIndex) {
         super(FXML);
@@ -64,7 +68,7 @@ public class ClassGroupCard extends UiPart<Region> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the attendance window or focuses on it if it's already opened.
      */
     @FXML
     public void handleAttendance() {

@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.ui.AssessmentAttemptsWindow.AssessmentAttempt;
 
+//@@author Gernene
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -34,6 +35,9 @@ public class AssessmentAttemptCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * 
+     * @param attempt A student's {@code AssessmentAttempt} to display.
+     * @param displayedIndex The attempt's index in the displayed list.
      */
     public AssessmentAttemptCard(AssessmentAttempt attempt, int displayedIndex) {
         super(FXML);

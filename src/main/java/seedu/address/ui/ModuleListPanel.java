@@ -10,8 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tamodule.TaModule;
 
+//@author Gernene
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of modules.
  */
 public class ModuleListPanel extends UiPart<Region> {
     private static final String FXML = "ModuleListPanel.fxml";
@@ -21,7 +22,7 @@ public class ModuleListPanel extends UiPart<Region> {
     private ListView<TaModule> moduleListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ModuleListPanel} with the given {@code TaModule} list.
      */
     public ModuleListPanel(ObservableList<TaModule> moduleList) {
         super(FXML);
@@ -30,7 +31,7 @@ public class ModuleListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code TaModule} using a {@code ModuleCard}.
      */
     class ModuleListViewCell extends ListCell<TaModule> {
         @Override
