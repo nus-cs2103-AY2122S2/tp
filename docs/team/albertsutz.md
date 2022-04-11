@@ -31,9 +31,7 @@ With every feature that I have implemented, I made sure to include the proper te
 * **New Command Features Implemented**:
   * Create Event Class
     * Event class has multiple additional attributes, in particular Date, Time, and Location. Thus, I contributed to code these additional 3 attributes.
-      * Create Date Class - Date attribute of the Event entry
-      * Create Time Class - Time attribute of the Event entry
-      * Create Location Class - Location attribute of the Event entry
+      * Create `Date`, `Time`, and `Location` Class
   * Find Event Command and Find Event Command Parser
     * A feature to filter events in InternBuddy by the combination of its name, companyName, date, time, location, and tags.
     * Created EventContainsKeywordsPredicate - an all-in-one event predicate used in FindEventCommand
@@ -65,8 +63,6 @@ With every feature that I have implemented, I made sure to include the proper te
     from any sources. 
   * These testing are made exactly to make sure that the tests were accurate and covered a lot of the functions. In particular, 
     from this testing, there were some medium level bugs found which would be detrimental to the application.
-  * The added `Predicate`, in particular `CompanyContainsKeywordsPredicate`, `EventContainsKeywordsPredicate`, and `PersonContainsKeywordsPredicate`
-    bundles multiple `Predicate` together. The design also make sure that all `find` commands are extendable when the `Entry`'s attribute are changed.
 * **User Guide Contribution**
   * Initial contributions to User Guide
   * Update `Quick Start`
