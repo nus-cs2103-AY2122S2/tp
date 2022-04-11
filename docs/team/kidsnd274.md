@@ -55,12 +55,10 @@ to see the code I've contributed.
 ### Contributions to the Developer Guide
 1. Added the UI design component section of the developer guide. (Pull request 
 [#131](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/131))
-   - Updated the UML diagram of the UI component
    - Added a section on how the InfoPanel and ListPanel classes are structured.
 2. Added implementation details on the `lesson` and `student` view commands. (Pull request
 [#138](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/138))
-   - Added sequence diagrams to show how the input is parsed and how the command is executed.
-   - Added a step-by-step example of how the entire command execution process is done.
+   - Added a step-by-step example with sequence diagrams of how the entire command execution process is done.
 3. Added table of contents and cleaned up formatting
 4. Added manual testing instructions for: (Pull request 
 [#266](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/266))
@@ -77,7 +75,7 @@ to see the code I've contributed.
 [#168](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/168) and 
 [#245](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/245))
 5. Updated the screenshot of the UI
-6. Improved the formatting of the user guide, by making some elements more prominent. (Pull request 
+6. Improved the formatting of the user guide. (Pull request 
 [#262](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/262))
 
 ### Contributions to team-based tasks
