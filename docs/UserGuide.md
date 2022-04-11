@@ -44,9 +44,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 6. If this is your first time reading our user guide, you can refer to our [Guide Walkthrough](#guide-walkthrough) section to learn how to navigate the guide, and eventually the app.
 
 --------------------------------------------------------------------------------------------------------------------
-## Overview of Internbuddy
+## Overview of InternBuddy
 
-InternBuddy is designed specifically for students who are searching for internships. With InternBuddy, there is no need
+InternBuddy is specially designed for students who are searching for internships. With InternBuddy, there is no need
 for you to juggle between multiple apps just to manage your multiple internship applications. This app values your
 **Time** and **Experience** by placing efficiency as one of its core principles. Let InternBuddy help you manage your 
 internship application details so you can focus on acing your assessments and interviews!
@@ -65,7 +65,8 @@ With that, InternBuddy stores 3 entry lists, one for each entry type:
 - **[Person List](#person-list)**
 - **[Event List](#event-list)**
 
-The app will only display one of these lists at any time, as shown in the screenshots of each of these lists.
+The app will only display one of these lists at any time, as shown in the screenshots of each of these lists. Lists cannot
+have duplicate entries; the criteria for what counts as a duplicate entry will be listed in the sections below.
 
 Each of these 3 entry types have different attributes attached to them. Let's dive in to understand what attributes each
 entry type can store.
@@ -80,6 +81,8 @@ A **Company** entry has:
 * A *real-life address*
 * Zero or more *tags* associated with them
 
+Two Company entries are considered duplicates of each other if they have the same name.
+
 #### Person List
 ![Person List](images/UserGuide/Ui-3.png)
 
@@ -89,6 +92,8 @@ A **Person** entry has:
 * An *email address*
 * A *phone number*
 * Zero or more *tags* associated with them
+
+Two Person entries are considered duplicates of each other if they have the same name.
 
 #### Event List
 ![Event List](images/UserGuide/Ui-4.png)
@@ -100,6 +105,8 @@ Finally, an **Event** entry has:
 * A *time*
 * A *location*
 * Zero or more *tags* associated with them
+
+Two Event entries are considered duplicates of each other if they have the same name, date, time, and company name.
 
 ### Interacting with the app
 Since **InternBuddy** is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with this app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
@@ -136,7 +143,7 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
 
 There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit).
 You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
-read the [User Guide Icons](#icons) and [Command Formats](#command-formats) section first to have a smoother
+read the [Features Guide](#features-guide) section first to have a smoother
 experience reading our [Features](#features) section :smile:.
 
 #### Dialog Box
@@ -149,6 +156,11 @@ If the command you tried to execute is **invalid** for whatever reason, an **err
 Otherwise, if the command is **valid**, a **success message** will be shown and the command will be executed. The command box will also be cleared.
 
 ![successful command](images/SuccessfulCommandExample.png)
+
+#### Archive
+InternBuddy supports archiving entries. When an entry is archived, it will be "hidden" from the entry list unless the user
+specifically chooses to display them. However, the entry can be unarchived when needed, and it will still technically
+exist in the entry list. For example, an Event or Person can still store the company name of an archived Company.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features Guide
@@ -214,7 +226,7 @@ An empty input or an input consisting only of spaces is invalid for every parame
   * If no `o/` parameter is given, InternBuddy will default to `ascending`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The keyword "today" for `DATE`, `START_DATE`, and `END_DATE` is case-insensitive.
+For the `DATE`, `START_DATE`, and `END_DATE` parameters, the keyword `today` is case-insensitive.
 </div>
 
 ### Finishing Up
@@ -562,6 +574,10 @@ delete INDEX
 * Deletes the entry at the specified `INDEX` of the currently displayed list.
 * The index refers to the index number shown in the currently displayed list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When a Company is deleted, all Persons and Events which store the company name of that Company will also be deleted.
+</div>
 
 Examples:
 * `listc` followed by `delete 2` deletes the 2nd company in the list of comapnies.
