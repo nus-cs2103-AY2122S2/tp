@@ -39,8 +39,8 @@ Computer Science undergraduate passionate about software engineering and game de
 [[github](http://github.com/graphcalibur)]
 [[portfolio](team/graphcalibur.md)]
 
-* Role: 
-* Responsibilities: TBD
+* Role: Developer
+* Responsibilities: Repository setup, issue management, archive feature implementation, testing
 
 I'm a Year 2 Computer Science undergraduate science with a passion for technology, games, and cybersecurity.
 I'm always looking for ways to improve my skills and widen my knowledge.
