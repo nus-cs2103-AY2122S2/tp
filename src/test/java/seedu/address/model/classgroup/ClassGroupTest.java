@@ -30,6 +30,7 @@ import seedu.address.model.studentattendance.Attendance;
 import seedu.address.model.studentattendance.StudentAttendance;
 import seedu.address.testutil.ClassGroupBuilder;
 import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.TypicalModules;
 
 //@@author jxt00
 public class ClassGroupTest {
@@ -128,7 +129,7 @@ public class ClassGroupTest {
         assertFalse(CS2040B10A.equals(editedCS2040B10A));
 
         // different class group module -> returns false
-        editedCS2040B10A = new ClassGroupBuilder(CS2040B10A).withModule(CS2030).build();
+        editedCS2040B10A = new ClassGroupBuilder(CS2040B10A).withModule(TypicalModules.getModule(CS2030)).build();
         assertFalse(CS2040B10A.equals(editedCS2040B10A));
 
         // different students -> returns false

@@ -64,46 +64,49 @@ public class TypicalAssessments {
         switch (i) {
         case 0:
             return new AssessmentBuilder()
-                    .withAssessmentName(PARTICIPATION).withSimpleName(PARTICIPATION_SIMPLE_NAME).withTaModule(CS2101)
+                    .withAssessmentName(PARTICIPATION).withSimpleName(PARTICIPATION_SIMPLE_NAME)
+                    .withTaModule(TypicalModules.getModule(CS2101))
                     .withAttempts(TYPICAL_ASSESSMENT_ONE_STUDENT_BENSON).build();
         case 1:
             return new AssessmentBuilder()
                     .withAssessmentName(PARTICIPATION)
-                    .withSimpleName(PARTICIPATION_SIMPLE_NAME).withTaModule(CS2103T).build();
+                    .withSimpleName(PARTICIPATION_SIMPLE_NAME).withTaModule(TypicalModules.getModule(CS2103T)).build();
         case 2:
             return new AssessmentBuilder()
                     .withAssessmentName(PARTICIPATION).withSimpleName(PARTICIPATION_SIMPLE_NAME)
-                    .withTaModule(CS2103T_WITH_STUDENT).build();
+                    .withTaModule(TypicalModules.getModule(CS2103T_WITH_STUDENT)).build();
         case 3:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB1).withSimpleName(LAB1_SIMPLE_NAME).withTaModule(CS2030)
+                    .withAssessmentName(LAB1).withSimpleName(LAB1_SIMPLE_NAME)
+                    .withTaModule(TypicalModules.getModule(CS2030))
                     .withAttempts(TYPICAL_ASSESSMENT_THREE_STUDENTS).build();
         case 4:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB2).withSimpleName(LAB2_SIMPLE_NAME).withTaModule(CS2030)
+                    .withAssessmentName(LAB2).withSimpleName(LAB2_SIMPLE_NAME)
+                    .withTaModule(TypicalModules.getModule(CS2030))
                     .withAttempts(TYPICAL_ASSESSMENT_TWO_STUDENTS_DIFF_GRADE).build();
         case 5:
             return new AssessmentBuilder()
-                    .withAssessmentName(PARTICIPATION).withTaModule(CS2040)
+                    .withAssessmentName(PARTICIPATION).withTaModule(TypicalModules.getModule(CS2040))
                     .withAttempts(TYPICAL_ASSESSMENT_ONE_STUDENT_ALICE).build();
         case 6:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB1).withTaModule(CS2040)
+                    .withAssessmentName(LAB1).withTaModule(TypicalModules.getModule(CS2040))
                     .withAttempts(TYPICAL_ASSESSMENT_ONE_STUDENT_ALICE).build();
         case 7:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB2).withTaModule(CS2040).build();
+                    .withAssessmentName(LAB2).withTaModule(TypicalModules.getModule(CS2040)).build();
         case 8:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB1).withTaModule(CS2105)
+                    .withAssessmentName(LAB1).withTaModule(TypicalModules.getModule(CS2105))
                     .withAttempts(TYPICAL_ASSESSMENT_TWO_STUDENTS_SAME_GRADE).build();
         case 9:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB2).withTaModule(CS2105)
+                    .withAssessmentName(LAB2).withTaModule(TypicalModules.getModule(CS2105))
                     .withAttempts(TYPICAL_ASSESSMENT_TWO_STUDENTS_SAME_GRADE).build();
         case 10:
             return new AssessmentBuilder()
-                    .withAssessmentName(LAB3).withTaModule(CS2105)
+                    .withAssessmentName(LAB3).withTaModule(TypicalModules.getModule(CS2105))
                     .withAttempts(TYPICAL_ASSESSMENT_TWO_STUDENTS_SAME_GRADE).build();
         default:
             return new AssessmentBuilder().build();

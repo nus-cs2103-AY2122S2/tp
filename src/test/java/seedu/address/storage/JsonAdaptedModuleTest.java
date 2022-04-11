@@ -19,6 +19,7 @@ import seedu.address.model.student.StudentId;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
+import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalStudents;
 
 public class JsonAdaptedModuleTest {
@@ -27,23 +28,23 @@ public class JsonAdaptedModuleTest {
     private static final String INVALID_ACADEMIC_YEAR = "21S9";
     private static final List<String> INVALID_STUDENT_IDS = List.of("a0123456", "a12345678");
 
-    private static final String VALID_MODULE_CODE = CS2103T.getModuleCode().toString();
-    private static final String VALID_MODULE_NAME = CS2103T.getModuleName().toString();
-    private static final String VALID_ACADEMIC_YEAR = CS2103T.getAcademicYear().toString();
+    private static final String VALID_MODULE_CODE = TypicalModules.getModule(CS2103T).getModuleCode().toString();
+    private static final String VALID_MODULE_NAME = TypicalModules.getModule(CS2103T).getModuleName().toString();
+    private static final String VALID_ACADEMIC_YEAR = TypicalModules.getModule(CS2103T).getAcademicYear().toString();
     private static final List<Student> VALID_STUDENTS = TypicalStudents.getTypicalStudents();
     private static final List<String> VALID_STUDENT_IDS = VALID_STUDENTS.stream().map(x -> x.getStudentId().toString())
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validModuleDetails_returnsModule() throws Exception {
-        JsonAdaptedTaModule module = new JsonAdaptedTaModule(CS2103T_WITH_STUDENT);
-        assertEquals(CS2103T_WITH_STUDENT, module.toModelType(VALID_STUDENTS));
+        JsonAdaptedTaModule module = new JsonAdaptedTaModule(TypicalModules.getModule(CS2103T_WITH_STUDENT));
+        assertEquals(TypicalModules.getModule(CS2103T_WITH_STUDENT), module.toModelType(VALID_STUDENTS));
     }
 
     @Test
     public void toModelType_validModuleDetailsWithoutStudents_returnsModule() throws Exception {
-        JsonAdaptedTaModule student = new JsonAdaptedTaModule(CS2101);
-        assertEquals(CS2101, student.toModelType(VALID_STUDENTS));
+        JsonAdaptedTaModule student = new JsonAdaptedTaModule(TypicalModules.getModule(CS2101));
+        assertEquals(TypicalModules.getModule(CS2101), student.toModelType(VALID_STUDENTS));
     }
 
     @Test
