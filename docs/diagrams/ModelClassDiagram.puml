@@ -5,46 +5,62 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyExpenseExpert" as ReadOnlyExpenseExpert
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class ExpenseExpert
 Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class PersonName
+Class PersonAmount
 
+Class UniqueExpenseList
+Class UniqueExpenseCategoryList
+Class UniquePersonList
+Class Budget
+Class Expense
+Class Description
+Class ExpenseCategory
+Class Amount
+Class Date
+
+Class ExpenseCategoryList
+Class Budget
+Class BudgetAmount
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ExpenseExpert .up.|> ReadOnlyExpenseExpert
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyExpenseExpert
+ModelManager -left-> "1" ExpenseExpert
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+ExpenseExpert *--> "1" UniqueExpenseList
+ExpenseExpert *--> "1" UniquePersonList
+ExpenseExpert *-left-> "1" ExpenseCategoryList
+ExpenseExpert *-left-> "1" Budget
+UniqueExpenseList --> "~* all" Expense
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ExpenseCategoryList --> "~* all" ExpenseCategory
+Person *--> PersonName
+Person *--> PersonAmount
+Expense *--> Description
+Expense *--> ExpenseCategory
+Expense *--> Amount
+Expense *--> Date
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Budget *--> BudgetAmount
+Budget *--> Date
 
+ModelManager -->"~* filtered" Expense
 ModelManager -->"~* filtered" Person
 @enduml

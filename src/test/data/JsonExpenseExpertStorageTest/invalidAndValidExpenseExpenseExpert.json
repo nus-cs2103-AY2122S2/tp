@@ -1,0 +1,13 @@
+{
+  "expenses": [ {
+    "description": "Groceries from ShengShiong",
+    "expenseCategory": "Groceries",
+    "amount": "68",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description": "Expense with Invalid Amount",
+    "expenseCategory": "Miscellaneous",
+    "amount": "..0a",
+    "expenseDate" : "2022-02-02"
+  } ]
+}

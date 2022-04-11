@@ -1,0 +1,8 @@
+{
+  "expenses": [ {
+    "description": "Ikea Dining",
+    "expenseCategory": "Food",
+    "amount": "3e",
+    "expenseDate" : "2022-02-02"
+  } ]
+}

@@ -3,42 +3,42 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExpenseExpertParser" as ExpenseExpertParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":VersionedExpenseExpert" as VersionedExpenseExpert MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> ExpenseExpertParser : parseCommand(undo)
+activate ExpenseExpertParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+ExpenseExpertParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> ExpenseExpertParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+ExpenseExpertParser --> LogicManager : u
+deactivate ExpenseExpertParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoExpenseExpert()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedExpenseExpert : undo()
+activate VersionedExpenseExpert
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedExpenseExpert -> VersionedExpenseExpert :resetData(ReadOnlyExpenseExpert)
+VersionedExpenseExpert --> Model :
+deactivate VersionedExpenseExpert
 
 Model --> UndoCommand
 deactivate Model

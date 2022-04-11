@@ -20,10 +20,12 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/coin_sprite.png";
+    private static BudgetPrompt budgetPrompt;
 
     private Logic logic;
     private MainWindow mainWindow;
+
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -41,13 +43,25 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
+            budgetPrompt = new BudgetPrompt();
             mainWindow.show(); //This should be called before creating other UI parts
+            if (logic.hasUndefinedBudget()) {
+                if (budgetPrompt.isShowing()) {
+                    budgetPrompt.focus();
+                } else {
+                    budgetPrompt.show();
+                }
+            }
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
+    }
+
+    public static void hideBudgetPrompt() {
+        budgetPrompt.hide();
     }
 
     private Image getImage(String imagePath) {

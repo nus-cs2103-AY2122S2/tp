@@ -1,0 +1,13 @@
+{
+  "expenses": [ {
+    "description": "Build a Bear",
+    "expenseCategory": "Entertainment",
+    "amount": "68",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description": "Build a Bear",
+    "expenseCategory": "Entertainment",
+    "amount": "68",
+    "expenseDate" : "2022-02-02"
+  } ]
+}

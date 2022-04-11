@@ -1,0 +1,30 @@
+#budget {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    background-color: #383838;
+}
+
+#copyButton, #budgetPrompt {
+    -fx-text-fill: white;
+    -fx-font-family: "Open Sans";
+}
+
+#copyButton {
+    -fx-background-color: dimgray;
+}
+
+#copyButton:hover {
+    -fx-background-color: gray;
+}
+
+#copyButton:armed {
+    -fx-background-color: darkgray;
+}
+
+#budgetPromptContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#budgetPrompt {
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}

@@ -1,141 +1,112 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_ANNUAL_SPOTIFY;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_BUILD_A_BEAR;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_ANNUAL_SPOTIFY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BUILD_A_BEAR;
+import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_CATEGORY_DESC_ENTERTAINMENT;
+import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DATE_DESC_BUILD_A_BEAR;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalExpenses.BUILD_A_BEAR;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.expense.Amount;
+import seedu.address.model.expense.Date;
+import seedu.address.model.expense.Description;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseCategory;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Expense expectedExpense = new ExpenseBuilder(BUILD_A_BEAR).build();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, DESCRIPTION_DESC_BUILD_A_BEAR
+                        + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + AMOUNT_DESC_BUILD_A_BEAR
+                        + EXPENSE_DATE_DESC_BUILD_A_BEAR,
+                new AddCommand(expectedExpense));
 
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        // multiple descriptions - last description accepted
+        assertParseSuccess(parser, DESCRIPTION_DESC_ANNUAL_SPOTIFY + DESCRIPTION_DESC_BUILD_A_BEAR
+                        + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + AMOUNT_DESC_BUILD_A_BEAR
+                        + EXPENSE_DATE_DESC_BUILD_A_BEAR,
+                new AddCommand(expectedExpense));
 
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+        // multiple amounts - last amount accepted
+        assertParseSuccess(parser, DESCRIPTION_DESC_BUILD_A_BEAR + EXPENSE_CATEGORY_DESC_ENTERTAINMENT
+                        + AMOUNT_DESC_ANNUAL_SPOTIFY + AMOUNT_DESC_BUILD_A_BEAR + EXPENSE_DATE_DESC_BUILD_A_BEAR,
+                new AddCommand(expectedExpense));
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+    public void parse_optionalFieldMissing_success() {
+        Expense expectedExpense = new ExpenseBuilder(BUILD_A_BEAR).withExpenseCategory("General").build();
+        // missing expenseCategory prefix
+        assertParseSuccess(parser, DESCRIPTION_DESC_BUILD_A_BEAR + AMOUNT_DESC_BUILD_A_BEAR
+                        + EXPENSE_DATE_DESC_BUILD_A_BEAR, new AddCommand(expectedExpense));
     }
+
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        // missing amount prefix
+        assertParseFailure(parser, DESCRIPTION_DESC_BUILD_A_BEAR
+                        + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + EXPENSE_DATE_DESC_BUILD_A_BEAR,
                 expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // missing description prefix
+        assertParseFailure(parser, EXPENSE_CATEGORY_DESC_ENTERTAINMENT + AMOUNT_DESC_BUILD_A_BEAR
+                        + EXPENSE_DATE_DESC_BUILD_A_BEAR, expectedMessage);
 
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+        // missing expenseDate prefix
+        assertParseFailure(parser, DESCRIPTION_DESC_BUILD_A_BEAR
+                        + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + AMOUNT_DESC_BUILD_A_BEAR,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, "",
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        // invalid amount
+        assertParseFailure(parser, INVALID_AMOUNT_DESC + DESCRIPTION_DESC_BUILD_A_BEAR
+                + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + EXPENSE_DATE_DESC_BUILD_A_BEAR, Amount.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        // invalid expenseDate
+        assertParseFailure(parser, AMOUNT_DESC_BUILD_A_BEAR + DESCRIPTION_DESC_BUILD_A_BEAR
+                + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + INVALID_EXPENSE_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        // invalid description
+        assertParseFailure(parser, AMOUNT_DESC_BUILD_A_BEAR + INVALID_DESCRIPTION_DESC
+                + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + EXPENSE_DATE_DESC_BUILD_A_BEAR,
+                Description.MESSAGE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
-
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        // invalid expenseCategory
+        assertParseFailure(parser, AMOUNT_DESC_BUILD_A_BEAR + DESCRIPTION_DESC_BUILD_A_BEAR
+                + INVALID_EXPENSE_CATEGORY_DESC + EXPENSE_DATE_DESC_BUILD_A_BEAR,
+                ExpenseCategory.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + DESCRIPTION_DESC_BUILD_A_BEAR
+                        + EXPENSE_CATEGORY_DESC_ENTERTAINMENT + AMOUNT_DESC_BUILD_A_BEAR
+                        + EXPENSE_DATE_DESC_BUILD_A_BEAR,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

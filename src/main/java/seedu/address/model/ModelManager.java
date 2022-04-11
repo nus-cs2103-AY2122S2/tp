@@ -11,33 +11,40 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseCategory;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the expense expert data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ExpenseExpert expenseExpert;
     private final UserPrefs userPrefs;
+    private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<ExpenseCategory> expenseCategories;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given expenseExpert and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyExpenseExpert expenseExpert, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(expenseExpert, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with expense expert: " + expenseExpert + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.expenseExpert = new ExpenseExpert(expenseExpert);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredExpenses = new FilteredList<>(this.expenseExpert.getExpenseList());
+        filteredPersons = new FilteredList<>(this.expenseExpert.getPersonList());
+        expenseCategories = new FilteredList<>(this.expenseExpert.getExpenseCategoryList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ExpenseExpert(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +72,66 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getExpenseExpertFilePath() {
+        return userPrefs.getExpenseExpertFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setExpenseExpertFilePath(Path expenseExpertFilePath) {
+        requireNonNull(expenseExpertFilePath);
+        userPrefs.setExpenseExpertFilePath(expenseExpertFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ExpenseExpert ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setExpenseExpert(ReadOnlyExpenseExpert expenseExpert) {
+        this.expenseExpert.resetData(expenseExpert);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyExpenseExpert getExpenseExpert() {
+        return expenseExpert;
+    }
+
+    @Override
+    public boolean hasExpense(Expense expense) {
+        requireNonNull(expense);
+        return expenseExpert.hasExpense(expense);
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return expenseExpert.hasPerson(person);
+    }
+
+    @Override
+    public void deleteExpense(Expense target) {
+        expenseExpert.removeExpense(target);
+    }
+
+    @Override
+    public void addExpense(Expense expense) {
+        expenseExpert.addExpense(expense);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
+    }
+
+    @Override
+    public void setExpense(Expense target, Expense editedExpense) {
+        requireAllNonNull(target, editedExpense);
+
+        expenseExpert.setExpense(target, editedExpense);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        expenseExpert.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        expenseExpert.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,18 +139,68 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        expenseExpert.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setBudget(Budget budget) {
+        requireNonNull(budget);
+        expenseExpert.setBudget(budget);
+    }
+
+    @Override
+    public void addExpenseCategory(ExpenseCategory expenseCategory) {
+        expenseExpert.addExpenseCategory(expenseCategory);
+    }
+
+    @Override
+    public boolean hasExpenseCategory(ExpenseCategory expenseCategory) {
+        requireNonNull(expenseCategory);
+        return expenseExpert.hasExpenseCategory(expenseCategory);
+    }
+
+    @Override
+    public boolean validExpenseCategory(Expense expense) {
+        requireNonNull(expense);
+        return expenseExpert.hasExpenseCategory(expense.getExpenseCategory());
+    }
+
+    @Override
+    public Budget getBudget() {
+        return expenseExpert.getBudget();
+    }
+
+    @Override
+    public boolean hasUndefinedBudget() {
+        return expenseExpert.hasUndefinedBudget();
+    }
+
+    //=========== Filtered Expense List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
+     * {@code versionedExpenseExpert}
      */
+    @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredExpenses;
+    }
+
+
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<ExpenseCategory> getFilteredExpenseCategoryList() {
+        return expenseCategories;
+    }
+
+    @Override
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpenses.setPredicate(predicate);
     }
 
     @Override
@@ -142,9 +223,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return expenseExpert.equals(other.expenseExpert)
                 && userPrefs.equals(other.userPrefs)
+                && filteredExpenses.equals(other.filteredExpenses)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

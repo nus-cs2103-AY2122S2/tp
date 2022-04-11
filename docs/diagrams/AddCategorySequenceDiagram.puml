@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ExpenseExpertParser" as ExpenseExpertParser LOGIC_COLOR
+participant ":AddCategoryCommandParser" as AddCategoryCommandParser LOGIC_COLOR
+participant "d:AddCategoryCommand" as AddCategoryCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addCat c/Food")
+activate LogicManager
+
+LogicManager -> ExpenseExpertParser : parseCommand("addCat c/Food")
+activate ExpenseExpertParser
+
+create AddCategoryCommandParser
+ExpenseExpertParser -> AddCategoryCommandParser
+activate AddCategoryCommandParser
+
+AddCategoryCommandParser --> ExpenseExpertParser
+deactivate AddCategoryCommandParser
+
+ExpenseExpertParser -> AddCategoryCommandParser : parse("Food")
+activate AddCategoryCommandParser
+
+create AddCategoryCommand
+AddCategoryCommandParser -> AddCategoryCommand
+activate AddCategoryCommand
+
+AddCategoryCommand --> AddCategoryCommandParser : d
+deactivate AddCategoryCommand
+
+AddCategoryCommandParser --> ExpenseExpertParser : d
+deactivate AddCategoryCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCategoryCommandParser -[hidden]-> ExpenseExpertParser
+destroy AddCategoryCommandParser
+
+ExpenseExpertParser --> LogicManager : d
+deactivate ExpenseExpertParser
+
+LogicManager -> AddCategoryCommand : execute()
+activate AddCategoryCommand
+
+AddCategoryCommand -> Model : AddCategory("Food")
+activate Model
+
+Model --> AddCategoryCommand
+deactivate Model
+
+create CommandResult
+AddCategoryCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCategoryCommand
+deactivate CommandResult
+
+AddCategoryCommand --> LogicManager : result
+deactivate AddCategoryCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

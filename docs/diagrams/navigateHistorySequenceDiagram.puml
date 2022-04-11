@@ -1,0 +1,47 @@
+@startuml
+Actor User
+participant "commandTextField:TextField"
+participant ":CommandBox"
+participant "upArrowPressed:KeyEvent"
+participant "pastHistory:ArrayList<String>"
+participant "nextHistory:ArrayList<String>"
+
+User -> "commandTextField:TextField": pressed "Up" key
+
+create "upArrowPressed:KeyEvent"
+"commandTextField:TextField" -> "upArrowPressed:KeyEvent": create new KeyEvent
+
+"commandTextField:TextField" -> ":CommandBox": //handleUpDownArrowsPressed(upArrowPressedEvent)//
+
+
+":CommandBox"-> "upArrowPressed:KeyEvent": //getCode()//
+"upArrowPressed:KeyEvent" --> ":CommandBox"
+":CommandBox"-> "upArrowPressed:KeyEvent": //consume()//
+destroy "upArrowPressed:KeyEvent"
+
+":CommandBox"-> "commandTextField:TextField": //getText()//
+"commandTextField:TextField" --> ":CommandBox": returns current command in text field
+
+":CommandBox" -> ":CommandBox": //getPrevCommand(currentCommand)//
+activate ":CommandBox"
+":CommandBox" -> ":CommandBox": //hasPrevCommands()//
+activate ":CommandBox"
+":CommandBox" -> "pastHistory:ArrayList<String>": //isEmpty()//
+activate "pastHistory:ArrayList<String>"
+"pastHistory:ArrayList<String>" --> ":CommandBox": pastHistory is not empty
+deactivate "pastHistory:ArrayList<String>"
+
+":CommandBox" --> ":CommandBox"
+deactivate ":CommandBox"
+
+":CommandBox" -> "nextHistory:ArrayList<String>": //add(currentCommand)//
+
+":CommandBox" -> "pastHistory:ArrayList<String>": //remove(lastIndex)//
+"pastHistory:ArrayList<String>" --> ":CommandBox": returns previous command
+":CommandBox" --> ":CommandBox"
+deactivate ":CommandBox"
+
+":CommandBox" -> "commandTextField:TextField": //setText(previousCommand)//
+activate "commandTextField:TextField"
+"commandTextField:TextField" --> User: show previous command
+@enduml

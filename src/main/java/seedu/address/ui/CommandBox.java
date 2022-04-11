@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +20,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final ArrayList<String> pastHistory = new ArrayList<>();
+    private final ArrayList<String> nextHistory = new ArrayList<>();
 
     @FXML
     private TextField commandTextField;
@@ -32,6 +37,51 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Checks if there are any commands before the current.
+     */
+    public boolean hasPrevCommands() {
+        return !(pastHistory.isEmpty());
+    }
+
+    /**
+     * Checks if there are any commands after the current.
+     */
+    public boolean hasNextCommands() {
+        return !(nextHistory.isEmpty());
+    }
+
+    /**
+     * Gets the most recent command before the current in the past command history inputted by user, if any.
+     */
+    public String getPrevCommand(String currentCommand) {
+        if (this.hasPrevCommands()) {
+            nextHistory.add(currentCommand);
+            return pastHistory.remove(pastHistory.size() - 1);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Gets the command after the current command in the command history inputted by user, if any.
+     */
+    public String getNextCommand(String currentCommand) {
+        if (this.hasNextCommands()) {
+            pastHistory.add(currentCommand);
+            return nextHistory.remove(nextHistory.size() - 1);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Adds the command into the command history after its execution
+     */
+    public void logCommand(String currentCommand) {
+        pastHistory.add(currentCommand);
+    }
+
+    /**
      * Handles the Enter button pressed event.
      */
     @FXML
@@ -43,9 +93,28 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            logCommand(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    // Solution below adapted from
+    // https://stackoverflow.com/questions/22014950/javafx-moving-image-with-arrow-keys-and-spacebar
+    @FXML
+    private void handleUpDownArrowsPressed(KeyEvent event) {
+        switch (event.getCode()) {
+        case UP:
+            event.consume();
+            commandTextField.setText(getPrevCommand(commandTextField.getText()));
+            break;
+        case DOWN:
+            event.consume();
+            commandTextField.setText(getNextCommand(commandTextField.getText()));
+            break;
+        default:
+            break;
         }
     }
 

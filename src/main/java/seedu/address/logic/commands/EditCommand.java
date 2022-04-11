@@ -1,105 +1,114 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE_CATEGORY;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.expense.Amount;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Date;
+import seedu.address.model.expense.Description;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseCategory;
+
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing expense in the expense expert.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expense identified "
+            + "by the index number used in the displayed expense list. \n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "(" + PREFIX_DESCRIPTION + "DESCRIPTION) "
+            + "(" + PREFIX_EXPENSE_CATEGORY + "CATEGORY) "
+            + "(" + PREFIX_AMOUNT + "AMOUNT)"
+            + "(" + PREFIX_DATE + "DATE) \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DESCRIPTION + "Groceries from ShengShiong "
+            + PREFIX_AMOUNT + "120 "
+            + PREFIX_DATE + "2022-02-02\n\n";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists in Expense Expert.";
+    public static final String MESSAGE_INVALID_EXPENSE_CATEGORY =
+            "This expense category does not exists in Expense Expert."
+                    + "\nUse the addCat Command to create a new category";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the expense in the filtered expense list to edit
+     * @param editExpenseDescriptor details to edit the expense with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditExpenseDescriptor editExpenseDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editExpenseDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editExpenseDescriptor = new EditExpenseDescriptor(editExpenseDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Expense> lastShownList = model.getFilteredExpenseList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Expense expenseToEdit = lastShownList.get(index.getZeroBased());
+        Expense editedExpense = createEditedExpense(expenseToEdit, editExpenseDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!expenseToEdit.equals(editedExpense) && model.hasExpense(editedExpense)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EXPENSE);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        if (!model.hasExpenseCategory(editedExpense.getExpenseCategory())) {
+            throw new CommandException(MESSAGE_INVALID_EXPENSE_CATEGORY);
+        }
+
+        model.setExpense(expenseToEdit, editedExpense);
+        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
+        double difference = expenseToEdit.getAmount().amount - editedExpense.getAmount().amount;
+        String amt = String.valueOf((model.getBudget().getBudgetAmount().amount + difference));
+        Amount newAmount = new Amount(amt);
+        Budget budget = new Budget(newAmount);
+        model.setBudget(budget);
+        return new CommandResult(String.format(MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
+     * edited with {@code editExpenseDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
+        assert expenseToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Description updatedDescription = editExpenseDescriptor.getDescription().orElse(expenseToEdit.getDescription());
+        ExpenseCategory updatedExpenseCategory = editExpenseDescriptor
+                .getExpenseCategory().orElse(expenseToEdit.getExpenseCategory());
+        Amount updatedAmount = editExpenseDescriptor.getAmount().orElse(expenseToEdit.getAmount());
+        Date updatedExpenseDate = editExpenseDescriptor.getExpenseDate().orElse(expenseToEdit.getExpenseDate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Expense(updatedDescription, updatedExpenseCategory, updatedAmount, updatedExpenseDate);
     }
 
     @Override
@@ -117,88 +126,69 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editExpenseDescriptor.equals(e.editExpenseDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the expense with. Each non-empty field value will replace the
+     * corresponding field value of the expense.
      */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
+    public static class EditExpenseDescriptor {
+        private Description description;
+        private ExpenseCategory expenseCategory;
+        private Amount amount;
+        private Date expenseDate;
 
-        public EditPersonDescriptor() {}
+        public EditExpenseDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+        public EditExpenseDescriptor(EditExpenseDescriptor toCopy) {
+            setDescription(toCopy.description);
+            setExpenseCategory(toCopy.expenseCategory);
+            setAmount(toCopy.amount);
+            setExpenseDate(toCopy.expenseDate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(description, expenseCategory, amount);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setExpenseCategory(ExpenseCategory expenseCategory) {
+            this.expenseCategory = expenseCategory;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<ExpenseCategory> getExpenseCategory() {
+            return Optional.ofNullable(expenseCategory);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setAmount(Amount amount) {
+            this.amount = amount;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Amount> getAmount() {
+            return Optional.ofNullable(amount);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setExpenseDate(Date expenseDate) {
+            this.expenseDate = expenseDate;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Date> getExpenseDate() {
+            return Optional.ofNullable(expenseDate);
         }
 
         @Override
@@ -209,18 +199,17 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditExpenseDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditExpenseDescriptor e = (EditExpenseDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+            return getDescription().equals(e.getDescription())
+                    && getExpenseCategory().equals(e.getExpenseCategory())
+                    && getAmount().equals(e.getAmount())
+                    && getExpenseDate().equals(e.getExpenseDate());
         }
     }
 }

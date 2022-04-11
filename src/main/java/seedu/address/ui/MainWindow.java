@@ -31,24 +31,33 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
+    private ExpenseListPanel expenseListPanel;
+    private BudgetDisplay budgetResultDisplay;
+    private ResultDisplay commandResultDisplay;
     private HelpWindow helpWindow;
+    private PersonListPanel personListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private StackPane personListPanelPlaceholder;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane expenseListPanelPlaceholder;
+
+    @FXML
+    private StackPane budgetDisplayPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,13 +119,20 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList());
+        expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        budgetResultDisplay = new BudgetDisplay();
+        budgetResultDisplay.showMonthlyBudget(logic.getBudget());
+        budgetDisplayPlaceholder.getChildren().add(budgetResultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        commandResultDisplay = new ResultDisplay("Welcome to Expense Expert!");
+        resultDisplayPlaceholder.getChildren().add(commandResultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getExpenseExpertFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -161,10 +177,15 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        UiManager.hideBudgetPrompt();
     }
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public ExpenseListPanel getExpenseListPanel() {
+        return expenseListPanel;
     }
 
     /**
@@ -174,22 +195,35 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (!(logic.hasUndefinedBudget()) || commandText.split(" ")[0].equals("budget")
+                    || commandText.split(" ")[0].equals("help")
+                    || commandText.split(" ")[0].equals("clear")
+                    || commandText.split(" ")[0].equals("exit")) {
+                CommandResult commandResult = logic.execute(commandText);
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+                commandResultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                budgetResultDisplay.showMonthlyBudget(logic.getBudget());
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
+                if (commandResult.isShowHelp()) {
+                    handleHelp();
+                }
+
+                if (commandResult.isExit()) {
+                    handleExit();
+                }
+                return commandResult;
+            } else {
+                CommandResult commandResult = new CommandResult("Please set your monthly budget "
+                    + "before executing other commands!");
+                logger.info("Please set your monthly budget before executing other commands!");
+                commandResultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                budgetResultDisplay.showMonthlyBudget(logic.getBudget());
+
+                return commandResult;
             }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            commandResultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }

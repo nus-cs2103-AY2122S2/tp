@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+
 package Storage{
 
 package "UserPrefs Storage" #F4F6F6{
@@ -14,12 +15,14 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "ExpenseExpert Storage" #F4F6F6{
+Class "<<interface>>\nExpenseExpertStorage" as ExpenseExpertStorage
+Class JsonExpenseExpertStorage
+Class JsonSerializableExpenseExpert
+Class JsonAdaptedExpense
+Class JsonAdaptedBudget
+Class JsonAdaptedExpenseCategory
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
 }
 
 }
@@ -29,15 +32,20 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ExpenseExpertStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> ExpenseExpertStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonExpenseExpertStorage .up.|> ExpenseExpertStorage
+JsonExpenseExpertStorage ..> JsonSerializableExpenseExpert
+JsonSerializableExpenseExpert --> "*" JsonAdaptedExpense
+JsonSerializableExpenseExpert --> "*" JsonAdaptedPerson
+JsonSerializableExpenseExpert --> "*" JsonAdaptedBudget
+JsonSerializableExpenseExpert --> "*" JsonAdaptedExpenseCategory
+
+JsonAdaptedExpense -[hidden]right- JsonAdaptedPerson
+JsonAdaptedBudget -[hidden]left- JsonAdaptedPerson
 
 @enduml

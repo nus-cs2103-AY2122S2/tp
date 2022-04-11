@@ -1,0 +1,39 @@
+{
+  "_comment": "ExpenseExpert save file which contains the same Expense values as in TypicalExpenses#getTypicalExpenseExpert()",
+  "expenses" : [ {
+    "description" : "Annual Netflix Fees",
+    "expenseCategory" : "Entertainment",
+    "amount" : "200",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Baseball Lesson Fees",
+    "expenseCategory" : "Entertainment",
+    "amount" : "100",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Car Wash",
+    "expenseCategory" : "Miscellaneous",
+    "amount" : "20",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Dental",
+    "expenseCategory" : "Medical",
+    "amount" : "200",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Electrical Appliances",
+    "expenseCategory" : "Miscellaneous",
+    "amount" : "50",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Fishing Apparatus",
+    "expenseCategory" : "Entertainment",
+    "amount" : "159.5",
+    "expenseDate" : "2022-02-02"
+  }, {
+    "description" : "Groceries",
+    "expenseCategory" : "Groceries",
+    "amount" : "69.85",
+    "expenseDate" : "2022-02-02"
+  } ]
+}
