@@ -8,7 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.InsurancePackage;
 
-
+/**
+ * Edits an existing insurance package in the address book.
+ */
 public class EditPackageCommand extends Command {
 
     public static final String COMMAND_WORD = "editp";
@@ -44,6 +46,7 @@ public class EditPackageCommand extends Command {
         }
 
         model.setInsurancePackage(packageName, newPackageDesc);
+        assert model.hasInsurancePackage(new InsurancePackage(packageName, newPackageDesc));
 
         return new CommandResult(String.format(MESSAGE_EDIT_PACKAGE_SUCCESS, packageName));
     }

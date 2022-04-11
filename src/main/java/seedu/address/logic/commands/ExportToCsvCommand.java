@@ -6,6 +6,9 @@ import java.util.HashMap;
 
 import seedu.address.model.Model;
 
+/**
+ * A command to indicate that the window to export to CSV files should be open.
+ */
 public class ExportToCsvCommand extends Command {
 
     public static final String COMMAND_WORD = "export";

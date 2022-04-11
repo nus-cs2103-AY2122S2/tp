@@ -9,7 +9,7 @@ ClientConnect is a desktop client address book application for insurance agents 
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added insurance packages as a separate entity, similar to how persons and their details can be stored in the application  
+* **New Feature**: Added insurance packages as a separate entity, similar to how persons and their details can be stored in the application ([\#69](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/69))
     * What it includes: 
       * The ability to store insurance packages into the application
       * The ability to add, edit, and delete insurance packages
@@ -20,14 +20,14 @@ Given below are my contributions to the project.
     * Highlights:
       * This enhancement required a good understanding of the architecture of the initial AddressBook, as the implementation of the storage and features of the packages in the app is very similar to that of the persons.
   
-* **New Feature**: Added CSV file storage support
+* **New Feature**: Added CSV file storage support ([\#32](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/32), [\#35](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/35))
   * What it includes:
     * The ability to export clients' details from the application to a CSV file
     * The ability to import clients' details from an exported CSV file into the application
   * Justification:
     * This allows for sharing of contacts between different users, and allows for storing of different copies of contacts, if necessary.
 
-* **New Feature**: Added the storage of past user commands
+* **New Feature**: Added the storage of past user commands ([\#37](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/37))
   * What it includes:
     * The ability to cycle through previous commands entered by the user, using the up and down arrow keys
   * Credits:
