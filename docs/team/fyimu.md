@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to view all schedules or archived schedules.
   * What it does: Allows the user to view all historically added schedules or expired schedules.
   * Justification: Firstly modified `Schedule` to be displayed in chronological order by default, allowing users to view the older schedules before newer schedules. This new feature makes the application display only active schedules by default for more convenient reference so that users can directly view the most recent future schedule. Outdated data are automatically archived, while users can still check all schedules or expired schedules by using this feature.
-  * Highlights: Initial display of schedules followed lexicological order and all schedules were displayed at all times. Thus thought was given to improving the relatability and usefulness of schedules. This enhancement required modifications of classes such as `UniqueScheduleList` and `AddCommand` as well as addition of new classes such as `ScheduleComparator`.
+  * Highlights: Initial display of schedules followed lexicographical order and all schedules were displayed at all times. Thus thought was given to improving the relatability and usefulness of schedules. This enhancement required modifications of classes such as `UniqueScheduleList` and `AddCommand` as well as addition of new classes such as `ScheduleComparator`.
 
 * **New Feature**: Added the ability to view schedules on a specific date.
   * What it does: allows the user to check all the schedules on a specific date.
@@ -46,7 +46,7 @@ Given below are my contributions to the project.
   * Created `LineupBuilder` and updated `PersonBuilder` for testing purposes (Pull request [#129](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/129))
   * Added tests for `DeleteCommand` and `EditCommand` (Pull requests [#129](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/129), [#136](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/136/files))
   * Updated the display of `players` and `schedules` in alphabetical order of name and chronological order of happening date respectively (Pull request [#139](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/139))
-  * Updated default display of `Person` to follow lexicological order (Pull request [#139](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/139))
+  * Updated default display of `Person` to follow lexicographical order (Pull request [#139](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/139))
   * Fixed functionality bugs for commands (Pull request [#244](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/244))
 * **Documentation**:
     * User Guide:
