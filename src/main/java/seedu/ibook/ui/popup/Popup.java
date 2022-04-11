@@ -3,6 +3,7 @@ package seedu.ibook.ui.popup;
 import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.ibook.ui.MainWindow;
@@ -12,6 +13,10 @@ import seedu.ibook.ui.UiComponent;
  * Abstract Class representing the skeleton of a popup.
  */
 public abstract class Popup extends UiComponent<Stage> {
+
+    protected static final String VALIDATION_REGEX = ".*(?:[^\\\\]|^):.*";
+
+    protected static final String MESSAGE_CONSTRAINTS = "The : character must be escaped with a backslash.";
 
     @FXML
     private Text error;
@@ -69,6 +74,15 @@ public abstract class Popup extends UiComponent<Stage> {
      */
     public void execute(String commandText) {
         getMainWindow().executeCommand(commandText);
+    }
+
+    /**
+     * Replaces line break to white space
+     *
+     * @param element The {@code TextArea} element.
+     */
+    protected void replaceLineBreak(TextArea element) {
+        element.setText(element.getText().replace("\n", " "));
     }
 
 }

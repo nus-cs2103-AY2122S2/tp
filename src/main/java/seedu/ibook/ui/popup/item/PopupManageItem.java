@@ -58,8 +58,20 @@ public class PopupManageItem extends Popup {
         super.hide();
     }
 
+    private boolean isValid() {
+        if (expiryDate.getText().matches(VALIDATION_REGEX)
+                || quantity.getText().matches(VALIDATION_REGEX)) {
+            setFeedbackToUser(MESSAGE_CONSTRAINTS);
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void handleUpdateItem() {
+        if (!isValid()) {
+            return;
+        }
         String commandText = UpdateItemCommand.COMMAND_WORD
                 + " " + productIndex + CompoundIndex.SEPARATOR + itemIndex
                 + " " + CliSyntax.PREFIX_EXPIRY_DATE.getPrefix()

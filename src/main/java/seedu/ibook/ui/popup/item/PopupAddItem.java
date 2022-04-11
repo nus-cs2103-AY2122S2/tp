@@ -54,8 +54,20 @@ public class PopupAddItem extends Popup {
         super.hide();
     }
 
+    private boolean isValid() {
+        if (expiryDate.getText().matches(VALIDATION_REGEX)
+                || quantity.getText().matches(VALIDATION_REGEX)) {
+            setFeedbackToUser(MESSAGE_CONSTRAINTS);
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void handleAddItem() {
+        if (!isValid()) {
+            return;
+        }
         String commandText = AddItemCommand.COMMAND_WORD
                 + " " + productIndex
                 + " " + CliSyntax.PREFIX_EXPIRY_DATE.getPrefix()

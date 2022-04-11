@@ -50,8 +50,25 @@ public class PopupAddProduct extends Popup {
         description.setText("");
     }
 
+    private boolean isValid() {
+        if (name.getText().matches(VALIDATION_REGEX)
+            || category.getText().matches(VALIDATION_REGEX)
+            || price.getText().matches(VALIDATION_REGEX)
+            || discountRate.getText().matches(VALIDATION_REGEX)
+            || discountStart.getText().matches(VALIDATION_REGEX)
+            || description.getText().matches(VALIDATION_REGEX)) {
+            setFeedbackToUser(MESSAGE_CONSTRAINTS);
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     private void handleAddProduct() {
+        replaceLineBreak(description);
+        if (!isValid()) {
+            return;
+        }
         String commandText = AddCommand.COMMAND_WORD
                 + " " + CliSyntax.PREFIX_NAME.getPrefix()
                 + name.getText()
@@ -64,7 +81,7 @@ public class PopupAddProduct extends Popup {
                 + " " + CliSyntax.PREFIX_DISCOUNT_START.getPrefix()
                 + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
-                + description.getText().replace("\n", "");
+                + description.getText();
 
         execute(commandText);
     }

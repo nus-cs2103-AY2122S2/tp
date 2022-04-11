@@ -1,5 +1,7 @@
 package seedu.ibook.ui.popup;
 
+import static seedu.ibook.commons.util.StringUtil.escapeCharacter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,16 +50,33 @@ public class PopupUpdateProduct extends Popup {
     public void show(int index, Product product) {
         super.show();
         this.index = index;
-        name.setText(product.getName().toString());
-        category.setText(product.getCategory().toString());
+        name.setText(escapeCharacter(product.getName().toString()));
+        category.setText(escapeCharacter(product.getCategory().toString()));
         price.setText(product.getPrice().toString());
         discountRate.setText(product.getDiscountRate().toString());
         discountStart.setText(product.getDiscountStart().toString());
-        description.setText(product.getDescription().toString());
+        description.setText(escapeCharacter(product.getDescription().toString()));
+    }
+
+    private boolean isValid() {
+        if (name.getText().matches(VALIDATION_REGEX)
+                || category.getText().matches(VALIDATION_REGEX)
+                || price.getText().matches(VALIDATION_REGEX)
+                || discountRate.getText().matches(VALIDATION_REGEX)
+                || discountStart.getText().matches(VALIDATION_REGEX)
+                || description.getText().matches(VALIDATION_REGEX)) {
+            setFeedbackToUser(MESSAGE_CONSTRAINTS);
+            return false;
+        }
+        return true;
     }
 
     @FXML
     private void handleUpdateProduct() {
+        replaceLineBreak(description);
+        if (!isValid()) {
+            return;
+        }
         String commandText = UpdateCommand.COMMAND_WORD
                 + " " + index
                 + " " + CliSyntax.PREFIX_NAME.getPrefix()
@@ -71,7 +90,7 @@ public class PopupUpdateProduct extends Popup {
                 + " " + CliSyntax.PREFIX_DISCOUNT_START.getPrefix()
                 + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
-                + description.getText().replace("\n", "");
+                + description.getText();
 
         execute(commandText);
     }
