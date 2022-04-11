@@ -27,8 +27,8 @@ public class FindBookingCommand extends Command {
             + "[" + PREFIX_FEEDBACK + "FEEDBACK] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "ALICE "
-            + PREFIX_STARTTIME + "10-10-2022"
-            + PREFIX_STARTTIME + "Great Service";
+            + PREFIX_STARTTIME + "10-10-2022 "
+            + PREFIX_FEEDBACK + "Great Service";
 
     private final BookingSearchContainsKeywordsPredicate predicate;
 
