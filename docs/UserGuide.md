@@ -313,7 +313,7 @@ Examples:
 * `listp` (defaults to `s/unarchived`) displays all unarchived people.
 * `listp s/archived` displays all archived people.
 
-### Listing all events : `liste`
+#### Listing all events : `liste`
 
 Shows a list of all events in the list of events.
 
@@ -396,8 +396,6 @@ Examples:
 * Entries matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `findp n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * At least one of the parameters must be provided.
-*`KEYWORD` represents each parameter with the arguments specified after it.
-  i.e. `[n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 
 #### Locating companies: `findc`
 
@@ -406,7 +404,7 @@ with index numbers.
 
 Format: 
 ```
-findc [n/NAME] [s/SEARCH_TYPE] [t/TAG]
+findc [n/NAME] [s/SEARCH_TYPE] [t/TAG]…
 ```
 Examples:
 * `findc n/sgshop dbsss` returns `sgshop` and `sgshop sop` and `dbsss`
@@ -420,7 +418,7 @@ with index numbers.
 
 Format: 
 ```
-findp [n/NAME] [c/COMPANY_NAME] [s/SEARCH_TYPE] [t/TAG]
+findp [n/NAME] [c/COMPANY_NAME] [s/SEARCH_TYPE] [t/TAG]…
 ```
 
 Examples:
@@ -439,7 +437,7 @@ START DATE and END DATE will find events from the START DATE to the END DATE **i
 
 Format: 
 ```
-finde [n/NAME] [c/COMPANY_NAME] [sd/START_DATE] [ed/END_DATE] [ti/TIME] [l/LOCATION] [s/SEARCH_TYPE]
+finde [n/NAME] [c/COMPANY_NAME] [sd/START_DATE] [ed/END_DATE] [ti/TIME] [l/LOCATION] [s/SEARCH_TYPE] [t/TAG]…
 ```
 Examples:
 * `finde n/online` returns `online interview` and `online assessment`
@@ -641,25 +639,29 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 ## Command summary
 
-| Action             | Format                                                                           | Examples                                                                             |
-|--------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Add Person**     | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                    | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t/friend t/colleague`       |
-| **Add Company**    | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… `                         | `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card R #02-03 t/finance` |
-| **Add Event**      | `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]… `                 | `adde n/Career Talk c/Sony d/2022-03-19 ti/10:00 l/22 Clementi Rd t/important`       |
-| **Clear**          | `clear`                                                                          |                                                                                      |
-| **Delete**         | `delete INDEX`                                                                   | `delete 3`                                                                           |
-| **Delete all in display**          |`delete_all`                                                                          |                                                                                      |
-| **Edit Person**    | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`             | `editp 1 p/91234567 e/johndoe@example.com`                                           |
-| **Edit Company**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                  | `editc 2 n/Shoppee t/`                                                               |
-| **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
-| **Archive**     | `archive INDEX` | `archive 2`                                              |
-| **Archive all in display**          |`archive_all`                                                                          |                                                                                      |
-| **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
-| **Unarchive all in display**          |`unarchive_all`                                                                          |                                                                                      |
-| **Find Person**    | `findp [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
-| **Find Company**    | `findc [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
-| **Find Event**     | `finde [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
-| **List Persons**   | `listp [s/SEARCH_TYPE]`                                                                          |`listp s/all`                                                                                      |
-| **List Companies** | `listc [s/SEARCH_TYPE]`                                                                          |`listc`                                                                                      |
-| **List Events**    | `liste [s/SEARCH_TYPE]`                                                                          |`liste s/archived`                                                                                      |
-| **Help**           | `help`                                                                           |                                                                                      |
+| Action                       | Format                                                                                                          | Examples                                                                        |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| **Add Company**              | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… `                                                        | `addc n/DBS t/bank e/dbs@example.com p/1234567 a/31 Race Road #02-03 t/finance` |
+| **Add Person**               | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                                                   | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t/friend t/colleague`  |
+| **Add Event**                | `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]… `                                                | `adde n/Career Talk c/Sony d/2022-03-19 ti/10:00 l/22 Clementi Rd t/important`  |
+| **Archive**                  | `archive INDEX`                                                                                                 | `archive 2`                                                                     |
+| **Archive all in display**   | `archive_all`                                                                                                   |                                                                                 |
+| **Clear**                    | `clear`                                                                                                         |                                                                                 |
+| **Delete**                   | `delete INDEX`                                                                                                  | `delete 3`                                                                      |
+| **Delete all in display**    | `delete_all`                                                                                                    |                                                                                 |
+| **Edit Company**             | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                 | `editc 2 n/Shoppee t/`                                                          |
+| **Edit Person**              | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`                                            | `editp 1 p/91234567 e/johndoe@example.com`                                      |
+| **Edit Event**               | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`                                | `edite 2 n/Resume Screening d/2022-12-11`                                       |
+| **Exit**                     | `exit`                                                                                                          |                                                                                 |
+| **Find Company**             | `findc [n/NAME] [s/SEARCH_TYPE] [t/TAG]…`                                                                       | `findc s/unarchived n/Shopee`                                                   |
+| **Find Person**              | `findp [n/NAME] [c/COMPANY_NAME] [s/SEARCH_TYPE] [t/TAG]…`                                                      | `findp n/James Jake`                                                            |
+| **Find Event**               | `finde [n/NAME] [c/COMPANY_NAME] [sd/START_DATE] [ed/END_DATE] [ti/TIME] [l/LOCATION] [s/SEARCH_TYPE] [t/TAG]…` | `finde s/all n/Career Talk sd/2022-01-01 ed/2022-03-14`                         |
+| **Help**                     | `help`                                                                                                          |                                                                                 |
+| **List Companies**           | `listc [s/SEARCH_TYPE]`                                                                                         | `listc`                                                                         |
+| **List Persons**             | `listp [s/SEARCH_TYPE]`                                                                                         | `listp s/all`                                                                   |
+| **List Events**              | `liste [s/SEARCH_TYPE]`                                                                                         | `liste s/archived`                                                              |
+| **Sort Companies**           | `sortc [s/SEARCH_TYPE] [o/ORDERING]`                                                                            | `sortc`                                                                         |
+| **Sort Persons**             | `sortp [s/SEARCH_TYPE] [o/ORDERING]`                                                                            | `sortp s/unarchived o/ascending`                                                |
+| **Sort Events**              | `sorte [s/SEARCH_TYPE] [o/ORDERING]`                                                                            | `sortc o/descending s/archived`                                                 |
+| **Unarchive**                | `unarchive INDEX`                                                                                               | `unarchive 4`                                                                   |
+| **Unarchive all in display** | `unarchive_all`                                                                                                 |                                                                                 |
