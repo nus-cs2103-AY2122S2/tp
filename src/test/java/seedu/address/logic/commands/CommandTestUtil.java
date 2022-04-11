@@ -257,7 +257,8 @@ public class CommandTestUtil {
                 false, false, listType == ListType.PERSON, listType == ListType.COMPANY, listType == ListType.EVENT);
     }
 
-    public static CommandResult getExpectedSortCommandResult(SearchType searchType, ListType listType, Ordering ordering) {
+    public static CommandResult getExpectedSortCommandResult(SearchType searchType,
+            ListType listType, Ordering ordering) {
         String searchTypeString = "";
         String orderingString = "";
         String msgSuccess = "";
@@ -283,6 +284,8 @@ public class CommandTestUtil {
         case DESCENDING:
             orderingString = " in descending order";
             break;
+        default:
+            // should not reach here
         }
 
         switch (listType) {

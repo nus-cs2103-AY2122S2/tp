@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.getExpectedSortCommandResult;
-import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEntries.INTERVIEW_A;
 import static seedu.address.testutil.TypicalEntries.INTERVIEW_B;
 import static seedu.address.testutil.TypicalEntries.ONLINE_ASSESSMENT;
+import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -40,35 +40,41 @@ public class SortEventCommandTest {
     }
 
     @Test
-    public void execute_sortListAscending_eventList_onlyUnarchived() {
+    public void execute_sortListAscending_eventListOnlyUnarchived() {
         expectedModel.sortEventListByDate(Ordering.ASCENDING, Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY, ListType.EVENT, Ordering.ASCENDING);
-        assertCommandSuccess(new SortEventCommand(SearchType.UNARCHIVED_ONLY, Ordering.ASCENDING), model,
-                expectedCommandResult, expectedModel);
-        assertEquals(List.of(ONLINE_ASSESSMENT, INTERVIEW_A, INTERVIEW_B), model.getAddressBook().getEventList());
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY,
+                ListType.EVENT, Ordering.ASCENDING);
+        assertCommandSuccess(new SortEventCommand(SearchType.UNARCHIVED_ONLY,
+                Ordering.ASCENDING), model, expectedCommandResult, expectedModel);
+        assertEquals(List.of(ONLINE_ASSESSMENT, INTERVIEW_A, INTERVIEW_B),
+                model.getAddressBook().getEventList());
     }
 
     @Test
-    public void execute_sortListDescending_eventList_onlyUnarchived() {
+    public void execute_sortListDescending_eventListOnlyUnarchived() {
         expectedModel.sortEventListByDate(Ordering.DESCENDING, Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY, ListType.EVENT, Ordering.DESCENDING);
-        assertCommandSuccess(new SortEventCommand(SearchType.UNARCHIVED_ONLY, Ordering.DESCENDING), model,
-                expectedCommandResult, expectedModel);
-        assertEquals(List.of(INTERVIEW_B, INTERVIEW_A, ONLINE_ASSESSMENT), model.getAddressBook().getEventList());
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY,
+                ListType.EVENT, Ordering.DESCENDING);
+        assertCommandSuccess(new SortEventCommand(SearchType.UNARCHIVED_ONLY,
+                Ordering.DESCENDING), model, expectedCommandResult, expectedModel);
+        assertEquals(List.of(INTERVIEW_B, INTERVIEW_A, ONLINE_ASSESSMENT),
+                model.getAddressBook().getEventList());
     }
 
     @Test
-    public void execute_sortListAscending_eventList_withArchived() {
+    public void execute_sortListAscending_eventListWithArchived() {
         expectedModel.sortEventListByDate(Ordering.ASCENDING, Model.PREDICATE_SHOW_ALL);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.EVENT, Ordering.ASCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL,
+                ListType.EVENT, Ordering.ASCENDING);
         assertCommandSuccess(new SortEventCommand(SearchType.ALL, Ordering.ASCENDING), model,
                 expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void execute_sortListDescending_eventList_withArchived() {
+    public void execute_sortListDescending_eventListWithArchived() {
         expectedModel.sortEventListByDate(Ordering.DESCENDING, Model.PREDICATE_SHOW_ALL);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.EVENT, Ordering.DESCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL,
+                ListType.EVENT, Ordering.DESCENDING);
         assertCommandSuccess(new SortEventCommand(SearchType.ALL, Ordering.DESCENDING), model,
                 expectedCommandResult, expectedModel);
     }

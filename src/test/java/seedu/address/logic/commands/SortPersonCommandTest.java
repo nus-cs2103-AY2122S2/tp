@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.getExpectedSortCommandResult;
-import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEntries.ALICE;
 import static seedu.address.testutil.TypicalEntries.BENSON;
 import static seedu.address.testutil.TypicalEntries.CARL;
@@ -14,6 +13,7 @@ import static seedu.address.testutil.TypicalEntries.ELLE;
 import static seedu.address.testutil.TypicalEntries.FIONA;
 import static seedu.address.testutil.TypicalEntries.GEORGE;
 import static seedu.address.testutil.TypicalEntries.JANE;
+import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -45,49 +45,58 @@ public class SortPersonCommandTest {
     }
 
     @Test
-    public void execute_sortListAscending_personList_onlyUnarchived() {
+    public void execute_sortListAscending_personListOnlyUnarchived() {
         expectedModel.sortPersonListByName(Ordering.ASCENDING, Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY, ListType.PERSON, Ordering.ASCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY,
+                ListType.PERSON, Ordering.ASCENDING);
         assertCommandSuccess(new SortPersonCommand(SearchType.UNARCHIVED_ONLY, Ordering.ASCENDING), model,
                 expectedCommandResult, expectedModel);
-        assertEquals(List.of(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE), model.getAddressBook().getPersonList());
+        assertEquals(List.of(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE),
+                model.getAddressBook().getPersonList());
     }
 
     @Test
-    public void execute_sortListDescending_personList_onlyUnarchived() {
+    public void execute_sortListDescending_personListOnlyUnarchived() {
         expectedModel.sortPersonListByName(Ordering.DESCENDING, Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY, ListType.PERSON, Ordering.DESCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.UNARCHIVED_ONLY,
+                ListType.PERSON, Ordering.DESCENDING);
         assertCommandSuccess(new SortPersonCommand(SearchType.UNARCHIVED_ONLY, Ordering.DESCENDING), model,
                 expectedCommandResult, expectedModel);
-        assertEquals(List.of(JANE, GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE), model.getAddressBook().getPersonList());
+        assertEquals(List.of(JANE, GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE),
+                model.getAddressBook().getPersonList());
     }
 
     @Test
-    public void execute_sortListAscending_personList_withArchived() {
+    public void execute_sortListAscending_personListWithArchived() {
         expectedModel.sortPersonListByName(Ordering.ASCENDING, Model.PREDICATE_SHOW_ALL);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.PERSON, Ordering.ASCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.PERSON,
+                Ordering.ASCENDING);
         assertCommandSuccess(new SortPersonCommand(SearchType.ALL, Ordering.ASCENDING), model,
                 expectedCommandResult, expectedModel);
     }
 
     @Test
-    public void execute_sortListDescending_personList_withArchived() {
+    public void execute_sortListDescending_personListWithArchived() {
         expectedModel.sortPersonListByName(Ordering.DESCENDING, Model.PREDICATE_SHOW_ALL);
-        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.PERSON, Ordering.DESCENDING);
+        expectedCommandResult = getExpectedSortCommandResult(SearchType.ALL, ListType.PERSON,
+                Ordering.DESCENDING);
         assertCommandSuccess(new SortPersonCommand(SearchType.ALL, Ordering.DESCENDING), model,
                 expectedCommandResult, expectedModel);
     }
 
     @Test
     public void equals() {
-        SortPersonCommand firstCommand = new SortPersonCommand(SearchType.UNARCHIVED_ONLY, Ordering.ASCENDING);
-        SortPersonCommand secondCommand = new SortPersonCommand(SearchType.UNARCHIVED_ONLY, Ordering.DESCENDING);
+        SortPersonCommand firstCommand = new SortPersonCommand(SearchType.UNARCHIVED_ONLY,
+                Ordering.ASCENDING);
+        SortPersonCommand secondCommand = new SortPersonCommand(SearchType.UNARCHIVED_ONLY,
+                Ordering.DESCENDING);
 
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns true
-        SortPersonCommand firstCommandCopy = new SortPersonCommand(SearchType.UNARCHIVED_ONLY, Ordering.ASCENDING);
+        SortPersonCommand firstCommandCopy = new SortPersonCommand(SearchType.UNARCHIVED_ONLY,
+                Ordering.ASCENDING);
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns false
