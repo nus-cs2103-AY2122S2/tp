@@ -250,7 +250,7 @@ successfully.
 
 The following sequence diagram shows how the tag operation works:
 <img src="images/TagSequenceDiagram0.png" />
-<img src="images/TagSequenceDiagram1.png" width="550"/>
+<img src="images/TagSequenceDiagram1.png" width="400"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -274,6 +274,8 @@ Given below is an example scenario of how the `removetag` command works.
 **Step 4:** The removal of tags is successful, and a success message will be generated.
 
 <img src="images/RemoveTagState1.png" width="450" />
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagrams shows how the `removetag` operation works: <br>
 
