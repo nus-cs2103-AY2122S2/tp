@@ -111,6 +111,7 @@ Deletes a friend in _Amigos_.
 
 **Examples**:
 * `deletefriend n/John Doe`
+<div style="page-break-after: always;"></div>
 
 |                  Before                   |                     After                     |
 |:-----------------------------------------:|:---------------------------------------------:|
