@@ -234,8 +234,6 @@ Step 4. After browsing through the list of commands, the user decides now that h
     * Pros: Faster performance, since no new objects are created after initialization.
     * Cons: Harder to implement, have to ensure that the display panes are correctly positioned and hidden/shown when required.
 
-_{more aspects and alternatives to be added}_
-
 ### Display Students Feature
 
 #### Implementation
@@ -380,8 +378,6 @@ The following sequence diagram shows how this operation works:
     * Pros: Fewer checks on whether person is a student required.
     * Cons: Additional filters required to remove duplicates when displaying both persons and students.
 
-_{more aspects and alternatives to be added}_
-
 ### Remove Student Feature
 
 This `RemoveStudentCommand`feature is facilitated by the display students feature. It extends the application by
@@ -520,13 +516,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -703,15 +692,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 4b1. Existing tags are removed from the person.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A TA with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using text commands than using the mouse.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -744,8 +729,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -761,12 +744,13 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Stop The Application By Closing the Program File
 
-1. _{ more test cases …​ }_
+3. Delete all the files in the data folder, which is in the same directory as `camNUS.jar`
+
+4. Start running `camNUS.jar`
+   

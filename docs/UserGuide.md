@@ -269,7 +269,7 @@ Format: `remove_student INDEX tn/TUTORIAL_NAME` or `remove_student id/STUDENT_ID
 Examples:
 
 * `remove_student 1 tn/G04`
-* `remove_student id/e0123456 tn/G04`
+* `remove_student id/e0123456 tn/T04`
 
 ### Listing students of a class: `list_student`
 
@@ -390,7 +390,7 @@ Format: `list_score as/ASSESSMENT_NAME tn/TUTORIAL_NAME`
 
 Examples:
 
-* list_score as/Assignment 1 tn/T04
+* `list_score as/Assignment 1 tn/T04`
   ![result for `list_score as/Assignment 1 tn/T04`](images/listScoreResult.png)
 
 ### Marking attendance for a student: `mark_attendance`
@@ -479,7 +479,7 @@ Format: `find [n/NAME] [tn/TUTORIAL_NAME] [t/TAG] [id/STUDENT_ID] [p/PHONE] [a/A
 Examples:
 
 * `find n/Em` returns `Emily Tan` and `emily` and `Emmanuel`
-* `find n/Em id/e1234567` returns `Emily Tan` and `Steven Lim` whose student ID is e1234567.
+* `find n/Em id/e0123456` returns `Emily Tan` and `Steven Lim` whose student ID is e0123456.
 
 ### Clearing all entries : `clear`
 
@@ -518,32 +518,34 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                                     |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Steven Lim p/98765432 e/stevenlim@example.com a/Changi Airport`               |
-| **Add Class**         | `add_class tn/TUTORIAL_NAME v/VENUE d/DAY tm/TIME wk/WEEK` <br> e.g., `add_class tn/T04 v/LT13 d/Monday tm/13:00 wk/13`                                                                |
-| **Add Student**       | `add_student n/NAME id/STUDENT_ID tn/TUTORIAL_NAME` <br> e.g., `add_student n/Amy Tan id/e0123456 tn/T13`                                                                            |
-| **Add Assessment**    | `add_assessment as/ASSESSMENT_NAME w/WEIGHTAGE f/FULL MARK` <br> e.g., `add_assessment as/Attendance w/5 f/10`                                                                       |
-| **Clear**             | `clear`                                                                                                                                                                              |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
-| **Delete Class**      | `delete_class INDEX` or `delete_class tn/TUTORIAL_NAME` <br> e.g., `delete_class 1` or `delete_class tn/T04`                                                                                                          |
-| **Remove Student**    | `remove_student INDEX tn/TUTORIAL_NAME` <br> `remove_student id/STUDENT_ID tn/TUTORIAL_NAME` <br> e.g. `remove_student 1 tn/G04` / `remove_student id/e0123456 tn/G04`                       |
-| **Delete Assessment** | `delete_assessment as/ASSESSMENT_NAME` <br> e.g., `delete_assessment as/Attendance`                                                                                                  |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/limsteven@example.com`                                          |
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br>`find [n/NAME] [id/STUDENT_ID] [a/ADDRESS] [e/EMAIL] [p/PHONE_NUMBER] [tn/TUTORIAL_NAME] [t/TAG]`<br> e.g. find n/emily |
-| **List**              | `list`                                                                                                                                                                               |
-| **List Assessment**   | `list_assessment`                                                                                                                                                                    |
-| **List Attendance**   | `list_attendance tn/TUTORIAL_NAME wk/WEEK` <br> `list_attendance id/STUDENT_ID` <br> e.g., `list_attendance tn/T04 wk/1` /  `list_attendance id/e0123456`                            |
-| **List Class**        | `list_class [d/DAY]` <br> e.g., `list_class d/Wed`                                                                                                                                   |
-| **List Student**      | `list_student` or `list_student INDEX` or `list_student tn/TUTORIAL_NAME` <br> e.g., `list_student 1` or `list_student tn/T04`                                                                                                       |
-| **List Score**        | `list_score as/ASSESSMENT_NAME tn/TUTORIAL_NAME` <br> e.g., `list_score as/Assignment 1 tn/T04`                                                                                      |
-| **Grade**             | `grade as/ASSESSMENT_NAME n/NAME s/SCORE` <br> e.g., `grade as/Attendance n/Steven Lim s/11`                                                                                                 |
-| **Mark Attendance**   | `mark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK` <br> e.g., `mark_attendance tn/T04 id/e0123456 wk/1`                                                                      |
-| **Unmark Attendance** | `unmark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK` <br> e.g., `unmark_attendance tn/T04 id/e0123456 wk/1`                                                                  |
-| **Comment**           | `comment id/STUDENT_ID msg/COMMENT` <br> e.g., `comment id/e0123456 msg/Participated actively`                                                                                       |
-| **Remove Comment**    | `remove_comment id/STUDENT_ID` <br> e.g., `remove_comment id/e0123456`                                                                                                               |
-| **View Comment**      | `view_comment id/STUDENT_ID` <br> e.g., `view_comment id/e0123456`                                                                                                                   |
-| **Help**              | `help [n/COMMAND_NAME]` <br> e.g.,`help n/delete`                                                                                                                                    |
-| **Exit**              | `exit`                                                                                                                                                                               |
+| Action                | Format, Examples                                                                                                                                                                         |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Steven Lim p/98765432 e/stevenlim@example.com a/Changi Airport`                                                |
+| **Add Class**         | `add_class tn/TUTORIAL_NAME v/VENUE d/DAY tm/TIME wk/WEEK` <br> e.g., `add_class tn/T04 v/LT13 d/Monday tm/13:00 wk/13`                                                                  |
+| **Add Student**       | `add_student n/NAME id/STUDENT_ID tn/TUTORIAL_NAME` <br> e.g., `add_student n/Steven Lim id/e0123456 tn/T04`                                                                             |
+| **Add Assessment**    | `add_assessment as/ASSESSMENT_NAME w/WEIGHTAGE f/FULL MARK` <br> e.g., `add_assessment as/Attendance w/5 f/13`                                                                           |
+| **Clear**             | `clear`                                                                                                                                                                                  |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Delete Class**      | `delete_class INDEX` or `delete_class tn/TUTORIAL_NAME` <br> e.g., `delete_class 1` or `delete_class tn/T04`                                                                             |
+| **Remove Student**    | `remove_student INDEX tn/TUTORIAL_NAME` <br> `remove_student id/STUDENT_ID tn/TUTORIAL_NAME` <br> e.g. `remove_student 1 tn/G04` or `remove_student id/e0123456 tn/T04`                  |
+| **Delete Assessment** | `delete_assessment as/ASSESSMENT_NAME` <br> e.g., `delete_assessment as/Attendance`                                                                                                      |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 1 p/91234567 e/limsteven@example.com`                                                              |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br>`find [n/NAME] [id/STUDENT_ID] [a/ADDRESS] [e/EMAIL] [p/PHONE_NUMBER] [tn/TUTORIAL_NAME] [t/TAG]`<br> e.g. `find n/emily`  |
+| **List**              | `list`                                                                                                                                                                                   |
+| **List Assessment**   | `list_assessment`                                                                                                                                                                        |
+| **List Attendance**   | `list_attendance tn/TUTORIAL_NAME wk/WEEK` <br> `list_attendance id/STUDENT_ID` <br> e.g., `list_attendance tn/T04 wk/1` or  `list_attendance id/e0123456`                               |
+| **List Class**        | `list_class [d/DAY]` <br> e.g., `list_class d/Wed`                                                                                                                                       |
+| **List Student**      | `list_student` or `list_student INDEX` or `list_student tn/TUTORIAL_NAME` <br> e.g., `list_student 1` or `list_student tn/T04`                                                           |
+| **List Score**        | `list_score as/ASSESSMENT_NAME tn/TUTORIAL_NAME` <br> e.g., `list_score as/Assignment 1 tn/T04`                                                                                          |
+| **Grade**             | `grade as/ASSESSMENT_NAME n/NAME s/SCORE` <br> e.g., `grade as/Attendance n/Steven Lim s/11`                                                                                             |
+| **Mark Attendance**   | `mark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK` <br> e.g., `mark_attendance tn/T04 id/e0123456 wk/1`                                                                          |
+| **Unmark Attendance** | `unmark_attendance tn/TUTORIAL_NAME [id/STUDENT_ID] wk/WEEK` <br> e.g., `unmark_attendance tn/T04 id/e0123456 wk/1`                                                                      |
+| **Comment**           | `comment id/STUDENT_ID msg/COMMENT` <br> e.g., `comment id/e0123456 msg/Participated actively`                                                                                           |
+| **Remove Comment**    | `remove_comment id/STUDENT_ID` <br> e.g., `remove_comment id/e0123456`                                                                                                                   |
+| **View Comment**      | `view_comment id/STUDENT_ID` <br> e.g., `view_comment id/e0123456`                                                                                                                       |
+| **Help**              | `help [n/COMMAND_NAME]` <br> e.g.,`help n/delete`                                                                                                                                        |
+| **Exit**              | `exit`                                                                                                                                                                                   |
