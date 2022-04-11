@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
+
+import seedu.address.MainApp;
 
 /**
  * Writes and reads files
@@ -12,6 +15,7 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
@@ -78,6 +82,15 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Deletes the file at the given path.
+     */
+    public static void deleteFile(Path file) {
+        if (!file.toFile().delete()) {
+            logger.warning(String.format("File was not deleted: %s", file));
+        }
     }
 
 }

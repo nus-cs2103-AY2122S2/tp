@@ -1,0 +1,40 @@
+@startuml
+!include ../style.puml
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as ABParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant "noteCommand:NoteCommand" as NoteCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> ABParser : parseInDetailedViewContext("note r/red")
+activate ABParser
+
+create NoteCommandParser
+ABParser -> NoteCommandParser
+activate NoteCommandParser
+NoteCommandParser -> ABParser
+deactivate NoteCommandParser
+
+ABParser -> NoteCommandParser : parseInDetailedViewContext("r/red")
+activate NoteCommandParser
+
+create NoteCommand
+NoteCommandParser -> NoteCommand
+activate NoteCommand
+NoteCommand -> NoteCommandParser
+deactivate NoteCommand
+
+NoteCommandParser -> ABParser : noteCommand
+deactivate NoteCommandParser
+'Hidden arrow to move destroy marker lower'
+NoteCommandParser -[hidden]-> NoteCommandParser
+destroy NoteCommandParser
+
+ABParser -> LogicManager : noteCommand
+deactivate ABParser
+
+@enduml

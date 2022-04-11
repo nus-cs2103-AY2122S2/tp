@@ -1,0 +1,54 @@
+@startuml
+!include ../style.puml
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "noteCommand:NoteCommand" as NoteCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+Box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "personToEdit:Person" as OldPerson MODEL_COLOR
+participant "editedPerson:Person" as NewPerson MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> NoteCommand : executeInDetailedView
+activate NoteCommand
+
+NoteCommand -> Model : getDetailedContactViewPerson
+activate Model
+Model -> NoteCommand : personToEdit
+deactivate Model
+
+create NewPerson
+NoteCommand -> NewPerson
+activate NewPerson
+NewPerson -> NoteCommand
+deactivate NewPerson
+
+NoteCommand -> Model : setPerson(personToEdit, editedPerson)
+Model -> NoteCommand
+
+NoteCommand -> Model : setDetailedContactView(editedPerson)
+Model -> OldPerson
+OldPerson -[hidden]-> OldPerson
+destroy OldPerson
+Model -> NoteCommand
+
+create CommandResult
+NoteCommand -> CommandResult : SpecialCommandResult.DETAILED_VIEW
+activate CommandResult
+CommandResult -> NoteCommand
+deactivate CommandResult
+
+NoteCommand -> LogicManager : commandResult
+deactivate NoteCommand
+
+'Hidden arrow to move destroy marker lower'
+NoteCommand -[hidden]-> NoteCommand
+destroy NoteCommand
+
+@enduml

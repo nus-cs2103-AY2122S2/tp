@@ -3,6 +3,16 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+    "address": "4th street",
+    "deadlines" : [ {
+      "description" : "happy",
+      "date" : "1/1/2349"
+    } ],
+    "notes" : [ ],
+    "tagged" : [ "colleagues", "friends" ],
+    "isFavourite" : "false",
+    "images" : [ ],
+    "hasHighImportance" : "true"
+  } ],
+  "tags" : [ "friends", "colleagues", "neighbours", "classmates", "family" ]
 }

@@ -1,0 +1,18 @@
+@startuml
+!include ../style.puml
+
+Box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand("note r/red")
+activate MainWindow
+
+MainWindow -> LogicManager : executeInDetailedViewMode("note r/red")
+activate LogicManager
+
+@enduml

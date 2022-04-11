@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Unmodifiable view of an address book
@@ -14,4 +15,15 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns an unmodifiable view of the tags list.
+     * This list will not contain any duplicate tags.
+     */
+    ObservableList<Tag> getTagList();
+
+    /**
+     * Returns an unmodifiable view of the currently activated tag list from the find tag command.
+     * This list will not contain any duplicate tags
+     */
+    ObservableList<Tag> getActivatedTagList();
 }

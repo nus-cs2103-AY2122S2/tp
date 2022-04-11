@@ -7,14 +7,17 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_1;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -38,6 +41,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setContactImagesFilePath(Paths.get("contact/images/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -45,6 +49,7 @@ public class ModelManagerTest {
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setContactImagesFilePath(Paths.get("new/contact/images/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -73,6 +78,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setContactImagesFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setContactImagesFilePath(null));
+    }
+
+    @Test
+    public void setContactImagesFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("contact/images/file/path");
+        modelManager.setContactImagesFilePath(path);
+        assertEquals(path, modelManager.getContactImagesFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -91,6 +108,29 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void setDetailedContactView_personInContactView_newPersonInContactViewOnly() {
+        modelManager.setDetailedContactView(ALICE);
+        modelManager.setDetailedContactView(BENSON);
+        assertTrue(modelManager.getDetailedContactView().size() == 1);
+        assertEquals(modelManager.getDetailedContactView().get(0), BENSON);
+        modelManager.clearDetailedContactView();
+    }
+
+    @Test
+    public void setImagesToView_personWithImages_success() {
+        modelManager.setImagesToView(BENSON.getImageDetailsList());
+        ImageDetailsList expectedList = new ImageDetailsList(List.of(TEST_IMAGE_1));
+        assertEquals(modelManager.getImagesToView(), expectedList);
+    }
+
+    @Test
+    public void setImagesToView_personWithoutImages_success() {
+        modelManager.setImagesToView(ALICE.getImageDetailsList());
+        ImageDetailsList expectedList = new ImageDetailsList();
+        assertEquals(modelManager.getImagesToView(), expectedList);
     }
 
     @Test
@@ -123,6 +163,11 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different contactFullView -> returns false
+        modelManager.setDetailedContactView(ALICE);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.clearDetailedContactView();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

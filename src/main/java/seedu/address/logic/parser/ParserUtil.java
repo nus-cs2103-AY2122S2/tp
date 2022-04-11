@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Deadline;
+import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -25,6 +28,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -93,6 +97,54 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param deadline the date of the deadline.
+     * @return the resulting {@code Deadline} object.
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static Deadline parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+        StringBuilder originalInput = new StringBuilder(trimmedDeadline);
+        originalInput.reverse();
+        String[] reversedAndSplit = originalInput.toString().split("\\s+", 2);
+        if (reversedAndSplit.length < 2) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        String description = new StringBuilder(reversedAndSplit[1]).reverse().toString();
+        String date = new StringBuilder(reversedAndSplit[0]).reverse().toString();
+        if (!Deadline.isValidDeadline(description, date)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Deadline(description, date);
+    }
+
+    /**
+     * parses {@code String deadlines} into a {@code DeadlineList}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param deadlines the string representing deadline/s
+     * @return the resulting {@code DeadlineList} object
+     * @throws ParseException if one of the given {@code deadlines} is invalid.
+     */
+    public static DeadlineList parseDeadlines(Collection<String> deadlines) throws ParseException {
+        requireNonNull(deadlines);
+        ArrayList<Deadline> deadlineList = new ArrayList<>();
+
+        if (deadlines.size() < 1) {
+            deadlineList.add(new Deadline());
+        }
+
+        for (String deadline : deadlines) {
+            deadlineList.add(parseDeadline(deadline));
+        }
+        return new DeadlineList(deadlineList);
     }
 
     /**

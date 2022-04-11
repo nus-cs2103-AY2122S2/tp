@@ -1,0 +1,84 @@
+@startuml
+!include ../style.puml
+
+Box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as ABParser LOGIC_COLOR
+participant ":DetailedViewExecutableParser" as DVEParser LOGIC_COLOR
+participant "command:DetailedViewExecutable" as DVECommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+Box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand
+activate MainWindow
+
+MainWindow -> LogicManager : executeInDetailedViewMode
+activate LogicManager
+
+LogicManager -> ABParser : parseInDetailedViewContext
+activate ABParser
+
+create DVEParser
+ABParser -> DVEParser
+activate DVEParser
+DVEParser -> ABParser
+deactivate DVEParser
+
+ABParser -> DVEParser : parseInDetailedViewContext
+activate DVEParser
+
+create DVECommand
+DVEParser -> DVECommand
+activate DVECommand
+DVECommand -> DVEParser
+deactivate DVECommand
+
+DVEParser -> ABParser : command
+deactivate DVEParser
+'Hidden arrow to move destroy marker lower'
+DVEParser -[hidden]-> DVEParser
+destroy DVEParser
+
+ABParser -> LogicManager : command
+deactivate ABParser
+
+LogicManager -> DVECommand : executeInDetailedView
+activate DVECommand
+
+DVECommand -> Model
+'Hidden arrow to extend activation box'
+DVECommand -[hidden]-> DVECommand
+create CommandResult
+DVECommand -> CommandResult
+activate CommandResult
+CommandResult -> DVECommand
+deactivate CommandResult
+DVECommand -> LogicManager : result
+deactivate DVECommand
+'Hidden arrow to move destroy marker lower'
+DVECommand -[hidden]-> DVECommand
+destroy DVECommand
+
+LogicManager -> MainWindow : result
+deactivate LogicManager
+
+MainWindow -> CommandResult : getSpecialCommandResult
+
+alt NONE SpecialCommandResult
+MainWindow -> MainWindow : handleListView
+else DETAILED_VIEW SpecialCommandResult
+MainWindow -> MainWindow : handleDetailedView
+end
+
+[<- MainWindow
+deactivate MainWindow
+
+@enduml

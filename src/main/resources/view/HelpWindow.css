@@ -1,19 +1,28 @@
-#copyButton, #helpMessage {
+.Button, Label {
     -fx-text-fill: white;
 }
 
-#copyButton {
+.Button {
     -fx-background-color: dimgray;
 }
 
-#copyButton:hover {
+.Button:hover {
     -fx-background-color: gray;
 }
 
-#copyButton:armed {
+.Button:armed {
     -fx-background-color: darkgray;
 }
 
 #helpMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#commandSummaryHelpContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+
+#helpWindowContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }

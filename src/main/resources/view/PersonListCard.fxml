@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.canvas.Canvas?>
 
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -26,11 +29,16 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <ImageView fx:id="flagImageView" visible="true" />
+        <Canvas fx:id="starCanvas" height="20" width="20" visible="false" />
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="deadlines" styleClass="cell_small_label" text="\$deadline" wrapText="true" maxWidth="450"
+             maxHeight="38"/>
+      <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" wrapText="true" maxWidth="450" maxHeight="38"/>
     </VBox>
   </GridPane>
 </HBox>

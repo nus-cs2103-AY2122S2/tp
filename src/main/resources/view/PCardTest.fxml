@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<VBox alignment="center" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- This VBox has to programatically fit the minimum window size of the app (minWidth) -->
+    <VBox fx:id="container" maxWidth="700" spacing="10">
+        <HBox alignment="center" spacing="10">
+            <Label fx:id="name" style="-fx-font-size: 40; -fx-underline: true" wrapText="true" />
+            <ImageView fx:id="flagImageView" />
+            <Canvas fx:id="starCanvas" height="20.0" width="20.0" />
+        </HBox>
+        <VBox spacing="5">
+            <FlowPane fx:id="tags" />
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        </VBox>
+        <HBox>
+            <VBox>
+                <Label prefWidth="320.0" text="Notes" alignment="center" style="-fx-underline: true" />
+                <Label fx:id="notes" prefWidth="320.0" text="Label" wrapText="true" />
+            </VBox>
+            <VBox>
+                <Label prefWidth="320.0" text="Deadlines" alignment="center" style="-fx-underline: true"/>
+                <Label fx:id="deadlines" prefWidth="320.0" text="Label" wrapText="true" />
+            </VBox>
+        </HBox>
+        <VBox minHeight="300">
+            <ScrollPane VBox.vgrow="ALWAYS" maxHeight="300" fitToWidth="true" style="-fx-background: #383838; -fx-border-color: #383838">
+                <TilePane fx:id="imageListView" alignment="center"/>
+            </ScrollPane>
+            <Label fx:id="moreImages" visible="false" />
+        </VBox>
+    </VBox>
+</VBox>

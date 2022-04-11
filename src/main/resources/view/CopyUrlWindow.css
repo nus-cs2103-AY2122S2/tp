@@ -1,0 +1,19 @@
+.Button, Label {
+    -fx-text-fill: white;
+}
+
+.Button {
+    -fx-background-color: dimgray;
+}
+
+.Button:hover {
+    -fx-background-color: gray;
+}
+
+.Button:armed {
+    -fx-background-color: darkgray;
+}
+
+#successMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}

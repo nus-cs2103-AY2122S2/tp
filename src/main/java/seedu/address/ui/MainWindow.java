@@ -16,6 +16,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
+import seedu.address.model.image.ImageDetailsList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,8 +34,14 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private DetailedContactPanel detailedContactPanel;
+    private ImageViewPanel imageViewPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private enum Panel { PERSON_LIST, DETAILED_VIEW, IMAGE_VIEW }
+
+    private Panel panelInDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane informationDisplayPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -78,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,8 +119,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanel = new PersonListPanel(logic.getSortedPersonList(), logic.getActivatedTagList());
+        informationDisplayPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        detailedContactPanel = new DetailedContactPanel(logic.getDetailedContactView());
+        informationDisplayPanelPlaceholder.getChildren().add(detailedContactPanel.getRoot());
+        detailedContactPanel.getRoot().setVisible(false);
+
+        ImageDetailsList list = logic.getImagesToView();
+        imageViewPanel = new ImageViewPanel(list);
+        informationDisplayPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+        imageViewPanel.getRoot().setVisible(false);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,8 +137,15 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::getCommandHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void setPanel(Panel panelToShow) {
+        panelInDisplay = panelToShow;
+        personListPanel.getRoot().setVisible(panelToShow.equals(Panel.PERSON_LIST));
+        detailedContactPanel.getRoot().setVisible(panelToShow.equals(Panel.DETAILED_VIEW));
+        imageViewPanel.getRoot().setVisible(panelToShow.equals(Panel.IMAGE_VIEW));
     }
 
     /**
@@ -167,6 +192,30 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    @FXML
+    private void handleDetailedView() {
+        setPanel(Panel.DETAILED_VIEW);
+    }
+
+    /**
+     * Loads the contact's images.
+     * Initializes a new ImageViewPanel for each new contact to clear the previous images.
+     */
+    @FXML
+    private void handleViewImages() {
+        ImageDetailsList list = logic.getImagesToView();
+        imageViewPanel = new ImageViewPanel(list);
+        informationDisplayPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+        setPanel(Panel.IMAGE_VIEW);
+    }
+
+    /**
+     * Changes the panel view to the full contacts list view
+     */
+    private void handleListView() {
+        setPanel(Panel.PERSON_LIST);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -174,16 +223,34 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            logic.cacheCommandText(commandText);
+
+            CommandResult commandResult = panelInDisplay == Panel.DETAILED_VIEW
+                    ? logic.executeInDetailedViewMode(commandText)
+                    : logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
+            handleListView();
 
-            if (commandResult.isExit()) {
+            switch (commandResult.getSpecialCommandResult()) {
+            case NONE:
+                break;
+            case SHOW_HELP:
+                handleHelp();
+                break;
+            case VIEW_IMAGES:
+                handleViewImages();
+                break;
+            case DETAILED_VIEW:
+                handleDetailedView();
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                logger.warning("Program execution should not reach here");
+                assert false;
             }
 
             return commandResult;
@@ -192,5 +259,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Retrieves the command history from i-commands ago
+     * @param i the amount of commands to back-step
+     * @return the retrieved command text
+     */
+    private CommandHistoryEntry getCommandHistory(int i) {
+        return logic.getCommandText(i);
     }
 }

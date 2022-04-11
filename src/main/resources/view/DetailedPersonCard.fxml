@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="center" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- This VBox has to programatically fit the minimum window size of the app (minWidth) -->
+    <VBox fx:id="container" maxWidth="700" spacing="10">
+        <HBox alignment="center" spacing="10">
+            <Label fx:id="name" style="-fx-font-size: 40; -fx-underline: true" wrapText="true" />
+            <ImageView fx:id="flagImageView" />
+            <Canvas fx:id="starCanvas" height="20.0" width="20.0" />
+        </HBox>
+        <VBox spacing="5">
+            <FlowPane fx:id="tags" />
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        </VBox>
+        <HBox>
+            <VBox fx:id="notesPane">
+                <Label fx:id="notesTitle" alignment="center" prefWidth="320.0" style="-fx-font-weight: bold;" text="Notes">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+                <Label fx:id="notes" prefWidth="320.0" text="Label" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Label>
+            <opaqueInsets>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </opaqueInsets>
+            </VBox>
+            <VBox fx:id="deadlinesPane">
+                <Label fx:id="deadlinesTitle" alignment="center" prefWidth="320.0" text="Label">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+                <Label fx:id="deadlines" prefWidth="320.0" text="Label" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Label>
+            <opaqueInsets>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </opaqueInsets>
+            </VBox>
+        </HBox>
+        <VBox minHeight="300">
+            <ScrollPane fitToWidth="true" maxHeight="300" style="-fx-background: #383838; -fx-border-color: #383838" VBox.vgrow="ALWAYS">
+                <TilePane fx:id="imageListView" alignment="center" />
+            </ScrollPane>
+            <Label fx:id="moreImages" visible="false" />
+        </VBox>
+    </VBox>
+</VBox>

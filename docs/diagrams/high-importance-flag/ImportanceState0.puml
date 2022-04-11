@@ -1,0 +1,21 @@
+@startuml
+!include ../style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Newly created persons (2 persons as example)
+package ContactState {
+    class PersonList as "__personList:FilteredPersonList__"
+    class P1 as "__p1:Person__"
+    class P2 as "__p2:Person__"
+    class NotImportant as "__NOT_HIGH_IMPORTANCE:HighImportance__"
+}
+
+PersonList -right-> P1
+P1 -right-> NotImportant
+PersonList --> P2
+P2 -up-> NotImportant
+
+P1 -[hidden]down-> P2
+
+@enduml

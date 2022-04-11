@@ -1,0 +1,29 @@
+@startuml
+!include ../style.puml
+
+Box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+activate MainWindow
+
+LogicManager -> MainWindow : commandResult
+
+MainWindow -> CommandResult : getSpecialCommandResult
+
+CommandResult -> MainWindow : DETAILED_VIEW
+
+MainWindow -> MainWindow : handleDetailedView
+activate MainWindow
+deactivate MainWindow
+'Hidden arrow to move return arrow lower'
+MainWindow -[hidden]-> MainWindow
+[<- MainWindow
+deactivate MainWindow
+
+@enduml

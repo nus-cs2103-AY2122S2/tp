@@ -1,12 +1,11 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,18 +21,29 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final DeadlineList deadlines;
+    private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
+    private final Favourite favouriteStatus;
+    private final ImageDetailsList imageDetailsList;
+    private final HighImportance highImportanceStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
+                  Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus,
+                  ImageDetailsList images) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.deadlines = deadlines;
+        this.notes = notes;
+        this.favouriteStatus = favouriteStatus;
+        this.highImportanceStatus = highImportanceStatus;
         this.tags.addAll(tags);
+        this.imageDetailsList = images;
     }
 
     public Name getName() {
@@ -50,6 +60,34 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public DeadlineList getDeadlines() {
+        return deadlines;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
+    }
+
+    public boolean isFavourite() {
+        return favouriteStatus.isFavourite();
+    }
+
+    public ImageDetailsList getImageDetailsList() {
+        return imageDetailsList;
+    }
+
+    public HighImportance getHighImportanceStatus() {
+        return highImportanceStatus;
+    }
+
+    public boolean hasHighImportance() {
+        return highImportanceStatus.hasHighImportance();
     }
 
     /**
@@ -92,13 +130,19 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getDeadlines().equals(getDeadlines())
+                && otherPerson.getNotes().equals(getNotes())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
+                && otherPerson.getImageDetailsList().equals(getImageDetailsList())
+                && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, deadlines, notes, tags, favouriteStatus, imageDetailsList,
+                highImportanceStatus);
     }
 
     @Override
@@ -110,14 +154,22 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Deadline(s): ")
+                .append(getDeadlines())
+                .append("; Notes: ")
+                .append(getNotes())
+                .append("; Favourite: ")
+                .append(getFavouriteStatus())
+                .append("; Importance Status: ")
+                .append(getHighImportanceStatus());
 
         Set<Tag> tags = getTags();
+
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();
     }
-
 }
