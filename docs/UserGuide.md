@@ -65,6 +65,8 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 * Extraneous parameters for commands that do not take in parameters will be ignored.<br>
   e.g. if the command specifies `list student 123`, it will be interpreted as `list student`.
 
+* For commands that do take in parameters, any extraneous parameters will be parsed together with the value of the previous parameter.<br>
+  e.g. if the command specifies `list student c/1 f/1`, the class group index will be interpreted as `1 f/1` and an error will be returned.
 </div>
 
 
@@ -186,7 +188,7 @@ From the assessment list, click the "See Attempts" button to open a popup window
     <tr>
         <td>STUDENT_ID</td>
         <td><code>id/</code></td>
-        <td>It represents the ID of the student, e.g. <code>E012345</code>.
+        <td>It represents the ID of the student, e.g. <code>E0123456</code>.
         </td>
     </tr>
     <tr>
@@ -208,7 +210,7 @@ From the assessment list, click the "See Attempts" button to open a popup window
             <ul>
                 <li><code>all</code> refers to all students.</li>
                 <li><code>STUDENT_INDEXES</code> represents the index of the students shown when <code>list student</code> is run.</li>
-                <li><code>STUDENT_IDS</code> represents the student ID of the student, e.g. <code>E012345</code>.</li>
+                <li><code>STUDENT_IDS</code> represents the student ID of the student, e.g. <code>E0123456</code>.</li>
             </ul>
         </td>
     </tr>
@@ -248,7 +250,7 @@ Examples:
 
 #### List all modules: `list module`
 
-Use the list command to view all your modules.
+Use the list command to display your modules in TAssist's "Modules" tab.
 
 Format: `list module`
 
@@ -282,7 +284,7 @@ Examples:
 
 #### List all assessments: `list assessment`
 
-Use this command to display your assessments in TAssist's "Assessments" tab. Optionally, you can filter this list by a specific module.
+Use the list assessment command to display your assessments in TAssist's "Assessments" tab. Optionally, you can filter this list by a specific module.
 
 Format: `list assessment [m/MODULE_INDEX]`
 
@@ -313,7 +315,7 @@ Examples:
 
 #### Add a class group: `add class`
 
-After creating modules in TAssist, you can add class groups to these modules. Class groups refer to recitations, tutorials, labs, and sectionals you personally teach.
+After creating modules in TAssist, you can add class groups to these modules. Class groups refer to labs, recitations, sectionals, and tutorials you personally teach.
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
@@ -325,7 +327,7 @@ Examples:
 
 #### List all class groups: `list class`
 
-Use the list class command to display your class groups in TAssist's "Classes" tab. You may filter these class groups by specifying an optional module.
+Use the list class command to display your class groups in TAssist's "Classes" tab. Optionally, you can filter this list by a specific module.
 
 Format: `list class [m/MODULE_INDEX]`
 
@@ -367,7 +369,7 @@ Examples:
 
 #### List all students: `list student`
 
-The list student command will list all students in TAssist. You can also limit this list to a specified module or class group.
+Use the list student command to display your students in TAssist's "Students" tab. Optionally, you can filter this list by a specific module or class group.
 
 Format: `list student [{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}]`
 
@@ -407,7 +409,7 @@ Delete a specified student from TAssist as well as the student's attempt(s) in a
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list module` followed by `delete module 2` deletes the 2nd module in the whole module list and its associated class group(s) and assessment(s) in TAssist.
+* `list student` followed by `delete student 2` deletes the 2nd student in the whole student list and their assessment(s)' attempt(s) in TAssist.
 
 
 #### Enrol a student: `enrol`
@@ -452,7 +454,7 @@ Examples:
 
 #### Mark attendance: `mark`
 
-Record attendance for any class group by marking a student(s) "present" for a given week. Currently, TAssist assumes that each class group meets at most once per week from week 1 to week 13.
+Record attendance for any class group by marking student(s) "present" for a given week. Currently, TAssist assumes that each class group meets at most once per week from week 1 to week 13.
 
 Format: `mark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -471,7 +473,7 @@ Examples:
 
 #### Unmark attendance: `unmark`
 
-Use the unmark command to mark a student(s) as "not present" during a specified lesson (identified by class group and week).
+Use the unmark command to mark student(s) as "not present" during a specified lesson (identified by class group and week).
 
 Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 

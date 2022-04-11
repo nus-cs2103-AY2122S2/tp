@@ -242,7 +242,7 @@ The following sequence diagram shows how the add operation works:
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
 ![AddSequenceDiagram](images/AddModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -256,6 +256,7 @@ The delete mechanism is facilitated by `TAssist`. Its functionality, usage and b
 
 * `DeleteCommandParser#parse()` — Parses the command arguments.
 * `DeleteCommand#execute()` — Executes `ModelManager#deleteEntity()` with the specified entity.
+* `ModelManager#deleteEntity()` — Deletes the specified entity.
 * `ModelManager#deleteEntity()` — Deletes the specified entity.
 
 However, when a `TaModule` object is deleted, its associated `ClassGroup` and `Assessment` object(s) are also deleted.
@@ -280,7 +281,7 @@ The following sequence diagram shows how the delete operation works:
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 ![DeleteSequenceDiagram](images/DeleteModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -310,7 +311,7 @@ The following sequence diagram shows how the list operation works:
 
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -339,13 +340,27 @@ Step 1. The user launches the application. The `TAssist` is already populated wi
 ![EnrolState0](images/AddState0.png)
 
 Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`. The `enrol` command also calls `EnrolCommandParser#parse()`, which parses the input and returns a successful/unsuccessful output message.
-* An example of the `enrol` command: `enrol c/1 s/1,2,3,4,5,6`
+* An example of the `enrol` command: `enrol c/1 s/1`
 
 ![EnrolState0](images/EnrolState1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enrolled to a class group will automatically be linked to the module it belongs to.
-<br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enrolled to the given class group.
+<br> 2. If a command fails its execution, it will still call `EnrolCommand#execute()`, and a `CommandException` will be thrown and only the valid student(s) will be enrolled to the given class group.
 </div>
+
+The following sequence diagram shows how the enrol operation works:
+
+![EnrolSequenceDiagram](images/EnrolSequenceDiagram.png)
+
+![EnrolModelSequenceDiagram](images/EnrolModelSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EnrolCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes an enrol command:
+
+![EnrolActivityDiagram](images/EnrolActivityDiagram.png)
 
 ### Grading Assessment Feature
 
@@ -381,7 +396,7 @@ The following sequence diagram shows how the grade operation works:
 ![GradeSequenceDiagram](images/GradeSequenceDiagram.png)
 ![GradeSequenceDiagram](images/GradeAssessmentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `GradeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -430,7 +445,7 @@ The following sequence diagram shows how the mark operation works:
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkModelSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -1222,7 +1237,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NUS**: The National University of Singapore
 * **Student**: A student in NUS
 * **TA**: A Teaching Assistant in NUS SoC
-* **TaModule**: Represents a Module. Named differently due to conflict with Java class.
+* **TaModule**: Represents a Module. Named differently due to conflict with Java class
 
 --------------------------------------------------------------------------------------------------------------------
 

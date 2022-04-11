@@ -21,6 +21,7 @@ Class JsonSerializableTAssist
 Class JsonAdaptedStudent
 Class JsonAdaptedTaModule
 Class JsonAdaptedClassGroup
+Class JsonAdaptedAssessment
 }
 
 }
@@ -41,5 +42,6 @@ JsonTAssistStorage ..> JsonSerializableTAssist
 JsonSerializableTAssist --> "*" JsonAdaptedStudent
 JsonSerializableTAssist --> "*" JsonAdaptedTaModule
 JsonSerializableTAssist --> "*" JsonAdaptedClassGroup
+JsonSerializableTAssist --> "*" JsonAdaptedAssessment
 
 @enduml
