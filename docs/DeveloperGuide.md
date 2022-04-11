@@ -69,9 +69,9 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletec 1,2`.
 
-![Structure of the UI Component](images/ArchitectureSequenceDiagramV2.png)
+![Structure of the UI Component](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -113,9 +113,9 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g., to add a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletec 1,2")` API call.
 
-![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletec 1,2` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
