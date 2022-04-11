@@ -8,7 +8,7 @@ start
 If () then ([Command has additional inputs ||\n Command not in proper format ])
     :Throws ParseException;
 
-    else ([Command is valid])
+    else ([Else])
 
 
     If () then ([Index provided is invalid])
