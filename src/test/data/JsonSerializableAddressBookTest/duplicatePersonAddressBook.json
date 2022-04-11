@@ -3,12 +3,19 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
+    "telegram": "al_02",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "telegram": "al_99"
+  } ],
+  "meetings": [ {
+    "name": "Valid Meeting",
+    "date" : "12/03/2022",
+    "startTime" : "1600",
+    "endTime" : "1700",
+    "participants" : [ ]
   } ]
 }

@@ -9,16 +9,18 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
-Class ResultDisplay
+package OtherUiComponents <<Rectangle>> {
+Class HiddenPart #FFFFFF
+}
 Class PersonListPanel
 Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+Class MeetingListPanel
+Class MeetingCard
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+Class Meeting
+Class Contact
 }
 
 package Logic <<Rectangle>> {
@@ -29,32 +31,30 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+UiManager -down-> "     1" MainWindow
+MainWindow *-down-> "     1" PersonListPanel
+MainWindow *-down-> "                 1" MeetingListPanel
+MainWindow *-down->  OtherUiComponents
 
-PersonListPanel -down-> "*" PersonCard
+PersonListPanel -down-> "           *" PersonCard
+MeetingListPanel -down-> "        *" MeetingCard
 
-MainWindow -left-|> UiPart
+MainWindow --down--|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
+OtherUiComponents --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+MeetingListPanel --|> UiPart
+MeetingCard --|> UiPart
 
-PersonCard ..> Model
+MeetingCard ..> Meeting
+PersonCard ..> Contact
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+OtherUiComponents -[hidden]left- PersonCard
+MeetingListPanel -[hidden]left- PersonListPanel
 
-MainWindow -[hidden]-|> UiPart
+MeetingListPanel -[hidden]-|> UiPart
+MeetingListPanel -[hidden]left- Model
 @enduml
