@@ -18,9 +18,9 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -82,6 +82,8 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
+<div style="page-break-after: always;"></div>
+
 The `UI` component,
 
 * executes user commands using the `Logic` component.
@@ -134,6 +136,7 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Unite`, which `Person` references. This allows `Unite` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -148,6 +151,8 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
+
+<div style="page-break-after: always;"></div>
 
 The `Storage` component,
 * can save both UNite data and user preference data in json format, and read them back into corresponding objects.
@@ -165,7 +170,7 @@ Classes used by multiple components are in the `seedu.unite.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Enhanced Person Object
+### **Enhanced Person Object**
 
 #### Rationale
 Person object needs to be enhanced to contain more relevant attributes to suit the target audiences.
@@ -178,6 +183,8 @@ Now in UNite, we are storying them in `Unite`.
 Within it, it contains two class, i) `UniquePersonList` that keep tracks of the `Person` in UNite, and
 ii) `UniqueTagList` that keep tracks of the `Tag` in UNite.
 
+<div style="page-break-after: always;"></div>
+
 In the original AB3 address book, eachj `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
 diagram of a class diagram of the profiles in the AB3 Address Book.
 
@@ -188,6 +195,8 @@ In UNite, each `Person` object is being enhanced and modified in order to fits t
 this includes `Course` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
 
 ![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Consider the following commands.
 
@@ -210,14 +219,13 @@ Abstract school related classes such as `Email`, `Course` and `MatricCard` such 
 
 We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
 
-<div style="page-break-after: always;"></div> 
-
 **Aspect: Optional `Telegram`, `Course` and `MatricCard` fields** <br>
 These fields are set as optional. When users choose not to key in these fields, it will be set to a default value of an empty String "". <br> 
 The regex of these three classes has been modified to accept the empty String "" as a valid input command, but internally any `Telegram`, `Course` and `MatricCard` with value of "" means that the field is left blank and unfilled. 
 
+<div style="page-break-after: always;"></div> 
 
-### Filter feature
+### **Filter feature**
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
 To implement the feature, the below classes are created:
@@ -254,7 +262,7 @@ The filter feature was implemented in such a way that it aligns with the format 
 
 <div style="page-break-after: always;"></div>
 
-### Grab Command
+### **Grab Command**
 #### Rationale
 The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can efficiently compile the needed data.
 
@@ -301,7 +309,7 @@ Hence, we avoided this potential confusion by imposing an additional constraint 
 
 <div style="page-break-after: always;"></div>
 
-### \[Proposed\] Undo/redo feature
+### **\[Proposed\] Undo/redo feature**
 
 #### Proposed Implementation
 
@@ -394,7 +402,7 @@ information about a person.
 
 <div style="page-break-after: always;"></div>
 
-### Theme choosing
+### **Theme choosing**
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
 that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
 dark theme, so that the application fits better to the vibrant energy of a university.
