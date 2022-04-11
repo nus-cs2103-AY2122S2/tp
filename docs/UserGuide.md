@@ -511,7 +511,7 @@ Format: `undo`
 
 **:warning: Note about undo**<br>
 
-* You will not be able to undo `clear`, `exit`, `find`, `filter`, `help` and `list` commands.
+* You will not be able to undo `clear`, `exit`, `find`, `charge`, `filter`, `help` and `list` commands.
 
 
 </div>
