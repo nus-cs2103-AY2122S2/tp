@@ -299,25 +299,28 @@ The following Sequence Diagrams summarizes the various steps involved:
 
 
 
-### 2. `editbuyer` / `For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/tree/master/src/main/java/seedu/address/logic)
-editseller` feature
-The `editbuyer` / `editseller` command mechanism uses a similar interactions as shown in the [Logic Component](). Mainly, it can be broken down into these steps:
-#### Syntax:
-```editbuyer [index] n/... p/... t/... prop/ h/... l/... pr/...```
 
-```editseller [index] n/... p/... t/... prop/ h/... l/... pr/...```
+
+### Edit Buyer feature
+For full details on implementation, check out this [link](https://github.com/AY2122S2-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/logic/commands/EditBuyerCommand.java)
+
+The `edit-b` / `edit-s` command mechanism uses a similar interactions as shown in the [Logic Component](). Mainly, it can be broken down into these steps:
+#### Syntax:
+```edit-b [index] n/... p/... t/... prop/ h/... l/... pr/...```
+
+```edit-s [index] n/... p/... t/... prop/ h/... l/... pr/...```
 
 Note: All the prefix (like n/, p/, ...) are <b>optional</b>, you could omit any of them but at least one prefix should be provided, and the <b>order</b> of prefix does not matter.
 
 Below are some detailed steps while executing `editbuyer` / `editseller` command:
 
-**We use ```editbuyer``` command as an example, the other command's flow are similar to this command as well.**
+**We use ```edit-b``` command as an example, the other command's flow are similar to this command as well.**
 
 ---
 
 **Step 1:**
 
-The user types input E.g. `editbuyer 1 n/Chua` into the `CommandBox`
+The user types input E.g. `edit-b 1 n/Chua` into the `CommandBox`
 
 **Step 2:**
 
@@ -360,6 +363,8 @@ The Sequence Diagrams below summarizes the various steps involved:
 ![EditBuyerCommandDiagram](diagrams/EditBuyerCommandDiagram.png)
 
 ---
+
+
 
 ### Add property for buyer feature
 The `add-ptb` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
@@ -679,9 +684,8 @@ testers are expected to do more *exploratory* testing.
    example JSON format of the `buyeraddressbook.json`  and `selleraddressbook`:
 
 
-   ```buyeraddressbook.json```:
-    
-    ```
+   `buyeraddressbook.json`:
+
     {
       "buyers" : [ {
         "name" : "Shi Hong",
@@ -706,11 +710,11 @@ testers are expected to do more *exploratory* testing.
         "propertyToBuy" : null
       }
     }
-    ```
+
 
    ```selleraddressbook.json```:
 
-    ```
+
     {
       "sellers" : [ {
         "name" : "chua",
@@ -736,7 +740,7 @@ testers are expected to do more *exploratory* testing.
         "propertyToSell" : null
       }
     }
-    ```
+
 
 
    1. Any of the following situation will cause the file to be broken and will start with empty buyer address book/ seller address book:
