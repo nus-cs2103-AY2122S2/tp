@@ -477,7 +477,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
 | `*`      | user           | view expired schedules                                                                         | reflect on frequencies of past events                                                              |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -557,7 +556,6 @@ Use case ends.
     * 3a1. MyGM displays the invalid input message and the appropriate command.
       Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -602,7 +600,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Adding a person
 
