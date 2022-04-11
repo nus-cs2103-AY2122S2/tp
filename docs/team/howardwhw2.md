@@ -27,6 +27,7 @@ Given below are my contributions to the project.
 
 * **Project Management**:
   * Managed release `v1.4`(1 release) on GitHub
+  * Helped Manage labeling of issues.
 
 * **Documentation**:
   * User Guide:
@@ -36,7 +37,7 @@ Given below are my contributions to the project.
     * Updated Ui Architecture diagram [\#189](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/189)
     * Added implementation details of the `upload` and `viewimage` feature.[\#98](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/98) [\#189](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/189)
     * Added use cases and manual testing `add`, `edit`, `delete`, `upload` and `viewimage` [\#189](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/189)
-    * Added Table of contents, some user stories and elaborate further for value proposition [\#203](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/203)
+    * Added Table of contents, some user stories and further elaboration for value proposition [\#203](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/203)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94), [\#96](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/96), [\#102](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/102) [\#108](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/108)

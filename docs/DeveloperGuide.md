@@ -239,7 +239,7 @@ Step 3: The user will be prompted with the Reminder window, containing the `Pers
 Step 4: The user can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the user of any reminders.
 
 
-## Upload Image
+## Upload Image Feature
 The upload image feature is implemented by storing a set of `UserImage` containing
 a `FilePath` to an image file and an optional `description` of the image. A `LinkedHashSet` is utilized
 to retain order based on the order of insertion.
@@ -252,19 +252,13 @@ There are two commands that are associated with this feature, namely `upload` an
 Below is an example usage scenario and the behaviour of the program:
 
 Step 1: User calls the `upload` command.
-`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add
-the image with, the `filepath` to the file (the validity of the file is checked) and
-the `description` if provided.
+`UploadCommandParser` would then be used to parse the command inputted to obtain the `index` of the `Person` to add the image with, the `filepath` to the file (the validity of the file is checked) and the `description` if provided.
 
-Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the
-file `FilePath` provided is an image before adding it to the
-`Person`.
+Step 2: A `UserImage` is created from the parameters obtained from `UploadCommandParser` that checks to ensure that the file `FilePath` provided is an image before adding it to the set of `UserImage` in `Person`.
 
-Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parses to get the `index` of the `Person` to
-view all the `UserImage` of the `Person`.
+Step 3: User enters the `viewimage` command that `ViewImageCommandParser` parses to get the `index` of the `Person` to view all the `UserImage` of the `Person`.
 
-Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
-The `viewImageWindow` is then launched after it retrieves the set from `model` using `logic`
+Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`. The `viewImageWindow` is then launched after it retrieves the set from `Model` using `Logic`
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
