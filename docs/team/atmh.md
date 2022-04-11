@@ -20,7 +20,10 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
     * Highlights: This feature affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation was challenging as it required changes to existing commands.
     * Credits: https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature
+  
   <br><br>
+  <div style="page-break-after: always;"></div>
+    
   * Duplicate detection feature (PR [\#51](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/51), [\#238](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/238), [\#264](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/264))
     * What it does: Prevents duplicate entries with the same name, phone and email when using add and edit commands.
     * Justification: This feature improves the product by helping users manage duplicates by preventing duplicated contacts with the same name, phone and email.
