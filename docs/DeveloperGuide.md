@@ -198,6 +198,7 @@ This is a sample of the `Person` object diagram.
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
 #### Design Consideration 
+Aspect: Implementation of `Telegram`, `Course` and `MatricCard` classes 
 - **Alternative 1 (current choice):** <br> 
 The `Telegram`, `Course` and `MatricCard` classes are implemented as individual classes that are associated with `Person`. This is similar to how the inbuilt AB3 classes (ie `Name`, `Email`, `Address` ...) are implemented.
     - Pros: Easy to implement
@@ -210,6 +211,11 @@ Abstract school related classes such as `Email`, `Course` and `MatricCard` such 
 We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
 
 <div style="page-break-after: always;"></div> 
+
+**Aspect: Optional `Telegram`, `Course` and `MatricCard` fields** <br>
+These fields are set as optional. When users choose not to key in these fields, it will be set to a default value of an empty String "". <br> 
+The regex of these three classes has been modified to accept the empty String "" as a valid input command, but internally any `Telegram`, `Course` and `MatricCard` with value of "" means that the field is left blank and unfilled. 
+
 
 ### Filter feature
 
@@ -286,7 +292,7 @@ There are multiple constraints on the inputs allowed for this command. Here are 
 We decided to leave the grabbing of tag out because this function can already been done by another command (`list_tag`) in UNite. This command is way more powerful than the grab command in terms of tag manipulations.
 
 - **When tag exists, you cannot include index** <br>
-This constraints is put in placed to avoid uneccessary confusion for the users. By allowing users to key in index (when the tag is present), it may create confusion of whether this index refers to the index when all the `Person` are present in UNite, or the filtered list with this tag. <br>
+This constraint is put in placed to avoid unnecessary confusion for the users. By allowing users to key in index (when the tag is present), it may create confusion of whether this index refers to the index when all the `Person` are present in UNite, or the filtered list with this tag. <br>
 Hence, we avoided this potential confusion by imposing an additional constraint to this command.
 
 
@@ -624,13 +630,13 @@ testers are expected to do more *exploratory* testing.
 ### Grab attributes from Person 
 1. Filter the full contact list using a tag
     1. Prerequisites: Have at least one Person in UNite. 
-    2. Test case: `grab n/`<br>
+    2. Test case: Grab all `grab n/`<br>
        Expected: Names of everyone in UNite displayed.
-    3. Test case: `grab n/1`<br>
+    3. Test case: Grab with valid index `grab n/1`<br>
        Expected: Names of the first Person in UNite displayed. 
-    4. Test case: `grab n/ t/VALID_TAGNAME`<br>
+    4. Test case: Grab with valid tag `grab n/ t/VALID_TAGNAME`<br>
        Expected: Names of everyone in UNite which are tagged as "friends". If no such tags exist in Unite, an error message is shown in display area.
-    5. Test case: `grab n/INDEX t/VALID_TAGNAME`<br>
+    5. Test case: Grab with tag and index `grab n/INDEX t/VALID_TAGNAME`<br>
        Expected: Error message shown saying that you can have both INDEX and VALID_TAGNAME present.
     6. You can conduct the test cases above with other valid attributes.
 
