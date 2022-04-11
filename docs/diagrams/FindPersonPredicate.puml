@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+mainframe sd get FindPersonPredicate
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "argMultimap:ArgumentMultimap" as ArgMultimap LOGIC_COLOR
+participant "predicate:FindPersonPredicate" as FindPersonPredicate LOGIC_COLOR
+end box
+
+
+
+FindCommandParser -> FindCommandParser : createArgMap(" n/ia")
+activate FindCommandParser
+create ArgMultimap
+FindCommandParser -> ArgMultimap
+activate ArgMultimap
+ArgMultimap --> FindCommandParser : argMultimap
+deactivate ArgMultimap
+
+FindCommandParser --> FindCommandParser : argMultimap
+deactivate FindCommandParser
+
+create FindPersonPredicate
+FindCommandParser -> FindPersonPredicate : FindPersonPredicate(argMultimap)
+activate FindPersonPredicate
+FindPersonPredicate --> FindCommandParser : predicate
+@enduml

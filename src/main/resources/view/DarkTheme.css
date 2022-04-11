@@ -4,9 +4,9 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #010504;
     -fx-opacity: 0.9;
 }
 
@@ -155,6 +155,34 @@
 
 .result-display .label {
     -fx-text-fill: black !important;
+}
+
+.detailed-name-display .label {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+}
+
+.detailed-person-display {
+    -fx-background: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-fit-to-width: true;
+}
+
+.detailed-detail-display {
+    -fx-pref-height: -1;
+}
+
+.detailed-detail-display .separator {
+    -fx-background: white;
+}
+
+.detailed-detail-display .label {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-wrap-text: true;
 }
 
 .status-bar .label {
@@ -349,4 +377,13 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#tagsPane .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
 }

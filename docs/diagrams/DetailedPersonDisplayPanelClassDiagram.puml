@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+skinparam classAttributeIconSize 0
+show members
+'https://plantuml.com/class-diagram
+
+ModelManager --> "1" StateAddressBook
+LogicManager --> ModelManager
+MainWindow --> DetailedPersonDisplay
+MainWindow --> LogicManager
+
+class ModelManager {
+-personOnDisplay: SimpleObjectProperty<Person>
+-handleListChangeListener(change: ListChangeListener.Change<? extends Person>)
++addPersonOnDisplayListener(listener: ChangeListener<? super Person>)
++updatePersonOnDisplay(person: Person)
++getPersonOnDisplay(): ReadOnlyProperty<Person>
+}
+
+class LogicManager {
++addPersonOnDisplayListener(listener: ChangeListener<? super Person>)
+}
+
+class MainWindow {
+}
+
+class DetailedPersonDisplay {
++getListener(): ChangeListener<? super Person>
+}
+
+@enduml

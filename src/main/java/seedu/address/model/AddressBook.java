@@ -27,7 +27,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -93,12 +94,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Removes all person from the {@code AddressBook}.
+     *
+     * @param personsToRemove List of person to remove from the {@code AddressBook}
+     */
+    public void removePersons(Person... personsToRemove) {
+        persons.removeAll(personsToRemove);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
     }
 
     @Override

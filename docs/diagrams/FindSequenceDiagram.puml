@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "command:FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("find n/ia")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find n/ia")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse(" n/ia")
+activate FindCommandParser
+
+ref over FindCommandParser : get FindPersonPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : FindCommand(predicate)
+activate FindCommand
+
+FindCommand --> FindCommandParser: command
+deactivate FindCommand
+
+FindCommandParser --> AddressBookParser : command
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> AddressBookParser
+destroy FindCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+ref over FindCommand : get CommandResult
+
+FindCommand --> LogicManager
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

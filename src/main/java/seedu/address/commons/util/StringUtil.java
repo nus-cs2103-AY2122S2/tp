@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -39,6 +41,31 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if any word in {@code sentence1} matches with any word
+     * from {@code sentence2}.
+     * <br>examples:<pre>
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "abc") == true
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "DEF DEF") == true
+     *      *       containsWordIgnoreCaseForTwoSentence("ABc def", "AB de") == false //not a full word match
+     *      *       </pre>
+     *
+     * @param sentence1 Cannot be null.
+     * @param sentence2 Cannot be null.
+     * @return Result of the check.
+     */
+    public static boolean containsWordIgnoreCaseForTwoSentence(String sentence1, String sentence2) {
+        requireNonNull(sentence1);
+        requireNonNull(sentence2);
+
+        // Split sentence by white space.
+        String[] wordsInPreppedSentence1 = sentence1.split("\\s+");
+        String[] wordsInPreppedSentence2 = sentence2.split("\\s+");
+        return Arrays.stream(wordsInPreppedSentence1)
+                .anyMatch(word -> Arrays.stream(wordsInPreppedSentence2).anyMatch(word::equalsIgnoreCase));
+    }
+
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
@@ -64,5 +91,37 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Removes all the white space from the given string.
+     *
+     * @param str String for white space removal.
+     * @return A string that has its whitespaces completely removed.
+     */
+    public static String removeSpaces(String str) {
+        return str.replace(" ", "");
+    }
+
+    /**
+     * Removes all the white space in each of the input string in the list.
+     *
+     * @param userList A list of string that is targeted for white space removal.
+     * @return A list that has no whitespace for each of the strings.
+     */
+    public static List<String> removeSpaces(List<String> userList) {
+        List<String> resultList = new ArrayList<>();
+        userList.forEach(inputStr -> resultList.add(inputStr.replace(" ", "")));
+        return resultList;
+    }
+
+    /**
+     * Replaces 2 or more consecutive whitespaces between words with a single whitespace.
+     *
+     * @param str String to be trimmed.
+     * @return Trimmed string with extra whitespaces removed.
+     */
+    public static String trimExtraWhiteSpaces(String str) {
+        return str.replaceAll("\\s{2,}", " ");
     }
 }

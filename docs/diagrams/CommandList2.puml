@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor BLACK_COLOR
+skinparam ClassBorderColor BLACK_COLOR
+skinparam ClassHeaderBackgroundColor ORANGE_COLOR
+
+title CommandList has 2 history
+
+package CommandList {
+    class State0 as "find n/Alice"
+    class State1 as "find n/Bob"
+    class State2 as "position 2"
+}
+
+State0 -[hidden]right-> State1
+State1 -[hidden]right-> State2
+
+
+class Pointer as "pointer" WHITE_COLOR
+Pointer -up-> State2
+@end

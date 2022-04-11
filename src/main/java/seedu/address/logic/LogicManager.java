@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
@@ -44,6 +47,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        //If command is executed successfully, record the command.
+        CommandList.getList().record(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -62,6 +67,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ReadOnlyProperty<Person> getPersonOnDisplay() {
+        return model.getPersonOnDisplay();
+    }
+
+    @Override
+    public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
+        model.addPersonOnDisplayListener(listener);
     }
 
     @Override

@@ -79,6 +79,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Removes all the persons that matches from the list.
+     *
+     * @param persons The persons to be deleted.
+     */
+    public void removeAll(Person... persons) {
+        internalList.removeAll(persons);
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

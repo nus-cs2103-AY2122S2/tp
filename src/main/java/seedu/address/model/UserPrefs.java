@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
@@ -15,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private final Path backupFilePath = Paths.get("data", "backup_" + getTimeStamp() + ".json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,6 +41,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -47,8 +51,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    @Override
+    public Path getBackupFilePath() {
+        return backupFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -84,4 +94,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+    /**
+     * Returns the current time of the program in the format "yyyy-MM-dd HH-mm-ss".
+     *
+     * @return Timestamp that helps to distinguish between two backup files
+     */
+    private String getTimeStamp() {
+        SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd' 'HH-mm-ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return dateTimeFormatter.format(timestamp);
+    }
 }

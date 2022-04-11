@@ -7,6 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -69,6 +72,20 @@ public class AddressBookTest {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
     }
+
+    @Test
+    public void removePersons_multipleRemovalOfPersons_deletionSuccessful() {
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(DANIEL);
+        addressBook.addPerson(BENSON);
+        addressBook.addPerson(BOB);
+        addressBook.removePersons(ALICE, DANIEL);
+        assertTrue(addressBook.hasPerson(BOB));
+        assertTrue(addressBook.hasPerson(BENSON));
+        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasPerson(DANIEL));
+    }
+
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {

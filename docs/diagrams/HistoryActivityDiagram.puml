@@ -1,0 +1,19 @@
+
+
+@startuml
+
+start
+:press UP/DOWN arrow-key;
+
+if () then ([Exist previous/next command])
+  :pointer decreases/increases;
+  :fetch the result from list;
+  :fill into the textbox;
+else ([else])
+  :throw exception;
+  :show error message;
+endif
+
+stop
+
+@enduml

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -33,10 +34,14 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private DetailedPersonDisplay detailedPersonDisplay;
     private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane detailedPersonDisplayPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -116,11 +121,32 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        detailedPersonDisplay = new DetailedPersonDisplay();
+        detailedPersonDisplayPlaceholder.getChildren().add(detailedPersonDisplay.getRoot());
+        initializeDetailedPersonDisplay();
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Initializes the {@code DetailedPersonDisplay} by linking the listener to the AddressBook and
+     * setting the initial {@code personOnDisplay}.
+     */
+    private void initializeDetailedPersonDisplay() {
+        linkPersonOnDisplay();
+        detailedPersonDisplay.setPersonDisplay(logic.getPersonOnDisplay().getValue());
+    }
+
+    /**
+     * Link the listener from {@code detailedPersonDisplay} to the personOnDisplay in the Address Book.
+     * @see seedu.address.model.Model#addPersonOnDisplayListener(ChangeListener)
+     */
+    private void linkPersonOnDisplay() {
+        logic.addPersonOnDisplayListener(detailedPersonDisplay.getListener());
     }
 
     /**

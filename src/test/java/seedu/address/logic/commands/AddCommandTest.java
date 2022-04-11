@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTED_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMO_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -13,6 +17,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +29,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains tests for {@code AddCommand}.
+ */
 public class AddCommandTest {
 
     @Test
@@ -46,6 +55,54 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentAddressDuplicateNamePhoneEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Different address, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withAddress(VALID_ADDRESS_BOB).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentContactedDateDuplicateNamePhoneEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Different contacted date, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withContactedDate(VALID_CONTACTED_DATE_BOB).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentMemoDuplicateNamePhoneEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Different memo, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withMemo(VALID_MEMO_BOB).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_differentTagsDuplicateNamePhoneEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        // Different tags, duplicate name, phone and email.
+        Person invalidPerson = new PersonBuilder().withTags(VALID_TAG_FRIEND).build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
@@ -147,6 +204,51 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updatePersonOnDisplay(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Person> getPersonOnDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonOnDisplayListener(ChangeListener<? super Person> listener) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveAddressBookState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAllPerson(ObservableList<Person> list) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -183,6 +285,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void saveAddressBookState() {
+            // invoked by {@code AddCommand#execute()}
         }
 
         @Override
