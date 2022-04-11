@@ -1,52 +1,62 @@
 @startuml
 !include style.puml
+skinparam BoxPadding 10
 
-box Logic LOGIC_COLOR_T1
+box <font:Berlin Sans FB><size:28><color:Midnightblue>Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+box <font:Berlin Sans FB><size:20><color:Purple>CommandManageable CM_COLOR_T1
+participant ":CommandManager" as CommandManager CM_COLOR
 end box
-[-> LogicManager : execute(undo)
+
+box <font:Berlin Sans FB><size:20><color:DarkRed>Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : <font Berlin Sans FB><color:black>execute("undo")</color>
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : <font Berlin Sans FB><color:black>parseCommand("undo")
 activate AddressBookParser
 
 create UndoCommand
 AddressBookParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand -> AddressBookParser : <font Berlin Sans FB><color:black>u
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
+AddressBookParser --> LogicManager : <font Berlin Sans FB><color:black>u
 deactivate AddressBookParser
 
-LogicManager -> UndoCommand : execute()
+LogicManager -> UndoCommand : <font Berlin Sans FB><color:black>execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> CommandManager : <font Berlin Sans FB><color:black>execute()
+activate CommandManager
+
+CommandManager -> Model : <font Berlin Sans FB><color:black>Undo()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
-
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
-
-Model --> UndoCommand
+Model --> CommandManager
 deactivate Model
 
-UndoCommand --> LogicManager : result
+CommandManager --> UndoCommand
+deactivate CommandManager
+
+create CommandResult
+UndoCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UndoCommand
+deactivate CommandResult
+
+UndoCommand --> LogicManager : <font Berlin Sans FB><color:black>result
 deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -1,31 +1,38 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
+skinparam arrowColor #orange
 
-package Logic {
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+package Logic <<Rectangle>> LOGIC_COLOR_T1 {
+Class "<<interface>>\nLogic" as Logic LOGIC_COLOR
+Class LogicManager LOGIC_COLOR
 }
 
-package Model{
-Class "<<interface>>\nModel" as Model
-Class ModelManager
+package Model <<Rectangle>> MODEL_COLOR_T1  {
+Class "<<interface>>\nModel" as Model MODEL_COLOR
+Class ModelManager MODEL_COLOR
 }
 
-package Storage{
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
+package CommandManager <<Rectangle>> CM_COLOR_T1 {
+Class "<<interface>>\nCommandManageable" as CommandManageable CM_COLOR
+Class CommandManager CM_COLOR
 }
 
-Class HiddenOutside #FFFFFF
+package Storage <<Rectangle>> STORAGE_COLOR_T1 {
+Class "<<interface>>\nStorage" as Storage STORAGE_COLOR
+Class StorageManager STORAGE_COLOR
+}
+
+Class HiddenOutside #Teal
 HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
 ModelManager .up.|> Model
 StorageManager .up.|> Storage
+CommandManager .up.|> CommandManageable
 
-LogicManager --> Model
+LogicManager --> CommandManageable
+CommandManager --> Model
 LogicManager --> Storage
 @enduml
+

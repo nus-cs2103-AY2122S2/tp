@@ -17,5 +17,7 @@ Person -up-> "*" Tag
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Role
+Person *--> Faculty
+Person *--> "<color:maroon>0..1" Telegram
 @enduml

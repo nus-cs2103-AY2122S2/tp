@@ -1,7 +1,8 @@
 @startuml
 !include style.puml
+skinparam BoxPadding 10
 
-box Logic LOGIC_COLOR_T1
+box <font:Berlin Sans FB><size:28><color:Midnightblue>Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
@@ -9,14 +10,18 @@ participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
+box <font:Berlin Sans FB><size:20><color:Purple>CommandManageable CM_COLOR_T1
+participant ":CommandManager" as CommandManager CM_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:DarkRed>Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : <font Berlin Sans FB><color:black>execute("delete 1")</color>
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : <font Berlin Sans FB><color:black>parseCommand("delete 1")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -26,33 +31,39 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : <font Berlin Sans FB><color:black>parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
 DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser : d
+DeleteCommand --> DeleteCommandParser : <font Berlin Sans FB><color:black>d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> AddressBookParser : <font Berlin Sans FB><color:black>d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : <font Berlin Sans FB><color:black>d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
+LogicManager -> DeleteCommand : <font Berlin Sans FB><color:black>execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> CommandManager : <font Berlin Sans FB><color:black>execute()
+activate CommandManager
+
+CommandManager -> Model : <font Berlin Sans FB><color:black>deletePerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> CommandManager
 deactivate Model
+
+CommandManager --> DeleteCommand
+deactivate CommandManager
 
 create CommandResult
 DeleteCommand -> CommandResult
@@ -61,7 +72,7 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
+DeleteCommand --> LogicManager : <font Berlin Sans FB><color:black>result
 deactivate DeleteCommand
 
 [<--LogicManager

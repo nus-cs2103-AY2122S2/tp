@@ -7,7 +7,7 @@ skinparam classBackgroundColor LOGIC_COLOR
 Class "{abstract}\nCommand" as Command
 Class XYZCommand
 
-package "Parser classes"{
+package "Parser classes" <<Rectangle>> LOGIC_COLOR_T1 {
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
 Class XYZCommandParser
@@ -18,13 +18,13 @@ Class ArgumentTokenizer
 Class Prefix
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside #Teal
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
+AddressBookParser .down.> XYZCommandParser: <color black>creates >
 
-XYZCommandParser ..> XYZCommand : creates >
-AddressBookParser ..> Command : returns >
+XYZCommandParser ..> XYZCommand : <color black>creates >
+AddressBookParser ..> Command : <color black>returns >
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer

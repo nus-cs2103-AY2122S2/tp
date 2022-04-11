@@ -24,16 +24,64 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Person> internalList;
+    private final ObservableList<Person> internalUnmodifiableList;
+
+    /**
+     * Empty constructor
+     */
+    public UniquePersonList() {
+        this.internalList = FXCollections.observableArrayList();
+        this.internalUnmodifiableList = FXCollections
+                .unmodifiableObservableList(internalList);
+    }
+
+    /**
+     * Constructor
+     * @param persons list of persons
+     */
+    public UniquePersonList(ObservableList<Person> persons) {
+        this.internalList = persons;
+        this.internalUnmodifiableList = FXCollections
+                .unmodifiableObservableList(persons);
+    }
+
+    public ObservableList<Person> makeCopy() {
+        return FXCollections.observableArrayList(internalList);
+    }
+
+    /**
+     * Returns true i
+     * f the list contains an equivalent person as the given argument.
+     */
+    public boolean containsName(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true i
+     * f the list contains an equivalent person as the given argument.
+     */
+    public boolean containsFavouriteName(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameFavouritePerson);
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean containsPhone(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSamePhone);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
     }
 
     /**
@@ -42,7 +90,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsName(toAdd)) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -61,7 +109,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSamePerson(editedPerson) && containsName(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
@@ -134,4 +182,5 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
 }

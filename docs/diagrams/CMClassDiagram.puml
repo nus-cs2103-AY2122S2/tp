@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CM_COLOR
+skinparam classBackgroundColor CM_COLOR
+
+Package <color:purple>CommandManageable <<Rectangle>>{
+
+Class "<<interface>>\nCommandManageable" as CM
+Class CommandManager
+Class CommandStackPointer
+Class CommandStack
+
+}
+
+Class HiddenOutside #Teal
+HiddenOutside ..> CM
+Class Model MODEL_COLOR
+
+CommandManager --> Model
+
+CommandManager .up.|> CM
+
+CommandManager *--> CommandStackPointer
+CommandManager *--> CommandStack
+@enduml

@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-package Logic {
+package Logic <<Rectangle>> LOGIC_COLOR_T1 {
 
 Class AddressBookParser
 Class XYZCommand
@@ -16,31 +16,37 @@ Class "<<interface>>\nLogic" as Logic
 Class LogicManager
 }
 
-package Model{
-Class HiddenModel #FFFFFF
+package Model <<Rectangle>> MODEL_COLOR_T1 {
+Class HiddenModel MODEL_COLOR
 }
 
-package Storage{
+package Storage <<Rectangle>> STORAGE_COLOR_T1 {
+Class HiddenStorage STORAGE_COLOR
 }
 
-Class HiddenOutside #FFFFFF
+package CommandManager <<Rectangle>> CM_COLOR_T1 {
+Class HiddenCommandManager CM_COLOR
+}
+
+Class HiddenOutside #Teal
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager -right-> "1" AddressBookParser
+AddressBookParser ..> XYZCommand : <color black>creates >
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .left.> Command : <color black>executes</color> >
 
-LogicManager --> Model
+LogicManager --> CommandManager
+CommandManager --> Model
 LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
-Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+Command .right.> CommandManager
+note left of XYZCommand #lightblue: <color:black>XYZCommand = AddCommand, \n<color:black>FindCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : produces >
+Command .up.> CommandResult : <color black>produces</color> >
 @enduml

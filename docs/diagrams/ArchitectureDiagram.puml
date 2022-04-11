@@ -11,6 +11,7 @@ Package " "<<Rectangle>>{
     Class Model MODEL_COLOR
     Class Main #grey
     Class Commons LOGIC_COLOR_T2
+    Class CommandManager CM_COLOR
 }
 
 Class "<$user>" as User MODEL_COLOR_T2
@@ -20,7 +21,8 @@ Class "<$documents>" as File UI_COLOR_T1
 UI -[#green]> Logic
 UI -right[#green]-> Model
 Logic -[#blue]-> Storage
-Logic -down[#blue]-> Model
+Logic -down[#blue]-> CommandManager
+CommandManager -[#purple]-> Model
 Main -[#grey]-> UI
 Main -[#grey]-> Logic
 Main -[#grey]-> Storage

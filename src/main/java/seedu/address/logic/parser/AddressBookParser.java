@@ -9,12 +9,21 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CopyEmailCommand;
+import seedu.address.logic.commands.CopyPhoneCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FavouriteCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindWideCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFavouritesCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnfavouriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,14 +62,29 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case FavouriteCommand.COMMAND_WORD:
+            return new FavouriteCommandParser().parse(arguments);
+
+        case UnfavouriteCommand.COMMAND_WORD:
+            return new UnfavouriteCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindWideCommand.COMMAND_WORD:
+            return new FindWideCommandParser().parse(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListFavouritesCommand.COMMAND_WORD:
+            return new ListFavouritesCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -68,9 +92,20 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case CopyEmailCommand.COMMAND_WORD:
+            return new CopyEmailCommandParser().parse(arguments);
+
+        case CopyPhoneCommand.COMMAND_WORD:
+            return new CopyPhoneCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

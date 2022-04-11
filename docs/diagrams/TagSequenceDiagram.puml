@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam BoxPadding 10
+
+box <font:Berlin Sans FB><size:28><color:Midnightblue>Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:Purple>CommandManageable CM_COLOR_T1
+participant ":CommandManager" as CommandManager CM_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:DarkRed>Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : <font Berlin Sans FB><color:black>execute("tag ...")</color>
+activate LogicManager
+
+LogicManager -> AddressBookParser : <font Berlin Sans FB><color:black>parseCommand("tag ...")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : <font Berlin Sans FB><color:black>parse("...")
+activate TagCommandParser
+
+create TagCommand
+TagCommandParser -> TagCommand
+activate TagCommand
+
+TagCommand --> TagCommandParser : <font Berlin Sans FB><color:black>t
+deactivate TagCommand
+
+TagCommandParser --> AddressBookParser : <font Berlin Sans FB><color:black>t
+deactivate TagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+AddressBookParser --> LogicManager : <font Berlin Sans FB><color:black>t
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : <font Berlin Sans FB><color:black>execute()
+activate TagCommand
+
+TagCommand -> CommandManager : <font Berlin Sans FB><color:black>execute()
+activate CommandManager
+
+CommandManager -> Model : <font Berlin Sans FB><color:black>Tag(Predicate)
+activate Model
+
+Model --> CommandManager
+deactivate Model
+
+CommandManager --> TagCommand
+deactivate CommandManager
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+TagCommand --> LogicManager : <font Berlin Sans FB><color:black>result
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

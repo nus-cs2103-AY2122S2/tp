@@ -17,15 +17,15 @@ Class StatusBarFooter
 Class CommandBox
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+package Model <<Rectangle>> MODEL_COLOR_T1 {
+Class HiddenModel MODEL_COLOR
 }
 
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+package Logic <<Rectangle>> LOGIC_COLOR_T1 {
+Class HiddenLogic LOGIC_COLOR
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside #Teal
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui

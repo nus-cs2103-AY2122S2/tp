@@ -23,11 +23,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-    {
+    public AddressBook() {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook(UniquePersonList list) {
+        this.persons = list;
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -37,7 +39,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    public UniquePersonList makeCopy() {
+        return new UniquePersonList(this.persons.makeCopy());
+    }
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -63,7 +67,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return persons.containsName(person);
+    }
+
+    /**
+     * Returns true if a person with the same identity and favourite as {@code person} exists in the address book.
+     */
+    public boolean hasFavouritePerson(Person person) {
+        requireNonNull(person);
+        return persons.containsFavouriteName(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containsEmail(person);
+    }
+
+    /**
+     * Returns true if a person with the same phone as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containsPhone(person);
     }
 
     /**

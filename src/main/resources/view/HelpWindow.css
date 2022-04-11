@@ -1,19 +1,29 @@
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New";
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #fe7b0f ;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New";
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #f5a856;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New";
 }
 
 #copyButton:armed {
     -fx-background-color: darkgray;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New";
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#004e88, 20%);
+    -fx-font-size: 11pt;
+    -fx-font-family: "Courier New";
 }

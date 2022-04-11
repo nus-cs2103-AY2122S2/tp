@@ -14,6 +14,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that evaluate to true if person is a favourite */
+    Predicate<Person> PREDICATE_SHOW_FAVOURITES = person ->
+            person.getFavourite().isFavourite;
+
+    AddressBook makeCopy();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -58,6 +64,20 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity and favourite as {@code person} exists in the address book.
+     */
+    boolean hasFavouritePerson(Person person);
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
+     * Returns true if a person with the same phone as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -78,6 +98,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    Predicate<Person> getModelPredicate();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

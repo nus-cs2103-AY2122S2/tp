@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam BoxPadding 10
+
+box <font:Berlin Sans FB><size:28><color:Midnightblue>Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:Purple>CommandManageable CM_COLOR_T1
+participant ":CommandManager" as CommandManager CM_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:DarkRed>Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : <font Berlin Sans FB><color:black>execute("add ...")</color>
+activate LogicManager
+
+LogicManager -> AddressBookParser : <font Berlin Sans FB><color:black>parseCommand("add ...")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : <font Berlin Sans FB><color:black>parse("...")
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser : <font Berlin Sans FB><color:black>a
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : <font Berlin Sans FB><color:black>a
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : <font Berlin Sans FB><color:black>a
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : <font Berlin Sans FB><color:black>execute()
+activate AddCommand
+
+AddCommand -> CommandManager : <font Berlin Sans FB><color:black>execute()
+activate CommandManager
+
+CommandManager -> Model : <font Berlin Sans FB><color:black>AddPerson(...)
+activate Model
+
+Model --> CommandManager
+deactivate Model
+
+CommandManager --> AddCommand
+deactivate CommandManager
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : <font Berlin Sans FB><color:black>result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -163,6 +163,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void closeHelp() {
+        if (helpWindow.isShowing()) {
+            helpWindow.hide();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +191,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isCloseHelp()) {
+                closeHelp();
             }
 
             return commandResult;

@@ -9,51 +9,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Shurvir Arora
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shurvirarora.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+* [[github](http://github.com/shurvirarora)]
+* [[portfolio](team/shurvirarora.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: `Logic`, `Model` components.
 
-### Jean Doe
+### Eugene Chia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eugenechiaay.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* [[github](http://github.com/eugenechiaay)]
+* [[portfolio](team/eugenechiaay.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: `Logic`, `Storage` components.
+
+### Jia Ming
+
+<img src="images/simjm.png" width="200px">
+
+* [[github](http://github.com/simjm)]
+* [[portfolio](team/simjm.md)]
+
+* Role: Developer
+* Responsibilities: `Model`, `UI` components.
+
+### Wei En
+
+<img src="images/tanweien.png" width="200px">
+
+* [[github](http://github.com/tanweien)]
+* [[portfolio](team/tanweien.md)]
+
+* Role: Developer
+* Responsibilities: `Logic`, `Testing` components.

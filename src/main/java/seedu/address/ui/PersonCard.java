@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
@@ -15,6 +16,14 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String heart = new String(Character.toChars(10084));
+    private static final String empty = "";
+    private static final String telegramField = "Telegram: ";
+    private static final String phoneField = "Phone    : ";
+    private static final String emailField = "Email    : ";
+    private static final String facultyField = "Faculty  : ";
+    private static final String roleField = "Role     : ";
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -35,9 +44,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label favourite;
+    @FXML
+    private Pane telegram;
     @FXML
     private Label email;
+    @FXML
+    private Label faculty;
+    @FXML
+    private Label role;
     @FXML
     private FlowPane tags;
 
@@ -47,11 +62,14 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ".");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText(phoneField + person.getPhone().value);
+        person.getTelegram().value.ifPresent(handle -> telegram.getChildren().add(new Label(telegramField + handle)));
+        favourite.setText(person.getFavourite().isFavourite ? heart : empty);
+        email.setText(emailField + person.getEmail().value);
+        faculty.setText(facultyField + person.getFaculty().value);
+        role.setText(roleField + person.getRole().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

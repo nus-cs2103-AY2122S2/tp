@@ -46,6 +46,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isCloseHelp() {
+        return feedbackToUser.equals("Undid command: Show help");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

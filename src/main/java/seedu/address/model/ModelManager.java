@@ -22,9 +22,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Predicate<Person> predicate;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     *
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -36,8 +38,25 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+    /**
+     * empty constructor
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    /**
+     * Constructor from given address book
+     * @param newAddressBook new one
+     */
+    public ModelManager(AddressBook newAddressBook) {
+        this.addressBook = newAddressBook;
+        this.userPrefs = new UserPrefs();
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+    }
+
+    public AddressBook makeCopy() {
+        return new AddressBook(this.addressBook.makeCopy());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -94,6 +113,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasFavouritePerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasFavouritePerson(person);
+    }
+
+    @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return addressBook.hasEmail(person);
+    }
+
+    @Override
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return addressBook.hasPhone(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -123,8 +160,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Predicate<Person> getModelPredicate() {
+        return this.predicate;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        this.predicate = predicate;
         filteredPersons.setPredicate(predicate);
     }
 

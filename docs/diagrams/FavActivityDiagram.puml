@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs add command;
+:AddressBookParser parses the command;
+:FavCommandParser parses user input;
+if () then ([index is valid])
+else ([else])
+:Throws ParseException with invalid command\nformat message;
+endif
+
+stop
+
+@enduml

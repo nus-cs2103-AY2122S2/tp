@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam BoxPadding 10
+
+box <font:Berlin Sans FB><size:28><color:Midnightblue>Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FavouriteCommandParser" as FavouriteCommandParser LOGIC_COLOR
+participant "f:FavouriteCommand" as FavouriteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:Purple>CommandManageable CM_COLOR_T1
+participant ":CommandManager" as CommandManager CM_COLOR
+end box
+
+box <font:Berlin Sans FB><size:20><color:DarkRed>Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : <font Berlin Sans FB><color:black>execute("fav 1")</color>
+activate LogicManager
+
+LogicManager -> AddressBookParser : <font Berlin Sans FB><color:black>parseCommand("fav 1")
+activate AddressBookParser
+
+create FavouriteCommandParser
+AddressBookParser -> FavouriteCommandParser
+activate FavouriteCommandParser
+
+FavouriteCommandParser --> AddressBookParser
+deactivate FavouriteCommandParser
+
+AddressBookParser -> FavouriteCommandParser : <font Berlin Sans FB><color:black>parse("1")
+activate FavouriteCommandParser
+
+create FavouriteCommand
+FavouriteCommandParser -> FavouriteCommand
+activate FavouriteCommand
+
+FavouriteCommand --> FavouriteCommandParser : <font Berlin Sans FB><color:black>f
+deactivate FavouriteCommand
+
+FavouriteCommandParser --> AddressBookParser : <font Berlin Sans FB><color:black>f
+deactivate FavouriteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FavouriteCommandParser -[hidden]-> AddressBookParser
+destroy FavouriteCommandParser
+
+AddressBookParser --> LogicManager : <font Berlin Sans FB><color:black>f
+deactivate AddressBookParser
+
+LogicManager -> FavouriteCommand : <font Berlin Sans FB><color:black>execute()
+activate FavouriteCommand
+
+FavouriteCommand -> CommandManager : <font Berlin Sans FB><color:black>execute()
+activate CommandManager
+
+CommandManager -> Model : <font Berlin Sans FB><color:black>FavouritePerson(1)
+activate Model
+
+Model --> CommandManager
+deactivate Model
+
+CommandManager --> FavouriteCommand
+deactivate CommandManager
+
+create CommandResult
+FavouriteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FavouriteCommand
+deactivate CommandResult
+
+FavouriteCommand --> LogicManager : <font Berlin Sans FB><color:black>result
+deactivate FavouriteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
