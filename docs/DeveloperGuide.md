@@ -254,6 +254,12 @@ Given below is an example usage scenario and how the filter mechanism behaves at
 
 6. A `CommandResult` object is created with a feedback message and is returned.
 
+The **UML sequence diagram** below shows the parsing of the user input using `FilterCommandParser` to create a
+`StudentHasLabPredicate` and subsequently a `FilterCommand` object.
+
+<img src="images/FilterCommandParserSequenceDiagram.png" width="850" />
+
+After the `FilterCommand` object is created, it is utilised to filter the student list.
 The following **UML sequence diagram** shows the interaction between the components during the execution of the `filter` command:
 
 <img src="images/FilterCommandSequenceDiagram.png" width="850" />
