@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "l:ListCommand" as ListCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list flag")
+activate LogicManager
+
+LogicManager -> HustleBookParser : parseCommand("list flag", lastCommand)
+activate HustleBookParser
+
+create ListCommandParser
+HustleBookParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> HustleBookParser
+deactivate ListCommandParser
+
+HustleBookParser -> ListCommandParser : parse("list flag")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand : new ListCommand(PREDICATE_SHOW_FLAGGED_PERSONS)
+activate ListCommand
+
+ListCommand --> ListCommandParser : l
+deactivate ListCommand
+
+ListCommandParser --> HustleBookParser : l
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> HustleBookParser
+destroy ListCommandParser
+
+HustleBookParser --> LogicManager : l
+deactivate HustleBookParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_FLAGGED_PERSONS)
+activate Model
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
