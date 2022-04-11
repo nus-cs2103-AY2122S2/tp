@@ -845,7 +845,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -854,9 +855,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
       
-## Customer-Related Commands
+### Customer-Related Commands
 
-### Adding a customer 
+#### Adding a customer 
 
    1.  Test case: Any command with either n/, a/, p/, e/ or rd/ missing : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01`<br>
       Expected: Error details shown in the status message about invalid command format. Status bar remains the same.<br>
@@ -867,7 +868,7 @@ testers are expected to do more *exploratory* testing.
    3.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
      Expected: Error message saying customer already exist
 
-### Editing a customer 
+#### Editing a customer 
       
   1.  Test case: `editc 2 n/Betsy Crower  p/91234567 e/johndoe@example.com`<br>
       Expected: Customer already exist error as this customer has the same phone and email as first customer after executing test case 1.
@@ -876,7 +877,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Return an error that at least one field must be provided.
   
 
-### Finding customer(s)
+#### Finding customer(s)
 
 NOTE: Make sure to use `listc` between test cases.
 
@@ -889,7 +890,7 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `findc e/`<br>
      Expected: Error message saying that find command does not take empty values.
 
-### Deleting customer(s) 
+#### Deleting customer(s) 
 
    1. Test case: `deletec -1`<br>
       Expected: Error message saying that the command format is invalid.
@@ -900,14 +901,14 @@ NOTE: Make sure to use `listc` between test cases.
    1. Test case: `deletec 1,2`<br>
       Expected: Delete first and second customer.
 
-### Listing customers
+#### Listing customers
 
    1. Test case: `listc`
       Expected: Shows all customers.
      
-## Service-Related Commands
+### Service-Related Commands
 
-### Adding a service
+#### Adding a service
 
   1. Test case: Any command with either n/ or pr/ or d/ missing, example  `adds n/Acne Facial Treatment pr/138`<br>
      Expected: Invalid command format error message.
@@ -921,7 +922,7 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `adds n/Acne Facial Treatment pr/138 d/120` and `adds n/Acne Facial Treatment pr/120 d/60`<br>
      Expected: Service is already in TrackBeau error.
       
-### Editing a service
+#### Editing a service
 
   1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
      Expected:Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
@@ -932,14 +933,14 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `edits 50 n/Dark Eye Circle Treatment d/30`<br>
      Expected: Invalid index error 
      
-### Finding services
+#### Finding services
  
  NOTE: Make sure to use `lists` between the tests
  
   1. Test case: `finds n/Facial dr/120`<br>
      Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
      
-### Deleting service(s)
+#### Deleting service(s)
  
    1. Test case: `deletes -1`<br>
      Expected:  Invalid command error message.
@@ -947,9 +948,9 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: `deletes 100,1`<br>
      Expected: Invalid index message.
 
-## Booking Commands
+### Booking Commands
 
-### Adding a booking 
+#### Adding a booking 
 
   1. Test case: Any of the fields are missing, example: `addb c/1 sev/1`<br>
      Expected: Invalid command format message.
@@ -957,7 +958,7 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: Any of the fields have invalid format, example: `addb c/1 sev/1 st/10-10-2022 10:333`<br>
      Expected:  Invalid format error message for the field that had a mistake.
 
-### Editing a booking 
+#### Editing a booking 
   
   1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
      Expected:Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
@@ -968,14 +969,14 @@ NOTE: Make sure to use `listc` between test cases.
   1. Test case: Invalid format for one of the parameters, example: `editb 2 st/29-02-2001 10:30`<br> 
      Expected:Invalid format error based on the parameter
     
-### Finding bookings
+#### Finding bookings
 
 NOTE: Make sure to use `listb` between the test cases.
 
   1. Test case: `findb f/bad st/10-04-2022` <br>
      Expected:Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
  
-### Deleting booking(s)
+#### Deleting booking(s)
 
    1. Test case: `deleteb 1,2,3`<br>
      Expected:Removes the 1st, 2nd and 3rd booking from the application.
@@ -984,7 +985,7 @@ NOTE: Make sure to use `listb` between the test cases.
      Expected: Invalid format or invalid index error message.
      
      
-## Statistics Commands
+### Statistics Commands
 
    1. Test case: `plotAll`<br>
      Expected:Plots 6 charts.
