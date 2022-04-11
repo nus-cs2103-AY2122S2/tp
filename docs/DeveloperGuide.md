@@ -19,7 +19,7 @@ Our team will like to welcome you by means of allowing you admire our work.
 
 ## **2. Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The code for Tracey is based on the [AddressBook-Level3(AB3)](https://se-education.org/addressbook-level3/) project created by SE-EDU.
 
 --------------------------------------------------------------------------------------------------------------------
 
