@@ -8,9 +8,10 @@ title: Teaching Assistant Contact Helper (TACH)
 
 ![Ui](images/Ui.png)
 
-The Teaching Assistant Contact Helper (TACH) is a desktop app that helps Computer Science (CS)
-Teaching Assistants tutoring multiple tutorial groups, by **managing their students in an organised manner**.
-sorting feature allows TAs to **view, categorize and get information** of all their students in a glance.
+The Teaching Assistant Contact Helper (TACH) is a desktop app that helps Computer Science (CS) Teaching Assistants (TAs)
+from National University of Singapore (NUS), especially those that tutor
+multiple tutorial groups, by **managing their students in an organised manner**.
+The sorting feature allows TAs to **view, categorize and get information** of all their students in a glance.
 It is optimized for Command Line Interface (CLI) users so that frequent tasks can be done faster by
 typing in commands. While it has a GUI (Graphical User Interface), most of the user interactions happen using the CLI.
 
@@ -20,4 +21,4 @@ typing in commands. While it has a GUI (Graphical User Interface), most of the u
 
 **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Markdown-javafx-renderer](https://github.com/JPro-one/markdown-javafx-renderer)
