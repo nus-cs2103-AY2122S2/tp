@@ -1621,7 +1621,7 @@ testers are expected to do more *exploratory* testing.
     b. Test case: Open the `addressbook.json` file in ROOT/data with a text editor and change the first contact's `Phone` to be the same as the second contact's phone. Ensure that the changes are saved. Input a command such as `list`.<br>
        Expected: The contacts are still present in the list. The `addressbook.json` file will be restored back to the previous working state.
 
-### 7.3.11. Editing a person
+#### 7.3.11. Editing a person
 
 1. Editing a person while all person are being shown
 
@@ -1639,9 +1639,35 @@ testers are expected to do more *exploratory* testing.
     e. Test case: Use a value that already exits in other contacts for a field that requires uniqueness e.g. `Phone` `Email` `Matriculation Number`, that is if third contact's `Email` is test@gmail.com then test using `edit 2 e/test@gmail.com`.<br>
        Expected: Second contact's details is not edited. Error details is shown in the status message. Status bar remains the same.
 
-    f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts<br>
+    f. Other incorrect edit commands to try: `edit`, `delete x`, `...` (where x is larger than the list size), use same values for other fields to be edited for the same person, use values that for fields that require uniqueness but already exists for other contacts.<br>
 
-### 7.3.12. Archiving the database
+#### 7.3.12. Undoing and redoing a command
+
+1. Undoing and redoing a command
+    a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+    b. Test case: `delete 1`, then `undo`, then `redo`<br>
+    Expected: The contact at index 1 will be deleted, then restored at index 1 after `undo` is entered. The contact will be deleted again after `redo` is entered.<br>
+    c. Test case: `edit 1 n/Poppy doopy`, then `undo`, then `redo`<br>
+    Expected: The name of the contact at index 1 will be changed to Poppy doopy and shifted to the bottom of the list, then back to the original name and at index 1 after `undo` is entered. The contact's name will be changed to Poppy Doopy again after `redo` is entered.<br>
+    d. Test case: `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE`, then `undo`, then `redo`<br>
+    Expected: A new contact will be added to the list, then removed again when `undo` is entered. The contact will be added again after `redo` is entered.<br>
+
+#### 7.3.13. Filtering by criteria
+
+2. Filtering by covid status, faculty and/or block
+    a. Prerequisites: List all persons using the `list command`. Multiple persons in the list.<br>
+    b. Test case: `filter f/soc`<br>
+    Expected: A list of all the contacts with faculty 'SOC' will be returned. If no such contacts exist, the list will be empty.<br>
+    c. Test case: `filter cs/positive`<br>
+    Expected: A list of all the contacts with covid status 'Positive' will be returned. If no such contacts exist, the list will be empty.<br>
+    d. Test case: `filter b/e`<br>
+    Expected: A list of all the contacts with block 'E' will be returned. If no such contacts exist, the list will be empty.<br>
+    e. Test case: `filter f/soc cs/negative`<br>
+    Expected: A list of all the contacts with faculty 'SOC' and covid status 'Negative' will be returned. If no such contacts exist, the list will be empty.<br>
+    f. Test case: `filter f/soc cs/positive b/a`<br>
+    Expected: A list of all the contacts with faculty 'SOC', covid status 'Positive' and block 'A' will be returned. If no such contacts exist, the list will be empty.<br>
+   
+#### 7.3.14. Archiving the database
 
 1. Saving the working copy of the Tracey database
 
@@ -1685,7 +1711,7 @@ testers are expected to do more *exploratory* testing.
     b. Test case: `archive x`(where x = any value)<br>
        Expected: No archived file is created in the specified directory. Error details is shown in the status message. Status bar remains the same.
 
-### 7.3.12. Resizing the result display window
+### 7.3.15. Resizing the result display window
 
 1. Using the command line to resize
 
