@@ -25,24 +25,14 @@ Given below are my contributions to the project.
   * Managed submissions meant for LumiNUS.
   * Created issues trackers for members to complete for final milestones.
   * Peer reviewed team members PR and provided suggestions.
-  * Offered suggestions and GUI UX/UI designs for Tracey.
-  * Set up team meetings weekly.
-  * Check on members to complete tasks weekly that have hard deadlines.
-  * Set up team documents for weekly planning and idealization for members to check back on.
-  * Provided TA the links to our weekly plans and submissions.
-  * Maintained master branch.
-
+  
 * **Enhancements to existing features**:
   * Added new categories for representing data (Pull request [\#86](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/86)).
   * Added defensive programming elements into the code (Pull request [\#86](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/86)).
   * Added colour and chart formatting so that it suits the data types of student types and categories (i.e. axes representing number of students are type casted to be integers instead of double) (Pull request [\#232](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/232)).
   * Further updated the UI of the PieChartWindow by constraining its size and forcing it to close when the main application exits (Pull requests [\#234](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/234), [\#232](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/232)).
   * Wrote test cases for the summarise command. Inclusive of test for Block type, Covid Status type and Faculty type. These test cases allowed the increase in coverage from 71% to 73% (Pull requests [\#58](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/58)).
-  * Wrote additional test cases for AddressBookParserTest class to allow for method coverage to increase from 69.89% to 70.12% (Pull request [\#122](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/122)).
-  * Wrote additional test cases and descriptions for FindCommandTest, DeleteCommandParserTest, EditCommandParserTest and FindCommandParserTest to use different testing heurisitc for stronger testing types (i.e. Boundary Value Analysis and Equivalence partitioning) (Pull request [\#135](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/135)).
-  * Added the descriptions of new features implemented into the Help Window (Pull request [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150)).
-  * Added resizeable elements to chart window so that it can fit better to all types of screens (Pull request [\#232](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/232)).
-
+  
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `summrise`, `import`, `clear`, `edit`, `find` (Pull requests [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150), [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128), [\#114](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/114))
@@ -51,11 +41,6 @@ Given below are my contributions to the project.
     * Added a collapsable section for the explanation of CLI. (Pull request [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150))
     * Edited the Question and Answer information of the user guide (Pull request [\#114](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/114))
     * Added information on what happens if duplicate inputs were used on Tracey (Pull request [\#240](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/240))
-    * Update figure numbering in accordance to changes in the flow of the features (Pull request [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150))
-    * Checked for grammatical and spelling errors (Pull request [\#150](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/150))
-    * Update the constraints on the tables mentioning the implementation of tags (Pull request [\#240](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/240))
-    * Corrected sample codes in the features sections so that the descriptions are relevant to how the users will use Tracey (Pull request [\#240](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/240))
-    * Simplified technical jargons with simple lay-man english so that user guide becomes an easy read (Pull request [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128))
     * Refined the table of contents (Pull request [\#128](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/128))
   * Developer Guide:
     * Added the target user profiles and value propositions (Pull request [\#20](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/20))
@@ -63,16 +48,7 @@ Given below are my contributions to the project.
     * Added user stories with its priority according to how important it is to implement (Pull request [\#20](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/20))
     * Added use cases for Tracey (Pull request [\#28](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/28))
     * Added UML sequence, class and activity diagrams for `summarise`, `exit`, `clear`, `list`, `find` and PieChartWindow (Pull requests [\#90](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/90), [\#100](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/100))
-    * Updated class diagrams for BetterModelClassDiagram and ModelClassDiagram (Pull request [\#90](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/90))
-    * Checked for grammatical and spelling errors (Pull request [\#100](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/100))
-    * Added sample command formats for all features (Pull request [\#100](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/100))
-    * Added introduction to the developer guide (Pull request [\#100](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/100))
-    * Provided diagrams for all iterations of the milestones
-  * ReadMe:
-    * Changed the purpose and value proposition of the file (Pull request [\#141](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/141))
-    * Added introduction for Tracey (Pull request [\#141](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/141))
-    * Added a screenshot of a sample page of the application (Pull request [\#141](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/141))
-
+  
 * **Community**:
     * PRs reviewed (with non-trivial review comments): (Pull requests [\#33](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/33), [\#57](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/57), [\#62](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/62), [\#75](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/75), [\#118](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/118), [\#130](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/130), [\#140](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/140), [\#238](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/238), [\#261](https://github.com/AY2122S2-CS2103T-T12-3/tp/pull/261))
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/jiale-c/ped/issues/1), [2](https://github.com/jiale-c/ped/issues/2), [3](https://github.com/jiale-c/ped/issues/3), [4](https://github.com/jiale-c/ped/issues/4), [5](https://github.com/jiale-c/ped/issues/5))
