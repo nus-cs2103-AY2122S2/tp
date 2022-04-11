@@ -11,6 +11,8 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benjykoh&breakdown=true)
 
+<div style="page-break-after: always;"></div>
+
 * **New Feature**:
   * Added the ability to display the format, and a short description for a specified command. [#43](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/43)
     * What it does: Provides the user with a short description on what the given command does, as well as display the format of the command, allowing the users to learn how to use it.
@@ -24,12 +26,12 @@ Given below are my contributions to the project.
     * Justification: This features allows the TAs to easily view which students are lacking behind in terms of number of incomplete tasks.
     * Highlights: This feature was slightly tricky to implement as the original implementation relied on counters whenever a task is marked as complete or incomplete. However, the counter resets everytime the application is rebooted. Hence, there was a need to ensure that the number of incomplete tasks would be counted everytime the `sort` command is run, instead of relying on counters.
 
-<div style="page-break-after: always;"></div>
-
 * **New Feature**:
   * Added the ability to mark a specific undone task as done. [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69)
     * What it does: Change the completion status of a task to done for a particular student.
     * Justification: This feature allows users update the progress of a student's task.
+
+<div style="page-break-after: always;"></div>
 
 * **New Feature**:
   * Added the ability to mark a specific done task as undone. [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69)
