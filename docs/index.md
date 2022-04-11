@@ -51,5 +51,4 @@ the [**Developer Guide**](DeveloperGuide.html)!
 **Acknowledgements**
 
 * This application was built from AddressBook-Level-3 project created by [SE-EDU initiative](https://se-education.org).
-
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
