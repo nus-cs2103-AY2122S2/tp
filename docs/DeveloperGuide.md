@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="740" />
+![Model Class Diagram](images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -128,9 +128,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has two `Tag` lists in the `AddressBook`, which `Person` and `Meeting` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` and each `Meeting` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has two `Tag` lists in the `AddressBook`, which `Person` and `Meeting` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` and each `Meeting` needing their own `Tag` objects.<br><br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![Better](images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -218,6 +218,51 @@ Reasons for choosing Alternative 1:
 notification pop-up should suffice in prompting the user to resolve any clashes in timings through editing or removing
 them. This implementation provides the user with more freedom as to how they would want to deal with the clash or simply
 make a mental note of it and not deal with it in the application at all.
+  
+
+### Find Contact feature
+
+#### Implementation
+
+The contacts of AddresSoc are stored in a `FilteredList`. The `FilteredList` is updated using `FilteredList#setPredicate`.
+The feature uses a combination of `NameContainsKeywordsPredicate` and `ContactTagContainsKeywordsPredicate` as a predicate. 
+Upon the ```findc``` command being called with the relevant fields provided, the ```FilteredList``` object is updated in accordance with the predicate and then displayed.
+
+Given below is an example usage scenario and how the ```findc``` command behaves at each step.
+1. The user inputs the command ```findc n/alex t/friends```
+2. The user input is passed into ```AddressBookParser``` which matches the ```findc``` command word and passes the arguments to ```FindContactCommandParser```.
+3. ```FindContactCommandParser``` parses the arguments according to the prefixes and constructs a ```FindContactCommand``` object.
+4. The ```FindContactCommand``` object is returned to ```LogicManager``` to be executed. During execution, the ```FilteredList<Contact>``` object is updated and displayed.
+
+#### Sequence Diagram
+
+The sequence diagram below shows the execution of the above example:
+
+![Find Contact Sequence Diagram](images/FindContactSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**The arguments for methods and constructors have been shortened for clarity in the diagram.
+</div>
+
+#### Activity Diagram
+
+The activity diagram below shows the execution of the above example:
+
+![Find Contact activity diagram](images/FindContactActivityDiagram.png)
+
+#### Design Considerations
+
+**Aspect: How `names` and `tags` matches:**
+
+* **Alternative 1 (current choice):** Only full names are matched
+    * Pros: Filtered List will look less cluttered and allows users to easily look up a particular contact 
+    * Cons: Users have less flexibility to search the contacts
+
+* **Alternative 2:** Names that contain the input phrase is matched
+  itself.
+    * Pros: Users have more flexibility to search the contacts
+    * Cons: The filtered list will be bloated and makes it difficult to look up a particular contact.
+    
 
 ### Undo/redo feature
 
@@ -403,14 +448,8 @@ Reasons for choosing Alternative 1:
 * The use of OOP through Java `Predicates` makes automated testing easier as we can test the `OR` behaviour 
   within each predicate separately before testing the `AND` behaviour in `FindMeetingCommand`. This helps to partially make
   up for the relatively low manual testability compared to alternative 2.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-### Reminder
+  
+### Reminder feature
 
 This section describes how the reminder feature can be used for users to be reminded of meetings that will occur
 within a certain time frame which the users can specify.
@@ -439,6 +478,99 @@ The following sequence diagram shows how this works:
 **Note:** The lifeline for `ReminderCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.
 
+#### Design considerations:
+
+##### Aspect: How to allow users to receive reminders
+
+* **Alternative 1 (current choice):** Create a `reminder` command that allows users to specify the number of days to
+  return the result of upcoming meetings.
+    * Pros:
+        * Gives users flexibility in specifying the time frame they want to receive reminders for
+        * Easy to implement.
+    * Cons:
+        * User has to manually specify number of days.
+
+* **Alternative 2:** Set number of days reminders, so that when user call reminder command meetings 
+upcoming in a fixed number of days will be displayed.
+    * Pros:
+        * User does not have to manually specify number of days since it is fixed.
+    * Cons:
+        * User has no flexibility to specify the time range to receive reminders for.
+        
+
+
+### Archive \& Unarchive Features
+
+#### 1. Archive feature
+
+This section describes how the archive feature can be used to be archive meetings that users do not
+want to appear in the meeting list , but still want to save the data. There is an unarchive command
+which is used to revert the archive command.
+
+### Implementation
+
+
+![ArchiveActivityDiagram](images/ArchiveActivityDiagram.png)
+
+Users can archive a specific meeting by entering the `archive index` command. The following steps describe how this 
+behaviour is implemented.
+
+The archive feature uses the `ArchiveStatus`.The condition to is used to check whether the meeting
+is already archived or not.
+The meetings in AddresSoc are extracted and stored in the `FilteredList`.
+It is then used to update `FilteredList` using `FilteredList#PREDICATE_SHOW_ALL_MEETINGS`.
+The updated `FilteredList` is then displayed.
+This operation uses the `Model` for `Model#UpdateFilteredMeetingList`.
+
+The following sequence diagram shows how this works:
+
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram.png)
+
+**Note:** The lifeline for `ArchiveCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+
+
+1. The user archives a `Meeting` in the observable `MeetingList` with command `archive index`.The index is parsed and
+ archive command is executed.
+
+2. The meeting's `ArchiveStatus` will be checked . If it is true, an error message will be displayed.
+
+3. Otherwise the meeting's `ArchiveStatus` will be set to true by the `Meeting#archive()` method.
+
+4. The current `FilteredList` will be updated showing only the unarchived meetings, facilitated by 
+`Model#PREDICATE_SHOW_ALL_MEETINGS`
+
+#### 2. Unarchive feature
+
+This section shows how the archive feature can be reverted. The user can use the unarchive command so
+that the unarchived meeting appear in the meeting list. 
+
+### Implementation
+
+
+![UnArchiveActivityDiagram](images/UnArchiveActivityDiagram.png)
+
+Users can unarchive a specific meeting by entering the `unarchive index` command. The following steps describe how this
+behaviour is implemented.
+
+The archive feature uses the `ArchiveStatus`.The condition to is used to check whether the meeting
+is already archived or not.
+The meetings in AddresSoc are extracted and stored in the `FilteredList`.
+It is then used to update `FilteredList` using `FilteredList#PREDICATE_SHOW_ALL_MEETINGS`.
+The updated `FilteredList` is then displayed.
+This operation uses the `Model` for `Model#UpdateFilteredMeetingList`.
+
+
+1. The user unarchives a `Meeting` in the observable `archivelist` with command `unarchive index`.The index is parsed and
+   unarchive command is executed.
+
+2. The meeting's `ArchiveStatus` will be checked . If it is false, an error message will be displayed.
+
+3. Otherwise the meeting's `ArchiveStatus` will be set to false by the `Meeting#archive()` method.
+
+4. The current `FilteredList` will be updated showing all the unarchived meetings, facilitated by
+   `Model#PREDICATE_SHOW_ALL_MEETINGS`
+   
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -680,7 +812,55 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a meeting
 
+Prerequisites: Default list of meetings are loaded into the application.
+
+1. Test case: `addm n/Lunch with Friends d/30-04-2022 st/1100 et/1300 t/important` <br>
+Expected: New meeting is added to the list. Details of added meeting is shown in status message.
+
+2. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1200 et/1400` <br>
+Expected: New meeting is added to the list. Warning notification pop up due to clash in timing with previously added
+meeting. Details of added meeting and meeting it clashes with is shown in status message.
+
+3. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1600 et/1800` <br>
+Expected: No meeting is added due to duplicate meeting with meeting added in previous test case. Error details shown in the status message.
+
+Other incorrect `addm` commands to try: `addm n/Dinner with Family d/24-05-2022`, `addm n/2103 Exam d/23-04-2022 st/1500 et/1400`, `addm`
+
+### Deleting a meeting
+
+Deleting a meeting while all meetings are being shown
+
+Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
+
+1. Test case: `deletem 1` <br>
+Expected: First meeting is deleted from the list. Details of the deleted meeting is shown in the status message.
+
+2. Test case: `deletem 0` <br>
+Expected: No meeting is deleted. Error details shown in the status message.
+
+Other incorrect `deletem` commands to try: `deletem`, `deletem x`, (where x is larger than the list size)<br>
+Expected: Similar to previous.
+
+### Undo/Redo
+
+Prerequisites: No contacts sharing any of the fields with contact to be added in test case.
+
+1. Test case: `addc n/Bobby Tan p/98127492 e/Bobby01@gmail.com th/Bobby012` followed by `undo` <br>
+Expected: Contact will first be added to the list and details of the added contact is shown in the status message.
+The contact will be removed after `undo` is executed and a successful `undo` message is shown.
+
+2. Test case: `addc n/Bobby Tan p/98127492 e/Bobby01@gmail.com th/Bobby012` followed by `undo`, then `redo` <br>
+Expected: Similar to previous test case. However, contact will be added back to the list after execution of
+`redo`, and a successful `redo` message is shown.
+
+3. Test case: `undo` without any prior changes to the lists <br>
+Expected: No change to the lists. Error details are shown in the status message.
+
+4. Test case: `redo` without any prior `undo` command <br>
+Expected: No change to the lists. Error details are shown in the status message.
+   
 ### Saving data
 
 1. Generating a save file when there is no saved data found.
