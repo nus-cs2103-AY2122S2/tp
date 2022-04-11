@@ -563,6 +563,19 @@ Given below are instructions to test the app manually.
 
 ## Sorting clients
 
+1. Sorting clients while all clients are being shown.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. 
+   2. Test case: `sort address`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored). The number of clients listed is shown in the result display.
+   3. Test case: `sort !phone`<br/>
+   Expected: Clients in the list are sorted according to their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   4. Test case: `sort address !phone`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored) first. Clients with the same address are then sorted by their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   5. Test case: `sort invalid_key`<br/>
+   Expected: Clients are not sorted. Error details are shown in the result display and the list remains the same.
+   6. Other incorrect sort commands to try: `sort`, `sort name invalid_key`, `sort invalid_key name`, `...`<br/>
+   Expected: Similar to previous.
+
 ## Matching clients
 
 ## Uploading an Image
