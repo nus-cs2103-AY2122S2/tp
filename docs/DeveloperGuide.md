@@ -1461,3 +1461,51 @@ The commands in code blocks for this section are meant to be inputted in one lin
 [Back to top <img src="images/back-to-top-icon.png" width="25px" />](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Effort**
+
+If we assume that the effort required to create AddressBook3 is 100, our team believes that the effort required to make
+LinkedOUT is 130.
+
+Our group has put in much commendable effort in order to refactor and modify the model of AB3 in order to satisfy the requirements
+of LinkedOUT.
+
+The amount of effort that we have put in is evidenced by our code contributions which number around 10k lines of code (LoC).
+
+### Notable Features
+* Add
+* Edit  
+* Add Skill
+* View
+* Search
+* Sort
+* Flag
+* Clear
+
+The effort made in these areas can be evidenced from reading the rest of the Developer Guide, particularly the features' implementation details.
+
+### Notable Achievements
+* Updated GUI
+  * AB3 had a very simple user interface, and consisted just mainly of plain text, without much formatting or regard to UI/UX design.
+  * In LinkedOUT, key fields such as skills and application round are highlighted in light colours that contrast the dark background, helping users take stock of key information.
+  * LinkedOUT also makes use of icons which are more relatable and easier on the eyes. For instance, the flag status is repreented by a flag icon.
+
+<div style="page-break-after: always;"></div>
+
+* Great abstraction
+  * AB3 already had large amounts of abstraction, and our group adhered to this by abstracting large amounts of code. For instance, in sort and search operations, ordering applicants is handled by a SortedList
+    which sorts its elements with a specified comparator. 
+  * Another example of this is how the group wrote a new parser for each command, instead of reusing current ones, to ensure that SOLID principles are adhered to.
+    
+* Used Test Driven Development
+  * Whenever our group implemented a new feature or a new field, we followed the procedure of test-driven development where we wrote
+    unit tests to test these features alongside writing the code, to ensure that the number of bugs can be reduced.
+  * Additionally, after the PED, the group spent a large amount of time fixing AB3 bugs, to ensure that the application is as bug-free as possible.  
+    
+* Ease-of-use
+  * This ties in with abstraction, where the group made commands as simple to execute as possible, so that fast typists can complete tasks easily and effectively.
+  * Most commands in LinkedOUT are not lengthy, and require a minimal amount of typing to perform potentially complex tasks such as sorting and searching by multiple prefixes. 
+    This is because the group put in much effort to hide these details from the user, choosing to handle such issues in implementation instead.
+    
