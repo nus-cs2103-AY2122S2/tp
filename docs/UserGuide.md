@@ -167,9 +167,8 @@ Sort contacts in the displayed contact list according to name.
 
 Format: `sortc`
 
-* Sort contacts according to name.
+* Sort contacts according to name in ascending alphabetical order.
 
-![example](images/sort_contacts.png)
 
 
 ## Meeting
@@ -273,10 +272,10 @@ Format: `findm [d/DATES]... [n/NAMES]... [t/TAGS]...`
   **and** at least one of `TAGS` will be returned.
 
 Examples:
-* `findc n/event n/project` returns meetings titled `Event`, `event planning`, `Project Meeting`, etc.
-* `findc n/event d/18-06-2022 t/important` returns a meeting that occurs on `18-06-2022`, is named `event planning` 
+* `findm n/event n/project` returns meetings titled `Event`, `event planning`, `Project Meeting`, etc.
+* `findm n/event d/18-06-2022 t/important` returns a meeting that occurs on `18-06-2022`, is named `event planning` 
   **and** has a tag called `important`.
-* `findc n/event n/project d/01-06-2022` returns meetings that occur on `01-06-2022` and are named `event planning` or  `project`, etc.
+* `findm n/event n/project d/01-06-2022` returns meetings that occur on `01-06-2022` and are named `event planning` or  `project`, etc.
 
 ### Sorting meetings : `sortm`
 
@@ -312,8 +311,6 @@ Format: `archive MEETING_INDEX`
 Examples:
 * `archive 2` archives 2nd meeting in the displayed meeting list
 * `archive 0` returns an error for invalid input as 0 is not a positive integer.
-
-![example](images/archive-example.png)
 
 
 ### Unarchive : `unarchive`
@@ -362,6 +359,10 @@ removes the added contact from your contact list.
 * `undo` after `findc t/family` will not revert the filtering of the contact list as
 `findc` does not change your contact list.
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** Only commands that alter the contact or meeting lists can be undone.
+</div>
+
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 If you would like to revert a `findc` command, you may use `listc` to return to the full contact list.
@@ -406,14 +407,14 @@ If your changes to the data file makes its format invalid, AddressSoC will disca
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: When you install the app in the other computer, you may overwrite the empty data file it creates with the file that contains the data of your previous AddresSoc home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 Action | Format, Examples
 --------|------------------
