@@ -290,7 +290,7 @@ greater than or equal to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
-![viewPlayer](images/viewplayer.png)
+![viewPlayer](images/viewPlayer.png)
 
 #### 2.6.2. View lineup
 
@@ -318,7 +318,7 @@ Examples:
 * `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
 * `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
 
-![viewLineup](images/viewlineup.png)
+![viewLineup](images/viewLineup.png)
 
 #### 2.6.3. View schedule
 
@@ -357,7 +357,7 @@ Examples:
 * `view S/ a/archive` Displays all the schedules including **only** the archived schedules
 * `view S/ d/22/02/2023` Displays all the schedules that fall on the date "22/02/2023"
 
-![viewSchedule](images/viewschedule.png)
+![viewSchedule](images/viewSchedule.png)
 
 ### 2.7. Sort players by height/ jersey number/ weight: `sort`
 
