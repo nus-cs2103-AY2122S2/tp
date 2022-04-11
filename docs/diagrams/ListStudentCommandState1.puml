@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "list_class"
+
+package MainWindow {
+    class DisplayListPanel1 as "__:DisplayListPanel__"
+    class DisplayListPanel2 as "__tutorialDisplayPanel:DisplayListPanel__"
+    class DisplayListPanel3 as "__:DisplayListPanel__"
+}
+DisplayListPanel1 -[hidden]right-> DisplayListPanel2
+DisplayListPanel2 -[hidden]right-> DisplayListPanel3
+hide DisplayListPanel1
+hide DisplayListPanel3
+
+class Pointer as "Current Display" #FFFFFF
+Pointer -up-> DisplayListPanel2
+@end

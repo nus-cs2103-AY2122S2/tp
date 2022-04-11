@@ -18,13 +18,17 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Displayable;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.TutorialName;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -47,8 +51,16 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in camNUS.";
+    public static final String MESSAGE_DUPLICATE_STUDENT_ID = "Another student in camNUS has %s as their NUSNET ID";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Another person in camNUS has %s as their email";
+    public static final String MESSAGE_DUPLICATE_PHONE = "Another person in camNUS has %s as their phone number";
+    public static final String MESSAGE_INDEX_USAGE = "Try listing a person or student e.g. list or list_student";
+    public static final String MESSAGE_NOT_A_STUDENT = "This person is not a student!";
+    public static final String MESSAGE_STUDENT_TAG_NOT_ADDED = "This person is not a student, student tag not added.";
+    public static final String MESSAGE_STUDENT_TAG_ADDED = "Student tag has been automatically added";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -68,21 +80,99 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Displayable> lastShownList = model.getLastShownList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Displayable personToEdit = lastShownList.get(index.getZeroBased());
+        //Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (personToEdit instanceof Student) {
+            return executeEditStudent(model, (Student) personToEdit);
+        }
+
+        if (personToEdit instanceof Person) {
+            return executeEditPerson(model, (Person) personToEdit);
+        }
+
+        throw new CommandException(Messages.MESSAGE_INDEX_LIST_MISMATCH + MESSAGE_INDEX_USAGE);
+
+    }
+
+    private CommandResult executeEditStudent(Model model, Person personToEdit) throws CommandException {
+        Student editedStudent;
+        Student studentToEdit = (Student) personToEdit;
+        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor(editPersonDescriptor);
+
+        editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+
+        // if you are changing the name to one that already exists
+        if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+
+        // if you are changing the email to one that already exists
+        if (!studentToEdit.getEmail().equals(editedStudent.getEmail())
+                && model.hasPersonWithEmail(editedStudent.getEmail())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, editedStudent.getEmail()));
+        }
+
+        // if you are changing the phone to one that already exists
+        if (!studentToEdit.getPhone().equals(editedStudent.getPhone())
+                && model.hasPersonWithPhone(editedStudent.getPhone())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE, editedStudent.getPhone()));
+        }
+
+        if (!editStudentDescriptor.hasStudentTag()) {
+            editedStudent.addTag("student");
+        }
+
+        model.setPerson(studentToEdit, editedStudent);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (!editStudentDescriptor.hasStudentTag()) {
+            return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS + "\n" + MESSAGE_STUDENT_TAG_ADDED,
+                    editedStudent));
+        }
+
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+    }
+
+    private CommandResult executeEditPerson(Model model, Person personToEdit) throws CommandException {
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // if you are changing the email to one that already exists
+        if (!personToEdit.getEmail().equals(editedPerson.getEmail())
+                && model.hasPersonWithEmail(editedPerson.getEmail())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL, editedPerson.getEmail()));
+        }
+
+        // if you are changing the phone to one that already exists
+        if (!personToEdit.getPhone().equals(editedPerson.getPhone())
+                && model.hasPersonWithPhone(editedPerson.getPhone())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE, editedPerson.getPhone()));
+        }
+
+        if (editPersonDescriptor.hasStudentTag()) {
+            editedPerson.removeTag("student");
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (editPersonDescriptor.hasStudentTag()) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS + "\n" + MESSAGE_STUDENT_TAG_NOT_ADDED,
+                    editedPerson));
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -100,6 +190,22 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        assert studentToEdit != null;
+
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        NusNetId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        TutorialName updatedTutorialName = editStudentDescriptor.getTutorialName()
+                .orElse(studentToEdit.getTutorialName());
+        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStudentId,
+                updatedTutorialName);
     }
 
     @Override
@@ -201,6 +307,16 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Returns true if the {@code EditPersonDescriptor} contains a student tag in its list of tags.
+         */
+        public boolean hasStudentTag() {
+            if (tags != null) {
+                return (tags.contains(new Tag("student")));
+            }
+            return false;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -222,5 +338,81 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
+    }
+
+    /**
+     * Stores the details to edit the student with. Each non-empty field value will replace the
+     * corresponding field value of the student.
+     */
+    public static class EditStudentDescriptor extends EditPersonDescriptor {
+        private NusNetId studentId;
+        private TutorialName tutorialName;
+
+        public EditStudentDescriptor() {}
+
+        /**
+         * Overloaded constructor to instantiate an {@code EditStudentDescriptor} as a copy.
+         */
+        public EditStudentDescriptor(EditStudentDescriptor toCopy) {
+            super(toCopy);
+            setStudentId(toCopy.studentId);
+            setTutorialName(toCopy.tutorialName);
+        }
+
+        /**
+         * Overloaded constructor to instantiate an {@code EditStudentDescriptor} from an {@code EditPersonDescriptor}.
+         * this is required so that a Student object does not get replaced with a Person object.
+         */
+        public EditStudentDescriptor(EditPersonDescriptor toConvert) {
+            super(toConvert);
+            setStudentId(null);
+            setTutorialName(null);
+        }
+
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(super.name, super.phone, super.email, super.address, super.tags,
+                    studentId, tutorialName);
+        }
+
+        public void setStudentId(NusNetId studentId) {
+            this.studentId = studentId;
+        }
+
+        public Optional<NusNetId> getStudentId() {
+            return Optional.ofNullable(studentId);
+        }
+
+        public void setTutorialName(TutorialName tutorialName) {
+            this.tutorialName = tutorialName;
+        }
+
+        public Optional<TutorialName> getTutorialName() {
+            return Optional.ofNullable(tutorialName);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditStudentDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditStudentDescriptor e = (EditStudentDescriptor) other;
+
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags())
+                    && getStudentId().equals(e.getStudentId())
+                    && getTutorialName().equals(e.getTutorialName());
+        }
+
     }
 }

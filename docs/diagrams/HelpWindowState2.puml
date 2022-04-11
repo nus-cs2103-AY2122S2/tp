@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+
+
+package "Active Display Panes" {
+    class State1 as "introText:AnchorPane"
+    class State2 as "commandList:AnchorPane"
+    class State3 as "devGuideLink:AnchorPane"
+}
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+hide State1
+hide State2
+
+class Pointer as "Current display"
+
+Pointer -up-> State3
+@enduml

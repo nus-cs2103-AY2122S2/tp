@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "add_assessment as/Test 1 w/10 f/10"
+
+package MainWindow {
+    class DisplayListPanel1 as "__personDisplayList:DisplayListPanel__"
+    class DisplayListPanel2 as "__assessmentDisplayList:DisplayListPanel__"
+}
+DisplayListPanel2 -[hidden]left-> DisplayListPanel1
+hide DisplayListPanel1
+
+class Pointer as "Current Display" #FFFFFF
+Pointer -up-> DisplayListPanel2
+@end

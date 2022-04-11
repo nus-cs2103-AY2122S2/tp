@@ -10,15 +10,32 @@ import seedu.address.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
+    private final boolean isPartial;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    /**
+     * Constructor
+     * @param keywords
+     * @param isPartial
+     */
+    public NameContainsKeywordsPredicate(List<String> keywords, boolean isPartial) {
+        this.isPartial = isPartial;
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        // check for NULL_INPUT
+        if (keywords.size() == 1 && keywords.get(0).equals("NULL_INPUT")) {
+            return false;
+        }
+
+        if (isPartial) {
+            return keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword));
+        } else {
+            return keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        }
     }
 
     @Override

@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.StudentNotFoundException;
+import seedu.address.model.tutorial.TutorialName;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -34,6 +36,24 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns the Student that has the same student id as {@code id}
+     */
+    public Student getStudentWithId(NusNetId id) {
+        requireNonNull(id);
+        for (int i = 0; i < internalList.size(); i++) {
+            Person p = internalList.get(i);
+            if (!(p instanceof Student)) {
+                continue;
+            }
+            Student s = (Student) p;
+            if (s.getStudentId().equals(id)) {
+                return s;
+            }
+        }
+        throw new StudentNotFoundException();
     }
 
     /**
@@ -134,4 +154,66 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Returns true if the list contains an equivalent person with
+     * the same name as the given argument.
+     */
+    public boolean hasPersonWithName(Name name) {
+        requireNonNull(name);
+        return internalList.stream().anyMatch(person -> person.getName().equals(name));
+    }
+
+    /**
+     * Returns true if the list contains a person with the same email as {@code email}.
+     */
+    public boolean hasPersonWithEmail(Email email) {
+        requireNonNull(email);
+        return internalList.stream().anyMatch(person -> person.getEmail().equals(email));
+    }
+
+    /**
+     * Returns true if the list contains a person with the same phone as {@code phone}.
+     */
+    public boolean hasPersonWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return internalList.stream().anyMatch(person -> person.getPhone().equals(phone));
+    }
+
+    /**
+     * Runs through the all contents in this list to find the person with
+     * name matching given {@code name}.
+     */
+    public Person getPersonWithName(Name name) {
+        requireNonNull(name);
+        Person person = internalList.stream()
+                .filter(p -> p.getName().equals(name))
+                .findAny()
+                .orElse(null);
+
+        if (person == null) {
+            throw new PersonNotFoundException();
+        }
+        return person;
+
+    }
+
+    public NusNetId getIdOfStudent(Name studentName) {
+        requireNonNull(studentName);
+        Person person = getPersonWithName(studentName);
+        if (!(person instanceof Student)) {
+            throw new StudentNotFoundException();
+        }
+        return ((Student) person).getStudentId();
+    }
+
+    public TutorialName getTutorialNameOfStudent(Name studentName) {
+        requireNonNull(studentName);
+        Person person = getPersonWithName(studentName);
+        if (!(person instanceof Student)) {
+            throw new StudentNotFoundException();
+        }
+        return ((Student) person).getTutorialName();
+    }
+
 }

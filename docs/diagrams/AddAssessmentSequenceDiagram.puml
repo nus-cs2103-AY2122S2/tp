@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "as:AddAssessmentCommand" as AddAssessmentCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add_assessment \nas/Test 1 w/10 f/10")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add_assessment ...")
+activate AddressBookParser
+
+create AddAssessmentCommand
+AddressBookParser -> AddAssessmentCommand
+activate AddAssessmentCommand
+
+AddAssessmentCommand --> AddressBookParser
+deactivate AddAssessmentCommand
+
+AddressBookParser --> LogicManager : as
+deactivate AddressBookParser
+
+LogicManager -> AddAssessmentCommand : execute()
+activate AddAssessmentCommand
+
+AddAssessmentCommand -> Model : hasAssessment(as.toAdd)
+activate Model
+
+Model -> AddressBook : hasAssessment(as.toAdd)
+activate AddressBook
+
+AddressBook --> Model : false
+deactivate AddressBook
+
+Model --> AddAssessmentCommand : false
+deactivate Model
+
+AddAssessmentCommand -> Model : addAssessment(as.toAdd)
+activate Model
+
+Model -> AddressBook : addAssessment(as.toAdd)
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> AddAssessmentCommand
+deactivate Model
+
+AddAssessmentCommand --> LogicManager : result
+deactivate AddAssessmentCommand
+AddAssessmentCommand -[hidden]-> LogicManager : result
+destroy AddAssessmentCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

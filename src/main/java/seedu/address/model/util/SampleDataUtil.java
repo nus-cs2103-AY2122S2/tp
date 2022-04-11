@@ -45,6 +45,9 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        for (Person samplePerson : getSamplePersons()) {
+            sampleAb.addLastShownItem(samplePerson);
+        }
         return sampleAb;
     }
 

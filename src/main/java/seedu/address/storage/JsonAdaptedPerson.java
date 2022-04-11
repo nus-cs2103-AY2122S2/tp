@@ -13,9 +13,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.TutorialName;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,20 +32,29 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String studentId;
+    private final String tutorialName;
 
-    /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
-     */
+
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("studentId") String studentId,
+            @JsonProperty("tutorialName") String tutorialName) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (studentId == null || tutorialName == null) {
+            this.studentId = null;
+            this.tutorialName = null;
+        } else {
+            this.studentId = studentId;
+            this.tutorialName = tutorialName;
         }
     }
 
@@ -57,7 +69,16 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        if (source instanceof Student) {
+            Student student = (Student) source;
+            studentId = student.getStudentId().id;
+            tutorialName = student.getTutorialName().name;
+        } else {
+            studentId = null;
+            tutorialName = null;
+        }
     }
+
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
@@ -103,7 +124,15 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (studentId == null || tutorialName == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        } else {
+            final NusNetId modelStudentId = new NusNetId(studentId);
+            final TutorialName modelTutorialName = new TutorialName(tutorialName);
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelStudentId, modelTutorialName);
+        }
     }
 
 }

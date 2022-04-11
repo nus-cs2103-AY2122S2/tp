@@ -7,15 +7,18 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.DisplayType;
+import seedu.address.model.Displayable;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Displayable {
 
     // Identity fields
+    private static final DisplayType displayType = DisplayType.PERSON;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -52,6 +55,11 @@ public class Person {
         return address;
     }
 
+    @Override
+    public DisplayType getDisplayType() {
+        return displayType;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -59,6 +67,31 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    /**
+     * Adds a tag to the tag set
+     */
+    public void addTag(String tagName) {
+        tags.add(new Tag(tagName));
+    }
+
+    /**
+     * Returns true if the person has a student tag.
+     */
+    public boolean hasStudentTag() {
+        if (tags != null) {
+            return tags.contains(new Tag("student"));
+        }
+        return false;
+    }
+
+    /**
+     * Removes a tag from the tag set
+     */
+    public void removeTag(String tagName) {
+        tags.remove(new Tag(tagName));
+    }
+
 
     /**
      * Returns true if both persons have the same name.

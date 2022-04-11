@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title before remove_student
+package "UniquePersonList" {
+    class State1 as "personA:Student"
+    class State2 as "personB:Person"
+
+}
+State1 -[hidden]right-> State2
+
+
+class Pointer as "Student to remove"
+
+Pointer -up-> State1
+@enduml

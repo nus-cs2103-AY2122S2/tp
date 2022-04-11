@@ -4,11 +4,30 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "studentId": null,
+    "tutorialName": null
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "studentId": null,
+    "tutorialName": null
+  } ],
+  "assessments": [{
+    "name" : "midterm",
+    "weightage" : "30",
+    "fullMark" : "50"
+  }, {
+    "name" : "tutorial",
+    "weightage": "5",
+    "fullMark" : "13"
+  }],
+  "tutorials" : [ {
+    "tutorialName" : "t04",
+    "venue" : "lt13",
+    "day" : "Monday",
+    "time" : "13:00"
   } ]
 }

@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package MainWindow {
+    class DisplayListPanel1 as "__personDisplayList:DisplayListPanel__"
+    class DisplayListPanel2 as "__:DisplayListPanel__"
+    class DisplayListPanel3 as "__:DisplayListPanel__"
+}
+DisplayListPanel1 -[hidden]right-> DisplayListPanel2
+DisplayListPanel2 -[hidden]right-> DisplayListPanel3
+hide DisplayListPanel2
+hide DisplayListPanel3
+
+class Pointer as "Current Display" #FFFFFF
+Pointer -up-> DisplayListPanel1
+@end

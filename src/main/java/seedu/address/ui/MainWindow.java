@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private DisplayListPanel displayListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane displayListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +110,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        displayListPanel = new DisplayListPanel(logic.getFilteredPersonList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +122,80 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+    }
+
+    /**
+     * Displays only list of class on main window.
+     */
+    void handleClass() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredTutorialList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of persons on main window.
+     */
+    void handlePerson() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredPersonList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of filtered persons on main window.
+     */
+    void handleFilteredPerson() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredPersonMultiPredList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of students on main window.
+     */
+    void handleStudent() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredStudentList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of assessments on main window.
+     */
+    private void handleAssessment() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredAssessmentList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of attendance on main window.
+     */
+    private void handleAttendance(int week) {
+        displayListPanel = new DisplayListPanel(logic.getFilteredAttendanceList());
+        displayListPanel.setAttendanceWeek(week);
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of attendance on main window.
+     */
+    private void handleAttendanceByStudent() {
+        displayListPanel = new DisplayListPanel(logic.getFilteredAttendanceList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only list of results on main window.
+     */
+    private void handleScore() {
+        displayListPanel = new DisplayListPanel(logic.getDisplayAssessmentResults());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
+    }
+
+    /**
+     * Displays only comment for specific student on main window.
+     */
+    private void handleComment() {
+        displayListPanel = new DisplayListPanel(logic.getCommentList());
+        displayListPanelPlaceholder.getChildren().add(displayListPanel.getRoot());
     }
 
     /**
@@ -147,6 +222,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened, and performs a keyword search for the
+     * specified command.
+     */
+    public void handleHelpWithInquiry(String inquiryWord) {
+        handleHelp();
+        helpWindow.showCommandsForWord(inquiryWord);
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -163,10 +247,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -174,9 +254,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowHelp() && commandResult.isInquiry()) {
+                handleHelpWithInquiry(commandResult.getInquiry());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -184,6 +269,41 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            switch(commandResult.getDisplayType()) {
+            case ATTENDANCE_BY_STUDENT:
+                handleAttendanceByStudent();
+                break;
+            case ATTENDANCE:
+                handleAttendance(commandResult.getAttendanceWeek());
+                break;
+            case CLASS:
+                handleClass();
+                break;
+            case COMMENT:
+                handleComment();
+                break;
+            case STUDENT:
+                handleStudent();
+                break;
+            case PERSON:
+                handlePerson();
+                break;
+            case ASSESSMENT:
+                handleAssessment();
+                break;
+            case SCORE:
+                handleScore();
+                break;
+            case FIND:
+                handlePerson();
+                break;
+            case FINDBYPREFIX:
+                handleFilteredPerson();
+                break;
+            default:
+                break;
             }
 
             return commandResult;

@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNAME;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,6 +36,16 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+    private static final String VALID_TUTORIAL_NAME_1 = "T01";
+    private static final String VALID_TUTORIAL_NAME_2 = "T02";
+    private static final String VALID_TUTORIAL_DAY_1 = "Wed";
+    private static final String VALID_TUTORIAL_DAY_2 = "Thu";
+
+    public static final String TUTORIAL_NAME_DESC_1 = " " + PREFIX_TUTORIALNAME + VALID_TUTORIAL_NAME_1;
+    public static final String TUTORIAL_NAME_DESC_2 = " " + PREFIX_TUTORIALNAME + VALID_TUTORIAL_NAME_2;
+    public static final String TUTORIAL_DAY_DESC_1 = " " + PREFIX_DAY + VALID_TUTORIAL_DAY_1;
+    public static final String TUTORIAL_DAY_DESC_2 = " " + PREFIX_DAY + VALID_TUTORIAL_DAY_2;
+
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -50,10 +62,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

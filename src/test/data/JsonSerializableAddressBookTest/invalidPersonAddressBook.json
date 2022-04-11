@@ -3,6 +3,23 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "studentId": null,
+    "tutorialName": null
+  } ],
+  "assessments": [{
+    "name" : "midterm",
+    "weightage" : "30",
+    "fullMark" : "50"
+  }, {
+    "name" : "tutorial",
+    "weightage": "5",
+    "fullMark" : "13"
+  }],
+  "tutorials" : [ {
+    "tutorialName" : "t04",
+    "venue" : "lt13",
+    "day" : "Monday",
+    "time" : "13:00"
   } ]
 }

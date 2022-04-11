@@ -12,9 +12,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Displayable;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Comment;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.storage.Storage;
 
 /**
@@ -65,6 +70,41 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Person> getFilteredPersonMultiPredList() {
+        return model.getFilteredPersonsMultiPredList();
+    }
+
+    @Override
+    public ObservableList<Tutorial> getFilteredTutorialList() {
+        return model.getFilteredTutorialList();
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredStudentList() {
+        return model.getFilteredStudentList();
+    }
+
+    @Override
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return model.getFilteredAssessmentList();
+    }
+
+    @Override
+    public ObservableList<Attendance> getFilteredAttendanceList() {
+        return model.getFilteredAttendanceList();
+    }
+
+    @Override
+    public ObservableList<? extends Displayable> getDisplayAssessmentResults() {
+        return model.getDisplayAssessmentResults();
+    }
+
+    @Override
+    public ObservableList<Comment> getCommentList() {
+        return model.getCommentList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
@@ -78,4 +118,5 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
 }

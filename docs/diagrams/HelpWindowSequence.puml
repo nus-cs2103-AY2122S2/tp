@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":HelpWindow" as helpWindow HELPWINDOW_COLOR
+Participant "mainPane:AnchorPane" as logic LOGIC_COLOR
+Participant "introPane:AnchorPane" as model MODEL_COLOR
+Participant "commandListPane:HelpCommandDisplay" as storage STORAGE_COLOR
+
+user -[USER_COLOR]> helpWindow : showCommands()
+activate helpWindow HELPWINDOW_COLOR
+
+
+helpWindow -[HELPWINDOW_COLOR]> logic : getChildren().clear()
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model :
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> logic
+deactivate model
+model -[hidden]-> logic : result
+destroy model
+
+logic --[LOGIC_COLOR]> helpWindow
+deactivate logic
+
+create storage
+helpWindow -[HELPWINDOW_COLOR]> storage
+activate storage
+storage --[STORAGE_COLOR]> helpWindow
+deactivate storage
+
+helpWindow -[HELPWINDOW_COLOR]> storage : addCommandDisplay(mainPane)
+activate storage
+storage --[STORAGE_COLOR]> helpWindow
+deactivate storage
+
+
+
+
+
+
+helpWindow--[HELPWINDOW_COLOR]> user
+deactivate helpWindow
+@enduml

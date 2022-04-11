@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="122.0" layoutY="438.0" pannable="true" prefHeight="559.0" prefWidth="823.0" style="-fx-background-color: #3c3e3f;" stylesheets="@ScrollBar.css" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="631.0" prefWidth="929.0">
+               <children>
+                  <VBox fx:id="commandDisplay" layoutX="34.0" prefHeight="631.0" prefWidth="969.0" style="-fx-background-color: #3c3e3f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Accordion fx:id="helpList" maxWidth="800.0" minHeight="-Infinity" prefWidth="919.0">
+                           <VBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="60.0" top="20.0" />
+                           </VBox.margin>
+                        </Accordion>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <TextField fx:id="helpWindowCommandInput" onAction="#handleUserInput" prefHeight="36.0" prefWidth="873.0" promptText="Search a command" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="40.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+participant ":CommandResult" as CommandResult STORAGE_COLOR
+
+user -[USER_COLOR]> ui : "remove_student"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : "remove_student"
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : execute(remove_student)
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> logic
+deactivate model
+
+create CommandResult
+logic -[LOGIC_COLOR]> CommandResult
+activate CommandResult STORAGE_COLOR
+
+CommandResult -[STORAGE_COLOR]> logic
+deactivate CommandResult
+
+logic --[LOGIC_COLOR]> ui : result
+ui -[UI_COLOR]> logic : getFilteredPersonList()
+logic --[LOGIC_COLOR]> ui
+deactivate logic
+
+ui--[UI_COLOR]> user
+deactivate ui
+@enduml

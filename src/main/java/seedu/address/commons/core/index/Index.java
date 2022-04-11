@@ -1,5 +1,6 @@
 package seedu.address.commons.core.index;
 
+
 /**
  * Represents a zero-based or one-based index.
  *
@@ -9,6 +10,9 @@ package seedu.address.commons.core.index;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
+
+    public static final String MESSAGE_CONSTRAINTS = "Index should be integer value zero or larger,"
+            + "and should not be blank.";
     private int zeroBasedIndex;
 
     /**

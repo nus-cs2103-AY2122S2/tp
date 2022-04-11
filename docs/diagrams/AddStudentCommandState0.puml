@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+
+title After add person B
+package "UniquePersonList" {
+    class State1 as "personA:Person"
+    class State2 as "personB:Person"
+    class State3 as "personC:Person"
+}
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+
+class Pointer as "New person"
+
+Pointer -up-> State2
+@enduml

@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam classFontSize 20
 
 Package Model <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -14,12 +15,19 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class Student
 
+Class UniqueTutorialList
+Class Tutorial
+
+Class UniqueAssessmentList
+Class Assessment
+
+Class "<<interface>>\nDisplayable" as Displayable
+}
+
+package UI <<Rectangle>> {
+Class HiddenModel #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -28,23 +36,29 @@ HiddenOutside ..> Model
 AddressBook .up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Model .left.> ReadOnlyUserPrefs
+Model .right.> ReadOnlyAddressBook
+ModelManager -right-> "1" AddressBook
+ModelManager -left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Student -up-|> Person
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" UniqueTutorialList
+UniqueTutorialList --> "~* all" Tutorial
+Tutorial --> "~*" Student
 
-ModelManager -->"~* filtered" Person
+AddressBook *--> "1" UniqueAssessmentList
+UniqueAssessmentList --> "~* all" Assessment
+
+ModelManager ---->  "~* filtered" Person
+
+Tutorial .down.|> Displayable
+Person ..|> Displayable
+Assessment ..|> Displayable
+
+Displayable .right.> UI
+
 @enduml

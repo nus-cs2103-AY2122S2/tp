@@ -55,7 +55,7 @@ These checks are implemented as POSIX shell scripts, and thus can only be run on
 
 `./config/travis/run-checks.sh`
 
-Any warnings or errors will be printed out to the console.
+Any warnings or errors will be printed out to the console
 
 **If adding new checks:**
 

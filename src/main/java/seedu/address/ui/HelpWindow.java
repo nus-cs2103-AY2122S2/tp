@@ -3,11 +3,14 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import seedu.address.commons.core.HelpWindowMessages;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -22,10 +25,16 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private RadioButton introButton;
 
     @FXML
-    private Label helpMessage;
+    private RadioButton commandButton;
+
+    @FXML
+    private RadioButton devGuideButton;
+
+    @FXML
+    private AnchorPane displayPane;
 
     /**
      * Creates a new HelpWindow.
@@ -34,7 +43,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        root.setResizable(true);
+        initializeButtons();
+        addIntroText();
     }
 
     /**
@@ -88,6 +99,69 @@ public class HelpWindow extends UiPart<Stage> {
     public void focus() {
         getRoot().requestFocus();
     }
+
+    private void initializeButtons() {
+        RadioButton[] buttonArray = {introButton, commandButton, devGuideButton};
+        for (RadioButton button : buttonArray) {
+            button.getStyleClass().remove("radio-button");
+            button.getStyleClass().add("toggle-button");
+        }
+    }
+
+    private void addIntroText() {
+        TextFlow introText = HelpWindowMessages.createIntroText();
+        setAnchors(introText, 47, 35, 35, 35);
+        introText.prefWidthProperty().bind(displayPane.widthProperty());
+        introText.prefHeightProperty().bind(displayPane.heightProperty());
+        displayPane.getChildren().add(introText);
+    }
+
+    private void addDevGuideText() {
+        TextFlow devGuideText = HelpWindowMessages.createDevGuideText();
+        setAnchors(devGuideText, 47, 35, 35, 35);
+        devGuideText.prefWidthProperty().bind(displayPane.widthProperty());
+        devGuideText.prefHeightProperty().bind(displayPane.heightProperty());
+        displayPane.getChildren().add(devGuideText);
+    }
+
+    private void setAnchors(Node node, double top, double bottom, double left, double right) {
+        AnchorPane.setTopAnchor(node, top);
+        AnchorPane.setLeftAnchor(node, left);
+        AnchorPane.setRightAnchor(node, right);
+        AnchorPane.setBottomAnchor(node, bottom);
+    }
+
+    @FXML
+    private void showCommands() {
+        displayPane.getChildren().clear();
+        HelpCommandDisplay commandDisplay = new HelpCommandDisplay();
+        commandDisplay.addCommandDisplay(displayPane);
+    }
+
+    /**
+     * Shows the command tab in the help window, and performs a keyword search for the specified command.
+     * @param word The command word to be searched.
+     */
+    public void showCommandsForWord(String word) {
+        commandButton.setSelected(true);
+        displayPane.getChildren().clear();
+        HelpCommandDisplay commandDisplay = new HelpCommandDisplay();
+        commandDisplay.addCommandDisplay(displayPane);
+        commandDisplay.identifyHelpList(word);
+    }
+
+    @FXML
+    private void showIntro() {
+        displayPane.getChildren().clear();
+        addIntroText();
+    }
+
+    @FXML
+    private void showDevGuide() {
+        displayPane.getChildren().clear();
+        addDevGuideText();
+    }
+
 
     /**
      * Copies the URL to the user guide to the clipboard.

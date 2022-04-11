@@ -3,18 +3,25 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam classFontSize 20
 
-package UI <<Rectangle>>{
+package UI <<Rectangle>> {
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
+Class DisplayListPanel
+Class TutorialCard
+Class AssessmentCard
+Class StudentResultCard
+Class StudentCard
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class AttendanceCard
+Class CommentCard
 }
 
 package Model <<Rectangle>> {
@@ -32,26 +39,44 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" DisplayListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+DisplayListPanel -down-> "*" TutorialCard
+DisplayListPanel -down-> "*" AssessmentCard
+DisplayListPanel -down-> "*" StudentResultCard
+DisplayListPanel -down-> "*" StudentCard
+DisplayListPanel -down-> "*" PersonCard
+DisplayListPanel -down-> "*" AttendanceCard
+DisplayListPanel -down-> "*" CommentCard
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay ---|> UiPart
+CommandBox ---|> UiPart
+DisplayListPanel ---|> UiPart
+TutorialCard ---|> UiPart
+AssessmentCard ---|> UiPart
+StudentResultCard ---|> UiPart
+StudentCard ---|> UiPart
+AttendanceCard ---|> UiPart
+CommentCard ---|> UiPart
+PersonCard ---|> UiPart
+StatusBarFooter ---|> UiPart
+HelpWindow ---|> UiPart
 
+AttendanceCard ....> Model
+CommentCard ....> Model
+TutorialCard ..> Model
+AssessmentCard ..> Model
+StudentResultCard ...> Model
+StudentCard ..> Model
 PersonCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+DisplayListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
