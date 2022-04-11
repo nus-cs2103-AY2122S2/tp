@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "a: ListOrderCommand" as ListOrderCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listo 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("listo 3")
+activate AddressBookParser
+
+create ListOrderCommand
+AddressBookParser -> ListOrderCommand
+activate ListOrderCommand
+
+'DeleteOrderCommandParser --> AddressBookParser
+'deactivate DeleteOrderCommandParser
+
+'AddressBookParser -> DeleteOrderCommandParser : parse("deleteo 3")
+'activate DeleteOrderCommandParser
+
+'create DeleteOrderCommand
+'DeleteOrderCommandParser -> DeleteOrderCommand
+'activate DeleteOrderCommand
+
+ListOrderCommand --> AddressBookParser : d
+deactivate ListOrderCommand
+
+'DeleteOrderCommandParser --> AddressBookParser : a
+'deactivate DeleteOrderCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+'DeleteOrderCommandParser -[hidden]-> AddressBookParser
+'destroy DeleteOrderCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> ListOrderCommand : execute()
+activate ListOrderCommand
+
+ListOrderCommand -> Model : updateFilteredOrderList()
+Model --> ListOrderCommand
+
+create CommandResult
+ListOrderCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListOrderCommand
+deactivate CommandResult
+
+ListOrderCommand --> LogicManager : result
+deactivate ListOrderCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

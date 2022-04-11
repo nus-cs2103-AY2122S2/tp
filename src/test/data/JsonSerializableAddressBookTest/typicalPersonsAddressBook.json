@@ -5,42 +5,57 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "remark": "Loves Ice Cream",
+    "uuid": "1517c308-cef9-4326-b6bf-fcabad7a0503",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "remark": "Loves Pistachio",
+    "uuid" : "b4bb5fc0-1357-4bdc-aa68-64d027cf383c",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "remark": "",
+    "uuid" : "a5a8dc4b-1dd9-48ee-aaa7-ae4817226957",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "remark": "",
+    "tagged" : [ "friends" ],
+    "uuid" : "c1fe7f58-13a1-49ba-a948-1827bac66dcb"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "remark": "",
+    "uuid" : "45c7fb03-3281-4e0c-bd12-a4344a0ae54c",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "remark": "",
+    "uuid" : "cb67c965-09f2-49d9-84c6-0e1db35af8c5",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "remark": "",
+    "uuid" : "17cca95b-efe5-41d6-97bb-a0be4f2fd95e",
     "tagged" : [ ]
   } ]
+
 }

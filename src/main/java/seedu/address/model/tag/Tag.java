@@ -9,8 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
+    public static final int TAG_SIZE_MAX_LIMIT = 70;
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_TAG_LIMIT = "A tag cannot be longer than " + TAG_SIZE_MAX_LIMIT
+            + " characters. ";
+
 
     public final String tagName;
 

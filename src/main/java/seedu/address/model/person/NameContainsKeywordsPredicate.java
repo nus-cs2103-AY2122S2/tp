@@ -15,6 +15,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    public String getKeywordsString() {
+        return keywords.toString();
+    }
+
     @Override
     public boolean test(Person person) {
         return keywords.stream()

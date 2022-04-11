@@ -12,38 +12,55 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isHelpCommand;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExitCommand;
+
+    /** The command is related to orders */
+    private final boolean isOrderCommand;
+
+    /** The command is related to persons */
+    private final boolean isPersonCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isOrderCommand, boolean isPersonCommand, boolean isHelpCommand,
+                         boolean isExitCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.isOrderCommand = isOrderCommand;
+        this.isPersonCommand = isPersonCommand;
+        this.isHelpCommand = isHelpCommand;
+        this.isExitCommand = isExitCommand;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, boolean isOrderCommand, boolean isPersonCommand) {
+        this(feedbackToUser, isOrderCommand, isPersonCommand, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public boolean isHelpCommand() {
+        return isHelpCommand;
     }
 
-    public boolean isExit() {
-        return exit;
+    public boolean isExitCommand() {
+        return isExitCommand;
+    }
+
+    public boolean isOrderCommand() {
+        return isOrderCommand;
+    }
+
+    public boolean isPersonCommand() {
+        return isPersonCommand;
     }
 
     @Override
@@ -59,13 +76,13 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && isHelpCommand == otherCommandResult.isHelpCommand
+                && isExitCommand == otherCommandResult.isExitCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, isHelpCommand, isExitCommand);
     }
 
 }

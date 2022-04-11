@@ -289,13 +289,15 @@ Refer to [this commit](https://github.com/se-edu/addressbook-level3/commit/ce998
 
 ## Updating Storage
 
-AddressBook stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
+ReadyBakey stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson.
+Let’s update `JsonAdaptedPerson` to work with our new `Person`!
 
 While the changes to code may be minimal, the test data will have to be updated as well.
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: You must delete AddressBook’s storage file located at `/data/addressbook.json` before running it! Not doing so will cause AddressBook to default to an empty address book!
+:exclamation: You must delete ReadyBakey’s storage file located at `/data/readybakey.json` before running it! Not 
+doing so will cause ReadyBakey to default to show an empty ReadyBakey list!
 
 </div>
 

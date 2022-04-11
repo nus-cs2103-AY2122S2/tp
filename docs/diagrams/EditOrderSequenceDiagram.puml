@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditOrderCommandParser" as EditOrderCommandParser LOGIC_COLOR
+participant "d:EditOrderCommand" as EditOrderCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(edito 1 \n c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edito 1 \n c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles")
+activate AddressBookParser
+
+create EditOrderCommandParser
+AddressBookParser -> EditOrderCommandParser
+activate EditOrderCommandParser
+
+EditOrderCommandParser --> AddressBookParser
+deactivate EditOrderCommandParser
+
+AddressBookParser -> EditOrderCommandParser : parse("c/30-06-2022 15:30 \n m/delivery \n d/1: Cheesecake \n r/Give me candles")
+activate EditOrderCommandParser
+
+create EditOrderCommand
+EditOrderCommandParser -> EditOrderCommand
+activate EditOrderCommand
+
+EditOrderCommand --> EditOrderCommandParser : e
+deactivate EditOrderCommand
+
+EditOrderCommandParser --> AddressBookParser : e
+deactivate EditOrderCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditOrderCommandParser -[hidden]-> AddressBookParser
+destroy EditOrderCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditOrderCommand : execute()
+activate EditOrderCommand
+
+EditOrderCommand -> EditOrderCommand : createEditedOrder(orderToEdit, editOrderDescriptor)
+activate EditOrderCommand
+deactivate EditOrderCommand
+
+EditOrderCommand -> Model : setOrder(orderToEdit, editedOrder)
+activate Model
+
+Model --> EditOrderCommand
+deactivate Model
+
+create CommandResult
+EditOrderCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditOrderCommand
+deactivate CommandResult
+
+EditOrderCommand --> LogicManager : result
+deactivate EditOrderCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -9,6 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final int EMAIL_SIZE_MIN_LIMIT = 6;
+    public static final int EMAIL_SIZE_MAX_LIMIT = 50;
+    public static final String MESSAGE_EMAIL_LIMIT = "Customer's email cannot be shorter than " + EMAIL_SIZE_MIN_LIMIT
+            + " characters and cannot be longer than " + EMAIL_SIZE_MAX_LIMIT + ". ";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"

@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindIncompleteOrdersCommandParser" as FindIncompleteOrdersCommandParser LOGIC_COLOR
+participant ":FindIncompleteOrdersCommand" as FindIncompleteOrdersCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("incompleteo 25-12-2022 15:30")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("incompleteo 25-12-2022 15:30")
+activate AddressBookParser
+
+create FindIncompleteOrdersCommandParser
+AddressBookParser -> FindIncompleteOrdersCommandParser
+activate FindIncompleteOrdersCommandParser
+
+FindIncompleteOrdersCommandParser --> AddressBookParser
+deactivate FindIncompleteOrdersCommandParser
+
+AddressBookParser --> FindIncompleteOrdersCommandParser : parse("incompleteo 25-12-2022 15:30")
+
+
+activate FindIncompleteOrdersCommandParser
+create FindIncompleteOrdersCommand
+FindIncompleteOrdersCommandParser --> FindIncompleteOrdersCommand
+activate FindIncompleteOrdersCommand
+
+FindIncompleteOrdersCommand --> FindIncompleteOrdersCommandParser : f
+deactivate FindIncompleteOrdersCommand
+
+FindIncompleteOrdersCommandParser --> AddressBookParser : f
+deactivate FindIncompleteOrdersCommandParser
+FindIncompleteOrdersCommandParser -[hidden]-> AddressBookParser
+destroy FindIncompleteOrdersCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindIncompleteOrdersCommand : execute()
+activate FindIncompleteOrdersCommand
+
+FindIncompleteOrdersCommand -> Model : updatedSortedFilteredOrderList(Predicate)
+
+activate Model
+
+Model --> Model : updateFilteredOrderList(predicate)
+Model --> Model : updatedSortedOrderList(filteredOrders)
+
+Model --> FindIncompleteOrdersCommand
+deactivate Model
+
+create CommandResult
+FindIncompleteOrdersCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindIncompleteOrdersCommand
+deactivate CommandResult
+
+FindIncompleteOrdersCommand  --> LogicManager : result
+deactivate FindIncompleteOrdersCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

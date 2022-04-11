@@ -57,4 +57,10 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /** Returns all {@code prefix} values.
+     */
+    public ArrayList<Prefix> getAllPrefixes() {
+        return new ArrayList<>(argMultimap.keySet());
+    }
 }

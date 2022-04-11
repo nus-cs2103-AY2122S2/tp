@@ -19,6 +19,14 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class UniqueOrderList
+Class Order
+Class Remark
+Class CollectionType
+Class DeliveryDateTime
+Class Complete
+Class Details
+Class UUID
 
 }
 
@@ -38,13 +46,25 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
+Person *--> UUID
 Person *--> Email
 Person *--> Address
+Person *--> Remark
 Person *--> "*" Tag
+
+AddressBook *--> "1" UniqueOrderList
+UniqueOrderList --> "~* all" Order
+Order *--> UUID
+Order *--> Remark
+Order *--> CollectionType
+Order *--> Complete
+Order *--> DeliveryDateTime
+Order *--> "1..5" Details
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Order
 @enduml

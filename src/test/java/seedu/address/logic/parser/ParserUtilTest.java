@@ -6,7 +6,12 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +19,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.order.DeliveryDateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG_TOO_LONG =
+            "12345678901234567890123456789012345678901234567890123456789012345678901";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -35,6 +43,67 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    private static final LocalDate nextMon = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+    private static final LocalDate nextTues = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+    private static final LocalDate nextWeds = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+    private static final LocalDate nextThurs = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+    private static final LocalDate nextFri = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+    private static final LocalDate nextSat = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+    private static final LocalDate nextSun = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+
+    private static String nextMonStr = dateFormat("Monday");
+    private static String nextTuesStr = dateFormat("Tuesday");
+    private static String nextWedsStr = dateFormat("Wednesday");
+    private static String nextThursStr = dateFormat("Thursday");
+    private static String nextFriStr = dateFormat("Friday");
+    private static String nextSatStr = dateFormat("Saturday");
+    private static String nextSunStr = dateFormat("Sunday");
+
+    private static final String VALID_DATETIME = "20-10-2022 23:59";
+    private static final String VALID_NATURAL_MON_DATETIME = "Monday 23:59";
+
+    private static final String VALID_MON_DATETIME = nextMonStr + " 23:59";
+    private static final String VALID_NATURAL_TUES_DATETIME = "Tuesday 23:59";
+    private static final String VALID_TUES_DATETIME = nextTuesStr + " 23:59";
+    private static final String VALID_NATURAL_WEDS_DATETIME = "Wednesday 23:59";
+    private static final String VALID_WEDS_DATETIME = nextWedsStr + " 23:59";
+    private static final String VALID_NATURAL_THURS_DATETIME = "Thursday 23:59";
+    private static final String VALID_THURS_DATETIME = nextThursStr + " 23:59";
+    private static final String VALID_NATURAL_FRI_DATETIME = "Friday 23:59";
+    private static final String VALID_FRI_DATETIME = nextFriStr + " 23:59";
+    private static final String VALID_NATURAL_SAT_DATETIME = "Saturday 23:59";
+    private static final String VALID_SAT_DATETIME = nextSatStr + " 23:59";
+    private static final String VALID_NATURAL_SUN_DATETIME = "Sunday 23:59";
+    private static final String VALID_SUN_DATETIME = nextSunStr + " 23:59";
+
+    private static final String INVALID_TIME_NATURAL_DATE = "Thursday 8:30";
+    private static final String INVALID_DATE_VALID_TIME = "20/10/2022 08:30";
+    private static final String INVALID_TIME_VALID_DATE = "20-10-2022 8:30";
+
+    private static String dateFormat(String dayToGet) {
+        LocalDate date = LocalDate.now();
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        if (dayToGet.equals("Monday") && (day != Calendar.MONDAY)) {
+            date = nextMon;
+        } else if (dayToGet.equals("Tuesday") && day != Calendar.TUESDAY) {
+            date = nextTues;
+        } else if (dayToGet.equals("Wednesday") && day != Calendar.WEDNESDAY) {
+            date = nextWeds;
+        } else if (dayToGet.equals("Thursday") && day != Calendar.THURSDAY) {
+            date = nextThurs;
+        } else if (dayToGet.equals("Friday") && day != Calendar.FRIDAY) {
+            date = nextFri;
+        } else if (dayToGet.equals("Saturday") && day != Calendar.SATURDAY) {
+            date = nextSat;
+        } else if (dayToGet.equals("Sunday") && day != Calendar.SUNDAY) {
+            date = nextSun;
+        }
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -149,6 +218,79 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCollectionDateTime_validValueWithWhitespace_returnsDate() throws Exception {
+        String datetimeWithWhitespace = WHITESPACE + VALID_DATETIME + WHITESPACE;
+        DeliveryDateTime expectedDatetime = new DeliveryDateTime(VALID_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(datetimeWithWhitespace));
+    }
+
+    @Test
+    public void parseCollectionDateTime_validValueWithoutWhitespace_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = new DeliveryDateTime(VALID_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_DATETIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_invalidDateWithoutWhitespace_returnsDate() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDateTime(INVALID_DATE_VALID_TIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_invalidTimeWithoutWhitespace_returnsDate() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDateTime(INVALID_TIME_VALID_DATE));
+    }
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateMonday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_MON_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_MON_DATETIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateTuesday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_TUES_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_TUES_DATETIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateWednesday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = new DeliveryDateTime(VALID_WEDS_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_NATURAL_WEDS_DATETIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateThursday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_THURS_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_THURS_DATETIME));
+    }
+
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateFriday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_FRI_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_FRI_DATETIME));
+    }
+
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateSaturday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_SAT_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_SAT_DATETIME));
+    }
+
+
+    @Test
+    public void parseCollectionDateTime_validNaturalDateSunday_returnsDate() throws Exception {
+        DeliveryDateTime expectedDatetime = ParserUtil.parseDeliveryDateTime(VALID_NATURAL_SUN_DATETIME);
+        assertEquals(expectedDatetime, ParserUtil.parseDeliveryDateTime(VALID_SUN_DATETIME));
+    }
+
+    @Test
+    public void parseCollectionDateTime_invalidTimeValidNaturalDateWithoutWhitespace_returnsDate() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDateTime(INVALID_TIME_NATURAL_DATE));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
@@ -156,6 +298,11 @@ public class ParserUtilTest {
     @Test
     public void parseTag_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    }
+
+    @Test
+    public void parseTag_invalidValueTooLong_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG_TOO_LONG));
     }
 
     @Test

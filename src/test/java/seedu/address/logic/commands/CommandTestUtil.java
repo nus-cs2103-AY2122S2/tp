@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERYDATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -17,8 +21,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.order.CollectionType;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderUuidContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditOrderDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -34,6 +42,21 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_REMARK_AMY = "Add more chocolate";
+    public static final String VALID_REMARK_BOB = "Enjoys a joke or two";
+    public static final String VALID_REMARK_EMPTY = "";
+    public static final String VALID_DETAILS_AMY = "1:chocolatemuffin";
+    public static final String VALID_DETAILS_BOB = "1:raspberrycake";
+    public static final String VALID_UUID_AMY = "c03d9523-9748-4fdd-938e-5666b9564af6";
+    public static final String VALID_UUID_BOB = "2609b29d-9532-4efb-8d9a-f7ab63d6d612";
+    public static final String VALID_DELIVERYDATETIME_AMY = "11-11-2022 15:30";
+    public static final String VALID_DELIVERYDATETIME_BOB = "12-12-2022 13:00";
+    public static final String VALID_COLLECTIONTYPE_AMY_STRING = "delivery";
+    public static final String VALID_COLLECTIONTYPE_BOB_STRING = "Pickup";
+    public static final CollectionType VALID_COLLECTIONTYPE_AMY_TYPE = CollectionType.DELIVERY;
+    public static final CollectionType VALID_COLLECTIONTYPE_BOB_TYPE = CollectionType.PICKUP;
+    public static final String VALID_COMPLETE_AMY = "false";
+    public static final String VALID_COMPLETE_BOB = "true";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -45,6 +68,18 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String DETAILS_DESC_AMY = " " + PREFIX_DETAILS + VALID_DETAILS_AMY;
+    public static final String DETAILS_DESC_BOB = " " + PREFIX_DETAILS + VALID_DETAILS_BOB;
+    public static final String DELIVERYDATETIME_DESC_AMY = " " + PREFIX_DELIVERYDATETIME
+            + VALID_DELIVERYDATETIME_AMY;
+    public static final String DELIVERYDATETIME_DESC_BOB = " " + PREFIX_DELIVERYDATETIME
+            + VALID_DELIVERYDATETIME_BOB;
+    public static final String COLLECTION_TYPE_DESC_AMY = " " + PREFIX_COLLECTION_TYPE
+            + VALID_COLLECTIONTYPE_AMY_STRING;
+    public static final String COLLECTION_TYPE_DESC_BOB = " " + PREFIX_COLLECTION_TYPE
+            + VALID_COLLECTIONTYPE_BOB_STRING;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -52,13 +87,25 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_DETAILS_DESC = " " + PREFIX_DETAILS
+            + "1: ch0co!ate cake"; // non-alphabet or whitespace characters allowed
+    public static final String INVALID_DETAILS_QUANTITY_DESC = " " + PREFIX_DETAILS + "0:chocolatecake";
+    public static final String INVALID_DETAILS_ITEM_DESC = " " + PREFIX_DETAILS
+            + "1:chocolatecakewithexcessivenumberofthings";
+    public static final String INVALID_DELIVERYDATETIME_DESC = " " + PREFIX_DELIVERYDATETIME
+            + "20/01/2022 23:32"; // format is wrong
+    public static final String INVALID_COLLECTIONTYPE_DESC = " " + PREFIX_COLLECTION_TYPE
+            + "PICKUPYY"; // format is wrong
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditOrderCommand.EditOrderDescriptor DESC_AMY_ORDER;
+    public static final EditOrderCommand.EditOrderDescriptor DESC_BOB_ORDER;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -67,6 +114,14 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_AMY_ORDER = new EditOrderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_AMY).withDeliveryDateTime(VALID_DELIVERYDATETIME_AMY)
+                .withCollectionType(VALID_COLLECTIONTYPE_AMY_TYPE).build();
+        DESC_BOB_ORDER = new EditOrderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_BOB).withDeliveryDateTime(VALID_DELIVERYDATETIME_BOB)
+                .withCollectionType(VALID_COLLECTIONTYPE_BOB_TYPE).build();
+
     }
 
     /**
@@ -74,8 +129,8 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+    public static void assertCommandSuccess(Command command, Model actualModel,
+                                                  CommandResult expectedCommandResult, Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -89,9 +144,19 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+    public static void assertPersonCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                  Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertOrderCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                  Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -111,6 +176,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,6 +189,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the order at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showOrderAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredOrderList().size());
+
+        Order order = model.getFilteredOrderList().get(targetIndex.getZeroBased());
+        final String[] splitName = order.getUuid().toString().split("\\s+");
+        model.updateFilteredOrderList(new OrderUuidContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredOrderList().size());
     }
 
 }

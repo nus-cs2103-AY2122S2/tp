@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -32,7 +33,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
+    private OrderListPanel orderListPanel;
+    private ResponseDisplay responseDisplay;
     private HelpWindow helpWindow;
 
     @FXML
@@ -42,10 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private VBox resultList;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane responseDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -90,13 +92,13 @@ public class MainWindow extends UiPart<Stage> {
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+         * ResponseDisplay contains a TextArea, thus some accelerators (e.g F1) will
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
          * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * in CommandBox or ResponseDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -111,10 +113,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        resultList.getChildren().add(personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        responseDisplay = new ResponseDisplay();
+        responseDisplayPlaceholder.getChildren().add(responseDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -147,6 +149,22 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Handles the displayed list of results in MainWindow when the command refers to orders
+     */
+    public void handleOrderCommand() {
+        orderListPanel = new OrderListPanel(logic.getFilteredOrderList(), logic.getPersonList());
+        resultList.getChildren().setAll(orderListPanel.getRoot());
+    }
+
+    /**
+     * Handles the displayed list of results in MainWindow when the command refers to persons
+     */
+    public void handlePersonCommand() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        resultList.getChildren().setAll(personListPanel.getRoot());
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,11 +178,10 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        commandBoxPlaceholder.setDisable(true);
+        javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(javafx.util.Duration.seconds(2));
+        delay.setOnFinished(event -> javafx.application.Platform.exit());
+        delay.play();
     }
 
     /**
@@ -176,20 +193,28 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            responseDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isHelpCommand()) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.isExitCommand()) {
                 handleExit();
+            }
+
+            if (commandResult.isPersonCommand()) {
+                handlePersonCommand();
+            }
+
+            if (commandResult.isOrderCommand()) {
+                handleOrderCommand();
             }
 
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            responseDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }

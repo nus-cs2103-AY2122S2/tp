@@ -1,0 +1,19 @@
+@startuml
+start
+
+:User executes command;
+if () then ([Order])
+    :Relevant Order data is manipulated;
+    :Relevant Order data is displayed;
+([else]) else if () then ([Help])
+    :Help window is displayed;
+([else]) else if () then ([is Exit Command])
+    :Exit information is displayed;
+    :Application exits;
+else ([Person])
+    :Relevant Person data is manipulated;
+    :Relevant Person data is displayed;
+endif
+
+stop
+@enduml

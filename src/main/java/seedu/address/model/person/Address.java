@@ -9,7 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
+    public static final int ADDRESS_SIZE_MIN_LIMIT = 6;
+    public static final int ADDRESS_SIZE_MAX_LIMIT = 70;
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_ADDRESS_LIMIT = "An address cannot be shorter than " + ADDRESS_SIZE_MIN_LIMIT
+            + " characters and cannot be longer than " + ADDRESS_SIZE_MAX_LIMIT + ". ";
 
     /*
      * The first character of the address must not be a whitespace,

@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkOrderCommandParser" as MarkOrderCommandParser LOGIC_COLOR
+participant "m:MarkOrderCommand" as MarkOrderCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("marko 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("marko 1")
+activate AddressBookParser
+
+create MarkOrderCommandParser
+AddressBookParser -> MarkOrderCommandParser
+activate MarkOrderCommandParser
+
+MarkOrderCommandParser --> AddressBookParser
+deactivate MarkOrderCommandParser
+
+AddressBookParser -> MarkOrderCommandParser : parse("1")
+activate MarkOrderCommandParser
+
+create MarkOrderCommand
+MarkOrderCommandParser -> MarkOrderCommand
+activate MarkOrderCommand
+
+MarkOrderCommand --> MarkOrderCommandParser : m
+deactivate MarkOrderCommand
+
+MarkOrderCommandParser --> AddressBookParser : m
+deactivate MarkOrderCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkOrderCommandParser -[hidden]-> AddressBookParser
+destroy MarkOrderCommandParser
+
+AddressBookParser --> LogicManager : m
+deactivate AddressBookParser
+
+LogicManager -> MarkOrderCommand : execute()
+activate MarkOrderCommand
+
+MarkOrderCommand -> MarkOrderCommand : createMarkedOrder(orderToMark)
+activate MarkOrderCommand
+deactivate MarkOrderCommand
+
+
+
+MarkOrderCommand -> Model : setOrder(orderToMark,editedOrder)
+activate Model
+
+Model --> MarkOrderCommand
+deactivate Model
+
+create CommandResult
+MarkOrderCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkOrderCommand
+deactivate CommandResult
+
+MarkOrderCommand --> LogicManager : result
+deactivate MarkOrderCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
