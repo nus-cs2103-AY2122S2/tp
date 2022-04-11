@@ -35,11 +35,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-<<<<<<< HEAD
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setTAssistFilePath(newUserPrefs.getTAssistFilePath());
-=======
->>>>>>> faa7424ed7cd160af950c8dfee245d09a51a37c7
     }
 
     public GuiSettings getGuiSettings() {

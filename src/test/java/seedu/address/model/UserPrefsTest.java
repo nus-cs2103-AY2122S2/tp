@@ -17,11 +17,5 @@ public class UserPrefsTest {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setTAssistFilePath(null));
     }
-
-    @Test
-    public void setTAssistFilePath_nullPath_throwsNullPointerException() {
-        UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setTAssistFilePath(null));
-    }
-
+    
 }
