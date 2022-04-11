@@ -13,7 +13,7 @@ traditional GUI apps.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to view schedule of a selected week. (PR [#131](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/131), [#137](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/137))
-  * What it does: allows the user to view all booking of a week organised by the day of the week.
+  * What it does: Allows the user to view all booking of a week organised by the day of the week.
   * Justification: This feature allows the user to view bookings in an organised manner which help better manage the new bookings and prepare manpower ahead.
   * Implemented 3 commands to navigate the schedule view, `schedule`, `scheduleNext` and `schedulePrevious`.
   * `schedule` display the week which the date fall under.
