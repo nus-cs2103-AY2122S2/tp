@@ -14,7 +14,7 @@ end box
 [-> LogicManager : execute(delete)
 activate LogicManager
 
-LogicManager -> DeleteCommandParser : parseCommand(add)
+LogicManager -> DeleteCommandParser : parseCommand(delete)
 activate DeleteCommandParser
 
 create DeleteCommand
