@@ -61,7 +61,15 @@ The GUI is split into two parts: Players and Schedules respectively. Details of 
 
 </div>
 
-### 2.1. Getting help : `help`
+### 2.1. Viewing insights
+
+Views some insights about players in the club and upcoming schedules.
+
+* The right half of the application is used to display aggregated information of the club.
+* Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
+* Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
+
+### 2.2. Getting help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -69,11 +77,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### 2.2. Adding a player/ lineup/ schedule: `add`
+### 2.3. Adding a player/ lineup/ schedule: `add`
 
 Adds a player/ lineup/ schedule with the specified attributes to MyGM.
 
-#### 2.2.1. Add a player
+#### 2.3.1. Add a player
 
 Adds a player with the specified attributes to the player list in MyGM.
 
@@ -110,7 +118,7 @@ Examples:
 
 ![AddPlayer_SS](images/AddPlayer_SS.png)
 
-#### 2.2.2. Add a lineup
+#### 2.3.2. Add a lineup
 
 Adds a lineup with the specified attribute inside MyGM.
 
@@ -132,7 +140,7 @@ Example:
 
 ![AddLineup_SS](images/AddLineup_SS.png)
 
-#### 2.2.3. Add a schedule
+#### 2.3.3. Add a schedule
 
 Adds a schedule with the specified attributes inside MyGM.
 
@@ -154,11 +162,11 @@ Examples:
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
 
-### 2.3. Deleting a player/ lineup/ schedule :  `delete`
+### 2.4. Deleting a player/ lineup/ schedule :  `delete`
 
 Deletes a player/ lineup/ schedule from MyGM.
 
-#### 2.3.1. Delete a player
+#### 2.4.1. Delete a player
 
 Deletes the specified player from MyGM.
 
@@ -179,7 +187,7 @@ Example: <br>
 * `delete P/James Soften` `L/Starting 5` will only delete player `James Soften` from the lineup `Starting 5`.
 
 
-#### 2.3.2. Delete a lineup
+#### 2.4.2. Delete a lineup
 
 Deletes the specified lineup.
 
@@ -197,7 +205,7 @@ Format: `delete L/LINEUP`
 Example:
 * `delete L/Starting 5` will only delete the lineup `Starting 5` from MyGM.
 
-#### 2.3.3. Delete a schedule
+#### 2.4.3. Delete a schedule
 
 Deletes the i-th schedule from MyGM.
 
@@ -218,7 +226,7 @@ Example:
 * `view S/` followed by `delete S/2` deletes the 2nd schedule in the **displayed** schedule.
 * `view S/game` followed by `delete S/1` deletes the 1st schedule in the **displayed** schedule as a result of the `view S/game` command.
 
-### 2.4 Putting a player to a lineup: `put`
+### 2.5 Putting a player to a lineup: `put`
 
 Puts the specified player to a specified lineup.
 
@@ -240,12 +248,12 @@ Example:
 
 ![Put_SS](images/Put_SS.png)
 
-### 2.5. Viewing player/schedule/lineup: `view`
+### 2.6. Viewing player/schedule/lineup: `view`
 
 This function makes listing, searching filtering of player/ schedule/ lineup quick and easy.
 You can specify criteria to list out the current player and schedule list.
 
-#### 2.5.1. View player
+#### 2.6.1. View player
 
 Filters the existing players to display only the players matching the criteria specified.
 
@@ -275,7 +283,7 @@ is lesser than `213`cm **and** weight equals to `100`kg **and** plays the positi
 
 * ![viewPlayer](images/viewPlayer.png)
 
-#### 2.5.2. View lineup
+#### 2.6.2. View lineup
 
 Filters players who are in the lineup that corresponds to the criteria specified.
 
@@ -303,7 +311,7 @@ Examples:
 
 * ![viewLineup](images/viewLineup.png)
 
-#### 2.5.3. View schedule
+#### 2.6.3. View schedule
 
 Filters the existing schedules to display only the schedules matching the criteria specified.
 
@@ -342,7 +350,7 @@ Examples:
 
 * ![viewSchedule](images/viewSchedule.png)
 
-### 2.6. Sort players by height/ jersey number/ weight: `sort`
+### 2.7. Sort players by height/ jersey number/ weight: `sort`
 
 The `sort` command allows you to sort the displayed players based on the criteria specified.
 
@@ -371,11 +379,11 @@ Example:
 
 * ![sortPlayer](images/sortPlayer.png)
 
-### 2.7. Edit a player/ lineup/ schedule information : `edit`
+### 2.8. Edit a player/ lineup/ schedule information : `edit`
 
 Updates the details of a player, lineup or schedule.
 
-#### 2.7.1 Edit a player
+#### 2.8.1 Edit a player
 
 Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
 
@@ -404,7 +412,7 @@ Example:
 
 </div>
 
-#### 2.7.2. Edit a lineup
+#### 2.8.2. Edit a lineup
 
 Edit the lineup name of the specified lineup to a new lineup name.
 
@@ -421,7 +429,7 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup `Starting5` to `Worst5`
 
-#### 2.7.3. To edit a schedule
+#### 2.8.3. To edit a schedule
 
 Edit the details of the i-th schedule
 
@@ -440,14 +448,6 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
-
-### 2.8. Viewing insights
-
-Views some insights about players in the club and upcoming schedules.
-
-* The right half of the application is used to display aggregated information of the club.
-* Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
-* Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
 
 ### 2.9. Clearing all entries : `clear`
 
