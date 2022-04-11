@@ -255,7 +255,6 @@ Format: `findc [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFER
 <div markdown="block" class="alert alert-warning">
    
 **:exclamation: Caution:**<br>
-* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`.
 * The search is case-insensitive, i.e, `John` will match `john`.
 * Keywords will be matched, i.e, `findc n/Alex Yeoh` will match customers who have `Alex` or `Yeoh` in their names. `Alex Tan` and `Alice Yeoh` will be matched.
 * All customers match the specified keywords for the prefix will be returned, i.e, `findc n/Alex al/Nickel` will return all customers with `alex` in their name and all customers with `nickel` as an allergy.
@@ -353,7 +352,6 @@ Format: `findb [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
-* KEYWORD_TYPE is specific to services prefixes: `n/` `pr/` `d/`.
 * The search is case-insensitive, i.e, `Facial` will match `facial`.
 * All services match the specified keywords for the prefix will be returned, i.e, `finds n/Facial pr/30` will return all services with `facial` in their name and all services that cost `30`.
 * Keywords will be matched, i.e, `finds n/Facial Cut` will match services who have `Facial` or `Cut` in their names. `Facial Treatment` and `Hair Cut` will be matched.
@@ -452,7 +450,6 @@ Format: `findb [n/NAME] [st/BOOKING_DATE_TIME] [f/FEEDBACK]`
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
-* KEYWORD_TYPE is specific to bookings prefixes: `n/` `st/` `f/`.
 * The search is case-insensitive, i.e, `Facial` will match `facial`.
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
 * All bookings match the specified keywords for the prefix will be returned, i.e, `findb st/05-05-2022 f/Good` will return all bookings on `05-05-2022` and all bookings that has a feedback of `Good`.
