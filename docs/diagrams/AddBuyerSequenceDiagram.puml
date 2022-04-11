@@ -21,7 +21,7 @@ participant ":Storage" as Storage STORAGE_COLOR_T2
 [-> LogicManager : execute("add-b n/David p/12345678")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addbuyer n/David p/12345678")
+LogicManager -> AddressBookParser : parseCommand("add-b n/David p/12345678")
 activate AddressBookParser
 
 create AddBuyerCommandParser

@@ -362,7 +362,7 @@ The `add-ptb` command uses a similar mechanism as the `add-b` command mentioned 
 
 1. An index needs to be specified along with the necessary fields
    E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
-2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and Smaller than or equal to the size of the displayed buyer list).
+2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and smaller than or equal to the size of the displayed buyer list).
 3. The updated buyer remains in the same position as before.
 
 Alternatives considered:
