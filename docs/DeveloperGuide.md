@@ -857,6 +857,8 @@ TeachWhat! allows you to store details of a lesson and view it back later on.
    4. Expected: The details of that recurring lesson should be shown on the right. A recurring lesson is denoted by the
    green tag which is labelled `recurring`.
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Note that:**<br>
 The list of lessons displayed is sorted by the next upcoming lesson date.
@@ -871,8 +873,6 @@ The list of lessons displayed is sorted by the next upcoming lesson date.
 </div>
 
 [return to top ↑](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Adding a student / Viewing a student's details
 TeachWhat! allows you to store details of a student and view it back later on.
@@ -1028,7 +1028,6 @@ To simulate this scenario, follow the steps below:
     "assignedStudents" : [ ],
     "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
   }
-  
   // ......
 }
 ```
@@ -1049,7 +1048,6 @@ To simulate this scenario, follow the steps below:
     "assignedStudents" : [ ],
     "lessonAddress" : "Blk 47 Tampines Street 20, #17-35"
   }
-  
   // ......
 }
 ```
