@@ -320,6 +320,12 @@ Examples:
 - `view` followed by `edit 1 n/Alex Tan` updates the name of the first patient information entry displayed on the screen
   to Alex Tan.
 
+<figure class="figure">
+  <img src="images/EditScreen.png" alt="Edit Screen Result" width="350">
+  <figcaption class="figure-caption text-right">Edit First Patient on Displayed List</figcaption>
+</figure>
+
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Editing a patient will overwrite the old data.
 </div>
