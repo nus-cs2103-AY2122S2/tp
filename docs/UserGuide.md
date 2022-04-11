@@ -211,6 +211,7 @@ Examples:
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Duplicate meetings with the same name and date cannot be added into the app.
 </div>
+<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting : `deletem`
 
