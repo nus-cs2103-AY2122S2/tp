@@ -359,6 +359,17 @@ The addition of `lastCommand` means that the user does not have to type in the c
     * Pros: Easier to implement.
     * Cons: Inconveniences the user, especially for clients with very long names
 
+### List Command
+
+The `list` command lists all clients in HustleBook and is primarily used after user uses `find`.
+
+However `list` has an added functionality of listing only flagged or unflagged clients if the arguments `flag` or `unflag` respectively follow the command.
+
+The `list` mechanism is facilitated by `HustleBook`. It is implemented by `ListCommand` that extends `Command` and parsed
+by `ListCommandParser`. `ListCommand` utilizes `Predicate` and `model#updateFilteredPersonList`.
+
+Below shows the logic sequence diagram of list:
+![List Logic Sequence Diagram](images/ListLogicSequenceDiagram.png)
 
 ### Sort Command
 
@@ -390,7 +401,7 @@ The following sequence diagram shows how the `sort` command works when executing
 
 ![Sort Sequence Diagram](images/SortSequenceDiagram.png)
 
-To further understand the implementation of sort, a logic sequence diagram is provided below. This highlights the use of `Comparators` in `sort`
+To further understand the implementation of sort, a logic sequence diagram is provided below. This highlights the use of `Comparators` in `sort`:
 
 ![Sort Logic Sequence Diagram](images/SortLogicSequenceDiagram.png)
 
