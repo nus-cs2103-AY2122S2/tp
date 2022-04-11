@@ -64,7 +64,7 @@ A glossary is included at the end to clarify any technical or vague terms used.
 <div markdown="block" class="alert alert-info">
 
 > :information_source: **Installation notes:**  
-> - Application save data will be stored in the same folder containing the **ultimatedivoctracker.jar** application.  
+> - Application save data will be stored in the same folder containing the **udt.jar** application.  
 > - Currently officially supported for **Windows**, **Mac** and **Linux** platforms.
 
 </div>
