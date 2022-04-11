@@ -321,8 +321,8 @@ The edit orders feature consists of one command, `EditOrderCommand`. It extends 
 
 These are the inputs that the edit order command will accept:
 
-1) It takes in an `Index` parameter to indicate the order that is to be edited.
-2) It also takes in other optional inputs based on the prefixes specified:
+1. It takes in an `Index` parameter to indicate the order that is to be edited. 
+2. It also takes in other optional inputs based on the prefixes specified:
 
 | Prefix | Meaning                              | Example            | Format                                                        | Compulsory |
 |--------|--------------------------------------|--------------------|---------------------------------------------------------------|------------|
