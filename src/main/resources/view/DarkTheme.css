@@ -57,10 +57,10 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -133,13 +133,13 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -229,8 +229,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -349,4 +349,45 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#labCard {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-padding: 2;
+}
+
+#labCard .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 12;
+}
+
+#labCard .scroll-bar:vertical .increment-arrow,
+#labCard .scroll-bar:vertical .decrement-arrow,
+#labCard .scroll-bar:vertical .increment-button,
+#labCard .scroll-bar:vertical .decrement-button {
+    -fx-scale-x: 0;
+    -fx-opacity: 0;
+    -fx-padding:-7;
+}
+
+#labCard .scroll-bar:horizontal .increment-arrow,
+#labCard .scroll-bar:horizontal .decrement-arrow,
+#labCard .scroll-bar:horizontal .increment-button,
+#labCard .scroll-bar:horizontal .decrement-button {
+    -fx-scale-x: 0;
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+#labCard.list-view {
+    -fx-background-color: transparent;
+}
+
+#labCard .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 1;
 }

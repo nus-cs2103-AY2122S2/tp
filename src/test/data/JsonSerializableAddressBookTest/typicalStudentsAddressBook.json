@@ -1,0 +1,102 @@
+{
+  "masterList": [
+    {
+      "labMark": "Unknown",
+      "labNumber": "1",
+      "labStatus": "UNSUBMITTED"
+    }
+  ],
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "students": [ {
+      "name": "Alice Pauline",
+      "email": "alice@example.com",
+      "github": "aliceP",
+      "telegram": "alice_P",
+      "studentId": "A0123456B",
+      "tagged": [ "year2" ],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+  }, {
+      "name": "Benson Meier",
+      "email": "johnd@example.com",
+      "github": "bensonM",
+      "telegram": "benson_M",
+      "studentId": "A0123457C",
+      "tagged": [ "Tembusu", "year2" ],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    }, {
+      "name": "Carl Kurz",
+      "email": "heinz@example.com",
+      "github": "carlK",
+      "telegram": "carl_K",
+      "studentId": "A0123458D",
+      "tagged": [],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    }, {
+      "name": "Daniel Meier",
+      "email": "cornelia@example.com",
+      "github": "danielM",
+      "telegram": "daniel_M",
+      "studentId": "A0123459E",
+      "tagged": [ "year2" ],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    }, {
+      "name": "Elle Meyer",
+      "email": "werner@example.com",
+      "github": "elleM",
+      "telegram": "elle_M",
+      "studentId": "A0123411A",
+      "tagged": [],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    }, {
+      "name": "Fiona Kunz",
+      "email": "lydia@example.com",
+      "github": "fionaK",
+      "telegram": "fiona_K",
+      "studentId": "A0123412B",
+      "tagged": [],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    }, {
+      "name": "George Best",
+      "email": "anna@example.com",
+      "github": "georgeB",
+      "telegram": "george_B",
+      "studentId": "A0123413C",
+      "tagged": [],
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
+    } ]
+}

@@ -2,58 +2,39 @@
 layout: page
 title: About Us
 ---
+# About Us
+We are team TAddressBook.
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Bryan seah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bryans17.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/bryans17)]
+[[portfolio](team/bryans17.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Team Lead, Integration
 
-### Jean Doe
+### Channe Chwa
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/channne.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/channne)]
+[[portfolio](team/channne.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation, Testing
+
+### Ryan Tan Gee Teng
+
+<img src="images/geetengtan.png" width="200px">
+
+[[github](http://github.com/geetengtan)]
+[[portfolio](team/geetengtan.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality, Deliverables and deadlines

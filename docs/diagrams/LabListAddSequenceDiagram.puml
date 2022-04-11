@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant "LabList" as LabList MODEL_COLOR
+participant "internalList:ObservableList<Lab>" as ObservableList MODEL_COLOR
+end box
+
+[-> LabList : add(lab)
+activate LabList
+
+LabList -> LabList : contains(lab)
+activate LabList
+
+LabList --> LabList
+deactivate LabList
+
+LabList -> ObservableList : add(lab)
+activate ObservableList
+
+ObservableList --> LabList
+deactivate ObservableList
+
+LabList -> ObservableList : sort(sortByLabNumber)
+activate ObservableList
+
+ObservableList --> LabList
+deactivate ObservableList
+
+[<-- LabList
+deactivate LabList
+
+@enduml

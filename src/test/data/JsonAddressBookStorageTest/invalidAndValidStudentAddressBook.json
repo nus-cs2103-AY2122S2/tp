@@ -1,0 +1,15 @@
+{
+  "students": [ {
+      "name": "Valid Student",
+      "email": "hans@example.com",
+      "github": "fionaK",
+      "telegram": "fiona_K",
+      "studentId": "A0123456B"
+    }, {
+      "name": "Student With Invalid Telegram Field",
+      "email": "hans@example.com",
+      "github": "fionaK",
+      "telegram": "fiona&K",
+      "studentId": "A0123456B"
+    } ]
+}

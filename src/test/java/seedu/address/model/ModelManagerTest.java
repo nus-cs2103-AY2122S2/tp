@@ -1,12 +1,13 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +16,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabStatus;
+import seedu.address.model.lab.StudentHasLabPredicate;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -73,29 +79,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasStudent_studentInAddressBook_returnsTrue() {
+        modelManager.addStudent(ALICE);
+        assertTrue(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,15 +124,86 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void hasLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasLab(null));
+    }
+
+    @Test
+    public void hasLab_labNotInModel_returnsFalse() {
+        assertFalse(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void hasLab_labInModel_returnsTrue() {
+        modelManager.addLab(new Lab("1"));
+        assertTrue(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void removeLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.removeLab(null));
+    }
+
+    @Test
+    public void removeLab_labNotInModel_throwsLabNotFoundException() {
+        assertThrows(LabNotFoundException.class, () -> modelManager.removeLab(new Lab("12")));
+    }
+
+    @Test
+    public void removeLab_labInModel_success() {
+        modelManager.addLab(new Lab("1"));
+        assertDoesNotThrow(() -> modelManager.removeLab(new Lab("1")));
+        assertFalse(modelManager.hasLab(new Lab("1")));
+    }
+
+    @Test
+    public void addLab_nullLab_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addLab(null));
+    }
+
+    @Test
+    public void addLab_duplicateLab_throwsDuplicateLabException() {
+        modelManager.addLab(new Lab("1"));
+        assertThrows(DuplicateLabException.class, () -> modelManager.addLab(new Lab("1")));
+    }
+
+    @Test
+    public void addOnFilteredStudentList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addOnFilteredStudentList(null));
+    }
+
+    @Test
+    public void addOnFilteredStudentList_validPredicate_success() {
+        AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        // current predicate on filtered student list == null
+        assertDoesNotThrow(() ->
+                modelManager.addOnFilteredStudentList(
+                        new StudentHasLabPredicate((new Lab("1")).of(LabStatus.UNSUBMITTED))
+                )
+        );
+
+        // add on to the current predicate
+        assertDoesNotThrow(() ->
+                modelManager.addOnFilteredStudentList(
+                        new StudentHasLabPredicate((new Lab("2")).of(LabStatus.UNSUBMITTED))
+                )
+        );
     }
 }

@@ -1,0 +1,136 @@
+{
+  "masterList" : [ {
+    "labNumber" : "1",
+    "labStatus" : "UNSUBMITTED",
+    "labMark" : "Unknown"
+  }, {
+    "labNumber" : "2",
+    "labStatus" : "UNSUBMITTED",
+    "labMark" : "Unknown"
+  }, {
+    "labNumber" : "4",
+    "labStatus" : "UNSUBMITTED",
+    "labMark" : "Unknown"
+  } ],
+  "students" : [ {
+    "name" : "Alex Yeoh",
+    "email" : "alexyeoh@example.com",
+    "tagged" : [ "year2" ],
+    "telegram" : "alex_yeoh",
+    "studentId" : "A0123456B",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "GRADED",
+      "labMark" : "10"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "SUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    } ],
+    "githubUsername" : "alexyeoh"
+  }, {
+    "name" : "Bernice Yu",
+    "email" : "berniceyu@example.com",
+    "tagged" : [ "RC4", "year2" ],
+    "telegram" : "bernice_yu",
+    "studentId" : "A1234567C",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "SUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    } ],
+    "githubUsername" : "berniceyu"
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "email" : "charlotte@example.com",
+    "tagged" : [ "internationalStudent" ],
+    "telegram" : "charlotte_oliverio",
+    "studentId" : "A0123457C",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "SUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    } ],
+    "githubUsername" : "charlotteoliveiro"
+  }, {
+    "name" : "David Li",
+    "email" : "lidavid@example.com",
+    "tagged" : [ "year1" ],
+    "telegram" : "david_li",
+    "studentId" : "A0123458D",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    } ],
+    "githubUsername" : "davidli"
+  }, {
+    "name" : "Irfan Ibrahim",
+    "email" : "irfan@example.com",
+    "tagged" : [ "KR" ],
+    "telegram" : "irfan_ibrahim",
+    "studentId" : "A0123459E",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "GRADED",
+      "labMark" : "11"
+    } ],
+    "githubUsername" : "irfanibrahim"
+  }, {
+    "name" : "Roy Balakrishnan",
+    "email" : "royb@example.com",
+    "tagged" : [ "RC4" ],
+    "telegram" : "roy_balakrishnan",
+    "studentId" : "A0123450F",
+    "labs" : [ {
+      "labNumber" : "1",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "2",
+      "labStatus" : "UNSUBMITTED",
+      "labMark" : "Unknown"
+    }, {
+      "labNumber" : "4",
+      "labStatus" : "SUBMITTED",
+      "labMark" : "Unknown"
+    } ],
+    "githubUsername" : "roybalakrishnan"
+  } ]
+}
