@@ -148,7 +148,7 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 A Contact Detail card with the details of a contact will be shown to the user as shown below.
 
-<img src="view.png">
+<img src="images/view.png">
 
 **Examples:**
 
