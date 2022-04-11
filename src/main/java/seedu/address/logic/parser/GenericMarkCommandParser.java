@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_ERROR_MESSAGE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_2;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_WEEK_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
@@ -33,7 +32,7 @@ public class GenericMarkCommandParser {
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_WEEK, PREFIX_STUDENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_ERROR_MESSAGE_FORMAT, MESSAGE_INVALID_COMMAND_FORMAT_2, usage));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
         }
 
         try {
@@ -59,7 +58,7 @@ public class GenericMarkCommandParser {
             }
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_ERROR_MESSAGE_FORMAT, pe.getMessage(), usage), pe);
+                    String.format("%s\n%s", pe.getMessage(), usage), pe);
         }
     }
 }
