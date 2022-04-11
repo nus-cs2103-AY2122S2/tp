@@ -19,6 +19,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
@@ -87,6 +89,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteEntity_nullEntity_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteEntity(null));
+    }
+
+    @Test
     public void hasStudent_studentNotInTAssist_returnsFalse() {
         assertFalse(modelManager.hasEntity(ALICE));
     }
@@ -120,6 +127,14 @@ public class ModelManagerTest {
         ObservableList<Student> unfilteredStudents = modelManager.getUnfilteredStudentList();
         assertTrue(unfilteredStudents.contains(ALICE));
         assertTrue(unfilteredStudents.contains(BENSON));
+    }
+
+    @Test
+    public void deleteStudent() {
+        modelManager.addEntity(ALICE);
+        assertTrue(modelManager.hasEntity(ALICE));
+        modelManager.deleteEntity(ALICE);
+        assertFalse(modelManager.hasEntity(ALICE));
     }
 
     @Test
@@ -161,6 +176,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteClassGroup() {
+        ClassGroup classGroup = TypicalClassGroups.CS2101G09;
+        modelManager.addEntity(classGroup);
+        assertTrue(modelManager.hasEntity(classGroup));
+        modelManager.deleteEntity(classGroup);
+        assertFalse(modelManager.hasEntity(classGroup));
+    }
+
+    @Test
     public void getFilteredModulesList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
     }
@@ -196,6 +220,15 @@ public class ModelManagerTest {
         ObservableList<TaModule> unfilteredModules = modelManager.getUnfilteredModuleList();
         assertTrue(unfilteredModules.contains(module1));
         assertTrue(unfilteredModules.contains(module2));
+    }
+
+    @Test
+    public void deleteModule() {
+        TaModule module = TypicalModules.CS2101;
+        modelManager.addEntity(module);
+        assertTrue(modelManager.hasEntity(module));
+        modelManager.deleteEntity(module);
+        assertFalse(modelManager.hasEntity(module));
     }
 
     @Test
@@ -244,6 +277,15 @@ public class ModelManagerTest {
         ObservableList<Assessment> unfilteredAssessments = modelManager.getUnfilteredAssessmentList();
         assertTrue(unfilteredAssessments.contains(assessment1));
         assertTrue(unfilteredAssessments.contains(assessment2));
+    }
+
+    @Test
+    public void deleteAssessment() {
+        Assessment assessment = TypicalAssessments.CS2040_LAB2_NO_ATTEMPT;
+        modelManager.addEntity(assessment);
+        assertTrue(modelManager.hasEntity(assessment));
+        modelManager.deleteEntity(assessment);
+        assertFalse(modelManager.hasEntity(assessment));
     }
 
     @Test
