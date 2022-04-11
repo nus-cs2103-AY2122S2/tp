@@ -257,9 +257,8 @@ Step 4. During the execution of add command, a `CommandException` is thrown if t
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage since unnecessary objects may be created.
 
-* **Alternative 2:** <br> Early duplication check in `AddCommandParser`.
-  itself.
-    * Pros: Prevent unnecessary creation of Person object. 
+* **Alternative 2:** <br> Early duplication check in `AddCommandParser` itself.
+    * Pros: Prevent unnecessary creation of `Person` object. 
     * Cons: May need heavy refactoring. 
 
 **Aspect: Duplication criteria** <br>
@@ -268,6 +267,47 @@ Step 4. During the execution of add command, a `CommandException` is thrown if t
     * At least one of following fields: `Email`, `Phone`, `Address`, `MatricCard`) is the same (case-insensitive) between these two `Person`.
     
 You can redefine your own criteria if you want to. Simply modify `Person#isSamePerson()` to define your own criteria.
+
+<div style="page-break-after: always;"></div>
+
+### **Edit Person feature**
+#### Rationale
+The edit command allows user to edit an existing `Person` in UNite.
+
+#### Implementation
+The edit profile feature receives input from the users (with the relevant attributes). The edit is facilitated by `EditPersonDescriptor`, which stores the details of the `Person` that needs to be changed.
+* `EditCommand` extending class `Command` is implemented to let the system understand the command
+* `EditCommandParser`is implemented to parse the filter command entered by user.
+
+The activity diagram below summarizes what happens when an add command is executed.
+
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+Given below is an example usage scenario of edit command.
+
+Step 1. UNite is opened by the user and ready to receive commands. Assuming there is already one `Person` added in UNite. The user types in the command `edit 1 n/Bob`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `EditCommandParser` object.
+
+Step 3. The `EditCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `EditCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of edit command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise a `CommandResult` containing the details of the new `Person` as a String is returned.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Creation of edited `Person` object** <br>
+* **Alternative 1 (current choice):** <br> Everytime a field get edited, a new `Person` object is created to replace the original `Person` in UNite. 
+    * Pros: Ensure immutability. Easy to implement. 
+    * Cons: Many object creations.
+
+* **Alternative 2:** <br> Update the field in the original `Person` object directly.
+  itself.
+    * Pros: Lesser creation of `Person` object.
+    * Cons: Needs to be implemented carefully to make sure there will not be any side effects. 
+
+We decided to go with **Alternative 1**, which ensures immutability and no side effects.
 
 <div style="page-break-after: always;"></div>
 

@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute(\n "add n/Alice p/87123456 \n e/alice@gmail.com \n a/12 Kent Ridge Road \n m/A1234123E \n c/Computer Science \n tele/thisisAlice")
 activate LogicManager
 
-LogicManager -> UniteParser : parseCommand(\n "n/Alice p/87123456 \n e/alice@gmail.com \n a/12 Kent Ridge Road \n m/A1234123E \n c/Computer Science \n tele/thisisAlice")
+LogicManager -> UniteParser : parseCommand(\n add "n/Alice p/87123456 \n e/alice@gmail.com \n a/12 Kent Ridge Road \n m/A1234123E \n c/Computer Science \n tele/thisisAlice")
 activate UniteParser
 
 create AddCommandParser
@@ -27,7 +27,7 @@ activate AddCommandParser
 AddCommandParser --> UniteParser
 deactivate AddCommandParser
 
-UniteParser -> AddCommandParser : parseCommand(\n "n/Alice p/87123456 \n e/alice@gmail.com \n a/12 Kent Ridge Road \n m/A1234123E \n c/Computer Science \n tele/thisisAlice")
+UniteParser -> AddCommandParser : parse(\n "n/Alice p/87123456 \n e/alice@gmail.com \n a/12 Kent Ridge Road \n m/A1234123E \n c/Computer Science \n tele/thisisAlice")
 activate AddCommandParser
 
 create Person
