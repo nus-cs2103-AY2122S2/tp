@@ -317,6 +317,8 @@ Step 3. The user executes `sort phone` to sort the clients according to their ph
 
 Step 4. The user executes `list` to list all clients, which causes the `FilteredList<Person>` to now contain all clients. The `SortedList<Person>` is automatically notified and sorts the new data in the `FilteredList<Person>`. Similarly, other commands that cause the data in the `FilteredList<Person>` to change, such as `add`, `delete`,`edit`,`favourite`, will cause the `SortedList<Person>` to automatically update itself.
 
+<div style="page-break-after: always;"></div>
+
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
@@ -345,6 +347,8 @@ This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps
 We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
 
+<div style="page-break-after: always;"></div>
+
 # Appendix: Glossary
 - **Users**: Real estate agents.
 - **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
@@ -368,6 +372,7 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 - Organize clients to be able to easily find their information when needed
 - Buy and sell properties with greater efficiency
 
+<div style="page-break-after: always;"></div>
 
 ## User stories
 
@@ -788,6 +793,8 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 3. Open Reminders window by key
    1. Test case: Press on the `F4` key on your device.
       Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+
+<div style="page-break-after: always;"></div>
 
 # Appendix: Effort
 
