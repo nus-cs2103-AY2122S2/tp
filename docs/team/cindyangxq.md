@@ -5,52 +5,40 @@ title: Yang Xiquan's Project Portfolio Page
 
 ### Project: AddressBook Level 3
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RealEstatePro is a desktop application for managing your client details for real estate agents.
+While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). 
+With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **New Feature**: Added `match` command.
+* **New Feature**: Added `match` function (Pull Request [#51](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/51)).
   * What it does: allows the real estate agent to see potential matching sellers and buyers.
 
-* **New Component**: Added `Preference` class
-  * What it does: a new field of a `Person`. Specifies the preference of a potential buyer.
-
-* **Code contributed**: [RepoSense link]()
-
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **New Component**: Added `Preference` attribute (Pull Request [#79](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/79)).
+  * What it does: a new attribute of a `Person`. Specifies the preference of a potential buyer.
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-  * Enhanced `find` feature to be able to find keywords not only in names but also in all other attributes of a person
+  * Enhanced `find` feature to be able to find keywords not only in names but also in all other attributes of a person (Pull Request [#97](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/97)).
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=cindyangXQ&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18).
+
+* **Project management**:
+  * Managed releases `v1.1` `v1.3.1` `v1.3.2` (3 releases) on GitHub.
+ 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Added documentation for the `match` feature
-    * Added documentation for the `Preference` attribute
-    * Updated documentation for the `find` feature
+    * Added documentation for the `match` feature.
+    * Added documentation for the `Preference` attribute.
+    * Updated documentation for the enhanced `find` feature.
+    * reformatted the summary table into three columns.
   * Developer Guide:
-    * Added implementation details of the `match` feature
-    * Added implementation details of the `Preference` attribute
-    * Added implementation details of the enhanced `find` feature
+    * Added implementation details of the `match` feature.
+    * Added implementation details of the `Preference` attribute.
+    * Added implementation details of the enhanced `find` feature.
+    * Added use cases and manual testing for the `match` feature.
+    * Added use cases and manual testing for the `find` feature. 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#50](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/50), [\#67](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/67), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94).
+  * Contributed to forum discussions (example: [262](https://github.com/nus-cs2103-AY2122S2/forum/issues/262)).
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/cindyangXQ/ped/issues/1), [2](https://github.com/cindyangXQ/ped/issues/2), [3](https://github.com/cindyangXQ/ped/issues/3), [4](https://github.com/cindyangXQ/ped/issues/4), [5](https://github.com/cindyangXQ/ped/issues/5), [6](https://github.com/cindyangXQ/ped/issues/6), [7](https://github.com/cindyangXQ/ped/issues/7)).

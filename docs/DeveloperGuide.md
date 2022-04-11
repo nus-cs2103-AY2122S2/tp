@@ -130,7 +130,9 @@ How the parsing works:
 
 The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
+* stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes.
+* The *sorted* list is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -180,6 +182,11 @@ The `match` opens a new `MatchWindow`, in which all matches are displayed in pai
 The left column shows the sellers, while the right column shows the buyers.
 
 Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
+
+A property matches with a preference if
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
 
 ## Help Feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
@@ -277,31 +284,33 @@ This allows the user to be able to visualize his/her client's data to make bette
 
 ## Sorting
 
-The sorting feature allows the user to sort the list of `Person` displayed.
+The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`. Whenever the data in the list containing all `Person` objects is changed, the `FilteredList<Person>` is notified first and will filter the data. Whenever the data in the `FilteredList<Person>` changes, the `SortedList<Person>` is notified and will sort the filtered data. This allows the *sort* feature to be used in conjunction with the *find* feature, i.e., it is possible to *sort* the results found by the *find* feature.
 
-The following table shows the attributes that the list can be sorted by and their corresponding keywords.
+The `SortedList<Person>` is exposed in the `Model` interface as `Model#getFilteredAndSortedPersonList()` while the `FilteredList<Person>` is not exposed.
 
-| Attribute            | Keyword        |
-|----------------------|----------------|
-| `Name`               | `name`         |
-| `Phone`              | `phone`        |
-| `Email`              | `email`        |
-| `Favourite`          | `favourite`    |
-| `Address`            | `address`      |
-| `UserType`           | `usertype`     |
-| Number of `Property` | `num_property` |
+Comparisons between `Person` objects are facilitated by `PersonComparator` which holds a list of `Comparator<Person>`. It implements `Comparator<Person>` and compares `Person` objects using the first `Comparator<Person>` in the list, followed by the subsequent elements in the event of a tie.
 
-Sorting the list is done by using the `sort` command, which has the following syntax: `sort [KEYWORD]...`.
+Given below is an example usage scenario.
 
-If multiple attributes are specified, the first attribute is given the highest priority, while the last attribute is given the lowest priority. For example, `sort address name` will sort the list by `Address` first, followed by `Name` if `Address` is equal.
+Step 1. The user launches the application. Both the `FilteredList<Person>` and `SortedList<Person>` will contain the same data as the list containing all `Person` objects.
 
-The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
+Step 2. The user executes `find name john`, causing the `FilteredList<Person>` to only contain clients with `john` in their name.
 
-Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+Step 3. The user executes `sort phone` to sort the clients according to their phone number. The `sort` command calls `Model#updateSortedPersonList()`. This in turn calls `FilteredList#setComparator()` which causes the `FilteredList<Person>` to sort the data it contains.
+
+Step 4. The user executes `list` to list all clients, which causes the `FilteredList<Person>` to now contain all clients. The `SortedList<Person>` is automatically notified and sorts the new data in the `FilteredList<Person>`. Similarly, other commands that cause the data in the `FilteredList<Person>` to change, such as `add`, `delete`,`edit`,`favourite`, will cause the `SortedList<Person>` to automatically update itself.
 
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
+
+This function does an OR search based on words separated by spaces. If the attribute(s) as specified by the user input 
+of a `Person` contain(s) at least one of the keywords specified by the user input, this `Person` is returned.
+
+Attributes supported are: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`, 
+among which `all` looks for the keywords in all other attributes. 
+`property` and `preference` are converted into a string representation concatenating all their fields separating with spaces, and the string is then checked for keywords.
+For all other attributes, their original string representation is used. 
 
 # Documentation, logging, testing, configuration, dev-ops
 
@@ -367,7 +376,7 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 ## Use cases
 System: RealEstatePro (REP)
 
-**Use case: Add a client**
+### **Use case: Add a client**
 
 Actor: User
 
@@ -382,7 +391,7 @@ Actor: User
 
      Use case resumes at step 1
 
-**Use Case: Edit a client**
+### **Use Case: Edit a client**
 
 Actor: User
 
@@ -408,7 +417,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: Delete a client**
+### **Use Case: Delete a client**
 
 Actor: User
 
@@ -427,7 +436,37 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Upload Image**
+### **Use Case: Find clients by keywords**
+
+Actor: User
+
+**MSS**
+1. User requests to find clients.
+2. REP filters the full list of clients for those that satisfy the condition.
+3. REP shows the filtered list of clients. 
+
+**Extensions:**
+* 1a. User request has wrong details. 
+  * 1a1. REP displays an error message.
+  
+    Use case ends.
+
+### **Use Case: Match clients**
+
+Actor: User
+
+**MSS**
+1. User requests to match clients.
+2. REP pops up MatchWindow.
+3. REP shows matching clients in MatchWindow.
+
+**Extensions:**
+* 2a. There are no matching clients. 
+  * 2a1. REP shows an empty MatchWindow.
+    
+    Use Case ends.
+
+### **Use Case: Upload Image**
 
 Actor: User
 
@@ -451,7 +490,7 @@ Actor: User
 
      Use case resumes at step 3
 
-**Use Case: View Image**
+### **Use Case: View Image**
 
 Actor: User
 
@@ -475,7 +514,7 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Set a Reminder for a client**
+### **Use Case: Set a Reminder for a client**
 
 Actor: User
 
@@ -499,7 +538,7 @@ Actor: User
 
     Use case resumes at step 2
 
-**Use Case: View Reminders for clients**
+### **Use Case: View Reminders for clients**
 
 Actor: User
 
@@ -569,6 +608,28 @@ Actor: User
 2. REP launches the Statistics window.
 
    Use case ends
+
+**Use Case: Sort**
+
+Actor: User
+
+**MSS**
+1. User requests to sort the list of clients
+2. REP displays clients in the requested order
+   Use case ends
+
+**Extensions:**
+* 1a. The list is empty
+
+  Use case ends
+
+
+* 1b. REP detects an error in the entered command
+   * 1b1. REP displays an error message
+   * 1b2. User enters the sort command again
+   * Steps 1b1-1b2 are repeated until the command entered is valid
+
+     Use case resumes at step 2
 
 ## Non-functional Requirements
 
@@ -669,11 +730,38 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 3. Open Statistics window by key
    1. Test case: Press on `F2` key on your device. <br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
-## Finding a client
+## Finding clients
+1. Finding clients by keywords
+   1. Prerequisites: None
+   2. Test Case: `find name Alex Yu`<br>
+      Expected: `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   3. Test Case: `find name alex yu`<br>
+      Expected: The function is case-insensitive. `Alex Yeoh` and `Bernice Yu` showed on the screen.
+   4. Test Case: `find all`<br>
+      Expected: List of clients showed does not change. Error message displayed.
+   5. Other incorrect add commands to try: `find`, `find all`, `find john`<br>
+      Expected: Similar to previous.
 
 ## Sorting clients
 
+1. Sorting clients while all clients are being shown.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. 
+   2. Test case: `sort address`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored). The number of clients listed is shown in the result display.
+   3. Test case: `sort !phone`<br/>
+   Expected: Clients in the list are sorted according to their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   4. Test case: `sort address !phone`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored) first. Clients with the same address are then sorted by their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   5. Test case: `sort invalid_key`<br/>
+   Expected: Clients are not sorted. Error details are shown in the result display and the list remains the same.
+   6. Other incorrect sort commands to try: `sort`, `sort name invalid_key`, `sort invalid_key name`, `...`<br/>
+   Expected: Similar to previous.
+
 ## Matching clients
+1. Matching clients
+   1. Prerequisites: None. Ideally there are existing matches, otherwise the MatchWindow that pops up is empty. 
+   2. Test Case: `match`<br>
+      Expected: MatchWindow pops up, showing matching sellers on the left and buyers on the right.
 
 ## Uploading an Image
 
