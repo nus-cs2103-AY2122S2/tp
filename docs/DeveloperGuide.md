@@ -665,7 +665,26 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting entries
 
-[TODO]
+1. Sorting companies
+   1. Test case: `sortc`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in ascending order".
+
+   2. Test case: `sortc o/ascending`<br>
+      Expected: Same as previous.
+
+   3. Test case: `sortc o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in descending order".
+
+   4. Test case: `sortc o/X` (where X is anything besides `ascending` or `descending`)<br>
+      Expected: No change. Error details shown in status message.
+
+   5. Test case: `sortc s/archived`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently archived displayed. Status message displays "Sorted all companies archived in ascending order".
+
+   6. Test case: `sortc s/all o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies displayed. Status message displays "Sorted all companies in descending order".
+2. Sorting persons or events
+   1. Follow similar procedure to the above, but use sortp or sorte beforehand instead of sortc.
 
 ### Saving data
 
