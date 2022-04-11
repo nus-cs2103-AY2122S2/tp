@@ -16,7 +16,7 @@ activate logic LOGIC_COLOR
 
 logic -[LOGIC_COLOR]> model : deleteClient(c)
 activate model MODEL_COLOR
-note left: c refers to the\n Client at the given 1
+note left: c refers to the\n Client at index 1
 model -[MODEL_COLOR]-> logic
 deactivate model
 
