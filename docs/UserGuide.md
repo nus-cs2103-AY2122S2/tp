@@ -550,7 +550,7 @@ Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
     "propertyToBuy" : {
       "house" : {
         "houseType" : "Bungalow",
-        "location" : "Clementi"
+        "location" : "clementi"
       },
       "priceRange" : {
         "lower" : "500000",
@@ -578,7 +578,7 @@ And here are the examples of 2 sellers, one has a property and one does not have
     "propertyToSell" : {
       "house" : {
         "houseType" : "Bungalow",
-        "location" : "Queens Town"
+        "location" : "queens town"
       },
       "priceRange" : {
         "lower" : "24",
@@ -614,7 +614,6 @@ And here are the examples of 2 sellers, one has a property and one does not have
 Otherwise, all other value will be translated to `Unspecified` housetype!
 - Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
 - `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
-
 
 --------------------------------------------------------------------------------------------------------------------
 
