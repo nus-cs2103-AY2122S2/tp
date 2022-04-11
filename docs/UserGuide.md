@@ -8,7 +8,7 @@
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `uMessage.jar` from
+2. Download the latest `uMessage.jar` from [this website](https://github.com/AY2122S2-CS2103-W16-2/tp/releases/tag/v1.3.1)
 
 3. Copy the file to the folder you want to use as the _home folder_ for *uMessage*.
 
@@ -24,7 +24,7 @@ This image is specific to MacOS, note that the `exit`,`minimize` and ` expand` w
    * Type any keywords, and uMessage will live search the list.
 
    * **`add`**`n/Aaron` to the Address Book.
-   
+
    * **`edit`**`1 e/aaron@example.com`: Adds an email to Aaron.
 
    * **`delete`**`alex`: Deletes Alex if the person exists.
@@ -104,7 +104,7 @@ Note that tags cannot be added to emergency contacts.
 NAME is case sensitive and must match the full name.</br>
 INDEX must be a positive integer. </br>
 
-Note that social medias cannot be added to emergency contacts.
+Note that social media cannot be added to emergency contacts.
 
 **Examples:**
 
@@ -147,6 +147,8 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 
 ## 4. Editing details of a person: `edit`
 
+### 4.1 Editing a person
+
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/{SOCIAL MEDIA PLATFORM}, {ID}]… [t/TAG]…`
 
 Note that emergency contacts cannot be edited.
@@ -156,6 +158,21 @@ Note that emergency contacts cannot be edited.
 > `edit 1 n/Aaron d/Telegram, @aaron`</br>
 > `edit Alex n/Aaron p/52873618`
 
+### 4.2 Editing a person's social media
+
+Edits a social media found in a person's list of social media.
+
+**Format:**  `edit NAME i/SOCIAL_MEDIA_INDEX [f/] d/NEW_DETAILS` or `edit INDEX i/SOCIAL_MEDIA_INDEX [f/] d/NEW_DETAILS`
+
+NAME is case sensitive and must match the full name.
+INDEX refers to the index of the person you want to edit, and must be a positive integer.
+SOCIAL_MEDIA_INDEX refers to the index of the social media in the person's list of social media, and must be a positive integer.
+`f/` is an optional parameter, include it to edit the name of the social media instead of the social media description.
+
+**Examples:**
+
+> `edit 1 i/2 -f d/Telegram`
+> `edit Alex Yeoh i/1 d/@alexxy`
 
 
 ## 5. Copying: `copy`
@@ -164,7 +181,7 @@ Note that emergency contacts cannot be edited.
 
 **Format:** `copy NAME`
 
-NAME is case sensitive and must match the full name. 
+NAME is case sensitive and must match the full name.
 
 **Examples:**
 
@@ -225,7 +242,7 @@ Note that tags of emergency contacts cannot be deleted.
 NAME is case sensitive and must match the full name.</br>
 INDEX must be a positive integer. </br>
 
-Note that social medias of emergency contacts cannot be deleted.
+Note that social media of emergency contacts cannot be deleted.
 
 **Examples:**
 > `delete kaaviya d/Telegram, @uNivUS`</br>
@@ -329,6 +346,11 @@ Deletes tag `TAG` from a person specified using `NAME` or `INDEX`.
 
 # Manage Global Tags
 
+Global tags are tags that may or may not be associated with any contacts and/or meetings. </br>
+
+For example, adding a global tag will store that tag in the system. However, it will not be associated with any 
+contacts/meetings until it is explicitly added to them. 
+
 ## 1. Adding a global tag
 
 **Format:** `add t/TAG`
@@ -414,7 +436,7 @@ If your changes to the data file makes its format invalid, the data will be disc
 |---------|-------------------------------------------------|----------|
 | help    | display the `Help` tab                          | `help`   |
 | list    | displays all persons/meetings                   | `list`   |
-| clear   | deletes all non-emergency contacts and meetings | `clear`  | 
+| clear   | deletes all non-emergency contacts and meetings | `clear`  |
 | exit    | exits the program                               | `exit`   |
 
 ---------------------------------------------------------------------------------------------------------------------

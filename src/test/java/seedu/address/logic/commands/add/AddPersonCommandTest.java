@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.meetings;
+package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,10 +19,10 @@ import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.meetingcommands.AddMeetingCommand;
-import seedu.address.model.MeetingsBook;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMeetingsBook;
@@ -30,65 +30,65 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.MeetingBuilder;
+import seedu.address.testutil.PersonBuilder;
 
-
-public class AddMeetingCommandTest {
+class AddPersonCommandTest {
 
     @Test
-    public void constructor_nullMeeting_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddMeetingCommand(null));
+    public void constructor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
     }
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingMeetingAdded modelStub = new ModelStubAcceptingMeetingAdded();
-        Meeting validMeeting = new MeetingBuilder().build();
-        CommandResult commandResult = new AddMeetingCommand(validMeeting).execute(modelStub);
+        AddPersonCommandTest.ModelStubAcceptingPersonAdded modelStub =
+                new AddPersonCommandTest.ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
 
-        assertEquals(String.format(AddMeetingCommand.MESSAGE_SUCCESS, validMeeting), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validMeeting), modelStub.meetingsAdded);
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicateMeeting_throwsCommandException() {
-        Meeting validMeeting = new MeetingBuilder().build();
-        AddMeetingCommand addMeetingCommand = new AddMeetingCommand(validMeeting);
-        ModelStub modelStub = new ModelStubWithMeeting(validMeeting);
+    public void execute_duplicatePerson_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddPersonCommand(validPerson);
+        AddPersonCommandTest.ModelStub modelStub = new AddPersonCommandTest.ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddMeetingCommand.MESSAGE_DUPLICATE_MEETING, () -> addMeetingCommand.execute(modelStub));
+                AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void equals() {
-        Meeting cs2103Meeting = new MeetingBuilder().withTitle("CS2103 Meeting").build();
-        Meeting cs3230Meeting = new MeetingBuilder().withTitle("CS3230 Meeting").build();
-        AddMeetingCommand addCs2103 = new AddMeetingCommand(cs2103Meeting);
-        AddMeetingCommand addCs3230 = new AddMeetingCommand(cs3230Meeting);
+    void testEquals() {
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
+        AddCommand addAliceCommand = new AddPersonCommand(alice);
+        AddCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
-        assertTrue(cs2103Meeting.equals(cs2103Meeting));
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddMeetingCommand addCS2103Copy = new AddMeetingCommand(cs2103Meeting);
-        assertTrue(addCs2103.equals(addCS2103Copy));
+        AddCommand addAliceCommandCopy = new AddPersonCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addCs2103.equals(1));
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addCs2103.equals(null));
+        assertFalse(addAliceCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addCs2103.equals(addCs3230));
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -108,6 +108,8 @@ public class AddMeetingCommandTest {
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
+
+
 
         @Override
         public Path getAddressBookFilePath() {
@@ -156,61 +158,6 @@ public class AddMeetingCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getSortedAndFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortFilteredPersonList(Comparator<Person> comparator) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateSelectedPerson(Person newPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableObjectValue<Person> getCurrentlySelectedPerson() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableIntegerValue getSelectedIndex() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateSelectedIndex(Index index) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getMeetingsBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setMeetingsBookFilePath(Path path) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setMeetingsBook(ReadOnlyMeetingsBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredTagList(Predicate<Tag> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
@@ -237,9 +184,38 @@ public class AddMeetingCommandTest {
 
         @Override
         public ObservableList<Tag> getFilteredTagList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredTagList(Predicate<Tag> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Person> getSortedAndFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getMeetingsBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetingsBookFilePath(Path path) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetingsBook(ReadOnlyMeetingsBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ReadOnlyMeetingsBook getMeetingsBook() {
@@ -251,9 +227,18 @@ public class AddMeetingCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public void deleteMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSelectedPerson(Person newPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableObjectValue<Person> getCurrentlySelectedPerson() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -268,13 +253,12 @@ public class AddMeetingCommandTest {
         }
 
         @Override
-        public void setMeeting(Meeting target, Meeting editedMeeting) {
+        public ObservableIntegerValue getSelectedIndex() {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
-        public void sortFilteredMeetingList(Comparator<Meeting> comparator) {
+        public void setMeeting(Meeting target, Meeting editedMeeting) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -289,12 +273,17 @@ public class AddMeetingCommandTest {
         }
 
         @Override
-        public void updateFilteredUpcomingMeetingList(Predicate<Meeting> predicate) {
+        public void updateSelectedIndex(Index newIndex) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortFilteredUpcomingMeetingList(Comparator<Meeting> comparator) {
+        public void sortFilteredPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredMeetingList(Comparator<Meeting> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -303,50 +292,57 @@ public class AddMeetingCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredUpcomingMeetingList(Predicate<Meeting> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
 
-
+        @Override
+        public void sortFilteredUpcomingMeetingList(Comparator<Meeting> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
+
 
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithMeeting extends ModelStub {
-        private final Meeting meeting;
+    private class ModelStubWithPerson extends AddPersonCommandTest.ModelStub {
+        private final Person person;
 
-        ModelStubWithMeeting(Meeting meeting) {
-            requireNonNull(meeting);
-            this.meeting = meeting;
+        ModelStubWithPerson(Person person) {
+            requireNonNull(person);
+            this.person = person;
         }
 
         @Override
-        public boolean hasMeeting(Meeting meeting) {
-            requireNonNull(meeting);
-            return this.meeting.isSameMeeting(meeting);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return this.person.isSamePerson(person);
         }
     }
 
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingMeetingAdded extends ModelStub {
-        final ArrayList<Meeting> meetingsAdded = new ArrayList<>();
+    private class ModelStubAcceptingPersonAdded extends AddPersonCommandTest.ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasMeeting(Meeting meeting) {
-            requireNonNull(meeting);
-            return meetingsAdded.stream().anyMatch(meeting::isSameMeeting);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
-        public void addMeeting(Meeting meeting) {
-            requireNonNull(meeting);
-            meetingsAdded.add(meeting);
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
         }
 
         @Override
-        public ReadOnlyMeetingsBook getMeetingsBook() {
-            return new MeetingsBook();
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
-
 }

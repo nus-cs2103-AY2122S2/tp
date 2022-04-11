@@ -6,10 +6,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETINGS;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.meeting.MeetingTimeSorter;
+import seedu.address.model.meeting.MeetingStartTimeSorter;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all meetings in the meetings book to the user.
  */
 public class ListMeetingCommand extends Command {
 
@@ -21,7 +21,7 @@ public class ListMeetingCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortFilteredMeetingList(new MeetingTimeSorter());
+        model.sortFilteredMeetingList(new MeetingStartTimeSorter());
         model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
         int listSize = model.getSortedAndFilteredMeetingList().size();
         return new CommandResult(listSize + MESSAGE_SUCCESS);

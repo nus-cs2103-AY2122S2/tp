@@ -53,7 +53,7 @@ public class Person {
 
 
     /**
-     * Returns an immutable list of social medias, which throws {@code UnsupportedOperationException}
+     * Returns an immutable list of social media, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public List<SocialMedia> getSocialMedias() {
@@ -107,7 +107,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, /* address,*/socialMedias, tags);
+        return Objects.hash(name, phone, email, socialMedias, tags);
     }
 
     @Override
@@ -121,8 +121,10 @@ public class Person {
 
         List<SocialMedia> socialMedias = getSocialMedias();
         if (!socialMedias.isEmpty()) {
-            builder.append("; SocialMedias: ");
-            socialMedias.forEach(builder::append);
+            builder.append("; Social Media:");
+            socialMedias.forEach(socialMedia -> {
+                builder.append(" ").append(socialMedia);
+            });
         }
 
         Set<Tag> tags = getTags();
