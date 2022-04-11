@@ -7,6 +7,27 @@ title: Developer Guide
 
 This is a brownfield project that bases from the Project template [AddressBook Level 3 (AB3)](https://se-education.org/docs/templates.html) from se-education.org.
 
+# Table of contents
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [Logic Component](#logic-component)
+    - [Model Component](#model-component)
+    - [storage Component](#storage-component)
+    - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Glossary](#appendix-glossary)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Target User Profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-functional Requirements](#non-functional-requirements)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- [Appendix: Effort](#appendix-effort)
+
 # Setting up, getting started
 
 Get started by following these instructions from our [guide](https://ay2122s2-cs2103-w16-4.github.io/tp/SettingUp.html).
@@ -238,7 +259,7 @@ Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parses 
 view all the `UserImage` of the `Person`.
 
 Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
-The `viewImageWindow` is then launched after it retrieves the set from `model`
+The `viewImageWindow` is then launched after it retrieves the set from `model` using `logic`
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
@@ -284,49 +305,64 @@ They can be fed to the `FindCommand` to filter out `Person` with the specified k
 
 # Documentation, logging, testing, configuration, dev-ops
 
-This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
+This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
 
-This is how we do our [testing](https://se-education.org/addressbook-level3/Testing.html).
+This is how we do our [testing](https://ay2122s2-cs2103-w16-4.github.io/tp/Testing.html).
 
-This is how we do our [logging](https://se-education.org/addressbook-level3/Logging.html).
+This is how we do our [logging](https://ay2122s2-cs2103-w16-4.github.io/tp/Logging.html).
 
-This is how we do our [configurations](https://se-education.org/addressbook-level3/Configuration.html).
+This is how we do our [configurations](https://ay2122s2-cs2103-w16-4.github.io/tp/Configuration.html).
 
-This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOps.html).
+This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps.html).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
+
+# Appendix: Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Requirements
 
 ## Target user profile
 
-- has a need to manage a significant number of Persons and their information (eg. contact, email, address...)
+Real estate agents who:
+- has a need to manage a significant number of clients and their information (eg. contact, email, address...)
 - prefer desktop apps over other types
 - can type fast and prefer typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
 ## Value Proposition
 
-Manage Persons faster that a typical mouse/GUI driven app.
+RealEstatePro is faster that a typical mouse/GUI driven app that helps the real estate agent to
+- Keep track of clients who are looking to buy and sell properties 
+- Organize clients to be able to easily find their information when needed
+- Buy and sell properties with greater efficiency
+
 
 ## User stories
 
 | Priority | As a ... | I want to ...                                                                                                                                                                      | So that i can...                                                                                    |
-| --- | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| High | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
-| High | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
-| High | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
-| High | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High | User | Favourite/Unfavourite a client                                                                                                                                                     | Separate clients based on whose information I frequent the most (favourited) and those that are not |
-| High | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
-| High | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
-| High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
-| High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
-| High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
-| High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| High     | User     | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
+| High     | User     | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
+| High     | User     | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
+| High     | User     | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
+| High     | User     | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
+| High     | User     | Favourite/Unfavourite a client                                                                                                                                                     | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High     | User     | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
+| High     | User     | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
+| High     | User     | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
+| High     | User     | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
+| High     | User     | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
+| medium   | User     | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| medium   | User     | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+| medium   | User     | Sort the list of clients by their attributes                                                                                                                                       | Better organize my clients                                                                          |
+| medium   | User     | set reminders for things to do                                                                                                                                                     | Make sure i do not forget to do certain tasks                                                       |
+| medium   | User     | Find clients based on their information                                                                                                                                            | Easily find a particular client to get the details i need                                           |
 
 ## Use cases
 System: RealEstatePro (REP)
@@ -490,18 +526,12 @@ Actor: User
 4. Should be able to hold up to 1000 Persons without a noticeable sluggishness in performance for typical usage.
 5. The application will not be able to prevent any data privacy violated by other programs.
 
-## Glossary
-- **Users**: Real estate agents.
-- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
-- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
-- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
-
 # Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
 </div>
 
 ## Launch and shutdown
@@ -608,12 +638,12 @@ Given below are instructions to test the app manually.
 ## Viewing an Image
 
 1.Uploading an Image to an existing client
-1. Prerequisites:
-   1. There must be at least a client in the list.
-   2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images).
-   3. Client must have at least one image associated with.
-2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
-3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+   1. Prerequisites:
+      1. There must be at least a client in the list.
+      2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+      3. client must have at least one image associated with
+   2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
+   3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
 
 ## Setting reminders
 
@@ -653,7 +683,7 @@ Given below are instructions to test the app manually.
    1. Test case: Press on the `F4` key on your device.
       Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
 
-# Effort
+# Appendix: Effort
 
 ## Difficulty level
 The development was of moderate difficulty due to having to understand the existing codebase and adapting it for our project. We also had trouble integrating the various features together especially the buyer and seller feature.
