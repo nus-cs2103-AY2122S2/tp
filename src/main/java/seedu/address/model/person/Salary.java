@@ -43,7 +43,7 @@ public class Salary {
 
     /**
      * Method to compare Salary with other Salary.
-     * Returns 0 if Salary is equal, -1 if this Salary is lesser and 1 if it is higher.
+     * Returns 0 if Salary is equal, > 0 if this Salary is lesser and < 0 if it is higher.
      *
      * @param otherSalary Another Salary to compare to.
      * @return Integer indicating if Salary is equal, less or more than otherSalary
