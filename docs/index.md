@@ -10,8 +10,8 @@ title: iBook
 
 **IBook is a desktop application for managing incoming and outgoing products of a store.** While it has a GUI (Graphical User Interface), most of the user interactions happen through a CLI (Command Line Interface).
 
-* If you are interested in using IBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing IBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using iBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing iBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
