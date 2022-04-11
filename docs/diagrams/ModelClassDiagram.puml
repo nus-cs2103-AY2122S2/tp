@@ -18,6 +18,7 @@ Class Status
 Class Name
 Class Tag
 Class Comment
+Class Rating
 
 }
 
@@ -37,6 +38,7 @@ ShowList *--> "1" UniqueShowList
 UniqueShowList --> "~* all" Show
 Show *--> "1" Name
 Show *--> "1" Status
+Show *--> "1" Rating
 Show *--> "1" Comment
 Show *--> "*" Tag
 

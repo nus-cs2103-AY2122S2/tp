@@ -6,13 +6,22 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code Comment}.
+ */
 public class CommentTest {
 
+    /**
+     * Test constructor of {@code Comment} for null input.
+     */
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Comment(null));
     }
 
+    /**
+     * Test return {@code String} for {@code Comment} toString method.
+     */
     @Test
     void testToString() {
         String test1 = "laugh1";
