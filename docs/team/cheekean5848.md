@@ -36,6 +36,7 @@ Given below are my contributions to the project.
         * Created a manager to parse the user's command type and execute the relevant command.
         * Maintain a view state to keep track of user's latest viewing state.
 
+<div style="page-break-after: always;"></div>
 
 * **Contributions to the UG**:
     * Add patients' medical prescription section.
