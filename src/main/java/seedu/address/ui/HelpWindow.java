@@ -55,10 +55,8 @@ public class HelpWindow extends UiPart<Stage> {
         try {
             helpGuide = IOUtils.toString(HelpWindow.class
                     .getResourceAsStream("/help/helpGuide.md"), StandardCharsets.UTF_8);
-        }
-
-        // could not find helpGuide path
-        catch (NullPointerException | IOException e) {
+        } catch (NullPointerException | IOException e) {
+            // could not find helpGuide path
             helpGuide = "File not found!";
         }
 
