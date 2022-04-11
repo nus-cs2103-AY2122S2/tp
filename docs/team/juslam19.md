@@ -14,7 +14,7 @@ Given below are my contributions to the project.
   * Justification: This features extend the product functionality as a health monitoring system to store patients' consultations. Medical professionals can see past consultation information of patients, such as diagnosis, fees, and additional notes.
   * Credits: The feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3). Some part of the codes were adapted and modified.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=juslam19&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zA=clement0010&zR=AY2122S2-CS2103T-T11-1%2Ftp%5Bmaster%5D&zACS=NaN&zS=2022-02-18&zFS=clement&zU=2022-03-06&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false&tabAuthor=clement0010&tabRepo=AY2122S2-CS2103T-T11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=juslam19&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Enhancements Implemented:**
   1. App User Interface

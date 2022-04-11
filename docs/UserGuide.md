@@ -407,13 +407,15 @@ Adds a patient's medical information to MedBook.
 
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
-- We recommend inputting blood type using ABO blood group system (eg. AB), height using centimeters (eg. 185 cm), weight
-  using kilograms (eg. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
+- We recommend inputting blood type using ABO blood group system (e.g. AB), height using centimeters (e.g. 185 cm), weight
+  using kilograms (e.g. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
 
 Examples:
 
 - `add t/medical i/S1234567L bt/AB ht/175 cm`
 - `add t/medical i/S1234567L a/22 bt/O md/Paracetamol 500mg twice a day; Atarvastatin 20mg once a day ht/185 cm wt/70 kg il/Mild fever; High cholesterol su/Appendectomy fh/Has family history of high blood pressure ih/MMR; 6 in 1; Hepatitis B gd/Male et/Chinese`
+
+Below is the list of parameters that can be used with the `add t/medical` command.
 
 | Parameters | Description                                                          |
 | ---------- | :--------------------------------------------------------------------|
@@ -467,6 +469,17 @@ Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE [nt/NOTES
 Examples:
 
 - `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
+
+Below is the list of parameters that can be used with the `add t/consultation` command.
+
+| Parameters | Description                                                        |
+|------------|:-------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC of the patient to add medical information to. |
+| `dt/`      | _Required_. The date of the Consultation.                          |
+| `tm/`      | _Required_. The time of the Consultation.                          |
+| `dg/`      | _Required_. The Diagnosis of the Consultation.                     |
+| `fe/`      | _Required_. The Fee of the Consultation.                           |
+| `nt/`      | _Optional_. The Additional Notes of the Consultation.              |
 
 ### Viewing Past Consultations: `view t/consultation`
 
@@ -548,13 +561,22 @@ Editing a prescription will overwrite the old data.
 
 Adds a test result taken by a patient in MedBook.
 
-Format: `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`
+Format: `add t/test i/NRIC td/DATE mt/MEDICAL_TEST r/RESULT`
 
 - DATE should be in the format of YYYY-MM-DD
 
 Examples:
 
-- `add t/test i/S1234567L td/2019-09-15 mt/CT Scan r/Brain Cancer`
+- `add t/test i/S1234567L td/2019-09-15 mt/X-Ray r/Broken wrist`
+
+Below is the list of parameters that can be used with the `add t/test` command.
+
+| Parameters | Description                                                          |
+|------------|:---------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC associated with the patient.                    |
+| `td/`      | _Required_. The date of the test was taken. (Format: YYYY-MM-DD)     |
+| `mt/`      | _Required_. The name of the medical test taken.                      |
+| `r/`       | _Required_. The results of the test taken.                           |
 
 ### Viewing Test Result: `view t/test`
 
