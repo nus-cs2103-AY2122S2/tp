@@ -72,7 +72,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Updated UML diagrams ModelClassDiagram and BetterModelClassDiagram (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93), [\#109](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/109))
     * Added instructions for manual testing (PR [\#278](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/278))
     * Updated non-functional requirement and glossary (PR [\#291](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/291), [\#296](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/296))
-    * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165))
+    * Improved DeveloperGuide formatting (PR [\#165](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/165), [\#313](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/313))
     <br><br>
     
 * **Contributions to team-based tasks**:
@@ -90,5 +90,5 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): (PR [\#61](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/61), [\#73](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/73), [\#77](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/77), [\#103](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/103), [\#123](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/123), [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#132](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/132), [\#166](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/166), [\#174](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/174), [\#247](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/247), [\#250](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/250))
-  * All other PRs reviewed: [Link to 40+ PRs reviewed](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aatmh)
+  * All other PRs reviewed: [Link to 50+ PRs reviewed](https://github.com/AY2122S2-CS2103T-T17-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aatmh)
   * Reported bugs and suggestions for other teams in the class ([1](https://github.com/atmh/ped/issues/1), [2](https://github.com/atmh/ped/issues/2), [3](https://github.com/atmh/ped/issues/3), [4](https://github.com/atmh/ped/issues/4), [5](https://github.com/atmh/ped/issues/5), [6](https://github.com/atmh/ped/issues/6), [7](https://github.com/atmh/ped/issues/7), [8](https://github.com/atmh/ped/issues/8), [9](https://github.com/atmh/ped/issues/9), [10](https://github.com/atmh/ped/issues/10), [11](https://github.com/atmh/ped/issues/11), [12](https://github.com/atmh/ped/issues/12), [13](https://github.com/atmh/ped/issues/13), [14](https://github.com/atmh/ped/issues/14), [15](https://github.com/atmh/ped/issues/15), [16](https://github.com/atmh/ped/issues/16), [17](https://github.com/atmh/ped/issues/17), [18](https://github.com/atmh/ped/issues/18), [and 4 others](https://github.com/AY2122S2-CS2103T-T17-1/tp/issues/273))
