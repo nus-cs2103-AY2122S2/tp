@@ -219,15 +219,15 @@ The remind feature is implemented by storing a static list of Persons the user w
 
 The remind feature can be activated by typing `remind INDEX r/ReminderDetails` where `INDEX` is the `Person` the user wants to set a reminder for and `ReminderDetails` are the details of the reminder in regard to the specific client.
 
-Given below is an example usage scenarios and the behavior of the program specific to this feature.
+Given below is an example usage scenario and the behavior of the program specific to this feature.
 
-Step 1: The user launches the app. Within 5 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
+Step 1: The user launches the app. After 60 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
 
-Step 2: User executes the `remind` command by typing in `remind 1 r/arrange meeting`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` and the corresponding `Reminder` is then added to the HashMap in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched.
+Step 2: User executes the `remind` command by typing in `remind 1 r/arrange meeting`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` and the corresponding `Reminder` is then added to the HashMap in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by `MainWindow` and the `ReminderWindow` is launched.
 
-Step 3: The User will be prompted with the Reminder window, containing the Person the user just set a `Reminder` for.
+Step 3: The user will be prompted with the Reminder window, containing the `Person` the user just set a `Reminder` for.
 
-Step 4: The User can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the User of any reminders.
+Step 4: The user can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the user of any reminders.
 
 
 ## Upload Image
@@ -471,6 +471,49 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Set a Reminder for a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to set a Reminder for a specific client.
+4. REP set a Reminder for the client in the system.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+  * 3a1. REP displays an error message
+
+    Use case resumes at step 2
+
+* 3b. REP detects error in details
+  * 3b1. REP displays an error message
+
+    Use case resumes at step 2
+
+**Use Case: View Reminders for clients**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to view Reminders for all clients.
+4. REP shows a list of current Reminders set.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. REP detects error in details
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
@@ -504,9 +547,9 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 1. Adding a new client
    1. Prerequisites: None
    2. Test Case: `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`<br>
-   Expected: A new client is created at the end of the list with a buyer tag. Details of the new client is shown in the result display.
+   Expected: A new client is created at the end of the list with a purple colored buyer tag. Details of the new client is shown in the result display.
    3. Test Case: `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`<br>
-   Expected: A new client is created at the end of the list with a seller tag. Details of the new client is shown in the result display.
+   Expected: A new client is created at the end of the list with a green colored seller tag. Details of the new client is shown in the result display.
    4. Test Case: `add n/Mary Sue`<br>
    Expected: No client is created. Error details are shown in the result display and list remains the same.
    5. Other incorrect add commands to try: `add`, `add p/999`, `...`<br>
@@ -531,7 +574,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
     2. Test case: `delete 1`<br>Expected: First client is deleted from the list. Details of the deleted contact shown in the result display. Timestamp in the status bar is updated.
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) Expected: Similar to previous.
 
 ## Favouriting a client
 
@@ -600,6 +643,42 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 
 ## Setting reminders
 
+1. Setting a Reminder for a client who has not had a Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   2. Test case: `remind 1 r/meet client for home viewing`
+      Expected: The first client has a Reminder set. An orange label containing the sentence "meet client for home viewing" will appear on the first client. The result display will show that the first client has a Reminder successfully set.
+   3. Test case: `remind 0 r/sign contract`
+      Expected: No client has a Reminder set. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+      Expected: Similar to previous.
+2. Editing a Reminder of a client who has an existing Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. At least one of the clients listed has to have a Reminder set.
+   2. Test case: `remind 1 r/inform client of leasing details`
+      Expected: The first client who previously had a different Reminder set, has their Reminder changed to "inform client of leasing details". The color of the Reminder label still remains as orange.
+   3. Test case: `remind 3 r/update client's phone number`
+      Expected: Unable to edit the Reminder of client, as the client does not have an existing Reminder set. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+      Expected: Similar to previous.
+3. Removing a Reminder of a client who has an existing Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. At least one of the clients listed has to have a Reminder set.
+   2. Test case: `remind 1`
+      Expected: The first client's reminder label is removed. The orange Reminder label & its contents are no longer on the client.
+   3. Test case: `remind 3 asd`
+      Expected: The Reminder of this client is not removed. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind 3 reminder/meet client for home viewing`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+
+## Opening Reminders window
+
+1. Open Reminders window by command
+   1. Test case: `rm`
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+2. Open Reminders window by UI
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Reminders`.
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+3. Open Reminders window by key
+   1. Test case: Press on the `F4` key on your device.
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+
 # Appendix: Effort
 
 ## Difficulty level
@@ -610,6 +689,7 @@ Challenges faced were the following:
 - Understanding and refactoring the existing AB3 code base.
 - Balancing the relationship between buyers, sellers, properties and preferences.
 - Understanding how to use JavaFX and adapting the existing JavaFX to suit our needs.
+- Integrating Java libraries such as Timer and TimerTask into the codebase.
 
 ## Effort Required
 We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work.

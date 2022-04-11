@@ -163,8 +163,8 @@ class ReminderPersonsTest {
         reminderPersons.add(alice, reminderForAlice);
         ReminderPersons.toggleFavouriteForReminder(alice);
 
-        // favoriting a Person
-        Person aliceFavorited = alice.toggleFavourite();
-        assertTrue(reminderPersons.containsKey(aliceFavorited));
+        // favouriting a Person
+        Person aliceFavourited = alice.toggleFavourite();
+        assertTrue(reminderPersons.containsKey(aliceFavourited));
     }
 }

@@ -225,7 +225,7 @@ Examples:
 
 ### Favourite a client: `favourite`
 
-Favourites the specified client in the RealEstatePro represented by a star as shown below. 
+Favourites the specified client in the RealEstatePro represented by a star as shown below.
 
 The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
@@ -342,10 +342,10 @@ To sort by number of properties in the default order, but with buyers shifted to
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
 
-A preference matches with a property if 
+A preference matches with a property if
 - they have the same `region`, and
 - they have the same `size`, and
-- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference. 
+- the `price` of the property is between `lowPrice` and `highPrice` (inclusive) of the preference.
 
 Format: `match`
 
@@ -374,7 +374,7 @@ Format `viewimage INDEX`
 ### Setting a Reminder for a client: `remind`
 <img src="images/user-guide/successfulRemindCommand.png" height="400px">
 
-Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminder-window).
+Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminders-window-rm).
 
 <div markdown="block" class="alert alert-info">
 
