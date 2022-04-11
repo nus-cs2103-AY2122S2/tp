@@ -15,12 +15,9 @@ import org.junit.jupiter.api.io.TempDir;
 import unibook.commons.exceptions.DataConversionException;
 import unibook.model.ReadOnlyUniBook;
 import unibook.model.UniBook;
-import unibook.model.person.Person;
 import unibook.testutil.Assert;
 import unibook.testutil.typicalclasses.TypicalStudents;
 import unibook.testutil.typicalclasses.TypicalUniBook;
-//import unibook.testutil.typicalclasses.TypicalStudents;
-//import unibook.testutil.typicalclasses.TypicalUniBook;
 
 public class JsonUniBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUniBookStorageTest");
@@ -77,15 +74,9 @@ public class JsonUniBookStorageTest {
         // Modify data, overwrite exiting file, and read back
         original.addPerson(TypicalStudents.ALICE);
         original.removePerson(original.getPersonList().get(0));
-        for (Person person : original.getPersonList()) {
-            System.out.println(person);
-        }
         jsonUniBookStorage.saveUniBook(original, filePath);
         readBack = jsonUniBookStorage.readUniBook(filePath).get();
         UniBook ub = new UniBook(readBack);
-        for (Person person : ub.getPersonList()) {
-            System.out.println(person);
-        }
         assertEquals(original, new UniBook(readBack));
 
         // Save and read without specifying file path
