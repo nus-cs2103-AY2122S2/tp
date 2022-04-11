@@ -185,7 +185,7 @@ ii) `UniqueTagList` that keep tracks of the `Tag` in UNite.
 
 <div style="page-break-after: always;"></div>
 
-In the original AB3 address book, eachj `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
+In the original AB3 address book, each `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
 diagram of a class diagram of the profiles in the AB3 Address Book.
 
 ![AddProfileOldClassDiagram](images/AddProfileOldClassDiagram.png)
@@ -306,6 +306,49 @@ Step 4. During the execution of edit command, a `CommandException` is thrown if 
   itself.
     * Pros: Lesser creation of `Person` object.
     * Cons: Needs to be implemented carefully to make sure there will not be any side effects. 
+
+We decided to go with **Alternative 1**, which ensures immutability and no side effects.
+
+<div style="page-break-after: always;"></div>
+
+### **Attach feature**
+
+The attach feature receives a tag name input and a profile index from the user, link the tag to the `Person`.
+To implement the feature, the below classes are created:
+
+* `AttachTagCommand` extending class `Command` is implemented to let the system understand the command
+* `AttachTagCommandParser`is implemented to parse the attach command entered by user.
+
+The activity diagram below summarizes what happens when an attach command is executed.
+
+![AttachActivityDiagram](images/AttachActivityDiagram.png)
+
+The sequence diagram below illustrates how the attach command works, using `'attach t/family i/1'` as the sample input.
+
+![AttachSequenceDiagram](images/AttachSequenceDiagram.png)
+
+Given below is an example usage scenario of attach command.
+
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `attach t/family i/1`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `AttachTagCommandParser` object.
+
+Step 3. The `AttachTagCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `AttachTagCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of attach command, a `CommandException` is thrown if the input is invalid (see activity diagram above).
+Otherwise, a `CommandResult` containing the details of the `Person` attached to as well as the tag attached will be returned.
+
+#### Design Consideration
+**Aspect: Creation of edited `Person` object** <br>
+* **Alternative 1 (current choice):** <br> Everytime a tag get attached, a new `Person` object is created to replace the original `Person` in UNite.
+    * Pros: Ensure immutability. Easy to implement.
+    * Cons: Many object creations.
+
+* **Alternative 2:** <br> Update the tag in the original `Person` object directly.
+  itself.
+    * Pros: Lesser creation of `Person` object.
+    * Cons: Needs to be implemented carefully to make sure there will not be any side effects.
 
 We decided to go with **Alternative 1**, which ensures immutability and no side effects.
 

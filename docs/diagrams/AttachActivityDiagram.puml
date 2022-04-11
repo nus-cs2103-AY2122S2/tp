@@ -1,0 +1,26 @@
+@startuml
+
+start
+:User type in attach command;
+:Checks if input index is valid and Tag is in UNite;
+if () then ([Yes, valid index])
+    : Do duplication Tag check;
+    if() then ([Not duplicated Tag])
+        :Attach this tag to the Person;
+        :Show attach success message;
+    else([Duplicated Tag])
+        :Show error message;
+    endif
+else ([No, invalid index or non-existing tag])
+    :Checks if input index is valid;
+    if() then ([Yes, Invalid index])
+        :Show error message;
+    else([No, non-existing tag])
+        :Show error message;
+    endif
+endif
+
+
+stop
+
+@enduml
