@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam sequenceMessageAlign center
+hide footbox
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "f:FindCommand" as fFindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("find n/name")
+activate LogicManager
+
+LogicManager -> ArchDukeParser : parseCommand("find n/name")
+activate ArchDukeParser
+
+create FindCommandParser
+ArchDukeParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> ArchDukeParser
+deactivate FindCommandParser
+
+ArchDukeParser -> FindCommandParser : parse("n/name")
+activate FindCommandParser
+
+create fFindCommand
+FindCommandParser -> fFindCommand
+activate fFindCommand
+
+fFindCommand --> FindCommandParser : f
+deactivate fFindCommand
+FindCommandParser --> ArchDukeParser : f
+
+destroy FindCommandParser
+
+ArchDukeParser --> LogicManager : f
+deactivate ArchDukeParser
+
+LogicManager -> fFindCommand : execute()
+activate fFindCommand
+
+fFindCommand -> Model: updateFilteredPersonList(name)
+activate Model
+
+Model --> fFindCommand
+deactivate Model
+
+fFindCommand -> Model: getFilteredPersonList().size()
+activate Model
+
+Model --> fFindCommand : number
+deactivate Model
+
+create CommandResult
+fFindCommand -> CommandResult : CommandResult(number)
+activate CommandResult
+
+CommandResult --> fFindCommand : result
+deactivate CommandResult
+
+fFindCommand --> LogicManager : result
+deactivate fFindCommand
+
+@enduml
+

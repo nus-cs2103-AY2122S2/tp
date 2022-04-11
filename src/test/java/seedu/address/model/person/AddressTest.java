@@ -6,31 +6,34 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code Address}.
+ */
 public class AddressTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Address(null));
+        assertThrows(NullPointerException.class, () -> new AcademicMajor(null));
     }
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
         String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+        assertThrows(IllegalArgumentException.class, () -> new AcademicMajor(invalidAddress));
     }
 
     @Test
     public void isValidAddress() {
-        // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        // null address -> throws NullPointerException
+        assertThrows(NullPointerException.class, () -> AcademicMajor.isValidAcademicMajor(null));
 
-        // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
+        // invalid addresses -> returns false
+        assertFalse(AcademicMajor.isValidAcademicMajor("")); // empty string
+        assertFalse(AcademicMajor.isValidAcademicMajor(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        // valid addresses -> returns true
+        assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science"));
+        assertTrue(AcademicMajor.isValidAcademicMajor("-")); // one character
+        assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science and Economics DDP")); // long major
     }
 }

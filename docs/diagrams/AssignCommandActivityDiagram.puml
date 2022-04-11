@@ -1,0 +1,30 @@
+@startuml
+start
+:User executes assign command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+
+else ([else])
+    if () then ([Index is invalid])
+    : Show invalid index error message;
+    else([else])
+        if () then ([Group name does not exist in Archduke])
+        : Show non-existent group error message;
+        else ([else])
+            if () then ([Student contact already exist in the group])
+            : Show person already exist error message;
+            else ([else])
+            : Assign student contact to the group;
+            endif
+        endif
+    endif
+endif
+stop
+
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes find command;
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+else ([else])
+    if () then ([command contains multiple prefixes])
+    :Show multiple prefixes error message;
+    else([else])
+    :Displays the contacts in the result display;
+    endif
+endif
+stop
+
+@enduml

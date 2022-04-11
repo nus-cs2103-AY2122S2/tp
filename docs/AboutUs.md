@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Papattarada Apithanangsiri
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/punpun1643.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Punpun1643)]
+[[portfolio](team/punpun1643.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines
 
-### Johnny Doe
+### Raja Dishafnya Achadi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rdac0.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Rdac0)]
+[[portfolio](team/rdac0.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality and Documentation
 
-### Jean Doe
+### Quek Kah Leong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kahleongq.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kahleongq)] 
+[[portfolio](team/kahleongq.md)]
+
+* Role: Testing
+* Responsibilities: Ensures tests are done correctly and on time.
+
+### KRISTOPHER PUTRA TASLIM
+
+<img src="images/kristopherptaslim.png" width="200px">
+
+[[github](http://github.com/kristopherptaslim)]
+[[portfolio](team/kristopherptaslim.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### LOW LIK HERN
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/likhern.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/likhern)]
+[[portfolio](team/likhern.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: TBC
+* Responsibilities: TBC

@@ -12,15 +12,34 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
+Package Person <<Rectangle>>{
 Class UniquePersonList
 Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
+}
+
+Package Tag <<Rectangle>>{
 Class Tag
+}
+
+Package Group <<Rectangle>>{
+Class UniqueGroupList
+Class Group
+Class GroupName
+}
+
+Package Task <<Rectangle>>{
+Class UniqueTaskList
+Class Task
+Class TaskName
+}
 
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
@@ -40,11 +59,22 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *---> "*" Tag
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+AddressBook *--> "1" UniqueGroupList
+UniqueGroupList --> "~* all" Group
+Group *--> GroupName
+Group *--> "*" Task
+
+AddressBook *--> "*" UniqueTaskList
+UniqueTaskList --> "~*" Task
+Task *--> TaskName
+
+ModelManager ---->"~* filtered" Person
+ModelManager ---->"~* filtered" Group
+ModelManager ---->"~* filtered" Task
 @enduml

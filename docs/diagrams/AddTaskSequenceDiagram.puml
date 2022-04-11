@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant "a:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "AddTaskCommand" as AddTaskCommandClass <<class>> LOGIC_COLOR_T2
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addtask task/exampleT g/exampleG")
+activate LogicManager
+
+LogicManager -> ArchDukeParser : parseCommand("addtask task/exampleT g/exampleG")
+activate ArchDukeParser
+
+create AddTaskCommandParser
+ArchDukeParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+
+AddTaskCommandParser --> ArchDukeParser
+deactivate AddTaskCommandParser
+
+ArchDukeParser -> AddTaskCommandParser : parse("task/exampleT g/exampleG")
+activate AddTaskCommandParser
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser : a
+deactivate AddTaskCommand
+
+AddTaskCommandParser --> ArchDukeParser : a
+deactivate AddTaskCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTaskCommandParser -[hidden]-> ArchDukeParser
+destroy AddTaskCommandParser
+
+ArchDukeParser --> LogicManager : a
+deactivate ArchDukeParser
+
+LogicManager -> AddTaskCommand : execute()
+activate AddTaskCommand
+
+AddTaskCommand -> Model : hasGroup(exampleG)
+activate Model
+
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> Model : hasTask(exampleT)
+activate Model
+
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> AddTaskCommandClass : createAddedTaskGroup(exampleG, exampleT, model)
+activate AddTaskCommandClass
+
+AddTaskCommandClass -> Model : addTask(exampleT, exampleG)
+activate Model
+
+Model --> AddTaskCommandClass
+deactivate Model
+
+AddTaskCommandClass --> AddTaskCommand : groupAddedTask
+deactivate AddTaskCommandClass
+
+AddTaskCommand -> Model : setGroup(exampleG, groupAddedTask)
+activate Model
+
+Model --> AddTaskCommand
+deactivate Model
+
+create CommandResult
+AddTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTaskCommand : result
+deactivate CommandResult
+
+AddTaskCommand --> LogicManager : result
+deactivate AddTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
+participant ":ViewTaskCommandParser" as ViewTaskCommandParser LOGIC_COLOR
+participant "v:ViewTaskCommand" as ViewTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewtask g/example")
+activate LogicManager
+
+LogicManager -> ArchDukeParser : parseCommand("viewtask g/example")
+activate ArchDukeParser
+
+create ViewTaskCommandParser
+ArchDukeParser -> ViewTaskCommandParser
+activate ViewTaskCommandParser
+
+ViewTaskCommandParser --> ArchDukeParser
+deactivate ViewTaskCommandParser
+
+ArchDukeParser -> ViewTaskCommandParser : parse("g/example")
+activate ViewTaskCommandParser
+
+create ViewTaskCommand
+ViewTaskCommandParser -> ViewTaskCommand
+activate ViewTaskCommand
+
+ViewTaskCommand --> ViewTaskCommandParser : v
+deactivate ViewTaskCommand
+
+ViewTaskCommandParser --> ArchDukeParser : v
+deactivate ViewTaskCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewTaskCommandParser -[hidden]-> ArchDukeParser
+destroy ViewTaskCommandParser
+
+ArchDukeParser --> LogicManager : v
+deactivate ArchDukeParser
+
+LogicManager -> ViewTaskCommand : execute()
+activate ViewTaskCommand
+
+ViewTaskCommand -> Model : hasGroup(example)
+activate Model
+
+Model --> ViewTaskCommand
+deactivate Model
+
+ViewTaskCommand -> Model : viewTask(example)
+activate Model
+
+Model --> ViewTaskCommand : message
+deactivate Model
+
+create CommandResult
+ViewTaskCommand -> CommandResult : CommandResult(message)
+activate CommandResult
+
+CommandResult --> ViewTaskCommand : result
+deactivate CommandResult
+
+ViewTaskCommand --> LogicManager : result
+deactivate ViewTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
