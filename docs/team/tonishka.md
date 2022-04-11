@@ -55,8 +55,8 @@ fast typers.
 #### Aspect: What happens when user does not specify a field
 
 **Note:** 
-For evaluating the usefulness of the alternatives these are the assumptions made as to why the user does not specify
-the field: 
+For evaluating the usefulness of the alternatives these are the assumptions
+made as to why the user does not specify the field: 
 a) they forgot, 
 b) they do not want to restrict their search to one field, or 
 c) they do not remember which field they want to search.
