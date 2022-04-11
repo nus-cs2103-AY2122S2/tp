@@ -131,7 +131,7 @@ Format: `add L/ n/LINEUP_NAME`
 * `LINEUP_NAME` must be in **alphanumeric** and should not be blank.
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 * The new `LINEUP_NAME` must not exist in MyGM already.
-* After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#25-viewing-playerschedulelineup-view) section.
+* After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#26-viewing-playerschedulelineup-view) section.
 
 </div>
 
@@ -281,7 +281,7 @@ greater than or equals to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
-* ![viewPlayer](images/viewPlayer.png)
+![viewPlayer](images/viewPlayer.png)
 
 #### 2.6.2. View lineup
 
@@ -309,7 +309,7 @@ Examples:
 * `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
 * `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
 
-* ![viewLineup](images/viewLineup.png)
+![viewLineup](images/viewLineup.png)
 
 #### 2.6.3. View schedule
 
@@ -348,7 +348,7 @@ Examples:
 * `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules
 * `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
 
-* ![viewSchedule](images/viewSchedule.png)
+![viewSchedule](images/viewSchedule.png)
 
 ### 2.7. Sort players by height/ jersey number/ weight: `sort`
 
@@ -396,7 +396,7 @@ Edit the details of an existing player in MyGM.
 * If any fields are specified, it will change accordingly.
 * Player `PLAYER` must exist in MyGM.
 * Multiple fields can be changed at once.
-* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#221-add-a-player) Command section for players applies here as well.
+* Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#231-add-a-player) Command section for players applies here as well.
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
 
 </div>
@@ -424,7 +424,7 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 :information_source: Notes about the `view` Command for lineup
 
 * The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
-* Restrictions for `NEW_LINEUP_NAME` in [add](#221-add-a-lineup) Command section for lineups applies here as well.
+* Restrictions for `NEW_LINEUP_NAME` in [add](#232-add-a-lineup) Command section for lineups applies here as well.
 
 </div>
 
@@ -444,7 +444,7 @@ Format: `edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]
 * If any fields are specified, it will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
-* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#221-add-a-schedule) Command section for schedules applies here as well.
+* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#233-add-a-schedule) Command section for schedules applies here as well.
 * Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
