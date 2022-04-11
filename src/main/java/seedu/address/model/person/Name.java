@@ -55,7 +55,7 @@ public class Name {
         } else {
             String[] keywords = test.split(" ");
             String[] names = this.fullName.split(" ");
-            List<String> nameList = Arrays.asList(this.fullName.split(" "));
+            List<String> nameList = Arrays.asList(names);
             if (keywords.length == 1) {
                 return nameList.stream().anyMatch(name -> containsSingleWord(name, test));
             } else {
