@@ -246,22 +246,23 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 
 Finds customers whose parameters contain any of the given keywords.
 
-Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORD_TYPE MORE_KEYWORDS]`
 
 <div markdown="block" class="alert alert-warning">
    
 **:exclamation: Caution:**<br>
-* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`
-* For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
-* The search is case-insensitive. e.g, `John` will match `john`
-* Only full words will be matched e.g. `findc n/Alex Yeoh` will not match customers who are `Alex Tan`, even if they both are called `Alex`
+* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`.
+* The search is case-insensitive, i.e, `John` will match `john`.
+* Keywords will be matched, i.e, `findc n/Alex Yeoh` will match customers who have `Alex` or `Yeoh` in their names. `Alex Tan` and `Alice Yeoh` will be matched.
+* All customers match the specified keywords for the prefix will be returned, i.e, `findc n/Alex al/Nickel` will return all customers with `alex` in their name and all customers with `nickel` as an allergy.
 
 </div>
 
 Examples:
-* `findc n/John stp/Jason` returns customers who have `john` in their name and customers who like `Jason`
-* `findc al/Nickel` returns customer profiles with Nickel allergies
-* `findc h/Oily` returns customer profiles that has the hair type of oily
+* `findc n/John stp/Jason` returns all customers who have `john` in their name and all customers who have staff `Jason` as preference.
+* `findc n/John Alex` return all customers who have `john` and all customers who have `alex` in their name.
+* `findc al/Nickel` returns customer profiles with Nickel allergies.
+* `findc h/Oily` returns customer profiles that has the hair type of oily.
 
 #### 4.1.6 Deleting customer(s) : `deletec`
 
@@ -345,13 +346,20 @@ Find services whose parameters contain any of the given keywords.
 
 Format: `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
-* Keyword types available: name, price, duration (i.e., `n/`, `pr/`, `d/`)
-* The search is case-insensitive. e.g, `Facial` will match `facial`.
-* Only the parameters is searched.
-* Only full words will be matched e.g. `Facial` will not match `Faial`.
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to services prefixes: `n/` `pr/` `d/`.
+* The search is case-insensitive, i.e, `Facial` will match `facial`.
+* All services match the specified keywords for the prefix will be returned, i.e, `finds n/Facial pr/30` will return all services with `facial` in their name and all services that cost `30`.
+* Keywords will be matched, i.e, `finds n/Facial Cut` will match services who have `Facial` or `Cut` in their names. `Facial Treatment` and `Hair Cut` will be matched.
+
+</div>
+
 
 Examples:
-* `finds n/Facial` returns `Organic Radiance Facial` and `Bio Ageless Facial`.
+* `finds n/Facial pr/30` returns all services who have `facial` in their name and all services that cost `30`.
+* `finds n/Facial Cut` return all services who have `facial` in their name and all services who have `cut` in their name.
 * `finds pr/100` returns service profiles at cost $100.
 * `finds d/90` returns services that lasts 90 minutes.
 
@@ -437,15 +445,22 @@ Find bookings whose parameters contain any of the given keywords.
 
 Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
-* Keyword types available: customer/service name, booking date time, feedback (i.e., `n/`, `st/`, `f/` )
-* The search is case-insensitive. e.g, `Excellent` will match `excellent`
-* Only the parameters is searched.
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to bookings prefixes: `n/` `st/` `f/`.
+* The search is case-insensitive, i.e, `Facial` will match `facial`.
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
+* All bookings match the specified keywords for the prefix will be returned, i.e, `findb st/05-05-2022 f/Good` will return all bookings on `05-05-2022` and all bookings that has a feedback of `Good`.
+* Using `n/` will search for booking whose customers and services names matches the keyword, i.e, `findb n/Alex Facial` will match booking whose customers and services who have `Alex` or `Facial` in their names.
+
+</div>
 
 Examples:
-* `findb n/alex` returns bookings where the customer name or service name match.
-* `findb f/Bad` returns `Bad service` and `Service was bad`.
-* `findb st/10-10-2022` returns bookings that are on `10-10-2022`.
+* `findb st/05-05-2022 f/Good` will return all bookings on `05-05-2022` and all bookings that has a feedback of `Good`.
+* `findb n/Alex Facial`  will match booking whose customers and services who have `Alex` or `Facial` in their names.
+* `findb st/05-05-2022` returns bookings on 05-05-2022.
+* `findb f/Good` returns bookings that have a `Good` feedback.
 
 Example Usage: `findb n/alex`
 ![Finding a booking example](images/user-guide/find-booking.png)

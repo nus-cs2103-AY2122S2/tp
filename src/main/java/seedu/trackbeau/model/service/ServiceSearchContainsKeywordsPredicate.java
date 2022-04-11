@@ -40,6 +40,10 @@ public class ServiceSearchContainsKeywordsPredicate implements Predicate<Service
                 }
 
                 for (String keyword : keywords) {
+                    if (i == 1) {
+                        Double temp = Double.parseDouble(keyword);
+                        keyword = temp.toString();
+                    }
                     if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
                         anyMatch = true;
                         break;
