@@ -21,9 +21,7 @@ Given below are my contributions to the project.
    - What it does: When the user tries to add a lesson that conflict with some existing lesson(s), the lesson list on the UI will be refreshed to show a list of such conflicting lessons.
 4. Implemented a feature to search for lessons by name and/or subject (pull-request [#136](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/136))
 5. Updated a feature to search for students by name and/or tags (pull-request [#141](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/141))
-6. Added persistence for lessons added (pull-request [#75](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/75)), which includes
-   - adding logic to write to convert data into their respective `JSON` representations and write them into `JSON` files
-   - adding logic to read and parse data from `JSON` files on program start-up
+6. Added persistence for lessons added (pull-request [#75](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/75))
 
 ## Contributions to the UG
 1. Contributed to the UG for `addlesson` command (pull-request [#136](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/161))
