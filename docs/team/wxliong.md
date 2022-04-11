@@ -44,9 +44,11 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for `Academic Year` under `add module`. [\#81](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/81)
     * Added `add` command. [\#21](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/21)
+    * Fix errors [\#230](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/230)
   * Developer Guide:
     * Added implementation details of the `add` and `enrol` feature. [\#113](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/113)
     * Added use cases for Student. [\#35](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/35)
+    * Fix errors [\#230](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/230)
 
 
 * **Community**:
