@@ -772,7 +772,7 @@ testers are expected to do more *exploratory* testing.
         "propertyToBuy" : {
           "house" : {
             "houseType" : "Bungalow",
-            "location" : "Clementi"
+            "location" : "clementi"
           },
           "priceRange" : {
             "lower" : "500000",
@@ -801,7 +801,7 @@ testers are expected to do more *exploratory* testing.
         "propertyToSell" : {
           "house" : {
             "houseType" : "Bungalow",
-            "location" : "Queens Town"
+            "location" : "cueens town"
           },
           "priceRange" : {
             "lower" : "24",
