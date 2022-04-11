@@ -38,4 +38,4 @@ Given below are my contributions to the project.
         * Added implementation details of the `sort` and `list` feature.
 
 * **Community**:
-    * Reported bugs and suggestions for other teams in the class ([PE-D](https://github.com/Decaxical/ped/issues))(exam: [1](), [2](), [3]())
+    * Reported bugs and suggestions for other teams in the class ([PE-D](https://github.com/Decaxical/ped/issues))
