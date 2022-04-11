@@ -3,11 +3,17 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEntries.ALICE;
+import static seedu.address.testutil.TypicalEntries.DBSSS;
+import static seedu.address.testutil.TypicalEntries.INTERVIEW_A;
+import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +28,8 @@ import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.exceptions.DuplicateEntryException;
+import seedu.address.testutil.CompanyBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -48,12 +56,38 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicateEntryException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasCompany_nullCompany_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasCompany(null));
+    }
+
+    @Test
+    public void hasCompany_companyNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCompany(DBSSS));
+    }
+
+    @Test
+    public void hasCompany_companyInAddressBook_returnsTrue() {
+        addressBook.addCompany(DBSSS);
+        assertTrue(addressBook.hasCompany(DBSSS));
+    }
+
+    @Test
+    public void hasCompany_ecompanyWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addCompany(DBSSS);
+        Company editedCompany = new CompanyBuilder(DBSSS).withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B)
+                .withAddress(VALID_ADDRESS_B).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasCompany(editedCompany));
     }
 
     @Test
@@ -75,9 +109,35 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEvent(INTERVIEW_A));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(INTERVIEW_A);
+        assertTrue(addressBook.hasEvent(INTERVIEW_A));
+    }
+
+    @Test
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEvent(INTERVIEW_A);
+        Event editedInterview = new EventBuilder(INTERVIEW_A).withLocation(VALID_LOCATION_B)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasEvent(editedInterview));
     }
 
     @Test

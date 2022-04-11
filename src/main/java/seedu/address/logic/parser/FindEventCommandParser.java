@@ -87,7 +87,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         if (companyNamePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_COMPANY).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseCompanyName(s);
+                ParserUtil.parseName(s);
             }
         }
         if (startDatePresent) {

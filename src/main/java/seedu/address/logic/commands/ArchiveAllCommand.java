@@ -14,7 +14,7 @@ public class ArchiveAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Archives all entries in the displayed entry list.";
 
-    public static final String MESSAGE_ARCHIVE_ALL_SUCCESS = "Archived all entries";
+    public static final String MESSAGE_SUCCESS = "Archived all entries";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -31,7 +31,7 @@ public class ArchiveAllCommand extends Command {
         model.updateCurrentlyDisplayedList(PREDICATE_SHOW_ALL);
         model.updateCurrentlyDisplayedList(PREDICATE_SHOW_ARCHIVED_ONLY);
 
-        return new CommandResult(MESSAGE_ARCHIVE_ALL_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

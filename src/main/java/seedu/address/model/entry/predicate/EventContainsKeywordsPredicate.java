@@ -87,8 +87,10 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 || (other instanceof EventContainsKeywordsPredicate // instanceof handles nulls
                 && nameKeywords.equals(((EventContainsKeywordsPredicate) other).nameKeywords)
                 && companyKeywords.equals(((EventContainsKeywordsPredicate) other).companyKeywords)
-                && startDate.equals(((EventContainsKeywordsPredicate) other).startDate)
-                && endDate.equals(((EventContainsKeywordsPredicate) other).endDate)
+                && ((startDate == null && ((EventContainsKeywordsPredicate) other).startDate == null)
+                || startDate.equals(((EventContainsKeywordsPredicate) other).startDate))
+                && (endDate == null && ((EventContainsKeywordsPredicate) other).endDate == null
+                || endDate.equals(((EventContainsKeywordsPredicate) other).endDate))
                 && timeKeywords.equals(((EventContainsKeywordsPredicate) other).timeKeywords)
                 && locationKeywords.equals(((EventContainsKeywordsPredicate) other).locationKeywords)
                 && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)

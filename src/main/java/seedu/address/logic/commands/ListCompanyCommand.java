@@ -32,4 +32,11 @@ public class ListCompanyCommand extends ListCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
                 false, false, false, true, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListCompanyCommand // instanceof handles nulls
+                && searchType.equals(((ListCompanyCommand) other).searchType)); // state check
+    }
 }
