@@ -13,6 +13,8 @@ traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -31,6 +33,8 @@ traditional GUI apps.
 5. The GUI similar to the below should appear in a few seconds. 
 Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
+
 6. Type the command in the command box and press Enter to execute it. e.g. Execute **`help`** to open the help window.<br>
    Some example commands you can try:
 
@@ -44,7 +48,7 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
 7. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -82,6 +86,8 @@ or lesson in the viewable lists.**
 You may see more than one command word for a command, the second one being the shorter command for more advanced users.
 * Integer refers to a maximum value of 2147483647.
 </div>
+   
+<div style="page-break-after: always;"></div>
 
 ---
 
