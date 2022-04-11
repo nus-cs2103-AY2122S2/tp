@@ -10,22 +10,30 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EDIT_PERSON_SUCCESS;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_MULTIPLE_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalNames.FULL_NAME_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_INVALID_PERSON;
 import static seedu.address.testutil.TypicalNames.NAME_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getDuplicatesHustleBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalHustleBook;
+
+import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -43,7 +51,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(FULL_NAME_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new HustleBook(model.getHustleBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -65,7 +73,7 @@ public class EditCommandTest {
 
         EditCommand editCommand = new EditCommand(lastPerson.getName(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new HustleBook(model.getHustleBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
@@ -78,7 +86,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(FULL_NAME_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new HustleBook(model.getHustleBook()), new UserPrefs());
 
@@ -94,10 +102,49 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(FULL_NAME_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new HustleBook(model.getHustleBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicatePersonUnfilteredList_success() {
+        model.setHustleBook(getDuplicatesHustleBook());
+
+        Person editedPerson = new PersonBuilder().build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(NAME_SECOND_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(getDuplicatesHustleBook(), new UserPrefs());
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(NAME_SECOND_PERSON.fullName));
+        expectedModel.updateFilteredPersonList(predicate);
+
+        assertCommandSuccess(editCommand, model, MESSAGE_MULTIPLE_PERSON, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicatePersonValidIndex_success() throws ParseException {
+        model.setHustleBook(getDuplicatesHustleBook());
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(NAME_SECOND_PERSON.fullName));
+
+        Person editedPerson = new PersonBuilder().build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(NAME_SECOND_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(getDuplicatesHustleBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
+
+        assertCommandSuccess(editCommand, model, MESSAGE_MULTIPLE_PERSON, expectedModel);
+
+        editCommand.setIndex(2);
+        String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.setPerson(expectedModel.getFilteredPersonList().get(2), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -143,6 +190,7 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
     }
+
 
     @Test
     public void equals() {
