@@ -11,51 +11,47 @@ the interview scheduling process of candidates applying to be undergraduate Teac
 Given below are my contributions to the project.
 
 * **New Features**:
-  * Ideated using a placeholder with randomized colour for each candidate's background photo in the `focusPanel` of the application.
-  * Updated application's icon and related refactors i.e. Removing traces of previous project naming conventions.
+  * Ideated using a placeholder with randomized colour for each candidate's background photo in the `focusPanel` of the application and `HelpWindow`'s design layout.
+  * Updated application's icon and related refactors to help the team as an overall i.e. Removing traces of previous project naming conventions.
     * E.g. Updating JSON file to `talentassistant.json` instead of the previous project's `addressbook.json`, updating PDF generator title to our application's name, etc.
-    * As an overall to help the team.
   * UI refactors wherever necessary.
     * E.g. Changing of styles i.e. `CSS`.
-  * Ideated `HelpWindow`'s design layout.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=domlimm&breakdown=true) to view individual code contribution.
 
 * **Project management**:
   * Managed deadlines and deliverables for the team whenever/wherever necessary.
-    * E.g. Briefly: Updating milestones, managing issues on GitHub.
+    * Brief e.g. Updating milestones, managing issues on GitHub.
   * Beautified releases' description.
   * Enhanced team's workflow with suggestion on branch naming i.e. `ISSUE_NO-ANY-OTHER-DESC`.
-    * To name each branch in the format with issue as the starting portion followed with dashes and other relevant description. Helps in the clarity of referring back to the linked issue when reviewing the PR.
+    * Naming each branch in the format with issue as the start followed by dashes and other relevant description. Helps in the clarity of referring back to the linked issue when reviewing the PR.
   * Drove team meetings.
 
 * **Enhancements to existing features**:
-  * Refactors consistently done throughout the development period of our program.
+  * Refactors constantly done throughout the development period of our program.
     * Refactored `model` of our application, specifically the entities. E.g. Introduced new entities.
       * Encompasses writing of the entity, test classes and integrated with application's `model`.
     * Improved existing `add` and `edit` commands with the introduction of new fields to our program based on project direction.
       * Includes writing of unit tests.
-    * Removal of unused entities of previous `Person` model from the existing codebase e.g. `tag`, `address`.
+    * Removal of unused entities of previous `Person` model from the initial codebase e.g. `tag`, `address`.
     * Refactored `Person` model to `Candidate` model.
-      * Updated all relevant/related files and scrap usage of `Person` to meet the team's target user profile.
+      * Updated all relevant/related files and scrap usages of `Person` to match target user profile.
 
 * **Documentation - User Guide**:
   * Worked on the `add`, `edit` commands.
-  * TODO
 
 * **Documentation - Developer Guide**:
   * Worked on [`Model`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#model-component), [`UI`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#ui-component), [`Add`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#add-feature) command.
+  * Some additions to User Stories and Use Cases.
 
 * **Team-based tasks**:
   * Setting up the GitHub team repository.
   * Updating individual roles.
-  * Necessary general code enhancements.
-    * Work related to renaming the product and changing the product's icon.
-  * Maintaining team's Gradle build file.
-    * Updating `shadowJar` naming and enabling assertions.
+  * Necessary general code enhancements e.g. Renaming the product and changing the product's icon.
+  * Maintaining team's Gradle build file by updating `shadowJar` naming and enabling assertions.
 
-* **Review/mentoring contributions**:
-  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 0; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 0
+* **Review/Mentoring contributions**:
+  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 47; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 135; (caa 11/04/22)
 
 * **Community**:
   * Non-trivial PRs reviewed
