@@ -20,7 +20,7 @@ As a school librarian of a large library, you may already have your own desktop 
 ### 1.2. About the User Guide
 The purpose of this guide is to explain to you how to use LibTask and to allow you to have an enjoyable experience. It explains the features and commands compatible with LibTask. It is also structured in a way to let you easily navigate to relevant sections.
 
-Take note of following symbols that are used in this document:
+Take note of the following symbols that are used in this document:
 
 | Icon                 | Explanation                                                                   |
 |----------------------|-------------------------------------------------------------------------------|
@@ -49,7 +49,9 @@ If you are an advanced user, you can refer to our [Command summary](#5-command-s
 
 1. Copy the file to the folder you want to use as the home folder for your LibTask.
 
-1. Double-click the file to start the app. The GUI is similar to the one shown below and should appear in a few seconds.<br>
+1. Double-click the file to start the app. You can follow [this guide](https://nus-cs2103-ay2122s2.github.io/website/admin/tp-pe.html#a-launching-the-jar-file-2) if double-clicking doesn't work.
+
+1. The GUI is similar to the one shown below and should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
 
 1. You can refer to [LibTask GUI Overview](#22-libtask-gui-overview) to understand what each component in the GUI does.
@@ -92,8 +94,7 @@ to doing this tutorial.
    `patron add n/Alice s/A0123456H p/90123212 e/profA@u.nus.edu t/professor`: Adds a patron named `Alice` into
    LibTask's patron list.
 
-   `patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu t/student`: Adds a patron named
-   `Bob Miller` into LibTask's patron list.
+   `patron add n/Bob Miller s/A4468931X p/92940284 e/bobmiller@u.nus.edu`: Adds a patron named `Bob Miller` into LibTask's patron list.
 
    `patron add n/Harper Lee s/A0988773M p/91437496 e/harperlee@u.nus.edu`: Adds a patron named `Harper Lee` into
    LibTask's patron list.
@@ -106,11 +107,10 @@ to doing this tutorial.
    `book add n/Harry Potter i/97888-69183-157 a/J.K.Rowling t/Thriller t/Magic`: Adds a book titled `Harry Potter` 
       into LibTask's book list.
 
-   `book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller t/Suspense`: Adds a book title 
+   `book add n/To Kill a Mockingbird i/97804-46310-789 a/Harper Lee t/Thriller`: Adds a book title 
       `To Kill a Mockingbird` into LibTask's book list.
 
-   `book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Thriller t/Mystery t/Crime`: Adds a book titled 
-     `The Da Vinci Code` into LibTask's book list.
+   `book add n/The Da Vinci Code i/97803-85513-227 a/Dan Brown t/Crime`: Adds a book titled `The Da Vinci Code` into LibTask's book list.
 
 <div style="page-break-after: always;"></div>
 
@@ -129,20 +129,24 @@ Harper Lee wishes to borrow "The Da Vinci Code". You may create a book loan for 
 </div>
 
 Method A:
+
 1. Scroll through the patron list to find the index at which `Harper Lee` is stored in LibTask. Let's say this index 
    number is 3.
+
 2. Scroll through the book list to find the index at which `The Da Vinci Code` is stored in LibTask. Let's say this 
    index number is 3.
+
 3. Enter command `borrow 3 3 25-Apr-2022` in the Command box. `Harper Lee` has now borrowed `The Da Vinci Code` with a 
    return date of 25th April 2022. You can confirm this by viewing the book's status in the book list.
 
 Method B:
+
 1. Enter `patron find harper lee` in the Command box. Running this command will display `Harper Lee` first in the patron 
    list. Learn more about the format of the `patron find` command [here](#323-finding-patrons-patron-find).
-2. Enter `book find n/The Da Vinci Code` in the Command box. Running this command will display `The Da Vinci Code` first
-   in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
-3. Enter command `borrow 1 1 25-Apr-2022` in the Command box. `Harper Lee` has now borrowed `The Da Vinci Code` with a 
-   return date of 25th April 2022. You can confirm this by viewing the book's status in the book list.
+
+2. Enter `book find n/The Da Vinci Code` in the Command box. Running this command will display all copies of `The Da Vinci Code` in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
+
+3. Enter command `borrow 1 1 25-Apr-2022` in the Command box. `Harper Lee` has now borrowed the first copy of `The Da Vinci Code` with a return date of 25th April 2022. You can confirm this by viewing the book's status in the book list.
 
 <div style="page-break-after: always;"></div>
 
@@ -163,34 +167,28 @@ two following ways:
 </div>
 
 Method A:
-1. List all patrons in the patron list by entering `patron list`. Scroll through the patron list to find the index at which `Bob Miller` is stored in LibTask. Let's say this index
-   number is 2.
-2. List all books in the book list by entering `book list`. Scroll through the book list to find the index at which `The Da Vinci Code` is stored in LibTask. Let's say this
-   index number is 3.
+
+1. List all patrons in the patron list by entering `patron list`. Scroll through the patron list to find the index at which `Bob Miller` is stored in LibTask. Let's say this index number is 2.
+
+2. List all books in the book list by entering `book list`. Scroll through the book list to find the index at which `The Da Vinci Code` is stored in LibTask. Let's say this index number is 3.
+
 3. Enter command `book request 2 3` in the Command Box. `Bob Miller` has now requested for `The Da Vinci Code`. You can confirm this by viewing the book's status in the book list.
 
 Method B:
-1. Enter `patron find Bob Miller` in the Command box. Running this command will display `Bob Miller` first in 
-   the patron list. Learn more about the format of the `patron find` command [here](#323-finding-patrons-patron-find).
-2. Enter `book find n/The Da Vinci Code` in the Command box. Running this command will display `The Da Vinci Code` first
-   in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
-3. Enter command `book request 1 1` in the Command box. `Bob Miller` has now requested for `The Da Vinci Code`. You can
-   confirm this by viewing the book's status in the book list.
 
-Subsequently, when Harper Lee returns "The Da Vinci Code", find the book by entering `book find n/The Da Vinci Code` 
-(which would result in it being displayed first) followed by `return b/1` (more about the `return` command 
-[here](#337-returning-a-book--return)). `The Da Vinci Code` is hence returned and the `Result box` would prompt you to 
-notify Bob Miller that the book is now available.
+1. Enter `patron find Bob Miller` in the Command box. Running this command will display `Bob Miller` first in the patron list. Learn more about the format of the `patron find` command [here](#323-finding-patrons-patron-find).
+
+2. Enter `book find n/The Da Vinci Code` in the Command box. Running this command will display all copies of `The Da Vinci Code` in the book list. Learn more about the format of the `book find` command [here](#333-finding-books--book-find).
+
+3. Enter command `book request 1 1` in the Command box. `Bob Miller` has now requested for `The Da Vinci Code`. You can confirm this by viewing the book's status in the book list.
+
+Subsequently, when Harper Lee returns "The Da Vinci Code", you can find the book by entering `book find n/The Da Vinci Code` (which would result in it being displayed first) followed by `return b/1` (more about the `return` command [here](#337-returning-a-book--return)). `The Da Vinci Code` is hence returned and the `Result box` would remind you to notify Bob Miller that the book is now available.
 
 **Congratulations! You have completed our tutorial!** You can now head over to our [Features](#3-features) section to learn more about our commands in greater detail.
 
---------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
-
 ## **3. Features**
 
-This section describes the features supported by LibTask and how to use them.
+This section describes the features supported by LibTask and how to use them in general. Details of some commands may vary as stated in their respective sections.
 
 <div markdown="block" class="alert alert-info">
 
@@ -322,7 +320,7 @@ Format: `patron find KEYWORD [KEYWORD]…​`
 
 * The order of the keywords does not matter. e.g. results from the keyword `Hans Bo` will match results of the keyword `Bo Hans`
 
-* Only the name is searched.
+* Only the name is searched, and KEYWORD cannot be empty or contains only spaces.
 
 * Only full words will be matched e.g. results from the keyword `Han` will not match results from the keyword `Hans`
 
@@ -460,7 +458,7 @@ Format: `book add n/BOOK_NAME i/ISBN [a/AUTHOR] … [t/TAG] … `
 
 * TAG can only contain alphanumeric characters and cannot contain spaces.
 
-* You can add multiple copies the same book with the same isbn. However, all books with the same isbn must also have the same name and written by the same authors.
+* You can add multiple copies of the same book with the same isbn. However, all books with the same isbn must also have the same name and written by the same authors. Comparison of book names and authors are case-insensitive and spacing insensitive.
 
 * If books with the same isbn already exists, and is requested by some patrons, adding this book will also remove all requests for those books, and you will be reminded to notify patrons who are interested in this available book.
 
@@ -506,7 +504,7 @@ To find books in LibTask based on book name, author or tags, you can enter the f
 
 **:information_source: Notes about the find command:**<br>
 
-* `PREFIX` must be either `t` (for find based on tag), `a` (for finding based on author), or `n` (for finding based on book name).
+* Exactly one of the optional parameters must be specified, and can only be specified once.
 
 * All books with a tag, or author, or book name that contains the substring of the given query will be displayed in the book list.
 
@@ -544,7 +542,7 @@ After entering the command, only one book which name contains `Harry` is display
 
 To edit the details of a specific book, you can enter the edit command with the format shown below.
 
-**Format**: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR] … [t/CATEGORY_TAG] …`
+**Format**: `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR] … [t/TAG] …`
 
 <div markdown="block" class="alert alert-info">
 
@@ -552,7 +550,7 @@ To edit the details of a specific book, you can enter the edit command with the 
 
 * Edits the book at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed book list. The index **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list.
 
-* At least one of the optional fields (NAME, ISBN, AUTHOR, CATEGORY_TAG) must be provided.
+* At least one of the optional fields (NAME, ISBN, AUTHOR, TAG) must be provided.
 
 * Existing values will be updated to the input values.
 
@@ -630,7 +628,7 @@ To keep track that a specific patron is borrowing a specific book, you can enter
 
 * Both `PATRON_INDEX` and `BOOK_INDEX` cannot exceed the largest index number in the displayed patron list or book list, respectively.
 
-* `RETURN_DATE` must be in dd-MMM-yyyy format (e.g. 20-May-2022) and must be later than the current date.
+* `RETURN_DATE` must be a valid date in dd-MMM-yyyy format (e.g. 20-May-2022) and must be later than the current date.
 
 * A patron cannot borrow multiple copies of the same book with the same isbn.
 
@@ -649,7 +647,7 @@ Before entering the command, the first book is available.
 
 <div style="page-break-after: always;"></div>
 
-After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return data of 05-May-2022.
+After entering the command, that first book is labelled as borrowed, and is borrowed by the first patron Alex Yeoh, until a return date of 05-May-2022.
 ![book-borrow-2.png](images/book-borrow-2.PNG)
 
 #### 3.3.7. Returning a book : `return`
@@ -669,8 +667,6 @@ To return a specific book, or to return all books by a specific patron, you can 
 * If `PREFIX` is `b`, `INDEX` refers to the index number of the book to be returned, as shown in the displayed book list.
 
 * `INDEX` **must be a positive integer** 1, 2, 3, … and cannot exceed the largest index number in the displayed book list (if prefix is `b`) or patron list (if prefix is `p`).
-
-* If the book at index `INDEX` is not borrowed, or if the patron at index `INDEX` does not borrow any books, a message is shown.
 
 * If there are patrons who requested to be notified about the availability of the returned books, you will be reminded to notify them. Subsequently, all requests for those books will be deleted automatically.
 
@@ -801,14 +797,10 @@ command as described in the user guide.
 **A**: Yes, it is expected, as all the books have probably been already listed.
 
 **Q4**: Why are there two separate lists for books and patrons instead of one combined list?<br>
-**A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various
-patrons and books in the database.
+**A**: This is done so that the user can see the two lists side by side and have a clearer picture of the various patrons and books in LibTask. This also makes commands such as [book related](#339-listing-all-books-related-to-a-patron--book-related) and [borrow](#336-borrowing-a-book--borrow) commands more efficient.
 
 **Q5**: Why are the "requested by" tags removed from the books after a patron has returned that particular book?<br>
-**A**: Once a book has been returned and that book has been requested, a list of alerts will be shown to the librarian
-to remind the patrons that have requested the book. The purpose of the automatic deletion of the "requested by" tag is
-a feature that is meant to provide convenience for the user and make them more productive because they would not need
-to manually input additional commands to delete the "requested by" tags.
+**A**: Once a book has been returned and that book has been requested, a list of reminders will already be shown to the librarian. LibTask's job is to only remind the librarians about book requests, not to notify the patrons for them, because LibTask does not have access to NUS email authentication to email the patrons. The automatic deletion of the "requested by" tag is a feature that is meant to provide convenience for the user and make them more productive because they would not need to manually input additional commands to delete the "requested by" tags.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -836,17 +828,17 @@ to manually input additional commands to delete the "requested by" tags.
 
 ### 5.3. Book Commands
 
-| Function                               | Command Format                                                      |
-|----------------------------------------|---------------------------------------------------------------------|
-| **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/CATEGORY_TAG]…​`            |
-| **List all books**                     | `book list`                                                         |
-| **Find a book**                        | `book find [n/NAME] [t/TAG] [a/AUTHOR]`                             |
-| **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/CATEGORY_TAG]…​` |
-| **Delete a book**                      | `book delete INDEX`                                                 |
-| **Borrow a book**                      | `borrow PATRON_INDEX BOOK_INDEX RETURN_DATE`                        |
-| **Return a book**                      | `return PREFIX/INDEX`                                               |
-| **Request a book**                     | `book request PATRON_INDEX BOOK_INDEX`                              |
-| **List all books related to a patron** | `book related INDEX`                                                |
+| Function                               | Command Format                                             |
+|----------------------------------------|------------------------------------------------------------|
+| **Add a book**                         | `book add n/NAME i/ISBN [a/AUTHOR]…​ [t/TAG]…​`            |
+| **List all books**                     | `book list`                                                |
+| **Find a book**                        | `book find [n/NAME] [t/TAG] [a/AUTHOR]`                    |
+| **Edit a book**                        | `book edit INDEX [n/NAME] [i/ISBN] [a/AUTHOR]…​ [t/TAG]…​` |
+| **Delete a book**                      | `book delete INDEX`                                        |
+| **Borrow a book**                      | `borrow PATRON_INDEX BOOK_INDEX RETURN_DATE`               |
+| **Return a book**                      | `return PREFIX/INDEX`                                      |
+| **Request a book**                     | `book request PATRON_INDEX BOOK_INDEX`                     |
+| **List all books related to a patron** | `book related INDEX`                                       |
 
 --------------------------------------------------------------------------------------------------------------------
 
