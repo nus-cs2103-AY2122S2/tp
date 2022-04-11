@@ -889,6 +889,22 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Scheduling an interview
+
+1. Adding an interview into the system
+
+    1. Test case: `schedule add 1 at/03-08-2022` <br>
+       Expected: 1st parameter is incorrect. It should be `candidate/1` with a forward slash `/`. All prefixes and its value are tied with a forward slash `/`.
+
+    2. Test case: `schedule add candidate/1`<br>
+       Expected: The `DATE_TIME` of an `Interview` should be present in the ` schedule add` command. An error message will be shown with the full `schedule add` command statement.
+
+    3. Test case: `schedule add candidate/1 at/03/08/2022`<br>
+       Expected: The `DATE_TIME` of an interview must be in the format `dd-MM-yyyy`.
+   
+    4. Test case: `schedule add candidate/1 at/20-02-2000`<br>
+       Expected: The `DATE_TIME` of an interview must not be in the past.
+    5. 
 ### Viewing the interview schedule
 
 1. Viewing the interview schedule for a specific time period
