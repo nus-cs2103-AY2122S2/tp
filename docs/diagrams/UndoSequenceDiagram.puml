@@ -3,42 +3,48 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":HustleBookHistory" as HustleBookHistory MODEL_COLOR
+participant ":HustleBook" as HustleBook MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> HustleBookParser : parseCommand(undo)
+activate HustleBookParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+HustleBookParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> HustleBookParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+HustleBookParser --> LogicManager : u
+deactivate HustleBookParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoHustleBook()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> HustleBookHistory : getPrevState()
+activate HustleBookHistory
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+HustleBookHistory --> Model : prevState
+deactivate HustleBookHistory
+
+Model -> HustleBook : resetData(prevState)
+activate HustleBook
+
+HustleBook --> Model
+deactivate HustleBook
 
 Model --> UndoCommand
 deactivate Model
