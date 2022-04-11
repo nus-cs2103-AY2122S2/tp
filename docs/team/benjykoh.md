@@ -11,8 +11,6 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benjykoh&breakdown=true)
 
-<br>
-
 * **New Feature**:
   * Added the ability to display the format, and a short description for a specified command. [#43](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/43)
     * What it does: Provides the user with a short description on what the given command does, as well as display the format of the command, allowing the users to learn how to use it.
@@ -30,8 +28,6 @@ Given below are my contributions to the project.
   * Added the ability to mark a specific undone task as done. [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69)
     * What it does: Change the completion status of a task to done for a particular student.
     * Justification: This feature allows users update the progress of a student's task.
-
-<div style="page-break-after: always;"></div>
 
 * **New Feature**:
   * Added the ability to mark a specific done task as undone. [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69)
@@ -51,7 +47,12 @@ Given below are my contributions to the project.
   * Maintained the issue tracker by assigning/labelling some issues.
   * Updated Developer Guide by adding and editing user stories in the `Appendix` section. [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93)
   * Maintained the User Guide and Developer Guide by formatting them and fixing documentation bugs. ([#213](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/213), [#234](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/234), [#258](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/258), [#259](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/259), [#263](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/263))
-  
+
+* **Community**:
+  * PRs reviewed (with non-trivial review comments): ([#40](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/40), [#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#205](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/205), [#254](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254))
+  * Reported a total of 18 bugs and suggestions for other teams in the class (as seen [here](https://github.com/Benjykoh/ped/issues))
+
+<div style="page-break-after: always;"></div>
 
 * **Documentation**:
   * User Guide:
@@ -62,9 +63,6 @@ Given below are my contributions to the project.
     * Updated implementation details for command: `assign`. [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231)
     * Added use cases: UC06, UC07, UC14, UC15. [#253](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/253)
     * Added manual test cases for `assign`, `mark`, `unmark`, `sort` and `manual`. [#268](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/268)
+  
 
-
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): ([#40](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/40), [#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#205](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/205), [#254](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254))
-  * Reported a total of 18 bugs and suggestions for other teams in the class (as seen [here](https://github.com/Benjykoh/ped/issues))
 
