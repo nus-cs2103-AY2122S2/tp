@@ -609,7 +609,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Player named "John" is added. Details of the added player shown in the status message.
 
     1. Test case: `add P/John Doe p/98765432 e/johnd@example.com h/180 j/23 w/80 t/PG t/SG`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect add commands to try: `add P/`, `add P/ n/John Doe`, `...` (where any of the required prefix is missing)<br>
        Expected: Similar to previous.
