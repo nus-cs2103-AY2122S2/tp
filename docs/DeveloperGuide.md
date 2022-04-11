@@ -55,7 +55,7 @@ TeachWhat! is a desktop application that helps private Tutors manage their stude
 
 ## **Setting up, getting started**
 
-Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/SettingUp.md)
+Refer to the [set-up guide.](https://ay2122s2-cs2103t-w11-3.github.io/tp/SettingUp.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -902,7 +902,7 @@ TeachWhat! allows you to store details of a student and view it back later on.
 ### Deleting a student
 
 This command requires you to have at least one existing student.
-* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+* If there are no students, refer to the [`addstudent`](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#adding-a-student)
   user guide section to add a student.
 
 1. Test case 1: Delete `student` of index 1 on the viewable student list.
@@ -929,9 +929,9 @@ This command requires you to have at least one existing student.
 ### Assigning a student
 
 This command requires you to have at least one existing student and lesson.
-* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+* If there are no students, refer to the [`addstudent`](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#adding-a-student)
 user guide section to add a student.
-* If there are no lessons, refer to the [`addlesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
+* If there are no lessons, refer to the [`addlesson`](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#adding-a-lesson)
   user guide section to add a lesson.
 
 1. Test case 1: Assigning `student` to `lesson` successfully
@@ -955,9 +955,9 @@ user guide section to add a student.
 ### Unassigning a student
 
 This command requires you to have at least one existing student and lesson.
-* If there are no students, refer to the [`addstudent`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-student)
+* If there are no students, refer to the [`addstudent`](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#adding-a-student)
   user guide section to add a student.
-* If there are no lessons, refer to the [`addslesson`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/UserGuide.md#adding-a-lesson)
+* If there are no lessons, refer to the [`addslesson`](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#adding-a-lesson)
   user guide section to add a lesson.
 
 1. Test case 1: Unassigning `student` from `lesson` successfully
