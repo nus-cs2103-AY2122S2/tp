@@ -163,7 +163,6 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_deleteTaskByModuleCodeAndTask_success() {
-        
         // Creates new Person with same Module Code as Alice, but does was not assigned the task: Cry
         Person andy = new PersonBuilder(ANDY).build();
 
