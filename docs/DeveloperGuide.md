@@ -431,6 +431,29 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Sort**
+
+Actor: User
+
+**MSS**
+1. User requests to sort the list of clients
+2. REP displays clients in the requested order
+
+   Use case ends
+
+**Extensions:**
+* 1a. The list is empty
+
+  Use case ends
+
+
+* 1b. REP detects an error in the entered command
+   * 1b1. REP displays an error message
+   * 1b2. User enters the sort command again
+   * Steps 1b1-1b2 are repeated until the command entered is valid
+
+     Use case resumes at step 2
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
