@@ -62,33 +62,34 @@ Given below are my contributions to the project.
   * Managed releases `1.2`, `1.3.trial`, `1.3.1`.
   * Created milestones for the team repo.
 
-* **Documentation**:
-  * Developer Guide:
-    * Add Product Scope: [PR #55](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/55)
-    * Add Acknowledgements: [c724c4](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c724c4a82e6e68bea84e3ad1c087bc284d15a4bf)
-    * Wrote implementation for `Target` class: [c8c5f74](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c8c5f7422268279d07b35ecc46ae9a733232f495)
-    * Wrote implementation for split-view panel (credits to Wu Zihao for the sequence diagram): [d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6)
-
-    * Update diagrams for `Model` component: [5e3f128](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/5e3f12877e18aaa6cc8b94ac73154da096528aba)
-
-  * User Guide:
-    * Add instructions on editing social media. [6833d5](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/6833d554602c4ea0725839985c5e5021449e46ad)
-    * Add instructions on add and delete commands. [130fcfb](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/130fcfb411d526c43b41909772bc801b1e3043bf)
-    * Fixed minor grammatical issues [bc8c99](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/bc8c99b7b2f63f1ebd23b621b89312b4b38997b1)
-
 <div style="page-break-after: always;"></div>
 
+* **Documentation**:
+  * Developer Guide:
+    * Add Product Scope. ([PR #55](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/55))
+    * Add Acknowledgements. ([c724c4](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c724c4a82e6e68bea84e3ad1c087bc284d15a4bf))
+    * Wrote implementation for `Target` class. ([c8c5f74](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c8c5f7422268279d07b35ecc46ae9a733232f495))
+    * Wrote implementation for split-view panel (credits to Wu Zihao for the sequence diagram). ([d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6))
+
+    * Update diagrams for `Model` component, `Storage` component, and `ParserClasses` under the `Logic` section. ([PR #236](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236)) 
+
+  * User Guide:
+    * Add instructions on editing social media. ([6833d5](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/6833d554602c4ea0725839985c5e5021449e46ad))
+    * Add instructions on add and delete commands. ([130fcfb](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/130fcfb411d526c43b41909772bc801b1e3043bf))
+    * Fixed minor grammatical issues ([bc8c99](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/bc8c99b7b2f63f1ebd23b621b89312b4b38997b1))
+
+
 * **Contributions to team-based tasks**:
-  * Update site-wide settings: [PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44)
-  * Update `AboutUs.md`: [PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44)
-  * Carried out PDF conversion of Developer guide : [#PR 263](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/263)
+  * Update site-wide settings: ([PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44))
+  * Update `AboutUs.md`: ([PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44))
+  * Carried out PDF conversion of Developer guide : ([#PR 263](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/263))
 
 * **Review/mentoring contributions**:
-  * PRs reviewed (with non-trivial review comments): [PR #49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), [PR #78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [PR #107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896) [PR #262](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/262)
+  * PRs reviewed (with non-trivial review comments): ([PR #49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), [PR #78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [PR #107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896) [PR #262](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/262))
 
   * Reviewed [over 40 Pull Requests](https://github.com/AY2122S2-CS2103-W16-2/tp/pulls?q=reviewed-by%3Acheehongw) in the team.
 
-  * Provided over [60+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html#74-wong-hong-cheehongw-29-comments) in team PRs and Issues
+  * Provided over [60+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html#74-wong-hong-cheehongw-29-comments) in team PRs and Issues.
 
 * **Community**:
   * Reported a total of [10 issues](https://github.com/cheehongw/ped/issues) during the PE dry run.
