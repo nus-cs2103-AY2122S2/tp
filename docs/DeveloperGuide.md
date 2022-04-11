@@ -66,7 +66,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -126,7 +126,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `UniBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -210,7 +210,7 @@ The delete feature enables the user to delete a module/student/professor/group/e
 
 Given below is an example of a sequence diagram that shows the flow using the input `delete 1` on the people view.
 
-The command is first parsed with `execute("delete 1", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `DeleteCommandParser`. This instantiates a new `DeleteCommand` object which is returned to `UniBookParser`. After which, the `DeleteCommand` is passed to `LogicManager` and the `execute` method will run. There will be checks to ensure that the command is able to be done, for example, if the index provided is out of range, no person will be deleted and the error message should inform the user that their command was invalid and how it can be fixed. Every command type will access model in different ways depending on what checks need to be done and how the model needs to be accessed. In this case, the `model` object will be accessed to delete the person at that index from the UniBook. Finally, the `CommandResult` will be returned.
+The command is first parsed with `execute("delete 1", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `DeleteCommandParser`. This instantiates a new `DeleteCommand` object which is returned to `UniBookParser`. After which, the `DeleteCommand` is passed to `LogicManager` and the `execute` method will run. There will be checks to ensure that the command can be executed, for example, if the index provided is out of range, no person will be deleted and the error message should inform the user that their command was invalid and how it can be fixed. Every command type will access model in different ways depending on what checks need to be done and how the model needs to be accessed. In this case, the `model` object will be accessed to delete the person at that index from the UniBook. Finally, the `CommandResult` will be returned.
 
 ![Implementation of deleting a person](images/DeleteSequenceDiagram.png)
 
@@ -222,7 +222,7 @@ diagram below shows the flow using the input `list type/professors` which runs o
 
 The command is first parsed with `execute("list type/professors", true, false, false)` where the boolean variables indicate whether the `People`, `Modules` or `Groups` view is currently active. Subsequently, the 
 `parseCommand` method in `UniBookParser` is called which will call `ListCommandParser`, which creates the 
-`ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently the `ListCommand` is returned to 
+`ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently, the `ListCommand` is returned to 
 `LogicManager` and the `execute` method is run. In this case the `Model` instance is accessed to update the predicate
 which changes the entries appropriately (in this case showing all professors), 
 before finally returning the `CommandResult`.
@@ -255,7 +255,7 @@ appropriate boolean variables will be flipped to represent the correct view.
 * has a need to find relevant contacts pertaining to a specific module
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: allows user to find relevant contacts (eg professors, classmates) from a specific module quickly
+**Value proposition**: allows user to find relevant contacts (e.g professors, classmates) from a specific module quickly
 
 ### User stories
 
@@ -543,7 +543,7 @@ Use case ends.
 * **User**: A user of UniBook, either a student or a professor.
 * **Module**: A university course, which has professor(s) teaching it, and students participating in it. 
 * **Group**: A group within a module. For example, a tutorial group or project group.
-* **Popular Operating System**: Windows, Linux, Unix, MacOS
+* **Popular Operating System**: Windows, Linux, Unix, macOS
 
 
 --------------------------------------------------------------------------------------------------------------------

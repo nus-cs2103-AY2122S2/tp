@@ -305,7 +305,7 @@ public class ModuleCard extends UiPart<Region> {
 
     //Enum which represents which tab of the ModuleCard is visible at a time
     public enum ModuleCardTab {
-        STUDENTS, PROFESSORS, GROUPS, KEY_EVENTS, NONE;
+        STUDENTS, PROFESSORS, GROUPS, KEY_EVENTS, NONE
     }
 
 }

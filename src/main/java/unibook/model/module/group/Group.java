@@ -175,7 +175,7 @@ public class Group {
     /**
      * Remove a meeting based on Index given
      *
-     * @param index
+     * @param index index of the meeting time in the list of meeting times to remove.
      */
     public void removeMeetingTime(int index) {
         meetingTimes.remove(index);
@@ -198,11 +198,8 @@ public class Group {
      * @return
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
-        if (moduleCode.equals(module.getModuleCode().toString())
-            && groupName.equalsIgnoreCase(getGroupName())) {
-            return true;
-        }
-        return false;
+        return moduleCode.equals(module.getModuleCode().toString())
+            && groupName.equalsIgnoreCase(getGroupName());
     }
 
     /**

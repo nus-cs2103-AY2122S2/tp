@@ -34,7 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
 * Role: Documentation
-* Responsibilities: Parsing command input
+* Responsibilities: List command functionality
 
 ### Ryan Walter Lee
 
@@ -44,7 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/ryanwalterlee.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Delete command functionality
 
 ### Sophie Ng
 
@@ -54,5 +54,5 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/sophiien.md)]
 
 * Role: Developer
-* Responsibilities: Updating contacts
+* Responsibilities: Edit command functionality
 

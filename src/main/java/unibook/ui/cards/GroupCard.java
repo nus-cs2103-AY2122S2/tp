@@ -144,7 +144,7 @@ public class GroupCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleCard)) {
+        if (!(other instanceof GroupCard)) {
             return false;
         }
 

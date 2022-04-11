@@ -281,7 +281,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Module>} containing zero modules.
      */
     private Optional<Set<ModuleCode>> parseModulesForEdit(String modules) throws ParseException {
-        if (modules == " ") {
+        if (modules.equals(" ")) {
             return Optional.empty();
         }
         Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();
