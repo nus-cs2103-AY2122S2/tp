@@ -513,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to [list customers UC03](#use-case-uc03---list-customers)
+1.  User requests to [list customers UC02](#use-case-uc02---list-customers)
 2.  User requests to edit a specific customer's information in the list based on the index and the input format.
 3.  TrackBeau edits the details of the customer.
 4.  TrackBeau shows the updated list of customers.
@@ -541,6 +541,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2d1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 #### Use case: UC05 - Find customers
 
@@ -571,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to [list customers UC03](#use-case-uc03---list-customers)
+1.  User requests to [list customers UC02](#use-case-uc02---list-customers)
 2.  User requests to delete a specific customer based on the customer index and the input format.
 3.  TrackBeau deletes the future bookings of the specified customer.
 4.  TrackBeau deletes the specified customer.
@@ -587,6 +589,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. TrackBeau shows an error message.
 
       Use case resumes at step 2.
+
+* *a. At any time, User requests to [view help UC01](#use-case-uc01---view-help)
 
 #### Use case: UC07 - List services
 
@@ -731,7 +735,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to [list customers UC03](#use-case-uc03---list-customers)
+1.  User requests to [list customers UC02](#use-case-uc02---list-customers)
 2.  User requests to [list services UC07](#use-case-uc07---list-services)
 3.  User requests to add a booking of a specific customer at a specific time for a specific service based on the customer and service index respectively and the input format.
 4.  TrackBeau adds the booking to the booking list.
@@ -755,7 +759,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests to [list bookings UC11](#use-case-uc11---list-bookings)
+1.  User requests to [list bookings UC12](#use-case-uc12---list-bookings)
 2.  User requests to edit a specific booking's information in the list based on the index and the input format.
 3.  TrackBeau edits the details of the booking.
 4.  TrackBeau shows the updated list of bookings.
@@ -810,7 +814,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to [list bookings UC11](#use-case-uc11---list-bookings)
+1.  User requests to [list bookings UC12](#use-case-uc12---list-bookings)
 2.  User requests to delete a booking of a customer based on the booking index and the input format.
 3.  TrackBeau deletes the booking at the specified index.
 
