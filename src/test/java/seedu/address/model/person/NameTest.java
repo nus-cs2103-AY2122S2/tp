@@ -42,4 +42,24 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    public void containsKeyword() {
+        Name testName = new Name("Jonathan Chen Xiao Ming");
+
+        assertFalse(testName.containsKeyword(""));
+        assertFalse(testName.containsKeyword("a"));
+        assertFalse(testName.containsKeyword("John"));
+        assertFalse(testName.containsKeyword("Che"));
+        assertFalse(testName.containsKeyword("Johnathan Che"));
+
+        assertTrue(testName.containsKeyword("Jonathan"));
+        assertTrue(testName.containsKeyword("jonathan"));
+        assertTrue(testName.containsKeyword("joNATHAN"));
+        assertTrue(testName.containsKeyword("JoNatHan"));
+
+        assertTrue(testName.containsKeyword("jonathan Chen"));
+        assertTrue(testName.containsKeyword("Chen Xiao Ming"));
+        assertTrue(testName.containsKeyword("xiao ming"));
+    }
 }

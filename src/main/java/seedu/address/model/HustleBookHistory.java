@@ -72,9 +72,26 @@ public class HustleBookHistory {
 
     /**
      * Checks if the history is empty.
-     * @return True is history is empty.
+     * @return True if history is empty.
      */
     public boolean isEmpty() {
         return historyList.isEmpty();
+    }
+
+    /**
+     * Clears the stored history.
+     */
+    public void clear() {
+        this.historyList = new ArrayList<>();
+        this.currStatePointer = -1;
+    }
+
+    /**
+     * Gets the current state of HustleBook
+     * @return The current state of the HustleBook
+     * @throws IndexOutOfBoundsException When historyList is empty
+     */
+    public ReadOnlyHustleBook getCurrState() throws IndexOutOfBoundsException {
+        return historyList.get(currStatePointer);
     }
 }

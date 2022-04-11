@@ -89,6 +89,9 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withPrevDateMet("2022-02-01").withSalary("9000").withInfo("Under Scheme B").build();
+    public static final Person BENSON_SMITH = new PersonBuilder().withName("Benson Smith").withPhone("8008135")
+            .withEmail("bensonS@test.com").withAddress("Benson Lane")
+            .withPrevDateMet("2021-12-25").withSalary("10000").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -114,7 +117,19 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static HustleBook getDuplicatesHustleBook() {
+        HustleBook hb = new HustleBook();
+        for (Person person : getDuplicatePersons()) {
+            hb.addPerson(person);
+        }
+        return hb;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getDuplicatePersons() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BENSON_SMITH, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
