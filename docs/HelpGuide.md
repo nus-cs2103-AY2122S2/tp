@@ -235,6 +235,7 @@ There cannot be duplicated meetings. Two meetings are the same if both have the 
 
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
 DURATION is in minutes and must be an integer between 1 and 10000.
+The meeting link must start with _https://_ or _http://_ for it to be valid.
 
 **Examples:**
 
