@@ -1222,3 +1222,29 @@ testers are expected to do more *exploratory* testing.
 
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+**Overview**
+
+Our team wanted to make an application that could help facilitate covid tracking and contact tracing in NUS residential halls. We decided to build Tracey which aims to be a central hub for the covid status information of all residents of an NUS residential hall. In addition to the existing basic features of the Address Book 3 (AB3), we needed to add additional features to satisfy the needs of our target audience, the student leaders and administrative staff of halls. These features include the Filter and Summarise functions.
+
+**Challenges faced**
+
+**Designing of app** - Our first obstacle was to come up with the idea for Tracey. During the planning the app design, we encountered conflicts as we all had differing ideas of what features to include. We tried to incorporate all of our ideas, by deliberating and debating on how we could align our ideas, and eventually came up with a consensus on the design. 
+
+**Testing and debugging** - Much of our time was spent on coming up with appropriate test cases and debugging. The difficulty we had was figuring out how the skeletal design of the original AB3 works, but once we accomplished that, we were able to test and debug our code more smoothly and quickly.
+
+**Coding standards** - There were many instances when our code did not adhere to appropriate conding standards and the team's convention. We addressed this by always meticulously reviewing the pull requests as a team and pointing out any coding standard violations. While this may have taken up extra time, it ensured that our code is clean and readable, making it easier for cooperation.
+
+**Documentation** - We had quite a number of meetings and discussions to decide on and standardize the way we wanted to write and format our user and developer guides. This took up a fair bit of time as we had to constantly update the guides whenever we altered the implementation of our features or added new ones.
+
+**Achievements**
+
+**Adhering to proper OOP** - For all our new features, we made sure that our code was implemented in an OOP manner with proper levels of abstraction. This made for code that is more reusable and easily maintainable.
+
+**Good test coverage** - We applied the various methods of testing that we had learnt (unit testing, integration testing, system testing etc.) to make sure that the code is as bug-free as possible. We also ensured at least 70% method coverage for all components.
+
+**Conclusion**
+
+In conclusion, it was a long journey but our team communicated well and worked cohesively, producing an app that was very close to what we had envisioned. As a team, we learnt plenty about how to work and cooperate with one another, eventually accomplishing what we had set out to achieve.
