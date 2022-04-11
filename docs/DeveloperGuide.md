@@ -815,7 +815,7 @@ window preferences when you close the program.
 1. Launching the app
    1. Refer to the [Quick Start](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start) section of the
    User Guide on setting up TeachWhat!.
-   2. Launch the program using the Terminal with this command `java -jar TeachWhat!.jar`
+   2. Launch the program using the Terminal with this command `java -jar TeachWhat.jar`
    3. Test Case: First launch\
    Expected: Sample data should populate the lists. A data folder along with config.json and preferences.json should be
    created in the current directory.
@@ -997,7 +997,7 @@ When using TeachWhat! (or any program), there is always a possibility that data-
 
 To simulate this scenario, follow the steps below:
 
-1. Create an **empty folder**, and place the `TeachWhat!.jar` inside it.
+1. Create an **empty folder**, and place the `TeachWhat.jar` inside it.
 2. Start the program by following the quick-start instructions in the [User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start).
 3. Exit the program by entering the `exit` command in the command-box.
    - At this point, you should see that some new files and folders have been created in the folder.
@@ -1013,7 +1013,7 @@ When using TeachWhat! (or any program), there is always a possibility that data-
 
 To simulate this scenario, follow the steps below:
 
-1. Create an **empty folder**, and place the `TeachWhat!.jar` inside it.
+1. Create an **empty folder**, and place the `TeachWhat.jar` inside it.
 2. Start the program by following the quick-start instructions in the [User Guide](https://ay2122s2-cs2103t-w11-3.github.io/tp/UserGuide.html#quick-start).
 3. Exit the program by entering the `exit` command in the command-box.
     - At this point, you should see that some new files and folders have been created in the folder.
