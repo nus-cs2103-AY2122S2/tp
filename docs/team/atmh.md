@@ -63,7 +63,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Updated FAQ (PR [\#152](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/152))
     * Updated Quick start (PR [\#275](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/275))
     * Updated details about max integer and chronological ordering of contacts ([\#283](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/283))
-    * Improved UserGuide formatting (PR [\#157](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/157), [\#159](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/159), [\#161](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/161), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#275](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/275), [\#283](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/283))
+    * Improved UserGuide formatting (PR [\#157](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/157), [\#159](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/159), [\#161](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/161), [\#180](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/180), [\#275](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/275), [\#283](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/283), [\#318](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/318))
   
   * Developer Guide:
     * Added implementation details of the `undo` and `redo` feature (PR [\#93](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/93))
