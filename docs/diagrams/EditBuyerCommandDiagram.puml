@@ -23,7 +23,7 @@ box Storage STORAGE_COLOR_T1
 participant ":Storage" as Storage STORAGE_COLOR_T3
 
 
-[-> LogicManager : execute("addbuyer 1 n/chua")
+[-> LogicManager : execute("edit-b 1 n/chua")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand
@@ -36,7 +36,7 @@ activate EditBuyerCommandParser
 EditBuyerCommandParser --> AddressBookParser:
 deactivate EditBuyerCommandParser
 
-AddressBookParser -> EditBuyerCommandParser : parse("addbuyer 1 n/chua")
+AddressBookParser -> EditBuyerCommandParser : parse("edit-b 1 n/chua")
 activate EditBuyerCommandParser
 
 create EditBuyerCommand
