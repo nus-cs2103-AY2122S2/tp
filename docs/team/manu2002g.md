@@ -32,5 +32,11 @@ Given below are my contributions to the project.
     * Added implementation for `edit`including the sequence diagram
     * Added class diagram describing the predicates used in `find` and `find -s`
     * Contributed to user stories, use cases, non-functional requirements and glossary
+  
+* **Test Case Implementation**:
+  * ShowEventsCommand
+  * ShowEventsCommandParser
+  * FindCommand 
+  * EditCommand
 
 
