@@ -27,7 +27,7 @@ I am an eager Y2 computer science undergraduate with the desire to learn and imp
 [[github](http://github.com/theprevailingone)] [[linkedin](https://www.linkedin.com/in/edwardalvin/)] [[portfolio](./team/theprevailingone.md)]
 
 * Role: Developer
-* Responsibilities: TBD
+* Responsibilities: UG main handler, sort command implementation along with parser, testings, and documentation
 
 Computer Science undergraduate passionate about software engineering and game development. Capable developer, having devised and developed multiple projects. Proficient in a range of modern technologies including Python, Javascript and Java. Interested in UI/UX Design and Data Science. Looking for new opportunities and challenges.
 
