@@ -526,6 +526,7 @@ Actor: User
 
 **Extensions:**
 * 1a. The list is empty
+
   Use case ends
 
 * 3a. The given index is invalid
@@ -550,6 +551,7 @@ Actor: User
 
 **Extensions:**
 * 1a. The list is empty
+
   Use case ends
 
 * 3a. REP detects error in details
