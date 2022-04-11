@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * As Team Lead, I was responsible for:
     * Scheduling and directing meetings
-    * Allocating project work and setting deliverables and deadlines, and ensuring they were met
+    * Allocating project work and setting deliverables and deadlines, ensuring they were met
     * Setting standards for the team to follow, these include:
       * Command format standards - to ensure consistent commands to enhance ease-of-use
       * Documentation format standards - to ensure consistent documentation
@@ -54,7 +54,9 @@ Given below are my contributions to the project.
   * Index page:
     * Changed the index page from AB3 to UniBook by replacing screenshots and descriptions to be on UniBook instead of AB3
 * **Community**:
-  * Actively reviewed PRs of teammates - Total number of PRs reviewed: 49
-  * Opened issues for features that needed to be completed, along with bugs noticed - Total number of issues opened: 17
+  * Actively reviewed PRs of teammates
+    * Total number of PRs reviewed: 51
+  * Opened issues for features that needed to be completed, along with bugs noticed 
+    * Total number of issues opened: 17
   * Carefully analyzed code written by teammates and reported bugs and suggestions to them where appropriate
   * Was active in, and often initiated, discussions on Github issues, PRs and Telegram group chat

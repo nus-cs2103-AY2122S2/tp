@@ -44,7 +44,7 @@ public class JsonAdaptedGroup {
     /**
      * Creates a JsonAdaptedGroup object using group object.
      *
-     * @param source
+     * @param source group object to use to create the {@code JsonAdaptedGroup}
      */
     public JsonAdaptedGroup(Group source) {
         this.groupName = source.getGroupName();
@@ -73,7 +73,7 @@ public class JsonAdaptedGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!isValidName(groupName)) {
-            throw new IllegalValueException(String.format(NAME_CONSTRAINT_MESSAGE));
+            throw new IllegalValueException(NAME_CONSTRAINT_MESSAGE);
         }
 
         Group group = new Group(groupName, module);

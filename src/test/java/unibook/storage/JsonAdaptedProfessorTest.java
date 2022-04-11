@@ -2,6 +2,7 @@ package unibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static unibook.storage.adaptedmodeltypes.JsonAdaptedPerson.MODULE_DOES_NOT_EXIST_MESSAGE;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
+import unibook.model.person.Office;
 import unibook.model.person.Phone;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedModuleCode;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
@@ -25,6 +27,7 @@ public class JsonAdaptedProfessorTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_OFFICE = "  ";
 
     private static final String VALID_NAME = TypicalProfessors.BENJAMIN.getName().toString();
     private static final String VALID_PHONE = TypicalProfessors.BENJAMIN.getPhone().toString();
@@ -98,10 +101,9 @@ public class JsonAdaptedProfessorTest {
 
     @Test
     public void toModelType_invalidOffice_throwsIllegalValueException() {
-        JsonAdaptedProfessor prof = new JsonAdaptedProfessor(VALID_NAME, VALID_PHONE, null, VALID_TAGS,
-            VALID_MODULES, VALID_OFFICE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, () -> prof.toModelType(
+        JsonAdaptedProfessor prof = new JsonAdaptedProfessor(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS,
+            VALID_MODULES, INVALID_OFFICE);
+        Assert.assertThrows(IllegalValueException.class, Office.MESSAGE_CONSTRAINTS, () -> prof.toModelType(
             TypicalUniBook.getTypicalUniBook()));
     }
 
@@ -115,6 +117,15 @@ public class JsonAdaptedProfessorTest {
             TypicalUniBook.getTypicalUniBook()));
     }
 
-    //TODO invalid modules test
-
+    @Test
+    public void toModelType_nonExistentModule_throwsIllegalValueException() {
+        JsonAdaptedModuleCode nonExistentModule = new JsonAdaptedModuleCode("XXXX");
+        Set<JsonAdaptedModuleCode> modules = new HashSet<>();
+        modules.add(nonExistentModule);
+        JsonAdaptedProfessor prof =
+            new JsonAdaptedProfessor(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, modules, VALID_OFFICE);
+        Assert.assertThrows(IllegalValueException.class,
+            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()), () ->
+                    prof.toModelType(TypicalUniBook.getTypicalUniBook()));
+    }
 }

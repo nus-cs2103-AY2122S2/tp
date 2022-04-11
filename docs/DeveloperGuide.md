@@ -66,7 +66,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -126,7 +126,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `UniBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -210,7 +210,7 @@ The delete feature enables the user to delete a module/student/professor/group/e
 
 Given below is an example of a sequence diagram that shows the flow using the input `delete 1` on the people view.
 
-The command is first parsed with `execute("delete 1", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `DeleteCommandParser`. This instantiates a new `DeleteCommand` object which is returned to `UniBookParser`. After which, the `DeleteCommand` is passed to `LogicManager` and the `execute` method will run. There will be checks to ensure that the command is able to be done, for example, if the index provided is out of range, no person will be deleted and the error message should inform the user that their command was invalid and how it can be fixed. Every command type will access model in different ways depending on what checks need to be done and how the model needs to be accessed. In this case, the `model` object will be accessed to delete the person at that index from the UniBook. Finally, the `CommandResult` will be returned.
+The command is first parsed with `execute("delete 1", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `DeleteCommandParser`. This instantiates a new `DeleteCommand` object which is returned to `UniBookParser`. After which, the `DeleteCommand` is passed to `LogicManager` and the `execute` method will run. There will be checks to ensure that the command can be executed, for example, if the index provided is out of range, no person will be deleted and the error message should inform the user that their command was invalid and how it can be fixed. Every command type will access model in different ways depending on what checks need to be done and how the model needs to be accessed. In this case, the `model` object will be accessed to delete the person at that index from the UniBook. Finally, the `CommandResult` will be returned.
 
 ![Implementation of deleting a person](images/DeleteSequenceDiagram.png)
 
@@ -222,7 +222,7 @@ diagram below shows the flow using the input `list type/professors` which runs o
 
 The command is first parsed with `execute("list type/professors", true, false, false)` where the boolean variables indicate whether the `People`, `Modules` or `Groups` view is currently active. Subsequently, the 
 `parseCommand` method in `UniBookParser` is called which will call `ListCommandParser`, which creates the 
-`ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently the `ListCommand` is returned to 
+`ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently, the `ListCommand` is returned to 
 `LogicManager` and the `execute` method is run. In this case the `Model` instance is accessed to update the predicate
 which changes the entries appropriately (in this case showing all professors), 
 before finally returning the `CommandResult`.
@@ -255,7 +255,7 @@ appropriate boolean variables will be flipped to represent the correct view.
 * has a need to find relevant contacts pertaining to a specific module
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: allows user to find relevant contacts (eg professors, classmates) from a specific module quickly
+**Value proposition**: allows user to find relevant contacts (e.g professors, classmates) from a specific module quickly
 
 ### User stories
 
@@ -543,7 +543,7 @@ Use case ends.
 * **User**: A user of UniBook, either a student or a professor.
 * **Module**: A university course, which has professor(s) teaching it, and students participating in it. 
 * **Group**: A group within a module. For example, a tutorial group or project group.
-* **Popular Operating System**: Windows, Linux, Unix, MacOS
+* **Popular Operating System**: Windows, Linux, Unix, macOS
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -678,12 +678,62 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
+### Finding a person
+1. Finding a person
+   1. Prerequisites: Must be on people view, which can be switched to using the `list o/view v/people` command.
+   2. Test case: `find james` <br>
+      Expected: All persons with the name "james" in their full name will be shown on the people view. "# persons listed!" will be seen in the result display, where # is the number of matching persons.<br>
+   3. Test case: `find bianca` <br> _("bianca" is a placeholder for a name that does not exist in UniBook, replace this name with a name that does not exist in your instance of UniBook)_<br>
+      Expected: No persons will be shown on the people view. "0 persons listed!" will be seen in the result display.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+## Effort
+
+### Challenges faced
+
+#### Number of entity types
+* 3 main entity types in UniBook, `Person`, `Module` and `Group`. Furthermore, a `Person` can have the subtype of `Student` or `Professor`. AB3 only had 1.
+  * Resulting Challenges:
+    * Writing of many new classes to fully model the entities.
+      * This took up a substantial amount of time as new classes meant more methods to support them in the main UniBook application and more tests to ensure that they work.
+    * Configuring of storage to store the entities in their entirety. 
+      * Needed to write a substantial amount of storage classes to support the new model classes.
+      * Had to account for the inheritance relationship between `Student` and `Professor` classes with `Person` class.
+        * This required learning more advanced uses of the Jackson library so that this relationship could be expressed in the stored JSON.
+    * Determination of and enforcement of fields on entity classes.
+      * Every field in all entities had to have its own set of constraints to ensure a consistent user experience.
+        * e.g. a module code must be unique amongst all modules in UniBook.
+      * Constraints had to be determined appropriately so that they would be intuitive, and match reality as closely as possible.
+        * e.g. in reality two modules in the same university would not share the same module code.
+      * Enforcement of the constraints involved a fair amount of time and code across all entities, along with the writing of the tests to ensure they are enforced correctly.
+      * Many specific error messages had to be created to inform users whenever any of their entered commands violated a constraint.
+      * Deserialization of storage file had to be carefully written to enforce these constraints as well.
+        * So that any erroneous modifications of the JSON storage file would not violate the constraints enforced by UniBook when launched.
+      * Table detailing every single constraint had to be thoroughly written out so the user of UniBook would be well aware of every constraint.
+    * Revamping of GUI so that all the new entities and their details could be viewed in full by the user.
+      * Required planning and conceptualisation of the layouts of different views of UniBook.
+      * Required many new GUI classes and their supporting FXML files to be written.
+      * Styling to achieve an aesthetically pleasing interface was a laborious process:
+        * Using CSS in JavaFX is not well documented online, and has different attribute names compared to standard CSS one would use for HTML in front-end development.
+        * Achieving the right sizing and coloring of components of the GUI often involved a trial-an-error process of changing the styling slightly, reloading the application and viewing the change to see if it is acceptable and achieves the desired effect. This is because to achieve an aesthetic that is 'just right', one often needs to the see the aesthetic first.
+* Designing of and standardisation of commands.
+  * Resulting Challenges:
+    * Ensuring each command was as similar to each other in structure as possible is a very time-consuming process as it involves the entire team having to cover all the many variations of each command.
+    * Many new tokens had to be created and standardized to support all the variations of commands.
+
+### Achievements
+* Achieved most of our original design goals.
+  * We wanted to enhance AB3 such that it would be particularly useful to our target users - students. Being students ourselves, we could better plan out our user stories and use cases to guide the development of UniBook, hence creating a more useful application.
+    * The new entities arose out of all of us agreeing that being able to manage university modules and groups, along with the people associated with them, would make AB3 much more useful to students. 
+    * Ultimately we succeeded in adding all the planned entities, along with all the supporting classes and key features necessary to view, manipulate and store these entities. We only missed out on more idyllic advanced features in the manipulation these entities due to time constraints.
+* Made GUI of AB3 much more useful and aesthetically pleasing.
+  * Original GUI of AB3 was rather simple and uninspiring, and it did not do much more than show basic contact information.
+  * Along with enhancing the GUI to display all the new entities, we made it more aesthetically pleasing. 
+  * Added ease-of-use features like basic navigation using mouse clicks, which will benefit users who prefer interacting with GUIs.
