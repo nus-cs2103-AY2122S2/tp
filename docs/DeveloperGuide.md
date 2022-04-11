@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,12 +153,23 @@ Now, what PropertyToBuy and PropertyToSell classes encapsulate:
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Structure of the Storage component](images/StorageClassDiagram.png)
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save buyer address book data, seller address book date, and user preference data in json format, and read them back into corresponding objects.
+* inherits from `BuyerAddressBookStorage`, `SellerAddressBookStorage` and `UserPrefStorage`, which means it can be treated as one of those (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+#### Design Consideration
+1. Current Design: Having different storage for buyers and sellers
+   Pros: Easier to implement as issues on one side will not affect issues on another. Moreover, when one json file is corrupted, the other json file can still be used.
+
+Cons: There will be lots of repetitive code.
+
+2. Alternative: Use addressbook.json to contain both buyer and seller list
+   Pros: Less repetitive code
+
+Cons: Another layer will be added in the json file, harder to debug and more prone to error.
 
 ### Common classes
 
@@ -182,9 +193,8 @@ We are currently implementing a Match feature. In implements the following opera
 Format: `match BUYER_INDEX`
 * The fields are:
     * `BUYER_INDEX` - index of the Buyer that the user is trying to match with Sellers.
-    
 Example: `match 2`
-    
+
 Result:
 * The list of sellers that match the buyer's demands will be displayed in the UI.
 
@@ -203,21 +213,21 @@ Result:
 * An example:
     - buyer's `PropertyToBuy`(after `edit-b` or `add-b`) has `House`, and buyer is currently at *index 2* of UniqueBuyerList.
         - `Name`: *Janald*
-    
-        - PropertyToBuy: 
+
+        - PropertyToBuy:
             - `HouseType`: `BUNGALOW`,
-            - `Location`: `Serangoon` and 
+            - `Location`: `Serangoon` and
             - `PriceRange`:(50 000, 100 000) in dollars
 
     - a certain seller has
         - `Name`: *Junhong*
-        - `ProperyToSell`: 
+        - `ProperyToSell`:
             - `House` with `HouseType`: `BUNGALOW` and `Location`: `Serangoon` as well
             - His `PriceRange` that he is willing to sell the property for is (99 999, 200 000)
-      
+
     - In this case, the PropertyToBuy and PropertyToSell can match(same House, and 99 999 - 100 000 dollars is a matching price)
     - `match 2` will display the list of sellers that match the buyer *Janald*. As a result, *Junhong* will be one of the sellers displayed.
-    
+
 #### Why match should be implemented
 
 * Our AgentSee application helps housing agents to keep track of their clients efficiently.
@@ -298,7 +308,7 @@ The `editbuyer` / `editseller` command mechanism uses a similar interactions as 
 
 Note: All the prefix (like n/, p/, ...) are <b>optional</b>, you could omit any of them but at least one prefix should be provided, and the <b>order</b> of prefix does not matter.
 
-Below are some detailed steps while executing `editbuyer` / `editseller` command: 
+Below are some detailed steps while executing `editbuyer` / `editseller` command:
 
 **We use ```editbuyer``` command as an example, the other command's flow are similar to this command as well.**
 
@@ -310,20 +320,20 @@ The user types input E.g. `editbuyer 1 n/Chua` into the `CommandBox`
 
 **Step 2:**
 
-Once the user hit Enter,  the  `LogicManager` calls `execute` that takes in everything user typed. 
-Then, `AddressBookParser` will investigate the user's input. It will takes the first keyword: `editbuyer` and 
+Once the user hit Enter,  the  `LogicManager` calls `execute` that takes in everything user typed.
+Then, `AddressBookParser` will investigate the user's input. It will takes the first keyword: `editbuyer` and
 call the corresponding `EditBuyerCommandParser::parse` by providing the **arguments** (anything after than first word) from user input
 
 **Step 3:**
 
-`EditBuyerCommandParser` parse the argument provided and check the validity of the arguments. If any argument provided 
+`EditBuyerCommandParser` parse the argument provided and check the validity of the arguments. If any argument provided
 is not valid, an error will be shown the command won't be executed.
 
 In our example, `1 n/Chua` was provided, the index and at least one require prefix are given, so it is a valid argument.
 
 **Step 4:**
 
-Now the `AddressBookParser` returns `EditBuyerCommand` as ``CommandResult``, the `LogicManager` then calls 
+Now the `AddressBookParser` returns `EditBuyerCommand` as ``CommandResult``, the `LogicManager` then calls
 `CommandResult::execute`.
 
 **Step 5:**
@@ -331,12 +341,12 @@ Now the `AddressBookParser` returns `EditBuyerCommand` as ``CommandResult``, the
 Now the `EditBuyerCommand` will execute and do the work, that is updating the corresponding information from the given
 index. A `CommandResult` containing the successful execution result is returned.
 
-**Note:** The validity of the index will be check at this time, if the index is out of bound, the error will be shown 
+**Note:** The validity of the index will be check at this time, if the index is out of bound, the error will be shown
 and the edit command will not be executed.
 
 **Step 6:**
 
-`LogicManager` component will then update the storage with the edited `Model` through the 
+`LogicManager` component will then update the storage with the edited `Model` through the
 `Storage#saveBuyerAddressBook()` method.
 
 **Step 7:**
@@ -354,55 +364,95 @@ The Sequence Diagrams below summarizes the various steps involved:
 The `add-ptb` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
 
 1. An index needs to be specified along with the necessary fields
-    E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
+   E.g. `add-ptb 1 h/condo l/Serangoon pr/400000,900000`
 2. The Parser (`AddPropertyToBuyCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and Smaller than or equal to the size of the displayed buyer list).
 3. The updated buyer remains in the same position as before.
 
 **\[Proposed\]** Alternatives considered:
 
 - Given the time, the add property to buy feature can be integrated with the `add-b` command to allow users to add properties with the buyer,
-instead of doing it in 2 commands. 
-  - Pros:
-    - More flexibility for experienced users
-  - Cons:
-    - More code to implement and test
+  instead of doing it in 2 commands.
+    - Pros:
+        - More flexibility for experienced users
+    - Cons:
+        - More code to implement and test
 - Allow for certain fields to be **optional** if a buyer is yet to give the user the information, but they still wish to add a property first
-  - Pros:
-    - More flexible design
-  - Cons:
-    - Hard to implement
-    - Error prone
+    - Pros:
+        - More flexible design
+    - Cons:
+        - Hard to implement
+        - Error prone
 
 ### `sort` feature
-The `sort` command mechanism can be broken down into the following steps:
+
+The sort feature allows the user to sort the buyers and sellers by name or time in ascending or descending order.
+
+Due to the symmetric nature of the command for buyer and seller, only `sort-b` will be discussed.
+
+
+Given below is the steps and the sequence diagram for execution of `execute("sort-b by/time o/asc")`
+
+
 
 **Step 1:**
-The user types input E.g.  `sort` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+The user types input E.g.  `sort-b by/time o/asc` into the `CommandBox` (See [UI component](#ui-component) for more info on `CommandBox`)
+
 
 **Step 2:**
-The `execute(input)` method of `LogicManager`, a subclass of the Logic component, is called with the given input.
+`AddressBookParser` will check if the command is a sort buyer command. The `AddressbookParser` will then create a `SortBuyerCommandParser`
 
 **Step 3:**
-The `sortFilteredClientList()` method of `model` is being called
+`SortBuyerCommandParser` then checks whether all the prefixes are present and whether the compared item are sortable, and whether the order belongs to either `asc` or `desc`. If yes, a `SortBuyerCommand` is returned.
+
+**Step 2:**
+The `execute(model)` method of `SortBuyerCommand` is being called.
+
+**Step 3:**
+The `sortFilteredBuyerList(time, asc)` method of `model` is being called, which in turn calls `sortFilteredBuyerList(time, asc)` method of `BuyerAddressBook`, which in turn calls `sortBuyers(time, asc)` from its own copy of `UniqueBuyerList`.
+
 
 **Step 4:**
-The `Addressbook.sortPersons() ` method is being called.
+The `sortBuyers(time, asc)` alters the `UniqueBuyerList`'s `internalList` permanently and sorts it by the compared item and by the given order.
 
-**Step 5:** 
-The `UniqueClientList.sortPersons() ` method is being called.
 
-**Step 6:**
-`UniqueClientList`'s `internalList` is being modified permanently by the order of their names alphabetically.
+**Step 5:**
+Finally, a `CommandResult` with the relevant feedback is returned to the `LogicManager`.
 
 The following Sequence Diagrams summarizes the various steps involved:
 
-`To be added later`
+![SortBuyerSequenceDiagram](images/SortBuyerSequenceDiagram.png)
+
+Design Considerations:
+Current Design: The structure of internal list change permanently, and instead of passing the comparator, the `comparedItem` and `order` are passed around in every method call.
 
 **Pros:**
-It alters the internal list completely, so that the app 'saves' users last sorting option.
+- It alters the internal list completely, so that the app 'saves' users last sorting option.
+- Easier to implement to pass the `comparedItem` and `order` are around.
 
 **Cons:**
-Some people might not want the sorted result to be saved.
+- Some people might not want the sorted result to be saved.
+- `comparedItem` and `order` will be passed in many layers before reaching  the `internalList`, less abstraction.
+
+Alternative 1: Sort the list temporarily and maintain the original list in the chronological order.
+
+**Pros:**
+- The functionality seems more natural: when you sort something you might not want the structure of the `internalList` to change permanently.
+
+**Cons:**
+- Harder to implement, needs to change the `FilteredList` to `SortedList` in `ModelManager`.
+
+
+Alternative 2: Pass a comparator along instead of `comparedItem` and `order`
+
+**Pros:**
+- Better abstraction, easier to maintain
+
+**Cons:**
+- Harder to implement, not efficient for sort with limited options.
+
+
+
+
 
 
 ### \[Proposed\] Clear buyer/seller list
@@ -460,7 +510,7 @@ Having a seperate buyer and seller list means we need to seperate the find comma
 Examples:
 - `list-b` lists all current buyers
 - `list-s` lists all current sellers
-- 
+-
 #### Result:
 returns an unfiltered list of sellers or buyers
 
@@ -545,9 +595,9 @@ Use case ends
 **Extensions**
 
 * 3a. System detects an error in User input.
-  * 3a1. System shows an error message.
-    
-    Use case resumes from step 3.
+    * 3a1. System shows an error message.
+
+      Use case resumes from step 3.
 
 **Use case: Add a seller**
 
@@ -562,9 +612,9 @@ Use case ends
 
 * 1a. System detects an error in User input.
 
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes from step 1.
+      Use case resumes from step 1.
 
 *{More to be added}*
 
@@ -614,15 +664,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
-   2. Run `java -jar addressbook.jar` in the directory containing the jar file.
-   3. Alternatively, double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Download the jar file and copy into an empty folder
+    2. Run `java -jar addressbook.jar` in the directory containing the jar file.
+    3. Alternatively, double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -631,6 +681,7 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
     
    example JSON format of the `buyeraddressbook.json`  and `selleraddressbook`:
+
 
    ```buyeraddressbook.json```:
     
@@ -705,5 +756,5 @@ testers are expected to do more *exploratory* testing.
      - `"priceRange"`:
      
      `"lower"` is more than `"upper"` value, i.e. `"lower"` > `"upper"`
-    
+   
 
