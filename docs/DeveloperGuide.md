@@ -390,7 +390,7 @@ Alternatives considered:
         - Hard to implement
         - Error prone
 
-### `sort` feature
+### Sort features
 
 The sort feature allows the user to sort the buyers and sellers by name or time in ascending or descending order.
 
@@ -714,7 +714,7 @@ testers are expected to do more *exploratory* testing.
     }
     ``` 
 
-   ```selleraddressbook.json```:
+   `selleraddressbook.json`:
 
     ```
     {
