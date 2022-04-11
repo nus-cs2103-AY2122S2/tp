@@ -214,15 +214,14 @@ Although iBook is a CLI based application, we do provide a GUI alternative for s
 
 If a command has a GUI alternative, the subheading GUI alternative will be included in the same section.
 
-<<<<<<< HEAD
 You can interact with the application through buttons, such as the <img align="center" src="images/ui-icons/add-product.png" alt="Add Product" height="25"/> button.
-=======
+
 <div markdown="block" class="alert alert-primary">
->>>>>>> 1c0de1de3233c1aaee5ba8bc1e1a38b66b882334
 
 :bulb: **Product and Item:**
 
 As most of the commands revolve around products and items. We advise you to take a look at the [Glossary](#6-glossary) section for our definition of products and items before proceeding.
+
 </div>
 
 <div style="page-break-after: always;"></div>
