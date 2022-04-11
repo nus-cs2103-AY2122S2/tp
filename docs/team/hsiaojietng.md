@@ -5,7 +5,7 @@ title: hsiaojietng's Project Portfolio Page
 
 ### Project: RealEstatePro
 
-RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
+RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be a breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 
@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-  * Act as repository master for the first iteration
+  * Act as repository master for the first iteration (v1.1)
     * Merge PRs into respective branches after reviewing changes
     * Provide effective reviews for PRs
 
@@ -45,10 +45,11 @@ Given below are my contributions to the project.
     * Create Model diagram for RealEstatePro
     * Create Storage diagram for RealEstatePro
     * * Add documentation for the features `favourite` & `Favourites window`[\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), `stats` & `Statistics window` [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
+    * Add use cases and manual testing for `favourite`, `stats` & `fw`
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#5](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/5), [\#11](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/11/)
+  * PRs reviewed (with non-trivial review comments): [\#5](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/5), [\#11](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/11/), [\#182](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/182)
   * Create Ui mockup for RealEstatePro
 
 
