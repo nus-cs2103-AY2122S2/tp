@@ -84,7 +84,6 @@ public class ViewCommand extends Command {
     public ViewCommand(List<Predicate<Person>> predicatePerson,
                        Predicate<Schedule> predicateSchedule,
                        List<String> keywords) {
-        //requireNonNull(predicate);
         this.predicatePerson = predicatePerson;
         this.predicateSchedule = predicateSchedule;
         this.keywords = keywords;
@@ -101,17 +100,22 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (predicatePerson != null) {
-            Predicate<Person> allPredicate = person -> true;
-            for (Predicate<Person> predicate : predicatePerson) {
-                allPredicate = allPredicate.and(predicate);
-            }
-            model.updateFilteredPersonList(allPredicate);
+            model.updateFilteredPersonList(accumulatePredicate(predicatePerson));
         }
         if (predicateSchedule != null) {
             model.updateFilteredScheduleList(predicateSchedule);
         }
         changeSuccessMessage(model);
         return new CommandResult(messageViewSuccess);
+    }
+
+    /** A helper method to accumulate the predicate */
+    private Predicate<Person> accumulatePredicate(List<Predicate<Person>> predicates) {
+        Predicate<Person> allPredicate = person -> true;
+        for (Predicate<Person> predicate : predicates) {
+            allPredicate = allPredicate.and(predicate);
+        }
+        return allPredicate;
     }
 
     private void changeSuccessMessage(Model model) {

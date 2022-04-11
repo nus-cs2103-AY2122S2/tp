@@ -16,13 +16,15 @@ import seedu.address.model.person.Person;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
+    private static final String ASCENDING = "asc";
+    private static final String DESCENDING = "desc";
     public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
             + ": To sort player\n"
             + "Parameters: "
             + PREFIX_HEIGHT + "ORDER or "
             + PREFIX_WEIGHT + "ORDER or "
             + PREFIX_JERSEY_NUMBER + "ORDER\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_HEIGHT + "asc";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_HEIGHT + ASCENDING;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sort players based on the specified criteria.\n"
             + MESSAGE_USAGE_PLAYER;
 
@@ -55,7 +57,7 @@ public class SortCommand extends Command {
             if (sortingCriteria.getPrefix().equals("j/")) {
                 criteria = "jersey";
             }
-            order = sortingOrder.equals("asc") ? "ascending" : "descending";
+            order = sortingOrder.equals(ASCENDING) ? "ascending" : "descending";
             return new CommandResult(String.format(Messages.MESSAGE_SORTED, criteria, order));
         }
         throw new CommandException(MESSAGE_USAGE);
@@ -63,33 +65,53 @@ public class SortCommand extends Command {
 
     private void performSort(Model model) {
         if (sortingCriteria.equals(PREFIX_HEIGHT)) {
-            if (sortingOrder.equals("asc")) {
-                model.sortPersonsInMyGM(Comparator.comparing(Person::getHeight));
-            } else {
-                model.sortPersonsInMyGM((Person person1, Person person2) ->
-                        person2.getHeight().compareTo(person1.getHeight()));
-            }
+            sortHeight(sortingOrder, model);
         }
 
         if (sortingCriteria.equals(PREFIX_WEIGHT)) {
-            if (sortingOrder.equals("asc")) {
-                model.sortPersonsInMyGM(Comparator.comparing(Person::getWeight));
-            } else {
-                model.sortPersonsInMyGM((Person person1, Person person2) ->
-                        person2.getWeight().compareTo(person1.getWeight())
-                );
-            }
+            sortWeight(sortingOrder, model);
         }
 
         if (sortingCriteria.equals(PREFIX_JERSEY_NUMBER)) {
-            if (sortingOrder.equals("asc")) {
-                model.sortPersonsInMyGM(Comparator.comparing(Person::getJerseyNumber)
-                );
-            } else {
-                model.sortPersonsInMyGM((Person person1, Person person2) ->
-                        person2.getJerseyNumber().compareTo(person1.getJerseyNumber())
-                );
-            }
+            sortJerseyNumber(sortingOrder, model);
         }
     }
+
+    /** Sorts height in ascending or descending order */
+    private void sortHeight(String order, Model model) {
+        assert(order.equals(ASCENDING) || order.equals(DESCENDING));
+        if (order.equals(ASCENDING)) {
+            model.sortPersonsInMyGM(Comparator.comparing(Person::getHeight));
+        } else {
+            // descending
+            model.sortPersonsInMyGM((Person person1, Person person2) ->
+                    person2.getHeight().compareTo(person1.getHeight()));
+        }
+    }
+
+    /** Sorts weight in ascending or descending order */
+    private void sortWeight(String order, Model model) {
+        assert(order.equals(ASCENDING) || order.equals(DESCENDING));
+        if (order.equals(ASCENDING)) {
+            model.sortPersonsInMyGM(Comparator.comparing(Person::getWeight));
+        } else {
+            // descending
+            model.sortPersonsInMyGM((Person person1, Person person2) ->
+                    person2.getWeight().compareTo(person1.getWeight()));
+        }
+    }
+
+    /** Sorts jersey number in ascending or descending order */
+    private void sortJerseyNumber(String order, Model model) {
+        assert(order.equals(ASCENDING) || order.equals(DESCENDING));
+        if (sortingOrder.equals(ASCENDING)) {
+            model.sortPersonsInMyGM(Comparator.comparing(Person::getJerseyNumber)
+            );
+        } else {
+            model.sortPersonsInMyGM((Person person1, Person person2) ->
+                    person2.getJerseyNumber().compareTo(person1.getJerseyNumber())
+            );
+        }
+    }
+
 }

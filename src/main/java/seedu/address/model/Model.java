@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
@@ -101,25 +102,25 @@ public interface Model {
     /**
      * Returns true if the lineup name is taken by some lineup.
      */
-    boolean hasLineupName(seedu.address.model.lineup.LineupName targetName);
+    boolean hasLineupName(LineupName targetName);
 
     /**
-     * Add a lineup to MyGM.
+     * Adds a lineup to MyGM.
      */
     void addLineup(Lineup toAdd);
 
     /**
-     * TO BE FILLED
+     * Deletes a lineup.
      */
     void deleteLineup(Lineup lineup);
 
     /**
-     * TO BE FILLED
+     * Adds a person to a lineup.
      */
     void putPersonIntoLineup(Person player, Lineup lineup);
 
     /**
-     * TO BE FILLED
+     * Sets a lineup.
      */
     void setLineup(Lineup target, Lineup editedLineup);
 
@@ -154,12 +155,12 @@ public interface Model {
     Person getPerson(Name targetName);
 
     /**
-     * TO BE FILLED
+     * Returns the lineup with the given name.
      */
-    Lineup getLineup(seedu.address.model.lineup.LineupName targetName);
+    Lineup getLineup(LineupName targetName);
 
     /**
-     * TO BE FILLED
+     * Sorts the person list in MyGM
      */
     void sortPersonsInMyGM(Comparator<Person> personComparator);
 
