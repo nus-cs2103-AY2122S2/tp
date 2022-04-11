@@ -53,5 +53,5 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/korochii)]
 [[portfolio](team/korochii.md)]
 
-* Role: Developer
-* Responsibilities: Undecided
+* Roles: Team Lead, Developer
+* Responsibilities: Documentation, Testing, Integration
