@@ -85,6 +85,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div markdown="span" class="alert alert-primary">
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -118,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div markdown="span" class="alert alert-primary">
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -138,6 +142,7 @@ The `Model` component,
 
 </div>
 
+<div markdown="span" class="alert alert-primary">
 
 ### Storage component
 
@@ -149,6 +154,8 @@ The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div markdown="span" class="alert alert-primary">
 
 ### Common classes
 
@@ -224,6 +231,8 @@ The execution of the command is the same as all other commands (e.g. `Delete` an
 You may refer to them if you require so.
 
 ![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-primary">
 
 ### Undo/redo feature
 
@@ -357,6 +366,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 | B        | Users with need to manage large number of contacts  | Manage large number of contacts effortlessly                          | Search for contacts through the use of different search options easily / add contacts |
 | B        | User who value my privacy                           | Make my contact private so others cannot share it                     | Only users that directly share contacts with me will have my contact                  |
 
+<div markdown="span" class="alert alert-primary">
 
 ### Use cases
 
