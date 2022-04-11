@@ -21,9 +21,9 @@ Given below are my contributions to the project.
   1. CSS changes to 
      * Address bugs such as blue boxes populating the application. (Pull Requests: [\#130](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/130), 
         [\#120](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/120))
-     * Update scrollbar look.
-     * Change the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
-        * Change the color of the HelpWindow [\#123](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/123)
+     * Updated scrollbar look. [\#120](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/120)
+     * Changed the color of the details in orders list. [\#166](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/166)
+     * Changed the color of the HelpWindow [\#123](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/123)
   2. Added natural date capability to enhance existing datetime capability. (Pull Requests: [\#141](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/141),
      [\#234](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/234))
      * _What it does_: allows the user to make use of natural dates (i.e. Monday, Mon, Tues) to input as dates for the
@@ -31,7 +31,7 @@ Given below are my contributions to the project.
        dates in the form of `dd-MM-yyyy`.
      * _Justification_: This feature improves the product significantly by speeding up the users' ability to type in the
        date without having to look at their calendar to find the day and month that the order is to be completed.
-     * _Credits_: Used a formula from https://coderanch.com/t/385117/java/date-Monday that gets the next date based 
+     * _Credits_: Used a formula from [https://coderanch.com/t/385117/java/date-Monday](https://coderanch.com/t/385117/java/date-Monday) that gets the next date based 
        on specified NaturalDate input.
   3. Update ExitCommand [\#96](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/96)
      * _What it does_: It sets a 3-second timer before closing the application
@@ -42,7 +42,7 @@ Given below are my contributions to the project.
 
 * **Contributions to team based tasks**:
   * Set up Github team repository, team organisation, and Gradle for repository.
-  * Added a new logo for ReadyBakey.[\#110](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/110) 
+  * Added a new logo for ReadyBakey. [\#110](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/110) 
   * [UI draft](https://www.figma.com/file/g10mAn5vFDXQXABQPh9U9M/ReadyBakey-UI-mockup?node-id=0%3A1) image made with 
     Figma to plan out how the final product will look like.
   * Set up Github Projects to track User Stories completed and in progress.
@@ -57,7 +57,7 @@ Given below are my contributions to the project.
 
 * **Contributions to Developer Guide**:
   * Added user story and use case for editing customers' phone number, name, email address, exiting ReadyBakey, and 
-    address. [\#73](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/73/files)
+    address. [\#73](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/73)
   * Added EditOrderSequenceDiagram and EditOrder design considerations. [\#140](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/140)
   * Edited Storage Component and StorageClassDiagram to include Orders. [\#238](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/238)
 
@@ -73,7 +73,7 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
   * Helped catch JavaFX issue with Mac [\#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50#discussion_r815455829)
-  * PRs reviewed:
+  * PRs reviewed with comments:
     [\#46](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/46#discussion_r814508758),
     [\#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50#discussion_r815458156),
     [\#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83#discussion_r820242099),
