@@ -630,8 +630,8 @@ The class diagram above depicts the structure of `ListCommand`. As per any Comma
 
 When a user inputs a list command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `ListCommand` object.
 
-Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method, a `CommandResult` object will be instantiated. In this method,
-the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window.
+Following this, the `LogicManager` will call the `execute()` method of the `ListCommand` object. In this method,
+the `updatedFilteredPersonList` method of the `Model` class will be called, making sure the list of students are displayed on the Window. A `CommandResult` object with user feedback is hence instantiated.
 
 ### Email Feature
 
