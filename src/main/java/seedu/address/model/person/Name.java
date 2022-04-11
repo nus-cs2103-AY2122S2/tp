@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a Person's name in the hustle book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -50,8 +53,46 @@ public class Name {
         if (test.equals("")) {
             return false;
         } else {
-            return this.fullName.toLowerCase().contains(test);
+            String[] keywords = test.split(" ");
+            String[] names = this.fullName.split(" ");
+            List<String> nameList = Arrays.asList(names);
+            if (keywords.length == 1) {
+                return nameList.stream().anyMatch(name -> containsSingleWord(name, test));
+            } else {
+                return containsMultipleWords(names, keywords);
+            }
         }
+    }
+
+    private boolean containsMultipleWords(String[] names, String[] keywords) {
+        String keyword = keywords[0];
+        int index = 0;
+        String name = names[index];
+
+        while (!name.equalsIgnoreCase(keyword)) {
+            index++;
+            if (index == names.length) {
+                return false;
+            }
+            name = names[index];
+        }
+
+        for (int i = 1; i < keywords.length; i++) {
+            if (index + i > names.length) {
+                return false;
+            }
+
+            name = names[index + 1];
+            keyword = keywords[i];
+            if (!name.equalsIgnoreCase(keyword)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean containsSingleWord(String name, String test) {
+        return name.equalsIgnoreCase(test);
     }
 
     @Override
