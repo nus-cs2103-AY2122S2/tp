@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+* Table of Contents  
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W12-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -39,11 +39,13 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+<div style="page-break-after: always;"></div>
 
 The rest of the App consists of four components.
 
@@ -64,11 +66,14 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
 
 ### UI component
 
@@ -79,7 +84,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 The UI consists of a `MainWindow` that is made up of parts, namely `MeetingListPanel`, `PersonListPanel` and other UI parts that have been left out of the diagram. The other parts include `StatusBarFooter`, `ResultDisplay`, `CommandBox`, `HelpWindow` and `MeetingClashWindow`.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -88,9 +93,11 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` objects and `Meeting` objects residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -137,6 +144,7 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -156,9 +164,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
-
 This section describes some noteworthy details on how certain features are implemented.
-
 ### Add Meeting feature
 
 This section describes how a ```Meeting``` object is added to the list of meetings using the ```addm``` command.
@@ -200,35 +206,35 @@ Activity Diagram in the Managing meeting participants section below.
 **Aspect: How `Participant` is constructed**
 
 * **Alternative 1 (current choice):** `Participant` constructed using a `Contact`.
-  * Pros: Better extensibility as it will be possible to implement features that can interact with the `Participant` in each meeting.
-  * Cons: More difficult to implement as a `Participant` would need to change if changes are made to the corresponding `Contact`.
+    * Pros: Better extensibility as it will be possible to implement features that can interact with the `Participant` in each meeting.
+    * Cons: More difficult to implement as a `Participant` would need to change if changes are made to the corresponding `Contact`.
 * **Alternative 2:** `Participant` constructed using a `String`.
-  * Pros: `Participant` has less dependence on `Contact`. Better flexibility as each `Participant` no longer needs to be a `Contact`.
-  * Cons: Less extensibility as `Participant` does not have any link to `Contact`. Changes to each `Contact` that is in a `Meeting` will require a separate command to change the `Participant` as well.
+    * Pros: `Participant` has less dependence on `Contact`. Better flexibility as each `Participant` no longer needs to be a `Contact`.
+    * Cons: Less extensibility as `Participant` does not have any link to `Contact`. Changes to each `Contact` that is in a `Meeting` will require a separate command to change the `Participant` as well.
 
 **Aspect: How to deal with clash in `Meeting` timings**
 
 * **Alternative 1 (current choice):** A clash in timings will notify the user of the clash.
-  * Pros: User is still allowed to add meetings regardless of the timing of other meetings in the list.
-  * Cons: Clash in meetings are left in the meeting list until the user deals with it. May cause confusion for the user if not dealt with.
+    * Pros: User is still allowed to add meetings regardless of the timing of other meetings in the list.
+    * Cons: Clash in meetings are left in the meeting list until the user deals with it. May cause confusion for the user if not dealt with.
 * **Alternative 2** A clash in timings will throw an exception.
-  * Pros: Meetings that clash will not be added and will not cause confusion for the user. The user can edit or remove clashing meetings before attempting to add the meeting again.
-  * Cons: Will require more steps to adding a meeting with time clash. User will have to edit or remove clashing meetings before adding again.
+    * Pros: Meetings that clash will not be added and will not cause confusion for the user. The user can edit or remove clashing meetings before attempting to add the meeting again.
+    * Cons: Will require more steps to adding a meeting with time clash. User will have to edit or remove clashing meetings before adding again.
 
 Reasons for choosing Alternative 1:
 
 * Overall, it is more efficient for the user as the original meeting will be successfully added to the list. The implemented
-notification pop-up should suffice in prompting the user to resolve any clashes in timings through editing or removing
-them. This implementation provides the user with more freedom as to how they would want to deal with the clash or simply
-make a mental note of it and not deal with it in the application at all.
-  
+  notification pop-up should suffice in prompting the user to resolve any clashes in timings through editing or removing
+  them. This implementation provides the user with more freedom as to how they would want to deal with the clash or simply
+  make a mental note of it and not deal with it in the application at all.
+
 
 ### Find Contact feature
 
 #### Implementation
 
 The contacts of AddresSoc are stored in a `FilteredList`. The `FilteredList` is updated using `FilteredList#setPredicate`.
-The feature uses a combination of `NameContainsKeywordsPredicate` and `ContactTagContainsKeywordsPredicate` as a predicate. 
+The feature uses a combination of `NameContainsKeywordsPredicate` and `ContactTagContainsKeywordsPredicate` as a predicate.
 Upon the ```findc``` command being called with the relevant fields provided, the ```FilteredList``` object is updated in accordance with the predicate and then displayed.
 
 Given below is an example usage scenario and how the ```findc``` command behaves at each step.
@@ -258,14 +264,16 @@ The activity diagram below shows the execution of the above example:
 **Aspect: How `names` and `tags` matches:**
 
 * **Alternative 1 (current choice):** Only full names are matched
-    * Pros: Filtered List will look less cluttered and allows users to easily look up a particular contact 
+    * Pros: Filtered List will look less cluttered and allows users to easily look up a particular contact
     * Cons: Users have less flexibility to search the contacts
 
 * **Alternative 2:** Names that contain the input phrase is matched
   itself.
     * Pros: Users have more flexibility to search the contacts
     * Cons: The filtered list will be bloated and makes it difficult to look up a particular contact.
-    
+
+
+<div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
 
@@ -339,13 +347,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Managing meeting participants
 
@@ -361,6 +369,9 @@ Users can directly modify the set of `Participants` of a `Meeting` during comman
 participant indexes, such as `AddMeetingCommand` and `EditMeetingCommand`. When entering these commands, the user optionally specifies the indexes of contacts in the
 currently displayed contact list to participate in the meeting.  During such commands, the
 general process of creating and adding `Participants` to a `Meeting`'s participant set is as follows:
+
+<div style="page-break-after: always;"></div>
+
 1. If an index is specified, the validity of the index is checked.
     * If the index is invalid, the command execution is stopped.
     * If the index is valid, proceed to step 2.
@@ -414,7 +425,7 @@ Reasons for choosing Alternative 1:
 This section describes how the find meeting feature was implemented. This feature allows the user to find meetings by specifying
 search terms for the name, date and/or tags of meetings.
 
-### Implementation
+#### Implementation
 
 Similar to other commands, the user input (eg. `findm n/Alex d/22-02-2022`) is first parsed by the `FindMeetingCommandParser` to create a `FindMeetingCommand`,
 which when executed will update the Model's `FilteredList` using `FilteredList#setPredicate`.
@@ -441,23 +452,23 @@ the lifeline reaches the end of diagram.
 * **Alternative 1 (current choice):** Allow multiple search terms of each type.
     * Pros: More flexible for the user. Addresses legitimate user stories, e.g. users might want to view their schedule on multiple days at once to aid with their planning.
     * Cons: Manual testing is much more difficult due to the large increase in number of possible user inputs.
-    
+
 * **Alternative 2:** Allow only one search term per type.
     * Pros: Much easier to test manually due to the smaller number of possible inputs.
     * Cons: Less flexible for the user. Might not adequately address the problems they face in managing their academic/social life. E.g. separate searches are required to view schedule on different days; unable to view schedule across multiple days at once.
 
 Reasons for choosing Alternative 1:
 * It helps to solve problems faced by the user in a faster and more convenient way than alternative 2.
-* The use of OOP through Java `Predicates` makes automated testing easier as we can test the `OR` behaviour 
+* The use of OOP through Java `Predicates` makes automated testing easier as we can test the `OR` behaviour
   within each predicate separately before testing the `AND` behaviour in `FindMeetingCommand`. This helps to partially make
   up for the relatively low manual testability compared to alternative 2.
-  
+
 ### Reminder feature
 
 This section describes how the reminder feature can be used for users to be reminded of meetings that will occur
 within a certain time frame which the users can specify.
 
-### Implementation
+#### Implementation
 
 The reminder feature uses the `ReminderDatePredicate`.The condition to locate the meetings is provided through this.
 The meetings in AddresSoc are extracted and stored in the `FilteredList`.
@@ -469,7 +480,7 @@ Given below is an example usage scenario and how the Reminder mechanism behaves 
 
 1. The user keys in and executes the command `reminder 2` to locate all meetings within 2 days.
 2. The command is parsed by `ReminderCommandParser`. The prefixes and their respective keywords are
-    extracted and saved in an `ArgumentMultimap`. 
+   extracted and saved in an `ArgumentMultimap`.
 3. The inputs are then checked for their validity. If no exceptions are detected, a `ReminderDatePredicate` and a `ReminderCommand` will be created.
 
 4. The `ReminderCommand#execute` is called which updates the `FilteredList` that is currently being displayed.
@@ -483,7 +494,7 @@ the lifeline reaches the end of diagram.
 
 #### Design considerations:
 
-##### Aspect: How to allow users to receive reminders
+**Aspect: How to allow users to receive reminders**
 
 * **Alternative 1 (current choice):** Create a `reminder` command that allows users to specify the number of days to
   return the result of upcoming meetings.
@@ -493,29 +504,31 @@ the lifeline reaches the end of diagram.
     * Cons:
         * User has to manually specify number of days.
 
-* **Alternative 2:** Set number of days reminders, so that when user call reminder command meetings 
-upcoming in a fixed number of days will be displayed.
+* **Alternative 2:** Set number of days reminders, so that when user call reminder command meetings
+  upcoming in a fixed number of days will be displayed.
     * Pros:
         * User does not have to manually specify number of days since it is fixed.
     * Cons:
         * User has no flexibility to specify the time range to receive reminders for.
-        
 
 
-### Archive \& Unarchive Features
 
-#### 1. Archive feature
+<div style="page-break-after: always;"></div>
+
+### Archive & Unarchive Features
+
+#### Archive feature
 
 This section describes how the archive feature can be used to be archive meetings that users do not
 want to appear in the meeting list , but still want to save the data. There is an unarchive command
 which is used to revert the archive command.
 
-### Implementation
+##### Implementation
 
 
 ![ArchiveActivityDiagram](images/ArchiveActivityDiagram.png)
 
-Users can archive a specific meeting by entering the `archive index` command. The following steps describe how this 
+Users can archive a specific meeting by entering the `archive index` command. The following steps describe how this
 behaviour is implemented.
 
 The archive feature uses the `ArchiveStatus`.The condition to is used to check whether the meeting
@@ -534,21 +547,23 @@ the lifeline reaches the end of diagram.
 
 
 1. The user archives a `Meeting` in the observable `MeetingList` with command `archive index`.The index is parsed and
- archive command is executed.
+   archive command is executed.
 
 2. The meeting's `ArchiveStatus` will be checked . If it is true, an error message will be displayed.
 
 3. Otherwise the meeting's `ArchiveStatus` will be set to true by the `Meeting#archive()` method.
 
-4. The current `FilteredList` will be updated showing only the unarchived meetings, facilitated by 
-`Model#PREDICATE_SHOW_ALL_MEETINGS`
+4. The current `FilteredList` will be updated showing only the unarchived meetings, facilitated by
+   `Model#PREDICATE_SHOW_ALL_MEETINGS`
 
-#### 2. Unarchive feature
+<div style="page-break-after: always;"></div>
+
+#### Unarchive feature
 
 This section shows how the archive feature can be reverted. The user can use the unarchive command so
-that the unarchived meeting appear in the meeting list. 
+that the unarchived meeting appear in the meeting list.
 
-### Implementation
+##### Implementation
 
 
 ![UnArchiveActivityDiagram](images/UnArchiveActivityDiagram.png)
@@ -573,7 +588,7 @@ This operation uses the `Model` for `Model#UpdateFilteredMeetingList`.
 
 4. The current `FilteredList` will be updated showing all the unarchived meetings, facilitated by
    `Model#PREDICATE_SHOW_ALL_MEETINGS`
-   
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -587,6 +602,8 @@ This operation uses the `Model` for `Model#UpdateFilteredMeetingList`.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -658,16 +675,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The contact list does not exist.
 
-   * 1a1. AddresSoc creates a new list.
+    * 1a1. AddresSoc creates a new list.
 
-   Use case resumes at step 2.
+  Use case resumes at step 2.
 
 * 1a. The arguments specified by the user are invalid.
 
-   * 1a1. AddresSoc shows an error message.
+    * 1a1. AddresSoc shows an error message.
 
-     Use case resumes at step 1.
+      Use case resumes at step 1.
 
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Delete a contact**
 
@@ -715,6 +734,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+
+<div style="page-break-after: always;"></div>
+
 **Use case: Delete a meeting**
 
 **MSS**
@@ -748,18 +770,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User does not provide any arguments as search terms.
-  * 1a1. AddresSoc shows an error message.
-    
-    Use case resumes at step 1.
-    
+    * 1a1. AddresSoc shows an error message.
+
+      Use case resumes at step 1.
+
 * 1b. User provides invalid arguments as search terms.
-  * 1b1. AddresSoc shows an error message.
-    
-    Use case resumes at step 1.
-    
+    * 1b1. AddresSoc shows an error message.
+
+      Use case resumes at step 1.
 
 
-*{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -777,6 +799,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -790,15 +814,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and meetings. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and meetings. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Saving & Loading data
@@ -826,7 +850,7 @@ testers are expected to do more *exploratory* testing.
     1.  Prerequisites: Default list of contacts is loaded into the application.
     1.  Test case: `addc n/Bobby Low e/bobby.low@u.nus.edu p/94323302 th/bLow01 t/friends` <br>
         Expected: New contact is added to the list. Details of added meeting is shown in status message.
-        
+
 1. Attempting to add an invalid contact.
     1.  Prerequisites: Same as above.
     1.  Test case: `addc n/Jacky Yeo e/jacky.yeo@u.nus.edu p/94123093 th/rak_01` <br>
@@ -839,61 +863,65 @@ testers are expected to do more *exploratory* testing.
 Prerequisites: List all contacts using the `listc` command. Multiple contacts in the list. There is no contact with the telegram handle `rak_02`.
 
 1. Editing a contact while all contacts are being shown
-   1. Test case: `editc 1 th/rak_02` <br>
-   Expected: The first contact in the list is edited. Details of the edited contact are shown in the status message.
-      
-   1. Test case: `editc 0 th/rake_02` <br>
-   Expected: No meeting is edited. Error details shown in the status message.
-   
-   1. Other incorrect `editc` commands to try: `editc th/rak_02`, `editc 1` <br>
-   Expected: Similar to previous.
+    1. Test case: `editc 1 th/rak_02` <br>
+       Expected: The first contact in the list is edited. Details of the edited contact are shown in the status message.
+
+    1. Test case: `editc 0 th/rake_02` <br>
+       Expected: No meeting is edited. Error details shown in the status message.
+
+    1. Other incorrect `editc` commands to try: `editc th/rak_02`, `editc 1` <br>
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `listc` command. Multiple contacts in the list.
+    1. Prerequisites: List all persons using the `listc` command. Multiple contacts in the list.
 
-   1. Test case: `deletec 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+    1. Test case: `deletec 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `deletec 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. 
+    1. Test case: `deletec 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect `deletec` commands to try: `deletec`, `deletec x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect `deletec` commands to try: `deletec`, `deletec x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Finding contacts
 
 1. Finding contacts with valid search terms
-   
+
     1. Prerequisites: List all contacts using the `listc` command. Multiple contacts in the list.
     1. Test case: `findc n/alex t/friends` <br>
-    Expected: Contacts named `alex` with a tag called `friends` will be displayed. The number of contacts with the name
-   `alex` and the tag `friends` is shown in the status message.
+       Expected: Contacts named `alex` with a tag called `friends` will be displayed. The number of contacts with the name
+       `alex` and the tag `friends` is shown in the status message.
 
-2. Attempting to find contacts with invalid search terms   
+2. Attempting to find contacts with invalid search terms
     1. Prerequisites: Same as above.
     1. Test case: `findc p/12345678`  <br>
-    Expected: No contacts are searched. Error details shown in status message.
+       Expected: No contacts are searched. Error details shown in status message.
     1. Other incorrect `findc` commands to try: `findc th/john_01`, `findc alex` <br>
-    Expected: Similar to previous.
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a meeting
 
 1. Adding meetings (including clashing and non-clashing meetings)
     1. Prerequisites: Default list of meetings are loaded into the application.
     1. Test case: `addm n/Lunch with Friends d/30-04-2022 st/1100 et/1300 t/important` <br>
-    Expected: New meeting is added to the list. Details of added meeting is shown in status message.
-   1. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1200 et/1400` <br>
-      Expected: New meeting is added to the list. Warning notification pop up due to clash in timing with previously added 
-      meeting. Details of added meeting and meeting it clashes with is shown in status message.
-   1. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1600 et/1800` <br>
-      Expected: No meeting is added due to duplicate meeting with meeting added in previous test case. Error details shown in the status message.
-       
-   1. Other incorrect `addm` commands to try
-     `addm n/Dinner with Family d/24-05-2022`, `addm n/2103 Exam d/23-04-2022 st/1500 et/1400`, `addm`<br>
-      Expected: No meeting is added. Error details shown in the status message.
+       Expected: New meeting is added to the list. Details of added meeting is shown in status message.
+    1. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1200 et/1400` <br>
+       Expected: New meeting is added to the list. Warning notification pop up due to clash in timing with previously added
+       meeting. Details of added meeting and meeting it clashes with is shown in status message.
+    1. Test case: `addm n/Project Meeting with Advisor d/30-04-2022 st/1600 et/1800` <br>
+       Expected: No meeting is added due to duplicate meeting with meeting added in previous test case. Error details shown in the status message.
+
+    1. Other incorrect `addm` commands to try
+       `addm n/Dinner with Family d/24-05-2022`, `addm n/2103 Exam d/23-04-2022 st/1500 et/1400`, `addm`<br>
+       Expected: No meeting is added. Error details shown in the status message.
 
 ### Editing a meeting
 
@@ -901,23 +929,25 @@ Prerequisites: List all contacts using the `listc` command. Multiple contacts in
     1. Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
 
     1. Test case: `editm 1 d/30-04-2022 st/1630 et/1730` <br>
-   Expected: The first meeting in the list is edited. Details of the edited meeting is shown in the status message.
+       Expected: The first meeting in the list is edited. Details of the edited meeting is shown in the status message.
 
     1. Test case: `editm 0 d/30-04-2022` <br>
-   Expected: No meeting is edited. Error details shown in the status message.
+       Expected: No meeting is edited. Error details shown in the status message.
     1. Other incorrect `editm` commands to try: `editm d/10-04-2022`, `editm 2`<br>
-Expected: Similar to previous.
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting
 
 1. Deleting a meeting while all meetings are being shown
     1. Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
     1. Test case: `deletem 1` <br>
-Expected: First meeting is deleted from the list. Details of the deleted meeting is shown in the status message.
+       Expected: First meeting is deleted from the list. Details of the deleted meeting is shown in the status message.
     1. Test case: `deletem 0` <br>
-Expected: No meeting is deleted. Error details shown in the status message.
+       Expected: No meeting is deleted. Error details shown in the status message.
     1. Other incorrect `deletem` commands to try: `deletem`, `deletem x`, (where x is larger than the list size)<br>
-Expected: Similar to previous.
+       Expected: Similar to previous.
 
 ### Finding meetings
 
@@ -945,25 +975,27 @@ Expected: Similar to previous.
     1. Prerequisites: No contacts sharing any of the fields with contact to be added in test case.
 
     1. Test case: `addc n/Bobby Tan p/98127492 e/Bobby01@gmail.com th/Bobby012` followed by `undo` <br>
-Expected: Contact will first be added to the list and details of the added contact is shown in the status message.
-The contact will be removed after `undo` is executed and a successful `undo` message is shown.
+       Expected: Contact will first be added to the list and details of the added contact is shown in the status message.
+       The contact will be removed after `undo` is executed and a successful `undo` message is shown.
 
     1. Test case: `addc n/Bobby Tan p/98127492 e/Bobby01@gmail.com th/Bobby012` followed by `undo`, then `redo` <br>
-Expected: Similar to previous test case. However, contact will be added back to the list after execution of
-`redo`, and a successful `redo` message is shown.
+       Expected: Similar to previous test case. However, contact will be added back to the list after execution of
+       `redo`, and a successful `redo` message is shown.
 
-1. Undoing and redoing without prior changes to the lists     
+1. Undoing and redoing without prior changes to the lists
     1. Prerequisites: No command has been executed since the application was opened, or all executed commands have already been undone.
     1. Test case: `undo` without any prior changes to the lists <br>
-Expected: No change to the lists. Error details are shown in the status message.
+       Expected: No change to the lists. Error details are shown in the status message.
     1. Test case: `redo` without any prior successful `undo` command <br>
-Expected: No change to the lists. Error details are shown in the status message.
+       Expected: No change to the lists. Error details are shown in the status message.
 
 ### Reminder
 1. Getting a reminder for meetings in the meeting list
     1. Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
     1. Test case: `reminder 1`<br>
-    Expected: All meetings whose date are either the current day or the next day are listed. The number of meetings listed is shown in the status message.
+       Expected: All meetings whose date are either the current day or the next day are listed. The number of meetings listed is shown in the status message.
+
+<div style="page-break-after: always;"></div>
 
 ### Archiving a meeting
 
@@ -971,13 +1003,13 @@ Expected: No change to the lists. Error details are shown in the status message.
 
     1. Prerequisites: List all meetings using the `listm` command. Multiple meetings in the list.
 
-    2. Test case: `archive 1`<br>
-       Expected: First meeting is archived and no longer shown in the meeting list. Details of the archived meeting shown in the status message. 
+    1. Test case: `archive 1`<br>
+       Expected: First meeting is archived and no longer shown in the meeting list. Details of the archived meeting shown in the status message.
 
-    3. Test case: `archive 0`<br>
+    1. Test case: `archive 0`<br>
        Expected: No meeting is archived. Error details shown in the status message.
 
-    4. Other incorrect archive commands to try: `archive`, `archive x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect archive commands to try: `archive`, `archive x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Unarchiving a meeting
@@ -990,7 +1022,7 @@ Expected: No change to the lists. Error details are shown in the status message.
        Expected: First meeting is unarchived and is no longer in the archive list. Details of the archived contact shown in the status message. The main meeting list is shown.
 
     1. Test case: `unarchive 0`<br>
-       Expected: No meeting is archived. Error details shown in the status message. 
+       Expected: No meeting is archived. Error details shown in the status message.
 
     1. Other incorrect archive commands to try: `unarchive`, `unarchive x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
