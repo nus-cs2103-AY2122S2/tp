@@ -23,7 +23,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 4. Double-click the file to start the app (**Mac user** are recommended to type `java -jar MyGM.jar` in the terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
 The GUI is split into two parts: Players and Schedules respectively. Details of the GUI are shown below
 
-![Ui_Players](images/UiPlayers.png) <br>
+![Ui_Players](images/UiPlayers.png)
 ![Ui_Schedule](images/UiSchedule.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -68,6 +68,9 @@ Views some insights about players in the club and upcoming schedules.
 * The right half of the application is used to display aggregated information of the club.
 * Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
 * Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
+
+![view_pie](images/viewpie.png)
+![view_cal](images/viewcal.png)
 
 ### 2.2. Getting help : `help`
 
@@ -116,7 +119,7 @@ Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` <br> Adds a player by the name of `John Doe`, with a jersey number of `3`, weight of `69`kg, height of `188`cm, handphone number of `98765432`, email of `johnd@example.com` with the position of `PG` to MyGM.
 * `add P/ n/James Doe j/6 w/100 h/206 p/98761234 e/jamesd@example.com t/PG t/SF` <br> Adds a player by the name of James Doe, with a jersey number of `6`, weight of `100`kg, height of `206`cm, handphone number of `98761234`, email of `jamesd@example.com` with the position of `PG` and `SF` to MyGM.
 
-![AddPlayer_SS](images/AddPlayer_SS.png)
+![AddPlayer_SS](images/addplayer.png)
 
 #### 2.3.2. Add a lineup
 
@@ -138,7 +141,7 @@ Format: `add L/ n/LINEUP_NAME`
 Example:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
 
-![AddLineup_SS](images/AddLineup_SS.png)
+![AddLineup_SS](images/addlineup.png)
 
 #### 2.3.3. Add a schedule
 
@@ -160,7 +163,7 @@ Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 Examples:
 * `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
 
-![AddSchedule_SS](images/AddSchedule_SS.png)
+![AddSchedule_SS](images/addschedule.png)
 
 ### 2.4. Deleting a player/ lineup/ schedule :  `delete`
 
@@ -186,6 +189,7 @@ Example: <br>
 * `delete P/James Soften` will delete player `James Soften` from MyGM.
 * `delete P/James Soften` `L/Starting 5` will only delete player `James Soften` from the lineup `Starting 5`.
 
+![delete_player](images/deleteplayer.png)
 
 #### 2.4.2. Delete a lineup
 
@@ -204,6 +208,8 @@ Format: `delete L/LINEUP`
 
 Example:
 * `delete L/Starting 5` will only delete the lineup `Starting 5` from MyGM.
+
+![delete_lineup](images/deletelineup.png)
 
 #### 2.4.3. Delete a schedule
 
@@ -226,6 +232,8 @@ Example:
 * `view S/` followed by `delete S/2` deletes the 2nd schedule in the **displayed** schedule.
 * `view S/game` followed by `delete S/1` deletes the 1st schedule in the **displayed** schedule as a result of the `view S/game` command.
 
+![delete_schedule](images/deleteschedule.png)
+
 ### 2.5 Putting a player to a lineup: `put`
 
 Puts the specified player to a specified lineup.
@@ -246,7 +254,7 @@ Format: `put P/PLAYER L/LINEUP`
 Example:
 * `put P/John Doe L/starting five` Puts `John Doe` into the lineup named `starting five`.
 
-![Put_SS](images/Put_SS.png)
+![Put_SS](images/putp.png)
 
 ### 2.6. Viewing player/schedule/lineup: `view`
 
@@ -281,7 +289,7 @@ greater than or equals to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
-![viewPlayer](images/viewPlayer.png)
+![viewPlayer](images/viewplayer.png)
 
 #### 2.6.2. View lineup
 
@@ -309,7 +317,7 @@ Examples:
 * `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
 * `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
 
-![viewLineup](images/viewLineup.png)
+![viewLineup](images/viewlineup.png)
 
 #### 2.6.3. View schedule
 
@@ -348,7 +356,7 @@ Examples:
 * `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules
 * `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
 
-![viewSchedule](images/viewSchedule.png)
+![viewSchedule](images/viewschedule.png)
 
 ### 2.7. Sort players by height/ jersey number/ weight: `sort`
 
@@ -377,7 +385,7 @@ Example:
 * `sort w/asc` Sort the displayed players in ascending order of weight
 * `sort w/desc` Sort the displayed players in descending order of weight
 
-* ![sortPlayer](images/sortPlayer.png)
+* ![sortPlayer](images/sort.png)
 
 ### 2.8. Edit a player/ lineup/ schedule information : `edit`
 
@@ -403,6 +411,8 @@ Edit the details of an existing player in MyGM.
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player `James Soften` to `88888888`.
+
+![edit_player](images/editplayer.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -431,6 +441,8 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup `Starting5` to `Worst5`
 
+![edit_lineup](images/editlineup.png)
+
 #### 2.8.3. Edit a schedule
 
 Edit the details of the i-th schedule
@@ -452,12 +464,15 @@ Format: `edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
 
-### 2.9. Clearing all entries : `clear`
+![edit_schedule](images/editschedule.png)
 
+### 2.9. Clearing all entries : `clear`
 
 Clears all data from MyGM.
 
 Format: `clear`
+
+![clear](images/clear.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -488,6 +503,8 @@ Format: `theme T/THEME`
 
 Example:
 * `theme T/light` Sets the theme of MyGM to `light`.
+
+![theme](images/themee.png)
 
 ### 2.12. Saving the data
 
