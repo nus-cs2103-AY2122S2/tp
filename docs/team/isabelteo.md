@@ -35,8 +35,12 @@ Given below are my contributions to the project.
 
 * **Community**:
     * Helped to peer review code.
+      * [#46](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/46), [#72](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/72), [#213](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/213) . Others include: #202,#132,#126,#115,#106,#103,#101,#99,#77,#73,#72,#70,#69,#66,#46
+    
     * Helped to point out potential bugs or code quality flaws.
     * Worked with teammates to discuss about how to implement more complicated features.
+    * Helped to manage the issues and task allocations.
+    * [Finding bugs to help other teams improve their product](https://github.com/isabelteo/ped/issues)
 
 * **Tools**:
     * JavaFX Charts

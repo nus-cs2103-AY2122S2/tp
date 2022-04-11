@@ -22,13 +22,15 @@ LogicManager -> AddCustomerCommand : execute()
 activate AddCustomerCommand
 
 AddCustomerCommand -> Model : hasCustomer()
-Model --> AddCustomerCommand
 activate Model
+Model --> AddCustomerCommand
+deactivate Model
+
 alt customer to add is not unique
 AddCustomerCommand -> CommandException
 activate CommandException
 
-CommandException --> LogicManager
+CommandException --> LogicManager : e
 deactivate CommandException
 
 [<--LogicManager : e
@@ -36,6 +38,7 @@ deactivate CommandException
 else customer is unique
 
  AddCustomerCommand -> Model : addCustomer(c)
+    activate Model
     Model --> AddCustomerCommand
     deactivate Model
     create CommandResult
