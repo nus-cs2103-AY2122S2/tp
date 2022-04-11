@@ -1,7 +1,8 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a Person's email in the address book.
@@ -23,12 +24,13 @@ public class Email {
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
+    private static final String ALPHANUMERIC_WITH_UNDERSCORE = "[^\\W]+"; // alphanumeric characters
+    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_WITH_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
             + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)+" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
@@ -39,9 +41,12 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        if (email == null) {
+            value = null;
+        } else {
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+            value = email;
+        }
     }
 
     /**
@@ -58,9 +63,19 @@ public class Email {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Email) other).value)); // state check
+        if (other == this) {
+            return true;
+        } else if (other instanceof Email) {
+            if (value == null) {
+                return Objects.isNull(((Email) other).value);
+            } else if (Objects.isNull(((Email) other).value)) {
+                return false;
+            } else {
+                return value.equals(((Email) other).value);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override

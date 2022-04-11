@@ -13,6 +13,12 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class PersonInsightListPanel
+Class PersonInsightCard
+Class ExpandedPersonListPanel
+Class ExpandedPersonCard
+Class EventListPanel
+Class EventCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -26,28 +32,44 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside .> Ui
 
-UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+UiManager ..left.|> Ui
+UiManager --down-> "1" MainWindow
+MainWindow *--down->  "1" CommandBox
+MainWindow *--down-> "1" ResultDisplay
+MainWindow *--down-> "1" PersonListPanel
+MainWindow *--down-> "1" PersonInsightListPanel
+MainWindow *--down-> "1" ExpandedPersonListPanel
+MainWindow *--down-> "1" EventListPanel
+MainWindow *--down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+PersonInsightListPanel -down-> "*" PersonInsightCard
+ExpandedPersonListPanel -down-> "1" ExpandedPersonCard
+EventListPanel -down-> "*" EventCard
+
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay ---|> UiPart
+CommandBox ---|> UiPart
+PersonListPanel ---|> UiPart
+PersonCard ---|> UiPart
+PersonInsightListPanel ---|> UiPart
+PersonInsightCard ---|> UiPart
+ExpandedPersonListPanel ---|> UiPart
+ExpandedPersonCard ---|> UiPart
+EventListPanel --|> UiPart
+EventCard ---|> UiPart
+StatusBarFooter ---|> UiPart
+HelpWindow ---|> UiPart
 
+ExpandedPersonCard ..> Model
+EventCard ..> Model
 PersonCard ..> Model
+PersonInsightCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":FindEventCommandParser" as FindEventCommandParser LOGIC_COLOR
+participant "p1:EventNameContainsSubstringPredicate" as EventNameContainsSubstring LOGIC_COLOR
+participant "p2:EventDateIsAfterPredicate" as EventDateIsAfter LOGIC_COLOR
+participant "f:FindEventCommand" as FindEventCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> FindEventCommandParser : parse("n/Birthday ds/15-05-2022")
+activate FindEventCommandParser
+
+create EventNameContainsSubstring
+FindEventCommandParser -> EventNameContainsSubstring : "Birthday"
+activate EventNameContainsSubstring
+
+EventNameContainsSubstring --> FindEventCommandParser
+deactivate EventNameContainsSubstring
+
+create EventDateIsAfter
+FindEventCommandParser -> EventDateIsAfter : 15-05-2022
+activate EventDateIsAfter
+
+EventDateIsAfter --> FindEventCommandParser
+deactivate EventDateIsAfter
+
+create FindEventCommand
+FindEventCommandParser -> FindEventCommand : [p1, p2]
+activate FindEventCommand
+
+FindEventCommand --> FindEventCommandParser
+deactivate FindEventCommand
+
+[<-- FindEventCommandParser : f
+deactivate FindEventCommandParser
+
+[-> FindEventCommand : execute()
+activate FindEventCommand
+
+FindEventCommand -> Model : updateFilteredEventList(p1 && p2)
+activate Model
+Model --> FindEventCommand
+deactivate Model
+
+[<-- FindEventCommand
+deactivate FindEventCommand
+
+@enduml

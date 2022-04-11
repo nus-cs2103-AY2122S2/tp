@@ -1,0 +1,45 @@
+
+
+@startuml
+
+
+object ":ExpandedPersonCard" as expcard
+object "name:Label" as name
+object "address:Textflow" as address
+object "email:Textflow" as email
+object "description:Textflow" as description
+object "tags:FlowPane" as tags
+object "upcomingEventsPanel:StackPane" as upcomingEvents
+object "logs:Label" as logs
+object ":Label" as tagLabelOne
+object ":Label" as tagLabelTwo
+object ":EventCard" as EventCardOne
+object ":EventCard" as EventCardTwo
+
+name : text = "Alex Yeoh"
+address : text = "Blk 10 Clementi Road"
+email : text = "alexyeoh@gmail.com"
+description : text = "Has a corgi"
+tagLabelOne : text = "Friend"
+tagLabelTwo : text = "Neighbour"
+logs : text = "1. My First Log! \n Alex is my first friend added."
+EventCardOne : name = "Alex's Birthday"
+EventCardOne : dateTime = "15-08-2022 1700"
+EventCardTwo : name = "Class outing"
+EventCardTwo : dateTime = "19-10-2022 0800"
+
+expcard -down-> name
+expcard -down-> address
+expcard -down-> email
+expcard -down-> description
+expcard -down-> upcomingEvents
+upcomingEvents -down-> EventCardOne
+upcomingEvents -down-> EventCardTwo
+expcard -down-> tags
+expcard -down-> logs
+description -[hidden]-> tags
+logs -[hidden]-> upcomingEvents
+tags -down-> tagLabelOne
+tags -down-> tagLabelTwo
+
+@enduml

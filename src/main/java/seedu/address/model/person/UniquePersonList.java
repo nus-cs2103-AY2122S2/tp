@@ -37,6 +37,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the given name.
+     */
+    public boolean containsPersonWithName(FriendName toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.hasName(toCheck));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +54,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList);
     }
 
     /**
@@ -66,6 +75,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        FXCollections.sort(internalList);
     }
 
     /**
@@ -77,6 +87,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        FXCollections.sort(internalList);
     }
 
     public void setPersons(UniquePersonList replacement) {
@@ -95,6 +106,26 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        FXCollections.sort(internalList);
+    }
+
+    /**
+     * Return the exact name used by a person in the list that matches the given name.
+     * Assumes that the given friend name matches the name of a person in the list.
+     *
+     * @param name Name to match with.
+     * @return Exact name used by a person in the list that matches the given name.
+     * @throws PersonNotFoundException If no person in the list is found matching the given name.
+     */
+    public FriendName getExactName(FriendName name) {
+        requireNonNull(name);
+
+        for (Person person : internalList) {
+            if (person.hasName(name)) {
+                return person.getName();
+            }
+        }
+        throw new PersonNotFoundException();
     }
 
     /**

@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -29,11 +32,14 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        filteredEvents.setPredicate(Event::isAfterNow);
     }
 
     public ModelManager() {
@@ -87,6 +93,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== AddressBook - Person =======================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -95,11 +103,14 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
+        forceEventListUpdate();
     }
 
     @Override
     public void addPerson(Person person) {
+        requireNonNull(person);
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -107,11 +118,42 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        forceEventListUpdate();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== AddressBook - Event =======================================================================
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+
+    @Override
+    public boolean areEventFriendsValid(Event toAdd) {
+        return addressBook.areFriendNamesValid(toAdd);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
+
+    //=========== List Accessors ===========================================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -123,9 +165,36 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public ObservableList<PersonInsight> getInsightsList() {
+        return this.addressBook.getInsightsList(this);
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    //=========== Misc ===========================================================================
+
+    /**
+     * Forces the view of the events list to be updated in the UI. Temporary workaround until
+     * we find a better way to do this - replace events in the event list perhaps?
+     * TODO Make sure it maintains previous filters when we implement find.
+     */
+    private void forceEventListUpdate() {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
@@ -144,7 +213,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredEvents.equals(other.filteredEvents);
     }
-
 }

@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueEventList
+AddressBook *-right-> "1" UniquePersonList
+UniquePersonList -[hidden]down- UniqueEventList
+UniquePersonList -[hidden]down- UniqueEventList
+
+UniquePersonList -right-> "*" Person
+Person *-> "1" FriendName
+
+UniqueEventList -right-> "*" Event
+
+Event -right-> "*" FriendName
+
+Event *--> "1" EventName
+Event *--> "1" DateTime
+Event *--> "1" Description
+
+@enduml

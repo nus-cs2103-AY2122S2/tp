@@ -24,19 +24,58 @@
     -fx-opacity: 1;
 }
 
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+.text-area .content{
+    -fx-background-color: #383838 transparent #383838;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
 }
 
 .tab-pane {
     -fx-padding: 0 0 0 1;
+    -fx-alignment: CENTER;
+    -fx-tab-min-width:90px;
 }
 
 .tab-pane .tab-header-area {
     -fx-padding: 0 0 0 0;
     -fx-min-height: 0;
     -fx-max-height: 0;
+    -fx-alignment: center;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 1;
+    -fx-background-color: #63615c;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #63615c;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Light";
+
 }
 
 .table-view {
@@ -120,9 +159,28 @@
     -fx-text-fill: white;
 }
 
+.cell_header_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+}
+
+.cell_name_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
+.cell_header_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-font-style: bold;
     -fx-text-fill: #010504;
 }
 
@@ -144,6 +202,7 @@
 
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-radius: 20;
 }
 
 .result-display {
@@ -308,8 +367,13 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 1;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+}
+
+#cardPane:hover {
+    -fx-border-color: #05d1e8;
 }
 
 #commandTypeLabel {
@@ -317,15 +381,16 @@
     -fx-text-fill: #F70D1A;
 }
 
-#commandTextField {
+#commandTextArea {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -350,3 +415,23 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#logs .label {
+    -fx-text-fill: white;
+    -fx-background-color: #91693e;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#friends .label {
+    -fx-text-fill: white;
+    -fx-background-color: #9FCC2E;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+

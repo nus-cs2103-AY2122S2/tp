@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.insights.PersonInsight;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -94,8 +96,18 @@ public class AddressBookTest {
         }
 
         @Override
+        public ObservableList<PersonInsight> getInsightsList(Model model) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

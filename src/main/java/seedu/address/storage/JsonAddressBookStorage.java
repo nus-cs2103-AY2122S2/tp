@@ -56,6 +56,9 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
+        } catch (NullPointerException ne) {
+            logger.info("Null values found in " + filePath + ": " + ne.getMessage());
+            throw new DataConversionException(ne);
         }
     }
 
