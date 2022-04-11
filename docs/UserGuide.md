@@ -250,7 +250,7 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 
 Finds customers whose parameters contain any of the given keywords.
 
-Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORD_TYPE MORE_KEYWORDS]`
+Format: `findc [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
 <div markdown="block" class="alert alert-warning">
    
@@ -348,7 +348,7 @@ Example Usage: `edits 1 pr/200`
 
 Find services whose parameters contain any of the given keywords.
 
-Format: `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+Format: `findb [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 
 <div markdown="block" class="alert alert-warning">
 
@@ -447,7 +447,7 @@ Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
 
 Find bookings whose parameters contain any of the given keywords.
 
-Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+Format: `findb [n/NAME] [st/BOOKING_DATE_TIME] [f/FEEDBACK]`
 
 <div markdown="block" class="alert alert-warning">
 
