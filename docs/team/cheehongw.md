@@ -43,17 +43,18 @@ Given below are my contributions to the project.
     - Weng Qi: Command for adding & deleting individual `SocialMedia` entries.
 
 
-* **Enhancements to existing features**: Changes to `Email` regex ([PR #227](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/227))
+* **Enhancements to existing features**: 
 
-  - Fix regex to allow for more than 2 consecutive special characters in local-part of an email.
-  - Set character limits of `Email` to follow RFC guidelines.
+  1. Changes to `Email` regex ([PR #227](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/227))
+      - Fix regex to allow for more than 2 consecutive special characters in local-part of an email.
+      - Set character limits of `Email` to follow RFC guidelines.
 
-* **Enhancements to existing features**: Allow index-based commands to work with names ([106db91](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/106db91bc80597b9da03dba3c73858fd9b464f38), [PR #232](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/232))
+  2. Allow index-based commands to work with names ([106db91](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/106db91bc80597b9da03dba3c73858fd9b464f38), [PR #232](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/232))
 
 
-* **Enhancements to existing features**: Make UI components scale dynamically to the window size ([PR #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
+  3. Make UI components scale dynamically to the window size ([PR #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
 
-* **Enhancements to existing features**: Wrote unit tests for `EditSocialMediaCommandParser` ([PR #260](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/260/commits/4c4e83e5611cdcf7ee6d420b34b97ebcff9a995f`)), `ParserUtil` ([PR #230](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/230/commits/96d04b380fb18ae80e76426e9f6c511b7594dc22))
+  4. Wrote unit tests for `EditSocialMediaCommandParser` ([PR #260](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/260/commits/4c4e83e5611cdcf7ee6d420b34b97ebcff9a995f`)), `ParserUtil` ([PR #230](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/230/commits/96d04b380fb18ae80e76426e9f6c511b7594dc22))
 
 
 
