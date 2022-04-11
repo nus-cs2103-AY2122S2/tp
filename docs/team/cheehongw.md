@@ -42,15 +42,15 @@ Given below are my contributions to the project.
     - Weng Qi: Command for adding & deleting individual `SocialMedia` entries.
 
 
-* **Enhancements to existing features**: Changes to `Email` regex ([#227](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/227))
+* **Enhancements to existing features**: Changes to `Email` regex ([PR #227](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/227))
 
   - Fix regex to allow for more than 2 consecutive special characters in local-part of an email.
   - Set character limits of `Email` to follow RFC guidelines.
 
-* **Enhancements to existing features**: Allow index-based commands to work with names ([106db91](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/106db91bc80597b9da03dba3c73858fd9b464f38), [#232](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/232))
+* **Enhancements to existing features**: Allow index-based commands to work with names ([106db91](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/88/commits/106db91bc80597b9da03dba3c73858fd9b464f38), [PR #232](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/232))
 
 
-* **Enhancements to existing features**: Make UI components scale dynamically to the window size ([#212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
+* **Enhancements to existing features**: Make UI components scale dynamically to the window size ([PR #212](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/212))
 
 
 
@@ -60,7 +60,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Developer Guide:
-    * Add Product Scope: [#55](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/55)
+    * Add Product Scope: [PR #55](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/55)
     * Add Acknowledgements: [c724c4](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c724c4a82e6e68bea84e3ad1c087bc284d15a4bf)
     * Wrote implementation for `Target` class: [c8c5f74](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/c8c5f7422268279d07b35ecc46ae9a733232f495)
     * Wrote implementation for split-view panel: [d014e58](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/236/commits/d014e582f55adab5da42187600024ed0ebb09df6)
@@ -72,11 +72,14 @@ Given below are my contributions to the project.
     * Fixed minor grammatical issues [bc8c99](https://github.com/AY2122S2-CS2103-W16-2/tp/commit/bc8c99b7b2f63f1ebd23b621b89312b4b38997b1)
 
 * **Contributions to team-based tasks**:
-  * Update site-wide settings: [#26](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/26)
-  * Update `AboutUs.md`: [#2](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/2)
+  * Update site-wide settings: [PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44)
+  * Update `AboutUs.md`: [PR #44](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/44)
+  * Carried out PDF conversion of Developer guide : [#PR 263](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/263)
 
 * **Review/mentoring contributions**:
-  * PRs reviewed (with non-trivial review comments): [\#49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), [#78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [#107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896)
+  * PRs reviewed (with non-trivial review comments): [PR #49](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/49), [PR #78](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/78), [PR #107](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/107#discussion_r830948896) [PR #262](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/262)
+
+  * Reviewed [over 40 Pull Requests](https://github.com/AY2122S2-CS2103-W16-2/tp/pulls?q=reviewed-by%3Acheehongw) in the team.
 
   * Provided over [60+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html#74-wong-hong-cheehongw-29-comments) in team PRs and Issues
 
