@@ -1036,9 +1036,6 @@ NOTE: Make sure to use `listc` between test cases.
 
 #### Editing a booking 
   
-  1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
-     Expected: Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
- 
   1. Test case: `editb -1 sev/1 f/Excellent Customer Service` or  `editb 100 sev/1 f/Excellent Customer Service`<br>
      Expected: Invalid index error
      
