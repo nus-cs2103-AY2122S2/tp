@@ -347,7 +347,7 @@ Example Usage: `edits 1 pr/200`
 
 Find services whose parameters contain any of the given keywords.
 
-Format: `findb [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
+Format: `finds [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 
 <div markdown="block" class="alert alert-warning">
 
