@@ -214,6 +214,8 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 
 ### Transaction 
 
+#### Implementation
+
 The `Transaction` class is used to represent a client's transaction. The abstract `TransactionField` class represents the transaction data.
 `Transaction` contains an immutable `HashMap<Prefix, TransactionField>` of transactionFields as well as identifier of the `Person`
 who owns the `Transaction`. This person identifier will be stored as a `long` inside the `Transaction` class. 
@@ -920,15 +922,13 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 2. User input the parameters of the transactions (Amount, Transaction Date,
    Due Date, Note, and Status).
 3. CinnamonBun add the transaction to the transaction list.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: Delete a transaction
 
@@ -936,15 +936,13 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 1. User specify which transaction to be deleted.
 2. CinnamonBun removes the transaction from the transaction list.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified index does not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: List all transactions
 
@@ -952,8 +950,7 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 1. User specify the command keyword.
 2. CinnamonBun displays all transactions in the application.
-
-   Use case ends.
+   <br>Use case ends.
 
 #### Use case: Find transactions from a client
 
@@ -961,15 +958,13 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 1. User specify which client's transactions be displayed. 
 2. CinnamonBun displays all transactions from the client.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified index does not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: Pay a transaction
 
@@ -977,15 +972,13 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 1. User specify which transaction to be paid.
 2. CinnamonBun changes the status of the transaction to be paid.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified index does not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
+      <br>Use case ends.
 
 #### Use case: Unpay a transaction
 
@@ -993,16 +986,13 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
 
 1. User specify which transaction to be unpaid.
 2. CinnamonBun changes the status of the transaction to be unpaid.
-
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 
 * 1a. CinnamonBun detects that the specified index does not satisfy requirements.
     * 1a1. CinnamonBun displays error message.
-
-      Use case ends.
-
+      <br>Use case ends.
 
 #### Use case: Undo modifications
 
@@ -1014,6 +1004,7 @@ For all use cases below, the **System** is `CinnamonBun` and the **Actor** is th
    <br>Use case ends.
 
 **Extensions**
+
 * 1a. There have been no modification made prior to calling undo.
   * 1a1. CinnamonBun shows an error message.
     <br>Use case ends.
