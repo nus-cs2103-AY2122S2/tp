@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the ownerName `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Thia Su Mian
@@ -16,7 +14,7 @@ You can reach us at the ownerName `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/tsumian)]
 [[portfolio](team/tsumian.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
 
 
 ### S Dinesh Raj
