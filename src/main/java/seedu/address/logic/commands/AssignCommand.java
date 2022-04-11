@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,7 +14,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Assigns a student to a group in ArchDuke
+ * Assigns a student to a group in ArchDuke.
  */
 public class AssignCommand extends Command {
 
@@ -64,16 +63,7 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
-        ObservableList<Group> groups = model.getFilteredGroupList();
-
-        Group assignedGroup = group;
-        for (Group gp : groups) {
-            if (gp.equals(group)) {
-                assignedGroup = gp;
-                break;
-            }
-        }
-
+        Group assignedGroup = model.getGroup(group);
         assert assignedGroup != null : "The assigned group should not be null";
 
         Person personToAssign = persons.get(index.getZeroBased());

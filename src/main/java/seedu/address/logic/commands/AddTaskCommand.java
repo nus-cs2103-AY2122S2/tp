@@ -9,6 +9,9 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
+/**
+ * Adds a task to a group in ArchDuke.
+ */
 public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "addtask";
