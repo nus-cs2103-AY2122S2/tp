@@ -19,11 +19,11 @@ the interview scheduling process of candidates applying to be undergraduate Teac
     * Added the feature to schedule, reschedule, delete and clear interviews. ([\#96](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/96), 
     [\#179](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/179), [\#194](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/194), [\#251](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/251))
     * Justification: An important feature for the value proposition of our application. Modelled after 
-    `AB3`'s `add`, `edit`, `delete`, `clear` commands for consistency. 
+    `AB3`'s `add`, `edit`, `delete`, `clear` commands for consistency. Created a new model `InterviewSchedule` (and interface `ReadOnlyInterviewSchedule`)
+    to store `Interview` objects.
     * Enhanced the `schedule clear` command to update the candidate's interview status according to the state of the
     interview upon execution (i.e. `Not Scheduled` if interview is upcoming or in progress, `Completed` if the interview
     has expired and user has not refreshed the application)
-    * Created a new model `InterviewSchedule` (and interface `ReadOnlyInterviewSchedule`) to store `Interview` objects.
 
   * **Enhancement to existing features**:
     * Enhanced the `ClearCommand` to clear both candidates and interviews when command is executed.
