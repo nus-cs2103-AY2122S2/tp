@@ -5,12 +5,12 @@ title: User Guide
 
 <style>
   /* Uncomment for PDF conversion*/
-  hr {
+  /* hr {
     display: none
   }
   h1, h2, h3{
     margin-top: 10px !important;
-  }
+  } */
   .alert {
     border: none;
     border-left: solid 5px;
