@@ -261,7 +261,7 @@ and `Applicant` classes.
     * Pros: A simplified way of matching, reduces complexity of interview and coupling between Interview and Positions.
     * Cons: Does not model real-world interview processes accurately, forces applicant to accept the first job which they pass the interview for. 
 
-#### Aspect: Number of interviews per applicant allowed for each unique role
+#### Aspect: Number of interviews per applicant allowed for each unique role:
 
 * **Alternative 1 (current choice):** An applicant can only schedule one interview for each unique position they apply for.
     * Pros: A simplified model that reduces complexity of when to hand out job offers, reducing bugs.
@@ -439,11 +439,11 @@ The *Sequence Diagram* below illustrates the interactions within the classes for
 * Can type fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
+* Needs to view where each applicant is in the hiring pipeline
 
 **Value proposition**:
-* Manage contacts faster than a typical mouse/GUI driven app
-* One command and the email will be sent to all recipient
-* Stores all correspondence with the candidate for easy access and viewing
+* Manage applicants faster than a typical mouse/GUI driven app
+* Schedule interviews for different applicants and match them to different positions
 * End to end seamless administration for talent management
 
 
@@ -451,27 +451,27 @@ The *Sequence Diagram* below illustrates the interactions within the classes for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                           | So that I can…​                                                         |
-| ------ |-------------|----------------------------------------|-------------------------------------------------------------------------|
-| `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them                |
-| `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                        |
-| `* * *` | recruiter   | edit an applicant                      | update the latest information of applicants                             |
-| `* * *` | recruiter   | delete an applicant                    | remove entries that I no longer need                                    |
-| `* * *` | recruiter   | add a new interview                    | keep track of all the interviews                                        |
-| `* * *` | recruiter   | edit an interview                      | update the latest information of interviews                             |
-| `* * *` | recruiter   | delete an interview                    | remove entries that I no longer need                                    |
-| `* * *` | recruiter   | add a new position                     | keep track of all the applicants                                        |
-| `* * *` | recruiter   | edit a position                        | update the latest information of positions                              |
-| `* * *` | recruiter   | delete a position                      | remove entries that I no longer need                                    |
-| `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
-| `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
-| `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                   |
-| `* *`  | recruiter   | filter the displayed data               | find the information I am looking for easily                            |
-| `* *`  | recruiter   | pass an interview that was successful   | proceed to offer the applicant the position                             |
-| `* *`  | recruiter   | fail an interview that was unsuccessful | proceed to end the hiring process for the applicant                     |
-| `* *`  | recruiter   | mark an interview as accepted by the applicant | update that the applicant has accepted the offer                 |
-| `* *`  | recruiter   | mark an interview as rejected by the applicant | update that the applicant has rejected the offer                 |
-| `* *`  | recruiter   | export the data in the application      | share the information with other recruiters                             |
+| Priority | As a …​     | I want to …​                           | So that I can…​                                                        |
+| ------ |-------------|----------------------------------------|------------------------------------------------------------------------|
+| `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them               |
+| `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                       |
+| `* * *` | recruiter   | edit an applicant                      | update the latest information of applicants                            |
+| `* * *` | recruiter   | delete an applicant                    | remove applicants that have left the hiring pipeline                   |
+| `* * *` | recruiter   | add a new interview                    | potentially match an applicant to a job                                |
+| `* * *` | recruiter   | edit an interview                      | update the latest information of interviews                            |
+| `* * *` | recruiter   | delete an interview                    | remove interviews that are cancelled                                   |
+| `* * *` | recruiter   | add a new position                     | keep track of all the job positions                                    |
+| `* * *` | recruiter   | edit a position                        | update the latest information of positions                             |
+| `* * *` | recruiter   | delete a position                      | remove positions which are not available anymore                       |
+| `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                              |
+| `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                  |
+| `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                  |
+| `* *`  | recruiter   | filter the displayed data               | find the information I am looking for easily                           |
+| `* *`  | recruiter   | pass an interview that was successful   | proceed to offer the applicant the position                            |
+| `* *`  | recruiter   | fail an interview that was unsuccessful | proceed to end the hiring process for the applicant                    |
+| `* *`  | recruiter   | mark an interview as accepted by the applicant | update that the applicant has accepted the offer                       |
+| `* *`  | recruiter   | mark an interview as rejected by the applicant | update that the applicant has rejected the offer                       |
+| `* *`  | recruiter   | export the data in the application      | share the information with other recruiters                            |
 | `*`    | expert user | access previous commands I made         | send multiple similar commands without having to type the whole command |
 
 
@@ -502,34 +502,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### **Use case 02: Add an interview**
+#### **Use case 02: Adding an applicant **
 
 **MSS**
 
-1. User requests to list applicants
-2. HireLah shows a list of applicants
-3. User request to list positions
-4. HireLah shows a list of positions
-5. User requests to add an interview, for a specific position to an applicant in the list
-6. HireLah adds the interview to the applicant
+1. User requests to add applicant with specific parameters.
+2. HireLah shows list including new applicant.
    <br/><br/>
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-  <br/><br/>
-  Use case ends.
-  <br/><br/>
-* 4a. The list is empty.
-  <br/><br/>
-  Use case ends.
-  <br/><br/>
-* 5a. The given index is invalid.
+* 1a. HireLah detects specified parameters are incorrect.
+  * 1a1. HireLah shows an error message.
+    <br/><br/>
+    Use case resumes at step 1.
+    <br/><br/>
 
-    * 5a1. HireLah shows an error message.
-
-      Use case resumes at step 4.
 
 #### **Use case 03: Editing position**
 
@@ -732,7 +721,7 @@ Use case ends.
   Use case ends.
   <br/><br/>
 
-#### **Use case 11: Exporting data**
+#### **Use case 12: Exporting data**
 
 **MSS**
 1. User requests to list data with optional sort or filter argument.
@@ -755,15 +744,13 @@ Use case ends.
   Use case ends.
   <br/><br/>
 
-#### **Use case 12: Clearing data**
+#### **Use case 13: Clearing data**
 
 **MSS**
 1. User requests to clear data.
 2. HireLah clear all data.
    <br/><br/>
    Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 

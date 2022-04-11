@@ -49,7 +49,7 @@ Given below are my contributions to the project.
     * Added documentation for the features of `interview`, including
     `add -i`, `delete -i`, `pass`, `fail`, `accept`, `reject`.
   * [Developer Guide](https://ay2122s2-cs2103-w17-4.github.io/tp/DeveloperGuide.html):
-    * Added use case for adding interviews.
+    * Added use case for adding applicants.
     * Updated sequence diagram for architecture overview to reflect renamed classes.
     * Added activity diagram and explanation for tracking interview status.
     * Added sequence diagram and design consideration for adding of data.
