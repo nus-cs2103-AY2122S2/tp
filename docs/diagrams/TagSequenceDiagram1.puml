@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Adding tags to the person
+
+box Logic LOGIC_COLOR_T1
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p1:Person" as Person MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate TagCommand
+
+create Person
+TagCommand -> Person
+activate Person
+Person --> TagCommand : p1
+deactivate Person
+
+TagCommand -> TagCommand : add tags to p1
+activate TagCommand
+TagCommand --> TagCommand : new_p1
+deactivate TagCommand
+
+TagCommand -> Model : setPerson(p1, new_p1)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+@enduml

@@ -5,20 +5,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -34,20 +32,20 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed person list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "EDITED PERSON:%n%1$s";
+    public static final String MESSAGE_NOT_EDITED_OR_INVALID = "At least one field to edit must be provided."
+            + "The edit command does not accept tags.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
@@ -69,6 +67,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastEventList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -82,8 +81,31 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        updateEvent(model, personToEdit, editedPerson, lastEventList);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    /**
+     * Updates the event to reflect the new participants
+     * @param model the current model
+     * @param personToEdit the person that is being edited
+     * @param editedPerson the person that has been edited
+     * @param lastEventList the event list
+     */
+    public void updateEvent(Model model, Person personToEdit, Person editedPerson, List<Event> lastEventList) {
+        Name oldName = personToEdit.getName();
+        Name newName = editedPerson.getName();
+
+        for (int i = 0; i < lastEventList.size(); i++) {
+            Event currEvent = lastEventList.get(i);
+            List<Name> participants = currEvent.getParticipants();
+            if (participants.remove(oldName)) {
+                participants.add(newName);
+            }
+            model.setEvent(currEvent, new Event(currEvent.getEventName(), currEvent.getEventInfo(), participants,
+                    currEvent.getDateTime()));
+        }
     }
 
     /**
@@ -92,14 +114,26 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
+        List<Tag> updatedEducations = editPersonDescriptor.getEducations().isEmpty()
+                ? personToEdit.getEducations()
+                : editPersonDescriptor.getEducations();
+        List<Tag> updatedCcas = editPersonDescriptor.getCcas().isEmpty()
+                ? personToEdit.getCcas()
+                : editPersonDescriptor.getCcas();
+        List<Tag> updatedInternships = editPersonDescriptor.getInternships().isEmpty()
+                ? personToEdit.getInternships()
+                : editPersonDescriptor.getInternships();
+        List<Tag> updatedModules = editPersonDescriptor.getModules().isEmpty()
+                ? personToEdit.getModules()
+                : editPersonDescriptor.getModules();
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedEducations, updatedInternships, updatedModules, updatedCcas);
     }
 
     @Override
@@ -129,7 +163,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private List<Tag> educations = new ArrayList<>();
+        private List<Tag> internships = new ArrayList<>();
+        private List<Tag> modules = new ArrayList<>();
+        private List<Tag> ccas = new ArrayList<>();
 
         public EditPersonDescriptor() {}
 
@@ -142,14 +179,21 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setEducations(toCopy.educations);
+            setInternships(toCopy.internships);
+            setModules(toCopy.modules);
+            setCcas(toCopy.ccas);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address)
+                    && educations.isEmpty()
+                    && internships.isEmpty()
+                    && modules.isEmpty()
+                    && ccas.isEmpty();
         }
 
         public void setName(Name name) {
@@ -184,21 +228,36 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setEducations(List<Tag> tags) {
+            this.educations = tags;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public List<Tag> getEducations() {
+            return educations;
+        }
+
+        public void setInternships(List<Tag> tags) {
+            this.internships = tags;
+        }
+
+        public List<Tag> getInternships() {
+            return internships;
+        }
+
+        public void setModules(List<Tag> tags) {
+            this.modules = tags;
+        }
+
+        public List<Tag> getModules() {
+            return modules;
+        }
+
+        public void setCcas(List<Tag> tags) {
+            this.ccas = tags;
+        }
+
+        public List<Tag> getCcas() {
+            return ccas;
         }
 
         @Override
@@ -220,7 +279,10 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getEducations().equals(e.getEducations())
+                    && getInternships().equals(e.getInternships())
+                    && getModules().equals(e.getModules())
+                    && getCcas().equals(e.getCcas());
         }
     }
 }

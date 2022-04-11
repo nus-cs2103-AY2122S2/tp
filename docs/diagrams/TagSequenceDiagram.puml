@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p1:Person" as Person MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : parse("1")
+activate TagCommandParser
+
+TagCommandParser -> ParserUtil : parseTags("computer science")
+activate ParserUtil
+TagCommandParser -> ParserUtil : parseTags("cs2030s, cs2040s")
+create TagCommand
+ParserUtil -> TagCommand
+activate TagCommand
+
+TagCommand --> ParserUtil : t
+deactivate TagCommand
+ParserUtil --> TagCommandParser : t
+deactivate ParserUtil
+
+TagCommandParser --> AddressBookParser : t
+deactivate TagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : execute()
+activate TagCommand
+
+create Person
+TagCommand -> Person
+activate Person
+Person --> TagCommand : p1
+deactivate Person
+
+TagCommand -> TagCommand : add tags to p1
+activate TagCommand
+TagCommand --> TagCommand : new_p1
+deactivate TagCommand
+
+TagCommand -> Model : setPerson(p1, new_p1)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+TagCommand --> LogicManager : result
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -4,12 +4,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
+
+    public static final String INVALID_TAGTYPE = "The tag type is invalid!";
 
     private final String tagName;
 
@@ -25,7 +31,7 @@ class JsonAdaptedTag {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+        this.tagName = source.tagName;
     }
 
     @JsonValue
@@ -38,11 +44,19 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(tagName);
-    }
+    public Tag toModelType(String tagType) throws IllegalValueException {
 
+        switch (tagType) {
+        case Tag.CCA:
+            return new Cca(tagName);
+        case Tag.EDUCATION:
+            return new Education(tagName);
+        case Tag.INTERNSHIP:
+            return new Internship(tagName);
+        case Tag.MODULE:
+            return new Module(tagName);
+        default:
+            throw new IllegalValueException(INVALID_TAGTYPE);
+        }
+    }
 }

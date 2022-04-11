@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tag 1 \nedu/computer science \nm/cs2030s m/cs2040s")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : parse("1")
+activate TagCommandParser
+
+TagCommandParser -> ParserUtil : parseTags("computer science")
+activate ParserUtil
+TagCommandParser -> ParserUtil : parseTags("cs2030s, cs2040s")
+create TagCommand
+ParserUtil -> TagCommand
+activate TagCommand
+
+TagCommand --> ParserUtil : t
+deactivate TagCommand
+ParserUtil --> TagCommandParser : t
+deactivate ParserUtil
+
+TagCommandParser --> AddressBookParser : t
+deactivate TagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : execute()
+activate TagCommand
+
+ref over TagCommand, Model
+Adding tags to the person
+end ref
+
+TagCommand --> LogicManager : result
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

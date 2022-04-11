@@ -2,15 +2,24 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Information;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -21,6 +30,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX_MULTIPLE = "All indexes must be unique"
+                + " and a non-zero unsigned integer.";
+    public static final String INVALID_TAGTYPE = "The tag type is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +45,38 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified any of the indexes are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseIndexes(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        boolean isMultipleIndex = StringUtil.containsMultipleIndex(trimmedIndex);
+        boolean isAllValidIntegers = isMultipleIndex && StringUtil.isAllNonZeroUnsignedInteger(trimmedIndex);
+        boolean isValidMultipleIndex = isAllValidIntegers && StringUtil.isAllUniqueIntegers(trimmedIndex);
+
+        if (!isMultipleIndex && !StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        } else if (isMultipleIndex && !isValidMultipleIndex) {
+            throw new ParseException(MESSAGE_INVALID_INDEX_MULTIPLE);
+        }
+
+        return getIndexes(trimmedIndex);
+    }
+
+    /**
+     * Transforms a string of valid one-based indexes into an array of {@code Index}.
+     */
+    private static Index[] getIndexes(String trimmedIndex) {
+        String[] oneBasedArr = trimmedIndex.split(" ");
+        Index[] indexArr = new Index[oneBasedArr.length];
+        for (int i = 0; i < oneBasedArr.length; i++) {
+            indexArr[i] = Index.fromOneBased(Integer.parseInt(oneBasedArr[i]));
+        }
+        return indexArr;
     }
 
     /**
@@ -51,6 +95,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a  {@code List<String> } into a {@code List<Name>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException through parseName.
+     */
+    public static List<Name> parseNames(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Name> set = new HashSet<>();
+        for (String value : list) {
+            set.add(parseName(value.trim()));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -63,6 +122,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<Phone>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException through parsePhone.
+     */
+    public static List<Phone> parsePhones(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Phone> set = new HashSet<>();
+        for (String value : list) {
+            set.add(parsePhone(value.trim()));
+        }
+        return new ArrayList<>(set);
     }
 
     /**
@@ -81,6 +155,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code List<String> } into a {@code List<Address>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException through parseAddress.
+     */
+    public static List<Address> parseAddresses(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Address> set = new HashSet<>();
+        for (String value : list) {
+            set.add(parseAddress(value.trim()));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -95,30 +184,215 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code List<String> } into a {@code List<Email>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static List<Email> parseEmails(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Email> set = new HashSet<>();
+        for (String value : list) {
+            for (String s: value.split(" ")) {
+                set.add(parseEmail(s.trim()));
+            }
         }
-        return new Tag(trimmedTag);
+        return new ArrayList<>(set);
+    }
+
+
+    /**
+    * Parses a {@code String tag} into a {@code Tag}.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if the given {@code tag} is invalid.
+    */
+    public static Tag parseTag(String tag, String type) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim().toLowerCase();
+
+        switch (type) {
+        case Tag.EDUCATION:
+            if (!Education.isValidTagName(trimmedTag)) {
+                throw new ParseException(Education.MESSAGE_CONSTRAINTS);
+            }
+            return new Education(trimmedTag);
+        case Tag.INTERNSHIP:
+            if (!Internship.isValidTagName(trimmedTag)) {
+                throw new ParseException(Internship.MESSAGE_CONSTRAINTS);
+            }
+            return new Internship(trimmedTag);
+        case Tag.MODULE:
+            if (!Module.isValidTagName(trimmedTag)) {
+                throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+            }
+            return new Module(trimmedTag);
+        case Tag.CCA:
+            if (!Cca.isValidTagName(trimmedTag)) {
+                throw new ParseException(Cca.MESSAGE_CONSTRAINTS);
+            }
+            return new Cca(trimmedTag);
+        default:
+            throw new ParseException(INVALID_TAGTYPE);
+        }
+    }
+
+    /**
+    * Parses {@code Collection<String> tags} into a {@code List<Tag>}.
+    */
+    public static List<Tag> parseTags(Collection<String> tags, String type) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(parseTag(tagName, type));
+        }
+        return new ArrayList<>(tagSet);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Returns an empty ArrayList if the tags list is [""], this is the case that the tag list is to be cleared.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static List<Tag> parseTagsForEdit(Collection<String> tags, String type) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        // This is the case that the tag list is meant to be cleared
+        if (tags.size() == 1 && tags.contains("")) {
+            return new ArrayList<>();
+        }
+        for (String tagName : tags) {
+            tagSet.add(parseTag(tagName, type));
+        }
+        return new ArrayList<>(tagSet);
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Returns a list with all tagNames split using whitespace and trimmed.
+     */
+    public static List<Tag> parseTagsForFind(Collection<String> tags, String type) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName.trim(), type));
         }
-        return tagSet;
+        return new ArrayList<>(tagSet);
+    }
+
+    /**
+     * Parses {@code String name} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<EventName>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<EventName> parseEventNames(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<EventName> set = new HashSet<>();
+        for (String value : list) {
+            set.add(parseEventName(value.trim()));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
+     * Parses {@code String info} into an {@code Information}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Information parseInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!Information.isValidInformation(trimmedInfo)) {
+            throw new ParseException(Information.MESSAGE_CONSTRAINTS);
+        }
+        return new Information(trimmedInfo);
+    }
+
+    /**
+     * Parses a {@code List<String> } into a {@code List<Information>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any single list item has more than one word.
+     */
+    public static List<Information> parseInfos(List<String> list) throws ParseException {
+        requireNonNull(list);
+        final Set<Information> set = new HashSet<>();
+        for (String value : list) {
+            set.add(parseInfo(value.trim()));
+        }
+        return new ArrayList<>(set);
+    }
+
+    /**
+     * Parses {@code String date} and {@code String time} into a {@code DateTime}.
+     * Returns a DateTime object that contains formatted date and time of the event.
+     */
+    public static DateTime parseDateTime(String date, String time) throws ParseException {
+        requireNonNull(date);
+        requireNonNull(time);
+        String trimmedDate = date.trim();
+        String trimmedTime = time.trim();
+
+        if (!DateTime.isValidTime(trimmedTime)) {
+            throw new ParseException(DateTime.TIME_MESSAGE_CONSTRAINTS);
+        } else if (!DateTime.isValidDate(trimmedDate)) {
+            throw new ParseException(DateTime.DATE_MESSAGE_CONSTRAINTS);
+        }
+
+        String[] tempDate = trimmedDate.split("-");
+        String[] tempTime = trimmedTime.split(":");
+        int year = Integer.parseInt(tempDate[0]);
+        int month = Integer.parseInt(tempDate[1]);
+        int day = Integer.parseInt(tempDate[2]);
+        int hour = Integer.parseInt(tempTime[0]);
+        int min = Integer.parseInt(tempTime[1]);
+
+
+        if (!DateTime.isValidDateTime(year, month, day, hour, min)) {
+            throw new ParseException(DateTime.DATETIME_MESSAGE_CONSTRAINTS);
+        }
+
+        return new DateTime(year, month, day, hour, min);
+    }
+
+    /**
+     * Parses string find prefix for date and time into a DateTime object
+     * @param dateTime
+     * @throws ParseException
+     */
+    public static DateTime parseDateTimeForFind(String dateTime) throws ParseException {
+        String trimmedDateTime = dateTime.trim();
+        if (trimmedDateTime.split(" ").length != 2) {
+            throw new ParseException(FindCommandParser.DATE_TIME_FORMAT);
+        }
+        return parseDateTime(trimmedDateTime.split(" ")[0], trimmedDateTime.split(" ")[1]);
+    }
+
+    /**
+     * Parses a list of string DateTimes into a list of DateTime objects
+     *
+     * @param stringDateTimes
+     * @throws ParseException
+     */
+    public static List<DateTime> parseDateTimes(List<String> stringDateTimes) throws ParseException {
+        requireNonNull(stringDateTimes);
+        final Set<DateTime> set = new HashSet<>();
+        for (String value : stringDateTimes) {
+            set.add(parseDateTimeForFind(value.trim()));
+        }
+        return new ArrayList<>(set);
     }
 }

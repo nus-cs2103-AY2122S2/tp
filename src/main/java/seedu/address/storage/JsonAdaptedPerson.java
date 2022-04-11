@@ -11,7 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,7 +32,10 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final Set<JsonAdaptedTag> ccas = new HashSet<>();
+    private final Set<JsonAdaptedTag> educations = new HashSet<>();
+    private final Set<JsonAdaptedTag> internships = new HashSet<>();
+    private final Set<JsonAdaptedTag> modules = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +43,25 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("educations") List<JsonAdaptedTag> educations,
+            @JsonProperty("internships") List<JsonAdaptedTag> internships,
+            @JsonProperty("modules") List<JsonAdaptedTag> modules,
+            @JsonProperty("ccas") List<JsonAdaptedTag> ccas) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (educations != null) {
+            this.educations.addAll(educations);
+        }
+        if (internships != null) {
+            this.internships.addAll(internships);
+        }
+        if (modules != null) {
+            this.modules.addAll(modules);
+        }
+        if (ccas != null) {
+            this.ccas.addAll(ccas);
         }
     }
 
@@ -54,7 +73,16 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
+        educations.addAll(new HashSet<>(source.getEducations()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        internships.addAll(new HashSet<>(source.getInternships()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        modules.addAll(new HashSet<>(source.getModules()).stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        ccas.addAll(new HashSet<>(source.getCcas()).stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -65,9 +93,37 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final Set<Tag> modelCcas = new HashSet<>();
+        final Set<Tag> modelEducations = new HashSet<>();
+        final Set<Tag> modelInternships = new HashSet<>();
+        final Set<Tag> modelModules = new HashSet<>();
+
+        for (JsonAdaptedTag curr : educations) {
+            if (!Education.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Education.MESSAGE_CONSTRAINTS);
+            }
+            modelEducations.add(curr.toModelType("education"));
+        }
+
+        for (JsonAdaptedTag curr : ccas) {
+            if (!Cca.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Cca.MESSAGE_CONSTRAINTS);
+            }
+            modelCcas.add(curr.toModelType("cca"));
+        }
+
+        for (JsonAdaptedTag curr : internships) {
+            if (!Internship.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Internship.MESSAGE_CONSTRAINTS);
+            }
+            modelInternships.add(curr.toModelType("internship"));
+        }
+
+        for (JsonAdaptedTag curr : modules) {
+            if (!Module.isValidTagName(curr.getTagName())) {
+                throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
+            }
+            modelModules.add(curr.toModelType("module"));
         }
 
         if (name == null) {
@@ -102,8 +158,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, new ArrayList<>(modelEducations),
+                new ArrayList<>(modelInternships), new ArrayList<>(modelModules), new ArrayList<>(modelCcas));
     }
-
 }

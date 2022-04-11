@@ -1,15 +1,18 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Cca;
+import seedu.address.model.person.Education;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Internship;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -20,12 +23,20 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_EDUCATION = "Computer Science";
+    public static final String DEFAULT_INTERNSHIP = "GIC";
+    public static final String DEFAULT_MODULE = "CS2040S";
+    public static final String DEFAULT_CCA = "Netball";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private List<Tag> educations;
+    private List<Tag> internships;
+    private List<Tag> modules;
+    private List<Tag> ccas;
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +46,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        educations = new ArrayList<>();
+        internships = new ArrayList<>();
+        modules = new ArrayList<>();
+        ccas = new ArrayList<>();
     }
 
     /**
@@ -46,7 +60,10 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        educations = personToCopy.getEducations();
+        internships = personToCopy.getInternships();
+        modules = personToCopy.getModules();
+        ccas = personToCopy.getCcas();
     }
 
     /**
@@ -54,14 +71,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -89,8 +98,47 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Education} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEducation(String education) {
+        educations.add(new Education(education));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Internship} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withInternship(String internship) {
+        internships.add(new Internship(internship));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Module} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withModule(String module) {
+        modules.add(new Module(module));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Cca} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCca(String cca) {
+        ccas.add(new Cca(cca));
+        return this;
+    }
+
+    private boolean isAllTagsEmpty() {
+        return educations.isEmpty() && internships.isEmpty() && modules.isEmpty() && ccas.isEmpty();
+    }
+
+    /**
+     * Creates a Person with the appropriate fields.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, educations, internships, modules, ccas);
     }
 
 }

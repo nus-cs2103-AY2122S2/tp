@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Adding the event
+
+box Logic LOGIC_COLOR_T1
+participant "e:EventCommand" as EventCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "e1:Event" as Event MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate EventCommand
+
+create Event
+EventCommand -> Event : create event e1
+activate Event
+Event --> EventCommand : e1
+deactivate Event
+
+
+EventCommand -> Model : addEvent(e1)
+activate Model
+Model --> EventCommand
+deactivate Model
+
+create CommandResult
+EventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EventCommand
+deactivate CommandResult
+
+@enduml

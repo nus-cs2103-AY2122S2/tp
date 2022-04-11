@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CancelEventCommandParser" as CancelEventCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "c:CancelEventCommand" as CancelEventCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("cancelevent 1 2 ")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("cancelevent 1 2")
+activate AddressBookParser
+
+create CancelEventCommandParser
+AddressBookParser -> CancelEventCommandParser
+activate CancelEventCommandParser
+
+CancelEventCommandParser --> AddressBookParser
+deactivate CancelEventCommandParser
+
+AddressBookParser -> CancelEventCommandParser : parse("1 2")
+activate CancelEventCommandParser
+
+CancelEventCommandParser -> ParserUtil : parseIndexes("1 2")
+activate ParserUtil
+create CancelEventCommand
+ParserUtil -> CancelEventCommand
+activate CancelEventCommand
+
+CancelEventCommand --> ParserUtil : c
+deactivate CancelEventCommand
+ParserUtil --> CancelEventCommandParser : c
+deactivate ParserUtil
+
+CancelEventCommandParser --> AddressBookParser : c
+deactivate CancelEventCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CancelEventCommandParser -[hidden]-> AddressBookParser
+destroy CancelEventCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CancelEventCommand : execute()
+activate CancelEventCommand
+CancelEventCommand -> CancelEventCommand : extractDeletedInfo()
+activate CancelEventCommand
+CancelEventCommand --> CancelEventCommand
+deactivate CancelEventCommand
+CancelEventCommand -> CancelEventCommand : deleteFromList()
+activate CancelEventCommand
+CancelEventCommand -> Model : deleteEvent(Event2)
+activate Model
+Model --> CancelEventCommand
+deactivate Model
+
+CancelEventCommand -> Model : deleteEvent(Event1)
+activate Model
+Model --> CancelEventCommand
+deactivate Model
+
+CancelEventCommand --> CancelEventCommand
+deactivate CancelEventCommand
+
+create CommandResult
+CancelEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CancelEventCommand
+deactivate CommandResult
+
+CancelEventCommand --> LogicManager : result
+deactivate CancelEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

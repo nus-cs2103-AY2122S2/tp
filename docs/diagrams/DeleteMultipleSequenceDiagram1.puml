@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Deletion of multiple contacts
+
+box Logic LOGIC_COLOR_T1
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate DeleteCommand
+
+DeleteCommand -> DeleteCommand : deleteFromList()
+activate DeleteCommand
+
+DeleteCommand -> Model : deletePerson(Person3)
+activate Model
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand -> Model : deletePerson(Person2)
+activate Model
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand -> Model : deletePerson(Person1)
+activate Model
+Model --> DeleteCommand
+deactivate Model
+
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+@enduml

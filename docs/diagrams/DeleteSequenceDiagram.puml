@@ -5,6 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -29,12 +30,16 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
+DeleteCommandParser -> ParserUtil : parseIndexes("1")
+activate ParserUtil
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand
+ParserUtil -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser : d
+DeleteCommand --> ParserUtil : d
 deactivate DeleteCommand
+ParserUtil --> DeleteCommandParser : d
+deactivate ParserUtil
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -48,11 +53,16 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+DeleteCommand -> DeleteCommand : deleteFromList()
+activate DeleteCommand
 
+DeleteCommand -> Model : deletePerson(Person1)
+activate Model
 Model --> DeleteCommand
 deactivate Model
+
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
 
 create CommandResult
 DeleteCommand -> CommandResult

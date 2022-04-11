@@ -3,15 +3,15 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -32,7 +32,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_CCA, PREFIX_EDUCATION, PREFIX_MODULE, PREFIX_INTERNSHIP);
 
         Index index;
 
@@ -55,20 +56,38 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_CCA).isPresent()) {
+            List<Tag> cca = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_CCA), Tag.CCA);
+            editPersonDescriptor.setCcas(cca);
+        }
+        if (argMultimap.getValue(PREFIX_EDUCATION).isPresent()) {
+            List<Tag> education = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_EDUCATION),
+                    Tag.EDUCATION);
+            editPersonDescriptor.setEducations(education);
+        }
+        if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
+            List<Tag> module = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_MODULE), Tag.MODULE);
+            editPersonDescriptor.setModules(module);
+        }
+        if (argMultimap.getValue(PREFIX_INTERNSHIP).isPresent()) {
+            List<Tag> internship = ParserUtil.parseTagsForEdit(argMultimap.getAllValues(PREFIX_INTERNSHIP),
+                    Tag.INTERNSHIP);
+            editPersonDescriptor.setInternships(internship);
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED_OR_INVALID);
         }
 
         return new EditCommand(index, editPersonDescriptor);
     }
 
-    /**
+    /*
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
+    /*
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
@@ -78,5 +97,5 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
+    */
 }

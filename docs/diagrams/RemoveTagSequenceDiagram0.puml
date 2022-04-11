@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemoveTagCommandParser" as RemoveTagCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "t:RemoveTagCommand" as RemoveTagCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("removetag 2 \nm/cs2100 m/cs2107")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("removetag 2 \nm/cs2100 m/cs2107")
+activate AddressBookParser
+
+create RemoveTagCommandParser
+AddressBookParser -> RemoveTagCommandParser
+activate RemoveTagCommandParser
+
+RemoveTagCommandParser --> AddressBookParser
+deactivate RemoveTagCommandParser
+
+AddressBookParser -> RemoveTagCommandParser : parse("2")
+activate RemoveTagCommandParser
+
+RemoveTagCommandParser -> ParserUtil : parseTags("cs2100, cs2107")
+activate ParserUtil
+create RemoveTagCommand
+ParserUtil -> RemoveTagCommand
+activate RemoveTagCommand
+
+RemoveTagCommand --> ParserUtil : t
+deactivate RemoveTagCommand
+ParserUtil --> RemoveTagCommandParser : t
+deactivate ParserUtil
+
+RemoveTagCommandParser --> AddressBookParser : t
+deactivate RemoveTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemoveTagCommandParser -[hidden]-> AddressBookParser
+destroy RemoveTagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> RemoveTagCommand : execute()
+activate RemoveTagCommand
+
+ref over RemoveTagCommand, Model
+Removal of matching tags
+end ref
+
+RemoveTagCommand --> LogicManager : result
+deactivate RemoveTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml
