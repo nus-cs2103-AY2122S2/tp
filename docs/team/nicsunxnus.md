@@ -102,17 +102,6 @@ Below is an activity diagram summarising the possible paths leading to and durin
     * Pros: Allows user to revert their changes
     * Cons: System crashes will not save the edits.
 
-#### Design considerations:
-
-**Aspect: How edit saves:**
-
-* **Alternative 1 (current choice):** Each edit is saved immediately.
-    * Pros: Prevents data loss from system crashes.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2 :** All edits are saved only after executing a save command (not implemented feature).
-    * Pros: Allows user to revert their changes
-    * Cons: System crashes will not save the edits.
 ...
 ### Use cases
 ...
