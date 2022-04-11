@@ -210,9 +210,9 @@ Although iBook is a CLI based application, we do provide a GUI alternative for s
 
 If a command has a GUI alternative, the subheading GUI alternative will also be included in the command section.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-primary">
 
-:information_source: **Product and Item:**
+:bulb: **Product and Item:**
 
 As most of the commands revolve around `Product` and `Item`. We advise you to take a look at the [Glossary](#6-glossary) section for our definition of `Product` and `Item` before proceeding.
 </div>
@@ -716,9 +716,9 @@ Format: `undo`
 | Compulsory Fields |  | 
 | Optional Fields   |  |
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
+:information_source: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
 
 </div>
 
