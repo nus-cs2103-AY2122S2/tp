@@ -429,6 +429,7 @@ Actor: User
 
 **Extensions:**
 * 1a. The list is empty
+
   Use case ends
 
 * 3a. The given index is invalid
@@ -478,6 +479,7 @@ Actor: User
 
 **Extensions:**
 * 1a. The list is empty
+
   Use case ends
 
 * 3a. The given index is invalid
@@ -502,6 +504,7 @@ Actor: User
 
 **Extensions:**
 * 1a. The list is empty
+
   Use case ends
 
 * 3a. The given index is invalid
@@ -539,6 +542,60 @@ Actor: User
 
     Use case resumes at step 2
 
+### **Use Case: Edit a Reminder for a client**
+
+Actor: User
+
+Preconditions: The client to edit a Reminder for has an existing Reminder.
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to edit a Reminder for a specific client.
+4. REP updates the Reminder for the client in the system.
+
+**Extensions:**
+* 1a. The list is empty
+
+  Use case ends
+
+* 3a. The given index is invalid
+    * 3a1. REP displays an error message
+
+      Use case resumes at step 2
+
+* 3b. REP detects error in details
+    * 3b1. REP displays an error message
+
+      Use case resumes at step 2
+
+### **Use Case: Delete a Reminder for a client**
+
+Actor: User
+
+Preconditions: The client to edit a Reminder for has an existing Reminder.
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to delete a Reminder for a specific client.
+4. REP removes the Reminder for the client in the system.
+
+**Extensions:**
+* 1a. The list is empty
+
+  Use case ends
+
+* 3a. The given index is invalid
+    * 3a1. REP displays an error message
+
+      Use case resumes at step 2
+
+* 3b. REP detects error in details
+    * 3b1. REP displays an error message
+
+      Use case resumes at step 2
+
 ### **Use Case: View Reminders for clients**
 
 Actor: User
@@ -559,7 +616,7 @@ Actor: User
 
      Use case resumes at step 2
 
-**Use Case: Favourite**
+### **Use Case: Favourite**
 
 Actor: User
 
@@ -574,7 +631,7 @@ Actor: User
   * 1a1. REP displays error message for invalid index.
   <br/>Use case ends
 
-**Use Case: Unfavourite**
+### **Use Case: Unfavourite**
 
 Actor: User
 
@@ -591,7 +648,7 @@ Preconditions: The client to unfavourite is favourited.
     * 1a1. REP displays error message for invalid index.
       <br/>Use case ends
 
-**Use Case: Open Favourites window**
+### **Use Case: Open Favourites window**
 
 Actor: User
 
@@ -601,7 +658,7 @@ Actor: User
 
    Use case ends
 
-**Use Case: Open Statistics window**
+### **Use Case: Open Statistics window**
 
 Actor: User
 
@@ -611,7 +668,7 @@ Actor: User
 
    Use case ends
 
-**Use Case: Sort**
+### **Use Case: Sort**
 
 Actor: User
 
