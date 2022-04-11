@@ -27,8 +27,8 @@ public class SampleDataUtil {
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"), 0),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"), 0),
             new Person(new Name("Peter Tan"), new Phone("95214839"), new Email("petertan@example.com"), 0),
-            new Person(new Name("Jack Koh"), new Phone("86201478"), new Email("joackkoh@example.com"), 0),
-            new Person(new Name("Zachery Lam"), new Phone("87412058"), new Email("zacheylam@example.com"), 0),
+            new Person(new Name("Jack Koh"), new Phone("86201478"), new Email("jackkoh@example.com"), 0),
+            new Person(new Name("Zachery Lam"), new Phone("87412058"), new Email("zacherylam@example.com"), 0),
             new Person(new Name("Jason Lim"), new Phone("90321458"), new Email("jasonlim@example.com"), 0),
         };
     }
