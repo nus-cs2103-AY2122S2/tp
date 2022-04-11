@@ -820,6 +820,25 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `add id/A0123456B n/John Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`<br>
       Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `add` command will be validated by the system. 
 
+### Editing a candidate
+
+1. Editing a candidate while all candidates are being shown
+   1. Prerequisites: System contains only two candidates, candidate 1 is: `id/A0654321B  n/Jane Doe p/81234657 e/E0654321@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
+      and candidate 2 is: `id/A0123456B  n/Peter Parker p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`
+   
+   2. Test case: `edit 1 n/Mary Jane`</br>
+      Expected: First candidate's name has been updated to show Mary Jane.
+   
+   3. Test case: `edit 0 n/Mary Jane`</br>
+      Expected: No candidate is edited. An error message will be shown.
+
+   4. Test case: `edit 1 id/A0123456B p/87654321 e/E0123456@u.nus.edu`</br>
+      Expected: Parameters to be edited belongs to another candidate in the system. An error message will be shown.
+   
+   5. Test case: `edit 1 id/A0123456B n/Jane Doe p/87654321 e/E0123456 c/CS yr/2 avail/monday,tuesday,wednesday`<br>
+      Expected: There are invalid values for `email`, `course` and `availability`. All values provided in the `edit` command will be validated by the system.
+
+2. Editing a candidate
 ### Deleting a candidate (WIP)
 
 1. Deleting a candidate while all candidates are being shown
