@@ -648,20 +648,72 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while on people view / module while on module view / group while on group view
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. All 3 uses the same command, but used on different pages
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Prerequisites: List all persons / modules / groups using the `list o/view v/people` command. Multiple persons / modules / groups in the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted person / module / group shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Test case: `delete 0`<br>
+       Expected: No person / module / group is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
+    5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+2. Delete person's attributes such as phone, email, tags and office
+    1. Prerequisites: Go to people view using the `list o/view v/people` command. 
+    2. Test case: `delete 1 p/ e/`<br>
+        Expected: Person at index 1 will have their phone and email deleted, if it already exists, if 1 of the attributes do not exist, nothing will happen for that attribute
+    3. Test case: `delete 1 of/` where person at index 1 is a student<br>
+        Expected: Students do not have an office attribute so nothing will be deleted.
+    4. Test case: `delete p/ p/` where person at index has phone<br>
+        Expected: Phone will be deleted
+3. Remove Student from Module on module view
+    1. Prerequisites: Go to Module view using the `list o/view v/modules`. At least 1 student in the 1st Module.
+    2. Test case: `delete 1 stu/1`<br>
+        Expected: Student at index 1 will be removed from module at index 1
+    3. Other incorrect delete commands to try: `delete x stu/y` (where x is larger than the module list size or y is larger than student list size inside Module x)<br>
+       Expected: No student is removed from the module. Error details shown in the status message.
+4. Remove Professor from Module on module view
+    1. Prerequisites: Go to Module view using the `list o/view v/modules`. At least 1 professor in the 1st Module.
+    2. Test case: `delete 1 prof/1`<br>
+       Expected: Professor at index 1 will be removed from module at index 1
+    3. Other incorrect delete commands to try: `delete x prof/y` (where x is larger than the module list size or y is larger than professor list size inside Module x)<br>
+       Expected: No Professor is removed from the module. Error details shown in the status message.
+5. Delete Group from Module on module view
+    1. Prerequisites: Go to Module view using the `list o/view v/modules`. At least 1 group in the 1st Module.
+    2. Test Case: `delete 1 g/1`<br>
+        Expected: Group at index 1 in Module at index 1 is deleted
+    3. Other incorrect delete commands to try: `delete x g/y` (where x is larger than the module list size or y is larger than group list size inside Module x)<br>
+       Expected: No Group is removed from the module. Error details shown in the status message.
+6. Delete Key Event from Module on module view
+   1. Prerequisites: Go to Module view using the `list o/view v/modules`. At least 1 Key Event in the 1st Module.
+   2. Test Case: `delete 1 ke/1`<br>
+      Expected: Key Event at index 1 in Module at index 1 is deleted
+   3. Other incorrect delete commands to try: `delete x ke/y` (where x is larger than the module list size or y is larger than Key Event list size inside Module x)<br>
+      Expected: No Key Event is removed from the module. Error details shown in the status message.
+7. Delete Meeting Time from Group on group view
+   1. Prerequisites: Go to Group view using the `list o/view v/groups`. At least 1 Meeting Time in the 1st Group.
+   2. Test Case: `delete 1 mt/1`<br>
+      Expected: Meeting Time at index 1 in Group at index 1 is deleted
+   3. Other incorrect delete commands to try: `delete x mt/y` (where x is larger than the module list size or y is larger than Meeting Time list size inside Group x)<br>
+      Expected: No Meeting Time is removed from the module. Error details shown in the status message.
+8. Delete Module from any view
+    1. Prerequisites: Module to be deleted should exist.
+    2. Test Case: `delete o/module m/CS2103`<br>
+       Expected: Module with module code `CS2103` will be deleted if it exists.
+    3. Other incorrect delete commands to try: `delete o/module m/x` (where x is a module code that does not exist)<br>
+       Expected: No Module is deleted. Error details shown in the status message.
+9. Delete Group from any view
+    4. Prerequisites: Group to be deleted should exist as well as the module that contains the group.
+    5. Test Case: `delete o/group m/CS2103 g/tp`<br>
+       Expected: Group with group name `tp` in Module with module code `CS2103` will be deleted if it exists.
+    6. Other incorrect delete commands to try: `delete o/group m/x g/y` (where x is a module code that does not exist or g is a group name that does not exist)<br>
+       Expected: No Module is deleted. Error details shown in the status message.
+
+
 
 ### Editing a person
 

@@ -77,7 +77,7 @@ public abstract class Person {
 
     public Tag getTag(String tagName) {
         for (Tag tag : tags) {
-            if (tag.tagName.equals(tagName)) {
+            if (tag.tagName.equalsIgnoreCase(tagName)) {
                 return tag;
             }
         }
