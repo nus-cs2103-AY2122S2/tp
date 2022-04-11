@@ -38,7 +38,7 @@ activate AddressBook
 AddressBook -> MasterLabList : addLab(toAdd)
 activate MasterLabList
 
-MasterLabList --> MasterLabList : add(toAdd)
+MasterLabList -> MasterLabList : add(toAdd)
 activate MasterLabList
 
 MasterLabList --> MasterLabList
