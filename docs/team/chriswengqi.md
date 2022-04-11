@@ -52,6 +52,8 @@ Given below are my contributions to the project.
     - Justification: Instead of providing a link to the User Guide website, we integrated `help` with the GUI so that users can refer to the help guide without the need of accessing the Internet.
 
     - Highlights: Markdown view was supported for `HelpWindow` which required the importing of external libraries.
+    
+    - Credits: Github user [JPro](https://github.com/JPro-one/markdown-javafx-renderer) for the markdown library.
 
     - Credits: Github user [JPro](https://github.com/JPro-one/markdown-javafx-renderer) for the markdown library.
 
@@ -64,27 +66,52 @@ Given below are my contributions to the project.
  
 
 
+* **Enhanced Feature**: Make `Email` and `Phone` optional ([PR #110](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/110))
+
+  - `Email` and `Phone` are now optional fields that do not have to be added when initialising a new contact.
+  
+  - By default, the value of `Email` and `Phone` is now `-` if it is empty.
+
+
+* **Enhanced Feature:** Addition and deletion of `SocialMedia` directly [#109](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/109)
+
+  - Supports the addition and deletion of specific `SocialMedia` from `Person` directly.
+
+
+  
 * **Documentation**:
+
   * User Guide:
+  
     * Update the User Guide with `help` and `view` command: [#90](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/90)
 
   * Developer Guide:
+  
     * Add User Stories: [#14](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/14)
+    
     * Add Glossary: [#16](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/16)
 
   * Help Guide:
-    * Initialized Help Guide in the `HelpWindow`: [#83](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/83)
+  
+    * Initialize Help Guide in the `HelpWindow`: [#83](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/83)
+
 
 * **Project Management**
-  * As the team lead, I set clear deadlines of deliverables for each member.
+
+  * As the team lead, I am in charge of the overall project management, from scheduling meetings to setting clear deadlines for each deliverable.
+  
   * Initialise 11 issues about bugs/improvements.
+  
   * Fix miscellaneous bugs. [#176](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/176), [#165](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/165), [#201](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/201), [#187](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/187), [#188](https://github.com/AY2122S2-CS2103-W16-2/tp/issues/188) and etc.
+  
   * Create test cases for `add`, `delete` and `edit`. [#222](https://github.com/AY2122S2-CS2103-W16-2/tp/pull/222)
 
 
 * **Review/mentoring contributions**:
-  * Reviewed 27 pull requests and provided suggestions to teammates about code.
+
+  * Review 27 pull requests and provide suggestions to teammates about code.
 
 
 * **Community**
+
   * Reported 9 bugs and suggestions for other teams in the class (examples: [1](https://github.com/chriswengqi/ped/issues/9), [2](https://github.com/chriswengqi/ped/issues/8))
