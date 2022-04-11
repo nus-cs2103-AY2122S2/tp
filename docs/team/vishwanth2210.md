@@ -31,7 +31,7 @@ Given below are my contributions to the project.
     * Set up the Github team organisation.
     * Updated the product icon.
     * Renamed the product to HustleBook and all instances of Addressbook to HustleBook.
-    * Created and released `v1.2` - `v1.3(final)` (4 releases) on GitHub.
+    * Created and released `v1.2` - `v1.4` (5 releases) on GitHub.
     * Updated gradle file to enable assertions and update the name of the jar file generated to HustleBook.
     * Updated necessary diagrams to match current implementation [\#252](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/252), [\#236](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/236)
     * Updated user stories
