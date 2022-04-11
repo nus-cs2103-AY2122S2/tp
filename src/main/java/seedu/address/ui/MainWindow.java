@@ -217,7 +217,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            CommandBox commandBox = new CommandBox(this::executeCommand); //replace CommandBox with normal CommandBox
+            CommandBox commandBox = new CommandBox(this::executeCommand); // replace CommandBox with normal CommandBox
             commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
             return commandResult;
@@ -225,7 +225,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
 
-            CommandBox commandBox = new CommandBox(this::executeCommand); //replace CommandBox with normal CommandBox
+            CommandBox commandBox = new CommandBox(this::executeCommand); // replace CommandBox with normal CommandBox
             commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
             throw e;
