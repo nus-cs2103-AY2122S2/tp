@@ -22,7 +22,7 @@ The following sections below summarise my contributions to this project.
 
 * **Code contributed**: [RepoSense Link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=lowjiahao99&breakdown=true)
 * **Enhancements to existing features**:
-  * Modify edit command to be able to accept empty GitHub and Telegram. ([#65](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/65))
+  * Modify edit command to be able to accept empty GitHub and Telegram. ([#66](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/66))
 * **Documentation**:
   * *User Guide*:
     * Added documentation for the feature `add`, `edit` and `deletetgall`. ([#34](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/34), [#66](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/66), [#72](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/72))
@@ -34,4 +34,4 @@ The following sections below summarise my contributions to this project.
   * Ensuring issues are closed with the PRs attached.
   * Updating user stories and value propositions in developer guide. ([#28](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/28), [#40](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/40))
 * **Review/mentoring contributions**: 
-  * PRs reviewed (with non-trivial review comments) : [#60](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/60), [#58](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/58), [#57](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/57), [#36](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/36)
+  * PRs reviewed (with non-trivial review comments) : [#36](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/36), [#57](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/57), [#58](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/58), [#60](https://github.com/AY2122S2-CS2103T-W15-3/tp/pull/60)
