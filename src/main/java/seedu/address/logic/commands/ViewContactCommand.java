@@ -25,8 +25,6 @@ public class ViewContactCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Here are the student contacts in this group: %s";
 
-    public static final String MESSAGE_ARGUMENTS = "View tasks in group: %s";
-
     private final Group group;
 
     /**

@@ -37,6 +37,7 @@ public class DeassignCommandParser implements Parser<DeassignCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            assert index.getOneBased() != 0 : "index should not be zero";
         } catch (IllegalValueException ive) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }

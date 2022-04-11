@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code GroupName}.
+ */
 public class GroupNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -25,14 +28,14 @@ public class GroupNameTest {
 
     @Test
     public void isValidGroupName() {
-        // null group name
+        // null group name -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> GroupName.isValidGroupName(null));
 
-        // invalid group name
+        // invalid group name -> returns false
         assertFalse(GroupName.isValidGroupName("")); // empty string
         assertFalse(GroupName.isValidGroupName(" ")); // spaces only
 
-        // valid name
+        // valid group name -> returns true
         assertTrue(GroupName.isValidGroupName("coffee enthusiasts")); // alphabets only
         assertTrue(GroupName.isValidGroupName("31415")); // numbers only
         assertTrue(GroupName.isValidGroupName("2nd year students")); // alphanumeric characters

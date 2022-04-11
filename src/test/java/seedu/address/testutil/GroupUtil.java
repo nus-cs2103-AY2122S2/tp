@@ -7,6 +7,9 @@ import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.model.group.Group;
 
+/**
+ * A utility class for Group.
+ */
 public class GroupUtil {
 
     /**

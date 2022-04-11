@@ -36,7 +36,10 @@ public class AddGroupCommandTest {
 
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
+        // same success message -> returns equal
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
+
+        // same group list -> returns equal
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 

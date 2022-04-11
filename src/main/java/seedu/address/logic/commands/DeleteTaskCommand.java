@@ -72,6 +72,11 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Creates and returns a {@code Group} with the details of {@code groupToDeleteTask}
+     *
+     * @param groupToDeleteTask target group to delete task.
+     * @param taskToDelete task to delete.
+     * @param model current model.
+     * @return Group with newly deleted task.
      */
     private static Group createDeletedTaskGroup(Group groupToDeleteTask, Task taskToDelete, Model model) {
 

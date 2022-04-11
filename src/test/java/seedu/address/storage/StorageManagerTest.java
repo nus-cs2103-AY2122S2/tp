@@ -15,6 +15,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
+/**
+ * Contains unit tests for {@code StorageManager}.
+ */
 public class StorageManagerTest {
 
     @TempDir
