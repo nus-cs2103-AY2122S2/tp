@@ -9,21 +9,38 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    public enum MeetingListStatusResult {
+        UNCHANGED,
+        UPCOMING,
+        ARCHIVE
+    }
+
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
+
+    /**
+     * Status of the meeting list displayed to the user.
+     */
+    private final MeetingListStatusResult meetingListStatus;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         MeetingListStatusResult meetingListStatus) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.meetingListStatus = meetingListStatus;
     }
 
     /**
@@ -31,7 +48,28 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, MeetingListStatusResult.UNCHANGED);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code meetingListStatus}
+     * and other fields set to their default value.
+     * @param feedbackToUser Feedback of the command to be displayed to the user.
+     * @param meetingListStatus Status of the meeting list to be displayed to the user.
+     */
+    public CommandResult(String feedbackToUser, MeetingListStatusResult meetingListStatus) {
+        this(feedbackToUser, false, false, meetingListStatus);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showHelp} and
+     * {@code meetingListStatus}. {@code meetListStatus} is set to its default value.
+     * @param feedbackToUser Feedback of the command to be displayed to the user.
+     * @param showHelp Whether the help window should be displayed to the user.
+     * @param exit Whether the program should exit.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, MeetingListStatusResult.UNCHANGED);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +84,10 @@ public class CommandResult {
         return exit;
     }
 
+    public MeetingListStatusResult getMeetingListStatus() {
+        return meetingListStatus;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -57,15 +99,20 @@ public class CommandResult {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
+        final CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && meetingListStatus == otherCommandResult.meetingListStatus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, meetingListStatus);
     }
 
+    @Override
+    public String toString() {
+        return feedbackToUser;
+    }
 }

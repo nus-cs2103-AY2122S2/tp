@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+mainframe **sd** AddMeetingCommandExecute
+
+participant "a:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+[-> AddMeetingCommand : execute()
+activate AddMeetingCommand
+
+AddMeetingCommand -> Model : getFilteredModuleList()
+activate Model
+
+Model --> AddMeetingCommand
+
+AddMeetingCommand -> AddMeetingCommand : moduleList.get(moduleIndex)
+activate AddMeetingCommand
+
+AddMeetingCommand ---> AddMeetingCommand
+deactivate AddMeetingCommand
+
+AddMeetingCommand -> Model : addMeeting(meetingToAdd)
+
+Model -> Model : refreshFilteredMeetingList()
+activate Model
+
+Model ---> Model
+deactivate Model
+
+Model --> AddMeetingCommand
+deactivate Model
+
+@enduml

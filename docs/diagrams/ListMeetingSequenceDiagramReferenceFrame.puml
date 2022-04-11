@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+
+mainframe **sd** ListMeetingCommandExecute
+
+participant "l:ListMeetingCommand" as ListMeetingCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+[-> ListMeetingCommand : execute()
+activate ListMeetingCommand
+
+ListMeetingCommand -> Model : showCompletedMeetings(false)
+activate Model
+Model --> ListMeetingCommand
+deactivate Model
+
+@enduml

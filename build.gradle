@@ -21,8 +21,13 @@ checkstyle {
 }
 
 test {
+    enableAssertions = true
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+}
+
+run {
+    enableAssertions = true
 }
 
 task coverage(type: JacocoReport) {
@@ -66,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'linkytime.jar'
 }
 
 defaultTasks 'clean', 'test'

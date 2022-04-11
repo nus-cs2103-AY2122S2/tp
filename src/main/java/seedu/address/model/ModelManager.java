@@ -11,36 +11,42 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.meeting.Meeting;
+import seedu.address.model.module.Module;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the LinkyTime data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final LinkyTime linkyTime;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Meeting> filteredMeetings;
+    private final FilteredList<Module> filteredModules;
+    private Predicate<Meeting> invariantPredicate = PREDICATE_SHOW_ALL_UNCOMPLETED_MEETINGS;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given linkyTime and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyLinkyTime linkyTime, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(linkyTime, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
+        logger.fine("Initializing with LinkyTime: " + linkyTime + " and user prefs " + userPrefs);
+        this.linkyTime = new LinkyTime(linkyTime);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.linkyTime.sortMeetings();
+        filteredMeetings = new FilteredList<>(this.linkyTime.getMeetingList());
+        this.linkyTime.sortModules();
+        filteredModules = new FilteredList<>(this.linkyTime.getModuleList());
+        refreshFilteredMeetingList();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new LinkyTime(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs ===============================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -65,67 +71,134 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getLinkyTimeFilePath() {
+        return userPrefs.getLinkyTimeFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setLinkyTimeFilePath(Path linkyTimeFilePath) {
+        requireNonNull(linkyTimeFilePath);
+        userPrefs.setLinkyTimeFilePath(linkyTimeFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== LinkyTime ===============================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setLinkyTime(ReadOnlyLinkyTime linkyTime) {
+        this.linkyTime.resetData(linkyTime);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyLinkyTime getLinkyTime() {
+        return linkyTime;
+    }
+
+    // =========== Meeting ============================================================================
+
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return linkyTime.hasMeeting(meeting);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteMeeting(Meeting target) {
+        requireNonNull(target);
+        linkyTime.removeMeeting(target);
+        refreshFilteredMeetingList();
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        linkyTime.addMeeting(meeting);
+        refreshFilteredMeetingList();
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireAllNonNull(target, editedMeeting);
+        linkyTime.setMeeting(target, editedMeeting);
+        refreshFilteredMeetingList();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Meeting List Accessors ====================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return filteredMeetings;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        // Forces the GUI to perform a complete re-render to reflect updated recurrent meeting date and times.
+        // This is a temporary workaround until a coherent solution comes about.
+        linkyTime.sortMeetings();
+
+        filteredMeetings.setPredicate(m -> false);
+        filteredMeetings.setPredicate(invariantPredicate.and(predicate));
+    }
+
+    @Override
+    public void showCompletedMeetings(boolean showCompleted) {
+        invariantPredicate = showCompleted
+                ? PREDICATE_SHOW_ALL_COMPLETED_MEETINGS : PREDICATE_SHOW_ALL_UNCOMPLETED_MEETINGS;
+        refreshFilteredMeetingList();
+    }
+
+    private void refreshFilteredMeetingList() {
+        updateFilteredMeetingList(m -> true);
+    }
+
+    @Override
+    public ObservableList<Meeting> getMeetingList() {
+        return linkyTime.getMeetingList();
+    }
+
+    // =========== Module ==================================================================================
+
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return linkyTime.hasModule(module);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        linkyTime.addModule(module);
+        linkyTime.sortModules();
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+    }
+
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+        linkyTime.setModule(target, editedModule);
+        linkyTime.sortModules();
+    }
+
+    @Override
+    public void deleteModule(Module target) {
+        linkyTime.removeModule(target);
+    }
+
+    // =========== Module List Accessors ==========================================================
+
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Module> getModuleList() {
+        return linkyTime.getModuleList();
     }
 
     @Override
@@ -141,10 +214,10 @@ public class ModelManager implements Model {
         }
 
         // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+        final ModelManager other = (ModelManager) obj;
+        return userPrefs.equals(other.userPrefs)
+                && filteredMeetings.equals(other.filteredMeetings)
+                && filteredModules.equals(other.filteredModules);
     }
 
 }

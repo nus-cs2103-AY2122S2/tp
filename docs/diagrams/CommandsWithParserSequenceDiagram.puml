@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkyTimeParser" as LinkyTimeParser LOGIC_COLOR
+participant ":XYZCommandParser" as XYZCommandParser LOGIC_COLOR
+participant "c:XYZCommand" as XYZCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("xyz  ...")
+activate LogicManager
+
+LogicManager -> LinkyTimeParser : parseCommand("xyz  ...")
+activate LinkyTimeParser
+
+create XYZCommandParser
+LinkyTimeParser -> XYZCommandParser
+activate XYZCommandParser
+
+XYZCommandParser --> LinkyTimeParser
+deactivate XYZCommandParser
+
+LinkyTimeParser -> XYZCommandParser : parse("...")
+activate XYZCommandParser
+
+create XYZCommand
+XYZCommandParser -> XYZCommand
+activate XYZCommand
+
+XYZCommand --> XYZCommandParser
+deactivate XYZCommand
+
+XYZCommandParser --> LinkyTimeParser : c
+deactivate XYZCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+XYZCommandParser -[hidden]-> LinkyTimeParser
+destroy XYZCommandParser
+
+LinkyTimeParser --> LogicManager : c
+deactivate LinkyTimeParser
+
+LogicManager -> XYZCommand : execute()
+
+activate XYZCommand
+ref over XYZCommand, Model : XYZCommandExecute
+
+create CommandResult
+XYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> XYZCommand
+deactivate CommandResult
+
+XYZCommand --> LogicManager : result
+deactivate XYZCommand
+
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml

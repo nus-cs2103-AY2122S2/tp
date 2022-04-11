@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+mainframe **sd** DeleteModuleCommandExecute
+
+participant "d:DeleteModuleCommand" as DeleteModuleCommand LOGIC_COLOR
+
+participant "model:Model" as Model MODEL_COLOR
+
+[-> DeleteModuleCommand : execute()
+activate DeleteModuleCommand
+
+alt isForced
+    DeleteModuleCommand -> DeleteModuleCommand : deleteAssociatedMeetings(model, moduleToDelete)
+    activate DeleteModuleCommand
+
+    loop hasAssociatedMeetings
+        DeleteModuleCommand -> Model : deleteMeeting(associatedMeeting)
+        activate Model
+
+        Model ---> DeleteModuleCommand
+        deactivate Model
+        end
+
+    DeleteModuleCommand ---> DeleteModuleCommand
+    deactivate DeleteModuleCommand
+    end
+
+DeleteModuleCommand -> Model : deleteModule(meetingToDelete)
+activate Model
+
+Model --> DeleteModuleCommand
+deactivate Model
+
+@enduml

@@ -13,7 +13,13 @@ public class TagTest {
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
+        final String invalidTagName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
+    }
+
+    @Test
+    public void constructor_invalidTagLength_throwsIllegalArgumentException() {
+        final String invalidTagName = "abcdefghijklmnopqrstuvwxyz"; // length of 26
         assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
     }
 

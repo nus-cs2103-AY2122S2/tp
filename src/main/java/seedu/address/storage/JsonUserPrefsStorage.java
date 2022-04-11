@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
  */
 public class JsonUserPrefsStorage implements UserPrefsStorage {
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonUserPrefsStorage(Path filePath) {
         this.filePath = filePath;
@@ -36,12 +36,25 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
      * @throws DataConversionException if the file format is not as expected.
      */
     public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataConversionException {
-        return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
+        final Optional<JsonAdaptedUserPrefs> jsonAdaptedUserPrefs =
+                JsonUtil.readJsonFile(prefsFilePath, JsonAdaptedUserPrefs.class);
+        if (!jsonAdaptedUserPrefs.isPresent()) {
+            return Optional.empty();
+        }
+
+        final UserPrefs userPrefs = jsonAdaptedUserPrefs.get().toModelType();
+        return Optional.of(userPrefs);
     }
 
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        JsonUtil.saveJsonFile(userPrefs, filePath);
+        final UserPrefs userPrefsToSave = new UserPrefs();
+
+        userPrefsToSave.setGuiSettings(userPrefs.getGuiSettings());
+        userPrefsToSave.setLinkyTimeFilePath(userPrefs.getLinkyTimeFilePath());
+
+        final JsonAdaptedUserPrefs jsonAdaptedUserPrefs = new JsonAdaptedUserPrefs(userPrefsToSave);
+        JsonUtil.saveJsonFile(jsonAdaptedUserPrefs, filePath);
     }
 
 }

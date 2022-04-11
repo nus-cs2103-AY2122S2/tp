@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+mainframe <b>sd</b> EditModuleCommandExecute
+participant "e:EditModuleCommand" as EditModuleCommand LOGIC_COLOR
+participant ":Model" as Model MODEL_COLOR
+
+[-> EditModuleCommand: execute()
+activate EditModuleCommand
+EditModuleCommand -> Model: getFilteredModuleList()
+activate Model
+Model --> EditModuleCommand
+note left: Retrieval of the module from \n the module list has been \n omitted for brevity.
+opt  hasDependentMeetings
+    EditModuleCommand -> EditModuleCommand: editAssociatedMeetings(...)
+    activate EditModuleCommand
+    EditModuleCommand -> Model: setMeeting(...)
+note right: Updating of each associated\n meeting has been\n omitted for brevity.
+    Model --> EditModuleCommand
+    EditModuleCommand -->EditModuleCommand
+    deactivate EditModuleCommand
+end
+EditModuleCommand -> Model: updateFilteredModuleList(PRED...)
+Model --> EditModuleCommand
+EditModuleCommand -> Model: model.setModule(...)
+Model --> EditModuleCommand
+
+deactivate Model
+
+
+@enduml

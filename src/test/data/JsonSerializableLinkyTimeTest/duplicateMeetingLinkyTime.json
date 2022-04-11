@@ -1,0 +1,22 @@
+{
+  "meetings" : [ {
+    "name" : "CS2103T Lecture",
+    "url" : "https://legit-uni.zoom.us/j/344299221?pwd=F3a99221",
+    "dateTime" : "18-03-2022 1500",
+    "duration" : "2.0",
+    "module" : "CS2103T",
+    "isRecurring" : "Y",
+    "tagged" : [ ]
+  }, {
+    "name" : "CS2103T Lecture",
+    "url" : "https://legit-uni.zoom.us/j/344299221?pwd=F3a99221",
+    "dateTime" : "18-03-2022 1500",
+    "duration" : "2.0",
+    "module" : "CS2103T",
+    "isRecurring" : "Y",
+    "tagged" : [ ]
+  } ],
+  "modules" : [ {
+      "code": "CS2103T"
+  } ]
+}

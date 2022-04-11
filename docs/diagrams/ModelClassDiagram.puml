@@ -4,47 +4,64 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Package Model <<Rectangle>> {
+Class "<<interface>>\nReadOnlyLinkyTime" as ReadOnlyLinkyTime
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class LinkyTime
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
+Package Meeting {
+Class Meeting
+Class DateTime
+Class Duration
+Class MeetingName
+Class Url
+Class IsRecurring
+Class UniqueMeetingList
+}
+
+Package Tag {
 Class Tag
+}
+
+Package Module {
+Class Module
+Class ModuleName
+Class UniqueModuleList
+}
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+LinkyTime .up.|> ReadOnlyLinkyTime
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyLinkyTime
+ModelManager -left-> "1" LinkyTime
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+LinkyTime *--> "1" UniqueMeetingList
+UniqueMeetingList "1" --> "~*" Meeting
+Meeting *--> MeetingName
+Meeting *--> Url
+Meeting *--> Duration
+Meeting *--> DateTime
+Meeting "*"  --> "1" Module
+Meeting *--> IsRecurring
+Meeting *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModelManager --> "~* filtered" Meeting
 
-ModelManager -->"~* filtered" Person
+LinkyTime *--> "1\t" UniqueModuleList
+UniqueModuleList "1" --> "~*" Module
+Module *--> ModuleName
+
+ModelManager --> "~*" Module
+
 @enduml

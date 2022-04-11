@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkyTimeParser" as LinkyTimeParser LOGIC_COLOR
+participant ":AddMeetingCommandParser" as AddMeetingCommandParser LOGIC_COLOR
+participant "a:AddMeetingCommand" as AddMeetingCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add n/Lecture...")
+activate LogicManager
+
+LogicManager -> LinkyTimeParser : parseCommand("add n/Lecture...")
+activate LinkyTimeParser
+
+create AddMeetingCommandParser
+LinkyTimeParser -> AddMeetingCommandParser
+activate AddMeetingCommandParser
+
+AddMeetingCommandParser --> LinkyTimeParser
+deactivate AddMeetingCommandParser
+
+LinkyTimeParser -> AddMeetingCommandParser : parse("n/Lecture...")
+activate AddMeetingCommandParser
+
+create AddMeetingCommand
+AddMeetingCommandParser -> AddMeetingCommand
+activate AddMeetingCommand
+
+AddMeetingCommand --> AddMeetingCommandParser : a
+deactivate AddMeetingCommand
+
+AddMeetingCommandParser --> LinkyTimeParser : a
+deactivate AddMeetingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddMeetingCommandParser -[hidden]-> LinkyTimeParser
+destroy AddMeetingCommandParser
+
+LinkyTimeParser --> LogicManager : a
+deactivate LinkyTimeParser
+
+LogicManager -> AddMeetingCommand : execute()
+activate AddMeetingCommand
+
+AddMeetingCommand -> Model : addMeeting(toAdd)
+activate Model
+
+
+Model -> Model : updateFilteredMeetingList(PRED...)
+activate Model
+
+Model ---> Model
+deactivate Model
+
+Model --> AddMeetingCommand
+deactivate Model
+
+create CommandResult
+AddMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddMeetingCommand
+deactivate CommandResult
+
+AddMeetingCommand --> LogicManager : result
+deactivate AddMeetingCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

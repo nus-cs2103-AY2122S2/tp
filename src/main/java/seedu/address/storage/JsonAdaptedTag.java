@@ -42,6 +42,9 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (!Tag.isValidTagLength(tagName)) {
+            throw new IllegalValueException(String.format(Tag.MESSAGE_LENGTH_EXCEEDED, Tag.MAX_TAG_LENGTH));
+        }
         return new Tag(tagName);
     }
 

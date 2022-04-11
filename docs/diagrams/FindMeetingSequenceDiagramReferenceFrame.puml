@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+
+mainframe **sd** FindMeetingCommandExecute
+
+participant "f:FindMeetingCommand" as FindMeetingCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+[-> FindMeetingCommand : execute()
+activate FindMeetingCommand
+
+FindMeetingCommand -> Model : updateFilteredMeetingList(predicate)
+
+activate Model
+
+Model --> FindMeetingCommand
+deactivate Model
+
+@enduml

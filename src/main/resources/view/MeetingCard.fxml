@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox spacing="2" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="id" styleClass="cell_big_label">
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
+        <Label fx:id="module" text="\$module" wrapText="true" />
+        <Label fx:id="isRecurring" text="\$isRecurring" />
+        <Label fx:id="name" text="\$name" styleClass="cell_big_label" maxWidth="800" wrapText="true" />
+      </HBox>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="startDateTime" styleClass="cell_small_label" text="\$startDateTime" />
+        <Label styleClass="label-bright"> - </Label>
+        <Label fx:id="endDateTime" styleClass="cell_small_label" text="\$endDateTime" />
+      </HBox>
+      <Label fx:id="url" styleClass="cell_small_label" text="\$url" wrapText="true" />
+      <FlowPane fx:id="tags" />
+    </VBox>
+  </GridPane>
+</HBox>

@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+mainframe **sd** OpenMeetingCommandExecute
+
+participant "o:OpenMeetingCommand" as OpenMeetingCommand LOGIC_COLOR
+
+participant "model:Model" as Model MODEL_COLOR
+
+participant "urlOpener:UrlOpenerManager" as UrlOpenerManager MODEL_COLOR
+
+participant ":Desktop" as Desktop MODEL_COLOR_T2
+
+[-> OpenMeetingCommand : execute()
+activate OpenMeetingCommand
+
+create UrlOpenerManager
+OpenMeetingCommand -> UrlOpenerManager
+activate UrlOpenerManager
+
+UrlOpenerManager -> UrlOpenerManager : checkAndSetDesktop()
+activate UrlOpenerManager
+UrlOpenerManager -> Desktop : getDesktop()
+activate Desktop
+Desktop ---> UrlOpenerManager
+deactivate Desktop
+
+UrlOpenerManager ---> UrlOpenerManager
+deactivate UrlOpenerManager
+UrlOpenerManager ---> OpenMeetingCommand
+deactivate UrlOpenerManager
+
+OpenMeetingCommand -> OpenMeetingCommand : executeWithUrlOpener(urlOpener, model)
+activate OpenMeetingCommand
+
+OpenMeetingCommand -> Model : getFilteredMeetingList()
+activate Model
+
+Model  ---> OpenMeetingCommand
+deactivate Model
+
+OpenMeetingCommand -> UrlOpenerManager : open(urlToOpen)
+activate UrlOpenerManager
+
+UrlOpenerManager -> UrlOpenerManager : checkAndSetUrl(url)
+activate UrlOpenerManager
+
+UrlOpenerManager --> UrlOpenerManager
+deactivate UrlOpenerManager
+
+UrlOpenerManager -> Desktop : browse(url)
+activate Desktop
+
+Desktop --> UrlOpenerManager
+deactivate Desktop
+
+UrlOpenerManager ---> OpenMeetingCommand
+deactivate UrlOpenerManager
+
+OpenMeetingCommand ---> OpenMeetingCommand
+deactivate OpenMeetingCommand
+
+@enduml

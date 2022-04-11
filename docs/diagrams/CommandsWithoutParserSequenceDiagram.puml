@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkyTimeParser" as LinkyTimeParser LOGIC_COLOR
+participant "c:XYZCommand" as XYZCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("xyz")
+activate LogicManager
+
+LogicManager -> LinkyTimeParser : parseCommand("xyz")
+activate LinkyTimeParser
+
+create XYZCommand
+LinkyTimeParser -> XYZCommand
+activate XYZCommand
+
+XYZCommand --> LinkyTimeParser : c
+deactivate XYZCommand
+
+LinkyTimeParser --> LogicManager : c
+deactivate LinkyTimeParser
+
+LogicManager -> XYZCommand : execute()
+activate XYZCommand
+
+ref over XYZCommand, Model : XYZCommandExecute
+
+create CommandResult
+XYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> XYZCommand : result
+deactivate CommandResult
+
+XYZCommand --> LogicManager : result
+deactivate XYZCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkyTimeParser" as LinkyTimeParser LOGIC_COLOR
+participant ":FindMeetingCommandParser" as FindMeetingCommandParser LOGIC_COLOR
+participant "f:FindMeetingCommand" as FindMeetingCommand LOGIC_COLOR
+participant "result :CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find cs2103t tutorial")
+activate LogicManager
+
+LogicManager -> LinkyTimeParser : parseCommand("find cs2103t tutorial")
+activate LinkyTimeParser
+
+create FindMeetingCommandParser
+LinkyTimeParser -> FindMeetingCommandParser
+activate FindMeetingCommandParser
+
+FindMeetingCommandParser --> LinkyTimeParser
+deactivate FindMeetingCommandParser
+
+LinkyTimeParser -> FindMeetingCommandParser : parse("cs2103t tutorial")
+activate FindMeetingCommandParser
+
+create FindMeetingCommand
+FindMeetingCommandParser -> FindMeetingCommand
+activate FindMeetingCommand
+
+FindMeetingCommand --> FindMeetingCommandParser : f
+deactivate FindMeetingCommand
+
+FindMeetingCommandParser --> LinkyTimeParser : f
+deactivate FindMeetingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindMeetingCommandParser -[hidden]-> LinkyTimeParser
+
+LinkyTimeParser --> LogicManager : f
+deactivate LinkyTimeParser
+
+LogicManager -> FindMeetingCommand : execute()
+activate FindMeetingCommand
+
+FindMeetingCommand -> Model : updateFilteredMeetingList(predicate)
+activate Model
+
+Model --> FindMeetingCommand
+deactivate Model
+
+create CommandResult
+FindMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindMeetingCommand
+deactivate CommandResult
+
+FindMeetingCommand --> LogicManager : result
+deactivate FindMeetingCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
