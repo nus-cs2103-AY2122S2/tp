@@ -389,8 +389,28 @@ Alternatives considered:
     - Cons:
         - Hard to implement
         - Error prone
+        
+### Appointment feature
 
-### Sort features
+The `appt-b` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
+
+1. An index needs to be specified along with the necessary time field.
+   E.g. appt-b 1 time/2023-09-09-09-09
+2. The Parser (`AppointmentBuyerCommandParser`) checks if the position parsed in is valid (Greater than equal to 1 and Smaller than or equal to the size of the displayed buyer list).
+3. The updated buyer remains in the same position as before.
+
+Design Consideration:
+
+- Current: All the properties of time needs to be entered. E.g. The year, month, day, hour and minute should all be present.
+    - Pros: Less prone to confusion
+    - Cons: More inputs needed.
+- Alternative 1: Have some option fields such as year and minute.
+
+    - Pros: Make the command line input short.
+    - Cons: Harder to deduce what the user want as the option fields, more prone to mistakes and confusion.
+
+
+### Sort feature
 
 The sort feature allows the user to sort the buyers and sellers by name or time in ascending or descending order.
 
@@ -411,18 +431,18 @@ The user types input E.g.  `sort-b by/time o/asc` into the `CommandBox` (See [UI
 **Step 3:**
 `SortBuyerCommandParser` then checks whether all the prefixes are present and whether the compared item are sortable, and whether the order belongs to either `asc` or `desc`. If yes, a `SortBuyerCommand` is returned.
 
-**Step 2:**
+**Step 4:**
 The `execute(model)` method of `SortBuyerCommand` is being called.
 
-**Step 3:**
+**Step 5:**
 The `sortFilteredBuyerList(time, asc)` method of `model` is being called, which in turn calls `sortFilteredBuyerList(time, asc)` method of `BuyerAddressBook`, which in turn calls `sortBuyers(time, asc)` from its own copy of `UniqueBuyerList`.
 
 
-**Step 4:**
+**Step 6:**
 The `sortBuyers(time, asc)` alters the `UniqueBuyerList`'s `internalList` permanently and sorts it by the compared item and by the given order.
 
 
-**Step 5:**
+**Step 7:**
 Finally, a `CommandResult` with the relevant feedback is returned to the `LogicManager`.
 
 The following Sequence Diagrams summarizes the various steps involved:
@@ -430,6 +450,8 @@ The following Sequence Diagrams summarizes the various steps involved:
 ![SortBuyerSequenceDiagram](images/SortBuyerSequenceDiagram.png)
 
 Design Considerations:
+
+
 Current Design: The structure of internal list change permanently, and instead of passing the comparator, the `comparedItem` and `order` are passed around in every method call.
 
 **Pros:**
