@@ -3,6 +3,7 @@ package unibook.testutil.builders;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
@@ -82,6 +83,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code groups} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withGroups(Set<Group> groups) {
+        this.groups = groups;
         return this;
     }
 

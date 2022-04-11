@@ -75,11 +75,12 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid group name, meaning it must be within 50 characters
-     * and have no whitespaces.
+     * Returns true if a given string is a valid group name, meaning it must be within 50 characters,
+     * and is not blank (just consisting of only whitespaces).
      */
     public static boolean isValidName(String test) {
-        return test.length() > 0 && test.length() <= MAX_GROUP_NAME_LENGTH;
+        String trimmedTest = test.trim();
+        return trimmedTest.length() > 0 && trimmedTest.length() <= MAX_GROUP_NAME_LENGTH;
     }
 
     /**
@@ -106,13 +107,6 @@ public class Group {
     }
 
     /**
-     * Edit the group name of the group object.
-     */
-    public void editGroupName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Edit the module of the group object.
      */
     public void editModule(Module module) {
@@ -122,14 +116,6 @@ public class Group {
     public Module getModule() {
         return module;
     }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidGroupName(String test) {
-        return test.length() > 0 && test.length() <= 50;
-    }
-
 
     /**
      * Returns the member students of the group.
@@ -187,45 +173,21 @@ public class Group {
     }
 
     /**
-     * Remove a meeting datetime from the group.
-     *
-     * @param meetingTime meeting datetime to remove.
-     */
-    public void removeMeetingTime(LocalDateTime meetingTime) {
-        requireNonNull(meetingTime);
-        if (!meetingTimes.contains(meetingTime)) {
-            throw new MeetingTimeNotFoundException();
-        }
-        meetingTimes.remove(meetingTime);
-    }
-
-    /**
      * Remove a meeting based on Index given
      *
      * @param index
      */
     public void removeMeetingTime(int index) {
-        requireNonNull(index);
         meetingTimes.remove(index);
     }
 
-    /**
-     * Edit a meeting datetime from the group.
-     *
-     * @param idx         index of the meeting time to edit
-     * @param meetingTime meeting datetime to remove.
-     */
-    public void editMeetingTime(int idx, LocalDateTime meetingTime) {
-        requireNonNull(meetingTime);
-        this.meetingTimes.set(idx, meetingTime);
-    }
 
     /**
      * Returns true only if the name of the group provided and this group name
-     * are the same.
+     * are the same, ignoring casing.
      */
     public boolean sameGroupName(Group group) {
-        return this.name.equalsIgnoreCase(group.getGroupName());
+        return name.equalsIgnoreCase(group.getGroupName());
     }
 
     /**
@@ -236,8 +198,8 @@ public class Group {
      * @return
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
-        if (moduleCode.equals(this.module.getModuleCode().toString())
-            && groupName.equalsIgnoreCase(this.getGroupName())) {
+        if (moduleCode.equals(module.getModuleCode().toString())
+            && groupName.equalsIgnoreCase(getGroupName())) {
             return true;
         }
         return false;

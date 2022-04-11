@@ -92,7 +92,7 @@ Can have both Professors and Students associated with it.
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |  
 | ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
-|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
+|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | A group name is case insensitive, e.g. _t12_ and _T12_ are considered the same. The case stored in UniBook is the case of the first group entered with the given group name. Future additions of the same group name with different case will not be allowed. | _W16-1_|
 |Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
 
 # Graphical User Interface
