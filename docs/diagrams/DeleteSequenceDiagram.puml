@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deletec 1")
+[-> LogicManager : execute("deletec 1,2")
 activate LogicManager
 
-LogicManager -> TrackBeauParser : parseCommand("deletec 1")
+LogicManager -> TrackBeauParser : parseCommand("deletec 1,2")
 activate TrackBeauParser
 
 create DeleteCustomerCommandParser
@@ -26,7 +26,7 @@ activate DeleteCustomerCommandParser
 DeleteCustomerCommandParser --> TrackBeauParser
 deactivate DeleteCustomerCommandParser
 
-TrackBeauParser -> DeleteCustomerCommandParser : parse("1")
+TrackBeauParser -> DeleteCustomerCommandParser : parse("1,2")
 activate DeleteCustomerCommandParser
 
 create DeleteCustomerCommand
@@ -58,7 +58,7 @@ activate Model
 Model --> DeleteCustomerCommand
 deactivate Model
 
-loop bookings of the customer (index 1) that is in the future
+loop for all bookings of the customers \n(index 1 & 2) that is in the future
 
     DeleteCustomerCommand -> Model : deleteBooking(b)
     activate Model
@@ -66,10 +66,12 @@ loop bookings of the customer (index 1) that is in the future
     deactivate Model
 end
 
-DeleteCustomerCommand -> Model : deleteCustomer(1)
-activate Model
-Model --> DeleteCustomerCommand
-deactivate Model
+loop for all customers to delete (index 1 & 2)
+    DeleteCustomerCommand -> Model : deleteCustomer(c)
+    activate Model
+    Model --> DeleteCustomerCommand
+    deactivate Model
+end
 
 create CommandResult
 DeleteCustomerCommand -> CommandResult

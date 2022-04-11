@@ -24,6 +24,10 @@ Given below are my contributions to the project.
   * What it does: allows the user to specify multiple customer indexes and delete those customers.
   * Justification: There might be multiple customers profiles that need to be removed and deleting them one at a time is slow. The product should provide a convenient way to batch delete.
   * Additional checks added to prevent duplicated indexes in the input.
+
+* **Enhancements to existing features**:
+  * Switch the main window panel after corresponding commands execute successfully. (PR [#135](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/135))
+  * For example, after a booking command is executed, current panel switches to bookings panel.
   
 * **Testing**: 
   * Included JUnit test cases for schedule and booking commands. (PR [#212](https://github.com/AY2122S2-CS2103-F11-3/tp/pull/212))
@@ -42,4 +46,3 @@ Given below are my contributions to the project.
 * **Community**:
   * Helped to review PRs for team
   * Report bugs and functional flows for other team
-

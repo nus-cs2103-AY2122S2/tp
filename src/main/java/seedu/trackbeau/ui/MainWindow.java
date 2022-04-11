@@ -153,6 +153,7 @@ public class MainWindow extends UiPart<Stage> {
             switchPanel(stringToPanel(label.getId()));
         });
     }
+    // @@author
 
     private Panel stringToPanel(String id) {
         switch (id) {
