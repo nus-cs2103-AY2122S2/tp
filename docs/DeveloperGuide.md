@@ -53,14 +53,14 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](https://github.com/AY2122S2-CS2103T-T12-3/tp/tree/master/src/main/java/seedu/address/commons) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java): The UI of the App.
+* [**`Logic`**](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java): The command executor.
+* [**`Model`**](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java): Holds the data of the App in memory.
+* [**`Storage`**](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -813,9 +813,9 @@ Regardless, `MainWindow#handleSummarise()` will call `PieChartWindow#execute()` 
 The data needed for the pie chart is obtained using `SummariseCommand#getPositiveStatsByFacultyData()` and `SummariseCommand#getCovidStatsByBlockDataList()`.
 
 Below are links for implementation of the classes and its methods:
-* [`PieChartWindow`](../src/main/java/seedu/address/ui/PieChartWindow.java)
-* [`SummariseCommand`](../src/main/java/seedu/address/logic/commands/SummariseCommand.java)
-* [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java)
+* [`PieChartWindow`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/PieChartWindow.java)
+* [`SummariseCommand`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/commands/SummariseCommand.java)
+* [`MainWindow`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 
 #### 5.10.6. Why it is implemented that way
 
