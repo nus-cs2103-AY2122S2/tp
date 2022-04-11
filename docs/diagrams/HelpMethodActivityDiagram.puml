@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User uses UDT;
+
+    :User executes a Help command;
+
+        If () then ([User inputs Help command incorrectly)
+        :throw ParseException;
+        else ([else])
+        :Command Summary displayed in Text Output Box;
+        :Help window opens;
+
+            If () then ([User wants to access User Guide])
+            :User clicks on Copy Link button;
+            :User Guide opens link in User's default browser;
+
+            else ([else])
+
+            endif
+            :Close Help Window;
+        endif
+
+stop
+
+@enduml

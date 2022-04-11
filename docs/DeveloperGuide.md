@@ -186,6 +186,7 @@ or any new features that we have in mind.
   - [Activity Feature](#implemented-activity-feature)
   - [Find By Activity Feature](#implemented-find-by-activity-feature)
 - Updated
+  - [Help Command](#updated-help-command)
   - [Adding a Person Feature](#updated-adding-a-person-feature)
   - [Editing a Person Feature](#updated-editing-a-person-feature)
   - [User Interface](#updated-user-interface)
@@ -425,6 +426,31 @@ activities. Allows user to check across multiple activities instead of only that
   * Cons:
     * Only students who are participating in all the input activities will be returned, possibly only a handful
 of students which makes it slightly impractical to use
+
+### \[Updated\] Help Command
+
+#### Updates
+
+`Help` Command now displays a list a command summary within the **Text Output Box**, along with an external window containing a link to
+UDT's User Guide page. Previous version only provides a link to the User Guide page. Implementation was changed to help facilitate ease of use
+when **Users** require help without having the need to go to the User Guide page.
+
+|![HelpMethodActivityDiagram](images/developer-guide/HelpMethodActivityDiagram.png)|
+|:--:|
+|*Help Method - Activity Diagram*|
+
+Diagram above shows the execution paths for the `help` command.
+
+|![HelpSequenceDiagram](images/developer-guide/HelpSequenceDiagram.png)|
+|:--:|
+|*Help Method - Sequence Diagram*|
+
+As seen in the sequence diagram for the `help` method above, `executeCommand("help")` is first called,
+which then calls the `execute()` method from the `LogicManager` Class. `AddressBookParser` then parses the
+command provided, calling upon the `HelpCommand` object, instantiating a `CommandResult` Object.
+
+The `MainWindow` then checks the boolean value returned by the method `isShowing()`, calling the `show()`
+method if the Help Window is not showing and focusing it otherwise.
 
 ### \[Updated\] Adding a Person Feature
 
