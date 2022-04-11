@@ -7,11 +7,13 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICEINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
@@ -120,6 +122,17 @@ public class CommandTestUtil {
     public static final String INVALID_SERVICE_DESC = " " + PREFIX_SERVICES; //empty string not allowed for tags
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGIES; //empty string not allowed for tags
     public static final String INVALID_DATE = " " + PREFIX_DATE + "10-10"; //missing year
+
+    //Service
+    public static final String SERVICENAME_FIRST = " " + PREFIX_NAME + "Facial";
+    public static final String SERVICENAME_SECOND = " " + PREFIX_NAME + "Hair Cut";
+    public static final String PRICE_FIRST = " " + PREFIX_PRICE + "20";
+    public static final String PRICE_SECOND = " " + PREFIX_PRICE + "10";
+    public static final String DURATION_FIRST = " " + PREFIX_DURATION + "50";
+    public static final String DURATION_SECOND = " " + PREFIX_DURATION + "30";
+
+    public static final String INVALID_PRICE = " " + PREFIX_PRICE + "O";
+    public static final String INVALID_DURATION = " " + PREFIX_DURATION + "a";
 
     //Booking
     public static final String CUSTOMERINDEX_FIRST = " " + PREFIX_CUSTOMERINDEX + "1";
