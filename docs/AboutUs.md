@@ -44,7 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/harish-coding.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, Testing, Integration
 
 ### Terng Yan Long
 
