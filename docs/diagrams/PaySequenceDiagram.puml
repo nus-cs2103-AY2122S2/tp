@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PayParser" as PayParser LOGIC_COLOR
+participant "a:PayCommand" as PayCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Transaction" as Transaction MODEL_COLOR
+end box
+
+[-> LogicManager : execute("pay 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("pay 1")
+activate AddressBookParser
+
+create PayParser
+AddressBookParser -> PayParser
+activate PayParser
+
+PayParser --> AddressBookParser
+deactivate PayParser
+
+AddressBookParser -> PayParser : parse(1)
+activate PayParser
+
+create PayCommand
+PayParser -> PayCommand
+activate PayCommand
+
+
+PayCommand --> PayParser : a
+deactivate PayCommand
+
+PayParser --> AddressBookParser : a
+deactivate PayParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PayParser -[hidden]-> AddressBookParser
+destroy PayParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> PayCommand : execute()
+activate PayCommand
+
+PayCommand -> Model : Get transaction at index 1.
+activate Model
+Model --> PayCommand : transactionToEdit
+deactivate Model
+
+create Transaction
+PayCommand -> Transaction : transactionToEdit.setStatusTo(PayCommand.class)
+activate Transaction
+
+Transaction --> PayCommand : editedTransaction
+deactivate Transaction
+
+PayCommand -> Model : setTransaction(editedTransaction)
+activate Model
+
+Model --> PayCommand
+deactivate Model
+
+PayCommand -[hidden]-> PayCommand
+create CommandResult
+PayCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PayCommand : result
+deactivate CommandResult
+
+PayCommand --> LogicManager : result
+deactivate PayCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PayCommand -[hidden]-> AddressBookParser
+destroy PayCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

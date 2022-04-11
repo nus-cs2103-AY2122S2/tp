@@ -65,13 +65,13 @@ FindTransactionCommand -> TransactionPredicateBuilder : tp.createTransactionPred
 activate TransactionPredicateBuilder
 
 TransactionPredicateBuilder -[hidden]-> FindTransactionCommand
-TransactionPredicateBuilder --> FindTransactionCommand : transactionPredicate
+TransactionPredicateBuilder --> FindTransactionCommand : predicate
 deactivate TransactionPredicateBuilder
 
 TransactionPredicateBuilder -[hidden]> FindTransactionCommand
 destroy TransactionPredicateBuilder
 
-FindTransactionCommand -> Model : updateFilteredTransaction(transactionPredicate)
+FindTransactionCommand -> Model : updateFilteredTransaction(predicate)
 activate Model
 
 Model -[hidden]-> FindTransactionCommand
