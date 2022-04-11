@@ -3,6 +3,15 @@ layout: page
 title: User Guide
 ---
 
+<style>
+    .feature {
+        padding: 10px 30px 30px;
+        margin: 30px;
+        border-radius: 12px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    }
+</style>
+
 IBook is an inventory organizing system specially designed to manage products in a store.
 
 <h2>Target User</h2>
