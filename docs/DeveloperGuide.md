@@ -625,7 +625,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 ### Use cases
 
-**For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.**
+For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.
 
 #### Use case: Get client list
 
