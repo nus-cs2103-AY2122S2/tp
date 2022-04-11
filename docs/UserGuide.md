@@ -342,7 +342,7 @@ After filling in the required fields, click
 
 Updates the product at the specified `INDEX`.
 
-Format: `update INDEX [TAG:NEW_VALUE] ...]`
+Format: `update INDEX [TAG:NEW_VALUE ...]`
 
 Valid tags and their values: `[n:NAME] [c:CATEGORY] [p:PRICE] [d:DESCRIPTION] [dr:DISCOUNT_RATE] [ds:DISCOUNT_START]`
 
@@ -754,7 +754,7 @@ Format: `exit`
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Once exited, the position and the size of ibook will be saved automatically.
+:information_source: Once exited, the position and the size of ibook on the screen will be recorded and saved automatically.
 
 </div>
 
