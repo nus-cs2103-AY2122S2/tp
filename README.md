@@ -23,5 +23,5 @@ Manage your clients with ease!
 Just using the keyboard, you can add clients by including details such as their name, address, etc. 
 You can also store your insurance packages and their corresponding details in the application! 
 
-Other functionalities, such as editing or deleting existing contacts, or finding contacts by keyworsds, are also available.
+Other functionalities, such as editing or deleting existing contacts, or finding contacts by keywords, are also available.
 

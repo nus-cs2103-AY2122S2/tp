@@ -190,8 +190,7 @@ Currently, there are 4 priority levels that a tag can have, as provided by the `
   itself.
   * Pros: Easier to implement, and easy to extend for future features such as `sort`.
   * Cons: We cannot give so much nuance- if someone has some issues that are urgent, and others that aren't, this cannot be captured.
-
-_{more aspects and alternatives to be added}_
+  
 #### Listing by priority
 The PriorityList() command. facilitated by `PriorityListCommand` and `TagPriorityComparator`, allows users to sort and display their client list by the priority level of their contact's tags. 
 A client with multiple tags will have the priority level of the highest priority out of all of his/her tags.
@@ -230,8 +229,7 @@ The predicate is implemented in this way since updating the filteredPersonList i
 * **Alternative 2:** Using just one predicate to encompass all the fields
     * Pros: Code is cleaner and less redundant
     * Cons: Implementation and testing might be harder as it is less modulariseds
-
-_{more aspects and alternatives to be added}_
+    
 
 ### Adding the ability to export AddressBook to CSV and back
 
@@ -775,8 +773,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  Source code is open source.
 8.  Features should be easy to test, for both manual and automated testing.
 
-*{More to be added (?)}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -798,16 +794,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -815,21 +809,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   
