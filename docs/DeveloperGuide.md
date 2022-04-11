@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-W17-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -89,14 +89,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `HireLahParser` class to parse the user command.
 1. In the case of commands that is common to all data types (e.g. `add`, `edit`, `delete`, `list`), an intermediate parser may be used to select the specific parser for the data type.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddApplicantCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a applicant).
@@ -114,7 +114,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HireLahParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HireLahParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -150,7 +150,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -161,7 +161,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2122S2-CS2103-W17-4/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,7 +298,7 @@ a limitation of PlantUML, the lifeline reaches the end of diagram. Logic for exe
 #### Implementation
 The implementation of deleting data is similar to adding data, where deleting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
 
-The parsing of a delete command from user input is also done through the 3 levels system, with `AddressBookParser`, `DeleteCommandParser`, and `DeleteXYZCommandParser` which eventually creates the `DeleteXYZCommand`.
+The parsing of a delete command from user input is also done through the 3 levels system, with `HireLahParser`, `DeleteCommandParser`, and `DeleteXYZCommandParser` which eventually creates the `DeleteXYZCommand`.
 
 However, when deleting an applicant or a position, an additional step of cascading to delete interview is required. Since every interview is associated with an applicant and a position, we cannot have an interview exist without the corresponding applicant or position.
 Hence, it is important to delete the associated interview(s) when deleting an applicant or a position.
@@ -349,7 +349,7 @@ The *Sequence Diagram* below illustrates the interactions within the classes for
 The implementation of sorting data is done as an extension of the `list -X` command, which takes in optional 
 parameters that will trigger the sorting of data to display if given. The sorting is done by directly sorting
 the data in `UniqueXYZList`, which uses `ObservableList<XYZ>` to contain the data. It applies a comparator to
-`UniqueXYZList` in `AddressBook`, then applies the given predicate (if none, then use show all predicate) to `filteredXYZ` 
+`UniqueXYZList` in `HireLah`, then applies the given predicate (if none, then use show all predicate) to `filteredXYZ` 
 filtered lists in `ModelManager`, which the `UI` will pick up and display the data to the user.
 
 
@@ -370,7 +370,7 @@ The *Sequence Diagram* below illustrates the interactions within the classes for
       * Less chance of error occurs when modify the displayed data.
       * `UI` can displayed the sorted data immediately.
       * `export -X` can export the data according to their sorting order. 
-    * Cons: Decrease cohesion, as we need to depend on `AddressBook`. 
+    * Cons: Decrease cohesion, as we need to depend on `HireLah`. 
 
 
 * **Alternative 2:** Directly sort the `filteredXYZ` filtered lists in `ModelManager` by passing it to sorted lists.
@@ -385,7 +385,7 @@ The *Sequence Diagram* below illustrates the interactions within the classes for
 
 Exporting of different data types is currently done through `ModelManger`, which implements the methods in interface `Model`.
 There are 2 levels to the parsing of the add command from user input.
-1. `AddressBookParser` identifies it as an `export` command.
+1. `HireLahParser` identifies it as an `export` command.
 2. `ExportCsvCommandParser` identifies the exact data type that need to be exported, through the `flag` of the user input
 , and returns the respective `ExportXYZCsvCommand`.
 
