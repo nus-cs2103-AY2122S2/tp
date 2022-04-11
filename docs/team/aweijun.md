@@ -48,11 +48,11 @@ Given below are my contributions to the project.
   * Managed issues relating to Model's components, etc. 
   * Perform testing on windows and macOS to test for bugs across different operating system.
   * Tested for bugs and fixed bugs related to components.
-    * Rating Bug: [[/#261]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/261)
-    * Tag Bug: [[/#264]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/264)
-    * Add Error Message Bug: [[/#262]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/262)
-    * Suggest Bug: [[/#260]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/260)
-    * Comment Bug: [[/#305]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/305)
+    * Rating Bug: [[\#261]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/261)
+    * Tag Bug: [[\#264]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/264)
+    * Add Error Message Bug: [[\#262]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/262)
+    * Suggest Bug: [[\#260]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/260)
+    * Comment Bug: [[\#305]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/305)
 * **Documentation**:
   * User Guide: 
     * Added documentation for features `suggest` [[\#194]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194).
