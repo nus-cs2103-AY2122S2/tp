@@ -53,9 +53,9 @@ title: Developer Guide
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Most of the images in UI are taken from [Feather](https://feathericons.com/) - collection of simply beautiful open source icons.
+* Most of the images in Ui are taken from [Feather](https://feathericons.com/) - a collection of simply beautiful open source icons.
 
-* The UI design are inspired from [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
+* The Ui design is inspired by [Warehouse Management System](https://dribbble.com/shots/16271310-Warehouse-Management-System) by Ashkan Fazeli
 
 <h2>Setting up, getting started</h2>
 
@@ -63,7 +63,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:information_source: **Note:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
@@ -120,7 +120,15 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 <img src="images/ComponentManagers.png" width="320" />
 
-The following sections will provide more detail about each component's structure.
+The sections below give more details about each component.
+
+### Ui component
+
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/ibook/ui/i.java)
+
+The diagram below shows a simplified view of the Ui component.
+
+![Structure of the UI Component](images/UiClassDiagram.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -134,7 +142,7 @@ The diagram below shows a simplified view of the `Ui` component.
 
 `XXX_Ui` represents `CommandBox`, `ProductTable`, `PopupHandler`, `ControlBox`, etc.
 
-The UI consists of a `UiManager` that implements the Façade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow. 
+The UI consists of a `UiManager` that implements the Facade interface `Ui`. `UiManager` consists of a `MainWindow` that holds all UI components of the application. `UiComponent` is an abstract class that contains a reference to the MainWindow. 
 
 By having `XXX_Ui` inherit from `UiComponent`, we allow nagivation from `XXX_Ui` to `MainWindow`. The navigation is helpful for some UI components that need to call methods in `UiManager`.
 
@@ -174,7 +182,7 @@ UI components that are related to the `ControlBox` are grouped under the `Contro
 
 The `ControlBox` is the box located just above the main display table. It holds the <img class="btn" align="center" src="images/ui-icons/add-product.png" alt="Add Product" height="25"/> button and `Filter` tags.
 
-The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represent each `AttributeFilter`.
+The `MainWindow` contains a `ControlBox` that holds multiple `Filter` that represents each `AttributeFilter`.
 
 <h4>More about Ui</h4>
 
@@ -195,7 +203,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/logic/Logic.java)
+**API**: [`Logic.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/logic/Logic.java)
 
 The diagram below shows a simplified view of the `Logic` component.
 
@@ -206,9 +214,9 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `IBookParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a product).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-Commands are separated into different packages depending on its functionalities. Thus, the commands package includes the item package for item commands, product package for product commands. The rest of the commands that do not fit into those two are directly under the command package.
+Commands are separated into different packages depending on their functionalities. Thus, the commands package includes the item package for item commands and the product package for product commands. The rest of the commands that do not fit into those two are directly under the command package.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -233,7 +241,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API**: [`Model.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/model/Model.java)
 
 The diagram below shows a simplified view of the `Model` component.
 
@@ -260,7 +268,7 @@ A more detailed representation of the `Product` class is shown below which inclu
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/storage/Storage.java)
+**API**: [`Storage.java`](https://github.com/AY2122S2-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/ibook/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -271,7 +279,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.ibook.commons` package.
 
 <hr/>
 
@@ -291,10 +299,10 @@ The diagram below shows a simplified internal structure of `Popup`.
 
 `PopupXXX` represents `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc
 
-The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each individual popup is contained by `PopupHandler` that provides APIs for operations related to popup.
+The implementation of popups is facilitated by the `PopupHandler` class and the `Popup` abstract class. Each popup is contained by `PopupHandler` which provides APIs for operations related to the popup.
 
 The API provided by `PopupHandler` are:
-* `isShowing()` – Checks if any of the popup is showing.
+* `isShowing()` – Checks if any one of the popups is showing.
 * `setFeedbackToUser(String)` – Shows feedback to user in the showing popup.
 * `showPopupXXX()` – Shows `PopupXXX`.
 * `hidePopup()` – Hides the showing popup.
@@ -316,7 +324,7 @@ The following sequence diagram shows how a `Popup` is displayed once a button is
 
 ![Show Popup](images/ShowPopupSequenceDiagram.png)
 
-`XXX_Ui` represents UI components that has a button which will open a popup once clicked, e.g `ControlBox`, `ProductCard`, `ItemCard`, etc.
+`XXX_Ui` represents UI components that have a button which will open a popup once clicked, e.g `ControlBox`, `ProductCard`, `ItemCard`, etc.
 
 `PopupYYY` represents different types of `Popup`, e.g `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
@@ -342,8 +350,8 @@ The `commandResult` will then be sent to `ResultWindow` for display and `PopupYY
 
 **Aspect: How to handle popup**
 * **Alternative 1:** Pass in popups created at `MainWindow` to UI components that require it.
-  * Pros: Less function calls and better performance.
-  * Cons: Increases coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have unnecessary dependency on `PopupModifyItem`.
+  * Pros: Fewer function calls and better performance.
+  * Cons: Increases coupling as these popups might be required by deeply nested components. <br> e.g `ItemCard` has to call `PopupModifyItem` but it resides in `MainWindow > ProductTable > ItemTable`. This causes `ProductTable` and `ItemTable` to have an unnecessary dependency on `PopupModifyItem`.
 
    &nbsp;
 
@@ -351,7 +359,7 @@ The `commandResult` will then be sent to `ResultWindow` for display and `PopupYY
   * Pros: Easy solution to reduce coupling.
   * Cons: 
     1. Difficult to manage popups and to check whether the popups are currently showing.
-    2. Two of the same popups might be opened at the same period of time.
+    2. Two of the same popups can be opened at the same time.
 
    &nbsp;
 
@@ -385,7 +393,7 @@ The following sequence diagram shows how the `Update` command works:
 
 * **Alternative 2 (current choice):** Make `Product` immutable.
   * Pros: Removes the need for listeners for UI to track product states.
-  * Cons: Cost for updating a product maybe huge.
+  * Cons: The cost for updating a product may be huge.
 
 ### Product filters
 
@@ -393,7 +401,7 @@ The following sequence diagram shows how the `Update` command works:
 
 The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command.
 
-Both the `ProductFilter` as well as the `AttributeFilter` has a `test()` method to test whether a given `Product` fulfils the query specified by the user.
+Both the `ProductFilter` as well as the `AttributeFilter` has a `test()` method to test whether a given `Product` fulfills the query specified by the user.
 
 Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
 
@@ -401,15 +409,15 @@ Given below is the class diagram of the `ProductFilter` class and the `Attribute
 
 The sequence diagram below shows how the `FindCommand` object is created:
 
-<img src="images/FindCreationSequenceDiagram.png" width="550" />
+<img src="images/FindCreationSequenceDiagram.png" width="1000" />
 
 The sequence diagram below shows how the `FindCommand` object is executed:
 
-<img src="images/FindExecutionSequenceDiagram.png" width="550" />
+<img src="images/FindExecutionSequenceDiagram.png" width="1000" />
 
-As different attributes have different constraints, the `parse()` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
+As different attributes have different constraints, the `parse()` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there are any invalid attributes, an exception would be thrown.
 
-When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test()` method is called with `Product` as the argument).
+When executing the `FindCommand`, the `clearProductFilters()` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter()` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfills every condition in the `AttributeFilter` (i.e. returning true for when the `test()` method is called with `Product` as the argument).
 
 The updated filtered product list would then be displayed in the GUI.
 
@@ -425,7 +433,7 @@ The updated filtered product list would then be displayed in the GUI.
 
 * **Alternative 1:** Create a single predicate as the product filter.
     * Pros: Easy to implement.
-    * Cons: User does not have fine-grained control over the current filter.
+    * Cons: The user does not have fine-grained control over the current filter.
 
     &nbsp;
 
@@ -441,12 +449,12 @@ The `Item` class is implemented to encapsulate two data fields, `ExpiryDate` and
 
 Listed below are the few behavioral requirements for `Item`, along with the classes/interfaces related to it.
 
-* A `Product` must not have two `Item` objects that are considered the same: `UniqueItemList`
-* An `Item` cannot exist without a `Parent` it's under: `ItemDescriptor`
+* A `Product` must not have two `Item` objects that are considered the same, this is enforced by `UniqueItemList`
+* An `Item` without a `Parent` is characterised using the `ItemDescriptor`
 
 `ItemDescriptor` contains a `ItemDescriptor#toItem(Product)` method to ensure the associated `Product` is given before creating the `Item` object.
 
-The motivation for such implementation is due to the parsing of the `add-item` command, when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
+The motivation for such implementation is due to the parsing of the `add-item` command when the fields of `Item` need to be populated before the associated `Product` is retrieved. We wanted to enforce the relationship between `Item` and `Product` to reduce unforeseen misuses and bugs.
 
 ##### Adding an Item
 
@@ -467,7 +475,7 @@ These two operations are similar to adding an `Item` as shown in the section abo
 
 #### Design considerations
 
-**Aspect: How to create `Item` and ensure it  when user executes `add-item` command:**
+**Aspect: How to create `Item` and ensure it when the user executes `add-item` command:**
 
 * **Alternative 1:** Retrieve the respective `Product` within the parser.
     * Pros: Easy solution.
@@ -503,7 +511,7 @@ These operations are exposed in the `Model` interface as `Model#prepareIBookForC
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` record.
+Step 1. The user launches the application for the first time. The `ReversibleIBook` will be initialized, which in turn initializes `StateChangeRecorder` with a `stateChanges` list consisting of zero `StateChange` records.
 
 <img src="images/UndoRedoState0.png" width="500" />
 
@@ -537,11 +545,11 @@ Step 4. The user now decides that adding the product was a mistake, and decides 
 
 The following sequence diagram shows how the undo operation works:
 
-<img src="images/UndoSequenceDiagram.png" width="950" />
+<img src="images/UndoSequenceDiagram.png" width="1000" />
 
 <br>
 
-The `redo` command does exactly the opposite  —  it calls `Model#redoIBook()`, which moves the `currentStateChange` once to the right, pointing to the previously reverted changes, then perform the actions needed to restore them back.
+The `redo` command does exactly the opposite  —  it calls `Model#redoIBook()`, which moves the `currentStateChange` to the right by one, pointing to the previously reverted changes, then performs the actions needed to restore them.
 
 
 <div markdown="span" class="alert alert-info">
@@ -577,8 +585,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   &nbsp;
 
 * **Alternative 2 (current choice):** Methods that make changes to `IBook` has corresponding reverse actions.
-  * Pros: Will use less memory (e.g. for `delete`, just save the product being deleted).
-  * Cons: Must ensure that the implementation of each method is correct.
+  * Pros: Uses less memory (e.g. for `delete`, just save the product being deleted).
+  * Cons: We must ensure that the implementation of each method is correct.
 
 <hr/>
 
@@ -613,7 +621,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority level | As a …​                    | I want to …​                                                            | So that I can…​                                        |
 |----------|----------------------------|-------------------------------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | user                       | add a product                                                           | input product data that I want to store                |
-| `* * *`  | user                       | list all products added                                                 | check on all important details of all itemms at once   |
+| `* * *`  | user                       | list all products added                                                 | check on all important details of all items at once    |
 | `* * *`  | user                       | search for specific products by category                                | find the relevant products and its details quickly     |
 | `* * *`  | user                       | delete a product                                                        | remove entries that I no longer need                   |
 | `* * *`  | user                       | update a product's information                                          | keep the details relevant                              |
@@ -779,23 +787,23 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
    
 **Extensions**
 
-* 1a. Required fields are all present but are invalid.
+* 2a. Required fields are all present but are invalid.
 
-    * 1a1. IBook shows an error message.
-
-      Use case ends.
-
-* 1b. Not all required fields are present (e.g. Expiry Date).
-
-    * 1b1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
-* 1c. Optional fields like Quantity is missing.
+* 2b. Not all required fields are present (e.g. Expiry Date).
 
-    * 1c1. IBook automatically sets the quantity to 0.
+    * 2b1. IBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
+
+* 2c. Optional fields like Quantity is missing.
+
+    * 2c1. IBook automatically sets the quantity to 0.
+
+      Use case resumes at step 3.
 
 #### UC8: Delete an item
 
@@ -912,22 +920,23 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 **MSS**
 
-1. User requests to update all products displayed in the list.
-2. IBook updates the list to show all products updated.
+1. User finds products they want to update using the find command ([UC5](#uc5-find-products)).
+2. User requests to update all products displayed in the list.
+3. IBook updates the list to show all products updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Some provided fields are invalid.
+* 2a. Some provided fields are invalid.
 
-    * 1a1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
-* 1b. The current display list is empty.
+* 2b. The current display list is empty.
 
-    * 1b1. IBook shows an error message.
+    * 2b1. IBook shows an error message.
 
       Use case ends.
 
@@ -935,16 +944,17 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 **MSS**
 
-1. User requests to delete all products displayed in the list.
-2. IBook updates the list to show all products updated.
+1. User finds products they want to delete using the find command ([UC5](#uc5-find-products)).
+2. User requests to delete all products displayed in the list.
+3. IBook updates the list to show all products updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The current display list is empty.
+* 2a. The current display list is empty.
 
-    * 1a1. IBook shows an error message.
+    * 2a1. IBook shows an error message.
 
       Use case ends.
 
@@ -986,7 +996,7 @@ For all use cases below, the **System** is the `IBook` and the **Actor** is the 
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1. Should work on any _mainstream OS_ as long as it has `Java 11` or above installed.
 2. Should be able to hold up to 1000 products without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Data should be auto saved locally each time a new command has been entered.

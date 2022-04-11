@@ -13,7 +13,6 @@ end box
 
 box Model MODEL_COLOR_LIGHT
 participant "d:ItemDescriptor" as ItemDescriptor<<Model>>
-participant ":Model" as Model<<Model>>
 end box
 
 [-> LogicManager : execute()
@@ -59,7 +58,7 @@ deactivate IBookParser
 LogicManager -> AddItemCommand : execute()
 activate AddItemCommand
 
-ref over AddItemCommand, ItemDescriptor, Model : Item Addition
+ref over AddItemCommand, ItemDescriptor : Item Addition
 
 AddItemCommand --> LogicManager
 deactivate AddItemCommand
