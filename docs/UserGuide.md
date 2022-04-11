@@ -34,6 +34,7 @@ To get started, click on any of the headers in the table of content to jump to t
     * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Recall recent used command](#recall-recent-used-command)
   * [**Miscellaneous Features**](#miscellaneous-features)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -98,6 +99,7 @@ and meetings.
   * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [Recall recent used command](#recall-recent-used-command)
 * [Miscellaneous Features](#miscellaneous-features)
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
@@ -153,8 +155,8 @@ Here you can find all the necessary features to manage your clients and meetings
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `cleardemo`, `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `clear 123`, it will be interpreted as `clear`.
 
 </div>
 
@@ -165,7 +167,16 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help [COMMAND]`
+
+* Enter optional parameter `COMMAND` to view the usage for that command.
+![meet Help Message](images/meetHelpMessage.png)
+* Entering only the `help` will allow you to view message explaining how to access help page and the usage of all commands.
+
+Example:
+
+* `help`
+* `help meet`
 
 ## Managing your clients
 
@@ -192,18 +203,21 @@ A client's meeting can be scheduled through meet command after adding the client
   * Duplicate is found when two clients have the exact `NAME`.
   * Duplicate `NAME` are case-insensitive. `John` is a duplicate of `JoHn`. 
 * `n/NAME` can only contain letters and numbers with single space in between each name.
-  * `William B J` and `John The 2nd` is acceptable. `Clara   Tan` is not acceptable.
+  * `William B J` and `John The 2nd` is acceptable. `Clara   Tan` is not acceptable.
 * `d/DATE` will be set to today's date by default if not specified.
   * `DATE` has to be in the format **YYYY-MM-DD**.
   * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
+* `p/PHONE_NUMBER` needs to be minimum **7** digits and maximum **15** digits.
 * `i/INFO` will be set to `No further info` by default if not specified.
 * `t/TAG` will be empty by default if not specified.
+  * Each tag is limited to **25** characters maximum currently.
 * `f/FLAG` will be set to `false` by default if not specified.
 * `s/SALARY` will be set to 0 by default if not specified.
+  * Salary is limited to **15** digits maximum currently. 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/Blk 775 Pasir Ris Street 71 S510775`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Salary of $3400 f/true`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/NUS School of Computing, COM1 s/4300 p/1234567 i/Low Risk Tolerance f/true`
 
 ### Editing a client : `edit`
 
@@ -224,11 +238,11 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 Example:
 
 **Scenario 1**: You have a client named `John Doe`
-* `edit n/John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
+* `edit John Doe d/2020-12-04` Edits the previous meeting date of the client with the name `John Doe` to
   `2020-12-04` which is 4th Dec 2020.
 
 **Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `edit n/John d/2020-12-04` will show a list of clients with names containing "John"
+* Running the command `edit John d/2020-12-04` will show a list of clients with names containing "John"
 
 ![edit_multiple_clients](images/editMultipleClients.png)
 * Typing `1` will edit "John Doe", typing `2` will edit "John Smith" and typing `3` will edit "John Williams"
@@ -269,8 +283,14 @@ Example:
 `delete John Doe` removes client `John Doe` from HustleBook
 
 **Scenario 2**: You have clients named `John Doe` `John Smith` and `John Willams`
-* Running the command `delete n/John` will show a list of clients with names containing "John"
+* Running the command `delete John` will show a list of clients with names containing "John"
 * If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue deleting other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
 
 ### Flagging a client : `flag`
 
@@ -283,6 +303,8 @@ Format: `flag NAME`
   * Only full words will be matched e.g. `Han` will not match `Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names.
   * Input the position on the list of the client you wish to edit.
+* A flagged client will have **red** tab on the left as shown below:
+![flagged_client](images/flaggedClient.png)
 
 Example:
 
@@ -293,9 +315,12 @@ Example:
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `flag John` will show a list of clients with names containing "John".
 * If you wish to flag `John Doe` and he is the first person listed, typing `1` and `Enter` will flag `John Doe`.
-* Subsequently, you can continue to flag other "John" listed here by typing their indexes and pressing `Enter`.
-* Run `list` to show all clients and stop flagging clients with names containing "John".
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue flagging other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
 
 ### Unflagging a client : `unflag`
 
@@ -318,14 +343,18 @@ Example:
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `unflag John` will show a list of clients with names containing "John".
 * If you wish to unflag `John Doe` and he is the first person listed, typing `1` and `Enter` will unflag `John Doe`.
-* Subsequently, you can continue to unflag other "John" listed here by typing their indexes and pressing `Enter`.
-* Run `list` to show all clients and stop flagging clients with names containing "John".
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can continue unflagging other clients here by entering other indexes. 
+
+To exit out of this mode and search result, simply run `list` to show all clients again. 
+</div>
 
 ## Managing your meetings
 
 ### Scheduling / Rescheduling a meeting: `meet`
 
-Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+Schedules a meeting for the client with the specified `NAME` with the `DATE` and `TIME` of the meeting specified.
 The same command can be used to reschedule a meeting with the client.
 
 Format: `meet NAME d/DATE t/TIME`
@@ -341,7 +370,7 @@ Example:
 
 ### Canceling a meeting: `meet`
 
-Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
+Cancels current meeting for the client with the specified `NAME`.
 
 Format: `meet NAME c/`
 
@@ -372,7 +401,7 @@ Format: `sort [meeting|name|prev|salary]`
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD, [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -397,6 +426,7 @@ Here you can find useful features that can help improve your efficiency using Hu
 * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
 * [Clearing all entries : `clear`](#clearing-all-entries--clear)
 * [Exiting the program : `exit`](#exiting-the-program--exit)
+* [Recall recent used command](#recall-recent-used-command)
 
 ### Undoing the previous commands : `undo`
 
@@ -448,6 +478,13 @@ Exits the program.
 
 Format: `exit`
 
+### Recall recent used command
+
+Recalls the most recent command used and enters it into the command box.
+
+* By pressing the `UP` arrow key, the last command used is reentered into the command box.
+* Only the most recent command used can be recalled.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Miscellaneous Features 
@@ -478,16 +515,16 @@ If you decide to make changes to the data file, HustleBook will not check the va
 
 | Action     | Format, Examples                                                                                                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Salary-3400` |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [d/DATE] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/3400`     |
 | **List**   | `list`                                                                                                                                                                                      |
 | **Clear**  | `clear`                                                                                                                                                                                     |
-| **Sort**   | `sort`                                                                                                                                                                                      |
-| **Undo**  | `undo`                                                                                                                                                                                       |
+| **Sort**   | `sort [meeting|name|prev|salary]` <br> e.g., `sort name`                                                                                                                                    |
+| **Undo**   | `undo`                                                                                                                                                                                      |
 | **Redo**   | `redo`                                                                                                                                                                                      |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                                       |
 | **Flag**   | `flag NAME`<br> e.g., `flag John`                                                                                                                                                           |
 | **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |
 | **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
 | **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
-| **Help**   | `help`                                                                                                                                                                                      |
+| **Find**   | `find KEYWORD, [MORE_KEYWORDS]`<br> e.g., `find James, Jake`                                                                                                                                |
+| **Help**   | `help [COMMAND]` <br> e.g., `help meet`                                                                                                                                                     |
