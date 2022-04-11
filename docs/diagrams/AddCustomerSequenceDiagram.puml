@@ -7,21 +7,12 @@ participant ":TrackBeauParser" as TrackBeauParser LOGIC_COLOR
 participant ":AddCustomerCommandParser" as AddCustomerCommandParser LOGIC_COLOR
 participant "c:Customer" as Customer LOGIC_COLOR
 participant "a:AddCustomerCommand" as AddCustomerCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-
-box CommandException STORAGE_COLOR_T1
-participant "e:CommandException" as CommandException STORAGE_COLOR
-end box
-
-[-> LogicManager : execute("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+[-> LogicManager : execute("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate LogicManager
 
-LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate TrackBeauParser
 
 create AddCustomerCommandParser
@@ -31,7 +22,7 @@ activate AddCustomerCommandParser
 AddCustomerCommandParser --> TrackBeauParser
 deactivate AddCustomerCommandParser
 
-TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate AddCustomerCommandParser
 
 create Customer
