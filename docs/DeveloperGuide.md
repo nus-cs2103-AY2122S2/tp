@@ -501,6 +501,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Extensions**
+
+* 2a. The list is empty 
+
+    Use case ends.
+
+* 3a. The selected company is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+    
+    Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+    Use case ends.
+
 **Use case: Edit an existing person**
 
 **MSS**
@@ -512,6 +528,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. InternBuddy shows successful feedback to the user
 
     Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected person is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
 
 **Use case: Edit an existing event**
 
@@ -525,6 +557,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected event is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
 **Use case: Delete an existing company**
 
 **MSS**
@@ -537,6 +585,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. InternBuddy shows successful feedback to the user
 
    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
 
 **Use case: Delete an existing person**
 
@@ -552,6 +611,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete an existing event**
 
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected person is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
 **MSS**
 
 1. User requests to view list of events
@@ -561,6 +631,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. InternBuddy shows successful feedback to the user
 
    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
 
 **Use case: Locating companies**
 
@@ -591,6 +672,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. InternBuddy shows successful feedback to the user
 
    Use case ends.
+
+
 
 *{More to be added}*
 
