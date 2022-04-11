@@ -73,9 +73,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EntityListPanel`*, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `*EntityListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-*`EntityListPanel` and *`EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
+`*EntityListPanel` and `*EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -240,7 +240,7 @@ Step 3. The user executes `add student` command to add a student to `TAssist`. T
 The following sequence diagram shows how the add operation works:
 
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
-<img src="images/AddModelSequenceDiagram.png" width="250" />
+![AddSequenceDiagram](images/AddModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -278,7 +278,7 @@ Step 3. The user executes `delete class 2` to delete the 2nd class group in the 
 The following sequence diagram shows how the delete operation works:
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
-<img src="images/DeleteModelSequenceDiagram.png" width="250" />
+![DeleteSequenceDiagram](images/DeleteModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -428,7 +428,7 @@ Step 4. The user executes `mark c/1 w/1 s/1,2` to mark attendance for a lesson w
 The following sequence diagram shows how the mark operation works:
 
 ![MarkUnmarkSequenceDiagram](images/MarkUnmarkSequenceDiagram.png)
-<img src="images/MarkUnmarkModelSequenceDiagram.png" width="250" />
+![MarkUnmarkSequenceDiagram](images/MarkUnmarkModelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
