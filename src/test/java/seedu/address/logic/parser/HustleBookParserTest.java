@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalNames.FULL_NAME_FIRST_PERSON;
 
@@ -33,7 +34,7 @@ import seedu.address.testutil.PersonUtil;
 public class HustleBookParserTest {
 
     private final HustleBookParser parser = new HustleBookParser();
-    private final Command lastCommand = new ListCommand();
+    private final Command lastCommand = new ListCommand(PREDICATE_SHOW_ALL_PERSONS);
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -81,13 +82,15 @@ public class HustleBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, lastCommand) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand) instanceof HelpCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, lastCommand) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand) instanceof ListCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", lastCommand));
     }
 
     @Test

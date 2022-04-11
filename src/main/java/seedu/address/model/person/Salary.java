@@ -8,8 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers";
-    private static final String VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers and at most 15 digits";
+    public static final String DEFAULT_VALUE = "0";
+    private static final String VALIDATION_REGEX = "\\d{1,15}";
     public final String value;
 
     /**
@@ -27,7 +28,7 @@ public class Salary {
      * Constructs a {@code Salary} with a default value of "0".
      */
     public Salary() {
-        this.value = "0";
+        this.value = DEFAULT_VALUE;
     }
 
     /**
@@ -37,7 +38,18 @@ public class Salary {
      * @return A boolean stating if the string is valid or not.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (test.matches(VALIDATION_REGEX));
+    }
+
+    /**
+     * Method to compare Salary with other Salary.
+     * Returns 0 if Salary is equal, -1 if this Salary is lesser and 1 if it is higher.
+     *
+     * @param otherSalary Another Salary to compare to.
+     * @return Integer indicating if Salary is equal, less or more than otherSalary
+     */
+    public int compare(Salary otherSalary) {
+        return -1 * this.value.compareTo(otherSalary.value);
     }
 
     @Override

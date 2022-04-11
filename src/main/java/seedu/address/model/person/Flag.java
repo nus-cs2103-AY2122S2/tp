@@ -1,10 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 public class Flag {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Flag should only be 'true' or 'false'.";
     public static final String VALIDATION_REGEX = "(true|false)";
+    public static final String FLAG_INPUT_TRUE = "true";
+    public static final String FLAG_INPUT_FALSE = "false";
     public final boolean isFlagged;
 
     /**
@@ -17,23 +22,25 @@ public class Flag {
     /**
      * Constructs a {@code Flag} with given String boolean.
      *
-     * @param bool If the person is flagged.
+     * @param input Used to flag or unflag person.
      */
-    public Flag(String bool) {
-        if (bool.equalsIgnoreCase("false")) {
+    public Flag(String input) {
+        requireNonNull(input);
+        checkArgument(isValidFlag(input), MESSAGE_CONSTRAINTS);
+        if (input.equals(FLAG_INPUT_FALSE)) {
             isFlagged = false;
-        } else if (bool.equalsIgnoreCase("true")) {
+        } else if (input.equals(FLAG_INPUT_TRUE)) {
             isFlagged = true;
         } else {
-            throw new RuntimeException("invalid bool");
+            throw new RuntimeException("Invalid input");
         }
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid flag.
      */
     public static boolean isValidFlag(String test) {
-        return test.toLowerCase().matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

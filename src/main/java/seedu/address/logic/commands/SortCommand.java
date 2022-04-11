@@ -13,13 +13,13 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons based on parameters given.\n"
-            + "Parameters: PARAMETER \n"
-            + "Example: " + COMMAND_WORD + "name";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all clients based on parameters given.\n"
+            + "Parameters available: meeting, name, prev, salary \n"
+            + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Persons are now sorted by date";
-
+    public static final String MESSAGE_SUCCESS = "Clients are now sorted";
     private final Comparator<Person> sortComparator;
+
     public SortCommand(Comparator<Person> sortComparator) {
         this.sortComparator = sortComparator;
     }

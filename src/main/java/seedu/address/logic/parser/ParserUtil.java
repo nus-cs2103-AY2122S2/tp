@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -106,10 +108,13 @@ public class ParserUtil {
      * Parses a {@code String flag} into an {@code Flag}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Flag parseFlag(String flag) {
+    public static Flag parseFlag(String flag) throws ParseException {
         requireNonNull(flag);
         String trimmedFlag = flag.trim();
-        return new Flag(trimmedFlag.equals("flag"));
+        if (!Flag.isValidFlag(trimmedFlag)) {
+            throw new ParseException(Flag.MESSAGE_CONSTRAINTS);
+        }
+        return new Flag(trimmedFlag);
     }
 
     /**
@@ -121,6 +126,12 @@ public class ParserUtil {
         String trimmedDate = date.trim();
         if (!MeetingDate.isValidDate(trimmedDate)) {
             throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        try {
+            // Helps to catch invalid date e.g. 29 Feb in non-leap years
+            MeetingDate.isDatePossible(trimmedDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
         }
         return new MeetingDate(trimmedDate);
     }
@@ -179,6 +190,11 @@ public class ParserUtil {
         if (!PrevDateMet.isValidPrevDateMet(trimmedDate)) {
             throw new ParseException(PrevDateMet.MESSAGE_CONSTRAINTS);
         }
+        try {
+            PrevDateMet.isDatePossible(trimmedDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
+        }
         return new PrevDateMet(trimmedDate);
     }
 
@@ -214,5 +230,22 @@ public class ParserUtil {
             throw new ParseException(Info.MESSAGE_CONSTRAINTS);
         }
         return new Info(trimmedInfo);
+    }
+
+    /**
+     * Parses a {@code String command} into a {@code CommandEnum}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param command A string of the command that have help requested.
+     * @return CommonEnum object that is parsed.
+     * @throws ParseException if the given {@code command} is invalid.
+     */
+    public static Command.CommandEnum parseCommand(String command) throws ParseException {
+        requireNonNull(command);
+        String trimmedCommand = command.trim();
+        if (!Command.CommandEnum.isValidCommand(trimmedCommand)) {
+            throw new ParseException(Command.CommandEnum.MESSAGE_CONSTRAINTS);
+        }
+        return Command.CommandEnum.valueOf(trimmedCommand);
     }
 }

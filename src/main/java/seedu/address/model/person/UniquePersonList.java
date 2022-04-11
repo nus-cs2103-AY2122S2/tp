@@ -83,26 +83,6 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the flag of the person {@code target} in the list with {@code flag}.
-     * {@code target} must exist in the list.
-     */
-    public void flagPerson(Person target, Flag flag) {
-        requireAllNonNull(target, flag);
-        target.setFlag(flag);
-    }
-
-    /**
-     * Schedules a meeting with the targeted person.
-     * @param target The person to be scheduled a meeting with.
-     * @param scheduledMeeting The meeting details.
-     */
-    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
-        requireAllNonNull(target, scheduledMeeting);
-        target.setScheduledMeeting(scheduledMeeting);
-    }
-
-
-    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */

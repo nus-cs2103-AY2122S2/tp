@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
@@ -104,16 +103,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void flagPerson(Person target, Flag flag) {
-        hustleBook.flagPerson(target, flag);
-    }
-
-    @Override
-    public void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting) {
-        hustleBook.scheduleMeeting(target, scheduledMeeting);
-    }
-
-    @Override
     public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
         requireNonNull(scheduledMeeting);
         return hustleBook.hasSameMeeting(scheduledMeeting);
@@ -128,13 +117,24 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         hustleBook.setPerson(target, editedPerson);
     }
 
     @Override
     public void sortPersonListBy(Comparator<Person> sortComparator) {
         hustleBook.sortPersonBy(sortComparator);
+    }
+
+    @Override
+    public void undoHustleBook() {
+        ReadOnlyHustleBook prevState = HustleBookHistory.getInstance().getPrevState();
+        this.hustleBook.resetData(prevState);
+    }
+
+    @Override
+    public void redoHustleBook() {
+        ReadOnlyHustleBook nextState = HustleBookHistory.getInstance().getNextState();
+        this.hustleBook.resetData(nextState);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -159,8 +159,8 @@ public class ModelManager implements Model {
         Index result = Index.fromZeroBased(0);
         String personName = name.fullName;
         for (Person i : filteredPersons) {
-            String currName = i.getName().fullName;
-            if (currName.toLowerCase().contains(personName.toLowerCase())) {
+            Name currName = i.getName();
+            if (currName.containsKeyword(personName)) {
                 break;
             }
             result.increment(1);

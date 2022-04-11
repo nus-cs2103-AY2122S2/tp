@@ -68,6 +68,27 @@ public class ScheduledMeeting {
         }
     }
 
+    /**
+     * Method to compare SheduledMeeting with other ScheduledMeeting.
+     * Returns 0 if meeting data and time are equal, -1 if this ScheduledMeeting is before and 1 if it is after.
+     *
+     * @param otherMeeting Another ScheduledMeeting to compare to
+     * @return Integer indicating if PrevDateMet is equal, before or after otherMeeting
+     */
+    public int compare(ScheduledMeeting otherMeeting) {
+        if (this.equals(otherMeeting)) {
+            return 0;
+        } else {
+            int dateCompare = this.getDate().compare(otherMeeting.getDate());
+            if (dateCompare != 0) {
+                return dateCompare;
+            } else {
+                return this.getTime().compare(otherMeeting.getTime());
+            }
+        }
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

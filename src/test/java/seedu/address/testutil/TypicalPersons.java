@@ -68,6 +68,19 @@ public class TypicalPersons {
             .withPrevDateMet("2021-04-25")
             .withSalary("4800")
             .withInfo("Salary of $4800").build();
+    public static final Person PETER = new PersonBuilder().withName("Peter Wilts").withPhone("96201021")
+            .withEmail("peter@example.com").withAddress("20th street")
+            .withPrevDateMet("2021-02-28")
+            .withSalary("4200")
+            .withInfo("Risky investor")
+            .withScheduledMeeting("2022-01-05", "1430")
+            .build();
+    public static final Person WILL = new PersonBuilder().withName("Will T").withPhone("9622141")
+            .withEmail("will@example.com").withAddress("30th street")
+            .withPrevDateMet("2021-03-15")
+            .withSalary("5100")
+            .withScheduledMeeting("2022-01-05", "1630")
+            .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

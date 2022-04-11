@@ -5,44 +5,37 @@ title: Wee Heng's Project Portfolio Page
 
 ### Project: HustleBook
 
-HustleBook is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+HustleBook is a desktop app specially catered towards financial advisors for **managing client details** and **scheduling meetings efficiently** without the need to lift their hands off the keyboard.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
+This project is built on top of the **AB3** application that is used for teaching Software Engineering principles.
 
 Given below are my contributions to the project.
 
-## To be filled with proper details in the future.
+* **New Feature**: Added the ability to sort clients through the `sort` command.
+    * What it does: Allows the user to sort clients by meeting time, name, previous date met and salary.
+    * Justification: This feature improves the functionality of the product significantly. This feature allows financial advisors to sort and manage clients for everyday operations. 
+    * Highlights: This enhancement required an in-depth analysis of design alternatives such as Priority Queues. The implementation was challenging as it required changes to existing classes like UniquePersonList and an in-depth understanding of `ObservableList` and `FXCollections`.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to list flagged or unflagged clients.
+  * What it does: Allows the user to list clients based on whether they are flagged or not. User can list only flagged clients, only unflagged clients or both.
+  * Justification: This feature improves the functionality of HustleBook for users by further finetuning what HustleBook displays especially when there are many clients.
+  
+* **New Feature**: Added a `Comparator` package for `person`.
+  * What it does: Allows `sort` to sort clients based on `Comparator`.
+  * Justification: This feature is important for the user to be able to sort by different fields.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=decaxical&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-
+    * Managed releases `v1.2` - `v1.3` (2 releases) on GitHub.
+    * Participated and ensured productive meetings.
+  
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `sort` and `list` [\#119](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/119/files) and [\#166](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/166)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `sort` and `list` feature.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * Reported bugs and suggestions for other teams in the class ([PE-D](https://github.com/Decaxical/ped/issues))(exam: [1](), [2](), [3]())

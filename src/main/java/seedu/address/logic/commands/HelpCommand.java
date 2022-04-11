@@ -10,12 +10,26 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " meet";
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private final CommandEnum commandToPrint;
+
+    public HelpCommand() {
+        this.commandToPrint = null;
+    }
+
+    public HelpCommand(CommandEnum commandToPrint) {
+        this.commandToPrint = commandToPrint;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (commandToPrint == null) {
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        } else {
+            return new CommandResult(commandToPrint.getMessageUsage(), false, false);
+        }
     }
 }

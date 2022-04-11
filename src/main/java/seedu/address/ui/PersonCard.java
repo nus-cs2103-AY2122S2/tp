@@ -40,13 +40,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label flag;
+    private Pane flag;
     @FXML
     private FlowPane tags;
     @FXML
     private Label prevDateMet;
-    @FXML
-    private Pane salary;
     @FXML
     private Label info;
     @FXML
@@ -63,7 +61,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText("Phone Number: " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
-        flag.setText("Flag: " + person.getFlag().toString());
+        if (person.getFlag().isFlagged) {
+            flag.setStyle("-fx-background-color: #c94848");
+        }
         prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
         info.setText("Info: " + person.getInfo().value);
 
@@ -77,8 +77,10 @@ public class PersonCard extends UiPart<Region> {
             scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
         }
 
-        salary.getChildren().add(new Label("Salary: $" + person.getSalary().value));
-
+        tags.getChildren().add(new Label("Salary: $" + person.getSalary().value));
+        tags.getChildren().get(0).setStyle("-fx-background-color: #6bd16b;"
+                + "-fx-hgap: 7;"
+                + "-fx-vgap: 3;");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

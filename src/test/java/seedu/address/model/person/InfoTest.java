@@ -14,7 +14,7 @@ class InfoTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidInfo_throwsIllegalArgumentException() {
         String invalidInfo = "";
         assertThrows(IllegalArgumentException.class, () -> new Info(invalidInfo));
     }

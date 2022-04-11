@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.model.person.exceptions.ComparatorException;
+
 /**
  * Represents a Person's upcoming meeting time.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
@@ -34,6 +36,26 @@ public class MeetingTime {
      */
     public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Method to compare MeetingTime with other MeetingTime.
+     * Returns 0 if date is equal, -1 if this MeetingTime is before and 1 if it is after.
+     *
+     * @param otherTime Another MeetingTime to compare to.
+     * @return Integer indicating if MeetingTime is equal, before or after otherTime
+     * @throws ComparatorException if hits else statement which it should not reach.
+     */
+    public int compare(MeetingTime otherTime) throws ComparatorException {
+        if (this.equals(otherTime)) {
+            return 0;
+        } else if (this.value.isBefore(otherTime.value)) {
+            return -1;
+        } else if (this.value.isAfter(otherTime.value)) {
+            return 1;
+        } else {
+            throw new ComparatorException();
+        }
     }
 
     @Override

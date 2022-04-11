@@ -9,6 +9,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -22,18 +23,19 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by their name in the displayed person list.\n"
+            + ": Deletes the client identified by their name in the displayed client list.\n"
             + "Parameters: Name (Alphanumerical characters and spaces only)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
-            + "list below and enter the index of the client you wish to delete \n"
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 client exists with that name. Please look at "
+            + "the list below and enter the index of the client you wish to delete \n"
             + "Example: 1, 2, 3 ...";
 
     private final Name targetName;
     private final String targetNameStr;
     private int index = 0;
+    private int listSize;
 
 
     /**
@@ -60,15 +62,16 @@ public class DeleteCommand extends Command {
 
             if (tempList.size() > 1) {
                 lastShownList.setPredicate(predicate);
+                listSize = lastShownList.size();
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
+
             targetIndex = model.getPersonListIndex(targetName);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
+            }
         } else {
             targetIndex = Index.fromOneBased(index);
-        }
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -77,7 +80,10 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
-    public void setIndex(int index) {
+    public void setIndex(int index) throws ParseException {
+        if (index <= 0 || index > listSize) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         this.index = index;
     }
 

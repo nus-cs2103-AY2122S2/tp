@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FLAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +23,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -45,15 +45,14 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
+            + "by the name used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (Alphanumerical and spaces only) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_FLAG + "FLAG] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_PREV_DATE_MET + "DATE] "
@@ -62,18 +61,18 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 client exists with that name. Please look at the "
             + "list below and enter the index of the client you wish to edit \n"
             + "Example: 1, 2, 3 ...";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
-    public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the hustle book.";
 
     private final Name targetName;
     private final String targetNameStr;
     private final EditPersonDescriptor editPersonDescriptor;
     private int index = 0;
+    private int listSize;
 
     /**
      * @param name name of the person in the filtered person list to edit
@@ -104,16 +103,15 @@ public class EditCommand extends Command {
 
             if (tempList.size() > 1) {
                 lastShownList.setPredicate(predicate);
+                listSize = lastShownList.size();
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
-
             targetIndex = model.getPersonListIndex(targetName);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
+            }
         } else {
             targetIndex = Index.fromOneBased(index);
-        }
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
         }
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
@@ -128,7 +126,10 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
-    public void setIndex(int index) {
+    public void setIndex(int index) throws ParseException {
+        if (index <= 0 || index > listSize) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         this.index = index;
     }
 

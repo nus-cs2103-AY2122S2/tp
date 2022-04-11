@@ -3,27 +3,37 @@ layout: page
 title: Jian Rong's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: HustleBook
 
-HustleBook is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+HustleBook is a desktop app specially catered towards financial advisors for **managing client details** and **scheduling meetings efficiently** without the need to lift their hands off the keyboard.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+
+This project is built on top of the **AB3** application that is used for teaching Software Engineering principles.
+
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability for users to specify the specific client they wish to perform an action on
+  in the case of their HustleBook containing clients with similar names.
+    * What it does: If a client has 2 clients, named `David Li` and `David Tan`, the command edit David will firstly show both those Davids,
+      and will ask the user again to clarify which "David" they refer to
+    * Justification: This feature enhances existing features as users do not have to type the full name of the clients they wish to perform actions on.
+    * Highlights: This enhancement currently affects `edit`, `delete`, `find` and `meet`. It will affect other features that use name to identify clients in the future
+  
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability for users to see their previous commands by pressing the "up arrow" when the textbox.
+    * What it does: A client can see their preivously inputted command by pressing the "up arrow".
+    * Justification: Some of the commands can be very long, and it is easier for users if we kept track of previous commands and displayed it for them.
+    * Highlights: This enhancement affects all commands that the user inputs.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=j4ck990&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=j4ck990&tabRepo=AY2122S2-CS2103T-W15-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~docs~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+    * Managed releases `v1.2` - `v1.3` (2 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
+    * Improved the way HustleBook searches for users with a given search string.
+    * Added Number Parser to assist in situations with users with similar names
     * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
@@ -34,13 +44,6 @@ Given below are my contributions to the project.
         * Added implementation details of the `delete` feature.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
 
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
 
-* _{you can add/remove categories in the list above}_

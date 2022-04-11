@@ -3,14 +3,26 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
+* Introduction
+  * [Purpose](#purpose)
+  * [Who is it for?](#who-is-this-for)
+  * [What is HustleBook](#what-is-hustlebook)
 * [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
-    * D1
-    * D2
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
 * [Implementation](#implementation)
-    * I1
+    * [Managing Meetings](#managing-meetings)
+    * [Adding optional attributes](#adding-optional-attributes)
+      * [Previous Date Met and Information](#optional-attributes-previous-date-met-and-information)
+      * [Salary](#adding-optional-additional-attribute-salary)
     * I2
+    * I3
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
     * [Product Scope](#product-scope)
@@ -24,10 +36,36 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+
+### Purpose
+
+The purpose of the developer guide is to document a brief overview of the multi-level design architecture of
+HustleBook. This allows you to gain a better understanding on the various components that makes HustleBook
+and how each component work with one another.
+
+### Who is this for? 
+
+The target audience for this Developer Guide is any user who is interested in understanding the internal logic 
+and design architecture of HustleBook. What can you do with this information? 
+* Support HustleBook as a developer - develop new features or enhance existing features to support the needs of 
+our product users. You can send a PR of your contribution to our [GitHub repo](https://github.com/AY2122S2-CS2103T-W15-2/tp/pulls)
+* Tweak features to suit your needs - any current users who can modify our codes to tweak certain features to fit their needs. E.g:
+You need another attribute to track in the client list. 
+
+### What is HustleBook?
+
+HustleBook (HB) is a desktop app specially catered towards financial advisors for **managing client details and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, HB can get your client management meetings done faster than traditional GUI apps.
+Feel free to read the [User Guide](UserGuide.md) to know more about what HustleBook can do for you! 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* HustleBook is a brown-field project from an existing project called [AddressBook3](https://se-education.org/addressbook-level3/) where enhancements 
+were made to solve the issues that Financial Advisors face.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -69,8 +107,8 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
-
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete John`.
+❗️ IMAGE NEEDS TO BE UPDATED 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
@@ -110,13 +148,13 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `HustleBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
-
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete John")` API call.
+❗️ IMAGE NEEDS TO BE UPDATED
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -127,11 +165,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HustleBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HustleBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+❗️ IMAGE NEEDS TO BE UPDATED
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -144,6 +184,8 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+❗️ IMAGE NEEDS TO BE UPDATED
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -158,12 +200,12 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `HustleBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,7 +213,34 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding optional attributes to fit for Client
+### Managing Meetings 
+
+Financial Advisors often need to schedule and reschedule meetings with their clients. On top of that, the meetings
+are often cancelled upon. Considering these issues, the implementation of managing meeting need to be quick and easy.
+Therefore, a meet command was introduced. Along with prefixes of `d/` and `t/` for date and time of the meeting and 
+a prefix `c/` to cancel the meeting. 
+
+Furthermore, we decided to implement scheduling the meeting by name to make our application user-friendly, especially 
+for non-technical users. As an enhancement, we also ensured that the meeting does not clash with the existing meetings
+scheduled. 
+
+The following activity diagram describes how the meet command determine if it should schedule or cancel the meeting 
+with a client in the list. It ensures that either the prefixes `d/` and `t/` or only `c/` prefix is given as input. 
+
+<img src="images/ScheduleMeetingActivityDiagram.png" width="600"/>
+
+The following sequence diagram shows how the logic of meet command of when `meet John Doe d/2022-05-25 t/1000` is executed
+
+<img src="images/ScheduleMeetingSequenceDiagram.png" width="600"/>
+
+To further understand the internal logic of executing `meet John Doe d/2022-05-25 t/1000`, a logic sequence diagram is shown
+below. This also highlights the logic of checking for meeting clash before scheduling the meeting into HustleBook.
+
+<img src="images/ScheduleMeetingLogicSequenceDiagram.png" width="600"/>
+
+## Adding optional attributes
+
+### Optional attributes: Previous date met and Information
 
 When handling clients, it would be beneficial to track the previous date met with the client, and additional information
 regarding the clients. Therefore, these two new attributes need to be added to the current Person class. The new prefix used
@@ -426,30 +495,30 @@ additional input, we can specify which client the user wants to edit based on th
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority                               | As a …​              | I want to …​                                                        | So that I can…​                                                     |
-|----------------------------------------|-------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`                                | new user                | click on the help button for a user guide on how to use the HustleBook | learn on how to use the features in the HustleBook                     |
-| `* * *`                                | new user                | clear the demo data                                                    | start using the HustleBook and enter their own data                    |
-| `* * *`                                | new user                | view demo data                                                         | play around with the features                                          |
-| `* * *`                                | new user                | create new contacts for each new client I get                          | keep track of my clients                                               | 
-| `* * *`                                | new user                | Add relevant information of each client                                | keep important information regarding each client is captured           | 
-| `* * *`                                | new user                | find which client they have not met in some time                       | contact them and get updates                                           |
-| `* * *`                                | new user                | view client details                                                    | contact them and get updates                                           | 
-| `* * *`                                | new user                | delete a contact                                                       | completely delete a contact so it clears up the list                   | 
-| `* * *`                                | expert user             | tag clients for urgent meetings                                        | avoid forgetting important meetings                                    |
-| `* * *`                                | expert user             | edit contact information                                               | update my client's details                                             |
-| `* * *`                                | expert user             | find a person by name                                                  | locate details of persons without having to go through the entire list |
-| `* *`                                  | expert user             | archive old contacts                                                   | keep the contact list clean and free clutter                           |
-| `* *`                                  | new user                | add a meet up information to a client                                  | track when is the next meet up                                         |
-| `* *`                                  | new user                | get tips on existing features                                          | get the required info without referring to help section                |
-| `* *`                                  | expert user             | load up previous work before shutting                                  | be more efficient                                                      |
-| `* *`                                  | expert user             | filter important clients                                               | prioritise them                                                        |
-| `* *`                                  | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
-| `* *`                                  | busy user               | be alerted when any meeting clashes                                    | make sure my meetings with my clients are scheduled                    |
-| `* *`                                  | busy user               | be reminded if I haven't met a client in a long time                   | maintain contact with my clients                                       |
-| `* *`                                  | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
-| `* *`                                  | busy user               | identify conflicting names by index                                    | perform operations more accurately                                     |
-| `*`                                    | new user                | Add social media data for clients                                      | access their social media details                                      |
+| Priority | As a …​                 | I want to …​                                                           | So that I can…​                                                        |
+|----------|-------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                | click on the help button for a user guide on how to use the HustleBook | learn on how to use the features in the HustleBook                     |
+| `* * *`  | new user                | clear the demo data                                                    | start using the HustleBook and enter their own data                    |
+| `* * *`  | new user                | view demo data                                                         | play around with the features                                          |
+| `* * *`  | new user                | create new contacts for each new client I get                          | keep track of my clients                                               | 
+| `* * *`  | new user                | Add relevant information of each client                                | keep important information regarding each client is captured           | 
+| `* * *`  | new user                | find which client they have not met in some time                       | contact them and get updates                                           |
+| `* * *`  | new user                | view client details                                                    | contact them and get updates                                           | 
+| `* * *`  | new user                | delete a contact                                                       | completely delete a contact so it clears up the list                   | 
+| `* * *`  | expert user             | tag clients for urgent meetings                                        | avoid forgetting important meetings                                    |
+| `* * *`  | expert user             | edit contact information                                               | update my client's details                                             |
+| `* * *`  | expert user             | find a person by name                                                  | locate details of persons without having to go through the entire list |
+| `* *`    | expert user             | archive old contacts                                                   | keep the contact list clean and free clutter                           |
+| `* *`    | new user                | add a meet up information to a client                                  | track when is the next meet up                                         |
+| `* *`    | new user                | get tips on existing features                                          | get the required info without referring to help section                |
+| `* *`    | expert user             | load up previous work before shutting                                  | be more efficient                                                      |
+| `* *`    | expert user             | filter important clients                                               | prioritise them                                                        |
+| `* *`    | expert user             | list meet ups for a specific day                                       | view and manage the meet ups with the clients                          |
+| `* *`    | busy user               | be alerted when any meeting clashes                                    | make sure my meetings with my clients are scheduled                    |
+| `* *`    | busy user               | be reminded if I haven't met a client in a long time                   | maintain contact with my clients                                       |
+| `* *`    | busy and forgetful User | tag certain clients as priority                                        | be constantly reminded as to not forget them                           | 
+| `* *`    | busy user               | identify conflicting names by index                                    | perform operations more accurately                                     |
+| `*`      | new user                | Add social media data for clients                                      | access their social media details                                      |
 
 ### Use cases
 

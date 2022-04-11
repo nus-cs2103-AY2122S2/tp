@@ -13,10 +13,20 @@ import seedu.address.model.person.Name;
  */
 public class FlagCommandParser implements Parser<FlagCommand> {
 
-    private String commandWord;
+    private String flagInput;
 
     public FlagCommandParser setCommand(String commandWord) {
-        this.commandWord = commandWord;
+        requireNonNull(commandWord);
+        switch (commandWord) {
+        case "flag":
+            this.flagInput = "true";
+            break;
+        case "unflag":
+            this.flagInput = "false";
+            break;
+        default:
+            assert false : "Multiple layers of Switch Case checks have failed";
+        }
         return this;
     }
 
@@ -38,7 +48,7 @@ public class FlagCommandParser implements Parser<FlagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE), pe);
         }
 
-        Flag newFlag = ParserUtil.parseFlag(commandWord);
+        Flag newFlag = ParserUtil.parseFlag(flagInput);
         return new FlagCommand(name, newFlag);
     }
 

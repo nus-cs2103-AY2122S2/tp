@@ -18,23 +18,26 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MeetCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UndoCommand;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
+    public static final String MESSAGE_SPACING = "\n\n";
 
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-w15-2.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + "\n\n"
-            + AddCommand.MESSAGE_USAGE + "\n\n"
-            + ClearCommand.MESSAGE_USAGE + "\n\n"
-            + DeleteCommand.MESSAGE_USAGE + "\n\n"
-            + EditCommand.MESSAGE_USAGE + "\n\n"
-            + ExitCommand.MESSAGE_USAGE + "\n\n"
-            + FindCommand.MESSAGE_USAGE + "\n\n"
-            + FlagCommand.MESSAGE_USAGE + "\n\n"
-            + HelpCommand.MESSAGE_USAGE + "\n\n"
-            + ListCommand.MESSAGE_USAGE;
+            + AddCommand.MESSAGE_USAGE + MESSAGE_SPACING + ClearCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + DeleteCommand.MESSAGE_USAGE + MESSAGE_SPACING + EditCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + ExitCommand.MESSAGE_USAGE + MESSAGE_SPACING + FindCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + FlagCommand.MESSAGE_USAGE + MESSAGE_SPACING + HelpCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + ListCommand.MESSAGE_USAGE + MESSAGE_SPACING + MeetCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + RedoCommand.MESSAGE_USAGE + MESSAGE_SPACING + SortCommand.MESSAGE_USAGE + MESSAGE_SPACING
+            + UndoCommand.MESSAGE_USAGE + MESSAGE_SPACING;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
