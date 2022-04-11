@@ -15,6 +15,9 @@ import seedu.address.model.group.Group;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.TaskBuilder;
 
+/**
+ * Contains unit tests for {@code Task}.
+ */
 public class TaskTest {
     @Test
     public void isSameTask() {

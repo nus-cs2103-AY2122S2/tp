@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code TaskName}.
+ */
 public class TaskNameTest {
 
     @Test
@@ -21,14 +24,14 @@ public class TaskNameTest {
 
     @Test
     public void isValidTaskName() {
-        // null name
+        // null name -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> TaskName.isValidTaskName(null));
 
-        // invalid name
+        // invalid name -> returns false
         assertFalse(TaskName.isValidTaskName("")); // empty string
         assertFalse(TaskName.isValidTaskName(" ")); // spaces only
 
-        // valid name
+        // valid name -> returns true
         assertTrue(TaskName.isValidTaskName("^")); // only non-alphanumeric characters
         assertTrue(TaskName.isValidTaskName("president's help * 3")); // contains non-alphanumeric characters
         assertTrue(TaskName.isValidTaskName("finish tutorial")); // alphabets only

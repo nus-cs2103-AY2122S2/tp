@@ -15,7 +15,9 @@ import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 import seedu.address.testutil.TaskBuilder;
 
-
+/**
+ * Contains unit tests for {@code UniqueTaskList}.
+ */
 public class UniqueTaskListTest {
 
     private final UniqueTaskList uniqueTaskList = new UniqueTaskList();

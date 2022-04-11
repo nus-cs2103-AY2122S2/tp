@@ -15,6 +15,9 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code UniqueGroupList}.
+ */
 public class UniqueGroupListTest {
 
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();

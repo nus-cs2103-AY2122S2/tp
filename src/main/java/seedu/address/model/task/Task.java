@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a Task's name in the ArchDuke.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
+ */
 public class Task {
 
     public final TaskName taskName;
@@ -40,7 +44,7 @@ public class Task {
 
     /**
      * Checks if both tasks are the same.
-     * This defines a stronger notion of equality between two groups.
+     * This defines a stronger notion of equality between two tasks.
      *
      * @param other Another task object.
      * @return true as a boolean value if both tasks are the same.

@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code Address}.
+ */
 public class AddressTest {
 
     @Test
@@ -21,14 +24,14 @@ public class AddressTest {
 
     @Test
     public void isValidAddress() {
-        // null address
+        // null address -> throws NullPointerException
         assertThrows(NullPointerException.class, () -> AcademicMajor.isValidAcademicMajor(null));
 
-        // invalid addresses
+        // invalid addresses -> returns false
         assertFalse(AcademicMajor.isValidAcademicMajor("")); // empty string
         assertFalse(AcademicMajor.isValidAcademicMajor(" ")); // spaces only
 
-        // valid addresses
+        // valid addresses -> returns true
         assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science"));
         assertTrue(AcademicMajor.isValidAcademicMajor("-")); // one character
         assertTrue(AcademicMajor.isValidAcademicMajor("Computer Science and Economics DDP")); // long major

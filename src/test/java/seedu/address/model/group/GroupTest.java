@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
 
+/**
+ * Contains unit tests for {@code Group}.
+ */
 public class GroupTest {
     @Test
     public void isSameGroup() {

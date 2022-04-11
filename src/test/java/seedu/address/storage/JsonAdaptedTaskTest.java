@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.TaskName;
 
+/**
+ * Contains unit tests for {@code JsonAdaptedTask}.
+ */
 public class JsonAdaptedTaskTest {
 
     private static final String INVALID_TASK_NAME = "";

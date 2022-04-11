@@ -65,6 +65,11 @@ public class AddTaskCommand extends Command {
 
     /**
      * Creates and returns a {@code Group} with the details of {@code groupToAddTask}
+     *
+     * @param groupToAddTask target group to add task.
+     * @param taskToAdd task to add to the group.
+     * @param model current model.
+     * @return Group with newly added task.
      */
     private static Group createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model) {
         model.addTask(taskToAdd, groupToAddTask);

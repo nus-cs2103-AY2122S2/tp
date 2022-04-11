@@ -9,6 +9,9 @@ import seedu.address.logic.commands.ViewTaskCommand;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
+/**
+ * A utility class for Task.
+ */
 public class TaskUtil {
 
     /**
