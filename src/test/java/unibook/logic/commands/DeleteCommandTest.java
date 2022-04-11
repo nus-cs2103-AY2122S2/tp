@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.UserPrefs;
-import unibook.model.person.Person;
-import unibook.testutil.typicalclasses.TypicalIndexes;
 import unibook.testutil.typicalclasses.TypicalUniBook;
 
 /**
