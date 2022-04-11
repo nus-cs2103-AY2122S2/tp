@@ -21,7 +21,6 @@ import seedu.address.logic.commands.meetingcommands.EditMeetingCommand;
 import seedu.address.logic.commands.meetingcommands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.commands.meetingcommands.FindMeetingCommand;
 import seedu.address.logic.commands.meetingcommands.ListMeetingCommand;
-import seedu.address.logic.commands.meetingcommands.MeetingTarget;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingContainsKeywordsPredicate;

@@ -15,9 +15,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.meetingcommands.EditMeetingCommand;
-import seedu.address.logic.commands.meetingcommands.MeetingTarget;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.MeetingTarget;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
