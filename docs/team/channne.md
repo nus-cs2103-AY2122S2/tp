@@ -46,7 +46,7 @@ Given below are my contributions to the project. The code contributed can be fou
   * Refined UG by standardizing formatting and parameter constraint descriptions (e.g. for `INDEX` and `LAB_MARK`)
 * Developer Guide (DG):
   * Contributed to user stories and use cases UC1, UC3, UC4, UC5 ([#33](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/33), [#85](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/85))
-  * Added implementation details for `add` and `labedit`
+  * Added implementation details for `labedit` ([#143](https://github.com/AY2122S2-CS2103-F10-1/tp/pull/143))
   * Added instructions for manual testing of `labedit`
 * Ensured that PDF versions of UG and DG looked and worked as expected
 
