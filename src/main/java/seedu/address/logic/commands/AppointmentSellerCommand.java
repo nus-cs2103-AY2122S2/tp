@@ -15,8 +15,6 @@ import seedu.address.model.seller.Seller;
 
 public class AppointmentSellerCommand extends Command {
     public static final String COMMAND_WORD = "appt-s";
-    public static final String MESSAGE_EMPTY_INPUT_DATE = "Please enter the date and time in the form of \n"
-            + "'yyyy-MM-dd-HH-mm'";
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "You have made an appointment with seller: %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "You have removed an appointment with seller: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD

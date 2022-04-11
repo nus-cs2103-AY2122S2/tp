@@ -175,7 +175,7 @@ Function: Create an appointment with a certain buyer. Now, you can keep track of
 Format: `appt-b INDEX time/TIME`
 
 * Create an appointment with the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
-* The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
+* The input `TIME` is in a `yyyy-MM-dd-HH-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
 * To **delete an appointment** with a buyer, use the keyword `reset` after the `time/` prefix.
 * Multiple clients may have the same appointment `TIME` (E.g. Zoom meetings).
@@ -412,7 +412,7 @@ Function: Create an appointment with a certain seller. Now, you can keep track o
 Format: `appt-s INDEX time/TIME`
 
 * Create an appointment with the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
-* The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
+* The input `TIME` is in a `yyyy-MM-dd-HH-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
 * To delete an appointment with a seller, use the keyword `reset` after the `time/` prefix.
 * Multiple clients may have the same appointment `TIME` (E.g. Zoom meetings).
@@ -451,19 +451,19 @@ Function: Find sellers whose selected **field** contain any of the given keyword
 
 Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
 
-* The **fields**` are:
+* The **fields** are:
   * name `n/`
   * phone `p/`
   * location `l/`
   * tags `t/`
   * house type `h/`
-* The search is **case-insensitive**. E.g `find-s n/hans` will match buyers with `Hans` and `HanS` in their name.
+* The search is **case-insensitive**. E.g `find-s n/hans` will match sellers with `Hans` and `HanS` in their name.
 * The **order** of the keywords does not matter. e.g. `find-bs n/Hans Bo` is equivalent to `find-s n/Bo Hans`.
 * All partial words will be matched e.g. `Han` keyword will match `Hans` and `Han`.
 * However, if the keyword is larger than the item itself, it will not match e.g. `Hans` keyword will not match `Han` in name
 * Sellers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* * find-b/s will shorten the current list to the filtered list. To show the full list again, type the corresponding list command i.e. list-b/s
+
 
 Examples:
 * `find-s n/John` displays seller whose names are `john` and `John Doe`.
@@ -551,7 +551,7 @@ Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
     "propertyToBuy" : {
       "house" : {
         "houseType" : "Bungalow",
-        "location" : "Clementi"
+        "location" : "clementi"
       },
       "priceRange" : {
         "lower" : "500000",
@@ -579,7 +579,7 @@ And here are the examples of 2 sellers, one has a property and one does not have
     "propertyToSell" : {
       "house" : {
         "houseType" : "Bungalow",
-        "location" : "Queens Town"
+        "location" : "queens town"
       },
       "priceRange" : {
         "lower" : "24",
@@ -615,7 +615,6 @@ And here are the examples of 2 sellers, one has a property and one does not have
 Otherwise, all other value will be translated to `Unspecified` housetype!
 - Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
 - `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -660,6 +659,7 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 |---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                                                |
 | **Exit**                        | `exit`                                                                                                                                                                |
+| **Clear**                       | `clear-all`                                                                                                                                                           |
 | **Match property**              | `match INDEX` <br> e.g., `match 1`                                                                                                                                    |
 | **List Buyers**                 | `list-b`                                                                                                                                                              |
 | **Add Buyer**                   | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`                                                                                      |
