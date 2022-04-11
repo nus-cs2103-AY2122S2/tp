@@ -250,7 +250,7 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 
 Finds customers whose parameters contain any of the given keywords.
 
-Format: `findc [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
+Format: `findc [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE] [sep/SERVICE_PREFERENCE] [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY] [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
 
 <div markdown="block" class="alert alert-warning">
    
