@@ -14,7 +14,7 @@ _Amigos_ is a desktop application to help tech-savvy university students manage 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `_Amigos_.jar` from [here](https://github.com/AY2122S2-CS2103-F09-2/tp/releases/tag/v1.1).
+2. Download the latest `_Amigos_.jar` from [here](https://github.com/AY2122S2-CS2103-F09-2/tp/releases/tag/v1.4).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your application.
 
