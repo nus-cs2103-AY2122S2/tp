@@ -5,42 +5,35 @@ title: Bryan Zheng's Project Portfolio Page
 
 ### Project: RealEstatePro
 
-RealEstatePro is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RealEstatePro is a desktop application for managing your client details for real estate agents. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). With RealEstatePro managing your clients will be breeze by using the various features such as reminders, client matching and many more!
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the ability to represent real estate listings using new classes: `Property`, `Region`, `Size`, `Price`.
+  * What it does: Represents the real estate listing of a client using the `Property` class which can be held by a `Person` object.
+  * Justification: This feature is required for the basic functionality of the application.
+  * Highlights: This feature was challenging to implement as it required significant changes to existing commands, and their unit tests.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability to sort clients.
+  * What it does: Allows the user to sort clients according to one or more of their attributes. The sorting order for each attribute can also be reversed individually. This feature is integrated with the find feature, meaning that it is possible to sort the filtered list obtained after using the `find` command.
+  * Justification: This feature improves the product significantly because a user can have a large list of clients, and the application should provide a convenient way to organize them.
+  * Highlights: This feature was difficult to test as there are a large number of possible sorting orders.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=w16-4&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=Ashuh&tabRepo=AY2122S2-CS2103-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Maintained the issue tracker
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the command format used to specify a `Property`: [\#50](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/50)
+    * Added documentation for the `sort` feature: [\#67](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/67)
+    * Improved readability of user guide by using alerts: [\#187](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/187)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `Property` feature.
+    * Added implementation details of the `sort` feature.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/74), [\#96](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/96), [\#43](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/43), [\#186](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/186), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
+  * Reported bugs in team member features (examples: [1](https://github.com/AY2122S2-CS2103-W16-4/tp/issues/68))
+  * Helped team members with issues related to their features: [\#55](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/55)

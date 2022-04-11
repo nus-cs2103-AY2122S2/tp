@@ -141,7 +141,9 @@ How the parsing works:
 
 The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
+* stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes.
+* The *sorted* list is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -287,27 +289,21 @@ This allows the user to be able to visualize his/her client's data to make bette
 
 ## Sorting Feature
 
-The sorting feature allows the user to sort the list of `Person` displayed.
+The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`. Whenever the data in the list containing all `Person` objects is changed, the `FilteredList<Person>` is notified first and will filter the data. Whenever the data in the `FilteredList<Person>` changes, the `SortedList<Person>` is notified and will sort the filtered data. This allows the *sort* feature to be used in conjunction with the *find* feature, i.e., it is possible to *sort* the results found by the *find* feature.
 
-The following table shows the attributes that the list can be sorted by and their corresponding keywords.
+The `SortedList<Person>` is exposed in the `Model` interface as `Model#getFilteredAndSortedPersonList()` while the `FilteredList<Person>` is not exposed.
 
-| Attribute            | Keyword        |
-|----------------------|----------------|
-| `Name`               | `name`         |
-| `Phone`              | `phone`        |
-| `Email`              | `email`        |
-| `Favourite`          | `favourite`    |
-| `Address`            | `address`      |
-| `UserType`           | `usertype`     |
-| Number of `Property` | `num_property` |
+Comparisons between `Person` objects are facilitated by `PersonComparator` which holds a list of `Comparator<Person>`. It implements `Comparator<Person>` and compares `Person` objects using the first `Comparator<Person>` in the list, followed by the subsequent elements in the event of a tie.
 
-Sorting the list is done by using the `sort` command, which has the following syntax: `sort [KEYWORD]...`.
+Given below is an example usage scenario.
 
-If multiple attributes are specified, the first attribute is given the highest priority, while the last attribute is given the lowest priority. For example, `sort address name` will sort the list by `Address` first, followed by `Name` if `Address` is equal.
+Step 1. The user launches the application. Both the `FilteredList<Person>` and `SortedList<Person>` will contain the same data as the list containing all `Person` objects.
 
-The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
+Step 2. The user executes `find name john`, causing the `FilteredList<Person>` to only contain clients with `john` in their name.
 
-Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+Step 3. The user executes `sort phone` to sort the clients according to their phone number. The `sort` command calls `Model#updateSortedPersonList()`. This in turn calls `FilteredList#setComparator()` which causes the `FilteredList<Person>` to sort the data it contains.
+
+Step 4. The user executes `list` to list all clients, which causes the `FilteredList<Person>` to now contain all clients. The `SortedList<Person>` is automatically notified and sorts the new data in the `FilteredList<Person>`. Similarly, other commands that cause the data in the `FilteredList<Person>` to change, such as `add`, `delete`,`edit`,`favourite`, will cause the `SortedList<Person>` to automatically update itself.
 
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
@@ -566,6 +562,29 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Sort**
+
+Actor: User
+
+**MSS**
+1. User requests to sort the list of clients
+2. REP displays clients in the requested order
+
+   Use case ends
+
+**Extensions:**
+* 1a. The list is empty
+
+  Use case ends
+
+
+* 1b. REP detects an error in the entered command
+   * 1b1. REP displays an error message
+   * 1b2. User enters the sort command again
+   * Steps 1b1-1b2 are repeated until the command entered is valid
+
+     Use case resumes at step 2
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
@@ -678,6 +697,19 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
       Expected: Similar to previous.
 
 ## Sorting clients
+
+1. Sorting clients while all clients are being shown.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. 
+   2. Test case: `sort address`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored). The number of clients listed is shown in the result display.
+   3. Test case: `sort !phone`<br/>
+   Expected: Clients in the list are sorted according to their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   4. Test case: `sort address !phone`<br/>
+   Expected: Clients in the list are sorted according to their address in lexicographical order (capitalization is ignored) first. Clients with the same address are then sorted by their phone number in reverse numerical order. The number of clients listed is shown in the result display.
+   5. Test case: `sort invalid_key`<br/>
+   Expected: Clients are not sorted. Error details are shown in the result display and the list remains the same.
+   6. Other incorrect sort commands to try: `sort`, `sort name invalid_key`, `sort invalid_key name`, `...`<br/>
+   Expected: Similar to previous.
 
 ## Matching clients
 1. Matching clients
