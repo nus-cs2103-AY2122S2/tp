@@ -42,7 +42,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/teddye.md)]
 
 * Role: Developer
-* Responsibilities: TBD
+* Responsibilities: Code
 
 ### Lin Da
 
