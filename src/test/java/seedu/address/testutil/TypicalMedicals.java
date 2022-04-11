@@ -39,7 +39,7 @@ public class TypicalMedicals {
     /**
      * Returns an {@code MedBook} with all the typical medicals.
      */
-    public static MedBook getTypicalAddressBook() {
+    public static MedBook getTypicalMedBook() {
         MedBook ab = new MedBook();
         for (Medical medical : getTypicalMedical()) {
             ab.addMedical(medical);

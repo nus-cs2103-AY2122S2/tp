@@ -28,7 +28,7 @@ public class TypicalPrescriptions {
     /**
      * Returns an {@code MedBook} with all the typical prescriptions.
      */
-    public static MedBook getTypicalAddressBook() {
+    public static MedBook getTypicalMedBook() {
         MedBook ab = new MedBook();
         for (Prescription prescription : getTypicalPrescription()) {
             ab.addPrescription(prescription);
