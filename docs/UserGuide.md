@@ -435,7 +435,7 @@ Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]… ​[h/HOUSE_TYPE] [l/LOCATIO
 * At least one of the optional inputs must be provided.
 * The order of the inputs can be in any order.
 * Existing values will be updated to the input values.
-* When editing tags, all the existing tags of the buyer will be **removed**, and replaced with the specified tags in the input. Hence, you can remove all the buyer’s tags by typing `t/` without specifying any tags after it.
+* When editing tags, all the existing tags of the seller will be **removed**, and replaced with the specified tags in the input. Hence, you can remove all the seller’s tags by typing `t/` without specifying any tags after it.
 * The house-related inputs (`pr/`, `l/`, `h/`, `a/`) cannot be edited until a Property is added (See how to add one here).
 * Appointment cannot be edited! You can reset and add another appointment with the `appt-s` commands.
 
@@ -655,30 +655,33 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 ## Command summary
 
 
-| Action                          | Format, Examples                                                                                                                                                      |
-|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                        | `help`                                                                                                                                                                |
-| **Exit**                        | `exit`                                                                                                                                                                |
-| **Clear**                       | `clear-all`                                                                                                                                                           |
-| **Match property**              | `match INDEX` <br> e.g., `match 1`                                                                                                                                    |
-| **List Buyers**                 | `list-b`                                                                                                                                                              |
-| **Add Buyer**                   | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`                                                                                      |
-| **Add Buyer Property**          | `add-ptb l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-ptb l/Bishan pr/100000,200000 h/hdb`                                                                 |
-| **Make Appointment for Buyer**  | `appt-b INDEX time/TIME` <br> e.g., `appt-b 1 time/2022-10-10-12-12`                                                                                                  |
-| **Edit Buyer**                  | `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]`  <br> e.g., `edit-b 2 n/James Ho p/22224444 `             |
-| **Find Buyer**                  | `find-b field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-b n/James Jake`                                                                                              |
-| **Delete Buyer**                | `delete-b INDEX`<br> e.g., `delete-b 3`                                                                                                                               |
-| **Clear Buyers**                | `clear-b`                                                                                                                                                             |
-| **Sort Buyers**                 | `sort-b [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-b by/name o/desc`                                                                                               |
-| **List Sellers**                | `list-s`                                                                                                                                                              |
-| **Add Seller**                  | `add-s n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-s n/James Ho p/22224444`                                                                                      |
-| **Add Seller Property**         | `add-pts a/ADDRESS l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-pts a/Blk 343, Rika Ave 1 #09-1231 l/Bishan pr/100000,200000 h/hdb`                        |
-| **Make Appointment for Seller** | `appt-s INDEX time/TIME` <br> e.g., `appt-s 1 time/2022-10-10-12-12`                                                                                                  |
-| **Edit Seller**                 | `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`  <br> e.g., `edit-s 2 n/James Ho p/22224444 ` |
-| **Find Seller**                 | `find-s field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-s n/James Jake`                                                                                              |
-| **Delete Seller**               | `delete-s INDEX`<br> e.g., `delete-s 3`                                                                                                                               |
-| **Clear Sellers**               | `clear-s`                                                                                                                                                             |
-| **Sort Sellers**                | `sort-s [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-s by/time o/asc`                                                                                                |
+| Action                           | Format, Examples                                                                                                                                   |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                         | `help`                                                                                                                                             |
+| **Exit**                         | `exit`                                                                                                                                             |
+| **Clear all buyers and sellers** | `clear-all`                                                                                                                                        |
+| **Match buyer by all fields**    | `match INDEX` <br> e.g., `match 1`                                                                                                                 |
+| **Match buyer by house type**    | `match-h INDEX` <br> e.g., `match-h 1`                                                                                                             |
+| **Match buyer by location**      | `match-l INDEX` <br> e.g., `match-l 1`                                                                                                             |
+| **Match buyer by price range**   | `match-pr INDEX` <br> e.g., `match-pr 1`                                                                                                           |
+| **List Buyers**                  | `list-b`                                                                                                                                           |
+| **Add Buyer**                    | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`                                                                   |
+| **Add Buyer Property**           | `add-ptb l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-ptb l/Bishan pr/100000,200000 h/hdb`                                              |
+| **Make Appointment for Buyer**   | `appt-b INDEX time/TIME` <br> e.g., `appt-b 1 time/2022-10-10-12-12`                                                                               |
+| **Edit Buyer**                   | `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]`  <br> e.g., `edit-b 2 n/James Ho p/22224444 `             |
+| **Find Buyer**                   | `find-b field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-b n/James Jake`                                                                           |
+| **Delete Buyer**                 | `delete-b INDEX`<br> e.g., `delete-b 3`                                                                                                            |
+| **Clear Buyers**                 | `clear-b`                                                                                                                                          |
+| **Sort Buyers**                  | `sort-b [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-b by/name o/desc`                                                                            |
+| **List Sellers**                 | `list-s`                                                                                                                                           |
+| **Add Seller**                   | `add-s n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-s n/James Ho p/22224444`                                                                   |
+| **Add Seller Property**          | `add-pts a/ADDRESS l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-pts a/Blk 343, Rika Ave 1 #09-1231 l/Bishan pr/100000,200000 h/hdb`     |
+| **Make Appointment for Seller**  | `appt-s INDEX time/TIME` <br> e.g., `appt-s 1 time/2022-10-10-12-12`                                                                               |
+| **Edit Seller**                  | `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`  <br> e.g., `edit-s 2 n/James Ho p/22224444 ` |
+| **Find Seller**                  | `find-s field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-s n/James Jake`                                                                           |
+| **Delete Seller**                | `delete-s INDEX`<br> e.g., `delete-s 3`                                                                                                            |
+| **Clear Sellers**                | `clear-s`                                                                                                                                          |
+| **Sort Sellers**                 | `sort-s [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-s by/time o/asc`                                                                             |
 
 
 [Back to top](#quick-start)
