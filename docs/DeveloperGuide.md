@@ -564,7 +564,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  InternBuddy displays the updated list of contact persons with the new contact person
 5.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 * 5a. User wants to add a company to the contact person
@@ -589,7 +589,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  InternBuddy displays the updated list of companies with the new company
 6.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Use case: Hide events that have passed or has been cancelled**
 
@@ -617,6 +617,192 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InternBuddy shows an error feedback to the user
 
       Use case resumes at step 2.
+
+**Use case: Edit an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to edit a selected company from the list with the given details
+4. InternBuddy updates the company's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty 
+
+    Use case ends.
+
+* 3a. The selected company is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+    
+    Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+    Use case ends.
+
+**Use case: Edit an existing person**
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to edit a selected person from the list with the given details
+4. InternBuddy updates the person's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected person is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Edit an existing event**
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to edit a selected event from the list with the given details
+4. InternBuddy updates the event details
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected event is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Delete an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to delete a selected company from the list
+4. InternBuddy deletes all persons associated with the company
+5. InternBuddy deletes the company from the list
+6. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Delete an existing person**
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to delete a selected person from the list
+4. InternBuddy deletes the person from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Delete an existing event**
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected person is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to delete a selected event from the list
+4. InternBuddy deletes the event from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find a company with a specified attribute
+2. InternBuddy shows all the companies that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating persons**
+
+**MSS**
+
+1. User requests to find a person with a specified attribute
+2. InternBuddy shows all the persons that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find an event with a specified attribute
+2. InternBuddy shows all the events that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+
 
 *{More to be added}*
 
