@@ -51,7 +51,7 @@ the interview scheduling process of candidates applying to be undergraduate Teac
     * Authored 47 PRs and reviewed 75 PRs.
 
 * #### Review/mentoring contributions:
-  * **PR reviews/discussion threads involving non-trivial comments/suggestions**
+  * **PR reviews/discussion threads involving non-trivial comments/suggestions**:
     * Suggested removal of redundant abstraction layers in implementation of availability checking
       ([\#135](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/135)).
     * Identified unnecessary declared and returned variables
