@@ -47,20 +47,20 @@ Given below are my contributions to the project.
   * Added tests for `DeleteCommand` and `EditCommand` (Pull requests [#129](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/129), [#136](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/136/files))
   * Updated the display of `players` and `schedules` in alphabetical order of name and chronological order of happening date respectively (Pull request [#139](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/139))
   * Updated default display of `Person` to follow lexicological order (Pull request [#139](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/139))
-
+  * Fixed functionality bugs for commands (Pull request [#244](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/244))
 * **Documentation**:
     * User Guide:
       * Added documentation for the `put`, `mark`, `delete`, `filter`, `load` and `edit` features [#23](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/23/files)
       * Added documentation for the `view schedule` feature [#141](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/141/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
       * Updated documentation for all commands to remove outdated information [#167](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/167/files)
     * Developer Guide:
-      * Added NFRs and glossary [#19](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/19/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
+      * Added NFRs and glossary [#19](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/19/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b), [#264](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/264)
       * Added implementation details of the `add player` feature [#97](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/97/files)
       * Modified details of the `delete player` feature [#97](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/97/files)
       * Added implementation details of `add lineup`, `add schedule`, `delete lineup` and `delete player from lineup` features [#124](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/124/files)
       * Added implementation details of `view schedule` [#141](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/141/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
       * Updated implementation details of `view schedule` [#167](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/167/files)
-
+      * Added implementation details of `add player`, `add schedule`, `delete schedule`, `edit player`, `edit schedule`, `clear`, `view lineup` [#264](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/264)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#92](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/92), [#100](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/100), [#153](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/153)
