@@ -183,7 +183,8 @@ Format: `appt-b INDEX time/TIME`
 * Create an appointment with the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
-* To **delete an appointment** with a buyer, use the keyword `reset` after the `time/` prefix
+* To **delete an appointment** with a buyer, use the keyword `reset` after the `time/` prefix.
+* Multiple clients may have the same appointment `TIME` (E.g. Zoom meetings).
 
 Examples:
 * `appt-b 1 time/2023-01-01-12-12` sets a new appointment for the 1st buyer on the displayed buyer list on 1st January 2023 and 12:12pm.
@@ -419,7 +420,8 @@ Format: `appt-s INDEX time/TIME`
 * Create an appointment with the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
-* * To delete an appointment with a seller, use the keyword `reset` after the `time/` prefix
+* To delete an appointment with a seller, use the keyword `reset` after the `time/` prefix.
+* Multiple clients may have the same appointment `TIME` (E.g. Zoom meetings).
 
 Examples:
 * `appt-s 1 time/2023-01-01-12-12` sets a new appointment for the 1st seller on the displayed seller list on 1st January 2023 and 12:12pm.
