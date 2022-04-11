@@ -68,7 +68,7 @@ Given below are my contributions to the project.
         * Added documentation for the `findTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
         * Added documentation for the `pay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
         * Added documentation for the `unpay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
-          
+           
     * Developer Guide:
         * Added implementation details for the `addTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250)
         * Added implementation details for the `deleteTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
@@ -85,12 +85,19 @@ Given below are my contributions to the project.
 
 * **Contribution to Developer Guide (extracts)**
   * Sequence diagrams
-    ![ activity diagram](../images/AddTransactionSequenceDiagram.png)
-    ![ activity diagram](../images/PaySequenceDiagram.png)
-    ![ activity diagram](../images/FindTransactionSequenceDiagram.png)
+    * Add Transaction Sequence Diagram
+      [Add Transaction sequence diagram](../images/AddTransactionSequenceDiagram.png)
+    * Find Transaction Sequence Diagram
+      [Find Transaction sequence diagram](../images/PaySequenceDiagram.png)
+    * Pay Sequence Diagram
+      [Pay sequence diagram](../images/FindTransactionSequenceDiagram.png)
   * Activity diagrams
-    ![ activity diagram](../images/AddTransactionActivityDiagram.png)
-    ![ activity diagram](../images/PayDiagram.png)
-    ![ activity diagram](../images/FindTransactionActivityDiagram.png)
+    * Add Transaction Activity Diagram
+      [Add Transaction activity diagram](../images/AddTransactionActivityDiagram.png)
+    * Find Transaction Activity Diagram
+      [Find Transaction activity diagram](../images/PayDiagram.png)
+    * Pay Activity Diagram
+      [Pay activity diagram](../images/FindTransactionActivityDiagram.png)
   * Class diagrams
-    ![ activity diagram](../images/TransactionClassDiagram.png)
+    * Transaction Class Diagram
+      [Transaction Class diagram](../images/TransactionClassDiagram.png)
