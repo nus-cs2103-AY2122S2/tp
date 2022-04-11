@@ -250,6 +250,9 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
 
+### 3.3. Adding a contact
+Add a student with relevant details such as faculty and Covid status into Tracey.
+
 Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
 
 
@@ -854,7 +857,28 @@ which sets the window in the GUI according to the user's desired option.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+
+### 5. Command Summary
+
+*Table 5: Command Summary.*
+
+| No. | Command     | Description                                                                               | Example                                                                                                                                |
+|-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| 1.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
+| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
+| 3.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
+| 4.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 5.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
+| 6.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
+| 7.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
+| 8.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
+| 9.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
+| 10. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 11. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 12. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 13. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
+| 15. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
