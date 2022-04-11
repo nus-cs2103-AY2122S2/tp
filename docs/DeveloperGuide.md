@@ -234,12 +234,12 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 These tags are compulsory: `Name`,`Block`, `Phone`, `Email`, `Address` `Faculty`, `MatriculationNumber` and `CovidStatus`
 
-####**Path Execution of Add Feature:**
+#### Path Execution of Add Feature:
 ![AddFeatureActivityDiagram](images/AddFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
-####**Structure of Add Feature:**
+#### Structure of Add Feature:
 ![AddClassDiagram](images/AddClassDiagram.png)
 
 The class diagram above depicts the structure of `AddCommand`. As per any Command class, AddCommand needs to extend the abstract class Command.
@@ -253,7 +253,7 @@ Additionally, there are a few final static messages to be displayed to the user 
    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
-####**Interaction of objects when Add Command is executed:**
+#### Interaction of objects when Add Command is executed:
 
 ![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
@@ -282,7 +282,7 @@ The `delete` command is as follows:
 
 * `delete INDEX`
 
-####**Path Execution of Delete Feature:**
+#### Path Execution of Delete Feature:
 
 ![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
 
@@ -292,13 +292,13 @@ There are three possible execution paths for the delete command
 2. User provides a valid delete command input but provides an index that does not exist in Tracey <br> This results in a CommandException
 3. User provides a valid delete command input and a valid index <br> The specified student contact will be deleted from Tracey
 
-####**Structure of Delete Feature:**
+#### Structure of Delete Feature:
 
 ![DeleteClassDiagram](images/DeleteClassDiagram.png)
 
 The class diagram above depicts the structure of `DeleteCommand`. As per any Command class, DeleteCommand needs to extend the abstract class Command.
 
-####**Interaction of objects when Delete Command is executed:**
+#### Interaction of objects when Delete Command is executed:
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
@@ -319,7 +319,7 @@ Data on each block and faculties will be drawn as pie charts and bar chart on a 
 This is helpful to determine if there is a specific block or faculty facing a covid superspread. Hall masters and leaders can be more certain on their follow-up actions to keep
 their hall safe. This feature is unique from the List feature due to its additional computational ability to make better sense out of the data in Tracey.
 
-####**Path Execution of Summarise Feature Activity Diagram is shown below:**
+#### Path Execution of Summarise Feature Activity Diagram is shown below:
 ![SummariseFeatureActivityDiagram](images/SummariseFeatureActivityDiagram.png)
 
 There are three possible execution paths for this command.
@@ -327,13 +327,13 @@ There are three possible execution paths for this command.
 2. User inputs `summarise` command with no students' records stored in Tracey. Tracey will just respond that there is no students to summarise. The Pie Chart Window will not open.
 3. User inputs `summarise` command with additional parameters. Tracey will throw a **ParseException** to indicate that the format of the summarise input is wrong.
 
-####**Class Diagram of Summarise Feature is shown below:**
+#### Class Diagram of Summarise Feature is shown below:
 
 ![SummariseClassDiagram](images/SummariseClassDiagram.png)
 
 The above class diagram shows the structure of the Summarise Command and its associated classes and interfaces.
 
-####**Sequence Diagram of Summarise Feature is shown below:**
+#### Sequence Diagram of Summarise Feature is shown below:
 
 ![SummariseSequenceDiagram](images/SummariseSequenceDiagram.png)
 
@@ -429,19 +429,19 @@ The user can choose when to execute the `help` command.
 
 The activity diagram shows the possible execution paths for the `help` command.
 
-####**Path Execution of Help Feature:**
+#### Path Execution of Help Feature:
 
 ![HelpActivityDiagram](images/HelpActivityDiagram.png)
 
 When a user opens Tracey, they may need some help regarding the commands. They may achieve this by using the `help` command. When the Help Window opens, the user may choose to view the comprehensive user guide by clicking on the `Open User Guide` button.
 
-####**Structure of Help Feature:**
+#### Structure of Help Feature:
 
 ![HelpClassDiagram](images/HelpClassDiagram.png)
 
 The class diagram above depicts the structure of `HelpCommand`. As per any Command class, HelpCommand needs to extend the abstract class Command.
 
-####**Interaction of objects when Help Command is executed:**
+#### Interaction of objects when Help Command is executed:
 
 ![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
 
@@ -460,11 +460,11 @@ The clear mechanism implements the following sequence and interactions for the m
 The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
 user to replace the list of students with an empty one. Previous data are swiped away.
 
-**Path Execution of Clear Feature:**
+#### Path Execution of Clear Feature:
 
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
-**Structure of Clear Feature:**
+#### Structure of Clear Feature:
 
 ![ClearClassDiagram](images/ClearClassDiagram.png)
 
@@ -475,8 +475,8 @@ Additionally, there is a static final static message to be displayed to the user
 1. `MESSAGE_SUCCESS`
    - Scenario: Tracey database successfully cleared.
    - Message: "Tracey has been cleared!".
-    
-**Interaction between objects when Clear Command is executed:**
+
+#### Interaction between objects when Clear Command is executed:
 
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
@@ -546,14 +546,14 @@ The command `edit 2 e/john123@gmail.com` still works and the new `Email` value f
 
 In order to address these issues, we have enhanced the `EditCommand` to include `EditCommand#editChecker()` to address the former issue and `Person#isDifferentPerson()` to address the latter issue.
 
-#### **Path Execution of Edit Feature Activity Diagram is shown below:**
+#### Path Execution of Edit Feature Activity Diagram is shown below:
 ![EditFeatureActivityDiagram](images/EditFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Edit` Command, when the user inputs an **Edit Command**, the command is checked if the required prefixes are correct, the index is not out of range **and** fields are of the correct format. If the requirements are not met, a **ParseException**
 will be thrown, else the new field values are then checked against its corresponding field values to be edited for duplicates. If there are any duplicates, a **Command Exception** will be thrown, else the new values that required uniqueness (`e.g.` `Phone``Email` `Matriculation Number`) are checked against the address book
 for if it already exists. If it does, a **Command Exception** will be thrown, else the field values to be edited are updated with the new field values as a success message would be shown to the user.
   
-#### **Class Diagram of Edit Feature is shown below**
+#### Class Diagram of Edit Feature is shown below
 
 ![EditFeatureClassDiagram](images/EditFeatureClassDiagram.png)
 
@@ -573,7 +573,7 @@ Additionally, there are a few final static messages to be displayed to the user 
   - Scenario: New values used for attribute(s) is duplicates of the corresponding attribute(s) to be edited.
   - Message: "The edited value is the same as the current one."
   
-#### **Sequence Diagram of Edit Feature is shown below:**
+#### Sequence Diagram of Edit Feature is shown below:
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram.png)
 
@@ -616,7 +616,7 @@ This is still a valid input even though the filter criteria for block was not sp
 
 The activity diagram shows the possible execution paths for the `filter` command.
 
-**Path Execution of Filter Feature Activity Diagram is shown below:**
+#### Path Execution of Filter Feature Activity Diagram is shown below:
 ![FilterFeatureActivityDiagram](images/FilterFeatureActivityDiagram.png)
 
 There are two possible execution paths for this command.
@@ -628,7 +628,7 @@ There are two possible execution paths for this command.
 
 The following is a class diagram of the filter feature.
 
-**Class diagram of Filter feature is shown below:**
+#### Class diagram of Filter feature is shown below:
 ![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
 
 The above class diagram shows the structure of the FilterCommand and its associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in FilterCommand; such as public static fields and getter/setter methods.
@@ -637,7 +637,7 @@ The above class diagram shows the structure of the FilterCommand and its associa
 
 The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
 
-**Sequence Diagram of Filter Feature is shown below:**
+#### Sequence Diagram of Filter Feature is shown below:
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
 The arguments typed into Tracey's text box will first be taken in by the `execute` method in `LogicManager`. It will then be parsed by the `parseCommmand` function in the `AddressBookParser` object.
@@ -666,7 +666,7 @@ The user can choose when to execute the list command.
 
 The activity diagram shows the possible execution paths for the `list` command.
 
-**Path Execution of List Feature:**
+#### Path Execution of List Feature:
 
 ![ListFeatureActivityDiagram](images/ListFeatureActivityDiagram.png)
 
@@ -674,13 +674,13 @@ There are two possible execution paths for this command.
 1. User inputs `list` command. The Main Window will show all students and their particulars. After which, a message will be sent to the user that the command is successfully executed.
 2. User inputs `list` command with additional parameters. Tracey will throw a ParseException to indicate that the format of the list input format is wrong.
 
-**Structure of List Feature:**
+#### Structure of List Feature:
 
 ![ListFeatureClassDiagram](images/ListFeatureClassDiagram.png)
 
 The class diagram above depicts the structure of `ListCommand`. As per any Command class, ListCommand needs to extend the abstract class Command.
 
-**Interactions between objects when List Command is executed:**
+#### Interactions between objects when List Command is executed:
 
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
@@ -705,7 +705,7 @@ The user can choose when to execute the email command.
 
 The activity diagram shows the possible execution paths for the `email` command.
 
-####**Path Execution of Email Feature:**
+#### Path Execution of Email Feature:
 
 ![EmailActivityDiagram](images/EmailActivityDiagram.png)
 
@@ -713,13 +713,13 @@ There are two possible execution paths for this command.
 1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
 2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
 
-####**Structure of Email Feature:**
+#### Structure of Email Feature:
 
 ![EmailClassDiagram](images/EmailClassDiagram.png)
 
 The class diagram above depicts the structure of `EmailCommand`. As per any Command class, EmailCommand needs to extend the abstract class Command.
 
-####**Interactions between objects when Email Command is executed:**
+#### Interactions between objects when Email Command is executed:
 
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
@@ -747,7 +747,7 @@ The user can choose when to exit the programme <br>
 
 The activity diagram shows the possible execution paths for the `exit` command.
 
-####**Path Execution of Exit Feature:**
+#### Path Execution of Exit Feature:
 
 ![ExitActivityDiagram](images/ExitActivityDiagram.png)
 
@@ -759,13 +759,13 @@ There are three possible execution path for this command.
 
 The sequence diagram below shows the interactions between objects during the execution of a `exit` command.
 
-####**Structure of Exit Feature**
+#### Structure of Exit Feature
 
 ![ExitClassDiagram](images/ExitClassDiagram.png)
 
 The class diagram above depicts the structure of `ExitCommand`. As per any Command class, ExitCommand needs to extend the abstract class Command.
 
-####**Interaction between objects when Exit Command is executed:**
+#### Interaction between objects when Exit Command is executed:
 
 ![ExitCommandSequenceDiagram](images/ExitCommandSequenceDiagram.png)
 
@@ -930,19 +930,19 @@ Below are links for implementation of the classes and its methods:
 * [`ArchiveCommand`](https://github.com/AY2122S2-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ArchiveCommand.java)
 * [`Files#copy()`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.io.InputStream,%20java.nio.file.Path,%20java.nio.file.CopyOption...))
 
-#### **Class Diagram of Archive Feature is shown below:**
+#### Class Diagram of Archive Feature is shown below:
 ![ArchiveFeatureClassDiagram](images/ArchiveCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ArchiveCommand`. As per any `Command` class, `ArchiveCommand` needs to extend the abstract class `Command`.
 
-#### **Path Execution of Archive Feature Activity Diagram is shown below:**
+#### Path Execution of Archive Feature Activity Diagram is shown below:
 ![ArchiveFeatureActivityDiagram](images/ArchiveFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Archive` Command, when the user inputs an **Archive Command**, the command is checked if there are any extra parameters. If there is, a `CommandException` will be thrown, else the command then checks if the
 working database file to be archived is present. If it is not present, a `CommandException` will be thrown, else the command then proceeds to copy the file. If there is an error copying the file, a `CommandException` will be thrown, else 
 the archived file will be saved in its respective file path and a success message will be shown to the user.
 
-#### **Sequence Diagram of Archive Feature is shown below:**
+#### Sequence Diagram of Archive Feature is shown below:
 ![ArchiveFeatureSequenceDiagram](images/ArchiveFeatureSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">
 
@@ -969,18 +969,18 @@ The `resize` command is as follows:
 
 This feature provides the user with three different resizing options to choose from, which are `1`, `2` and `3` with each number being a multiplier of the default result display window size (1 being the default size).
 
-#### **Class Diagram of Resize Feature is shown below:**
+#### Class Diagram of Resize Feature is shown below:
 ![ResizeFeatureClassDiagram](images/ResizeCommandClassDiagram.png)
 
 The class diagram above depicts the structure of `ResizeCommand`. As per any `Command` class, `ResizeCommand` needs to extend the abstract class `Command`.
 
-#### **Path Execution of Resize Feature Activity Diagram is shown below:**
+#### Path Execution of Resize Feature Activity Diagram is shown below:
 ![ResizeFeatureActivityDiagram](images/ResizeFeatureActivityDiagram.png)
 
 Modelling the workflow of the `Resize` Command, when the user inputs a **Resize Command**, the command is checked if the parameter is valid. If it is invalid, a `ParseException` will be thrown, else the result
 display window in the GUI is resized according to the user's option. A success message is then displayed to the user.
 
-#### **Sequence Diagram of Resize Feature is shown below:**
+#### Sequence Diagram of Resize Feature is shown below:
 ![ResizeFeatureSequenceDiagram](images/ResizeFeatureSequenceDiagram.png)
 
 The above figure illustrates the important interactions of `ResizeCommand` when the user successfully resizes the result display window.
@@ -1022,8 +1022,8 @@ which sets the window in the GUI according to the user's desired option.
 
 **Value proposition**:
 
-Keep track of students’ covid status. This is a central repository for covid status updating to ease the facilitation of
-management of NUS students across different faculties. It will be easier to read and update covid status.
+This application aims to keep track of students’ covid status. This is a central repository for covid status updating to ease the facilitation of
+management of NUS students within residential halls. It will be easier to read and update covid status.
 
 Every students’ info in one integrated application platform. The app will help to manage students across different
 faculties within NUS (no support for other schools).
