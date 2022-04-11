@@ -1,8 +1,24 @@
 {
   "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+    "id" : "9ddd72fa-e32e-4ed7-b475-32d4b19f6b70",
+    "name": "Alice Pauline",
+    "company": "Te$la",
+    "jobTitle": "CEO",
+    "numbers": {
+      "personal": "+65 94351253"
+    },
+    "emails": {
+      "business": "alice@example.com"
+    },
+    "addresses": {
+      "home": "123, Jurong West Ave 6, #08-111"
+    },
+    "pronouns": [
+      "she"
+    ],
+    "tagged": [
+      "friends"
+    ]
+  }
+  ]
 }

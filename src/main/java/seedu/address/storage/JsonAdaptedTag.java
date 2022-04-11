@@ -45,4 +45,8 @@ class JsonAdaptedTag {
         return new Tag(tagName);
     }
 
+    @Override
+    public String toString() {
+        return "JsonAdaptedTag: " + tagName;
+    }
 }

@@ -15,7 +15,9 @@ import java.util.Optional;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -51,10 +53,26 @@ public class ArgumentMultimap {
         return new ArrayList<>(argMultimap.get(prefix));
     }
 
+    public boolean isEmpty() {
+        return this.argMultimap.size() == 1;
+    }
+
     /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Prefix, List<String>> entry : argMultimap.entrySet()) {
+            builder.append("(Prefix:" + entry.getKey() + " ");
+            for (String arg : entry.getValue()) {
+                builder.append("Arg:" + arg + ") ");
+            }
+        }
+        return builder.toString();
     }
 }

@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes add or view command;
+if () then (   [is Add Command])
+    :AddressbookStorage saves contact with details added;
+else ([is View Command])
+    endif
+:Open contact details page;
+repeat
+    :User executes edit command;
+    :AddressbookStorage saves changes;
+repeat while () is ([User wants to make\n more edits])
+:User executes back command;
+stop
+@enduml

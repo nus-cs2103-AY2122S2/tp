@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+hide footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HomePageParser" as HomePageParser LOGIC_COLOR
+participant ":MeetCommandParser" as MeetCommandParser LOGIC_COLOR
+participant ":Meeting" as Meeting LOGIC_COLOR
+participant ":MeetCommand" as MeetCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+note left of LogicManager: 1 is the index of the meeting attendee \nin the current contacts list
+-> LogicManager : executeHomePageCommand\n(meet with/1 for/Agenda in/Place \non/01-01-2040 23:59)
+LogicManager -> HomePageParser : parseCommand\n(meet with/1 for/Agenda in/Place \non/01-01-2040 23:59)
+activate HomePageParser
+HomePageParser -> MeetCommandParser** : MeetCommandParser()
+activate MeetCommandParser
+MeetCommandParser --> HomePageParser
+deactivate MeetCommandParser
+HomePageParser -> MeetCommandParser : parse\n(with/1 for/Agenda in/Place \non/01-01-2040 23:59)
+ref over MeetCommandParser, HomePageParser :The lower-level details of parsing individual arguments is hidden for simplicity
+
+activate MeetCommandParser
+MeetCommandParser --> Meeting** :Meeting(agenda, meetingPlace, meetingTime, indexes, new HashSet<>())
+activate Meeting
+Meeting --> MeetCommandParser :createdMeeting
+deactivate Meeting
+MeetCommandParser --> MeetCommand** :MeetCommand(createdMeeting)
+activate MeetCommand
+MeetCommand --> MeetCommandParser :meetCommand
+deactivate MeetCommand
+MeetCommandParser --> HomePageParser :meetCommand
+deactivate MeetCommandParser
+HomePageParser --> LogicManager :meetCommand
+deactivate HomePageParser
+LogicManager --> MeetCommand :execute(model)
+activate MeetCommand
+MeetCommand --> LogicManager :commandResult
+deactivate MeetCommand
+
+<-- LogicManager: commandResult
+@enduml
+

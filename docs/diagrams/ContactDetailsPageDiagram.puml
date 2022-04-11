@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+class MainWindow as "__:MainWindow__"
+class CommandBox as "__:CommandBox__"
+class ResultDisplay as "__:ResultDisplay__"
+class StatusBarFooter as "__:StatusBarFooter__"
+class ContactDetailsPanel as "__:ContactDetailsPanel__"
+class ContactMeetingsPanel as "__:ContactMeetingsPanel__"
+
+MainWindow -- CommandBox
+MainWindow -- ResultDisplay
+MainWindow -- StatusBarFooter
+MainWindow -- ContactDetailsPanel
+MainWindow -- ContactMeetingsPanel
+@end

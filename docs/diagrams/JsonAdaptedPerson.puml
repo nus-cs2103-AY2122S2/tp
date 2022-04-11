@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage{
+
+package "AddressBook Storage" #F4F6F6{
+Class JsonAdaptedPerson
+Class JsonAdaptedEmail
+Class JsonAdaptedAddress
+Class JsonAdaptedPhone
+Class JsonAdaptedPronoun
+Class JsonAdaptedTag
+}
+
+JsonAdaptedPerson --> "*" JsonAdaptedEmail
+JsonAdaptedPerson --> "*" JsonAdaptedPhone
+JsonAdaptedPerson --> "*" JsonAdaptedAddress
+JsonAdaptedPerson --> "*" JsonAdaptedPronoun
+JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+@enduml

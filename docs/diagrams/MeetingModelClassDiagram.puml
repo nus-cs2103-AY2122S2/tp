@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Class "<<interface>>\nReadOnlyMeetingBook" as ReadOnlyMeetingBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class MeetingBook
+Class ModelManager
+Class UserPrefs
+
+Class MeetingsList
+Class Meeting
+Class MeetingPlace
+Class Agenda
+Class MeetingTime
+Class Id
+Class Person
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+MeetingBook .up.|> ReadOnlyMeetingBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyMeetingBook
+ModelManager -left-> "1" MeetingBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+MeetingBook *--> "1" MeetingsList
+MeetingsList --> "~* all" Meeting
+Meeting *--> "1" MeetingPlace
+Meeting *--> "1" MeetingTime
+Meeting *--> "1" Agenda
+Meeting *--> "1..*" Id : Meeting Attendees
+
+Id "1" <-- "1" Person
+
+ModelManager -->"~* filtered" Meeting
+@enduml

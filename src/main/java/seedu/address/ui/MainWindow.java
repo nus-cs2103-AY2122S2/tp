@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,8 +35,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ContactDetailsPanel contactDetailsPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ConfirmWindow confirmWindow;
+    private MeetingListPanel meetingListPanel;
+    private ContactMeetingsPanel contactMeetingsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,10 +49,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane panelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane meetingListPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -66,10 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-    }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
+        confirmWindow = new ConfirmWindow(logic);
     }
 
     private void setAccelerators() {
@@ -78,26 +85,12 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -111,7 +104,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        panelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        meetingListPanel = new MeetingListPanel(logic.getMeetingList(), logic.getPersonList());
+        meetingListPanelPlaceholder.getChildren().add(meetingListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeHomePageCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -147,6 +143,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the contacts confirmation window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleContactsClearConfirmation(boolean isMeetingClear) {
+        if (!confirmWindow.isShowing()) {
+            confirmWindow.show(isMeetingClear);
+        } else {
+            confirmWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -163,18 +171,56 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Switches the page to display the lists of all contacts and meetings.
+     */
+    private void loadHomePage() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        CommandBox commandBox = new CommandBox(this::executeHomePageCommand);
+        meetingListPanel = new MeetingListPanel(logic.getMeetingList(), logic.getPersonList());
+
+        panelPlaceholder.getChildren().removeAll();
+        commandBoxPlaceholder.getChildren().removeAll();
+        meetingListPanelPlaceholder.getChildren().removeAll();
+
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        panelPlaceholder.getChildren().add(personListPanel.getRoot());
+        meetingListPanelPlaceholder.getChildren().add(meetingListPanel.getRoot());
+
+        commandBox.setFocused();
+    }
+
+    /**
+     * Switches the screen to display the contact information of a specific person.
+     */
+    private void loadContactDetailsPage(Person personToDisplay) {
+        contactDetailsPanel = new ContactDetailsPanel(personToDisplay);
+        CommandBox commandBox = new CommandBox(this::executeContactDetailsPageCommand);
+        contactMeetingsPanel = new ContactMeetingsPanel(logic.getMeetingList(), logic.getPersonList(), personToDisplay);
+
+        panelPlaceholder.getChildren().removeAll();
+        commandBoxPlaceholder.getChildren().removeAll();
+        meetingListPanelPlaceholder.getChildren().removeAll();
+
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        panelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
+        meetingListPanelPlaceholder.getChildren().add(contactMeetingsPanel.getRoot());
+
+        commandBox.setFocused();
     }
 
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.Logic#executeHomePageCommand(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeHomePageCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.executeHomePageCommand(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -184,6 +230,58 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.requiresConfirmation()) {
+                handleContactsClearConfirmation(commandResult.isMeetingClear());
+            }
+
+            if (commandResult.isLoadPersonList()) {
+                loadHomePage();
+            }
+
+            if (commandResult.isLoadContactDetails()) {
+                Person personToEdit = commandResult.getPerson();
+                requireNonNull(personToEdit);
+                loadContactDetailsPage(personToEdit);
+            }
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Executes the command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#executeHomePageCommand(String)
+     */
+    private CommandResult executeContactDetailsPageCommand(String commandText) throws CommandException, ParseException {
+        try {
+            Person currentPerson = contactDetailsPanel.getPerson();
+            CommandResult commandResult = logic.executeContactDetailsPageCommand(commandText, currentPerson);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowHelp()) {
+                handleHelp();
+            }
+
+            if (commandResult.isExit()) {
+                handleExit();
+            }
+
+            if (commandResult.isLoadPersonList()) {
+                loadHomePage();
+            }
+
+            if (commandResult.isLoadContactDetails()) {
+                Person personToEdit = commandResult.getPerson();
+                requireNonNull(personToEdit);
+                loadContactDetailsPage(personToEdit);
             }
 
             return commandResult;

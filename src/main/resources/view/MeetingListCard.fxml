@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      prefWidth="320">
+    <padding>
+        <Insets top="8" right="5" bottom="5" left="10" />
+    </padding>
+    <HBox>
+        <Label fx:id="index" styleClass="primary_text"/>
+        <Label fx:id="agenda" styleClass="primary_text"/>
+        <padding>
+            <Insets bottom="4"/>
+        </padding>
+    </HBox>
+    <Label fx:id="time" styleClass="secondary_text"/>
+    <Label fx:id="place" styleClass="secondary_text"/>
+    <Label fx:id="attendees" styleClass="secondary_text" wrapText="true"/>
+</VBox>

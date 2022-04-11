@@ -1,0 +1,67 @@
+@startuml
+!include Style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":ContactDetailsPanel" as ContactDetailsPanel UI_COLOR
+participant ":ContactMeetingsPanel" as ContactMeetingsPanel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HomePageParser" as HomePageParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+end box
+
+-> MainWindow : executeHomePageCommand(view 2)
+activate MainWindow
+
+MainWindow -> LogicManager:executeHomePageCommand(view 2)
+activate LogicManager
+
+LogicManager -> HomePageParser : parseCommand(view 2)
+activate HomePageParser
+
+create ViewCommand
+HomePageParser -> ViewCommand
+activate ViewCommand
+
+ViewCommand --> HomePageParser : v
+deactivate ViewCommand
+
+HomePageParser --> LogicManager : v
+deactivate HomePageParser
+
+LogicManager -> ViewCommand : execute()
+activate ViewCommand
+
+ViewCommand --> LogicManager : commandResult
+deactivate ViewCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+MainWindow -> MainWindow : loadContactScreen()
+activate MainWindow
+
+create ContactDetailsPanel
+MainWindow -> ContactDetailsPanel
+activate ContactDetailsPanel
+
+ContactDetailsPanel --> MainWindow
+deactivate ContactDetailsPanel
+
+create ContactMeetingsPanel
+MainWindow -> ContactMeetingsPanel
+activate ContactMeetingsPanel
+
+ContactMeetingsPanel --> MainWindow
+deactivate ContactMeetingsPanel
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+<-- MainWindow
+deactivate MainWindow
+
+@enduml

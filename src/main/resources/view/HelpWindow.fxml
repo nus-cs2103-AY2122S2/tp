@@ -19,14 +19,14 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
+      <HBox alignment="CENTER" fx:id="helpMessageContainer" prefHeight="80" prefWidth="350">
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
-              <Insets right="5.0" />
+              <Insets right="10.0" />
             </HBox.margin>
           </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+          <Button fx:id="openButton" mnemonicParsing="false" onAction="#openUrl" text="Go to User Guide" minWidth="120">
             <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
@@ -36,7 +36,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </opaqueInsets>
         <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
         </padding>
       </HBox>
     </Scene>

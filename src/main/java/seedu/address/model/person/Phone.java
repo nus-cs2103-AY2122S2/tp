@@ -13,7 +13,7 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
+    public final String phone;
 
     /**
      * Constructs a {@code Phone}.
@@ -23,7 +23,7 @@ public class Phone {
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        this.phone = phone;
     }
 
     /**
@@ -35,19 +35,19 @@ public class Phone {
 
     @Override
     public String toString() {
-        return value;
+        return phone;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+                && phone.equals(((Phone) other).phone)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return phone.hashCode();
     }
 
 }

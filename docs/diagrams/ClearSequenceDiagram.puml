@@ -1,0 +1,64 @@
+
+@startuml
+!include Style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":ConfirmWindow" as ConfirmWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HomePageParser" as HomePageParser LOGIC_COLOR
+participant ":ClearCommand" as ClearCommand LOGIC_COLOR
+end box
+
+-> MainWindow
+activate MainWindow
+MainWindow -> LogicManager:executeHomePageCommand(clear)
+activate LogicManager
+
+LogicManager -> HomePageParser : parseCommand(clear)
+activate HomePageParser
+
+create ClearCommand
+HomePageParser -> ClearCommand
+activate ClearCommand
+
+ClearCommand --> HomePageParser :
+deactivate ClearCommand
+
+HomePageParser --> LogicManager :
+deactivate HomePageParser
+
+LogicManager -> ClearCommand : execute()
+activate ClearCommand
+
+ClearCommand --> LogicManager : commandResult
+deactivate ClearCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleConfirmation()
+activate MainWindow
+
+MainWindow -> ConfirmWindow : show()
+activate ConfirmWindow
+
+ConfirmWindow -> LogicManager : clearAddressBook()
+activate LogicManager
+
+LogicManager -> ConfirmWindow
+deactivate LogicManager
+
+ConfirmWindow --> MainWindow
+deactivate ConfirmWindow
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+<-- MainWindow
+deactivate MainWindow
+
+@enduml

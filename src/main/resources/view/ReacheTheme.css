@@ -1,0 +1,393 @@
+.root {
+    -primary: #0048cd;
+    -primary_dark: #00379c;
+    -primary_light: #75c7fb;
+    -secondary: #ffcf00;
+    -accent: #ecf1f4;
+    -border: #d4dae6;
+    -background_primary: #fafcfe;
+    -background_secondary: #f4f6f9;
+    -text_primary: #404040;
+    -text_secondary: #555555;
+    -grey: #686F7C;
+}
+
+.background {
+    -fx-background-color: -background_primary;
+}
+
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: -primary;
+    -fx-opacity: 0.9;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: -primary;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: -primary;
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+}
+
+
+.tab-pane {
+    -fx-padding: 0 0 0 1;
+    -fx-background-color: -background_primary;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
+.table-view {
+    -fx-base: -background_primary;
+    -fx-control-inner-background: -background_primary;
+    -fx-background-color: -background_primary;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: -primary;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.split-pane:horizontal .split-pane-divider {
+    -fx-background-color: derive(-background_primary, 20%);
+    -fx-border-color: transparent transparent transparent -primary_light;
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: derive(-background_primary, 20%);
+}
+
+#personListView {
+    -fx-background-color: -background_primary;
+    -fx-padding: 0;
+}
+
+#meetingListView {
+    -fx-background-color: -background_secondary;
+    -fx-padding: 0;
+}
+
+.list-cell:filled {
+    -fx-background-color: white;
+    -fx-background-insets: 4px 0px 0px 0px;
+    -fx-border-color: transparent transparent -accent transparent;
+    -fx-border-width: 1px;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color:  derive(-primary_light, 80%);
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.list-cell .label: {
+    -fx-text-fill: -text_primary;
+}
+
+.headline {
+    -fx-font-family: "Helvetica Bold", Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: -text_primary;
+}
+
+.primary_text {
+    -fx-font-family: "Helvetica Bold", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text_primary;
+}
+
+.secondary_text {
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text_secondary;
+}
+
+.pane-primary {
+     -fx-background-color: -background_primary;
+}
+
+.pane-secondary {
+     -fx-background-color: -background_secondary;
+}
+
+.info-box {
+     -fx-background-color: -background_primary;
+     -fx-border-color: -border;
+     -fx-border-top-width: 1px;
+     -fx-border-insets: 4px;
+     -fx-padding: 5px;
+     -fx-border-radius: 5px;
+}
+
+.status-bar {
+    -fx-background-color: derive(-background_primary, 30%);
+}
+
+.result-display {
+    -fx-background-color: transparent;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text_primary;
+}
+
+.result-display .label {
+    -fx-text-fill: black !important;
+}
+
+.status-bar .label {
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: -primary;
+    -fx-padding: 4px;
+    -fx-pref-height: 30px;
+}
+
+.status-bar-with-border {
+    -fx-background-color: derive(-background_primary, 30%);
+    -fx-border-color: derive(-background_primary, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: -primary;
+}
+
+.grid-pane {
+    -fx-background-color: derive(-background_primary, 30%);
+    -fx-border-color: derive(-background_primary, 30%);
+    -fx-border-width: 1px;
+}
+
+.grid-pane .stack-pane {
+    -fx-background-color: derive(-background_primary, 30%);
+}
+
+.menu-bar {
+    -fx-background-color: -primary;
+}
+
+.menu-bar .label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
+    -fx-background: -primary_dark;
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: -primary;
+    -fx-padding: 0px;
+}
+
+.menu-item {
+    -fx-background-color: -primary;
+}
+
+.menu-item:hover {
+    -fx-background-color: -primary_dark;
+}
+
+.menu-item .label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-text-fill: white;
+}
+
+/*
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: -background_primary;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: -primary;
+  -fx-text-fill: -background_primary;
+}
+
+.button:focused {
+    -fx-border-color: -primary, -primary;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: -background_primary;
+    -fx-text-fill: -primary;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: -primary;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color, 30%);
+}
+
+.dialog-pane {
+    -fx-background-color: -background_primary;
+}
+
+.dialog-pane > *.button-bar > *.container {
+    -fx-background-color: -background_primary;
+}
+
+.dialog-pane > *.label.content {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -primary;
+}
+
+.dialog-pane:header *.header-panel {
+    -fx-background-color: derive(-background_primary, 25%);
+}
+
+.dialog-pane:header *.header-panel *.label {
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: -primary;
+    -fx-text-fill: -primary;
+}
+
+.scroll-bar {
+    -fx-background-color: #EDF0F3;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -grey;
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+#cardPane {
+    -fx-border-width: 0;
+    -fx-border-radius: 5px;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-background-color: -background_primary;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent -border transparent;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Helvetica", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text_primary;
+}
+
+#resultDisplay .content {
+    -fx-background-color: white;
+    -fx-border-color: -border;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tags .label {
+    -fx-text-fill: -text_primary;
+    -fx-background-color: -secondary;
+    -fx-padding: 2 6 2 6;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 12;
+}
+
+#contactListPane {
+    -fx-border-color: transparent -border -border transparent;
+}
+
+#meetingListPane {
+    -fx-border-color: transparent transparent -border transparent;
+}

@@ -1,0 +1,35 @@
+@startuml
+!include Style.puml
+hide footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ContactDetailsPageParser" as ContactDetailsParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "editCommand:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+note left of LogicManager: personToEdit is the Person object\n encompassing the edited contact
+-> LogicManager : executeContactDetailsPageCommand\n(edit n/Jack, personToEdit)
+LogicManager -> ContactDetailsParser : parseCommand\n(edit n/Jack, personToEdit)
+activate ContactDetailsParser
+ContactDetailsParser -> EditCommandParser ** : EditCommandParser()
+activate EditCommandParser
+EditCommandParser --> ContactDetailsParser
+deactivate EditCommandParser
+ContactDetailsParser -> EditCommandParser : parse(n/Jack, personToEdit)
+activate EditCommandParser
+ref over EditCommandParser, EditCommand : The more detailed parsing of each field to edit
+EditCommandParser --> ContactDetailsParser : editCommand
+deactivate EditCommandParser
+ContactDetailsParser --> LogicManager : editCommand
+deactivate ContactDetailsParser
+note right of LogicManager : model is the list of contacts
+LogicManager -> EditCommand : execute(model)
+activate EditCommand
+EditCommand --> LogicManager : commandResult
+deactivate EditCommand
+<-- LogicManager: commandResult
+@enduml
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Optional" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <HBox fx:id="OptContainer" alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
+                <children>
+               <Label snapToPixel="false" text="sss" />
+                    <TextField fx:id="optTextField" centerShape="false" focusTraversable="false" layoutX="100.0" layoutY="100.0" onAction="#handleCommandEntered" pickOnBounds="false" scaleShape="false" snapToPixel="false" translateX="-50.0" translateY="-200.0" HBox.hgrow="NEVER">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets></TextField>
+                </children>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>

@@ -27,6 +27,13 @@ public class CollectionUtil {
     }
 
     /**
+     * Returns true if {@code items} contain any elements that are empty strings.
+     */
+    public static boolean hasEmptyString(Collection<?> items) {
+        return items.contains("");
+    }
+
+    /**
      * Returns true if {@code items} contain any elements that are non-null.
      */
     public static boolean isAnyNonNull(Object... items) {

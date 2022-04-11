@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" styleClass="background"
+            fitToWidth="true" fitToHeight="true">
+    <VBox styleClass="background">
+        <StackPane VBox.vgrow="NEVER" fx:id="particularsCardPlaceholder" />
+        <StackPane VBox.vgrow="NEVER" fx:id="numbersCardPlaceholder">
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </StackPane>
+        <StackPane VBox.vgrow="NEVER" fx:id="emailsCardPlaceholder">
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </StackPane>
+        <StackPane VBox.vgrow="NEVER" fx:id="addressesCardPlaceholder">
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </StackPane>
+    </VBox>
+</ScrollPane>

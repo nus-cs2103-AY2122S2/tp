@@ -67,10 +67,12 @@ public class Version implements Comparable<Version> {
                 versionMatcher.group(4) == null ? false : true);
     }
 
+    //Important
     @JsonValue
     public String toString() {
         return String.format("V%d.%d.%d%s", major, minor, patch, isEarlyAccess ? "ea" : "");
     }
+
 
     @Override
     public int compareTo(Version other) {

@@ -19,7 +19,6 @@ public class Index {
         if (zeroBasedIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
-
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
@@ -50,5 +49,10 @@ public class Index {
         return other == this // short circuit if same object
                 || (other instanceof Index // instanceof handles nulls
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+    }
+
+    @Override
+    public String toString() {
+        return "Index: " + zeroBasedIndex;
     }
 }

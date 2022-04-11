@@ -1,0 +1,28 @@
+.root {
+    -primary: #0048cd;
+    -primary_dark: #00379c;
+    -background_primary: #fafcfe;
+    -text_primary: #404040;
+}
+
+#confirmButton, #confirmMessage {
+    -fx-text-fill: -text_primary;
+}
+
+#confirmButton {
+    -fx-background-color: -primary;
+    -fx-font-family: "Helvetica Bold", Arial, sans-serif;
+    -fx-background-radius: 0;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+
+}
+
+#confirmButton:hover {
+    -fx-background-color: -primary_dark;
+}
+
+#confirmMessageContainer {
+    -fx-background-color: -background_primary;
+}

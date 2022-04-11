@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage{
+
+
+package "MeetingBook Storage" #F4F6F6{
+Class JsonAdaptedMeeting
+Class JsonAdaptedAttendee
+Class Id
+}
+
+JsonAdaptedMeeting --> "*" JsonAdaptedAttendee
+JsonAdaptedAttendee ..> Id
+
+@enduml

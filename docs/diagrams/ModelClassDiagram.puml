@@ -19,6 +19,13 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Pronoun
+Class Company
+Class Job
+Class Id
+Class "Label" as Label1
+Class "Label" as Label2
+Class "Label" as Label3
 
 }
 
@@ -36,11 +43,19 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> "1" Name
+Person *--> "*" Phone
+Person *--> "*" Email
+Person *--> "*" Address
+Person *--> "0..1" Company
+Person *--> "*" Pronoun
+Person *--> "0..1" Job
+Person --> "*" Tag
+Person *--> "1" Id
+
+Phone --> "1" Label1
+Address --> "1" Label2
+Email --> "1" Label3
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

@@ -1,0 +1,47 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+hide footbox
+mainframe ref
+box Logic LOGIC_COLOR_T1
+participant "EditCommandParser" as ECP LOGIC_COLOR
+participant "<<Class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant "editPersonDescriptor\n:EditPersonDescriptor" as EditPersonDescriptor MODEL_COLOR
+end box
+box Logic LOGIC_COLOR_T1
+participant "<<Class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant "jack:Name" as Jack MODEL_COLOR
+end box
+box Logic LOGIC_COLOR_T1
+participant "editCommand\n:EditCommand" as EditCommand LOGIC_COLOR
+end box
+activate ECP
+ECP -> ArgumentTokenizer : tokenize(n/Jack, n/, c/,\n j/, pr/,ph/, e/, a/, t/)
+activate ArgumentTokenizer
+ECP <-- ArgumentTokenizer : argMultiMap
+deactivate ArgumentTokenizer
+ECP -> EditPersonDescriptor ** : EditPersonDescriptor()
+activate EditPersonDescriptor
+ECP <-- EditPersonDescriptor : editPersonDescriptor
+deactivate EditPersonDescriptor
+ECP -> ParserUtil : parseName(Jack)
+activate ParserUtil
+ParserUtil -> Jack ** : Name(Jack)
+activate Jack
+Jack --> ParserUtil : jack
+deactivate Jack
+ECP <-- ParserUtil : jack
+deactivate ParserUtil
+ECP -> EditPersonDescriptor : setName(jack)
+activate EditPersonDescriptor
+ECP <-- EditPersonDescriptor
+deactivate EditPersonDescriptor
+ECP -> EditCommand ** : EditCommand(editPersonDescriptor, personToEdit)
+activate  EditCommand
+ECP <-- EditCommand :editCommand
+deactivate EditCommand
+@enduml

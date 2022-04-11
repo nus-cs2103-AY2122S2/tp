@@ -31,6 +31,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    public void setFocused() {
+        commandTextField.requestFocus();
+    }
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -40,7 +44,6 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
@@ -77,7 +80,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @see seedu.address.logic.Logic#executeHomePageCommand(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }

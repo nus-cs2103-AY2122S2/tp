@@ -16,9 +16,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.MeetingBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -28,6 +30,8 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.meeting.JsonMeetingBookStorage;
+import seedu.address.storage.meeting.MeetingBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -36,7 +40,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 4, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +52,9 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Reache ]===========================");
+
+        //commenting out this does not affect the startup
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,7 +63,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookFilePath());
+        storage = new StorageManager(addressBookStorage, meetingBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -75,22 +82,38 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyMeetingBook> meetingBookOptional;
+        ReadOnlyAddressBook initialAddressBook;
+        ReadOnlyMeetingBook initialMeetingBook;
+
         try {
             addressBookOptional = storage.readAddressBook();
+            meetingBookOptional = storage.readMeetingBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample AddressBook and MeetingBook");
+                initialAddressBook = SampleDataUtil.getSampleAddressBook();
+                initialMeetingBook = SampleDataUtil.getSampleMeetingBook();
+            } else if (!meetingBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with an empty MeetingBook");
+                initialAddressBook = addressBookOptional.get();
+                initialMeetingBook = new MeetingBook();
+            } else {
+                initialAddressBook = addressBookOptional.get();
+                initialMeetingBook = meetingBookOptional.get();
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. "
+                    + "Will be starting with an empty AddressBook and MeetingBook");
+            initialAddressBook = new AddressBook();
+            initialMeetingBook = new MeetingBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with an empty AddressBook and MeetingBook");
+            initialAddressBook = new AddressBook();
+            initialMeetingBook = new MeetingBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialAddressBook, initialMeetingBook, userPrefs);
     }
 
     private void initLogging(Config config) {

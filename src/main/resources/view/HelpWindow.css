@@ -1,19 +1,28 @@
-#copyButton, #helpMessage {
+.root {
+    -primary: #0048cd;
+    -primary_dark: #00379c;
+    -background_primary: #fafcfe;
+    -text_primary: #404040;
+}
+
+#openButton, #helpMessage {
+    -fx-text-fill: -text_primary;
+}
+
+#openButton {
+    -fx-background-color: -primary;
+    -fx-font-family: "Helvetica Bold", Arial, sans-serif;
+    -fx-background-radius: 0;
+    -fx-font-size: 12px;
     -fx-text-fill: white;
+    -fx-padding: 5px;
+
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
+#openButton:hover {
+    -fx-background-color: -primary_dark;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -background_primary;
 }
