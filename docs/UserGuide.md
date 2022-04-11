@@ -23,8 +23,10 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 4. Double-click the file to start the app (**Mac users** are recommended to type `java -jar MyGM.jar` in the terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight differences in different OS).<br>
 The GUI is split into two parts: Players and Schedules respectively. Details of the GUI are shown below
 
-![Ui_Players](images/UiPlayers.png)<br>
-![Ui_Schedule](images/UiSchedule.png)
+|             **Player**              |             **Schedule**              |
+|:-----------------------------------:|:-------------------------------------:|
+| ![Ui_Players](images/UiPlayers.png) | ![Ui_Schedule](images/UiSchedule.png) |
+
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -69,8 +71,9 @@ Views some insights about players in the club and upcoming schedules.
 * Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
 * Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
 
-![view_pie](images/viewpie.png) <br>
-![view_cal](images/viewcal.png)
+|           **Player**            |          **Schedule**           |
+|:-------------------------------:|:-------------------------------:|
+| ![view_pie](images/viewpie.png) | ![view_cal](images/viewcal.png) |
 
 ### 2.2. Getting help : `help`
 
