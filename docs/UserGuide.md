@@ -68,10 +68,11 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Quick Start
-1. Ensure you have Java 11 or above installed in your Computer. <br>
+1. Ensure you have Java 11 or above installed in your Computer.
+
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:**<br>
+**:information_source: Note:**<br>
 
 * If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
     
@@ -90,15 +91,17 @@ Additional formatting guidelines:
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
+
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:**<br>
+
+**:information_source: Note:**<br>
   
 * If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
 * If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
 </div>
-6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * **`list`** : Lists all contacts.
