@@ -21,6 +21,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -56,7 +58,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="500" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -65,9 +67,11 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="250" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -85,6 +89,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,6 +121,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -136,6 +144,8 @@ The `Model` component,
 </div>
 
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -152,6 +162,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -193,6 +205,8 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 <img src="images/DeleteMultipleSequenceDiagram0.png" />
 <img src="images/DeleteMultipleSequenceDiagram1.png" width="400"/>
 
+<div style="page-break-after: always;"></div>
+
 ### Tag feature
 
 #### Current Implementation
@@ -232,6 +246,8 @@ The following sequence diagram shows how the tag operation works:
 ![Tag Sequence Diagram](images/TagSequenceDiagram0.png)
 ![Tag Sequence Diagram](images/TagSequenceDiagram1.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Remove Tag feature
 
 #### Current implementation
@@ -257,6 +273,8 @@ The following sequence diagrams shows how the `removetag` operation works: <br>
 
 <img src="images/RemoveTagSequenceDiagram0.png" />
 <img src="images/RemoveTagSequenceDiagram1.png" width="500"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Event feature
 
@@ -322,6 +340,8 @@ The following sequence diagram shows how the tag operation works:
 ![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram0.png)
 ![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram1.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit Feature
 
 #### Original Implementation
@@ -357,6 +377,8 @@ successfully.
 
 The following sequence diagram shows how the edit operation works:
 ![EditCommand Sequence Diagram](images/EditSequenceDiagram0.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Find feature
 
@@ -400,6 +422,8 @@ the relationship between these classes. The predicates for Email and Address fol
 The predicates for Internship and Education follow the same pattern as those for Cca and Module. They were left out to simplify the diagram.
 
 ![Class diagram for FindPredicates](images/FindPredicatesClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -542,7 +566,7 @@ Priorities:
 | `*`      | user that tagged a lot of information to the contacts    | remove a specific tag of a contact                       | avoid going through the trouble of re-tagging all the information again                           |
 | `*`      | user with many persons in the contact list               | sort persons by name in alphabetical order               | locate a person easily                                                                            |
 
-
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -823,6 +847,8 @@ The user wants to delete event(s) instead.
 
 * **Mainstream OS**: Windows, macOS
 * **CLI**: Command Line Interface
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
