@@ -474,6 +474,7 @@ The following sequence diagram shows how `AddLessonCommand`
 
 ![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
 
+<div style="page-break-after: always;"></div>
 
 #### Determining if a lesson clashes with any existing lessons
 
@@ -494,6 +495,8 @@ The following sequence diagram shows how this is done:
 ![Add Lesson Sequence Diagram 5](images/AddLessonSequenceDiagram_5.png)
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Assign student to lesson
 
@@ -564,8 +567,6 @@ Given below is a class diagram of `TableView<CommandCard>`.
 The `CommandCard` class became a nested class because there were no other features that would be implemented that need to use it. Only the `HelpWindow` requires it,
 thus, it was made as a nested class.
 
-<div style="page-break-after: always;"></div>
-
 ### Command Shortcuts
 
 Command shortcuts were implemented for commands that have a lengthy `COMMAND_WORD`. This was done by adding another field `SHORTENED_COMMAND_WORD`.
@@ -585,6 +586,8 @@ If we had a feature that allows the user to create custom command words for each
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -594,8 +597,6 @@ If we had a feature that allows the user to create custom command words for each
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
