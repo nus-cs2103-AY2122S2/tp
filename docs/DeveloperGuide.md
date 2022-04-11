@@ -1499,10 +1499,12 @@ The effort made in these areas can be evidenced from reading the rest of the Dev
     which sorts its elements with a specified comparator. 
   * Another example of this is how the group wrote a new parser for each command, instead of reusing current ones, to ensure that SOLID principles are adhered to.
     
+
 * Used Test Driven Development
   * Whenever our group implemented a new feature or a new field, we followed the procedure of test-driven development where we wrote
     unit tests to test these features alongside writing the code, to ensure that the number of bugs can be reduced.
   * Additionally, after the PED, the group spent a large amount of time fixing AB3 bugs, to ensure that the application is as bug-free as possible.  
+
     
 * Ease-of-use
   * This ties in with abstraction, where the group made commands as simple to execute as possible, so that fast typists can complete tasks easily and effectively.
