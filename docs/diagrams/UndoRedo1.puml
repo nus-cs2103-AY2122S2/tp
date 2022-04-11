@@ -1,10 +1,10 @@
 @startuml
 start
 :User inputs commands;
-:System pushes command into StackUndoRedo;
+:System pushes command onto StackUndoRedo;
 
 
-if () then ([command shows add or edit window])
+if () then ([Command is not a RedoableCommand])
     :Command will not be
     added to undoStack;
 else ([else])
@@ -14,11 +14,10 @@ else ([else])
 
     endif
 
-    if () then ([is not redoable])
-        :Command will not be
-        added to undoStack;
+    if () then ([is not a RedoableCommand])
+        stop
     else ([else])
-        :Command push into undoStack;
+        :Command push onto undoStack;
     endif
 endif
 stop
