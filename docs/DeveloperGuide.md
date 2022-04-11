@@ -422,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. TAB displays warning message to user (that there are no students yet but students added subsequently will have the new lab).
 
       Use case ends.
-  
+
 * 1b. TAB detects that an identical lab already exists.
     * 1b1. TAB displays error message (that lab already exists).
 
@@ -620,9 +620,9 @@ testers are expected to do more *exploratory* testing.
 1. Assuming the `LabList` is empty and the list has some `Student`s.
    1. Test case: `labadd l/1`<br>
    Expected: `Lab 1` will appear as a red label on each `Student`'s card in the list.
-   
+
    2. Test case: `labadd l/21`<br>
    Expected: A error message will appear with the correct command format and constraints and no lab will be added.
-   
+
    3. Test case: `labadd l/-1`<br>
    Expected: A error message will appear with the correct command format and constraints and no lab will be added.
