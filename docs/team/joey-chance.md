@@ -28,7 +28,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Code quality
-    * Wrote test cases to increase code coverage from X% to X%. Pull Request: WIP
+    * Wrote test cases to increase code coverage.
 * **Documentation**:
   * User Guide
     * Added patients' consultation notes section, FAQ and Command Summary. Pull request: [#6](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/6)
@@ -36,7 +36,7 @@ Given below are my contributions to the project.
     * Fixed grammatical issues and revised sentence structures for coherency and conciseness. Pull request: [#244](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/244)
   * Developer Guide
     * Added implementation details of Add command features. Pull request: [#83](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/83)
-    * Added implementation details of Find command features. Pull request: WIP
+    * Added implementation details of Find command features. Pull request: [#254](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/254)
 * **Community**:
   * Reviews and Comments
     * Pull requests reviewed with non-trivial comments: [#9](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/9), [#47](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/47), [#50](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/50), [#53](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/53), [#58](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/58), [#66](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/66), [#87](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/87), [#99](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/99), [#229](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/229), [#234](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/234), [#243](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/243), [#246](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/246)

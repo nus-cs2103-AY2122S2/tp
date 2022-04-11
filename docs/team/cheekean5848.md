@@ -11,17 +11,16 @@ Given below are my contributions to the project.
 
 * **New Feature**: Patient's Medical Prescription
 
-It allows user to add medical prescription information to the patients. This feature
-extends the product functionality by allowing medical professionals to keep track of
-patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
+  It allows user to add medical prescription information to the patients. This feature
+  extends the product functionality by allowing medical professionals to keep track of
+  patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
 
 
 
 * **New Feature**: Command History Navigation
 
-It enhances the user experience by allowing users to navigate through the command
-history by pressing the `↑` and `↓` arrow keys.
-
+  It enhances the user experience by allowing users to navigate through the command
+  history by pressing the `↑` and `↓` arrow keys.
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=cheekean5848&breakdown=true)
@@ -37,20 +36,23 @@ history by pressing the `↑` and `↓` arrow keys.
         * Created a manager to parse the user's command type and execute the relevant command.
         * Maintain a view state to keep track of user's latest viewing state.
 
+<div style="page-break-after: always;"></div>
 
 * **Contributions to the UG**:
-
     * Add patients' medical prescription section.
     * Created Command Summary Section.
 
 
-* **Contributions to the DG**: to be added soon
+* **Contributions to the DG**:
+    * Modify the component design and structure details on top of [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+    * Add implementation details for navigation of command history and delete features.
 
 
 * **Contributions to team-based tasks**:
     * Keep track of project deadline
     * Plan and schedule meeting time
     * Distribute task to team members
+    * Did internal testing and identified bugs
 
 
 * **Community**:
