@@ -215,7 +215,7 @@ The lifeline for `AppendCommandParser` and `AppendCommand` should end at their d
 ### Transaction 
 
 The `Transaction` class is used to represent a client's transaction. The abstract `TransactionField` class represents the transaction data.
-`Transaction` contains an immutable `HashMap<Prefix, TransactionField>` of transactionFields as well as a reference to the `Person`
+`Transaction` contains an immutable `HashMap<Prefix, TransactionField>` of transactionFields as well as identifier of the `Person`
 who owns the `Transaction`. This person identifier will be stored as a `long` inside the `Transaction` class. 
 
 ![Transaction Class Diagram](images/TransactionClassDiagram.png)
@@ -246,7 +246,7 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, `No
 
 * **Alternative 1 (current implementation):** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
   Everytime a user create a transaction, a new instance of transaction will be added to the list and a client
-  specified by its unique identifier (`Email`) will be referenced by this transaction. To list all the transactions
+  specified by its unique identifier (`personId`) will be referenced by this transaction. To list all the transactions
   of a particular client, the `FilteredList` should be updated to only contain `Transaction`
   with a reference to the client's id.
     * Pros: Consistent design with the `Person` class.
@@ -323,7 +323,7 @@ List`.
 This issue is addressed by using the class `TransactionPredicateBuilder` that takes a `personIdentifier`
 and returns the desired `TransactionPredicate`.
 
-![Add Transaction activity diagram](images/FindTransactionActivityDiagram.png)
+![Find Transaction activity diagram](images/FindTransactionActivityDiagram.png)
 
 *Figure: Simplified activity diagram showing the sequence of action of Find Transaction command.*
 
@@ -338,7 +338,7 @@ Given below is an example usage scenario and how `Find Transaction` behaves at e
    using `TransactionPredicate`.
 5. `CommandResult` will be returned back to the `LogicManager` if there is no failure in execution.
 
-![Add Transaction sequence diagram](images/FindTransactionSequenceDiagram.png)
+![Find Transaction sequence diagram](images/FindTransactionSequenceDiagram.png)
 *Figure: Simplified sequence diagram showing the sequence of action of Find Transaction command.*
 
 #### Design considerations
@@ -748,6 +748,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `LOW`    | user    | store my client's birthday                                 | give them discounts on their birthday.                                  |
 | `LOW`    | user    | store my client's age                                      | know if I can sell them age restricted items.                           |
 | `HIGH`   | user    | add client transaction                                     | store the transaction history of my clients.                            |
+| `HIGH`   | user    | delete a transaction                                       | delete the transaction from the transaction list                        |
 | `MEDIUM` | user    | chain multiple commands                                    | execute multiple commands at once.                                      |
 | `LOW`    | user    | list all clients who are members.                          |                                                                         |
 | `LOW`    | user    | assign different tiers of memberships to my clients.       |                                                                         |
@@ -757,7 +758,10 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `MEDIUM` | user    | remove data fields and tags from clients                   | remove fields and tags from a client without editing the entire client. |
 | `HIGH`   | user    | be able to re-input my previous commands                   | execute similar commands without having to retype the whole command.    |
 | `HIGH`   | user    | switch between light and dark themes.                      |                                                                         |
-| `HIGH`   | user    | list a client's transactions                               | see all the transactions associated with a particular client.           |
+| `HIGH`   | user    | list all transactions                                      |                                                                         |
+| `HIGH`   | user    | find a client's transactions                               | see all the transactions associated with a particular client.           |
+| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be paid                         |
+| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be unpaid                       |
 | `MEDIUM` | user    | flag a transaction as paid or unpaid                       | know if a transaction has been paid.                                    |
 | `LOW`    | user    | click on a client to see the list of their transactions    | see a client's transactions without typing.                             |
 | `HIGH`   | user    | remove memberships from clients                            | remove a client from my rewards program.                                |

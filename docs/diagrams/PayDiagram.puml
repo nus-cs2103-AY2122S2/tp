@@ -10,16 +10,13 @@ if () then ([valid command provided])
   if () then ([valid transaction index provided])
   : update the specified transaction;
   : Display success message;
-  stop
   else ([invalid transaction index])
    : Throw exception;
    : Display invalid index message;
-   stop
   endif
 else ([invalid])
   :Throw parse exception;
   :Display invalid command message;
-  stop
-
 endif
+stop
 @enduml

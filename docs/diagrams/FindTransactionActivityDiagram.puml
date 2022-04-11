@@ -16,16 +16,13 @@ if () then ([valid command provided])
   : Update the transaction list according
     to the transaction predicate;
   : Display success message;
-  stop
   else ([invalid])
    : Throw exception;
    : Display invalid index message;
-   stop
   endif
 else ([invalid])
   :Throw parse exception;
   :Display invalid command message;
-  stop
-
 endif
+stop
 @enduml
