@@ -133,7 +133,7 @@ It is split into the following subsections:
 1. [Customer management ](#41-customer-management)
 2. [Service management ](#42-service-management)
 3. [Booking management ](#43-booking-management)
-4. [Statistics ](#44-statistics-management)
+4. [Statistics management](#44-statistics-management)
 5. [Schedule management](#45-schedule-management)
 6. [Miscellaneous ](#46-miscellaneous)
 
