@@ -109,6 +109,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `add 1` Command](images/AddSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -547,6 +549,8 @@ testers are expected to do more *exploratory* testing.
    2. Start the application and exit right after.
 
     Expected: Data from data file is cleared and contains no entry.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
