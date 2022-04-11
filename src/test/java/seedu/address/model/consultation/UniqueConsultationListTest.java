@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-
 import static seedu.address.testutil.TypicalConsultations.CONSULTATION_A;
 import static seedu.address.testutil.TypicalConsultations.CONSULTATION_B;
 
@@ -14,8 +13,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.consultation.exceptions.ConsultationNotFoundException;
 import seedu.address.model.consultation.exceptions.DuplicateConsultationException;
 

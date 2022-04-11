@@ -29,6 +29,7 @@ public class ConsultationDiagnosisTest {
         assertFalse(ConsultationDiagnosis.isValidDiagnosis(" ")); // space only
 
         // valid family history
-        assertTrue(ConsultationDiagnosis.isValidDiagnosis("Has Upper Respiratory infection. To be prescribed antibiotics, to be completed."));
+        assertTrue(ConsultationDiagnosis.isValidDiagnosis("Has Upper Respiratory infection. "
+                + "To be prescribed antibiotics, to be completed."));
     }
 }
