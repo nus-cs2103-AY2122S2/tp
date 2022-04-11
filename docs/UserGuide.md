@@ -124,7 +124,7 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 2: Login Prompt Display</figcaption>
    </figure>
 
-5. After you have successfully logged in, the GUI will be loaded up with sample data and MedBook should look like the 
+5. After you have successfully logged in, the GUI will be loaded up with sample data and MedBook should look like the
    picture below.
 
    <figure class="figure">

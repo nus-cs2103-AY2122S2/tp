@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 /**
  * Represents a TestResult's test date in the address book.
@@ -43,7 +44,8 @@ public class TestDate {
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        return formattedDate;
     }
 
     @Override
