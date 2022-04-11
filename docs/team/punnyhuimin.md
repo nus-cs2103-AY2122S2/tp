@@ -31,7 +31,7 @@ Given below are my contributions to the project.
        dates in the form of `dd-MM-yyyy`.
      * _Justification_: This feature improves the product significantly by speeding up the users' ability to type in the
        date without having to look at their calendar to find the day and month that the order is to be completed.
-     * _Credits_: Used a formula from https://coderanch.com/t/385117/java/date-Monday that gets the next date based 
+     * _Credits_: Used a formula from [https://coderanch.com/t/385117/java/date-Monday](https://coderanch.com/t/385117/java/date-Monday) that gets the next date based 
        on specified NaturalDate input.
   3. Update ExitCommand [\#96](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/96)
      * _What it does_: It sets a 3-second timer before closing the application
@@ -57,7 +57,7 @@ Given below are my contributions to the project.
 
 * **Contributions to Developer Guide**:
   * Added user story and use case for editing customers' phone number, name, email address, exiting ReadyBakey, and 
-    address. [\#73](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/73/files)
+    address. [\#73](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/73)
   * Added EditOrderSequenceDiagram and EditOrder design considerations. [\#140](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/140)
   * Edited Storage Component and StorageClassDiagram to include Orders. [\#238](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/238)
 
@@ -73,7 +73,7 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
   * Helped catch JavaFX issue with Mac [\#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50#discussion_r815455829)
-  * PRs reviewed:
+  * PRs reviewed with comments:
     [\#46](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/46#discussion_r814508758),
     [\#50](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/50#discussion_r815458156),
     [\#83](https://github.com/AY2122S2-CS2103-F09-4/tp/pull/83#discussion_r820242099),
