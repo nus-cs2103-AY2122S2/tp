@@ -28,7 +28,7 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class GradeCommandParser implements Parser<GradeCommand> {
 
-    private static final String MESSAGE_ASSESSMENT_NOT_FOUND =
+    public static final String MESSAGE_ASSESSMENT_NOT_FOUND =
                 "Unable to find assessment using the given the module index and simple name!";
 
     /**
