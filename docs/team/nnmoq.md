@@ -2,13 +2,17 @@
 layout: page
 title: Nikhil's Project Portfolio Page
 ---
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
 
 ### Project: TeachWhat!
 TeachWhat! is a desktop address book application used for private tutors in managing their class. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-Given below are my contributions to the project.
-
+Given below are my contributions to the project.<br>
 ### Summary of Contributions
 #### Code contributed
 [tP Code Dashboard](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=nnmoq&zR=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&zACS=201.4071329319129&zS=2022-02-18&zFS=&zU=2022-04-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
@@ -44,8 +48,7 @@ Given below are my contributions to the project.
 #### Contributions to the UG
 * Created the initial format and draft of the user guide on our Team's shared google docs.
 * Added the command shortcuts to user guide.
-* Updated the user guide to use consistent wording.
-
+* Updated the user guide to use consistent wording.<br>
 #### Contributions to the DG
 * Added functionality and use-cases for `AddStudent` command.
 * Added Sequence Diagram for `AddStudent` command.
@@ -53,13 +56,11 @@ Given below are my contributions to the project.
 * Updated Architecture Sequence Diagram
 * Added testcase examples for deleting a student
 * Added Help feature and class diagram
-* Added Command Shortcuts
-
-### Contributions to team-based tasks
+* Added Command Shortcuts<br>
+#### Contributions to team-based tasks
 * Created and assigned tasks to milestones 1.3 and 1.4
-* Created 1.3.1 release and uploaded its jar file
-
-### Review/mentoring contributions
+* Created 1.3.1 release and uploaded its jar file<br>
+#### Review/mentoring contributions
 * Made multiple good suggestions when reviewing pull requests such as [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978)
 * Debated with [james](https://github.com/jamesyeap) about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a list to hold all the command words for every command because we decided to not implement user specified keybinds.
 * Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
