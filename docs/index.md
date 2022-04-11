@@ -13,12 +13,12 @@ Want to form groups with friends for certain modules, but don't know what they a
 
 
 Worry not! With ModuleMateFinder, you can:
-1) Add friends into ModuleMateFinder, and their contact details
-2) Keep track of what modules they are taking
-3) Favourite people who you want to work with the most
-4) Blacklist people who you want to **avoid** working with
-5) Find people by the modules they are taking
-6) Many more...
+1. Add friends into ModuleMateFinder, and their contact details
+2. Keep track of what modules they are taking 
+3. Favourite people who you want to work with the most 
+4. Blacklist people who you want to **avoid** working with 
+5. Find people by the modules they are taking 
+6. Many more...
 
 
 - Head over to the [User Guide](https://ay2122s2-cs2103t-t13-4.github.io/tp/UserGuide.html) to find out more
