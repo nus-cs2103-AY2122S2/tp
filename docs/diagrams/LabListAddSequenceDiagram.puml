@@ -13,22 +13,22 @@ activate LabList
 LabList -> LabList : contains(lab)
 activate LabList
 
-LabList -> LabList
+LabList --> LabList
 deactivate LabList
 
 LabList -> ObservableList : add(lab)
 activate ObservableList
 
-ObservableList -> LabList
+ObservableList --> LabList
 deactivate ObservableList
 
 LabList -> ObservableList : sort(sortByLabNumber)
 activate ObservableList
 
-ObservableList -> LabList
+ObservableList --> LabList
 deactivate ObservableList
 
-[<- LabList
+[<-- LabList
 deactivate LabList
 
 @enduml
