@@ -936,6 +936,8 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a show
 
 1. Prerequisites: None, but if the list is empty, all edits will result in an error.
@@ -954,10 +956,7 @@ testers are expected to do more *exploratory* testing.
    2. Command: `edit 0` `edit 1` `edit <out_of_bound_integer>` `edit` <br>
       Expected: No show is edited. Error details shown in the result display.<br><br>
 6. Test case: Invalid edit name
-   1. Condition: Show named `Inception` exists in the show list that is not currently being edited.
-
-<div style="page-break-after: always;"></div>
-
+   1. Condition: Show named `Inception` exists in the show list that is not currently being edited. 
    2. Command: `edit <index of show to be edited> n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
 
