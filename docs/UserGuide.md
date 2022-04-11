@@ -67,6 +67,7 @@ If you're a student who can type fast, AddresSoC can get your contact and schedu
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+<div style="page-break-after: always;"></div>
 
 ## Contact
 
