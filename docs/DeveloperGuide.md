@@ -289,7 +289,7 @@ The find customers feature is implemented via `FindCustomerCommand` and `Custome
 
 The following activity diagram summarizes what happens when the user executes the add customer command (`findc`):
 
-![Find Customer(s) Activity Diagram](images/FindCustomerActivityDiagramV2.png)
+![Find Customer(s) Activity Diagram](images/FindCustomerActivityDiagram.png)
 
 The following sequence diagram shows the interactions within components when the user inputs `findc n/Alex Jane` command.
 
