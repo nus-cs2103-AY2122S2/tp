@@ -18,20 +18,23 @@ Given below are my contributions to the project.
     * Justification: This feature allows users to rectify any mistakes made through the use of a single command. This helps improve the users productivity and makes this product more user-friendly. 
     * Highlights: This command was challenging in the aspect on figuring out how to make this work with minimal changes but compatible with all commands. 
     * Credits: *This implementation is loosely based on AB3's future implementation recommendation for undo/redo to save the entire HustleBook data*
+    * Implemented the necessary JUnit test cases. [\#250](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/250)
 
 
-* **New Feature**: Added a `salary` attribute to allow users to store a clients' salary information.
+* **New Feature**: Added a `salary` attribute to allow users to store a clients' salary information and its necessary JUnit test cases. 
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=vishwanth2210&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 
 * **Project management**:
-    * Set up the Github team organisation
-    * Updated the product icon
+    * Set up the Github team organisation.
+    * Updated the product icon.
     * Renamed the product to HustleBook and all instances of Addressbook to HustleBook.
-    * Created and released `v1.2` - `v1.3(final)` (4 releases) on GitHub
-    * Updated gradle file to enable assertions and update the name of the jar file generated to HustleBook
+    * Created and released `v1.2` - `v1.3(final)` (4 releases) on GitHub.
+    * Updated gradle file to enable assertions and update the name of the jar file generated to HustleBook.
+    * Updated necessary diagrams to match current implementation [\#252](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/252), [\#236](https://github.com/AY2122S2-CS2103T-W15-2/tp/pull/236)
+    * Updated user stories
 
 
 * **Enhancements to existing features**:
@@ -42,15 +45,12 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `undo` and `redo` 
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `salary` attribute.
+        * Added implementation details of `undo` command.
 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-
-* _{you can add/remove categories in the list above}_
+    * Reviewed many PRs
+    * Reported bugs and suggestions for other teams in the class

@@ -17,4 +17,9 @@ public class PersonNameComparator extends PersonFlagComparator implements Compar
             return flagCompare;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof PersonNameComparator;
+    }
 }
