@@ -389,10 +389,8 @@ Alternatives considered:
     - Cons:
         - Hard to implement
         - Error prone
-
-
+        
 ### Appointment feature
-
 
 The `appt-b` command uses a similar mechanism as the `add-b` command mentioned [above](#add-buyer-feature), with the following differences:
 
@@ -738,7 +736,7 @@ testers are expected to do more *exploratory* testing.
     }
     ``` 
 
-   ```selleraddressbook.json```:
+    `selleraddressbook.json`:
 
     ```
     {
