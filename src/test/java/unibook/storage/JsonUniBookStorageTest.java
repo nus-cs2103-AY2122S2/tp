@@ -77,15 +77,9 @@ public class JsonUniBookStorageTest {
         // Modify data, overwrite exiting file, and read back
         original.addPerson(TypicalStudents.ALICE);
         original.removePerson(original.getPersonList().get(0));
-        for (Person person : original.getPersonList()) {
-            System.out.println(person);
-        }
         jsonUniBookStorage.saveUniBook(original, filePath);
         readBack = jsonUniBookStorage.readUniBook(filePath).get();
         UniBook ub = new UniBook(readBack);
-        for (Person person : ub.getPersonList()) {
-            System.out.println(person);
-        }
         assertEquals(original, new UniBook(readBack));
 
         // Save and read without specifying file path

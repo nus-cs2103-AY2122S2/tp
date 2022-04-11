@@ -141,7 +141,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
                 Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
                 String groupName = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get();
-                System.out.println(groupName);
                 Group group = ParserUtil.parseGroup(groupName);
                 return new DeleteCommand(index, group);
 

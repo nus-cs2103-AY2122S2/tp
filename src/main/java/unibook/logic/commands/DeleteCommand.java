@@ -221,8 +221,6 @@ public class DeleteCommand extends Command {
 
             } else if (isGroupListShowing) {
 
-                System.out.println(isGroupListShowing);
-
                 List<Group> lastShownGroupList = model.getShowingGroupList();
 
                 // list o/view v/groups
