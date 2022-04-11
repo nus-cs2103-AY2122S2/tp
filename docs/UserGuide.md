@@ -85,6 +85,7 @@ The Features section will be split into 3 subsections for:
   * **Location** & **Address** must be non-empty, and can contain **alphabets**, **numerics** and **special symbols**. E.g. `Kent Ridge 1/2`. 
     * However, inputs like `l/Bishan h/hdb` will be treated as `l/Bishan` & `h/hdb` (see above).
     * Typing `l/Bishanh/abcpr/0,2` is still acceptable and will treat `Bishanh/abcpr/0,2` as the location input.
+  * **Location** will be converted to **lower case**.
   * **Price range** must be in a `lower,upper` format. E.g. `1000,2000`
 * The **displayed seller list** & **displayed buyer list** are the sellers and buyers shown on the UI of the application respectively. They do not refer to the entire list of buyers & sellers.
 * If we do refer to the whole list of buyers or sellers, we will just use **buyer list** or **seller list** respectively.
@@ -159,13 +160,13 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * The order of the inputs can be in any order.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
-* Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
+* Do use appropriate `LOCATION` for your own utility. E.g. `bishan` or `marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
 * You cannot add a new property to buy once one has already been added.
 * If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE` or `HOUSE_TYPE`, it will be ignored. E.g. `____hdb_____` where `_` is whitespace will be treated as `hdb`.
 * If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
 Examples:
-* `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
+* `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in bishan for any price from $400,000 to $500,000. 
 
 #### Adding an appointment with buyer. `appt-b`
 
@@ -392,7 +393,7 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 * The order of the inputs can be in any order.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the seller might be generous and give their house away for free.
-* Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
+* Do use appropriate `LOCATION` for your own utility. E.g. `bishan` or `marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
 * Do use appropriate `ADDRESS` to maximize your own utility. E.g. `Blk 343, Ajax Ave 1121`. The application will not check if it is an actual location in Singapore or elsewhere.
 * The application will not check if the `LOCATION` actually contains a property with the given `ADDRESS`. It is up to your due diligence to ensure `ADDRESS` is at `LOCATION` stated.
 * It is possible for multiple different sellers to sell same `ADDRESS` properties. This is for cases that you are storing information about separate residents of the property.
@@ -402,7 +403,7 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 * If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
   Examples:
-* `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
+* `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
 
 #### Adding an appointment with seller. `appt-s`
 
@@ -479,7 +480,7 @@ Function: Delete the specified seller from the displayed seller list.
 Format: `delete-s INDEX`
 
 * Deletes the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
-* The displayed list refers to the seller list shown after a `list-b`, `sort-b` or `find-b` was previously executed.
+* The displayed list refers to the seller list shown after a `list-s`, `sort-s` or `find-s` was previously executed.
 
 Examples:
 * `list-s` followed by `delete-s 2` deletes the 2nd seller in the seller list.
