@@ -240,6 +240,12 @@ The meetings in the future are listed first with ascending starting time, follow
 
 The header displays the size of the current meeting list in the brackets.
 
+Access the Meetings by clicking on the tab in the upper region of the application as shown below. 
+Note that the hyperlinks in the details are clickable and will redirect the user to the preferred browser.
+
+<img src="images/meeting.gif">
+
+
 ## 1. Adding: `add`
 
 ### 1.1 Adding a meeting
