@@ -288,15 +288,15 @@ The main logic for `find` command is still implemented within `FindCommand` (whi
 
 The `FindCommandParser` class has been extended to include a switch-case block to validate
 which field the user is trying to search across:
-1. `studentId` (accepted user input abbreviated as `id`)
+1. `studentId`
 2. `course`
-3. `seniority` (accepted user input abbreviated as `yr`)
+3. `seniority`
 4. `name`
 5. `email`
 6. `phone`
-7. `applicationStatus` (accepted user input abbreviated as `as`)
-8. `interviewStatus` (accepted user input abbreviated as `is`)
-9. `availability` (accepted user input abbreviated as `avail`)
+7. `appStatus` (stands for candidate's application status)
+8. `intStatus` (stands for candidate's interview status)
+9. `avail` (stands for candidate's availability)
 10. `all` (i.e. search across all fields of the candidate)
 
 Based on the field validated by the switch-case block, a `new findCommand(new ContainsKeywordsPredicate(keywords))`
@@ -324,27 +324,27 @@ checks for the specific related entity, and should not have any other reason to 
 **3. Allowing searches across multiple fields**
 Currently the `find` command is implemented such that the parser will only validate the last `ATTRIBUTE_FIELD` parsed in
 by the user, and execute the `ContainsKeywordsPredicate` test against it. An alternative was to allow searches across multiple
-`ATTRIBUTE_FIELDS`. Though this is easily implementable by checking the validity of each of the `ATTRIBUTE_FIELD` parsed in,
-it is not very relevant for the nature of the application's use. Given as all the fields hold extremely different values,
+`ATTRIBUTE_FIELDS`. Though this is implementable by checking the validity of each of the `ATTRIBUTE_FIELD` parsed in,
+it is considered out of scope in this particular iteration. Given as all the fields hold extremely different values,
 the user is unlikely to be searching for the same set of keywords across multiple fields. Instead, following the behaviour
 of other commands, the `FindCommandParser` will take in the last `/f` prefix.
 
 #### UML Diagrams
 **Activity Diagram**<br>
-The following activity diagram summarizes what happens when a user executes a `find` command: <br>
+The following activity diagram summarizes a high level view of what happens when a user executes a `find` command: <br>
 <img src="images/FindActivityDiagram.png" width="550" />
 
 
 ### Sort feature
 
 #### What is the feature about?
-The `sort` mechanism utilises the existing class model from `AddressBook`. It introduces new methods and modifies current
-implementation of existing methods in order to allow the user sort the last viewed candidates list by a specific
+The `sort` mechanism utilises the existing command class model from `AddressBook`. It introduces new methods and modifies current
+implementation of existing methods in order to allow the user sort the displayed candidates list by a specific
 field.
 
 A new `s/` prefix is added in the `CliSyntax`, which is used to accurately parse in the `ATTRIBUTE_FIELD` that the user
-would like to sort the existing candidate list by. The implementation works by calling `model.updateSortedCandidateList(sortComparator)`,
-which updates the sorted order of the existing `CandidateList` in the system.
+would like to sort the displayed candidate list by. The implementation in `SortCommand` class works by calling 
+`model.updateSortedCandidateList(sortComparator)`, which updates the sorted order of the existing `CandidateList` in the system.
 
 #### How is the feature implemented?
 The parser for the `sort` command works similarly to all other commands implemented. In this case, as the user
@@ -356,16 +356,38 @@ sort command is executed, a valid Comparator is passed as an argument into the `
 is called from the `ModelManager` class. Here, the `ModelManager` class acts as an intermediate layer
 which then calls the `sortCandidates()` method in the `AddressBook` class.
 
-The `sortCandidates()` method creates an exact copy of the exact `CandidateList` currently
+The `sortCandidates()` method creates an exact copy of the existing `CandidateList` currently
 in the system, before sorting it by the `Comparator` passed as its argument and setting
 the new `CandidateList` in the system to be that of the sorted copy.
 
-#### Why is the feature implemented as such? (WIP)
-**1. Layers of abstraction in method calls** <br>
+#### Why is the feature implemented as such?
+**1. Modification of `ObservableList<Candidate>`**<br>
+The `ObservableList<Candidate>` accessible by calling `getFilteredCandidateList()` in the `ModelManager` class
+is an unmodifiable copy. In order to retain the integrity of data accessible through in the `ModelManager`, the modification of the candidate 
+list is instead implemented within the `AddressBook` class. This separates the responsibilities of `AddressBook` class (which
+wraps all data in the system) from the `ModelManager` class, which provides a slightly higher level of abstraction to access
+the in memory data.
 
-**2. Modification of ObservableList<Candidate>**
+#### UML Diagrams
+The following simplified partial sequence diagram showcases what happened when `execute` is called from the `LogicManager`.
 
-#### UML Diagrams (WIP)
+Explanation of sequence when a `sort s/name` is parsed in is explained.
+
+**Step 1.** (Not shown by diagram) The new `SortCommand` object is created with the `Comparator<Candidate>` object passed in as the argument when
+the user enters the command.
+
+**Step 2.** The`SortCommand#execute` method is called from `LogicManager` with the `Model` object passed in.
+
+**Step 3.** `ModelManager#updateSortedCandidateList` is called, where the `ModelManager` class
+implements the `Model` interface. The `Comparator<Candidate>` object is passed in as the argument.
+
+**Step 4.** The `AddressBook#sortCandidates` is then called where a new copy of the candidate list is created as a `List<Candidate>` and sorted using the comparator.
+
+**Step 5.** The candidate list in the system is then set as the new sorted copy using the `AddressBook#setCandidates` method call.
+
+**Step 6.** Finally, `SortCommand#execute` method returns a new `CommandResult` object with feedback message to be displayed.
+
+<img src="images/SortSequenceDiagram.png"/>
 
 
 ### Focus Feature
@@ -980,9 +1002,6 @@ testers are expected to do more *exploratory* testing.
        Expected: The earlier interview scheduled within 7 days of the current date and time is displayed in the interview
    panel. The other interview scheduled after 7 days of the current date and time is not displayed. Number of interviews listed is displayed in the feedback panel.
 
-    4. Test case: `view month`<br>
-       Expected: Both interviews scheduled earlier are displayed in the interview panel. Number of interviews listed is displayed in the feedback panel.
-
     5. Test case: `view`<br>
        Expected: No change to the interview schedule already displayed. Error message is shown in the feedback panel.
 
@@ -1004,10 +1023,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Remark for candidate at index 1 in the displayed candidate list is updated. Focus panel updates
        to display the remark field as `updated remark`. Details of the candidate with the updated remark is shown in the feedback panel.
 
-    6. Test case: `remark 0`<br>
-       Expected: No update to remarks of any candidate. Error message is shown in the feedback panel.
-
-    7. Other incorrect remark commands to try: `remark 1 r`, `remark r/`<br>
+    7. Incorrect remark commands to try: `remark 0`, `remark 1 r`, `remark r/`<br>
        Expected: No update to remarks of any candidate. Error message is shown in the feedback panel.
 
 2. Updating a candidate's remark while only some candidates are being shown
@@ -1051,9 +1067,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find k/Alex f/name`<br>
       Expected: Only candidates containing `Alex` in their names (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.
-
-   1. Test case: `find k/Alex f/course `<br>
-      Expected: No candidates should be displayed. Message `0 candidates listed!` is shown in the feedback panel.
 
    1. Test case: `find k/Alex f/`<br>
       Expected: Only candidates containing `Alex` in any of their valid searchable attribute fields (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.

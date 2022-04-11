@@ -30,11 +30,7 @@ public abstract class WithinTimePeriodPredicate implements Predicate<Interview> 
      * @return true if the condition is fulfilled and false otherwise
      */
     @Override
-    public boolean test(Interview interview) {
-        requireNonNull(interview);
-
-        return interview.getInterviewEndDateTime().isBefore(endDateTime);
-    }
+    public abstract boolean test(Interview interview);
 
     /**
      * Checks if another object are instances of the same class and contains the same

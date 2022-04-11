@@ -32,12 +32,7 @@ public abstract class ContainsKeywordsPredicate implements Predicate<Candidate> 
      * @return true if a match is found, and false otherwise.
      */
     @Override
-    public boolean test(Candidate candidate) {
-        requireNonNull(candidate);
-
-        return keywords.stream()
-                .anyMatch(keyword -> candidate.toString().toLowerCase().contains(keyword.toLowerCase()));
-    }
+    public abstract boolean test(Candidate candidate);
 
     @Override
     public boolean equals(Object other) {
