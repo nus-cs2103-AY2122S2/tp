@@ -341,7 +341,7 @@ preferred staffs, suggested services, hair type, skin type and monthly customers
 
 #### Implementation of feature
 The plot feature is implemented using the various plot commands such as `plotStaffChartCommand`.
-1. `MainWindow` takes in the argument string and uses `LogicManager` to parses it into `Command`.
+1. `MainWindow` takes in the argument string and uses `LogicManager` to parse it into `Command`.
 2. `LogicManager` then executes the `Command` to obtain a `CommandResult`
 3. `MainWindow` checks if the `CommandResult` should result in a chart being plotted using isPlotXYZChart() where XYZ 
    refers to a chart type, like isPlotStaffChart()
