@@ -399,6 +399,24 @@ Hence, we avoided this potential confusion by imposing an additional constraint 
 
 <div style="page-break-after: always;"></div>
 
+### **View detailed profile**
+In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
+limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
+height of a `PersonCard`, less person will be displayed of the same window size.
+
+Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
+conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
+information about a person.
+
+<div style="page-break-after: always;"></div>
+
+### **Theme choosing**
+In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
+that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
+dark theme, so that the application fits better to the vibrant energy of a university.
+
+
+
 ### **\[Proposed\] Undo/redo feature**
 
 #### Proposed Implementation
@@ -480,23 +498,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 <div style="page-break-after: always;"></div>
-
-### View detailed profile
-In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
-limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
-height of a `PersonCard`, less person will be displayed of the same window size.
-
-Therefore, in UNite, the main display window has been divided into two parts. On the left-hand side, it is the
-conventional `PersonListPanel`, on the right-hand side, is the newly implemented `Profile` window to display more
-information about a person.
-
-<div style="page-break-after: always;"></div>
-
-### **Theme choosing**
-In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
-that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
-dark theme, so that the application fits better to the vibrant energy of a university.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
