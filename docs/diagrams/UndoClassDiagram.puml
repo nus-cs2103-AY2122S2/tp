@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Model
+class ModelManager
+class HustleBookHistory
+
+Model <|.. ModelManager
+ModelManager .right.> HustleBookHistory
+
+interface Model {
+undoHustleBook()
+redoHustleBook()
+}
+
+class ModelManager {
+undoHustleBook()
+redoHustleBook()
+}
+
+class HustleBookHistory {
+historyList : ArrayList<ReadOnlyHustleBook>
+currStatePointer : Integer
+getInstance() : HustleBookHistory
+update(ReadOnlyHustleBook)
+getPrevState() : ReadOnlyHustleBook
+getNextState() : ReadOnlyHustleBook
+}
+
+@enduml
