@@ -1,0 +1,40 @@
+{
+  "appointments": [
+    {
+      "name": "Meeting With forbidden character?",
+      "startDateTime": "2022-11-11T12:34:00",
+      "duration": 10
+    },
+    {
+      "name": "Missing start time",
+      "duration": 10
+    },
+    {
+      "name": "Missing duration",
+      "startDateTime": "2022-11-11T12:34:00"
+    },
+    {
+      "name": "Invalid person",
+      "startDateTime": "2022-11-11T12:34:00",
+      "duration": 10,
+      "person": "JOHNNY"
+    },
+    {
+      "name": "Invalid priority",
+      "startDateTime": "2022-11-11T12:34:00",
+      "duration": 10,
+      "priority": "very low"
+    },
+    {
+      "name": "First meeting with alice",
+      "startDateTime": "2022-11-20T10:25:00",
+      "duration": 30,
+      "person": "Alice Pauline"
+    },
+    {
+      "name": "Do some work alone",
+      "startDateTime": "2022-10-07T22:50:00",
+      "duration": 60
+    }
+  ]
+}

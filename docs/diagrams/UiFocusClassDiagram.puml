@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title CommandResult Partial Class Diagram
+
+class "<<enumeration>>\nGuiListContentType" as GuiListContentType {
+    PERSON,
+    APPOINTMENT,
+    TAG,
+    UNCHANGED
+}
+
+class CommandResult {
+    uiContentType: GuiListContentType
+}
+
+CommandResult ..> GuiListContentType
+
+@enduml

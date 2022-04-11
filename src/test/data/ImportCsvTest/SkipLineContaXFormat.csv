@@ -1,0 +1,6 @@
+Name,Phone,Email,Address,Tagged
+Person 1,12345678,example1@example.com,Example address 1,tag1;tag2
+Person 2,12345678,example2@example.com,Example address 2,tag1
+Person 3,111111,Invalid Email,Example address 3,tag1
+Person 4,Invalid Phone,example4@example.com,Example address 4,
+Person 5,+659111111,example5@example.com,Example address 5,tag2;tag3

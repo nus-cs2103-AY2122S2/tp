@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+box Logic LOGIC_COLOR_T1
+participant ":Command" as Command LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+box UI UI_COLOR_T1
+participant ":ResultDisplay" as ResultDisplay UI_COLOR
+participant "<<class>>\nTextStyleHelper" as TextStyleHelper UI_COLOR
+end box
+
+MainWindow -> Command : execute(commandText)
+activate MainWindow
+activate Command
+Command -> CommandResult :execute(commandText)
+activate CommandResult
+CommandResult -->Command :commandResult
+deactivate CommandResult
+Command --> MainWindow : commandResult
+deactivate Command
+
+
+
+MainWindow -> ResultDisplay : setFeedbackToUser(commandResult.text)
+activate ResultDisplay
+
+ResultDisplay -> TextStyleHelper : formattedTextParser(text)
+activate TextStyleHelper
+
+TextStyleHelper --> ResultDisplay : List of styled Text
+deactivate TextStyleHelper
+
+ResultDisplay -> ResultDisplay : Add list of Text to display
+ResultDisplay --> MainWindow
+deactivate ResultDisplay
+deactivate MainWindow
+@enduml

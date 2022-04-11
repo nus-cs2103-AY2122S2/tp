@@ -1,0 +1,5 @@
+{
+  "_comment": "AddressBook save file which only contains tags in the AddressBook.",
+  "persons" : [ ],
+  "tags" : [ "clients", "family", "colleagues", "neighbours" ]
+}

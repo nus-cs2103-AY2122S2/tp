@@ -1,0 +1,46 @@
+@startuml
+!include ../style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Partial ScheduleItem Class Diagram
+
+class Appointment {
+    name: Name
+    startDateTime: StartDateTime
+    duration: Duration
+    person: Person
+    priority: Priority
+}
+
+class AppointmentSlot {
+
+}
+
+class "{abstract}\n ScheduleItem " as ScheduleItem {
+    getStartDateTime()
+    getEndDateTime()
+    getComparableDateTime()
+    isOverlapping(ScheduleItem)
+    compareTo(TemporalComparable)
+}
+
+class "<<interface>>\n TemporalComparable " as TemporalComparable {
+    getComparableDateTime()
+    compareTo(TemporalComparable)
+}
+
+class "<<interface>>\n Comparable<T> " as Comparable {
+    compareTo(T)
+}
+
+
+AppointmentSlot -up-|> ScheduleItem
+Appointment -left-|> ScheduleItem
+ScheduleItem .up.|> TemporalComparable
+TemporalComparable -right-|> Comparable
+
+@enduml

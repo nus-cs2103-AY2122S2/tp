@@ -1,0 +1,27 @@
+@startuml
+!include ../style.puml
+
+Actor "User Class" as user USER_COLOR
+
+participant "**<<class>>**\n DateUtil " as DateUtil LOGIC_COLOR_T2
+participant "**<<class>>**\n DateParser " as DateParser LOGIC_COLOR_T2
+participant "**<<class>>**\n TimeParser " as TimeParser LOGIC_COLOR_T2
+autoactivate on
+
+[-> user : parse("12 may 2022", "12:00pm")
+user -> DateUtil : parseDate("12 may 2022")
+DateUtil -> DateParser : parseDate("12 may 2022")
+DateUtil <-- DateParser : date
+user <-- DateUtil : date
+
+user -> DateUtil : parseTime("12:00pm")
+DateUtil -> TimeParser : parseTime("12:00pm")
+DateUtil <-- TimeParser : time
+user <-- DateUtil : time
+
+user -> DateUtil : combineDateTime(date, time)
+user <-- DateUtil : dateTime
+
+[<-- user : dateTime
+
+@enduml

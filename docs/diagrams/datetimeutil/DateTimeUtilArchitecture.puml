@@ -1,0 +1,42 @@
+@startuml
+!include ../style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Date-Time Parser Partial Class Diagram
+
+class DateUtil {
+    {static} parseDate(String) : LocalDate
+    {static} parseTime(String) : LocalTime
+    {static} combineDateTime(LocalDate, LocalTime) : LocalDateTime
+}
+
+package "Time Parsers" {
+    class TimeParser {
+        {static} parseTime(String) : LocalTime
+    }
+
+    class TimeParserPatternProvider {
+
+    }
+}
+
+package "Date Parsers" {
+    class DateParser {
+        {static} parseDate(String) : LocalDate
+    }
+
+    class DateParserPatternProvider {
+
+    }
+}
+
+DateUtil --> TimeParser
+DateUtil --> DateParser
+TimeParser --> TimeParserPatternProvider
+DateParser --> DateParserPatternProvider
+
+@enduml

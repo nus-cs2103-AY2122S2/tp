@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class ModelManager
+class AppointmentSlotList
+class Person
+Package "Schedule Models" as Model <<Rectangle>>{
+Class Schedule
+
+Class " {abstract} \nScheduleItem" as ScheduleItem
+Class " <<interface>> \nTemporalComparable" as TemporalComparable
+
+Class DisjointAppointmentList
+Class AppointmentSlot
+Class Appointment
+Class " Name "
+Class StartDateTime
+Class Duration
+Class " <<enumeration>> \nPriority" as Priority
+}
+
+Schedule *--> "1" DisjointAppointmentList
+DisjointAppointmentList --> "~* all" Appointment
+DisjointAppointmentList ..> ScheduleItem
+Appointment *--> " Name "
+Appointment *--> StartDateTime
+Appointment *--> Duration
+Appointment *--> Priority
+Appointment -left-> Person
+
+Appointment -up--|> ScheduleItem
+AppointmentSlot -up-|> ScheduleItem
+ScheduleItem .up.|> TemporalComparable
+
+ModelManager -->"~* filtered" Appointment
+AppointmentSlotList --->"*" AppointmentSlot
+@enduml

@@ -17,17 +17,24 @@ Class "<$user>" as User MODEL_COLOR_T2
 Class "<$documents>" as File UI_COLOR_T1
 
 
-UI -[#green]> Logic
-UI -right[#green]-> Model
+UI -down[#green]> Logic
+UI .down[#green].> Model
 Logic -[#blue]-> Storage
-Logic -down[#blue]-> Model
+Logic -left[#blue]-> Model
 Main -[#grey]-> UI
 Main -[#grey]-> Logic
 Main -[#grey]-> Storage
-Main -up[#grey]-> Model
-Main -down[hidden]-> Commons
+Main -down[#grey]-> Model
+Storage -left[hidden]-> Commons
 
 Storage -up[STORAGE_COLOR].> Model
 Storage .right[STORAGE_COLOR].>File
 User ..> UI
+
+legend
+ |    **Arrow Type** |         **Meaning** |
+ |  Dashed Arrow  |  Indirect dependency  |
+ |  Solid Arrow   |  Direct dependency  |
+end legend
+
 @enduml

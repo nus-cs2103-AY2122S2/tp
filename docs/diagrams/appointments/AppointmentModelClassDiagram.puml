@@ -1,0 +1,72 @@
+@startuml
+!include ../style.puml
+show members
+hide empty methods
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Partial Schedule Subsystem Class Diagram
+
+package "Schedule\nSubsystem\n" {
+    class Appointment {
+    }
+
+    class DisjointAppointmentList {
+        add(Appointment)
+        set(Appointment, Appointment)
+        remove(Appointment)
+    }
+
+    class Schedule {
+        getAppointmentList()
+    }
+
+    class "<<interface>>\n ReadOnlySchedule" as ReadOnlySchedule {
+        getAppointmentList()
+    }
+
+    class AppointmentSlotList {
+        getSlotList()
+    }
+
+    class AppointmentSlot {
+
+    }
+
+    class "{abstract}\n ScheduleItem " as ScheduleItem {
+        getStartDateTime()
+        getEndDateTime()
+        getComparableDateTime()
+    }
+
+    class "<<interface>>\n TemporalComparable " as TemporalComparable {
+        getComparableDateTime()
+    }
+
+}
+
+class ModelManager {
+    getScheduleItemList()
+}
+class " CompositeObservableList " as CompositeObservableList
+
+
+AppointmentSlot -[hidden]right- Appointment
+DisjointAppointmentList -[hidden]down- TemporalComparable
+
+Schedule *-down->"1  " DisjointAppointmentList
+Schedule .right.|> ReadOnlySchedule
+DisjointAppointmentList -down->"*" Appointment
+ModelManager -down->"1 " Schedule
+ModelManager -left->"1" CompositeObservableList
+CompositeObservableList -[hidden]down-> AppointmentSlotList
+ModelManager -down->"1 " AppointmentSlotList
+AppointmentSlotList --->"*" AppointmentSlot
+AppointmentSlotList -right-> Schedule
+AppointmentSlot -down-|> ScheduleItem
+Appointment -down-|> ScheduleItem
+ScheduleItem .up.|> TemporalComparable
+ModelManager ...> ScheduleItem
+
+@enduml

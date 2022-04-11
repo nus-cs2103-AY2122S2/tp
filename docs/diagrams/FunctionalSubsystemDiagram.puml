@@ -1,0 +1,45 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Package " "<<Rectangle>>{
+    package "Command Parsing, \nProcessing and\n Display Subsystem" as Parser {
+        Class "Logic" LOGIC_COLOR
+        Class "UI" UI_COLOR
+    }
+
+    Class "Model" MODEL_COLOR
+    package "Address Book Subsystem"{
+        Class "AddressBook" MODEL_COLOR
+        Class "SerializableAddressBook" STORAGE_COLOR
+        Class "Person" MODEL_COLOR
+        Class "Tag" MODEL_COLOR
+    }
+    package "Schedule Subsystem"{
+        Class " Schedule " MODEL_COLOR
+        Class "SerializableSchedule" STORAGE_COLOR
+        Class "Appointment" MODEL_COLOR
+    }
+}
+
+Class "<$user>" as User MODEL_COLOR_T2
+Class "<$documents>" as File UI_COLOR_T2
+
+"AddressBook" -[MODEL_COLOR]-> "Person"
+"AddressBook" -[MODEL_COLOR]-> "Tag"
+"Person" -[MODEL_COLOR]right-> "Tag"
+"SerializableAddressBook" -up[STORAGE_COLOR]-> "AddressBook"
+" Schedule " -[MODEL_COLOR]-> "Appointment"
+"SerializableSchedule" -up[STORAGE_COLOR]-> " Schedule "
+"SerializableAddressBook" -down[STORAGE_COLOR].> File
+"SerializableSchedule" .down[STORAGE_COLOR].>File
+User .down.> "UI"
+UI -left-> Logic
+
+"Logic" -[#blue]-> "Model"
+"Model" -[MODEL_COLOR]down-> " Schedule "
+"Model" -[MODEL_COLOR]down-> "AddressBook"
+"Address Book Subsystem" -right[hidden]-> "Schedule Subsystem"
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "command:ImportCsvCommand" as ImportCsvCommand LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":CsvManager" as CsvManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("importcsv")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("importcsv")
+activate AddressBookParser
+
+create ImportCsvCommand
+AddressBookParser -> ImportCsvCommand
+
+activate ImportCsvCommand
+ImportCsvCommand --> AddressBookParser
+deactivate ImportCsvCommand
+AddressBookParser -->LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> ImportCsvCommand : execute()
+activate ImportCsvCommand
+
+
+create CsvManager
+ImportCsvCommand -> CsvManager : CsvManager(Function to parse persons into model)
+
+activate CsvManager
+ImportCsvCommand -> CsvManager : importCsv(toImport)
+CsvManager --> ImportCsvCommand : List of skipped lines
+deactivate CsvManager
+CsvManager -[hidden]-> ImportCsvCommand
+destroy CsvManager
+
+ImportCsvCommand --> LogicManager : result
+deactivate ImportCsvCommand
+ImportCsvCommand -[hidden]-> LogicManager : result
+
+destroy ImportCsvCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

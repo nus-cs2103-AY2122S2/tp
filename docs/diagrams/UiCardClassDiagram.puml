@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+Class " <<interface>>\nRecyclableCard<T> " as RecyclableCard
+
+package "Model UI Cards" as ModelCards <<Rectangle>> {
+    Class TagCard
+    Class PersonCard
+    Class ScheduleItemCard
+    Class AppointmentCard
+    Class AppointmentSlotCard
+    Class ScheduleItemCardFactory
+}
+Class " <<interface>> \n CardFactory<T> " as CardFactory
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package "Model" as Model2 <<Rectangle>> {
+Class HiddenModel2 #FFFFFF
+}
+
+TagCard .up.|> RecyclableCard
+PersonCard .up.|> RecyclableCard
+ScheduleItemCard .up.|> RecyclableCard
+ScheduleItemCard *-down-> AppointmentCard
+ScheduleItemCard *-down-> AppointmentSlotCard
+ScheduleItemCardFactory .right.|> CardFactory
+CardFactory --up-> TagCard : Creates >
+CardFactory -up-> PersonCard : Creates >
+ScheduleItemCardFactory -up-> ScheduleItemCard : Creates >
+
+TagCard .up.> Model
+PersonCard .up.> Model
+AppointmentSlotCard ..> Model2
+AppointmentCard ..> Model2
+
+
+ScheduleItemCard -right[hidden]- TagCard
+ScheduleItemCardFactory -left[hidden]- AppointmentCard
+TagCard -right[hidden]- PersonCard
+
+@enduml

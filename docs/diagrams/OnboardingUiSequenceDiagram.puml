@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":OnboardingWindow" as OnboardingWindow UI_COLOR
+participant ":Overlay" as Overlay UI_COLOR
+participant ":OnboardingInstruction" as OnboardingInstruction UI_COLOR
+participant ":OnboardingCommandBox" as OnboardingCommandBox UI_COLOR
+end box
+
+
+autoactivate on
+
+[-> OnboardingWindow : processStep(OnboardingStep)
+OnboardingWindow -> OnboardingCommandBox : highlight()
+OnboardingCommandBox --> OnboardingWindow
+OnboardingWindow -> OnboardingInstruction : setText(newMessage)
+OnboardingInstruction --> OnboardingWindow
+OnboardingWindow -> Overlay : showOnly(menuBar, overlayOption)
+Overlay --> OnboardingWindow
+[<--OnboardingWindow
+
+@enduml

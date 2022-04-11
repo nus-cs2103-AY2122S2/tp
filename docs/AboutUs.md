@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ho Zong Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sharpstorm.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sharpstorm)]
+[[portfolio](team/sharpstorm.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Code Quality, Scheduling and Deadlines, Progress Tracking, In Charge of Appointments Subcomponent
 
-### Johnny Doe
+### Daniel Lee Min Qiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dandaandaaaaaan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dandaandaaaaaan)]
+[[portfolio](team/dandaandaaaaaan.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: CI/CD and Workflow Management, Repository Administration, In Charge of Import/Export Subcomponent
 
-### James Doe
+### Ong Wei Xin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wei-xinn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/wei-xinn)]
+[[portfolio](team/wei-xinn.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In Charge of User Onboarding Subcomponent
+
+### Kwan Hao Wei
+
+<img src="images/kwanhw.png" width="200px">
+
+[[github](http://github.com/kwanhw)]
+[[portfolio](team/kwanhw.md)]
+
+* Role: Developer
+* Responsibilities: In Charge of Tag Management Subcomponent
+
+### Han Jiyao
+
+<img src="images/hanjiyao.png" width="200px">
+
+[[github](http://github.com/hanjiyao)]
+[[portfolio](team/hanjiyao.md)]
+
+-   Role: Developer
+-   Responsibilities: In Charge of Bulk Operations Subcomponent

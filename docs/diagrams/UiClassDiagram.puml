@@ -11,10 +11,15 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class " ListPanel<T> " as ListPanel
+Class ScheduleItemListPanel
+Class " <<interface>>\nRecyclableCard<T> " as RecyclableCard
+Class " <<interface>>\nCardFactory<T> " as CardFactory
 Class StatusBarFooter
 Class CommandBox
+package "Model UI Cards" as ModelCards <<Rectangle>> {
+    Class HiddenCard #FFFFFF
+}
 }
 
 package Model <<Rectangle>> {
@@ -25,6 +30,8 @@ package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
 
+
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
@@ -32,26 +39,32 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "2" ListPanel
+MainWindow *-down-> "1" ScheduleItemListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+ListPanel -down-> "*" RecyclableCard
+ListPanel -down-> "1" CardFactory
+CardFactory -left->  "*" RecyclableCard : Creates >
+ModelCards .up.|> RecyclableCard
+ModelCards .up.|> CardFactory
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ListPanel --|> UiPart
+ModelCards -left-|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+HiddenCard .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ScheduleItemListPanel -left-|> ListPanel
+ListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

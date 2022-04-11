@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "command:ExportCsvCommand" as ExportCsvCommand LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":CsvManager" as CsvManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("exportcsv")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("exportcsv")
+activate AddressBookParser
+
+create ExportCsvCommand
+AddressBookParser -> ExportCsvCommand
+
+activate ExportCsvCommand
+ExportCsvCommand --> AddressBookParser
+deactivate ExportCsvCommand
+AddressBookParser -->LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> ExportCsvCommand : execute()
+activate ExportCsvCommand
+
+
+create CsvManager
+ExportCsvCommand -> CsvManager : CsvManager(Function to parse persons into model)
+
+activate CsvManager
+ExportCsvCommand -> CsvManager : exportCsv(defaultFilePath)
+CsvManager --> ExportCsvCommand : Boolean indicating success
+deactivate CsvManager
+CsvManager -[hidden]-> ExportCsvCommand
+destroy CsvManager
+
+ExportCsvCommand --> LogicManager : result
+deactivate ExportCsvCommand
+ExportCsvCommand -[hidden]-> LogicManager : result
+
+destroy ExportCsvCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

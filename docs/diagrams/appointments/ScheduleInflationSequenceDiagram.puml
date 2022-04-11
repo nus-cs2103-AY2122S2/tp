@@ -1,0 +1,39 @@
+@startuml
+!include ../style.puml
+
+participant ":MainApp" as MainApp #000000
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+participant ":JsonScheduleStorage" as ScheduleStorage STORAGE_COLOR
+participant ":JsonSerializableStorage" as JsonSerializableStorage STORAGE_COLOR
+participant ":JsonSerializableAppointment" as JsonSerializableAppointment STORAGE_COLOR
+end box
+
+[-> MainApp : initModelManager()
+activate MainApp
+MainApp -> Storage : readAddressBook()
+activate Storage
+MainApp <-- Storage : initialAddressBook
+deactivate Storage
+
+MainApp -> Storage : readSchedule(initialAddressBook)
+activate Storage
+Storage -> ScheduleStorage : readSchedule(initialAddressBook)
+activate ScheduleStorage
+ScheduleStorage -> JsonSerializableStorage : toModelType(initialAddressBook.getPersonList())
+activate JsonSerializableStorage
+JsonSerializableStorage -> JsonSerializableAppointment : toModelType(personList)
+activate JsonSerializableAppointment
+JsonSerializableStorage <-- JsonSerializableAppointment
+deactivate JsonSerializableAppointment
+ScheduleStorage <-- JsonSerializableStorage
+deactivate JsonSerializableStorage
+Storage <-- ScheduleStorage
+deactivate ScheduleStorage
+MainApp <-- Storage : initialSchedule
+deactivate Storage
+[<-- MainApp
+
+
+@enduml

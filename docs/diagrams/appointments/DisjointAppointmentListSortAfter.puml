@@ -1,0 +1,38 @@
+@startuml
+!include ../style.puml
+show fields
+hide empty fields
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After shiftAppointmentToPosition(2)
+
+class "  __:DisjointAppointmentList__  " as DisjointAppointmentList
+
+package "addAppointment(appt2) After ShiftAppointmentToPosition()" {
+    class Appointment0 as "  __appt0:Appointment__  " {
+        StartDateTime = "12-12-2022 13:00"
+        Duration = 30
+    }
+    note top: Index 1
+    class Appointment1 as "  __appt1:Appointment__  " {
+        StartDateTime = "12-12-2022 13:30"
+        Duration = 60
+    }
+    note top: Index 2
+    class Appointment2 as "  __appt2:Appointment__  " #CCFFCC {
+        StartDateTime = "10-11-2022 15:30"
+        Duration = 10
+    }
+    note top: Index 0
+}
+Appointment2 -[hidden]right-> Appointment0
+Appointment0 -[hidden]right-> Appointment1
+Appointment0 -[hidden]down-> DisjointAppointmentList
+
+DisjointAppointmentList -up-> Appointment0
+DisjointAppointmentList -right-> Appointment1
+DisjointAppointmentList -left-> Appointment2
+note right on link: appt2 is in\n chronological order.
+
+@end

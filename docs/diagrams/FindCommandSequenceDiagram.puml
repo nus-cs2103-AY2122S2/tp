@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindPersonCommandParser" as FindPersonCommandParser LOGIC_COLOR
+participant "pred:ContainsKeywordsPredicate" as ContainsKeywordsPredicate LOGIC_COLOR
+participant "command:FindPersonCommand" as FindPersonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+autoactivate on
+
+[-> LogicManager : execute("findperson Johnny")
+
+LogicManager -> AddressBookParser : parseCommand("findperson Johnny")
+
+create FindPersonCommandParser
+AddressBookParser -> FindPersonCommandParser
+AddressBookParser <-- FindPersonCommandParser
+
+AddressBookParser -> FindPersonCommandParser : parse("Johnny")
+create ContainsKeywordsPredicate
+FindPersonCommandParser -> ContainsKeywordsPredicate : ContainsKeywordsPredicate("Johnny")
+FindPersonCommandParser <-- ContainsKeywordsPredicate
+
+create FindPersonCommand
+FindPersonCommandParser -> FindPersonCommand : FindPersonCommand(pred)
+FindPersonCommandParser <-- FindPersonCommand
+AddressBookParser <-- FindPersonCommandParser : command
+LogicManager <-- AddressBookParser : command
+
+LogicManager -> FindPersonCommand : execute()
+FindPersonCommand -> Model : updateFilteredPersonList(pred)
+FindPersonCommand <-- Model
+LogicManager <-- FindPersonCommand
+
+[<-- LogicManager
+
+@enduml
