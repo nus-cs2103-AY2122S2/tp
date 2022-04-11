@@ -20,7 +20,7 @@ title: Developer Guide
 
 <h2>Setting up, getting started</h2>
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2122s2-cs2103t-t09-4.github.io/tp/SettingUp.html).
 
 <div markdown="span" class="alert alert-info">
 
