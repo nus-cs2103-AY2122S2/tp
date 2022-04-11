@@ -10,7 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* AddToClipboardCommand.java, lines 92-94, reused from https://stackoverflow.com/questions/6710350/copying-text-to-the-clipboard-using-java
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -427,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add a person**
 
-**MSS**
+*MSS*
 
 1. User requests to add a person
 2. User keys in person's details
@@ -437,7 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a person**
 
-**MSS**
+*MSS*
 
 1. User requests to list persons
 2. AddressBook shows a list of persons
@@ -446,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. The list is empty.
 
@@ -460,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Edit a person**
 
-**MSS**
+*MSS*
 
 1. User requests to list persons
 2. AddressBook shows a list of persons
@@ -470,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. The list is empty.
 
@@ -484,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Find a person**
 
-**MSS**
+*MSS*
 
 1. User requests to list specific persons
 2. User keys in keywords and relevant fields to find
@@ -492,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. There are no fields and no keywords, just `find` typed.
 
@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Clear address book**
 
-**MSS**
+*MSS*
 
 1. User requests to clear all persons
 2. AddressBook shows an empty list
@@ -518,14 +518,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Undo a command**
 
-**MSS**
+*MSS*
 
 1. User requests to undo the previous command
 2. AddressBook undoes previous command
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 1a. The previous command is not un-doable.
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Redo a command**
 
-**MSS**
+*MSS*
 
 1. User requests to undo the previous command
 2. AddressBook undoes previous command
@@ -548,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * There is no command to redo.
 
@@ -558,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
 **Use case: Clip a person's information to clipboard**
 
-**MSS**
+*MSS*
 
 1. User requests to clip a person
 2. User specifies the person to clip
@@ -566,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. The specified person cannot be found.
 
@@ -576,14 +576,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
 **Use case: Display client list by priority level of tags**
 
-**MSS**
+*MSS*
 
 1. User requests to sort and display client list by priority level of tags
 2. AddressBook displays sorted list
 
     Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 1a. The command was inputted wrongly.
 
@@ -593,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add a tag**
 
-**MSS**
+*MSS*
 
 1. AddressBook shows a list of persons
 2. User requests to add a tag to a specified person
@@ -602,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 1a. The list is empty.
 
@@ -623,7 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete a tag**
 
-**MSS**
+*MSS*
 
 1. AddressBook shows a list of persons
 2. User requests to delete a tag from a specific person in the list
@@ -632,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 1a. The list is empty.
 
@@ -652,7 +652,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Edit a person**
 
-**MSS**
+*MSS*
 
 1. AddressBook shows a list of persons
 2. User requests to edit a tag from a specific person in the list
@@ -662,7 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 1a. The list is empty.
 
@@ -688,7 +688,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Add insurance package**
 
-**MSS**
+*MSS*
 
 1. User requests to add a package.
    
@@ -698,7 +698,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. There already exists a package with the same package name.
 
@@ -714,7 +714,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Edit insurance package**
 
-**MSS**
+*MSS*
 
 1. User requests to edit a package.
 
@@ -724,7 +724,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. There is no package with the given package name.
 
@@ -740,7 +740,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Delete insurance package**
 
-**MSS**
+*MSS*
 
 1. User requests to delete a package.
 
@@ -750,7 +750,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+*Extensions*
 
 * 2a. There is no package with the given package name.
 
