@@ -159,8 +159,8 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and
-  the breed of Woofie from 'Bulldog' to 'German Sheppard'.
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name from
+  'Alice Tan' to 'Pauline Tan' and the breed of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
 
@@ -305,7 +305,7 @@ to note down the relevant details of such appointments, such as the date, time a
 **:information_source: Notes about this feature:**<br>
 
 * You can only note down one appointment per pet at any point in time.
-* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointments.
+* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointment.
 
 </div>
 
@@ -533,7 +533,7 @@ wish to deal with the nitty-gritty details of each feature.
 |---------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **Add**       | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]`                | `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`                                         | Adds Woofie into pet list along with its information                                                                  |
 | **Edit**      | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/BREED]` | `edit 1 p/98247076 t/bulldog`                                                                                         | Edits phone number and tag of pet at index 1                                                                          |
-| **Present**   | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm`                                  | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                                                         | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
+| **Present**   | `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`                                | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                                                         | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
 | **Absent**    | `absent INDEX date/dd-MM-yyyy`                                                     | `absent 1 date/22-03-2022`                                                                                            | Indicates that pet at index 1 was absent on 22 March 2022                                                             |
 | **Charge**    | `charge INDEX m/MM-yyyy c/number1[.number2]`                                       | `charge 1 m/03-2022 c/200.50`                                                                                         | Computes charge for pet 1 in the month of March on 2022, where each day's stay costs `200.50`                         |
 | **Delete**    | `delete id`                                                                        | `delete 1`                                                                                                            | Deletes pet at index 1 from the pet list                                                                              |
