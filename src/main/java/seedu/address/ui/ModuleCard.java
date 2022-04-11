@@ -37,7 +37,7 @@ public class ModuleCard extends UiPart<Region> {
 
     /**
      * Creates a {@code ModuleCard} with the given {@code TaModule} and index to display.
-     * 
+     *
      * @param module TaModule to display.
      * @param displayedIndex Index of the module in the displayed list.
      */

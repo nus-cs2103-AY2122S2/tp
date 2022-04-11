@@ -35,7 +35,7 @@ public class AssessmentAttemptCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-     * 
+     *
      * @param attempt A student's {@code AssessmentAttempt} to display.
      * @param displayedIndex The attempt's index in the displayed list.
      */

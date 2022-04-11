@@ -40,7 +40,7 @@ public class LessonCard extends UiPart<Region> {
 
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
-     * 
+     *
      * @param lesson Lesson to display information for.
      * @param displayedIndex Index of the lesson in the displayed list.
      */
@@ -53,7 +53,7 @@ public class LessonCard extends UiPart<Region> {
 
     /**
      * Creates a list of all absentees for this lesson.
-     * 
+     *
      * @return String list of all absentees.
      */
     private String getAbsenteeText() {
@@ -67,7 +67,7 @@ public class LessonCard extends UiPart<Region> {
 
     /**
      * Creates an absentee string.
-     * 
+     *
      * @return String that represents an absentee.
      */
     private String getAbsenteeString(StudentAttendance studentAttendance) {
@@ -77,7 +77,7 @@ public class LessonCard extends UiPart<Region> {
 
     /**
      * Filters absentees from student list.
-     * 
+     *
      * @return Predicate to filter students who were absent for this lesson.
      */
     private Predicate<StudentAttendance> filterAbsentees() {

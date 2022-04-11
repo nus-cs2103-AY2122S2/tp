@@ -46,7 +46,7 @@ public class ClassGroupCard extends UiPart<Region> {
 
     /**
      * Creates a {@code ClassGroupCard} with the given {@code ClassGroup} and index to display.
-     * 
+     *
      * @param classGroup {@code ClassGroup} to display info for.
      * @param displayedIndex Index of the class group in the displayed list.
      */

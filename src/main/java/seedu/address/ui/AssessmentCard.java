@@ -37,7 +37,7 @@ public class AssessmentCard extends UiPart<Region> {
 
     /**
      * Creates a {@code AssessmentCard} with the given {@code Assessment} and index to display.
-     * 
+     *
      * @param assessment
      * @param displayIndex
      */
