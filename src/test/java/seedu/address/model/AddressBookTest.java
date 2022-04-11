@@ -3,12 +3,14 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+// import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.util.EmergencyContactsDataUtil.getEmergencyContacts;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -28,7 +31,10 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        List<Person> emergencyContacts = new ArrayList<>();
+        Collections.addAll(emergencyContacts, getEmergencyContacts());
+
+        assertEquals(emergencyContacts, addressBook.getPersonList());
     }
 
     @Test
@@ -46,12 +52,33 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE)//.withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void addPerson_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.getPersonList().contains(ALICE));
+    }
+
+    @Test
+    public void addPerson_addressBookMaintainsAlphabeticalOrder() {
+        addressBook.addPerson(ALICE);
+        boolean reachedAlice = false;
+        for (Person p : addressBook.getPersonList()) {
+            if (p.equals(ALICE)) {
+                reachedAlice = true;
+            } else if (!reachedAlice) {
+                assertTrue(p.getName().fullName.compareToIgnoreCase(ALICE.getName().fullName) > 0);
+            } else {
+                assertTrue(p.getName().fullName.compareToIgnoreCase(ALICE.getName().fullName) < 0);
+            }
+        }
     }
 
     @Test
@@ -73,8 +100,8 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE)//.withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
@@ -96,6 +123,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Tag> getTagList() {
+            return null;
         }
     }
 

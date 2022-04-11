@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.ClipboardManager;
+import seedu.address.model.EmergencyContact;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -28,6 +30,8 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    private final ClipboardManager clipboard = new ClipboardManager();
+
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
@@ -37,7 +41,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds a person to the list while maintaining alphabetical order.
      * The person must not already exist in the list.
      */
     public void add(Person toAdd) {
@@ -49,7 +53,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the person {@code target} in the list with {@code editedPerson} while maintaining alphabetical order.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
@@ -79,6 +83,19 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Copies the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void copy(Person toCopy) {
+        requireNonNull(toCopy);
+        if (!internalList.contains(toCopy)) {
+            throw new PersonNotFoundException();
+        } else {
+            clipboard.copy(toCopy);
+        }
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -97,6 +114,13 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+
+    public void setEmergencyContacts(List<EmergencyContact> emergencyContacts) {
+        requireAllNonNull(emergencyContacts);
+        emergencyContacts.forEach(emergencyContact -> this.add(emergencyContact));
+    }
+
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -113,7 +137,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override
