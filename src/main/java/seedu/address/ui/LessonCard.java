@@ -13,8 +13,9 @@ import seedu.address.model.student.Student;
 import seedu.address.model.studentattendance.Attendance;
 import seedu.address.model.studentattendance.StudentAttendance;
 
+//@@author Gernene
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Lesson}.
  */
 public class LessonCard extends UiPart<Region> {
 
@@ -38,7 +39,10 @@ public class LessonCard extends UiPart<Region> {
     private Label absentees;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
+     *
+     * @param lesson Lesson to display information for.
+     * @param displayedIndex Index of the lesson in the displayed list.
      */
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
@@ -47,6 +51,11 @@ public class LessonCard extends UiPart<Region> {
         absentees.setText(getAbsenteeText());
     }
 
+    /**
+     * Creates a list of all absentees for this lesson.
+     *
+     * @return String list of all absentees.
+     */
     private String getAbsenteeText() {
         List<StudentAttendance> studentAttendanceList = lesson.getStudentAttendanceList();
         List<String> absenteeStrings = studentAttendanceList.stream()
@@ -56,11 +65,21 @@ public class LessonCard extends UiPart<Region> {
         return String.join("\n", absenteeStrings);
     }
 
+    /**
+     * Creates an absentee string.
+     *
+     * @return String that represents an absentee.
+     */
     private String getAbsenteeString(StudentAttendance studentAttendance) {
         Student student = studentAttendance.getStudent();
         return String.format("%s (%s)", student.getName(), student.getStudentId());
     }
 
+    /**
+     * Filters absentees from student list.
+     *
+     * @return Predicate to filter students who were absent for this lesson.
+     */
     private Predicate<StudentAttendance> filterAbsentees() {
         return (StudentAttendance studentAttendance) -> {
             Attendance attendance = studentAttendance.getAttendance();

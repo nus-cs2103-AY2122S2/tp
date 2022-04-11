@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 
+//@@author Gernene
 /**
  * An UI component that displays information of a {@code Student}.
  */
@@ -37,7 +38,7 @@ public class StudentCard extends UiPart<Region> {
     private Label email;
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
