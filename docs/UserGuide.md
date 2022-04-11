@@ -50,15 +50,15 @@ A glossary is included at the end to clarify any technical or vague terms used.
 1. Ensure you have **Java 11** or above installed on your Computer.
     - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
     - To check which version of Java you have installed:
-    1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
-    2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
+      1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results. 
+      2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
 2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate Divoc Tracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
     - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
-    1. Navigate to the folder containing the **udt.jar** file.
-    2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
-    3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
+      1. Navigate to the folder containing the **udt.jar** file.
+      2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
+      3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
 5. Refer to the Features below for details of each command.
 
 <div markdown="block" class="alert alert-info">
