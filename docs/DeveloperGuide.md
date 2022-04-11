@@ -417,12 +417,12 @@ Similar to other commands, the user input (eg. `findm n/Alex d/22-02-2022`) is f
 which when executed will update the Model's `FilteredList` using `FilteredList#setPredicate`.
 
 During the parsing, the user input is used to create an instance each of `MeetingNameHasKeywordsPredicate`, `MeetingTagHasKeywordsPredicate`
-and `MeetingOccursOnDatesPredicate`. (Note that all 3 are created regardless of whether the user specified a search term of that type).
+and `MeetingOccursOnDatesPredicate`. (Note that all 3 are created regardless of whether the user specified a search term of that type.)
 The 3 classes implement the Java generic interface `Predicate<Meeting>` (see [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html) for documentation), with the `test` method implemented as follows:
-* If no search terms of a type are specified by the user, the predicate corresponding to that type will always return true. (eg. if the user does not specify any name or tag to search for, `MeetingNameHasKeywordsPredicate#test` and `MeetingTagHasKeywordsPredicate#test` return true for any meeting) 
-* If search terms of that type are specified, the predicate returns true if and only if the meeting being tested matches **at least one** of the search terms. (eg. if the user specifies the dates `22-02-2022` and `11-04-2022`, `MeetingOccursOnDatesPredicate#test` will return true for meetings that occur on either date)
+* If no search terms of a type are specified by the user, the predicate corresponding to that type will always return true. For example, if the user does not specify any name or tag to search for, `MeetingNameHasKeywordsPredicate#test` and `MeetingTagHasKeywordsPredicate#test` return true for any meeting.
+* If search terms of that type are specified, the predicate returns true if and only if the meeting being tested matches **at least one** of the search terms. For example, if the user specifies the dates `22-02-2022` and `11-04-2022`, `MeetingOccursOnDatesPredicate#test` will return true for meetings that occur on either date.
 
-These 3 predicates are combined using the default method `Predicate#and`, thus allowing the user to combine searches of different types (eg. searching for meetings occurring on specific days with the same tag). The predicate produced from `and` is then used as the argument for `FilteredList#setPredicate`.
+These 3 predicates are combined using the default method `Predicate#and`, thus allowing the user to combine searches of different types (e.g. searching for meetings occurring on specific days with the same tag). The predicate produced from `and` is then used as the argument for `FilteredList#setPredicate`.
 
 The following sequence diagram summarises these interactions between the logic and model components when this feature is used:
 
@@ -433,15 +433,15 @@ the lifeline reaches the end of diagram.
 
 #### Design considerations:
 
-**Aspect: Whether to allow multiple search terms of each type** (eg. allow users to specify multiple dates to search for)
+**Aspect: Whether to allow multiple search terms of each type** (e.g. allow users to specify multiple dates to search for)
 
 * **Alternative 1 (current choice):** Allow multiple search terms of each type.
-    * Pros: More flexible for the user. Addresses legitimate user stories, eg. users might want to view their schedule on multiple days at once to aid with their planning.
+    * Pros: More flexible for the user. Addresses legitimate user stories, e.g. users might want to view their schedule on multiple days at once to aid with their planning.
     * Cons: Manual testing is much more difficult due to the large increase in number of possible user inputs.
     
-* **Alternative 2:** Allow only one search term per type
+* **Alternative 2:** Allow only one search term per type.
     * Pros: Much easier to test manually due to the smaller number of possible inputs.
-    * Cons: Less flexible for the user. Might not adequately address the problems they face in managing their academic/social life. eg. separate searches are required to view schedule on different days; unable to view schedule across multiple days at once.
+    * Cons: Less flexible for the user. Might not adequately address the problems they face in managing their academic/social life. E.g. separate searches are required to view schedule on different days; unable to view schedule across multiple days at once.
 
 Reasons for choosing Alternative 1:
 * It helps to solve problems faced by the user in a faster and more convenient way than alternative 2.
