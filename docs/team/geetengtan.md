@@ -1,4 +1,7 @@
-## Ryan Tan Gee Teng's Project Portfolio Page
+---
+layout: page
+title: Ryan Tan Gee Teng's Project Portfolio Page
+---
 
 ### Project: TAddressBook
 
