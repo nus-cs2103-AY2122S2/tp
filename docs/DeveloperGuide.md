@@ -397,29 +397,29 @@ A tech savvy insurance agent who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                     | have a quick guide         | learn how to use the address book efficiently and effectively                 |
-| `* * *`  | user                                         | add a new client               | have a list of my clients                                                                       |
-| `* * *`  | user                                         | delete an old client                | remove clients who have stopped working with me                                   |
-| `* * *`  | user                                         | update a client's details          | keep information of my clients accurate and up-to-date |
-| `* * *`  | user                                         | list all clients         | have an overview of my clientele |
-| `* * *`  | user                                         | have an 'information' field in each client's details          | store miscellaneous infomation pertaining to each client |
-| `* *`    | user                                         | sort my clients   |  see contacts in ascending/descending order w.r.t a certain priority (i.e. next meeting)               |
-| `* *`    | user on-the-move                             | have keyboard shortcuts   |  use the app efficiently and reliably               |
-| `* *`    | clumsy user                                  | undo my last command |  revert if I made a mistake in my previous command               |
-| `* *`    | clumsy user                                  | have autocorrect for commands |  make minor mistyping errors without having to rewrite entire commands               |
-| `* *`    | user with many clients in the address book   | search for clients           | obtain information about a client easily                                            |
-| `* *`    | user with many clients in the address book   | filter clients           | obtain information about a group of clients easily                                            |
-| `* *`    | user with many clients in the address book   | pin certain clients           | easily access them |
-| `* *`    | anxious user                                 | set reminders                 | be alerted for upcoming meetings, deadlines etc.
-| `* *`    | user                                         | see relationships between my clients  | manage entire families/groups of friends at the same time and tailor pacakages specifically for them |
-| `*`      | user                                         | export my data into other formats such as Excel | visualise and share information with others |
-| `*`      | user                                         | import and view the data of others' using this app | help out my colleagues when needed |
-| `*`      | night-owl user                               | turn on dark mode           | strain my eyes less when working at night |
-| `*`      | artsy user                                   | artsy mode                      | enjoy different visuals on the app
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                       | So that I can…​                                                                                            |
+|----------|--------------------------------------------|----------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                   | have a quick guide                                 | learn how to use the address book efficiently and effectively                                              |
+| `* * *`  | user                                       | add a new client                                   | have a list of my clients                                                                                  |
+| `* * *`  | user                                       | delete an old client                               | remove clients who have stopped working with me                                                            |
+| `* * *`  | user                                       | update a client's details                          | keep information of my clients accurate and up-to-date                                                     |
+| `* * *`  | user                                       | list all clients                                   | have an overview of my clientele                                                                           |
+| `* * *`  | user                                       | have tags to store other client details            | store miscellaneous information pertaining to each client                                                  |
+| `* * `   | user                                       | have priorities assigned to tags                   | conveniently recall which tasks have higher priorities than others, without have to only rely on my memory |
+| `* *`    | user                                       | sort my clients                                    | see contacts in ascending/descending order w.r.t a certain priority (i.e. next meeting)                    |
+| `* *`    | user on-the-move                           | have keyboard shortcuts                            | use the app efficiently and reliably                                                                       |
+| `* *`    | clumsy user                                | undo my last command                               | revert if I made a mistake in my previous command                                                          |
+| `* *`    | clumsy user                                | have autocorrect for commands                      | make minor mistyping errors without having to rewrite entire commands                                      |
+| `* *`    | user with many clients in the address book | search for clients                                 | obtain information about a client easily                                                                   |
+| `* *`    | user with many clients in the address book | filter clients                                     | obtain information about a group of clients easily                                                         |
+| `* *`    | user with many clients in the address book | pin certain clients                                | easily access them                                                                                         |
+| `* *`    | anxious user                               | set reminders                                      | be alerted for upcoming meetings, deadlines etc.                                                           |
+| `* *`    | user                                       | see relationships between my clients               | manage entire families/groups of friends at the same time and tailor packages specifically for them        |
+| `* *`    | user                                       | be able to conveniently edit individual tags       | avoid typing the entire list of tags every time I want to make a small change                              |
+| `*`      | user                                       | export my data into other formats such as Excel    | visualise and share information with others                                                                |
+| `*`      | user                                       | import and view the data of others' using this app | help out my colleagues when needed                                                                         |
+| `*`      | night-owl user                             | turn on dark mode                                  | strain my eyes less when working at night                                                                  |
+| `*`      | artsy user                                 | artsy mode                                         | enjoy different visuals on the app                                                                         |
 
 ### Use cases
 
@@ -591,6 +591,100 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Add a tag**
+
+**MSS**
+
+1. AddressBook shows a list of persons
+2. User requests to add a tag to a specified person
+3. User keys in details of the new tag
+4. AddressBook adds the tag to the person
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 3b. The given tag name is invalid.
+
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: Delete a tag**
+
+**MSS**
+
+1. AddressBook shows a list of persons
+2. User requests to delete a tag from a specific person in the list
+3. User specifies the exact tag they want to delete from that person
+4. AddressBook deletes the tag identified
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given person index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The given tag number is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1. AddressBook shows a list of persons
+2. User requests to edit a tag from a specific person in the list
+3. User specifies the exact tag they want to delete from that person
+4. User specifies what they want the new version of the tag to look like
+5. AddressBook edits the tag identified accordingly
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given person index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The given tag number is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 4a. The given tag name is invalid.
+
+    * 4a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
 
 **Use case: Add insurance package**
 
