@@ -640,20 +640,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. No class with given TUTORIAL_NAME exists in camNUS.
 
     * 2a1. camNUS shows an error message.
-    
+
       Use case resumes at step 1.
 
-* 4a. No assessment component with the given assessment name exists in camNUS. 
+* 4a. No assessment component with the given assessment name exists in camNUS.
 
     * 4a1. camNUS shows an error message.
+
       Use case resumes at step 3.
+
 * 4b. No student with the given name exists in camNUS.
-  * 4b1. camNUS shows an error message.
-     Use case resumes at step 3.
+
+    * 4b1. camNUS shows an error message.
+
+      Use case resumes at step 3.
 
 * 4c. The given score is invalid
-  * 4c1. camNUS shows an error message.
-     Use case resumes at step 3.
+
+    * 4c1. camNUS shows an error message.
+
+      Use case resumes at step 3.
 
 **Use case: Edit a person**
 
@@ -676,17 +682,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. camNUS shows an error message.
 
       Use case resumes at step 2.
+
 * 3b. No fields are provided.
-  * 3b1. camNUS shows an error message.
 
-    Use case resumes at step 2.
+    * 3b1. camNUS shows an error message.
+
+      Use case resumes at step 2.
+
 * 3c. No value is provided for a field that is not tags.
-  * 3c1. camNUS shows an error message.
 
-    Use case resumes at step 2.
+    * 3c1. camNUS shows an error message.
+
+      Use case resumes at step 2.
+
 * 4a. The user enters values for tags.
-  * 4a1. Existing tags are removed and inputted tags are added to the person.
+
+    * 4a1. Existing tags are removed and inputted tags are added to the person.
+
 * 4b. No value is entered after t/.
+
   * 4b1. Existing tags are removed from the person.
 
 *{More to be added}*
