@@ -183,6 +183,9 @@ they can be compared and sorted alphabetically.
 The following sequence diagram shows how the sort operation works:
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram summarizes what happens when a user executes a new sort command:
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
@@ -353,7 +356,7 @@ VersionedPetBook#commit(), so the WoofAreYou state will not be saved into the pe
 </div>
 
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call `Model#undo()`, which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call `Model#undo()`, which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores WoofAreYou to that state.
 
 <p align="center">
   <img src="images/UndoState3.png" alt="UndoRedoState3" width="450"/>
