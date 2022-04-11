@@ -538,6 +538,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: Delete an existing person**
+
 **MSS**
 
 1. User requests to view list of persons
@@ -548,13 +550,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: Delete an existing event**
+
 **MSS**
 
 1. User requests to view list of events
 2. InternBuddy shows list of events
 3. User requests to delete a selected event from the list
-5. InternBuddy deletes the event from the list
-6. InternBuddy shows successful feedback to the user
+4. InternBuddy deletes the event from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find a company with a specified attribute
+2. InternBuddy shows all the companies that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating persons**
+
+**MSS**
+
+1. User requests to find a person with a specified attribute
+2. InternBuddy shows all the persons that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find an event with a specified attribute
+2. InternBuddy shows all the events that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
 
    Use case ends.
 
