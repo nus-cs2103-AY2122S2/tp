@@ -17,6 +17,5 @@ Worry not! With ModuleMateFinder, you can:
 
 
 - Head over to the [User Guide](https://ay2122s2-cs2103t-t13-4.github.io/tp/UserGuide.html) to find out more
-- You can also see the mockup in [Figma](https://www.figma.com/file/COWAJJL0DBAPffotRIkHXz/ModuleMateFinder?node-id=0%3A1)
 
 **This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).**
