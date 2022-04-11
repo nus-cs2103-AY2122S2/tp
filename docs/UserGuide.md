@@ -297,6 +297,8 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
 
+Note: tags can be removed from and assigned to a player using `edit P/PLAYER t/TAG1 t/TAG2`. All previous tags will be removed, and only newly added tags will be assigned to the player.
+
 ### Clearing all entries : `clear`
 
 Clears all data from MyGM.
