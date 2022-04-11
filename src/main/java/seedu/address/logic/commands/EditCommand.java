@@ -64,7 +64,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "newjohndoe@example.com";
 
     public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD + ": Edits the details of the lineup identified "
-            + "by the name of the lineup."
+            + "by the name of the lineup. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_LINEUP + "LINEUP_NAME "
             + PREFIX_NAME + "LINEUP NAME\n"
@@ -73,7 +73,7 @@ public class EditCommand extends Command {
             + PREFIX_NAME + "substitutes";
 
     public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD + ": Edits the details of the schedule identified "
-            + "by the index of the schedule."
+            + "by the index of the schedule. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_SCHEDULE + "INDEX" + " "
