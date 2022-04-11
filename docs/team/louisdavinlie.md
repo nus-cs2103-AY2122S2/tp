@@ -3,6 +3,7 @@ layout: page
 title: Louis' Project Portfolio Page
 ---
 
+[//]: # (@@author louisdavinlie)
 ### Project: Ultimate Divoc Tracker
 
 Ultimate Divoc Tracker is a desktop app for managing COVID-19 contacts in school admin, optimized for use via a
