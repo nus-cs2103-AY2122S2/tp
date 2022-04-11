@@ -1,0 +1,101 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTransactionParser" as AddTransactionParser LOGIC_COLOR
+participant "a:AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
+participant "tb:TransactionBuilder" as TransactionBuilder LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "nt:Transaction" as Transaction MODEL_COLOR
+end box
+
+[-> LogicManager : execute(addTransactionEx)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(addTransactionEx)
+activate AddressBookParser
+
+create AddTransactionParser
+AddressBookParser -> AddTransactionParser
+activate AddTransactionParser
+
+AddTransactionParser --> AddressBookParser
+deactivate AddTransactionParser
+
+AddressBookParser -> AddTransactionParser : parse(transaction)
+activate AddTransactionParser
+
+create AddTransactionCommand
+AddTransactionParser -> AddTransactionCommand
+activate AddTransactionCommand
+
+create TransactionBuilder
+AddTransactionCommand --> TransactionBuilder
+activate TransactionBuilder
+
+TransactionBuilder --> AddTransactionCommand : tb
+deactivate TransactionBuilder
+
+AddTransactionCommand --> AddTransactionParser : a
+deactivate AddTransactionCommand
+
+AddTransactionParser --> AddressBookParser : a
+deactivate AddTransactionParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTransactionParser -[hidden]-> AddressBookParser
+destroy AddTransactionParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddTransactionCommand : execute()
+activate AddTransactionCommand
+
+AddTransactionCommand -> Model : Get person's identifier at index 1.
+activate Model
+Model --> AddTransactionCommand : personIdentifier
+deactivate Model
+
+AddTransactionCommand -> TransactionBuilder : tb.createTransaction(personIdentifier)
+activate TransactionBuilder
+
+create Transaction
+TransactionBuilder -> Transaction
+activate Transaction
+
+Transaction --> TransactionBuilder :  nt
+deactivate Transaction
+
+TransactionBuilder --> AddTransactionCommand : nt
+deactivate TransactionBuilder
+TransactionBuilder -[hidden]-> AddTransactionCommand : nt
+destroy TransactionBuilder
+
+AddTransactionCommand -> Model : addTransaction(nt)
+activate Model
+
+Model --> AddTransactionCommand
+deactivate Model
+
+create CommandResult
+AddTransactionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTransactionCommand : result
+deactivate CommandResult
+
+AddTransactionCommand --> LogicManager : result
+deactivate AddTransactionCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTransactionCommand -[hidden]-> AddressBookParser
+destroy AddTransactionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
