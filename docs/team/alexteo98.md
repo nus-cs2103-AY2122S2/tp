@@ -24,6 +24,8 @@ had to be updated and new tests had to be created for the new class and commands
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=alexteo98&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
+<div style="page-break-after: always;"></div>
+
 * **Project management**:
     * Set up Team Repo
     * Set up milestones (v1.1)
