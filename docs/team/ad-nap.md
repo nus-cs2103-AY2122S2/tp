@@ -6,7 +6,7 @@ title: Shafik's Project Portfolio Page
 ### Project: HustleBook
 
 HustleBook is a desktop app specially catered towards financial advisors for **managing client details** and **scheduling meetings efficiently** without the need to lift their hands off the keyboard.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -34,8 +34,8 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ad-nap&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
 * **Project management**:
-    * Managed releases `v1.1` - `v1.4` (total of 5 milestones) on GitHub.
-    * Refactored all references to AddressBook to HustleBook in Developer Guide.
+    * Manage project milestones (v1.1 to v1.4, 5 milestones) in GitHub.
+    * Maintain consistency of HustleBook references in Developer Guide and User Guide.
     * Maintained the issue tracker and adhere to it.
     * Managed project meetings and meeting documents.
 
