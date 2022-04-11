@@ -11,8 +11,8 @@ the interview scheduling process of candidates applying to be undergraduate Teac
 
 #### Summary of Contributions ####
 * #### Code contributed: 
-  * Click on the following [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=lzan98&tabRepo=AY2122S2-CS2103-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
-    to view the detailed breakdown of my code contribution!
+  * Click on this [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=lzan98&tabRepo=AY2122S2-CS2103-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+    to view the breakdown of my code contribution!
 
 * #### Enhancements implemented:
   * **New Features**: `schedule add`, `schedule edit`, `schedule delete`, `schedule clear`
@@ -43,7 +43,7 @@ the interview scheduling process of candidates applying to be undergraduate Teac
   * **Testing and de-bugging:**
     * Contribution to identified bugs in v1.3b found [here](https://github.com/AY2122S2-CS2103-F11-2/tp/issues/240)
     * Fixed bug related to invalid user input for interview DATE_TIME ([\#365](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/365))
-    * Fixed bug where user encounters a conflicting interview error when rescheduling the same candidate
+    * Fixed bug preventing users from rescheduling the same candidate
       ([\#384](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/384))
   * **Project management**:
     * Managed GitHub issues/deadlines whenever/wherever necessary.
