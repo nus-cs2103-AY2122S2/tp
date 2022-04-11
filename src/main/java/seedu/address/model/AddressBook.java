@@ -150,9 +150,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.lineups.containsLineupName(targetName);
     }
 
-    /**
-     * Deletes the lineup from all players and lineup lists.
-     */
+    /** Deletes the lineup from all players and lineup lists */
     public void deleteLineup(Lineup lineup) {
         this.lineups.deleteLineupFromList(lineup);
         this.persons.removeAllPlayerFromLineup(lineup);
@@ -173,16 +171,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a Lineup to MyGM
-     *
      * @param lineup The Lineup to be added
      */
     public void addLineup(Lineup lineup) {
         lineups.addLineupToList(lineup);
     }
 
-    /**
-     * Returns true if MyGM has reached maximum capacity.
-     */
+    /** Returns true if MyGM has reached maximum capacity.*/
     public boolean isFull() {
         return persons.isFull();
     }

@@ -61,7 +61,15 @@ The GUI is split into two parts: Players and Schedules respectively. Details of 
 
 </div>
 
-### 2.1. Getting help : `help`
+### 2.1. Viewing insights
+
+Views some insights about players in the club and upcoming schedules.
+
+* The right half of the application is used to display aggregated information of the club.
+* Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
+* Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
+
+### 2.2. Getting help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -69,11 +77,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### 2.2. Adding a player/ lineup/ schedule: `add`
+### 2.3. Adding a player/ lineup/ schedule: `add`
 
 Adds a player/ lineup/ schedule with the specified attributes to MyGM.
 
-#### 2.2.1. Add a player
+#### 2.3.1. Add a player
 
 Adds a player with the specified attributes to the player list in MyGM.
 
@@ -83,6 +91,7 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 
 :information_source: Notes about the `add` Command for player.
 
+* `NAME` must be **alphanumeric** and should not be blank.
 * `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players. 
 * The first character of every word in `NAME` are **recommended being capitalized**. For example:`John Doe` instead of `john doe`
 * `NAME` must not exist in MyGM already.
@@ -99,16 +108,17 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
         - Have each domain label start and end with alphanumeric characters
         - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
+* If the same tag is specified twice, it will only be captured only once. <br> e.g. `t/PG t/PG t/PG` will be treated as `t/PG`.
 </div>
 
 Examples:
-* `add P/ n/Josh Doe j/9 w/70 h/190 p/98760000 e/joshd@example.com` Adds a player by the name of `Josh Doe`, with a jersey number of `9`, weight of `70`kg, height of `190`cm, handphone number of `98760000`, email of `joshd@example.com` to MyGM
-* `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of `John Doe`, with a jersey number of `3`, weight of `69`kg, height of `188`cm, handphone number of `98765432`, email of `johnd@example.com` with the position of `PG` to MyGM
-* `add P/ n/James Doe j/6 w/100 h/206 p/98761234 e/jamesd@example.com t/PG t/SF` Adds a player by the name of James Doe, with a jersey number of `6`, weight of `100`kg, height of `206`cm, handphone number of `98761234`, email of `jamesd@example.com` with the position of `PG` and `SF` to MyGM
+* `add P/ n/Josh Doe j/9 w/70 h/190 p/98760000 e/joshd@example.com` <br> Adds a player by the name of `Josh Doe`, with a jersey number of `9`, weight of `70`kg, height of `190`cm, handphone number of `98760000`, email of `joshd@example.com` to MyGM.
+* `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` <br> Adds a player by the name of `John Doe`, with a jersey number of `3`, weight of `69`kg, height of `188`cm, handphone number of `98765432`, email of `johnd@example.com` with the position of `PG` to MyGM.
+* `add P/ n/James Doe j/6 w/100 h/206 p/98761234 e/jamesd@example.com t/PG t/SF` <br> Adds a player by the name of James Doe, with a jersey number of `6`, weight of `100`kg, height of `206`cm, handphone number of `98761234`, email of `jamesd@example.com` with the position of `PG` and `SF` to MyGM.
 
 ![AddPlayer_SS](images/AddPlayer_SS.png)
 
-#### 2.2.2. Add a lineup
+#### 2.3.2. Add a lineup
 
 Adds a lineup with the specified attribute inside MyGM.
 
@@ -116,20 +126,21 @@ Format: `add L/ n/LINEUP_NAME`
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Notes about the lineup added after the `add` Command.
+:information_source: Notes about the `add` Command for lineup.
 
+* `LINEUP_NAME` must be in **alphanumeric** and should not be blank.
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 * The new `LINEUP_NAME` must not exist in MyGM already.
 * After creating a lineup, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#25-viewing-playerschedulelineup-view) section.
 
 </div>
 
-Examples:
+Example:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
 
 ![AddLineup_SS](images/AddLineup_SS.png)
 
-#### 2.2.3. Add a schedule
+#### 2.3.3. Add a schedule
 
 Adds a schedule with the specified attributes inside MyGM.
 
@@ -139,7 +150,9 @@ Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 
 :information_source: Notes about the `add` Command for schedule.
 
-* `DATETIME` must be in a dd/mm/yyyy hhmm format, where hhmm is in 24-hour clock.
+* `DATETIME` must be in a dd/mm/yyyy HHmm format, where HHmm is in 24-hour clock. <br> e.g. `04/04/2024 1400`
+* `SCHEDULE_NAME` must be **alphanumeric** and should not be blank.
+* `DESCRIPTION` should not be blank.
 * Multiple schedules can be added to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
@@ -149,11 +162,11 @@ Examples:
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
 
-### 2.3. Deleting a player/ lineup/ schedule :  `delete`
+### 2.4. Deleting a player/ lineup/ schedule :  `delete`
 
 Deletes a player/ lineup/ schedule from MyGM.
 
-#### 2.3.1. Delete a player
+#### 2.4.1. Delete a player
 
 Deletes the specified player from MyGM.
 
@@ -174,7 +187,7 @@ Example: <br>
 * `delete P/James Soften` `L/Starting 5` will only delete player `James Soften` from the lineup `Starting 5`.
 
 
-#### 2.3.2. Delete a lineup
+#### 2.4.2. Delete a lineup
 
 Deletes the specified lineup.
 
@@ -192,7 +205,7 @@ Format: `delete L/LINEUP`
 Example:
 * `delete L/Starting 5` will only delete the lineup `Starting 5` from MyGM.
 
-#### 2.3.3. Delete a schedule
+#### 2.4.3. Delete a schedule
 
 Deletes the i-th schedule from MyGM.
 
@@ -213,7 +226,7 @@ Example:
 * `view S/` followed by `delete S/2` deletes the 2nd schedule in the **displayed** schedule.
 * `view S/game` followed by `delete S/1` deletes the 1st schedule in the **displayed** schedule as a result of the `view S/game` command.
 
-### 2.4 Putting a player to a lineup: `put`
+### 2.5 Putting a player to a lineup: `put`
 
 Puts the specified player to a specified lineup.
 
@@ -233,14 +246,14 @@ Format: `put P/PLAYER L/LINEUP`
 Example:
 * `put P/John Doe L/starting five` Puts `John Doe` into the lineup named `starting five`.
 
-* ![Put_SS](images/Put_SS.png)
+![Put_SS](images/Put_SS.png)
 
-### 2.5. Viewing player/schedule/lineup: `view`
+### 2.6. Viewing player/schedule/lineup: `view`
 
 This function makes listing, searching filtering of player/ schedule/ lineup quick and easy.
 You can specify criteria to list out the current player and schedule list.
 
-#### 2.5.1. View player
+#### 2.6.1. View player
 
 Filters the existing players to display only the players matching the criteria specified.
 
@@ -262,15 +275,15 @@ players with such name exists.
 
 Examples:
 * `view P/` Displays all the players
-* `view P/Kelvin Darent` Displays all the players that have "Kelvin" **or** "Darent" in their name
-* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is
-greater than or equals to 80kg
+* `view P/Kelvin Darent` Displays all the players that have `Kelvin` **or** `Darent` in their name
+* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than `180`cm **and** weight that is
+greater than or equals to `80`kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
-is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
+is lesser than `213`cm **and** weight equals to `100`kg **and** plays the position of `SG` or `SF`
 
 * ![viewPlayer](images/viewPlayer.png)
 
-#### 2.5.2. View lineup
+#### 2.6.2. View lineup
 
 Filters players who are in the lineup that corresponds to the criteria specified.
 
@@ -298,7 +311,7 @@ Examples:
 
 * ![viewLineup](images/viewLineup.png)
 
-#### 2.5.3. View schedule
+#### 2.6.3. View schedule
 
 Filters the existing schedules to display only the schedules matching the criteria specified.
 
@@ -337,7 +350,7 @@ Examples:
 
 * ![viewSchedule](images/viewSchedule.png)
 
-### 2.6. Sort players by height/ jersey number/ weight: `sort`
+### 2.7. Sort players by height/ jersey number/ weight: `sort`
 
 The `sort` command allows you to sort the displayed players based on the criteria specified.
 
@@ -366,21 +379,22 @@ Example:
 
 * ![sortPlayer](images/sortPlayer.png)
 
-### 2.7. Edit a player/ lineup/ schedule information : `edit`
+### 2.8. Edit a player/ lineup/ schedule information : `edit`
 
 Updates the details of a player, lineup or schedule.
 
-#### 2.7.1 Edit a player
+#### 2.8.1 Edit a player
 
-Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
+Format: `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-Edit the details of a existing player in MyGM.
+Edit the details of an existing player in MyGM.
 
 :information_source: Notes about the `view` Command for lineup
 
 * If any fields are specified, it will change accordingly.
+* Player `PLAYER` must exist in MyGM.
 * Multiple fields can be changed at once.
 * Restrictions for `NAME`, `JERSEY_NUMBER`, `WEIGHT`, `HEIGHT`, `PHONE`, `EMAIL_ADDRESS` and `TAG` in [add](#221-add-a-player) Command section for players applies here as well.
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
@@ -399,7 +413,7 @@ Example:
 
 </div>
 
-#### 2.7.2. Edit a lineup
+#### 2.8.2. Edit a lineup
 
 Edit the lineup name of the specified lineup to a new lineup name.
 
@@ -410,17 +424,18 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 :information_source: Notes about the `view` Command for lineup
 
 * The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
+* Restrictions for `NEW_LINEUP_NAME` in [add](#221-add-a-lineup) Command section for lineups applies here as well.
 
 </div>
 
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup `Starting5` to `Worst5`
 
-#### 2.7.3. To edit a schedule
+#### 2.8.3. Edit a schedule
 
 Edit the details of the i-th schedule
 
-Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
+Format: `edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -429,6 +444,7 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 * If any fields are specified, it will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
+* Restrictions for `NEW_NAME`, `NEW_DESCRIPTION`, `NEW_DATETIME` in [add](#221-add-a-schedule) Command section for schedules applies here as well.
 * Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 </div>
@@ -436,15 +452,8 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
 
-### 2.8. Viewing insights
-
-Views some insights about players in the club and upcoming schedules.
-
-* The right half of the application is used to display aggregated information of the club.
-* Under the **Player** section, a pie chart showing the distribution of players by position in the club and a recruitment suggestion based on the distribution are given. Specifically, if one or more position contains noticeably fewer players than the average, or any position contains less than 2 players (1 starting and 1 reserved player), MyGM will remind the user to recruit more players. Moreover, MyGM will remind the user to tag those untagged players to have a better understanding of the club.
-* Under the **Schedule** section, a calendar representing the current month is shown. The date representing today and the dates containing schedules will be marked out.
-
 ### 2.9. Clearing all entries : `clear`
+
 
 Clears all data from MyGM.
 
@@ -510,11 +519,11 @@ If your changes to the data file makes its format invalid, MyGM will discard all
 | Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                               |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` |
-| **Delete** | `delete P/PLAYER`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/ i/INDEX`<br>e.g. `delete S/INDEX`                                                                                                                                                                                                                                |
+| **Delete** | `delete P/PLAYER [L/LINEUP]`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/INDEX_SCHEDULE`<br>e.g. `delete S/2`                                                                                                                                                                                                                   |
 | **View**   | `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/TAG]`<br>e.g. `view P/Kelvin Darent`<br>`view L/[NAMES_IN_LINEUPNAME]`<br>e.g. `view L/starting`<br>`view S/[NAMES_IN_SCHEDULENAME] [d/DATE]`<br>e.g. `view S/drills`                                                                                                                                               |
 | **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      
 | **Sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/asc`                                                                                                                                                                                                                                                                                                                                     |
-| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/SCHEDULE NAME] [r/DESCRIPTION] [d/DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                                       |
+| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER] [t/TAG]…​`<br> e.g. `edit P/James Soften p/8888888`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/NEW_NAME] [r/NEW_DESCRIPTION] [d/NEW_DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                 |
 | **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                    
 | **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                        |
 | **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                         |
