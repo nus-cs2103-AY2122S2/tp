@@ -389,7 +389,7 @@ Format: `meet NAME d/DATE t/TIME`
 * `DATE` input must be in `YYYY-MM-DD` format.
 * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
 * `TIME` input must be in 24-hr format of `HHmm`.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` of the list shown.
+* In the event where more than one name matches `NAME` input, you would need to specify using `INDEX` of the list shown.
   * This is similar to the scenario 2 in `edit` and `flag` commands.
 
 Example:
@@ -408,7 +408,7 @@ Format: `meet NAME c/`
 :information_source: **Note:**
 * `c/` will clear the meeting with the client with the specified `NAME`.
   * If `c/WORDS` is input, eg. `meet John Doe c/abcdef`,HustleBook will still clear the meeting with the given `NAME`.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` of the list shown.
+* In the event where more than one name matches `NAME` input, you would need to specify using `INDEX` of the list shown.
   * This is similar to the scenario 2 in `edit` and `flag` commands.
 
 Example:
