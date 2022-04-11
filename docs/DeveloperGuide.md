@@ -556,12 +556,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The input format is wrong.
     * 1a1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1b. The given parameters is invalid.
     * 1b1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1c. The list is empty.
 
@@ -683,12 +683,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The input format is wrong.
     * 1a1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1b. The given parameters is invalid.
     * 1b1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1c. The list is empty.
 
@@ -799,12 +799,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The input format is wrong.
     * 1a1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1b. The given parameters is invalid.
     * 1b1. TrackBeau shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1c. The list is empty.
 
