@@ -10,6 +10,7 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -37,6 +38,8 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## Using this Guide
 
@@ -69,6 +72,7 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
   e.g. if the command specifies `list student c/1 f/1`, the class group index will be interpreted as `1 f/1` and an error will be returned.
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ## Features & Walkthrough
 
@@ -78,6 +82,8 @@ TAssist's user interface features a command input box, a command results box, an
 
 ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
+
 From TAssist's "Classes" tab, click the "Check Absentees" button to open a popup window. This popup  displays a list of lessons 1-13 and any students who were **absent** for a lesson.
 
 <img src="images/Ui_Check_Attendance.jpg" style="display:block;margin:0 auto;max-width:500px;">
@@ -86,6 +92,8 @@ From TAssist's "Classes" tab, click the "Check Absentees" button to open a popup
 From TAssist's "Assessments" tab, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
 
 <img src="images/Ui_See_Attempts.jpg" style="display:block;margin:0 auto;max-width:500px;">
+
+<div style="page-break-after: always;"></div>
 
 ### Command Parameters
 
@@ -220,6 +228,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Features
 

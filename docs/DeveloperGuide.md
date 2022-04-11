@@ -87,6 +87,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays various `Entity` objects residing in the `Model`.
 
 <div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -115,6 +116,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `TAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TAssistParser` returns back as a `Command` object.
 * All `TAssistParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -186,6 +189,7 @@ The `Model` component,
 </div>
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -203,6 +207,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -251,6 +256,8 @@ The following activity diagram summarizes what happens when a user executes an a
 
 <img src="images/AddActivityDiagram.png" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 ### Delete Feature
 
 The delete mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
@@ -290,6 +297,8 @@ The following activity diagram summarizes what happens when a user executes a de
 
 <img src="images/DeleteActivityDiagram.png" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 ### List Feature
 
 The list mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is the same for all entities. Additionally, it implements the following operations:
@@ -319,6 +328,8 @@ The following sequence diagram shows how the list operation works:
 The following activity diagram summarizes what happens when a user executes a list command:
 
 ![ListActivityDiagram](images/ListActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Enrol Feature
 
@@ -362,6 +373,8 @@ The following sequence diagram shows how the enrol operation works:
 The following activity diagram summarizes what happens when a user executes an enrol command:
 
 ![EnrolActivityDiagram](images/EnrolActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Grading Assessment Feature
 
@@ -417,6 +430,8 @@ The following activity diagram summarizes what happens when a user executes a gr
     * Pros: All module related data are in one class.
     * Cons: Duplicate data in storage, hard to display assessments attempts.
 
+<div style="page-break-after: always;"></div>
+
 ### Mark/Unmark feature
 
 #### Implementation
@@ -465,6 +480,8 @@ The following activity diagram summarizes what happens when a user executes a ma
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -794,6 +811,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         </tr>
     </tbody>
 </table>
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -1269,6 +1288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **TaModule**: Represents a Module. Named differently due to conflict with Java class
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
