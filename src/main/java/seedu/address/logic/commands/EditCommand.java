@@ -81,8 +81,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_DATE + "DATE TIME]\n"
             + "Example: " + COMMAND_WORD + " "
-            + "1 "
-            + PREFIX_SCHEDULE + " "
+            + " "
+            + PREFIX_SCHEDULE + "1 "
             + PREFIX_NAME + "finals "
             + PREFIX_DESCRIPTION + "nba finals "
             + PREFIX_DATE + "06/06/2022 2100";
