@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Developer Guide
+title: TeachWhat! Developer Guide
 ---
 ## Table of Contents
 * [**Introduction**](#introduction)
@@ -408,6 +408,8 @@ and improve user experience by improving typing speed as the user does not have 
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete student or lesson
 Deleting a `Student` or `Lesson` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the
 `TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
@@ -437,8 +439,10 @@ Step 6. The `LogicManager` then executes the `DeleteLessonCommand` and the `Less
 * Constraint
   * The `Index` in `DeleteStudentCommand` must not be greater than or equal to the size of the viewable student list.
     `ParseException` will be thrown if the constraints are violated
+  
+<img src="images/DeleteLessonSequenceDiagram.png" width="700"/>
 
-![](images/DeleteLessonSequenceDiagram.png)
+<div style="page-break-after: always;"></div>
 
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
@@ -537,6 +541,7 @@ The following sequence diagram shows how the assign operation works.
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Help feature
 
@@ -558,6 +563,8 @@ Given below is a class diagram of `TableView<CommandCard>`.
 **Design considerations**  
 The `CommandCard` class became a nested class because there were no other features that would be implemented that need to use it. Only the `HelpWindow` requires it,
 thus, it was made as a nested class.
+
+<div style="page-break-after: always;"></div>
 
 ### Command Shortcuts
 
@@ -587,6 +594,8 @@ If we had a feature that allows the user to create custom command words for each
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
