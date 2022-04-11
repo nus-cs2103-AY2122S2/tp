@@ -46,7 +46,7 @@ Given below are my contributions to the project.
         * Add screenshots for `view` and `sort` commands.  [\#176](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/176)
     * Developer Guide:
         * Updating the user stories [\#118](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/118)
-        * Added the implementation details of view. [\#127](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/127)
+        * Added the implementation details of `view`. [\#127](https://github.com/AY2122S2-CS2103-F09-1/tp/pull/127)
 
 * **Community**:
     * Full list of PRs reviewed: [PRs](https://github.com/AY2122S2-CS2103-F09-1/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed).
