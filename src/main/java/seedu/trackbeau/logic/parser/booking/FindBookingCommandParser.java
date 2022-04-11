@@ -47,7 +47,7 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
                     continue;
                 }
                 if (i == 1) {
-                    ParserUtil.parseBirthdate(argMultimap.getValue(prefixList[i]).get());
+                    ParserUtil.parseDate(argMultimap.getValue(prefixList[i]).get());
                 } else {
                     for (String value : argMultimap.getValue(prefixList[i]).get().split(" ")) {
                         Method m = ParserUtil.class.getDeclaredMethod(parse[i], String.class);
