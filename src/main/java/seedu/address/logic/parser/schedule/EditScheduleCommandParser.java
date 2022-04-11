@@ -20,8 +20,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns a EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditScheduleCommand
+     * and returns a EditScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditScheduleCommand parse(String args) throws ParseException {
