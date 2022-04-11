@@ -462,6 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | new user       | key in the first few letters to see what commands starting with these letters are available    | know the potential commands that starts with these letters                                         |
 | `*`      | expert user    | send mass reminders to each players one day before the training date                           | automate the sending of announcements to my players                                                |
 | `*`      | user           | change the theme to light mode                                                                 | read the words more clearly in various environment                                                 |
+| `*`      | user           | view expired schedules                                                                         | reflect on frequencies of past events                                                              |
 
 *{More to be added}*
 
@@ -557,9 +558,11 @@ Use case ends.
 ### Glossary
 
 * **Club**: A basketball club consisting of a number of players, who regularly trains and participates in competitions.
+* **Person**: Players of the basketball club.
 * **Lineup**: Players from part of a club that play together on the court, typically consisting of 5 players.
 * **Schedule**: Event of a team, including training and competitions.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
