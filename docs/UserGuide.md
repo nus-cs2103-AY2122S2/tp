@@ -403,7 +403,7 @@ folder containing the `addressoc.jar` file to find a folder called `data`. Acces
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressSoC will discard all data and start with an empty data file the next time you run the app.
 </div>
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
