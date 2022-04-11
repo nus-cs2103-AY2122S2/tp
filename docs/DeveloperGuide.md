@@ -557,6 +557,58 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Favourite**
+
+Actor: User
+
+**MSS**
+1. User requests to favourite a client.
+2. REP displays a "🌟" on the right-hand corner of the client's display card.
+
+    Use case ends
+
+**Extensions:**
+* 1a. REP detects invalid index input.
+  * 1a1. REP displays error message for invalid index.
+  <br/>Use case ends
+
+**Use Case: Unfavourite**
+
+Actor: User
+
+Preconditions: The client to unfavourite is favourited.
+
+**MSS**
+1. User requests to unfavourite a client.
+2. REP removes the "🌟" on the right-hand corner of the client's display card.
+
+   Use case ends
+
+**Extensions:**
+* 1a. REP detects invalid index input.
+    * 1a1. REP displays error message for invalid index.
+      <br/>Use case ends
+
+**Use Case: Open Favourites window**
+
+Actor: User
+
+**MSS**
+1. User requests to open Favourites window.
+2. REP launches the Favourites window.
+
+   Use case ends
+
+**Use Case: Open Statistics window**
+
+Actor: User
+
+**MSS**
+1. User requests to open Statistics window.
+2. REP launches the Statistics window.
+
+   Use case ends
+
 **Use Case: Sort**
 
 Actor: User
@@ -564,7 +616,6 @@ Actor: User
 **MSS**
 1. User requests to sort the list of clients
 2. REP displays clients in the requested order
-
    Use case ends
 
 **Extensions:**
