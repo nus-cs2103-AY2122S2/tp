@@ -44,19 +44,15 @@ Given below are my contributions to the project.
   * TODO
 
 * **Documentation - Developer Guide**:
-  * Worked on `Candidate` model, `Add` command.
-  * Re-ordered `Implementation` section.
-  * TODO
+  * Worked on [`Model`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#model-component), [`UI`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#ui-component), [`Add`](https://ay2122s2-cs2103-f11-2.github.io/tp/DeveloperGuide.html#add-feature) command.
 
 * **Team-based tasks**:
   * Setting up the GitHub team repository.
   * Updating individual roles.
   * Necessary general code enhancements.
-    * Work related to renaming the product.
-    * Work related to changing the product's icon.
+    * Work related to renaming the product and changing the product's icon.
   * Maintaining team's Gradle build file.
-    * Updating `shadowJar` naming.
-    * Enabling assertions.
+    * Updating `shadowJar` naming and enabling assertions.
 
 * **Review/mentoring contributions**:
   * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm), Count: 0; [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm), Count: 0
