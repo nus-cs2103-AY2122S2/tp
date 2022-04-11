@@ -298,6 +298,10 @@ Examples:
 
 ![example](images/reminder_example.png)
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** Reminder will not remind you of archived meetings.
+</div>
+
 
 ### Archive : `archive`
 
@@ -376,7 +380,7 @@ Format: `redo`
 
 Examples:
 * `redo` after an `undo` that reverts a `deletem 3` command will delete the meeting restored by `undo`.
-<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows you a message explaining how to access the help page.
