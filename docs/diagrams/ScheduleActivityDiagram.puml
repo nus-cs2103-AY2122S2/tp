@@ -1,0 +1,27 @@
+@startuml
+start
+:User executes the 'schedule' command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid command format])
+    :Parses the command using \nScheduleCommandParser;
+    if () then ([valid parameters])
+        :Update the selected date store\nin model;
+        :Filter the bookings list for the \nweek containing the new date;
+        :Display the week view of the \nfiltered bookings;
+    else ([else])
+        :Shows an invalid \nparameters error message;
+        stop
+    endif
+    if () then ([user is on Schedule tab])
+    else ([else])
+        :Switch to Schedule tab;
+    endif
+    :Displays updated booking list;
+else ([else])
+    :Shows an invalid command error message;
+endif
+stop
+@enduml

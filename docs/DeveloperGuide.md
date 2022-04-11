@@ -191,6 +191,7 @@ The add customer feature is implemented via `AddCustomerCommand` which is create
 The following activity diagram summarizes what happens when the user executes the edit service command (`edits`):
 
 ![Add Customer Sequence Diagram](images/AddCustomerSequenceDiagram.png)
+
 ![Add Customer Sequence Diagram 2](images/AddCustomerSequenceDiagram2.png)
 
 ### List customers feature
@@ -224,12 +225,14 @@ The `UniqueList` uses Java's generics and contains items that implements the `Un
 ### Delete customer(s) feature
 
 #### Overview
-Delete command allows users to delete multiple customers at once for fast removal of unwanted customer profiles.
+The delete command allows users to delete multiple customers at once for fast removal of unwanted customer profiles.
 
 #### Implementation of feature
-The current implementation allows users to enter multiple indexes separated by commas. All the indexes will be checked if
-they are integers and valid indexes. Users have to make sure that all indexes pass the check, the command will be aborted 
-if any indexes fail the check. Only if all indexes pass the check, then the command with be executed.
+The delete customers feature is implemented via `DeleteCustomersCommand` which is created from `DeleteCustomerCommandParser`.
+1. The `DeleteCustomersCommandParser` takes in the argument string and verify if the indexes in the string are all valid integers.
+2. The indexes are then passed as a list to create a `DeleteCustomersCommand`.
+3. When executing `DeleteCustomersCommand`, it will check if all indexes are within the bound of the size of customers list and there are no duplicated indexes.
+4. The command will only success if all the check passes, else the execution will be aborted and an error will be thrown.
 
 #### Design Considerations
 
@@ -243,6 +246,7 @@ if any indexes fail the check. Only if all indexes pass the check, then the comm
   * Cons: Minor error in the input will cause the whole command to be aborted.
 
 The following activity diagram summarizes what happens when the user executes the delete customer command (`deletec`):
+
 ![Delete Customer(s) Activity Diagram](images/DeleteCustomerActivityDiagram.png)
 
 
@@ -311,10 +315,40 @@ The plot feature is implemented using the various plot commands such as `plotSta
 4. `MainWindow` then updates the data in the chart and shows the chart window.
 
 The following sequence diagram summarizes what happens when the user executes the plot command (`plot`):
+
 ![Plot Chart Sequence Diagram](images/ChartSequenceDiagram.png)
 
+### Schedule view feature
 
+#### Overview
+The schedule command allows users to view a selected week's bookings. 
+They will be displayed in columns organised from Monday to Sunday, company by their corresponding date.
 
+#### Implementation of feature
+The schedule feature provides three commands to navigate to different week, `ScheduleCommand`, `ScheduleNextCommand` and `SchedulePreviousCommand`.
+1. The schedule panel will display the week that contains the selected date, by default the selected date is set to the date everytime user starts up the application.
+2. The selected date is store inside the `ModelManager`, and the schedule commands will manipulate this date.
+3. `ScheduleCommand` sets the selected date to be the same as use input. 
+4. `ScheduleNextCommand` adds 7 days to the selected date, while `SchedulePreviousCommand` minus 7 days.
+5. The `SchedulePanel` will use the date stored in `Model` and find the Monday date if the date is not on Monday. 
+6. Using the date, `SchedulePanel` will filter the list of bookings sequential from Monday to Sunday and display the desired week's schedule.
+
+#### Design considerations
+* **Option 1:** Filter the bookings of Monday to Sunday in parallel using Java threads.
+    * Pros: Better performance specially when the number of bookings becomes huge.
+    * Cons: Need some form of synchronization so that Monday to Sunday list in display in correct order.
+* **Option 2 (Current choice):** Filter the bookings' day by day in a sequential order.
+    * Pros: Straightforward to implement.
+    * Cons: When booking data grow large, it might take longer to load the view.
+
+The following activity diagram summarizes what happens when the user executes the schedule command (`schedule`):
+
+![Schedule Activity Diagram](images/ScheduleActivityDiagram.png)
+
+The following sequence diagram shows the interactions within the `Logic` and `Model` components when the user inputs `schedule date/10-10-2022` command.
+
+![Schedule Sequence Diagram](images/ScheduleSequenceDiagram.png)
+ 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -508,6 +542,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User requests to see input format for plotting a chart using `help`
 
       Use case resumes at step 2.
+
+**Use Case 9: Display a selected week's schedule**
+
+**MSS**
+
+1. User request to view the desired week by specifying a date within that week.
+2. TrackBeau filters the booking data.
+3. The schedule panel displays the bookings of the desired week.
+
+    Use case ends.
+
+**Extensions**
+
+
+* 3a. The user is not on schedule panel.
+    * 3a1. TrackBeau switch from current panel to schedule panel.
+
+      Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
