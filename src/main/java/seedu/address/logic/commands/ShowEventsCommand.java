@@ -35,4 +35,18 @@ public class ShowEventsCommand extends Command {
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ShowEventsCommand)) {
+            return false;
+        }
+
+        ShowEventsCommand e = (ShowEventsCommand) other;
+        return predicate.equals(e.predicate);
+    }
+
 }
