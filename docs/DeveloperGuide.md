@@ -297,7 +297,7 @@ The sequence diagram below describes a successful execution of a command in a po
 
 `PopupYYY` represents different types of `Popup`, e.g. `PopupAddProduct`, `PopupUpdateProduct`, `PopupAddItem`, etc.
 
-When a user clicks a button in `PopupYYY`, the associated command is generated from the inputs. The command is then passed to `MainWindow` for execution. This process is similar a command is executed from `CommandBox`.
+When a user clicks a button in `PopupYYY`, the associated command is generated from the inputs. The command is then passed to `MainWindow` for execution. This process is similar to how a command is executed from `CommandBox`.
 
 The `commandResult` will then be sent to `ResultWindow` for display and `PopupYYY` will be hidden.
 
