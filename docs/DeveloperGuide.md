@@ -390,7 +390,7 @@ Step 2: It then creates a new instance of `ViewCommandParser` and passes the arg
 
 Step 3: This creates a new instance of `ViewCommand` with `nric` parameter
 
-Step 4: `Model#updateSummary()` is invoked, which updates all filtered lists for the entities in `Model`
+Step 4: `Model#updateSummary(nric)` is invoked as `ViewCommand` is executed, which updates all filtered lists for the entities in `Model`
 
 Step 5: `UI` is then updated accordingly, displaying the patient's summary
 
