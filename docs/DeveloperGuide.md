@@ -548,32 +548,6 @@ The `ObservableList` in the `Model` class then updates the display of the contac
 
 TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
 
-###Import feature
-
-The import mechanism implements the following sequence for the method call execute("import").
-
-#### What is the import feature
-
-The import feature allows users to import an Excel file that contains a list of student records into Tracey.
-
-The `import` command is as follows:
-
-`import FILE PATH`
-
-The activity diagram shows the possible execution paths for the `import` command.
-
-**Path Execution of Import Feature Activity Diagram is shown below:**
-
-There are two possible execution paths for this command.
-
-1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
-2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
-
-The sequence diagram below shows the interactions between objects during the execution of a `import` command.
-
-**Sequence Diagram of Import Feature is shown below:**
-
-
 ### Filter feature
 
 In this section, the functionality of the filter feature, the expected execution path, the structure of the FilterCommand class, the structure of the FilterCommand class and the interactions between objects with the FilterCommand object will be discussed.
@@ -901,6 +875,37 @@ The above figure illustrates the important interactions of `ResizeCommand` when 
 When a user inputs `resize 1`, `MainWindow#executeCommand()` will be invoked which in turn calls `LogicManager#execute()`. This will trigger a parsing process by `AddressBookParser` and `ResizeCommandParser` to check for valid command type and parameters.
 This will then create a `ResizeCommand` object which is then executed by the `LogicManager` via `ResizeCommand#execute()` which will then update the value needed to set the result display window size. This value is used by the `MainWindow#handleResizeResultDisplayWindow()`
 which sets the window in the GUI according to the user's desired option.
+
+--------------------------------------------------------------------------------------------------------------------
+
+###Potential Feature: Import 
+
+This section explains the potential import feature. 
+The import mechanism will implement the following sequence for the method call execute("import").
+
+#### What is the import feature
+
+The import feature allows users to import an Excel file that contains a list of student records into Tracey.
+
+The `import` command is as follows:
+
+`import FILE PATH`
+
+The activity diagram shows the possible execution paths for the `import` command.
+
+**Path Execution of Import Feature Activity Diagram is shown below:**
+![ImportFeatureActivityDiagram](images/ImportFeature.png)
+
+There are two possible execution paths for this command.
+
+1. User inputs the `import` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
+2. User inputs the `import` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+
+The sequence diagram below shows the interactions between objects during the execution of a `import` command.
+
+**Sequence Diagram of Import Feature is shown below:**
+![ImportFeatureSequenceDiagram](images/ImportSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1243,6 +1248,34 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Finding a person
+
+1. Finding a person by their full name
+
+     1. Prerequisites: Add contacts with names of `Andy` and `Bob` by using `add` command 
+
+    1. Test case: `find Andy`<br>
+       Expected: List details of `Andy`. Details of matched contacts shown in the status message. 
+
+    1. Test case: `find Carl`<br>
+       Expected: No person is found. Error details shown in the status message. 
+
+    1. Other incorrect delete commands to try: `find`, `find x` (where x is any number)<br>
+       Expected: Similar to previous.
+
+1. Finding a person by using name's prefix 
+
+    1. Prerequisites: Add contacts with names of `Andy`, `Anna` and `Bob` by using `add` command
+
+    1. Test case: `find An`<br>
+       Expected: List details of `Andy` and `Anna`. Details of matched contacts shown in the status message.
+
+    1. Test case: `find dy`<br>
+       Expected: No person is found. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `find na`, `find ob` <br>
+       Expected: Similar to previous.
 
 ### Saving data
 

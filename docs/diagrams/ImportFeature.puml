@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Import Command with file path;
+
+if () then ([File data follows correct format])
+    :Parse data into Json format;
+        :Returns Message to user indicating Import Success;
+        :ResultDisplay prints result to user;
+
+else ([else])
+    :CommandException;
+endif
+stop
+@enduml

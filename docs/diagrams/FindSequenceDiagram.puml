@@ -22,7 +22,7 @@ LogicManager -> AddressBookParser : parseCommand("find XYZ")
 activate AddressBookParser
 
 create FindCommandParser
-AddressBookParser -> FindCommandParser
+AddressBookParser -> FindCommandParser : FindCommandParser ("find XYZ")
 activate FindCommandParser
 
 FindCommandParser --> AddressBookParser
