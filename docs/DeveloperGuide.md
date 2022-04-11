@@ -382,7 +382,7 @@ c) they do not remember which field they want to search.
 * **Alternative 1 (Current Choice):** Search all fields for the keyword <br>
   - Pros:
     - This is the most intuitive approach. 
-    - For all above mentioned scenarios a-c, this alternative is will produce the most useful result.
+    - For all above mentioned scenarios a-c, this alternative will produce the most useful result.
   - Cons:
     - If there is a lot of data it will take more time to search all fields for every person.
     - Requires the most complex implementation among all alternatives. 
@@ -849,7 +849,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -862,7 +862,92 @@ testers are expected to do more *exploratory* testing.
       
 ### 8.2 Adding a person
 
+1. Adding a person
+
+   1. Prerequisites: Have an empty contacts list. (_Note: The clear and back command may come in handy_)
+   
+   1. Test case for basic case: `add n/John Doe'<br>
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for all fields: `add n/Michael ph/62334555 l/Home e/michael@gmail.com l/Personal a/Big Mansion l/Home j/Jobs c/Company t/Happy t/Man`
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for some fields: `add n/Peter ph/63339888 l/Home e/peter@gmail.com l/Personal`
+      Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
+      
+   1. Test case for no fields: `add`
+      Expected: Invalid command format error message.
+      
+   1. Test case for one invalid prefix: `add name/Wayne`
+      Expected: Invalid command format error message.
+      
+   1. Test case for one invalid name input: `add n/1` 
+      Expected: Invalid name format error message.
+      
+   1. Test case for input without name: `add ph/999 a/Big Hotel`
+      Expected: Invalid command format error message.
+      
+   1. Test case for input with one invalid field input: `add n/Harry ph/Numbers`
+      Expected: Invalid phone format error message.
+      
+   1. Test case for inputs with multiple invalid field inputs: `add n/Harry ph/Numbers j/###`
+      Expected: Invalid phone format error message.
+      
+   1. Test case for duplicate contacts: `add n/David` then `back` and `add n/David`
+      Expected: Duplicate person error message.
+      
+   1. Test case for contacts with same name but different tags: `add n/Storm t/sunny` then `back` and `add n/Storm t/windy`
+      Expected: Both contacts successfully added.
+
 ### 8.3 Editing a person
+
+1. Editing a person
+
+   1. Prerequisites: Preferably an empty contacts list. Do `add n/Zachary Davidson` and stay at the Contact Details Page before starting the testing. The list of test cases have to be followed in order for the testing to work.
+   
+   1. Test case with one valid field input: `edit t/funny`
+      Expected: Contact information updated message is displayed.
+   
+   1. Test case with multiple valid field inputs: `edit ph/63339888 e/guy@people.com a/Average apartment t/not funny actually`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case for no fields: `edit`
+      Expected: Field error message is displayed.
+   
+   1. Test case with one invalid field input amongst valid inputs: `edit ph/90909999 e/ihateemails a/Pineapple`
+      Expected: Invalid email format error message is displated.
+      
+   1. Test case with one invalid field input and one valid field input: `edit ph/98889777 ph/no`
+      Expected: Invalid phone format error message is displayed.
+      
+   1. Test case with unnecessary additions to front of inputs: `edit 1 t/me`, `edit Zachary Davidson t/me`
+      Expected: Invalid command format message is displayed.
+      
+   1. Test case with valid name input: `edit n/Johnny`, `edit n/Johnny Number 1`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case with invalid name input: `edit n/R@dical`, `edit n/`
+      Expected: Invalid name format message is displayed.
+      
+   1. Test case with valid jobtitle input: `edit j/Job`, `edit j/Job Number 1`
+      
+   1. Test case with invalid jobtitle input: `edit j/Ch@f`, `edit j/Boss (CEO)`, `edit j/`
+      Expected: Invalid jobtitle format message is displayed.
+      
+   1. Test case with valid company input: `edit c/Good company`, `edit c/Company Number 1`
+      Expected: Contact information updated message is displayed.
+      
+   1. Test case with invalid company input: `edit c/`
+      Expected: Invalid company format message is displayed.
+   
+   1. Test case with valid label input: `edit ph/999 l/Police`, `edit e/email@gmail.com l/Email`, `edit a/address l/home`, `edit ph/999 l/9aS@1`
+      Expected: Contact information updated message is displayed.
+   
+   1. Test case with invalid label input: `edit l/onlyLabel`
+      Expected: Invalid command format message is displayed.
+      
+   1. Test case with invalid label input: `edit ph/67676767 l/`
+      Expected: Invalid label format message is displayed.
 
 ### 8.4 Deleting fields
 1. Deleting only particular fields of a contact
@@ -915,7 +1000,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 8.6 Clearing contacts and/or meetings
 
-1. Clearing all data
+1. Clearing all data (contacts and meetings)
 
    1. Prerequisites: Have at least one contact and one meeting stored in the
       application
@@ -929,16 +1014,43 @@ testers are expected to do more *exploratory* testing.
 
 1. Clearing all meetings
 
-  1. Prerequisites: Have at least one meeting stored in the application.
+   1. Prerequisites: Have at least one meeting stored in the application.
 
-  2. Test case: `cancel-all` <br>
-     Expected: A confirmation window appears.
-    1. Test case i: Close the confirmation window. <br>
-       Expected: No meetings get deleted.
-    2. Test case ii: Click on the 'Yes' button to confirm meetings' deletion. <br>
-       Expected: All meetings get deleted from the application.
+   2. Test case: `cancel-all` <br>
+      Expected: A confirmation window appears.
+      1. Test case i: Close the confirmation window. <br>
+         Expected: No meetings get deleted.
+      2. Test case ii: Click on the 'Yes' button to confirm meetings' deletion. <br>
+         Expected: All meetings get deleted from the application.
 
 ### 8.7 Finding
+1. Finding contacts using various fields
+   1. Prerequisites: More than one person in the contacts list. They should collectively meet the following criteria:
+      1. Only one person has `Barry` in their name
+      2. At least one person is tagged `Manager`
+      3. Only one person lives in `Barry Street` and he is not `Barry`
+      4. At least one person's job is `Engineer`
+      5. No one is named `Dakota`
+      6. No one is tagged `Friend`
+      
+   2. Test case: `find n/Barry` <br>
+      Expected: Person named `Barry` will appear in the search result. A message showing the one person matched is displayed.
+   3. Test case: `find t/Manager` <br>
+      Expected: People tagged `Manager` will appear in the search result. A message showing the number of people matched is displayed.
+   4. Test case: `find a/Pine Street`<br>
+      Expected: People who live in `Pine Street` will appear in the search result. A message showing the number of people matched is displayed.
+   5. Test case: `find j/engineer`
+      Expected: People who work as `engineer` will appear in the search result. A message showing the number of people matched is displayed.
+   6. Test case: `find n/Dakota` <br>
+      Expected: A message showing that no people were matched is displayed.
+   7. Test case: `find t/Friend` <br>
+      Expected: A message showing that no people were matched is displayed.
+   8. Test case: `find Barry` <br>
+      Expected: Person who lives in `Barry Street` and person who is named `Barry` will appear in the search result. A message showing the number of people matched is displayed.
+   9. Test case: `find`
+      Expected: No search results are shown and error message is displayed in the Result Display.
+   10. Test case: `find n/`
+       Expected: No search results are shown and error message is displayed in the Result Display.
 
 ### 8.8 Listing all contacts
 
@@ -961,6 +1073,16 @@ testers are expected to do more *exploratory* testing.
        Expected: You are not navigated to the Contact Details Page and an error message is shown in the Result Display.
 
 ### 8.10 Back
+
+1. Going back to the Home Page from the Contact Details Page
+
+   1. Prerequisites: Have at least 1 contact and start at the home page.
+
+   1. Test case for view command: `view 1` then `back`
+      Expected: Home Page -> Contact Details Page -> Home Page.
+      
+   1. Test case for add command: `add n/Vivaldi` then `back`
+      Expected: Home Page -> Contact Details Page -> Home Page.
 
 ### 8.11 Adding a meeting
 
@@ -993,8 +1115,45 @@ testers are expected to do more *exploratory* testing.
       Expected: No meeting is added and an error message is shown in the status box.
 
 ### 8.12 Updating a meeting
+1. Updating a meeting
+
+   1. Prerequisites: Must have only one meeting added in the `Meetings` list
+   
+   2. Test case: `update 1 in/UTown` <br>
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed.
+
+   3. Test case: `update 1 for/Testing Feature` <br>
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed.
+
+   4. Test case: `update 1 on/22-08-2040 23:47`
+      Expected: The updated meeting is shown on the list of meetings at the side and a success message is displayed. 
+   
+   5. Test case: `update 1 in/` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   6. Test case: `update 1 for/` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   7. Test case: `update 1 on/21-09-2021 12:30` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   8. Test case: `update 1` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
+   
+   9. Test case: `update 2 in/UTown` <br>
+      Expected: No meeting is updated and an error message is shown in the Result Display.
 
 ### 8.13 Cancelling a meeting
+
+1. Canceling a meeting
+
+   1. Prerequisites: Must have only one meeting added in the `Meetings` list
+   
+   2. Test case: `cancel 2` <br>
+      Expected: No meeting is cancelled and an error message is shown in the Result Display.
+   
+   3. Test case: `cancel 1` <br>
+      Expected: The meeting is cancelled and disappears from the `Meetings` list.
 
 ### 8.14 Saving data
 
