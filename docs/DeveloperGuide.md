@@ -793,30 +793,21 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+    
+### Deleting a client
 
-1. _{ more test cases …​ }_
+1. Deleting a client while all clients are being shown
 
-### Deleting a person
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list from the demo data.
 
-1. Deleting a person while all persons are being shown
+    2. Test case: `delete Alex`<br>
+       Expected: Client with the name `Alex Yeo` is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    3. Test case: `delete 123`<br>
+       Expected: No client is deleted as no name is found that contains `123` from the demo data. Error details shown in the status message.
+   
+    4. Test case: `delete John` when there are `John Doe` and `John Yeo` in the list<br>
+       Expected: Choose an index of which `John` should be deleted.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    6. Other incorrect delete commands to try:`delete`, `delete ABC*!@` (special characters found)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
