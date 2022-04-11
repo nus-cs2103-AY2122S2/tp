@@ -279,7 +279,7 @@ The `find` mechanism is facilitated by `AddressBook`. The `find` command in `TAl
 has been enhanced based on the initial implementation of the `find` command in `AddressBook`.
 
 The enhancement works by adding a new prefix in the `CliSyntax` class `k/`, which allows the
-user to separate multiple keywords. and `f/` which allows the user to specify which field the
+user to separate multiple keywords and `f/` which allows the user to specify which field the
 `find` command should search for keywords under.
 
 #### How is the feature implemented?
@@ -327,7 +327,7 @@ by the user, and execute the `ContainsKeywordsPredicate` test against it. An alt
 `ATTRIBUTE_FIELDS`. Though this is implementable by checking the validity of each of the `ATTRIBUTE_FIELD` parsed in,
 it is considered out of scope in this particular iteration. Given as all the fields hold extremely different values,
 the user is unlikely to be searching for the same set of keywords across multiple fields. Instead, following the behaviour
-of other commands, the `FindCommandParser` will take in the last `/f` prefix.
+of other commands, the `FindCommandParser` will take in the last `f/` prefix.
 
 #### UML Diagrams
 **Activity Diagram**<br>
@@ -339,7 +339,7 @@ The following activity diagram summarizes a high level view of what happens when
 
 #### What is the feature about?
 The `sort` mechanism utilises the existing command class model from `AddressBook`. It introduces new methods and modifies current
-implementation of existing methods in order to allow the user sort the displayed candidates list by a specific
+implementation of existing methods in order to allow the user to sort the displayed candidates list by a specific
 field.
 
 A new `s/` prefix is added in the `CliSyntax`, which is used to accurately parse in the `ATTRIBUTE_FIELD` that the user
@@ -349,7 +349,7 @@ would like to sort the displayed candidate list by. The implementation in `SortC
 #### How is the feature implemented?
 The parser for the `sort` command works similarly to all other commands implemented. In this case, as the user
 may potentially key in multiple valid `s/` prefix fields, we utilise the `ArgumentTokenizer` in order to parse
-in all the input, and only utilise the last `s/` prefix field.
+in all the inputs, and only utilise the last `s/` prefix field.
 
 The main logic for executing the `sort` command works within the `ModelManager` and `AddressBook` classes. When the
 sort command is executed, a valid Comparator is passed as an argument into the `updateSortedCandidateList()` method, which

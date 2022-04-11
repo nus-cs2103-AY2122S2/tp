@@ -458,6 +458,9 @@ and/or (conflicting) interviews.
   * A new feature to pinpoint the exact interview in conflict (if any) when a user attempts to schedule an interview
   * A new feature to allow the user to schedule interviews of flexible duration is
     under consideration for future versions of TAlent Assistant™.
+  * Extension of the `find` command to enable searching across multiple fields.
+  * Extension of the `view` command to enable user to bring up a list of scheduled interview for a customised date range.
+  * Extension of the `sort` command to enable user to customise the sorting order (ascending or descending) as well as sorting by availabilities.
 
 --------------------------------------------------------------------------------------------------------------------
 
