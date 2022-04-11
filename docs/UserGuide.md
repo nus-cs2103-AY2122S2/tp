@@ -27,7 +27,6 @@ Some features are able to be operated via mouse interaction. Features that allow
 
 Refer to the [Features](#features-cli) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Features (CLI)<a name="features-cli"></a>
@@ -58,6 +57,8 @@ Below are the features that can be completed using command line interface (CLI).
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Add a new person: `add`<a name="add-a-new-person"></a>
 
 Add a new person to UNite.
@@ -67,6 +68,9 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [c/COURSE] [tele/TELEGRAM] [m/MATR
 * The order of input does not matter.
 * `n/NAME p/PHONE e/EMAIL a/ADDRESS` are the 4 required information that must be present.
 * Can attach multiple tags to the person at the same time, each tag must follow the format `t/TAG`
+* Two `Person` are considered the same `Person` if 
+  * They have the same `Name` (case-insensitive).
+  * At least one of following fields: `Email`, `Phone`, `Address`, `MatricCard`) is the same (case-insensitive) between these two `Person`.
 
 Examples:
 * `add n/Peter p/12345678 e/peter@gmail.com a/1 Computing Drive t/classmates t/friends
@@ -153,6 +157,8 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` <br> Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` <br> Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 2 n/Betsy Crower t/tag1 t/tag1 t/tag1` <br> Edits the name of the 2nd person to be `Betsy Crower` and creates only one tag `tag1`.
+
+<div style="page-break-after: always;"></div>
 
 ### Add a new tag : `add_tag`<a name="add-a-new-tag"></a>
 
@@ -264,7 +270,7 @@ Examples:
 * `grab tele/ t/friends` <br> Grabs the telegram id of everyone tagged as "friends" inside UNite.
 
   ![result for 'grab e/'](images/grab-email.png)
-* 
+
 <div style="page-break-after: always;"></div>
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
@@ -294,6 +300,7 @@ Examples:
 * `theme dark` changes UNite to dark theme, which is also the default theme.
 
 ![dark theme](images/dark_theme.png)
+<div style="page-break-after: always;"></div>
 
 * `theme light` changes UNite to light theme.
 

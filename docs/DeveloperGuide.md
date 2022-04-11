@@ -18,9 +18,9 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -82,6 +82,8 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
+<div style="page-break-after: always;"></div>
+
 The `UI` component,
 
 * executes user commands using the `Logic` component.
@@ -134,6 +136,7 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Unite`, which `Person` references. This allows `Unite` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -148,6 +151,8 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
+
+<div style="page-break-after: always;"></div>
 
 The `Storage` component,
 * can save both UNite data and user preference data in json format, and read them back into corresponding objects.
@@ -165,7 +170,7 @@ Classes used by multiple components are in the `seedu.unite.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Enhanced Person Object
+### **Enhanced Person Object**
 
 #### Rationale
 Person object needs to be enhanced to contain more relevant attributes to suit the target audiences.
@@ -178,6 +183,8 @@ Now in UNite, we are storying them in `Unite`.
 Within it, it contains two class, i) `UniquePersonList` that keep tracks of the `Person` in UNite, and
 ii) `UniqueTagList` that keep tracks of the `Tag` in UNite.
 
+<div style="page-break-after: always;"></div>
+
 In the original AB3 address book, eachj `Person` object consist of various attributes such as `Name`, `Phone`, `Address`, `Email` and `Tag`. Here shows a
 diagram of a class diagram of the profiles in the AB3 Address Book.
 
@@ -188,6 +195,8 @@ In UNite, each `Person` object is being enhanced and modified in order to fits t
 this includes `Course` class, `MatricCard` class and `Telegram` class. The updated class diagram for UNite can be found below.
 
 ![AddProfileNewClassDiagram](images/AddProfileNewClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 Consider the following commands.
 
@@ -210,14 +219,99 @@ Abstract school related classes such as `Email`, `Course` and `MatricCard` such 
 
 We sticked to **Alternative 1** which was the easier option for implementation. We are only targeting one university as of now, so it is a good assumption that school related information such as `MatricCard`, `Email` and `Course` are unique so the pros in **Alternative 2** may be less relevant in UNite.
 
-<div style="page-break-after: always;"></div> 
-
 **Aspect: Optional `Telegram`, `Course` and `MatricCard` fields** <br>
 These fields are set as optional. When users choose not to key in these fields, it will be set to a default value of an empty String "". <br> 
 The regex of these three classes has been modified to accept the empty String "" as a valid input command, but internally any `Telegram`, `Course` and `MatricCard` with value of "" means that the field is left blank and unfilled. 
 
+<div style="page-break-after: always;"></div> 
 
-### Filter feature
+### **Add Person feature**
+#### Rationale 
+The add command allows user to add a new `Person` into UNite.
+
+#### Implementation
+The add profile feature receives input from the users (with the relevant attributes) and create a `Person` object with these attributes and add it into UNite.
+* `AddCommand` extending class `Command` is implemented to let the system understand the command
+* `AddCommandParser`is implemented to parse the filter command entered by user.
+
+The activity diagram below summarizes what happens when an add command is executed.
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
+Given below is an example usage scenario of grab command.
+
+Step 1. UNite is opened by the user and ready to receive commands. The user types in the command `add n/Alice p/87123456 e/alice@gmail.com a/12 Kent Ridge Road m/A1234123E c/Computer Science tele/thisisAlice`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `AddCommandParser` object.
+
+Step 3. The `AddCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `AddCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of add command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise a `CommandResult` containing the details of the new `Person` as a String is returned.
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Duplication check** <br>
+* **Alternative 1 (current choice):** <br> The check is done late in `AddCommand`. `Person` object created before the duplication check.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage since unnecessary objects may be created.
+
+* **Alternative 2:** <br> Early duplication check in `AddCommandParser` itself.
+    * Pros: Prevent unnecessary creation of `Person` object. 
+    * Cons: May need heavy refactoring. 
+
+**Aspect: Duplication criteria** <br>
+* **Alternative 1 (current choice):** <br> Two `Person` are considered the same `Person` if
+    * They have the same `Name` (case-insensitive).
+    * At least one of following fields: `Email`, `Phone`, `Address`, `MatricCard`) is the same (case-insensitive) between these two `Person`.
+    
+You can redefine your own criteria if you want to. Simply modify `Person#isSamePerson()` to define your own criteria.
+
+<div style="page-break-after: always;"></div>
+
+### **Edit Person feature**
+#### Rationale
+The edit command allows user to edit an existing `Person` in UNite.
+
+#### Implementation
+The edit profile feature receives input from the users (with the relevant attributes). The edit is facilitated by `EditPersonDescriptor`, which stores the details of the `Person` that needs to be changed.
+* `EditCommand` extending class `Command` is implemented to let the system understand the command
+* `EditCommandParser`is implemented to parse the filter command entered by user.
+
+The activity diagram below summarizes what happens when an add command is executed.
+
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+Given below is an example usage scenario of edit command.
+
+Step 1. UNite is opened by the user and ready to receive commands. Assuming there is already one `Person` added in UNite. The user types in the command `edit 1 n/Bob`.
+
+Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteParser` which creates a `EditCommandParser` object.
+
+Step 3. The `EditCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `EditCommand` object
+if there is no parse exception.
+
+Step 4. During the execution of edit command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise a `CommandResult` containing the details of the new `Person` as a String is returned.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+#### Design Consideration
+**Aspect: Creation of edited `Person` object** <br>
+* **Alternative 1 (current choice):** <br> Everytime a field get edited, a new `Person` object is created to replace the original `Person` in UNite. 
+    * Pros: Ensure immutability. Easy to implement. 
+    * Cons: Many object creations.
+
+* **Alternative 2:** <br> Update the field in the original `Person` object directly.
+  itself.
+    * Pros: Lesser creation of `Person` object.
+    * Cons: Needs to be implemented carefully to make sure there will not be any side effects. 
+
+We decided to go with **Alternative 1**, which ensures immutability and no side effects.
+
+<div style="page-break-after: always;"></div>
+
+### **Filter feature**
 
 The filter feature receives a tag name input from the user and filters out the profiles that has the given tag attached.
 To implement the feature, the below classes are created:
@@ -226,6 +320,10 @@ To implement the feature, the below classes are created:
 * `FilterCommandParser`is implemented to parse the filter command entered by user.
 * `PersonContainsTagPredicate` extends class Predicate<Person> to assist in filtering out the profiles that contains
   the given tag
+
+The activity diagram below summarizes what happens when a filter command is executed.
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 The sequence diagram below illustrates how the filter command works, using `'filter family'` as the sample input.
 
@@ -244,9 +342,6 @@ if there is no parse exception. In the creation of a new `FilterCommand` object,
 Step 4. During the execution of filter command, a `CommandException` is thrown if the tag does not exist in the model.
 Otherwise, the profile list is filtered using the predicate.
 
-The activity diagram below summarizes what happens when a filter command is executed.
-
-![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 #### Design considerations
 
@@ -254,7 +349,7 @@ The filter feature was implemented in such a way that it aligns with the format 
 
 <div style="page-break-after: always;"></div>
 
-### Grab Command
+### **Grab Command**
 #### Rationale
 The grab feature allows user to grab any attribute (as defined in [Enchanced Person Object](#) (except `Tag`) of anyone in UNite. The grab result will be displayed in UNite and users can efficiently compile the needed data.
 
@@ -280,7 +375,7 @@ Step 2. The command is passed from `logic.LogicManager`into `logic.parser.UniteP
 Step 3. The `GrabCommandParser` parses the arguments using `ArgumentTokenizer` and returns a `GrabCommand` object
 if there is no parse exception.
 
-Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, the attribute is being grabbed from the correct `Person` and returned to user.
+Step 4. During the execution of grab command, a `CommandException` is thrown if the input is invalid (see activity diagram above). Otherwise, Otherwise a `CommandResult` containing the String of the attribute being grabbed from the correct `Person` is returned to user.
 
 ![GrabSequenceDiagram](images/GrabSequenceDiagram.png)
 
@@ -301,7 +396,7 @@ Hence, we avoided this potential confusion by imposing an additional constraint 
 
 <div style="page-break-after: always;"></div>
 
-### \[Proposed\] Undo/redo feature
+### **\[Proposed\] Undo/redo feature**
 
 #### Proposed Implementation
 
@@ -394,7 +489,7 @@ information about a person.
 
 <div style="page-break-after: always;"></div>
 
-### Theme choosing
+### **Theme choosing**
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
 that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
 dark theme, so that the application fits better to the vibrant energy of a university.
