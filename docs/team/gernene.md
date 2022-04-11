@@ -20,6 +20,8 @@ Given below are my contributions to the project.
   * Justification: This feature allows TAssist to commit class groups and assessments to persistent storage.
   * Highlights: This enhancement affects existing commands and commands to be added in future.
 
+![Ui](../images/Ui.png)
+
 * **New Feature**: Added mutliple lists and toggles to GUI.
   * What it does: Allows users to switch between their module, class group, student, and assessment lists by clicking the respective button.
   * Justification: This feature lets users study data more efficiently by leveraging the UI to display information.
@@ -36,16 +38,19 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=Gernene)
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme
-  * Wrote additional tests for common classes
+  * Updated the GUI color scheme/overall styling
+  * Wrote additional tests for common classes (ex: ModelManagerTest)
+  * Created several entity-builders for testing sample data
 
 * **Documentation**:
   * User Guide:
     * Modified feature list to serve the dual purpose of a step-by-step walkthrough.
-    * Adjusted UG language to sound more "inviting" and "user-friendly".
+    * Reworked UG language to sound more "inviting" and "user-friendly".
   * Developer Guide:
+    * Wrote target user profile
+    * Contributed heavily to target user stories
     * Added implementation details of the `list` command.
     * Added UML diagrams for the `list` command.
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#106](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/106), [\#99](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/99)
+* **Team & Community**:
+  * Some PRs reviewed (with non-trivial review comments): [\#106](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/106), [\#99](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/99)
