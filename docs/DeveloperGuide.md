@@ -1202,7 +1202,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC14 - Redoing a undo command
+### Use case: UC15 - Redoing a undo command
 
 **MSS**
 
@@ -1218,7 +1218,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Use case: UC15 - Getting the email of students
+### Use case: UC16 - Getting the email of students
 
 **MSS**
 
