@@ -2,6 +2,31 @@
 layout: page
 title: Developer Guide
 ---
+## **Introduction**
+
+ReCLIne is a desktop app which serves as a centralised location for recruiters to store and track job applicants and jobs,
+optimized for use via a `Command Line Interface (CLI)` while still having the benefits of a `Graphical User Interface (GUI)`.
+
+This Developer Guide assumes that its readers have some basic understanding of programming.
+
+The purpose of this Develop Guide is to aid any curious or interested contributor in developing ReCLIne further by providing
+an in-depth explanation of how the features are implemented.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
+
+* This project is based off the AddressBook-Level3(AB3) project that was created by the [SE-EDU initiative](https://se-education.org/).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Setting up, getting started**
+
+Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
+
 ## Table of Contents
 * [Introduction](#introduction)
 * [Acknowledgements](#introduction)
@@ -41,30 +66,7 @@ title: Developer Guide
   * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
-
-## **Introduction**
-
-ReCLIne is a desktop app which serves as a centralised location for recruiters to store and track job applicants and jobs,
-optimized for use via a `Command Line Interface (CLI)` while still having the benefits of a `Graphical User Interface (GUI)`.
-
-This Developer Guide assumes that its readers have some basic understanding of programming.
-
-The purpose of this Develop Guide is to aid any curious or interested contributor in developing ReCLIne further by providing
-an in-depth explanation of how the features are implemented.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* This project is based off the AddressBook-Level3(AB3) project that was created by the [SE-EDU initiative](https://se-education.org/).
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Design**
 
@@ -180,10 +182,10 @@ This is a `slightly zoomed in version` of the Model Diagram for `Job`
 
 The `Model` component,
 
-* stores the address book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object) and all `Job` objects (which are contained in a `UniqueJobList` object).
-* stores the currently 'selected' `Applicant` or "Job" objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` or `ObservableList<Job>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* Stores the address book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object) and all `Job` objects (which are contained in a `UniqueJobList` object).
+* Stores the currently 'selected' `Applicant` or `Job` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` or `ObservableList<Job>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Applicant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Applicant` needing their own `Tag` objects.<br>
 
@@ -256,6 +258,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 Back to [Table of Content](#table-of-content)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Implementation**
 
@@ -451,6 +454,7 @@ The design implementation for DeleteJob is similar to that for DeleteApplicant, 
 Back to [Table of Content](#table-of-content)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -728,6 +732,7 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Appendix: Instructions for manual testing**
 
