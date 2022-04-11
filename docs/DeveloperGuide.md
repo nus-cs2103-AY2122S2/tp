@@ -525,6 +525,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: Delete an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to delete a selected company from the list
+4. InternBuddy deletes all persons associated with the company
+5. InternBuddy deletes the company from the list
+6. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to delete a selected person from the list
+4. InternBuddy deletes the person from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to delete a selected event from the list
+5. InternBuddy deletes the event from the list
+6. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
