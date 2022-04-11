@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":HireLahParser" as HireLahParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddInterviewCommandParser" as AddInterviewCommandParser LOGIC_COLOR
+participant "a:AddInterviewCommand" as AddInterviewCommand LOGIC_COLOR
+end box
+
+[-> HireLahParser : parseCommand("add -i 1 d/2022-01-01 14:00 p/2")
+activate HireLahParser
+
+create AddCommandParser
+HireLahParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> HireLahParser
+deactivate AddCommandParser
+
+HireLahParser -> AddCommandParser : parse("-i 1 d/2022-01-01 14:00 p/2")
+activate AddCommandParser
+
+create AddInterviewCommandParser
+AddCommandParser -> AddInterviewCommandParser
+activate AddInterviewCommandParser
+
+AddInterviewCommandParser --> AddCommandParser
+deactivate AddInterviewCommandParser
+
+AddCommandParser -> AddInterviewCommandParser : parse("1 d/2022-01-01 14:00 p/2")
+activate AddInterviewCommandParser
+
+create AddInterviewCommand
+AddInterviewCommandParser -> AddInterviewCommand
+activate AddInterviewCommand
+
+AddInterviewCommand -> AddInterviewCommandParser : a
+deactivate AddInterviewCommand
+
+AddInterviewCommandParser --> AddCommandParser : a
+deactivate AddInterviewCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddInterviewCommandParser -[hidden]-> AddCommandParser
+destroy AddInterviewCommandParser
+
+AddCommandParser --> HireLahParser : a
+deactivate AddCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> HireLahParser
+destroy AddCommandParser
+
+[<--HireLahParser : a
+deactivate HireLahParser
+
+
+@enduml
