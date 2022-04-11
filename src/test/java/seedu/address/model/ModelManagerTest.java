@@ -19,8 +19,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
-import seedu.address.model.entity.Entity;
-import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
