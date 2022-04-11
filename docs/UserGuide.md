@@ -4,12 +4,14 @@ title: User Guide
 ---
 
 AgentSee is a **desktop application for property agents to manage clients.** It is:
+
 * optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
   - So if you can type fast, AgentSee can get your client management tasks done faster than traditional GUI apps!
   
 * Easy to use! The User Guide and the application is very easy to navigate!
 
 * ~~Cheap~~ FREE!
+
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -355,7 +357,7 @@ Function: Display the seller list.
 
 Format: `list-s`
 
-#### `add-s`
+#### Adding sellers. `add-s`
 
 Function: Add a seller to the seller list. This is essential for you to add a seller's data.
 
@@ -610,9 +612,10 @@ And here are the examples of 2 sellers, one has a property and one does not have
 
 #### Tag
 - empty tag should be `[]`
+
 #### PropertyToBuy
 - empty property must be `null`, not `"null"` or `'null'`
-- for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
+- for the `housetype` under `house`, the housetype provided must be one of the defined house types.
 Otherwise, all other value will be translated to `Unspecified` housetype!
 - Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
 - `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
