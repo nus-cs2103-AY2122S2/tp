@@ -462,7 +462,10 @@ To delete a person, right-click on the profile and select `Delete`.
 
 To add a new tag, click the `Tags` button on the menu bar, and select `Tags`. A **Tags pop-up window** will appear.
 
-<img src="images/tag_popup.png" width="300"/>
+<p align="center">
+    <img src="images/tag_popup.png" width="300"/>
+</p>
+
 
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
