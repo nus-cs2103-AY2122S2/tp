@@ -87,6 +87,7 @@
                                 </Label>
                             </children>
                         </VBox>
+                        <!-- @@author -->
                         <VBox id="mainDisplay" HBox.hgrow="ALWAYS">
                             <children>
                                 <StackPane fx:id="commandBoxPlaceholder" VBox.vgrow="NEVER">
