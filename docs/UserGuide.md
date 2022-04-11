@@ -531,9 +531,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
-<br> 1. When grading assessments, executing the command without `g/GRADE` will increment what ever grade the student previously had. If the student has no grade for the assessment, they will automatically be graded `1`. Hence, you will be able to execute the same command every week when grading assessment like class participation.
-<br> 2. Similar to marking attendance, if most of the students has the same grade, you may grade all students the same grade using `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all g/GRADE` before changing the grade of a couple of students by specifying the student indexes or student IDs.
+:bulb: **Tip:** When grading assessments, executing the command without `g/GRADE` will increment what ever grade the student previously had. If the student has no grade for the assessment, they will automatically be graded `1`. Hence, you will be able to execute the same command every week when grading assessment like class participation.
 </div>
 
 ### Managing data
