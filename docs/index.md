@@ -1,6 +1,6 @@
 ---
 layout: page
-title: uMessage v1.3
+title: uMessage v1.4
 ---
 
 [![CI Status](https://github.com/AY2122S2-CS2103-W16-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-W16-2/tp/actions)
