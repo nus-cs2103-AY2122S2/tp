@@ -31,6 +31,21 @@ public class ArgumentMultimap {
         argMultimap.put(prefix, argValues);
     }
 
+    public Map<Prefix, List<String>> getArgMap() {
+        return argMapCopy();
+    }
+
+    /**
+     * Returns a copy of the argMultimap
+     */
+    private Map<Prefix, List<String>> argMapCopy() {
+        Map<Prefix, List<String>> copy = new HashMap<>();
+        for (Map.Entry<Prefix, List<String>> entry : argMultimap.entrySet()) {
+            copy.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
+        return copy;
+    }
+
     /**
      * Returns the last value of {@code prefix}.
      */

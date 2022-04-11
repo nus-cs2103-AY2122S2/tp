@@ -32,6 +32,17 @@ public class Name {
     }
 
     /**
+     * Compare two names ignoring their casing.
+     * @param other Name to be compared to.
+     * @return True if both names are identical when casing is ignored, false otherwise.
+     */
+    public boolean equalsIgnoreCasing(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Name // instanceof handles nulls
+                && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
+    }
+
+    /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {

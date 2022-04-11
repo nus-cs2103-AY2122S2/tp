@@ -2,26 +2,33 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.CombineContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: find FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
-    private final NameContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_NO_KEYWORD = "Field must contain a keyword. \n"
+            + "Parameters: find FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    private final CombineContainsKeywordsPredicate predicate;
+    private final Logger logger = LogsCenter.getLogger(FindCommand.class);
+
+    public FindCommand(CombineContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -29,6 +36,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        logger.info("Model updated filteredPersonList with predicate");
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

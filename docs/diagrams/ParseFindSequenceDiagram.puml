@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+box Parse Find Command Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "a:ArgumentMultiMap" as ArgumentMultimap LOGIC_COLOR
+participant "c:CombineContainsKeywordsPredicate" as CombineContainsKeywordsPredicate LOGIC_COLOR
+end box
+
+[-> FindCommandParser : parse(" a/Clementi t/friends")
+activate FindCommandParser
+
+FindCommandParser -> ArgumentTokenizer : tokenize(" a/Clementi t/friends", ...prefixes)
+activate ArgumentTokenizer
+
+ArgumentTokenizer -> ArgumentTokenizer : findAllPrefixPositions(" a/Clementi t/friends", prefixes)
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> ArgumentTokenizer : positions
+deactivate ArgumentTokenizer
+
+ArgumentTokenizer -> ArgumentTokenizer : extractArguments(" a/Clementi t/friends, positions")
+activate ArgumentTokenizer
+
+create ArgumentMultimap
+ArgumentTokenizer -> ArgumentMultimap
+activate ArgumentMultimap
+
+ArgumentMultimap --> ArgumentTokenizer : a
+deactivate ArgumentMultimap
+
+deactivate ArgumentTokenizer
+deactivate ArgumentTokenizer
+
+ArgumentTokenizer --> FindCommandParser : a
+
+FindCommandParser -> ParserUtil : parseArgMap(a)
+activate ParserUtil
+
+ParserUtil --> FindCommandParser : predicatesList
+deactivate ParserUtil
+
+create CombineContainsKeywordsPredicate
+FindCommandParser -> CombineContainsKeywordsPredicate : CombineContainsKeywordsPredicate(predicatesList)
+activate CombineContainsKeywordsPredicate
+
+CombineContainsKeywordsPredicate --> FindCommandParser : c
+deactivate CombineContainsKeywordsPredicate
+
+FindCommandParser -> : FindCommand(c)
+
+@enduml

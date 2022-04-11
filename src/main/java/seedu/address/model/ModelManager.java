@@ -11,7 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.comparators.TagPriorityComparator;
+import seedu.address.storage.UndoRedoStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,23 +25,29 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private InsurancePackagesSet insurancePackagesSet;
     private final FilteredList<Person> filteredPersons;
+
+    private UndoRedoStorage undoRedoStorage = new UndoRedoStorage();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        InsurancePackagesSet insurancePackages) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.insurancePackagesSet = new InsurancePackagesSet(insurancePackages);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new InsurancePackagesSet());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,11 +85,61 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getInsurancePackagesFilePath() {
+        return userPrefs.getInsurancePackagesFilePath();
+    }
+
+    @Override
+    public void setInsurancePackagesFilePath(Path insurancePackagesFilePath) {
+        requireNonNull(insurancePackagesFilePath);
+        userPrefs.setInsurancePackagesFilePath(insurancePackagesFilePath);
+    }
+
+    //=========== InsurancePackages ==========================================================================
+    @Override
+    public void setInsurancePackagesSet(InsurancePackagesSet insurancePackagesSet) {
+        this.insurancePackagesSet = new InsurancePackagesSet(insurancePackagesSet);
+    }
+
+    @Override
+    public InsurancePackagesSet getInsurancePackagesSet() {
+        return insurancePackagesSet;
+    }
+
+    @Override
+    public void addInsurancePackage(InsurancePackage p) {
+        this.insurancePackagesSet.addPackage(p);
+    }
+
+    @Override
+    public void deleteInsurancePackage(InsurancePackage p) {
+        this.insurancePackagesSet.removePackage(p);
+    }
+
+    @Override
+    public boolean hasInsurancePackage(InsurancePackage p) {
+        requireNonNull(p);
+        return insurancePackagesSet.hasPackage(p);
+    }
+
+    @Override
+    public void setInsurancePackage(String targetPackageName, String newPackageDesc) {
+        insurancePackagesSet.setPackage(targetPackageName, newPackageDesc);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+    }
+
+    @Override
+    public void resetAddressBook() {
+        this.addressBook.resetData(new AddressBook());
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     @Override
@@ -96,19 +156,49 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        undoRedoStorage.resetRedoStack();
+        undoRedoStorage.addToUndo(copyAddressBook());
+    }
+
+    @Override
+    public void undoCommand() throws CommandException {
+        AddressBook newAddressBook = undoRedoStorage.undo();
+        setAddressBook(newAddressBook);
+    }
+
+    @Override
+    public void redoCommand() throws CommandException {
+        AddressBook newAddressBook = undoRedoStorage.redo();
+        setAddressBook(newAddressBook);
+    }
+
+    /**
+     * Makes a deep copy of an AddressBook
+     */
+    public AddressBook copyAddressBook() {
+        AddressBook copiedAddressBook = new AddressBook();
+        int currAddressBookSize = addressBook.getPersonList().size();
+        for (int i = 0; i < currAddressBookSize; i++) {
+            Person copiedPerson = Person.copyPerson(addressBook.getPersonList().get(i));
+            copiedAddressBook.addPerson(copiedPerson);
+        }
+        return copiedAddressBook;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -122,10 +212,21 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Filters and updates {@code filteredPersons} by {@code predicate}.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the list of {@code Person} in {@code addressBook} by the priority level of their tags.
+     */
+    @Override
+    public void sortByPriority() {
+        addressBook.sort(new TagPriorityComparator());
     }
 
     @Override

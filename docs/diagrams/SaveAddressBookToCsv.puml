@@ -1,0 +1,29 @@
+@startuml
+participant MainWindow
+activate MainWindow
+
+MainWindow -> MainWindow: handleSaveFile
+activate MainWindow
+
+MainWindow -> MainWindow: outputCsvFilePath
+deactivate MainWindow
+
+activate Logic
+MainWindow -> Logic: saveAddressBookToCsv
+
+activate Storage
+Logic -> Storage: saveAddressBookToCsv
+
+activate CsvAddressBookStorage
+Storage -> CsvAddressBookStorage: saveAddressBook
+
+activate CsvUtil
+CsvAddressBookStorage -> CsvUtil: saveCsvFile
+
+deactivate CsvUtil
+deactivate CsvAddressBookStorage
+deactivate Storage
+deactivate Logic
+deactivate MainWindow
+
+@enduml

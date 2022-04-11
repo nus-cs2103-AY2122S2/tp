@@ -17,9 +17,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -75,7 +77,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -109,12 +111,57 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getInsurancePackagesFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInsurancePackagesFilePath(Path insurancePackagesFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public InsurancePackagesSet getInsurancePackagesSet() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInsurancePackagesSet(InsurancePackagesSet s) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasInsurancePackage(InsurancePackage p) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addInsurancePackage(InsurancePackage p) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteInsurancePackage(InsurancePackage p) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setInsurancePackage(String targetPackageName, String newPackageDesc) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,6 +194,21 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortByPriority() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -168,7 +230,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accepts the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
@@ -183,6 +245,14 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void addInsurancePackage(InsurancePackage p) {
+            // do nothing with the package
+            requireNonNull(p);
+
+            // this method is written because the Model now adds an insurance package when a person is added
         }
 
         @Override

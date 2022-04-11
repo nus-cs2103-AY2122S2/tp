@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -12,18 +13,36 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
+
+    /** The application should display the window allowing the user to import a CSV file. */
+    private final boolean isImportFromCsv;
+
+    /** The application should display the window allowing the user to export to a CSV file. */
+    private final boolean isExportToCsv;
+
+    /** The application should display the window showing the insurance packages available */
+    private final boolean isShowPackages;
+
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     * The HashMap can have keys for "showHelp", "exit", "importFromCsv", "exportToCsv".
+     * The default values are false.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, HashMap<String, Boolean> settings) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+
+        boolean hasSettings = Objects.nonNull(settings);
+
+        this.isShowHelp = hasSettings && settings.getOrDefault("showHelp", false);
+        this.isExit = hasSettings && settings.getOrDefault("exit", false);
+        this.isImportFromCsv = hasSettings && settings.getOrDefault("importFromCsv", false);
+        this.isExportToCsv = hasSettings && settings.getOrDefault("exportToCsv", false);
+        this.isShowPackages = hasSettings && settings.getOrDefault("showPackages", false);
     }
 
     /**
@@ -31,7 +50,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null);
     }
 
     public String getFeedbackToUser() {
@@ -39,11 +58,23 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
+    }
+
+    public boolean isImportFromCsv() {
+        return isImportFromCsv;
+    }
+
+    public boolean isExportToCsv() {
+        return isExportToCsv;
+    }
+
+    public boolean isShowPackages() {
+        return isShowPackages;
     }
 
     @Override
@@ -59,13 +90,17 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isExit == otherCommandResult.isExit
+                && isImportFromCsv == otherCommandResult.isImportFromCsv
+                && isExportToCsv == otherCommandResult.isExportToCsv
+                && isShowPackages == otherCommandResult.isShowPackages;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(
+                feedbackToUser, isShowHelp, isExit, isImportFromCsv, isExportToCsv, isShowPackages);
     }
 
 }

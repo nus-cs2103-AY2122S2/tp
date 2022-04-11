@@ -2,10 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -21,19 +21,36 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final InsurancePackage insurancePackage;
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private ArrayList<Tag> tags = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email,
+                  InsurancePackage insurancePackage, Address address, ArrayList<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.insurancePackage = insurancePackage;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Copies a person object.
+     */
+    public static Person copyPerson(Person personToCopy) {
+        Name copiedName = personToCopy.getName();
+        Phone copiedPhone = personToCopy.getPhone();
+        Email copiedEmail = personToCopy.getEmail();
+        InsurancePackage copiedInsurancePackage = personToCopy.getInsurancePackage();
+        Address copiedAddress = personToCopy.getAddress();
+        ArrayList<Tag> copiedTags = new ArrayList<>();
+        copiedTags.addAll(personToCopy.getTags());
+        return new Person(copiedName, copiedPhone, copiedEmail, copiedInsurancePackage, copiedAddress, copiedTags);
     }
 
     public Name getName() {
@@ -48,20 +65,35 @@ public class Person {
         return email;
     }
 
+    public InsurancePackage getInsurancePackage() {
+        return insurancePackage;
+    }
+
     public Address getAddress() {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public void setTags(ArrayList<Tag> tagList) {
+        assert tagList != null;
+        this.tags = tagList;
+    }
+
+    public ArrayList<Tag> getTags() {
+        return new ArrayList<>(tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns a String of tagname separated by spaces after retrieving the tagname from the {@code Tag } object.
+     * @return String of tagnames separated by spaces
+     */
+    public String getTagsInString() {
+        ArrayList<Tag> tags = getTags();
+        List<String> tagsListInString = tags.stream().map(tag -> tag.tagName).collect(Collectors.toList());
+        return String.join(" ", tagsListInString);
+    }
+
+    /**
+     * Returns true if both persons have the same name, and same phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -70,7 +102,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -91,6 +124,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getInsurancePackage().equals(getInsurancePackage())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -109,10 +143,12 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Insurance Package: ")
+                .append(getInsurancePackage())
                 .append("; Address: ")
                 .append(getAddress());
 
-        Set<Tag> tags = getTags();
+        ArrayList<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);

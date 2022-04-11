@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,6 +12,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MessageWindow messageWindow;
+    private PackageWindow packageWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +72,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        messageWindow = new MessageWindow();
+        packageWindow = new PackageWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -119,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::accessHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -147,6 +155,118 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the package window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleShowPackages() {
+        if (!packageWindow.isShowing()) {
+            packageWindow.show();
+            packageWindow.fillInnerParts();
+        } else {
+            packageWindow.focus();
+        }
+    }
+
+    /**
+     * Handles the tasks associated with allowing the user to load a file from CSV.
+     */
+    @FXML
+    public void handleLoadFromCsv() {
+        if (!Desktop.isDesktopSupported()) {
+            messageWindow.show("Desktop not supported.");
+            return;
+        }
+
+        logger.info("Loading from csv");
+        Path inputCsvFilePath = handleLoadFile();
+
+        if (inputCsvFilePath == null) {
+            return;
+        }
+
+        try {
+            logic.readAddressBookFromCsv(inputCsvFilePath);
+            messageWindow.show(
+                    "Loaded successfully. Type a command (e.g. list) to save this permanently.");
+        } catch (CommandException err) {
+            messageWindow.show("Error in loading: " + err.getMessage());
+        }
+    }
+
+    /**
+     * OHandles the tasks associated with allowing the user to save a file to CSV.
+     */
+    @FXML
+    public void handleSaveToCsv() {
+        if (!Desktop.isDesktopSupported()) {
+            messageWindow.show("Desktop not supported.");
+            return;
+        }
+
+        logger.info("Saving to csv");
+        Path outputCsvFilePath = handleSaveFile();
+
+        if (outputCsvFilePath == null) {
+            return;
+        }
+
+        try {
+            logic.saveAddressBookToCsv(outputCsvFilePath);
+            messageWindow.show("Saved successfully.");
+        } catch (CommandException err) {
+            messageWindow.show("Error in saving: " + err.getMessage());
+        }
+    }
+
+    /**
+     * Method that handles the GUI aspect of allowing the user to select a path to load CSV file from.
+     *
+     * @return the Path of the CSV file.
+     */
+    public Path handleLoadFile() {
+
+        // initialise the file chooser
+        FileChooser fileChooser = new FileChooser();
+
+        // current working directory
+        File cwd = new java.io.File(".");
+
+        // chooser settings
+        fileChooser.setInitialDirectory(cwd);
+        fileChooser.setTitle("Select a ClientConnect CSV file...");
+
+        // only allow CSV files
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("ClientConnect CSV files", "*.csv"));
+
+        // opens the dialog
+        File fileChosen = fileChooser.showOpenDialog(primaryStage);
+        return fileChosen == null ? null : fileChosen.toPath();
+
+    }
+
+    /**
+     * Method that handles the GUI aspect of allowing the user to select a path to save a CSV file to.
+     *
+     * @return the Path of the CSV file.
+     */
+    public Path handleSaveFile() {
+
+        // initialise the file chooser
+        FileChooser chooser = new FileChooser();
+
+        // chooser settings
+        chooser.setInitialDirectory(new java.io.File("."));
+        chooser.setTitle("Save CSV file to ...");
+        chooser.setInitialFileName("ClientConnectData.csv");
+        chooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("ClientConnect CSV files", "*.csv"));
+
+        File fileChosen = chooser.showSaveDialog(primaryStage);
+        return fileChosen == null ? null : fileChosen.toPath();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +280,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        messageWindow.hide();
         primaryStage.hide();
     }
 
@@ -186,11 +307,34 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isImportFromCsv()) {
+                handleLoadFromCsv();
+            }
+
+            if (commandResult.isExportToCsv()) {
+                handleSaveToCsv();
+            }
+
+            if (commandResult.isShowPackages()) {
+                handleShowPackages();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Depending on whether the user pressed UP or DOWN, retrieve the previous or next user input.
+     * This seeks to emulate the command line ability to scroll through the history of typed commands.
+     *
+     * @param isUp True if the button pressed is Up, False if it's Down.
+     * @return The relevant command in history.
+     */
+    private String accessHistory(boolean isUp) {
+        return isUp ? logic.getPreviousCommand() : logic.getNextCommand();
     }
 }

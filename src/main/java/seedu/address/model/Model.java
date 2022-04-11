@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,12 +47,55 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the user prefs' insurance packages file path.
+     */
+    Path getInsurancePackagesFilePath();
+
+    /**
+     * Sets the user prefs' insurance packages file path.
+     */
+    void setInsurancePackagesFilePath(Path insurancePackagesFilePath);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book data with an empty {@code addressBook}.
+     */
+    void resetAddressBook();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setInsurancePackagesSet(InsurancePackagesSet insurancePackagesSet);
+
+    /** Returns the AddressBook */
+    InsurancePackagesSet getInsurancePackagesSet();
+
+    /**
+     * Adds the given Insurance Package.
+     */
+    void addInsurancePackage(InsurancePackage p);
+
+    /**
+     * Deletes the given Insurance Package.
+     */
+    void deleteInsurancePackage(InsurancePackage p);
+
+    /**
+     * Returns true if an insurance package with the same identity as {@code p} exists in the set of packages.
+     */
+    boolean hasInsurancePackage(InsurancePackage p);
+
+    /**
+     * Sets the description of an insurance package with the given description.
+     */
+    void setInsurancePackage(String targetPackageName, String newPackageDesc);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -84,4 +129,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the person list by the priority of their tags.
+     */
+    void sortByPriority();
+
+    void undoCommand() throws CommandException;
+
+    void redoCommand() throws CommandException;
 }

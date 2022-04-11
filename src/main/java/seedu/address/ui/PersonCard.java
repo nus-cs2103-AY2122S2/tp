@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Priority;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -15,6 +16,12 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final Map<Priority, String> fxmlColorMapper = Map.of(
+            Priority.PRIORITY_1, "-fx-background-color: red;",
+            Priority.PRIORITY_2, "-fx-background-color: orange;",
+            Priority.PRIORITY_3, "-fx-background-color: gold;",
+            Priority.PRIORITY_4, "-fx-background-color: peachpuff;"
+    );
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label insurancePackage;
+    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -50,11 +59,18 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        insurancePackage.setText(person.getInsurancePackage().getPackageName());
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                // .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    if (tag.tagPriority != null) {
+                        label.setStyle(fxmlColorMapper.get(tag.tagPriority));
+                    }
+                    tags.getChildren().add(label);
+                });
     }
 
     @Override
