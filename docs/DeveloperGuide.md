@@ -611,6 +611,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
+**Use case: Add insurance package**
+
+**MSS**
+
+1. User requests to add a package.
+   
+2. User keys in package name and description.
+   
+3. AddressBook adds the package.
+   
+   Use case ends.
+
+**Extensions**
+
+* 2a. There already exists a package with the same package name.
+
+    * 2a1. AddressBook shows an error message, saying that the package already exists. 
+      
+        Use case ends.
+
+* 2b. User did not input the package description field (`/d`).
+  
+    * 2a1. AddressBook shows an error message, saying that the command format is invalid.
+      
+        Use case ends.
+
+**Use case: Edit insurance package**
+
+**MSS**
+
+1. User requests to edit a package.
+
+2. User keys in package name to be edited, and the new description of the package.
+
+3. AddressBook edits the package.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There is no package with the given package name.
+
+    * 2a1. AddressBook shows an error message, saying that the package does not exist.
+
+      Use case ends.
+
+* 2b. User did not input the package description field (`/d`).
+
+    * 2a1. AddressBook shows an error message, saying that the command format is invalid.
+
+      Use case ends.
+
+**Use case: Delete insurance package**
+
+**MSS**
+
+1. User requests to delete a package.
+
+2. User keys in package name to be deleted.
+
+3. AddressBook deleted the package.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There is no package with the given package name.
+
+    * 2a1. AddressBook shows an error message, saying that the package does not exist.
+
+      Use case ends.
+
+* 2b. The given package is still in use by a person.
+
+    * 2a1. AddressBook shows an error message, saying that the package is in use.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.

@@ -8,7 +8,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 
-
+/**
+ * Deletes an insurance package from the address book.
+ *
+ * Note that the current implementation does not allow a package to be deleted, if it is in use by someone.
+ */
 public class DeletePackageCommand extends Command {
 
     public static final String COMMAND_WORD = "deletep";
