@@ -902,6 +902,8 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a show
 
 1. Prerequisites: None.
@@ -1003,7 +1005,9 @@ testers are expected to do more *exploratory* testing.
       2. Command: `find 86 shutter` <br>
          Expected: Looks through the name, status, rating and tag fields for any partial or full word of `86` or `shutter` then displays them on the show list. <br>
          E.g. `86` or `shutter` from name, status, rating, or tag fields will be matched (`OR` search).
-   
+      
+<div style="page-break-after: always;"></div>
+
    4. Test case: Invalid command format
       1. Command: `find` <br>
          Expected: No show is found. Error details shown in the result display, with a result message saying `Invalid command format!...`.<br><br>
