@@ -10,7 +10,7 @@ end box
 
 box Model MODEL_COLOR_LIGHT
 participant ":Model" as Model<<Model>>
-participant "updatedProduct:Product" as Product<<Model>>
+participant "p:Product" as Product<<Model>>
 end box
 
 [-> LogicManager : execute(update)
@@ -36,7 +36,7 @@ activate Product
 Product --> UpdateCommand
 deactivate Product
 
-UpdateCommand -> Model : SetProduct(target, updatedProduct)
+UpdateCommand -> Model : SetProduct(target, p)
 activate Model
 
 Model --> UpdateCommand
