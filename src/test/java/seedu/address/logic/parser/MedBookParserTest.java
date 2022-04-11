@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalMedBook;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,7 @@ import seedu.address.testutil.PatientUtil;
 public class MedBookParserTest {
 
     private final MedBookParser parser = new MedBookParser();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalMedBook(), new UserPrefs());
 
     @Test
     public void parseCommand_add() throws Exception {

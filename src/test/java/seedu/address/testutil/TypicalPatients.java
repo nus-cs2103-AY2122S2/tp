@@ -73,7 +73,7 @@ public class TypicalPatients {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static MedBook getTypicalAddressBook() {
+    public static MedBook getTypicalMedBook() {
         MedBook ab = new MedBook();
         for (Patient patient : getTypicalPatients()) {
             ab.addPatient(patient);

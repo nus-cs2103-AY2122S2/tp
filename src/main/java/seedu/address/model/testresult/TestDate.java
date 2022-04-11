@@ -44,7 +44,8 @@ public class TestDate {
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        return formattedDate;
     }
 
     @Override
