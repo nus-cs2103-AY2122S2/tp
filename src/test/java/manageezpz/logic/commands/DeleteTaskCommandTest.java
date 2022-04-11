@@ -8,6 +8,8 @@ import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_DELETE_TASK_SU
 import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
+import static manageezpz.testutil.TypicalIndexes.INDEX_THIRD;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -85,23 +87,35 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        List<Person> modelFullPersonList = model.getAddressBook().getPersonList();
+
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+
+        assertEquals(model.getFilteredTaskList().size(), 3);
+        assertEquals(modelFullPersonList.get(INDEX_FIRST.getZeroBased()).getNumOfTasks(), 3);
+        assertEquals(modelFullPersonList.get(INDEX_SECOND.getZeroBased()).getNumOfTasks(), 0);
+        assertEquals(modelFullPersonList.get(INDEX_THIRD.getZeroBased()).getNumOfTasks(), 3);
 
         String expectedMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        List<Person> fullPersonList = model.getAddressBook().getPersonList();
+        List<Person> expectedModelFullPersonList = expectedModel.getAddressBook().getPersonList();
 
         List<Person> affectedPersonList = taskToDelete.getAssignees();
 
         for (Person person : affectedPersonList) {
-            Person personToUpdate = fullPersonList.get(fullPersonList.indexOf(person));
+            Person personToUpdate = expectedModelFullPersonList.get(expectedModelFullPersonList.indexOf(person));
             expectedModel.decreaseNumOfTasks(personToUpdate);
         }
 
         expectedModel.deleteTask(taskToDelete);
+
+        assertEquals(expectedModel.getFilteredTaskList().size(), 2);
+        assertEquals(expectedModelFullPersonList.get(INDEX_FIRST.getZeroBased()).getNumOfTasks(), 2);
+        assertEquals(expectedModelFullPersonList.get(INDEX_SECOND.getZeroBased()).getNumOfTasks(), 0);
+        assertEquals(expectedModelFullPersonList.get(INDEX_THIRD.getZeroBased()).getNumOfTasks(), 2);
 
         assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
     }
@@ -118,26 +132,38 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        List<Person> modelFullPersonList = model.getAddressBook().getPersonList();
+
         showTaskAtIndex(model, INDEX_FIRST);
 
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
 
+        assertEquals(model.getFilteredTaskList().size(), 1);
+        assertEquals(modelFullPersonList.get(INDEX_FIRST.getZeroBased()).getNumOfTasks(), 3);
+        assertEquals(modelFullPersonList.get(INDEX_SECOND.getZeroBased()).getNumOfTasks(), 0);
+        assertEquals(modelFullPersonList.get(INDEX_THIRD.getZeroBased()).getNumOfTasks(), 3);
+
         String expectedMessage = String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        List<Person> fullPersonList = model.getAddressBook().getPersonList();
+        List<Person> expectedModelFullPersonList = expectedModel.getAddressBook().getPersonList();
 
         List<Person> affectedPersonList = taskToDelete.getAssignees();
 
         for (Person person : affectedPersonList) {
-            Person personToUpdate = fullPersonList.get(fullPersonList.indexOf(person));
+            Person personToUpdate = expectedModelFullPersonList.get(expectedModelFullPersonList.indexOf(person));
             expectedModel.decreaseNumOfTasks(personToUpdate);
         }
 
         expectedModel.deleteTask(taskToDelete);
         showNoTask(expectedModel);
+
+        assertEquals(expectedModel.getFilteredTaskList().size(), 0);
+        assertEquals(expectedModelFullPersonList.get(INDEX_FIRST.getZeroBased()).getNumOfTasks(), 2);
+        assertEquals(expectedModelFullPersonList.get(INDEX_SECOND.getZeroBased()).getNumOfTasks(), 0);
+        assertEquals(expectedModelFullPersonList.get(INDEX_THIRD.getZeroBased()).getNumOfTasks(), 2);
 
         assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
     }

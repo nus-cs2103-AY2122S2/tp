@@ -15,6 +15,8 @@ import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.logic.commands.EditEmployeeCommand.createEditedEmployee;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
+import static manageezpz.testutil.TypicalIndexes.INDEX_THIRD;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -107,22 +109,38 @@ public class EditEmployeeCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(personToEdit))
                 .collect(Collectors.toList());
+
+        assertEquals(affectedTaskList.size(), 3);
 
         for (Task task : affectedTaskList) {
             List<Person> assignees = task.getAssignees();
 
             for (Person assignee : assignees) {
                 if (assignee.equals(personToEdit)) {
-                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    Task taskToUpdate = expectedModelFullTaskList.get(expectedModelFullTaskList.indexOf(task));
                     expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
                 }
             }
         }
+
+        assertFalse(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(personToEdit));
+        assertFalse(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(personToEdit));
+        assertFalse(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(personToEdit));
+
+        assertTrue(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(editedPerson));
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -143,22 +161,38 @@ public class EditEmployeeCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(lastPersonToEdit, editedPerson);
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(lastPersonToEdit))
                 .collect(Collectors.toList());
+
+        assertEquals(affectedTaskList.size(), 3);
 
         for (Task task : affectedTaskList) {
             List<Person> assignees = task.getAssignees();
 
             for (Person assignee : assignees) {
                 if (assignee.equals(lastPersonToEdit)) {
-                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    Task taskToUpdate = expectedModelFullTaskList.get(expectedModelFullTaskList.indexOf(task));
                     expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
                 }
             }
         }
+
+        assertFalse(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(lastPersonToEdit));
+        assertFalse(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(lastPersonToEdit));
+        assertFalse(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(lastPersonToEdit));
+
+        assertTrue(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(editedPerson));
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -168,6 +202,8 @@ public class EditEmployeeCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person editedPerson = createEditedEmployee(personToEdit, new EditEmployeeCommand.EditEmployeeDescriptor());
 
+        assertEquals(personToEdit, editedPerson);
+
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST,
                 new EditEmployeeCommand.EditEmployeeDescriptor());
 
@@ -176,22 +212,38 @@ public class EditEmployeeCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(personToEdit))
                 .collect(Collectors.toList());
+
+        assertEquals(affectedTaskList.size(), 3);
 
         for (Task task : affectedTaskList) {
             List<Person> assignees = task.getAssignees();
 
             for (Person assignee : assignees) {
                 if (assignee.equals(personToEdit)) {
-                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    Task taskToUpdate = expectedModelFullTaskList.get(expectedModelFullTaskList.indexOf(task));
                     expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
                 }
             }
         }
+
+        assertTrue(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(personToEdit));
+        assertTrue(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(personToEdit));
+        assertTrue(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(personToEdit));
+
+        assertTrue(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(editedPerson));
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -214,22 +266,38 @@ public class EditEmployeeCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST);
         expectedModel.setPerson(personToEditInFilteredList, editedPerson);
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(personToEditInFilteredList))
                 .collect(Collectors.toList());
+
+        assertEquals(affectedTaskList.size(), 3);
 
         for (Task task : affectedTaskList) {
             List<Person> assignees = task.getAssignees();
 
             for (Person assignee : assignees) {
                 if (assignee.equals(personToEditInFilteredList)) {
-                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    Task taskToUpdate = expectedModelFullTaskList.get(expectedModelFullTaskList.indexOf(task));
                     expectedModel.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
                 }
             }
         }
+
+        assertFalse(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(personToEditInFilteredList));
+        assertFalse(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(personToEditInFilteredList));
+        assertFalse(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(personToEditInFilteredList));
+
+        assertTrue(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased())
+                .getAssignees().contains(editedPerson));
+        assertTrue(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased())
+                .getAssignees().contains(editedPerson));
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }

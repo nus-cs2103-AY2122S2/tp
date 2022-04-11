@@ -8,6 +8,8 @@ import static manageezpz.logic.commands.DeleteEmployeeCommand.MESSAGE_DELETE_PER
 import static manageezpz.logic.commands.DeleteEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
+import static manageezpz.testutil.TypicalIndexes.INDEX_THIRD;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -86,16 +88,24 @@ public class DeleteEmployeeCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        List<Task> modelFullTaskList = model.getAddressBook().getTaskList();
+
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(INDEX_FIRST);
+
+        assertEquals(model.getFilteredPersonList().size(), 3);
+        assertEquals(personToDelete.getNumOfTasks(), 3);
+        assertEquals(modelFullTaskList.get(INDEX_FIRST.getZeroBased()).getAssignees().toString(),
+                "[Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com, "
+                        + "Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
 
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(personToDelete))
                 .collect(Collectors.toList());
 
@@ -104,6 +114,14 @@ public class DeleteEmployeeCommandTest {
         }
 
         expectedModel.deletePerson(personToDelete);
+
+        assertEquals(expectedModel.getFilteredPersonList().size(), 2);
+        assertEquals(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
+        assertEquals(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
+        assertEquals(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
 
         assertCommandSuccess(deleteEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -120,18 +138,26 @@ public class DeleteEmployeeCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        List<Task> modelFullTaskList = model.getAddressBook().getTaskList();
+
         showPersonAtIndex(model, INDEX_FIRST);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(INDEX_FIRST);
 
+        assertEquals(model.getFilteredPersonList().size(), 1);
+        assertEquals(personToDelete.getNumOfTasks(), 3);
+        assertEquals(modelFullTaskList.get(INDEX_FIRST.getZeroBased()).getAssignees().toString(),
+                "[Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com, "
+                        + "Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
+
         String expectedMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
+        List<Task> expectedModelFullTaskList = expectedModel.getAddressBook().getTaskList();
 
-        List<Task> affectedTaskList = fullTaskList.stream()
+        List<Task> affectedTaskList = expectedModelFullTaskList.stream()
                 .filter(task -> task.getAssignees().contains(personToDelete))
                 .collect(Collectors.toList());
 
@@ -141,6 +167,14 @@ public class DeleteEmployeeCommandTest {
 
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
+
+        assertEquals(expectedModel.getFilteredPersonList().size(), 0);
+        assertEquals(expectedModelFullTaskList.get(INDEX_FIRST.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
+        assertEquals(expectedModelFullTaskList.get(INDEX_SECOND.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
+        assertEquals(expectedModelFullTaskList.get(INDEX_THIRD.getZeroBased()).getAssignees().toString(),
+                "[Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com]");
 
         assertCommandSuccess(deleteEmployeeCommand, model, expectedMessage, expectedModel);
     }
