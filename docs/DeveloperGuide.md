@@ -93,6 +93,7 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -112,6 +113,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 The sections below give more details of each component.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 The **API** of this component is specified in `Ui.java`
