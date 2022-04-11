@@ -66,9 +66,9 @@ This image is specific to MacOS, note that the `exit`,`minimize` and ` expand` w
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 # Managing Contacts
 
 The contacts are listed alphabetically. The contacts list is navigable using the arrow keys.
@@ -267,9 +267,9 @@ Note that social media of pre-installed emergency contacts cannot be deleted.
 **Examples:**
 > `delete kaaviya sm/Telegram, @uNivUS`<br>
 > `delete 1 sm/Telegram, @uNivUS`
-
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # Managing Meetings
 
 The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.
@@ -366,10 +366,8 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 
 **Example:**
 > `delete 1 t/urgent`
-
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Manage Global Tags
 
@@ -394,9 +392,9 @@ Global tags helps you organise relevant contacts and meetings together.
 
 **Format:** click on a tag in the tag panel. This filters both contacts and meetings with the tag.
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 # Universal Features
 
 ## 1. Viewing help: `help`
@@ -427,9 +425,9 @@ uMessage's data are saved as two JSON files: `[JAR file location]/data/addressbo
 If your changes to the data file makes its format invalid, the data will be discarded and uMessage start with an empty data file at the next run.
 </div>
 
-
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # Summary of Commands
 
 ## Managing Contacts
