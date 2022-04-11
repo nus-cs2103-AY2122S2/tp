@@ -435,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  InternBuddy displays the updated list of contact persons with the new contact person
 5.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 * 5a. User wants to add a company to the contact person
@@ -460,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  InternBuddy displays the updated list of companies with the new company
 6.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Use case: Hide events that have passed or has been cancelled**
 
@@ -488,6 +488,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InternBuddy shows an error feedback to the user
 
       Use case resumes at step 2.
+
+**Use case: Edit an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to edit a selected company from the list with the given details
+4. InternBuddy updates the company's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Use case: Edit an existing person**
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to edit a selected person from the list with the given details
+4. InternBuddy updates the person's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Use case: Edit an existing event**
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to edit a selected event from the list with the given details
+4. InternBuddy updates the event details
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
 
 *{More to be added}*
 
