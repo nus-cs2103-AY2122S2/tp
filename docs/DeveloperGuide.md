@@ -577,8 +577,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-<div style="page-break-after: always;"></div>
-
 * 2b. User enters command with the wrong syntax.
 
     * 2b1. Trackermon shows an error message to the user.
