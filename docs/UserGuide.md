@@ -63,7 +63,7 @@ title: uMessage User Guide
 
 </div>
 
-
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 # Managing Contacts
@@ -148,7 +148,7 @@ The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 > `view 2` </br>
 >  clicking on the second contact does the same as above.
 
-
+<div style="page-break-after: always;"></div>
 
 ## 4. Editing details of a person: `edit`
 
@@ -179,6 +179,7 @@ SOCIAL_MEDIA_INDEX refers to the index of the social media in the person's list 
 > `edit 1 i/2 f/ sm/Telegram`
 > `edit Alex Yeoh i/1 sm/@alexxy`
 
+<div style="page-break-after: always;"></div>
 
 ## 5. Copying: `copy`
 
@@ -209,7 +210,7 @@ Note that clicking the email and telegram fields will trigger a unique response.
 **Copying email:** Clicking the email will trigger the local Mail application to create a new email to the aforementioned address. </br>
 **Copying a telegram handle:** Clicking the telegram handle will open the Telegram link to contact the person at the aforementioned handle name.
 
-
+<div style="page-break-after: always;"></div>
 
 ## 6. Deleting: `delete`
 
@@ -259,13 +260,15 @@ Note that social media of pre-installed emergency contacts cannot be deleted.
 > `delete kaaviya sm/Telegram, @uNivUS`</br>
 > `delete 1 sm/Telegram, @uNivUS`
 
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 # Managing Meetings
 
 The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.
 
 There cannot be duplicated meetings. Two meetings are the same if both have the same title (case-sensitive) and same start time.
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Adding: `add`
 
@@ -291,6 +294,7 @@ INDEX must be a positive integer.
 
 > `add 1 t/urgent`
 
+<div style="page-break-after: always;"></div>
 
 ## 2. Searching meetings by keyword: `[find]`
 
@@ -326,7 +330,7 @@ DURATION is in minutes and must be an integer between 1 and 10000 (inclusive).
 > `edit 1 n/CS2030 PE` </br>
 > `edit 2 s/2022-4-1 1600`
 
-
+<div style="page-break-after: always;"></div>
 
 ## 4. Deleting: `delete`
 
@@ -346,6 +350,8 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 
 **Example:**
 > `delete 1 t/urgent`
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,7 +378,7 @@ Global tags helps you organise relevant contacts and meetings together.
 
 **Format:** click on a tag in the tag panel. This filters both contacts and meetings with the tag.
 
-
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 # Universal Features
@@ -406,7 +412,7 @@ If your changes to the data file makes its format invalid, the data will be disc
 </div>
 
 
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 # Summary of Commands
 
