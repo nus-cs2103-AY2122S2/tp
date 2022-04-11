@@ -375,9 +375,9 @@ The schedule feature provides three commands to navigate to different week, `Sch
     * Cons: When booking data grow large, it might take longer to load the view.
 
 The following activity diagram summarizes what happens when the user executes the schedule command (`schedule`):
- 
-    ![Schedule Activity Diagram](images/ScheduleActivityDiagram.png)
- 
+
+![Schedule Activity Diagram](images/ScheduleActivityDiagram.png)
+
 The following sequence diagram shows the interactions within the `Logic` and `Model` components when the user inputs `schedule date/10-10-2022` command.
 
 ![Schedule Sequence Diagram](images/ScheduleSequenceDiagram.png)
