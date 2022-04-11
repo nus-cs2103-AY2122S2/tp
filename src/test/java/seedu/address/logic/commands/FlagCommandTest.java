@@ -5,13 +5,16 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNames.*;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalHustleBook;
 
 /**
@@ -23,78 +26,69 @@ public class FlagCommandTest {
     private Model model = new ModelManager(getTypicalHustleBook(), new UserPrefs());
 
     @Test
-    public void execute_validNameUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(FULL_NAME_FIRST_PERSON);
+    public void execute_validNameFlag_success() {
+        Person personToFlag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        FlagCommand flagCommand = new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("true"));
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(FlagCommand.MESSAGE_FLAG_PERSON_SUCCESS, personToFlag);
 
         ModelManager expectedModel = new ModelManager(model.getHustleBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        Person flaggedPerson = new PersonBuilder(personToFlag).withFlag("true").build();
+        expectedModel.setPerson(personToFlag, flaggedPerson);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(flagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(NAME_INVALID_PERSON);
+    public void execute_invalidNameFlag_throwsCommandException() {
+        FlagCommand flagCommand = new FlagCommand(NAME_INVALID_PERSON, new Flag("true"));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
+        assertCommandFailure(flagCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
     }
 
     @Test
-    public void execute_validNameFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validNameUnflag_success() {
+        Person personToFlag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person flaggedPerson = new PersonBuilder(personToFlag).withFlag("true").build();
+        model.setPerson(personToFlag, flaggedPerson);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(FULL_NAME_FIRST_PERSON);
+        FlagCommand flagCommand = new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("false"));
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(FlagCommand.MESSAGE_FLAG_PERSON_SUCCESS, flaggedPerson);
 
         Model expectedModel = new ModelManager(model.getHustleBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        Person unflaggedPerson = new PersonBuilder(personToFlag).withFlag("false").build();
+        expectedModel.setPerson(personToFlag, unflaggedPerson);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(flagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidNameFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_invalidNameUnflag_throwsCommandException() {
+        FlagCommand flagCommand = new FlagCommand(NAME_INVALID_PERSON, new Flag("false"));
 
-        DeleteCommand deleteCommand = new DeleteCommand(NAME_SECOND_PERSON);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
+        assertCommandFailure(flagCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(FULL_NAME_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(NAME_SECOND_PERSON);
+        FlagCommand flagCommand = new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("true"));
+        FlagCommand unflagCommand = new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("false"));
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(flagCommand.equals(flagCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(FULL_NAME_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        FlagCommand flagCommandCopy = new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("true"));
+        assertTrue(flagCommand.equals(flagCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(flagCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(flagCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertFalse(flagCommand.equals(unflagCommand));
     }
 }
