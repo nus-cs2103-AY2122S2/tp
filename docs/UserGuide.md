@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: TeachWhat! User Guide 
 ---
 
 TeachWhat! is a **desktop app for tutors to manage their schedule, students and lessons**, optimized for use via a Command Line Interface (CLI) while still having the 
@@ -410,8 +410,6 @@ To guard against the possibility of you being misled by corrupted data, TeachWha
 error is found in the data files for students *or* lessons.
 
 An example of such an error would be conflicting lessons being found in the data file that holds lessons.
-
---------------------------------------------------------------------------------------------------------------------
    
 <div style="page-break-after: always;"></div>
 
