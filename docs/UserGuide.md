@@ -38,7 +38,7 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents
+* Table of Contents 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,9 @@ Additional formatting guidelines:
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
- <div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:**<br>
 
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
   
@@ -89,8 +91,8 @@ Additional formatting guidelines:
    Note how the app contains some sample data: <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.*
 <div markdown="span" class="alert alert-info">
-  
-  :information_source: **Note:**<br>
+
+:information_source: **Note:**<br>
   
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
   
@@ -136,7 +138,7 @@ This is a sample screenshot of what you can expect from the `help` command.
   
 </div>
 
-### 3.3. Adding a contact
+### 3.2. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -192,7 +194,7 @@ In addition, the list of pre-defined constants are also provided for `Faculty` a
   
 </div>
 
-### 3.4. Editing an existing contact
+### 3.3. Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
@@ -209,7 +211,7 @@ Format: `edit INDEX n/NAME ...`
   i.e. `edit 1 p/98090042 p/81812424` is the same as `edit 1 p/81812424`.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 3: Screenshot of index location.*
 
 Examples of usage:
 * `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
@@ -217,10 +219,10 @@ Examples of usage:
   and `johndoe@example.com` respectively.
 
 Original list:
-![Before_Edit](images/BeforeEdit.png) *Figure 6: Screenshot of Tracey before edit command is applied.*
+![Before_Edit](images/BeforeEdit.png) *Figure 4: Screenshot of Tracey before edit command is applied.*
 
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
-![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
+![After_Edit](images/AfterEdit.png) *Figure 5: Screenshot of Tracey after applying the edit command.*
 
 <div markdown="span" class="alert alert-info">
   
@@ -242,7 +244,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
   
 </div>
 
-### 3.5. Deleting a contact
+### 3.4. Deleting a contact
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
@@ -253,7 +255,7 @@ Format: `delete INDEX`
 * You can only delete the contact information at an index where there is a student assigned to it.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 6: Screenshot of index location.*
 
 Examples of usage:
 * `delete 2` removes the 2nd student on the list.
@@ -273,7 +275,7 @@ Examples of usage:
   
 </div>
 
-### 3.6. Undoing an action
+### 3.5. Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
@@ -287,9 +289,9 @@ Examples of usage:
 * Using `undo` after a `delete` command will add the recently deleted student.
 
 Scenario for undoing an edit command:
-![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 8: Scenario of using an undo command following an edit command.*
+![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 7: Scenario of using an undo command following an edit command.*
 
-Figure *8* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+Figure *7* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
 The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
 
 <div markdown="span" class="alert alert-info">
@@ -306,7 +308,7 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
   
 </div>
 
-### 3.7. Redoing an action
+### 3.6. Redoing an action
 
 Reverse an executed undo command.
 
@@ -321,9 +323,9 @@ Examples of usage:
 * Using `redo` after using `undo` on an `edit` command will counteract the effect of undoing an `edit` command and the overall result edits the details of the student in Tracey.
 
 Scenario for redoing after undoing an edit command:
-![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
+![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 8: Scenario of using a redo command after using an undo command following an edit command.*
 
-Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
+Following the scenario from *Figure 7*, *Figure 8* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
 to counteract the effects of the `undo` command on the `edit` command, and to counteract the effects of the undo command. At the end, all tags will be removed from Jane Doe.
 
 <div markdown="span" class="alert alert-info">
@@ -340,7 +342,7 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
   
 </div>
 
-### 3.8. Finding a contact
+### 3.7. Finding a contact
 Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
@@ -356,11 +358,11 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 10: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 9: Screenshot of result of the find command.*
 
-As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 9*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### 3.9. Filtering contacts
+### 3.8. Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
@@ -379,9 +381,9 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 11: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 10: Example result of `filter` command.*
 
-As seen in *Figure 11*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 10*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 <div markdown="span" class="alert alert-info">
   
@@ -391,23 +393,23 @@ As seen in *Figure 11*, using the `filter` command with "negative" as covid stat
   
 </div>
 
-### 3.10. Listing the records
+### 3.9. Listing the records
 List all students, displaying all their data stored in Tracey.
 
 Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 11: Screenshot of list command.*
 
-### 3.11. Copying emails
+### 3.10. Copying emails
 Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
 
-![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 12: Screenshot of Copy Email function.*
 
-From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 12*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 <div markdown="span" class="alert alert-info">
   
@@ -419,7 +421,7 @@ From *Figure 13*, this function is beneficial for administrators as you may want
   
 </div>
 
-### 3.12. Summarising the records
+### 3.11. Summarising the records
 
 Summarise the statistics of the student records inside Tracey.
 
@@ -432,15 +434,15 @@ Example of usage:
 
 <img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
-*Figure 14a: Example pie charts of Tracey in response to the `summarise` command.* 
+*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.* 
 
 <img src ='images/SummariseExample2.png' alt='SummariseExample2' width="400"/> 
 
-*Figure 14b: Example bar chart of Tracey in response to the `summarise` command.*
+*Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 13aand 13b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
-### 3.13. Archiving Tracey
+### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
 * `ROOT`: The folder where the Tracey.jar is in.
 * `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
@@ -467,6 +469,8 @@ Examples of usage:
 :warning: **Warning:**<br>
   
 * Do not change the suffix of the archived file to any other type except for `json` as only a `json` file is compatiable with Tracey.
+
+* Do not manually edit the database file i.e. edit directly from `addressbook.json`, as this feature will save an exact copy of it regardless of whether it is corrupted or not.
   
 </div>
 
@@ -482,13 +486,13 @@ Examples of usage:
   
 </div>
 
-### 3.14. Resizing the result display window
+### 3.13. Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
 * There are only 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figure 15 for the comparison for the different result display window sizes.
+* Refer to figure 14 for the comparison for the different result display window sizes.
 
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
 
@@ -508,7 +512,7 @@ Format: `resize SIZE`
   
 </div>
 
-### 3.15. Clearing all records
+### 3.14. Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
@@ -523,19 +527,19 @@ Format:`clear`
   
 </div>
 
-### 3.16. Exiting Tracey
+### 3.15. Exiting Tracey
 Close the application.
 
 Format: `exit`
 * Closes the application.
 
-### 3.17. Saving
+### 3.16. Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### 4. FAQ
+## 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -568,7 +572,7 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 5. Command Summary
+## 5. Command Summary
 
 *Table 5: Command Summary.*
 
@@ -594,7 +598,7 @@ there are changes to Tracey.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### 6. Glossary
+## 6. Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
@@ -612,16 +616,17 @@ there are changes to Tracey.
 
 *Table 6: Specific terminology used.*
 
-| Term                           | Meaning                                                                                                                                                                                                                                                                                              |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Block                          | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                     |
-| Command Line Interface (CLI)   | A text-based user interface used to run applications.                                                                                                                                                                                                                                                |
-| Covid Status                   | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                     |
-| Faculty                        | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                       |
-| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                    |
-| Health Risk Notice (HRN)       | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                     |
-| JAR File                       | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                        |
-| Matriculation Number           | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                  |
-| Prefix                         | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant           | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                  |
-| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                               |
+| Term                                | Meaning                                                                                                                                                                                                                                                                                             |
+|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                               | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                    |
+| Command Line Interface (CLI)        | A text-based user interface used to run applications.                                                                                                                                                                                                                                               |
+| Covid Status                        | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                    |
+| Faculty                             | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                      |
+| Graphical User Interface (GUI)      | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                   |
+| Health Risk Notice (HRN)            | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                    |
+| JAR File                            | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                       |
+| Matriculation Number                | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                 |
+| Prefix                              | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in table 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
+| Pre-defined constant                | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                 |
+| Uniform Resource Locator (URL)      | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                              |
+| JavaScript Object Notation (JSON)   | A text format used for transmitting data. It stores and transmit data objects consisting of attribute-value pairs and array (or other serialisable values), and the text used is human-readable.                                                                                                    |

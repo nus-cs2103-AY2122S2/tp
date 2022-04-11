@@ -18,14 +18,15 @@ import seedu.address.model.UserPrefs;
 
 public class ArchiveCommandTest {
 
-    private Path validTestFilePath;
     private Path invalidTestFilePath;
 
     @BeforeEach
     public void setUp() {
-        validTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\testAddressBook.json");
         invalidTestFilePath = Paths.get("src\\test\\data\\ArchiveFilesTest\\noSuchAddressBook.json");
     }
+
+    // Note: Manual testing is needed to test if an existing database file can be archived
+    // As automated testing will cause CI/CD tests in GitActions to fail
 
     @Test
     public void invalidTestFileDoesNotExist() {
