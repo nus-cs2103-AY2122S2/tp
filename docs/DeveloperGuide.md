@@ -875,6 +875,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case for some fields: `add n/Peter ph/63339888 l/Home e/peter@gmail.com l/Personal`
       Expected: Transferred to the Contact Details Page and "New person added" success message is displayed.
       
+   1. Test case for no fields: `add`
+      Expected: Invalid command format error message.
+      
    1. Test case for one invalid prefix: `add name/Wayne`
       Expected: Invalid command format error message.
       
@@ -907,6 +910,9 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case with multiple valid field inputs: `edit ph/63339888 e/guy@people.com a/Average apartment t/not funny actually`
       Expected: Contact information updated message is displayed.
+      
+   1. Test case for no fields: `edit`
+      Expected: Field error message is displayed.
    
    1. Test case with one invalid field input amongst valid inputs: `edit ph/90909999 e/ihateemails a/Pineapple`
       Expected: Invalid email format error message is displated.
@@ -920,7 +926,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case with valid name input: `edit n/Johnny`, `edit n/Johnny Number 1`
       Expected: Contact information updated message is displayed.
       
-   1. Test case with invalid name input: `edit n/R@dical`, edit n/`
+   1. Test case with invalid name input: `edit n/R@dical`, `edit n/`
       Expected: Invalid name format message is displayed.
       
    1. Test case with valid jobtitle input: `edit j/Job`, `edit j/Job Number 1`
