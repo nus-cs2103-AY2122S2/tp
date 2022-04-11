@@ -65,6 +65,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="250" />
@@ -106,12 +108,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -243,8 +249,8 @@ and stored in the addressbook. `CommandResult` would then generate a success mes
 successfully.
 
 The following sequence diagram shows how the tag operation works:
-![Tag Sequence Diagram](images/TagSequenceDiagram0.png)
-![Tag Sequence Diagram](images/TagSequenceDiagram1.png)
+<img src="images/TagSequenceDiagram0.png" />
+<img src="images/TagSequenceDiagram1.png" width="550"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -309,8 +315,10 @@ will eventually return to `LogicManager` which will call `EventCommand#execute()
 `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
 The following sequence diagram shows how the tag operation works:
-![Event Sequence Diagram](images/EventSequenceDiagram0.png)
-![Event Sequence Diagram](images/EventSequenceDiagram1.png)
+<img src="images/EventSequenceDiagram0.png" />
+<img src="images/EventSequenceDiagram1.png" width="500"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Cancel Event feature
 
