@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.HireLah;
 import seedu.address.model.applicant.Applicant;
 
 /**
@@ -66,5 +67,13 @@ public class TypicalApplicants {
 
     public static List<Applicant> getTypicalApplicants() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static HireLah getTypicalHireLah() {
+        HireLah hl = new HireLah();
+        for (Applicant applicant : getTypicalApplicants()) {
+            hl.addApplicant(applicant);
+        }
+        return hl;
     }
 }
