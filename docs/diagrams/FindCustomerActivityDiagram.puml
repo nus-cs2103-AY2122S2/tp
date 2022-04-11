@@ -15,7 +15,7 @@ if () then ([valid command format])
         :Go to next data field;
         repeat
             :Go to next input keyword;
-            if () then ([Keyword matches a customer's keyword in same data field])
+            if () then ([keyword matches a customer's keyword in same data field])
                 :Add customer to the list of customers to be displayed;
             else ([Else])
             endif
