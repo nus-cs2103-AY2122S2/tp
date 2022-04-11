@@ -118,6 +118,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 * For skill field, Skill name have to be followed by an underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level. Maximum length of a skill name is 10 characters.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
 
+* Team and skill names for team and skill field can only be consisted of alphanumeric characters, spaces, and some special characters including `-`, `#`, and `+`. The names cannot start or end with spaces and such spaces will be automatically ignored.
+
 * HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.
 
 </div>
@@ -156,7 +158,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 
 **:information_source: Notes regarding adding a person:**<br>
 
-* Consecutive white spaces right after `t/` and `s/` are ignored (result in contact added without teams or skills).<br>
+* Consecutive white spaces right after `t/` and `s/` are ignored (results in a contact added without teams or skills).<br>
 * There is currently no way of viewing the exact number that you entered.
 * The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).<br>
 </div>
@@ -172,37 +174,42 @@ Examples:
 
 Edits the details of specific person in HackNet.
 
-Format: `edit INDEX [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
+Format: `edit INDEX [o/OPTION] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
-* At least one of the person detail fields must be provided besides `[-r]`.
-* Team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Refer to the examples below.
+* At least one of the optional fields must be provided besides `[o/OPTION]`.
+* Team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. Any excess commas after values will be ignored. Refer to the examples below.
+* Spaces before and after commas are ignored, so `t/team a, team b` will be treated the same as `t/team a,team b`. The same applies to `[s/SKILLNAME_SKILLPROFICENCY…]`.
 * Existing values will be updated to the input values.
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: `-r`:**<br>
+**:information_source: `[o/OPTION]F`:**<br>
 
-* When `-r` is used as an option, the `Team` and `Skill` fields of the contact is overwritten by the arguments to `t/` and `s/`.
-* Without `-r`, the `Team` and `Skill` fields of the contact specified by `t/` and `s/` are appended to the contact's existing teams and skills.
+* `o/` declares the option parameters for `edit`.
+* When `r` is used as an option, reset mode is activated and the `Team` and `Skill` fields of the contact is overwritten by the arguments in `t/` and `s/`.
+* Without `o/r`, the `Team` and `Skill` fields of the contact specified in the command after `t/` and `s/` are appended to the contact's existing teams and skills.
 </div>
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+* `edit 2 o/r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
 * `edit 1 s/C_90, C_2, C_11` will result in the 1st person in the list having skill `C` with proficiency `90` as it is the highest value.
 
 #### Batch edit
 
-Edits the details of multiple contacts in HackNet.
+Edits the details of multiple contacts in HackNet. 
 
-Format: `edit INDEX_1 INDEX_2... [t/TEAM…] [s/SKILLNAME_SKILLPROFICENCY…]`
+Format: `edit INDEX… [o/OPTION] [t/TEAM…] [s/SKILLNAME_SKILLPROFICENCY…]`
 
+* `edit` command behaves as batch edit only when at least two indices are provided for `INDEX…`. Otherwise, `edit` behaves as single edit.
 * Edit the `Team` and `Skill` field of multiple contacts specified by the indexes simultaneously.
-* Indices must be separated by a whitespace as opposed to teams and skills. All index **must be a positive integer** `1, 2, 3, …`
+* Syntax for passing multiple values for `Team` and `Skill` is the same as single edit. Values should be separated by a comma and whitespaces before and after commas, and any excess commas after the values will be ignored.
+* Indices must be separated by a whitespace as opposed to teams and skills. All index **must be a positive integer that is in the contact list** `1, 2, 3, …`
 * If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
-* In the case that same index is present multiple times for `INDEX [INDEX…]`, HackNet will still successfully execute the edit command as long as the index is valid.
+* In the case that same index is present multiple times for `INDEX…`, HackNet will still successfully execute the edit command as long as the index is valid.
+* If any other fields such as `[n/NAME]` that is only valid for single edit is provided, it will be silently ignored.
 
 Examples:
 * `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
@@ -429,7 +436,7 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help [TOPIC]`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/hackathon2021, hackathon2022 s/java_70`
-**Edit** | `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [INDEX…] [o/OPTION] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Mark/unmark contacts** | `team`, `unteam` <br> e.g., `team 1`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`

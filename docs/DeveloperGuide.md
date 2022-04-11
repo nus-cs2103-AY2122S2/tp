@@ -206,7 +206,7 @@ Below is a sequence diagram showing the execution path for this command
 
 By making use of the enumeration `TeamAction`, this command decides its execution path to either add or remove someone from the list of potential teammates.
 
-Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of have 2 out-of-sync commands.
+Similar logic required by the command after (e.g. `model#setPerson`) regardless of the path taken will hence have a single implementation, reducing the risks of having 2 out-of-sync commands.
 
 ### Filtering feature
 
@@ -537,3 +537,8 @@ testers are expected to do more *exploratory* testing.
    2. Start the application and exit right after.
 
     Expected: Data from data file is cleared and contains no entry.
+
+## **Appendix: Effort**
+
+1. Although the `skill` feature was built on AB3's `tag`, there was significant difficulty in implementing it as `tag` only took in 1 argument while `skill` took in 2: `skill name` and `skill proficiency` with both of different types. To add on, `tag` did not contain much interaction with the user but `skill` is used in many of HackNet's features such as `sort` and we had to maintain one unique `skill` for every person and updating it only when the `skill profiency` is different. Further abstraction was also done with the `skill` feature by implementing a `skillset` to contain all `skill`s and allow for other developers to easily interact with `skill` without knowing the implementation.
+2. There was much difficulty faced in making the `skill` in HackNet's GUI reflect different colour based on input `skill proficiency`. This is because simply changing the `.fxml` file will not work as it was not possible to obtain the `skill proficiency` values there. After tracing the code and finding where the `Label` was created, methods such as `setTextFill()` did not work too. Finally, with help from the [forum](https://github.com/nus-cs2103-AY2122S2/forum/issues/225), a fellow student suggested a fix with `setStyle()`.
