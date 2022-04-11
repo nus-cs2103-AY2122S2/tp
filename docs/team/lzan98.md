@@ -72,7 +72,7 @@ the interview scheduling process of candidates applying to be undergraduate Teac
 * **Contributions beyond the project team**:
     * Solved issues faced by others: e.g. [\#13](https://github.com/nus-cs2103-AY2122S2/forum/issues/13#issuecomment-1017380970),
       [\#57](https://github.com/nus-cs2103-AY2122S2/forum/issues/57), [\#142](https://github.com/nus-cs2103-AY2122S2/forum/issues/142)
-    * Contributed to forum discussions: e.g. [#\28](https://github.com/nus-cs2103-AY2122S2/forum/issues/28#issuecomment-1019963524),
+    * Contributed to forum discussions: e.g. [\#28](https://github.com/nus-cs2103-AY2122S2/forum/issues/28#issuecomment-1019963524),
       [\#243](https://github.com/nus-cs2103-AY2122S2/forum/issues/243), [\#194](https://github.com/nus-cs2103-AY2122S2/forum/issues/194)
     * Reported a total of [10 issues](https://github.com/lzan98/ped) during PED.
   
