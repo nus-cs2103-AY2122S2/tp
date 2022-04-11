@@ -593,7 +593,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test Case: `add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-04-28 13:00 ke/3 dt/2022-04-15 23:59`<br>
       Expected: The UniBook adds this module with the specified key events to the UniBook.<br>                      
-
+<br>
 2. Add a group with meeting times to a module.<br>
 
    1. Prerequisites: The specified module must exist in the UniBook, otherwise an error message will be displayed.  
