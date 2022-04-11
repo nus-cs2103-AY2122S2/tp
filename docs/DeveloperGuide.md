@@ -170,6 +170,8 @@ Refer to [Viewing a Lesson or Student's details](#viewing-a-lesson-or-students-d
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
