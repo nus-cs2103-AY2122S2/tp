@@ -30,12 +30,12 @@ traditional GUI apps.
 | Windows | Double-click the TeachWhat! jar file.                                                                     |
 |   Mac   | On Terminal, go to the directory where the TeachWhat! jar file is and do <br/> `java -jar TeachWhat!.jar` |
 
-5. The GUI similar to the below should appear in a few seconds. 
+* The GUI similar to the one shown below should appear in a few seconds. 
 Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
 
 <div style="page-break-after: always;"></div>
 
-6. Type the command in the command box and press Enter to execute it. e.g. Execute **`help`** to open the help window.<br>
+* Type the command in the command box and press Enter to execute it. e.g. Execute **`help`** to open the help window.<br>
    Some example commands you can try:
 
    * **`listlessons`** : Lists all lessons.
@@ -46,7 +46,7 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
    
    * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+* Refer to the [Features](#features) below for details of each command.
 
 <div style="page-break-after: always;"></div>
 
@@ -89,8 +89,6 @@ You may see more than one command word for a command, the second one being the s
    
 <div style="page-break-after: always;"></div>
 
----
-
 ### Viewing a student
 
 Displays the details for the student with the specified student ID.
@@ -128,7 +126,7 @@ Displays the details for the lesson with the specified lesson ID.
 
 **Example**: `listlessons` would display a list of all the lessons that a tutor has.
 
----
+<div style="page-break-after: always;"></div>
 
 ### Adding a student
 
@@ -160,7 +158,8 @@ information which is the student's name and phone number.
 * Email is limited to 100 characters.
 * Tags are limited to 30 alphanumeric characters with no spaces allowed.
 </div>
----
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a Student
 
@@ -197,7 +196,7 @@ Deletes a student from TeachWhat!
 
 **Example**: `rmstudent 13`
 
----
+<div style="page-break-after: always;"></div>
 
 ### Adding a lesson
 
@@ -244,7 +243,7 @@ If you have any existing lessons that clash with the one that you're trying to a
 If you still want to add this lesson, use `rmlesson` to remove the list of conflicting lessons shown before proceeding to add the new lesson.
 </div>
 
----
+<div style="page-break-after: always;"></div>
 
 ### Editing a Lesson
 
@@ -270,7 +269,7 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 * If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than **24 hours!**
 </div>
 
----
+<div style="page-break-after: always;"></div>
 
 ### Deleting a lesson
 
@@ -317,7 +316,7 @@ Unssigns the specified student from the specified lesson.
 **Example**: `liststudents` followed by `unassign -s 5 -l 11` unassigns the student with `<STUDENT_ID>` of **5**
 to the lesson with `<LESSON_ID>` of **11**.
 
----
+<div style="page-break-after: always;"></div>
 
 ### Finding a Student
 
@@ -360,6 +359,8 @@ Remember to include **`-f`** when typing this command!
 **:exclamation: Caution:**<br>
 THIS WILL WIPE YOUR ENTIRE LESSON AND STUDENT LIST!
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Help
 
@@ -412,6 +413,8 @@ error is found in the data files for students *or* lessons.
 An example of such an error would be conflicting lessons being found in the data file that holds lessons.
 
 --------------------------------------------------------------------------------------------------------------------
+   
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
