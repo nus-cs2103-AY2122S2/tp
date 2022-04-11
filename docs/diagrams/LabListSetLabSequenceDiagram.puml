@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant "LabList" as LabList MODEL_COLOR
+participant "target:Lab" as Lab MODEL_COLOR
+participant ":ObservableList<Lab>" as ObservableList MODEL_COLOR
+end box
+
+[-> LabList : setLab(target, editedLab)
+activate LabList
+
+LabList -> Lab : equals(editedLab)
+activate Lab
+
+Lab --> LabList
+deactivate Lab
+
+LabList -> ObservableList : indexOf(target)
+activate ObservableList
+
+ObservableList --> LabList
+deactivate ObservableList
+
+LabList -> ObservableList : set(target, editedLab)
+activate ObservableList
+
+ObservableList --> LabList
+deactivate ObservableList
+
+[<-- LabList
+deactivate LabList
+
+@enduml

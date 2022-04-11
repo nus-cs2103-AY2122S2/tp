@@ -257,7 +257,7 @@ The implementation of `labedit` is as follows:
 
 6. The `EditLabCommand` calls `LabList#setLab` of the student specified by the given `INDEX`, which edits the target `Lab` to the new `Lab`.
 
-The following sequence diagram shows the interactions between components during the execution of the `labedit` command:
+The following sequence diagram shows the interactions between components during a `labedit` command, `labedit l/1 s/u`:
 
 <img src="images/EditLabCommandSequenceDiagram.png" width="850" />
 
@@ -272,9 +272,9 @@ The detailed steps are as follows:
 1. `LabList#setLab` checks if the edited `Lab` is the same as the original `Lab`, and whether the target `Lab` exists in the `LabList`.
 2. `LabList#setLab` edits the target `Lab` to the new `Lab` with different `LabStatus` and/or `LabMark`.
 
-To summarize, the following activity diagram summarizes what happens when the user requests to edit a lab:
+To summarize, the following activity diagram shows what happens when the user requests to edit a lab:
 
-<img src="images/EditLabCommandActivityDiagram.png" width="600" />
+<img src="images/EditLabCommandActivityDiagram.png" width="500" />
 
 
 ### \[Proposed\] Undo/redo feature

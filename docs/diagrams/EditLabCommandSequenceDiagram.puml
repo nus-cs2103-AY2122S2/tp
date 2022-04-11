@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditLabCommandParser" as EditLabCommandParser LOGIC_COLOR
+participant "e:EditLabCommand" as EditLabCommand LOGIC_COLOR
+participant "c:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant ":List<Student>" as List MODEL_COLOR
+participant "s:Student" as Student MODEL_COLOR
+participant "list:LabList" as LabList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("labedit l/1 s/u")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("labedit l/1 s/u")
+activate AddressBookParser
+
+create EditLabCommandParser
+AddressBookParser -> EditLabCommandParser
+activate EditLabCommandParser
+
+EditLabCommandParser --> AddressBookParser
+deactivate EditLabCommandParser
+
+AddressBookParser -> EditLabCommandParser : parse("l/1 s/u")
+activate EditLabCommandParser
+
+create EditLabCommand
+EditLabCommandParser -> EditLabCommand
+activate EditLabCommand
+
+EditLabCommand --> EditLabCommandParser : e
+deactivate EditLabCommand
+
+EditLabCommandParser --> AddressBookParser : e
+deactivate EditLabCommandParser
+EditLabCommandParser -[hidden]-> AddressBookParser
+destroy EditLabCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditLabCommand : execute(m)
+activate EditLabCommand
+
+EditLabCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> EditLabCommand
+deactivate Model
+
+EditLabCommand -> List : get(index)
+activate List
+
+List --> EditLabCommand : s
+deactivate List
+
+EditLabCommand -> Student : getLabs()
+activate Student
+
+Student --> EditLabCommand : list
+deactivate Student
+
+EditLabCommand -> LabList : getLab()
+activate LabList
+
+LabList --> EditLabCommand : labToEdit
+deactivate LabList
+
+EditLabCommand -> LabList : setLab(labToEdit, editedLab)
+activate LabList
+
+LabList --> EditLabCommand
+deactivate LabList
+
+create CommandResult
+EditLabCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditLabCommand
+deactivate CommandResult
+
+EditLabCommand --> LogicManager
+deactivate EditLabCommand
+
+[<--LogicManager :
+deactivate LogicManager
+
+@enduml
