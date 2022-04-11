@@ -186,6 +186,8 @@ How the `Logic` component works:
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rms 1")` API call.
 
 ![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteStudentSequenceDiagram.png)
@@ -194,14 +196,17 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <img src="images/ParserClasses.png" width="600"/>
+
+<div style="page-break-after: always;"></div>
 
 How the parsing works:
 * When called upon to parse a user command, the `TeachWhatParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteStudentCommand`) which the `TeachWhatParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -222,6 +227,8 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 ![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
 
 [return to top ↑](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
