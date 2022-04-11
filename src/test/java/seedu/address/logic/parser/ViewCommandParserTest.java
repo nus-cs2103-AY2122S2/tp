@@ -2,13 +2,6 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.person.Person;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
@@ -23,6 +16,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.model.person.Person;
 
 public class ViewCommandParserTest {
     private ViewCommandParser parser = new ViewCommandParser();
