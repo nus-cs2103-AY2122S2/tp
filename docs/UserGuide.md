@@ -257,8 +257,10 @@ help
 
 ### Adding entries
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Adding an entry may fail and display an error message below if the entry already exists. You can try to do `listc s/all`/`listp s/all`/`liste s/all` to see the all the entries (archived and unarchived) in the display to make sure entryalready exists previously.
+Adding an entry may fail and display an error message if the entry already exists. You can try to do `listc s/all`/`listp s/all`/`liste s/all`
+to see all the entries (archived and unarchived) in the display. This way, you can check if the entry already exists.
 </div>
+
 #### Adding a company: `addc`
 
 Adds a company to the list of companies.
