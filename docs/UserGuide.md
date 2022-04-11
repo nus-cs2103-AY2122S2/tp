@@ -446,7 +446,7 @@ TACH data is saved in your computer's [hard disk](#glossary) automatically after
 
 ## Editing the data file
 
-TACH data is saved as a [JSON file](#glossary) under `[TACH file location]/data/tach.json`. <br>
+TACH data is saved as a [JSON file](#glossary) under `[TACH file location]/data/addressbook.json`. <br>
 **You should not edit the data file directly unless you are absolutely sure of what you are doing!** <br>
 Only advanced users who are absolutely familiar with the data format should try updating the data directly by editing the data file.
 
