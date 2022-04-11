@@ -74,7 +74,7 @@ deactivate Transaction
 
 TransactionBuilder --> AddTransactionCommand : nt
 deactivate TransactionBuilder
-TransactionBuilder -[hidden]-> AddTransactionCommand : nt
+TransactionBuilder -[hidden]-> AddTransactionCommand
 destroy TransactionBuilder
 
 AddTransactionCommand -> Model : addTransaction(nt)
