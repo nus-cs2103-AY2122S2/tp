@@ -76,7 +76,9 @@ Given below are my contributions to the project.
         * Added implementation details for the `findTransaction` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
         * Added implementation details for the `pay` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
         * Added implementation details for the `unpay` feature. [\#250](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/250/files)
-    
+
+* **Reviewed PRs**: [\#69](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/69), [\#91](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/91),
+ [\#100](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/100), [\#35](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/35)
 * **Tests**:
   * Add test cases for various transaction features. [\#78](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/78),
     [\#138](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/138), 
