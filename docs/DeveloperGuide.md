@@ -347,9 +347,11 @@ causing another modified WoofAreYou state to be saved into the petBookStateList.
   <img src="images/UndoState2.png" alt="UndoRedoState2" width="450"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: Note: If a command fails its execution, it will not call `VersionedPetBook#commit()`, so the WoofAreYou state will not be saved into the petBookStateList.
-
+<div markdown="span" class="alert alert-info">
+:information_source: Note: If a command fails its execution, it will not call 
+VersionedPetBook#commit(), so the WoofAreYou state will not be saved into the petBookStateList.
 </div>
+
 
 Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the undo command. The undo command will call `Model#undo()`, which will shift the currentStatePointer once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
@@ -357,9 +359,10 @@ Step 4. The user now decides that adding the pet was a mistake, and decides to u
   <img src="images/UndoState3.png" alt="UndoRedoState3" width="450"/>
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: Note: If the currentStatePointer is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. If so, it will return an error to the user.
-
+<div markdown="span" class="alert alert-info">
+:information_source: Note: If the currentStatePointer is at index 0, pointing to the initial PetBook state, then there are no previous PetBook states to restore. If so, it will return an error to the user.
 </div>
+
 
 The following sequence diagram shows how the undo operation works:
 
@@ -378,9 +381,6 @@ Thus, the petBookStateList remains unchanged.
   <img src="images/UndoState4.png" alt="UndoRedoState4" width="450"/>
 </p>
 
-<p align="center">
-  <img src="images/UndoState5.png" alt="UndoRedoState5" width="450"/>
-</p>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
