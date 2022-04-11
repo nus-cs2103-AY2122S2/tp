@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+participant ":ModelManager" as ModelManager MODEL_COLOR
+
+participant ":AddressBook" as AddressBook MODEL_COLOR
+
+participant ":List<Candidate>" as List LOGIC_COLOR
+
+
+[-> LogicManager : execute("sort s/name")
+activate LogicManager
+
+
+LogicManager  -> SortCommand : execute(model)
+activate SortCommand
+
+SortCommand  -> ModelManager : updateSortedCandidateList(sortComparator)
+activate ModelManager
+
+ModelManager  -> AddressBook : sortCandidates(sortComparator)
+activate AddressBook
+
+create List
+
+AddressBook  -> List :  new ArrayList<Candidate>(candidateList)
+activate List
+
+List  -> List : sort(sortComparator)
+activate List
+deactivate List
+
+List --> AddressBook :
+deactivate List
+
+AddressBook  -> AddressBook : setCandidates(candidatesCopy)
+activate AddressBook
+deactivate AddressBook
+
+destroy List
+
+AddressBook --> ModelManager :
+deactivate AddressBook
+
+ModelManager --> SortCommand :
+deactivate ModelManager
+
+create CommandResult
+SortCommand -> CommandResult :
+activate CommandResult
+
+CommandResult --> SortCommand :
+deactivate CommandResult
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommand --> LogicManager
+deactivate SortCommand
+
+SortCommand -[hidden]-> LogicManager
+destroy SortCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
