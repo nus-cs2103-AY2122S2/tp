@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from the ArchDuke.
  */
 public class DeleteCommand extends Command {
 

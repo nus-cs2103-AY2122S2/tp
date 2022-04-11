@@ -26,6 +26,9 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains unit tests for {@code AddressBook}.
+ */
 public class AddressBookTest {
 
     private final AddressBook addressBook = new AddressBook();

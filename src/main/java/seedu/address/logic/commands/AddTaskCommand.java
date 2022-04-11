@@ -9,6 +9,9 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
+/**
+ * Adds a task to a group in ArchDuke.
+ */
 public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "addtask";
@@ -43,8 +46,7 @@ public class AddTaskCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
-        if (model.hasGroup(specificGroup)) { //check whether the specified group exists
+        if (model.hasGroup(specificGroup)) {
             if (model.hasTask(taskToAdd, specificGroup)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
@@ -63,6 +65,11 @@ public class AddTaskCommand extends Command {
 
     /**
      * Creates and returns a {@code Group} with the details of {@code groupToAddTask}
+     *
+     * @param groupToAddTask target group to add task.
+     * @param taskToAdd task to add to the group.
+     * @param model current model.
+     * @return Group with newly added task.
      */
     private static Group createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model) {
         model.addTask(taskToAdd, groupToAddTask);

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -66,18 +65,8 @@ public class DeassignCommand extends Command {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
-        ObservableList<Group> groups = model.getFilteredGroupList();
-        assert groups != null : "group list should not be null";
-
-        Group deassignedGroup = group;
-        for (Group gp : groups) {
-            if (gp.equals(group)) {
-                deassignedGroup = gp;
-                break;
-            }
-        }
-
-        assert deassignedGroup != null : "deassignedGroup should not be null";
+        Group deassignedGroup = model.getGroup(group);
+        assert deassignedGroup != null : "deassigned Group should not be null";
 
         Person personToDeassign = persons.get(index.getZeroBased());
         assert personToDeassign != null : "personToDeassign should not be null";

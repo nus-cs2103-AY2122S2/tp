@@ -56,17 +56,12 @@ public class UniqueGroupList implements Iterable<Group> {
     public Group getGroup(Group group) {
         requireNonNull(group);
 
-        try {
-            for (int i = 0; i < internalList.size(); i++) {
-                System.out.println(internalList.get(i));
-                if (internalList.get(i).equals(group)) {
-                    return internalList.get(i);
-                }
+        for (Group value : internalList) {
+            if (value.equals(group)) {
+                return value;
             }
-        } catch (GroupNotFoundException e) {
-            System.out.println("Group is not found in the list.");
         }
-        return null;
+        throw new GroupNotFoundException();
     }
 
     /**

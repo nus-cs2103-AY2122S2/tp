@@ -4,6 +4,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for {@code UserPrefs}.
+ */
 public class UserPrefsTest {
 
     @Test
