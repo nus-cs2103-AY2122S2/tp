@@ -12,13 +12,28 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
+Class UniqueApplicantList
+Class Applicant
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Nric
+Class Date_Applied
+Class Qualification
+Class Job_id
+Class Interview_Date
+Class Applicant_Status
+
+Class UniqueJobList
+Class Job
+Class Job_Title
+Class Company_Name
+Class Job_Status
+Class Position
+Class Salary
+
 
 }
 
@@ -34,17 +49,36 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueApplicantList
+UniqueApplicantList --> "~* all" Applicant
+Applicant *--> Name
+Applicant *--> Phone
+Applicant *--> Email
+Applicant *--> Address
+Applicant *--> Nric
+Applicant *--> Date_Applied
+Applicant *--> Qualification
+Applicant *--> Job_id
+Applicant *--> Interview_Date
+Applicant *--> Applicant_Status
+Applicant *--> "*" Tag
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Applicant
+
+AddressBook *--> "1" UniqueJobList
+UniqueJobList --> "~* all" Job
+Job *--> Job_Title
+Job *--> Company_Name
+Job *--> Job_id
+Job *--> Address
+Job *--> Qualification
+Job *--> Job_Status
+Job *--> Position
+Job *--> Salary
+
+ModelManager -->"~* filtered" Job
 @enduml

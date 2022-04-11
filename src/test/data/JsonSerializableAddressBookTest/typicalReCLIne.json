@@ -1,0 +1,152 @@
+{
+  "applicants" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "nric" : "S9920202A",
+    "job" : "1",
+    "qualification" : "degree in Computing",
+    "dateApplied" : "2022-01-21",
+    "interviewDate" : "2022-01-28",
+    "applicationStatus" : "1"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ],
+    "nric" : "S9930303B",
+    "job" : "2",
+    "qualification" : "degree in Computer Engineering",
+    "dateApplied" : "2022-01-22",
+    "interviewDate" : "2022-01-29",
+    "applicationStatus" : "3"
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tagged" : [ ],
+    "nric" : "S9940404C",
+    "job" : "1",
+    "qualification" : "degree in Economics",
+    "dateApplied" : "2022-01-23",
+    "interviewDate" : "2022-01-30",
+    "applicationStatus" : "1"
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tagged" : [ "friends" ],
+    "nric" : "S9950505D",
+    "job" : "1",
+    "qualification" : "degree in Business",
+    "dateApplied" : "2022-01-24",
+    "interviewDate" : "2022-01-31",
+    "applicationStatus" : "2"
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "94822241",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "tagged" : [ ],
+    "nric" : "S9960606E",
+    "job" : "2",
+    "qualification" : "degree in Data Science",
+    "dateApplied" : "2022-01-25",
+    "interviewDate" : "2022-02-01",
+    "applicationStatus" : "2"
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "94824271",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tagged" : [ ],
+    "nric" : "S9970707F",
+    "job" : "1",
+    "qualification" : "degree in Real Estate",
+    "dateApplied" : "2022-01-26",
+    "interviewDate" : "2022-02-02",
+    "applicationStatus" : "3"
+  }, {
+    "name" : "George Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tagged" : [ ],
+    "nric" : "S9980808G",
+    "job" : "1",
+    "qualification" : "degree in Political Science",
+    "dateApplied" : "2022-01-27",
+    "interviewDate" : "2022-02-03",
+    "applicationStatus" : "0"
+  } ],
+  "jobs" : [ {
+    "jobTitle" : "Software Engineer",
+    "companyName" : "Google",
+    "id" : "3",
+    "address" : "123 Google Road",
+    "qualification" : "Degree in Computer Science",
+    "jobStatus" : "filled",
+    "position" : "ft",
+    "salary" : "5000-6000"
+  }, {
+    "jobTitle" : "Engineer",
+    "companyName" : "Visa",
+    "id" : "4",
+    "address" : "123 Visa Road",
+    "qualification" : "Degree in Engineering",
+    "jobStatus" : "filled",
+    "position" : "ft",
+    "salary" : "4000-6000"
+  }, {
+    "jobTitle" : "Accountant",
+    "companyName" : "DBS",
+    "id" : "5",
+    "address" : "194 DBS Road",
+    "qualification" : "Degree in Accounting",
+    "jobStatus" : "vacant",
+    "position" : "ft",
+    "salary" : "5000-8000"
+  }, {
+    "jobTitle" : "Cashier",
+    "companyName" : "NTUC",
+    "id" : "6",
+    "address" : "194 NTUC Fairprice Road",
+    "qualification" : "No Requirement",
+    "jobStatus" : "filled",
+    "position" : "ft",
+    "salary" : "2000-3000"
+  }, {
+    "jobTitle" : "Safe Distancing Ambassador",
+    "companyName" : "Ministry of Sustainability and Environment",
+    "id" : "7",
+    "address" : "1 Safe Distance Road",
+    "qualification" : "No Requirement",
+    "jobStatus" : "vacant",
+    "position" : "pt",
+    "salary" : "10-13"
+  }, {
+    "jobTitle" : "Food Packer",
+    "companyName" : "FitThree",
+    "id" : "8",
+    "address" : "194 Packing Road",
+    "qualification" : "No Requirement",
+    "jobStatus" : "filled",
+    "position" : "pt",
+    "salary" : "10-10"
+  }, {
+    "jobTitle" : "Waiter",
+    "companyName" : "Ichiban",
+    "id" : "9",
+    "address" : "14 Waiting Table Road",
+    "qualification" : "No Requirement",
+    "jobStatus" : "filled",
+    "position" : "pt",
+    "salary" : "8-10"
+  } ],
+  "idCount" : 9
+}

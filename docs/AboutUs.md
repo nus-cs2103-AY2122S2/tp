@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Justin Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justinnje.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Justinnje)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/justinnje.html)]
 
-* Role: Project Advisor
+* Role: Developer - Job Feature
+* Responsibilities: Testing
 
-### Jane Doe
+### Rosa Kang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ro4k9.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ro4k9)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/ro4k9.html)]
 
-* Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+* Role: Developer - Employer Feature
+* Responsibilities: Documentation
 
-<img src="images/johndoe.png" width="200px">
+### Sean Leong
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/seanleong339.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+[[github](http://github.com/seanleong339)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/seanleong339.html)]
 
-### Jean Doe
+* Role: Developer - Applicant Feature
+* Responsibilities: Code Quality
 
-<img src="images/johndoe.png" width="200px">
+### Chan Yi Juan
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/chanyijuan.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+[[github](http://github.com/chanyijuan)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/chanyijuan.html)]
+* 
+* Role: Developer - List Features
+* Responsibilities: Deliverables and deadlines.
 
-### James Doe
+### Paing Oo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e0543517.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/e0543517)]
+[[Portfolio Page](https://ay2122s2-cs2103t-w15-1.github.io/tp/team/e0543517.html)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer - Applicant Features
+* Responsibilities: UI and Parser

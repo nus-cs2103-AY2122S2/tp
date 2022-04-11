@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title "if new Applicant != current Applicant"
+
+package Applicant <<rectangle>> {
+    class State1 as "__ applicantToMark : Applicant __"
+    class State2 as "__ markedApplicant : Applicant __"
+
+}
+
+State1 -[hidden]right-> State2
+
+hide State1
+
+
+@end

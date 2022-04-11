@@ -1,0 +1,21 @@
+@startuml
+start
+:User executes editapplicant;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ( [index provided < size of list])
+- Get current Applicant from List
+- Create a new Applicant with updated information
+
+if () then ([current Applicant
+            != new Applicant])
+    - Replace the current Applicant with the new Applicant
+    else ([else])
+       endif
+
+else ([else])
+endif
+stop
+@enduml

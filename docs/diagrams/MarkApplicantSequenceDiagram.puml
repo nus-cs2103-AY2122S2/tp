@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkApplicantParser" as MarkApplicantParser LOGIC_COLOR
+participant ":MarkApplicant" as MarkApplicant LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model :Model" as Model MODEL_COLOR
+participant "applicant :Applicant" as Applicant MODEL_COLOR
+participant "addressBook:AddressBook" as AddressBook MODEL_COLOR
+participant "applicants:UniqueApplicantList" as UniqueApplicantList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(markapplicant)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(markapplicant)
+activate AddressBookParser
+
+create MarkApplicantParser
+AddressBookParser -> MarkApplicantParser
+activate MarkApplicantParser
+
+MarkApplicantParser --> AddressBookParser
+deactivate MarkApplicantParser
+
+AddressBookParser -> MarkApplicantParser : parse(arguments)
+activate MarkApplicantParser
+
+create MarkApplicant
+MarkApplicantParser -> MarkApplicant
+activate MarkApplicant
+
+MarkApplicant --> MarkApplicantParser
+deactivate MarkApplicant
+
+MarkApplicantParser --> AddressBookParser
+deactivate MarkApplicantParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+destroy MarkApplicantParser
+
+LogicManager -> MarkApplicant : execute()
+activate MarkApplicant
+
+MarkApplicant -> Model : getFilteredApplicant()
+activate Model
+
+Model --> MarkApplicant
+deactivate Model
+
+MarkApplicant -> Applicant : new Applicant(arguments)
+activate Applicant
+Applicant --> MarkApplicant
+deactivate Applicant
+
+MarkApplicant -> Model :setApplicant()
+activate Model
+
+Model -> AddressBook : setApplicant()
+activate AddressBook
+
+AddressBook -> UniqueApplicantList : setApplicant()
+activate UniqueApplicantList
+
+UniqueApplicantList --> AddressBook
+deactivate UniqueApplicantList
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> MarkApplicant
+deactivate Model
+
+MarkApplicant -> Model : updateFilteredApplicantList()
+activate Model
+
+Model --> MarkApplicant
+deactivate Model
+
+MarkApplicant --> LogicManager
+deactivate MarkApplicant
+
+[<--LogicManager
+deactivate LogicManager
+
+destroy MarkApplicant
+
+@enduml

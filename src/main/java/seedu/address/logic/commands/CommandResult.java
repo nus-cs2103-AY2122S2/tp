@@ -17,13 +17,26 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should switch to applicant tab. */
+    private final boolean tabApplicant;
+
+    /** The application should switch to job tab. */
+    private final boolean tabJob;
+
+    /** The application should reset */
+    private final boolean resetInfoPanel;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean tabApplicant, boolean tabJob, boolean resetPanel) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.tabApplicant = tabApplicant;
+        this.tabJob = tabJob;
+        this.resetInfoPanel = resetPanel;
     }
 
     /**
@@ -31,8 +44,24 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} that makes appropriate changes to UI
+     */
+    public CommandResult(String feedbackToUser, boolean tabApplicant, boolean tabJob, boolean resetPanel) {
+        this(feedbackToUser, false, false, tabApplicant, tabJob, resetPanel);
+    }
+
+
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -44,6 +73,18 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isTabApplicant() {
+        return tabApplicant;
+    }
+
+    public boolean isTabJob() {
+        return tabJob;
+    }
+
+    public boolean isResetInfoPanel() {
+        return resetInfoPanel;
     }
 
     @Override
@@ -60,12 +101,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && tabApplicant == otherCommandResult.tabApplicant
+                && tabJob == otherCommandResult.tabJob
+                && resetInfoPanel == otherCommandResult.resetInfoPanel;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, tabApplicant, tabJob, resetInfoPanel);
     }
-
 }

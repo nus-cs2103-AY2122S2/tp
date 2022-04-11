@@ -129,4 +129,14 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void getIdCountReturnsAndIncrements() {
+        AddressBook addressBook = new AddressBook();
+        ModelManager modelManager = new ModelManager();
+        String ten = modelManager.getIdCount();
+        String eleven = modelManager.getIdCount();
+        assertEquals("10", ten);
+        assertEquals("11", eleven);
+    }
 }

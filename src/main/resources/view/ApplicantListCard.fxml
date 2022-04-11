@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="120" prefWidth="200" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Label fx:id="id" style="-fx-padding: 10 10 10 10;" styleClass="cell_big_label" BorderPane.alignment="CENTER">
+         <minWidth>
+            <Region fx:constant="USE_PREF_SIZE" />
+         </minWidth>
+         <font>
+            <Font name="Futura Medium" size="30.0" />
+         </font>
+      </Label>
+   </left>
+   <center>
+      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+         <children>
+            <HBox style="-fx-padding: 0 0 3 0;">
+               <children>
+                  <Label fx:id="name" style="-fx-padding: 0 8 0 0;" styleClass="cell_big_label" text="\$first" />
+                  <Label style="-fx-padding: 2 0 0 0;">
+                     <graphic>
+                        <Circle fx:id="status" fill="#a8a8a8" radius="6.0" stroke="#3636366e" strokeType="INSIDE" />
+                     </graphic>
+                  </Label>
+               </children>
+            </HBox>
+            <FlowPane fx:id="tags" style="-fx-padding: 0 0 3 0;" />
+               <Label fx:id="jobID" styleClass="cell_small_label" text="\$jobid" />
+               <Label fx:id="dateapplied" styleClass="cell_small_label" text="\$dateapplied" />
+               <Label fx:id="interviewdate" styleClass="cell_small_label" text="\$interviewdate" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

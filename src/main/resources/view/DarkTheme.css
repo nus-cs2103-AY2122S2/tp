@@ -10,18 +10,52 @@
     -fx-opacity: 0.9;
 }
 
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
+/* Style for Info Panel*/
+.info-panel {
+    -fx-background-color:transparent;
+    -fx-background-radius:10;
 }
 
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+
+.info-panel .label {
     -fx-text-fill: white;
-    -fx-opacity: 1;
+    -fx-font-size: 15px;
+    -fx-padding: 0 5 0 0;
+}
+
+.info-panel .label-big {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-padding: 5 0 5 10;
+}
+
+.info-panel .hbox {
+    -fx-padding: 0 3 3 0;
+}
+
+/* Style for Status*/
+.label-accepted {
+    -fx-background-color: green;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+}
+
+.label-pending {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+}
+
+.label-rejected {
+    -fx-background-color: red;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+}
+
+.label-interviewed {
+    -fx-background-color: yellow;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
 }
 
 .text-field {
@@ -29,15 +63,55 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
-.tab-pane {
-    -fx-padding: 0 0 0 1;
-}
-
+/* Style for Tab Pane*/
 .tab-pane .tab-header-area {
     -fx-padding: 0 0 0 0;
     -fx-min-height: 0;
     -fx-max-height: 0;
 }
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator  {
+    -fx-background-color: rgba(75, 75, 75, 0.2);
+    -fx-background-radius: 3;
+    -fx-border-color: transparent;
+}
+
+.tab-pane *.tab-header-area *.tab-header-background {
+  -fx-background-color:transparent;
+  -fx-border-color:transparent;
+}
+
+.tab-pane {
+  -fx-tab-min-width:90px;
+  -fx-tab-max-width:90px;
+  -fx-tab-min-height:30px;
+  -fx-tab-max-height:30px;
+}
+
+.tab {
+  -fx-font-family: Arial;
+  -fx-font-size: 16;
+  -fx-background-radius: 10 10 0 0;
+  -fx-border-radius: 10 10 0 0;
+}
+
+
+.tabApplicant {
+  -fx-font-family: Arial;
+  -fx-font-size: 14;
+  -fx-background-color: #c5d1e0;
+  -fx-border-color: #c5d1e0;
+
+}
+
+.tabJob {
+  -fx-font-family: Arial;
+  -fx-font-size: 14;
+  -fx-background-color: #869bb5;
+  -fx-border-color: #869bb5;
+}
+
+/* Style for table */
 
 .table-view {
     -fx-base: #1d1d1d;
@@ -47,6 +121,7 @@
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
 }
+
 
 .table-view .column-header-background {
     -fx-background-color: transparent;
@@ -76,44 +151,46 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
-}
-
-.split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
+/* Style for List View*/
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 10;
+    -fx-background-radius: 0 10 10 10;
+
+
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-background-radius: 20;
+    -fx-background-insets: 3;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #7c8394;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #555d70;
 }
 
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
+    -fx-background-radius: 20;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+     -fx-background-color: #424d5f;
+     -fx-background-radius: 20;
+
+}
+
+.list-cell:empty {
+    -fx-padding: 2px ;
+    -fx-background-color: transparent ;
+    -fx-background-insets: 0 ;
 }
 
 .list-cell .label {
@@ -138,16 +215,39 @@
 
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-color: derive(#1d1d1d, 20%);
      -fx-border-top-width: 1px;
 }
 
+/* Style for Scroll Pane*/
+.scroll-pane {
+   -fx-background: grey;
+   -fx-background-radius: 15;
+   -fx-border-color: transparent;
+   -fx-background-insets: 0;
+   -fx-padding: 0;
+}
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Style for status bar */
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+/* Style for result display */
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: derive(#1d1d1d, 40%);
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
@@ -157,6 +257,7 @@
     -fx-text-fill: black !important;
 }
 
+/* Style for status bar */
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
@@ -174,16 +275,6 @@
     -fx-text-fill: white;
 }
 
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
@@ -191,6 +282,7 @@
 .context-menu .label {
     -fx-text-fill: white;
 }
+
 
 .menu-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
@@ -206,6 +298,16 @@
 .menu .left-container {
     -fx-background-color: black;
 }
+
+/* Style for Split Pane*/
+.split-pane {
+    -fx-background-color: transparent;
+}
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: transparent;
+   -fx-padding: 10;
+}
+
 
 /*
  * Metro style Push Button
@@ -282,11 +384,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 60%);
     -fx-background-insets: 3;
 }
 
@@ -310,6 +412,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+    -fx-padding: 5;
 }
 
 #commandTypeLabel {
@@ -320,7 +423,7 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
@@ -333,8 +436,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-border-color:derive(#1d1d1d, 40%);
 }
 
 #tags {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="infoPanel" alignment="CENTER_LEFT" styleClass="info-panel" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+      <padding>
+         <Insets bottom="5" left="15" right="5" top="15" />
+      </padding>
+      <children>
+      <HBox>
+         <children>
+            <ImageView fx:id="image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="false" preserveRatio="false" />
+            <Label fx:id="name" styleClass="label-big" textFill="WHITE" wrapText="true"/>
+            <Label fx:id="id" styleClass="label-big" minHeight="-Infinity" minWidth="-Infinity"/>
+         </children>
+      </HBox>
+      <FlowPane fx:id="tags" prefHeight="20.0" prefWidth="130.0" prefWrapLength="200"/>
+      <HBox>
+         <children>
+            <Label fx:id="firstSubHeader" text="Click the list item to view more information" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="firstLabel" wrapText="true"/>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="secondSubHeader" minHeight="-Infinity" minWidth="-Infinity" />
+            <Label fx:id="secondLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="thirdSubHeader" minHeight="-Infinity" minWidth="-Infinity" />
+            <Label fx:id="thirdLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="fourthSubHeader" minHeight="-Infinity" minWidth="-Infinity" />
+            <Label fx:id="fourthLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="fifthSubHeader" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="fifthLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="sixthSubHeader" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="sixthLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="seventhSubHeader" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="seventhLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="eighthSubHeader" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="eighthLabel" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Label fx:id="ninthSubHeader" minHeight="-Infinity" minWidth="-Infinity"/>
+            <Label fx:id="ninthLabel" wrapText="true" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

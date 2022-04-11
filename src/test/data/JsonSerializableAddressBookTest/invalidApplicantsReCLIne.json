@@ -1,0 +1,18 @@
+{
+  "applicants" : [ {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tagged" : [ ],
+    "nric" : "9980808G",
+    "job" : "7",
+    "qualification" : "degree in Political Science",
+    "id" : "1558456209",
+    "dateApplied" : "2022-01-27",
+    "interviewDate" : "2022-02-03",
+    "applicationStatus" : "3"
+  } ],
+  "jobs" : [],
+  "idCount": 9
+}

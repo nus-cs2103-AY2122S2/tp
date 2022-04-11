@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "lastShownList.get(Index)"
+
+package Applicant <<rectangle>> {
+    class State1 as "__ applicantToEdit : Applicant __"
+    class State2 as "__ editedApplicant : Applicant __"
+
+}
+
+State1 -[hidden]right-> State2
+
+hide State2
+
+@end

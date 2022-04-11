@@ -1,0 +1,76 @@
+@@startuml
+ !include style.puml
+
+ box Logic LOGIC_COLOR_T1
+ participant ":LogicManager" as LogicManager LOGIC_COLOR
+ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+ participant ":AddApplicantParser" as AddApplicantParser LOGIC_COLOR
+ participant ":AddApplicant" as AddApplicant LOGIC_COLOR
+ end box
+
+ box Model MODEL_COLOR_T1
+ participant "model :Model" as Model MODEL_COLOR
+ participant "addressBook:AddressBook" as AddressBook MODEL_COLOR
+ participant "applicants:UniqueApplicantList" as UniqueApplicantList MODEL_COLOR
+ end box
+
+ [-> LogicManager : execute(addapplicant)
+ activate LogicManager
+
+ LogicManager -> AddressBookParser : parseCommand(addapplicant)
+ activate AddressBookParser
+
+ create AddApplicantParser
+ AddressBookParser -> AddApplicantParser
+ activate AddApplicantParser
+
+ AddApplicantParser --> AddressBookParser
+ deactivate AddApplicantParser
+
+ AddressBookParser -> AddApplicantParser : parse(arguments)
+ activate AddApplicantParser
+
+ create AddApplicant
+ AddApplicantParser -> AddApplicant
+ activate AddApplicant
+
+ AddApplicant --> AddApplicantParser
+ deactivate AddApplicant
+
+ AddApplicantParser --> AddressBookParser
+ deactivate AddApplicantParser
+
+ AddressBookParser --> LogicManager
+ deactivate AddressBookParser
+
+ LogicManager -> AddApplicant : execute()
+ activate AddApplicant
+
+ AddApplicant -> Model : addApplicant(Applicant)
+ activate Model
+
+ Model -> AddressBook : addApplicant(Applicant)
+ activate AddressBook
+
+ AddressBook -> UniqueApplicantList : add(Applicant)
+ activate UniqueApplicantList
+
+ UniqueApplicantList --> AddressBook
+ deactivate UniqueApplicantList
+
+ AddressBook --> Model
+ deactivate AddressBook
+
+ Model --> AddApplicant
+ deactivate Model
+
+ AddApplicant --> LogicManager
+ deactivate AddApplicant
+
+ [<--LogicManager
+ deactivate LogicManager
+
+ destroy AddApplicantParser
+ destroy AddApplicant
+
+ @enduml

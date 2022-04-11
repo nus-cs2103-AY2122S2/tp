@@ -1,0 +1,94 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditApplicantParser" as EditApplicantParser LOGIC_COLOR
+participant ":EditApplicant" as EditApplicant LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model :Model" as Model MODEL_COLOR
+participant "addressBook:AddressBook" as AddressBook MODEL_COLOR
+participant "applicants:UniqueApplicantList" as UniqueApplicantList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(editapplicant)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(editapplicant)
+activate AddressBookParser
+
+create EditApplicantParser
+AddressBookParser -> EditApplicantParser
+activate EditApplicantParser
+
+EditApplicantParser --> AddressBookParser
+deactivate EditApplicantParser
+
+AddressBookParser -> EditApplicantParser : parse(arguments)
+activate EditApplicantParser
+
+create EditApplicant
+EditApplicantParser -> EditApplicant
+activate EditApplicant
+
+EditApplicant --> EditApplicantParser
+deactivate EditApplicant
+
+EditApplicantParser --> AddressBookParser
+deactivate EditApplicantParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> EditApplicant : execute()
+activate EditApplicant
+
+EditApplicant -> Model : getFilteredApplicant()
+activate Model
+
+Model --> EditApplicant
+deactivate Model
+
+EditApplicant -> EditApplicant : createEditedApplicant()
+activate EditApplicant
+
+EditApplicant --> EditApplicant
+deactivate EditApplicant
+
+EditApplicant -> Model :setApplicant()
+activate Model
+
+Model -> AddressBook : setApplicant()
+activate AddressBook
+
+AddressBook -> UniqueApplicantList : setApplicant()
+activate UniqueApplicantList
+
+UniqueApplicantList --> AddressBook
+deactivate UniqueApplicantList
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> EditApplicant
+deactivate Model
+
+EditApplicant -> Model : updateFilteredApplicantList()
+activate Model
+
+Model --> EditApplicant
+deactivate Model
+
+EditApplicant --> LogicManager
+deactivate EditApplicant
+
+[<--LogicManager
+deactivate LogicManager
+
+destroy EditApplicantParser
+destroy EditApplicant
+
+@enduml

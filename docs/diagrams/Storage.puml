@@ -1,0 +1,61 @@
+@startjson
+{
+  "applicants" : [ {
+    "name" : "Alice Tan",
+    "phone" : "98567843",
+    "email" : "alicetan@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "Applicant" ],
+    "nric" : "S9920202A",
+    "job" : "2",
+    "qualification" : "Degree in Sociology",
+    "dateApplied" : "2022-02-12",
+    "interviewDate" : "2022-03-18",
+    "applicationStatus" : "1"
+  }, {
+    "name" : "Benson Goh",
+    "phone" : "98184343",
+    "email" : "bensongoh@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "Applicant" ],
+    "nric" : "S8830303B",
+    "job" : "PENDING",
+    "qualification" : "PENDING",
+    "dateApplied" : "2022-01-22",
+    "interviewDate" : "PENDING",
+    "applicationStatus" : "1"
+  }, {
+    "name" : "Carl Teo",
+    "phone" : "83127843",
+    "email" : "carlteo@example.com",
+    "address" : "456, Hougang North Street 6, #03-21",
+    "tagged" : [ "Applicant" ],
+    "nric" : "S7750505G",
+    "job" : "1",
+    "qualification" : "Degree in Psychology",
+    "dateApplied" : "2022-01-19",
+    "interviewDate" : "2022-02-10",
+    "applicationStatus" : "3"
+  } ],
+  "jobs" : [ {
+    "jobTitle" : "Data Analyst",
+    "companyName" : "Facebook",
+    "id" : "1",
+    "address" : "9 Straits View, Marina One",
+    "qualification" : "Degree in Data Science",
+    "jobStatus" : "filled",
+    "position" : "ft",
+    "salary" : "6000-8000"
+  }, {
+    "jobTitle" : "Project Manager",
+    "companyName" : "OCBC",
+    "id" : "2",
+    "address" : "65 Chulia Street, OCBC Centre",
+    "qualification" : "Degree in Business Management",
+    "jobStatus" : "vacant",
+    "position" : "ft",
+    "salary" : "4000-5000"
+  }],
+  "idCount" : 11
+}
+@endjson

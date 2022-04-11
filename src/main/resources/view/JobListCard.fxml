@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="120" prefWidth="200" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Label fx:id="index" style="-fx-padding: 10 10 10 10;" styleClass="cell_big_label" BorderPane.alignment="CENTER">
+         <minWidth>
+            <Region fx:constant="USE_PREF_SIZE" />
+         </minWidth>
+         <font>
+            <Font name="Futura Medium" size="30.0" />
+         </font>
+      </Label>
+   </left>
+   <center>
+      <VBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="jobTitle" style="-fx-padding: 0 3 0 0;" styleClass="cell_big_label" text="job title" />
+                  <Label fx:id="id" text="\$id" styleClass="cell_big_label" minHeight="-Infinity" minWidth="-Infinity"/>
+               </children>
+            </HBox>
+            <Label fx:id="companyName" styleClass="cell_small_label" text="\$company name"/>
+            <Label fx:id="status" styleClass="cell_small_label" text="\$status"/>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -40,6 +40,16 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Checks if {@code prefix} key exists in this map.
+     * If the map contains {@code prefix} the method returns true. Otherwise false.
+     *
+     * @param prefix   Prefix key with which the specified argument value is to be associated
+     */
+    public boolean containsPrefix(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.

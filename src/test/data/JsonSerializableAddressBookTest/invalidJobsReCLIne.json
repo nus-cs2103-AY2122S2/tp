@@ -1,0 +1,15 @@
+{
+  "applicants" : [ ],
+  "jobs" : [{
+    "jobTitle" : "D@t@ Analyst",
+    "companyName" : "Facebook",
+    "id" : "1",
+    "address" : "9 Straits View, Marina One",
+    "qualification" : "Degree in Data Science",
+    "jobStatus" : "vacant",
+    "position" : "ft",
+    "salary" : "6000-8000"
+    } ],
+  "idCount" : 9
+}
+

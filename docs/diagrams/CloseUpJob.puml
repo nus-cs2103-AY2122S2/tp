@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+
+Class ModelManager
+
+Class UniqueJobList
+Class Job
+Class Job_Title
+Class Company_Name
+Class Job_Status
+Class Position
+Class Salary
+Class Address
+Class Qualification
+Class Job_id
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> UniqueJobList
+HiddenOutside ..> ModelManager
+
+UniqueJobList --> "~* all" Job
+Job *--> Job_Title
+Job *--> Company_Name
+Job *--> Job_id
+Job *--> Address
+Job *--> Qualification
+Job *--> Job_Status
+Job *--> Position
+Job *--> Salary
+
+ModelManager -->"~* filtered" Job
+@enduml

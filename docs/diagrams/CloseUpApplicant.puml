@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Class ModelManager
+
+Class UniqueApplicantList
+Class Applicant
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Tag
+Class Nric
+Class Date_Applied
+Class Qualification
+Class Job_id
+Class Interview_Date
+Class Applicant_Status
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> UniqueApplicantList
+HiddenOutside ..> ModelManager
+
+UniqueApplicantList --> "~* all" Applicant
+Applicant *--> Name
+Applicant *--> Phone
+Applicant *--> Email
+Applicant *--> Address
+Applicant *--> Nric
+Applicant *--> Date_Applied
+Applicant *--> Qualification
+Applicant *--> Job_id
+Applicant *--> Interview_Date
+Applicant *--> Applicant_Status
+Applicant *--> "*" Tag
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+
+ModelManager -->"~* filtered" Applicant
+
+
+@enduml

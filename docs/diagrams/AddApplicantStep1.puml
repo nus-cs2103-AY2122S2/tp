@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddApplicantParser" as AddApplicantParser LOGIC_COLOR
+end box
+
+LogicManager -> AddressBookParser : parseCommand(addapplicant)
+activate AddressBookParser
+
+create AddApplicantParser
+AddressBookParser -> AddApplicantParser
+activate AddApplicantParser
+
+AddApplicantParser --> AddressBookParser
+deactivate AddApplicantParser
+
+
+@enduml
