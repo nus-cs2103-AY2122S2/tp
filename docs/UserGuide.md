@@ -70,13 +70,13 @@ Additional formatting guidelines:
 
 1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.<br>
 
-2. To check your java version:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
+   1. To check your java version:<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;1. For Mac users, open up Terminal and type in `java --version`.<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;2. For Windows users, open up Command Prompt and type in `java --version`.<br>
 
-3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
+   2. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.<br>
 
-4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+   3. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 
 </div>
 
