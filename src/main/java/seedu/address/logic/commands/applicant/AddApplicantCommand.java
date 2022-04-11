@@ -17,11 +17,11 @@ import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 
 /**
- * Adds an applicant to the address book.
+ * Adds an applicant to the application.
  */
 public class AddApplicantCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " -a: Adds a applicant to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " -a: Adds an applicant to HireLah. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
