@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -77,7 +77,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 `*EntityListPanel` and `*EntityListCard` represent separate list panels and cards tailored for a specific entity (`Student`, `ClassGroup`, `Module`, `Assessment`).
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/AY2122S2-CS2103T-T13-2/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -764,6 +764,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
                 <p class="c8"><span class="c0">***</span></p>
             </td>
         </tr>
+                <tr class="c11">
+            <td class="c16" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">11</span></p>
+            </td>
+            <td class="c9" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">TA</span></p>
+            </td>
+            <td class="c3" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">edit the attributes of the things I created</span></p>
+                <p class="c8"><span class="c0">List of things I should be able to edit:</span></p>
+                <ol class="c10 lst-kix_8pu3ok8lb4xj-0 start" start="1">
+                    <li class="c7 li-bullet-0"><span class="c0">student</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">module</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">class group</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">assessment</span></li>
+                </ol>
+            </td>
+            <td class="c13" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">modify any attributes that I entered wrongly.</span></p>
+            </td>
+            <td class="c12" colspan="1" rowspan="1">
+                <p class="c8 c6"><span class="c0"></span></p>
+            </td>
+            <td class="c1" colspan="1" rowspan="1">
+                <p class="c8"><span class="c0">**</span></p>
+            </td>
+        </tr>
     </tbody>
 </table>
 
@@ -958,7 +985,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case 09: Grading assessments**
 
-**Preconditions: The student(s) are already enrolled in the module that the assesssment is associated with.**
+**Preconditions: The student(s) are already enrolled in the module that the assessment is associated with.**
 
 **MSS**
 
@@ -1017,19 +1044,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TA requests to filter students by a specific class group.
+* 1b. TA requests to filter students by a specific class group.
 
-  * 1a1. TAssist displays the details of students belonging to the specified class group.
+  * 1b1. TAssist displays the details of students belonging to the specified class group.
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1c. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1c1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1c2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1c1-1c2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1050,13 +1077,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1b. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1b1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1b2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1b1-1b2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1077,13 +1104,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1a. TAssist detects an error in the entered command.
+* 1b. TAssist detects an error in the entered command.
 
-  * 1a1. TAssist prompts for the correct command.
+  * 1b1. TAssist prompts for the correct command.
 
-  * 1a2. TA enters a new command.
+  * 1b2. TA enters a new command.
 
-    Steps 1a1-1a2 are repeated until the command entered is correct.
+    Steps 1b1-1b2 are repeated until the command entered is correct.
 
     Use case resumes from step 2.
 
@@ -1226,6 +1253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Assessment**: Various gradable component that the TA can add into the module. E.g. Class participation, Lab 1, Lab 2 Report
 * **Class Group**: The different types of classes a module has. E.g. T01, T02, B01, B02
 * **CLI**: Command line interface
 * **Entity**: A generic object used in TAssist, which can be an instance of Assessment, ClassGroup, Module, or Student

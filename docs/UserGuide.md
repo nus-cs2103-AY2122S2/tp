@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAssist is a desktop app designed to **help teaching assistants manage their classes and students.** TAssist lets you save student contact data and group students into class groups and modules. Record attendance, mark assessments, and more by typing commands. TAssist combines its text command-based system with an intuitive interface to help you work quickly while displaying information in a clear and organized manner. If you are someone who prefers **Command Line Interface** (CLI) to **Graphical User Interface** (GUI) while having a GUI to view student data, TAssist is the app for you.
+TAssist is a desktop app designed to **help teaching assistants manage their classes and students.** TAssist lets you save student contact data and group students into class groups and modules. Record attendance, mark assessments, and more by typing commands. TAssist combines its text command-based system with an intuitive interface to help you work quickly while displaying information in a clear and organized manner. If you are someone who prefers **Command Line Interface** (CLI) to **Graphical User Interface** (GUI) while having a GUI to view student data, TAssist is the app for you. However, if you are not familiar with CLI, this user guide will help you understand how each commands work.
 
 * Table of Contents
 {:toc}
@@ -104,7 +104,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>ASSESSMENT_INDEX</td>
         <td><code>a/</code></td>
-        <td>It represents the index of the assessments shown when <code>list assessment</code> is run.
+        <td>It represents the index of the assessments shown when <code>list assessment</code> is executed.
         </td>
     </tr>
     <tr>
@@ -116,13 +116,13 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>CLASS_GROUP_ID</td>
         <td><code>id/</code></td>
-        <td>It represents the ID of the class group, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>T13</code>.
+        <td>It represents the ID of the class group, similar to those used by <a href="https://nusmods.com/modules">NUSMods</a>, e.g. <code>T13</code>.
         </td>
     </tr>
     <tr>
         <td>CLASS_GROUP_INDEX</td>
         <td><code>c/</code></td>
-        <td>It represents the index of the class groups shown when <code>list class</code> is run.
+        <td>It represents the index of the class groups shown when <code>list class</code> is executed.
         </td>
     </tr>
     <tr>
@@ -146,7 +146,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>INDEX</td>
         <td>No prefix</td>
-        <td>It represents the index of the students/modules/class groups/assessments shown when <code>list student</code>/<code>list module</code>/<code>list class</code>/<code>list assessment</code> is run.
+        <td>It represents the index of the students/modules/class groups/assessments shown when <code>list student</code>/<code>list module</code>/<code>list class</code>/<code>list assessment</code> is executed.
         </td>
     </tr>
     <tr>
@@ -158,19 +158,19 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
     <tr>
         <td>MODULE_CODE</td>
         <td><code>c/</code></td>
-        <td>It represents the code of the module, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>CS2103T</code>.
+        <td>It represents the code of the module, similar to those used by <a href="https://nusmods.com/modules">NUSMods</a>, e.g. <code>CS2103T</code>.
         </td>
     </tr>
     <tr>
         <td>MODULE_INDEX</td>
         <td><code>m/</code></td>
-        <td>It represents the index of the modules shown when <code>list module</code> is run.
+        <td>It represents the index of the modules shown when <code>list module</code> is executed.
         </td>
     </tr>
     <tr>
         <td>MODULE_NAME</td>
         <td><code>n/</code></td>
-        <td>It represents the name of the module, similar to those used by <a href="https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4">NUSMods</a>, e.g. <code>Software Engineering Project</code>.
+        <td>It represents the name of the module, similar to those used by <a href="https://nusmods.com/modules">NUSMods</a>, e.g. <code>Software Engineering Project</code>.
         </td>
     </tr>
     <tr>
@@ -209,7 +209,7 @@ From TAssist's "Assessments" tab, click the "See Attempts" button to open a popu
         <td>
             <ul>
                 <li><code>all</code> refers to all students.</li>
-                <li><code>STUDENT_INDEXES</code> represents the index of the students shown when <code>list student</code> is run.</li>
+                <li><code>STUDENT_INDEXES</code> represents the index of the students shown when <code>list student</code> is executed.</li>
                 <li><code>STUDENT_IDS</code> represents the student ID of the student, e.g. <code>E0123456</code>.</li>
             </ul>
         </td>
@@ -283,7 +283,7 @@ TAssist lets you create and grade module-wide assessments. Assessments can repre
 Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
 
 Examples:
-* `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
+* `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is executed.
 
 
 #### List all assessments: `list assessment`
@@ -297,7 +297,7 @@ Format: `list assessment [m/MODULE_INDEX]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
+* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is executed.
 
 
 #### Delete an assessment: `delete assessment`
@@ -330,7 +330,7 @@ Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 * You can create 4 different types of class groups: labs, recitations, sectionals, and tutorials. Specify `CLASS_GROUP_TYPE` using one of the following values: `LAB`, `RECITATION`, `SECTIONAL` and `TUTORIAL`.
 
 Examples:
-* `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
+* `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is executed.
 
 
 #### List all class groups: `list class`
@@ -344,7 +344,7 @@ Format: `list class [m/MODULE_INDEX]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
+* `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is executed.
 
 
 #### Delete a class group: `delete class`
@@ -390,8 +390,8 @@ Format: `list student [{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
-* `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
+* `list student m/1` displays the students belonging to the 1st module shown when `list module` is executed.
+* `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is executed.
 
 
 #### Find students: `find`
@@ -442,9 +442,9 @@ Format: `enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `enrol c/1 s/all` enrols all students to the 1st class group shown when `list class` is run.
-* `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
-* `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is run.
+* `enrol c/1 s/all` enrols all students to the 1st class group shown when `list class` is executed.
+* `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is executed to the 1st class group shown when `list class` is executed.
+* `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is executed.
 
 
 #### Disenrol a student: `disenrol`
@@ -461,9 +461,9 @@ Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `disenrol c/1 s/all` disenrols all students from the 1st class group shown when `list class` is run.
-* `disenrol c/1 s/1,2,3,4,5,6` disenrols the 1st 6 students belonging to the 1st class group shown when `list class` is run.
-* `disenrol c/1 s/e0123456,e0234567` disenrols the students with student IDs `E0123456` and `E0234567` from the 1st class group shown when `list class` is run.
+* `disenrol c/1 s/all` disenrols all students from the 1st class group shown when `list class` is executed.
+* `disenrol c/1 s/1,2,3,4,5,6` disenrols the 1st 6 students belonging to the 1st class group shown when `list class` is executed.
+* `disenrol c/1 s/e0123456,e0234567` disenrols the students with student IDs `E0123456` and `E0234567` from the 1st class group shown when `list class` is executed.
 
 
 ### Taking student attendance
@@ -505,6 +505,10 @@ Examples:
 * `unmark c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `unmark c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** If there are only a couple of students that are absent, you may mark the attendance for all students using `mark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all` before using `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/STUDENT_INDEXES|STUDENT_IDS` to mark the couple of students absent.
+</div>
 
 ### Grade assessments: `grade`
 
@@ -521,10 +525,16 @@ Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDEN
 * If the grade is omitted, the value of the student's attempt will simply be incremented (i.e. `0` will be incremented to `1`).
 
 Examples:
-* `grade sn/lab1 m/1 s/all g/1` adds a grade of value `1` to the `lab1` assessment for all students enrolled in the 1st module shown when `list module` is run.
-* `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is run.
-* `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
+* `grade sn/lab1 m/1 s/all g/1` adds a grade of value `1` to the `lab1` assessment for all students enrolled in the 1st module shown when `list module` is executed.
+* `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is executed.
+* `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is executed.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+<br> 1. When grading assessments, executing the command without `g/GRADE` will increment what ever grade the student previously had. If the student has no grade for the assessment, they will automatically be graded `1`. Hence, you will be able to execute the same command every week when grading assessment like class participation.
+<br> 2. Similar to marking attendance, if most of the students has the same grade, you may grade all students the same grade using `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all g/GRADE` before changing the grade of a couple of students by specifying the student indexes or student IDs.
+</div>
 
 ### Managing data
 
