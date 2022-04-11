@@ -70,6 +70,8 @@ Given below are my contributions to the project.
     
   - Helped WeiJie solve find source of failing tests.
     - [\#124](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/124) Commit `7c11303`, [\#135](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/135) Commit `45c9683`
-
+    
+  - Helped Julio with developer guide bugs.
+    - [\#218](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/218) Commit `978f666`, Commit `69ad65c`, Commit `d9335e8`
     
   
