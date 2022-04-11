@@ -184,7 +184,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - Type of the client can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the client's current `Property` or `Preference`.
-- You can remove all the client’s properties by typing `pr/` without specifying any properties after it.
+- If all the properties of a `seller` have been sold, you can remove all the properties by typing `pr/` without specifying any properties after it. In this case, the `seller` will be temporarily marked as a `buyer`.
 
 Examples:
 
