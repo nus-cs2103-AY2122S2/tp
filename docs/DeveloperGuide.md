@@ -249,15 +249,15 @@ These records include a `Patient`'s `Contact` details, `Medical` information, `C
 `TestResult`. For each of the records, there is a corresponding class to add the record into the `MedBook`. 
 
 Example: `TestResult` can be added into the `MedBook` using the `AddTestResultCommand` which allows users to add a new 
-and unique record regarding the results of a medical test taken if this record is not a duplicate.
+and unique record containing the results of a medical test taken as long as this record is not a duplicate.
 
-It extends the abstract class `Command` and has additional fields to store the patient's `NRIC` and their
-corresponding records.
+It extends the abstract class `Command` and has additional fields to store the patient's `NRIC` and the corresponding
+information for the record added.
 
 It implements the abstract method `execute` to add and store the record in `MedBook` and this operation is exposed in
 the `LogicManager` class.
 #### Design Consideration
-Aspect: How add executes:
+#### Aspect: How add executes:
 * Alternative 1: Extends `AddCommand` class
   * Pros: easy to follow AB3's OOP design
   * Cons: more code is needed to make the subclasses compatible with `AddCommand` and this design may also violate the
@@ -267,11 +267,13 @@ Aspect: How add executes:
   * Cons: commands that aim to do the same thing (add records to the `MedBook`) are not grouped together and this may
     not be an intuitive approach to OOP
 #### Implementation
+The following diagram shows the class diagram which models how the `AddXXXCommand` classes extend the abstract `Command` class
+
 <img src="images/AllAddCommandsClassDiagram.png" width="550" />
 
 #### Usage
 Given below is an activity diagram which shows the example usage scenario for when a user adds the `Medical` information
-for a `Patient` and how the add mechanism behaves at each step:
+of a `Patient` and how the add mechanism behaves at each step:
 
 <img src="images/AddMedicalActivityDiagram.png" width="550" />
 
@@ -360,28 +362,41 @@ prescription. It will then delete the 2nd prescription from prescription model a
 
 
 ### Find
-The `Find` command is used to find the patient whose names contain any of the given keywords. 
+The find mechanism is facilitated by `MedBook`. It allows users to filter records on the current display page based on keywords specified by the user.
+For `Patient` records, the filter is based on the name of the desired patients. For all other records, the filter is based on any keyword matching any of the fields stored in that record.
 
-<!-- Joey -->
+Example: 
+* For `Patient` records: Calling `view` then `find Alice` filters the list of patients to show only those whose name contains Alice 
+* For all other records: `find KEYWORD` filters the currently displayed list to show only those containing the `KEYWORD`
+
+It extends the abstract class `Command` and uses corresponding `Predicate` classes to filter records in the current view. 
+
+It implements the abstract method `execute` to find records in `MedBook` and this operation is exposed in
+the `LogicManager` class.
 #### Design Consideration
-WIP
-
+#### Aspect: How find executes:
+* Alternative 1 (current choice): find records in the current view
+  * Pros: Easy to implement
+  * Cons: Requires keeping track of the currently viewed patient using the `ViewedNric` class which may result in higher coupling 
+* Alternative 2: find the record by specifying the patient's NRIC and type of record to find from
+  * Pros: The user can find any record when viewing any page
+  * Cons: Harder to implement and it is not very intuitive for a user to filter records that are not in the current view
 #### Implementation
-
-`FindCommandParser` parses input, builds a `NameContainsKeywordsPredicate` and returns a `FindCommand` with needed name predicate.
-
-`FindCommand` extends the abstract class `Command`. 
-
-It implements the abstract method `execute` to invoke `Model` and update the list of displayed patients in `MedBook`. 
-
-This operation is exposed in the `LogicManager` class. 
-
-`UI` is then updated accordingly.
-
-WIP - Insert UML and activity diagram
+The following sequence diagram shows how `find x-ray` works when viewing a patient's test results:
+<img src="images/FindSequenceDiagram.png" width="550" />
 
 #### Usage
-WIP
+Given below is an example usage scenario and how the `find x-ray` works:
+
+Step 1: The user launches the application for the first time. The `CommandManager` will initialize
+`CommandType` to DEFAULT, which is the PATIENT state, and the `ViewedNric` to NULL.
+
+Step 2: The user enters the command `view t/test i/S1234567L` and then `CommandManager` will change the `CommandType` to PRESCRIPTION and `ViewedNric` to S1234567L.
+
+Step 3: The user then enters the command `find x-ray` to find all test results belonging to this patient which contains the keyword "x-ray". 
+This command will call `CommandManager#parseFindCommandType` to parse what is the current type, which is
+TEST. It will then call `FindTestResultCommandParser#parse` to retrieve all test results currently displayed which contains the keyword "x-ray".
+
 
 <!-- Si Binh -->
 ### Summary

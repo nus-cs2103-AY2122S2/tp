@@ -6,9 +6,10 @@ if "NRIC exists in MedBook" then
         --> "Stores it in MedBook"
         --> (*)
       else
-        --> "Duplicate found, don't add"
+        --> [else] "Duplicate found, don't add"
         --> [Ending Process] (*)
+      endif
 else
-  --> "No patient found, don't add"
+  --> [else]"No patient found, don't add"
   --> [Ending Process] (*)
 @enduml
