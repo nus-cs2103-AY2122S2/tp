@@ -1,0 +1,26 @@
+@startuml
+
+start
+
+: User opens Unibook;
+
+repeat : User wants to \n modify / view data
+switch ()
+case ( Add )
+  :Type add command \n with options;
+case ( Delete )
+  :Type delete command \n with options;
+case ( Edit )
+  :Type edit command \n with options;
+case ( List )
+  :Type list command \n with options;
+case ( Find )
+  :Type find command \n with options;
+endswitch
+
+repeat while () is (More Actions)
+->No more actions;
+:Type Exit Command;
+stop
+
+@enduml

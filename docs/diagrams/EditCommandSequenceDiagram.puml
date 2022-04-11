@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant ":EditModuleDescriptor" as EditModuleDescriptor LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> EditCommandParser : parse(String)
+activate EditCommandParser
+
+alt#gold #lightblue Option edit person
+EditCommandParser -> EditPersonDescriptor **
+activate EditPersonDescriptor
+EditPersonDescriptor --> EditCommand **
+deactivate EditPersonDescriptor
+activate EditCommand
+[-> EditCommand : execute(Model)
+activate Model
+EditCommand -> Model : setPerson(personToEdit, editedPerson)
+
+EditCommand -> CommandResult **
+activate CommandResult
+deactivate Model
+CommandResult --> EditCommand
+deactivate CommandResult
+[<-- EditCommand : CommandResult
+deactivate EditCommand
+
+else #pink Option edit module
+EditCommandParser -> EditModuleDescriptor **
+activate EditModuleDescriptor
+EditModuleDescriptor --> EditCommand **
+deactivate EditModuleDescriptor
+activate EditCommand
+[-> EditCommand : execute(Model)
+activate Model
+EditCommand -> Model : setModule(moduleToEdit, editedModule)
+
+EditCommand -> CommandResult **
+activate CommandResult
+deactivate Model
+CommandResult --> EditCommand
+deactivate CommandResult
+[<-- EditCommand : CommandResult
+deactivate EditCommand
+
+end
+
+deactivate EditCommandParser
+
+@enduml

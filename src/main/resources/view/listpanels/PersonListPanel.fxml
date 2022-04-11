@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" styleClass="person-list-pane">
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="59.6"/>
+            <ColumnConstraints percentWidth="0.8"/>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="39.6"/>
+        </columnConstraints>
+        <ScrollPane fitToWidth="true" GridPane.columnIndex="0">
+            <VBox fx:id="personListView" VBox.vgrow="ALWAYS" spacing="5" styleClass="person-list-pane"/>
+        </ScrollPane>
+        <VBox GridPane.columnIndex="2" styleClass="module-group-mini-cards">
+            <GridPane styleClass="module-group-mini-cards-header-pane">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="40"/>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="60"/>
+                </columnConstraints>
+                <HBox alignment="CENTER" GridPane.columnIndex="0">
+                    <Label text="Modules" styleClass="person-list-header"/>
+                </HBox>
+                <HBox alignment="CENTER" GridPane.columnIndex="1" styleClass="person-list-groups-header-pane">
+                    <Label text="Groups" styleClass="person-list-header"/>
+                </HBox>
+            </GridPane>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="module-group-list-scroll-pane">
+                <VBox fx:id="moduleAndGroupListView" VBox.vgrow="ALWAYS" spacing="5" styleClass="module-list-pane"/>
+            </ScrollPane>
+        </VBox>
+    </GridPane>
+</VBox>

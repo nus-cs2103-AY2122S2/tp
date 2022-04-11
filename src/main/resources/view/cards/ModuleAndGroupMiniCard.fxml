@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" id="moduleAndGroupMiniPane" fx:id="moduleAndGroupMiniPane"
+      xmlns="http://javafx.com/javafx/8" styleClass="module-group-card">
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" minWidth="10" percentWidth="40"/>
+            <ColumnConstraints hgrow="NEVER" minWidth="10" percentWidth="60"/>
+        </columnConstraints>
+        <Label GridPane.halignment="CENTER" fx:id="moduleCode" text="\$moduleCode" styleClass="mini-pane-module-code"
+               GridPane.columnIndex="0"/>
+        <FlowPane hgap="5" vgap="7" alignment="CENTER_LEFT" fx:id="groupNameList" styleClass="mini-pane-group-code-list"
+                  GridPane.columnIndex="1"/>
+    </GridPane>
+</HBox>
+

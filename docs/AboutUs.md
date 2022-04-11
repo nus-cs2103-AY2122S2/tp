@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Ben Murphy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/benmurphyy.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/benmurphyy)]
+[[portfolio](team/benmurphyy.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: UI, Storage
 
-### Johnny Doe
+### Loy Yoke Yue
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yokester98.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yokester98)]
+[[portfolio](team/yokester98.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Add Command functionality
 
-### James Doe
+### Gerald Neo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/geraldneo567.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/geraldneo567)] [[portfolio](team/geraldneo567.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: List command functionality
+
+### Ryan Walter Lee
+
+<img src="images/ryanwalterlee.png" width="200px">
+
+[[github](http://github.com/ryanwalterlee)]
+[[portfolio](team/ryanwalterlee.md)]
+
+* Role: Developer
+* Responsibilities: Delete command functionality
+
+### Sophie Ng
+
+<img src="images/sophiien.png" width="200px">
+
+[[github](http://github.com/sophiien)]
+[[portfolio](team/sophiien.md)]
+
+* Role: Developer
+* Responsibilities: Edit command functionality
+

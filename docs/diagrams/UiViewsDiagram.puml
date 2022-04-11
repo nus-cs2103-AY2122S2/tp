@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package Views <<Rectangle>>{
+package PeopleView {
+Class PersonListPanel
+Class ModuleAndGroupMiniCard
+}
+package ModulesView <<Rectangle>> {
+Class ModuleListPanel
+Class ModuleCard
+Class ModuleKeyEventCard
+}
+package GroupsView {
+Class GroupListPanel
+Class GroupCard
+}
+Class StudentCard
+Class ProfessorCard
+}
+
+PersonListPanel *-down-> "*" StudentCard
+PersonListPanel *-down-> "*" ProfessorCard
+PersonListPanel *-down-> "*" ModuleAndGroupMiniCard
+
+ModuleListPanel *-down-> "*" ModuleCard
+ModuleCard *-down-> "*" StudentCard
+ModuleCard *-down-> "*" ProfessorCard
+ModuleCard *-down-> "*" ModuleKeyEventCard
+ModuleCard *-down-> "*" GroupCard
+
+GroupListPanel *-down-> "*" GroupCard
+GroupCard *-down-> "*" StudentCard
+
+@enduml
