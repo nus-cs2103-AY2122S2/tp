@@ -190,7 +190,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" />
 
 The `Storage` component,
 * can save both TAssist data and user preference data in json format, and read them back into corresponding objects.
@@ -230,7 +230,7 @@ Step 2. The user executes `clear` command to remove all existing data in `TAssis
 ![AddState1](images/AddState1.png)
 
 Step 3. The user executes `add student` command to add a student to `TAssist`. The `add` command also calls `AddCommandParser#parse()`, which parses the input and returns the index and entity type.
-* An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
+* An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@u.nus.edu t/john_doe`
 
 ![AddState2](images/AddState2.png)
 
@@ -376,19 +376,19 @@ The `Assessment` entity will be tied to a specific module. Hence, when a `TaModu
 
 Given below is an example usage scenario of how the grading mechanism behaves at each step.
 
-<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `ClassGroup` as well.
+<div markdown="span" class="alert alert-info">:information_source: **Assumption:** Valid `Student`, `Module`, `ClassGroup` and `Assessment` objects are created beforehand. `Student` objects are enrolled to the `Module` as well.
 
 </div>
 
-Step 1. The user launches the application. The `TAssist` is already populated with data.
+Step 1. The user launches the application. The `TAssist` is already populated with the necessary data.
 
 ![GradeState0](images/GradeState0.png)
 
-Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students enrolled in the module (`s1` and `s2` respectively) with grade 1 in the `TAssist`. the `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
+Step 2. The user executes `grade a/1 s/1,2 g/1` command to grade the 1st assessment (`a1`) for the 1st and 2nd students (`s1` and `s2` respectively) enrolled in the module with grade 1 in the `TAssist`. The `grade` command would call the `GradeCommandParser#parse()`, which parses the input and return the assessment to grade, which students to grade and what is the grade the students will get for the assessment.
 
 ![GradeState1](images/GradeState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `GradeCommand#execute()`, instead a `CommandException` will be thrown and no assessments will be graded.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will still call `GradeCommand#execute()`, and both valid and invalid grading attempts will be printed out.
 </div>
 
 The following sequence diagram shows how the grade operation works:
@@ -471,15 +471,15 @@ The following activity diagram summarizes what happens when a user executes a ma
 
 **Target user profile**:
 
-* TA in charge of tutorial groups
+* TA in charge of teaching NUS modules
 * Needs to manage a significant number of student contacts
-* Might be instructing multiple modules/tutorials
+* Might be instructing multiple modules/classes
 * Prefers desktop apps over other types
 * Types fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and track their progress.
+**Value proposition**: TAssist creates a more conducive learning environment for educators and students by helping TAs consolidate students’ contacts and monitor their progress for all modules/classes taught by the TAs.
 
 ### TAssist User Stories
 
