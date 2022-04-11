@@ -277,7 +277,7 @@ The following sequence diagram shows how the `findstatus` operation works:
         * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
         * May violate SLAP principles, as every thing is done in a single class
 
-### \[Implemented\] Class Code Feature
+### \[Implemented\] ClassCode Feature
 
 #### Implementation
 
@@ -286,7 +286,39 @@ The implemented Class Code label is facilitated by `ClassCode`. It extends `Addr
 
 The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
 
-### \[Implemented\] Find By Class Code Feature
+Classes changed for this feature:
+- `AddCommand`
+- `EditCommand`
+- `AddCommandParser`
+- `EditCommandParser`
+
+#### Design considerations:
+**Aspect: Creating a new `Person` in the contact list:**
+
+* **Alternative 1 (current choice):** Each Person is created with an association to a classcode
+    * Pros:
+        * Adds an additional layer of filtering of Persons in the school.
+        * Differentiate a student from another with Classcode instead of Activity.
+        * Easy to implement.
+    * Cons:
+        * Difficult to scope the naming convention of the classcode.
+        * Different commands and logic files will be affected from the introduction of a new attribute.
+        * Need to change default data set with new attribute.
+    
+* **Alternative 2:** Each Person is added without a classcode
+    * Pros:
+        * Prone to less error.
+    * Cons:
+        * Makes it difficult to filter Students for future feature implementations.
+
+#### Limitations and proposed solutions
+
+Currently, `ClassCode` attribute only allows a strict naming convention  [number from 1 - 6][Letters from A-Z].
+* Examples: 6A, 4B, 2H
+
+**Solution**: Keep to the restriction of the naming convention.
+
+### \[Implemented\] Find By ClassCode Feature
 
 #### Implementation
 
@@ -300,8 +332,11 @@ Classes added for this feature:
 Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
 
 Step 1. The user launches the application. The full list of `Person`s will be shown to the user.
+
 Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
+
 Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
+
 Step 4. The filtered list of perons is displayed to the user.
 
 The following sequence diagram shows how the `findclasscode` operation works:
