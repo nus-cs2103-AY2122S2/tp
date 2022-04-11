@@ -9,29 +9,17 @@ ArchDuke - is a desktop application used for students' contacts and groups manag
 
 Given below are my contributions to the project.
 
-* **New Feature**: to be added soon
-
-* **New Feature**: to be added soon
-
-* **Code contributed**: to be added soon
-
-* **Project management**:
-  * to be added soon
-
-* **Enhancements to existing features**:
-  * to be added soon
+* **Design and Development**:
+  * Helped spearhead the original concept and design of ArchDuke.
+  * Kept the scope of ArchDuke manageable.
+  * Ensured The robustness of ArchDuke.
 
 * **Documentation**:
   * User Guide:
-    * to be added soon
+    * Reviewed and finalized User Guide
   * Developer Guide:
-    * to be added soon
+    * Helped build the Developer Guide
+    * Reviewed and finalized Developer Guide
 
 * **Community**:
-  * (to be updated) PRs reviewed (with non-trivial review comments): 
-  * (to be updated) Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * (to be updated) Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * (to be updated) Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * to be added soon
+  * Reported bugs and suggestions for other teams in the class through PE-D
