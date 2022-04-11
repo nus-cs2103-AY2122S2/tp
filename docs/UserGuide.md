@@ -213,9 +213,12 @@ Examples:
 **Note**:
 - Images associated with the client are not deleted and remains in the OS file system.
 
-### Favourite a client: `favourite`
+### Favourite/Unfavourite a client: `favourite`
 
-Favourites the specified client in the RealEstatePro represented by a star as shown below.
+ Favourites the specified client in the RealEstatePro represented by a star as shown below.
+
+💡 **Note**: 
+ * If the client was favourited before, calling `favourite` command on this particular client will unfavourite him/her. This command will remove "🌟" from the client. <br/> Additionally, the client information will not show up on the Favourite window anymore.
 
 The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
@@ -223,7 +226,7 @@ The user (real estate agent) will be able to view a more compact list of favouri
 
 Format: `favourite INDEX`
 
-- Favourites the client at the specified `INDEX`.
+- Favourites/unfavourites the client at the specified `INDEX`.
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 

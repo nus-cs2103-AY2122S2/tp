@@ -133,22 +133,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## Favourite feature and Favourites window
+## Favourite/Unfavourite feature and Favourites window
 
-The proposed `favourite` mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of Persons and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
+The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
 
 Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
 
-Step 1. The user starts the application with pre-loaded data of Persons.
+Step 1. The user starts the application with pre-loaded data of `Person`.
 
-Step 2. Assuming there is a Person with the index number 1. User then executes `favourite 1` command to favourite the Person with index number 1 in the application. The system will create a new Person with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this Person to be a favourited instance of the same Person.
+Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
 
 <aside>
-💡 **Note:** Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
-
+💡 Note: 
+If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourite window anymore.
 </aside>
 
-Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ instance's value set as True. The user can also input the command `fw` to open up the Favourites window through this CLI command.
+Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
+
+<aside>
+💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
+</aside>
 
 ## Match feature/Window
 The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
@@ -241,14 +245,14 @@ Step 5: The set of `UserImage` is then converted into an `ArrayList` and the fir
 ## Statistics feature/Window
 <img src="images/user-guide/Stats.png" height="400px">
 
-The `stats` opens a new `StatisticsWindow` that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
+The `stats` opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
 This allows the user to be able to visualize his/her client's data to make better business decisions. (exp. Expand the user's influence in the most popular region for any potential sellers/buyers to contact him/her)
 
-**[Future version]** </br>
-Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
-Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
-Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+**[Future version]** <br/>
+* Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+* Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+* Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
 ## Sorting
 
