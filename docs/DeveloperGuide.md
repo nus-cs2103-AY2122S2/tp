@@ -941,7 +941,7 @@ testers are expected to do more *exploratory* testing.
    2.  Test case: Any command with invalid format for one of the keywords : for example, `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/<DATE THAT IS IN THE FUTURE>` <br>
      Expected: Error details shown in the status message about invalid date format. Status bar remains the same.
      
-   3.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022` and `addc n/John Doe p/98765431 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022`<br>
+   3.  Test case: Adding a customer with the same email or phone number as another customer: add a customer using `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/10-04-2022` then `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johndoe@example.com rd/10-04-2022`
      Expected: Error message saying customer already exist
 
 #### Editing a customer 
