@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonMedBookStorage addressBookStorage = new JsonMedBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -55,14 +55,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         MedBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyMedBook retrieved = storageManager.readAddressBook().get();
+        storageManager.saveMedBook(original);
+        ReadOnlyMedBook retrieved = storageManager.readMedBook().get();
         assertEquals(original, new MedBook(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getMedBookFilePath());
     }
 
 }

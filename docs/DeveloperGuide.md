@@ -52,7 +52,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) from Baeldung
 
 ---
 
@@ -115,7 +115,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `XYZListPanel` (XYZ is a placeholder for specific information type e.g., Patient, Contact, etc.), `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -135,16 +135,16 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `MedBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call when the prescription screen is displayed.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeletePrescriptionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -152,8 +152,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `MedBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MedBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, `AddContactParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -163,16 +163,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `XYZ` objects which are contained in a `UniqueXYZList` object (`XYZ` is a placeholder for the specific information type e.g., `Patient`, `Contact`, etc. Different `XYZ` objects also stores different type of information objects. For example, Patient store Name, Phone, Email, Address, Tag objects.).
+* stores the currently 'selected' `XYZ` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<XYZ>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+[//]: # (<img src="images/BetterModelClassDiagram.png" width="450" />)
 
-</div>
+[//]: # (</div>)
 
 
 ### Storage component
@@ -182,9 +182,12 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both med book data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `MedBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `XYZ` is a placeholder for the specific type of information e.g., Patient, Contact, Prescription, etc. Among them, JsonAdaptedPatient and JsonAdaptedContact contain JsonAdaptedTag.
+</div>
 
 ### Common classes
 
@@ -195,22 +198,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 The sections below give more details on how the following features are implemented.
-* Dynamic Ui Rendering
-* Create
+* Add
 * View
 * Safe Delete
 * Find
-* Summary (WIP)
+* Summary
 
-<!-- Clement -->
-### Dynamic Ui Rendering
-#### Design Consideration
-WIP
 
-#### Implementation
-WIP - Insert UML
-
-<!-- Joey -->
 ### Add
 The add mechanism is facilitated by `MedBook`. It allows users to create and store records belonging to a patient.
 These records include a `Patient`'s `Contact` details, `Medical` information, `Consultation` notes,`Prescription` and
@@ -244,9 +238,6 @@ for a `Patient` and how the add mechanism behaves at each step:
 <img src="images/AddMedicalActivityDiagram.png" width="550" />
 
 
-
-
-<!-- Justin -->
 ### View
 #### Design Consideration
 ##### Aspects: How view executes:
@@ -262,9 +253,9 @@ according to the given parameters. These types include a `Patient`'s `Contact` d
 `Consultation` notes,`Prescription` and `TestResult`. For each of the records types, there is a corresponding class 
 to view the record types into the `MedBook`.
 
-The view mechanism is facilitated by `CommandType`. It implements `CommandType#parseViewCommandType()` which parse the
+The view mechanism is facilitated by `CommandManager`. It implements `CommandManager#parseViewCommandType()` which parse the
 type of view command, and the arguments passed in the command string, which specify the boundaries of which elements to
-include in the filtered list. From here, let `XXX` be the type determined from `CommandType#parseViewCommandType()`.
+include in the filtered list. From here, let `XXX` be the type determined from `CommandManager#parseViewCommandType()`.
 It then creates a new instance of `ViewXXXCommandParser`, which parses the view command
 according to how the type in meant to be parsed, and then creates a new instance of `ViewXXXCommand`, which extends
 Command. It implements the abstract method `execute` to invoke `Model` and update `filteredXXXList` in `MedBook`.
@@ -281,13 +272,13 @@ The following sequence diagram shows view consultation works:
 #### Usage
 Given below is an example usage scenario about how `view t/consultation` works:
 
-Step 1: The user launches the application for the first time, The `CommandType` will be
-initialized with default state, the is viewing the patient panel list.
+Step 1: The user launches the application for the first time, The `CommandManager` will initialize
+the view state to default, which is the patient state
 
-Step 2: The user types in view t/consultation i/S1234567L. This command  will call `CommandType#parseVewCommandType` 
+Step 2: The user types in view t/consultation i/S1234567L. This command  will call `CommandManager#parseVewCommandType` 
 to parse what is the current type, which is consultation. 
 
-From here, let `XXX` be the type determined in `CommandType#parseViewCommandType()`.
+From here, let `XXX` be the type determined in `CommandManager#parseViewCommandType()`.
 
 Step 3: It then creates a new instance of `ViewXXXCommandParser` and passes the arguments into the new instance.
 
@@ -297,10 +288,7 @@ Model's `Model#updateFilteredXXXList` to update the `filteredXXXList` according 
 Step 5: `UI` is then updated accordingly, displaying in the Main Window the desired filtered list.
 
 
-
-
-<!-- Chee Kean -->
-### Safe Delete
+### Delete
 #### Design Considerations
 
 ##### Aspects: How delete executes:
@@ -312,9 +300,9 @@ Step 5: `UI` is then updated accordingly, displaying in the Main Window the desi
   * Cons: Harder to implement, it is not very intuitive for a user to delete a field without viewing it.
 
 #### Implementation
-The delete mechanism is facilitated bby `CommandType`. It extends MedBook
+The delete mechanism is facilitated bby `CommandManager`. It extends MedBook
 with the latest view state, stored internally as a currentViewType.
-It implements `CommandType#parseDeleteCommandType()` which parse the type
+It implements `CommandManager#parseDeleteCommandType()` which parse the type
 of delete command according to the latest view type.
 
 The following sequence diagram shows delete prescription works:
@@ -323,14 +311,14 @@ The following sequence diagram shows delete prescription works:
 #### Usage
 Given below is an example usage scenario and how the delete prescription works:
 
-Step 1: The user launches the application for the first time, The `CommandType` will be
-initialized with default state, the is viewing the patient panel list.
+Step 1: The user launches the application for the first time, The `CommandManager` will initialize
+view state to default, which is the patient state.
 
-Step 2: The user view t/prescription i/S1234567L, `Command Type` will change the `viewCommandType` to prescription type.
+Step 2: The user view t/prescription i/S1234567L, `CommandManager` will change the view state to prescription.
 
 Step 3: The user decide to delete the 2nd prescription of this patient, The user executes `delete 2`
-command. This command  will call `CommandType#parseDeleteCommandType` to parse what is the current type, which is
-prescription. It will then delete the 2nd prescription from prescription model and save to storage
+command. This command  will call `CommandManager#parseDeleteCommandType` to parse what is the current type, which is
+prescription. It will then delete the 2nd prescription from prescription model and save to storage.
 
 
 ### Find
@@ -396,7 +384,7 @@ The following activity diagram summarizes what happens when a user attempts to v
 #### Usage
 Given below is an example usage scenario of how summary feature works:
 
-Step 1: The user types in `view i/S1234567L`. This command will call `CommandType#parseViewCommandType`
+Step 1: The user types in `view i/S1234567L`. This command will call `CommandManager#parseViewCommandType`
 
 Step 2: It then creates a new instance of `ViewCommandParser` and passes the arguments into the new instance
 
@@ -431,21 +419,15 @@ Our target users would be doctors who need to keep track of their patient's medi
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                                  | So that I can…​                                              |
-| -------- | ------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `* * *`  | user    | add, update and delete a patient's profile with their personal information    | keep track of my patients’ data                              |
-| `* * *`  | user    | retrieve a patient's past diagnoses based on their name                       | have more information to make diagnoses                      |
-| `* * *`  | user    | retrieve a patient's medicine administration history based on their name      | have more information to make diagnoses                      |
-| `* * *`  | user    | view the progress of my patient's condition by viewing their health analytics | check if they are healing or getting better                  |
-| `* * *`  | user    | to create patient medical information                                         | so that I can retrieve the record in the future efficiently. |
-| `* * *`  | doctor  | make prescriptions (add, update and delete a medicine list and export it      |                                                              |
-| `* * *`  | user    | I can add, update and delete a patient's test results                         | can make diagnoses                                           |
-| `* * *`  | user    | retrieve a patient's visit history based on their name                        | have more information to make diagnoses                      |
-| `* * *`  | user    | retrieve the contact details of the patient from the address book             | communicate with the patient effectively                     |
-| `* * *`  | user    | retrieve patient's medical history based on a given date                      | pinpoint the patient's cause of disease more efficiently     |
-| `* * *`  | user    | retrieve the medical history, information of the patient                      | assess the patient more accurately and quickly               |
-| `* * *`  | user    | input my patient's information and medical history                            | store my patient’s medical data                              |
-| `* * *`  | user    | delete patient's medical record                                               | better protect their privacy                                 |
+| Priority | As a …​  | I want to …​                                                               | So that I can…​                                           |
+|---|----------|----------------------------------------------------------------------------|-----------------------------------------------------------|
+| `* * *` | new user | see usage instructions                                                     | refer to instructions when I forget how to use the App    |
+| `* * *` | user     | add, update and delete a patient’s profile with their personal information | keep track of my patient's data                           |
+| `* * *` | user     | add, update and delete a patient's medical information                     | retrieve the record in the future                         |
+| `* * *` | user     | add patient's emergency contact                                            | contact their next-of-kin when something emergency happen |
+| `* * *` | user     | add, update and delete a patient’s test results                            | make diagnoses based on the result                        |
+| `* * *` | user     | add patient's medical prescription                                         | keep track of the medicine consumption                    |
+| `* * *` | user     | add patient's consultation history                                         | keep track of patient's health condition                  |
 
 
 ### Use cases
@@ -479,31 +461,6 @@ Use Case: Delete a Patient’s Contact Information
 
     Use case resumes at step 2.
 
-<!-- View a Patient’s Medical Information -->
-
-<!-- Create a Patient’s Medical Information -->
-
-<!-- Delete a Patient’s Medical Information -->
-
-<!-- View a Patient’s Consultations Information -->
-
-<!-- Create a Patient’s Consultations Information -->
-
-<!-- Delete a Patient’s Consultations Information -->
-
-<!-- View a Patient’s Prescriptions Information -->
-
-<!-- Create a Patient’s Prescriptions Information -->
-
-<!-- Delete a Patient’s Prescriptions Information -->
-
-<!-- View a Patient’s Tests Result -->
-
-<!-- Create a Patient’s Tests Result -->
-
-<!-- Delete a Patient’s Tests Result -->
-
-
 _{More to be added}_
 
 ### Non-Functional Requirements
@@ -534,7 +491,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
    
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+       Expected: Shows the GUI prompting user to enter a password. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -543,29 +501,24 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Deleting a patient
 
-### Deleting a person
+1. Deleting a patient while all patients are being shown
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using the `view` command. Multiple patients in the list.
    
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
+   
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_

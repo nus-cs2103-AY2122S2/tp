@@ -25,12 +25,8 @@ import seedu.address.model.ReadOnlyMedBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.*;
+import seedu.address.storage.MedBookStorage;
 import seedu.address.ui.LoginWindow;
 import seedu.address.ui.SignupWindow;
 import seedu.address.ui.Ui;
@@ -63,9 +59,9 @@ public class MainApp extends Application {
         config = initConfig(appParameters.getConfigPath());
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        MedBookStorage medBookStorage = new JsonMedBookStorage(userPrefs.getAddressBookFilePath());
 
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(medBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -98,7 +94,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyMedBook> addressBookOptional;
         ReadOnlyMedBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readMedBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
@@ -204,9 +200,9 @@ public class MainApp extends Application {
             if (!authentication.isLoggedIn()) {
                 return;
             }
-            storage.saveAddressBook(model.getMedBook());
+            storage.saveMedBook(model.getMedBook());
             storage.saveUserPrefs(model.getUserPrefs());
-            authentication.createEncryptedFile(storage.getAddressBookFilePath());
+            authentication.createEncryptedFile(storage.getMedBookFilePath());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         } catch (InvalidKeyException e) {

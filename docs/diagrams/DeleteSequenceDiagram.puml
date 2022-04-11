@@ -3,8 +3,8 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "CommandType" as CommandType LOGIC_COLOR
+participant ":MedBookParser" as MedBookParser LOGIC_COLOR
+participant "CommandManager" as CommandManager LOGIC_COLOR
 participant ":DeletePrescriptionCommandParser" as DeletePrescriptionCommandParser LOGIC_COLOR
 participant "d:DeletePrescriptionCommand" as DeletePrescriptionCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -17,14 +17,14 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> MedBookParser : parseCommand("delete 1")
+activate MedBookParser
 
-AddressBookParser -> CommandType : parseDeleteCommandType("delete 1")
-activate CommandType
+MedBookParser -> CommandManager : parseDeleteCommandType("delete 1")
+activate CommandManager
 
 create DeletePrescriptionCommandParser
-CommandType -> DeletePrescriptionCommandParser : parse("delete 1")
+CommandManager -> DeletePrescriptionCommandParser : parse("delete 1")
 activate DeletePrescriptionCommandParser
 
 create DeletePrescriptionCommand
@@ -34,16 +34,16 @@ activate DeletePrescriptionCommand
 DeletePrescriptionCommand --> DeletePrescriptionCommandParser : d
 deactivate DeletePrescriptionCommand
 
-DeletePrescriptionCommandParser --> CommandType : d
+DeletePrescriptionCommandParser --> CommandManager : d
 deactivate DeletePrescriptionCommandParser
-DeletePrescriptionCommandParser -[hidden]-> CommandType
+DeletePrescriptionCommandParser -[hidden]-> CommandManager
 destroy DeletePrescriptionCommandParser
 
-CommandType --> AddressBookParser : d
-deactivate CommandType
+CommandManager --> MedBookParser : d
+deactivate CommandManager
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+MedBookParser --> LogicManager : d
+deactivate MedBookParser
 
 LogicManager -> DeletePrescriptionCommand : execute()
 activate DeletePrescriptionCommand
