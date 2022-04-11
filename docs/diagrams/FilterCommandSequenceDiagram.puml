@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "c:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+
+[-> FilterCommand : execute(m)
+activate FilterCommand
+
+FilterCommand -> Model : hasLab(toFilter)
+activate Model
+Model --> FilterCommand
+deactivate Model
+
+FilterCommand -> Model : addOnFilteredStudentList(predicate)
+activate Model
+Model --> FilterCommand
+deactivate Model
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+CommandResult --> FilterCommand
+deactivate CommandResult
+
+[<-- FilterCommand : c
+
+@enduml
