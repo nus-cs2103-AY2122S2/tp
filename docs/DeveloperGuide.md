@@ -507,19 +507,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list specific persons
-2. User keys in keywords to search for
+2. User keys in keywords and relevant fields to find
 3. AddressBook shows a list of persons matching the keyword
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given keywords are invalid.
+* 2a. There are no fields and no keywords, just `find` typed.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. AddressBook shows an error message to show how `find` should be used. 
+    * Use case resumes at step 2.
 
-      Use case resumes at step 2.
-
+* 2b. The fields are given but there are no keywords
+    * 2b1. AddressBook shows an error message telling the user that no keywords are entered. 
+    * Use case resumes at step 2.
+  
 * 3a. The list is empty.
 
   Use case ends.
