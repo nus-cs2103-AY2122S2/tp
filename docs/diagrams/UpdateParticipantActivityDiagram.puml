@@ -1,4 +1,5 @@
 @startuml
+title Activity: Update Participant when Contact is updated\n
 
 start
 :Original contact is replaced by the  \n edited contact in UniquePersonList;
