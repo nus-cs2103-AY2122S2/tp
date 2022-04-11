@@ -750,7 +750,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `LOW`    | user    | store my client's birthday                                 | give them discounts on their birthday.                                  |
 | `LOW`    | user    | store my client's age                                      | know if I can sell them age restricted items.                           |
 | `HIGH`   | user    | add client transaction                                     | store the transaction history of my clients.                            |
-| `HIGH`   | user    | delete a transaction                                       | delete the transaction from the transaction list                        |
+| `HIGH`   | user    | delete a transaction                                       | delete the transaction from the transaction list.                       |
 | `MEDIUM` | user    | chain multiple commands                                    | execute multiple commands at once.                                      |
 | `LOW`    | user    | list all clients who are members.                          |                                                                         |
 | `LOW`    | user    | assign different tiers of memberships to my clients.       |                                                                         |
@@ -762,8 +762,8 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `HIGH`   | user    | switch between light and dark themes.                      |                                                                         |
 | `HIGH`   | user    | list all transactions                                      |                                                                         |
 | `HIGH`   | user    | find a client's transactions                               | see all the transactions associated with a particular client.           |
-| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be paid                         |
-| `MEDIUM` | user    | unpay a transaction                                        | change the status of the transaction to be unpaid                       |
+| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be paid.                        |
+| `MEDIUM` | user    | unpay a transaction                                        | change the status of the transaction to be unpaid.                      |
 | `MEDIUM` | user    | flag a transaction as paid or unpaid                       | know if a transaction has been paid.                                    |
 | `LOW`    | user    | click on a client to see the list of their transactions    | see a client's transactions without typing.                             |
 | `HIGH`   | user    | remove memberships from clients                            | remove a client from my rewards program.                                |
