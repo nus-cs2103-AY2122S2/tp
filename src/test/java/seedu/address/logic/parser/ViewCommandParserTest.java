@@ -1,9 +1,8 @@
 package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ThemeCommand;
+
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
