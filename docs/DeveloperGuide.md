@@ -202,7 +202,7 @@ The add customer feature is implemented via `AddCustomerCommand` which is create
 4.  If the `Customer` to be added is unique and does not exist in TrackBeau, it will be added. If not, a `CommandException`
     is thrown
 
-The following sequence diagram shows the interaction within the `Logic` and `Model` components when the user inputs `addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022` command.
+The following sequence diagram shows the interaction within the `Logic` and `Model` components when the user inputs `addc n/Alex p/90211201 e/ale@gmail.com a/Chuang Road 113 rd/10-04-2022` command.
 
 ![Add Customer Sequence Diagram](images/AddCustomerSequenceDiagram2V2.png)
 
