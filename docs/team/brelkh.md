@@ -9,46 +9,56 @@ TAPA is a desktop contact management application used to manage students' contac
 
 Given below are my contributions to the project.
 
-* **History Command Feature**: **(to be added soon)**
-    * What it does: Displays a list of previously executed commands.
-    * Justification:
-    * Highlights:
-    * Credits:*{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **Undo Command Feature**: **(to be added soon)**
-    * What it does: Undoes the most recently executed command
-    * Justification:
-    * Highlights:
-    * Credits:*{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **New Feature**: **(to be added soon)**
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:*{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=brelkh&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
-* **Project management**:
-    * **(to be added soon)**
+* **Undo Command (New Feature)**:
+  * What it does: Undoes the most recently executed command.
+  * Justification: Performing tasks on a CLI can be punishing if a user were to execute the wrong command or execute a command with a typo. In this scenario, having a command that reverts erroneous changes saves time and reduces frustration.
+  * Highlights: This implementation of the undo feature requires storing previous states of TAPA. As such, the `ModelManager` had to be extended, and new classes constructed, to keep track of the state of TAPA after each successfully executed command. Special care also had to be taken to ensure that certain commands (including `clear` and `undo` itself) could not be undone as they would disrupt the tracking of TAPA's states.
+  * Implementation: [#120](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/120)
+
+* **History Command (New Feature)**:
+    * What it does: Displays a list of previously executed commands.
+    * Justification: In the event that the user needs to undo a chain of previously executed commands, but cannot remember when they executed the command, or how many commands they would need to undo, the history command provides an easy way to view their previously executed commands.
+    * Highlights: This implementation of the history feature requires keeping track of previously executed commands, as well as updating the list of commands as the user executes new commands. As such, the `ModelManager` had to be extended to cater for these.
+    * Implementation: [#120](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/120)
+    
+* **Confirm Clear Command (Extension)**:
+  * What it does: After the user executes the clear command, TAPA requests for the user's confirmation before clearing all details stored in TAPA.
+  * Justification: Due to the severity of accidentally clearing all details stored in TAPA, this confirmation feature acts as a safeguard to ensure the user knows the effect of the clear command and intends to clear TAPA.
+  * Highlights: This extension of the clear command requires the user to interact with TAPA to confirm their decision. Thus, unlike for most other commands, the UI component of TAPA had to be studied and then extended. Additional thought was required to figure out how to obtain confirmation from the user. In this implementation, the confirmation feature acts as a command to build upon the existing command components, yet interacts with the UI of TAPA to achieve its purpose.
+  * Implementation: [#61](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/61)
+
+* **Edit Command (Extension)**:
+  * What it does: Edits the specified details of a student in TAPA.
+  * Justification: As TAPA evolved its use cases from AB3, the edit command had to be updated to suit the current needs of TAPA, and function properly with the new parameters involved.
+  * Implementation: [#64](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/64)
 
 * **Enhancements to existing features**:
-    * **(to be added soon)**
+    * Implemented arrow key navigation in CLI for previously executed commands. ([#114](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/114))
+    * Improved GUI
+      * Edited personCard to highlight the most important information. ([#68](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/68))
+      * Added textwrapping to eliminate the need for side-scrolling. ([#63](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/63))
 
 * **Documentation**:
     * User Guide:
-        * **(to be added soon)**
+        * Added documentation for the `edit`, `clear`, `undo` and `history` features. ([#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41) and [#141](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/141)).
+        * Improved user guide based on peer review comments in CS2101. ([#130](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/130))
     * Developer Guide:
-        * **(to be added soon)**
+        * Added documentation for the `clear`, `undo` and `history` features. ([#110](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/110) and [#54](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/254)).
+
+* **Contribution to team-based tasks**:
+  * Worked with the team to ideate and design TAPA.
+  * Worked with the team to evolve AB3 into TAPA by updating or replacing outdated segments of code.
+  * Worked with the team to maintain the issue tracker by assigning and labelling issues.
+  * Worked with the team to provide timely updates to our TA.
+  * Worked with the team to address and fix PE-D bugs.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): **(to be added soon)**
-    * Contributed to forum discussions (examples: **(to be added soon)**)
-    * Reported bugs and suggestions for other teams in the class (examples: **(to be added soon)**)
-    * Some parts of the history feature I added was adopted by several other classmates (**(to be added soon)**)
-
-* **Tools**:
-    * **(to be added soon)**
-
-* _{you can add/remove categories in the list above}_
+    * PRs reviewed (with non-trivial review comments):
+      * [#105](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/105) Filter students by module code
+      * [#108](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/108) Update DG for Task Command
+      * [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127) Implement DeleteTask Command
+      * [#232](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/232) Update model component of DG
+      * [#238](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/238) Add Assign Command and DeleteTask Command to DG
+    * Reported a total of 10 bugs and suggestions for other teams in the class (reported [here](https://github.com/brelkh/ped/issues)).
