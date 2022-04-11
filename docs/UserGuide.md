@@ -408,33 +408,25 @@ From *Figure 12*, this function is beneficial for administrators as you may want
 </div>
 
 ### 3.11. Summarising the records
-The above figure illustrates the important interactions of `EditCommand` when the user successfully edit the `name` attribute of the student at index 1 to Poppy.
-
-When a user inputs an `EditCommand`, `LogicManager#execute()` will be invoked and this will trigger a parsing process by `AddressBookParser`, `EditCommandParser` and `ParserUtil` to check the validity of the input index, prefixes and parameters. If the input is valid, a `EditPersonDescriptor` object is instantiated and this object is subsequently used as a parameter to instantiate an `EditCommand` object.
-The `EditCommand` object is then passed back to the `LogicManager` which will then invoked `EditCommand#execute()`. This execute method will call two other helper methods `EditCommand#editChecker()` and `Person#isDifferentPerson()`, which both are not shown in the sequence diagram and is used further validation.
-The main functions of these two methods are to check if the new values are duplicate of the corresponding fields to be edited and if the new values for fields that requires uniqueness already exists in the address book respectively.
-The `ObservableList` in the `Model` class then updates the display of the contacts, placing the edited person to the bottom of the list (or placing it at the last index).
-
-TThe `ObservableList` is a JavaFX class which observes and automatically changes the list once an update is performed.
-
 Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
+
 * You can get an overview of the students in Tracey if you want to get an idea of the hall block or faculty where Covid is more prevalent.
 * You can see which hall block or faculty has the highest number of Covid cases.
 
 Example of usage:
-* `summarise` will summarise the records of everyone in Tracey. The results is a graphical analysis of the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
+* `summarise` will summarise the records of everyone in Tracey. The results are a graphical analysis of the `Covid Status` of the individuals in each block (refer to *Figure 13a*). Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to *Figure 13b*).
 
 <img src='images/SummariseExample.png' alt='SummariseExample' width="400"/> 
 
-*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.* 
+*Figure 13a: Example pie charts of Tracey in response to the `summarise` command.*
 
 <img src ='images/SummariseExample2.png' alt='SummariseExample2' width="400"/> 
 
 *Figure 13b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 13a and 13b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 13a* and *Figure 13b*, when the user inputs the `Summarise` command, the results display charts of the student population categorised by `Covid Status`. These charts are separated into the students' `Block` and their `Faculty`.
 
 ### 3.12. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
