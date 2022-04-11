@@ -491,7 +491,7 @@ Format: `delete o/module m/[MODULECODE]`
 Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
 * Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
-* Module is not case-sensitive, Group is case-sensitive.
+* Module and Group are case-insensitive.
 * For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### On People View:
