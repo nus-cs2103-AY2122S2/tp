@@ -227,6 +227,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!emailWindow.isShowing()) {
             createEmailWindow();
         } else {
+            logger.info("Reopening Email Window");
             emailWindow.hide();
             createEmailWindow();
         }
