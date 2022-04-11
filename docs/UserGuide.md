@@ -501,15 +501,17 @@ Format: `plotAll`
 
 Examples:
 * `plotAll`
-   
-#### 4.4.3 Plot chart on popular staff amongst customers: `plotStaff`
 
-Plots a pie chart on the most popular staff as indicated by customers as their preferred staff. If there are most than 10 staffs indicated as preferred by customers in TrackBeau, only the top 10 most popular staff will be included in the piechart to let the chart be still meaningful.
+#### 4.4.3 Plot chart on common skin type amongst customers: `plotSkin`
+![plot skin chart](images/user-guide/plot-skin.png)
 
-Format: `plotStaff`
+Plots a pie chart on the most common allergies amongst customers. If there are most than 10 skin types in customer data, only the top 10 most skin types will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotSkin`
 
 Examples:
-* `plotStaff`
+* `plotSkin`
+
 
 #### 4.4.4 Plot chart on popular services amongst customers: `plotService`
 
@@ -528,16 +530,15 @@ Format: `plotAllergy`
 
 Examples:
 * `plotAllergy`
-  
-#### 4.4.6 Plot chart on common skin type amongst customers: `plotSkin`
-   ![plot skin chart](images/user-guide/plot-skin.png)
 
-Plots a pie chart on the most common allergies amongst customers. If there are most than 10 skin types in customer data, only the top 10 most skin types will be included in the piechart to let the chart be still meaningful.
+#### 4.4.6 Plot chart on popular staff amongst customers: `plotStaff`
 
-Format: `plotSkin`
+Plots a pie chart on the most popular staff as indicated by customers as their preferred staff. If there are most than 10 staffs indicated as preferred by customers in TrackBeau, only the top 10 most popular staff will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotStaff`
 
 Examples:
-* `plotSkin`   
+* `plotStaff`
 
 #### 4.4.7 Plot chart on common hair type amongst customers: `plotHair`
 
@@ -659,7 +660,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Action                | Format                                                 | Examples                                    |
 |-----------------------|--------------------------------------------------------|---------------------------------------------|
 | Add a service         | `adds n/SERVICE_NAME pr/PRICE d/DURATION`              | `adds n/Acne Facial Treatment pr/138 d/120` |
-| List all services     | `lists`                                                ||
+| List all services     | `lists`                                                |`lists`|
 | Edit a service        | `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]` | `edits 2 n/Dark Eye Circle Treatment d/30`  |
 | Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           | `finds n/facial`|
 | Delete service(s)     | `deletes INDEX,[MORE INDEXES]`                         | `deletes 1,2,3`                             |
@@ -669,7 +670,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Action                | Format                                                                                   | Examples                                     |
 |-----------------------|------------------------------------------------------------------------------------------|----------------------------------------------|
 | Add a booking         | `addb c/CUSTOMER_INDEX sev/SERVICE_INDEX st/BOOKING_DATE_TIME`                           | `addb c/1 sev/1 st/10-10-2022 10:30`         |
-| List all bookings     | `listb`                                                                                  ||
+| List all bookings     | `listb`                                                                                  |`listb`|
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
 | Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             |`findb n/alex`|
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
