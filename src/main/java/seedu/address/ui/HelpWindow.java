@@ -20,7 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t12-3.github.io/tp/UserGuide.html";
     public static final String NEWLINE_AND_INDENTATION = "\n     ";
     public static final String HELP_MESSAGE = "Tracey supports the following features: Find, Add, Delete, Edit, Clear, "
-            + "Summarise, List, Help, Filter, Import, Undo, Redo, Email, Archive and Resize.\n"
+            + "Summarise, List, Help, Filter, Undo, Redo, Email, Archive and Resize.\n"
             + "This guide aims to showcase the syntax used for the aforementioned features.\n"
             + "For a full comprehensive guide, please refer to " + USERGUIDE_URL
             + "\n"
@@ -84,9 +84,9 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: filter f/FACULTY cs/COVID_STATUS b/BLOCK"
             + NEWLINE_AND_INDENTATION
-            + "Example 1: cs/positive"
+            + "Example 1: filter cs/positive"
             + NEWLINE_AND_INDENTATION
-            + "Example 2: b/c\n"
+            + "Example 2: filter b/c\n"
 
             + "\n10. UNDO an executed add, edit or delete command."
             + NEWLINE_AND_INDENTATION
@@ -100,7 +100,8 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: email\n"
 
-            + "\n13. Archive the current database, saving the data in [ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]."
+
+            + "\n13. ARCHIVE the current database, saving the data in ROOT/data/archive/DIRECTORY/ARCHIVED_FILE."
             + NEWLINE_AND_INDENTATION
             + "Format: archive\n"
 

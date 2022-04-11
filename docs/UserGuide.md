@@ -112,7 +112,7 @@ Additional formatting guidelines:
 
 * **`exit`** : Exits the app.
 
-6. Refer to the <a href='#features'Features/> below for details of each command.
+6. Refer to the [Features](#3-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
+* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the [glossary](#6-glossary).
 * If any values for faculty, Covid status and block is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error. You will have to input the details for the keyword again.
 * If you added duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
   i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`.
@@ -196,7 +196,7 @@ Format: `edit INDEX n/NAME ...`
 * To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
-* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
+* Refer to Table 4 in the [glossary](#6-glossary)</a> for the correct format and pre-defined constants to be used for each input field.
 * Existing information of the student will be replaced with the newly inputted values.
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
@@ -225,7 +225,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
   
 2. After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
-3. If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
+3. If the input phone number, matriculation number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 </div>
 
@@ -259,11 +259,11 @@ Examples of usage:
   
 1. The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
   
-2. You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
-  
+2. You can use `find` to get his/her `INDEX` and then apply `delete`.
+
 3. This can save you time scrolling down an entire list to get his/her `INDEX`!
   
-4. Deletions can be reversed with the <a href='#undoing-an-action>`undo`</a> feature.
+4. Deletions can be reversed with the `undo` feature.
   
 </div>
 
@@ -293,9 +293,9 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
   
 2. Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
   
-   a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+   1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
   
-   b. Using an `undo` command will not restore the student's index back to 1
+   2. Using an `undo` command will not restore the student's index back to 1.
   
 </div>
 
@@ -326,9 +326,9 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
   
 2. Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
   
-  a. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  1. If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey.
   
-  b. Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+  2. Using a `redo` command after using an `undo` command will not restore the student's index back to 1.
   
 </div>
 
@@ -358,7 +358,7 @@ Filter students based on faculties, health statuses and/or blocks.
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
-* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
+* Refer to Table 4 in the [glossary](#6-glossary) for the list of pre-defined constants to be used for these 3 categories.
 * The search is case-insensitive. e.g. `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
@@ -474,9 +474,9 @@ Examples of usage:
   
 1. You can rename the archived file in the file path manually for easier reference.
   
-  a. Features for naming the archived file using the CLI will be available in later releases.
+   1. Features for naming the archived file using the CLI will be available in later releases.
   
-  b. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
+   2. To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
   
 </div>
 
@@ -488,14 +488,14 @@ Format: `resize SIZE`
 * The default result display window size is option 1.
 * Refer to Figure 14 for the comparison for the different result display window sizes.
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*
-
+![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*<br>
 <div markdown="span" class="alert alert-info">
+
 :information_source: **Note:**<br>
   
 1. There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
   
-</div>
+</div><br>
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
@@ -512,7 +512,7 @@ Format:`clear`
 <div markdown="span" class="alert alert-warning">
 :warning: **Warning:**<br>
   
-1. Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+1. Use the `archive` feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
   
 2. This feature cannot be reversed using `undo`.
   
