@@ -68,6 +68,8 @@ Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/m
 
 [return to top ↑](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
