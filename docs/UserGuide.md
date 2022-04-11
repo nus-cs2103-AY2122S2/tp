@@ -22,7 +22,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Adding a client: `add`](#adding-a-client-add)
   - [Editing a client: `edit`](#editing-a-client-edit)
   - [Deleting a client: `delete`](#deleting-a-client-delete)
-  - [Favourite a client: `favourite`](#favourite-a-client-favourite)
+  - [Favourite a client: `favourite`](#favourite-or-unfavourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
   - [Finding clients by keyword: `find`](#finding-clients-by-keyword-find)
   - [Sorting clients: `sort`](#sorting-clients-sort)
@@ -223,9 +223,12 @@ Examples:
 **Note**:
 - Images associated with the client are not deleted and remains in the OS file system.
 
-### Favourite a client: `favourite`
+### Favourite or Unfavourite a client: `favourite`
 
-Favourites the specified client in the RealEstatePro represented by a star as shown below.
+ Favourites the specified client in the RealEstatePro represented by a star as shown below.
+
+💡 **Note**: 
+ * If the client was favourited before, calling `favourite` command on this particular client will unfavourite him/her. This command will remove "🌟" from the client. <br/> Additionally, the client information will not show up on the Favourites window anymore.
 
 The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
@@ -233,7 +236,7 @@ The user (real estate agent) will be able to view a more compact list of favouri
 
 Format: `favourite INDEX`
 
-- Favourites the client at the specified `INDEX`.
+- Favourites/unfavourites the client at the specified `INDEX`.
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
@@ -251,7 +254,12 @@ Format:  `fw`
 
 2) Under it, click on `Favourites`.
 
-3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
+3) The system will pop up the Favourites window.
+
+#### By Key: `F3`
+
+1) Press `F3`.
+2) The system will pop up the Favourites window.
 
 ![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
 
@@ -427,6 +435,22 @@ Format: `rm`
 Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region namely { North, South, East, West, Central }.
 
 Format: `stats`
+
+#### By Ui:
+
+1) Navigate to the `File` menu and click on it.
+
+2) Under it, click on `Stats`.
+
+3) The system will pop up the Statistics window.
+
+#### By Key: `F2`
+
+1) Press `F2`.
+
+2) The system will pop up the Statistics window.
+
+
 
 <img src="images/user-guide/Stats.png" height="400px">
 

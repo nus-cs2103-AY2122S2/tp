@@ -154,22 +154,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## Favourite feature and Favourites window
+## Favourite/Unfavourite feature and Favourites window
 
-The proposed `favourite` mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of Persons and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
+The proposed Favourite mechanism will make use of a new attribute called `Favourite`. How we went about creating this mechanism is by going through the list of `Person` and checking if their `Favourite` instance returns "🌟" (represents favourited) when `toString()` is called.
 
 Given below is an example of how the `favourite` mechanism behaves with the Favourites window.
 
-Step 1. The user starts the application with pre-loaded data of Persons.
+Step 1. The user starts the application with pre-loaded data of `Person`.
 
-Step 2. Assuming there is a Person with the index number 1. User then executes `favourite 1` command to favourite the Person with index number 1 in the application. The system will create a new Person with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this Person to be a favourited instance of the same Person.
+Step 2. Assuming there is a `Person` with the index number 1 that is not favourited. User then executes `favourite 1` command to favourite the `Person` with index number 1 in the application. The system will create a new `Person` with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this `Person` to be the favourited instance of the same `Person`.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
-</div>
+<aside>
+💡 Note: 
+If the <code>Person</code> was favourited before, calling <code>favourite</code> command on this particular <code>Person</code> will unfavourite him/her. This command will remove "🌟" from the <code>Person</code>. <br/> Additionally, the <code>Person</code>'s information will not show up on the Favourites window anymore.
+</aside>
 
+Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those `Persons` that have `Favourite` instance's value set as `True`. The user can also input the command `fw` to open up the Favourites window through this CLI command.
 
-Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ instance's value set as True. The user can also input the command `fw` to open up the Favourites window through this CLI command.
+<aside>
+💡 Note: Every newly added <code>Person</code> will have the default value of <code>False</code> for <code>Favourite</code> attribute, thus will never appear in the Favourites window before the <code>favourite</code> command is called on them.
+</aside>
 
 ## Match feature/Window
 The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
@@ -262,14 +266,14 @@ Step 5: The set of `UserImage` is then converted into an `ArrayList` and the fir
 ## Statistics feature/Window
 <img src="images/user-guide/Stats.png" height="400px">
 
-The `stats` opens a new `StatisticsWindow` that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
+The `stats` command opens a new Statistics window that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
 This allows the user to be able to visualize his/her client's data to make better business decisions. (exp. Expand the user's influence in the most popular region for any potential sellers/buyers to contact him/her)
 
-**[Future version]** </br>
-Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
-Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
-Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+**[Future version]** <br/>
+* Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+* Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+* Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
 ## Sorting
 
@@ -348,7 +352,7 @@ RealEstatePro is faster that a typical mouse/GUI driven app that helps the real 
 | High     | User     | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
 | High     | User     | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
 | High     | User     | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High     | User     | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High     | User     | Favourite/Unfavourite a client                                                                                                                                                     | Separate clients based on whose information I frequent the most (favourited) and those that are not |
 | High     | User     | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
 | High     | User     | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
 | High     | User     | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
@@ -576,7 +580,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) Expected: Similar to previous.
 
-## Favouriting a client
+## Favouriting/Unfavouriting a client
 
 1. Favouriting a client while all clients are being shown
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
@@ -594,7 +598,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 
 
 2. Open Favourites window by UI
-   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Favourites`. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Favourites`. <br>Expected: The Favourites window will pop up above the listings of clients on the Main window. The window will display a list of clients that are favourited (it will be empty is there are no favourited clients).
 
 
 3. Open Favourites window by key
@@ -607,7 +611,7 @@ Please bear in mind to extend your testing to more *exploratory* testing after f
 
 
 2. Open Statistics window by UI
-   1. Test case: Click on `files` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Stats`.<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Stats`.<br>Expected: The Statistics window will pop up above the listings of clients on the Main window. The window will display a pie chart with data of buyers/sellers in regions based on their preference/properties (If there is no data in RealEstatePro, the pie chart will not be displayed. Labels of the Statistics window will still display).
 
 
 3. Open Statistics window by key
