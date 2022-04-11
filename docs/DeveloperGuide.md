@@ -677,12 +677,62 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
+### Finding a person
+1. Finding a person
+   1. Prerequisites: Must be on people view, which can be switched to using the `list o/view v/people` command.
+   2. Test case: `find james` <br>
+      Expected: All persons with the name "james" in their full name will be shown on the people view. "# persons listed!" will be seen in the result display, where # is the number of matching persons.<br>
+   3. Test case: `find bianca` <br> _("bianca" is a placeholder for a name that does not exist in UniBook, replace this name with a name that does not exist in your instance of UniBook)_<br>
+      Expected: No persons will be shown on the people view. "0 persons listed!" will be seen in the result display.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+## Effort
+
+### Challenges faced
+
+#### Number of entity types
+* 3 main entity types in UniBook, `Person`, `Module` and `Group`. Furthermore, a `Person` can have the subtype of `Student` or `Professor`. AB3 only had 1.
+  * Resulting Challenges:
+    * Writing of many new classes to fully model the entities.
+      * This took up a substantial amount of time as new classes meant more methods to support them in the main UniBook application and more tests to ensure that they work.
+    * Configuring of storage to store the entities in their entirety. 
+      * Needed to write a substantial amount of storage classes to support the new model classes.
+      * Had to account for the inheritance relationship between `Student` and `Professor` classes with `Person` class.
+        * This required learning more advanced uses of the Jackson library so that this relationship could be expressed in the stored JSON.
+    * Determination of and enforcement of fields on entity classes.
+      * Every field in all entities had to have its own set of constraints to ensure a consistent user experience.
+        * e.g. a module code must be unique amongst all modules in UniBook.
+      * Constraints had to be determined appropriately so that they would be intuitive, and match reality as closely as possible.
+        * e.g. in reality two modules in the same university would not share the same module code.
+      * Enforcement of the constraints involved a fair amount of time and code across all entities, along with the writing of the tests to ensure they are enforced correctly.
+      * Many specific error messages had to be created to inform users whenever any of their entered commands violated a constraint.
+      * Deserialization of storage file had to be carefully written to enforce these constraints as well.
+        * So that any erroneous modifications of the JSON storage file would not violate the constraints enforced by UniBook when launched.
+      * Table detailing every single constraint had to be thoroughly written out so the user of UniBook would be well aware of every constraint.
+    * Revamping of GUI so that all the new entities and their details could be viewed in full by the user.
+      * Required planning and conceptualisation of the layouts of different views of UniBook.
+      * Required many new GUI classes and their supporting FXML files to be written.
+      * Styling to achieve an aesthetically pleasing interface was a laborious process:
+        * Using CSS in JavaFX is not well documented online, and has different attribute names compared to standard CSS one would use for HTML in front-end development.
+        * Achieving the right sizing and coloring of components of the GUI often involved a trial-an-error process of changing the styling slightly, reloading the application and viewing the change to see if it is acceptable and achieves the desired effect. This is because to achieve an aesthetic that is 'just right', one often needs to the see the aesthetic first.
+* Designing of and standardisation of commands.
+  * Resulting Challenges:
+    * Ensuring each command was as similar to each other in structure as possible is a very time-consuming process as it involves the entire team having to cover all the many variations of each command.
+    * Many new tokens had to be created and standardized to support all the variations of commands.
+
+### Achievements
+* Achieved most of our original design goals.
+  * We wanted to enhance AB3 such that it would be particularly useful to our target users - students. Being students ourselves, we could better plan out our user stories and use cases to guide the development of UniBook, hence creating a more useful application.
+    * The new entities arose out of all of us agreeing that being able to manage university modules and groups, along with the people associated with them, would make AB3 much more useful to students. 
+    * Ultimately we succeeded in adding all the planned entities, along with all the supporting classes and key features necessary to view, manipulate and store these entities. We only missed out on more idyllic advanced features in the manipulation these entities due to time constraints.
+* Made GUI of AB3 much more useful and aesthetically pleasing.
+  * Original GUI of AB3 was rather simple and uninspiring, and it did not do much more than show basic contact information.
+  * Along with enhancing the GUI to display all the new entities, we made it more aesthetically pleasing. 
+  * Added ease-of-use features like basic navigation using mouse clicks, which will benefit users who prefer interacting with GUIs.

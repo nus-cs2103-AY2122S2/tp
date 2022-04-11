@@ -55,7 +55,7 @@ Given below are my contributions to the project.
     * Changed the index page from AB3 to UniBook by replacing screenshots and descriptions to be on UniBook instead of AB3
 * **Community**:
   * Actively reviewed PRs of teammates
-    * Total number of PRs reviewed: 49
+    * Total number of PRs reviewed: 51
   * Opened issues for features that needed to be completed, along with bugs noticed 
     * Total number of issues opened: 17
   * Carefully analyzed code written by teammates and reported bugs and suggestions to them where appropriate

@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.exceptions.DuplicateMeetingTimeException;
-import unibook.model.module.exceptions.MeetingTimeNotFoundException;
 import unibook.model.person.Student;
 import unibook.model.person.exceptions.PersonNotFoundException;
 

@@ -11,17 +11,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import unibook.commons.exceptions.IllegalValueException;
-import unibook.model.module.group.Group;
 import unibook.model.person.Email;
 import unibook.model.person.Name;
 import unibook.model.person.Phone;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedGroupCode;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedModuleCode;
-import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedStudent;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedTag;
 import unibook.testutil.Assert;
-import unibook.testutil.builders.GroupBuilder;
 import unibook.testutil.typicalclasses.TypicalStudents;
 import unibook.testutil.typicalclasses.TypicalUniBook;
 
@@ -134,7 +131,7 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent student =
             new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, modules, VALID_GROUPS);
         Assert.assertThrows(IllegalValueException.class,
-            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()),
-            () -> student.toModelType(TypicalUniBook.getTypicalUniBook()));
+            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()), () ->
+                student.toModelType(TypicalUniBook.getTypicalUniBook()));
     }
 }

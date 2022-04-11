@@ -3,7 +3,6 @@ package unibook.testutil.builders;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import unibook.model.module.Module;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;

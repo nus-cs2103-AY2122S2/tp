@@ -21,8 +21,8 @@ public class JsonAdaptedGroupCodeTest {
         JsonAdaptedModuleCode nonExistentModule = new JsonAdaptedModuleCode("XXXX");
         JsonAdaptedGroupCode groupCode = new JsonAdaptedGroupCode(nonExistentModule, "YYY");
         assertThrows(IllegalValueException.class,
-            String.format(GROUP_MODULE_DOES_NOT_EXIST, nonExistentModule.getModuleCode()),
-            () -> groupCode.toModelType(TypicalUniBook.getTypicalUniBook()));
+            String.format(GROUP_MODULE_DOES_NOT_EXIST, nonExistentModule.getModuleCode()), () ->
+                    groupCode.toModelType(TypicalUniBook.getTypicalUniBook()));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class JsonAdaptedGroupCodeTest {
         JsonAdaptedModuleCode existentJsonModuleCode = new JsonAdaptedModuleCode(existentModuleCode);
         JsonAdaptedGroupCode groupCode = new JsonAdaptedGroupCode(existentJsonModuleCode, nonExistentGroup);
         assertThrows(IllegalValueException.class,
-            String.format(GROUP_NAME_DOES_NOT_EXIST, nonExistentGroup),
-            () -> groupCode.toModelType(uniBook));
+            String.format(GROUP_NAME_DOES_NOT_EXIST, nonExistentGroup), () ->
+                    groupCode.toModelType(uniBook));
     }
 }

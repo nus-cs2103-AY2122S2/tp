@@ -19,10 +19,8 @@ import unibook.storage.adaptedmodeltypes.JsonAdaptedModuleCode;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedProfessor;
 import unibook.storage.adaptedmodeltypes.JsonAdaptedTag;
 import unibook.testutil.Assert;
-import unibook.testutil.builders.ModuleBuilder;
 import unibook.testutil.typicalclasses.TypicalProfessors;
 import unibook.testutil.typicalclasses.TypicalUniBook;
-import unibook.model.module.Module;
 
 public class JsonAdaptedProfessorTest {
     private static final String INVALID_NAME = "R@chel";
@@ -127,7 +125,7 @@ public class JsonAdaptedProfessorTest {
         JsonAdaptedProfessor prof =
             new JsonAdaptedProfessor(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS, modules, VALID_OFFICE);
         Assert.assertThrows(IllegalValueException.class,
-            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()),
-            () -> prof.toModelType(TypicalUniBook.getTypicalUniBook()));
+            String.format(MODULE_DOES_NOT_EXIST_MESSAGE, nonExistentModule.getModuleCode()), () ->
+                    prof.toModelType(TypicalUniBook.getTypicalUniBook()));
     }
 }

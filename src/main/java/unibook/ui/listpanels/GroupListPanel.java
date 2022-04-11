@@ -42,8 +42,8 @@ public class GroupListPanel extends UiPart<Region> {
      * Sets up the list of group cards in this panel.
      */
     private void setUpGroupCardList() {
-        TriFunction<Group, Integer, Boolean, Node> cardConverter =
-            (group, index, singleFlag) -> new GroupCard(group, index + 1, singleFlag).getRoot();
+        TriFunction<Group, Integer, Boolean, Node> cardConverter = (group, index, singleFlag) ->
+                new GroupCard(group, index + 1, singleFlag).getRoot();
 
         fillPaneFromList(groupListView, this.groupList, cardConverter);
         addIndexedAndFlagListChangeListener(groupListView, this.groupList, cardConverter);

@@ -151,14 +151,14 @@ public class GroupTest {
     }
 
     @Test
-    public void test_sameGroupName_differentGroupName_returnsFalse() {
+    public void sameGroupName_differentGroupName_returnsFalse() {
         Group group1 = new GroupBuilder().withName("A").build();
         Group group2 = new GroupBuilder().withName("B").build();
         assertTrue(!group1.sameGroupName(group2));
     }
 
     @Test
-    public void test_sameGroupName_sameGroupName_returnsTrue() {
+    public void sameGroupName_sameGroupName_returnsTrue() {
         Group group1 = new GroupBuilder().withName("A").build();
         Group group2 = new GroupBuilder().withName("A").build();
         Group group3 = new GroupBuilder().withName("a").build(); //same name, different case
@@ -167,7 +167,7 @@ public class GroupTest {
     }
 
     @Test
-    public void test_sameGroupNameAndModule_differentGroupNameOrModule_returnsFalse() {
+    public void sameGroupNameAndModule_differentGroupNameOrModule_returnsFalse() {
         Module module1 = new ModuleBuilder().withModuleCode("M1").build();
         Module module2 = new ModuleBuilder().withModuleCode("M2").build();
 

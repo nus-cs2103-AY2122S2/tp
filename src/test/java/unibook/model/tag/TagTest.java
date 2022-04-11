@@ -5,8 +5,6 @@ import static unibook.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import unibook.testutil.Assert;
-
 public class TagTest {
 
     @Test
