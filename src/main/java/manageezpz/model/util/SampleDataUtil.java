@@ -25,7 +25,11 @@ public class SampleDataUtil {
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"), 0),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"), 0),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"), 0),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"), 0)
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"), 0),
+            new Person(new Name("Peter Tan"), new Phone("95214839"), new Email("petertan@example.com"), 0),
+            new Person(new Name("Jack Koh"), new Phone("86201478"), new Email("jackkoh@example.com"), 0),
+            new Person(new Name("Zachery Lam"), new Phone("87412058"), new Email("zacherylam@example.com"), 0),
+            new Person(new Name("Jason Lim"), new Phone("90321458"), new Email("jasonlim@example.com"), 0),
         };
     }
 
@@ -40,7 +44,14 @@ public class SampleDataUtil {
             new Deadline(new Description("Submit Proposal"),
                     new Date("2022-04-08"), new Time("1800")),
             new Event(new Description("Meeting with HR"), new Date("2022-03-16"),
-                    new Time("1400"), new Time("1500"))
+                    new Time("1400"), new Time("1500")),
+            new Deadline(new Description("Submit Sales Report"),
+                    new Date("2022-06-15"), new Time("1800")),
+            new Deadline(new Description("Payout Employees"),
+                    new Date("2022-04-30"), new Time("1900")),
+            new Event(new Description("Working lunch with Client"), new Date("2022-03-17"),
+                    new Time("1200"), new Time("1400")),
+            new Todo(new Description("Review IT Report")),
         };
     }
     public static ReadOnlyAddressBook getSampleAddressBook() {
