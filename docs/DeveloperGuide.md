@@ -539,4 +539,15 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. Attempt to a
+### Adding a record to an existing patient
+
+Prerequisites: A patient with NRIC `S1234567L` exists.
+
+1. Test case: `add t/prescription i/S1234567L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`
+   Expected: A prescription record is added to patient with NRIC `S1234567L`. The command result display shows the newly added prescription, and a list of the patient's prescriptions is shown.
+
+2. Test case: `add t/prescription i/S123456789L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`
+   Expected: No prescription added. Error details shown in the status message.
+
+4. Other invalid `add t/prescription` commands (e.g. missing parameters, adding to a patient that does not exist, invalid date, etc.).
+   Expected: Similar to previous.
