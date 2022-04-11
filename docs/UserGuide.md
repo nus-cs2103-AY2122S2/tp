@@ -247,10 +247,10 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [i/INFO] 
 * Edits the client with the specified `NAME`.
   * `Name` is case-insensitive. E.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
-    * Example: `edit John Doe p/88888888` will find clients with names containing `John` and `Doe`, unless
-      there exists a client with the name `John Doe`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* If `NAME` is multiple words, the whole string will be used to search for clients.
+  * Words in `NAME` still have to fully match words in client's name
+  * Example: `Jonathan Lee` will match `Jonathan Lee Juler`. `Lee Juler` will also match `Jonathan Lee Juler`,
+             `Jonathan L` will not match.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
 
@@ -293,6 +293,10 @@ Format: `delete NAME`
 * Deletes the client with the specified `NAME`.
   * `NAME` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` is multiple words, the whole string will be used to search for clients.
+  * Words in `NAME` still have to fully match words in client's name
+  * Example: `Jonathan Lee` will match `Jonathan Lee Juler`. `Lee Juler` will also match `Jonathan Lee Juler`,
+    `Jonathan L` will not match.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
 
