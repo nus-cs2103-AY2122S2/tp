@@ -1,10 +1,6 @@
 package seedu.address.ui;
 
-import java.io.File;
-import java.util.List;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +19,6 @@ import seedu.address.logic.commands.ResizeCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.excel.ImportFileParser;
 import seedu.address.model.person.Person;
 
 /**
@@ -47,7 +42,6 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private EmailWindow emailWindow;
-    private ImportWindow importWindow;
 
 
     @FXML
@@ -171,31 +165,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens file manager for import window
-     */
-    @FXML
-    public void handleImport () throws ParseException, CommandException {
-        JFileChooser fileChooser = new JFileChooser();
-        JDialog dialog = new JDialog();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-        int returnValue = fileChooser.showOpenDialog(dialog);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            ImportFileParser converter = new ImportFileParser();
-            List<String> res;
-            res = converter.jsonToPerson(selectedFile);
-            for (int i = 0; i < res.size(); i++) {
-                try {
-                    executeCommand(res.get(i));
-                } catch (ParseException e) {
-                    throw new ParseException("haha");
-                }
-            }
-        }
-
-    }
-
-    /**
      * Toggles display text place-holder height to grow and shrink.
      */
     @FXML
@@ -214,13 +183,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Instantiates a new EmailWindow and shows it.
-     */
-    public void createImportWindow() {
-        importWindow = new ImportWindow();
-        importWindow.show();
-    }
 
     /**
      * Opens the email window or opens an updated window it if it's already opened.
