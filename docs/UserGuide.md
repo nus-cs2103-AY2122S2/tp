@@ -548,13 +548,22 @@ Editing a prescription will overwrite the old data.
 
 Adds a test result taken by a patient in MedBook.
 
-Format: `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`
+Format: `add t/test i/NRIC td/DATE mt/MEDICAL_TEST r/RESULT`
 
 - DATE should be in the format of YYYY-MM-DD
 
 Examples:
 
-- `add t/test i/S1234567L td/2019-09-15 mt/CT Scan r/Brain Cancer`
+- `add t/test i/S1234567L td/2019-09-15 mt/X-Ray r/Broken wrist`
+
+Below is the list of parameters that can be used with the `add t/test` command.
+
+| Parameters | Description                                                          |
+|------------|:---------------------------------------------------------------------|
+| `i/`       | _Required_. The NRIC associated with the patient.                    |
+| `td/`      | _Required_. The date of the test was taken. (Format: YYYY-MM-DD)     |
+| `mt/`      | _Required_. The name of the medical test taken.                      |
+| `r/`       | _Required_. The results of the test taken.                           |
 
 ### Viewing Test Result: `view t/test`
 
