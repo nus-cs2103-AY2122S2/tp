@@ -246,7 +246,7 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, `No
 
 **Aspect: Structure for storing fields**
 
-* **Alternative 1 (current implementation):** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
+* **Alternative 1 (current choice):** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`.
   Everytime a user create a transaction, a new instance of transaction will be added to the list and a client
   specified by its unique identifier (`personId`) will be referenced by this transaction. To list all the transactions
   of a particular client, the `FilteredList` should be updated to only contain `Transaction`
@@ -763,7 +763,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 | `HIGH`   | user    | list all transactions                                      |                                                                         |
 | `HIGH`   | user    | find a client's transactions                               | see all the transactions associated with a particular client.           |
 | `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be paid                         |
-| `MEDIUM` | user    | pay a transaction                                          | change the status of the transaction to be unpaid                       |
+| `MEDIUM` | user    | unpay a transaction                                        | change the status of the transaction to be unpaid                       |
 | `MEDIUM` | user    | flag a transaction as paid or unpaid                       | know if a transaction has been paid.                                    |
 | `LOW`    | user    | click on a client to see the list of their transactions    | see a client's transactions without typing.                             |
 | `HIGH`   | user    | remove memberships from clients                            | remove a client from my rewards program.                                |
