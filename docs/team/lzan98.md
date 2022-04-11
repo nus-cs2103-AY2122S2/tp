@@ -71,4 +71,5 @@ the interview scheduling process of candidates applying to be undergraduate Teac
       * Contributed to forum discussions: e.g. [\#28](https://github.com/nus-cs2103-AY2122S2/forum/issues/28#issuecomment-1019963524),
         [\#243](https://github.com/nus-cs2103-AY2122S2/forum/issues/243), [\#194](https://github.com/nus-cs2103-AY2122S2/forum/issues/194)
       * Reported a total of [10 issues](https://github.com/lzan98/ped) during PED.
+
       
