@@ -87,4 +87,15 @@ public class StringUtil {
         return isNonZeroUnsignedInteger(parts[0])
                 && isNonZeroUnsignedInteger(parts[1]);
     }
+
+    /**
+     * Escapes the `:` character with backslash.
+     *
+     * @param s The string to be processed.
+     * @return String that has `:` character escaped.
+     */
+    public static String escapeCharacter(String s) {
+        return s.replace(":", "\\:");
+    }
+
 }

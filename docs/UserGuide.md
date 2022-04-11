@@ -102,7 +102,7 @@ If you feel lost at any point in time, you can always refer to the Table of Cont
 
    * **`delete 3`** : Deletes the 3rd product shown in the displayed product list.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#3-features) below for details of each command.
 
 <hr/>
 
@@ -445,7 +445,7 @@ You can click <img align="center" src = "images/ui-icons/x.png" alt="X" height =
 
 :information_source: A filter tag will always appear whenever a command that involves filtering is executed. All filter tags will be cleared once there is a modification to `product/item`.
 
-(e.g. [`find`](#315-finding-certain-products--find), [`expired`](#316-looking-for-products-having-expired-items--expired), [`out-of-stock`](#317-looking-for-products-that-are-out-of-stock--out-of-stock))
+(e.g. [`find`](#315-finding-products--find), [`expired`](#324-finding-expired-items--expired), [`out-of-stock`](#316-finding-out-of-stock-products--out-of-stock))
 
 </div>
 
@@ -461,7 +461,7 @@ Format: `out-of-stock`
 | Compulsory Fields | | 
 | Optional Fields   | |
 
-* A product is considered out of stock if it does not have an item
+* A product is considered out of stock if it does not have an item.
 
 <h5>GUI Alternative</h5> 
 
@@ -469,7 +469,7 @@ On the menu bar, select `Actions` > `Find Out of Stock products`.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Only one filter can be applied at a time. Thus, [expired](#324-looking-for-expired-items--expired) and [out-of-stock](#316-looking-for-products-that-are-out-of-stock--out-of-stock) filters cannot be used with other filters.
+:information_source: Only one filter can be applied at a time. Thus, [expired](#324-finding-expired-items--expired) and [out-of-stock](#316-finding-out-of-stock-products--out-of-stock) filters cannot be used with other filters.
 
 </div>
 
@@ -698,8 +698,8 @@ Format: `clear`
 
 :information_source: The difference between `clear` and `delete-all` :
 
-* `clear` will delete all the `products/item` including those which are not showing.
-* `delete-all` will only delete `products/item` that is shown in the table.
+* `clear` will delete all the `products/items` including those which are not showing.
+* `delete-all` will only delete `products/items` that are shown in the table.
 
 </div>
 
@@ -743,13 +743,13 @@ Format: `redo`
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: You can redo changes that have been undone accidentally by the `undo` command.
+:bulb: You can redo changes that have been undone accidentally by the [`undo`](#332-undoing-most-recent-changes--undo) command.
 
 </div>
 
 <div style="page-break-after: always;"></div>
 
-#### 3.3.2 Exiting the program : `exit`
+#### 3.3.4 Exiting the program : `exit`
 
 Exits iBook.
 
@@ -766,7 +766,7 @@ Format: `exit`
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: The history for [`undo`](#332-undoing-most-recent-changes--undo) and [`redo`](#333-redoing-most-recent-undone-changes--redo) will be deleted.
+:information_source: The history for [`undo`](#332-undoing-most-recent-changes--undo) and [`redo`](#333-redoing-most-recently-undone-changes--redo) will be deleted.
 
 </div>
 
