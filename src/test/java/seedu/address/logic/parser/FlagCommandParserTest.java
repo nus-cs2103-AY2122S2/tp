@@ -21,7 +21,7 @@ public class FlagCommandParserTest {
     private FlagCommandParser parser = new FlagCommandParser();
 
     @Test
-    public void parseFlag_validArgs_returnsDeleteCommand() {
+    public void parseFlag_validArgs_returnsFlagCommand() {
         parser.setCommand("flag");
         assertParseSuccess(parser, "Alice Pauline",
                 new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("true")));
@@ -30,12 +30,12 @@ public class FlagCommandParserTest {
     @Test
     public void parseFlag_invalidArgs_throwsParseException() {
         parser.setCommand("flag");
-        assertParseFailure(parser, "!",
+        assertParseFailure(parser, "NotAPerson",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parseUnflag_validArgs_returnsDeleteCommand() {
+    public void parseUnflag_validArgs_returnsFlagCommand() {
         parser.setCommand("unflag");
         assertParseSuccess(parser, "Alice Pauline",
                 new FlagCommand(FULL_NAME_FIRST_PERSON, new Flag("false")));
@@ -44,7 +44,7 @@ public class FlagCommandParserTest {
     @Test
     public void parseUnflag_invalidArgs_throwsParseException() {
         parser.setCommand("unflag");
-        assertParseFailure(parser, "!",
+        assertParseFailure(parser, "NotAPerson",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
     }
 }
