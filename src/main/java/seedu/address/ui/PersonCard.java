@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
@@ -39,7 +40,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Pane flag;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Label prevDateMet;
+    @FXML
+    private Label info;
+    @FXML
+    private Label scheduledMeeting;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,9 +58,29 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Phone Number: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        if (person.getFlag().isFlagged) {
+            flag.setStyle("-fx-background-color: #c94848");
+        }
+        prevDateMet.setText("Date last met:\n" + person.getPrevDateMet().value.toString());
+        info.setText("Info: " + person.getInfo().value);
+
+        String meetingDetails = person.getScheduledMeeting().toString();
+        if (meetingDetails.equals("No meeting scheduled")) {
+            scheduledMeeting.setText(meetingDetails);
+        } else {
+            String[] meetingSplit = person.getScheduledMeeting().toString().split(" ");
+            String meetingDate = meetingSplit[0];
+            String meetingTime = meetingSplit[1];
+            scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
+        }
+
+        tags.getChildren().add(new Label("Salary: $" + person.getSalary().value));
+        tags.getChildren().get(0).setStyle("-fx-background-color: #6bd16b;"
+                + "-fx-hgap: 7;"
+                + "-fx-vgap: 3;");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

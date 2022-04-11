@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,33 +12,36 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the hustle book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final HustleBook hustleBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given hustleBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyHustleBook hustleBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(hustleBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with hustle book: " + hustleBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.hustleBook = new HustleBook(hustleBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.hustleBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HustleBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,57 +69,79 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getHustleBookFilePath() {
+        return userPrefs.getHustleBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setHustleBookFilePath(Path hustleBookFilePath) {
+        requireNonNull(hustleBookFilePath);
+        userPrefs.setHustleBookFilePath(hustleBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== HustleBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setHustleBook(ReadOnlyHustleBook hustleBook) {
+        this.hustleBook.resetData(hustleBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyHustleBook getHustleBook() {
+        return hustleBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return hustleBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        hustleBook.removePerson(target);
+    }
+
+    @Override
+    public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
+        requireNonNull(scheduledMeeting);
+        return hustleBook.hasSameMeeting(scheduledMeeting);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        hustleBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        hustleBook.setPerson(target, editedPerson);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public void sortPersonListBy(Comparator<Person> sortComparator) {
+        hustleBook.sortPersonBy(sortComparator);
+    }
+
+    @Override
+    public void undoHustleBook() {
+        ReadOnlyHustleBook prevState = HustleBookHistory.getInstance().getPrevState();
+        this.hustleBook.resetData(prevState);
+    }
+
+    @Override
+    public void redoHustleBook() {
+        ReadOnlyHustleBook nextState = HustleBookHistory.getInstance().getNextState();
+        this.hustleBook.resetData(nextState);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedHustleBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -126,6 +152,20 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Index getPersonListIndex(Name name) {
+        Index result = Index.fromZeroBased(0);
+        String personName = name.fullName;
+        for (Person i : filteredPersons) {
+            Name currName = i.getName();
+            if (currName.containsKeyword(personName)) {
+                break;
+            }
+            result.increment(1);
+        }
+        return result;
     }
 
     @Override
@@ -142,7 +182,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return hustleBook.equals(other.hustleBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

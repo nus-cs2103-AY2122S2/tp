@@ -1,0 +1,117 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
+participant ":MeetCommandParser" as MeetCommandParser LOGIC_COLOR
+participant "d:MeetCommand" as MeetCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("meet John Doe d/2022-05-25 t/1000")
+activate LogicManager
+
+LogicManager -> HustleBookParser : parseCommand("meet John Doe d/2022-05-25 t/1000", lastCommand)
+activate HustleBookParser
+
+create MeetCommandParser
+HustleBookParser -> MeetCommandParser
+activate MeetCommandParser
+
+MeetCommandParser --> HustleBookParser
+deactivate MeetCommandParser
+
+HustleBookParser -> MeetCommandParser : parse("John Doe d/2022-05-25 t/1000")
+activate MeetCommandParser
+
+MeetCommandParser -> Model : new Name(userInputName)
+activate Model
+
+Model --> MeetCommandParser : name
+deactivate Model
+
+MeetCommandParser -> Model : new Meeting Date
+activate Model
+
+Model --> MeetCommandParser : date
+deactivate Model
+
+MeetCommandParser -> Model : new Meeting Time
+activate Model
+
+Model --> MeetCommandParser : time
+deactivate Model
+
+MeetCommandParser -> Model : new ScheduleMeeting(date, time)
+activate Model
+
+Model --> MeetCommandParser : meeting
+deactivate Model
+
+create MeetCommand
+MeetCommandParser -> MeetCommand : new MeetCommand(name, meeting)
+activate MeetCommand
+
+MeetCommand --> MeetCommandParser : d
+deactivate MeetCommand
+
+MeetCommandParser --> HustleBookParser : d
+deactivate MeetCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MeetCommandParser -[hidden]-> HustleBookParser
+destroy MeetCommandParser
+
+HustleBookParser --> LogicManager : d
+deactivate HustleBookParser
+
+LogicManager -> MeetCommand : execute()
+activate MeetCommand
+
+MeetCommand -> Model : check for clashing meetings
+activate Model
+
+Model --> MeetCommand
+deactivate Model
+
+MeetCommand -> Model : get person from filtered person list
+activate Model
+
+Model --> MeetCommand : person
+deactivate Model
+
+MeetCommand -> Model : new Person(editedInfo)
+activate Model
+
+Model --> MeetCommand : edited person
+deactivate Model
+
+MeetCommand -> Model : setPerson(person, editedInfo)
+activate Model
+
+Model --> MeetCommand
+deactivate Model
+
+MeetCommand -> Model : update filtered person list
+activate Model
+
+Model --> MeetCommand
+deactivate Model
+
+create CommandResult
+MeetCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MeetCommand
+deactivate CommandResult
+
+MeetCommand --> LogicManager : result
+deactivate MeetCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

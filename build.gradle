@@ -20,6 +20,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
@@ -66,7 +70,8 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveBaseName = "HustleBook"
+    archiveClassifier = null
 }
 
 defaultTasks 'clean', 'test'

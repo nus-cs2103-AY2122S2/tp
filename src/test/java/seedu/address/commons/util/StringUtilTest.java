@@ -140,4 +140,37 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+
+    //---------------- Tests for isNumber --------------------------------------
+
+    @Test
+    public void isNumber() {
+        // EP: empty strings
+        assertFalse(StringUtil.isNumber("")); // Boundary value
+        assertFalse(StringUtil.isNumber("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isNumber("a"));
+        assertFalse(StringUtil.isNumber("aaa"));
+
+        // EP: zero
+        assertTrue(StringUtil.isNumber("0"));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isNumber("01"));
+
+        // EP: signed numbers
+        assertFalse(StringUtil.isNumber("-1"));
+        assertFalse(StringUtil.isNumber("+1"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNumber(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isNumber("1 0")); // Spaces in the middle
+
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isNumber("1"));
+        assertTrue(StringUtil.isNumber("10"));
+        assertTrue(StringUtil.isNumber("123456"));
+    }
 }

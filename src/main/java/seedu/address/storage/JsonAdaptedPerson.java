@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,9 +13,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Flag;
+import seedu.address.model.person.Info;
+import seedu.address.model.person.MeetingDate;
+import seedu.address.model.person.MeetingTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PrevDateMet;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +36,12 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String flag;
+    private final String prevDateMet;
+    private final String salary;
+    private final String info;
+    private final String scheduledMeeting;
+
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,11 +50,19 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("flag") String flag, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("prevDateMet") String prevDateMet, @JsonProperty("salary") String salary,
+            @JsonProperty("info") String info, @JsonProperty("scheduledMeeting") String scheduledMeeting) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.flag = flag;
+        this.prevDateMet = prevDateMet;
+        this.salary = salary;
+        this.info = info;
+        this.scheduledMeeting = scheduledMeeting;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +76,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        flag = source.getFlag().toString();
+        prevDateMet = source.getPrevDateMet().toString();
+        salary = source.getSalary().value;
+        info = source.getInfo().value;
+        scheduledMeeting = source.getScheduledMeeting().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -69,31 +96,88 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
+        final Name modelName = getName();
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
+        final Phone modelPhone = getPhone();
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
+        final Email modelEmail = getEmail();
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
+        final Address modelAddress = getAddress();
 
+        final Flag modelFlag = getFlag();
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final PrevDateMet modelPrevDateMet = getPrevDateMet();
+
+        final Salary modelSalary = getSalary();
+
+        final Info modelInfo = getInfo();
+
+        if (scheduledMeeting == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        ScheduledMeeting meeting;
+        if (scheduledMeeting.equals("No meeting scheduled")) {
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                    modelTags, modelPrevDateMet, modelSalary, modelInfo);
+        } else {
+            meeting = parseScheduledMeeting();
+        }
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFlag,
+                modelTags, modelPrevDateMet, modelSalary, modelInfo, meeting);
+    }
+
+    private Info getInfo() throws IllegalValueException {
+        if (info == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        if (!Info.isValidInfo(info)) {
+            throw new IllegalValueException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        final Info modelInfo = new Info(info);
+        return modelInfo;
+    }
+
+    private Salary getSalary() throws IllegalValueException {
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        final Salary modelSalary = new Salary(salary);
+        return modelSalary;
+    }
+
+    private PrevDateMet getPrevDateMet() throws IllegalValueException {
+        if (prevDateMet == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+        if (!PrevDateMet.isValidPrevDateMet(prevDateMet)) {
+            throw new IllegalValueException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        try {
+            PrevDateMet.isDatePossible(prevDateMet);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+        final PrevDateMet modelPrevDateMet = new PrevDateMet(prevDateMet);
+        return modelPrevDateMet;
+    }
+
+    private Flag getFlag() throws IllegalValueException {
+        if (flag == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Flag.class.getSimpleName()));
+        }
+        if (!Flag.isValidFlag(flag)) {
+            throw new IllegalValueException(Flag.MESSAGE_CONSTRAINTS);
+        }
+        final Flag modelFlag = new Flag(flag);
+        return modelFlag;
+    }
+
+    private Address getAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -101,9 +185,60 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        return modelAddress;
+    }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+    private Email getEmail() throws IllegalValueException {
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelEmail = new Email(email);
+        return modelEmail;
+    }
+
+    private Phone getPhone() throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelPhone = new Phone(phone);
+        return modelPhone;
+    }
+
+    private Name getName() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+        return modelName;
+    }
+
+    private ScheduledMeeting parseScheduledMeeting() throws IllegalValueException {
+        ScheduledMeeting meeting;
+        String[] meetingSplit = scheduledMeeting.split(" ");
+        String meetingDate = meetingSplit[0];
+        String meetingTime = meetingSplit[1];
+        if (!MeetingDate.isValidDate(meetingDate)) {
+            throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        try {
+            MeetingDate.isDatePossible(meetingDate);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+        if (!MeetingTime.isValidTime(meetingTime)) {
+            throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);
+        }
+        meeting = new ScheduledMeeting(new MeetingDate(meetingDate), new MeetingTime(meetingTime));
+        return meeting;
     }
 
 }

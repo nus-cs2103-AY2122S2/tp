@@ -8,6 +8,47 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public enum CommandEnum {
+        add(AddCommand.MESSAGE_USAGE),
+        clear(ClearCommand.MESSAGE_USAGE),
+        delete(DeleteCommand.MESSAGE_USAGE),
+        edit(EditCommand.MESSAGE_USAGE),
+        exit(ExitCommand.MESSAGE_USAGE),
+        find(FindCommand.MESSAGE_USAGE),
+        flag(FlagCommand.MESSAGE_USAGE),
+        unflag(FlagCommand.MESSAGE_USAGE),
+        help(HelpCommand.MESSAGE_USAGE),
+        list(ListCommand.MESSAGE_USAGE),
+        meet(MeetCommand.MESSAGE_USAGE),
+        redo(RedoCommand.MESSAGE_USAGE),
+        sort(SortCommand.MESSAGE_USAGE),
+        undo(UndoCommand.MESSAGE_USAGE);
+
+        public static final String MESSAGE_CONSTRAINTS = "Please include proper commands to display help for.";
+
+        private final String messageUsage;
+
+        CommandEnum(String messageUsage) {
+            this.messageUsage = messageUsage;
+        }
+
+        /**
+         * Returns true if a given string is a valid command.
+         */
+        public static boolean isValidCommand(String command) {
+            for (CommandEnum commands : CommandEnum.values()) {
+                if (command.equals(commands.name())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public String getMessageUsage() {
+            return messageUsage;
+        }
+    }
+
     /**
      * Executes the command and returns the result message.
      *

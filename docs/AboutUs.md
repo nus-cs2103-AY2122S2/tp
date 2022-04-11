@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `shafik@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Vishwanth
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vishwanth2210.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vishwanth2210)]
+[[portfolio](team/vishwanth2210.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
+* Role: Developer + Team Lead
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Kuan Jian Rong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kuanjr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kuanjr)]
+[[portfolio](team/kuanjr.md)]
 
-* Role: Developer
+* Role: Developer + Deliverables and Deadlines
+
+### Mohd Shafik
+
+<img src="images/ad-nap.png" width="200px">
+
+[[github](https://github.com/AD-NAP/)]
+[[portfolio](team/ad-nap.md)]
+
+* Role: Developer + Scheduling and Tracking
+* Responsibilities: Code
+
+### Jack Ng
+
+<img src="images/j4ck990.png" width="200px">
+
+[[github](http://github.com/j4ck990)]
+[[portfolio](team/j4ck990.md)]
+
+* Role: Developer + Integration
+* Responsibilities: Data
+
+### Wee Heng
+
+<img src="images/decaxical.png" width="200px">
+
+[[github](http://github.com/decaxical)]
+[[portfolio](team/decaxical.md)]
+
+* Role: Developer + Testing
 * Responsibilities: UI

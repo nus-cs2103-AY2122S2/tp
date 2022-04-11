@@ -4,8 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREV_DATE_MET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -15,7 +20,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -36,6 +41,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PREV_DATE_MET = "2022-02-12";
+    public static final String VALID_SALARY_AMY = "4300";
+    public static final String VALID_SALARY_BOB = "3000";
+    public static final String VALID_INFO_AMY = "Salary - $4300 and interested in investing";
+    public static final String VALID_INFO_BOB = "Salary - $3000 and low risk tolerance";
+    public static final String VALID_MEETING_DATE = "2022-05-25";
+    public static final String VALID_MEETING_TIME = "1530";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +59,25 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String PREV_DATE_MET_DESC = " " + PREFIX_PREV_DATE_MET + VALID_PREV_DATE_MET;
+    public static final String SALARY_DESC_AMY = " " + PREFIX_SALARY + VALID_SALARY_AMY;
+    public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
+    public static final String INFO_DESC_AMY = " " + PREFIX_INFO + VALID_INFO_AMY;
+    public static final String INFO_DESC_BOB = " " + PREFIX_INFO + VALID_INFO_BOB;
+    public static final String MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + VALID_MEETING_DATE;
+    public static final String MEETING_TIME_DESC = " " + PREFIX_MEETING_TIME + VALID_MEETING_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PREV_DATE_MET = " " + PREFIX_PREV_DATE_MET + "12/12/2022"; //wrong date format
+    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "sixty thousand"; // Alphabets not allowed
+    public static final String INVALID_INFO = " " + PREFIX_INFO + "High risk \\n tolerance"; // '\n' not allowed in info
+    public static final String INVALID_MEETING_DATE = "25/05/2022-25";
+    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "12-12-2022"; // wrong format
+    public static final String INVALID_MEETING_TIME_DESC = " " + PREFIX_MEETING_TIME + "10:00"; // wrong format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -63,10 +88,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withSalary(VALID_SALARY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSalary(VALID_SALARY_BOB).build();
     }
 
     /**
@@ -99,21 +124,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the hustle book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        HustleBook expectedHustleBook = new HustleBook(actualModel.getHustleBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedHustleBook, actualModel.getHustleBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s hustle book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());

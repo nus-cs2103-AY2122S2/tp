@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HustleBookParser" as HustleBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -13,42 +13,54 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete John")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> HustleBookParser : parseCommand("delete John")
+activate HustleBookParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+HustleBookParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> HustleBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+HustleBookParser -> DeleteCommandParser : parse("John")
 activate DeleteCommandParser
 
+DeleteCommandParser -> Model : new Name("John")
+activate Model
+
+Model --> DeleteCommandParser : name
+deactivate Model
+
 create DeleteCommand
-DeleteCommandParser -> DeleteCommand
+DeleteCommandParser -> DeleteCommand : new DeleteCommand(name)
 activate DeleteCommand
 
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> HustleBookParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> HustleBookParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+HustleBookParser --> LogicManager : d
+deactivate HustleBookParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : getPersonListIndex(name)
+activate Model
+
+Model --> DeleteCommand : index
+deactivate Model
+
+DeleteCommand -> Model : deletePerson(index)
 activate Model
 
 Model --> DeleteCommand

@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScheduledMeeting;
 
 /**
  * The API of the Model component.
@@ -35,48 +39,70 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' hustle book file path.
      */
-    Path getAddressBookFilePath();
+    Path getHustleBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' hustle book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setHustleBookFilePath(Path hustleBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces hustle book data with the data in {@code hustleBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setHustleBook(ReadOnlyHustleBook hustleBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the HustleBook */
+    ReadOnlyHustleBook getHustleBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Undo the HustleBook to the previous state of data
+     */
+    void undoHustleBook();
+
+    /**
+     * Redo the HustleBook data
+     */
+    void redoHustleBook();
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the hustle book.
      */
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a meeting clashes with existing ones in the hustle book.
+     * @param scheduledMeeting Meeting to be scheduled.
+     * @return true if meeting clashes.
+     */
+    boolean hasSameMeeting(ScheduledMeeting scheduledMeeting);
+
+    /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the hustle book.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the hustle book.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the hustle book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the hustle book.
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Sorts the person list.
+     */
+    void sortPersonListBy(Comparator<Person> sortComparator);
+
+    /** Returns an unmodifiable view of the filtered person list. */
     ObservableList<Person> getFilteredPersonList();
 
     /**
@@ -84,4 +110,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the index of a specified person in the filtered person list.
+     */
+    Index getPersonListIndex(Name name);
 }
