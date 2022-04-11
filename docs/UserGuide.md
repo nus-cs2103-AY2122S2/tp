@@ -88,7 +88,7 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Woofie`.
 
 * Items in square brackets are optional.<br>
-  e.g. `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Sheppard` or as `n/Woofie`.
+  e.g. `[n/NAME] [t/BREED]` can be used as `n/Woofie t/German Shepherd` or as `n/Woofie`.
 
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `NAME_OF_PET [KEYWORD]…​` can be used as `Woofie`, `Woofie Poofie`, `Woofie Poofie Zoofie` etc.
@@ -98,7 +98,7 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `p/91234567 p/81234567`, only `p/81234567` will be taken.
 
 * However, for the breed parameter, users will only be able to key in one breed.
   e.g. if you specify `t/Golden t/Retriever`, an error message will be shown.
@@ -153,13 +153,13 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 
 * When editing `[t/BREED]`, the existing breed of the pet will be removed.
 * As there is only one breed for each pet, you may only edit *that* breed.
-* Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
-  by "German Sheppard" instead.
+* Following from the previous e.g., if you key in `edit 1 t/German Shepherd`, Woofie's "Bulldog" breed will be replaced
+  by "German Shepherd" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name from
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Shepherd` will change the owner's name from
   'Alice Tan' to 'Pauline Tan' and the breed of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
