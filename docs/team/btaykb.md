@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Refactor Edit command and its associated test classes to
-not allow modules to be edited. [(PR #48)](https://github.com/AY2122S2-CS2103T-T13-4/tp/commit/1aa81e2c5590653463a84a972c678f447c979a29)
+not allow modules to be edited. [(PR #48)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/48)
   * Renamed `Tag` field to `Module` to better fit the context of the project. [(PR #65)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/65)
   * Update the deletion of a `Comment` to be more simplified and easy for users. [(PR #104)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/104)
 
