@@ -14,15 +14,15 @@ title: Developer Guide
 * Plot Commands
   * [Pie Chart Code](https://docs.oracle.com/javafx/2/charts/pie-chart.htm)
   * [Bar Chart Code](https://docs.oracle.com/javafx/2/charts/line-chart.htm)
-  * [Bar Chart FXML Code](https://github.com/AY2021S1-CS2103T-T09-2/CalorieGraph.fxml)
+  * [Bar Chart FXML Code](https://github.com/AY2021S1-CS2103T-T09-2/tp/blob/master/src/main/resources/view/CalorieGraph.fxml)
 
 * Toggling Tabs
   * Ui for side tabs was reused from [this team's side tab](https://github.com/AY2122S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml) with minor modifications
   * Code behind logic for determining which tabs was clicked on was reused from [stackoverflow](https://stackoverflow.com/questions/49097747/javafx-determining-which-label-has-been-clicked) with minor modifications
 
 * User Guide
-  * Section 3.2.1 was reused from [this team's about section](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#3-about) 
-  * Section 3.2.3 was adapted from [this team's about section](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#3-about)
+  * Section 3.2.1 was reused from [this team's UG](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html) 
+  * Section 3.2.3 was adapted from [this team's UG](https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html)
   * Section 3.2.4's table was reused from [this team's UG](https://ay2021s1-cs2103t-w13-3.github.io/tp/UserGuide.html) with minor modifications
     
 * Developer Guide
@@ -1001,10 +1001,10 @@ NOTE: Make sure to use `listc` between test cases.
 #### Editing a service
 
   1. Test case: `addb c/1 sev/1 st/10-10-2022 10:30` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
-     Expected:Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
+     Expected: Edits the name and duration of the 1st service to be Dark Eye Circle Treatment and 60 respectively. The booking details would also have changed accordingly.
  
   1. Test case: `edits -1 n/Dark Eye Circle Treatment d/30`<br>
-     Expected:Invalid command format error
+     Expected: Invalid command format error
      
   1. Test case: `edits 50 n/Dark Eye Circle Treatment d/30`<br>
      Expected: Invalid index error 
@@ -1014,12 +1014,12 @@ NOTE: Make sure to use `listc` between test cases.
  NOTE: Make sure to use `lists` between the tests
  
   1. Test case: `finds n/Facial dr/120`<br>
-     Expected:  Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
+     Expected: Returns services that contain the word 'Facial'. The list will not return services with name containing 'Facial' and duration of 120 minutes.
      
 #### Deleting service(s)
  
    1. Test case: `deletes -1`<br>
-     Expected:  Invalid command error message.
+     Expected: Invalid command error message.
   
   1. Test case: `deletes 100,1`<br>
      Expected: Invalid index message.
@@ -1032,30 +1032,30 @@ NOTE: Make sure to use `listc` between test cases.
      Expected: Invalid command format message.
      
   1. Test case: Any of the fields have invalid format, example: `addb c/1 sev/1 st/10-10-2022 10:333`<br>
-     Expected:  Invalid format error message for the field that had a mistake.
+     Expected: Invalid format error message for the field that had a mistake.
 
 #### Editing a booking 
   
   1. Test case: `editb 1 sev/3 f/Excellent Customer Service ` then `edits 1 n/Dark Eye Circle Treatment d/30`<br>
-     Expected:Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
+     Expected: Edits the 1st booking's service to the service at Index 2 and edit its feedback to Excellent Customer Service.
  
   1. Test case: `editb -1 sev/1 f/Excellent Customer Service` or  `editb 100 sev/1 f/Excellent Customer Service`<br>
-     Expected:Invalid index error
+     Expected: Invalid index error
      
   1. Test case: Invalid format for one of the parameters, example: `editb 2 st/29-02-2001 10:30`<br> 
-     Expected:Invalid format error based on the parameter
+     Expected: Invalid format error based on the parameter
     
 #### Finding bookings
 
 NOTE: Make sure to use `listb` between the test cases.
 
   1. Test case: `findb f/bad st/10-04-2022` <br>
-     Expected:Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
+     Expected: Returns feedback saying "Bad service" and "Service was bad", as well as bookings on the date 10-04-2022.
  
 #### Deleting booking(s)
 
    1. Test case: `deleteb 1,2,3`<br>
-     Expected:Removes the 1st, 2nd and 3rd booking from the application.
+     Expected: Removes the 1st, 2nd and 3rd booking from the application.
  
    1. Test case: `deleteb -1` or `deleteb 100`<br>
      Expected: Invalid format or invalid index error message.
@@ -1064,7 +1064,7 @@ NOTE: Make sure to use `listb` between the test cases.
 ### Statistics Commands
 
    1. Test case: `plotAll`<br>
-     Expected:Plots 6 charts.
+     Expected: Plots 6 charts.
     
    1. Test case: `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/10-04-2022 al/Test sep/Test sep/Test stp/Test h/Test s/Test` then `plotAll` <br>
-     Expected:Plots 6 charts with updated information. Accuracy can be checked by comparing charts before and after the new customer is added.
+     Expected: Plots 6 charts with updated information. Accuracy can be checked by comparing charts before and after the new customer is added.
