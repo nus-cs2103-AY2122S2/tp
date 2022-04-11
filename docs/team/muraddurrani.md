@@ -55,23 +55,27 @@ meetings.
 ```markdown
 ### 5.4 View feature
 
-The `view` feature allows the user to view the contact details of a specified person in the address book, as well as 
-meetings the user has with that person. The command is only available from the Home Page, and is facilitated by the
-`HomePageParser`, `ViewCommandParser`, and `ViewCommand`. Additionally, it implements the following operation:
+The `view` feature allows the user to view the contact details of a specified person in the
+address book, as well as meetings the user has with that person. The command is only
+available from the Home Page, and is facilitated by the`HomePageParser`,
+`ViewCommandParser`, and `ViewCommand`. Additionally, it implements the following operation:
 
-* `MainWindow#LoadContactDetailsPage(Person personToDisplay)` — Constructs a `ContactDetailsPanel` and a
-  `ContactMeetingsPanel` for the specified `personToDisplay`,and displays them in the `MainWindow`.
+* `MainWindow#LoadContactDetailsPage(Person personToDisplay)` — Constructs a
+  `ContactDetailsPanel` and a `ContactMeetingsPanel` for the specified `personToDisplay`,
+  and displays them in the `MainWindow`.
 
 Given below is an example usage scenario and how the _view_ mechanism behaves at each step.
 
-Step 1. From the Home Page, the user executes `view 2` to view the contact details of the second person in the address
-book. A `ViewCommand` is constructed with the index of the person to de displayed.
+Step 1. From the Home Page, the user executes `view 2` to view the contact details of the
+second person in the addressbook. A `ViewCommand` is constructed with the index of the person
+to de displayed.
 
-Step 2. The `ViewCommand` is executed, and the person that corresponds to the provided index is returned to `MainWindow`
-inside a `CommandResult`.
+Step 2. The `ViewCommand` is executed, and the person that corresponds to the provided index
+is returned to `MainWindow` inside a `CommandResult`.
 
-Step 3. `MainWindow#loadContactDetailsPage(Person personToDisplay)` is executed with the specified person passed as
-argument, which constructs and displays the respective `ContactDetailsPanel` and `ContactMeetingsPanel`.
+Step 3. `MainWindow#loadContactDetailsPage(Person personToDisplay)` is executed with the
+specified person passed as argument, which constructs and displays the respective
+`ContactDetailsPanel` and `ContactMeetingsPanel`.
 
 The following sequence diagram shows how the _view_ feature works:
 
@@ -82,17 +86,18 @@ The following sequence diagram shows how the _view_ feature works:
 * **Contributions to the User Guide (Extracts)**:
 
 ```markdown
-Upon launching Reache, you will see the Main Window, which is depicted below. The Main Window displays your entire contact
-list as well as all upcoming meetings you have planned.
+Upon launching Reache, you will see the Main Window, which is depicted below. The Main
+Window displays your entire contact list as well as all upcoming meetings you have planned.
 
 ![Main Window](/images/MainWindow.png)
 
 The Main Window contains the following elements:
 1. **Menu Bar**: Contains Reache's options and help.
 2. **Command Box**: A dialog box from which you can type commands to use Reache.
-3. **Result Display**: When you use the Command Box to enter a command, Reache will show the result of that command here.
-4. **Contact List**: A list of all your contacts, sorted alphabetically. Each contact has a corresponding index number, 
-   which you can use to refer to that contact in commands.
-5. **Meeting List**: A list of all your upcoming meetings, sorted chronologically. As with contacts, each meeting has a 
-   corresponding index number for use in commands.
+3. **Result Display**: When you use the Command Box to enter a command, Reache will show
+   the result of that command here.
+4. **Contact List**: A list of all your contacts, sorted alphabetically. Each contact has
+   a corresponding index number, which you can use to refer to that contact in commands.
+5. **Meeting List**: A list of all your upcoming meetings, sorted chronologically. As with
+   contacts, each meeting has a corresponding index number for use in commands.
 ```
