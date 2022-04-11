@@ -78,8 +78,7 @@ Parameters | Information that is supplied by the user.                          
 Execute | The process by which Abπ reads the instructions written by user and acts on it.                                                                                                                          |
 String | A programming terminology that describes an ordered sequence of characters.                                                                                                                              | 
 Prefix | Part of the user input that allows the user to specify certain attributes of a person. <br > Type of prefix:  `n/`, `p/`, `a/`, `e/`, `m/`, `c/` and `t/`.                                               
-Prefix argument  | The input specified by the user after the prefix in the command box.                                                                                                                                     
-Attribute constraints | Constraints that was set by Abπ that specifies how the format of the prefix argument should look like. For eg., Name should not be blank, and its length should be between 1 and 800 (including spaces). | 
+Prefix argument  | The input specified by the user after the prefix in the command box.
 
 <br>
 
@@ -102,7 +101,7 @@ Symbol | What it means |
 
 ## 2. Quick start
 ### 2.1. Installation
-1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed in your computer.
+1. Ensure you have [Java JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or above installed on your computer.
    
 2. Download the latest Abpi.jar from [here](https://github.com/AY2122S2-CS2103T-T17-4/tp/releases).
    
@@ -208,11 +207,12 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CONTACTED DATE] [m/MEMO] [t/TAG]…​`
 
 * Contacted date, memo, and tag are optional.
-* If contacted date is specified, it must follow the [specified format](#date).
+* If the contacted date is specified, it must follow the [specified format](#date).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags, including 0.
 </div>
+
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -222,6 +222,8 @@ Examples:
 * `add n/Alice Eng p/98765432 e/aliceeng@example.com a/Alice street`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/01-01-2020 m/Avid hiker`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 m/Partner in crime t/criminal`
+
+<div style="page-break-after: always;"></div>
 
 Visual Example:
 
@@ -249,7 +251,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CONTACTED DATE] 
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * A person’s tags or memo can be removed by typing `t/` or `m/` respectively without specifying text after it.
 * A person's contacted date can be edited to "Not contacted" by typing `c/` without specifying a date after it.
-* If contacted date is specified, it must follow the [specified format](#date).
+* If the contacted date is specified, it must follow the [specified format](#date).
+
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Abπ helps to manage duplicates, refer to [4.9. Policy on duplicates](#49-policy-on-duplicates)
@@ -262,6 +265,8 @@ Examples:
 * `edit 2 m/Avid hiker` edits the memo of the 2nd person to be `Avid hiker`.
 * `edit 2 c/01-01-2020` edits the contacted date of the 2nd person to be "Last contacted on 01-01-2020".
 * `edit 2 m/ c/` edits the memo of the 2nd person to be empty and the contacted date to be "Not contacted".
+
+<div style="page-break-after: always;"></div>
 
 Visual Example:
 
@@ -285,7 +290,7 @@ Appends one or more tags to a specified person in the address book.
 Format: `addtag INDEX t/TAG…`
 
 * Appends one or more tags to the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
-* If any of the tag to be appended already exists in the person's tag list, the command will be rejected.
+* If any of the tags to be appended already exists in the person's tag list, the command will be rejected.
 
 Examples:
 * `addtag 1 t/friends` appends the tag "friends" to the 1st person in the displayed person list.
@@ -308,7 +313,7 @@ Deletes one or more tags of a specified person in the address book.
 Format: `deletetag INDEX t/TAG…`
 
 * Deletes one or more tags of the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
-* If any of the tag to be deleted does not exist, the command will be rejected.
+* If any of the tags to be deleted does not exist, the command will be rejected.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To overwrite all existing tags or remove all tags in one go, refer to [4.1.2. Editing a person](#412-editing-a-person-edit).
@@ -350,18 +355,19 @@ Examples:
 #### 4.3.2. Scrubbing address book: `scrub`
 
 * Similar to [delete](#431-deleting-a-person-delete) as it cleans up the address book of unwanted contacts. 
-* Allows multiple person to be deleted by specifying the criteria to delete a person by through the use of prefixes.
+* Allows multiple persons to be deleted by specifying the criteria to delete a person through the use of prefixes.
 * Abπ would use the specified criteria and scan through the person list and delete anybody that matches the criteria.
-* Duplicated prefix arguments are treated as the same criteria to delete a person by. Examples of duplicated prefix arguments include `scrub t/family t/family`.
+* Duplicated prefix arguments are treated as the same criteria to delete a person. Examples of duplicated prefix arguments include `scrub t/family t/family`.
 
 Format: `scrub [p/PHONE] [e/EMAIL DOMAIN] [t/TAG]…​`
-* Delete contacts that matches any of the phone number, email domain or tag specified from the command.
+* Delete contacts that match any of the phone number, email domain or tag specified from the command.
 * At least one parameter must be present.
 * For phone number and tags, an exact match criteria is employed, where `scrub t/family` would only scrub contacts that have the tag "family".
 * For email, an exact match criteria is employed for the email domain. Look at the information box below to learn more about what is an email domain.
 * Note that for phone numbers, white spaces are ignored. That is, ABπ sees "+65 90400204" and "+6590400204" as equivalent numbers. 
 * The matching criteria is case-insensitive.
-* Prefix arguments must conform to the attribute constraints.  
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Email domain is defined to be the string that is after the "@" symbol (inclusive). For example, a valid scrub command that removes contacts based on their email domain is: `scrub e/@gmail` or `scrub e/@gmail.com`. Note that `scrub e/tester@gmail.com` would result in an invalid command format error since "e/" only takes in a valid domain name. 
@@ -393,7 +399,6 @@ Upon executing the command `scrub t/friends`:
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
 
 #### 4.3.3. Clearing all entries: `clear`
 
@@ -403,7 +408,9 @@ Format: `clear`
 
 [Back to Table of Contents](#table-of-contents)
 
-<br>
+
+<div style="page-break-after: always;"></div>
+
 
 ### 4.4. Displaying person details
 
@@ -413,7 +420,7 @@ Displays the detailed description of the selected person on the right side of th
 
 Format: `view INDEX`
 
-* Displays detailed information of person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
+* Displays detailed information of the person at the specified `INDEX`. `INDEX` must follow the [specified format](#index).
 
 Examples:
 * `list` followed by `view 2` displays the 2nd person in the address book.
@@ -428,7 +435,7 @@ Upon executing the command `view 3`:
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. As an example, when you add a new person, Abπ will automatically display the newly added person without the need of a `view` command. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
+:information_source: **Note:** Abπ will try to predict which person you're trying to view as you execute other commands. For more information on the predictive behavior, check out [4.10.4. Predictive viewing](#4104-predictive-viewing).
 
 </div>
 
@@ -445,14 +452,14 @@ Upon executing the command `view 3`:
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MEMO] [c/Days] [t/TAG]…​`
 
-Below is a table that shows the different matching criteria that is present in the app:
+Below is a table that shows the different matching criteria that are present in the app:
 
-| Matching criteria                | Attributes that uses the criteria  | Prefix Argument Constraints                           | Description                                                                                                                                                                                                                                                                                                                               | 
-|----------------------------------|------------------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Partial string matching          | Name, Phone number, Email, Address | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive partial match between two strings where it will check if the prefix argument partially matches with the compared string. Note that the order of character matters and this includes the whitespace character. For phone numbers, white spaces are ignored. That is, `find p/+65 9040` would match with "+659040". |  
-| Exact string matching            | Tags                               | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive exact match between two strings where it will check if the prefix argument is equivalent to the compared string.                                                                                                                                                                                                  |
-| Contacted Date matching criteria | Contacted Date                     | Prefix argument must be between 0 to 1000 characters. | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all.                        |
-| Memo matching criteria           | Memo                               | Prefix argument must be between 0 to 1000 characters. | Tests if any of the word in the person's memo partially matches to the user's memo prefix argument. If an empty argument is specified, i.e "m/",the predicate matches with any person that has no memo.                                                                                                                                   |   
+| Matching criteria                | Attributes that uses the criteria     | Prefix Argument Constraints                           | Description                                                                                                                                                                                                                                                                                                                               | 
+|----------------------------------|---------------------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Partial string matching          | Name, Phone number, Email and Address | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive partial match between two strings where it will check if the prefix argument partially matches with the compared string. Note that the order of character matters and this includes the whitespace character. For phone numbers, white spaces are ignored. That is, `find p/+65 9040` would match with "+659040". |  
+| Exact string matching            | Tags                                  | Prefix argument must be between 1 to 1000 characters. | Does a case-insensitive exact match between two strings where it will check if the prefix argument is equivalent to the compared string.                                                                                                                                                                                                  |
+| Contacted Date matching criteria | Contacted Date                        | Prefix argument must be between 0 to 1000 characters. | When given a valid positive integer "n", the criteria selects people that had not been contacted for at least n days (relative to the current day). Note that when no positive integer is specified and the user only types in `find c/`, the criteria would select only people who had not been contacted at all.                        |
+| Memo matching criteria           | Memo                                  | Prefix argument must be between 0 to 1000 characters. | Tests if any of the word in the person's memo partially matches to the user's memo prefix argument. If an empty argument is specified, i.e `find m/`,the predicate matches with any person that has no memo.                                                                                                                               |   
 
 Examples:
 * `find n/Alex` would match with "alexa".
@@ -517,7 +524,7 @@ Examples:
 
 #### 4.7.1. Undoing commands: `undo`
 
-Undo previous commands that modified data, which includes: <br> 
+Undo previous commands that modified data, which include: <br> 
 `add`, `edit`, `delete`, `clear`, `scrub`, `addtag` and `deletetag`.
 
 Format: `undo`
@@ -561,9 +568,9 @@ By pressing the `UP_ARROW_KEY` button or the `DOWN_ARROW_KEY` button on your key
 
 Examples:
 * If the recent commands are `find n/Anny` `find n/Bob` `find n/Cathy`.
-* Pressing `UP_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
-* Then pressing `UP_ARROW_KEY` again will fill-in the textbox with "find n/Bob".
-* Then pressing `DOWN_ARROW_KEY` once will fill-in the textbox with "find n/Cathy".
+* Pressing `UP_ARROW_KEY` once will fill in the text box with "find n/Cathy".
+* Then pressing `UP_ARROW_KEY` again will fill in the text box with "find n/Bob".
+* Then pressing `DOWN_ARROW_KEY` once will fill in the text box with "find n/Cathy".
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -596,8 +603,8 @@ Format: `exit`
 ### 4.9. Policy on duplicates
 
 #### 4.9.1. Ignoring case difference
-Abπ ignores case difference for the person attributes name, email, address, memo and tag to provide a more seamless experience that matches the real world.
-* Attributes that only differs in case sensitivity is considered as identical.
+Abπ ignores the case differences for the person attributes: name, email, address, memo, and tag to provide a more seamless experience that matches the real world.
+* Attributes that only differ in case sensitivity is considered identical.
 
 Examples:
 
@@ -619,10 +626,12 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 #### 4.9.3. Preventing duplicate contacts
-Abπ helps to manage duplicates by preventing duplicate contacts of identical name, phone and email when using the `add` and `edit` commands.
+Abπ helps to manage duplicates by preventing duplicate contacts with identical name, phone and email when using the `add` and `edit` commands.
 
 * Each contact in Abπ is uniquely identified by their name, phone and email, that is, a contact is only considered a duplicate if there already exists a contact in Abπ with the same name, phone and email.
 * The reason why duplicate is considered as such is to provide greater flexibility as different individuals may share the same name, or phone, or even email.
@@ -648,6 +657,8 @@ Abπ data are saved in the hard disk automatically after any command that change
 
 [Back to Table of Contents](#table-of-contents)
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 #### 4.10.2. Editing the data file
@@ -655,7 +666,7 @@ Abπ data are saved in the hard disk automatically after any command that change
 Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
- If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+ If your changes to the data file cause its format to become invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
 [Back to Table of Contents](#table-of-contents)
@@ -664,7 +675,7 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 
 #### 4.10.3. Backing up the data file
 
-* Everytime the original data file is corrupted, Abπ would back up your data and store it in "[Abπ location]/data/" as "backup_[DD-MM-YY HH-MM-SS].json". The backup file format will be similar to the backup file shown in the image below.
+* Every time the original data file is corrupted, Abπ would back up your data and store it in "[Abπ location]/data/" as "backup_[DD-MM-YY HH-MM-SS].json". The backup file format will be similar to the backup file shown in the image below.
 
 ![backupFileImage.png](images/backupFileImage.png)
 
@@ -680,6 +691,8 @@ Abπ data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 [Back to Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
+
+<br>
 
 #### 4.10.4. Predictive viewing
 
@@ -709,16 +722,16 @@ Hence, there is no need to worry about the display containing outdated informati
 There is no need to save manually. Abπ automatically saves the data after any command that changes the data.
 
 **Where does Abπ store its data?**<br>
-Abπ data is stored in data folder located at Abπ's home directory, the data file name is "addressbook.json". Specifically "[_Abπ location_]/data/addressbook.json".
+Abπ data is stored in the data folder located at Abπ's home directory, the data file name is "addressbook.json". Specifically "[_Abπ location_]/data/addressbook.json".
 
 **How do I transfer my data to another computer?**<br>
 Simply overwrite the "addressbook.json" data file with your previous "addressbook.json" data file.
 
 **What happens if I executed a command unintentionally?**<br>
-Fret not, Abπ supports the `undo` and `redo` commands, which follows modern application undo and redo functionality.
+Fret not, Abπ supports the `undo` and `redo` commands, which follow modern application undo and redo functionality.
 
 **Why is my data gone?**<br>
-When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named as "backup_[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/". For more information on how to restore your backup data, take a look [here](#4103-backing-up-the-data-file).
+When the data file is corrupted, an empty address book will be shown. Do not worry, Abπ has made a backup of your previous data file, named "backup_[_DD-MM-YY HH-MM-SS_].json", located at "[_Abπ location_]/data/". For more information on how to restore your backup data, take a look [here](#4103-backing-up-the-data-file).
 
 [Back to Table of Contents](#table-of-contents)
 

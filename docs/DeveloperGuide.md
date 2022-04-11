@@ -173,6 +173,7 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
+<div style="page-break-after: always;"></div>
 
 The `Model` component,
 

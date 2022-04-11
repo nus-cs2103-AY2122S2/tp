@@ -16,18 +16,18 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * **Features and Enhancement implemented**
   * Enhancement of the FindCommand (Pull requests [\#55](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/55), [\#118](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/118), [\#268](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/268), [\#192](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/192))
-    * What it does: Allows user to search for a contact in Abπ by using any of the attribute that is available to a person. 
-    * Justification: This feature enhances the original find command by increasing the scope of the search. Previous find command only allows users to search a contact by their name but with the newly enhanced find command, users are now able to search contacts based on a combination of attributes (Name, Phone number, Email, Address, Memo, Contacted Date and Tag).     
-    * Highlights: To develop the find command, we identified the potential problems users might face when using the command and from there, try to come up with an appropriate design that would solve their problems. However, one problem encountered when adopting this approach of development is that it is impossible to find a solution that would solve all the potential problems the user might face. Although some implementations might solve a specific problem, they might also give rise to other problems. Hence, there are always trade-offs to consider when a certain implementation design is proposed.
+    * What it does: Allows the user to search for a contact in Abπ by using any of the attributes that are available to a person. 
+    * Justification: This feature enhances the original find command by increasing the scope of the search. The previous find command only allows users to search a contact by their name but with the newly enhanced find command, users are now able to search contacts based on a combination of attributes (Name, Phone number, Email, Address, Memo, Contacted Date and Tag).     
+    * Highlights: To develop the find command, we identified the potential problems users might face when using the command and from there, try to come up with an appropriate design that would solve their problems. However, one problem encountered when adopting this approach to development is that it is impossible to find a solution that would solve all the potential problems the user might face. Although some implementations might solve a specific problem, they might also give rise to other problems. Hence, there are always trade-offs to consider when a certain implementation design is proposed.
 
   <div style="page-break-after: always;"></div>
 
   <br>
 
   * Scrub Command (Pull requests [\#130](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/130), [\#139](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/139), [\#177](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/177), [\#182](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/182))
-    * What it does: Allows users to delete multiple person from the address book by specifying the criteria to delete a person by through the use of prefixes.
-    * Justification: Previously, to delete a person from the address book, the user would have to manually delete the contacts 1 by 1 through the use of the `delete` command. However, with the `scrub` command, users now have a means to quickly delete multiple person from the address book. 
-    * Highlights: For deletion of contacts, a strict matching criteria was used (exact word matching) as contact deletion is considered to be a risky operation. Any unintended removal of contacts would be a detrimental feature flaw for the application. Hence, an exact word match criteria is employed where `scrub p/90400204` would only scrub contacts that has the phone number "90400204". 
+    * What it does: Allows the users to delete multiple contacts from the address book by specifying the criteria to delete a person through the use of prefixes.
+    * Justification: Previously, to delete a person from the address book, the user would have to manually delete the contacts 1 by 1 through the use of the `delete` command. However, with the `scrub` command, users now have a means to quickly delete multiple contacts from the address book. 
+    * Highlights: For deletion of contacts, a strict matching criteria was used (exact word matching) as contact deletion is considered to be a risky operation. Any unintended removal of contacts would be a detrimental feature flaw for the application. Hence, an exact word match criteria is employed where `scrub p/90400204` would only scrub contacts that have the phone number "90400204". 
 
   
   * AddTag command (Pull requests [\#255](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/255), [\#171](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/171))
@@ -42,7 +42,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   
   * Backup system (Pull requests [\#147](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/147), [\#246](https://github.com/AY2122S2-CS2103T-T17-4/tp/pull/246))
     * What it does: Backups the Abπ data so that whenever the "addressbook.json" file is corrupted, users would not lose their existing data of Abπ.
-    * Justification: Everytime the original data file is corrupted, Abπ would load up an empty addressbook and if a user keys in a valid command, the empty data would be saved to the "addressbook.json" file. With that, the original data file of the Abπ is lost and this is a major feature flaw for the application. Hence, a backup system is created.
+    * Justification: Every time the original data file is corrupted, Abπ would load up an empty address book and if a user keys in a valid command, the empty data would be saved to the "addressbook.json" file. With that, the original data file of the Abπ is lost and this is a major feature flaw for the application. Hence, a backup system is created.
     
 
 <div style="page-break-after: always;"></div>
