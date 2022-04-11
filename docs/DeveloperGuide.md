@@ -2,8 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -587,7 +586,7 @@ Having a seperate buyer and seller list means we need to seperate the find comma
 Examples:
 - `list-b` lists all current buyers
 - `list-s` lists all current sellers
--
+
 #### Result:
 returns an unfiltered list of sellers or buyers
 
