@@ -24,7 +24,7 @@ public class ViewCommandParser {
 
         if (arePrefixesPresent(argMultimap, PREFIX_NRIC)) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            CommandManager.setViewCommandType(CommandType.SUMMARY);
+            CommandManager.setCurrentViewType(CommandType.SUMMARY);
         }
 
         return new ViewCommand(nric);

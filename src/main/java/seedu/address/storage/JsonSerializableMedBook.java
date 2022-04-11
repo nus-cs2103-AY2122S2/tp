@@ -22,7 +22,7 @@ import seedu.address.model.testresult.TestResult;
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableMedBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact list contains duplicate person(s).";
@@ -31,7 +31,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "Consultation list contains duplicate consultation(s).";
     public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "Prescription list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TEST_RESULT = "Test result list contains duplicate test(s).";
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedPatient> persons = new ArrayList<>();
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedMedical> medicals = new ArrayList<>();
     private final List<JsonAdaptedConsultation> consultations = new ArrayList<>();
@@ -43,12 +43,12 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons, contacts and test results.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                                       @JsonProperty("medicals") List<JsonAdaptedMedical> medicals,
-                                       @JsonProperty("consultations") List<JsonAdaptedConsultation> consultations,
-                                       @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions,
-                                       @JsonProperty("testResults") List<JsonAdaptedTestResult> testResults) {
+    public JsonSerializableMedBook(@JsonProperty("persons") List<JsonAdaptedPatient> persons,
+                                   @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
+                                   @JsonProperty("medicals") List<JsonAdaptedMedical> medicals,
+                                   @JsonProperty("consultations") List<JsonAdaptedConsultation> consultations,
+                                   @JsonProperty("prescriptions") List<JsonAdaptedPrescription> prescriptions,
+                                   @JsonProperty("testResults") List<JsonAdaptedTestResult> testResults) {
         this.persons.addAll(persons);
         if (!contacts.isEmpty()) {
             this.contacts.addAll(contacts);
@@ -72,8 +72,8 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyMedBook source) {
-        persons.addAll(source.getPatientList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+    public JsonSerializableMedBook(ReadOnlyMedBook source) {
+        persons.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         medicals.addAll(source.getMedicalList().stream().map(JsonAdaptedMedical::new).collect(Collectors.toList()));
         prescriptions.addAll(source.getPrescriptionList().stream().map(JsonAdaptedPrescription::new)
@@ -91,8 +91,8 @@ class JsonSerializableAddressBook {
      */
     public MedBook toModelType() throws IllegalValueException {
         MedBook medBook = new MedBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Patient patient = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedPatient jsonAdaptedPatient : persons) {
+            Patient patient = jsonAdaptedPatient.toModelType();
             if (medBook.hasPatient(patient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

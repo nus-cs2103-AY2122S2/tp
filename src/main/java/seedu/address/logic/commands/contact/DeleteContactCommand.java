@@ -45,7 +45,7 @@ public class DeleteContactCommand extends Command {
 
         // Display patient screen when current view list is empty
         if (lastShownList.isEmpty()) {
-            CommandManager.setViewCommandType(CommandType.DEFAULT);
+            CommandManager.setCurrentViewType(CommandType.DEFAULT);
             model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
             return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete),
                     CommandType.DEFAULT);

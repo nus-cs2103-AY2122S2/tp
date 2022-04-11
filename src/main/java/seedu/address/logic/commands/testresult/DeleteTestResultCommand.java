@@ -47,7 +47,7 @@ public class DeleteTestResultCommand extends Command {
         TestResult testResultToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTestResult(testResultToDelete);
         if (lastShownList.isEmpty()) {
-            CommandManager.setViewCommandType(CommandType.DEFAULT);
+            CommandManager.setCurrentViewType(CommandType.DEFAULT);
             model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
             return new CommandResult(String.format(MESSAGE_DELETE_TEST_RESULT_SUCCESS, testResultToDelete),
                     CommandType.DEFAULT);

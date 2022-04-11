@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MedBookParser" as MedBookParser LOGIC_COLOR
+participant "CommandManager" as CommandManager LOGIC_COLOR
+participant ":FindTestResultCommandParser" as FindTestResultCommandParser LOGIC_COLOR
+participant "d:FindTestResultCommand" as FindTestResultCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("find X-Ray")
+activate LogicManager
+
+LogicManager -> MedBookParser : parseCommand("find X-Ray")
+activate MedBookParser
+
+MedBookParser -> CommandManager : parseViewCommandType("find X-Ray")
+activate CommandManager
+
+create FindTestResultCommandParser
+CommandManager -> FindTestResultCommandParser : parse("find X-Ray")
+activate FindTestResultCommandParser
+
+create FindTestResultCommand
+FindTestResultCommandParser -> FindTestResultCommand
+activate FindTestResultCommand
+
+FindTestResultCommand --> FindTestResultCommandParser : d
+deactivate FindTestResultCommand
+
+FindTestResultCommandParser --> CommandManager : d
+deactivate FindTestResultCommandParser
+FindTestResultCommandParser -[hidden]-> CommandManager
+destroy FindTestResultCommandParser
+
+CommandManager --> MedBookParser : d
+deactivate CommandManager
+
+MedBookParser --> LogicManager : d
+deactivate MedBookParser
+
+LogicManager -> FindTestResultCommand : execute()
+activate FindTestResultCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
