@@ -68,14 +68,9 @@ title: uMessage User Guide
 --------------------------------------------------------------------------------------------------------------------
 # Managing Contacts
 
-<<<<<<< HEAD
-The contacts are listed alphabetically. The header displays the size of the current contact list in the brackets. <br>
-The contacts list is navigable using the arrow keys.
-=======
 The contacts are listed alphabetically. The contacts list is navigable using the arrow keys.
 
 There cannot be duplicated contacts. Two contacts are the same if both have the same name (case-sensitive).
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ## 1. Adding: `add`
 
@@ -85,27 +80,17 @@ There cannot be duplicated contacts. Two contacts are the same if both have the 
 
 **Examples:**
 
-<<<<<<< HEAD
-> `add n/John Doe p/91020111 e/JohnDoe@outlook.com d/Telegram, @johnnydoe t/friend`<br>
+> `add n/John Doe p/91020111 e/JohnDoe@outlook.com sm/Telegram, @johnnydoe t/friend`<br>
 > `add n/Betsy Crowe e/e0123456@gmail.com`<br>
-=======
-> `add n/John Doe p/91020111 e/JohnDoe@outlook.com sm/Telegram, @johnnydoe t/friend`</br>
-> `add n/Betsy Crowe e/e0123456@gmail.com`</br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 > `add n/Potter`
 
 ### 1.2 Adding new tag to a person
 
 **Format:** `add NAME t/NEWTAG` or `add INDEX t/NEWTAG`
 
-<<<<<<< HEAD
-NAME is case sensitive and must match the full name.<br>
+INDEX will be matched if it is valid. <br>
+NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
-=======
-INDEX will be matched if it is valid. </br>
-NAME is case sensitive and must match the full name. </br>
-INDEX must be a positive integer. </br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 Note that tags cannot be added to pre-installed emergency contacts.
 
@@ -118,26 +103,16 @@ Note that tags cannot be added to pre-installed emergency contacts.
 
 **Format:** `add INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `add NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}`
 
-<<<<<<< HEAD
-NAME is case sensitive and must match the full name.<br>
+INDEX will be matched if it is valid. <br>
+NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
-=======
-INDEX will be matched if it is valid. </br>
-NAME is case sensitive and must match the full name. </br>
-INDEX must be a positive integer. </br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 Note that social media cannot be added to pre-installed emergency contacts.
 
 **Examples:**
 
-<<<<<<< HEAD
-> `add John Doe d/telegram, @johndoe23`<br>
-> `add 2 d/telegram, @johndoe23`
-=======
-> `add John Doe sm/telegram, @johndoe23`</br>
+> `add John Doe sm/telegram, @johndoe23`<br>
 > `add 2 sm/telegram, @johndoe23`
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 
 
@@ -185,11 +160,7 @@ Note that pre-installed emergency contacts cannot be edited.
 
 **Examples:**
 
-<<<<<<< HEAD
-> `edit 1 n/Aaron d/Telegram, @aaron`<br>
-=======
-> `edit 1 n/Aaron sm/Telegram, @aaron`</br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
+> `edit 1 n/Aaron sm/Telegram, @aaron`<br>
 > `edit Alex n/Aaron p/52873618`
 
 ### 4.2 Editing a person's social media
@@ -246,14 +217,9 @@ Note that clicking the email and telegram fields will trigger a unique response.
 
 **Format:** `delete NAME` or `delete INDEX`
 
-<<<<<<< HEAD
+INDEX will be matched if it is valid. <br>
 NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
-=======
-INDEX will be matched if it is valid. </br>
-NAME is case sensitive and must match the full name. </br>
-INDEX must be a positive integer. </br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 Note that pre-installed emergency contacts cannot be deleted.
 
@@ -268,14 +234,9 @@ Note that pre-installed emergency contacts cannot be deleted.
 
 **Format:** `delete NAME t/TAG` `delete INDEX t/TAG`
 
-<<<<<<< HEAD
+INDEX will be matched if it is valid. <br>
 NAME is case sensitive and must match the full name. <br>
 INDEX must be a positive integer. <br>
-=======
-INDEX will be matched if it is valid. </br>
-NAME is case sensitive and must match the full name. </br>
-INDEX must be a positive integer. </br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 Note that tags of pre-installed emergency contacts cannot be deleted.
 
@@ -288,35 +249,21 @@ Note that tags of pre-installed emergency contacts cannot be deleted.
 
 **Format:** `delete NAME sm/{SOCIAL MEDIA PLATFORM}, {ID}` or `delete INDEX sm/{SOCIAL MEDIA PLATFORM}, {ID}`
 
-<<<<<<< HEAD
+INDEX will be matched if it is valid. <br>
 NAME is case sensitive and must match the full name.<br>
 INDEX must be a positive integer. <br>
-=======
-INDEX will be matched if it is valid. </br>
-NAME is case sensitive and must match the full name.</br>
-INDEX must be a positive integer. </br>
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 Note that social media of pre-installed emergency contacts cannot be deleted.
 
 **Examples:**
-<<<<<<< HEAD
-> `delete kaaviya d/Telegram, @uNivUS`<br>
-> `delete 1 d/Telegram, @uNivUS`
-=======
-> `delete kaaviya sm/Telegram, @uNivUS`</br>
+> `delete kaaviya sm/Telegram, @uNivUS`<br>
 > `delete 1 sm/Telegram, @uNivUS`
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 
 --------------------------------------------------------------------------------------------------------------------
 # Managing Meetings
 
-<<<<<<< HEAD
-The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.<br>
-=======
 The meetings in the future are listed first with ascending starting time, followed by past meetings with descending starting time.
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 There cannot be duplicated meetings. Two meetings are the same if both have the same title (case-sensitive) and same start time.
 
@@ -331,13 +278,8 @@ DURATION is in minutes and must be an integer between 1 and 10000.
 
 **Examples:**
 
-<<<<<<< HEAD
-> `add n/CS2040 PE l/www.google.com s/2022-3-20 0900 d/120 t/Alex`<br>
-> `add n/CS2103 Tutorial l/www.google.com s/2022-3-20 1200 d/60`
-=======
-> `add n/CS2040 PE l/https://www.google.com s/2022-3-20 0900 d/120 t/Alex`</br>
+> `add n/CS2040 PE l/https://www.google.com s/2022-3-20 0900 d/120 t/Alex`<br>
 > `add n/CS2103 Tutorial l/https://www.google.com s/2022-3-20 1200 d/60`
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ### 1.2 Adding new tag to a meeting
 
@@ -376,13 +318,8 @@ The order of the keywords does not matter. e.g. `2040 CS` will match `CS 2040`.
 
 **Format:** `edit INDEX [n/TITLE] [l/LINK] [s/START_TIME] [d/DURATION] [t/TAG]…`
 
-<<<<<<< HEAD
 START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.<br>
-DURATION is in minutes and must be an integer between 1 and 10000.
-=======
-START_TIME must follow the format `yyyy-M-d HHmm` (e.g. `2022-3-20 0900`) and must not be in the past.</br>
 DURATION is in minutes and must be an integer between 1 and 10000 (inclusive).
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 **Examples:**
 
@@ -414,15 +351,8 @@ Deletes tag `TAG` from a meeting specified using `TITLE` or `INDEX`.
 
 # Manage Global Tags
 
-<<<<<<< HEAD
-Global tags are tags that may or may not be associated with any contacts and/or meetings. <br>
-
-For example, adding a global tag will store that tag in the system. However, it will not be associated with any 
-contacts/meetings until it is explicitly added to them. 
-=======
 Global tags helps you organise relevant contacts and meetings together.
 <!-- Need to explain how this might be useful for the user -->
->>>>>>> cf7610ea0601d876b009109153e715788e9ab042
 
 ## 1. Adding a global tag
 
