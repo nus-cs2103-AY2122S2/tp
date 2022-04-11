@@ -7,6 +7,27 @@ title: Developer Guide
 
 This is a brownfield project that bases from the Project template [AddressBook Level 3 (AB3)](https://se-education.org/docs/templates.html) from se-education.org.
 
+# Table of contents
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [Logic Component](#logic-component)
+    - [Model Component](#model-component)
+    - [storage Component](#storage-component)
+    - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Glossary](#appendix-glossary)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Target User Profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-functional Requirements](#non-functional-requirements)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- [Appendix: Effort](#appendix-effort)
+
 # Setting up, getting started
 
 Get started by following these instructions from our [guide](https://ay2122s2-cs2103-w16-4.github.io/tp/SettingUp.html).
@@ -143,10 +164,10 @@ Step 1. The user starts the application with pre-loaded data of Persons.
 
 Step 2. Assuming there is a Person with the index number 1. User then executes `favourite 1` command to favourite the Person with index number 1 in the application. The system will create a new Person with the `Favourite` instance's value set as true. Then calls `Model#setPerson()` to set this Person to be a favourited instance of the same Person.
 
-<aside>
-💡 **Note:** Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Every newly added Person will have the default value of `False` for `Favourite` attribute, thus will never appear in the Favourites window before the `favourite` command is called on them.
+</div>
 
-</aside>
 
 Step 3. User can access the Favourites window by navigating to the menu item as shown in the diagram, which pops up a new window that contains only those Persons that have ‘Favourite’ instance's value set as True. The user can also input the command `fw` to open up the Favourites window through this CLI command.
 
@@ -203,15 +224,15 @@ The remind feature is implemented by storing a static list of Persons the user w
 
 The remind feature can be activated by typing `remind INDEX r/ReminderDetails` where `INDEX` is the `Person` the user wants to set a reminder for and `ReminderDetails` are the details of the reminder in regard to the specific client.
 
-Given below is an example usage scenarios and the behavior of the program specific to this feature.
+Given below is an example usage scenario and the behavior of the program specific to this feature.
 
-Step 1: The user launches the app. Within 5 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
+Step 1: The user launches the app. After 60 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
 
-Step 2: User executes the `remind` command by typing in `remind 1 r/arrange meeting`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` and the corresponding `Reminder` is then added to the HashMap in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched.
+Step 2: User executes the `remind` command by typing in `remind 1 r/arrange meeting`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` and the corresponding `Reminder` is then added to the HashMap in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by `MainWindow` and the `ReminderWindow` is launched.
 
-Step 3: The User will be prompted with the Reminder window, containing the Person the user just set a `Reminder` for.
+Step 3: The user will be prompted with the Reminder window, containing the `Person` the user just set a `Reminder` for.
 
-Step 4: The User can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the User of any reminders.
+Step 4: The user can continue using the app, but after a minute since the Reminder window last popped up, the Reminder window launches again to actively remind the user of any reminders.
 
 
 ## Upload Image
@@ -239,7 +260,7 @@ Step 3: User calls the `viewimage` command that `ViewImageCommandParser` parses 
 view all the `UserImage` of the `Person`.
 
 Step 4: The set of `UserImage` is then passed to `model` via `model#updateViewPerson(Set<UserImage>)`.
-The `viewImageWindow` is then launched after it retrieves the set from `model`
+The `viewImageWindow` is then launched after it retrieves the set from `model` using `logic`
 
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
@@ -293,49 +314,64 @@ For all other attributes, their original string representation is used.
 
 # Documentation, logging, testing, configuration, dev-ops
 
-This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
+This is how we do our [documentation](https://ay2122s2-cs2103-w16-4.github.io/tp/Documentation.html).
 
-This is how we do our [testing](https://se-education.org/addressbook-level3/Testing.html).
+This is how we do our [testing](https://ay2122s2-cs2103-w16-4.github.io/tp/Testing.html).
 
-This is how we do our [logging](https://se-education.org/addressbook-level3/Logging.html).
+This is how we do our [logging](https://ay2122s2-cs2103-w16-4.github.io/tp/Logging.html).
 
-This is how we do our [configurations](https://se-education.org/addressbook-level3/Configuration.html).
+This is how we do our [configurations](https://ay2122s2-cs2103-w16-4.github.io/tp/Configuration.html).
 
-This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOps.html).
+This is how we do our [DevOps](https://ay2122s2-cs2103-w16-4.github.io/tp/DevOps.html).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
+
+# Appendix: Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Requirements
 
 ## Target user profile
 
-- has a need to manage a significant number of Persons and their information (eg. contact, email, address...)
+Real estate agents who:
+- has a need to manage a significant number of clients and their information (eg. contact, email, address...)
 - prefer desktop apps over other types
 - can type fast and prefer typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
 ## Value Proposition
 
-Manage Persons faster that a typical mouse/GUI driven app.
+RealEstatePro is faster that a typical mouse/GUI driven app that helps the real estate agent to
+- Keep track of clients who are looking to buy and sell properties 
+- Organize clients to be able to easily find their information when needed
+- Buy and sell properties with greater efficiency
+
 
 ## User stories
 
 | Priority | As a ... | I want to ...                                                                                                                                                                      | So that i can...                                                                                    |
-| --- | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| High | User | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
-| High | User | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
-| High | User | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
-| High | User | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
-| High | User | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
-| High | User | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
-| High | User | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
-| High | User | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
-| High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
-| High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
-| High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
-| High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| High     | User     | Delete my client’s information on the app                                                                                                                                          | Remove this redundant information after he/she is not my client anymore                             |
+| High     | User     | To edit my clients’ information on the app                                                                                                                                         | Ensure all information of my clients are always up to date                                          |
+| High     | User     | To list out my clients’ information on the app                                                                                                                                     | View all of my clients’ information in one place                                                    |
+| High     | User     | Differentiate my clients’ on the app (e.g. buyers, sellers)                                                                                                                        | Know if a client is looking for a property to buy or is trying sell a property                      |
+| High     | User     | Add my clients’ information on the app                                                                                                                                             | Gain access to all these information in one place                                                   |
+| High     | User     | Favourite a client                                                                                                                                                                 | Separate clients based on whose information I frequent the most (favourited) and those that are not |
+| High     | User     | View favourited clients                                                                                                                                                            | Have a compact display of clients that I frequent the most                                          |
+| High     | User     | To create a preference for a client who is a buyer                                                                                                                                 | Have information of potential properties that the buyer would want to buy                           |
+| High     | User     | To add properties information of clients who are a seller                                                                                                                          | Know what kind of property my client is trying to sell so i can see if there is any suitable buyers |
+| High     | User     | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
+| High     | User     | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
+| medium   | User     | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| medium   | User     | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
+| medium   | User     | Sort the list of clients by their attributes                                                                                                                                       | Better organize my clients                                                                          |
+| medium   | User     | set reminders for things to do                                                                                                                                                     | Make sure i do not forget to do certain tasks                                                       |
+| medium   | User     | Find clients based on their information                                                                                                                                            | Easily find a particular client to get the details i need                                           |
 
 ## Use cases
 System: RealEstatePro (REP)
@@ -448,6 +484,49 @@ Actor: User
 
      Use case resumes at step 2
 
+**Use Case: Set a Reminder for a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to set a Reminder for a specific client.
+4. REP set a Reminder for the client in the system.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+  * 3a1. REP displays an error message
+
+    Use case resumes at step 2
+
+* 3b. REP detects error in details
+  * 3b1. REP displays an error message
+
+    Use case resumes at step 2
+
+**Use Case: View Reminders for clients**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients.
+2. REP shows a list of clients.
+3. User requests to view Reminders for all clients.
+4. REP shows a list of current Reminders set.
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. REP detects error in details
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
 ## Non-functional Requirements
 
 1. Should be able to work on any mainstream OS as long as it has Java 11 or above installed
@@ -456,18 +535,12 @@ Actor: User
 4. Should be able to hold up to 1000 Persons without a noticeable sluggishness in performance for typical usage.
 5. The application will not be able to prevent any data privacy violated by other programs.
 
-## Glossary
-- **Users**: Real estate agents.
-- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
-- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
-- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
-
 # Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
 </div>
 
 ## Launch and shutdown
@@ -487,9 +560,9 @@ Given below are instructions to test the app manually.
 1. Adding a new client
    1. Prerequisites: None
    2. Test Case: `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`<br>
-   Expected: A new client is created at the end of the list with a buyer tag. Details of the new client is shown in the result display.
+   Expected: A new client is created at the end of the list with a purple colored buyer tag. Details of the new client is shown in the result display.
    3. Test Case: `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`<br>
-   Expected: A new client is created at the end of the list with a seller tag. Details of the new client is shown in the result display.
+   Expected: A new client is created at the end of the list with a green colored seller tag. Details of the new client is shown in the result display.
    4. Test Case: `add n/Mary Sue`<br>
    Expected: No client is created. Error details are shown in the result display and list remains the same.
    5. Other incorrect add commands to try: `add`, `add p/999`, `...`<br>
@@ -514,7 +587,7 @@ Given below are instructions to test the app manually.
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
     2. Test case: `delete 1`<br>Expected: First client is deleted from the list. Details of the deleted contact shown in the result display. Timestamp in the status bar is updated.
     3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0) Expected: Similar to previous.
 
 ## Favouriting a client
 
@@ -588,16 +661,52 @@ Given below are instructions to test the app manually.
 ## Viewing an Image
 
 1.Uploading an Image to an existing client
-1. Prerequisites:
-   1. There must be at least a client in the list.
-   2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
-   3. client must have at least one image associated with
-2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
-3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+   1. Prerequisites:
+      1. There must be at least a client in the list.
+      2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+      3. client must have at least one image associated with
+   2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
+   3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
 
 ## Setting reminders
 
-# Effort
+1. Setting a Reminder for a client who has not had a Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   2. Test case: `remind 1 r/meet client for home viewing`
+      Expected: The first client has a Reminder set. An orange label containing the sentence "meet client for home viewing" will appear on the first client. The result display will show that the first client has a Reminder successfully set.
+   3. Test case: `remind 0 r/sign contract`
+      Expected: No client has a Reminder set. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+      Expected: Similar to previous.
+2. Editing a Reminder of a client who has an existing Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. At least one of the clients listed has to have a Reminder set.
+   2. Test case: `remind 1 r/inform client of leasing details`
+      Expected: The first client who previously had a different Reminder set, has their Reminder changed to "inform client of leasing details". The color of the Reminder label still remains as orange.
+   3. Test case: `remind 3 r/update client's phone number`
+      Expected: Unable to edit the Reminder of client, as the client does not have an existing Reminder set. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+      Expected: Similar to previous.
+3. Removing a Reminder of a client who has an existing Reminder
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. At least one of the clients listed has to have a Reminder set.
+   2. Test case: `remind 1`
+      Expected: The first client's reminder label is removed. The orange Reminder label & its contents are no longer on the client.
+   3. Test case: `remind 3 asd`
+      Expected: The Reminder of this client is not removed. Error details shown in the result display. List remains the same.
+   4. Other incorrect Remind commands to try: `remind 3 reminder/meet client for home viewing`, `remind x`, `...` (where x is larger than the list size or smaller than 0).
+
+## Opening Reminders window
+
+1. Open Reminders window by command
+   1. Test case: `rm`
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+2. Open Reminders window by UI
+   1. Test case: Click on `File` menu on the top left corner of RealEstatePro. Under the drop-down list, click on `Reminders`.
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+3. Open Reminders window by key
+   1. Test case: Press on the `F4` key on your device.
+      Expected: The Reminders window will appear as a separate window. The window will display a list of clients with their reminders, if any clients have reminders set, or the label "No Reminders set!" if no clients have any reminders set.
+
+# Appendix: Effort
 
 ## Difficulty level
 The development was of moderate difficulty due to having to understand the existing codebase and adapting it for our project. We also had trouble integrating the various features together especially the buyer and seller feature.
@@ -607,6 +716,7 @@ Challenges faced were the following:
 - Understanding and refactoring the existing AB3 code base.
 - Balancing the relationship between buyers, sellers, properties and preferences.
 - Understanding how to use JavaFX and adapting the existing JavaFX to suit our needs.
+- Integrating Java libraries such as Timer and TimerTask into the codebase.
 
 ## Effort Required
 We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work.
