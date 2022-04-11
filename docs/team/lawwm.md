@@ -17,8 +17,7 @@ Given below are my contributions to the project.
   - **What it does**: Allows the user to sort all `Person` by specified fields and specify ascending or descending order.
   - **Justification**: This feature improves the product significantly because a user can order persons based on what their needs. e.g. sort by status to track people by their status.
   - **Highlights**: This enhancement affects existing attributes of persons to be added in future. It required an in-depth analysis of design alternatives. It also required a design that made it easily extendable for fields of `Person` if more were to be added.
-  - **Credits**: Syntax inspired by SQL language. Implementation inspired by [SimpleDB](http://cs.bc.edu/~sciore/simpledb/).
-
+  - **Credits**: Syntax inspired by SQL language. 
 
 * **New Feature**: Added the ability to copy details based on specified fields. [#78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
   - **What it does**: Allows the user to copy information from an individual `Person` or all `Person`, and specify format.
