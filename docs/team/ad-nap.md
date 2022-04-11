@@ -6,7 +6,7 @@ title: Shafik's Project Portfolio Page
 ### Project: HustleBook
 
 HustleBook is a desktop app specially catered towards financial advisors for **managing client details** and **scheduling meetings efficiently** without the need to lift their hands off the keyboard.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 15 kLoC.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
