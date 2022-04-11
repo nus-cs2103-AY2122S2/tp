@@ -344,7 +344,6 @@ public class EditCommand extends Command {
             mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
 
-            // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
         }
         // Edit person
@@ -443,7 +442,6 @@ public class EditCommand extends Command {
             if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
                 ModuleCode moduleCode = editPersonDescriptor.getModCode().get();
                 String groupName = editPersonDescriptor.getGroupName().get();
-                System.out.println("entered");
                 Module modToEdit;
                 try {
                     modToEdit = model.getModuleByCode(moduleCode);
@@ -599,8 +597,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            System.out.println(groupName.isPresent());
-            System.out.println(modCode.isPresent());
+
             return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules, office)
                     || (groupName.isPresent() && modCode.isPresent());
         }
@@ -870,9 +867,7 @@ public class EditCommand extends Command {
 
 
         public void setModule(ModuleCode modcode) {
-            System.out.println(modcode.toString());
             Module module = model.getModuleByCode(modcode);
-            System.out.println(module + "here");
             this.module = module;
         }
 
@@ -905,7 +900,7 @@ public class EditCommand extends Command {
         }
 
         public void setGroupName(String name) throws ParseException {
-            if (!Group.isValidGroupName(name)) {
+            if (!Group.isValidName(name)) {
                 throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
             }
             this.name = name;
@@ -921,11 +916,8 @@ public class EditCommand extends Command {
 
 
 
-        // TODO CHANGED HERE
         public void setMeetingTimes(List<Object> ls) {
-            System.out.println(ls);
             LocalDateTime meetingTime = (LocalDateTime) ls.get(1);
-            System.out.println(meetingTime.getClass().getSimpleName());
             int idxOfMeetingTime = (int) ls.get(0);
             this.idxOfMeetingTime = idxOfMeetingTime;
             this.meetingTimes = meetingTime;

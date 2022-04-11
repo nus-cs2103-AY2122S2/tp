@@ -255,7 +255,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(index, editModuleDescriptor);
 
         } else {
-            System.out.println(argMultimap.getValue(PREFIX_OPTION).get());
             throw new ParseException(EditCommand.MESSAGE_OPTION_NOT_FOUND);
         }
     }
@@ -281,7 +280,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Module>} containing zero modules.
      */
     private Optional<Set<ModuleCode>> parseModulesForEdit(String modules) throws ParseException {
-        if (modules == " ") {
+        if (modules.equals(" ")) {
             return Optional.empty();
         }
         Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();

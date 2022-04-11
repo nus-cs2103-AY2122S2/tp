@@ -41,5 +41,4 @@ Given below are my contributions to the project.
 
 * **Community**:
     * Provided help and suggestions to teammates after reviewing PR
-    * Links to PRs reviewed with non trivial comments: #83
-* **Tools**:
+    * Links to PRs reviewed with non trivial comments: [#83](https://github.com/AY2122S2-CS2103-W16-1/tp/pull/83)

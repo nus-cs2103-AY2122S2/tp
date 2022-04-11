@@ -54,7 +54,7 @@ Constraint Types:
   * \* for maximum indicates that there can be an unbounded number of instances of this field in one entity.
 * _Acceptable Values_ : The acceptable characters for a field.
 * _Length Constraint_ : The minimum - maximum length of a field. 
-  * A number >0 for minimum means that if the field has been filled, then the value it was been filled with cannot be blank.
+  * A number >0 for minimum means that if the field has been filled, then the value it was filled with cannot be blank.
   * \* for maximum means that the field is unbounded.
 * _Unique Constraint_ : If the field must be unique among all other entities of its type.
   * :heavy_check_mark: - yes 
@@ -92,8 +92,8 @@ Can have both Professors and Students associated with it.
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |  
 | ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
-|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
-|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
+|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | A group name is case insensitive, e.g. _t12_ and _T12_ are considered the same. The case stored in UniBook is the case of the first group entered with the given group name. Future additions of the same group name with different case will not be allowed. | _W16-1_|
+|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as acceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
 
 # Graphical User Interface
 ## Main Function
@@ -158,7 +158,7 @@ Navigation between views is done primarily with the `list` command, as UniBook i
 
 ## Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -181,7 +181,7 @@ Format: `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…
 `3` - Assignment Release  
 `4` - Assignment Due  
 * The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-* The format of `ke/KEYEVENTTYPE dt/DATETIME` has to be **strictly followed**.
+* The format of `ke/KEYEVENTTYPE dt/DATETIME` **must be strictly followed**. Otherwise, the datetime will be parsed as part of the other fields, depending on which prefix was entered before it.
 * Duplicate Module Codes are **not allowed**, however duplicate Module Names are allowed as modules may have same names.
 * Example: `add o/module n/Computer Organisation m/CS2100 ke/1 dt/2022-05-04 13:00`  
 * Adds a module "Computer Organisation" with module code CS2100 to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
@@ -360,7 +360,7 @@ the specific group with the given group name, from the given module.
 - Otherwise, UniBook switches to `Groups` view automatically and displays all groups with the given name.
 - Example: Assume module `CS2103` along with multiple other modules have a group with group name `W16-1`. 
   When the command `list o/group g/W16-1` is run, if only `CS2103` was visible then the specific `W16-1` in `CS2103` 
-  is displayed in the group view. Otherwise all groups with name `W16-1` from all modules are displayed.
+  is displayed in the group view. Otherwise, all groups with name `W16-1` from all modules are displayed.
 
 ### On Groups view:
 
@@ -460,7 +460,7 @@ Finds a person stored in UniBook by the given keyword. **Only works on people vi
 #### :bulb: Find person(s) whose name(s) contain any of the given keywords
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -579,13 +579,17 @@ UniBook data are saved in the hard disk automatically after any command that cha
 
 ## Editing the data file
 
-UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.  
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, UniBook will discard all data and start with an empty data file at the next run.
 </div>
 
-## Archiving data files `[coming in v2.0]`
+The data file format can be made invalid if:
+* A duplicate field is added that UniBook does not allow duplicates of. Example: Duplicate group code in the list of group codes of a `Student`.
+* Illegal values are entered into fields. 
+  * Illegal meaning they violate one or more constraints defined here: [link](#entities)
 
 --------------------------------------------------------------------------------------------------------------------
 

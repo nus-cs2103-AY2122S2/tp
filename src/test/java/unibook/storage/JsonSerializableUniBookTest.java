@@ -70,7 +70,7 @@ public class JsonSerializableUniBookTest {
         JsonSerializableUniBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_GROUP_FILE,
             JsonSerializableUniBook.class).get();
         Assert.assertThrows(IllegalValueException.class, String.format(
-            JsonAdaptedModule.GROUP_ALREADY_IN_MODULE_MESSAGE_FORMAT, "W16-1", "CS2103"),
+                JsonAdaptedModule.GROUP_ALREADY_IN_MODULE_MESSAGE_FORMAT, "W16-1", "CS2103"),
             dataFromFile::toModelType);
     }
 
@@ -79,7 +79,7 @@ public class JsonSerializableUniBookTest {
         JsonSerializableUniBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_KEY_EVENT_FILE,
             JsonSerializableUniBook.class).get();
         Assert.assertThrows(IllegalValueException.class, String.format(
-            JsonAdaptedModule.KEY_EVENT_ALREADY_IN_MODULE_MESSAGE_FORMAT, "EXAM", "2022-05-04T14:00", "CS2103"),
+                JsonAdaptedModule.KEY_EVENT_ALREADY_IN_MODULE_MESSAGE_FORMAT, "EXAM", "2022-05-04T14:00", "CS2103"),
             dataFromFile::toModelType);
     }
 
