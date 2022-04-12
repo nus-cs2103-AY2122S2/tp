@@ -246,6 +246,12 @@ Marks a specific undone task as done for a particular student.
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
+  
+| Before                                             | After                                              |
+|----------------------------------------------------|----------------------------------------------------|
+| <img src="images/UG_MarkCommand_Screenshot_1.png"> | <img src="images/UG_MarkCommand_Screenshot_2.png"> |
+
+
 <br>
 
 ### Marking a done task as undone for a student: `unmark`
@@ -264,6 +270,11 @@ Marks a specific done task as undone for a particular student.
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as undone.
+
+| Before                                               | After                                                |
+|------------------------------------------------------|------------------------------------------------------|
+| <img src="images/UG_UnmarkCommand_Screenshot_1.png"> | <img src="images/UG_UnmarkCommand_Screenshot_2.png"> |
+
 
 <br>
 
@@ -474,6 +485,10 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 * `sort`
     * Displays all the enrolled students by the number of undone tasks in **descending** order.
 
+| Before                                             | After                                              |
+|----------------------------------------------------|----------------------------------------------------|
+| <img src="images/UG_SortCommand_Screenshot_1.png"> | <img src="images/UG_SortCommand_Screenshot_2.png"> |
+
 <br>
 
 ### Displaying manual for a command: `manual`
@@ -491,6 +506,10 @@ Display the format and a short description for a specified command.
     * Display the format for the command add, and briefly describes the command.
 * `manual`
     * Display all available commands.
+
+| manual                                               | manual progress                                      |
+|------------------------------------------------------|------------------------------------------------------|
+| <img src="images/UG_ManualCommand_Screenshot_1.png"> | <img src="images/UG_ManualCommand_Screenshot_2.png"> |
 
 <br>
 
