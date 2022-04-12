@@ -237,6 +237,9 @@ public class Position {
     /**
      * Eliminates special characters from csv string
      */
+    //@@author Javi
+    //Reused from https://stackoverflow.com/questions/61680044/
+    // write-elements-of-a-map-to-a-csv-correctly-in-a-simplified-way-in-java-8
     private String escapeSpecialCharacters(String data) {
         String escapedData = data.replaceAll("\\R", " ");
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {
