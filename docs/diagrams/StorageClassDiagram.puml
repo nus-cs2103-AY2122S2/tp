@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
-package Storage{
+package Storage {
 
 package "UserPrefs Storage" #F4F6F6{
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
@@ -14,12 +14,15 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "HireLah Storage" #F4F6F6{
+Class "<<interface>>\nHireLahStorage" as HireLahStorage
+Class JsonHireLahStorage
+Class JsonSerializableHireLah
+Class JsonAdaptedApplicant
 Class JsonAdaptedTag
+Class JsonAdaptedInterview
+Class JsonAdaptedPosition
+Class JsonAdaptedRequirement
 }
 
 }
@@ -29,15 +32,21 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" HireLahStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> HireLahStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
-
+JsonHireLahStorage -up|> HireLahStorage
+JsonHireLahStorage ..> JsonSerializableHireLah
+JsonSerializableHireLah -d> "*" JsonAdaptedApplicant
+JsonAdaptedApplicant --> "*" JsonAdaptedTag
+JsonSerializableHireLah --> "*" JsonAdaptedInterview
+JsonSerializableHireLah --> "*" JsonAdaptedPosition
+JsonAdaptedPosition --> "*" JsonAdaptedRequirement
+JsonAdaptedInterview --> "1" JsonAdaptedApplicant
+JsonAdaptedInterview --> "1" JsonAdaptedPosition
+JsonAdaptedInterview -right[hidden]-> JsonAdaptedPosition
+JsonAdaptedApplicant -right[hidden]-> JsonAdaptedApplicant
 @enduml

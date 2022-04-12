@@ -3,9 +3,10 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HireLahParser" as HireLahParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeleteApplicantCommandParser" as DeleteApplicantCommandParser LOGIC_COLOR
+participant "d:DeleteApplicantCommand" as DeleteApplicantCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +14,94 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete -a 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> HireLahParser : parseCommand("delete -a 1")
+activate HireLahParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+HireLahParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> HireLahParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+HireLahParser -> DeleteCommandParser : parse("-a 1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteApplicantCommandParser
+DeleteCommandParser -> DeleteApplicantCommandParser
+activate DeleteApplicantCommandParser
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteApplicantCommandParser --> DeleteCommandParser
+deactivate DeleteApplicantCommandParser
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeleteCommandParser -> DeleteApplicantCommandParser : parse("1")
+activate DeleteApplicantCommandParser
+
+create DeleteApplicantCommand
+DeleteApplicantCommandParser -> DeleteApplicantCommand
+activate DeleteApplicantCommand
+
+DeleteApplicantCommand --> DeleteApplicantCommandParser : d
+deactivate DeleteApplicantCommand
+
+DeleteApplicantCommandParser --> DeleteCommandParser : d
+deactivate DeleteApplicantCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteApplicantCommandParser -[hidden]-> DeleteCommandParser
+destroy DeleteApplicantCommandParser
+
+DeleteCommandParser --> HireLahParser : d
+deactivate DeleteCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> HireLahParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+HireLahParser --> LogicManager : d
+deactivate HireLahParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteApplicantCommand : execute()
+activate DeleteApplicantCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteApplicantCommand -> Model : getFilteredApplicantList()
 activate Model
-
-Model --> DeleteCommand
+Model --> DeleteApplicantCommand
 deactivate Model
 
+DeleteApplicantCommand -> Model : getApplicantInterviews(applicantToDelete)
+activate Model
+Model --> DeleteApplicantCommand
+deactivate Model
+
+DeleteApplicantCommand -> Model : deleteApplicant(applicantToDelete)
+activate Model
+Model --> DeleteApplicantCommand
+deactivate
+
+loop interviewsToDelete.size()
+    DeleteApplicantCommand -> Model : deleteInterview(i)
+    activate Model
+    Model --> DeleteApplicantCommand
+    deactivate
+end
+
+
+
+
+
+
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteApplicantCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteApplicantCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteApplicantCommand --> LogicManager : result
+deactivate DeleteApplicantCommand
 
 [<--LogicManager
 deactivate LogicManager

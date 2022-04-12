@@ -1,0 +1,108 @@
+@startuml
+!include style.puml
+
+skinparam participantFontSize 25
+skinparam ArrowFontSize 30
+skinparam headerFontSize 30
+
+box LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HireLahParser" as HireLahParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant ":ListApplicantCommandParser" as ListApplicantCommandParser LOGIC_COLOR
+participant "L:ListApplicantCommand" as ListApplicantCommand LOGIC_COLOR
+participant "P:ApplicantNamePredicate" as ApplicantNamePredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list -a f/name a/Bob")
+activate LogicManager
+
+LogicManager -> HireLahParser : parseCommand("list -a f/name a/Bob")
+activate HireLahParser
+
+create ListCommandParser
+HireLahParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> HireLahParser
+deactivate ListCommandParser
+
+HireLahParser -> ListCommandParser : parse("-a f/name a/Bob")
+activate ListCommandParser
+
+create ListApplicantCommandParser
+ListCommandParser -> ListApplicantCommandParser
+activate ListApplicantCommandParser
+
+ListApplicantCommandParser --> ListCommandParser
+deactivate ListApplicantCommandParser
+
+ListCommandParser -> ListApplicantCommandParser : parse("f/name a/Bob")
+activate ListApplicantCommandParser
+
+ListApplicantCommandParser -> ListApplicantCommandParser : parseFilter("f/name a/Bob")
+activate ListApplicantCommandParser
+
+create ListApplicantCommand
+ListApplicantCommandParser -> ListApplicantCommand
+activate ListApplicantCommand
+
+ListApplicantCommand --> ListApplicantCommandParser : L
+deactivate ListApplicantCommand
+
+ListApplicantCommandParser --> ListApplicantCommandParser : L
+deactivate ListApplicantCommandParser
+
+ListApplicantCommandParser --> ListCommandParser : L
+deactivate ListApplicantCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListApplicantCommandParser -[hidden]-> ListCommandParser
+destroy ListApplicantCommandParser
+
+ListCommandParser --> HireLahParser : L
+deactivate ListCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> HireLahParser
+destroy ListCommandParser
+
+HireLahParser --> LogicManager : L
+deactivate HireLahParser
+
+LogicManager -> ListApplicantCommand : execute()
+activate ListApplicantCommand
+
+ListApplicantCommand -> ListApplicantCommand : getFilterPredicate(name, Bob)
+activate ListApplicantCommand
+
+create ApplicantNamePredicate
+ListApplicantCommand -> ApplicantNamePredicate
+activate ApplicantNamePredicate
+
+ApplicantNamePredicate --> ListApplicantCommand : P
+deactivate ApplicantNamePredicate
+
+ListApplicantCommand --> ListApplicantCommand : P
+deactivate ListApplicantCommand
+
+ListApplicantCommand -> Model : updateFilteredApplicantList(P)
+activate Model
+
+Model --> ListApplicantCommand
+deactivate Model
+
+create CommandResult
+ListApplicantCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListApplicantCommand
+deactivate CommandResult
+
+ListApplicantCommand --> LogicManager : result
+deactivate ListApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

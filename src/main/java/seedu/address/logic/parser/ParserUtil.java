@@ -2,17 +2,33 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.DataType;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.FilterArgument;
+import seedu.address.logic.FilterType;
+import seedu.address.logic.HelpArgument;
+import seedu.address.logic.SortArgument;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Age;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Gender;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.Phone;
+import seedu.address.model.position.Description;
+import seedu.address.model.position.PositionName;
+import seedu.address.model.position.PositionOpenings;
+import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +136,182 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String age} into a {@code age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDateTime parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+
+        // See whether date is valid
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
+                    .withResolverStyle(ResolverStyle.STRICT);
+            LocalDateTime dateParsed = LocalDateTime.parse(date, formatter);
+            return dateParsed;
+        } catch (DateTimeException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATETIME);
+        }
+
+    }
+
+    /**
+     * Parses a {@code String positionName} into a {@code PositionName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code positionName} is invalid.
+     */
+    public static PositionName parsePositionName(String positionName) throws ParseException {
+        requireNonNull(positionName);
+        String trimmedName = positionName.trim();
+        if (!PositionName.isValidPositionName(trimmedName)) {
+            throw new ParseException(PositionName.MESSAGE_CONSTRAINTS);
+        }
+        return new PositionName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescriptionText(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String openings} into a {@code PositionOpenings}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code openings} is invalid.
+     */
+    public static PositionOpenings parseOpenings(String openings) throws ParseException {
+        requireNonNull(openings);
+        String trimmedOpenings = openings.trim();
+        if (!PositionOpenings.isValidNumber(openings)) {
+            throw new ParseException(PositionOpenings.MESSAGE_CONSTRAINTS);
+        }
+        return new PositionOpenings(trimmedOpenings);
+    }
+
+    /**
+     * Parses a {@code String requirement} into a {@code Requirement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code requirement} is invalid.
+     */
+    public static Requirement parseRequirement(String requirement) throws ParseException {
+        requireNonNull(requirement);
+        String trimmedRequirement = requirement.trim();
+        if (!Requirement.isValidRequirementText(trimmedRequirement)) {
+            throw new ParseException(Requirement.MESSAGE_CONSTRAINTS);
+        }
+        return new Requirement(trimmedRequirement);
+    }
+
+    /**
+     * Parses {@code Collection<String> requirements} into a {@code Set<Requirement>}.
+     */
+    public static Set<Requirement> parseRequirements(Collection<String> requirements) throws ParseException {
+        requireNonNull(requirements);
+        final Set<Requirement> requirementSet = new HashSet<>();
+        for (String requirement : requirements) {
+            requirementSet.add(parseRequirement(requirement));
+        }
+        return requirementSet;
+    }
+
+    /**
+     * Parses a {@code String filterType} into a {@code FilterType}, along with the corresponding data type.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filterType} is invalid for the {@code dataType}.
+     */
+    public static FilterType parseFilterType(DataType dataType, String filterType) throws ParseException {
+        requireNonNull(filterType);
+        String trimmedFilterType = filterType.trim().toLowerCase();
+        if (!FilterType.isValidFilterType(dataType, trimmedFilterType)) {
+            throw new ParseException(FilterType.MESSAGE_CONSTRAINTS);
+        }
+        return new FilterType(dataType, trimmedFilterType);
+    }
+
+    /**
+     * Parses a {@code String filterArgument} into a {@code FilterArgument}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static FilterArgument parseFilterArgument(String filterArgument) throws ParseException {
+        requireNonNull(filterArgument);
+        if (filterArgument.trim().isEmpty()) {
+            throw new ParseException(FilterArgument.MESSAGE_CONSTRAINTS);
+        }
+        return new FilterArgument(filterArgument.trim());
+    }
+
+    /**
+     * Parses a {@code String sortArgument} into a {@code SortArgument}.
+     * Leading and trailing whitespaces will be trimmed, and argument will be converted to lower case.
+     */
+    public static SortArgument parseSortArgument(String sortArgument) throws ParseException {
+        requireNonNull(sortArgument);
+        String trimmedSortArgument = sortArgument.trim().toLowerCase();
+        if (!SortArgument.isValidSortArgument(sortArgument)) {
+            throw new ParseException(SortArgument.MESSAGE_CONSTRAINTS);
+        }
+        return new SortArgument(trimmedSortArgument);
+    }
+
+    /**
+     * Parses a {@code String helpArgument} into a {@code HelpArgument}.
+     * All whitespaces will be trimmed, and argument will be converted to lower case.
+     */
+    public static HelpArgument parseHelpArgument(String helpArgument) throws ParseException {
+        requireNonNull(helpArgument);
+        String trimmedHelpArgument = helpArgument.replaceAll("\\s+", "").toLowerCase();
+        if (!HelpArgument.isValidHelpArgument(trimmedHelpArgument)) {
+            throw new ParseException(HelpArgument.COMMAND_NOT_FOUND_DESCRIPTION);
+        }
+        return new HelpArgument(trimmedHelpArgument);
     }
 }

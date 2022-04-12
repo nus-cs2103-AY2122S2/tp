@@ -1,0 +1,14 @@
+{
+  "applicants": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "gender" : "M",
+    "age" : "27",
+    "address": "4th street",
+    "tagged" : [ ],
+    "hiredStatus" : "Available"
+  } ],
+  "interviews" : [ ],
+  "positions" : [ ]
+}

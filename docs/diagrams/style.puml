@@ -53,10 +53,17 @@ skinparam Actor {
 
 skinparam Sequence {
     MessageAlign center
-    BoxFontSize 15
+    BoxFontSize 20
     BoxPadding 0
     BoxFontColor #FFFFFF
     FontName Arial
+    ParticipantFontSize 25
+    ArrowFontSize 20
+    GroupFontSize 20
+    GroupHeaderFontSize 15
+    GroupBodyBackGroundColor #F2F2E2
+    ArrowThickness 3
+    LifeLineBorderThickness 3
 }
 
 skinparam Participant {

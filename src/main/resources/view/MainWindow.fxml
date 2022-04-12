@@ -3,18 +3,21 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="HireLah" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/hirelah_icon.png" />
   </icons>
   <scene>
     <Scene>
@@ -29,31 +32,56 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelpTab" text="Help" />
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+              <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
-        </StackPane>
+            <children>
+           <TabPane fx:id="dataTypeTabs" minWidth="340" tabClosingPolicy="UNAVAILABLE">
+             <tabs>
+               <Tab fx:id="applicantsTab" text="Applicants">
+                    <content>
+                        <StackPane fx:id="applicantListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                    </content>
+               </Tab>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+               <Tab fx:id="positionsTab" text="Positions">
+                 <content>
+                     <StackPane fx:id="positionListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                 </content>
+               </Tab>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+                 <Tab fx:id="interviewsTab" text="Interviews">
+                     <content>
+                         <StackPane fx:id="interviewListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                     </content>
+                 </Tab>
+             </tabs>
+           </TabPane>
+               </children>
+            </StackPane>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="130" minHeight="100" prefHeight="130" styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+          </StackPane>
+
+          <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+          </StackPane>
+
+          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER">
+              <padding>
+                  <Insets left="10" right="10" />
+              </padding>
+          </StackPane>
       </VBox>
     </Scene>
   </scene>

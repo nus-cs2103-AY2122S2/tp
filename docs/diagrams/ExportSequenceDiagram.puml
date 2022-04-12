@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam participantFontSize 25
+skinparam ArrowFontSize 30
+skinparam headerFontSize 30
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HireLahParser" as HireLahParser LOGIC_COLOR
+participant ":ExportCsvCommandParser" as ExportCsvCommandParser LOGIC_COLOR
+participant "L:ExportPositionCsvCommand" as ExportPositionCsvCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("export -p")
+activate LogicManager
+
+LogicManager -> HireLahParser : parseCommand("export -p")
+activate HireLahParser
+
+create ExportCsvCommandParser
+HireLahParser -> ExportCsvCommandParser
+activate ExportCsvCommandParser
+
+ExportCsvCommandParser --> HireLahParser
+deactivate ExportCsvCommandParser
+
+HireLahParser -> ExportCsvCommandParser : parse("-p")
+activate ExportCsvCommandParser
+
+create ExportPositionCsvCommand
+ExportCsvCommandParser -> ExportPositionCsvCommand
+activate ExportPositionCsvCommand
+
+ExportPositionCsvCommand --> ExportCsvCommandParser : L
+deactivate ExportPositionCsvCommand
+
+ExportCsvCommandParser --> HireLahParser : L
+deactivate ExportCsvCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExportCsvCommandParser -[hidden]-> HireLahParser
+destroy ExportCsvCommandParser
+
+HireLahParser --> LogicManager : L
+deactivate HireLahParser
+
+LogicManager -> ExportPositionCsvCommand : execute()
+activate ExportPositionCsvCommand
+
+ExportPositionCsvCommand -> Model : exportCsvPosition()
+activate Model
+
+Model --> ExportPositionCsvCommand
+deactivate Model
+
+create CommandResult
+ExportPositionCsvCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ExportPositionCsvCommand
+deactivate CommandResult
+
+ExportPositionCsvCommand --> LogicManager : result
+deactivate ExportPositionCsvCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
