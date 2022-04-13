@@ -464,7 +464,7 @@ company that may come in handy during the internship application process.
 
 **Format:** `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-company-restrictions)
+* More restrictions for command [parameters](#technical-terminologies) can be found [here](#c-company-restrictions)
 
 **Examples:**
 
@@ -598,7 +598,7 @@ company.
 
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions).
+* More restrictions for command [parameters](#technical-terminologies) can be found [here](#c-role-restrictions).
 
 **Examples:**
 
@@ -757,7 +757,7 @@ Below are miscellaneous features that enhance the general user experience.
 Is the default reminder window of 7 days not to your liking? Update the window size with `setWindow` so that you can
 keep better track of upcoming tasks.
 
-* The [parameter]((#technical-terminologies)) `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's
+* The [parameter](#technical-terminologies) `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's
   reminder date.
 * Sets the reminder window to the specified `REMINDER_WINDOW`.
 * The `REMINDER_WINDOW` is capped at 30 (in days) because Tinner aims to highlight only imminent deadlines.
