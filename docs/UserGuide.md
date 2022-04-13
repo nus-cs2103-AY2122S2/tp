@@ -177,6 +177,7 @@ application process for each role is at a glance.
 |  Parameter   | User input supplied to a command                                                                                                                             |
 |  Whitespace  | Any string of text composed only of spaces, tabs or line breaks                                                                                                 |
 |   Integer    | An integer is a number which is not a fraction; a whole number.                                                                                                                                                         |
+|  Use case    | A description of a sequence of actions on how a user interacts with Tinner. 
 
 [Back to Table of Contents](#toc)
 
@@ -283,6 +284,15 @@ update the reminder date if you wish to follow the demo as [reminder dates canno
 
 </div>
 
+## Use cases <a id="use-cases"></a>
+
+* [Use Case #1: Applying to a role in a company](#usecase1)
+* [Use Case #2: Deleting a company or a role](#usecase2)
+* [Use Case #3: Editing a company or a role](#usecase3)
+* [Use Case #4: Setting reminder window for reminder list](#usecase4)
+* [Use Case #5: Favouriting a company](#usecase5)
+* [Use Case #6: Finding a role](#usecase6)
+
 ## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
 
 Say you found a company with an opening that you are interested in. You did your research and found relevant information
@@ -323,6 +333,8 @@ entries from the application:
 
    ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
 
+[Back to Table of Contents](#toc)
+
 ## Use Case #3: Editing a company or a role <a id="usecase3"></a>
 
 Say you received an email for an interview and the point of contact's email is different. Here's how you can make
@@ -347,6 +359,8 @@ this entry:
 
 </div>
 
+[Back to Table of Contents](#toc)
+
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
 Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next opening of
@@ -362,6 +376,8 @@ Thus, you can increase the reminder window by making this entry:
 
 
    ![WindowDemo](images/WindowDemo.png)
+
+[Back to Table of Contents](#toc)
 
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
 
@@ -397,6 +413,8 @@ You can choose to unfavourite by making this entry:
 
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
+
+[Back to Table of Contents](#toc)
 
 ## Use Case #6: Finding a role <a id="usecase6"></a>
 In the future when you have many applications, finding specific applications can be daunting. The
