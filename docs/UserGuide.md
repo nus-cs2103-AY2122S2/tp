@@ -171,6 +171,11 @@ Deletes a student from TAPA.
 * `delete i/A0123456Z`
     * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
 
+| Before                                    | After                                     |
+|-------------------------------------------|-------------------------------------------|
+| <img src="images/UG-DeleteCommand-1.png"> | <img src="images/UG-DeleteCommand-2.png"> |
+
+
 <br>
 
 ### Deleting all students taking a particular module: `deleteModule`
@@ -192,6 +197,10 @@ Deletes all students taking a particular module from TAPA.
 * `deleteModule m/CS2100`
     * All students who are specified as taking CS2100 are deleted from TAPA.
 
+| Before                                          | After                                           |
+|-------------------------------------------------|-------------------------------------------------|
+| <img src="images/UG-DeleteModuleCommand-1.png"> | <img src="images/UG-DeleteModuleCommand-2.png"> |
+
 <br>
 
 ### Finding a student: `find`
@@ -212,6 +221,11 @@ Allows the user to look up the details of a particular student.
 **Example**:
 * `find n/John`
     * Displays the particulars of the students whose names include John.
+
+| Before                                  | After                                   |
+|-----------------------------------------|-----------------------------------------|
+| <img src="images/UG-FindCommand-1.png"> | <img src="images/UG-FindCommand-2.png"> |
+
 * `find i/AXXXXXXXR`
     * Displays the particulars of the student with student ID AXXXXXXXR.
 * `find m/CS2103T`
