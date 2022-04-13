@@ -380,6 +380,11 @@ Displays all the students enrolled in a list.
 **Example**:
 * `list`
     * Displays all the enrolled students in alphabetical order.
+  
+| Before                                             | After                                              |
+|----------------------------------------------------|----------------------------------------------------|
+| <img src="images/UG-ListCommand_1.png"> | <img src="images/UG-ListCommand_2.png"> |
+
 
 <br>
 
@@ -390,10 +395,21 @@ Assigns a task to a particular student.
 **Format**: `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME`
 
 **Example**:
-* `assign i/AXXXXXXXR tn/assignment 1`
-    * Assigns assignment 1 to student with id AXXXXXXXR.
-* `assign m/CS2103T tn/assignment 1`
-    * Assigns assignment 1 to students taking module CS2103T.
+* `assign i/A0223456Z tn/Submit User Guide`
+    * Assigns Submit User Guide to student with id A0223456Z.
+
+| Before                                                          | After                                                           |
+|-----------------------------------------------------------------|-----------------------------------------------------------------|
+| <img src="images/UG-AssignCommandByStudentId_1.png"> | <img src="images/UG-AssignCommandByStudentId_2.png"> |
+
+
+* `assign m/CS2103 tn/Create IP Release`
+    * Assigns Create Ip Release task to students taking module CS2103.
+
+| Before                                                           | After                                                            |
+|------------------------------------------------------------------|------------------------------------------------------------------|
+| <img src="images/UG-AssignCommandByModuleCode_1.png"> | <img src="images/UG-AssignCommandByModuleCode_2.png"> |
+
 
 <div markdown="block" class="alert alert-info">
 :warning: <b>Warning!</b>
@@ -447,10 +463,22 @@ An error message will be displayed if:
 * none of the students are taking a module with the given module code
 
 **Example**:
-* `deleteTask i/AXXXXXXXR idx/3`
-    * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
-* `deleteTask m/cs2030 tn/Assignment 1`
-    * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
+* `deleteTask i/A0223456Z idx/2`
+    * Deletes task at index 2 from the student's list of assigned task, provided that a task exists at that index.
+
+| Before                                                   | After                                                          |
+|----------------------------------------------------------|----------------------------------------------------------------|
+| <img src="images/UG-DeleteTaskCommandByStudentId_1.png"> | <img src="images/UG-DeleteTaskCommandByStudentId_2.png"> |
+
+
+* `deleteTask m/cs2103 tn/Create Ip Release`
+    * Deletes Create Ip Release task that was previously assigned to any of the students taking CS2103 module.
+
+| Before                                                               | After                                                            |
+|----------------------------------------------------------------------|------------------------------------------------------------------|
+| <img src="images/UG-DeleteTaskCommandByModuleCode_1.png"> | <img src="images/UG-DeleteTaskCommandByModuleCode_2.png"> |
+
+
 <br>
 
 ### Viewing previously executed commands: `history`
