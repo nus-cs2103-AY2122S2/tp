@@ -45,6 +45,111 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isUnsignedInteger --------------------------------------
+    @Test
+    public void isUnsignedInteger() {
+
+        // EP: empty strings
+        assertFalse(StringUtil.isUnsignedInteger("")); // Boundary value
+        assertFalse(StringUtil.isUnsignedInteger("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isUnsignedInteger("a"));
+        assertFalse(StringUtil.isUnsignedInteger("aaa"));
+
+        // EP: zero
+        assertTrue(StringUtil.isUnsignedInteger("0"));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isUnsignedInteger("01"));
+
+        // EP: signed numbers
+        assertFalse(StringUtil.isUnsignedInteger("-1"));
+        assertFalse(StringUtil.isUnsignedInteger("+1"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isUnsignedInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isUnsignedInteger("1 0")); // Spaces in the middle
+
+        // EP: number larger than Integer.MAX_VALUE
+        assertFalse(StringUtil.isUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isUnsignedInteger("1")); // Boundary value
+        assertTrue(StringUtil.isUnsignedInteger("10"));
+    }
+
+    //---------------- Tests for isValidDescriptionLength --------------------------------------
+
+    /*
+     * Invalid equivalence partitions: null, Strings more than 280
+     * Valid equivalence partitions: String length of 0 to 280
+     */
+    @Test
+    public void isValidDescriptionLength() {
+        assertThrows(NullPointerException.class, ()-> StringUtil.isValidDescriptionLength(null));
+
+        //EP: 280 characters
+        assertTrue(StringUtil.isValidDescriptionLength("aaaaaaaaaaaaaaaa  "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "a good."));
+
+        //EP: 281 characters
+        assertFalse(StringUtil.isValidDescriptionLength("aaaaaaaaaaaaaaaa  "
+                + "delete a lot aaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaa"));
+
+        //EP: 279 characters
+        assertTrue(StringUtil.isValidDescriptionLength("aaaaaaaaaaaaaaaa  "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaa "
+                + "aaaaaa"));
+
+        //EP: 0 characters, valid because we don't have a lower bound
+        assertTrue(StringUtil.isValidDescriptionLength(""));
+
+    }
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

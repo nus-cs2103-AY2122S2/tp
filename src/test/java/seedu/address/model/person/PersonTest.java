@@ -1,25 +1,32 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().addDefaultContactedInfo().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
     }
 
@@ -87,5 +94,46 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hasTag_hasTagIgnoreCase_returnsTrue() {
+        Person alice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        // same tag
+        assertTrue(alice.hasTag(new Tag(VALID_TAG_HUSBAND)));
+
+        // all upper case
+        assertTrue(alice.hasTag(new Tag(VALID_TAG_HUSBAND.toUpperCase())));
+
+        // all lower case
+        assertTrue(alice.hasTag(new Tag(VALID_TAG_FRIEND.toLowerCase())));
+    }
+
+    @Test
+    public void hasTag_noTagOrNull_returnsFalse() {
+        Person alice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        // not tag
+        assertFalse(alice.hasTag(new Tag("randomTag123")));
+
+        // null
+        assertFalse(alice.hasTag(null));
+    }
+
+    @Test
+    public void showSameContactedInfoList() {
+        Person benson = new PersonBuilder(BENSON).build();
+        Person carl = new PersonBuilder(CARL).build();
+        assertEquals(benson.getContactedInfoListToString(), carl.getContactedInfoListToString());
+    }
+
+    @Test
+    public void emptyContactedInfoList_showEmptyMessage() {
+        Index index = Index.fromOneBased(1);
+        Person alice = new PersonBuilder(ALICE).deleteContactedInfo(index).build();
+        assertEquals(alice.getContactedInfoListToString(), Messages.MESSAGE_EMPTY_CONTACTED_INFORMATION);
+
+
     }
 }
