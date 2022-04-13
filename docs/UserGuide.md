@@ -131,6 +131,10 @@ Adds a student to TAPA.
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
     * A student named John is added to TAPA.
 
+<p align="center">
+<img src="images/Add-Command-UG.png"/>
+</p>
+
 <br>
 
 ### Deleting a student: `delete`
@@ -167,6 +171,11 @@ Deletes a student from TAPA.
 * `delete i/A0123456Z`
     * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
 
+| Before                                    | After                                     |
+|-------------------------------------------|-------------------------------------------|
+| <img src="images/UG-DeleteCommand-1.png"> | <img src="images/UG-DeleteCommand-2.png"> |
+
+
 <br>
 
 ### Deleting all students taking a particular module: `deleteModule`
@@ -188,6 +197,10 @@ Deletes all students taking a particular module from TAPA.
 * `deleteModule m/CS2100`
     * All students who are specified as taking CS2100 are deleted from TAPA.
 
+| Before                                          | After                                           |
+|-------------------------------------------------|-------------------------------------------------|
+| <img src="images/UG-DeleteModuleCommand-1.png"> | <img src="images/UG-DeleteModuleCommand-2.png"> |
+
 <br>
 
 ### Finding a student: `find`
@@ -208,6 +221,11 @@ Allows the user to look up the details of a particular student.
 **Example**:
 * `find n/John`
     * Displays the particulars of the students whose names include John.
+
+| Before                                  | After                                   |
+|-----------------------------------------|-----------------------------------------|
+| <img src="images/UG-FindCommand-1.png"> | <img src="images/UG-FindCommand-2.png"> |
+
 * `find i/AXXXXXXXR`
     * Displays the particulars of the student with student ID AXXXXXXXR.
 * `find m/CS2103T`
@@ -228,6 +246,10 @@ Displays all the tasks that are allocated to a particular student.
 * `task i/AXXXXXXXR`
     * Lists out the tasks that student (AXXXXXXXR) has.
 
+<p align="center">
+<img src="images/Task-Command-UG.png"/>
+</p>
+
 <br>
 
 ### Marking an undone task as done for a student: `mark`
@@ -246,6 +268,12 @@ Marks a specific undone task as done for a particular student.
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
+  
+| Before                                             | After                                              |
+|----------------------------------------------------|----------------------------------------------------|
+| <img src="images/UG_MarkCommand_Screenshot_1.png"> | <img src="images/UG_MarkCommand_Screenshot_2.png"> |
+
+
 <br>
 
 ### Marking a done task as undone for a student: `unmark`
@@ -264,6 +292,11 @@ Marks a specific done task as undone for a particular student.
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as undone.
+
+| Before                                               | After                                                |
+|------------------------------------------------------|------------------------------------------------------|
+| <img src="images/UG_UnmarkCommand_Screenshot_1.png"> | <img src="images/UG_UnmarkCommand_Screenshot_2.png"> |
+
 
 <br>
 
@@ -329,6 +362,10 @@ Saves a copy of the details currently saved in TAPA into a separate file.
 * The file name will be the date and time of the archive operation.
 * This file will be saved in the same directory as the original `.json` data file.
 
+<p align="center">
+<img src="images/Archive-Command-UG.png"/>
+</p>
+
 <br>
 
 ### Listing the student details: `list`
@@ -388,6 +425,10 @@ The completion status of each student in the list will be displayed as well.
     * For each student in the output list, a :heavy_check_mark: "tick" symbol signifies that he/she has already
       completed the assigned task.
     * On the other hand, a :x: "cross" symbol signifies that the student has not complete the assigned task.
+
+<p align="center">
+<img src="images/Progress-Command-UG.png"/>
+</p>
 
 <br>
 
@@ -474,6 +515,10 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 * `sort`
     * Displays all the enrolled students by the number of undone tasks in **descending** order.
 
+| Before                                             | After                                              |
+|----------------------------------------------------|----------------------------------------------------|
+| <img src="images/UG_SortCommand_Screenshot_1.png"> | <img src="images/UG_SortCommand_Screenshot_2.png"> |
+
 <br>
 
 ### Displaying manual for a command: `manual`
@@ -492,6 +537,10 @@ Display the format and a short description for a specified command.
 * `manual`
     * Display all available commands.
 
+| manual                                               | manual progress                                      |
+|------------------------------------------------------|------------------------------------------------------|
+| <img src="images/UG_ManualCommand_Screenshot_1.png"> | <img src="images/UG_ManualCommand_Screenshot_2.png"> |
+
 <br>
 
 ### Viewing help : `help`
@@ -499,6 +548,10 @@ Display the format and a short description for a specified command.
 Shows a pop-up window explaining how to access the user guide.
 
 **Format**: `help`
+
+<p align="center">
+<img src="images/Help-Command-UG.png"/>
+</p>
 
 <br>
 
@@ -537,28 +590,28 @@ As seen in the Command Summary below, you can input `manual add` to view a short
 
 If you would like to learn more about a specific command, you can read more about it in the [Features](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#features) section above!
 
-| Action            | Command Format with Examples                                                                                                                                                                             |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**           | `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`        |
-| **Delete**        | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`                                                                             |
-| **Delete Module** | `deleteModule m/MODULE_CODE` <br> Example: `deleteModule m/CS2100`                                                                                                                                       |
-| **Find**          | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`                                                       |
-| **Task**          | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`                                                                                                                                                     |
-| **Mark**          | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`                                                                                                                         |
-| **Unmark**        | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`                                                                                                                       |
-| **Edit**          | `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg` |
-| **Clear**         | `clear`                                                                                                                                                                                                  |
-| **Archive**       | `archive`                                                                                                                                                                                                |
-| **List**          | `list`                                                                                                                                                                                                   |
-| **Assign**        | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`                                     |
-| **Progress**      | `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`                                                                                                                 |
-| **Delete Task**   | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`                                 |
-| **History**       | `history`                                                                                                                                                                                                |
-| **Undo**          | `undo`                                                                                                                                                                                                   |
-| **Sort**          | `sort`                                                                                                                                                                                                   |
-| **Manual**        | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`                                                                                                                                         |
-| **Help**          | `help`                                                                                                                                                                                                   |
-| **Exit**          | `exit`                                                                                                                                                                                                   |
+| Action            | Command Format                                                                                                                      | Example                                                                      |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Add**           | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] `                       | `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`  |
+| **Delete**        | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID`                                                                                | `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`                    |
+| **Delete Module** | `deleteModule m/MODULE_CODE`                                                                                                        | `deleteModule m/CS2100`                                                      |
+| **Find**          | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`                                                            | `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`                  |
+| **Task**          | `task i/STUDENT_ID`                                                                                                                 | `task i/AXXXXXXXR`                                                           |
+| **Mark**          | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX`                                                                                           | `mark i/AXXXXXXXR idx/1`                                                     |
+| **Unmark**        | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX`                                                                                           | `unmark i/AXXXXXXXR idx/1`                                                   |
+| **Edit**          | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] `  | `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`                |
+| **Clear**         | `clear`                                                                                                                             | `clear`                                                                      |
+| **Archive**       | `archive`                                                                                                                           | `archive`                                                                    |
+| **List**          | `list`                                                                                                                              | `list`                                                                       |
+| **Assign**        | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME`                                                         | `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`   |
+| **Progress**      | `progress m/MODULE_CODE tn/TASK_NAME`                                                                                               | `progress m/CS2103T tn/assignment 1`                                         |
+| **Delete Task**   | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`                                                    | `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`    |
+| **History**       | `history`                                                                                                                           | `history`                                                                    |
+| **Undo**          | `undo`                                                                                                                              | `undo`                                                                       |
+| **Sort**          | `sort`                                                                                                                              | `sort`                                                                       |
+| **Manual**        | `manual [COMMAND_NAME]`                                                                                                             | `manual` (or) `manual add`                                                   |            
+| **Help**          | `help`                                                                                                                              | `help`                                                                       |
+| **Exit**          | `exit`                                                                                                                              | `exit`                                                                       |
 
 ## Glossary
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
