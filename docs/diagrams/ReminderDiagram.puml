@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+'https://plantuml.com/sequence-diagram
+
+box Main STORAGE_COLOR_T1
+
+participant ":MainApp" as MainApp STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "reminderList:UniqueReminderList" as UniqueReminderList MODEL_COLOR
+participant "reminder:Reminder" as Reminder MODEL_COLOR
+participant ":Company" as Company MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+box Storage LOGIC_COLOR_T1
+participant ":Storage" as Storage LOGIC_COLOR
+end box
+
+MainApp -> MainApp : initModelManager(Storage, ReadOnlyUserPrefs)
+
+MainApp -> UniqueReminderList : getInstance()
+activate UniqueReminderList
+
+UniqueReminderList --> MainApp : reminderList
+deactivate UniqueReminderList
+
+
+MainApp -> Storage : readCompanyList()
+activate Storage
+Storage --> MainApp : companyList
+deactivate Storage
+
+MainApp -> UniqueReminderList : setReminders(companyList)
+activate UniqueReminderList
+
+loop for each company in companyList
+UniqueReminderList -> Company :getRoleList()
+deactivate UniqueReminderList
+activate Company
+
+Company --> UniqueReminderList : roleList
+deactivate Company
+activate UniqueReminderList
+loop for each role in roleList
+UniqueReminderList -> UniqueReminderList : addFromRole(Company, Role)
+activate UniqueReminderList
+opt role reminder date is within reminder window
+create Reminder
+UniqueReminderList -> Reminder : Reminder(CompanyName, RoleName, Status, ReminderDate)
+activate Reminder
+deactivate UniqueReminderList
+Reminder --> UniqueReminderList : reminder
+deactivate Reminder
+
+activate UniqueReminderList
+UniqueReminderList -> UniqueReminderList : add(reminder)
+deactivate UniqueReminderList
+
+end
+end
+end
+
+create ModelManager
+UniqueReminderList -> ModelManager :ModelManager(ReadOnlyCompanyList, ReadOnlyUserPrefs, ReminderList)
+activate ModelManager
+deactivate UniqueReminderList
+ModelManager --> MainApp :ModelManager
+deactivate ModelManager
+
+@enduml

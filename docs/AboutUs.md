@@ -5,55 +5,66 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `cs2103tATeam@gmail.com`
 
 ## Project team
 
-### John Doe
+### NANAYAKKARAWASAM PERU KANDAGE NUWAN JANAKA
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/janakanuwan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+
+[[github](https://github.com/janakanuwan)]
+[[portfolio](team/janakanuwan.html)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Brendon Lau
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brendonlau.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+
+[[github](https://github.com/BrendonLau)]
+[[portfolio](team/brendonlau.html)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Git
 
-### Johnny Doe
+### Ng Hong Liang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jinnhl.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jinnhl)]
+[[portfolio](team/jinnhl.html)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Integration Reviewer
+* Responsibilities: Testing 
 
-### Jean Doe
+### Justin Yip
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justinyjt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/justinyjt)] [[portfolio](team/justinyjt.html)]
 
-* Role: Developer
+* Role: Code Quality and Documentation Reviewer
+* Responsibilities: Docs
+
+### Kerby Soh
+
+<img src="images/kerbysoh.png" width="200px">
+
+[[github](http://github.com/kerbysoh)]
+[[portfolio](team/kerbysoh.html)]
+
+* Role: Testing Reviewer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Peter Jung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/petermonky.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/petermonky)]
+[[portfolio](team/petermonky.html)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Frontend Developer
+* Responsibilities: GUI

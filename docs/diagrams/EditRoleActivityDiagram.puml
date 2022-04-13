@@ -1,0 +1,28 @@
+@startuml
+
+start
+:User edits a role in a specific company;
+:Parse command;
+
+if () then ([role command is valid])
+    if () then ([company index is valid])
+        if () then ([role index is valid])
+            if () then ([fields are valid]))
+                :Create new role object with updated fields;
+                :Update old role with new role object;
+                :Response box displays updated role;
+            else ([else])
+                :Response box shows the field
+                restriction that is violated;
+            endif
+        else ([else])
+            :Response box shows invalid role index;
+        endif
+    else ([else])
+        :Response box shows invalid company index;
+    endif
+else ([else])
+    :Response box shows invalid command;
+endif
+stop
+@enduml

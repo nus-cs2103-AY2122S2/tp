@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CompanyListParser" as CompanyListParser LOGIC_COLOR
+participant ":SetReminderWindowCommandParser" as SetReminderWindowCommandParser LOGIC_COLOR
+participant ":SetReminderWindowCommand" as SetReminderWindowCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box UserPrefs USERPREFS_COLOR_T1
+participant ":UserPrefs" as UserPrefs USERPREFS_COLOR
+end box
+
+[-> LogicManager : execute("setWindow 14")
+activate LogicManager
+
+LogicManager -> CompanyListParser : parseCommand("setWindow 14")
+activate CompanyListParser
+
+create SetReminderWindowCommandParser
+CompanyListParser -> SetReminderWindowCommandParser
+activate SetReminderWindowCommandParser
+
+SetReminderWindowCommandParser --> CompanyListParser
+deactivate SetReminderWindowCommandParser
+
+CompanyListParser -> SetReminderWindowCommandParser : parse("14")
+activate SetReminderWindowCommandParser
+
+create SetReminderWindowCommand
+SetReminderWindowCommandParser -> SetReminderWindowCommand : SetReminderWindowCommand(14)
+activate SetReminderWindowCommand
+
+SetReminderWindowCommand --> SetReminderWindowCommandParser
+deactivate SetReminderWindowCommand
+
+SetReminderWindowCommandParser --> CompanyListParser
+deactivate SetReminderWindowCommandParser
+
+CompanyListParser --> LogicManager
+deactivate CompanyListParser
+
+LogicManager -> SetReminderWindowCommand : execute(model)
+activate SetReminderWindowCommand
+
+SetReminderWindowCommand -> Model : setWindow(14)
+activate Model
+
+Model -> UserPrefs : setWindow(14)
+activate UserPrefs
+
+UserPrefs --> Model
+deactivate UserPrefs
+
+Model --> SetReminderWindowCommand
+deactivate Model
+
+create CommandResult
+SetReminderWindowCommand-> CommandResult
+activate CommandResult
+
+CommandResult --> SetReminderWindowCommand
+deactivate CommandResult
+
+SetReminderWindowCommand --> LogicManager : result
+deactivate SetReminderWindowCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+!include detailed.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class FavouriteCompanyCommandParser {
+    +FavouriteCompanyCommand parse(String args)
+}
+Class FavouriteCompanyCommand {
+    -Index targetIndex
+    +FavouriteCompanyCommand(Index companyIndex)
+    +CommandResult execute(Model model)
+    +{static} Company createFavouritedCompany(Company companyToFavourite)
+}
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+FavouriteCompanyCommand -up-|> Command
+
+FavouriteCompanyCommandParser -up-|> Parser
+FavouriteCompanyCommandParser .down.> FavouriteCompanyCommand: creates >
+
+FavouriteCompanyCommandParser -[hidden]Down- FavouriteCompanyCommand
+@enduml

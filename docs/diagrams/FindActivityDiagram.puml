@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+
+start
+:User finds roles using role keyword(s) and/or company keyword(s);
+:Parse command;
+if () then ([valid command format])
+    if () then ([any keyword matches any role])
+        :Company result list shows companies containing \n matched roles, with only the matched roles displayed;
+    else ([else])
+        :Company result list shows nothing;
+    endif
+else ([else])
+    :Response box shows that the command format is
+    invalid, and the details of Find command;
+    :Company result list shows current list of companies;
+endif
+stop
+
+@enduml

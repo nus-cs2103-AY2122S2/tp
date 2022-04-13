@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+
+start
+:User favourites a specific company;
+:Parse command;
+if () then ([valid command format])
+    :Parse index;
+    if () then ([valid index])
+        if () then ([company at index is not favourited])
+            :Favourite the specified company;
+        else ([else])
+            :Response box shows that the company
+            had already been favourited;
+        endif
+    else ([else])
+        :Response box shows that
+        the index is invalid;
+    endif
+else ([else])
+    :Response box shows that the command format is invalid,
+    and the details of Favourite command;
+endif
+stop
+
+@enduml

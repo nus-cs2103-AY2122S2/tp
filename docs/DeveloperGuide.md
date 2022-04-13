@@ -2,41 +2,85 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+# Table of Contents <a id="toc"></a>
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+* [Implementation](#implementation)
+    * [Add role feature](#add-role-feature)
+      * [Implementation](#implementation-add)
+      * [Design considerations](#design-considerations-add)
+    * [Edit role feature](#edit-role-feature)
+      * [Implementation](#implementation-edit)
+      * [Design considerations](#design-considerations-edit)
+    * [Delete role feature](#delete-role-feature)
+      * [Implementation](#implementation-delete)
+      * [Design considerations](#design-considerations-delete)
+    * [Find feature](#find-feature)
+      * [Implementation](#implementation-find)
+      * [Design considerations](#design-considerations-find)
+    * [Reminder feature](#reminder-feature)
+        * [Implementation](#implementation-reminder)
+    * [Set reminder window feature](#set-reminder-window-feature)
+        * [Implementation](#implementation-set-reminder-window)
+    * [Favourite feature](#favourite-feature)
+      * [Implementation](#implementation-favourite)
+      * [Design considerations](#design-considerations-favourite)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
+  * [Start and exit the application](#start-and-exit-the-application)
+  * [Adding a company](#adding-a-company)
+  * [Editing a company](#editing-a-company)
+  * [Deleting a company](#deleting-a-company)
+  * [Favouriting a company](#favouriting-a-company)
+  * [Unfavouriting a company](#unfavouriting-a-company)
+  * [Adding a role](#adding-a-role)
+  * [Editing a role](#editing-a-role)
+  * [Deleting a role](#deleting-a-role)
+  * [Finding a role](#finding-a-role)
+  * [Using the reminder feature](#using-reminders)
+* [Appendix: Effort](#effort)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements <a id="acknowledgements"></a>
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+* This project is created based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Setting up, getting started <a id="setting-up-getting-started"></a>
 
+Refer to the guide [Setting up and getting started](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Design <a id="design"></a>
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: if the image is too small, try opening it in a new tab by right-clicking the image and select "Open image in new tab" for a better view.
+
 </div>
 
-### Architecture
+### Architecture <a id="architecture"></a>
+![Architecture Diagram of the Tinner](images/ArchitectureDiagram.png)
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+The Architecture Diagram given above explains the high-level design of the Tinner. Tinner follows a multi-layered architecture where the lower layers are independent of higher layers. For example, `Main` can use methods found in `Storage` but not the other way around.
+Below is a quick overview of main components and how they interact with each other.
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/MainApp.java). It is responsible for,
 
-Given below is a quick overview of main components and how they interact with each other.
-
-**Main components of the architecture**
-
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -49,199 +93,390 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
+Each of the four components,
+
+* defines its _API_ in an `interface` with the same name as the Component.
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
+
+![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deleteCompany 1` when in project view.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
-Each of the four main components (also shown in the diagram above),
-
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<img src="images/ComponentManagers.png" width="300" />
+![Sequence Diagram of the deleteCompany](images/LogicClassDiagram.png)
 
 The sections below give more details of each component.
 
-### UI component
-
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+### UI Component <a id="ui-component"></a>
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+**API** :
+[`Ui.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/ui/Ui.java)
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CompanyListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `CommandBox` and `ResultDisplay` appear at the top of the application for the user
+to interact with the application.
+
+The `CompanyListPanel` appears at the center of the application displaying key information of `Company`
+from `CompanyCard`.
+
+The `RoleListPanel` appears at the bottom of `CompanyCard` displaying key information of `Role` from `RoleCard`.
+
+The `ReminderWindow` appears as a separate window displaying key information of `Reminder` from `ReminderCard`.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 The `UI` component,
-
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* listens for changes to `Model` data so that the `UI` can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Company` and `Role` objects residing in the `Model`.
 
-### Logic component
+### Logic Component <a id="logic-component"></a>
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+**API** :
+[`Logic.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/logic/Logic.java)
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+* When `Logic` is called upon to execute a command, it uses the `CompanyListParser` class to parse the user command.
+* This results in a `Command` object (or more precisely, an object of one of its subclasses e.g., `AddCompanyCommand`) which is executed by the `LogicManager`.
+* The command can communicate with the `Model` when it is executed (e.g. to add a company).
+* The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteCompany 1")` API call.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+![Interactions Inside the Logic Component for the `deleteCompany 1` Command](images/DeleteCompanySequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCompanyCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+The other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command can be represented as follows:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+* When called upon to parse a user command, the `CompanyListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCompanyCommandParser`) which uses the other classes shown above (e.g. `ArgumentMultimap`, `ParserUtil`, etc.) to parse the user command and create a `XYZCommand` object (e.g., `AddCompanyCommand`) which the `CompanyListParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCompanyCommandParser`, `DeleteCompanyCommandParser`, …) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<img src="images/ModelClassDiagram.png" width="450" />
+### Model Component <a id="model-component"></a>
 
+![Structure of the Model Component](images/ModelClassDiagram.png)
+
+Breakdown of the Company, RoleManager and Reminder packages:
+
+![Structure of the Company and RoleManager Classes](images/CompanyRoleManagerClassDiagram.png)
+
+**API** :
+[`Model.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/model/Model.java)
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
+* stores the currently selected `Company`, `Role` and `Reminder` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* the `Reminder` objects store data of a role in a company that has a reminder date which is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+### Storage Component <a id="storage-component"></a>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-</div>
-
-
-### Storage component
-
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
-<img src="images/StorageClassDiagram.png" width="550" />
+**API** :
+[`Storage.java`](https://github.com/AY2122S2-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/tinner/storage/Storage.java)
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+* can save `UserPref` objects in json format and read it back.
+* can save `JsonAdaptedCompany` objects in `JsonSerializableCompanyList` in json format and read it back.
+* can save `JsonAdaptedRole` objects in `JsonAdaptedCompany` in json format and read it back
+* inherits from both `CompanyListStorage` and `UserPrefStorage`,meaning that it can be
+  treated as either one (if the functionality of only one is required)
+* depends on classes like `Company` and `Role` in the `Model` component (as it is the `Storage` component's
+  job to save/retrieve objects that belong to the `Model`)
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>` format, as show in the class diagram above.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Implementation <a id="implementation"></a>
+
+Due to some of our features having duality in its implementaion, we have decided to omit those features exclusive
+to `company` that have a `role` counterpart. This is due to the `role` counterpart being more complicated as it builds
+directly on top of the features exclusive to `company`.
+
+### Add role feature <a id="add-role-feature"></a>
+The `addRole` command for the `Role` item allows the user to add a new role by specifying
+the company index this role is attached to, and the details of the role with the appropriate prefix.
+
+The fields of the `Role` that are necessary are as follows:
+* `RoleName`
+* `Status`
+
+The fields of the `Role` that are optional are as follows:
+* `ReminderDate`
+* `Description`
+* `Stipend`
+
+#### Implementation <a id="implementation-add"></a>
+
+![UML diagram of the AddRole feature](images/AddRoleDiagram.png)  
+The `addRole` command is primarily implemented by `AddRoleCommandParser` a class that extends `Parser`, 
+and `AddRoleCommand`, which is a class that extends `Command`.
+
+The `AddRoleCommandParser` has three main objective
+1. Ensure user inputs all necessary fields.
+2. Ensure validity of all fields from user input.
+3. If 1 and 2 are satisfied, store the user inputs into a new `Role` object.
+
+If all three objectives are achieved, the newly created `Role` object would then be passed to `AddRoleCommand`
+Upon completion of executing `addRole` command, the displayed list of roles would be dynamically updated accordingly.
+
+Given below is an example usage scenario and how the add role feature behaves at each step:
+1. The user executes the command `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59` to add a new role into the 1<sup>st</sup> company.
+2. Then the `AddRoleCommandParser#parse()` parses and creates a `Role` object with fields to be added such as the roleName `Data Analyst` before creating an instance of `AddRoleCommand` with it.
+3. The `AddRoleCommandParser` returns the `AddRoleCommand` to the `LogicManager`. `LogicManager` invokes `AddRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so add the new role into the company's `RoleManager`.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display changes to the user.
+
+The following sequence diagram shows how the `addRole` command operation works with the
+valid user input `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59`:
+![Sequence diagram of the AddRole feature](images/AddRoleSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an `addRole` command:    
+![Activity diagram of the AddRole feature](images/AddRoleActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-add"></a>
+* Alternative 1 (current choice): Abstract `Role`'s storage to be handled by `RoleManager`
+    * Pros: 
+      * Reduce coupling between `Role` and `Company` as the `addRole` feature is implemented
+      via the `Role`'s model instead of the `Company`'s model.
+      * `Company` does not need to worry about the implementation details of `Role`,
+      which it shouldn't in the first place.
+    * Cons:
+      * Increases code duplication as `Company` class has to retain methods which acts as signals for
+      invoking execution of methods in `Role`.
+* Alternative 2 (used in v1.2): `Role` is stored in a Java List as an attribute of `Company` class
+    * Pros: 
+      * All commands related to `Role` can be implemented and handled on `Company` level, reduces code repetition.
+      * `AddRole` feature could be achieved via calling on an attribute of `Company`.
+    * Cons:
+      * Exposes the internal implementation of `Role` to `Company` even though they are different.
+      * Increases coupling between `Role` and `Company`.
+
+
+### Edit role feature <a id="edit-role-feature"></a>
+The `editRole` command for the `Role` item allows the user to update any fields by specifying
+the company index, role index and prefixes of the fields to be updated.
+
+The aforementioned fields of the `Role` that can be modified are as follows:
+* `RoleName`
+* `Status`
+* `ReminderDate`
+* `Description`
+* `Stipend`
+
+#### Implementation <a id="implementation-edit"></a>
+
+![UML diagram of the EditRole feature](images/EditRoleDiagram.png)  
+The `editRole` command is primarily implemented by `EditRoleCommandParser` a class that
+extends `Parser`, and `EditRoleCommand`, which is a class that extends `Command`. The `EditRoleCommand` has
+an inner class `EditRoleDescriptor` that holds the changes to fields of the `Role` to be modified.
+Upon completion of executing `editRole` command, the displayed list of roles would be dynamically updated accordingly.
+
+Given below is an example usage scenario and how the edit role feature behaves at each step:
+1. The user executes the command `editRole 1 1 d/react js` to edit the description in the 1<sup>st</sup> role from the 1<sup>st</sup> company.
+2. Then the `EditRoleCommandParser#parse()` parses and creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` before creating an instance of `EditRoleCommand` with it.
+3. The `EditRoleCommandParser` returns the `EditRoleCommand` to `LogicManager`. `LogicManager` invokes `EditRoleCommand#execute()` which validates the company and role indexes, if so edit its description to the user input.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display changes to the user.
+
+The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
+![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
+
+The following activity diagram summarizes what happens when a user executes an `editRole` command:    
+![Activity diagram of the EditRole feature](images/EditRoleActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-edit"></a>
+* Alternative 1 (current choice): Logic components interact with the `Model` interface solely and not directly with model’s internal components: `Company`, `RoleManager`, `UniqueRoleList`.
+    * Pros:
+      * The `Model` interface acts as a Façade to allow clients such as `Logic` to access to the functionalities of its internal components without exposing the implementation details.
+      Thus, reducing coupling between `Model` and other components as all functionalities of modifying `Role` can be accessed via the `Model` interface.
+      * This increases maintainability as `EditRoleCommand` will only interact with `Model` interface with little concern to any changes in the implementation details of the internal components of `Model`.
+    * Cons:
+      * This requires additional code within `Model` as more methods are needed for other components to access the functionality of its internal components.
+* Alternative 2 (used in v1.2): `Model` allows clients to access its internal components directly such as `Company`, `RoleManager`, `UniqueRoleList` to modify `Role`.
+  * Pros:
+    * No additional code is needed as clients can operate directly on the internals of `Model`.
+  * Cons:
+    * This exposes the internal implementation of `Model` and increases coupling between `EditRoleCommand` and, `Company`, `RoleManager` and `UniqueRoleList`.
+    * It is harder to maintain as any changes to the internal implementation of `Model` will affect the implementation of `EditRoleCommand`.
+
+### Delete role feature <a id="delete-role-feature"></a>
+The `deleteRole` command for the `Role` item allows the user to delete any role under a `Company` item by specifying the company index and role index that which are associated with the `Role` item to be deleted.
+
+#### Implementation <a id="implementation-delete"></a>
+![UML diagram of the DeleteRole feature](images/DeleteRoleDiagram.png)
+
+The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that extends `Parser`, as well as `DeleteRoleCommand`, which is a class that extends `Command`.
+The `DeleteRoleCommand`, upon completion, dynamically updates the displayed list of roles accordingly.
+
+Given below is an example usage scenario and how the delete role feature behaves at each step:
+1. The user executes the command `deleteRole 1 1` to delete the 1<sup>st</sup> role from the 1<sup>st</sup> company.
+2. Then the `DeleteRoleCommandParser#parse()` parses and creates an instance of `DeleteRoleCommand` with the company index and role index parsed.
+3. The `DeleteRoleCommandParser` returns the `DeleteRoleCommand` to `LogicManager`. `LogicManager` invokes `DeleteRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so deletes the role.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
+
+
+The following sequence diagram shows how the `deleteRole` command operation works with the user input `deleteRole 1 1`:
+
+![Sequence diagram of the DeleteRole feature](images/DeleteRoleSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an `deleteRole` command:    
+![Activity diagram of the DeleteRole feature](images/DeleteRoleActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-delete"></a>
+* Alternative 1 (current choice): Split `delete` feature into `deleteCompany` and `deleteRole`
+    * Pros:
+        * Prevents users from accidentally deleting an entire company when intended action was to only delete roles.
+        * More intuitive to users as it is easier to associate the differences with words compared to format of command. 
+    * Cons:
+        * Increases code repetition due to both delete features have similar components.
+* Alternative 2 (used in v1.2): Have a unified `delete` feature that changes functionality based off user input.
+    * Pros:
+        * Reduce code repetition due to not having two different class and two different parsers.
+    * Cons:
+        * User might accidentally delete an entire `company` if command was sent too early, resulting in the `company` and all associated `roles` being deleted.
+        * Due to the lack of an undo feature, this is can be a massive problem.
+
+### Find feature <a id="find-feature"></a>
+
+The `find` feature allows users to filter the company list to find roles by specifying company name keywords and role name keywords.
+
+#### Implementation <a id="implementation-find"></a>
+
+![UML diagram of the Find feature](images/FindDiagram.png)
+
+Given below is an example usage scenario and how the find feature behaves at each step:
+1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
+2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
+3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
+4. The `Parser` returns the `FindCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
+
+
+The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
+
+![UML diagram of the Find feature](images/FindSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `find` command:
+
+![UML diagram of the Find feature](images/FindActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-find"></a>
+
+* Alternative 1 (current choice): The use of one unified `find` command with prefixes `c/` and `r/` to concurrently filter the company list by role name and company name.
+    * Pros:
+        * Users are able to quickly sieve through the company list to find the specific roles.
+    * Cons:
+        * Increased dependencies and coupling between components, as `model` now depends on both classes `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
+* Alternative 2 (used in v1.2): `find` only allows users to filter the company list by company name keywords and not role name keywords.
+    * Pros:
+        * Reduced coupling between components as `model` depends on `CompanyNameContainsKeywordsPredicate` but not `RoleNameContainsKeywordsPredicate`.
+    * Cons:
+        * Users have less flexibility in searching for specific roles, especially when they have applied for multiple roles within the same company. They can only find all roles which belong to specific companies.
+
+### Reminder feature <a id="reminder-feature"></a>
+Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
+
+The fields of the `Reminder` that will be shown are as follows:
+* `CompanyName`
+* `RoleName`
+* `ReminderDate`
+* `Status`
+
+#### Implementation <a id="implementation-reminder"></a>
+
+Given below is an example scenario on how the reminder feature works:
+1. The user has a role in a company with a reminder date of 30-04-2022 23:59.
+2. Assuming that the reminder window is at its default of 7 days, and today is within 7 days from 30th April 2022, when the user opens the application, the reminder pane will display the given role and its relevant fields as mentioned above.
+
+The following sequence diagram shows how the reminder feature works:
+![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)
+
+The following activity diagram summarises what happens when the user opens the application to see upcoming reminders:
+![Activity diagram of the Reminder feature](images/ReminderActivityDiagram.png)
+
+### Set reminder window feature <a id="set-reminder-window-feature"></a>
+
+The `setWindow` feature allows users to set the reminder window to a specific number of days. Any roles stored in the company list that fall within the set window will be displayed in the reminder pane that automatically opens up on start.
+
+#### Implementation <a id="implementation-set-reminder-window"></a>
+
+![UML diagram of the SetWindow feature](images/SetReminderWindowDiagram.png)
+
+Given below is an example usage scenario and how the set reminder window feature behaves at each step:
+1. The user executes the command `setWindow 14` to set the reminder window to 14 days.
+2. Then the `SetReminderWindowCommandParser#parse()` creates an instance of `SetReminderWindowCommand` by passing the number of days to which the reminder window will be set.
+3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
+4. The `Parser` returns the `SetReminderWindowCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order display the changes to the user.
+
+
+The following sequence diagram shows how the `setWindow` command operation works with the user input `setWindow 14`:
+
+![UML sequence diagram of the SetWindow feature](images/SetReminderWindowSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `setWindow` command:
+
+![UML activity diagram of the SetWindow feature](images/SetReminderWindowActivityDiagram.png)
+
+### Favourite feature <a id="favourite-feature"></a>
+
+The `favourite` feature allows users to highlight specific companies. Favourited companies are indicated using a star beside their company name in the GUI.
+
+#### Implementation <a id="implementation-favourite"></a>
+
+![UML diagram of the Favourite feature](images/FavouriteDiagram.png)
+
+Given below is an example usage scenario and how the favourite feature behaves at each step:
+1. The user executes the command `favourite 1` to favourite the first company within the displayed company list.
+2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
+3. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
+4. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
+5. The `Parser` returns the `FavouriteCompanyCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
+
+
+The following sequence diagram shows how the `favourite` command operation works with the user input `favourite 1`:
+
+![UML diagram of the Favourite feature](images/FavouriteSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `favourite` command:
+
+![UML diagram of the Favourite feature](images/FavouriteActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-favourite"></a>
+
+* Alternative 1 (current choice): Although both `favourite` and `editCompany` commands edit fields within a specified company, we decided to make them two separate commands.
+    * Pros:
+        * Users are able to favourite roles much more easily by just providing the index.
+        * More intuitive to users to use `favourite` rather than `editCompany` to favourite a company.
+    * Cons:
+        * This feature was more challenging to implement as compared to simply integrating the functionality of `favourite` into `editCompany`.
+* Alternative 2: Allowing the favourite status field of a company to be modified through `editCompany`.
+    * Pros:
+        * Users can modify all fields within a company, including the favourite status, with the use of one single command. 
+    * Cons:
+        * It is less straightforward for users to use `editCompany` to favourite a company. This also means that the favourite status field will not stand out to users.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Documentation, logging, testing, configuration, dev-ops <a id="documentation-logging-testing-configuration-dev-ops"></a>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -251,127 +486,527 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements <a id="requirements"></a>
 
-### Product scope
+### Product scope <a id="product-scope"></a>
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Students who...
+
+* want to keep track of tech internships
+* are disorganised and tend to miss deadlines
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+1. **Tracks** essential information such as statuses and deadlines at a glance.
+2. **Reminds** you of important deadlines so that you will not miss anything about your application.
+3. Allows you to **Review** the process and take down notes so that you can ace your next application.
 
-### User stories
+### User stories <a id="user-stories"></a>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                          |
+|----------|----------------|----------------------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`  | user           | add a new company                                                          | add new internship roles to said company                 |
+| `* * *`  | user           | add a new internship role                                                  | keep track of said internship application process        |
+| `* * *`  | user           | delete a company                                                           | remove companies that I am no longer interested in       |
+| `* * *`  | user           | delete an internship role                                                  | remove internship roles that are outdated or complete    |
+| `* * *`  | user           | see a summary of my internship applications at a glance                    | have a general overview of the status of my applications |
+| `* *`    | user           | search keywords like company name, internship roles, etc.                  | locate my internship application quickly                 |
+| `* *`    | user           | sort applications in chronological order of deadlines                      | keep track of the timeline of applications               |
+| `* *`    | user           | modify each item                                                           | keep Tinner and all its contents up to date              |
+| `* *`    | user           | be reminded of upcoming deadlines                                          | be on time with my applications                          |
+| `* *`    | organised user | tag applications and events                                                | keep items compartmentalised and thus easier to access   |
+| `* *`    | new user       | learn how to use the application via a guide                               | use the application periodically with ease               |
+| `* *`    | user           | mark certain entries as my favourites                                      | view those that I am more interested in at a glance      |
+| `*`      | user           | sort company names in alphabetical order                                   | locate a company that I may have forgotten about         |
+| `*`      | user           | export calendar dates of important events into a .ics or .pdf file         | keep track of my events on an external platform          |
+| `*`      | long term user | archive/hide irrelevant events                                             | not get distracted by what is not important              |
+| `*`      | user           | export a list of interview reviews of different companies into a .csv file | share my experience with juniors and peers               |
 
-*{More to be added}*
 
-### Use cases
+### Use cases <a id="use-cases"></a>
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Tinner` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a company**
+
+Guarantees: a company will be successfully created
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a specific company and its information in the list
+2. Tinner adds a company to the list
+3. Tinner displays the list of companies
 
-    Use case ends.
+   Use case ends
 
 **Extensions**
 
-* 2a. The list is empty.
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
 
-  Use case ends.
+&emsp;1b. The specific company is already stored <br/>
+&emsp;&emsp;1b1. Tinner shows a duplicate company error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC02 - Edit a company** <a id="uc02"></a>
 
-      Use case resumes at step 2.
+Precondition: there exists at least one company in Tinner
 
-*{More to be added}*
+**MSS**
+1. User request to edit certain details of a specific company
+2. Tinner edits certain details specified by the user
+3. Tinner displays the list of companies with updated details
 
-### Non-Functional Requirements
+    Use case ends
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Extensions**  
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-*{More to be added}*
+&emsp;1b. Company already exists in Tinner format <br/>
+&emsp;&emsp;1b1. Tinner shows error that company is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-### Glossary
+&emsp;1c. Field restrictions violated <br/>
+&emsp;&emsp;1c1. Tinner shows error that a specific restriction is violated <br/> 
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
---------------------------------------------------------------------------------------------------------------------
+**Use case: UC03 - Delete a company**
 
-## **Appendix: Instructions for manual testing**
+Precondition: there exists at least one company in Tinner
 
-Given below are instructions to test the app manually.
+Guarantees: a company is successfully removed from Tinner
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**MSS**
 
-</div>
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to delete a specific company in the list
+4. Tinner deletes the company
 
-### Launch and shutdown
+   Use case ends
 
-1. Initial launch
+**Extensions**
 
-   1. Download the jar file and copy into an empty folder
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+**Use case: UC04- Add an internship role**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+Precondition: the company to which the internship role will belong has already been created
 
-1. _{ more test cases …​ }_
+Guarantees: an internship role will be successfully created
 
-### Deleting a person
+**MSS**
 
-1. Deleting a person while all persons are being shown
+1. User requests to view a list of companies 
+2. User requests to add an internship role and provides the relevant details 
+3. Tinner adds the internship role to the list of roles of the specific company
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   Use case ends
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+**Extensions**
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+**Use case: UC05 - Edits an internship role** <a id="uc05"></a>
 
-### Saving data
+Precondition: there exists at least one role associated with a company in Tinner
 
-1. Dealing with missing/corrupted data files
+**MSS**
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. User requests to edit a specific internship role of a company 
+2. Tinner edits certain details specified by the user 
+3. Tinner displays the list of companies with roles and its updated details
+   
+    Use case ends
 
-1. _{ more test cases …​ }_
+**Extensions**  
+&emsp; 1a. The input does not adhere to the command format <br/>
+&emsp; &emsp; 1a1. Tinner shows an invalid input format error message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1b. The input company index is invalid <br/>
+&emsp; &emsp; 1b1. Tinner shows error that the company index is invalid  message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1c. The input internship role index is invalid <br/>
+&emsp; &emsp; 1c1. Tinner shows error that the role index is invalid message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1d. Role already exists in Tinner format <br/>
+&emsp;&emsp; 1d1. Tinner shows error that role is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp; 1e. Field restrictions violated <br/>
+&emsp;&emsp; 1e1. Tinner shows error that a specific restriction is violated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+
+**Use case: UC06 - Delete an internship role**
+
+Precondition: there exists at least one internship role associated with a company 
+
+Guarantees: a specified internship role is successfully removed from the associated company
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to delete a specific internship role of a company in the list
+4. Tinner deletes the internship role
+
+   Use case ends
+
+**Extensions**
+
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 2
+
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3c. The input internship role index is invalid <br/>
+&emsp;&emsp;3c1. Tinner shows an internship role index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+
+**Use case: UC07 - Find a company with an internship role**
+
+Precondition: there exists at least one internship role associated with a company
+
+Guarantees: all internship role which matches the user input will be successfully displayed from
+all companies matches the user input
+
+**MSS**
+
+1. User requests to find some internship roles in some company and provides keywords for both.
+2. Tinner displays all companies that matches the company keyword and have at least one role which matches the role keyword.
+
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp;1b. The input company keyword is invalid <br/>
+&emsp;&emsp;1b1. Tinner shows invalid company name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1c. The input role keyword is invalid <br/>
+&emsp;&emsp;1c1. Tinner shows invalid role name error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+&emsp;1d. The input role keyword is absent <br/>
+&emsp;&emsp;1d1. Tinner shows all companies that matches the company keyword and all their roles <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+&emsp;1e. The input company keyword is absent <br/>
+&emsp;&emsp;1e1. Tinner shows all companies with at least one role that matches the role keyword and display all <br/>
+&emsp;&emsp;&emsp;&emsp;Use case ends
+
+
+**Use case: UC08 - List all companies**
+
+Precondition: there exist at least one company stored in Tinner
+
+Guarantees: every company stored in Tinner will be shown
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner displays all companies in its storage
+
+   Use case ends
+
+**Use case: UC09 - Using the reminder feature**
+
+Precondition: there exist at least one company stored in Tinner
+
+Guarantees: every role in companies that have reminder dates within the reminder window from today will be shown
+
+**MSS**
+
+1. The user [adds a role(UC02)](#uc02) or [edits a role(UC05)](#uc05) that has a reminder date.
+2. Tinner shows success message and adds/edits the role.
+3. The user closes the application and opens it up again immediately or some time in the future
+4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date
+    
+   Use case ends
+
+**Use case: UC10 - Using the set reminder window feature**
+
+Guarantees: the reminder window will be successfully updated
+
+**MSS**
+
+1. User requests to update reminder window to a new reminder window
+2. Tinner updates the reminder window
+3. The updated reminder window is reflected upon restarting the application
+    
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input reminder window is invalid (i.e. negative or bigger than 30) <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input reminder window error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+**Use case: UC11 - Favouriting a company and viewing all favourited companies**
+
+Precondition: there exist at least one company in Tinner
+
+Guarantees: a company is successfully favourited within Tinner
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to favourite a specific company in the list
+4. Tinner favourites the company
+5. User requests to view all favourited companies
+6. Tinner shows a list of all favourited companies and their associated internship roles
+  
+   Use case ends
+
+**Extensions**
+
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3c. The specific company to be favourited had already been favourited <br/>
+&emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+**Use case: UC12 - Unfavouriting a company**
+
+Precondition: there exist at least one company in Tinner 
+
+Guarantees: a company is successfully unfavourited within Tinner
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to unfavourite a specific company in the list
+4. Tinner unfavourites the company
+
+   Use case ends
+
+**Extensions**
+
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3c. The specific company to be unfavourited is already unfavourited<br/>
+&emsp;&emsp;3c1. Tinner shows a company already unfavourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+
+### Non-Functional Requirements <a id="non-functional-requirements"></a>
+
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
+2. Should be able to hold up to 1000 items (companies and internship roles) without a noticeable sluggishness in performance for typical usage
+3. Should require no installation
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+5. Should be responsive and have a latency of less than 3 seconds
+
+### Glossary <a id="glossary"></a>
+
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **CLI**: Command Line Interface
+* **MSS**: Main Success Scenario
+* **[Command Box](https://ay2122s2-cs2103t-t17-1.github.io/tp/UserGuide.html#navigation)**: Text field for users to key in their commands                                                                                                                             
+* **[Response Box](https://ay2122s2-cs2103t-t17-1.github.io/tp/UserGuide.html#navigation)**:  Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it
+
+## Appendix: Instructions for manual testing <a id="instructions-for-manual-testing"></a>
+
+### Start and exit the application <a id="start-and-exit-the-application"></a>
+1. To start the application
+   1. Download the tinner.jar file and copy into an empty folder. 
+   2. On the command terminal, run the following command in the directory containing tinner.jar: `java -jar tinner.jar`  
+   Expected: Shows the GUI with internship application examples. 
+2. To exit the application
+   1. Enter `exit` in the command box.   
+   Expected: The application will close shortly. 
+   
+
+### Adding a company <a id="adding-a-company"></a>
+1. Test case: `addCompany n/Govtech p/9222222 e/xyz@gov.com a/10 Pasir Panjang Rd, #10-01 Mapletree Business City, Singapore 117438`
+   1. Expected: Company list is updated with the addition of "GovTech". The response box shows the details of all the fields added.
+2. Test case: `addCompany n/Tik Tok e/xyz@tiktok.com`
+   1. Expected: Company list is updated with the addition of "Tik Tok". The response box shows the details of the fields added.
+3. Test case: `addCompany e/t@tesla.com p/99944426 n/Tesla`
+   1. Expected: Company list is updated with the addition of "Tesla". The response box shows the details of the fields added.
+4. Test case: `addCompany n/Tinner p/ e/t@tinner.com a/fairy land`
+   1. Expected: Company list is not updated. The response box shows error message that there must be a value after a prefix.
+5. Other incorrect test cases to try: `addCompany`, and other prefixes without value e.g. `add n/`.
+   1. Expected: Company list is not updated. The response box shows an error message that it is an invalid command with additional information of the correct command format. 
+
+### Editing a company <a id="editing-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `editCompany 1 1 n/Tik Tok`
+    1. Expected: The name of 1<sup>st</sup> company is changed to "TikTok".
+       The response box shows the updated details of all the fields of the edited company. The company list is updated with the changes.
+3. Test case: `editCompany 2 n/Tik Tok`
+    1. Expected: The name 2<sup>nd</sup> company is not updated.
+       The response box shows error message that the company already exists in the company list.
+4. Other incorrect test cases to try: `editCompany`, `editCompany x n/VAlID_COMPANY_NAME` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: The intended company with index `x` is not updated.
+   The response box shows error message that it is an invalid command or company index provided is invalid. 
+
+### Deleting a company <a id="deleting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `deleteCompany 1`
+   1. Expected: First company with its roles included if any, is removed from the company list. 
+   The response box shows the details of the deleted company.
+3. Other incorrect test cases to try: `deleteCompany`, `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
+   1. Expected: Company with index `x` is not deleted. The response box shows error message that it is an invalid command or company index provided is invalid.
+
+### Favouriting a company <a id="favouriting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
+2. Test case: `favourite 2`
+    1. Expected: Second company in the displayed company list is favourited.
+       The response box shows the details of the favourited company.
+3. Test case: `favourite 1`
+    1. Expected: First company in the displayed company list is not favourited again as it is already favourited.
+       The response box shows a message indicating that the company is already favourited.
+4. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
+
+### Unfavouriting a company <a id="unfavouriting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
+2. Test case: `unfavourite 1`
+    1. Expected: First company in the displayed company list is unfavourited.
+       The response box shows the details of the unfavourited company.
+3. Test case: `unfavourite 2`
+    1. Expected: Second company in the displayed company list is not unfavourited as it is already unfavourited.
+       The response box shows a message indicating that the company is already unfavourited.
+4. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
+
+### Adding a role <a id="adding-a-role"></a>
+1. Prerequisites: At least 1 companies must exist and listed using the `list` command
+2. Test case: `addRole 1 n/Frontend Engineer s/pending`
+    1. Expected: The name of the lastest role from the 1<sup>st</sup> company is initialised as "Frontend Engineer", with status of "pending".
+       The response box shows the details of all the fields of the newly added role. The company list is updated with the changes.
+3. Test case: `addRole 1 n/Frontend Engineer s/complete`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that the role already exists in the company.
+4. Test case: `addRole 1 s/complete $/1000`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that the format is wrong, this is due to required field (RoleName)) not being given.
+5. Test case: `addRole 1 n/Frontend Engineer s/complete $/`
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that there must be a value after a prefix, regardless of if it is optional.
+6. Other incorrect test cases to try:`addRole x1 n/VALID_ROLE_NAME s/VALID_STATUS` where x1 is an integer larger than the size of the company list or negative integer values.
+    1. Expected: No new role is added to the 1<sup>st</sup> company.
+       The response box shows error message that it is an invalid command or company/role index provided is invalid.
+7. Other incorrect test cases to try:`addRole x1 n/LONG_ROLE_NAME s/VALID_STATUS $/LONG_STIPEND` where x1 is an integer larger than the size of the company list or negative integer values, and LONG_ROLE_NAME exceeds 30 characters, and LONG_STIPEND exceeds 14 characters.
+   1. Expected: No new role is added to the 1<sup>st</sup> company.
+      The response box shows error message that the role name character limit is 30 characters/the stipend character limit is 14 characters.
+
+### Editing a role <a id="editing-a-role"></a>
+1. Prerequisites: At least 1 company with 2 roles must exist and is listed using the `list` command
+2. Test case: `editRole 1 1 n/Frontend Engineer`
+   1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is changed to "Frontend Engineer".
+   The response box shows the updated details of all the fields of the edited role. The company list is updated with the changes. 
+3. Test case: `editRole 1 2 n/Frontend Engineer`
+   1. Expected: The name of 2<sup>nd</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that the role already exists in the company. 
+4. Test case: `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+      The response box shows error message that stipend must be a positive number.
+5. Test case: `editRole 1 1 $/10000000000` or `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that stipend must be a positive value and input of stipend should be at most 10 digits long.
+6. Other incorrect test cases to try: `editRole`, `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
+   1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
+   The response box shows error message that it is an invalid command or company/role index provided is invalid.
+
+### Deleting a role <a id="deleting-a-role"></a>
+1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
+2. Test case: `deleteRole 1 1`
+    1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is deleted.
+       The response box shows the details of all the fields of the deleted role. The company list is updated with the changes. 
+3. Other incorrect test cases to try: `deleteRole`, `deleteRole x1 x2` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values.
+   1. Expected: The intended role at company with index `x1` and role with index `x2` is not deleted.
+      The response box shows error message that it is an invalid command or company/role index provided is invalid.
+
+### Finding a role <a id="finding-a-role"></a>
+1. Prerequisites: There must be 2 companies which are listed using the `list` command. The first company must have the name `meta` containing a role with the name `software engineer` followed by another role with the name `data engineer`. The second company must have the name `google` containing a role with the name `mobile engineer` followed by another role with the name `data engineer`.
+2. Test case: `find c/meta`
+    1. Expected: Only the first company is displayed with both its roles.
+3. Test case: `find r/engineer`
+    1. Expected: Both companies are displayed with all their roles.
+4. Test case: `find c/google r/data`
+    1. Expected: Only the second company is displayed with only its `data engineer` role shown.
+5. Test case: `find r/data`
+    1. Expected: Both companies are displayed with only their respective `data engineer` roles shown.
+6. Test case: `find c/meta r/engineer`
+    1. Expected: Only the first company is displayed with both its roles.
+7. Test case: `find c/meta r/mobile`
+    1. Expected: No companies are displayed.
+8. Test case: `find r/mobile data software`
+    1. Expected: Both companies are displayed with all their roles.
+9. Test case: `find c/`, `find r/`, `find c/ r/`
+   1. Expected: The response box shows an error message that it is an invalid command as there must be a value after prefix.
+10. Other incorrect test cases to try: `find`, `find test`, `find a/ b/`
+     1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format.
+
+### Using the reminder feature <a id="using-reminders"></a>
+1. Prerequisites: At least 1 company with one role must exist and is listed on index 1 using the `list` command, test cases assume default reminder window of 7 days is used
+2. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS WITHIN 7 DAYS FROM TODAY>` (e.g. if today is 06-04-2022, test case should use any date between 06-04-2022 to 13-04-2022)
+   1. Expected: When you close and reopen the application, the reminder pane will show the added role.
+3. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS IN THE PAST>` (e.g. if today is 06-04-2022 , use any date before then like 05-04-2022)
+   1. Expected: The response box shows an error message that the reminder date should not be in the past.
+4. Test case: `editRole 1 n/Software Engineer r/<INSERT INVALID DATE>` (e.g. 31-04-2022)
+   1. Expected: THe response box shows an error message that the reminder date should be a valid date.
+
+## Appendix: Effort <a id="effort"></a>
+
+Tinner is a challenging venture as we are modifying the AB3 address book application to an internship application. The introduction of `Role` requires much consideration into the interaction, management and storage of information within and across components to ensure ample usage of Object-Oriented Programming (OOP) and Design Patterns. Moreover, there were many modifications to AB3's commands, such as `find` to optimise searches on internship applications within Tinner. As a result, there were major changes in components such as `Model` and `Logic` while seeking out the best design practices. Additionally, the `Reminder` feature requires a separate window thus, designing a new interface is required to display essential information.
+
+Some of the difficulties and challenges faced when implementing the features are as followed: <br/>
+* `addRole`, `editRole`, `deleteRole`:  Even though the implementation of `Role` commands are adapted from the commands in AB3, it was challenging due to the close coupling between `Company` and `Role`. While having separate logic and commands for both entities, there is also a need to ensure data consistency for cases such as `Role` cannot exist without `Company`. Thus, features such as `deleteCompany` have a cascade effect where the removing of a company will remove all `Role` associated with it. <br/>
+* `find`: The implementation of the find was different from that of AB3's as we needed to account for two separate search predicates: company and role. Thus, it was rather complicated due to the fact that we had to run the company list through multiple filters based on different search scenarios such as when just the role is specified, just the company is specified, or both. <br/>
+* `reminder`: The implementation of the reminder system was rather tricky because it was our first time using the singleton pattern across the application. The UniqueReminderList behaves as a class that contains a single instance of a reminder list that can be retrieved with getInstance(); this took a while to get used to as it meant that the reminder list could be readily retrieved from almost anywhere within the application. The second hurdle was the implementation of the actual reminder window, since it involved the creation of new UI components and entailed several changes to the UniqueReminderList in terms of how Reminder items were retrieved. Wireframing software like Figma especially came in handy when drafting out the UI components before the writing them in JavaFX. <br/>
+* `setWindow`: The implementation of the setWindow command is quite unique as it is the only command that edits the UserPrefs. Challenges faced with this implementation included the testing of the command as the update of the reminder window only occurs after the application is restarted, making it only possible to test manually. <br/>
+
+Overall, we estimate our effort to be 20% more than the implementation of AB3. This is due to the implementation of `Role` as a key entity with many closely coupled relationships with other components. Also, managing both `Role` and `Company` entities separately, and we implemented close to double the key features implemented in AB3. 
+

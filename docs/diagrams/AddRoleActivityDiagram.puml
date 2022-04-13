@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+start
+:User adds new role to the company
+at the company index with its fields;
+:Parse command;
+
+if () then ([role command is valid])
+    if () then ([company index is valid])
+        if () then ([fields are valid])
+            :Create new role object with user inputs;
+            :Add new role object into company's RoleManager;
+            :Response box displays newly added role;
+        else ([else])
+            :Response box shows the field
+            restriction that is violated;
+        endif
+    else ([else])
+        :Response box shows
+        invalid company index;
+    endif
+else ([else])
+    :Response box shows that the command format is
+    invalid, and the details of AddRole command;
+    :Company result list shows current list of companies;
+endif
+stop
+@enduml

@@ -31,6 +31,12 @@
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
+!define USERPREFS_COLOR #00a303
+!define USERPREFS_COLOR_T1 #74ff82
+!define USERPREFS_COLOR_T2 #20ed2a
+!define USERPREFS_COLOR_T3 #008004
+!define USERPREFS_COLOR_T2 #00540e
+
 !define USER_COLOR #000000
 
 skinparam BackgroundColor #FFFFFFF
@@ -63,6 +69,8 @@ skinparam Participant {
     FontColor #FFFFFFF
     Padding 20
 }
+
+
 
 skinparam MinClassWidth 50
 skinparam ParticipantPadding 10

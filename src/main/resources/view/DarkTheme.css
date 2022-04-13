@@ -1,32 +1,51 @@
+@font-face {
+    font-family: "Rubik Bold";
+    src: url("../fonts/rubik/static/Rubik-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Rubik Regular";
+    src: url("../fonts/rubik/static/Rubik-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Mono Regular";
+    src: url("../fonts/roboto_mono/static/RobotoMono-Regular.ttf");
+}
+
+.text {
+    -fx-font-smoothing-type: gray;
+}
+
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: #2f3136;
+    background-color: #2f3136; /* Used in the default.html file */
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Rubik Regular";
 }
 
 .tab-pane {
@@ -56,17 +75,13 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -77,115 +92,152 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2f3136;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2f3136;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2f3136;
 }
 
-.list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
+#companyListView .list-cell {
+    -fx-padding: 0 0 10 0;
+    -fx-background-color: transparent;
+}
+
+#reminderDateListView .list-cell {
     -fx-padding: 0 0 0 0;
+    -fx-background-color: transparent;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+#reminderListView .list-cell {
+    -fx-padding: 10 0 0 0;
+    -fx-background-color: transparent;
 }
 
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+#roleListView .list-cell {
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: transparent;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+.list-cell:filled #reminderDateCardPane {
+    -fx-background-color: #37393e;
+    -fx-background-color: transparent;
 }
 
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+.list-cell:filled #reminderCardPane {
+    -fx-background-color: #37393e;
+    -fx-background-radius: 10;
+}
+
+.list-cell:filled #companyCardPane {
+    -fx-background-color: #37393e;
+    -fx-background-radius: 10;
+}
+
+.list-cell:filled:selected #companyCardPane {
+    -fx-background-color: #3e7b91, #424d5f;
+    -fx-background-insets: 0, 1;
+}
+
+#roleCardPane {
+    -fx-background-radius: 10;
+}
+
+.list-cell:filled:even #roleCardPane {
+    -fx-background-color: derive(#37393e, -20%);
+}
+
+.list-cell:filled:odd #roleCardPane {
+    -fx-background-color: derive(#37393e, -30%);
 }
 
 .list-cell .label {
     -fx-text-fill: white;
 }
 
-.cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
-}
-
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
-}
-
-.stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
-}
-
-.status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
-.result-display {
-    -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+#reminderDateListPanel .label {
     -fx-text-fill: white;
 }
 
-.result-display .label {
-    -fx-text-fill: black !important;
+#noRemindersBox .label {
+    -fx-text-fill: grey;
+}
+
+.cell_giant_label {
+    -fx-font-family: "Rubik Bold";
+    -fx-font-size: 28px;
+}
+
+.cell_big_label {
+    -fx-font-family: "Rubik Bold";
+    -fx-font-size: 18px;
+}
+
+.cell_date_label {
+    -fx-font-family: "Rubik";
+    -fx-font-size: 18px;
+}
+
+.cell_no_reminders_label {
+    -fx-font-family: "Rubik";
+    -fx-font-size: 18px;
+}
+
+.cell_medium_label {
+    -fx-font-family: "Rubik Bold";
+    -fx-font-size: 14px;
+}
+
+.cell_small_label {
+    -fx-font-family: "Rubik Regular";
+    -fx-font-size: 12px;
+}
+
+.cell_tiny_label {
+    -fx-font-family: "Rubik Regular";
+    -fx-font-size: 11px;
+}
+
+.stack-pane {
+    -fx-background-color: #2f3136;
+}
+
+.pane-with-border {
+    -fx-background-color: #2f3136;
+}
+
+.status-bar {
+    -fx-background-color: #2f3136;
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
-.status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
-    -fx-border-width: 1px;
-}
-
-.status-bar-with-border .label {
-    -fx-text-fill: white;
-}
-
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #2f3136;
+    -fx-border-color: #2f3136;
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #2f3136;
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #2f3136;
 }
 
 .context-menu .label {
@@ -193,12 +245,12 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2f3136;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -229,8 +281,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -282,12 +334,14 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+    -fx-background-color: derive(#1b1c1e, 10%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
-    -fx-background-insets: 3;
+    -fx-background-color: #1b1c1e;
+    -fx-background-insets: 1;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -318,35 +372,57 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #37393e;
+    -fx-min-height: 40;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Roboto Mono Regular";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #companyWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+.result-display {
+    -fx-wrap-text: true;
+    -fx-min-height: 100;
+    -fx-background-color: transparent;
+    -fx-font-family: "Rubik Regular";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
 }
 
-#tags {
+#resultDisplay .viewport {
+    -fx-background-color: transparent;
+}
+
+#resultDisplay .content {
+    -fx-padding: 10px;
+    -fx-background-color: derive(#2f3136, 15%);
+    -fx-background-radius: 10;
+}
+
+#roleTags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#roleTags .label {
+    -fx-font-family: "Rubik Regular";
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-background-color: #9b84ec;
+    -fx-padding: 1 10 1 10;
+    -fx-background-radius: 20;
+    -fx-font-size: 10;
+}
+
+.roles_list .list-view {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.roles_list #roleListPanel {
+    -fx-padding: 5 0 0 0;
 }

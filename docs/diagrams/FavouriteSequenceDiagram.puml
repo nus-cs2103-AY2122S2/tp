@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CompanyListParser" as CompanyListParser LOGIC_COLOR
+participant ":FavouriteCompanyCommandParser" as FavouriteCompanyCommandParser LOGIC_COLOR
+participant ":FavouriteCompanyCommand" as FavouriteCompanyCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("favourite 1")
+activate LogicManager
+
+LogicManager -> CompanyListParser : parseCommand("favourite 1")
+activate CompanyListParser
+
+create FavouriteCompanyCommandParser
+CompanyListParser -> FavouriteCompanyCommandParser
+activate FavouriteCompanyCommandParser
+
+FavouriteCompanyCommandParser --> CompanyListParser
+deactivate FavouriteCompanyCommandParser
+
+CompanyListParser -> FavouriteCompanyCommandParser : parse("1")
+activate FavouriteCompanyCommandParser
+
+create FavouriteCompanyCommand
+FavouriteCompanyCommandParser -> FavouriteCompanyCommand : FavouriteCompanyCommand(1)
+activate FavouriteCompanyCommand
+
+FavouriteCompanyCommand --> FavouriteCompanyCommandParser
+deactivate FavouriteCompanyCommand
+
+FavouriteCompanyCommandParser --> CompanyListParser
+deactivate FavouriteCompanyCommandParser
+
+CompanyListParser --> LogicManager
+deactivate CompanyListParser
+
+LogicManager -> FavouriteCompanyCommand : execute(model)
+activate FavouriteCompanyCommand
+
+FavouriteCompanyCommand -> Model : setCompany(companyToFavourite, favouritedCompany)
+activate Model
+
+Model --> FavouriteCompanyCommand
+deactivate Model
+
+FavouriteCompanyCommand -> Model : updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES,\n PREDICATE_SHOW_ALL_ROLES);
+activate Model
+
+Model --> FavouriteCompanyCommand
+deactivate Model
+
+create CommandResult
+FavouriteCompanyCommand-> CommandResult
+activate CommandResult
+
+CommandResult --> FavouriteCompanyCommand
+deactivate CommandResult
+
+FavouriteCompanyCommand --> LogicManager : result
+deactivate FavouriteCompanyCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

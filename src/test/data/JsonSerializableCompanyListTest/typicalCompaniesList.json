@@ -1,0 +1,107 @@
+{
+  "_comment": "AddressBook save file which contains the same Company values as in TypicalCompanies#getTypicalAddressBook()",
+  "companies" : [ {
+    "name" : "Meta",
+    "phone" : "94351253",
+    "email" : "meta@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "ML ENGINEER",
+      "status" : "pending",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do ML",
+      "stipend" : "1000"
+    }, {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Amazon",
+    "phone" : "98765432",
+    "email" : "amazon@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Zoom",
+    "phone" : "95352563",
+    "email" : "zooom@example.com",
+    "address" : "wall street",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Tiktok",
+    "phone" : "87652533",
+    "email" : "ticky@example.com",
+    "address" : "10th street",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "MOBILE ENGINEER",
+      "status" : "offered",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do mobile engineering",
+      "stipend" : "1000"
+    }, {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Apple",
+    "phone" : "9482224",
+    "email" : "pear@example.com",
+    "address" : "micheegan ave",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "ML ENGINEER",
+      "status" : "pending",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do ML",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Gov tech",
+    "phone" : "9482427",
+    "email" : "techygov@example.com",
+    "address" : "little tokyo",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
+  }, {
+    "name" : "Slack",
+    "phone" : "9482442",
+    "email" : "slacker@example.com",
+    "address" : "4th street",
+    "favouriteStatus": "false",
+    "roles" : [ {
+      "name" : "NETWORK ENGINEER",
+      "status" : "rejected",
+      "reminderDate" : "01-01-2022 22:00",
+      "description" : "Do networking",
+      "stipend" : "1000"
+    } ]
+  } ]
+}

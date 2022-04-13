@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+start
+:User deletes roles at company index and role index;
+:Parse command;
+
+if () then ([role command is valid])
+    if () then ([company index is valid])
+        if () then ([role index is valid])
+            :Delete role from RoleManager;
+            :Response box displays deleted role;
+        else ([else])
+            :Response box shows that
+            the role index invalid;
+        endif
+    else ([else])
+        :Response box shows that
+        the company index is invalid;
+    endif
+else ([else])
+    :Response box shows that the command format is
+    invalid, and the details of DeleteRole command;
+    :Company result list shows current list of companies;
+endif
+stop
+@enduml

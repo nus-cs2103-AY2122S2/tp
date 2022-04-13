@@ -1,0 +1,15 @@
+{
+  "companies": [ {
+    "name": "Meta",
+    "phone": "94351253",
+    "email": "meta@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "favouriteStatus": "false"
+  }, {
+    "name": "Meta",
+    "phone": "94351253",
+    "email": "facebook@example.com",
+    "address": "4th street",
+    "favouriteStatus": "false"
+  } ]
+}
