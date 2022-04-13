@@ -7,8 +7,14 @@ title: User Guide
   <img src="images/tapa banner.png">
 </p>
 
-TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
-especially for those who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+**Introduction**<br>
+TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s contact details and progress, especially for TAs who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+
+**Purpose of This User Guide**<br>
+The intended audience of this guide includes TAs who are interested in using TAPA, and anyone interested in learning more about TAPA. This guide aims to get you started with TAPA, and introduce you to all the features TAPA has to offer. As mentioned earlier, TAPA operates on a CLI. If you have no prior experience with a CLI, you can learn more about this in the [Features](#features) section introduction.
+
+**Using This User Guide**<br>
+This guide offers explanations for each feature found in TAPA, as well as how to use them to meet your student management needs. If you want to get started with TAPA as soon as possible, simply follow our [Quick Start](#quick-start) tutorial. Otherwise, you can find an overview of the features discussed in this guide in the following Table of Contents:
 
 * Table of Contents
 {:toc}
@@ -18,7 +24,7 @@ especially for those who are teaching multiple classes/modules at the same time.
 
 ## Quick start
 
-1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your Computer.
+1. Before getting started with TAPA, ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer. You can check the version of Java on your computer by inputting `java -version` in your terminal.
 
 2. Download the latest `TAPA.jar` file from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
@@ -50,7 +56,7 @@ Here are some example commands you can try:
 
 ## Information about contacts in TAPA
 
-Each contact in TAPA represents a student, who can have the following fields:
+After reading the Quick Start guide, you probably have a good idea of how to interact with TAPA. Using the CLI, you can add or delete students, as well as assign tasks to them and check their task progress. This section provides an explanation of the contact information that each student can have. Each student can be added to TAPA with the following fields:
 
 | Field           | Prefix | Description                                                        | Restrictions                                                                                                                                                                     | Multiplicity            |
 |-----------------|--------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
@@ -66,9 +72,9 @@ Each contact in TAPA represents a student, who can have the following fields:
 
 **:information_source: Note:** <br>
 
-* Multiplicity refers to the number of instances of each field, that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
+* Multiplicity refers to the number of instances of each field that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
 
-* In TAPA, two students are considered as equal only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not student ID).
+* In TAPA, two students are considered the same only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not the same student IDs).
 
 * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
@@ -76,29 +82,34 @@ Each contact in TAPA represents a student, who can have the following fields:
 
 ## Features
 
+**Introduction**<br>
+TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving in to TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the "Format" section for each command:**<br>
 
+* Each feature in this section has a "Format" descriptor that details how you should input the command in the command box for TAPA to execute. For example, to add a student to TAPA, you have to follow this format: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`. This may seem overwhelming at first, but do read on, and you will be a TAPA power user in no time.
+
 * Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
-  Example: For the command `edit STUDENT_INDEX`, `STUDENT_INDEX` is a parameter that must be supplied by the user.<br>
-  Thus, the user should input the command `edit 10`, where "10" is the `STUDENT_INDEX` supplied by the user.
+  Example: For the command `edit STUDENT_INDEX`, `STUDENT_INDEX` is a parameter that you have to provide.<br>
+  Thus, you should input the command `edit 10`, where "10" is the `STUDENT_INDEX`.
 
 * Parameters in square brackets are optional parameters.<br>
-  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER] [m/MODULE_CODE]`, the user must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` and `MODULE_CODE` parameters are optional.<br>
-  Thus, the user can input the command `edit 10 p/98765432` (`MODULE_CODE` not specified) or `edit 10 p/98765432 m/CS2103` (`MODULE_CODE` specified).
+  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER] [m/MODULE_CODE]`, you must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` and `MODULE_CODE` parameters are optional.<br>
+  Thus, you can either input the command `edit 10 p/98765432` (`MODULE_CODE` not specified), or `edit 10 p/98765432 m/CS2103` (`MODULE_CODE` specified).
 
 * Parameters with `…`​ after them can be used multiple times.<br>
-  Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (one `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
+  Example: For the command `delete STUDENT_INDEX…​`, you can input `delete 10` (one `STUDENT_INDEX` parameter), or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
 
 * Parameters can be inputted in any order.<br>
-  Example: For the command `add i/STUDENT_ID n/NAME m/MODULE_CODE`, the user can input `add i/A0123456B n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add i/A0123456B m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
+  Example: For the command `add i/STUDENT_ID n/NAME m/MODULE_CODE`, you can input `add i/A0123456B n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add i/A0123456B m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`). Both inputs will have the same result.
 
 * If a parameter is expected only once in the command, but the user specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  Example: For the command `find n/NAME`, if the user inputs the command `find n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
+  Example: For the command `find n/NAME`, if you input the command `find n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
+  Example: For the command `help`, if you input `help help 123`, the input will be interpreted as `help`.
 </div>
 
 ### Adding a student: `add`
@@ -571,8 +582,14 @@ Exits the program.
 **Q**: How do I get started with TAPA?<br>
 **A**: You can refer to the [Quick Start](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#quick-start) section of this guide to start using TAPA as soon as possible!
 
-**Q**: How can I view a list of available commands within TAPA?<br>
+**Q**: I am not comfortable using a CLI. Do you have any tips on how I can get started?<br>
+**A**: CLI refers to a Command Line Interface. As you may have noticed, rather than clicking buttons to operate TAPA, you type commands into the command box. TAPA was designed with fast typists in mind, who can make the most of a CLI to speed up their student management processes. To learn to use a CLI on your computer's terminal, you can read [this guide](https://www.w3schools.com/whatis/whatis_cli.asp). Alternatively, the [Features](#features) section of this guide explains how you can use the CLI in TAPA.
+
+**Q**: I already know how to use TAPA. How can I view a list of available commands within TAPA?<br>
 **A**: You can input the command `manual` to view the list of commands used within TAPA. Alternatively, you can refer to the [Command Summary](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#command-summary) section below.
+
+**Q**: I have a question about TAPA that is not on the FAQ. **OR** I think a feature of TAPA does not function as expected. Who can I talk to about this?<br>
+**A**: Feel free to reach out to one of our team members [here](https://ay2122s2-cs2103t-w09-4.github.io/tp/AboutUs.html). Alternatively, since TAPA is open-source, you can start developing TAPA to suit your needs [here](https://ay2122s2-cs2103t-w09-4.github.io/tp/DeveloperGuide.html).
 
 **Q**: Who developed this amazing app?<br>
 **A**: You can find more details about our team on TAPA's [About Us](https://ay2122s2-cs2103t-w09-4.github.io/tp/AboutUs.html) page!
@@ -619,6 +636,7 @@ If you would like to learn more about a specific command, you can read more abou
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken).
 * **Person**: A student in TAPA.
 * **Student ID/Matriculation number**: Used interchangeably to refer to the unique identification number of a student.
+* **Field**: An input that comprises information of a student in TAPA. For example, you can add a student with several fields (like their name, and email) to TAPA.
 
 
 
