@@ -131,6 +131,10 @@ Adds a student to TAPA.
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
     * A student named John is added to TAPA.
 
+<p align="center">
+<img src="images/Add-Command-UG.png"/>
+</p>
+
 <br>
 
 ### Deleting a student: `delete`
@@ -227,6 +231,10 @@ Displays all the tasks that are allocated to a particular student.
 **Example**:
 * `task i/AXXXXXXXR`
     * Lists out the tasks that student (AXXXXXXXR) has.
+
+<p align="center">
+<img src="images/Task-Command-UG.png"/>
+</p>
 
 <br>
 
@@ -340,6 +348,10 @@ Saves a copy of the details currently saved in TAPA into a separate file.
 * The file name will be the date and time of the archive operation.
 * This file will be saved in the same directory as the original `.json` data file.
 
+<p align="center">
+<img src="images/Archive-Command-UG.png"/>
+</p>
+
 <br>
 
 ### Listing the student details: `list`
@@ -399,6 +411,10 @@ The completion status of each student in the list will be displayed as well.
     * For each student in the output list, a :heavy_check_mark: "tick" symbol signifies that he/she has already
       completed the assigned task.
     * On the other hand, a :x: "cross" symbol signifies that the student has not complete the assigned task.
+
+<p align="center">
+<img src="images/Progress-Command-UG.png"/>
+</p>
 
 <br>
 
@@ -518,6 +534,10 @@ Display the format and a short description for a specified command.
 Shows a pop-up window explaining how to access the user guide.
 
 **Format**: `help`
+
+<p align="center">
+<img src="images/Help-Command-UG.png"/>
+</p>
 
 <br>
 
