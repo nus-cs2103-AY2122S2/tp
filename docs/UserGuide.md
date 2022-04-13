@@ -177,7 +177,6 @@ application process for each role is at a glance.
 |  Parameter   | User input supplied to a command                                                                                                                             |
 |  Whitespace  | Any string of text composed only of spaces, tabs or line breaks                                                                                                 |
 |   Integer    | An integer is a number which is not a fraction; a whole number.                                                                                                                                                         |
-|  Use case    | A description of a sequence of actions on how a user interacts with Tinner. 
 
 [Back to Table of Contents](#toc)
 
@@ -196,7 +195,7 @@ application process for each role is at a glance.
 
 The following points explain the format of a command.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the [parameters](#technical-terminologies) to be supplied by the user.<br>
   e.g. in `addCompany n/COMPANY e/EMAIL`, `COMPANY` and `EMAIL` represent parameters which can be used like `addCompany n/Google e/hr@google.com`.
 
 * Items in square brackets are optional.<br>
@@ -209,7 +208,7 @@ The following points explain the format of a command.
   the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Additional non-whitespace parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will result in an error.<br>
+* Additional non-[whitespace](#technical-terminologies) parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will result in an error.<br>
   e.g. if the command specifies `help 123`, Tinner will throw an error and the command will not be executed.
 
 * Duplicate company names are not allowed.<br>
@@ -217,7 +216,7 @@ The following points explain the format of a command.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Commands are recognised by their command word. As such, if the command word is incorrect, even if it differs slightly from the correct command word, Tinner's response box will indicate that you have entered an unknown command.
+:information_source: Commands are recognised by their [command word](#technical-terminologies). As such, if the command word is incorrect, even if it differs slightly from the correct command word, Tinner's response box will indicate that you have entered an unknown command.
 
 </div>
 
@@ -268,7 +267,7 @@ in the following format: dd-MM-yyyy HH:mm.
     * rejected
     * complete
 * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
-* The `STIPEND` must be a positive integer with input going up to 10 digits long.
+* The `STIPEND` must be a positive [integer](#technical-terminologies) with input going up to 10 digits long.
 
 
 [Back to Table of Contents](#toc)
@@ -276,6 +275,7 @@ in the following format: dd-MM-yyyy HH:mm.
 --------------------------------------------------------------------------------------------------------------------
 
 # Demo Use Cases <a id="demos"></a>
+Use case describes an interaction between the user and Tinner for a specific functionality.
 
 <div markdown="block" class="alert alert-info">
 
@@ -465,7 +465,7 @@ company that may come in handy during the internship application process.
 
 **Format:** `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-* More restrictions for command parameters can be found [here](#c-company-restrictions)
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-company-restrictions)
 
 **Examples:**
 
@@ -496,11 +496,11 @@ not, `editCompany` has got you covered. Simply edit the parts of the company det
 **Format:** `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the company at the specified INDEX. The index refers to the index number shown in the displayed company list.
-  The index must be a positive integer 1, 2, 3, …​
+  The index must be a positive [integer](#technical-terminologies) 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
   * `PHONE_NUMBER`, `EMAIL` and `ADDRESS` fields can be left blank, allowing you to remove previously added information which may be erroneous.
-* More restrictions for command parameters can be found [here](#c-company-restrictions)
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-company-restrictions)
 
 **Examples:**
 
@@ -521,7 +521,7 @@ companies less clustered and thus more organised.
 
 * Deletes the company at the specified `COMPANY_INDEX`.
 * The index refers to the index number shown in the displayed company list.
-* The index must be a positive integer like 1, 2, 3, …
+* The index must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
 * Refer to [Demo Use Case #2](#usecase2) for an example use case.
 
 **Examples:**
@@ -547,7 +547,7 @@ star to let it stand out from the rest.
 
 * Favourites the company at the specified `COMPANY_INDEX`.
 * The index refers to the index number shown in the displayed company list.
-* The indexes must be a positive integer like 1, 2, 3, …
+* The indexes must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
 
 **Examples:**
 
@@ -573,7 +573,7 @@ Perhaps you fell through with an ex-favourite company. Use `unfavourite` to peel
 
 * Unfavourites the company at the specified `COMPANY_INDEX`.
 * The index refer to the index number shown in the displayed company list.
-* The indexes must be a positive integer like 1, 2, 3, …
+* The indexes must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
 
 **Examples:**
 
@@ -598,8 +598,8 @@ company.
 **Format:** `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 
 * Add internship role at the specified `COMPANY_INDEX`.
-* The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, …
-* More restrictions for command parameters can be found [here](#c-role-restrictions)
+* The `COMPANY_INDEX` must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions)
 
 **Examples:**
 
@@ -648,11 +648,11 @@ Just got invited to an interview? Keep your internship role status and other det
 **Format:** `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 
 * Edits the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refers to
-  the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
+  the index number shown in the displayed company list. The indexes must be a positive [integer](#technical-terminologies) 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
   * `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` fields can be left blank, allowing you to remove previously added information which may be erroneous.
-* More restrictions for command parameters can be found [here](#c-role-restrictions)
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions)
 
 
 **Examples:**
@@ -676,7 +676,7 @@ reundant roles off your mind and Tinner with `deleteRole`.
 
 * Deletes the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refer to
   the index numbers shown in the displayed company list.
-* The indexes must be a positive integer like 1, 2, 3, …
+* The indexes must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
 
 **Examples:**
 
@@ -756,35 +756,12 @@ readily identify and track down items!
 
 Below are miscellaneous features that enhance the general user experience.
 
-### Clearing the company list: `clear` <a id="c-clear"></a>
-
-Start off the internship application period fresh with `clear`. Reset the list of companies and internship roles with a
-single command.
-
-**Function:** Clears the entire company list, including roles within each company.
-
-**Format:** `clear`
-
-[Back to Table of Contents](#toc)
-
-### Viewing help : `help` <a id="c-help"></a>
-
-If you're not too familiar with the CLI, `help` can help! It provides a link to this user guide as well as a table of commands to assist you.
-
-**Function:** Shows a message explaining how to access the user guide and a table of commands.
-
-![help message](images/helpMessage.png)
-
-**Format:** `help`
-
-[Back to Table of Contents](#toc)
-
 ### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
 
 Is the default reminder window of 7 days not to your liking? Update the window size with `setWindow` so that you can
 keep better track of upcoming tasks.
 
-* The parameter `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's
+* The [parameter]((#technical-terminologies)) `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's
   reminder date.
 * Sets the reminder window to the specified `REMINDER_WINDOW`.
 * The `REMINDER_WINDOW` is capped at 30 (in days) because Tinner aims to highlight only imminent deadlines.
@@ -806,7 +783,6 @@ keep better track of upcoming tasks.
 </div>
 
 [Back to Table of Contents](#toc)
-
 
 ### Clearing the company list: `clear` <a id="c-clear"></a>
 
