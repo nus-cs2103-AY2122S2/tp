@@ -361,6 +361,11 @@ Clears all students from TAPA.
 * `confirm`
   * All students cleared from TAPA.
 
+| Before                                   | After                                    |
+|------------------------------------------|------------------------------------------|
+| <img src="images/UG-ClearCommand-1.png"> | <img src="images/UG-ClearCommand-2.png"> |
+
+
 <br>
 
 ### Archiving details in TAPA: `archive`
@@ -481,6 +486,7 @@ Displays a list of previous commands that were executed successfully.
 * The commands are displayed exactly as they were inputted by the user.
 * The commands are indexed as 1, 2, 3, ......
 
+<img src="images/UG-HistoryCommand-1.png">
 <br>
 
 ### Undoing the previous command: `undo`
@@ -510,6 +516,10 @@ Reverts the changes made by the previously executed command.
     * Displays the command that has been undone.
     * The changes made by the previously executed command are undone.
     * The undone command is removed from the history of commands.
+    
+| Before                                  | After                                   |
+|-----------------------------------------|-----------------------------------------|
+| <img src="images/UG-UndoCommand-1.png"> | <img src="images/UG-UndoCommand-2.png"> |
 
 <br>
 
