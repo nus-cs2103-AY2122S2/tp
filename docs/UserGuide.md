@@ -499,7 +499,7 @@ not, `editCompany` has got you covered. Simply edit the parts of the company det
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
   * `PHONE_NUMBER`, `EMAIL` and `ADDRESS` fields can be left blank, allowing you to remove previously added information which may be erroneous.
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-company-restrictions)
+* More restrictions for command [parameters](#technical-terminologies) can be found [here](#c-company-restrictions)
 
 **Examples:**
 
@@ -648,7 +648,7 @@ Just got invited to an interview? Keep your internship role status and other det
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
   * `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` fields can be left blank, allowing you to remove previously added information which may be erroneous.
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions).
+* More restrictions for command [parameters](#technical-terminologies) can be found [here](#c-role-restrictions).
 
 
 **Examples:**
