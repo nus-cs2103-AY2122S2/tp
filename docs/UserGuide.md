@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 Tinner (Anagram of Intern) is a desktop app for managing internship applications for students, optimized for use via a
-Command Line Interface (CLI)
+Command Line Interface (CLI).
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily
 sort through and retrieve relevant information faster than traditional GUI apps.
 
@@ -173,10 +173,10 @@ application process for each role is at a glance.
 
 |     Term     | What it means                                                                                                                                                |
 |:------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Command word | Commands are invoked based on the command word, which is the first word in every user command. The command word is indicated by `COMMAND_WORD` in the guide. |
+| Command word | Commands are invoked based on the command word, which is the first word in every user command; The command word is indicated by `COMMAND_WORD` in the guide |
 |  Parameter   | User input supplied to a command                                                                                                                             |
 |  Whitespace  | Any string of text composed only of spaces, tabs or line breaks                                                                                                 |
-|   Integer    | An integer is a number which is not a fraction; a whole number.                                                                                                                                                         |
+|   Integer    | An integer is a number which is not a fraction; a whole number                                                                                                                                                         |
 
 [Back to Table of Contents](#toc)
 
@@ -184,7 +184,7 @@ application process for each role is at a glance.
 
 | Symbol |  What it means |
 |:----------:|-------------|
-| `list` |  Words that have a grey highlighted background are either commands or parameters. |
+| `list` |  Words that have a grey highlighted background are either commands or parameters |
 |:bulb:|Useful tip|
 |:warning:|Warning|
 |:information_source:|Important piece of information |
@@ -248,7 +248,7 @@ The following points explain the format of a command.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: In the `ADDRESS` field, if the character / is present, the previous character in the user input should be a space to observe the intended output. If the previous character matches any of these characters, (aenp), excluding the parentheses, the intended output will not be observed.
+:information_source: In the `ADDRESS` field, if the character / is present, the previous character in the user input should be a space to observe the intended output. If the previous character matches any of these characters, 'a','e','n','p', excluding the parentheses, the intended output will not be observed.
 
 </div>
 
@@ -280,12 +280,11 @@ Use case describes an interaction between the user and Tinner for a specific fun
 <div markdown="block" class="alert alert-info">
 
 :information_source: Note that some of these demos may be outdated, as such do remember to
-update the reminder date if you wish to follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
+update the reminder date if you  follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
 
 </div>
 
 ## Use cases <a id="use-cases"></a>
-
 * [Use Case #1: Applying to a role in a company](#usecase1)
 * [Use Case #2: Deleting a company or a role](#usecase2)
 * [Use Case #3: Editing a company or a role](#usecase3)
@@ -298,12 +297,12 @@ update the reminder date if you wish to follow the demo as [reminder dates canno
 Say you found a company with an opening that you are interested in. You did your research and found relevant information
 pertaining to the company and the role. Here's how you can input this data in the application:
 
-1. [Add the company](#c-add-c) to the company list.
+* [Add the company](#c-add-c) to the company list.
 
 
    ![AddCompanyDemo](images/AddCompanyDemo.png)
 
-2. [Add the role](#c-add-c-r) under the added company.
+* [Add the role](#c-add-c-r) under the added company.
 
 
    ![AddRoleDemo](images/AddRoleDemo.png)
@@ -323,12 +322,12 @@ Perhaps for some reason, you decide not to go through with an application. Maybe
 vision were not in line with your values or maybe you realised the role isn't for you. Here's how you can delete these
 entries from the application:
 
-1. [Delete the role](#c-delete-c-r) from a given company.
+* [Delete the role](#c-delete-c-r) from a given company.
 
 
    ![DeleteRoleDemo](images/DeleteRoleDemo.png)
 
-2. [Delete the company](#c-delete-c) from the company list.
+* [Delete the company](#c-delete-c) from the company list.
 
 
    ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
@@ -340,7 +339,7 @@ entries from the application:
 Say you received an email for an interview and the point of contact's email is different. Here's how you can make
 changes to the application:
 
-1. [Edit the company](#c-edit-c) from the company list.
+* [Edit the company](#c-edit-c) from the company list.
 
 
    ![EditCompanyDemo](images/EditCompanyDemo.png)
@@ -348,7 +347,7 @@ changes to the application:
 Also, you can change the status of your internship application and set the reminder for the interview date by making
 this entry:
 
-2. [Edit the role](#c-edit-r) from a given company.
+* [Edit the role](#c-edit-r) from a given company.
 
 
    ![EditRoleDemo](images/EditRoleDemo.png)
@@ -363,7 +362,7 @@ this entry:
 
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 
-Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next opening of
+Assuming that the reminder date from [Demo Use Case #3](#usecase3) is within a week from today, upon the next launch of
 Tinner, you will be able to see a reminder pop-out box like this:
 
 <img src="images/ReminderDemo.png" alt="ReminderDemo" height="480">
@@ -372,7 +371,7 @@ If you do not see the intended reminder, it is likely that the reminder date is 
 the [reminder window](#c-setWindow-c).  
 Thus, you can increase the reminder window by making this entry:
 
-1. [Set the reminder window](#c-setWindow-c) for the reminder list.
+* [Set the reminder window](#c-setWindow-c) for the reminder list.
 
 
    ![WindowDemo](images/WindowDemo.png)
@@ -385,7 +384,7 @@ A scenario where multiple companies have sent you offers and you may want to sto
 a [list of favourites](#c-listfavourite) for ease of reference.  
 You can favourite a company by making this entry:
 
-1. [Favourite a company](#c-favourite-c) from the company list.
+* [Favourite a company](#c-favourite-c) from the company list.
 
 
    ![FavouriteDemo](images/FavouriteDemo.png)
@@ -406,12 +405,12 @@ companies which have sent you offers.
 
 You can choose to unfavourite by making this entry:
 
-2. [Unfavourite a company](#c-favourite-c) from the company list.
+* [Unfavourite a company](#c-favourite-c) from the company list.
 
 
    ![UnfavouriteDemo](images/UnfavouriteDemo.png)
 
-Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
+Finally, you can make a quick reference by listing all favourite companies using the [`listFavourite`](#c-listfavourite)
 command.
 
 [Back to Table of Contents](#toc)
@@ -420,23 +419,23 @@ command.
 In the future when you have many applications, finding specific applications can be daunting. The
 [find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
 
-Say you are interested in finding out what are the roles you had applied to at Google,
+Say you are interested in finding out what are the roles you had applied to at Amazon,
 you can make this entry:
-1. [Finding a company](#c-find-c-r) from the company list.
+* [Finding a company](#c-find-c-r) from the company list.
 
 
    ![FindCompanyDemo](images/FindCompanyDemo.png)
 
-Then after realising that you have an interview for a backend role at Google, you want to check out the progress of similar roles.
+Then after realising that you have an offer for a backend role at Amazon, you want to check out the progress of similar roles.
 You can search for other backend roles by making this entry:
-2. [Finding all roles](#c-find-c-r) from the company list.
+* [Finding all roles](#c-find-c-r) from the company list.
 
 
    ![FindRoleDemo](images/FindRoleDemo.png)
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: Find a specific role in a specific company by providing both `COMPANY_NAME` and `ROLE_NAME`. E.g. `find c/google r/backend engineer`.
+:bulb: Find a specific role in a specific company by providing both `COMPANY_NAME` and `ROLE_NAME`. E.g. `find c/amazon r/backend engineer`.
 
 </div>
 
@@ -486,7 +485,7 @@ company that may come in handy during the internship application process.
 
 [Back to Table of Contents](#toc)
 
-### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
+### Editing an existing company : `editCompany` <a id="c-edit-c"></a>
 
 Added a company with `addCompany` but made a typo? The company recruitment team changed their email address? Fret
 not, `editCompany` has got you covered. Simply edit the parts of the company details that you want updated.
@@ -557,7 +556,7 @@ star to let it stand out from the rest.
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: Easily track and view your favourite companies by using the [`listFavourite`](#c-listfavourite) command
+:bulb: Easily track and view your favourite companies by using the [`listFavourite`](#c-listfavourite) command.
 
 </div>
 
@@ -599,7 +598,7 @@ company.
 
 * Add internship role at the specified `COMPANY_INDEX`.
 * The `COMPANY_INDEX` must be a positive [integer](#technical-terminologies) like 1, 2, 3, …
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions)
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions).
 
 **Examples:**
 
@@ -633,9 +632,6 @@ company.
 </div>
 
 
-
-
-
 [Back to Table of Contents](#toc)
 
 
@@ -652,7 +648,7 @@ Just got invited to an interview? Keep your internship role status and other det
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
   * `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` fields can be left blank, allowing you to remove previously added information which may be erroneous.
-* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions)
+* More restrictions for command [parameters]((#technical-terminologies)) can be found [here](#c-role-restrictions).
 
 
 **Examples:**
@@ -733,11 +729,11 @@ readily identify and track down items!
 * The search is case-insensitive. e.g. `meta` will match `Meta`.
 * The order of the keywords does not matter. e.g. `software engineer` will match `engineer software`.
 * Only the company name, and the role name are searched.
-* Only full words would be matched e.g. `mobile` will not match `mobiles`
+* Only full words would be matched e.g. `mobile` will not match `mobiles`.
 * Companies and roles matching at least one keyword will be returned e.g. `software engineer` will
-  match `mobile engineer` and `software developer`
+  match `mobile engineer` and `software developer`. 
 * At least one role keyword or one company keyword must be provided in the user input.
-* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered
+* The prefixes `c/` and `r/` can be omitted or included if no corresponding keywords are meant to be entered.
 
 **Examples:**
 
@@ -855,7 +851,7 @@ containing a file named "companyList.json". The list of companies is stored with
 **A**: Install the app in the other computer. Overwrite the empty data file it creates with the data file from your
 previous Tinner home folder.
 
-**Q**: What happens if I clear the company list accidentally using `clear`<br>
+**Q**: What happens if I clear the company list accidentally using `clear`?<br>
 **A**: Please ensure that you only use the command `clear` when you are certain that you want to erase the company list.
 There are currently no features to revert the `clear` command.
 
