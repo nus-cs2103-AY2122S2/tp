@@ -335,7 +335,7 @@ Edits a student's information in TAPA.
 **Example**:
 
 * `edit 2 m/CS2103T p/98765432 t/amirakan e/e4363722@u.nus.edu`
-  * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
+  * A student (whose list index is “2”) has their module, phone number, telegram handle and email address edited.
 
 | Before                                  | After                                   |
 |-----------------------------------------|-----------------------------------------|
