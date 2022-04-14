@@ -24,7 +24,7 @@ This guide offers explanations for each feature found in TAPA, as well as how to
 
 ## Quick start
 
-1. Before getting started with TAPA, ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer. You can check the version of Java on your computer by inputting `java -version` in your terminal.
+1. Before getting started with TAPA, ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer. You can check the version of Java on your computer by inputting `java -version` in your [terminal](https://www.ionos.com/help/email/troubleshooting-mail-basicmail-business/access-the-command-prompt-or-terminal/#:~:text=Open%20Command%20Prompt%20in%20Windows,cmd%22%20and%20then%20click%20OK.).
 
 2. Download the latest `TAPA.jar` file from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
