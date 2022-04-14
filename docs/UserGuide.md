@@ -85,6 +85,8 @@ After reading the Quick Start guide, you probably have a good idea of how to int
 **Introduction**<br>
 TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving into TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
 
+<br>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the "Format" section for each command:**<br>
@@ -112,6 +114,9 @@ TAPA offers a plethora of features at your disposal. However, you need to use di
   Example: For the command `help`, if you input `help help 123`, the input will be interpreted as `help`.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Adding a student: `add`
 
 Adds a student to TAPA.
@@ -129,6 +134,8 @@ Adds a student to TAPA.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
 
 </div>
+
+<br>
 
 <div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b> <br>
 
@@ -186,8 +193,8 @@ Deletes a student from TAPA.
 |-------------------------------------------|-------------------------------------------|
 | <img src="images/UG-DeleteCommand-1.png"> | <img src="images/UG-DeleteCommand-2.png"> |
 
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Deleting all students taking a particular module: `deleteModule`
 
@@ -212,7 +219,8 @@ Deletes all students taking a particular module from TAPA.
 |-------------------------------------------------|-------------------------------------------------|
 | <img src="images/UG-DeleteModuleCommand-1.png"> | <img src="images/UG-DeleteModuleCommand-2.png"> |
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Finding a student: `find`
 
@@ -242,7 +250,8 @@ Allows the user to look up the details of a particular student.
 * `find m/CS2103T`
     * Displays the particulars of the student with module code CS2103T. Also works for module codes with varying lengths.
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Checking all the tasks that a student has: `task`
 
@@ -261,7 +270,8 @@ Displays all the tasks that are allocated to a particular student.
 <img src="images/Task-Command-UG.png"/>
 </p>
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Marking an undone task as done for a student: `mark`
 
@@ -284,8 +294,8 @@ Marks a specific undone task as done for a particular student.
 |----------------------------------------------------|----------------------------------------------------|
 | <img src="images/UG_MarkCommand_Screenshot_1.png"> | <img src="images/UG_MarkCommand_Screenshot_2.png"> |
 
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Marking a done task as undone for a student: `unmark`
 
@@ -308,8 +318,8 @@ Marks a specific done task as undone for a particular student.
 |------------------------------------------------------|------------------------------------------------------|
 | <img src="images/UG_UnmarkCommand_Screenshot_1.png"> | <img src="images/UG_UnmarkCommand_Screenshot_2.png"> |
 
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Editing a student's information: `edit`
 
@@ -365,8 +375,8 @@ Clears all students from TAPA.
 |------------------------------------------|------------------------------------------|
 | <img src="images/UG-ClearCommand-1.png"> | <img src="images/UG-ClearCommand-2.png"> |
 
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Archiving details in TAPA: `archive`
 
@@ -382,7 +392,8 @@ Saves a copy of the details currently saved in TAPA into a separate file.
 <img src="images/Archive-Command-UG.png"/>
 </p>
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Listing the student details: `list`
 
@@ -401,8 +412,8 @@ Displays all the students enrolled in a list.
 |----------------------------------------------------|----------------------------------------------------|
 | <img src="images/UG-ListCommand_1.png"> | <img src="images/UG-ListCommand_2.png"> |
 
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Assigning tasks to a particular student: `assign`
 
@@ -440,7 +451,8 @@ Assigns a task to a particular student.
 * The name of the assigned task will be converted to Title Case.
 </div>
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Viewing the completion status of a particular task: `progress`
 
@@ -462,7 +474,8 @@ The completion status of each student in the list will be displayed as well.
 <img src="images/Progress-Command-UG.png"/>
 </p>
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Deleting previously assigned task: `deleteTask`
 
