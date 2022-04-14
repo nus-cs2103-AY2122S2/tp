@@ -98,7 +98,7 @@ Step 5. Type your commands in the command box and press Enter to execute it. e.g
 
 * **`list`** : Lists all contacts.
 
-* **`summarise`** : Summarises all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
+* **`summarise`** : Summarises all contacts into their respective faculty and informs you the percentage of student from that faculty/block is Covid positive.
 
 * **`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/leader`** : Adds a student named `John Doe` to Tracey.
 
@@ -113,10 +113,10 @@ Step 6. Refer to the [Features](#3-features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3. Features
-### 3.1. Viewing help
-Help users to search for all the commands that Tracey offers by opening a pop-up window.
+### 3.1. Viewing help: Need help finding the commands?
+Don't worry, you can type `help` to search for all the commands that Tracey offers by opening a pop-up window.
 It includes a summary to briefly explain all the commands.
-The pop-up window also offers a button for easy access to the User Guide via the user's default browser.
+The pop-up window also offers a button for easy access to the User Guide via your default browser.
 
 Format: `help`
 
@@ -131,10 +131,11 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 </div>
 
-### 3.2. Adding a contact
-Add a student with relevant details such as faculty and Covid status into Tracey.
+### 3.2. Adding a contact: Do you want to add a student? 
+You can do this with the add feature which allows you to add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
+
 * Adds a student with the specified details.
 * Tags are optional. You can add as many tags as you like.
     * Duplicate tags will be displayed as a single tag.
@@ -179,12 +180,12 @@ In addition, the list of pre-defined constants are also provided for `Faculty`, 
 :bulb: **Tip:**<br>
 
 1. You are able to add optional tags with no restrictions using the `t/` prefix.<br>
-2. Additions can be reversed with the `undo` feature.
+2. Additions can be reversed with the `undo` feature (explained in section 3.5).
 
 </div>
 
-### 3.3. Editing an existing contact
-Edit a contact at a specific index.
+### 3.3. Editing an existing contact: Student's information changed?  
+You can edit the information of a particular student with the edit feature.
 
 Format: `edit INDEX n/NAME ...`
 * Edits an existing student's information found in Tracey. The student is referred to by an index, displayed beside his/her name in the student list.
