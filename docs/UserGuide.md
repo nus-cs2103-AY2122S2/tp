@@ -174,6 +174,8 @@ Deletes a student from TAPA.
 
 </div>
 
+<br>
+
 <div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
 
 * Multiple indices can be inputted in order to delete multiple students. 
@@ -270,8 +272,8 @@ Displays all the tasks that are allocated to a particular student.
 <img src="images/Task-Command-UG.png"/>
 </p>
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+                                                                                                                                                                                                                                                                                                                                        --------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                                                                                                                                                        <div style="page-break-after: always;"></div>
 
 ### Marking an undone task as done for a student: `mark`
 
@@ -294,8 +296,6 @@ Marks a specific undone task as done for a particular student.
 |----------------------------------------------------|----------------------------------------------------|
 | <img src="images/UG_MarkCommand_Screenshot_1.png"> | <img src="images/UG_MarkCommand_Screenshot_2.png"> |
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Marking a done task as undone for a student: `unmark`
 
@@ -317,9 +317,6 @@ Marks a specific done task as undone for a particular student.
 | Before                                               | After                                                |
 |------------------------------------------------------|------------------------------------------------------|
 | <img src="images/UG_UnmarkCommand_Screenshot_1.png"> | <img src="images/UG_UnmarkCommand_Screenshot_2.png"> |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Editing a student's information: `edit`
 
@@ -375,9 +372,6 @@ Clears all students from TAPA.
 |------------------------------------------|------------------------------------------|
 | <img src="images/UG-ClearCommand-1.png"> | <img src="images/UG-ClearCommand-2.png"> |
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 ### Archiving details in TAPA: `archive`
 
 Saves a copy of the details currently saved in TAPA into a separate file.
@@ -429,6 +423,7 @@ Assigns a task to a particular student.
 |-----------------------------------------------------------------|-----------------------------------------------------------------|
 | <img src="images/UG-AssignCommandByStudentId_1.png"> | <img src="images/UG-AssignCommandByStudentId_2.png"> |
 
+<div style="page-break-after: always;"></div>        
 
 * `assign m/CS2103 tn/Create IP Release`
     * Assigns Create Ip Release task to students taking module CS2103.
@@ -499,6 +494,7 @@ An error message will be displayed if:
 |----------------------------------------------------------|----------------------------------------------------------------|
 | <img src="images/UG-DeleteTaskCommandByStudentId_1.png"> | <img src="images/UG-DeleteTaskCommandByStudentId_2.png"> |
 
+  <div style="page-break-after: always;"></div>
 
 * `deleteTask m/cs2103 tn/Create Ip Release`
     * Deletes Create Ip Release task that was previously assigned to any of the students taking CS2103 module.
@@ -537,6 +533,8 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 * Reverts the changes of the previously executed command, and removes the command from history.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 :warning: <b>Warning!</b>
@@ -581,7 +579,8 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 |----------------------------------------------------|----------------------------------------------------|
 | <img src="images/UG_SortCommand_Screenshot_1.png"> | <img src="images/UG_SortCommand_Screenshot_2.png"> |
 
-<br>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Displaying manual for a command: `manual`
 
