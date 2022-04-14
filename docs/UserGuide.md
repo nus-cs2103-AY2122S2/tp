@@ -83,7 +83,7 @@ After reading the Quick Start guide, you probably have a good idea of how to int
 ## Features
 
 **Introduction**<br>
-TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving in to TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
+TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving into TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
 
 <div markdown="block" class="alert alert-info">
 
