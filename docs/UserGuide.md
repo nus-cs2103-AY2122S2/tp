@@ -342,7 +342,6 @@ Edits a student's information in TAPA.
 | <img src="images/UG-EditCommand_1.png"> | <img src="images/UG-EditCommand_2.png"> |
 
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 
@@ -352,6 +351,8 @@ Edits a student's information in TAPA.
 * The `edit` command cannot to applied to `Task`.
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
 
@@ -371,8 +372,6 @@ Clears all students from TAPA.
 * As clearing TAPA cannot be undone, you will have to click the commandBox again to input `confirm`. (This is an additional measure to ensure a user does not clear TAPA accidentally.) After inputting `confirm`, you can click the commandBox again, then continue to use TAPA as per normal.
 </div>
 
-
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 **Example**:
@@ -385,6 +384,9 @@ Clears all students from TAPA.
 | Before                                   | After                                    |
 |------------------------------------------|------------------------------------------|
 | <img src="images/UG-ClearCommand-1.png"> | <img src="images/UG-ClearCommand-2.png"> |
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Archiving details in TAPA: `archive`
 
