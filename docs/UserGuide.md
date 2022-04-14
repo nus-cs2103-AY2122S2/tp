@@ -74,7 +74,7 @@ After reading the Quick Start guide, you probably have a good idea of how to int
 
 * Multiplicity refers to the number of instances of each field that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
 
-* In TAPA, two students are considered the same only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not the same student IDs).
+* In TAPA, two students are considered the same only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not the same student ID).
 
 * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
