@@ -24,7 +24,7 @@ This guide offers explanations for each feature found in TAPA, as well as how to
 
 ## Quick start
 
-1. Before getting started with TAPA, ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer. You can check the version of Java on your computer by inputting `java -version` in your terminal.
+1. Before getting started with TAPA, ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer. You can check the version of Java on your computer by inputting `java -version` in your [terminal](https://www.ionos.com/help/email/troubleshooting-mail-basicmail-business/access-the-command-prompt-or-terminal/#:~:text=Open%20Command%20Prompt%20in%20Windows,cmd%22%20and%20then%20click%20OK.).
 
 2. Download the latest `TAPA.jar` file from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
@@ -74,7 +74,7 @@ After reading the Quick Start guide, you probably have a good idea of how to int
 
 * Multiplicity refers to the number of instances of each field that a student can have (e.g. a student can have either 0 or 1 phone numbers associated to him/her).
 
-* In TAPA, two students are considered the same only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not the same student IDs).
+* In TAPA, two students are considered the same only if they have the same student ID (i.e. multiple students can have the same module code/name/phone number/telegram handle/email address but not the same student ID).
 
 * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
@@ -83,7 +83,7 @@ After reading the Quick Start guide, you probably have a good idea of how to int
 ## Features
 
 **Introduction**<br>
-TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving in to TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
+TAPA offers a plethora of features at your disposal. However, you need to use different command formats to execute the various features. Before diving into TAPA's commands and features, do read the following notes to understand how to format your command inputs to TAPA:
 
 <div markdown="block" class="alert alert-info">
 
