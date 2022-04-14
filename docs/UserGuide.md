@@ -333,8 +333,18 @@ Edits a student's information in TAPA.
     * the field to be edited is in an invalid format
   
 **Example**:
-* `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
-    * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
+
+* `edit 2 m/CS2103T p/98765432 t/amirakan e/e4363722@u.nus.edu`
+  * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
+
+| Before                                  | After                                   |
+|-----------------------------------------|-----------------------------------------|
+| <img src="images/UG-EditCommand_1.png"> | <img src="images/UG-EditCommand_2.png"> |
+
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 <div markdown="block" class="alert alert-info">
 :warning: <b>Warning!</b>
@@ -360,6 +370,10 @@ Clears all students from TAPA.
 * Inputting the `clear` command puts TAPA in the "clear confirmation" mode. In this mode, TAPA will not recognise any command other than `confirm`. Inputting any command other than `confirm` will cause TAPA to exit the "clear confirmation" mode and resume its normal operation.
 * As clearing TAPA cannot be undone, you will have to click the commandBox again to input `confirm`. (This is an additional measure to ensure a user does not clear TAPA accidentally.) After inputting `confirm`, you can click the commandBox again, then continue to use TAPA as per normal.
 </div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 **Example**:
 * `clear`
