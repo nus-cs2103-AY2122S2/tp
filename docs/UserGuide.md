@@ -67,14 +67,14 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 1. #### Entry List
 
-    **InternBuddy**'s Entry List is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
+    InternBuddy's Entry List is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
 
 2. #### Dialog Box
 
     The Dialog Box is where InternBuddy gives you the details of the commands that you entered. More on this in [Dialog Box](#dialog-box).
 
 3. #### Command Box
-    This is where you can input commands to **InternBuddy** by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
+    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
 
 ### Structure of InternBuddy
 
@@ -141,8 +141,8 @@ Two Event entries are considered duplicates of each other if they have the same 
 
 ### Interacting with the app
 
-Since **InternBuddy** is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with this app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
-**InternBuddy**'s commands follows a simple classification system for all 3 lists. There are 5 types of commands:
+Since InternBuddy is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with this app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
+InternBuddy's commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 
 -   **Adding entries**
     -   [`addc`](#adding-a-company-addc): Adds a company to the list of companies.
