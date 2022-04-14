@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Brandon Kheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brelkh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/brelkh)]
+[[portfolio](team/brelkh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: In charge of Model component
 
-### Jean Doe
+### Benjamin Koh Wei Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/benjykoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/benjykoh)]
+[[portfolio](team/benjykoh.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Git expert
+
+### Jet Tan
+
+<img src="images/medajet.png" width="200px">
+
+[[github](http://github.com/medajet)]
+[[portfolio](team/medajet.md)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Saravanan Anuja Harish
+
+<img src="images/harish-coding.png" width="200px">
+
+[[github](http://github.com/harish-coding)]
+[[portfolio](team/harish-coding.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
+
+### Terng Yan Long
+
+<img src="images/korochii.png" width="200px">
+
+[[github](http://github.com/korochii)]
+[[portfolio](team/korochii.md)]
+
+* Roles: Team Lead, Developer
+* Responsibilities: Integration

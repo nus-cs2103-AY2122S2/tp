@@ -18,10 +18,17 @@ import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonUserPrefsStorageTest");
 
     @TempDir
     public Path testFolder;
+
+    @Test
+    public void getUserPrefsFilePath_success() {
+        JsonUserPrefsStorage storage = new JsonUserPrefsStorage(TEST_DATA_FOLDER);
+        assertEquals(storage.getUserPrefsFilePath(), TEST_DATA_FOLDER);
+    }
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
@@ -40,7 +47,8 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
+        assertThrows(DataConversionException.class, ()
+            -> readUserPrefs("NotJsonFormatUserPrefs.json"));
     }
 
     private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {

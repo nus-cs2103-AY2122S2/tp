@@ -1,13 +1,15 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TaskList;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -29,17 +31,22 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label id; // index of entry
     @FXML
-    private Label id;
+    private FlowPane moduleCodes;
+    @FXML
+    private Label studentId;
+    @FXML
+    private Label name;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label telegramHandle;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label tasks;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,13 +55,39 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        studentId.setText("Matriculation No.: " + person.getStudentId().id);
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        Phone currentPhone = person.getPhone();
+        if (currentPhone == null || currentPhone.value == null) {
+            phone.setText("Phone No.: ");
+        } else {
+            phone.setText("Phone No.: " + currentPhone.value);
+        }
+
+        TelegramHandle currentTelegramHandle = person.getTelegramHandle();
+        if (currentTelegramHandle == null || currentTelegramHandle.telegramHandle == null) {
+            telegramHandle.setText("Telegram Handle: ");
+        } else {
+            telegramHandle.setText("Telegram Handle: @" + currentTelegramHandle.telegramHandle);
+        }
+
+        Email currentEmail = person.getEmail();
+        if (currentEmail == null || currentEmail.value == null) {
+            email.setText("Email: ");
+        } else {
+            email.setText("Email: " + currentEmail.value);
+        }
+
+        TaskList currentTasks = person.getTaskList();
+        if (currentTasks == null || currentTasks.isEmpty()) {
+            tasks.setText("Tasks: ");
+        } else {
+            tasks.setText("Tasks: \n" + currentTasks.toString());
+        }
+
+        moduleCodes.getChildren().add(new Label(person.getModuleCode().moduleCode));
+
     }
 
     @Override

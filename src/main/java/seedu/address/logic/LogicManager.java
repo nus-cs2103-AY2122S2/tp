@@ -45,6 +45,28 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        if (!commandResult.isUndoRequest()) { // Do not add undo and its respective AB to history (or else it will loop)
+            model.addToCommandHistory(commandText);
+            model.saveCurrentAddressBookToHistory();
+        }
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        return commandResult;
+    }
+
+    @Override
+    public CommandResult executeClearConfirmation(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        CommandResult commandResult;
+        Command command = addressBookParser.parseConfirmCommand(commandText);
+        commandResult = command.execute(model);
+
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (IOException ioe) {

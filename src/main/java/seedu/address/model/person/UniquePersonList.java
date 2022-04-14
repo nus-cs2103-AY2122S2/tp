@@ -3,13 +3,23 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.InvalidTaskIndexException;
+import seedu.address.model.person.exceptions.ModuleCodeNotFoundException;
+import seedu.address.model.person.exceptions.PartialDuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.TaskAlreadyCompleteException;
+import seedu.address.model.person.exceptions.TaskAlreadyNotCompleteException;
+import seedu.address.model.person.exceptions.TaskNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -98,6 +108,225 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Assigns {@code task} to a person with {@code studentId}.
+     *
+     * @param studentId the student id of the person to be assigned.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToPerson(StudentId studentId, Task task) {
+        requireAllNonNull(studentId, task);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                if (!currPerson.isTaskAlreadyPresent(task)) {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.addTask(task);
+                    setPerson(currPerson, updatedPerson);
+                } else {
+                    throw new DuplicateTaskException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Assigns {@code task} to a person taking a module with {@code moduleId}.
+     *
+     * @param moduleCode the module code of the module of which all students are to be assigned a task.
+     * @param task the task to be assigned.
+     */
+    public void assignTaskToAllInModule(ModuleCode moduleCode, Task task) {
+        requireAllNonNull(moduleCode, task);
+        boolean anyPersonFound = false;
+        int totalPersonWithNoDuplicateTask = 0;
+        int totalPersonTakingThisModule = 0;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getModuleCode().equals(moduleCode)) {
+                anyPersonFound = true;
+                totalPersonTakingThisModule++;
+                if (!currPerson.isTaskAlreadyPresent(task)) {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.addTask(task);
+                    setPerson(currPerson, updatedPerson);
+                    totalPersonWithNoDuplicateTask++;
+                }
+            }
+        }
+        if (!anyPersonFound) {
+            throw new ModuleCodeNotFoundException();
+        }
+        if (totalPersonWithNoDuplicateTask == 0) {
+            throw new DuplicateTaskException();
+        }
+
+        if (totalPersonWithNoDuplicateTask != totalPersonTakingThisModule) {
+            throw new PartialDuplicateTaskException();
+        }
+    }
+
+    /**
+     * Deletes task with {@code index} belonging to {@code Person} with {@code studentId}.
+     *
+     * @param studentId the student id of the person whose task is to be deleted.
+     * @param index the index of the task to be deleted.
+     */
+    public void deleteTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+
+                Person updatedPerson = currPerson.getCopy();
+                updatedPerson.deleteTask(index);
+                setPerson(currPerson, updatedPerson);
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+
+    }
+
+    /**
+     * Deletes task assigned to {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the person whose task is to be deleted.
+     * @param task the task with the exact task name to be deleted.
+     */
+    public void deleteTaskForAllInModule(ModuleCode moduleCode, Task task) {
+        requireAllNonNull(moduleCode, task);
+        boolean isAnyPersonFound = false;
+        int personsAssignedToTask = 0;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getModuleCode().equals(moduleCode)) {
+                isAnyPersonFound = true;
+
+                try {
+                    Person updatedPerson = currPerson.getCopy();
+                    updatedPerson.deleteTask(task);
+                    setPerson(currPerson, updatedPerson);
+                    personsAssignedToTask++;
+                } catch (TaskNotFoundException taskNotFoundException) {
+                    // do not do anything yet.
+                }
+            }
+        }
+
+        if (!isAnyPersonFound) {
+            throw new ModuleCodeNotFoundException();
+        }
+
+        if (personsAssignedToTask == 0) { // raise error if no student in the module was assigned to this task.
+            throw new TaskNotFoundException();
+        }
+
+    }
+
+    /**
+     * Mark {@code task} task belonging to a person {@code studentId} as done.
+     *
+     * @param studentId the student id of the person's whose task is to be marked as done.
+     * @param index the index of the task to be marked as complete.
+     */
+    public void markTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                Person updatedPerson = currPerson.getCopy();
+                TaskList updatedPersonTaskList = updatedPerson.getTaskList();
+                int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
+                if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                    if (!updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
+                        updatedPersonTaskList.markTaskAsComplete(index.getZeroBased());
+                        setPerson(currPerson, updatedPerson);
+                    } else {
+                        throw new TaskAlreadyCompleteException();
+                    }
+                } else {
+                    throw new InvalidTaskIndexException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Unmark {@code task} task belonging to a person {@code studentId} as undone.
+     *
+     * @param studentId the student id of the person's whose task is to be marked as undone.
+     * @param index the index of the task to be marked as incomplete.
+     */
+    public void unmarkTaskOfPerson(StudentId studentId, Index index) {
+        requireAllNonNull(studentId, index);
+        boolean isPersonFound = false;
+
+        for (Person currPerson: internalList) {
+            if (currPerson.getStudentId().equals(studentId)) {
+                isPersonFound = true;
+                Person updatedPerson = currPerson.getCopy();
+                TaskList updatedPersonTaskList = updatedPerson.getTaskList();
+                int numberOfTasks = updatedPersonTaskList.getNumberOfTasks();
+                if (index.getZeroBased() < numberOfTasks && index.getOneBased() > 0) {
+                    if (updatedPersonTaskList.getTaskList().get(index.getZeroBased()).isTaskComplete()) {
+                        updatedPersonTaskList.markTaskAsNotComplete(index.getZeroBased());
+                        setPerson(currPerson, updatedPerson);
+                    } else {
+                        throw new TaskAlreadyNotCompleteException();
+                    }
+                } else {
+                    throw new InvalidTaskIndexException();
+                }
+            }
+        }
+
+        if (!isPersonFound) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Iterates through each {@code Person}, and checks if the {@code Person} who is taking {@code ModuleCode}
+     * has the specified {@code Task} in his/her {@code TaskList}. If the specified task is present,
+     * the completion status will be extracted out into a resulting HashMap.
+     *
+     * @param moduleCode target moduleCode to be compared with.
+     * @param task target task to be compared with.
+     * @return LinkedHashMap containing valid person/completion status pair.
+     */
+    public LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+        LinkedHashMap<Person, Boolean> result = new LinkedHashMap<Person, Boolean>();
+
+        // iterate through each student, and check if their respective TaskList contain the specified task
+        for (Person currPerson: internalList) {
+            TaskList currTaskList = currPerson.getTaskList();
+            if (currPerson.getModuleCode().equals(moduleCode)
+                    && currTaskList != null && currTaskList.isTaskAlreadyPresent(task)) {
+                result.put(currPerson, currTaskList.isTaskPresentAndCompleted(task));
+            }
+        }
+        return result;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
@@ -133,5 +362,56 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list of persons in ascending order of their names.
+     */
+    public void sortList() {
+        internalList.sort(new SortAlphabetically());
+    }
+
+    /**
+     * Sorts the list of persons in ascending order of the number of tasks completed.
+     */
+    public void sortListByTaskLeft() {
+        internalList.sort(new SortByTaskLeft().reversed());
+    }
+
+    /**
+     * SortAlphabetically implements a comparator class, to sort the list of persons in alphabetical order.
+     */
+    class SortAlphabetically implements Comparator<Person> {
+
+        /**
+         * Sorts in ascending order of the names of persons.
+         *
+         * @param a the first person.
+         * @param b the second person.
+         * @return an int value after comparing the names of the two persons.
+         */
+        @Override
+        public int compare(Person a, Person b) {
+            String personAFullName = a.getName().fullName;
+            String personBFullName = b.getName().fullName;
+            return personAFullName.compareTo(personBFullName);
+        }
+    }
+
+    /**
+     * SortByTaskDone implements a comparator class, to sort the list of persons by the number of tasks completed.
+     */
+    class SortByTaskLeft implements Comparator<Person> {
+
+        @Override
+        public int compare(Person a, Person b) {
+            Integer personANumOfTaskTotal = a.getTaskList().getNumberOfTasks();
+            Integer personBNumOfTaskTotal = b.getTaskList().getNumberOfTasks();
+            Integer personANumOfTaskDone = a.getTaskList().getNumOfCompletedTasks();
+            Integer personBNumOfTaskDone = b.getTaskList().getNumOfCompletedTasks();
+            Integer personANumOfTaskLeft = personANumOfTaskTotal - personANumOfTaskDone;
+            Integer personBNumOfTaskLeft = personBNumOfTaskTotal - personBNumOfTaskDone;
+            return personANumOfTaskLeft.compareTo(personBNumOfTaskLeft);
+        }
     }
 }

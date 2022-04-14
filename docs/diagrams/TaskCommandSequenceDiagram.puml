@@ -1,0 +1,148 @@
+@startuml
+!include style.puml
+
+title TaskCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "taskCommand:TaskCommand" as TaskCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "pred:StudentIdContainsKeywordsPredicate" as Predicate MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+participant "targetStudent:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+ref over LogicManager: Produce taskCommand
+
+LogicManager -> TaskCommand ++ LOGIC_COLOR: execute(model)
+
+create Predicate
+TaskCommand -> Predicate
+activate Predicate MODEL_COLOR
+Predicate --> TaskCommand: pred
+deactivate Predicate
+
+TaskCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(pred)
+deactivate Model
+TaskCommand -> Model ++ MODEL_COLOR: getFilteredPersonList().get(0);
+Model --> TaskCommand MODEL_COLOR: targetStudent:Person
+deactivate Model
+
+TaskCommand -> Person ++ MODEL_COLOR: getTaskList()
+Person --> TaskCommand -- MODEL_COLOR: targetTaskList:TaskList
+
+ref over TaskCommand: Categorise each task in targetTaskList
+
+TaskCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+deactivate Model
+
+create CommandResult
+TaskCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> TaskCommand
+note right: The CompletedTaskList and IncompleteTaskList\ncreated in "Categorise each task in targetTaskList"\n will be used in initialising commandResult.
+deactivate CommandResult
+
+TaskCommand --> LogicManager -- LOGIC_COLOR: commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TaskCommandParser" as TaskCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "taskCommand:TaskCommand" as TaskCommand LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "studentId:StudentId" as StudentId MODEL_COLOR
+end box
+
+mainframe sd Produce taskCommand
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create TaskCommandParser
+AddressBookParser -> TaskCommandParser
+activate TaskCommandParser LOGIC_COLOR
+TaskCommandParser --> AddressBookParser
+deactivate TaskCommandParser
+
+AddressBookParser -> TaskCommandParser : parse(arguments)
+activate TaskCommandParser LOGIC_COLOR
+
+TaskCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> TaskCommandParser -- LOGIC_COLOR: argMultimap
+
+TaskCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
+create StudentId
+ParserUtil -> StudentId
+activate StudentId MODEL_COLOR
+StudentId --> ParserUtil
+deactivate StudentId
+ParserUtil --> TaskCommandParser -- MODEL_COLOR: studentId
+
+create TaskCommand
+TaskCommandParser -> TaskCommand
+activate TaskCommand LOGIC_COLOR
+TaskCommand --> TaskCommandParser: taskCommand
+deactivate TaskCommand
+
+TaskCommandParser --> AddressBookParser -- LOGIC_COLOR: taskCommand
+AddressBookParser --> LogicManager -- LOGIC_COLOR: taskCommand
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant "taskCommand:TaskCommand" as TaskCommand LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "targetTaskList:TaskList" as TargetTaskList MODEL_COLOR
+participant "completed:TaskList" as CompletedTaskList MODEL_COLOR
+participant "incomplete:TaskList" as IncompleteTaskList MODEL_COLOR
+end box
+
+mainframe sd Categorise each task in targetTaskList
+
+create CompletedTaskList
+TaskCommand -> CompletedTaskList
+activate CompletedTaskList MODEL_COLOR
+CompletedTaskList --> TaskCommand
+deactivate CompletedTaskList
+
+create IncompleteTaskList
+TaskCommand -> IncompleteTaskList
+activate IncompleteTaskList MODEL_COLOR
+IncompleteTaskList --> TaskCommand
+deactivate IncompleteTaskList
+
+TaskCommand -> TargetTaskList ++ MODEL_COLOR: getTaskList()
+TargetTaskList --> TaskCommand --: tempList
+
+loop for all Tasks in tempList
+alt task is completed
+TaskCommand -> CompletedTaskList ++ MODEL_COLOR: addTask(task)
+deactivate CompletedTaskList
+else
+TaskCommand -> IncompleteTaskList ++ MODEL_COLOR: addTask(task)
+deactivate IncompleteTaskList
+end
+end loop
+
+@enduml

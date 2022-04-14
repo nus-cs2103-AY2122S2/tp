@@ -1,0 +1,24 @@
+@startuml
+
+title ClearCommand Activity Diagram\n
+
+start
+:User inputs "clear";
+:TAPA enters "clear confirmation" mode;
+:TAPA requests for confirmation from
+the user to clear all student details;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User inputs "confirm"])
+    :All students are cleared from TAPA;
+else ([Else])
+    :A CommandException is thrown;
+endif
+
+:TAPA exits "clear confirmation" mode
+then resumes its normal operations;
+
+stop
+@enduml

@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -39,13 +38,19 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        if (email == null) {
+            value = null;
+        } else {
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+            value = email;
+        }
     }
 
     /**
      * Returns if a given string is a valid email.
+     *
+     * @param test the string that is being tested.
+     * @return a boolean value (true/false) depending if the email is valid.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -58,13 +63,31 @@ public class Email {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Email) other).value)); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        }
+        if (!(other instanceof Email)) { // target object is of different type
+            return false;
+        }
+
+        Email targetObject = (Email) other;
+
+        if (targetObject.value == null && this.value == null) {
+            return true;
+        } else if (targetObject.value == null) {
+            return false;
+        } else if (this.value == null) {
+            return false;
+        } else {
+            return value.equals(targetObject.value);
+        }
     }
 
     @Override
     public int hashCode() {
+        if (value == null) {
+            return 0;
+        }
         return value.hashCode();
     }
 

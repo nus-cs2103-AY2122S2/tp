@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+
+title ProgressCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ProgressCommandParser" as ProgressCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":ProgressCommand" as ProgressCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create ProgressCommandParser
+AddressBookParser -> ProgressCommandParser
+activate ProgressCommandParser LOGIC_COLOR
+ProgressCommandParser --> AddressBookParser
+deactivate ProgressCommandParser
+
+AddressBookParser -> ProgressCommandParser : parse(arguments)
+activate ProgressCommandParser LOGIC_COLOR
+
+ProgressCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> ProgressCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over ProgressCommandParser: Parsing each field
+
+create ProgressCommand
+ProgressCommandParser -> ProgressCommand
+activate ProgressCommand LOGIC_COLOR
+ProgressCommand --> ProgressCommandParser
+deactivate ProgressCommand
+
+ProgressCommandParser --> AddressBookParser -- LOGIC_COLOR: ProgressCommand
+AddressBookParser --> LogicManager -- LOGIC_COLOR: ProgressCommand
+
+LogicManager -> ProgressCommand ++ LOGIC_COLOR: execute(model)
+
+ProgressCommand -> Model ++ MODEL_COLOR: checkProgress(moduleCode, task)
+Model --> ProgressCommand -- MODEL_COLOR: LinkedHashMap<Person, Boolean> possiblePairings
+
+ProgressCommand -> ProgressCommand: Create result string using possiblePairings
+
+create CommandResult
+ProgressCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> ProgressCommand: commandResult
+deactivate CommandResult
+
+ProgressCommand --> LogicManager -- LOGIC_COLOR: commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":ProgressCommandParser" as ProgressCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
+participant "task:Task" as Task MODEL_COLOR
+end box
+
+mainframe sd Parsing each field
+ProgressCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
+create ModuleCode
+ParserUtil -> ModuleCode
+activate ModuleCode MODEL_COLOR
+ModuleCode --> ParserUtil
+deactivate ModuleCode
+ParserUtil --> ProgressCommandParser -- LOGIC_COLOR: moduleCode
+
+ProgressCommandParser -> ParserUtil ++ LOGIC_COLOR: parseTask(task)
+create Task
+ParserUtil -> Task
+activate Task MODEL_COLOR
+Task --> ParserUtil
+deactivate Task
+ParserUtil --> ProgressCommandParser -- LOGIC_COLOR: task
+
+@enduml

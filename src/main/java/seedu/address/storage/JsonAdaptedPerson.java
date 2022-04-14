@@ -1,21 +1,18 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
+import seedu.address.model.person.TaskList;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -24,25 +21,30 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    private final String studentId;
     private final String name;
+    private final String moduleCode;
     private final String phone;
+    private final String telegramHandle;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final TaskList taskList = new TaskList();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("studentId") String studentId, @JsonProperty("name") String name,
+                             @JsonProperty("moduleCode") String moduleCode, @JsonProperty("phone") String phone,
+                             @JsonProperty("telegramHandle") String telegramHandle,
+                             @JsonProperty("email") String email, @JsonProperty("taskList") TaskList taskList) {
+        this.studentId = studentId;
         this.name = name;
+        this.moduleCode = moduleCode;
         this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
-        this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (taskList != null) {
+            this.taskList.addAllTask(taskList);
         }
     }
 
@@ -50,13 +52,31 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        studentId = source.getStudentId().id;
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        moduleCode = source.getModuleCode().moduleCode;
+        Phone currPhone = source.getPhone();
+        if (currPhone == null) {
+            phone = null;
+        } else {
+            phone = currPhone.value;
+        }
+
+        TelegramHandle currTelegramHandle = source.getTelegramHandle();
+        if (currTelegramHandle == null) {
+            telegramHandle = null;
+        } else {
+            telegramHandle = currTelegramHandle.telegramHandle;
+        }
+
+        Email currEmail = source.getEmail();
+        if (currEmail == null) {
+            email = null;
+        } else {
+            email = currEmail.value;
+        }
+
+        taskList.addAllTask(source.getTaskList());
     }
 
     /**
@@ -65,10 +85,14 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
         }
+        if (!StudentId.isValidId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelStudentId = new StudentId(studentId);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -78,32 +102,52 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        if (moduleCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModuleCode.class.getSimpleName()));
+        }
+        if (!ModuleCode.isValidModuleCode(moduleCode)) {
+            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
+
+        final Phone modelPhone;
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
+            modelPhone = new Phone(null);
+        } else if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        } else {
+            modelPhone = new Phone(phone);
         }
-        final Phone modelPhone = new Phone(phone);
 
+        final TelegramHandle modelTelegramHandle;
+        if (telegramHandle == null) {
+            modelTelegramHandle = new TelegramHandle(null);
+        } else if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        } else {
+            modelTelegramHandle = new TelegramHandle(telegramHandle);
+        }
+
+        final Email modelEmail;
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
+            modelEmail = new Email(null);
+        } else if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        } else {
+            modelEmail = new Email(email);
         }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        final TaskList modelTaskList;
+        for (Task i : taskList.getTaskList()) {
+            if (!Task.isValidTaskName(i.getTaskName())) {
+                throw new IllegalValueException(Task.MESSAGE_CONSTRAINTS);
+            }
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
+        modelTaskList = taskList;
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelStudentId, modelName, modelModuleCode,
+                modelPhone, modelTelegramHandle, modelEmail, modelTaskList);
     }
 
 }

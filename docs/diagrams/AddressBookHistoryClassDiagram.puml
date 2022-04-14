@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeFontColor BackgroundColor
+show members
+
+title AddressBookHistory Class Diagram
+
+package Logic {
+    class LogicManager
+}
+
+package Model {
+Class "<<interface>>\nModel" as Model
+
+    class ModelManager {
+        saveCurrentAddressBookToHistory()
+        undoAddressBook()
+    }
+
+    class AddressBookHistory {
+        List<>: previousAddressBooks
+        addAddressBook(addressBook: AddressBook)
+        getPreviousAddressBook()
+        clearHistory()
+    }
+}
+
+LogicManager -> Model
+Model <|- ModelManager
+ModelManager -down-> AddressBookHistory
+
+@enduml

@@ -1,11 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Task;
 
 /**
  * The API of the Model component.
@@ -53,6 +58,36 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the AddressBook that was saved before the last user command was executed.
+     */
+    ReadOnlyAddressBook getPreviousAddressBook();
+
+    /**
+     * Adds AddressBook to the list of address books that are saved with each user command.
+     */
+    void saveCurrentAddressBookToHistory();
+
+    /**
+     * Returns the history of address books following the user's commands.
+     */
+    AddressBookHistory getAddressBookHistory();
+
+    /**
+     * Returns true if the address book history is empty.
+     */
+    boolean isAddressBookHistoryEmpty();
+
+    /**
+     * Replaces the current address book with one that was saved before the last user command was executed.
+     */
+    void undoAddressBook();
+
+    /**
+     * Clears the user's address book history.
+     */
+    void clearAddressBookHistory();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -76,6 +111,55 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Assigns {@code Task} to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * The {@code task} should be unique and not a duplicate of already assigned task.
+     */
+    void assignTaskToPerson(StudentId studentId, Task task);
+
+    /**
+     * Deletes {@code Task} assigned to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * A {@code task} at {@code Index} should exist.
+     */
+    void deleteTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Deletes {@code Task} assigned to {@code person} with {@code moduleCode}.
+     * A person with {@code moduleCode} must exist in the address book.
+     * A {@code task} with the exact task name as given by the user should exist.
+     */
+    void deleteTaskForAllInModule(ModuleCode moduleCode, Task task);
+
+    /**
+     * Assigns {@code Task} to 1 or more {@code person} with taking the module with the {@code moduleCode}.
+     * 1 or more persons with {@code moduleCode} must exist in the address book.
+     * The {@code task} should be unique and not a duplicate of already assigned task.
+     */
+    void assignTaskToAllInModule(ModuleCode moduleCode, Task task);
+
+    /**
+     * Marks {@code Task} to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * The {@code task} should be an existing unmarked assigned task.
+     */
+    void markTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Unmarks {@code Task} to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * The {@code task} should be an existing marked assigned task.
+     */
+    void unmarkTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Returns a key-value pair between each {@code person} and the completion status of a task,
+     * if the person is taking the specified module and is being assigned with the specified task.
+     * The {@code task} must not be null.
+     */
+    LinkedHashMap<Person, Boolean> checkProgress(ModuleCode moduleCode, Task task);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +168,35 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Sorts the list of persons in alphabetical order by their names. */
+    void sortFilteredPersonList();
+
+    /** Sorts the list of students in descending order of the number of incomplete tasks. */
+    void sortFilteredPersonListByTaskLeft();
+
+    /**
+     * Returns the user's command history.
+     */
+    CommandHistory getCommandHistory();
+
+    /**
+     * Returns the user's previously executed command (represented as a String).
+     */
+    String getPreviousCommandText();
+
+    /**
+     * Returns true if the command history is empty.
+     */
+    boolean isCommandHistoryEmpty();
+
+    /**
+     * Adds the command (as a {@code String}) to command history.
+     */
+    void addToCommandHistory(String commandText);
+
+    /**
+     * Clears the user's command history.
+     */
+    void clearCommandHistory();
 }

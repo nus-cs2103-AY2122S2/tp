@@ -1,0 +1,114 @@
+@startuml
+!include style.puml
+
+title FindCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "predicate:Predicate" as Predicate MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser LOGIC_COLOR
+FindCommandParser --> AddressBookParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse(arguments)
+activate FindCommandParser LOGIC_COLOR
+
+FindCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> FindCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over FindCommandParser: Parsing inputted field
+
+create Predicate
+FindCommandParser -> Predicate
+activate Predicate MODEL_COLOR
+Predicate --> FindCommandParser
+deactivate Predicate
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand LOGIC_COLOR
+FindCommand --> FindCommandParser
+deactivate FindCommand
+
+FindCommandParser --> AddressBookParser -- LOGIC_COLOR: FindCommand
+AddressBookParser --> LogicManager -- LOGIC_COLOR: FindCommand
+
+LogicManager -> FindCommand ++ LOGIC_COLOR: execute(model)
+FindCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(predicate)
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager -- LOGIC_COLOR: commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "studentId:StudentId" as StudentId MODEL_COLOR
+participant "name:Name" as Name MODEL_COLOR
+participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
+end box
+
+mainframe sd Parsing inputted field
+
+alt user inputs studentId
+    FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
+    create StudentId
+    ParserUtil -> StudentId
+    activate StudentId MODEL_COLOR
+    StudentId --> ParserUtil
+    deactivate StudentId
+    ParserUtil --> FindCommandParser -- MODEL_COLOR: studentId
+
+else user inputs name
+    FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseName(name)
+    create Name
+    ParserUtil -> Name
+    activate Name MODEL_COLOR
+    Name --> ParserUtil
+    deactivate Name
+    ParserUtil --> FindCommandParser -- MODEL_COLOR: name
+
+else user inputs moduleCode
+    FindCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
+    create ModuleCode
+    ParserUtil -> ModuleCode
+    activate ModuleCode MODEL_COLOR
+    ModuleCode --> ParserUtil
+    deactivate ModuleCode
+    ParserUtil --> FindCommandParser -- LOGIC_COLOR: moduleCode
+end
+@enduml

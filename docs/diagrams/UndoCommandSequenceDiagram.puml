@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+
+title UndoCommand Sequence Diagram\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UndoCommand" as UndoCommand LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant ":AddressBookHistory" as AddressBookHistory MODEL_COLOR
+end box
+
+[-> LogicManager : execute("undo")
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand("undo")
+activate AddressBookParser LOGIC_COLOR
+
+create UndoCommand
+AddressBookParser -> UndoCommand
+activate UndoCommand LOGIC_COLOR
+UndoCommand --> AddressBookParser
+deactivate UndoCommand
+
+AddressBookParser --> LogicManager : UndoCommand
+deactivate AddressBookParser
+
+LogicManager -> UndoCommand : execute(model)
+activate UndoCommand LOGIC_COLOR
+
+UndoCommand -> Model : undoAddressBook()
+activate Model MODEL_COLOR
+
+Model -> AddressBookHistory : getPreviousAddressBook()
+activate AddressBookHistory MODEL_COLOR
+
+AddressBookHistory --> Model : previous address book
+deactivate AddressBookHistory
+
+Model -> Model : setAddressBook(previous address book)
+activate Model MODEL_COLOR
+Model --> Model
+deactivate Model MODEL_COLOR
+
+Model --> UndoCommand
+deactivate Model
+
+UndoCommand --> LogicManager : CommandResult
+deactivate UndoCommand
+
+[<--LogicManager : CommandResult
+deactivate LogicManager
+@enduml
