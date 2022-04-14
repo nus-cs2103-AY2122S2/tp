@@ -141,7 +141,16 @@ Two Event entries are considered duplicates of each other if they have the same 
 
 ### Interacting with the app
 
-Since InternBuddy is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through typing the commands. To interact with this app, you **type commands into the command box** and **hit the Enter key** when you are done.<br/>
+Since InternBuddy is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through the Command Box by **typing commands in the Command Box** and **hitting the Enter key** afterwards.<br/>
+
+| ![Command Box](images/UserGuide/Command-Box.png) |
+| :----------------------------------------------: |
+|            InternBuddy's Command Box             |
+
+#### Commands
+
+Commands are sequences of words that follows a predetermined [format](#command-formats) that informs InternBuddy what to do.
+
 InternBuddy's commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 
 -   **Adding entries**
