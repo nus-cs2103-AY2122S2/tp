@@ -29,7 +29,10 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
 4. Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Opening UI](images/UserGuide/Ui-1.png)
+
+    | ![Opening UI](images/UserGuide/Ui-1.png) |
+    | :--------------------------------------: |
+    |             InternBuddy app              |
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -61,7 +64,9 @@ This section will go into detail as to how the app works.
 
 ### User Interface
 
-![Annotated user interface](images/UserGuide/Ui-annotated.png)
+| ![Annotated user interface](images/UserGuide/Ui-annotated.png) |
+| :------------------------------------------------------------: |
+|            Main interface components of InternBuddy            |
 
 As you can see in the image above, there are 3 main components of InternBuddy:
 
@@ -98,7 +103,9 @@ entry type can store.
 
 #### Company List
 
-![Company List](images/UserGuide/Ui-2.png)
+| ![Company List](images/UserGuide/Ui-2.png) |
+| :----------------------------------------: |
+|        Entry list showing companies        |
 
 A **Company** entry has:
 
@@ -112,7 +119,9 @@ Two Company entries are considered duplicates of each other if they have the sam
 
 #### Person List
 
-![Person List](images/UserGuide/Ui-3.png)
+| ![Person List](images/UserGuide/Ui-3.png) |
+| :---------------------------------------: |
+|        Entry list showing contacts        |
 
 A **Person** entry has:
 
@@ -126,7 +135,9 @@ Two Person entries are considered duplicates of each other if they have the same
 
 #### Event List
 
-![Event List](images/UserGuide/Ui-4.png)
+| ![Event List](images/UserGuide/Ui-4.png) |
+| :--------------------------------------: |
+|        Entry list showing events         |
 
 Finally, an **Event** entry has:
 
@@ -194,11 +205,15 @@ For those of you not familiar with what a dialog box is, a dialog box is a box t
 
 If the command you tried to execute is **invalid** for whatever reason, an **error message** will be shown and the command you typed will remain. An example of this is shown below.
 
-![invalid commmand message](images/InvalidCommandMessageExample.png)
+| ![invalid commmand message](images/InvalidCommandMessageExample.png) |
+| :------------------------------------------------------------------: |
+|                        Invalid command result                        |
 
 Otherwise, if the command is **valid**, a **success message** will be shown and the command will be executed. The command box will also be cleared.
 
-![successful command](images/SuccessfulCommandExample.png)
+| ![successful command](images/SuccessfulCommandExample.png) |
+| :--------------------------------------------------------: |
+|                    Valid command result                    |
 
 #### Archive
 
@@ -299,7 +314,9 @@ Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+| ![help message](images/helpMessage.png) |
+| :-------------------------------------: |
+|           Help message window           |
 
 Format:
 
@@ -522,7 +539,10 @@ Examples:
 
 -   `findp n/John` returns `john` and `John Doe`
 -   `findp n/alex david` returns `Alex Yeoh`, `David Li`<br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+    | ![result for 'find alex david'](images/findAlexDavidResult.png) |
+    | :-------------------------------------------------------------: |
+    |                 Result of `findp n/alex david`                  |
 
 #### Locating events: `finde`
 
