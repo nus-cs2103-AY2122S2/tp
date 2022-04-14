@@ -31,18 +31,18 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 4. Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Opening UI](images/UserGuide/Ui-1.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - **`listc`** : Lists all companies.
+    - `listc` : Lists all companies.
 
-    - **`addc`**`n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
+    - `addc n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
 
-    - **`delete`**`3` : Deletes the 3rd contact shown in the currently displayed list.
+    - `delete 3` : Deletes the 3rd contact shown in the currently displayed list.
 
-    - **`delete_all`** : Deletes all entries in the currently displayed list.
+    - `delete_all` : Deletes all entries in the currently displayed list.
 
-    - **`exit`** : Exits the app.
+    - `exit` : Exits the app.
 
 6. If this is your first time reading our user guide, you can refer to the [Overview](#overview-of-internbuddy) section
    to learn more about the app, or to the [Features Guide](#features-guide) section to better understand the [Features](#features)
