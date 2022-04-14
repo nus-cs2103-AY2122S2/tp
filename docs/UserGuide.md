@@ -272,8 +272,8 @@ Displays all the tasks that are allocated to a particular student.
 <img src="images/Task-Command-UG.png"/>
 </p>
 
-                                                                                                                                                                                                                                                                                                                                        --------------------------------------------------------------------------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                        <div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Marking an undone task as done for a student: `mark`
 
