@@ -70,16 +70,16 @@ This section will go into detail as to how the app works.
 
 As you can see in the image above, there are 3 main components of InternBuddy:
 
-1. #### Entry List
+1. Entry List
 
     InternBuddy's Entry List is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
 
-2. #### Dialog Box
+2. Dialog Box
 
     The Dialog Box is where InternBuddy gives you the details of the commands that you entered. More on this in [Dialog Box](#dialog-box).
 
-3. #### Command Box
-    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
+3. Command Box
+   This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
 
 ### Structure of InternBuddy
 
