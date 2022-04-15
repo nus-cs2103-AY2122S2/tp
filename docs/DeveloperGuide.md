@@ -166,7 +166,7 @@ object must match an existing `Company` object in the `AddressBook`.
 is given below. It has a `Tag` list in the `AddressBook`, which `Entry` references. This allows `AddressBook` to only 
 require one `Tag` object per unique tag, instead of each `Entry` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" />
 
 </div>
 
@@ -277,10 +277,10 @@ _{more aspects and alternatives to be added}_
 #### Design
 
 The main idea of the archive feature for InternBuddy is that archived entries will not show up when searching for entries
-with the `find` or `list` commands unless the user specifies that they specifically want to search for archived entries.
+with the `find` or `list` or `sort` commands unless the user specifies that they specifically want to search for archived entries.
 In this way, they function similarly to hidden files in many file managers.
 
-To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. For flexibility,
+To handle this, the `list`, `find` and `sort` commands needed an extra parameter indicating the search type. For flexibility,
 there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
 not to explicitly pass a search type; in this case, the default behavior would be `UNARCHIVED_ONLY`.
 
@@ -294,7 +294,7 @@ To deal with the actual archiving, each `Entry` object was given an `isArchived`
 was archived or not. Predicates to check the value of the `isArchived` attribute of each entry could then be applied to the
 filtered lists to filter out archived entries (or filter only archived entries).
 
-Finally, the `archive` command aws designed to take only the index as the parameter. It would archive the entry specified
+Finally, the `archive` command was designed to take only the index as the parameter. It would archive the entry specified
 by the index that was in the currently displayed list. The `unarchive` command has a similar design.
 
 #### Implementation
@@ -328,6 +328,40 @@ passed search type parameter is `unarchived`, `archived`, or `all`, the executio
 predicate on it depending on the search type.
 6. The `CommandResult` of the `find` command is returned.
 
+A simplified sequence diagram of the archive command is shown below.
+
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram.png)
+
+### Sort Feature
+
+#### Design
+
+The main idea for the sort feature for InternBuddy is that entries can be sorted by the importance of the entry. In InternBuddy, the importance of a company or a person is based on the lexicographical order of the company or person's name. As for event, the importance of an event is based on the date of the event. The sort feature is capable of ordering the entries in ascending or descending order.
+
+The `sort` command functions similarly to its `list` counterpart in terms of display. Both the commands will display the entries accordingly depending on the entry type specified for the command. The difference is that the `sort` command will sort the entries according to the importance of the entry.
+
+Due to its similar nature to the `list` command, the `sort` command extends the `list` command to minimize re-implementing the same behaviour twice. This is also done to further enforce DRY. The `sort` command also has a `SearchType` parameter. The `SearchType` parameter is optional. The `sort` command takes in an additional `Ordering` parameter as well. The `Ordering` parameter is optional. the `Ordering` parameter allows the user to specify whether the entries should be sorted in ascending or descending order.
+
+Since `sort` is a newly implemented feature, a new parser `SortCommandParser`. Similar to its `list` counterpart, `SortCommandParser` will handle the creation of the 3 kinds of sort commands. Similar to above, the `SortCommandParser` will also handle the parsing of the `SearchType` and `Ordering` parameters. Now the `parse()` method can return any of the 3 sort commands.
+
+To handle the actual sorting, the `SortCommand` will call `Model#sortPersonListByName`/ `Model#sortCompanyListByName`/ `Model#sortEventListByDate` to sort the entries. Each respective call of sort methods in the model calls the same respective method in addressbook.
+
+Please take note that the `SortCommand` does not just sort the displayed list (`FilteredList`), it also sorts the actual stored list (`UniqueEntryList`). This is to ensure that the order of the list persists even after the user has sorted the list (i.e. calling a `find` or `list` command).
+
+#### Common Implementation
+Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
+
+For the `sortXYZ` command: (where `XYZ` is `person`, `company`, or `event`)
+1. The user executes `sortXYZ o/descending`.
+2. This command is parsed to check if the given optional parameters are there and valid (`o/ORDERING` and `s/SEARCH_TYPE`). If not, a `ParseException` is thrown. In this case, the `Ordering` parameter is set to `DESCENDING` (since `o/descending` is specified, otherwise set to `ASCENDING`) and the `SearchType` parameter is set to `UNARCHIVED` (default value of the optional parameter).
+3. Otherwise, the created `SortXYZCommand` object will execute `Model#sortPersonListByName`/ `Model#sortCompanyListByName`/ `Model#sortEventListByDate` depending on `XYZ`.  These methods take 2 parameters: the first is the `Predicate` and the second is the `Ordering`. `Predicate` is generated by the command through the `SearchType` parameter.
+4. The model will then call the respective sort method in the address book (i.e. `AddressBook#sortPersonListByName`/ `AddressBook#sortCompanyListByName`/ `AddressBook#sortEventListByDate`). These methods in address book requires 1 parameter, which is the `Comparator<? super XYZ>` object to be used for sorting. The Comparator needed is already predefined in the model.
+5. The address book will then call `sort(Comparator<? super XYZ>)` in the respective `UniqueEntryList`.
+6. Finally, the `UniqueEntryList` will sort the entries according to the `Comparator` object passed in.
+7. Finally, moving to the model again, the `Model#showXYZList(predicate)` method is called to display the list. The `predicate` is generated by the command through the `SearchType` parameter.
+8. The `CommandResult` of the `sortXYZ` command is returned.
+
+A similar process is performed with the `unarchive` command, but `Entry#setArchived()` is ultimately passed `false` instead of `true`.
 
 ### Adding Feature
 
@@ -340,6 +374,10 @@ can be tricky to implement.
 The command designs for each type of entries must be similar to make sure that the code is united and coherent. In particular, 
 although the implementation of `addc`, `addp`, and `adde` commands are similar, it is necessary to divide them out to their own classes.
 
+While the design of each `add` command is inspired from AB3, there are quite some changes to the implementation as `Event`, `Company`,
+and `Person` have different attributes. In particular, there are now 3 `UniqueEntryList` for each `Entry`. This is to make sure that the three different `Entry`
+does not mix with each other when displaying in `UI`.
+
 
 #### Common Implementation
 Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
@@ -349,9 +387,9 @@ The Activity Diagram below summarizes what happens when the user enters the add 
 
 
 For the `addXYZ` command:
-1. The user executes `addXYZ` followed by `XYZ` parameters (along with their tags).
+1. The user executes `addXYZ` followed by `XYZ` parameters (along with their tags). You can look at our UG to see the parameters.
 2. This command is parsed by `AddXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
-3. Otherwise, an `XYZ` object is created and `AddXYZCommand` object will be created.
+3. Otherwise, an `XYZ` object is created and `AddXYZCommand` object will be created accordingly.
 4. Next, `AddXYZCommand` will check whether the added `XYZ` object exists in the address book by using `Model#hasEntry()`.
    if the added `XYZ` object is a duplicate, then `CommandException` will be thrown. 
 5. Otherwise, the created `AddXYZCommand` object will call `Model#addXYZ()` to add `XYZ` object to the model.
@@ -397,6 +435,13 @@ more attributes when judging whether two events are the same entry.
 This feature allows the user to display selected `Entry` in the address book. It is facilitated by `ModelManager`. This acts as a way for user to 
 filter the entries by their attributes.
 
+While the design of each `find` command is inspired from AB3, there are quite some changes to the implementation as `Event`, `Company`,
+and `Person` have different attributes. As mentioned, there are now 3 `UniqueEntryList` for each `Entry`. Each command will look at different
+`UniqueEntryList` accordingly.
+
+To understand how each `find` commands work in depth. Look at `CompanyContainsKeywordsPredicate`, `PersonContainsKeywordsPredicate`, and `EventContainsKeywordsPredicate` classes
+which are the main logic when filtering each `Entry`.
+
 The Activity Diagram below summarizes what happens when the user enters the add command
 <img src="images/FindXYZActivityDiagram.png" />
 
@@ -404,9 +449,9 @@ The Activity Diagram below summarizes what happens when the user enters the add 
 Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
 
 For the `findXYZ` command:
-1. The user executes `findXYZ` followed by `XYZ` parameters (along with their tags).
+1. The user executes `findXYZ` followed by `XYZ` parameters (along with their tags). You can look at the parameters in our UG.
 2. This command is parsed by `FindXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
-3. Otherwise, `XYZContainsKeywordsPredicate` object will be created. Notice that `XYZContainsKeywordsPredicate` is the class responsible to test
+3. Otherwise, `XYZContainsKeywordsPredicate` object will be created. Note that `XYZContainsKeywordsPredicate` is the class responsible to test
    whether a particular `XYZ` object fits the queried entry. With this predicate, `FindXYZCommand` object will be created.
 4. Next, `FindXYZCommand` will call `Model#showXYZList(predicate)`.
    1. The model will update the displayed list to be the `XYZ` list and choose only the `XYZ` objects that suits the query
@@ -418,6 +463,29 @@ Here is the Sequence Diagram for the implementation to understand it better.
 
 In the diagram, `FindXYZexample` is just a placeholder for user input. You can look at the UG for sample user input for different
 find commands.
+
+### Editing Feature
+
+The design and implementation of `edit` commands are similar to `find` commands and their sequence diagrams differ minimally.
+For developers, you can trace through the code similarly with the `find` commands.
+
+### List Feature
+
+#### Design
+This feature allows the user to display unarchived, archived, or all the `Entry` in the address book. It is facilitated by `ModelManager`. This acts as a way for user to display entries in the most general way (respective to the desired entry type).
+
+As entries can either be archived or unarchived, the parameter `SearchType` can be passed to the `list` command to indicate which entries to display.
+
+#### Common Implementation
+Note that we are going to use XYZ as a placeholder of either Company, Event, or Person for this section.
+
+For the `listXYZ` command:
+1. The user executes `listXYZ` followed by `SearchType` parameters.
+2. This command is parsed by `ListXYZCommandParser` to check if the given parameters are valid. If not, a `ParseException` is thrown.
+3. Otherwise, `ListXYZCommand` object will be created.
+4. Next, `ListXYZCommand` will call `Model#showXYZList(Predicate)` (`Predicate` is generated by `ListXYZCommand` through `SearchType`).
+5. The model will update the displayed list to be the `XYZ` list and choose only the `XYZ` objects that suits the search type (unarchived/ archived/ all) using `SearchType`.
+6. The `CommandResult` of the `listXYZ` command is returned.=
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -535,7 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  InternBuddy displays the updated list of contact persons with the new contact person
 5.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 * 5a. User wants to add a company to the contact person
@@ -560,7 +628,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  InternBuddy displays the updated list of companies with the new company
 6.  InternBuddy shows successful feedback to the user
 
-   Use case ends.
+    Use case ends.
 
 **Use case: Hide events that have passed or has been cancelled**
 
@@ -588,6 +656,192 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InternBuddy shows an error feedback to the user
 
       Use case resumes at step 2.
+
+**Use case: Edit an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to edit a selected company from the list with the given details
+4. InternBuddy updates the company's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty 
+
+    Use case ends.
+
+* 3a. The selected company is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+    
+    Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+    Use case ends.
+
+**Use case: Edit an existing person**
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to edit a selected person from the list with the given details
+4. InternBuddy updates the person's details
+5. InternBuddy shows successful feedback to the user
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected person is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Edit an existing event**
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to edit a selected event from the list with the given details
+4. InternBuddy updates the event details
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 3a. The selected event is invalid
+    * 3a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+* 3b. The given details is invalid
+    * 3b1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Delete an existing company**
+
+**MSS**
+
+1. User requests to view list of companies
+2. InternBuddy shows list of companies
+3. User requests to delete a selected company from the list
+4. InternBuddy deletes all persons associated with the company
+5. InternBuddy deletes the company from the list
+6. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Delete an existing person**
+
+**MSS**
+
+1. User requests to view list of persons
+2. InternBuddy shows list of persons
+3. User requests to delete a selected person from the list
+4. InternBuddy deletes the person from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Delete an existing event**
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected person is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**MSS**
+
+1. User requests to view list of events
+2. InternBuddy shows list of events
+3. User requests to delete a selected event from the list
+4. InternBuddy deletes the event from the list
+5. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+  Use case ends.
+
+* 4a. The selected event is invalid
+    * 4a1. InternBuddy shows an error feedback to the user
+
+  Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find a company with a specified attribute
+2. InternBuddy shows all the companies that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating persons**
+
+**MSS**
+
+1. User requests to find a person with a specified attribute
+2. InternBuddy shows all the persons that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+**Use case: Locating companies**
+
+**MSS**
+
+1. User requests to find an event with a specified attribute
+2. InternBuddy shows all the events that contain the specified attribute
+3. InternBuddy shows successful feedback to the user
+
+   Use case ends.
+
+
 
 *{More to be added}*
 
@@ -816,7 +1070,26 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting entries
 
-[TODO]
+1. Sorting companies
+   1. Test case: `sortc`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in ascending order".
+
+   2. Test case: `sortc o/ascending`<br>
+      Expected: Same as previous.
+
+   3. Test case: `sortc o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies currently unarchived displayed. Status message displays "Sorted all companies unarchived in descending order".
+
+   4. Test case: `sortc o/X` (where X is anything besides `ascending` or `descending`)<br>
+      Expected: No change. Error details shown in status message.
+
+   5. Test case: `sortc s/archived`<br>
+      Expected: List of companies is sorted alphabetically. List of companies currently archived displayed. Status message displays "Sorted all companies archived in ascending order".
+
+   6. Test case: `sortc s/all o/descending`<br>
+      Expected: List of companies is sorted alphabetically in descending order. List of companies displayed. Status message displays "Sorted all companies in descending order".
+2. Sorting persons or events
+   1. Follow similar procedure to the above, but use sortp or sorte beforehand instead of sortc.
 
 ### Saving data
 

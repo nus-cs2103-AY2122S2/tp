@@ -21,7 +21,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4/internbuddy.jar).
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4.0/internbuddy.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
@@ -41,7 +41,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
    * **`exit`** : Exits the app.
 
-6. If this is your first time reading our user guide, you can refer to our [Guide Walkthrough](#guide-walkthrough) section to learn how to navigate the guide, and eventually the app.
+6. If this is your first time reading our user guide, you can refer to the [Overview](#overview-of-internbuddy) section
+to learn more about the app, or to the [Features Guide](#features-guide) section to better understand the [Features](#features)
+section of the app.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of InternBuddy
@@ -120,25 +122,25 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`listp`](#listing-all-persons--listp): Lists all persons.
   - [`liste`](#listing-all-events--liste): Lists all events.
 - **Sorting entries**
-  - [`sortc`](#sorting-companies-by-name--sortc): Sorts companies by name.
-  - [`sortp`](#sorting-persons-by-name--sortp): Sorts persons by name.
-  - [`sorte`](#sorting-events-by-date--sorte): Sorts events by date.
+  - [`sortc`](#sorting-companies-by-name-sortc): Sorts companies by name.
+  - [`sortp`](#sorting-people-by-name-sortp): Sorts persons by name.
+  - [`sorte`](#sorting-events-by-date-sorte): Sorts events by date.
 - **Editing entries**
   - [`editc`](#editing-a-company--editc): Edits a company.
   - [`editp`](#editing-a-person--editp): Edits a person.
   - [`edite`](#editing-an-event--edite): Edits an event.
 - **Archiving entries**
-  - [`archive`](#archiving-an-entry--archive): Archives an entry.
-  - [`archive_all`](#archiving-entries-in-display--archive_all): Archives all entries in the display.
-  - [`unarchive`](#unarchiving-an-entry--unarchive): Unarchives an entry.
-  - [`unarchive_all`](#unarchiving-entries-in-display--unarchive_all): Unarchives all entries in the display.
+  - [`archive`](#archiving-an-entry-archive): Archives an entry.
+  - [`archive_all`](#archiving-all-entries-in-display-archive_all): Archives all entries in the display.
+  - [`unarchive`](#unarchiving-an-entry-unarchive): Unarchives an entry.
+  - [`unarchive_all`](#unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
 - **Deleting entries**
   - [`delete`](#deleting-an-entry--delete): Deletes an entry. 
-  - [`delete-all`](#deleting-entries-in-display--delete_all): Deletes all entries.
+  - [`delete-all`](#deleting-all-entries-in-display--delete_all): Deletes all entries.
   - [`clear`](#clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
   - [`findc`](#locating-companies-findc): Finds a company.
-  - [`findp`](#locating-people-by-name-findp): Finds a person.
+  - [`findp`](#locating-people-findp): Finds a person.
   - [`finde`](#locating-events-finde): Finds an event. 
 
 There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit).
@@ -214,7 +216,7 @@ An empty input or an input consisting only of spaces is invalid for every parame
 * `n/NAME` - Must only consist of letters or numbers
 * `c/COMPANY_NAME` - Must refer to the name of an existing Company in the app
 * `p/PHONE` - Must contain only numbers and be at least 3 digits long
-* `e/EMAIL` - Must be of the form `local-part@domain`
+* `e/EMAIL` - Must be of the form `local-part@domain`. The `domain` must contain at least one period.
 * `d/DATE`, `sd/START_DATE`, and `ed/END_DATE` - Must be of one of the following forms:
   * `YYYY-MM-DD` e.g. `2022-01-22` (It must still be a valid date)
   * `today` (InternBuddy will interpret this as today's date)
@@ -237,7 +239,7 @@ do refer back to the user guide and the [FAQ](#faq) section. Good luck! :confett
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
+Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
@@ -530,7 +532,7 @@ archive INDEX
 Examples:
 * `archive 1` archives the 1st entry in the currently displayed list.
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Use a list, find, or sort command to get all unarchived entries first. That way, you can get the INDEX of the entry
 you want to archive.
 </div>
@@ -554,8 +556,8 @@ unarchive INDEX
 Examples:
 * `unarchive 1` shows the 1st entry in the list of entries.
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Use a list, find, or sort command to get all archivede entries first. That way, you can get the INDEX of the entry
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use a list, find, or sort command to get all archived entries first. That way, you can get the INDEX of the entry
 you want to unarchive.
 </div>
 
