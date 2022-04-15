@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "s:SortCommand" as SortCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort by/priority in/desc")
+activate LogicManager
+
+LogicManager -> HarmoniaParser : parseCommand("sort by/priority in/desc")
+activate HarmoniaParser
+
+create SortCommandParser
+HarmoniaParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> HarmoniaParser
+deactivate SortCommandParser
+
+HarmoniaParser -> SortCommandParser : parse("by/priority in/desc")
+activate SortCommandParser
+
+create SortCommand
+SortCommandParser -> SortCommand
+activate SortCommand
+
+SortCommand --> SortCommandParser : s
+deactivate SortCommand
+
+SortCommandParser --> HarmoniaParser : s
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> HarmoniaParser
+destroy SortCommandParser
+
+HarmoniaParser --> LogicManager : s
+deactivate HarmoniaParser
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+SortCommand -> Model : updateSortedTaskList(Comparator)
+activate Model
+
+Model --> SortCommand
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : result
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

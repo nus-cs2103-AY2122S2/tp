@@ -1,0 +1,89 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:TagContainsKeywordPredicate" as TagContainsKeywordPredicate MODEL_COLOR
+participant "p:PriorityMatchedPredicate" as PriorityMatchedPredicate MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find t/CS2103T t/CS2105 p/low")
+activate LogicManager
+
+LogicManager -> HarmoniaParser : parseCommand("find t/CS2103T t/CS2105 p/low")
+activate HarmoniaParser
+
+create FindCommandParser
+HarmoniaParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> HarmoniaParser
+deactivate FindCommandParser
+
+HarmoniaParser -> FindCommandParser : parse("find t/CS2103T t/CS2105 p/low")
+activate FindCommandParser
+
+create TagContainsKeywordPredicate
+FindCommandParser -> TagContainsKeywordPredicate
+activate TagContainsKeywordPredicate
+
+TagContainsKeywordPredicate --> FindCommandParser : tagPredicate
+deactivate TagContainsKeywordPredicate
+
+create PriorityMatchedPredicate
+FindCommandParser -> PriorityMatchedPredicate
+activate PriorityMatchedPredicate
+
+PriorityMatchedPredicate --> FindCommandParser : priorityPredicate
+deactivate PriorityMatchedPredicate
+
+
+create FindCommand
+FindCommandParser -> FindCommand
+activate FindCommand
+
+FindCommand --> FindCommandParser : f
+deactivate FindCommand
+
+FindCommandParser --> HarmoniaParser : f
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> HarmoniaParser
+destroy FindCommandParser
+
+HarmoniaParser --> LogicManager : f
+deactivate HarmoniaParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+FindCommand -> FindCommand : interceptPredicates(namePredicate, descriptionPredicate, tagPredicate, deadlinePredicate, priorityPredicate, completionStatusPredicate)
+
+FindCommand -> Model : updateFilteredTaskList(interceptedPredicate)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand : result
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

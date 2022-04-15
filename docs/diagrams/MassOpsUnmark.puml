@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+ box Logic LOGIC_COLOR_T1
+ participant ":LogicManager" as LogicManager LOGIC_COLOR
+ participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
+ participant ":UnmarkCommandParser" as UnmarkCommandParser LOGIC_COLOR
+ participant "t:UnmarkCommand" as UnmarkCommand LOGIC_COLOR
+ participant "result:CommandResult" as CommandResult LOGIC_COLOR
+ participant "p:MassOpsParser" as MassOpsParser LOGIC_COLOR
+ end box
+
+ box Model MODEL_COLOR_T1
+ participant ":Model" as Model MODEL_COLOR
+ end box
+
+ [-> LogicManager : execute("unmark 1 2 3")
+ activate LogicManager
+
+ LogicManager -> HarmoniaParser : parseCommand("unmark 1 2 3")
+ activate HarmoniaParser
+
+ create UnmarkCommandParser
+ HarmoniaParser -> UnmarkCommandParser
+ activate UnmarkCommandParser
+
+ UnmarkCommandParser --> HarmoniaParser
+ deactivate UnmarkCommandParser
+
+ HarmoniaParser -> UnmarkCommandParser : parse("unmark 1 2 3")
+ activate UnmarkCommandParser
+
+ create MassOpsParser
+ UnmarkCommandParser -> MassOpsParser : massOpsProcessor(" 1 2 3")
+ activate MassOpsParser
+
+ MassOpsParser --> UnmarkCommandParser
+ deactivate MassOpsParser
+
+ create UnmarkCommand
+ UnmarkCommandParser -> UnmarkCommand
+ activate UnmarkCommand
+
+ UnmarkCommand --> UnmarkCommandParser : t
+ deactivate UnmarkCommand
+
+ UnmarkCommandParser --> HarmoniaParser : t
+ deactivate UnmarkCommandParser
+ 'Hidden arrow to position the destroy marker below the end of the activation bar.
+ UnmarkCommandParser -[hidden]-> HarmoniaParser
+ destroy UnmarkCommandParser
+
+ HarmoniaParser --> LogicManager : t
+ deactivate HarmoniaParser
+
+ LogicManager -> UnmarkCommand : execute(model)
+ activate UnmarkCommand
+
+ UnmarkCommand -> Model : getSortedTaskList()
+ activate Model
+
+ Model --> UnmarkCommand
+ deactivate Model
+
+ create CommandResult
+ UnmarkCommand -> CommandResult
+ activate CommandResult
+
+ CommandResult --> UnmarkCommand : result
+ deactivate CommandResult
+
+ UnmarkCommand --> LogicManager : result
+ deactivate UnmarkCommand
+
+ [<--LogicManager
+ deactivate LogicManager
+ @enduml

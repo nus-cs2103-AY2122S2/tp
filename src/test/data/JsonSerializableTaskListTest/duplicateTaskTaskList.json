@@ -1,0 +1,17 @@
+{
+  "tasks" : [ {
+    "name" : "Complete Tutorial",
+    "description" : "Hand draw UML diagrams",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-10",
+    "priority": "low",
+    "tagged" : [ "CS2103T" ]
+  },  {
+    "name" : "Complete Tutorial",
+    "description" : "Hand draw UML diagrams",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-10",
+    "priority": "low",
+    "tagged" : [ "CS2103T" ]
+  }]
+}

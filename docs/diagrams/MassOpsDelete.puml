@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+ box Logic LOGIC_COLOR_T1
+ participant ":LogicManager" as LogicManager LOGIC_COLOR
+ participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
+ participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+ participant "t:DeleteCommand" as DeleteCommand LOGIC_COLOR
+ participant "result:CommandResult" as CommandResult LOGIC_COLOR
+  participant "p:MassOpsParser" as MassOpsParser LOGIC_COLOR
+ end box
+
+ box Model MODEL_COLOR_T1
+ participant ":Model" as Model MODEL_COLOR
+ end box
+
+ [-> LogicManager : execute("delete 1 2 3")
+ activate LogicManager
+
+ LogicManager -> HarmoniaParser : parseCommand("delete 1 2 3")
+ activate HarmoniaParser
+
+ create DeleteCommandParser
+ HarmoniaParser -> DeleteCommandParser
+ activate DeleteCommandParser
+
+ DeleteCommandParser --> HarmoniaParser
+ deactivate DeleteCommandParser
+
+ HarmoniaParser -> DeleteCommandParser : parse("delete 1 2 3")
+ activate DeleteCommandParser
+
+ create MassOpsParser
+ DeleteCommandParser -> MassOpsParser : massOpsProcessor(" 1 2 3")
+ activate MassOpsParser
+
+ MassOpsParser --> DeleteCommandParser
+ deactivate MassOpsParser
+
+ create DeleteCommand
+ DeleteCommandParser -> DeleteCommand
+ activate DeleteCommand
+
+ DeleteCommand --> DeleteCommandParser : t
+ deactivate DeleteCommand
+
+ DeleteCommandParser --> HarmoniaParser : t
+ deactivate DeleteCommandParser
+ 'Hidden arrow to position the destroy marker below the end of the activation bar.
+ DeleteCommandParser -[hidden]-> HarmoniaParser
+ destroy DeleteCommandParser
+
+ HarmoniaParser --> LogicManager : t
+ deactivate HarmoniaParser
+
+ LogicManager -> DeleteCommand : execute(model)
+ activate DeleteCommand
+
+ DeleteCommand -> Model : getSortedTaskList()
+ activate Model
+
+ Model --> DeleteCommand
+ deactivate Model
+
+ create CommandResult
+ DeleteCommand -> CommandResult
+ activate CommandResult
+
+ CommandResult --> DeleteCommand : result
+ deactivate CommandResult
+
+ DeleteCommand --> LogicManager : result
+ deactivate DeleteCommand
+
+ [<--LogicManager
+ deactivate LogicManager
+ @enduml

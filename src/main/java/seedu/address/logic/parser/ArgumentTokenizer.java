@@ -71,6 +71,14 @@ public class ArgumentTokenizer {
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
+        if (prefixIndex == -1) {
+            // If prefix index not found, try another whitespace.
+            prefixIndex = argsString.indexOf("\n" + prefix, fromIndex);
+        }
+        if (prefixIndex == -1) {
+            // If prefix index not found, try another whitespace.
+            prefixIndex = argsString.indexOf("\t" + prefix, fromIndex);
+        }
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
     }

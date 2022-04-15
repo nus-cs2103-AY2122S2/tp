@@ -65,4 +65,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Checks whether two strings are the same, ignoring the cases.
+     *
+     * @param s1 the first string to be compared
+     * @param s2 the second string to be compared
+     * @return true if s1 and s2 contain the same value, ignoring the cases
+     */
+    public static boolean isSameStringIgnoreCases(String s1, String s2) {
+        return s1.toLowerCase().equals(s2.toLowerCase());
+    }
 }

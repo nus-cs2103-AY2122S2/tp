@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HarmoniaParser" as HarmoniaParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "l:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list t/")
+activate LogicManager
+
+LogicManager -> HarmoniaParser : parseCommand("list t/")
+activate HarmoniaParser
+
+create ListCommandParser
+HarmoniaParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> HarmoniaParser
+deactivate ListCommandParser
+
+HarmoniaParser -> ListCommandParser : parse("t/")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+ListCommand --> ListCommandParser : l
+deactivate ListCommand
+
+ListCommandParser --> HarmoniaParser : l
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> HarmoniaParser
+destroy ListCommandParser
+
+HarmoniaParser --> LogicManager : l
+deactivate HarmoniaParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : getTagList()
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

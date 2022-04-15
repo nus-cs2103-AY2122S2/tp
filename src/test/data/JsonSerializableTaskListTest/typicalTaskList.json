@@ -1,0 +1,45 @@
+{
+  "tasks" : [ {
+    "name" : "CS2103T Project",
+    "description" : "V1.2b completion",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-13",
+    "priority": "low",
+    "tagged" : [ "CS2103T" ]
+  }, {
+    "name" : "CS2106 Finals",
+    "description" : "All lectures and tutorials",
+    "isCompleted" : "true",
+    "deadline" : "2022-11-11",
+    "priority": "low",
+    "tagged" : [ "CS2106", "exam" ]
+  },{
+    "name" : "CS2105 Midterm",
+    "description" : "Lecture 1-5, Tutorial 1-4",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-03",
+    "priority": "low",
+    "tagged" : [ "CS2105", "exam" ]
+  }, {
+    "name" : "CS2107 Tutorial",
+    "description" : "Week 9 Tutorial",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-16",
+    "priority": "low",
+    "tagged" : [ "CS2107" ]
+  }, {
+    "name" : "Meet Alice",
+    "description" : "Meeting Alice at NUS",
+    "isCompleted" : "false",
+    "deadline" : "2022-04-01",
+    "priority": "low",
+    "tagged" : [ ]
+  }, {
+    "name" : "CS2102 Meeting",
+    "description" : "Meeting",
+    "isCompleted" : "true",
+    "deadline" : "2022-04-06",
+    "priority" : "medium",
+    "tagged" : [ ]
+  } ]
+}

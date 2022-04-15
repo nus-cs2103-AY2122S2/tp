@@ -1,0 +1,15 @@
+{
+  "tasks" : [ {
+    "name" : "Valid task",
+    "description" : "V1.2b completion",
+    "isCompleted" : "false",
+    "deadline" : "2022-03-13",
+    "tagged" : [ "CS2103T" ]
+  }, {
+    "name" : "Task with invalid isCompleted field",
+    "description" : "All lectures and tutorials",
+    "isCompleted" : "unkown",
+    "deadline" : "2022-11-11",
+    "tagged" : [ "CS2105", "exam" ]
+  }]
+}

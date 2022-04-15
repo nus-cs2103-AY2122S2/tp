@@ -2,71 +2,94 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_KEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.keyword.Keyword;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.TaskList;
+import seedu.address.model.task.NameContainsKeywordsPredicate;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NAME_TUTORIAL = "Complete Tutorial";
+    public static final String VALID_NAME_MIDTERM = "Midterm Test";
+    public static final String VALID_DESCRIPTION_TUTORIAL = "Week 9 Tutorial, draw OODM & activity diagram";
+    public static final String VALID_DESCRIPTION_MIDTERM = "Chapter 1-3";
+    public static final String VALID_DEADLINE_TUTORIAL = "2022-03-17";
+    public static final String VALID_DEADLINE_MIDTERM = "2022-03-21";
+    public static final String VALID_COMPLETION_STATUS_TRUE = "true";
+    public static final String VALID_COMPLETION_STATUS_FALSE = "false";
+    public static final String VALID_PRIORITY_LOW = "low";
+    public static final String VALID_PRIORITY_MEDIUM = "medium";
+    public static final String VALID_TAG_CS2103T = "CS2103T";
+    public static final String VALID_TAG_CS2102 = "CS2102";
+    public static final String VALID_TAG_TEST = "Test";
+    public static final String VALID_SORT_ORDER_ASCENDING = "asc";
+    public static final String VALID_SORT_ORDER_DESCENDING = "desc";
+    public static final String VALID_SORT_KEY_DEADLINE = "deadline";
+    public static final String VALID_SORT_KEY_PRIORITY = "priority";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NAME_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_TUTORIAL;
+    public static final String NAME_DESC_MIDTERM = " " + PREFIX_NAME + VALID_NAME_MIDTERM;
+    public static final String DESCRIPTION_DESC_TUTORIAL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TUTORIAL;
+    public static final String DESCRIPTION_DESC_MIDTERM = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MIDTERM;
+    public static final String DEADLINE_DESC_TUTORIAL = " " + PREFIX_DEADLINE + VALID_DEADLINE_TUTORIAL;
+    public static final String DEADLINE_DESC_MIDTERM = " " + PREFIX_DEADLINE + VALID_DEADLINE_MIDTERM;
+    public static final String PRIORITY_LOW = " " + PREFIX_PRIORITY + VALID_PRIORITY_LOW;
+    public static final String PRIORITY_MEDIUM = " " + PREFIX_PRIORITY + VALID_PRIORITY_MEDIUM;
+    public static final String TAG_DESC_CS2103T = " " + PREFIX_TAG + VALID_TAG_CS2103T;
+    public static final String TAG_DESC_CS2102 = " " + PREFIX_TAG + VALID_TAG_CS2102;
+    public static final String TAG_DESC_TEST = " " + PREFIX_TAG + VALID_TAG_TEST;
+    public static final String SORT_ORDER_DESC_ASCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_ASCENDING;
+    public static final String SORT_ORDER_DESC_DESCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_DESCENDING;
+    public static final String SORT_KEY_DESC_DEADLINE = " " + PREFIX_SORT_KEY + VALID_SORT_KEY_DEADLINE;
+    public static final String SORT_KEY_DESC_PRIORITY = " " + PREFIX_SORT_KEY + VALID_SORT_KEY_PRIORITY;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME; // empty string not allowed for names
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "Lorem ipsum dolor sit amet, "
+            + "consectetur adipiscing elit. Sed metus diam, egestas sed ante pulvinar, fermentum dignissim arcu. "
+            + "Donec pellentesque massa vel dolor blandit imperdiet. In bibendum justo urna, vitae venenatis "
+            + "magna dictum quis. Proin erat curae."; // description should not be more than 255 characters
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "2022/01/01"; // wrong date format
+    public static final String INVALID_PRIORITY = " " + PREFIX_PRIORITY + "highest"; // invalid priority enum
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG
+            + "qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn"; // tag should not be more than 50 characters
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "lowest"; // invalid sort order enum
+    public static final String INVALID_SORT_KEY_DESC = " " + PREFIX_SORT_KEY + "description"; // invalid sort key enum
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditTaskDescriptor DESC_TUTORIAL;
+    public static final EditCommand.EditTaskDescriptor DESC_MIDTERM;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_TUTORIAL = new EditTaskDescriptorBuilder().withName(VALID_NAME_TUTORIAL)
+                .withDescription(VALID_DESCRIPTION_TUTORIAL).withDeadline(VALID_DEADLINE_TUTORIAL)
+                .withPriority(VALID_PRIORITY_LOW).withTags(VALID_TAG_CS2103T).build();
+        DESC_MIDTERM = new EditTaskDescriptorBuilder().withName(VALID_NAME_MIDTERM)
+                .withDescription(VALID_DESCRIPTION_MIDTERM).withDeadline(VALID_DEADLINE_MIDTERM)
+                .withPriority(VALID_PRIORITY_MEDIUM).withTags(VALID_TAG_CS2102, VALID_TAG_TEST).build();
     }
 
     /**
@@ -99,30 +122,66 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the task list, filtered task list and selected task in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        TaskList expectedTaskList = new TaskList(actualModel.getTaskList());
+        List<Task> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTaskList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedTaskList, actualModel.getTaskList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredTaskList());
     }
+
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s task list.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitName = task.getName().fullName.split("\\s+");
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName[0]))));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the task with the matching {@code keywords} with task name
+     * in the {@code model}'s task list.
+     */
+    public static void showTaskWithKeywords(Model model, String... keywords) {
+        Set<Keyword> set = new HashSet<>();
+        for (String keyword : keywords) {
+            set.add(new Keyword(keyword));
+        }
+        model.updateFilteredTaskList(new NameContainsKeywordsPredicate(set));
+        assertTrue(0 < model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show the tasks at the 2 given {@code targetIndexes} in the
+     * {@code model}'s task list.
+     */
+    public static void showTasksAtIndexes(Model model, Index targetIndex1, Index targetIndex2) {
+        assertTrue(targetIndex1.getZeroBased() < model.getFilteredTaskList().size());
+        assertTrue(targetIndex2.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task1 = model.getFilteredTaskList().get(targetIndex1.getZeroBased());
+        String[] splitName1 = task1.getName().fullName.split("\\s+");
+        NameContainsKeywordsPredicate p1 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName1[0])));
+
+        Task task2 = model.getFilteredTaskList().get(targetIndex2.getZeroBased());
+        String[] splitName2 = task2.getName().fullName.split("\\s+");
+        NameContainsKeywordsPredicate p2 = new NameContainsKeywordsPredicate(Collections.singleton(
+                new Keyword(splitName2[0])));
+
+        model.updateFilteredTaskList(p1.or(p2));
+        assertEquals(2, model.getFilteredTaskList().size());
+    }
 }

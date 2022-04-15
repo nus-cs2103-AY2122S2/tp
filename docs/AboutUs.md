@@ -9,51 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Joeie Tao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joeietao.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/joeietao)]
+[[portfolio](team/joeietao.md)]
 
-* Role: Project Advisor
+* Role: Documentation
 
-### Jane Doe
+### Benjamin Seah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sbhbenjamin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.sbhbenjamin.works/)]
+[[github](http://github.com/sbhbenjamin)]
+[[portfolio](team/sbhbenjamin.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Integration
 
-### Johnny Doe
+### Thikhina Bakmeedeniya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/thikhinab.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/thikhinab)]
+[[portfolio](team/thikhinab.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing
 
-### Jean Doe
+### Jiang Zhengtao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ainsleyj.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ainsleyj)]
+[[portfolio](team/ainsleyj.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
 
-### James Doe
+### Nicolle Gan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicollegann.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nicollegann)]
+[[portfolio](team/nicollegann.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and Deadlines
