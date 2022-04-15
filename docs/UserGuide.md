@@ -26,7 +26,7 @@ If you have never used InternBuddy before, the [Quick Start](#quick-start) secti
 InternBuddy is designed and optimised for **Computer Science Students who are looking to manage their internship**. However, if you are not a Computer Science Student, worry not! Our User Guide
 is meant for anyone who wants to try and learn how to use InternBuddy. 
 
-### 1.3. Helping Icons
+### 1.4. Helping Icons
 Here are some icons that can help us emphasize any important information for you. Do read what it means beforehand!
 
 | Icon                 | Meaning                                                                                           |
@@ -35,7 +35,7 @@ Here are some icons that can help us emphasize any important information for you
 | :bulb:               | This icon indicates useful tips for the users                                                     |
 | :exclamation:        | This icon indicates caution for an action the user can take that can have dangerous consequences. |
 
-### 1.4. Table of Contents
+### 1.5. Table of Contents
 * Table of Contents
 {:toc}
 
@@ -125,7 +125,7 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 4. #### Command Box
     This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
 
-### Structure of InternBuddy
+### 3.2. Structure of InternBuddy
 
 Because internships and job seeking is InternBuddy's main focus, the app supports 3 kinds of entries:
 
@@ -145,7 +145,7 @@ have duplicate entries; the criteria for what counts as a duplicate entry will b
 Each of these 3 entry types have different attributes attached to them. Let's dive in to understand what attributes each
 entry type can store.
 
-#### Company List
+#### 3.2.1. Company List
 
 | ![Company List](images/UserGuide/Ui-2.png) |
 | :----------------------------------------: |
@@ -161,7 +161,7 @@ A **Company** entry has:
 
 **Two Company entries are considered duplicates of each other if they have the same name.**
 
-#### Person List
+#### 3.2.2. Person List
 
 | ![Person List](images/UserGuide/Ui-3.png) |
 | :---------------------------------------: |
@@ -177,7 +177,7 @@ A **Person** entry has:
 
 **Two Person entries are considered duplicates of each other if they have the same name.**
 
-#### Event List
+#### 3.2.3. Event List
 
 | ![Event List](images/UserGuide/Ui-4.png) |
 | :--------------------------------------: |
@@ -194,7 +194,7 @@ Finally, an **Event** entry has:
 
 **Two Event entries are considered duplicates of each other if they have the same name, date, time, and company name.**
 
-### Interacting with the app
+### 3.3. Interacting with the app
 
 Since InternBuddy is designed to be used via a Command Line Interface (CLI), you will be interacting with the app mostly through the Command Box by **typing commands in the Command Box** and **hitting the Enter key** afterwards.<br/>
 
@@ -202,7 +202,7 @@ Since InternBuddy is designed to be used via a Command Line Interface (CLI), you
 | :----------------------------------------------: |
 |            InternBuddy's Command Box             |
 
-#### Commands
+#### 3.3.1. Commands
 
 Commands are sequences of words that follows a predetermined [format](#command-formats) that informs InternBuddy what to do.
 
@@ -246,7 +246,7 @@ You can try clicking on the commands above to see how to use them in further det
 read the [Features Guide](#features-guide) section first to have a smoother
 experience reading our [Features](#features) section :smile:.
 
-#### Dialog Box
+#### 3.3.2. Dialog Box
 
 For those of you not familiar with what a dialog box is, a dialog box is a box that shows when you execute a command. It is a box that contains a message. The message is basically a feedback from InternBuddy to you. InternBuddy will show you a dialog box when you execute a command.
 
@@ -262,7 +262,7 @@ Otherwise, if the command is **valid**, a **success message** will be shown and 
 | :--------------------------------------------------------: |
 |                    Valid command result                    |
 
-### Archive
+### 3.4. Archive
 
 InternBuddy supports archiving entries. When an entry is archived, it will be **"hidden"** from the entry list unless the user
 specifically chooses to display them. However, it will still technically
@@ -276,12 +276,12 @@ The below screenshot shows what archived entries look like. Notice the `ARCHIVED
 
 ---
 
-## Features Guide
+## 4. Features Guide
 
 This section will help you navigate and understand the [Features](#features) section of the guide.
 This way, you can easily use it to answer any question you have regarding the app's features.
 
-### Command Formats
+### 4.1. Command Formats
 
 With a simple command standards, we tried to make the commands as intuitive as possible. To make sure that you can read the commands without any confusion, here are the formats we use in the guide.
 
@@ -309,7 +309,7 @@ With a simple command standards, we tried to make the commands as intuitive as p
 
 </div>
 
-### Command Parameters
+### 4.2. Command Parameters
 
 For reference, here is the list of parameters along with the commands that utilize this parameters. We also add a short description of the parameters so you can understand it better :) .
 
@@ -329,7 +329,7 @@ For reference, here is the list of parameters along with the commands that utili
 | `o/`        | `sortc`, `sortp`, `sorte`  | Orderings used to sort the entries in ascending or descending order |
 | `t/`        | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`  | Tags tagged to an entry  |
 
-### Command Parameter Restrictions
+### 4.3. Command Parameter Restrictions
 
 Some parameters have special restrictions on what counts as a valid input. These restrictions are listed below.
 If a parameter is not listed below, it has no special restrictions.
@@ -364,7 +364,7 @@ in the Dialog Box. An example of this is shown below.
 | :------------------------------------------------------: |
 | Error message in the dialog box after an invalid command |
 
-### That's all for the Basic!
+### 4.4. That's all for the Basic!
 
 And that's all there is to it! Now that you have a basic understanding of the commands, You can now get started on
 learning all the important [commands](#features) you can use to organize your InternBuddy lists. If you have any trouble,
@@ -372,7 +372,7 @@ do refer back to the user guide and the [FAQ](#faq) section. Good luck! :confett
 
 ---
 
-## Features
+## 5. Features
 
 Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
 
@@ -380,9 +380,9 @@ Our InternBuddy has a number of features that you can use to organize your Inter
 Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
 </div>
 
-### Getting help
+### 5.1. Getting help
 
-#### Viewing help : `help`
+#### 5.1.1. Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -396,14 +396,14 @@ Format:
 help
 ```
 
-### Adding entries
+### 5.2. Adding entries
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Adding an entry may fail and display an error message if the entry already exists. You can try to do `listc s/all`/`listp s/all`/`liste s/all`
 to see all the entries (archived and unarchived) in the display. This way, you can check if the entry already exists.
 </div>
 
-#### Adding a company: `addc`
+#### 5.2.1. Adding a company: `addc`
 
 Adds a company to the list of companies.
 
@@ -427,7 +427,7 @@ Examples:
 | :--------------------------------------------------: |
 |            Successfully adding a company             |
 
-#### Adding a person: `addp`
+#### 5.2.2. Adding a person: `addp`
 
 Adds a person to the list of contact people.
 
@@ -446,7 +446,7 @@ Examples:
 | :------------------------------------------------: |
 |            Successfully adding a person            |
 
-#### Adding an event: `adde`
+#### 5.2.3. Adding an event: `adde`
 
 Adds an event to the list of events.
 
@@ -466,9 +466,9 @@ Examples:
 | :----------------------------------------------: |
 |           Successfully adding an event           |
 
-### Listing entries
+### 5.3. Listing entries
 
-#### Listing all companies : `listc`
+#### 5.3.1. Listing all companies : `listc`
 
 Shows a list of all companies in the list of companies.
 
@@ -487,7 +487,7 @@ Examples:
 | :----------------------------------------: |
 |      Listing all unarchived companies      |
 
-#### Listing all persons : `listp`
+#### 5.3.2. Listing all persons : `listp`
 
 Shows a list of all people in the list of contact people.
 
@@ -506,7 +506,7 @@ Examples:
 | :----------------------------------------: |
 |       Listing all unarchived people        |
 
-#### Listing all events : `liste`
+#### 5.3.3. Listing all events : `liste`
 
 Shows a list of all events in the list of events.
 
@@ -525,7 +525,7 @@ Examples:
 | :---------------------------------------: |
 |       Listing all unarchived events       |
 
-### Editing entries
+### 5.4. Editing entries
 
 <div markdown="block" class="alert alert-info">
 
@@ -545,7 +545,7 @@ Examples:
 You can remove all of an entry’s tags by typing `t/` without specifying any tags after it.
 </div>
 
-#### Editing a company : `editc`
+#### 5.4.1. Editing a company : `editc`
 
 Edits an existing company in the list of companies.
 
@@ -569,7 +569,7 @@ Examples:
 | :-------------------------------------------------: |
 |           Successfully editing a company            |
 
-#### Editing a person : `editp`
+#### 5.4.2. Editing a person : `editp`
 
 Edits an existing person in the list of contact people.
 
@@ -588,7 +588,7 @@ Examples:
 | :-----------------------------------------------: |
 |           Successfully editing a person           |
 
-#### Editing an event : `edite`
+#### 5.4.3. Editing an event : `edite`
 
 Edits an existing event in the list of events.
 
@@ -607,7 +607,7 @@ Examples:
 | :----------------------------------------------: |
 |          Successfully editing an event           |
 
-### Locating entries
+### 5.5. Locating entries
 
 -   The search is case-insensitive. e.g `hans` will match `Hans`
 -   The order of the keywords does not matter. e.g. `findp n/Hans Bo` is the same as `findp n/Bo Hans`
@@ -616,7 +616,7 @@ Examples:
     e.g. `findp n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
 -   At least one of the parameters must be provided.
 
-#### Locating companies: `findc`
+#### 5.5.1. Locating companies: `findc`
 
 Finds all companies which have a name and tags that contain any of the given keywords and displays them as a list
 with index numbers.
@@ -637,7 +637,7 @@ Examples:
 | :-------------------------------------------------: |
 |       Finding a company named sgshop and dbss       |
 
-#### Locating people: `findp`
+#### 5.5.2. Locating people: `findp`
 
 Finds all persons whose name, company name, and tags contain any of the given keywords and displays them as a list
 with index numbers.
@@ -657,7 +657,7 @@ Examples:
 | :-------------------------------------------------------------: |
 |           Finding alex and david in the contact list            |
 
-#### Locating events: `finde`
+#### 5.5.3. Locating events: `finde`
 
 Finds all events whose name, company, start date, end date, time, location and tags contains the specified keywords
 and displays them as a list with index numbers.
@@ -683,7 +683,7 @@ Examples:
 | :----------------------------------------------------------: |
 | Finding all events between Today (2022-04-15) and 2022-05-21 |
 
-### Sorting entries
+### 5.6. Sorting entries
 
 <div markdown="block" class="alert alert-info">
 
@@ -703,7 +703,7 @@ Below are screenshots of sorting the company list in ascending order (above) and
 | :-----------------------------------------------------: |
 |       Sorting the company list in desceding order       |
 
-#### Sorting companies by name: `sortc`
+#### 5.6.1. Sorting companies by name: `sortc`
 
 Sorts companies by name. The default is in `ascending` order. To sort in `descending` order, use `sortc o/descending`.
 
@@ -719,7 +719,7 @@ Examples:
 -   `sortc o/descending` returns all unarchived companies in descending order
 -   `sortc s/all o/descending` returns all companies in descending order
 
-#### Sorting people by name: `sortp`
+#### 5.6.2. Sorting people by name: `sortp`
 
 Sorts people by name. The default is in `ascending` order. To sort in `descending` order, use `sortp o/descending`.
 
@@ -735,7 +735,7 @@ Examples:
 -   `sortp o/descending` returns all unarchived people in descending order
 -   `sortp s/all o/descending` returns all people in descending order
 
-#### Sorting events by date: `sorte`
+#### 5.6.3. Sorting events by date: `sorte`
 
 Sorts events by date. The default is in `ascending` order. To sort in `descending` order, use `sorte o/descending`.
 
@@ -751,7 +751,7 @@ Examples:
 -   `sorte o/descending` returns all unarchived events in descending order
 -   `sorte s/all o/descending` returns all events in descending order
 
-### Archiving entries
+### 5.7. Archiving entries
 
 <div markdown="block" class="alert alert-info">
 
@@ -763,7 +763,7 @@ Examples:
 
 </div>
 
-#### Archiving an entry: `archive`
+#### 5.7.1. Archiving an entry: `archive`
 
 Archives an entry in the currently displayed list.
 
@@ -786,7 +786,7 @@ you want to archive.
 | :----------------------------------------------------------: |
 | Archived DBS, the first entry on the previous displayed list |
 
-#### Archiving all entries in display: `archive_all`
+#### 5.7.2. Archiving all entries in display: `archive_all`
 
 Archiving all the entries displayed in the currently displayed list.
 
@@ -800,7 +800,7 @@ archive_all
 | :----------------------------------------------------: |
 |       Archived all entries on the displayed list       |
 
-#### Unarchiving an entry: `unarchive`
+#### 5.7.3. Unarchiving an entry: `unarchive`
 
 Unarchiving an entry will show it in the list of entries.
 
@@ -823,7 +823,7 @@ Use a list, find, or sort command to get all archived entries first. That way, y
 you want to unarchive.
 </div>
 
-#### Unarchiving all entries in display: `unarchive_all`
+#### 5.7.4. Unarchiving all entries in display: `unarchive_all`
 
 Unarchiving all the entries displayed in the currently displayed list.
 
@@ -837,9 +837,9 @@ unarchive_all
 | :-----------------------------------------------------------: |
 | All recently unarchived entries visible in the companies list |
 
-### Removing entries
+### 5.8. Removing entries
 
-#### Deleting an entry : `delete`
+#### 5.8.1. Deleting an entry : `delete`
 
 Deletes the specified entry from the currently displayed list.
 
@@ -866,7 +866,7 @@ Examples:
 | :-------------------------------------------------------: |
 | DBS not showing in the companies list after being deleted |
 
-#### Deleting all entries in display : `delete_all`
+#### 5.8.2. Deleting all entries in display : `delete_all`
 
 Deletes all the entries displayed in the currently displayed list.
 
@@ -880,7 +880,7 @@ delete_all
 | :------------------------------------------------------------------------: |
 | Empty list of events after using `delete_all` on the displayed events list |
 
-#### Clearing all entries : `clear`
+#### 5.8.3. Clearing all entries : `clear`
 
 Clears all entries from all lists.
 
@@ -894,7 +894,7 @@ clear
 | :------------------------------------------------: |
 | Empty list of companies after clearing all entries |
 
-### Exiting the program : `exit`
+### 5.9. Exiting the program : `exit`
 
 Exits the program.
 
@@ -904,11 +904,11 @@ Format:
 exit
 ```
 
-### Saving the data
+### 5.10. Saving the data
 
 InternBuddy data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 5.11. Editing the data file
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This section is for advanced users only.
 </div>
@@ -921,20 +921,30 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 ---
 
-## Common Workflow
+## 6. Common Workflow
 
 **TODO**
 
 ---
 
-## FAQ
+## 7. That is All!
+Congratulations! You have finished reading all InternBuddy has to offer. We the developers surely hope that 
+you find this User Guide to be useful as your personal Guide to become **InternBuddy Guru**.
+
+With that, Good Luck with your Internship!
+
+---
+## 8. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternBuddy home folder.
 
+**Q**: Is InternBuddy development still in progress?<br>
+**A**: Yes! InternBuddy is an active ongoing project. We hope to optimise the application to better suit our user!
+
 ---
 
-## Glossary
+## 9. Glossary
 
 -   ### CLI
     CLI stands for Command Line Interface. It is a special type of terminal where you can type commands into it and the command will be executed.
@@ -947,7 +957,7 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 ---
 
-## Command summary
+## 10. Command summary
 
 | Action                       | Format                                                                                                          | Examples                                                                        |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
