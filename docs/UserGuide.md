@@ -270,6 +270,26 @@ With a simple command standards, we tried to make the commands as intuitive as p
 
 </div>
 
+### Command Parameters
+
+For reference, here is the list of parameters along with the commands that utilize this parameters. We also add a short description of the parameters so you can understand it better :) .
+
+| Parameter                 | Commands | Description                                                                                           |
+|----------------------|---------|------------------------------------------------------------------------------------------|
+| `n/` | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`  | Name of the entry                                     |
+| `c/`               | `adde`, `addp`, `edite`, `editp`, `findp`, `finde`  | Name of the company a person or event related to                                                    |
+| `p/`        | `addc`, `addp`, `editc`, `editp`  | Phone number of the person or company |
+| `e/`        | `addc`, `addp`, `editc`, `editp`  | Email address of the person or company |
+| `a/`        |  `addc`, `editc` | Address of the company |
+| `l/`        |  `adde`, `edite`, `finde` | Location of the event |
+| `d/`        | `adde`, `edite`  | Date of the event |
+| `sd/`        | `finde`  | Start date used to search for events happening at the start date and afterward (inclusive) |
+| `ed/`        | `finde`  | End date used to search for events happening at the end date and previously (inclusive) |
+| `ti/`        |  `adde`, `edite`, `finde` | Time of the event |
+| `s/`        | `listc`, `listp`, `liste`, `findc`, `findp`, `finde`, `sortc`, `sortp`, `sorte`  | Search type used to filter archived, unarchived, or all entries |
+| `o/`        | `sortc`, `sortp`, `sorte`  | Orderings used to sort the entries in ascending or descending order |
+| `t/`        | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`  | Tags tagged to an entry  |
+
 ### Command Parameter Restrictions
 
 Some parameters have special restrictions on what counts as a valid input. These restrictions are listed below.
