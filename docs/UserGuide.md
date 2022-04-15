@@ -4,18 +4,19 @@ title: User Guide
 ---
 
 ## 1. Introduction
+
 Hi there! Welcome to the User Guide for InternBuddy! We are here to help guide you on your journey with our application. **Keep on reading to become an InternBuddy Guru!**
 
-
 ### 1.1. What is InternBuddy?
-InternBuddy is a **desktop application to help computer science students manage their events, companies, and contact people encountered during the internship search.** 
 
-This application is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI).** 
+InternBuddy is a **desktop application to help computer science students manage their events, companies, and contact people encountered during the internship search.**
+
+This application is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI).**
 
 If you can type fast, InternBuddy can definitely help you organize your internship search faster than traditional GUI apps.
 
-
 ### 1.2. Purpose of The User Guide
+
 The purpose of this User Guide is to assist you in learning and using InternBuddy. Whether you're a new user looking for a place to start or a veteran needing a quick reference, this guide is here to answer your questions.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -23,10 +24,12 @@ If you have never used InternBuddy before, the [Quick Start](#2-quick-start) sec
 </div>
 
 ### 1.3. InternBuddy Target Audience
+
 InternBuddy is designed and optimised for **Computer Science Students who are looking to manage their internship**. However, if you are not a Computer Science Student, worry not! Our User Guide
-is meant for anyone who wants to try and learn how to use InternBuddy. 
+is meant for anyone who wants to try and learn how to use InternBuddy.
 
 ### 1.4. Helping Icons
+
 Here are some icons that can help us emphasize any important information for you. Do read what it means beforehand!
 
 | Icon                 | Meaning                                                                                           |
@@ -36,9 +39,9 @@ Here are some icons that can help us emphasize any important information for you
 | :exclamation:        | This icon indicates caution for an action the user can take that can have dangerous consequences. |
 
 ### 1.5. Table of Contents
-* Table of Contents
-{:toc}
 
+-   Table of Contents
+    {:toc}
 
 ---
 
@@ -77,9 +80,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
     - `exit` : Exits the app.
 
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-        If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
-    </div>
+          <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+              If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
+          </div>
 
 6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
    to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
@@ -90,7 +93,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 ## 3. Overview of InternBuddy
 
 **InternBuddy** is specially designed for Computer Science Students who are searching for internships. With **InternBuddy**, there is no need
-for you to juggle between multiple apps just to manage your multiple internship applications. 
+for you to juggle between multiple apps just to manage your multiple internship applications.
 
 This app values your
 **Time** and **Experience** by placing efficiency as one of its core principles. Let InternBuddy help you manage your
@@ -98,32 +101,32 @@ internship application details so you can focus on acing your assessments and in
 
 This section will go into detail as to how the application works.
 
-### 3.1. User Interface 
+### 3.1. User Interface
+
 **In short, what you see!**
 
 When you first open InternBuddy, InternBuddy will present you with:
 
 | ![Annotated user interface](images/UserGuide/Ui-annotated.png) |
 | :------------------------------------------------------------: |
-|            Main interface components of InternBuddy            |
+|                 Main components of InternBuddy                 |
 
 As you can see in the image above, there are 3 main components of InternBuddy:
 
-1. #### Entry List
+1. Entry List
 
     InternBuddy's **Entry List** is a scrollable list containing entries which is explained in [Structure of InternBuddy](#32-structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
 
-2. #### Dialog Box
+2. Dialog Box
 
     **The Dialog Box** is where InternBuddy gives you the details of the commands that you have entered. More on this in [Dialog Box](#332-dialog-box)
 
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-        After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
-        From here, you can know whether your command is successfully entered or not!
-    </div>
-
-4. #### Command Box
-    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
+3. Command Box
+   This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
+   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+   After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box.
+   From here, you can know whether your command is successfully entered or not!
+   </div>
 
 ### 3.2. Structure of InternBuddy
 
@@ -208,39 +211,39 @@ Commands are sequences of words that follows a predetermined [format](#41-comman
 
 InternBuddy's commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 
-- **Adding entries**
+-   **Adding entries**
     -   [`addc`](#521-adding-a-company-addc): Adds a company to the list of companies.
     -   [`addp`](#522-adding-a-person-addp): Adds a person to the list of persons.
     -   [`adde`](#523-adding-an-event-adde): Adds an event to the list of events.
-- **Listing/Viewing entries**
+-   **Listing/Viewing entries**
     -   [`listc`](#531-listing-all-companies--listc): Lists all companies.
     -   [`listp`](#532-listing-all-persons--listp): Lists all persons.
     -   [`liste`](#533-listing-all-events--liste): Lists all events.
-- **Sorting entries**
+-   **Sorting entries**
     -   [`sortc`](#561-sorting-companies-by-name-sortc): Sorts companies by name.
     -   [`sortp`](#562-sorting-people-by-name-sortp): Sorts persons by name.
     -   [`sorte`](#563-sorting-events-by-date-sorte): Sorts events by date.
-- **Editing entries**
+-   **Editing entries**
     -   [`editc`](#541-editing-a-company--editc): Edits a company.
     -   [`editp`](#542-editing-a-person--editp): Edits a person.
     -   [`edite`](#543-editing-an-event--edite): Edits an event.
-- **Archiving entries**
+-   **Archiving entries**
     -   [`archive`](#571-archiving-an-entry-archive): Archives an entry.
     -   [`archive_all`](#572-archiving-all-entries-in-display-archive_all): Archives all entries in the display.
     -   [`unarchive`](#573-unarchiving-an-entry-unarchive): Unarchives an entry.
     -   [`unarchive_all`](#574-unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
-- **Deleting entries**
+-   **Deleting entries**
     -   [`delete`](#581-deleting-an-entry--delete): Deletes an entry.
     -   [`delete_all`](#582-deleting-all-entries-in-display--delete_all): Deletes all currently displayed entries.
     -   [`clear`](#583-clearing-all-entries--clear): Clears all entries.
-- **Finding/Locating entries**
-    - [`findc`](#551-locating-companies-findc): Finds a company.
-    - [`findp`](#552-locating-people-findp): Finds a person.
-    - [`finde`](#553-locating-events-finde): Finds an event.
-- **Miscellaneous**
-    - [`help`](#511-viewing-help--help): Open the help window which contains the link to this User Guide.
-    - [`clear`](#583-clearing-all-entries--clear): Delete all entries from all lists.
-    - [`exit`](#59-exiting-the-program--exit): Exit and close the application.
+-   **Finding/Locating entries**
+    -   [`findc`](#551-locating-companies-findc): Finds a company.
+    -   [`findp`](#552-locating-people-findp): Finds a person.
+    -   [`finde`](#553-locating-events-finde): Finds an event.
+-   **Miscellaneous**
+    -   [`help`](#511-viewing-help--help): Open the help window which contains the link to this User Guide.
+    -   [`clear`](#583-clearing-all-entries--clear): Delete all entries from all lists.
+    -   [`exit`](#59-exiting-the-program--exit): Exit and close the application.
 
 You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
 read the [Features Guide](#4-features-guide) section first to have a smoother
@@ -313,21 +316,21 @@ With a simple command standards, we tried to make the commands as intuitive as p
 
 For reference, here is the list of parameters along with the commands that utilize this parameters. We also add a short description of the parameters so you can understand it better :) .
 
-| Parameter                 | Commands | Description                                                                                           |
-|----------------------|---------|------------------------------------------------------------------------------------------|
-| `n/` | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`  | Name of the entry                                     |
-| `c/`               | `adde`, `addp`, `edite`, `editp`, `findp`, `finde`  | Name of the company a person or event related to                                                    |
-| `p/`        | `addc`, `addp`, `editc`, `editp`  | Phone number of the person or company |
-| `e/`        | `addc`, `addp`, `editc`, `editp`  | Email address of the person or company |
-| `a/`        |  `addc`, `editc` | Address of the company |
-| `l/`        |  `adde`, `edite`, `finde` | Location of the event |
-| `d/`        | `adde`, `edite`  | Date of the event |
-| `sd/`        | `finde`  | Start date used to search for events happening at the start date and afterward (inclusive) |
-| `ed/`        | `finde`  | End date used to search for events happening at the end date and previously (inclusive) |
-| `ti/`        |  `adde`, `edite`, `finde` | Time of the event |
-| `s/`        | `listc`, `listp`, `liste`, `findc`, `findp`, `finde`, `sortc`, `sortp`, `sorte`  | Search type used to filter archived, unarchived, or all entries |
-| `o/`        | `sortc`, `sortp`, `sorte`  | Orderings used to sort the entries in ascending or descending order |
-| `t/`        | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`  | Tags tagged to an entry  |
+| Parameter | Commands                                                                        | Description                                                                                |
+| --------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `n/`      | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`    | Name of the entry                                                                          |
+| `c/`      | `adde`, `addp`, `edite`, `editp`, `findp`, `finde`                              | Name of the company a person or event related to                                           |
+| `p/`      | `addc`, `addp`, `editc`, `editp`                                                | Phone number of the person or company                                                      |
+| `e/`      | `addc`, `addp`, `editc`, `editp`                                                | Email address of the person or company                                                     |
+| `a/`      | `addc`, `editc`                                                                 | Address of the company                                                                     |
+| `l/`      | `adde`, `edite`, `finde`                                                        | Location of the event                                                                      |
+| `d/`      | `adde`, `edite`                                                                 | Date of the event                                                                          |
+| `sd/`     | `finde`                                                                         | Start date used to search for events happening at the start date and afterward (inclusive) |
+| `ed/`     | `finde`                                                                         | End date used to search for events happening at the end date and previously (inclusive)    |
+| `ti/`     | `adde`, `edite`, `finde`                                                        | Time of the event                                                                          |
+| `s/`      | `listc`, `listp`, `liste`, `findc`, `findp`, `finde`, `sortc`, `sortp`, `sorte` | Search type used to filter archived, unarchived, or all entries                            |
+| `o/`      | `sortc`, `sortp`, `sorte`                                                       | Orderings used to sort the entries in ascending or descending order                        |
+| `t/`      | `addc`, `addp`, `adde`, `editc`, `editp`, `edite`, `findc`, `findp`, `finde`    | Tags tagged to an entry                                                                    |
 
 ### 4.3. Command Parameter Restrictions
 
@@ -419,9 +422,9 @@ Entries can have any number of tags (including 0)
 
 Examples:
 
-- `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
-- `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
-- `addc n/Company e/company@gmail.com p/91142678 a/ 123 Race Course Road` (see screenshot below)
+-   `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
+-   `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
+-   `addc n/Company e/company@gmail.com p/91142678 a/ 123 Race Course Road` (see screenshot below)
 
 | ![Add Company Example](images/AddCompanyExample.png) |
 | :--------------------------------------------------: |
@@ -663,7 +666,7 @@ Finds all events whose name, company, start date, end date, time, location and t
 and displays them as a list with index numbers.
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-START DATE and END DATE will find events from the START DATE to the END DATE **inclusively**.
+START_DATE and END_DATE will find events from the START_DATE to the END DATE **inclusively**.
 </div>
 
 Format:
@@ -758,7 +761,7 @@ Examples:
 **:information_source: Notes about the Archive Commands:**<br>
 
 -   Archived entries will be "hidden" from their entry list unless the user specifically searches for them
-    (e.g. by using the `s/archived` or `s/all` parameter)
+    (e.g. by using the `s/archived` or `s/all` [parameter](#42-command-parameters))
 -   Only unarchived entries can be archived; similarly, only archived entries can be unarchived.
 
 </div>
@@ -922,12 +925,14 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 ---
 
 ## 6. That is All!
-Congratulations! You have finished reading all InternBuddy has to offer. We the developers surely hope that 
+
+Congratulations! You have finished reading all InternBuddy has to offer. We the developers surely hope that
 you find this User Guide to be useful as your personal Guide to become **InternBuddy Guru**.
 
 With that, Good Luck with your Internship!
 
 ---
+
 ## 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
