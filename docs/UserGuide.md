@@ -335,9 +335,9 @@ Format: `importSchedule INDEX pa/FILE_PATH`
   :exclamation: **Caution:** The person's schedule will be **overwritten** with the imported schedule.
 </div>
 
-Example:
-Assuming that you started the application from the directory containing `UniGenda.jar`, and the json file was saved here:
-![importSchedule directory of saved file](images/importScheduleDirectory.png)
+Example:<br>
+* Assuming that you started the application from the directory containing `UniGenda.jar`, and the json file was saved here:
+![importSchedule directory of saved file](images/importScheduleDirectory.png)<br>
 Result of `importSchedule 2 pa/Han Qin.json`:
 ![result for importSchedule](images/importScheduleResult.png)
 
