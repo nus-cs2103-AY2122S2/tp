@@ -82,7 +82,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
     </div>
 
 6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
-   to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features](#5-features-details)
+   to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
    section of the app.
 
 ---
@@ -244,7 +244,7 @@ InternBuddy's commands follows a simple classification system for all 3 lists. T
 
 You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
 read the [Features Guide](#4-features-guide) section first to have a smoother
-experience reading our [Features](#5-features-details) section :smile:.
+experience reading our [Features Details](#5-features-details) section :smile:.
 
 #### 3.3.2. Dialog Box
 
@@ -278,7 +278,7 @@ The below screenshot shows what archived entries look like. Notice the `ARCHIVED
 
 ## 4. Features Guide
 
-This section will help you navigate and understand the [Features](#5-features-details) section of the guide.
+This section will help you navigate and understand the [Features Details](#5-features-details) section of the guide.
 This way, you can easily use it to answer any question you have regarding the app's features.
 
 ### 4.1. Command Formats
@@ -377,7 +377,7 @@ do refer back to the user guide and the [FAQ](#8-faq) section. Good luck! :confe
 Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#14-helping-icons) and [Command Formats](#41-command-formats) section first. If you are still confused, please refer to the [FAQ](#8-faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
+Read the <a href="#9-glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
 </div>
 
 ### 5.1. Getting help
