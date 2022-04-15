@@ -80,9 +80,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
     - `exit` : Exits the app.
 
-      <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-          If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
-      </div>
+        <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+            If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
+        </div>
 
 6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
    to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
@@ -109,7 +109,7 @@ When you first open InternBuddy, InternBuddy will present you with:
 
 | ![Annotated user interface](images/UserGuide/Ui-annotated.png) |
 | :------------------------------------------------------------: |
-|            Main interface components of InternBuddy            |
+|                 Main components of InternBuddy                 |
 
 As you can see in the image above, there are 3 main components of InternBuddy:
 
@@ -123,10 +123,10 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 3. Command Box
    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
-      <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-          After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
-          From here, you can know whether your command is successfully entered or not!
-      </div>
+       <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+           After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
+           From here, you can know whether your command is successfully entered or not!
+       </div>
 
 ### 3.2. Structure of InternBuddy
 
@@ -666,7 +666,7 @@ Finds all events whose name, company, start date, end date, time, location and t
 and displays them as a list with index numbers.
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-START DATE and END DATE will find events from the START DATE to the END DATE **inclusively**.
+START_DATE and END_DATE will find events from the START_DATE to the END DATE **inclusively**.
 </div>
 
 Format:
