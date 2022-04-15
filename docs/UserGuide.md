@@ -98,8 +98,9 @@ Figure 1.5 depicts the user interface of Harmonia. The following descriptions ex
 
 3. Copy the file to the folder you want to use as the home folder for Harmonia.
 
-4. * For **Windows** user: double-click the file to start the app.
-   * For **Mac/Linux** user: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
+4. To run Harmonia, follow the instructions below according to your operating system.
+   * For **Windows** users: double-click the file to start the app.
+   * For **Mac/Linux** users: open the terminal, navigate to the directory where harmonia.jar is located, then run `java -jar harmonia.jar` in the terminal.
    * The [GUI](#54-gui) similar to *Figure 1.5* should appear in a few seconds.
 
 5. Type the command in the command box and press <kbd>↵Enter</kbd> to execute it.<br>
@@ -145,7 +146,7 @@ Here are a few example commands you can try:
 - Extraneous parameters for commands that do not take in any parameters (such as `help` and `exit`) will be ignored.<br>
   For example if you input `exit 123`, Harmonia will interpret it as `exit`.
 
-- The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+- You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 </div>
 
@@ -161,7 +162,7 @@ Example: `add n/CS2103T tp meeting d/read the weekly tasks before the meeting dl
 ![Add a task](images/Ui-AddTask.png)
 *Figure 3.1: Example of Harmonia after adding a task*
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 - Harmonia does not allow multiple tasks with the same name, and [task names are case-insensitive](#6-appendix-constraints-on-inputs).
@@ -202,7 +203,7 @@ Example:
 - `delete 3` deletes the task at the third [index](#52-index) of the task list.
 - `delete 1 2 3` deletes the tasks at the first, second and third [index](#52-index) of the task list.
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to delete.
@@ -216,7 +217,7 @@ This action is irreversible and all deleted tasks cannot be retrieved.
 
 ### 3.5 Locating a task: `find`
 
-Finds the tasks that match the given keyword(s) and is due within the time range specified from Harmonia.
+Harmonia finds tasks that match the given keyword(s) and is due within the specified time range.
 
 Format: `find [n/NAME_KEYWORD]... [d/DESCRIPTION_KEYWORD]... [start/START_DATE] [end/END_DATE] [p/PRIORITY]... [t/TAG]... [c/COMPLETION_STATUS]`
 
@@ -239,7 +240,7 @@ Example: `find n/tp n/CS2103T t/meeting start/2022-03-15 end/2022-03-27 p/low p/
 ![Find tasks after and including a specified start date](images/Ui-FindStartDate.png)
 *Figure 3.5: Example of finding tasks after and including the date `2022-04-01`*
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can also search using multiple descriptors (example: `find n/book t/CS2103T`) to narrow down your search.
@@ -265,7 +266,7 @@ Example:
 ![UserGuide-mark](images/Ui-MarkTask.png)
 *Figure 3.6: Example of Harmonia after marking task 2*
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to mark.
@@ -287,7 +288,7 @@ Example:
 ![UserGuide-unmark](images/Ui-MassUnmarkTasks.png)
 *Figure 3.7: Example of Harmonia after unmarking tasks 1 and 2*
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the index of the task you wish to unmark.
@@ -305,7 +306,7 @@ Example:
 - `edit 1 d/Prepare for CS2103T tutorial`
 - `edit 2 n/CS2103T meeting t/CS2103T`
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You can key `list` to check the [index](#52-index) of the task you wish to edit.
@@ -338,7 +339,7 @@ Example:
 ![Sort by priority in descending order](images/Ui-SortPriority.png)
 *Figure 3.9: Example of Harmonia after sorting tasks in descending order*
 
-The constraints on the inputs can be found [here](#6-appendix-constraints-on-inputs).
+You can find the constraints on the inputs [here](#6-appendix-constraints-on-inputs).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Sort order will be lost after using the `add` or `edit` commands.
