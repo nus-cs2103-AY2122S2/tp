@@ -19,7 +19,7 @@ If you can type fast, InternBuddy can definitely help you organize your internsh
 The purpose of this User Guide is to assist you in learning and using InternBuddy. Whether you're a new user looking for a place to start or a veteran needing a quick reference, this guide is here to answer your questions.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you have never used InternBuddy before, the [Quick Start](#quick-start) section is super useful for you to start!
+If you have never used InternBuddy before, the [Quick Start](#2-quick-start) section is super useful for you to start!
 </div>
 
 ### 1.3. InternBuddy Target Audience
@@ -81,8 +81,8 @@ If you're interested in using InternBuddy but don't know where to begin, this se
         If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
     </div>
 
-6. If this is your first time reading our user guide, you can refer to the [Overview](#overview-of-internbuddy) section
-   to learn more about the app, or to the [Features Guide](#features-guide) section to better understand the [Features](#features)
+6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
+   to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features](#5-features-details)
    section of the app.
 
 ---
@@ -111,11 +111,11 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 1. #### Entry List
 
-    InternBuddy's **Entry List** is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
+    InternBuddy's **Entry List** is a scrollable list containing entries which is explained in [Structure of InternBuddy](#32-structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
 
 2. #### Dialog Box
 
-    **The Dialog Box** is where InternBuddy gives you the details of the commands that you have entered. More on this in [Dialog Box](#dialog-box)
+    **The Dialog Box** is where InternBuddy gives you the details of the commands that you have entered. More on this in [Dialog Box](#332-dialog-box)
 
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
         After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
@@ -123,7 +123,7 @@ As you can see in the image above, there are 3 main components of InternBuddy:
     </div>
 
 4. #### Command Box
-    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
+    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
 
 ### 3.2. Structure of InternBuddy
 
@@ -135,9 +135,9 @@ Because internships and job seeking is InternBuddy's main focus, the app support
 
 With that, InternBuddy stores 3 entry lists, one for each entry type:
 
--   **[Company List](#company-list)**
--   **[Person List](#person-list)**
--   **[Event List](#event-list)**
+-   **[Company List](#321-company-list)**
+-   **[Person List](#322-person-list)**
+-   **[Event List](#323-event-list)**
 
 The app will only display one of these lists at any time, as shown in the screenshots of each of these lists. Lists cannot
 have duplicate entries; the criteria for what counts as a duplicate entry will be listed in the sections below.
@@ -204,47 +204,47 @@ Since InternBuddy is designed to be used via a Command Line Interface (CLI), you
 
 #### 3.3.1. Commands
 
-Commands are sequences of words that follows a predetermined [format](#command-formats) that informs InternBuddy what to do.
+Commands are sequences of words that follows a predetermined [format](#41-command-formats) that informs InternBuddy what to do.
 
 InternBuddy's commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 
 - **Adding entries**
-    -   [`addc`](#adding-a-company-addc): Adds a company to the list of companies.
-    -   [`addp`](#adding-a-person-addp): Adds a person to the list of persons.
-    -   [`adde`](#adding-an-event-adde): Adds an event to the list of events.
+    -   [`addc`](#521-adding-a-company-addc): Adds a company to the list of companies.
+    -   [`addp`](#522-adding-a-person-addp): Adds a person to the list of persons.
+    -   [`adde`](#523-adding-an-event-adde): Adds an event to the list of events.
 - **Listing/Viewing entries**
-    -   [`listc`](#listing-all-companies--listc): Lists all companies.
-    -   [`listp`](#listing-all-persons--listp): Lists all persons.
-    -   [`liste`](#listing-all-events--liste): Lists all events.
+    -   [`listc`](#531-listing-all-companies--listc): Lists all companies.
+    -   [`listp`](#532-listing-all-persons--listp): Lists all persons.
+    -   [`liste`](#533-listing-all-events--liste): Lists all events.
 - **Sorting entries**
-    -   [`sortc`](#sorting-companies-by-name-sortc): Sorts companies by name.
-    -   [`sortp`](#sorting-people-by-name-sortp): Sorts persons by name.
-    -   [`sorte`](#sorting-events-by-date-sorte): Sorts events by date.
+    -   [`sortc`](#561-sorting-companies-by-name-sortc): Sorts companies by name.
+    -   [`sortp`](#562-sorting-people-by-name-sortp): Sorts persons by name.
+    -   [`sorte`](#563-sorting-events-by-date-sorte): Sorts events by date.
 - **Editing entries**
-    -   [`editc`](#editing-a-company--editc): Edits a company.
-    -   [`editp`](#editing-a-person--editp): Edits a person.
-    -   [`edite`](#editing-an-event--edite): Edits an event.
+    -   [`editc`](#541-editing-a-company--editc): Edits a company.
+    -   [`editp`](#542-editing-a-person--editp): Edits a person.
+    -   [`edite`](#543-editing-an-event--edite): Edits an event.
 - **Archiving entries**
-    -   [`archive`](#archiving-an-entry-archive): Archives an entry.
-    -   [`archive_all`](#archiving-all-entries-in-display-archive_all): Archives all entries in the display.
-    -   [`unarchive`](#unarchiving-an-entry-unarchive): Unarchives an entry.
-    -   [`unarchive_all`](#unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
+    -   [`archive`](#571-archiving-an-entry-archive): Archives an entry.
+    -   [`archive_all`](#572-archiving-all-entries-in-display-archive_all): Archives all entries in the display.
+    -   [`unarchive`](#573-unarchiving-an-entry-unarchive): Unarchives an entry.
+    -   [`unarchive_all`](#574-unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
 - **Deleting entries**
-    -   [`delete`](#deleting-an-entry--delete): Deletes an entry.
-    -   [`delete_all`](#deleting-all-entries-in-display--delete_all): Deletes all currently displayed entries.
-    -   [`clear`](#clearing-all-entries--clear): Clears all entries.
+    -   [`delete`](#581-deleting-an-entry--delete): Deletes an entry.
+    -   [`delete_all`](#582-deleting-all-entries-in-display--delete_all): Deletes all currently displayed entries.
+    -   [`clear`](#583-clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
-    - [`findc`](#locating-companies-findc): Finds a company.
-    - [`findp`](#locating-people-findp): Finds a person.
-    - [`finde`](#locating-events-finde): Finds an event.
+    - [`findc`](#551-locating-companies-findc): Finds a company.
+    - [`findp`](#552-locating-people-findp): Finds a person.
+    - [`finde`](#553-locating-events-finde): Finds an event.
 - **Miscellaneous**
-    - [`help`](#viewing-help--help): Open the help window which contains the link to this User Guide.
-    - [`clear`](#clearing-all-entries--clear): Delete all entries from all lists.
-    - [`exit`](#exiting-the-program--exit): Exit and close the application.
+    - [`help`](#511-viewing-help--help): Open the help window which contains the link to this User Guide.
+    - [`clear`](#583-clearing-all-entries--clear): Delete all entries from all lists.
+    - [`exit`](#59-exiting-the-program--exit): Exit and close the application.
 
 You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
-read the [Features Guide](#features-guide) section first to have a smoother
-experience reading our [Features](#features) section :smile:.
+read the [Features Guide](#4-features-guide) section first to have a smoother
+experience reading our [Features](#5-features-details) section :smile:.
 
 #### 3.3.2. Dialog Box
 
@@ -278,7 +278,7 @@ The below screenshot shows what archived entries look like. Notice the `ARCHIVED
 
 ## 4. Features Guide
 
-This section will help you navigate and understand the [Features](#features) section of the guide.
+This section will help you navigate and understand the [Features](#5-features-details) section of the guide.
 This way, you can easily use it to answer any question you have regarding the app's features.
 
 ### 4.1. Command Formats
@@ -367,14 +367,14 @@ in the Dialog Box. An example of this is shown below.
 ### 4.4. That's all for the Basic!
 
 And that's all there is to it! Now that you have a basic understanding of the commands, You can now get started on
-learning all the important [commands](#features) you can use to organize your InternBuddy lists. If you have any trouble,
-do refer back to the user guide and the [FAQ](#faq) section. Good luck! :confetti_ball: :confetti_ball: :confetti_ball:
+learning all the important [commands](#5-features-details) you can use to organize your InternBuddy lists. If you have any trouble,
+do refer back to the user guide and the [FAQ](#8-faq) section. Good luck! :confetti_ball: :confetti_ball: :confetti_ball:
 
 ---
 
-## 5. Features
+## 5. Features Details
 
-Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
+Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#14-helping-icons) and [Command Formats](#41-command-formats) section first. If you are still confused, please refer to the [FAQ](#8-faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
