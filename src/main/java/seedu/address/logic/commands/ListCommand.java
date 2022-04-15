@@ -1,24 +1,33 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import java.util.function.Predicate;
 
-import seedu.address.model.Model;
+import seedu.address.commons.core.SearchTypeUtil;
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
+import seedu.address.model.entry.Entry;
 
-/**
- * Lists all persons in the address book to the user.
- */
-public class ListCommand extends Command {
+public abstract class ListCommand extends Command {
+    protected final SearchType searchType;
 
-    public static final String COMMAND_WORD = "list";
+    public ListCommand(SearchType searchType) {
+        this.searchType = searchType;
+    }
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    protected Predicate<Entry> getPredicate() {
+        return SearchTypeUtil.getPredicate(searchType);
+    }
 
-
-    @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+    protected String getSuccessMessage() {
+        switch (searchType) {
+        case UNARCHIVED_ONLY:
+            return " unarchived";
+        case ARCHIVED_ONLY:
+            return " archived";
+        case ALL:
+            return "";
+        default:
+            // Should not reach here
+            throw new IllegalArgumentException("Inavlid searchType passed");
+        }
     }
 }

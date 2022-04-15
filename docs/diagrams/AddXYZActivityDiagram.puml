@@ -1,0 +1,27 @@
+@startuml
+start
+: User enter addXYZ command;
+: AddXYZCommandParser parses command;
+
+if () then ([valid user input provided])
+  :Create XYZ object;
+  :Create addXYZ command;
+  :Execute addXYZ Command;
+  if () then ([all valid parameter provided])
+     if () then ([XYZ object exists in XYZ List])
+        : Throw CommandException;
+     else ([XYZ object is new])
+        : Calls Model to add the given XYZ object;
+        : Model interacts with AddressBook and add the XYZ object to XYZ list;
+        : Display success message;
+     endif
+  else ([invalid])
+   : Throw CommandException;
+   : Display invalid parameter error message;
+  endif
+else ([invalid])
+  :Throw parse exception;
+  :Display invalid command error message;
+endif
+stop
+@enduml

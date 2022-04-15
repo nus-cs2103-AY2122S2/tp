@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.entry.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -31,13 +31,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label companyName;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
+    @FXML
+    private FlowPane archive;
     @FXML
     private FlowPane tags;
 
@@ -48,10 +50,18 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(person.getName().fullName);
+        name.setWrapText(true);
+        companyName.setText(person.getCompanyName().fullName);
+        companyName.setWrapText(true);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        phone.setWrapText(true);
         email.setText(person.getEmail().value);
+        email.setWrapText(true);
+        if (person.isArchived()) {
+            archive.getChildren().add(new Label("ARCHIVED"));
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

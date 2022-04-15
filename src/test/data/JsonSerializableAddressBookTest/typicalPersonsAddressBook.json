@@ -2,45 +2,108 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "companyName": "DBSSS",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "isArchived": false
   }, {
     "name" : "Benson Meier",
+    "companyName": "Big Bank",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "isArchived": false
   }, {
     "name" : "Carl Kurz",
+    "companyName": "DBSSS",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Daniel Meier",
+    "companyName": "Janice Street",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "isArchived": false
   }, {
     "name" : "Elle Meyer",
+    "companyName": "DBSSS",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "Fiona Kunz",
+    "companyName": "Janice Street",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "isArchived": false
   }, {
     "name" : "George Best",
+    "companyName": "Big Bank",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
-    "tagged" : [ ]
-  } ]
+    "tagged" : [ ],
+    "isArchived": false
+  }, {
+    "name" : "Jane Lee",
+    "companyName": "Big Bank",
+    "phone" : "6444121",
+    "email" : "jane@example.com",
+    "tagged" : [ ],
+    "isArchived": true
+  } ],
+  "companies": [ {
+    "name" : "DBSSS",
+    "phone" : "91123671",
+    "email" : "dbsss@example.com",
+    "address" : "14 Jurong Street",
+    "tagged" : [ ],
+    "isArchived": false
+  }, {
+    "name" : "Big Bank",
+    "phone" : "94316789",
+    "email" : "bigbank@example.com",
+    "address" : "16 Race Course Road",
+    "tagged" : [ ],
+    "isArchived": false
+  }, {
+    "name" : "Janice Street",
+    "phone" : "89245223",
+    "email" : "janicestreet@example.com",
+    "address" : "21 Marina Bay Sands",
+    "tagged" : [ ],
+    "isArchived": false
+  } ],
+  "events": [
+    {
+      "name" : "DBSSS Interview",
+      "company" : "DBSSS",
+      "date" : "2022-05-01",
+      "time" : "10:00",
+      "location" : "Zoom",
+      "tagged" : [ "Technical" ],
+      "isArchived" : false
+    }, {
+      "name" : "BB Interview",
+      "company" : "Big Bank",
+      "date" : "2022-06-05",
+      "time" : "12:30",
+      "location" : "16 Race Course Road",
+      "tagged" : [],
+      "isArchived" : false
+    }, {
+      "name" : "Online Assessment",
+      "company" : "Janice Street",
+      "date" : "2022-04-30",
+      "time" : "18:00",
+      "location" : "Hackerrank",
+      "tagged" : [ "Difficult" ],
+      "isArchived" : false
+    }
+  ]
 }
