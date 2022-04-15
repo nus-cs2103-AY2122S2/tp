@@ -946,14 +946,18 @@ With that, Good Luck with your Internship!
 
 ## 9. Glossary
 
--   ### CLI
-    CLI stands for Command Line Interface. It is a special type of terminal where you can type commands into it and the command will be executed.
--   ### GUI
-    GUI stands for Graphical User Interface. Contrary to CLI, GUI is an interface that you can interact with, mainly through clicking interface (i.e. clicking buttons).
--   ### Entry
+-   ### 9.1. CLI
+    CLI stands for Command Line Interface. It is a special type of terminal interface where you can type commands into it and the command will be executed.
+-   ### 9.2. Entry
     An entry is a single entry in a list. In InternBuddy, an entry can be a company, a person, or an event. Entry is a generic term that can be used to refer to any of the three types of entries.
--   ### Parameter
-    A parameter is a keyword that is used to specify a specific action. For example, `listc` is a command that lists all companies. `listc` has a parameter `s/` that specifies the type of entries to be listed.
+-   ### 9.3. GUI
+    GUI stands for Graphical User Interface. Contrary to CLI, GUI is an interface that you can interact with, mainly through clicking interface (i.e. clicking buttons and menu).
+-   ### 9.4. JAR
+    JAR stands for Java Archive. It is a file format that is used to store data in a compressed format. The InternBuddy app is run in form of JAR.
+-  ### 9.5. JSON
+    JSON stands for JavaScript Object Notation. InternBuddy uses JSON files to store data.
+-   ### 9.6. Parameter
+    A parameter is a keyword that is used to specify a specific action. For example, `listp` is a command that lists all companies. `listp` has a parameter `s/` that specifies the type of entries to be listed.
 
 ---
 
