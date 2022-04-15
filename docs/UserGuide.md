@@ -7,7 +7,7 @@ InternBuddy is a **desktop app to help computer science students manage the even
 
 The purpose of this User Guide is to assist you in learning and using InternBuddy. Whether you're a new user looking for a place to start or a veteran needing a quick reference, this guide is here to answer your questions.
 
--   Table of Contents
+* Table of Contents
     {:toc}
 
 ---
