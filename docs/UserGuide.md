@@ -41,7 +41,7 @@ Here are some icons that can help us emphasize any important information for you
 ### 1.5. Table of Contents
 
 -   Table of Contents
-    {:toc}
+{:toc}
 
 ---
 
@@ -49,7 +49,7 @@ Here are some icons that can help us emphasize any important information for you
 
 If you're interested in using InternBuddy but don't know where to begin, this section will give you a step-by-step walkthrough to get you started!
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1.  Ensure you have Java `11` or above installed in your Computer.
 
     - If you don't have it installed, you can follow [Oracle's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
       for your operating system.
@@ -57,36 +57,36 @@ If you're interested in using InternBuddy but don't know where to begin, this se
     - If you are not sure which version of Java that you currently have, you can follow this [Java Manual](https://www.java.com/en/download/help/version_manual.html)
       to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4.0/internbuddy.jar).
+2.  Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4.0/internbuddy.jar).
 
-3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
+3.  Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
-4. Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
+4.  Double-click the file to start the app. A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
 
     | ![Opening UI](images/UserGuide/Ui-1.png) |
     | :--------------------------------------: |
     |             InternBuddy app              |
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5.  Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+    Some example commands you can try:
 
-    - `listc` : Lists all companies.
+    -   `listc` : Lists all companies.
 
-    - `addc n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
+    -   `addc n/DeeBee p/98765432 e/dbs@example.com a/14 Jurong Street #01-01` : Adds a company named `DeeBee` to the list of companies.
 
-    - `delete 3` : Deletes the 3rd contact shown in the currently displayed list.
+    -   `delete 3` : Deletes the 3rd contact shown in the currently displayed list.
 
-    - `delete_all` : Deletes all entries in the currently displayed list.
+    -   `delete_all` : Deletes all entries in the currently displayed list.
 
-    - `exit` : Exits the app.
+    -   `exit` : Exits the app.
 
-          <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-              If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
-          </div>
+            <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+                If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
+            </div>
 
-6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
-   to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
-   section of the app.
+6.  If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
+    to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
+    section of the app.
 
 ---
 
@@ -123,10 +123,10 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 3. Command Box
    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
-   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-   After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box.
-   From here, you can know whether your command is successfully entered or not!
-   </div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box.
+    From here, you can know whether your command is successfully entered or not!
+    </div>
 
 ### 3.2. Structure of InternBuddy
 
