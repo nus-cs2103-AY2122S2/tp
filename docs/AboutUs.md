@@ -5,55 +5,58 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Loo Chee Kean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cheekean5848.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/cheekean5848)]
+[[portfolio](team/cheekean5848.md)]
 
-* Role: Project Advisor
+* Role: Team Lead, Deliverables and deadlines
+* Responsibilities: Logic
 
-### Jane Doe
+### Clement Tee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clement0010.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/clement0010)]
+[[portfolio](team/clement0010.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
 
-### Johnny Doe
+* Role: Code quality, Scheduling and tracking, Git Expert
+* Responsibilities: User Interface, Authentication and Encryption
 
-<img src="images/johndoe.png" width="200px">
+### Si Binh Ho
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/sibinhho99-nus.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
+[[github](http://github.com/sibinhho99-nus)]
+[[portfolio](team/sibinhho99-nus.md)]
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+* Role: Developer, Integration
+* Responsibilities: Storage
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Joey Chance
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+<img src="images/joey-chance.png" width="200px">
 
-### James Doe
+[[github](http://github.com/joey-chance)]
+[[portfolio](team/joey-chance.md)]
 
-<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer, Testing
+* Responsibilities: Model
 
-* Role: Developer
-* Responsibilities: UI
+### Justin Lam
+
+<img src="images/juslam19.png" width="200px">
+
+[[github](http://github.com/juslam19)]
+[[portfolio](team/juslam19.md)]
+
+
+* Role: Documentation
+* Responsibilities: Ui

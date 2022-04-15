@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.ImageView?>
+<fx:root resizable="true" title="Login" type="javafx.stage.Stage"
+         minWidth="450" minHeight="600" xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1"
+         onCloseRequest="#handleExit">
+    <icons>
+        <Image url="@/images/MedBook_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@LightTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox alignment="CENTER" styleClass="background">
+                <ImageView fitHeight="250" fitWidth="250">
+                    <Image url="@/images/MedBook.png"/>
+                </ImageView>
+                <StackPane alignment="center" fx:id="screenTitlePane" prefWidth="300" minHeight="75"
+                           styleClass="pane-with-border">
+                    <Label textAlignment="CENTER" fx:id="screenTitle" wrapText="true"/>
+                </StackPane>
+                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border"  maxWidth="250">
+                    <PasswordField fx:id="userPassword" onAction="#handleLogin" />
+                </StackPane>
+                <StackPane>
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                    <Label fx:id="responseDisplay" wrapText="true"/>
+                </StackPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

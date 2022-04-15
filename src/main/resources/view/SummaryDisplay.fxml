@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox spacing="5" alignment="CENTER_LEFT">
+    <Label fx:id="screenTitle" text="\$screenTitle" styleClass="screen-header"/>
+    <padding>
+      <Insets top="10" bottom="10" />
+    </padding>
+  </HBox>
+  <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+    <content>
+      <VBox VBox.vgrow="ALWAYS">
+        <Label text="Details" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="details" >
+          <padding>
+            <Insets left="10" right="10" bottom="10" top="5"/>
+          </padding>
+        </StackPane>
+        <Label text="Medical Details" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="medical">
+          <padding>
+            <Insets left="10" right="10" bottom="10" top="5"/>
+          </padding>
+        </StackPane>
+        <Label text="Consultations" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="consultation"/>
+        <Label text="Prescriptions" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="prescription">
+          <padding>
+            <Insets bottom="10" />
+          </padding>
+        </StackPane>
+        <Label text="Tests Taken and Result" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="test">
+          <padding>
+            <Insets bottom="10" />
+          </padding>
+        </StackPane>
+        <Label text="Emergency Contacts" styleClass="cell_big_label">
+          <padding>
+            <Insets left="10" />
+          </padding>
+        </Label>
+        <StackPane fx:id="contact">
+          <padding>
+            <Insets bottom="10" />
+          </padding>
+        </StackPane>
+      </VBox>
+    </content>
+  </ScrollPane>
+</VBox>
+
+

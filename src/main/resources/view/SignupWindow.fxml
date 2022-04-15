@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root resizable="false" title="Welcome to MedBook" type="javafx.stage.Stage"
+         minWidth="600" minHeight="800" xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1"
+         onCloseRequest="#handleExit">
+    <icons>
+        <Image url="@/images/MedBook_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@LightTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox alignment="CENTER" styleClass="background">
+                <ImageView fitHeight="250" fitWidth="250">
+                    <Image url="@/images/MedBook.png"/>
+                </ImageView>
+                <StackPane styleClass="pane-with-border" prefWidth="300" minHeight="50">
+                    <Label fx:id="screenTitle" wrapText="true" textAlignment="CENTER"/>
+                </StackPane>
+                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border" maxWidth="250">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                    <PasswordField fx:id="userPassword" onAction="#handleSignup" onKeyTyped="#handleOnKeyPressed"
+                                   promptText="Enter password here"/>
+                </StackPane>
+                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border" maxWidth="250">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                    <PasswordField fx:id="userRepeatPassword" onAction="#handleSignup"
+                                   promptText="Enter same password here" onKeyTyped="#handleOnKeyPressed"/>
+                </StackPane>
+
+                <VBox fx:id="responseDisplayPane" alignment="CENTER" maxWidth="425">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="15" />
+                    </padding>
+                    <HBox alignment="CENTER">
+                        <padding>
+                            <Insets top="5" bottom="5" />
+                        </padding>
+                        <Label fx:id="responseDisplay" textAlignment="CENTER" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                        <ImageView fx:id="conditionImage1" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label fx:id="conditionText1" text="Passwords do not match" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" >
+                        <ImageView fx:id="conditionImage2" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label text="Password must be 8 or more characters in length" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" >
+                        <ImageView fx:id="conditionImage3" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label text="Password must contain 1 or more lowercase character" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" >
+                        <ImageView fx:id="conditionImage4" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label text="Password must contain 1 or more uppercase character" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" >
+                        <ImageView fx:id="conditionImage5" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label text="Password must contain 1 or more digit characters" wrapText="true"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" >
+                        <ImageView fx:id="conditionImage6" fitHeight="16" fitWidth="16">
+                            <Image url="@/images/reject.png"/>
+                        </ImageView>
+                        <Label text="Password must contain 1 or more special characters" wrapText="true"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

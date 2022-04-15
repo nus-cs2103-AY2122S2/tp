@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="15" />
+            </padding>
+            <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
+            <Label fx:id="age" styleClass="cell_small_label" text="\$age" />
+            <Label fx:id="bloodType" styleClass="cell_small_label" text="\$bloodType" />
+            <Label fx:id="medication" styleClass="cell_small_label" text="\$medication" />
+            <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
+            <Label fx:id="weight" styleClass="cell_small_label" text="\$weight" />
+            <Label fx:id="illnesses" styleClass="cell_small_label" text="\$illnesses" />
+            <Label fx:id="surgeries" styleClass="cell_small_label" text="\$surgeries" />
+            <Label fx:id="familyHistory" styleClass="cell_small_label" text="\$familyHistory" />
+            <Label fx:id="immunizationHistory" styleClass="cell_small_label" text="\$immunizationHistory" />
+            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
+            <Label fx:id="ethnicity" styleClass="cell_small_label" text="\$ethnicity" />
+
+        </VBox>
+    </GridPane>
+</HBox>

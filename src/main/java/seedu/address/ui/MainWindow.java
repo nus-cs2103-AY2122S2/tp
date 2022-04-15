@@ -14,8 +14,14 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.consultation.ConsultationListPanel;
+import seedu.address.ui.contact.ContactListPanel;
+import seedu.address.ui.medical.MedicalListPanel;
+import seedu.address.ui.prescription.PrescriptionListPanel;
+import seedu.address.ui.testresult.TestResultListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,13 +33,19 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PatientListPanel patientListPanel;
+    private ContactListPanel contactListPanel;
+    private ConsultationListPanel consultationListPanel;
+    private MedicalListPanel medicalListPanel;
+    private PrescriptionListPanel prescriptionListPanel;
+    private TestResultListPanel testResultListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private SummaryDisplay summaryDisplay;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +122,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
+        medicalListPanel = new MedicalListPanel(logic.getFilteredMedicalList());
+        prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
+        testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
+        summaryDisplay = new SummaryDisplay();
+
+        listPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -132,6 +151,39 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Sets the stackpane size based on {@code commandType}.
+     */
+    public void setDisplayListPane(CommandType commandType) {
+
+        listPanelPlaceholder.getChildren().clear();
+        switch (commandType) {
+        case CONTACT:
+            listPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            return;
+        case CONSULTATION:
+            listPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+            return;
+        case MEDICAL:
+            listPanelPlaceholder.getChildren().add(medicalListPanel.getRoot());
+            return;
+        case PRESCRIPTION:
+            listPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+            return;
+        case TEST:
+            listPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
+            return;
+        case SUMMARY:
+            summaryDisplay.setSummary(logic.getFilteredPatientList(), logic.getFilteredMedicalList(),
+                    logic.getFilteredConsultationList(), logic.getFilteredPrescriptionList(),
+                    logic.getFilteredTestResultList(), logic.getFilteredContactList());
+            listPanelPlaceholder.getChildren().add(summaryDisplay.getRoot());
+            return;
+        default:
+            listPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
         }
     }
 
@@ -163,8 +215,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public PatientListPanel getPatientListPanel() {
+        return patientListPanel;
     }
 
     /**
@@ -185,6 +237,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            setDisplayListPane(commandResult.getCommandType());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

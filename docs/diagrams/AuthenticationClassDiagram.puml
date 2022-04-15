@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor AUTH_COLOR
+skinparam classBackgroundColor AUTH_COLOR
+
+Package Authentication <<Rectangle>>{
+Interface Authentication <<Interface>>
+Class AuthenticationManager
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Authentication
+
+AuthenticationManager .up.|> Authentication
+@enduml

@@ -1,7 +1,7 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 h2, h3, h4, h5, h6 {
-  color: #e46c0a;
+  color: #004aad;
 }
 
 // Bootstrap style alerts
@@ -10,7 +10,32 @@ h2, h3, h4, h5, h6 {
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
-  order-radius : $alert-border-radius;
+  border-radius : $alert-border-radius;
+}
+
+// Bootstrap style alerts
+.card {
+  position: relative;
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border: $alert-border-width solid rgba(0, 0, 0, 0.125);
+  border-radius : $alert-border-radius;
+}
+
+figure img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: $alert-border-width solid rgba(0, 0, 0, 0.125);
+}
+
+figure img.logo {
+  border: $alert-border-width solid rgba(0, 0, 0, 0);
+}
+
+.figure-caption {
+  margin-top: 10px;
+  text-align: center;
 }
 
 // Headings for larger alerts

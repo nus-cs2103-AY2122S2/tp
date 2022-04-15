@@ -10,12 +10,18 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.MedBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyMedBook;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.medical.Medical;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.prescription.Prescription;
+import seedu.address.model.testresult.TestResult;
 import seedu.address.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -26,7 +32,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final MedBookParser medBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +40,8 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        medBookParser = new MedBookParser();
+
     }
 
     @Override
@@ -42,11 +49,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = medBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveMedBook(model.getMedBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,18 +62,43 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyMedBook getAddressBook() {
+        return model.getMedBook();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Patient> getFilteredPatientList() {
+        return model.getFilteredPatientList();
+    }
+
+    @Override
+    public ObservableList<Contact> getFilteredContactList() {
+        return model.getFilteredContactList();
+    }
+
+    @Override
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        return model.getFilteredConsultationList();
+    }
+
+    @Override
+    public ObservableList<Medical> getFilteredMedicalList() {
+        return model.getFilteredMedicalList();
+    }
+
+    @Override
+    public ObservableList<Prescription> getFilteredPrescriptionList() {
+        return model.getFilteredPrescriptionList();
+    }
+
+    @Override
+    public ObservableList<TestResult> getFilteredTestResultList() {
+        return model.getFilteredTestResultList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getMedBookFilePath();
     }
 
     @Override
