@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(model : Model) : CommandResult
+}
+
+interface Model <<interface>> {
+    /' Fields '/
+        +PREDICATE_SHOW_ALL_PERSONS : Predicate
+
+    /' Methods '/
+    + updateFilteredPersonList(Predicate)
+}
+
+class ModelManager implements Model{
+    -addressBook : AddressBook
+}
+
+class ListCommand{
+    /' Fields '/
+    + {static} COMMAND_WORD : String
+    + {static} MESSAGE_SUCCESS : String
+
+    /' Methods '/
+    + execute(Model) : CommandResult
+}
+
+ModelManager <-- ListCommand
+"{abstract}\nCommand" <|-- ListCommand
+@enduml

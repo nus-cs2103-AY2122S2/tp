@@ -1,0 +1,50 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(Model) : CommandResult
+}
+
+interface Model <<interface>> {
+    + addPerson(Person)
+    + hasPerson(Person) : boolean
+}
+
+class ModelManager implements Model{
+    -addressBook : AddressBook
+    +addPerson()
+}
+
+class Person {
+    /' Fields '/
+     -name : Name
+     -block : Block
+     -faculty : Faculty
+     -phone : Phone
+     -email : Email
+     -number : MatriculationNumber
+     -address : Address
+     -status : CovidStatus
+     -tags : HashSet<Tag>
+
+    /' Methods '/
+    + equals(Object) : boolean
+    + hashCode() : int
+    + toString() : String
+}
+
+class AddCommand {
+    /' Fields '/
+    - toAdd : Person
+
+    /' Methods '/
+    + execute(Model) : CommandResult
+    + equals(Object) : boolean
+}
+
+ModelManager <-- AddCommand
+"{abstract}\nCommand" <|-- AddCommand
+AddCommand --> Person
+@enduml

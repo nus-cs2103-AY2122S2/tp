@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,15 +30,23 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private HBox covidStatusPane;
+    @FXML
     private Label name;
     @FXML
+    private Label block;
+    @FXML
     private Label id;
+    @FXML
+    private Label faculty;
     @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label status;
     @FXML
     private FlowPane tags;
 
@@ -48,13 +57,56 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+        name.setText(String.format("%s %s", person.getName().fullName, person.getMatriculationNumber().value));
+        block.setText(person.getBlock().studentBlock);
+        faculty.setText(person.getFaculty().studentFaculty);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        status.setText(person.getStatus().covidStatus);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setStatusPaneColor(person.getStatus().covidStatus);
+    }
+
+    /**
+     * Sets the background of the covid status pane according to the severity of the given {@code status}.
+     * @param status The covid status of the person.
+     */
+    private void setStatusPaneColor(String status) {
+        assert CovidStatus.isValidCovidStatus(status);
+        String covidStatus = status.toLowerCase().trim();
+        String color;
+
+        final String baseStyle = ("-fx-background-color: %s; "
+                + "-fx-background-radius: 15px; "
+                + "-fx-border-radius: 15px; "
+                + "-fx-border-color: white; "
+                + "-fx-max-width: 100px; "
+                + "-fx-max-height: 50px;");
+
+        switch(covidStatus) {
+        case "positive":
+            color = "RED";
+            break;
+        case "negative":
+            color = "LIGHTGREEN";
+            break;
+        case "hrw":
+            color = "ORANGE";
+            break;
+        case "hrn":
+            color = "YELLOW";
+            break;
+        default:
+            color = "BLACK";
+            assert false : covidStatus;
+        }
+
+        String style = String.format(baseStyle, color);
+
+        covidStatusPane.setStyle(style);
     }
 
     @Override

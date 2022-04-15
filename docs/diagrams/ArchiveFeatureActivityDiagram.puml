@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User inputs Archive Command;
+
+If () then ([User input extra parameters])
+    :Throws CommandException;
+
+    else (                       [Else])
+
+    if () then ([Address book file to be \n archived cannot be found])
+    :Throws CommandException;
+
+    else (                  [Else])
+
+    If () then ([Error copying current \n address book file])
+    :Throws CommandException;
+
+    else (          [Else])
+        :A copy of the current \n address book is saved \n into the archive folder;
+        endif
+    endif
+    endif
+    :ResultDisplay prints result to user;
+stop
+
+@enduml

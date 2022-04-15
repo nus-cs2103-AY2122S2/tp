@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User inputs Resize Command with the size option;
+
+if () then ([The parameter for the \n size option is invalid])
+    :Throws ParseException;
+
+    else (           [else]\n)
+    : The result display window is set \n to the size specified by the size option;
+
+    endif
+stop
+
+@enduml

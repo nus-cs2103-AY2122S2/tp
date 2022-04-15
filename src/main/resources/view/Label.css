@@ -1,0 +1,16 @@
+#helpMessage {
+    -fx-control-inner-background:#383838;
+}
+
+#helpMessage {
+      -fx-highlight-text-fill: #000000;
+}
+
+#helpMessage {
+       -fx-text-fill: white;
+}
+
+#helpMessage {
+    -fx-border-color: #383838;
+     -fx-border-width: 0 ;
+}

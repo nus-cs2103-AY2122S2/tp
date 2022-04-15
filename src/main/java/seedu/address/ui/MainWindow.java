@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -14,8 +15,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ResizeCommand;
+import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,8 +28,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static HelpWindow helpWindow;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Double resultDisplaySizeOne = 100.0;
+    private final Double resultDisplaySizeTwo = 200.0;
+    private final Double resultDisplaySizeThree = 300.0;
 
     private Stage primaryStage;
     private Logic logic;
@@ -33,7 +41,11 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private EmailWindow emailWindow;
+
+
+    @FXML
+    private PieChartWindow pieChartWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +78,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        emailWindow = new EmailWindow(logic.getFilteredPersonList());
+        pieChartWindow = new PieChartWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +92,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -109,7 +124,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+
     void fillInnerParts() {
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -147,6 +164,59 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Toggles display text place-holder height to grow and shrink.
+     */
+    @FXML
+    public void handleResize() {
+        double height = resultDisplayPlaceholder.getHeight();
+        logger.info("Resize Window button is clicked");
+        if (height == resultDisplaySizeOne) {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeOne, resultDisplaySizeTwo));
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo);
+        } else if (height == resultDisplaySizeTwo) {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeTwo, resultDisplaySizeThree));
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree);
+        } else {
+            logger.info(String.format("Resize Window from %f to %f", resultDisplaySizeThree, resultDisplaySizeOne));
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
+        }
+    }
+
+
+    /**
+     * Opens the email window or opens an updated window it if it's already opened.
+     */
+    @FXML
+    public void handleEmailWindow() {
+        if (!emailWindow.isShowing()) {
+            createEmailWindow();
+        } else {
+            logger.info("Reopening Email Window");
+            emailWindow.hide();
+            createEmailWindow();
+        }
+    }
+
+    /**
+     * Resizes the result display window according to 3 different sizes.
+     */
+    @FXML
+    public void handleResizeResultDisplayWindow() {
+        double resultWindowSize = ResizeCommand.getResultWindowDisplaySize() * ResizeCommand.RESIZE_WINDOW_MULTIPLIER;
+        logger.info("Resizing result display window using CLI to " + resultWindowSize);
+        resultDisplayPlaceholder.setMinHeight(resultWindowSize);
+    }
+
+    /**
+     * Instantiates a new EmailWindow and shows it.
+     */
+    public void createEmailWindow() {
+        ObservableList<Person> filteredList = logic.getFilteredPersonList();
+        emailWindow = new EmailWindow(filteredList);
+        emailWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,7 +230,31 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        emailWindow.hide();
+        pieChartWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Creates and open a pie chart window if it is not yet created or not showing. Or else it will close, create and
+     * open a new pie chart window. Focus of window is not used because user might edit the contact in Tracey and
+     * use the {@code SummariseCommand} again, so an updated window is needed to be shown.
+     *
+     * @param message Feedback message from {@code SummariseCommand} to user
+     */
+    @FXML
+    private void handleSummarise(String message) {
+        if (SummariseCommand.shouldOpenPieChartWindow()) {
+            if (pieChartWindow.isShowing()) {
+                pieChartWindow.hide();
+                logger.info("Pie chart window is not yet initialised or not showing!");
+            }
+            pieChartWindow = new PieChartWindow();
+            pieChartWindow.execute();
+            pieChartWindow.show();
+        } else {
+            logger.info("Pie chart window not opened because address book is empty!");
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -178,8 +272,20 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isSummarise()) {
+                handleSummarise(commandResult.getFeedbackToUser());
+            }
+
+            if (commandResult.isResize()) {
+                handleResizeResultDisplayWindow();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowEmail()) {
+                handleEmailWindow();
             }
 
             if (commandResult.isExit()) {

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User opens Tracey;
+
+if () then ([User executes an "Undo"
+or "Redo" command first ||
+user adds extra arguments])
+    :Throws CommandException;
+    else ([else])
+    :User successfully executes an "Add", "Edit" or "Delete" command;
+    :User executes an "Undo" command;
+    if () then ([User adds extra arguments])
+    :Throws CommandException;
+    else ([else])
+    :The previous command is reversed and the original state of
+    Addressbook is returned;
+
+    if () then ([User decides to redo the previous command])
+        :User executes a "Redo" command;
+        :The previous command is executed again and the
+        state of Addressbook before the "Undo"
+        command is returned;
+    else ([else])
+   endif
+   endif
+endif
+stop
+@enduml
+

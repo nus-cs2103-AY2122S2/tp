@@ -1,0 +1,39 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\n Command" as Command {
+    {abstract} execute(Model) : CommandResult
+}
+
+class ResizeCommandParser {
+    /' Fields '/
+    -resizableWindowSizeList : int[3]
+
+    /' Methods '/
+    +parse(String) : ResizeCommand
+}
+
+class ResizeCommand {
+    /' Fields '/
+    {static} +RESIZE_WINDOW_MULTIPLIER : int
+    {static} -resultWindowDisplaySize: double
+
+    /' Methods '/
+    {static} +getResultWindowDisplaySize() : double
+}
+
+class MainWindow {
+    /' Fields '/
+    -resultDisplayPlaceholder : StackPane
+
+    /' Methods '/
+    +handleResize()
+}
+
+Command <|-- ResizeCommand
+MainWindow ..> ResizeCommand
+ResizeCommandParser ..> ResizeCommand
+
+@enduml

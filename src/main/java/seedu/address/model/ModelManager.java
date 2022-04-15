@@ -94,12 +94,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getNonUniquePersonAttributeType(Person person) {
+        requireNonNull(person);
+        return addressBook.getNonUniquePersonAttributeType(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
+        addressBook.resetOriginal();
+        addressBook.saveHistory();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        addressBook.resetOriginal();
+        addressBook.saveHistory();
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -108,7 +118,32 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
+        addressBook.resetOriginal();
+        addressBook.saveHistory();
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void restoreHistory() {
+        addressBook.saveOriginal();
+        addressBook.restoreHistory();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public boolean checkHistory() {
+        return addressBook.getHistory() != null;
+    }
+
+    @Override
+    public void restoreOriginal() {
+        addressBook.restoreOriginal();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public boolean checkOriginal() {
+        return addressBook.getOriginal() != null;
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATRICULATION_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -15,6 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains unit tests for Person class and its methods.
+ */
 public class PersonTest {
 
     @Test
@@ -31,23 +35,80 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+
+        // different phone number, all other attributes same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different matriculation number, all the other attributes same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different email, all the other attributes the same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different phone number and matriculation, all other attributes same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different phone number and email, all other attributes same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different matriculation number and email, all other attributes same --> returns true
+        editedAlice = new PersonBuilder(ALICE).withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different phone, matriculation number and email, all the other attributes the same --> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // email differs in case, all other attributes same -> returns true
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // matriculation number differs in case, all other attributes same -> returns true
+        editedBob = new PersonBuilder(BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        editedBob = new PersonBuilder(BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // First character is upper case last character is lower case eg. A0253625m --> returns true
+        String editedMatriculationNumber = VALID_MATRICULATION_NUMBER_BOB.substring(0, 1).toUpperCase()
+                + VALID_MATRICULATION_NUMBER_BOB.substring(1).toLowerCase();
+
+        editedBob = new PersonBuilder(BOB).withMatriculationNumber(editedMatriculationNumber).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // First character is lower case last character is upper case eg. a0253625M --> returns true
+        editedMatriculationNumber = VALID_MATRICULATION_NUMBER_BOB.substring(0, 1).toLowerCase()
+                + VALID_MATRICULATION_NUMBER_BOB.substring(1).toUpperCase();
+        editedBob = new PersonBuilder(BOB).withMatriculationNumber(editedMatriculationNumber).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // email has trailing spaces, all other attributes same -> returns true
+        String emailWithTrailingSpaces = VALID_EMAIL_BOB + " ";
+        editedBob = new PersonBuilder(BOB).withEmail(emailWithTrailingSpaces).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // phone has trailing spaces, all other attributes same -> returns true
+        String phoneWithTrailingSpaces = VALID_PHONE_BOB + " ";
+        editedBob = new PersonBuilder(BOB).withPhone(phoneWithTrailingSpaces).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // matriculation number has trailing spaces, all other attributes same -> returns true
+        String matriculationNumberWithTrailingSpaces = VALID_MATRICULATION_NUMBER_BOB + " ";
+        editedBob = new PersonBuilder(BOB).withMatriculationNumber(matriculationNumberWithTrailingSpaces).build();
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test

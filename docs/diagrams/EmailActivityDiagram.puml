@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User input email command;
+:Email Window opens;
+
+If () then ([User wishes to copy emails])
+    :Click on copy email button;
+    :Student emails copied to clipboard;
+
+    else ([Else])
+    :User does nothing;
+
+    endif
+    :Close Email Window;
+
+stop
+
+@enduml

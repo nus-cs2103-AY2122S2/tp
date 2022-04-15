@@ -1,0 +1,64 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\n Command" as Command {
+    /' Methods '/
+    {abstract} execute(Model) : CommandResult
+}
+
+class EditCommand {
+    /' Fields '/
+    -index : Index
+    +execute(Model) : CommandResult
+
+    /' Methods '/
+    {static} -editChecker(Optional<T>, T) : T
+    {static} -createEditedPerson(Person, EditPersonDescriptor) : Person
+}
+
+class EditCommandParser {
+   /' Fields '/
+
+   /' Methods '/
+    +parse(String) : EditCommand
+}
+
+class EditPersonDescriptor {
+    /' Fields '/
+    -name : Name
+    -block : Block
+    -faculty : Faculty
+    -phone : Phone
+    -email : Email
+    -address : Address
+    -matriculationNumber : MatriculationNumber
+    -covidStatus : CovidStatus
+    -tags : Set<Tag>
+
+    /' Methods '/
+    +isAnyFieldEdited() : boolean
+}
+
+class ModelManager {
+    /' Fields '/
+    -addressbook : AddressBook
+
+    /' Methods '/
+    +addPerson(Person)
+    +setPerson(Person, Person)
+    +updateFilteredPersonList(Predicate<Person>)
+}
+
+interface "<<interface>>\n Model" as Model {
+
+}
+
+Command <|-- EditCommand
+EditCommand *--> EditPersonDescriptor
+ModelManager <-- EditCommand
+Model <.. ModelManager
+EditCommandParser ..> EditCommand
+
+@enduml

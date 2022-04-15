@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Kuo Chun Yuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kevinkuo0320.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/kevinkuo0320)]
+[[portfolio](team/kevinkuo0320.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code integration and UI design
 
-### Jean Doe
+### Chua Wen Quan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cwq2326.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/cwq2326)]
+[[portfolio](team/cwq2326.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer & Co-Integration
+* Responsibilities: Code integration and Tracking
 
-### James Doe
+### Malcom Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dannydakota.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/DannyDakota)] [[portfolio](team/dannydakota.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer & Code-Quality
+* Responsibilities: Code integration and Testing
+
+### Tan Chin Kiat
+
+<img src="images/tanchinkiat99.png" width="200px">
+
+[[github](http://github.com/tanchinkiat99)]
+[[portfolio](team/tanchinkiat99.md)]
+
+* Role: Developer & Documentation
+* Responsibilities: Testing and Code Quality
+
+### Chee Jia Le
+
+<img src="images/jiale-c.png" width="200px">
+
+[[github](http://github.com/jiale-c)]
+[[portfolio](team/jiale-c.md)]
+
+* Role: Team Lead & Integration
+* Responsibilities: Scheduling and Code integration

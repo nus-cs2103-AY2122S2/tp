@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:SummariseCommand" as SummariseCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("summarise")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("summarise")
+activate AddressBookParser
+
+create SummariseCommand
+AddressBookParser -> SummariseCommand : SummariseCommand()
+activate SummariseCommand
+
+SummariseCommand --> AddressBookParser
+deactivate SummariseCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> SummariseCommand : execute()
+activate SummariseCommand
+
+SummariseCommand -> Model : updateFilteredPersonList(m)
+activate Model
+
+Model --> SummariseCommand
+deactivate Model
+
+SummariseCommand -> Model : getFilteredList()
+activate Model
+
+Model --> SummariseCommand
+deactivate Model
+
+SummariseCommand -> SummariseCommand : summariseAll(x)
+activate SummariseCommand
+
+SummariseCommand --> SummariseCommand
+deactivate SummariseCommand
+
+SummariseCommand -> SummariseCommand : filterByBlock(x)
+activate SummariseCommand
+
+SummariseCommand --> SummariseCommand
+deactivate SummariseCommand
+
+SummariseCommand -> SummariseCommand : filterByFaculty(x)
+activate SummariseCommand
+
+SummariseCommand --> SummariseCommand
+deactivate SummariseCommand
+
+alt no answer
+    create CommandResult
+    SummariseCommand -> CommandResult : CommandResult(fail)
+    activate CommandResult
+    CommandResult --> SummariseCommand
+    deactivate CommandResult
+else there's an answer
+    create CommandResult
+    SummariseCommand -> CommandResult : CommandResult(summary,f,f,t,f)
+    activate CommandResult
+    CommandResult --> SummariseCommand
+    deactivate CommandResult
+end
+
+SummariseCommand --> LogicManager : result
+deactivate SummariseCommand
+
+SummariseCommand -[hidden]-> AddressBookParser
+destroy SummariseCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

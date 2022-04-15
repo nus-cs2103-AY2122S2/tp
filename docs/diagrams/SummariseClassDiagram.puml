@@ -1,0 +1,79 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(model : Model) : CommandResult
+}
+
+interface Model <<interface>> {
+    /' Fields '/
+    +PREDICATE_SHOW_ALL_PERSONS : Predicate
+
+    /' Methods '/
+    + updateFilteredPersonList(Predicate)
+    + getFilteredPersonList() : ObservableList
+}
+
+class ModelManager implements Model{
+    -addressBook : AddressBook
+}
+
+class Person {
+    /' Fields '/
+     -block : Block
+     -faculty : Faculty
+     -status : CovidStatus
+
+    /' Methods '/
+    + getBlockAsString() : String
+    + getStatusAsString() : String
+    + getFacultyAsString() : String
+}
+
+class SummariseCommand {
+    /' Fields '/
+    - {static} FACULTY : List
+    - {static} BLOCKS : List
+    - {static} BY_POSITIVE : Predicate
+    - {static} BY_NEGATIVE : Predicate
+    - {static} BY_HRN : Predicate
+    - {static} covidStatsByBlockDataList : TreeMap
+    - {static} positiveStatsByFacultyData : TreeMap
+    - {static} highestPositiveByFaculty : int
+
+    /' Methods '/
+    + execute(Model) : CommandResult
+    + filterByFaculty(List) : String
+    + filterByBlock(List) : String
+    - summariseFaculty(List, String) : String
+    - summariseBlock(List, String) : String
+    - summariseAll(List) : String
+    + {static} getCovidStatsByBlockDataList() : TreeMap
+    + {static} getPositiveStatsByFacultyData() : TreeMap
+    + {static} shouldOpenPieChartWindow() : boolean
+    + {static} getHighestPositiveByFaculty() : int
+}
+
+class MainWindow {
+    /' Methods '/
+    - handleSummarise()
+}
+
+class PieChartWindow {
+     /' Methods '/
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + execute()
+     + show()
+ }
+
+ModelManager <-- SummariseCommand
+"{abstract}\nCommand" <|-- SummariseCommand
+SummariseCommand --> Person
+MainWindow --> SummariseCommand
+MainWindow *-- PieChartWindow
+
+@enduml

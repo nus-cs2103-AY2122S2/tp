@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for Email class and its methods.
+ */
 public class EmailTest {
 
     @Test

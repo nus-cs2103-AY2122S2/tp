@@ -1,9 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -15,6 +20,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -28,30 +34,54 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_BLOCK_AMY = "B";
+    public static final String VALID_BLOCK_BOB = "E";
+    public static final String VALID_FACULTY_AMY = "SOC";
+    public static final String VALID_FACULTY_BOB = "FASS";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_MATRICULATION_NUMBER_AMY = "A1234567A";
+    public static final String VALID_MATRICULATION_NUMBER_BOB = "A2180000A";
+    public static final String VALID_COVID_STATUS_AMY = "HRN";
+    public static final String VALID_COVID_STATUS_BOB = "POSITIVE";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String BLOCK_DESC_AMY = " " + PREFIX_BLOCK + VALID_BLOCK_AMY;
+    public static final String BLOCK_DESC_BOB = " " + PREFIX_BLOCK + VALID_BLOCK_BOB;
+    public static final String FACULTY_DESC_AMY = " " + PREFIX_FACULTY + VALID_FACULTY_AMY;
+    public static final String FACULTY_DESC_BOB = " " + PREFIX_FACULTY + VALID_FACULTY_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String MATRICULATION_NUMBER_DESC_AMY = " " + PREFIX_MATRICULATION_NUMBER
+            + VALID_MATRICULATION_NUMBER_AMY;
+    public static final String MATRICULATION_NUMBER_DESC_BOB = " " + PREFIX_MATRICULATION_NUMBER
+            + VALID_MATRICULATION_NUMBER_BOB;
+    public static final String COVID_STATUS_DESC_AMY = " " + PREFIX_COVID_STATUS + VALID_COVID_STATUS_AMY;
+    public static final String COVID_STATUS_DESC_BOB = " " + PREFIX_COVID_STATUS + VALID_COVID_STATUS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_BLOCK_DESC = " " + PREFIX_BLOCK + "1"; // '1' not allowed in blocks
+    public static final String INVALID_FACULTY_DESC = " " + PREFIX_FACULTY + "@"; // '@' not allowed in faculties
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_MATRICULATION_NUMBER_DESC = " " + PREFIX_MATRICULATION_NUMBER; // empty string
+    // not allowed for matriculation number
+    public static final String INVALID_COVID_STATUS_DESC = " " + PREFIX_COVID_STATUS; // empty string not allowed
+    // for covid status
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -62,10 +92,22 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withBlock(VALID_BLOCK_AMY)
+                .withFaculty(VALID_FACULTY_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_AMY)
+                .withCovidStatus(VALID_COVID_STATUS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withBlock(VALID_BLOCK_BOB)
+                .withFaculty(VALID_FACULTY_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB)
+                .withCovidStatus(VALID_COVID_STATUS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
@@ -80,7 +122,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
-        } catch (CommandException ce) {
+        } catch (CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -123,6 +165,23 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link String} does not match {@code nonExpectedMessage} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertResponseSuccess(Command command, Model actualModel, String nonExpectedMessage,
+                                            Model expectedModel) {
+        CommandResult nonExpectedCommandResult = new CommandResult(nonExpectedMessage);
+        try {
+            CommandResult result = command.execute(actualModel);
+            assertNotEquals(nonExpectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException | ParseException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
     }
 
 }

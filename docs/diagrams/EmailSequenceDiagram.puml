@@ -1,0 +1,133 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "oldWindow:EmailWindow" as EmailWindow UI_COLOR
+participant "newWindow:EmailWindow" as EmailWindow1 UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:EmailCommand" as EmailCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+
+
+[-> MainWindow : executeCommand("email")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("email")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("email")
+activate AddressBookParser
+
+create EmailCommand
+AddressBookParser -> EmailCommand :EmailCommand()
+activate EmailCommand
+
+EmailCommand --> AddressBookParser
+deactivate EmailCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> EmailCommand : execute()
+activate EmailCommand
+
+create CommandResult
+EmailCommand -> CommandResult : CommandResult()
+activate CommandResult
+
+CommandResult --> EmailCommand
+deactivate CommandResult
+
+EmailCommand --> LogicManager
+deactivate EmailCommand
+
+LogicManager --> MainWindow
+deactivate LogicManager
+
+MainWindow -> CommandResult : isShowEmail()
+activate CommandResult
+
+CommandResult --> MainWindow
+deactivate CommandResult
+
+MainWindow -> MainWindow : handleEmailWindow()
+activate MainWindow
+
+MainWindow -> EmailWindow : isShowing()
+activate EmailWindow
+
+EmailWindow --> MainWindow
+deactivate EmailWindow
+
+alt EmailWindow is currently not shown
+
+
+    MainWindow -> MainWindow : createEmailWindow()
+    activate MainWindow
+
+    MainWindow -> LogicManager : getFilteredPersonList()
+    activate LogicManager
+
+    LogicManager --> MainWindow : filteredList
+    deactivate LogicManager
+    destroy EmailWindow
+
+
+    MainWindow -> EmailWindow1 : EmailWindow(filteredList)
+    activate EmailWindow1
+
+
+    EmailWindow1 --> MainWindow
+    deactivate EmailWindow1
+
+    MainWindow --> MainWindow
+    deactivate MainWindow
+
+
+
+else EmailWindow is currently shown
+    MainWindow -> EmailWindow : hide()
+    activate EmailWindow
+
+    EmailWindow --> MainWindow
+    deactivate EmailWindow
+
+
+    MainWindow -> MainWindow : createEmailWindow()
+    activate MainWindow
+
+    MainWindow -> LogicManager : getFilteredPersonList()
+    activate LogicManager
+
+    LogicManager --> MainWindow : filteredList
+    deactivate LogicManager
+
+    destroy EmailWindow
+
+    MainWindow -> EmailWindow1 : EmailWindow(filteredList)
+    activate EmailWindow1
+
+    EmailWindow1 --> MainWindow
+    deactivate EmailWindow1
+
+
+    MainWindow --> MainWindow
+    deactivate MainWindow
+
+
+end
+
+    MainWindow --> MainWindow
+    deactivate MainWindow
+
+    [<--MainWindow
+    deactivate MainWindow
+@enduml

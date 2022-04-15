@@ -1,0 +1,50 @@
+#emailButton {
+    -fx-text-fill: white;
+}
+
+#emailButton {
+    -fx-background-color: dimgray;
+}
+
+#emailButton {
+    -fx-border-radius: 5px;
+}
+
+#emailButton:hover {
+    -fx-background-color: gray;
+}
+
+
+#importButton {
+    -fx-text-fill: white;
+}
+
+#importButton {
+    -fx-background-color: dimgray;
+}
+
+#importButton:hover {
+    -fx-background-color: gray;
+
+}
+
+#importButton {
+    -fx-border-radius: 5px;
+}
+
+#importButton:hover {
+#resizeButton {
+    -fx-text-fill: white;
+}
+
+#resizeButton {
+    -fx-background-color: dimgray;
+}
+
+#resizeButton {
+    -fx-border-radius: 5px;
+}
+
+#resizeButton:hover {
+    -fx-background-color: gray;
+}

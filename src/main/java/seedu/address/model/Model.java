@@ -58,6 +58,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns a string of the type of attributes that is unique to a {@code person} that already exist
+     * in the address book.
+     */
+    String getNonUniquePersonAttributeType(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -75,6 +81,27 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Restores the previous state of the address book.
+     */
+    void restoreHistory();
+
+    /**
+     * Checks the presence of a previous state of the address book.
+     */
+    boolean checkHistory();
+
+    /**
+     * Restores the original state of the address book.
+     */
+    void restoreOriginal();
+
+    /**
+     * Checks the presence of an original state of the address book.
+     * @return
+     */
+    boolean checkOriginal();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

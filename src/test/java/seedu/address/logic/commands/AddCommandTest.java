@@ -26,6 +26,11 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandTest {
 
     @Test
+    public void test_addCommandWordIsCorrect() {
+        assertTrue(AddCommand.COMMAND_WORD.equals("add"));
+    }
+
+    @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
@@ -47,7 +52,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_DUPLICATE_PERSON,
+            "DUPLICATE ATTRIBUTE"), () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -119,6 +125,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String getNonUniquePersonAttributeType(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -147,6 +158,26 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void restoreHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreOriginal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkOriginal() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -164,6 +195,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public String getNonUniquePersonAttributeType(Person person) {
+            requireNonNull(person);
+            return "DUPLICATE ATTRIBUTE";
         }
     }
 

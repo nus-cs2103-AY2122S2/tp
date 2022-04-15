@@ -1,0 +1,43 @@
+{
+  "persons" : [ {
+    "name" : "John Doe",
+    "block" : "E",
+    "faculty" : "SOC",
+    "phone" : "987654232",
+    "email" : "johnd@exdample.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "number" : "A0251647C",
+    "status" : "NEGATIVE",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "John Doe",
+    "block" : "E",
+    "faculty" : "SOC",
+    "phone" : "987632315432",
+    "email" : "johnd@exsdffdsample.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "number" : "A0213647C",
+    "status" : "POSITIVE",
+    "tagged" : [ ]
+  }, {
+    "name" : "John Doe",
+    "block" : "E",
+    "faculty" : "FASS",
+    "phone" : "9876325432",
+    "email" : "johnd@exfdmple.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "number" : "A0253147C",
+    "status" : "NEGATIVE",
+    "tagged" : [ ]
+  }, {
+    "name" : "John Doe",
+    "block" : "E",
+    "faculty" : "YLLSOM",
+    "phone" : "987265432",
+    "email" : "johnd@examdssdple.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "number" : "A0213641C",
+    "status" : "NEGATIVE",
+    "tagged" : [ "owesMoney", "friends" ]
+  } ]
+}

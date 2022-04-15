@@ -10,7 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Block;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.MatriculationNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -45,9 +49,42 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!Name.isValidNameLength(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_CHARACTER_LENGTH);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String block} into a {@code Block}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Block} is invalid.
+     */
+    public static Block parseBlock(String block) throws ParseException {
+        requireNonNull(block);
+        String trimmedBlock = block.trim();
+        if (!Block.isValidBlock(trimmedBlock)) {
+            throw new ParseException(Block.MESSAGE_CONSTRAINTS);
+        }
+        return new Block(trimmedBlock);
+    }
+
+    /**
+     * Parses a {@code String faculty} into a {@code Faculty}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code faculty} is invalid.
+     */
+    public static Faculty parseFaculty(String faculty) throws ParseException {
+        requireNonNull(faculty);
+        String trimmedFaculty = faculty.trim();
+        if (!Faculty.isValidFaculty(trimmedFaculty)) {
+            throw new ParseException(Faculty.MESSAGE_CONSTRAINTS);
+        }
+        return new Faculty(trimmedFaculty);
     }
 
     /**
@@ -96,6 +133,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String faculty} into a {@code MatriculationNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code number} is invalid.
+     */
+    public static MatriculationNumber parseMatriculationNumber(String number) throws ParseException {
+        requireNonNull(number);
+        String trimmedNumber = number.trim();
+        if (!MatriculationNumber.isValidMatriculationNumber(trimmedNumber)) {
+            throw new ParseException(MatriculationNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new MatriculationNumber(trimmedNumber);
+    }
+
+    /**
+     * Parses a {@code String faculty} into a {@code Faculty}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code faculty} is invalid.
+     */
+    public static CovidStatus parseCovidStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!CovidStatus.isValidCovidStatus(trimmedStatus)) {
+            throw new ParseException(CovidStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new CovidStatus(trimmedStatus);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -106,6 +173,9 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!Tag.isValidTagLength(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS_LENGTH);
         }
         return new Tag(trimmedTag);
     }

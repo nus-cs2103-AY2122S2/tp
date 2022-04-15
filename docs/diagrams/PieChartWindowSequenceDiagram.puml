@@ -1,0 +1,109 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "newChart:PieChartWindow" as PieChartWindow UI_COLOR
+participant "oldChart:PieChartWindow" as PieChartWindow1 UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":SummariseCommand" as SummariseCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand()
+activate MainWindow
+
+MainWindow -> MainWindow : handleSummarise(message)
+activate MainWindow
+
+MainWindow -> SummariseCommand : shouldOpenPieChartWindow()
+activate SummariseCommand
+
+SummariseCommand --> MainWindow : Should display window
+deactivate SummariseCommand
+
+alt#Gold #LightBlue Should display window
+
+opt#Gold #Pink Pie chart window is currently shown
+MainWindow -> PieChartWindow1 : hide()
+
+activate PieChartWindow1
+
+PieChartWindow1 --> MainWindow
+deactivate PieChartWindow1
+
+destroy PieChartWindow1
+
+end
+
+create PieChartWindow
+MainWindow -> PieChartWindow : PieChartWindow()
+
+activate PieChartWindow
+
+PieChartWindow -> SummariseCommand : getCovidStatsByBlockDataList()
+activate SummariseCommand
+
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow -> SummariseCommand : getPositiveStatsByFacultyData()
+activate SummariseCommand
+
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow --> MainWindow
+deactivate PieChartWindow
+
+MainWindow -> PieChartWindow : execute()
+activate PieChartWindow
+
+PieChartWindow -> PieChartWindow : collateBlocksChart()
+activate PieChartWindow
+
+PieChartWindow -> PieChartWindow : makePieChart(treemap, string)
+activate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+
+PieChartWindow -> PieChartWindow : createFacultyChartPositive()
+activate PieChartWindow
+
+PieChartWindow -> SummariseCommand : getHighestPositiveByFaculty()
+activate SummariseCommand
+
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow --> PieChartWindow
+
+deactivate PieChartWindow
+
+PieChartWindow -> PieChartWindow : makeChartScene(allCharts)
+activate PieChartWindow
+
+PieChartWindow --> PieChartWindow
+deactivate PieChartWindow
+
+PieChartWindow --> MainWindow: pieChartWindow
+deactivate PieChartWindow
+
+MainWindow -> PieChartWindow : show()
+activate PieChartWindow
+
+MainWindow <--PieChartWindow : result
+deactivate PieChartWindow
+
+else #Grey Else
+
+end
+deactivate MainWindow
+[<--MainWindow : feedback to user
+deactivate MainWindow
+@enduml
