@@ -368,16 +368,16 @@ in the Dialog Box. An example of this is shown below.
 
 And that's all there is to it! Now that you have a basic understanding of the commands, You can now get started on
 learning all the important [commands](#5-features-details) you can use to organize your InternBuddy lists. If you have any trouble,
-do refer back to the user guide and the [FAQ](#8-faq) section. Good luck! :confetti_ball: :confetti_ball: :confetti_ball:
+do refer back to the user guide and the [FAQ](#7-faq) section. Good luck! :confetti_ball: :confetti_ball: :confetti_ball:
 
 ---
 
 ## 5. Features Details
 
-Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#14-helping-icons) and [Command Formats](#41-command-formats) section first. If you are still confused, please refer to the [FAQ](#8-faq) section. Otherwise, you can start using the features listed below. :smile:
+Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#14-helping-icons) and [Command Formats](#41-command-formats) section first. If you are still confused, please refer to the [FAQ](#7-faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Read the <a href="#9-glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
+Read the <a href="#8-glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
 </div>
 
 ### 5.1. Getting help
@@ -921,20 +921,14 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 ---
 
-## 6. Common Workflow
-
-**TODO**
-
----
-
-## 7. That is All!
+## 6. That is All!
 Congratulations! You have finished reading all InternBuddy has to offer. We the developers surely hope that 
 you find this User Guide to be useful as your personal Guide to become **InternBuddy Guru**.
 
 With that, Good Luck with your Internship!
 
 ---
-## 8. FAQ
+## 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternBuddy home folder.
@@ -944,7 +938,7 @@ With that, Good Luck with your Internship!
 
 ---
 
-## 9. Glossary
+## 8. Glossary
 
 -   ### CLI
     CLI stands for Command Line Interface. It is a special type of terminal where you can type commands into it and the command will be executed.
@@ -957,7 +951,7 @@ With that, Good Luck with your Internship!
 
 ---
 
-## 10. Command summary
+## 9. Command summary
 
 | Action                       | Format                                                                                                          | Examples                                                                        |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
