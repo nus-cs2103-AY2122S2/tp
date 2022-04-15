@@ -233,13 +233,12 @@ Format: `addEvent INDEX ed/EVENT_DESCRIPTION da/DATE [ti/TIME] [du/DURATION] [r/
 * Adds an event to the schedule of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * You cannot add duplicate events. Events are considered to be duplicates if they share the same event description (case-insensitive), time, duration, recur frequency and recur on the same dates.
 <div markdown="block" class="alert alert-info">
-  :information_source: **Note:** CS2103T Tutorial 2022-01-01 10:00-11:00 (Weekly) is considered the same event as cs103t tutorial 2022-01-08 10:00-11:00 (Weekly) because they are considered to have the same event description and they eventually recur on the same dates. 
+  :information_source: **Note:** CS2103T Tutorial 2022-01-01 10:00-11:00 (Weekly) is considered the same event as cs103t tutorial 2022-01-08 10:00-11:00 (Weekly) because they have the same event description and they eventually recur on the same dates. 
 </div>
 
 * If `TIME` is not specified, the added event will have a duration of 24 hours and start from 00:00.
 * If `TIME` is specified but not `DURATION`, the duration will be defaulted to 2 hours.
 * If `DURATION` is specified, `TIME` also needs to be specified.
-* `EVENT_DESCRIPTION` should only contain alphanumeric characters, spaces, and the following punctuations: **!"#$&'()\*+,-.:;<=>?@**. It should not be blank and be at most 60 characters long.
 * `DATE` should be a valid date in "YYYY-MM-DD" format, and **YYYY must be between 2000-2100**.
 * `TIME` should be a valid time in "HH:MM" format.
 * `DURATION`, if provided, should be in one of the following formats (case-insensitive):
@@ -251,8 +250,6 @@ Format: `addEvent INDEX ed/EVENT_DESCRIPTION da/DATE [ti/TIME] [du/DURATION] [r/
 | `Mm`   | M minutes         | `20m`   |
 | `H`    | H hours           | `3`     |
 
-* `DURATION` **must be at least 1 minute long and less than or equal to 336hours (2 weeks)**.
-* The minutes part of `DURATION`, if provided, must be an integer between 0 and 59 inclusive.
 * `RECUR_FREQUENCY`, if provided, must be one of the following values (case-insensitive):
 
 | Value            | Frequency |
@@ -285,12 +282,11 @@ Format: `editEvent INDEX EVENT_NUMBER [ed/EVENT_DESCRIPTION] [da/DATE] [ti/TIME]
 
 * `INDEX` refers to the index number shown in the displayed person list, whereas `EVENT_NUMBER` refers to the event's index shown in the person's full schedule. Both indices **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* You cannot edit an event's description, date, time, duration and/or recurring frequency such that there will be duplicate events in UniGenda. Events are considered to be duplicates if they share the same event description (case-insensitive), time, duration, recur frequency and recur on the same dates.
+* You cannot edit an event's attributes such that there will be duplicate events in UniGenda. Events are considered to be duplicates if they share the same event description (case-insensitive), time, duration, recur frequency and recur on the same dates.
 <div markdown="block" class="alert alert-info">
-  :information_source: **Note:** CS2103T Tutorial 2022-01-01 10:00-11:00 (Weekly) is considered the same event as cs103t tutorial 2022-01-08 10:00-11:00 (Weekly) because they are considered to have the same event description and they eventually recur on the same dates. 
+  :information_source: **Note:** CS2103T Tutorial 2022-01-01 10:00-11:00 (Weekly) is considered the same event as cs103t tutorial 2022-01-08 10:00-11:00 (Weekly) because they have the same event description and they eventually recur on the same dates. 
 </div>
 
-* `EVENT_DESCRIPTION` should only contain alphanumeric characters, spaces, and the following punctuations: **!"#$&'()\*+,-.:;<=>?@**. It should not be blank and be at most 60 characters long.
 * `DATE` should be a valid date in "YYYY-MM-DD" format, and **YYYY must be between 2000-2100**.
 * `TIME` should be a valid time in "HH:MM" format.
 * `DURATION`, if provided, should be in one of the following formats (case-insensitive):
@@ -302,8 +298,6 @@ Format: `editEvent INDEX EVENT_NUMBER [ed/EVENT_DESCRIPTION] [da/DATE] [ti/TIME]
 | `Mm`   | M minutes         | `20m`   |
 | `H`    | H hours           | `3`     |
 
-* `DURATION` **must be at least 1 minute long and less than or equal to 336hours (2 weeks)**.
-* The minutes part of `DURATION`, if provided, must be an integer between 0 and 59 inclusive.
 * RECUR_FREQUENCY, if provided, must be one of the following values (case-insensitive) :
 
 | Value            | Frequency |
