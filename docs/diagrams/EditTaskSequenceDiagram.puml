@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "t:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit-t 1 n/Meeting")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("edit-t 1 n/Meeting")
+activate Coach2K22Parser
+
+create EditTaskCommandParser
+Coach2K22Parser -> EditTaskCommandParser
+activate EditTaskCommandParser
+
+EditTaskCommandParser --> Coach2K22Parser
+deactivate EditTaskCommandParser
+
+Coach2K22Parser -> EditTaskCommandParser : parse("1 n/Meeting")
+activate EditTaskCommandParser
+
+create EditTaskCommand
+EditTaskCommandParser -> EditTaskCommand
+activate EditTaskCommand
+
+EditTaskCommand --> EditTaskCommandParser : t
+deactivate EditTaskCommand
+EditTaskCommandParser --> Coach2K22Parser : t
+
+EditTaskCommandParser -[hidden]-> Coach2K22Parser
+destroy EditTaskCommandParser
+
+Coach2K22Parser --> LogicManager : t
+deactivate Coach2K22Parser
+
+LogicManager -> EditTaskCommand : execute()
+activate EditTaskCommand
+
+EditTaskCommand -> Model : setTask(editedTask)
+activate Model
+
+Model --> EditTaskCommand
+deactivate Model
+
+EditTaskCommand -> Model : hasStartEndTimeConflict()
+activate Model
+
+Model --> EditTaskCommand
+deactivate Model
+
+loop size of Task ContactList
+    loop size of TaskList
+    EditTaskCommand -> Model : hasDateTimeConflict(editedTask)
+    activate Model
+    Model --> EditTaskCommand
+    deactivate Model
+    end
+end
+
+
+
+create CommandResult
+EditTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditTaskCommand
+deactivate CommandResult
+
+EditTaskCommand --> LogicManager : result
+deactivate EditTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

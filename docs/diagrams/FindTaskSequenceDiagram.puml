@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":FindTaskCommandParser" as FindTaskCommandParser LOGIC_COLOR
+participant "f:FindTaskCommand" as FindTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(arg)
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand(arg)
+activate Coach2K22Parser
+
+create FindTaskCommandParser
+Coach2K22Parser -> FindTaskCommandParser
+activate FindTaskCommandParser
+
+FindTaskCommandParser --> Coach2K22Parser
+deactivate FindTaskCommandParser
+
+Coach2K22Parser -> FindTaskCommandParser : parse(arg)
+activate FindTaskCommandParser
+
+create FindTaskCommand
+FindTaskCommandParser -> FindTaskCommand
+activate FindTaskCommand
+
+FindTaskCommand --> FindTaskCommandParser : f
+deactivate FindTaskCommand
+
+FindTaskCommandParser --> Coach2K22Parser : f
+deactivate FindTaskCommandParser
+
+Coach2K22Parser --> LogicManager : f
+deactivate Coach2K22Parser
+destroy FindTaskCommandParser
+
+LogicManager -> FindTaskCommand : execute()
+activate FindTaskCommand
+
+FindTaskCommand -> Model: updateFilteredTaskList(predicate)
+activate Model
+
+Model --> FindTaskCommand
+deactivate Model
+
+create CommandResult
+FindTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindTaskCommand
+deactivate CommandResult
+
+FindTaskCommand --> LogicManager : result
+deactivate FindTaskCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

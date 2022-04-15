@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":ClearTaskCommandParser" as ClearTaskCommandParser LOGIC_COLOR
+participant "p:ClearTaskCommand" as ClearTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clear-t 2020-10-10")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("clear-t 2020-10-10")
+activate Coach2K22Parser
+
+create ClearTaskCommandParser
+Coach2K22Parser -> ClearTaskCommandParser
+activate ClearTaskCommandParser
+
+ClearTaskCommandParser --> Coach2K22Parser
+deactivate ClearTaskCommandParser
+
+Coach2K22Parser -> ClearTaskCommandParser : parse("2020-10-10")
+activate ClearTaskCommandParser
+
+create ClearTaskCommand
+ClearTaskCommandParser -> ClearTaskCommand
+activate ClearTaskCommand
+
+ClearTaskCommand --> ClearTaskCommandParser : p
+deactivate ClearTaskCommand
+
+ClearTaskCommandParser --> Coach2K22Parser : p
+deactivate ClearTaskCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ClearTaskCommandParser -[hidden]-> Coach2K22Parser
+destroy ClearTaskCommandParser
+
+Coach2K22Parser --> LogicManager : p
+deactivate Coach2K22Parser
+
+LogicManager -> ClearTaskCommand : execute()
+activate ClearTaskCommand
+
+Model -> ClearTaskCommand :getFilteredTaskList()
+
+loop size of TaskList
+alt task.getDate() == date
+    ClearTaskCommand -> Model : deleteTask(task)
+    end
+end
+activate Model
+
+Model --> ClearTaskCommand
+deactivate Model
+
+create CommandResult
+ClearTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearTaskCommand
+deactivate CommandResult
+
+ClearTaskCommand --> LogicManager : result
+deactivate ClearTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

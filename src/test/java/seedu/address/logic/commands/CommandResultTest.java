@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Tabs.CONTACT_TAB;
+import static seedu.address.commons.core.Tabs.DEFAULT;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, DEFAULT, false, null, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +31,13 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, DEFAULT, false, null, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, DEFAULT, false, null, false)));
+
+        // different tab pane value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, CONTACT_TAB, false, null, false)));
     }
 
     @Test
@@ -46,9 +51,23 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false,
+                DEFAULT, false, null, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true,
+                DEFAULT, false, null, false).hashCode());
+
+        // different tab pane value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                CONTACT_TAB, false, null, false).hashCode());
+    }
+
+    @Test
+    public void toStringTest() {
+        CommandResult commandResult = new CommandResult("feedback", true, false, DEFAULT, false, null, false);
+        // same values -> returns same String
+        assertEquals(commandResult.toString(),
+                new CommandResult("feedback", true, false, DEFAULT, false, null, false).toString());
     }
 }

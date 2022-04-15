@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="strategyAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <AnchorPane fx:id="playerAnchorPane" layoutX="26.0" layoutY="24.0" prefHeight="176.0" prefWidth="204.0">
+      <children>
+         <Pane fx:id="playerView" layoutX="-10.0" prefHeight="176.0" prefWidth="210.0" />
+         <ImageView fx:id="strategyImage" fitHeight="176.0" fitWidth="217.0" layoutX="-13.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+   </AnchorPane>
+   <Slider fx:id="vSlider" layoutX="-11.0" layoutY="16.0" max="600.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="25.0" showTickLabels="true" showTickMarks="true" styleClass="axis-left" stylesheets="@Extensions.css" value="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-11.0" AnchorPane.topAnchor="16.0" />
+   <Slider fx:id="hSlider" layoutX="21.0" layoutY="-11.0" max="1000.0" prefHeight="32.0" prefWidth="204.0" showTickLabels="true" showTickMarks="true" styleClass="axis-top" stylesheets="@Extensions.css" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="-11.0" />
+</AnchorPane>

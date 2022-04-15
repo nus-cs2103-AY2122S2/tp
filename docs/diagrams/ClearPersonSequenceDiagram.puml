@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant "p:ClearPersonCommand" as ClearPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clear-p")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("clear-p")
+activate Coach2K22Parser
+
+create ClearPersonCommand
+Coach2K22Parser -> ClearPersonCommand
+activate ClearPersonCommand
+
+ClearPersonCommand --> Coach2K22Parser : p
+deactivate ClearPersonCommand
+
+Coach2K22Parser --> LogicManager : p
+deactivate Coach2K22Parser
+
+LogicManager -> ClearPersonCommand : execute()
+activate ClearPersonCommand
+
+ClearPersonCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> ClearPersonCommand
+deactivate Model
+
+loop size of TaskList
+  ClearPersonCommand -> Model : setTask(editedTask)
+  activate Model
+  Model --> ClearPersonCommand
+  deactivate Model
+end
+
+ClearPersonCommand -> Model : setAddressBook(new AddressBook)
+activate Model
+
+Model --> ClearPersonCommand
+deactivate Model
+
+create CommandResult
+ClearPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearPersonCommand
+deactivate CommandResult
+
+ClearPersonCommand --> LogicManager : result
+deactivate ClearPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

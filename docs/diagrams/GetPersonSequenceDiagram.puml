@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":GetPersonCommandParser" as GetPersonCommandParser LOGIC_COLOR
+participant "f:GetPersonCommand" as GetPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(arg)
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand(arg)
+activate Coach2K22Parser
+
+create GetPersonCommandParser
+Coach2K22Parser -> GetPersonCommandParser
+activate GetPersonCommandParser
+
+GetPersonCommandParser --> Coach2K22Parser
+deactivate GetPersonCommandParser
+
+Coach2K22Parser -> GetPersonCommandParser : parse(arg)
+activate GetPersonCommandParser
+
+create GetPersonCommand
+GetPersonCommandParser -> GetPersonCommand
+activate GetPersonCommand
+
+GetPersonCommand --> GetPersonCommandParser : f
+deactivate GetPersonCommand
+
+GetPersonCommandParser --> Coach2K22Parser : f
+deactivate GetPersonCommandParser
+
+Coach2K22Parser --> LogicManager : f
+deactivate Coach2K22Parser
+destroy GetPersonCommandParser
+
+LogicManager -> GetPersonCommand : execute()
+activate GetPersonCommand
+
+GetPersonCommand -> Model: updateFilteredPersonList(predicate)
+activate Model
+
+Model --> GetPersonCommand
+deactivate Model
+
+create CommandResult
+GetPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GetPersonCommand
+deactivate CommandResult
+
+GetPersonCommand -->LogicManager : result
+deactivate GetPersonCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

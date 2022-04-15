@@ -1,0 +1,13 @@
+{
+  "tasks": [ {
+    "name": "Valid Task",
+    "date": "19-01-2023",
+    "startTime": "09:00",
+    "endTime": "12:00"
+  }, {
+    "name": "Task With Invalid Date Field",
+    "date": "29-30-2020",
+    "startTime": "09:00",
+    "endTime": "12:00"
+  } ]
+}

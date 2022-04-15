@@ -1,17 +1,23 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: Coach2K22
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2122S2-CS2103T-W14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W14-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W14-2/tp/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2122S2-CS2103T-W14-2/tp)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**Coach2K22 is a contact management application that helps busy sports coaches organise their overwhelming lists of contacts and messy weekly schedules. It also provides them with a platform to visualise defensive and offensive plays as the game unfolds.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+Example usages:
+* as a contact management utility for his players and relevant contacts
+* as a visualiser for real-time play to aid decision making on the fly
+* as an organisation tool for teams and organisations
+
+Guide:
+* If you are interested in using Coach2K22, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing Coach2K22, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

@@ -5,42 +5,63 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "strengths" : [ "Good Defense", "Great Stamina" ],
+    "weaknesses" : [ "Bad Offense", "Poor Endurance" ],
+    "misc" : [ "birthday tomorrow", "likes Python" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ "likes bing chilling" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "strengths" : [ ],
+    "weaknesses" : [ ],
+    "misc" : [ ]
   } ]
 }

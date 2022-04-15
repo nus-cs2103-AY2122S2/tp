@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant "p:SortTaskByDateCommand" as SortTaskByDateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort-date")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("sort-date")
+activate Coach2K22Parser
+
+create SortTaskByDateCommand
+Coach2K22Parser -> SortTaskByDateCommand
+activate SortTaskByDateCommand
+
+SortTaskByDateCommand --> Coach2K22Parser
+deactivate SortTaskByDateCommand
+
+Coach2K22Parser --> LogicManager
+deactivate Coach2K22Parser
+
+LogicManager -> SortTaskByDateCommand : execute()
+activate SortTaskByDateCommand
+
+activate SortTaskByDateCommand
+SortTaskByDateCommand -> Model : setTaskBook(sortedTaskBook)
+activate Model
+
+Model --> SortTaskByDateCommand
+deactivate Model
+
+create CommandResult
+SortTaskByDateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortTaskByDateCommand
+deactivate CommandResult
+
+SortTaskByDateCommand --> LogicManager : result
+deactivate SortTaskByDateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,8 @@
+{
+  "tasks": [ {
+    "name": "Task with invalid name field: Ha!ns Mu@ster",
+    "date": "10-02-2020",
+    "startTime": "09:00",
+    "endTime": "14:00"
+  } ]
+}

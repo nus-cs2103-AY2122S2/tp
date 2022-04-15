@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":AddPersonTagCommandParser" as AddPersonTagCommandParser LOGIC_COLOR
+participant "p:AddPersonTagCommand" as AddTagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag-add-p 1 friend")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("tag-add-p 1 friend")
+activate Coach2K22Parser
+
+create AddPersonTagCommandParser
+Coach2K22Parser -> AddPersonTagCommandParser
+activate AddPersonTagCommandParser
+
+AddPersonTagCommandParser --> Coach2K22Parser
+deactivate AddPersonTagCommandParser
+
+Coach2K22Parser -> AddPersonTagCommandParser : parse(" 1 friend")
+activate AddPersonTagCommandParser
+
+create AddTagCommand
+AddPersonTagCommandParser -> AddTagCommand
+activate AddTagCommand
+
+AddTagCommand --> AddPersonTagCommandParser : p
+deactivate AddTagCommand
+
+AddPersonTagCommandParser --> Coach2K22Parser : p
+deactivate AddPersonTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPersonTagCommandParser -[hidden]-> Coach2K22Parser
+destroy AddPersonTagCommandParser
+
+Coach2K22Parser --> LogicManager : p
+deactivate Coach2K22Parser
+
+LogicManager -> AddTagCommand : execute()
+activate AddTagCommand
+
+AddTagCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> AddTagCommand
+deactivate Model
+
+create CommandResult
+AddTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTagCommand
+deactivate CommandResult
+
+AddTagCommand --> LogicManager : result
+deactivate AddTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

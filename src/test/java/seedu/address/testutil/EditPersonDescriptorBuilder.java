@@ -1,13 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.EditPersonDescriptor;
+import seedu.address.model.name.Name;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -78,6 +80,36 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code strengths} into a {@code List<Note>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withStrengths(String... strength) {
+        List<Note> strengthList = Stream.of(strength).map(Note::new).collect(Collectors.toList());
+        descriptor.setStrengths(strengthList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code weaknesses} into a {@code List<Note>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withWeaknesses(String... weaknesses) {
+        List<Note> weaknessList = Stream.of(weaknesses).map(Note::new).collect(Collectors.toList());
+        descriptor.setWeaknesses(weaknessList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code miscellaneous} into a {@code List<Note>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withMiscellaneous(String... miscellaneous) {
+        List<Note> misList = Stream.of(miscellaneous).map(Note::new).collect(Collectors.toList());
+        descriptor.setMiscellaneous(misList);
         return this;
     }
 

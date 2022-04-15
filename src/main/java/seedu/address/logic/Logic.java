@@ -5,10 +5,12 @@ import java.nio.file.Path;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.task.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.strategy.Player;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -32,6 +34,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the filtered list of players */
+    ObservableList<Player> getFilteredPlayerList();
 
     /**
      * Returns the user prefs' address book file path.

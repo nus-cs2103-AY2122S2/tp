@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.name.Name;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +29,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private List<Note> strengths;
+    private List<Note> weaknesses;
+    private List<Note> miscellaneous;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +42,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        strengths = new ArrayList<>();
+        weaknesses = new ArrayList<>();
+        miscellaneous = new ArrayList<>();
     }
 
     /**
@@ -47,6 +56,9 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        strengths = new ArrayList<>(personToCopy.getStrengths());
+        weaknesses = new ArrayList<>(personToCopy.getWeaknesses());
+        miscellaneous = new ArrayList<>(personToCopy.getMiscellaneous());
     }
 
     /**
@@ -89,8 +101,34 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Parses the {@code strengths} into a {@code List<Note>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withStrengths(String... strengths) {
+        List<Note> noteList = SampleDataUtil.getNoteList(strengths);
+        this.strengths.addAll(noteList);
+        return this;
     }
 
+    /**
+     * Parses the {@code weaknesses} into a {@code List<Note>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withWeaknesses(String... weaknesses) {
+        List<Note> noteList = SampleDataUtil.getNoteList(weaknesses);
+        this.weaknesses.addAll(noteList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code misc} into a {@code List<Note>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withMisc(String... misc) {
+        List<Note> noteList = SampleDataUtil.getNoteList(misc);
+        this.miscellaneous.addAll(noteList);
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, phone, email, address, tags, strengths, weaknesses, miscellaneous);
+    }
 }

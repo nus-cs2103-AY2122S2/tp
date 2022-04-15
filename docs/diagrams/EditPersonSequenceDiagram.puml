@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":EditPersonCommandParser" as EditPersonCommandParser LOGIC_COLOR
+participant "p:EditPersonCommand" as EditPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit-p 1 n/Johnson")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("edit-p 1 n/Johnson")
+activate Coach2K22Parser
+
+create EditPersonCommandParser
+Coach2K22Parser -> EditPersonCommandParser
+activate EditPersonCommandParser
+
+EditPersonCommandParser --> Coach2K22Parser
+deactivate EditPersonCommandParser
+
+Coach2K22Parser -> EditPersonCommandParser : parse("1 n/Johnson")
+activate EditPersonCommandParser
+
+create EditPersonCommand
+EditPersonCommandParser -> EditPersonCommand
+activate EditPersonCommand
+
+EditPersonCommand --> EditPersonCommandParser : p
+deactivate EditPersonCommand
+EditPersonCommandParser --> Coach2K22Parser : p
+
+EditPersonCommandParser -[hidden]-> Coach2K22Parser
+destroy EditPersonCommandParser
+
+Coach2K22Parser --> LogicManager : p
+deactivate Coach2K22Parser
+
+LogicManager -> EditPersonCommand : execute()
+activate EditPersonCommand
+
+EditPersonCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> EditPersonCommand
+deactivate Model
+
+loop size of TaskList
+  alt newName != prevName && task.contains(prevName)
+    EditPersonCommand -> Model : setTask(editedTask)
+    activate Model
+    Model --> EditPersonCommand
+    deactivate Model
+  end
+end
+
+EditPersonCommand -> Model : setPerson(editedPerson)
+activate Model
+
+Model --> EditPersonCommand
+deactivate Model
+
+create CommandResult
+EditPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditPersonCommand
+deactivate CommandResult
+
+EditPersonCommand --> LogicManager : result
+deactivate EditPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

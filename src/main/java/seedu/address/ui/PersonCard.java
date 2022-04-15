@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.ListUtil;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -40,6 +42,12 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label strengths;
+    @FXML
+    private Label weaknesses;
+    @FXML
+    private Label misc;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,6 +63,15 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        strengths.setText(ListUtil.toIndexedStringList(person.getStrengths())
+                .stream()
+                .collect(Collectors.joining("\n")));
+        weaknesses.setText(ListUtil.toIndexedStringList(person.getWeaknesses())
+                .stream()
+                .collect(Collectors.joining("\n")));
+        misc.setText(ListUtil.toIndexedStringList(person.getMiscellaneous())
+                .stream()
+                .collect(Collectors.joining("\n")));
     }
 
     @Override

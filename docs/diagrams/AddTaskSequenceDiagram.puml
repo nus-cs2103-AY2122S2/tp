@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Coach2K22Parser" as Coach2K22Parser LOGIC_COLOR
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant "t:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-t n/Meet ...")
+activate LogicManager
+
+LogicManager -> Coach2K22Parser : parseCommand("add-t n/Meet ...")
+activate Coach2K22Parser
+
+create AddTaskCommandParser
+Coach2K22Parser -> AddTaskCommandParser
+activate AddTaskCommandParser
+
+AddTaskCommandParser --> Coach2K22Parser
+deactivate AddTaskCommandParser
+
+Coach2K22Parser -> AddTaskCommandParser : parse("n/Meet ...")
+activate AddTaskCommandParser
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser : t
+deactivate AddTaskCommand
+AddTaskCommandParser --> Coach2K22Parser : t
+
+AddTaskCommandParser -[hidden]-> Coach2K22Parser
+destroy AddTaskCommandParser
+
+Coach2K22Parser --> LogicManager : t
+deactivate Coach2K22Parser
+
+LogicManager -> AddTaskCommand : execute()
+activate AddTaskCommand
+
+AddTaskCommand -> Model : addTask("Meet ...")
+activate Model
+
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> Model : hasStartEndTimeConflict()
+activate Model
+
+Model --> AddTaskCommand
+deactivate Model
+
+loop size of Task ContactList
+    loop size of TaskList
+    AddTaskCommand -> Model : hasDateTimeConflict("Meet ...")
+    activate Model
+    Model --> AddTaskCommand
+    deactivate Model
+    end
+end
+
+
+
+create CommandResult
+AddTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTaskCommand
+deactivate CommandResult
+
+AddTaskCommand --> LogicManager : result
+deactivate AddTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,29 @@
+#strengthTitle {
+    -fx-font-weight: bold;
+}
+
+#weaknessTitle {
+    -fx-font-weight: bold;
+}
+
+#miscTitle {
+    -fx-font-weight: bold;
+}
+
+#strengths {
+    -fx-max-width: 150.0;
+    -fx-background-color: #fff2cd;
+    -fx-text-fill: #000000;
+}
+
+#weaknesses {
+    -fx-max-width: 150.0;
+    -fx-background-color: #fff2cd;
+    -fx-text-fill: #000000;
+}
+
+#misc {
+    -fx-max-width: 150.0;
+    -fx-background-color: #fff2cd;
+    -fx-text-fill: #000000;
+}
