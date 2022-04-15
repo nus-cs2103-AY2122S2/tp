@@ -3,16 +3,46 @@ layout: page
 title: User Guide
 ---
 
-InternBuddy is a **desktop app to help computer science students manage the events, companies, and contact people encountered during the internship search. The app is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** If you can type fast, InternBuddy can help you organize your internship search faster than traditional GUI apps.
+## 1. Introduction
+Hi there! Welcome to the User Guide for InternBuddy! We are here to help guide you on your journey with our application. **Keep on reading to become an InternBuddy Guru!**
 
+
+### 1.1. What is InternBuddy?
+InternBuddy is a **desktop application to help computer science students manage their events, companies, and contact people encountered during the internship search.** 
+
+This application is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI).** 
+
+If you can type fast, InternBuddy can definitely help you organize your internship search faster than traditional GUI apps.
+
+
+### 1.2. Purpose of The User Guide
 The purpose of this User Guide is to assist you in learning and using InternBuddy. Whether you're a new user looking for a place to start or a veteran needing a quick reference, this guide is here to answer your questions.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you have never used InternBuddy before, the [Quick Start](#quick-start) section is super useful for you to start!
+</div>
+
+### 1.3. InternBuddy Target Audience
+InternBuddy is designed and optimised for **Computer Science Students who are looking to manage their internship**. However, if you are not a Computer Science Student, worry not! Our User Guide
+is meant for anyone who wants to try and learn how to use InternBuddy. 
+
+### 1.3. Helping Icons
+Here are some icons that can help us emphasize any important information for you. Do read what it means beforehand!
+
+| Icon                 | Meaning                                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| :information_source: | This icon indicates important information to be taken note of                                     |
+| :bulb:               | This icon indicates useful tips for the users                                                     |
+| :exclamation:        | This icon indicates caution for an action the user can take that can have dangerous consequences. |
+
+### 1.4. Table of Contents
 * Table of Contents
-    {:toc}
+{:toc}
+
 
 ---
 
-## Quick start
+## 2. Quick start
 
 If you're interested in using InternBuddy but don't know where to begin, this section will give you a step-by-step walkthrough to get you started!
 
@@ -21,7 +51,7 @@ If you're interested in using InternBuddy but don't know where to begin, this se
     - If you don't have it installed, you can follow [Oracle's JDK installation guide](https://docs.oracle.com/en/java/javase/11/install/installation-guide.pdf)
       for your operating system.
     - Also ensure that you have selected Java `11` as your default Java version.
-    - If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
+    - If you are not sure which version of Java that you currently have, you can follow this [Java Manual](https://www.java.com/en/download/help/version_manual.html)
       to check.
 
 2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.4.0/internbuddy.jar).
@@ -47,22 +77,31 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
     - `exit` : Exits the app.
 
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+        If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
+    </div>
+
 6. If this is your first time reading our user guide, you can refer to the [Overview](#overview-of-internbuddy) section
    to learn more about the app, or to the [Features Guide](#features-guide) section to better understand the [Features](#features)
    section of the app.
 
 ---
 
-## Overview of InternBuddy
+## 3. Overview of InternBuddy
 
-InternBuddy is specially designed for students who are searching for internships. With InternBuddy, there is no need
-for you to juggle between multiple apps just to manage your multiple internship applications. This app values your
+**InternBuddy** is specially designed for Computer Science Students who are searching for internships. With **InternBuddy**, there is no need
+for you to juggle between multiple apps just to manage your multiple internship applications. 
+
+This app values your
 **Time** and **Experience** by placing efficiency as one of its core principles. Let InternBuddy help you manage your
 internship application details so you can focus on acing your assessments and interviews!
 
-This section will go into detail as to how the app works.
+This section will go into detail as to how the application works.
 
-### User Interface
+### 3.1. User Interface 
+**In short, what you see!**
+
+When you first open InternBuddy, InternBuddy will present you with:
 
 | ![Annotated user interface](images/UserGuide/Ui-annotated.png) |
 | :------------------------------------------------------------: |
@@ -72,13 +111,18 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 1. #### Entry List
 
-    InternBuddy's Entry List is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
+    InternBuddy's **Entry List** is a scrollable list containing entries which is explained in [Structure of InternBuddy](#structure-of-internbuddy). At the top of the Entry List, you can see the type of entry that is currently displayed.
 
 2. #### Dialog Box
 
-    The Dialog Box is where InternBuddy gives you the details of the commands that you entered. More on this in [Dialog Box](#dialog-box).
+    **The Dialog Box** is where InternBuddy gives you the details of the commands that you have entered. More on this in [Dialog Box](#dialog-box)
 
-3. #### Command Box
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+        After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
+        From here, you can know whether your command is successfully entered or not!
+    </div>
+
+4. #### Command Box
     This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#interacting-with-the-app).
 
 ### Structure of InternBuddy
@@ -115,7 +159,7 @@ A **Company** entry has:
 -   A _real-life address_
 -   Zero or more _tags_ associated with them
 
-Two Company entries are considered duplicates of each other if they have the same name.
+**Two Company entries are considered duplicates of each other if they have the same name.**
 
 #### Person List
 
@@ -131,7 +175,7 @@ A **Person** entry has:
 -   A _phone number_
 -   Zero or more _tags_ associated with them
 
-Two Person entries are considered duplicates of each other if they have the same name.
+**Two Person entries are considered duplicates of each other if they have the same name.**
 
 #### Event List
 
@@ -148,7 +192,7 @@ Finally, an **Event** entry has:
 -   A _location_
 -   Zero or more _tags_ associated with them
 
-Two Event entries are considered duplicates of each other if they have the same name, date, time, and company name.
+**Two Event entries are considered duplicates of each other if they have the same name, date, time, and company name.**
 
 ### Interacting with the app
 
@@ -164,37 +208,40 @@ Commands are sequences of words that follows a predetermined [format](#command-f
 
 InternBuddy's commands follows a simple classification system for all 3 lists. There are 5 types of commands:
 
--   **Adding entries**
+- **Adding entries**
     -   [`addc`](#adding-a-company-addc): Adds a company to the list of companies.
     -   [`addp`](#adding-a-person-addp): Adds a person to the list of persons.
     -   [`adde`](#adding-an-event-adde): Adds an event to the list of events.
--   **Listing/Viewing entries**
+- **Listing/Viewing entries**
     -   [`listc`](#listing-all-companies--listc): Lists all companies.
     -   [`listp`](#listing-all-persons--listp): Lists all persons.
     -   [`liste`](#listing-all-events--liste): Lists all events.
--   **Sorting entries**
+- **Sorting entries**
     -   [`sortc`](#sorting-companies-by-name-sortc): Sorts companies by name.
     -   [`sortp`](#sorting-people-by-name-sortp): Sorts persons by name.
     -   [`sorte`](#sorting-events-by-date-sorte): Sorts events by date.
--   **Editing entries**
+- **Editing entries**
     -   [`editc`](#editing-a-company--editc): Edits a company.
     -   [`editp`](#editing-a-person--editp): Edits a person.
     -   [`edite`](#editing-an-event--edite): Edits an event.
--   **Archiving entries**
+- **Archiving entries**
     -   [`archive`](#archiving-an-entry-archive): Archives an entry.
     -   [`archive_all`](#archiving-all-entries-in-display-archive_all): Archives all entries in the display.
     -   [`unarchive`](#unarchiving-an-entry-unarchive): Unarchives an entry.
     -   [`unarchive_all`](#unarchiving-all-entries-in-display-unarchive_all): Unarchives all entries in the display.
--   **Deleting entries**
+- **Deleting entries**
     -   [`delete`](#deleting-an-entry--delete): Deletes an entry.
-    -   [`delete-all`](#deleting-all-entries-in-display--delete_all): Deletes all entries.
+    -   [`delete_all`](#deleting-all-entries-in-display--delete_all): Deletes all currently displayed entries.
     -   [`clear`](#clearing-all-entries--clear): Clears all entries.
--   **Finding/Locating entries**
-    -   [`findc`](#locating-companies-findc): Finds a company.
-    -   [`findp`](#locating-people-findp): Finds a person.
-    -   [`finde`](#locating-events-finde): Finds an event.
+- **Finding/Locating entries**
+    - [`findc`](#locating-companies-findc): Finds a company.
+    - [`findp`](#locating-people-findp): Finds a person.
+    - [`finde`](#locating-events-finde): Finds an event.
+- **Miscellaneous**
+    - [`help`](#viewing-help--help): Open the help window which contains the link to this User Guide.
+    - [`clear`](#clearing-all-entries--clear): Delete all entries from all lists.
+    - [`exit`](#exiting-the-program--exit): Exit and close the application.
 
-There are other commands such as [`help`](#viewing-help--help), [`clear`](#clearing-all-entries--clear), and [`exit`](#exiting-the-program--exit).
 You can try clicking on the commands above to see how to use them in further details. However, we would suggest you to
 read the [Features Guide](#features-guide) section first to have a smoother
 experience reading our [Features](#features) section :smile:.
@@ -217,11 +264,11 @@ Otherwise, if the command is **valid**, a **success message** will be shown and 
 
 ### Archive
 
-InternBuddy supports archiving entries. When an entry is archived, it will be "hidden" from the entry list unless the user
-specifically chooses to display them. However, the entry can be unarchived when needed, and it will still technically
-exist in the entry list. For example, an Event or Person can still store the company name of an archived Company.
+InternBuddy supports archiving entries. When an entry is archived, it will be **"hidden"** from the entry list unless the user
+specifically chooses to display them. However, it will still technically
+exist in the entry list, and the entry can be unarchived when needed. For example, an Event or Person can still store the company name of an archived Company.
 
-The below screenshot shows what archived entries look like.
+The below screenshot shows what archived entries look like. Notice the `ARCHIVED` tag?
 
 | ![archived entry](images/ArchivedEntryExample.png) |
 | :------------------------------------------------: |
@@ -233,14 +280,6 @@ The below screenshot shows what archived entries look like.
 
 This section will help you navigate and understand the [Features](#features) section of the guide.
 This way, you can easily use it to answer any question you have regarding the app's features.
-
-### Icons
-
-| Icon                 | Meaning                                                                                           |
-| -------------------- | ------------------------------------------------------------------------------------------------- |
-| :information_source: | This icon indicates important information to be taken note of                                     |
-| :bulb:               | This icon indicates useful tips for the users                                                     |
-| :exclamation:        | This icon indicates caution for an action the user can take that can have dangerous consequences. |
 
 ### Command Formats
 
@@ -305,7 +344,7 @@ in the Dialog Box. An example of this is shown below.
 | :------------------------------------------------------: |
 | Error message in the dialog box after an invalid command |
 
-### Finishing Up
+### That's all for the Basic!
 
 And that's all there is to it! Now that you have a basic understanding of the commands, You can now get started on
 learning all the important [commands](#features) you can use to organize your InternBuddy lists. If you have any trouble,
@@ -360,8 +399,9 @@ Entries can have any number of tags (including 0)
 
 Examples:
 
--   `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
--   `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
+- `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
+- `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
+- `addc n/Company e/company@gmail.com p/91142678 a/ 123 Race Course Road` (see screenshot below)
 
 | ![Add Company Example](images/AddCompanyExample.png) |
 | :--------------------------------------------------: |
@@ -398,7 +438,7 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 
 Examples:
 
--   `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
+-   `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom` (see screenshot below)
 -   `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
 -   `adde n/Practical Test c/ABC d/today ti/15:00 l/Zoom`
 
