@@ -236,7 +236,7 @@ InternBuddy's commands follows a simple classification system for all 3 lists. T
 -   **Deleting entries**
     -   [`delete`](#681-deleting-an-entry--delete): Deletes an entry.
     -   [`delete_all`](#682-deleting-all-entries-in-display--delete_all): Deletes all currently displayed entries.
-    -   [`clear`](#683-clearing-all-entries--clear): Clears all entries.
+    -   [`clear`](#683-clearing-all-entries--clear): Deletes all entries.
 -   **Finding/Locating entries**
     -   [`findc`](#651-locating-companies-findc): Finds a company.
     -   [`findp`](#652-locating-people-findp): Finds a person.
@@ -886,7 +886,7 @@ delete_all
 
 #### 6.8.3. Clearing all entries : `clear`
 
-Clears all entries from all lists.
+Deletes all entries from all lists.
 
 Format:
 
