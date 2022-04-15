@@ -2,13 +2,48 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "telegram" : "",
+    "github" : "",
+    "email" : "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "schedule" : {
+      "events" : [ {
+        "eventDescription" : "CS2103T Tutorial",
+        "date" : "2022-12-28",
+        "time" : "10:00",
+        "duration" : "3H",
+        "recurFrequency" : "NONE"
+      }, {
+        "eventDescription" : "CS2106 Lab",
+        "date" : "2022-12-28",
+        "time" : "10:00",
+        "duration" : "3H",
+        "recurFrequency" : "NONE"
+      } ]
+    },
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "telegram" : "",
+    "github" : "",
+    "email" : "pauline@example.com",
+    "address": "4th street",
+    "schedule" : {
+      "events" : [ {
+        "eventDescription" : "CS2103T Tutorial",
+        "date" : "2022-12-28",
+        "time" : "10:00",
+        "duration" : "3H",
+        "recurFrequency" : "NONE"
+      }, {
+        "eventDescription" : "CS2106 Lab",
+        "date" : "2022-12-28",
+        "time" : "12:00",
+        "duration" : "3H",
+        "recurFrequency" : "NONE"
+      } ]
+    },
+    "tagged": [ "friends" ]
   } ]
 }

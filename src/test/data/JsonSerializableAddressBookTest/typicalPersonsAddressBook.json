@@ -3,44 +3,180 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
+    "telegram" : "",
+    "github" : "",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "schedule" : {
+      "events" : [ {
+        "eventDescription" : "CS2106 Tutorial",
+        "date" : "2022-03-14",
+        "time" : "10:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "Alice Birthday Surprise",
+        "date" : "2022-03-14",
+        "time" : "17:00",
+        "duration" : "4H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2103T Tutorial",
+        "date" : "2022-03-16",
+        "time" : "09:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2106 Lecture",
+        "date" : "2022-03-16",
+        "time" : "10:00",
+        "duration" : "2H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2106 Lab",
+        "date" : "2022-03-17",
+        "time" : "13:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2103T Lecture",
+        "date" : "2022-03-18",
+        "time" : "14:00",
+        "duration" : "2H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "National Day Party at BFF",
+        "date" : "2022-08-09",
+        "time" : "20:00",
+        "duration" : "3H",
+        "recurFrequency" : "WEEKLY"
+      } ]
+    },
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
+    "telegram" : "",
+    "github" : "",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "schedule" : {
+      "events" : [ {
+        "eventDescription" : "CS2106 Tutorial",
+        "date" : "2022-03-14",
+        "time" : "10:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "Alice Birthday Surprise",
+        "date" : "2022-03-14",
+        "time" : "17:00",
+        "duration" : "4H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2103T Tutorial",
+        "date" : "2022-03-16",
+        "time" : "09:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2106 Lecture",
+        "date" : "2022-03-16",
+        "time" : "10:00",
+        "duration" : "2H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2106 Lab",
+        "date" : "2022-03-17",
+        "time" : "13:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "CS2103T Lecture",
+        "date" : "2022-03-18",
+        "time" : "14:00",
+        "duration" : "2H",
+        "recurFrequency" : "WEEKLY"
+      }, {
+        "eventDescription" : "National Day Party at BFF",
+        "date" : "2022-08-09",
+        "time" : "20:00",
+        "duration" : "3H",
+        "recurFrequency" : "WEEKLY"
+      } ]
+    },
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
+    "telegram" : "",
+    "github" : "",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "schedule" : {
+      "events" : [ ]
+    },
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
+    "telegram" : "",
+    "github" : "",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "schedule" : {
+      "events" : [ ]
+    },
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
+    "telegram" : "Elle_chan",
+    "github" : "Elle-chan",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "schedule" : {
+      "events" : [ ]
+    },
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
+    "telegram" : "",
+    "github" : "",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "schedule" : {
+      "events" : [ ]
+    },
     "tagged" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
+    "telegram" : "",
+    "github" : "",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "schedule" : {
+      "events" : [ ]
+    },
+    "tagged" : [ ]
+  }, {
+    "name" : "Hendri Tanjaya",
+    "phone" : "85108989",
+    "telegram" : "",
+    "github" : "",
+    "email" : "hendri@example.com",
+    "address" : "PGPR",
+    "schedule" : {
+      "events" : [ {
+        "eventDescription" : "Tutorial CS2103T",
+        "date" : "2022-03-16",
+        "time" : "09:00",
+        "duration" : "1H",
+        "recurFrequency" : "WEEKLY"
+      } ]
+    },
     "tagged" : [ ]
   } ]
 }

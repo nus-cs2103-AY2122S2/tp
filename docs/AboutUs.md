@@ -9,51 +9,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tay Yan Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tyanhan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/tyanhan)]
+[[portfolio](team/tyanhan.md)]
 
-* Role: Project Advisor
+* Role: Developer, Team Lead
+* Responsibilities: Code, Testing, Documentation
 
-### Jane Doe
+### Ong Han Qin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanqinilnix.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/hanqinilnix)]
+[[portfolio](team/hanqinilnix.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code, Testing, Documentation
 
-### Jean Doe
+### Vishandi Rudy Keneta
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vishandi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vishandi)] [[portfolio](team/vishandi.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code, Testing, Documentation
+
+### Mark Biju George
+
+<img src="images/markbiju.png" width="200px">
+
+[[github](http://github.com/markbiju)]
+[[portfolio](team/markbiju.md)]
+
+* Role: Developer
+* Responsibilities: Code, Testing, Documentation
+

@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":WhoIsFreeCommandParser" as WhoIsFreeCommandParser LOGIC_COLOR
+participant ":WhoIsFreeCommand" as WhoIsFreeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("whoIsFree ti/10:00 da/2022-03-24")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("whoIsFree ti/10:00 da/2022-03-24")
+activate AddressBookParser
+
+create WhoIsFreeCommandParser
+AddressBookParser -> WhoIsFreeCommandParser
+activate WhoIsFreeCommandParser
+
+WhoIsFreeCommandParser --> AddressBookParser
+deactivate WhoIsFreeCommandParser
+
+AddressBookParser -> WhoIsFreeCommandParser : parse("ti/10:00 da/2022-03-24")
+activate WhoIsFreeCommandParser
+
+create WhoIsFreeCommand
+WhoIsFreeCommandParser -> WhoIsFreeCommand :predicate
+activate WhoIsFreeCommand
+
+WhoIsFreeCommand --> WhoIsFreeCommandParser
+deactivate WhoIsFreeCommand
+
+WhoIsFreeCommandParser --> AddressBookParser
+deactivate WhoIsFreeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+WhoIsFreeCommandParser -[hidden]-> AddressBookParser
+destroy WhoIsFreeCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> WhoIsFreeCommand : execute()
+activate WhoIsFreeCommand
+
+WhoIsFreeCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> WhoIsFreeCommand
+deactivate Model
+
+create CommandResult
+WhoIsFreeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> WhoIsFreeCommand
+deactivate CommandResult
+
+WhoIsFreeCommand --> LogicManager : result
+deactivate WhoIsFreeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Represents a Person in the address book.
@@ -18,21 +18,28 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
+    private final Telegram telegram;
+    private final GitHub github;
+    private final Email email;
     private final Address address;
+    private final Schedule schedule;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Telegram telegram, GitHub github, Email email,
+                  Address address, Schedule schedule, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
+        this.telegram = telegram;
+        this.github = github;
         this.email = email;
         this.address = address;
+        this.schedule = schedule;
         this.tags.addAll(tags);
     }
 
@@ -42,6 +49,14 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
+    public GitHub getGithub() {
+        return github;
     }
 
     public Email getEmail() {
@@ -60,6 +75,17 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    /**
+     * Returns a schedule containing upcoming events that are happening in the next {@code daysForward} days.
+     */
+    public Schedule getUpcomingSchedule(int daysForward) {
+        return schedule.getUpcomingSchedule(daysForward);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -70,7 +96,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -90,8 +117,11 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getTelegram().equals(getTelegram())
+                && otherPerson.getGithub().equals(getGithub())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getSchedule().equals(getSchedule())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -106,11 +136,27 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getPhone());
+
+        if (!getTelegram().isEmpty()) {
+            builder.append("; Telegram: ")
+                    .append(getTelegram());
+        }
+
+        if (!getGithub().isEmpty()) {
+            builder.append("; GitHub: ")
+                    .append(getGithub());
+        }
+
+        if (!getEmail().isEmpty()) {
+            builder.append("; Email: ")
+                    .append(getEmail());
+        }
+
+        if (!getAddress().isEmpty()) {
+            builder.append("; Address: ")
+                    .append(getAddress());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
