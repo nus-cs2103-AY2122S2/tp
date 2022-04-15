@@ -223,7 +223,9 @@ exist in the entry list. For example, an Event or Person can still store the com
 
 The below screenshot shows what archived entries look like.
 
-![archived entry](images/ArchivedEntryExample.png)
+| ![archived entry](images/ArchivedEntryExample.png) |
+| :------------------------------------------------: |
+|       Contacts list showing archived entries       |
 
 ---
 
@@ -297,9 +299,11 @@ For the `DATE`, `START_DATE`, and `END_DATE` parameters, the keyword `today` is 
 </div>
 
 If a parameter violates these restrictions, an error message will appear
-in the status message box. An example of this is shown below.
+in the Dialog Box. An example of this is shown below.
 
-![parameter error](images/ParameterErrorExample.png)
+|   ![parameter error](images/ParameterErrorExample.png)   |
+| :------------------------------------------------------: |
+| Error message in the dialog box after an invalid command |
 
 ### Finishing Up
 
@@ -359,7 +363,9 @@ Examples:
 -   `addc n/Shopee p/96113432 e/shopee@gmail.com a/14 Jurong Street #01-01`
 -   `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card Road #02-03 t/financial`
 
-![Add Company Example](images/AddCompanyExample.png)
+| ![Add Company Example](images/AddCompanyExample.png) |
+| :--------------------------------------------------: |
+|            Successfully adding a company             |
 
 #### Adding a person: `addp`
 
@@ -376,7 +382,9 @@ Examples:
 -   `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com`
 -   `addp n/Betsy Crowe c/DBS t/friend e/bcrowe@example.com p/1234567 t/hr` (see screenshot below)
 
-![Add Person Example](images/AddPersonExample.png)
+| ![Add Person Example](images/AddPersonExample.png) |
+| :------------------------------------------------: |
+|            Successfully adding a person            |
 
 #### Adding an event: `adde`
 
@@ -394,7 +402,9 @@ Examples:
 -   `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
 -   `adde n/Practical Test c/ABC d/today ti/15:00 l/Zoom`
 
-![Add Event Example](images/AddEventExample.png)
+| ![Add Event Example](images/AddEventExample.png) |
+| :----------------------------------------------: |
+|           Successfully adding an event           |
 
 ### Listing entries
 
@@ -413,7 +423,9 @@ Examples:
 -   `listc` (defaults to `s/unarchived`) displays all unarchived companies (see screenshot below).
 -   `listc s/archived` displays all archived companies.
 
-![Company List](images/UserGuide/Ui-2.png)
+| ![Company List](images/UserGuide/Ui-2.png) |
+| :----------------------------------------: |
+|      Listing all unarchived companies      |
 
 #### Listing all persons : `listp`
 
@@ -430,7 +442,9 @@ Examples:
 -   `listp` (defaults to `s/unarchived`) displays all unarchived people (see screenshot below).
 -   `listp s/archived` displays all archived people.
 
-![Persons List](images/UserGuide/Ui-3.png)
+| ![Persons List](images/UserGuide/Ui-3.png) |
+| :----------------------------------------: |
+|       Listing all unarchived people        |
 
 #### Listing all events : `liste`
 
@@ -447,7 +461,9 @@ Examples:
 -   `liste` (defaults to `s/unarchived`) displays all unarchived events (see screenshot below).
 -   `liste s/archived` displays all archived events.
 
-![Events List](images/UserGuide/Ui-4.png)
+| ![Events List](images/UserGuide/Ui-4.png) |
+| :---------------------------------------: |
+|       Listing all unarchived events       |
 
 ### Editing entries
 
@@ -489,7 +505,9 @@ Examples:
 -   `editc 1 p/91234567 e/company@example.com` edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively (see screenshot below).
 -   `editc 2 n/Shoppee t/` edits the name of the 2nd company to be `Shoppee` and clears all existing tags.
 
-![Editing a company](images/EditCompanyExample.png)
+| ![Editing a company](images/EditCompanyExample.png) |
+| :-------------------------------------------------: |
+|           Successfully editing a company            |
 
 #### Editing a person : `editp`
 
@@ -506,7 +524,9 @@ Examples:
 -   `editp 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively (see screenshot below).
 -   `editp 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-![Editing a person](images/EditPersonExample.png)
+| ![Editing a person](images/EditPersonExample.png) |
+| :-----------------------------------------------: |
+|           Successfully editing a person           |
 
 #### Editing an event : `edite`
 
@@ -523,7 +543,9 @@ Examples:
 -   `edite 1 d/2021-12-21 l/Zoom` edits the date and location of the 1st event to be `2021-12-21` and `Zoom` respectively.
 -   `edite 2 n/Resume Screening t/` edits the name of the 2nd event to be `Resume Screening` and clears all existing tags.
 
-![Editing an event](images/EditEventExample.png)
+| ![Editing an event](images/EditEventExample.png) |
+| :----------------------------------------------: |
+|          Successfully editing an event           |
 
 ### Locating entries
 
@@ -551,7 +573,9 @@ Examples:
 -   `findc n/Shopee` returns `Shopee` and `Shopee Express`
 -   `findc n/abc google` returns `Google`, `ABC Pte`<br>
 
-![Finding a company](images/FindCompanyExample.png)
+| ![Finding a company](images/FindCompanyExample.png) |
+| :-------------------------------------------------: |
+|       Finding a company named sgshop and dbss       |
 
 #### Locating people: `findp`
 
@@ -569,7 +593,9 @@ Examples:
 -   `findp n/John` returns `john` and `John Doe`
 -   `findp n/alex david` returns `Alex Yeoh`, `David Li` (see screenshot below)<br>
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+| ![result for 'find alex david'](images/findAlexDavidResult.png) |
+| :-------------------------------------------------------------: |
+|           Finding alex and david in the contact list            |
 
 #### Locating events: `finde`
 
@@ -593,7 +619,9 @@ Examples:
 -   `finde s/archived n/test` returns `software test`, `practical test`<br> (given both events have been archived)
 -   `finde sd/Today ed/2022-05-21` returns all events where the date is between today and 2022-05-21.
 
-![Find an Event](images/FindEventExample.png)
+|        ![Find an Event](images/FindEventExample.png)         |
+| :----------------------------------------------------------: |
+| Finding all events between Today (2022-04-15) and 2022-05-21 |
 
 ### Sorting entries
 
@@ -607,7 +635,13 @@ Examples:
 
 Below are screenshots of sorting the company list in ascending order (above) and descending order (below).
 
-![Sorting Ascending](images/SortAscendingExample.png) ![Sorting Descending](images/SortDescendingExample.png)
+| ![Sorting Ascending](images/SortAscendingExample.png) |
+| :---------------------------------------------------: |
+|      Sorting the company list in ascending order      |
+
+| ![Sorting Descending](images/SortDescendingExample.png) |
+| :-----------------------------------------------------: |
+|       Sorting the company list in desceding order       |
 
 #### Sorting companies by name: `sortc`
 
@@ -688,7 +722,9 @@ Use a list, find, or sort command to get all unarchived entries first. That way,
 you want to archive.
 </div>
 
-![Archiving an entry](images/ArchiveEntryExample.png)
+|    ![Archiving an entry](images/ArchiveEntryExample.png)     |
+| :----------------------------------------------------------: |
+| Archived DBS, the first entry on the previous displayed list |
 
 #### Archiving all entries in display: `archive_all`
 
@@ -700,7 +736,9 @@ Format:
 archive_all
 ```
 
-![Archiving all entries](images/ArchiveAllExample.png)
+| ![Archiving all entries](images/ArchiveAllExample.png) |
+| :----------------------------------------------------: |
+|       Archived all entries on the displayed list       |
 
 #### Unarchiving an entry: `unarchive`
 
@@ -712,7 +750,9 @@ Format:
 unarchive INDEX
 ```
 
-![Unarchiving an entry](images/UnarchiveEntryExample.png)
+|      ![Unarchiving an entry](images/UnarchiveEntryExample.png)      |
+| :-----------------------------------------------------------------: |
+| DBS not showing in the archived company list after being unarchived |
 
 Examples:
 
@@ -733,7 +773,9 @@ Format:
 unarchive_all
 ```
 
-![Unarchiving all entry](images/UnarchiveAllExample.png)
+|   ![Unarchiving all entry](images/UnarchiveAllExample.png)    |
+| :-----------------------------------------------------------: |
+| All recently unarchived entries visible in the companies list |
 
 ### Removing entries
 
@@ -760,7 +802,9 @@ Examples:
 -   `listc` followed by `delete 2` deletes the 2nd company in the list of comapnies.
 -   `findp Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![Deleting a company](images/DeleteEntryExample.png)
+|   ![Deleting a company](images/DeleteEntryExample.png)    |
+| :-------------------------------------------------------: |
+| DBS not showing in the companies list after being deleted |
 
 #### Deleting all entries in display : `delete_all`
 
@@ -772,7 +816,9 @@ Format:
 delete_all
 ```
 
-![Deleting all entries](images/DeleteAllExample.png)
+|            ![Deleting all entries](images/DeleteAllExample.png)            |
+| :------------------------------------------------------------------------: |
+| Empty list of events after using `delete_all` on the displayed events list |
 
 #### Clearing all entries : `clear`
 
@@ -784,7 +830,9 @@ Format:
 clear
 ```
 
-![Clear](images/ClearExample.png)
+|         ![Clear](images/ClearExample.png)          |
+| :------------------------------------------------: |
+| Empty list of companies after clearing all entries |
 
 ### Exiting the program : `exit`
 
