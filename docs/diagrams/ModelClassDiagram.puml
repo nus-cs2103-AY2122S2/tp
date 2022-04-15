@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
+skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
@@ -14,16 +14,24 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
 
+Class UniqueJobList
+Class Job
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+' @@author arrow from nowhere adapted from Anthony-Gaudino
+' https://forum.plantuml.net/6378/inwards-outwards-arrow-to-from-a-class-from-to-nowhere
+skinparam rectangle {
+    BorderColor<<PLACEHOLDER>> transparent
+    FontColor<<PLACEHOLDER>> transparent
+    StereotypeFontColor<<PLACEHOLDER>> transparent
+}
+
+rectangle arrowFromNowhere <<PLACEHOLDER>> {
+}
+' @@author
+
+arrowFromNowhere ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 
@@ -36,15 +44,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" UniqueJobList
+UniqueJobList --> "~* all" Job
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Job
 @enduml

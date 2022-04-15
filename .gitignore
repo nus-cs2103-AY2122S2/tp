@@ -3,16 +3,21 @@
 /build/
 src/main/resources/docs/
 
-# IDEA files
+# IDEA and other IDE files
 /.idea/
 /out/
 /*.iml
+/.vscode/
+
+# Misc build files
+/bin/
 
 # Storage/log files
-/data/
+/data/ Change the sample details
 /config.json
 /preferences.json
 /*.log.*
+/data/
 
 # Test sandbox files
 src/test/data/sandbox/
@@ -20,3 +25,4 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+gradle/wrapper/gradle-wrapper.properties

@@ -1,0 +1,33 @@
+.root {
+    /* Final Colors */
+    text-norm: white;
+    text-faded: #858AAB;
+
+    bg: #1B1A2B;
+    pane: #201f31;
+    pane-light: #2e2d42;
+    accent: #6368ff;
+
+    tag: #262645;
+    tag-green: #249b7e;
+    tag-green-bg: #202a38;
+}
+
+.bottom-help-panel {
+    -fx-background-color: pane;
+    -fx-background-radius: 11px;
+}
+
+.bottom-help-panel .label {
+    -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
+}
+
+.button {
+    -fx-background-color: pane-light;
+    -fx-background-radius: 8;
+    -fx-text-fill: text-norm;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 12;
+}
