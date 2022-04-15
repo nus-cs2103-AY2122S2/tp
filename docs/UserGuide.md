@@ -80,9 +80,9 @@ If you're interested in using InternBuddy but don't know where to begin, this se
 
     - `exit` : Exits the app.
 
-        <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-            If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
-        </div>
+          <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+              If you currently do not understand the commands above, don't worry! This is section is for you to install and get the feel for the application.
+          </div>
 
 6. If this is your first time reading our user guide, you can refer to the [Overview](#3-overview-of-internbuddy) section
    to learn more about the app, or to the [Features Guide](#4-features-guide) section to better understand the [Features Details](#5-features-details)
@@ -123,10 +123,10 @@ As you can see in the image above, there are 3 main components of InternBuddy:
 
 3. Command Box
    This is where you can input commands to InternBuddy by typing them and then pressing enter. This is the main way of [interacting with **InternBuddy**](#33-interacting-with-the-app).
-       <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-           After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box. 
-           From here, you can know whether your command is successfully entered or not!
-       </div>
+   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+   After you type and enter any commands to InternBuddy, the details of the command will be given in The Dialog Box.
+   From here, you can know whether your command is successfully entered or not!
+   </div>
 
 ### 3.2. Structure of InternBuddy
 
@@ -761,7 +761,7 @@ Examples:
 **:information_source: Notes about the Archive Commands:**<br>
 
 -   Archived entries will be "hidden" from their entry list unless the user specifically searches for them
-    (e.g. by using the `s/archived` or `s/all` parameter)
+    (e.g. by using the `s/archived` or `s/all` [parameter](#42-command-parameters))
 -   Only unarchived entries can be archived; similarly, only archived entries can be unarchived.
 
 </div>
