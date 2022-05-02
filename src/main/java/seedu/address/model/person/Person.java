@@ -267,6 +267,7 @@ public class Person implements Serializable {
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     *
      * @param other the other Person to compare to
      * @return true if both persons have the same identity and data fields
      */
@@ -281,11 +282,19 @@ public class Person implements Serializable {
 
         Person otherPerson = (Person) other;
 
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        if (hasField(Membership.PREFIX) != otherPerson.hasField(Membership.PREFIX)) {
+            return false;
+        }
+
+        Membership membership = (Membership) getField(Membership.PREFIX).orElse(null);
+        Membership otherMembership = (Membership) otherPerson.getField(Membership.PREFIX).orElse(null);
+        if (membership != null && !membership.equals(otherMembership)) {
+            return false;
+        }
+
+        return otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail()) && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
