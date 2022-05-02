@@ -12,6 +12,8 @@ title: CinnamonBun Developer Guide
 List of sources of all code and third-party libraries:
 * This project is based on the AddressBook-Level3 projected created by the [SE-EDU](https://se-education.org/) initiative.
 * Libraries used: [JavaFX](https://openjfx.io/)
+* Edit distance algorithm adapted from [geeksforgeeks](https://www.geeksforgeeks.org/edit-distance-dp-5/).
+* ListView selection adapted from [StackOverflow](https://stackoverflow.com/questions/23622703/deselect-an-item-on-an-javafx-listview-on-click).
 
 --------------------------------------------------------------------------------------------------------------------
 

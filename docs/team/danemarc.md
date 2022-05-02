@@ -22,6 +22,7 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
 * **New Feature**: Added the ability to complete or correct a command while typing.
   * Functionality: Allows the user complete or correct a command they are currently typing by pressing the `tab` key.
   * Justification: This feature makes typing commands significantly quicker and reduces input error.
+  * Credits: Adapted the edit distance algorithm from this [site](https://www.geeksforgeeks.org/edit-distance-dp-5/)
 
 
 * **New Feature**: Added the ability to switch color schemes (themes).
