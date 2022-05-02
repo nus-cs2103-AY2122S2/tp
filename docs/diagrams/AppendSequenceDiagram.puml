@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AppendCommandParser" as AppendCommandParser LOGIC_COLOR
+participant "a:AppendCommand" as AppendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("append 1 t/vendor")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("append 1 t/vendor")
+activate AddressBookParser
+
+create AppendCommandParser
+AddressBookParser -> AppendCommandParser
+activate AppendCommandParser
+
+AppendCommandParser --> AddressBookParser
+deactivate AppendCommandParser
+
+AddressBookParser -> AppendCommandParser : parse("1 t/vendor")
+activate AppendCommandParser
+
+create AppendCommand
+AppendCommandParser -> AppendCommand
+activate AppendCommand
+
+AppendCommand --> AppendCommandParser : a
+deactivate AppendCommand
+
+AppendCommandParser --> AddressBookParser : a
+deactivate AppendCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppendCommandParser -[hidden]-> AddressBookParser
+destroy AppendCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AppendCommand : execute()
+activate AppendCommand
+
+AppendCommand -> Model : Get person at index 1.
+activate Model
+Model --> AppendCommand : personToEdit
+deactivate Model
+
+create Person
+AppendCommand -> Person : personToEdit.setTag(new Tag("vendor"))
+activate Person
+
+Person --> AppendCommand : editedPerson
+deactivate Person
+
+AppendCommand -> Model : setPerson(editedPerson)
+activate Model
+
+Model --> AppendCommand
+deactivate Model
+
+create CommandResult
+AppendCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AppendCommand
+deactivate CommandResult
+
+AppendCommand --> LogicManager : result
+deactivate AppendCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AppendCommand -[hidden]-> AddressBookParser
+destroy AppendCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

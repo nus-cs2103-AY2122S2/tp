@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * API of the Logic component
@@ -21,7 +22,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException, IllegalArgumentException;
 
     /**
      * Returns the AddressBook.
@@ -32,6 +33,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * @return an unmodifiable view of the transaction list of
+     * the selected person
+     */
+    ObservableList<Transaction> getFilteredTransactionList();
 
     /**
      * Returns the user prefs' address book file path.

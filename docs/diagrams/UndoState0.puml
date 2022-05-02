@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package TempAddressBookStorage {
+}
+
+class Pointer as "Current State" #FFFFFF
+Pointer -up[hidden]-> TempAddressBookStorage
+Pointer -right-> "__ab0:AddressBook__"
+@end

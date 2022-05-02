@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -26,12 +27,15 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final String lightThemeUrl = getClass().getResource("/view/Cinnamon.css").toExternalForm();
+    private final String darkThemeUrl = getClass().getResource("/view/Caramel.css").toExternalForm();
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TransactionListPanel transactionListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane transactionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +117,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::executeCommand);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        transactionListPanel = new TransactionListPanel(logic.getFilteredTransactionList());
+        transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -129,9 +139,38 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+        primaryStage.getScene().getStylesheets().add(guiSettings.getStylesheet());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Enables the light theme.
+     */
+    @FXML
+    private void useLightTheme() {
+        Scene scene = primaryStage.getScene();
+        assert lightThemeUrl != null;
+        assert darkThemeUrl != null;
+        if (scene.getStylesheets().contains(darkThemeUrl)) {
+            scene.getStylesheets().remove(darkThemeUrl);
+            scene.getStylesheets().add(lightThemeUrl);
+        }
+    }
+
+    /**
+     * Enables the dark theme.
+     */
+    @FXML
+    private void useDarkTheme() {
+        Scene scene = primaryStage.getScene();
+        assert lightThemeUrl != null;
+        assert darkThemeUrl != null;
+        if (scene.getStylesheets().contains(lightThemeUrl)) {
+            scene.getStylesheets().remove(lightThemeUrl);
+            scene.getStylesheets().add(darkThemeUrl);
         }
     }
 
@@ -157,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), primaryStage.getScene().getStylesheets().get(1));
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -187,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | IllegalArgumentException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

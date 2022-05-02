@@ -1,0 +1,52 @@
+@startuml
+hide empty members
+
+class Person {
+    - fields : final HashMap<Prefix, Field>
+    - tags: final HastSet<Tag>
+
+    + hasField(Prefix) : boolean
+    + addFields(Field...) : Person
+    + removeFields(Field...) : Person
+    + setFields(Collection<Field>) : Person
+    + getFields() : List<Field>
+    + getField(Prefix) : Optional<Field>
+    + hasTag(Tag) : boolean
+    + addTags(Tag...) : Person
+    + removeTags(Tag...) : Person
+    + setTags(Tag...) : Person
+}
+
+abstract class Field {
+    + prefix : Prefix
+
+    + getValue() : String
+}
+
+class Name
+class Email
+class Address
+class Phone
+class Remark
+class Birthday
+class Membership
+class Tag
+
+Person o--> "1" Name
+Person o--> "1" Email
+Person o--> "1" Address
+Person o--> "1" Phone
+Person o--> "0..1" Remark
+Person o--> "0..1" Birthday
+Person o--> "0..1" Membership
+Person o--> "*" Tag
+
+Name --|> Field
+Email --|> Field
+Address --|> Field
+Phone --|> Field
+Remark --|> Field
+Birthday --|> Field
+Membership --|> Field
+
+@enduml

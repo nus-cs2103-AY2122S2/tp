@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes a command;
+:Locally save current state of
+AddressBook clients' list;
+:Command executed;
+if () then ([Undo command executed])
+    :Read latest temporary file
+    of AddressBook saved;
+    :Update AddressBook
+    with data from temporary file;
+else ([else])
+    if () then ([Clients' list state changed])
+        :Store previous locally saved state of
+        AddressBook clients' list in a temporary file;
+    else ([else])
+    endif
+endif
+
+stop
+@enduml

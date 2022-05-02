@@ -1,0 +1,28 @@
+@startuml
+start
+: User enter find transaction command;
+
+: Parses command;
+
+if () then ([valid command provided])
+  :Create transaction predicate builder;
+  :Create find transaction command;
+  :Execute find transaction command;
+  if () then ([valid person index provided])
+  : Get personIdentifier of person
+    at the specified index;
+  : Create the transaction predicate
+  using personIdentifier;
+  : Update the transaction list according
+    to the transaction predicate;
+  : Display success message;
+  else ([invalid])
+   : Throw exception;
+   : Display invalid index message;
+  endif
+else ([invalid])
+  :Throw parse exception;
+  :Display invalid command message;
+endif
+stop
+@enduml

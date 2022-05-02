@@ -3,12 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.Prefix;
+
 /**
  * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
  */
-public class Address {
-
+public class Address extends Field {
+    public static final Prefix PREFIX = new Prefix("a/", true);
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
@@ -17,7 +19,7 @@ public class Address {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Address}.
@@ -25,16 +27,22 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
+        super(PREFIX);
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        value = address.trim();
+        checkArgument(isValid(value), MESSAGE_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValid(String str) {
+        return str.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public String getValue() {
+        return value;
     }
 
     @Override
@@ -54,4 +62,13 @@ public class Address {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Field other) {
+        if (!(other instanceof Address)) {
+            return -1;
+        }
+
+        Address otherAddress = (Address) other;
+        return value.toLowerCase().compareTo(otherAddress.value.toLowerCase());
+    }
 }

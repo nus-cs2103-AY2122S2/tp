@@ -14,7 +14,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data/CinnamonBun.save");
+    private Path tempAddressBookFileDirectoryPath = Paths.get("data/.temp");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setTempAddressBookFileDirectoryPath(newUserPrefs.getTempAddressBookFileDirectoryPath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -51,10 +53,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    //@@author LapisRaider
+    public Path getTempAddressBookFileDirectoryPath() {
+        return tempAddressBookFileDirectoryPath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
     }
+
+    public void setTempAddressBookFileDirectoryPath(Path tempAddressBookFileDirectoryPath) {
+        requireNonNull(tempAddressBookFileDirectoryPath);
+        this.tempAddressBookFileDirectoryPath = tempAddressBookFileDirectoryPath;
+    }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

@@ -68,7 +68,7 @@ Following the convention in other commands, we add relevant messages as constant
             + ": Edits the remark of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (between 1 and 2147483647 inclusive) "
             + "r/ [REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
@@ -140,9 +140,9 @@ Your code should look something like [this](https://github.com/se-edu/addressboo
 
 ### Parse user input
 
-Now let’s move on to writing a parser that will extract the index and remark from the input provided by the user.
+Now let’s move on to writing a commandParser that will extract the index and remark from the input provided by the user.
 
-Create a `RemarkCommandParser` class in the `seedu.address.logic.parser` package. The class must extend the `Parser` interface.
+Create a `RemarkCommandParser` class in the `seedu.address.logic.commandParser` package. The class must extend the `Parser` interface.
 
 ![The relationship between Parser and RemarkCommandParser](../images/add-remark/ParserInterface.png)
 
@@ -198,7 +198,7 @@ Now that we have the know-how to extract the data that we need from the user’s
 public RemarkCommand parse(String args) throws ParseException {
     requireNonNull(args);
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-        PREFIX_REMARK);
+        Remark.PREFIX);
 
     Index index;
     try {
@@ -208,7 +208,7 @@ public RemarkCommand parse(String args) throws ParseException {
             RemarkCommand.MESSAGE_USAGE), ive);
     }
 
-    String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+    String remark = argMultimap.getValue(Remark.PREFIX).orElse("");
 
     return new RemarkCommand(index, remark);
 }

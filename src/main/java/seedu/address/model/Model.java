@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -13,6 +15,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +89,39 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the person list based on {@code comparator} given.
+     *
+     * @param comparator {@code comparator} to sort the person list by.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortPersonList(Comparator<Person> comparator);
+
+    /**
+     * Deletes the given transaction.
+     */
+    void deleteTransaction(Transaction target);
+
+    void deleteTransactionWithId(long personId);
+
+    /**
+     * Adds the given transaction.
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Replaces the given transaction {@code target} with {@code editedTransaction}.
+     * {@code target} must exist in the address book.
+     */
+    void setTransaction(Transaction target, Transaction editedPerson);
+
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

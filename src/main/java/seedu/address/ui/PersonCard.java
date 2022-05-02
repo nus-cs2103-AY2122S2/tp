@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.address.model.person.Field;
+import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,10 +31,14 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+
+    // Required Fields
     @FXML
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label personId;
     @FXML
     private Label phone;
     @FXML
@@ -39,7 +46,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private VBox optionalFields;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane memberships;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,13 +59,40 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Required fields.
+        name.setText(person.getName().getValue());
+        personId.setText("Client ID #" + person.getUniqueId());
+        phone.setText(person.getPhone().getValue());
+        address.setText(person.getAddress().getValue());
+        email.setText(person.getEmail().getValue());
+
+        // Optional fields.
+        person.getFields().stream().filter((Field f) -> !f.prefix.isRequired()).forEach((Field f) -> {
+            String value = f.getValue();
+            // Do not display blank fields. (e.g. blank remarks)
+            if (!value.isBlank()) {
+                optionalFields.getChildren().add(new Label(value));
+            }
+        });
+
+        // Tags.
+        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.value))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.value)));
+
+        Membership membership = person.getMembership();
+        if (membership != null) {
+            Label newLabel = new Label(membership.toString().toUpperCase());
+            if (membership.getTier() == Membership.Tier.GOLD) {
+                newLabel.setId("gold");
+            } else if (membership.getTier() == Membership.Tier.SILVER) {
+                newLabel.setId("silver");
+            } else {
+                newLabel.setId("bronze");
+            }
+            memberships.getChildren().add(newLabel);
+        }
+
     }
 
     @Override
@@ -71,7 +109,6 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        return id.getText().equals(card.id.getText()) && person.equals(card.person);
     }
 }

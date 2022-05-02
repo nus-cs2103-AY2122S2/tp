@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box ClearFiltered LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "cf:ClearFilteredCommand" as ClearFilteredCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clearFiltered")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("clearFiltered")
+activate AddressBookParser
+
+create ClearFilteredCommand
+AddressBookParser -> ClearFilteredCommand
+activate ClearFilteredCommand
+
+ClearFilteredCommand --> AddressBookParser : cf
+deactivate ClearFilteredCommand
+
+AddressBookParser --> LogicManager : cf
+deactivate AddressBookParser
+
+LogicManager -> ClearFilteredCommand : execute()
+activate ClearFilteredCommand
+
+ClearFilteredCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ClearFilteredCommand : filteredList
+deactivate Model
+
+ClearFilteredCommand -> Model : deletePerson(filteredList)
+activate Model
+
+Model --> ClearFilteredCommand
+deactivate Model
+
+create CommandResult
+ClearFilteredCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearFilteredCommand
+deactivate CommandResult
+
+ClearFilteredCommand --> LogicManager : result
+deactivate ClearFilteredCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ClearFilteredCommand -[hidden]-> AddressBookParser
+destroy ClearFilteredCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
