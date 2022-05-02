@@ -14,7 +14,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyInterviewSchedule;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 import seedu.address.storage.Storage;
 
 /**
@@ -47,6 +49,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveInterviewSchedule(model.getInterviewSchedule());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -60,13 +63,28 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ReadOnlyInterviewSchedule getInterviewSchedule() {
+        return model.getInterviewSchedule();
+    }
+
+    @Override
+    public ObservableList<Interview> getFilteredInterviewSchedule() {
+        return model.getFilteredInterviewSchedule();
+    }
+
+    @Override
+    public ObservableList<Candidate> getFilteredCandidateList() {
+        return model.getFilteredCandidateList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getInterviewScheduleFilePath() {
+        return model.getInterviewScheduleFilePath();
     }
 
     @Override

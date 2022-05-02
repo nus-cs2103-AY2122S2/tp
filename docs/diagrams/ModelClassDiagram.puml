@@ -7,18 +7,27 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyInterviewSchedule" as ReadOnlyInterviewSchedule
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class InterviewSchedule
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniqueCandidateList
+Class Candidate
+Class StudentId
 Class Name
 Class Phone
-Class Tag
+Class Email
+Class Course
+Class Seniority
+Class ApplicationStatus
+Class InterviewStatus
+Class Availability
+
+Class UniqueInterviewList
+Class Interview
 
 }
 
@@ -26,25 +35,42 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+InterviewSchedule .up.|> ReadOnlyInterviewSchedule
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .left.> ReadOnlyInterviewSchedule
 ModelManager -left-> "1" AddressBook
+ModelManager -up-> "1" InterviewSchedule
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+InterviewSchedule *--> "1" UniqueInterviewList
+UniqueInterviewList --> "~* all" Interview
 
+AddressBook *--> "1" UniqueCandidateList
+UniqueCandidateList --> "~* all" Candidate
+Candidate *--> StudentId
+Candidate *--> Name
+Candidate *--> Phone
+Candidate *--> Email
+Candidate *--> Course
+Candidate *--> Seniority
+Candidate *--> ApplicationStatus
+Candidate *--> InterviewStatus
+Candidate *--> Availability
+
+StudentId -[hidden]right-> Name
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Course
+Course -[hidden]right-> Seniority
+Seniority -[hidden]right-> ApplicationStatus
+ApplicationStatus -[hidden]right-> InterviewStatus
+InterviewStatus -[hidden]right-> Availability
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Candidate
+ModelManager -left->"~* filtered" Interview
+
 @enduml

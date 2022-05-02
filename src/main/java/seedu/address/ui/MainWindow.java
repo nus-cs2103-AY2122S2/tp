@@ -13,9 +13,20 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.FocusCommand;
+import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ClearScheduleCommand;
+import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
+import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.interview.Interview;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,14 +35,20 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final int EDIT_COMMAND_INDEX = 5;
+    private static final int DELETE_COMMAND_INDEX = 7;
+    private static final int ADD_SCHEDULE_COMMAND_INDEX = 23;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private CandidateListPanel candidateListPanel;
+    private InterviewListPanel interviewListPanel;
+    private FocusCard focusListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +59,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane candidateListPanelPlaceholder;
+
+    @FXML
+    private StackPane interviewListPanelPlaceholder;
+
+    @FXML
+    private StackPane focusListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +133,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        candidateListPanel = new CandidateListPanel(logic.getFilteredCandidateList());
+        candidateListPanelPlaceholder.getChildren().add(candidateListPanel.getRoot());
+
+        interviewListPanel = new InterviewListPanel(logic.getFilteredInterviewSchedule());
+        interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,9 +189,139 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void handleFocus(CommandResult commandResult) {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            focusListPanelPlaceholder.getChildren().remove(0);
+        }
+
+        Candidate candidate = logic.getFilteredCandidateList().get(commandResult.getIndexFocus());
+        Interview interview = null;
+
+        for (Interview i: logic.getInterviewSchedule().getInterviewList()) {
+            if (i.getCandidate().isSameCandidate(candidate)) {
+                interview = i;
+                break;
+            }
+        }
+        focusListPanel = new FocusCard(candidate, interview);
+        focusListPanelPlaceholder.getChildren().add(focusListPanel.getRoot());
     }
+
+    private void handleDelete(String commandResult) throws CommandException {
+        int index;
+        try {
+            index = Integer.parseInt(commandResult.substring(DELETE_COMMAND_INDEX));
+            if (focusListPanel.getCandidate().equals(logic.getFilteredCandidateList().get(index - 1))) {
+                clearFocusCard();
+            }
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    /**
+     * Clear Focus Card
+     */
+    public void clearFocusCard() {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            focusListPanelPlaceholder.getChildren().remove(0);
+        }
+        candidateListPanel = new CandidateListPanel(logic.getFilteredCandidateList());
+        candidateListPanelPlaceholder.getChildren().add(candidateListPanel.getRoot());
+    }
+
+    /**
+     * This method will be used when a user tries to key in an Edit Command. It will check if the index
+     * being edited corresponds to the Candidate being shown.
+     *
+     * @return if the Candidate being edited is the one on Focus Panel, return the index of the Candidate. Else
+     * it will return the value of -1.
+     */
+    public int handleEdit(String commandText, int commandIndex) throws CommandException, ParseException {
+        logger.info(commandText);
+
+        try {
+            int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+            String string = commandText.substring(commandIndex);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < string.length(); i++) {
+                char c = string.charAt(i);
+                if (Character.isDigit(c)) {
+                    builder.append(c);
+                } else {
+                    break;
+                }
+            }
+
+            int editIndex = Integer.parseInt(builder.toString());
+            if (editIndex - 1 == displayedIndex) {
+                return editIndex;
+            } else {
+                return -1;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    public CandidateListPanel getCandidateListPanel() {
+        return candidateListPanel;
+    }
+
+    public InterviewListPanel getInterviewListPanel() {
+        return interviewListPanel;
+    }
+
+    public FocusCard getFocusCard() {
+        return focusListPanel;
+    }
+
+
+    /**
+     * Methods where we need to execute the command to get the Index of the Candidate to refresh the panel
+     */
+    public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute(commandText);
+
+        if (focusListPanel != null && focusListPanel.getCandidate().looseEqual(logic
+                .getFilteredCandidateList()
+                .get(commandResult.getEditIndex()))) {
+            executeCommand(FocusCommand.COMMAND_WORD + " "
+                    + String.valueOf(commandResult.getEditIndex() + 1));
+        }
+
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        //to manually clear the commandBox
+        commandBoxPlaceholder.getChildren().remove(0);
+        commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
+        return commandResult;
+    }
+
+
+    /**
+     * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
+     */
+    public CommandResult refreshWhenClearAllSchedule(String commandText) throws CommandException, ParseException {
+
+        int displayedIndex = -1;
+
+        if (focusListPanel != null && !focusListPanelPlaceholder.getChildren().isEmpty()) {
+            displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+        }
+
+        CommandResult commandResult = logic.execute(commandText);
+
+        if (displayedIndex != -1) {
+            logger.info(String.valueOf(logic.getFilteredCandidateList().contains(focusListPanel.getCandidate())));
+            executeCommand(FocusCommand.COMMAND_WORD + " " + String.valueOf(displayedIndex + 1));
+        }
+
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        commandBoxPlaceholder.getChildren().remove(0);
+        commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
+        return commandResult;
+    }
+
 
     /**
      * Executes the command and returns the result.
@@ -174,9 +330,34 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            int editFlag = -1;
+
+            if (commandText.contains(DeleteScheduleCommand.COMMAND_WORD)
+                    || commandText.contains(RemarkCommand.COMMAND_WORD)
+                    || (commandText.contains(EditScheduleCommand.COMMAND_WORD))) {
+                return executeCommandThenRefresh(commandText);
+            } else if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
+                handleDelete(commandText);
+            } else if (commandText.contains(EditCommand.COMMAND_WORD)) {
+                try {
+                    CommandResult commandResult = logic.execute(commandText);
+                    logger.info("Result: " + commandResult.getFeedbackToUser());
+                    resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                    clearFocusCard();
+                    return commandResult;
+                } catch (CommandException e) {
+                    throw e;
+                }
+            } else if (commandText.contains(AddScheduleCommand.COMMAND_WORD)) {
+                editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
+            } else if (commandText.contains(ClearScheduleCommand.COMMAND_WORD)) {
+                return refreshWhenClearAllSchedule(commandText);
+            } else if (commandText.split(" ")[0].equals(ClearCommand.COMMAND_WORD)) {
+                clearFocusCard();
+            }
+
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -186,6 +367,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowFocus()) {
+                handleFocus(commandResult);
+            }
+
+            if (editFlag != -1) {
+                executeCommand(FocusCommand.COMMAND_WORD + " " + editFlag);
+            }
+
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

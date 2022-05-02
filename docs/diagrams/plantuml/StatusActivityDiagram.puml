@@ -1,0 +1,23 @@
+@startuml
+ 'https://plantuml.com/activity-diagram-beta
+
+ start
+ :User executes edit command for ApplicationStatus;
+ :System parses in the user command;
+ if () then ([Valid prefix and status entered])
+    switch(Status entered)
+    case ([Accepted[])
+        : Change ApplicationStatus to Accepted;
+        : Trigger InterviewStatus to Completed;
+    case ([Rejected])
+        : Change ApplicationStatus to Rejected;
+        : Trigger InterviewStatus to Completed;
+    case ([Pending])
+        : Change ApplicationStatus to Pending;
+    endswitch
+ else ([Invalid prefix or status entered])
+   :System returns invalid command error;
+ endif
+ stop
+
+ @enduml

@@ -57,10 +57,10 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -124,6 +124,15 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-padding: 2 0 2 0;
+}
+
+.status_pane_style {
+    -fx-padding: 5 0 2 0;
+}
+
+.availability_pane_style {
+    -fx-padding: 5 0 0 0;
 }
 
 .cell_small_label {
@@ -133,13 +142,13 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -229,8 +238,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -310,6 +319,7 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+    -fx-padding: 0 0 6 0
 }
 
 #commandTypeLabel {
@@ -328,7 +338,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #candidateListPanel, #candidateWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -349,4 +359,176 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#availableDays #availabilityTag {
+    -fx-alignment: center;
+}
+
+#availableDaysFocus #availabilityTag {
+    -fx-alignment: center;
+}
+
+#statusPane {
+    -fx-hgap: 7;
+    -fx-vgap: 10;
+}
+
+#statusPane .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 2;
+    -fx-background-radius: 3;
+    -fx-font-size: 11;
+}
+
+#availableDays {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#availableDays .label {
+    -fx-text-fill: black;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 3;
+    -fx-font-size: 11;
+}
+
+#statusFocusPane {
+    -fx-hgap: 7;
+    -fx-vgap: 10;
+    -fx-padding: 2 3 2 3;
+}
+
+#statusFocusPane .label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 2;
+    -fx-background-radius: 3;
+    -fx-font-size: 11;
+}
+
+#availableDaysFocus {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-padding: 2 3 2 3;
+}
+
+#availableDaysFocus .label {
+    -fx-text-fill: black;
+    -fx-background-color: #4BB11F;
+    -fx-padding: 2 3 2 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 3;
+    -fx-font-size: 11;
+}
+
+#focusSplitPane {
+    -fx-padding: 0 0 10 0;
+}
+
+.focusStyle {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 17px;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 1 3 0 3;
+}
+
+.focusStyleName {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 0 0 0 3
+}
+
+
+.focusStyleRemark {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.focusStyleRemarkText {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.keyAttributesVBox {
+    -fx-padding: 10 10 10 0;
+}
+
+/* candidate panel header css */
+.candidate-panel-header {
+    -fx-background-color: #3c3e3f;
+}
+
+.candidate-panel-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.profileTextStyle {
+    -fx-font-size: 35px;
+    -fx-stroke: black;
+    -fx-font-family: "Segoe UI";
+}
+
+/*  focus panel (external elements excluding content) css */
+.focus-panel-header {
+    -fx-background-color: #3c3e3f;
+}
+
+.focus-panel-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+#focus-card-label {
+    -fx-padding: 0 0 0 15;
+}
+
+#focus-card-misc-label {
+    -fx-padding: 25 0 0 15;
+    -fx-font-weight: bold;
+}
+
+#focus-card-scroll-pane {
+    -fx-background-color: #3c3e3f;
+    -fx-border-width: 0;
+}
+
+#focus-card-scroll-pane > .viewport {
+    -fx-background-color: #3c3e3f;
+}
+
+/* interview panel css */
+.interview-panel-header {
+    -fx-background-color: #407BFF;
+}
+
+.interview-panel-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.interview-list .list-cell:filled:odd {
+    -fx-background-color: #515658;
+}
+
+.interview-list .list-cell:filled:even {
+    -fx-background-color: #3c3e3f;
+}
+
+.list-cell:filled:selected #interviewCard {
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 1;
+}
+
+.list-cell:filled #interviewCard {
+    -fx-border-color: #383838;;
 }

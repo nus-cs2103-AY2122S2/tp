@@ -1,60 +1,68 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.AddressBook;
+import seedu.address.model.InterviewSchedule;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.ReadOnlyInterviewSchedule;
+import seedu.address.model.candidate.ApplicationStatus;
+import seedu.address.model.candidate.Availability;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Course;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.InterviewStatus;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
+import seedu.address.model.candidate.Seniority;
+import seedu.address.model.candidate.StudentId;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+
+    private static final ApplicationStatus PENDING = new ApplicationStatus("pending");
+    private static final InterviewStatus INTERVIEW_NOT_SCHEDULED = new InterviewStatus("Not Scheduled");
+    private static final Remark EMPTY_REMARK = new Remark("");
+
+    public static Candidate[] getSampleCandidates() {
+        return new Candidate[] {
+            new Candidate(new StudentId("A0123456B"), new Name("Alex Yeoh"), new Phone("87438807"),
+                    new Email("E0123456@u.nus.edu"), new Course("Business Analytics"), new Seniority("1"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3,4,5"), EMPTY_REMARK),
+            new Candidate(new StudentId("A0234567B"), new Name("Bernice Yu"), new Phone("99272758"),
+                    new Email("E0234567@u.nus.edu"), new Course("Computer Engineering"), new Seniority("2"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3,4,5"), EMPTY_REMARK),
+            new Candidate(new StudentId("A0345678B"), new Name("Charlotte Oliveiro"), new Phone("93210283"),
+                    new Email("E0345678@u.nus.edu"), new Course("Computer Science"), new Seniority("3"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("1,2,3"), EMPTY_REMARK),
+            new Candidate(new StudentId("A0456789B"), new Name("David Li"), new Phone("91031282"),
+                    new Email("E0456789@u.nus.edu"), new Course("Information Security"), new Seniority("4"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("3,4,5"), EMPTY_REMARK),
+            new Candidate(new StudentId("A0567890B"), new Name("Irfan Ibrahim"), new Phone("92492021"),
+                    new Email("E0567890@u.nus.edu"), new Course("Information Systems"), new Seniority("1"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("4,5"), EMPTY_REMARK),
+            new Candidate(new StudentId("A0678901B"), new Name("Roy Balakrishnan"), new Phone("92624417"),
+                    new Email("E0678901@u.nus.edu"), new Course("Computer Science"), new Seniority("2"),
+                    PENDING, INTERVIEW_NOT_SCHEDULED, new Availability("3,5"), EMPTY_REMARK)
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Candidate sampleCandidate : getSampleCandidates()) {
+            sampleAb.addCandidate(sampleCandidate);
         }
         return sampleAb;
     }
 
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+    public static ReadOnlyInterviewSchedule getEmptyInterviewList() {
+        InterviewSchedule interviewSchedule = new InterviewSchedule();
+        return interviewSchedule;
+    }
+
+    public static ApplicationStatus getPending() {
+        return PENDING;
     }
 
 }

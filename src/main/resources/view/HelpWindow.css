@@ -17,3 +17,33 @@
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+.styleFieldMessage {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-padding: 0 0 5 10;
+}
+
+.styleField {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-padding: 3 5 3 15;
+}
+
+.styleCommand {
+    -fx-text-fill: white;
+    -fx-background-color: #3F7BCD;
+    -fx-border-radius: 2;
+    -fx-background-radius: 3;
+    -fx-font-size: 14;
+    -fx-padding: 3 5 3 5;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.styleHBox {
+    -fx-padding: 8 0 0 10;
+}
+
+#copyButtonHBox {
+    -fx-padding: 20 5 0 0;
+}

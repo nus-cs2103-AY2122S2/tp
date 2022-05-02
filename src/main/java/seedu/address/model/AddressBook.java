@@ -2,19 +2,22 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.UniqueCandidateList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameCandidate comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueCandidateList candidates;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +27,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        candidates = new UniqueCandidateList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Candidates in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -40,11 +43,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the candidate list with {@code candidates}.
+     * {@code candidates} must not contain duplicate candidates.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates.setCandidates(candidates);
+    }
+
+    /**
+     * Reorders the contents of the candidate list by comparator based on {@code sortComparator}
+     * by creating a copy of the original candidate list.
+     * {@code candidates} must not contain duplicate candidates.
+     * @param sortComparator contains information on which candidate field to compare and sort by
+     */
+    public void sortCandidates(Comparator<Candidate> sortComparator) {
+        requireNonNull(sortComparator);
+        List<Candidate> candidatesCopy = new ArrayList<Candidate>(this.getCandidateList());
+        candidatesCopy.sort(sortComparator);
+        this.candidates.setCandidates(candidatesCopy);
     }
 
     /**
@@ -53,68 +69,73 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setCandidates(newData.getCandidateList());
     }
 
-    //// person-level operations
+    //// candidate-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a candidate with the same identity as {@code candidate} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasCandidate(Candidate candidate) {
+        requireNonNull(candidate);
+        return candidates.contains(candidate);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a candidate to the address book.
+     * The candidate must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addCandidate(Candidate p) {
+        candidates.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given candidate {@code target} in the list with {@code editedCandidate}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
+     * address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException {
+        requireNonNull(editedCandidate);
 
-        persons.setPerson(target, editedPerson);
+        candidates.setCandidate(target, editedCandidate);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeCandidate(Candidate key) {
+        candidates.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return candidates.asUnmodifiableObservableList().size() + " candidates";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Candidate> getCandidateList() {
+        return candidates.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && candidates.equals(((AddressBook) other).candidates));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return candidates.hashCode();
+    }
+
+    public void resetAllScheduledStatus() throws CommandException {
+        candidates.resetScheduledStatus();
     }
 }

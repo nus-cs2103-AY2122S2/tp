@@ -1,0 +1,14 @@
+@startuml
+ 'https://plantuml.com/activity-diagram-beta
+
+ start
+ :User keys in the edit command;
+ if () then ([Valid command])
+    :selects the candidate to be edited;
+    :update and return the candidate's attribute;
+ else ([Invalid prefix or status entered])
+   :System returns invalid command error;
+ endif
+ stop
+
+ @enduml

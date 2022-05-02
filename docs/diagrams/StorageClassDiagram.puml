@@ -18,26 +18,37 @@ package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Class JsonAdaptedCandidate
+}
+
+package "InterviewSchedule Storage" #F4F6F6{
+Class "<<interface>>\nInterviewScheduleStorage" as InterviewScheduleStorage
+Class JsonInterviewScheduleStorage
+Class JsonSerializableInterviewSchedule
+Class JsonAdaptedInterview
 }
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
-
+skinparam linetype ortho
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -down-> "1" UserPrefsStorage
+StorageManager -down-> "1" AddressBookStorage
+StorageManager -down-> "1" InterviewScheduleStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -down-|> UserPrefsStorage
+Storage -down-|> InterviewScheduleStorage
+Storage -down-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSerializableAddressBook --> "*" JsonAdaptedCandidate
+
+JsonInterviewScheduleStorage .up.|> InterviewScheduleStorage
+JsonInterviewScheduleStorage ..> JsonSerializableInterviewSchedule
+JsonSerializableInterviewSchedule --> "*" JsonAdaptedInterview
 
 @enduml

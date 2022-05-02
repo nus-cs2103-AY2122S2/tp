@@ -1,14 +1,20 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_CANDIDATES_DISPLAYED;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SENIORITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_PENDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_NOT_SCHEDULED;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalCandidates.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,12 +31,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyInterviewSchedule;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonInterviewScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CandidateBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -44,9 +52,11 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonAddressBookStorage(temporaryFolder.resolve("talentAssistant.json"));
+        JsonInterviewScheduleStorage interviewScheduleStorage =
+                new JsonInterviewScheduleStorage(temporaryFolder.resolve("interviewSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, interviewScheduleStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -59,13 +69,13 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_NO_CANDIDATES_DISPLAYED);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, MESSAGE_NO_CANDIDATES_IN_SYSTEM, model);
     }
 
     @Test
@@ -73,24 +83,34 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonInterviewScheduleStorage interviewScheduleStorage =
+                new JsonInterviewScheduleIoExceptionThrowingStub(temporaryFolder
+                        .resolve("ioExceptionInterviewSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, interviewScheduleStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + STUDENT_ID_DESC_AMY + NAME_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + COURSE_DESC_AMY + SENIORITY_DESC_AMY + AVAILABILITY_DESC_AMY;
+        Candidate expectedCandidate = new CandidateBuilder(AMY)
+                .withApplicationStatus(VALID_APPLICATION_PENDING)
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addCandidate(expectedCandidate);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredCandidateList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCandidateList().remove(0));
+    }
+
+    @Test
+    public void getFilteredInterviewSchedule_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredInterviewSchedule().remove(0));
     }
 
     /**
@@ -129,7 +149,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -156,6 +176,21 @@ public class LogicManagerTest {
 
         @Override
         public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called.
+     */
+    private static class JsonInterviewScheduleIoExceptionThrowingStub extends JsonInterviewScheduleStorage {
+        private JsonInterviewScheduleIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveInterviewSchedule(ReadOnlyInterviewSchedule interviewSchedule, Path filePath)
+                throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

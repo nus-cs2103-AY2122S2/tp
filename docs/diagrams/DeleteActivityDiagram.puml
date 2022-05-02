@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes list command;
+:User executes delete command;
+if () then ([valid command])
+if () then ([candidate list is empty])
+:System returns empty candidate list message;
+else ([false])
+:Candidate is deleted from system;
+:System returns updated list of candidates;
+endif
+else ([invalid command])
+:System returns invalid command error message;
+endif
+
+stop
+
+@enduml

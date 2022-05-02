@@ -1,13 +1,17 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showCandidateAtIndex;
+import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
+import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.model.AddressBook;
+import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -22,8 +26,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
     }
 
     @Test
@@ -33,7 +37,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsEmpty_showsEmptyMessage() {
+        model = new ModelManager(new AddressBook(), new InterviewSchedule(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
+        assertCommandSuccess(new ListCommand(), model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM, expectedModel);
     }
 }
