@@ -95,7 +95,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Remove an interview from the list.
+     * Removes an interview from the list.
      */
     public void remove(Interview toRemove) {
         requireNonNull(toRemove);
@@ -103,7 +103,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
     }
-
+    /**
+     * Replaces the content of this list with the given list.
+     */
     public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -126,9 +128,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
     }
 
     /**
-     * Checks if the interview list contains an interview with the same candidate in {@code toCheck}.
+     * Checks if the interview list contains an interview with the same candidate in the given interview.
      * @param toCheck
-     * @return
+     * @return True if the interview list contains an interview with the same candidate as the given interview.
      */
     public boolean containsCandidate(Interview toCheck) {
         requireNonNull(toCheck);
