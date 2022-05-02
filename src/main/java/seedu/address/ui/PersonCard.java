@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Membership;
 import seedu.address.model.person.Person;
@@ -45,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane optionalFields;
+    private VBox optionalFields;
     @FXML
     private FlowPane tags;
     @FXML

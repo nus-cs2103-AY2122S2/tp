@@ -39,7 +39,7 @@
       <Label fx:id="address" text="\$address" />
       <Label fx:id="email" text="\$email" />
       <!-- Optional Fields -->
-      <FlowPane fx:id="optionalFields" />
+      <VBox fx:id="optionalFields" />
     </VBox>
   </GridPane>
 </HBox>

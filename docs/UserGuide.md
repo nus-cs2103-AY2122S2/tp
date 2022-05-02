@@ -140,7 +140,7 @@ A transaction also have compulsory and optional fields.
 | [Edit](#edit-client-edit)                                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/remark] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                |
 | [Remark](#append-remark-to-client-remark)                     | `remark INDEX r/REMARK`<br> e.g., `remark 5 r/Needs marble flooring delivered by next Tuesday.`                                                                       |
 | [Append](#append-fields-to-client-append)                     | `append INDEX r/REMARK b/BIRTHDAY e/wolololol@aoe.net t/senior`                                                                                                       |
-| [Remove](#remove-fields-from-client-remove)                   | `remove INDEX r/ b/`                                                                                                                                                  |
+| [Remove](#remove-fields-from-client-remove)                   | `remove [r/] [b/] [t/TAG]…`<br> e.g., `remove INDEX r/ b/`                                                                                                            |
 | [Delete](#delete-client-delete)                               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | [Clear](#delete-all-entries-clear)                            | `clear`                                                                                                                                                               |
 | [List](#list-all-clients-list)                                | `list`                                                                                                                                                                |
@@ -171,7 +171,7 @@ Format: `help`
 
 Adds a client to CinnamonBun.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
 
 Examples:
 * `add n/Andy Lau p/98765432 e/andy_lau@example.com a/Pasir Ris Grove, Block 73, #02-38, Singapore 518206`
